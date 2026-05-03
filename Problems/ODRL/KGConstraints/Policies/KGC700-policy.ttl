@@ -1,0 +1,40 @@
+@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+@prefix bcp:  <https://tools.ietf.org/html/bcp47#> .
+@prefix dpv:  <https://w3id.org/dpv#> .
+@prefix gn:   <https://www.geonames.org/ontology#> .
+@prefix gnf:  <https://sws.geonames.org/> .
+@prefix drk:  <http://w3id.org/drk/ontology/> .
+
+drk:offer_rule a odrl:Permission ;
+  odrl:constraint [
+    odrl:leftOperand odrl:spatial ;
+    odrl:operator odrl:eq ;
+    odrl:rightOperand <https://sws.geonames.org/2951839/>
+  ] ;
+  odrl:constraint [
+    odrl:leftOperand odrl:language ;
+    odrl:operator odrl:eq ;
+    odrl:rightOperand bcp:de
+  ] .
+
+drk:request_rule a odrl:Permission ;
+  odrl:constraint [
+    odrl:leftOperand odrl:spatial ;
+    odrl:operator odrl:eq ;
+    odrl:rightOperand <https://sws.geonames.org/3017382/>
+  ] ;
+  odrl:constraint [
+    odrl:leftOperand odrl:language ;
+    odrl:operator odrl:eq ;
+    odrl:rightOperand bcp:fr
+  ] .
+
+# Both rules use AND composition (default ODRL constraint-set
+# composition). Per Corollary 3 of the paper, rule-level verdict is
+# determined by per-operand verdicts via Strong Kleene aggregation.
+
+# Theorem 2 AND-Conflict aggregation:
+#   verdict_conflict(c1_off, c1_req) holds (Bayern vs France).
+#   verdict_conflict(c2_off, c2_req) holds (de vs fr).
+#   has_conflict(r1) follows.
+#   rule_and(r1) = conflict by Strong Kleene.

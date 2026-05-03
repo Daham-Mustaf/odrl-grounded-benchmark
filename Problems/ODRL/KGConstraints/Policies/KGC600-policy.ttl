@@ -1,0 +1,18 @@
+@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+@prefix bcp:  <https://tools.ietf.org/html/bcp47#> .
+@prefix drk:  <http://w3id.org/drk/ontology/> .
+
+drk:c1 a odrl:Constraint ;
+  odrl:leftOperand odrl:language ;
+  odrl:operator odrl:eq ;
+  odrl:rightOperand bcp:de .
+
+drk:c2 a odrl:Constraint ;
+  odrl:leftOperand odrl:language ;
+  odrl:operator odrl:eq ;
+  odrl:rightOperand bcp:fr .
+
+# Theorem 3 (paper Section 3.6):
+#   verdict_conflict(c1, c2) ==> no request R satisfies both.
+# Static Conflict via BCP 47 registry uniqueness.
+# Universal conjecture: holds for ALL possible requests.

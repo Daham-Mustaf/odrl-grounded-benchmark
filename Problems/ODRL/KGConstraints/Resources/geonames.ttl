@@ -1,0 +1,143 @@
+# GeoNames EU slice v3 — benchmark-grade, trimmed
+#
+# 15 concepts, four-level hierarchy, all real GeoNames IDs verified against
+# sws.geonames.org and admin1CodesASCII.txt.
+#
+# Structure:
+#   Europe (L.CONT)
+#   +-- France (A.PCLI)
+#   |   +-- 6 ADM1 regions: Ile-de-France, Grand Est, PACA, Occitanie,
+#   |   |   Auvergne-Rhone-Alpes, Nouvelle-Aquitaine
+#   |   +-- 2 cities: Paris (under Ile-de-France),
+#   |                 Strasbourg (under Grand Est)
+#   +-- Germany (A.PCLI)
+#       +-- 3 Bundeslaender: Bayern, Berlin (Land), Baden-Wuerttemberg
+#       +-- 1 city: Munich (under Bayern)
+#
+# Rationale: ADM1 breadth drives sibling-disjointness test cases (RQ2).
+# Cities are anchor points for `eq X` constraints; three is enough:
+#   - Paris: continent -> country -> region -> city chain (deep case)
+#   - Strasbourg: motivating example from the paper
+#   - Munich: cross-country case (isPartOf France vs eq Munich)
+#
+# Predicate shape mirrors live GeoNames RDF: parentFeature is the immediate
+# parent; parentCountry and parentADM1 provide shortcut edges.
+#
+# No disjointness is asserted. This matches real GeoNames and keeps the
+# baseline honest: the SDA profile is applied at evaluation time.
+
+@prefix gn:   <https://www.geonames.org/ontology#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+### Continent ###############################################################
+
+<https://sws.geonames.org/6255148/> a gn:Feature ;
+    gn:name "Europe" ;
+    gn:featureCode gn:L.CONT .
+
+### Countries (A.PCLI) ######################################################
+
+<https://sws.geonames.org/3017382/> a gn:Feature ;
+    gn:name "France" ;
+    gn:featureCode gn:A.PCLI ;
+    gn:countryCode "FR" ;
+    gn:parentFeature <https://sws.geonames.org/6255148/> .
+
+<https://sws.geonames.org/2921044/> a gn:Feature ;
+    gn:name "Germany" ;
+    gn:featureCode gn:A.PCLI ;
+    gn:countryCode "DE" ;
+    gn:parentFeature <https://sws.geonames.org/6255148/> .
+
+### French first-order administrative divisions (A.ADM1) ####################
+
+<https://sws.geonames.org/3012874/> a gn:Feature ;
+    gn:name "Ile-de-France" ;
+    gn:featureCode gn:A.ADM1 ;
+    gn:countryCode "FR" ;
+    gn:parentCountry <https://sws.geonames.org/3017382/> ;
+    gn:parentFeature <https://sws.geonames.org/3017382/> .
+
+<https://sws.geonames.org/11071622/> a gn:Feature ;
+    gn:name "Grand Est" ;
+    gn:featureCode gn:A.ADM1 ;
+    gn:countryCode "FR" ;
+    gn:parentCountry <https://sws.geonames.org/3017382/> ;
+    gn:parentFeature <https://sws.geonames.org/3017382/> .
+
+<https://sws.geonames.org/2985244/> a gn:Feature ;
+    gn:name "Provence-Alpes-Cote d'Azur" ;
+    gn:featureCode gn:A.ADM1 ;
+    gn:countryCode "FR" ;
+    gn:parentCountry <https://sws.geonames.org/3017382/> ;
+    gn:parentFeature <https://sws.geonames.org/3017382/> .
+
+<https://sws.geonames.org/11071623/> a gn:Feature ;
+    gn:name "Occitanie" ;
+    gn:featureCode gn:A.ADM1 ;
+    gn:countryCode "FR" ;
+    gn:parentCountry <https://sws.geonames.org/3017382/> ;
+    gn:parentFeature <https://sws.geonames.org/3017382/> .
+
+<https://sws.geonames.org/11071625/> a gn:Feature ;
+    gn:name "Auvergne-Rhone-Alpes" ;
+    gn:featureCode gn:A.ADM1 ;
+    gn:countryCode "FR" ;
+    gn:parentCountry <https://sws.geonames.org/3017382/> ;
+    gn:parentFeature <https://sws.geonames.org/3017382/> .
+
+<https://sws.geonames.org/11071620/> a gn:Feature ;
+    gn:name "Nouvelle-Aquitaine" ;
+    gn:featureCode gn:A.ADM1 ;
+    gn:countryCode "FR" ;
+    gn:parentCountry <https://sws.geonames.org/3017382/> ;
+    gn:parentFeature <https://sws.geonames.org/3017382/> .
+
+### German first-order administrative divisions (A.ADM1) ####################
+
+<https://sws.geonames.org/2951839/> a gn:Feature ;
+    gn:name "Bayern" ;
+    gn:featureCode gn:A.ADM1 ;
+    gn:countryCode "DE" ;
+    gn:parentCountry <https://sws.geonames.org/2921044/> ;
+    gn:parentFeature <https://sws.geonames.org/2921044/> .
+
+<https://sws.geonames.org/2950157/> a gn:Feature ;
+    gn:name "Berlin" ;
+    gn:featureCode gn:A.ADM1 ;
+    gn:countryCode "DE" ;
+    gn:parentCountry <https://sws.geonames.org/2921044/> ;
+    gn:parentFeature <https://sws.geonames.org/2921044/> .
+
+<https://sws.geonames.org/2953481/> a gn:Feature ;
+    gn:name "Baden-Wuerttemberg" ;
+    gn:featureCode gn:A.ADM1 ;
+    gn:countryCode "DE" ;
+    gn:parentCountry <https://sws.geonames.org/2921044/> ;
+    gn:parentFeature <https://sws.geonames.org/2921044/> .
+
+### Cities (P.PPLC / P.PPLA) ################################################
+
+<https://sws.geonames.org/2988507/> a gn:Feature ;
+    gn:name "Paris" ;
+    gn:featureCode gn:P.PPLC ;
+    gn:countryCode "FR" ;
+    gn:parentCountry <https://sws.geonames.org/3017382/> ;
+    gn:parentADM1 <https://sws.geonames.org/3012874/> ;
+    gn:parentFeature <https://sws.geonames.org/3012874/> .
+
+<https://sws.geonames.org/2973783/> a gn:Feature ;
+    gn:name "Strasbourg" ;
+    gn:featureCode gn:P.PPLA ;
+    gn:countryCode "FR" ;
+    gn:parentCountry <https://sws.geonames.org/3017382/> ;
+    gn:parentADM1 <https://sws.geonames.org/11071622/> ;
+    gn:parentFeature <https://sws.geonames.org/11071622/> .
+
+<https://sws.geonames.org/2867714/> a gn:Feature ;
+    gn:name "Munich" ;
+    gn:featureCode gn:P.PPLA ;
+    gn:countryCode "DE" ;
+    gn:parentCountry <https://sws.geonames.org/2921044/> ;
+    gn:parentADM1 <https://sws.geonames.org/2951839/> ;
+    gn:parentFeature <https://sws.geonames.org/2951839/> .

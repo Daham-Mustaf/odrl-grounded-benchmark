@@ -1,0 +1,27 @@
+@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+@prefix bcp:  <https://tools.ietf.org/html/bcp47#> .
+@prefix dpv:  <https://w3id.org/dpv#> .
+@prefix gn:   <https://www.geonames.org/ontology#> .
+@prefix gnf:  <https://sws.geonames.org/> .
+@prefix drk:  <http://w3id.org/drk/ontology/> .
+
+drk:offer_rule a odrl:Permission ;
+  odrl:constraint [
+    odrl:leftOperand odrl:spatial ;
+    odrl:operator odrl:isPartOf ;
+    odrl:rightOperand <https://sws.geonames.org/2921044/>  # Germany
+  ] .
+
+drk:request_rule a odrl:Permission ;
+  odrl:constraint [
+    odrl:leftOperand odrl:spatial ;
+    odrl:operator odrl:isPartOf ;
+    odrl:rightOperand <https://sws.geonames.org/3017382/>  # France
+  ] .
+
+# Proposition 1 Conflict preservation under disjointness addition:
+#   R: {germany, france, bayern} with kge_disjoint(germany, france)
+#      and kge_leq(bayern, germany).
+#   R': R + {italy} with new disjoint_R_prime(italy, france).
+#   Verdict in R is Conflict (forced_empty via disjointness propagation).
+#   Conjecture: same Conflict survives in R'.

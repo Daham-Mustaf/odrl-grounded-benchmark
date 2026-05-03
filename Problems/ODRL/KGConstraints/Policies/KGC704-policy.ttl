@@ -1,0 +1,34 @@
+@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+@prefix bcp:  <https://tools.ietf.org/html/bcp47#> .
+@prefix dpv:  <https://w3id.org/dpv#> .
+@prefix gn:   <https://www.geonames.org/ontology#> .
+@prefix gnf:  <https://sws.geonames.org/> .
+@prefix drk:  <http://w3id.org/drk/ontology/> .
+
+drk:offer_rule a odrl:Permission ;
+  odrl:constraint [
+    odrl:leftOperand odrl:spatial ;
+    odrl:operator odrl:isPartOf ;
+    odrl:rightOperand <https://sws.geonames.org/6255148/>
+  ] ;
+  odrl:constraint [
+    odrl:leftOperand odrl:language ;
+    odrl:operator odrl:eq ;
+    odrl:rightOperand bcp:de
+  ] .
+
+drk:request_rule a odrl:Permission ;
+  odrl:constraint [
+    odrl:leftOperand odrl:language ;
+    odrl:operator odrl:eq ;
+    odrl:rightOperand bcp:fr
+  ] ;
+  odrl:constraint [
+    odrl:leftOperand odrl:purpose ;
+    odrl:operator odrl:isA ;
+    odrl:rightOperand dpv:Purpose
+  ] .
+# Corollary 1 case (c): partial overlap.
+#   L  = {spatial, language}; L' = {language, purpose}.
+#   Shared operand: language.  Atomic verdict at language: Conflict.
+#   rule_and(r1) = conflict via Strong Kleene over shared operands only.

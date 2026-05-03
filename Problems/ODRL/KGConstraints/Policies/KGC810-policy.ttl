@@ -1,0 +1,25 @@
+@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+@prefix bcp:  <https://tools.ietf.org/html/bcp47#> .
+@prefix dpv:  <https://w3id.org/dpv#> .
+@prefix gn:   <https://www.geonames.org/ontology#> .
+@prefix gnf:  <https://sws.geonames.org/> .
+@prefix drk:  <http://w3id.org/drk/ontology/> .
+
+drk:offer_rule a odrl:Permission ;
+  odrl:constraint [
+    odrl:leftOperand odrl:language ;
+    odrl:operator odrl:neq ;
+    odrl:rightOperand bcp:de
+  ] .
+
+drk:request_rule a odrl:Permission ;
+  odrl:constraint [
+    odrl:leftOperand odrl:language ;
+    odrl:operator odrl:neq ;
+    odrl:rightOperand bcp:fr
+  ] .
+
+# BOUNDARY audit: Remark 2 (complement operators).
+#   R: {bcp_de, bcp_fr}. Verdict: Conflict (no shared non-de non-fr concept).
+#   R': R + {bcp_es}. Verdict: Compatible (bcp_es satisfies both neq).
+#   Conjecture asserts conflict_R_prime; expected to NOT derive.

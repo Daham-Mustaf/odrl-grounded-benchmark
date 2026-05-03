@@ -1,0 +1,28 @@
+@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+@prefix bcp:  <https://tools.ietf.org/html/bcp47#> .
+@prefix dpv:  <https://w3id.org/dpv#> .
+@prefix gn:   <https://www.geonames.org/ontology#> .
+@prefix gnf:  <https://sws.geonames.org/> .
+@prefix drk:  <http://w3id.org/drk/ontology/> .
+
+drk:c1 a odrl:Constraint ;
+  odrl:leftOperand odrl:purpose ;
+  odrl:operator odrl:eq ;
+  odrl:rightOperand dpv:ScientificResearch .
+
+drk:c2 a odrl:Constraint ;
+  odrl:leftOperand odrl:purpose ;
+  odrl:operator odrl:isA ;
+  odrl:rightOperand dpv:Purpose .
+
+drk:c3 a odrl:Constraint ;
+  odrl:leftOperand odrl:purpose ;
+  odrl:operator odrl:eq ;
+  odrl:rightOperand dpv:Marketing .
+
+# Lemma 1 antecedents:
+#   c1 refines c2: ScientificResearch is below Purpose. ✓
+#   verdict(c2, c3) = Compatible (Marketing is below Purpose).
+#                     NOT Conflict.
+# Lemma 1's conclusion is NOT licensed; encoding must NOT
+# derive verdict_conflict(c1, c3).

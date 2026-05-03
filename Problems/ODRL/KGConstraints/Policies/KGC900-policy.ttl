@@ -1,0 +1,21 @@
+@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+@prefix gn:   <https://www.geonames.org/ontology#> .
+@prefix gnf:  <https://sws.geonames.org/> .
+@prefix iso:  <https://www.iso.org/iso/iso3166#> .
+@prefix drk:  <http://w3id.org/drk/ontology/> .
+
+drk:offer_rule a odrl:Permission ;
+  odrl:constraint [
+    odrl:leftOperand odrl:spatial ;
+    odrl:operator odrl:isPartOf ;
+    odrl:rightOperand <https://sws.geonames.org/2951839/>  # Bayern
+  ] .
+drk:request_rule a odrl:Permission ;
+  odrl:constraint [
+    odrl:leftOperand odrl:spatial ;
+    odrl:operator odrl:isPartOf ;
+    odrl:rightOperand <https://sws.geonames.org/3012874/>  # Ile-de-France
+  ] .
+# Proposition 2 Conflict transport at ADM1 level via GeoNames ↔ ISO 3166.
+# Both constraints reference concepts in dom(α): the alignment carries
+# disjointness from R_A's country level down through the hierarchy.

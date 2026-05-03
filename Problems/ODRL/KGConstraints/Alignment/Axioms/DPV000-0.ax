@@ -1,0 +1,101 @@
+%--------------------------------------------------------------------------
+% File     : DPV000-0.ax
+% Domain   : ODRL Policy / KB Grounding Concept-valued
+% Axioms   : DPV Purpose hierarchy fragment
+% Version  : 1.2
+% English  : Concrete grounding facts for the purpose left operand,
+%           : derived from a 15-concept slice of the W3C Data Privacy
+%           : Vocabulary (DPV v2.3, https://w3id.org/dpv) with 17
+%           : direct skos:broader edges. Each concept is declared as a
+%           : kge_concept (resource universe membership).
+%           : Disjointness is NOT asserted: DPV does not assert sibling
+%           : disjointness, and the open-world absence of an axiom between
+%           : ScientificResearch and NonCommercialPurpose is exactly what
+%           : yields the Unknown verdict in the paper's Example 1. The
+%           : Sibling-Disjointness Assumption (SDA) profile is applied at
+%           : evaluation time, not here.
+%
+% Refs     : ()
+% Source   : 
+% Authors  : 
+% Names    : DPV000-0.ax
+%
+% Status   : Satisfiable
+% SPC      : FOF_SAT_RFN
+%
+% Comments : Generated from Resources/dpv.ttl by gen_dpv.py.
+%           : Depends on KGE000-0.ax (kge_leq + kge_concept signatures, kge_leq_transitive, kge_leq_antisymmetric, kge_leq_reflexive).
+%           : 15 kge_concept assertions + 17 direct skos:broader edges over 15 concepts.
+%           : Acyclicity is verified at generation time.
+%           : NO disjointness asserted (OWA).  Problem files emit:
+%           : include('Axioms/KGE000-0.ax').
+%           : include('Axioms/DENOT000-0.ax').
+%           : include('Axioms/DPV000-0.ax').
+%           : No axiom file self-includes this file.
+%           : 32 axioms: 15 concept assertions + 17 direct skos:broader edges (transitive closure via KGE000-0.ax).
+%--------------------------------------------------------------------------
+
+% ==========================================================================
+% DPV (Data Privacy Vocabulary) Purpose hierarchy
+%                                            [Paper: tab:realizations,
+%                                             Example 1 purpose pair]
+%
+% Source: Resources/dpv.ttl
+% Encoding: each DPV purpose concept is a TPTP constant; skos:broader
+% edges are emitted as direct kge_leq facts.  Transitive closure is
+% provided by KGE000-0.ax::kge_leq_transitive at proof time.
+% Each concept is also asserted as a kge_concept (resource universe
+% membership) for use by complement-operator denotations.
+%
+% NO disjointness facts are asserted in this file.  DPV does not assert
+% sibling disjointness, and that absence is exactly what gives the
+% motivating-example Unknown verdict on the purpose operand:
+%   (purpose, isA, dpv:NonCommercialPurpose) cap (purpose, eq,
+%   dpv:ScientificResearch) yields Unknown because DPV asserts neither
+%   ScientificResearch leq NonCommercialPurpose nor disjointness.
+%
+% Cross-resource convention: this file asserts only DPV facts.  No
+% kge_disjoint or kge_leq fact involves constants from other resources;
+% maintaining this convention across all resource files prevents
+% cross-domain disjointness propagation pathology.
+%
+% Concepts: 15.  Concept assertions: 15.
+% Direct skos:broader edges: 17.
+% Acyclicity verified at generation time.
+% ==========================================================================
+
+% ----- Concept universe membership (kge_concept) -----
+fof(dpv_academic_research_concept, axiom, kge_concept(dpv_academic_research)).
+fof(dpv_advertising_concept, axiom, kge_concept(dpv_advertising)).
+fof(dpv_commercial_purpose_concept, axiom, kge_concept(dpv_commercial_purpose)).
+fof(dpv_commercial_research_concept, axiom, kge_concept(dpv_commercial_research)).
+fof(dpv_direct_marketing_concept, axiom, kge_concept(dpv_direct_marketing)).
+fof(dpv_marketing_concept, axiom, kge_concept(dpv_marketing)).
+fof(dpv_non_commercial_purpose_concept, axiom, kge_concept(dpv_non_commercial_purpose)).
+fof(dpv_non_commercial_research_concept, axiom, kge_concept(dpv_non_commercial_research)).
+fof(dpv_organisation_governance_concept, axiom, kge_concept(dpv_organisation_governance)).
+fof(dpv_personalisation_concept, axiom, kge_concept(dpv_personalisation)).
+fof(dpv_personalised_advertising_concept, axiom, kge_concept(dpv_personalised_advertising)).
+fof(dpv_purpose_concept, axiom, kge_concept(dpv_purpose)).
+fof(dpv_research_and_development_concept, axiom, kge_concept(dpv_research_and_development)).
+fof(dpv_scientific_research_concept, axiom, kge_concept(dpv_scientific_research)).
+fof(dpv_social_media_marketing_concept, axiom, kge_concept(dpv_social_media_marketing)).
+
+% ----- skos:broader edges (kge_leq) -----
+fof(dpv_academic_research_leq_research_and_development, axiom, kge_leq(dpv_academic_research, dpv_research_and_development)).
+fof(dpv_advertising_leq_marketing, axiom, kge_leq(dpv_advertising, dpv_marketing)).
+fof(dpv_commercial_purpose_leq_purpose, axiom, kge_leq(dpv_commercial_purpose, dpv_purpose)).
+fof(dpv_commercial_research_leq_commercial_purpose, axiom, kge_leq(dpv_commercial_research, dpv_commercial_purpose)).
+fof(dpv_commercial_research_leq_research_and_development, axiom, kge_leq(dpv_commercial_research, dpv_research_and_development)).
+fof(dpv_direct_marketing_leq_marketing, axiom, kge_leq(dpv_direct_marketing, dpv_marketing)).
+fof(dpv_marketing_leq_purpose, axiom, kge_leq(dpv_marketing, dpv_purpose)).
+fof(dpv_non_commercial_purpose_leq_purpose, axiom, kge_leq(dpv_non_commercial_purpose, dpv_purpose)).
+fof(dpv_non_commercial_research_leq_non_commercial_purpose, axiom, kge_leq(dpv_non_commercial_research, dpv_non_commercial_purpose)).
+fof(dpv_non_commercial_research_leq_research_and_development, axiom, kge_leq(dpv_non_commercial_research, dpv_research_and_development)).
+fof(dpv_organisation_governance_leq_purpose, axiom, kge_leq(dpv_organisation_governance, dpv_purpose)).
+fof(dpv_personalisation_leq_purpose, axiom, kge_leq(dpv_personalisation, dpv_purpose)).
+fof(dpv_personalised_advertising_leq_advertising, axiom, kge_leq(dpv_personalised_advertising, dpv_advertising)).
+fof(dpv_personalised_advertising_leq_personalisation, axiom, kge_leq(dpv_personalised_advertising, dpv_personalisation)).
+fof(dpv_research_and_development_leq_purpose, axiom, kge_leq(dpv_research_and_development, dpv_purpose)).
+fof(dpv_scientific_research_leq_research_and_development, axiom, kge_leq(dpv_scientific_research, dpv_research_and_development)).
+fof(dpv_social_media_marketing_leq_marketing, axiom, kge_leq(dpv_social_media_marketing, dpv_marketing)).

@@ -1,0 +1,39 @@
+@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+@prefix bcp:  <https://tools.ietf.org/html/bcp47#> .
+@prefix dpv:  <https://w3id.org/dpv#> .
+@prefix gn:   <https://www.geonames.org/ontology#> .
+@prefix gnf:  <https://sws.geonames.org/> .
+@prefix drk:  <http://w3id.org/drk/ontology/> .
+
+drk:offer_rule a odrl:Permission ;
+  odrl:constraint [
+    odrl:leftOperand odrl:spatial ;
+    odrl:operator odrl:isPartOf ;
+    odrl:rightOperand <https://sws.geonames.org/6255148/>
+  ] ;
+  odrl:constraint [
+    odrl:leftOperand odrl:purpose ;
+    odrl:operator odrl:eq ;
+    odrl:rightOperand dpv:ScientificResearch
+  ] .
+
+drk:request_rule a odrl:Permission ;
+  odrl:constraint [
+    odrl:leftOperand odrl:spatial ;
+    odrl:operator odrl:eq ;
+    odrl:rightOperand <https://sws.geonames.org/3017382/>
+  ] ;
+  odrl:constraint [
+    odrl:leftOperand odrl:purpose ;
+    odrl:operator odrl:eq ;
+    odrl:rightOperand dpv:Marketing
+  ] .
+
+# Both rules use AND composition (default ODRL constraint-set
+# composition). Per Corollary 3 of the paper, rule-level verdict is
+# determined by per-operand verdicts via Strong Kleene aggregation.
+
+# Theorem 2 AND-Unknown propagation:
+#   Operand 1 Compatible (asserted premise).
+#   Operand 2 Unknown (asserted premise; OWA meta-claim).
+#   Strong Kleene aggregates to rule_and(r1) = unknown.

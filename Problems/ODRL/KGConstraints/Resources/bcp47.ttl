@@ -1,0 +1,69 @@
+# BCP 47 language-tag slice v1 — benchmark-grade, trimmed
+#
+# 15 primary language subtags from the IANA Language Subtag Registry,
+# all ISO 639-1 two-letter codes under RFC 5646 §2.2.1. Covers the
+# motivating example and a representative spread of EU official
+# languages.
+#
+# Structure:
+#   Flat registry: 15 atomic tags, no hierarchy.
+#   Partial order on the resource is equality of tags (Table 1 in
+#   the paper). Disjointness comes from RFC 5646's registry-uniqueness
+#   rule: every primary language subtag identifies a distinct language,
+#   so the 15 tags are pairwise disjoint.
+#
+# Rationale:
+#   - de and fr are required for the motivating example
+#     (the bcp:de ⊥ bcp:fr Conflict verdict on the language pair).
+#   - The remaining 13 give coverage across EU official languages
+#     to exercise multi-valued constraints (isAnyOf, isNoneOf)
+#     without synthetic entries.
+#   - 15 tags matches the GeoNames and DPV slice sizes for
+#     cross-resource evaluation balance.
+#
+# Encoding: each tag is an individual instance of bcp:LanguageTag.
+# Unlike the GeoNames and DPV slices, disjointness IS asserted
+# (via owl:AllDifferent), because registry uniqueness is a genuine
+# RFC 5646 axiom rather than a conservative closure applied at
+# evaluation time. This is the resource that gives the motivating
+# example its Conflict verdict, per Table 3 in the paper.
+#
+# BCP 47 does not define official IRIs for subtags; the bcp: prefix
+# used here is a pragmatic convention.
+
+@prefix bcp:  <https://tools.ietf.org/html/bcp47#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+### Class ###################################################################
+
+bcp:LanguageTag a rdfs:Class ;
+    rdfs:label "BCP 47 Language Tag" .
+
+### Primary language tags (ISO 639-1, alphabetised) #########################
+
+bcp:bg a bcp:LanguageTag ;  rdfs:label "Bulgarian"  .
+bcp:cs a bcp:LanguageTag ;  rdfs:label "Czech"      .
+bcp:da a bcp:LanguageTag ;  rdfs:label "Danish"     .
+bcp:de a bcp:LanguageTag ;  rdfs:label "German"     .
+bcp:el a bcp:LanguageTag ;  rdfs:label "Greek"      .
+bcp:en a bcp:LanguageTag ;  rdfs:label "English"    .
+bcp:es a bcp:LanguageTag ;  rdfs:label "Spanish"    .
+bcp:fi a bcp:LanguageTag ;  rdfs:label "Finnish"    .
+bcp:fr a bcp:LanguageTag ;  rdfs:label "French"     .
+bcp:hu a bcp:LanguageTag ;  rdfs:label "Hungarian"  .
+bcp:it a bcp:LanguageTag ;  rdfs:label "Italian"    .
+bcp:nl a bcp:LanguageTag ;  rdfs:label "Dutch"      .
+bcp:pl a bcp:LanguageTag ;  rdfs:label "Polish"     .
+bcp:pt a bcp:LanguageTag ;  rdfs:label "Portuguese" .
+bcp:sv a bcp:LanguageTag ;  rdfs:label "Swedish"    .
+
+### Registry uniqueness axiom ###############################################
+# RFC 5646 §2.2.1: every primary language subtag identifies a distinct
+# language. The 15 tags above are therefore pairwise disjoint.
+
+[] a owl:AllDifferent ;
+    owl:distinctMembers (
+        bcp:bg bcp:cs bcp:da bcp:de bcp:el bcp:en bcp:es bcp:fi
+        bcp:fr bcp:hu bcp:it bcp:nl bcp:pl bcp:pt bcp:sv
+    ) .

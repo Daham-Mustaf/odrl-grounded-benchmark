@@ -1,0 +1,67 @@
+%--------------------------------------------------------------------------
+% File     : REFINE000-0.ax
+% Domain   : ODRL Policy / KB Grounding Concept-valued
+% Axioms   : Constraint refinement
+% Version  : 1.1
+% English  : Encodes Definition 9 (Constraint refinement: c1 refines c2
+%           : iff both denotations are defined and [[c1]] is a subset of
+%           : [[c2]]). Lemma 1 (Conflict propagation: refinement preserves
+%           : Conflict verdicts) is NOT asserted here; it is a conjecture
+%           : stated in Refinement/ problem files. Reflexivity follows
+%           : from refines_def for any non-undef constraint and is omitted.
+%           : Transitivity is included as an optional proof hint, also
+%           : derivable from refines_def.
+%
+% Refs     : [Anon26] Anonymous. Denotational Semantics for ODRL: Knowledge-Based Constraint Conflict Detection. 2026. . 
+% Source   : Anonymous (2026)
+% Authors  : Anonymous
+% Names    : REFINE000-0.ax
+%
+% Status   : Satisfiable
+% SPC      : FOF_SAT_RFN
+%
+% Comments : Depends on DENOT000-0.ax (in_denotation, denotation_undef).
+%           : Problem files for Lemma 1 instances emit:
+%           : include('Axioms/KGE000-0.ax').
+%           : include('Axioms/DENOT000-0.ax').
+%           : include('Axioms/REFINE000-0.ax').
+%           : include('Axioms/<resource>.ax').
+%           : ... constraint instantiation ...
+%           : fof(lem1_conflict_propagation, conjecture,
+%           : ![C1, C2, C3]:
+%           : ((refines(C1, C2) & verdict_conflict(C2, C3)) =>
+%           : verdict_conflict(C1, C3))).
+%           : No axiom file self-includes this file.
+%           : 2 axioms: 1 refinement def + 1 transitivity hint.
+%--------------------------------------------------------------------------
+
+% ==========================================================================
+% Constraint refinement                      [Paper: def:refinement]
+%
+%   c1 refines c2  iff  both denotations are defined AND
+%                       every concept satisfying c1 also satisfies c2
+% Operationally: denotation of c1 is contained in denotation of c2.
+%
+% The undef guard matters: a constraint with grounding failure
+% (denotation_undef from DENOT000-0.ax) does NOT refine anything, and
+% nothing refines it.  Without the guard, vacuous universal
+% quantification over an empty denotation would make undef constraints
+% refine everything, breaking Lemma 1.
+% ==========================================================================
+
+fof(refines_def, axiom,
+    ![C1, C2]:
+      (refines(C1, C2) <=>
+        (~denotation_undef(C1) & ~denotation_undef(C2) &
+         ![X]: (in_denotation(X, C1) => in_denotation(X, C2))))).
+
+% ==========================================================================
+% Optional: transitivity hint
+%
+% Derivable from refines_def by chaining universals; included as a proof
+% hint that may speed up Lemma 1 derivations.  Not load-bearing.
+% ==========================================================================
+
+fof(refines_transitive, axiom,
+    ![C1, C2, C3]:
+      ((refines(C1, C2) & refines(C2, C3)) => refines(C1, C3))).

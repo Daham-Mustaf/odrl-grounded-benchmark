@@ -1,0 +1,19 @@
+@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+@prefix gn:   <https://www.geonames.org/ontology#> .
+@prefix gnf:  <https://sws.geonames.org/> .
+@prefix iso:  <https://www.iso.org/iso/iso3166#> .
+@prefix drk:  <http://w3id.org/drk/ontology/> .
+
+drk:request_rule a odrl:Permission ;
+  odrl:constraint [
+    odrl:leftOperand odrl:spatial ;
+    odrl:operator odrl:eq ;
+    odrl:rightOperand <https://sws.geonames.org/2867714/>  # Munich (GeoNames)
+  ] .
+# Proposition 2 second case: GeoNames has city-level granularity (Munich)
+# but ISO 3166 stops at the ADM1 level (DE-BY). An attempted partial
+# alignment that includes Bayern but excludes Munich is impossible:
+# below-preservation forces Munich into dom(α). The framework's encoding
+# detects this via align_downward_domain. At the policy level, this
+# means consumers using ISO 3166 must accept Unknown verdicts on
+# city-level constraints — the framework refuses to fabricate.

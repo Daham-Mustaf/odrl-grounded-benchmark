@@ -1,0 +1,121 @@
+%--------------------------------------------------------------------------
+% File     : COMPOSE001-0.ax
+% Domain   : ODRL Policy / KB Grounding Concept-valued
+% Axioms   : Cross-disjunct decomposition for `or` composition
+% Version  : 1.0
+% English  : Encodes Proposition 3 (Cross-disjunct decomposition).
+%           : Rule-level verdict for `or`-composed (DNF-expanded)
+%           : constraint sets:
+%           : Conflict   iff every cross-pair has disjunct Conflict;
+%           : Compatible iff some cross-pair has disjunct Compatible;
+%           : Unknown    otherwise.
+%           : rule_or is total in {compatible, conflict, unknown};
+%           : verdict-value distinctness is provided by COMPOSE000-0.ax.
+%           : xone-Conflict reduces to or-Conflict over the same
+%           : disjuncts and requires no additional axioms.
+%
+% Refs     : ()
+% Source   : 
+% Authors  : 
+% Names    : COMPOSE001-0.ax
+%
+% Status   : Satisfiable
+% SPC      : FOF_SAT_RFN
+%
+% Comments : Logically independent of COMPOSE000-0.ax but reuses the
+%           : verdict-value distinctness axioms (verdicts_distinct_*).
+%           : Problem files using `or` composition must:
+%           : 1. include the foundation axiom files in order:
+%           : Axioms/KGE000-0.ax
+%           : Axioms/DENOT000-0.ax
+%           : Axioms/COMPOSE000-0.ax    (verdict-value distinctness)
+%           : Axioms/COMPOSE001-0.ax
+%           : Axioms/<resource>.ax
+%           : 2. emit per-rule disjunct membership axioms:
+%           : has_disjunct(r1, d1).  has_disjunct(r1, d2).
+%           : has_disjunct(r2, d1p).
+%           : plus closure axioms ruling out unintended disjuncts:
+%           : ![D]: (has_disjunct(r1, D) <=> (D=d1 | D=d2)).
+%           : 3. emit disjunct-pair verdict bridges from the atomic
+%           : operand-level verdicts. For each cross-pair (D, D'):
+%           : disjunct_conflict(D, D') <=> some shared-operand
+%           : verdict_conflict;
+%           : disjunct_compat(D, D')   <=> every shared-operand
+%           : verdict_compatible.
+%           : 4. assert distinctness among disjunct names
+%           : (distinct(d1, d2, d1p, ...)).
+%           : 
+%           : xone-Conflict reduces to or-Conflict over the same disjuncts
+%           : (paper Section 4.3 footnote): for xone(c_1, ..., c_n) vs c',
+%           : rule-level Conflict iff every (c_k, c') has Conflict, which is
+%           : exactly rule_or(xone-rule, single-rule) = conflict under the
+%           : DNF expansion of xone.  No additional axioms are required.
+%           : 
+%           : No axiom file self-includes this file.
+%           : 4 axioms: 4 rule_or axioms (conflict, compatible, unknown, total).
+%--------------------------------------------------------------------------
+
+% ==========================================================================
+% Cross-disjunct decomposition for `or` composition (Proposition 3)
+%
+% After DNF expansion, a constraint set CS = or(d_1, ..., d_n) where
+% each d_i is a conjunction of atomic constraints. Per Proposition 3
+% (paper Section 4.3), rule-level Conflict between CS and CS' holds
+% iff every cross-pair (d_i, d'_j) has disjunct-level Conflict.
+%
+% Predicates expected from problem files:
+%   has_disjunct(R, D)        : D is a disjunct of rule R's DNF
+%   disjunct_conflict(D, D')  : disjunct-pair (D, D') has atomic-level
+%                               Conflict at some shared operand.  Problem
+%                               files instantiate this from the atomic
+%                               verdicts via the same Strong Kleene `and'
+%                               aggregation as in COMPOSE000.
+%   disjunct_compat(D, D')    : disjunct-pair has atomic-level Compatible
+%                               (every shared operand Compatible).
+%
+% rule_or(R, R') is total in {compatible, conflict, unknown}; the three
+% verdict values are distinct (axioms in COMPOSE000-0.ax, reused).
+%
+% Both CS and CS' are assumed to have at least one disjunct: a
+% constraint set with at least one constraint always has at least one
+% DNF disjunct.  This non-emptiness is asserted explicitly in the
+% rule_or_conflict axiom to prevent vacuous Conflict on empty disjunct
+% sets.
+% ==========================================================================
+
+% --------------------------------------------------------------------------
+% OR composition (cross-disjunct decomposition, Proposition 3)
+%   Conflict   : every cross-pair has Conflict (and both rules have
+%                at least one disjunct).
+%   Compatible : some cross-pair has Compatible.
+%   Unknown    : otherwise (no Compatible, at least one Unknown).
+% --------------------------------------------------------------------------
+
+fof(rule_or_conflict, axiom,
+    ![R, RP] :
+      ( rule_or(R, RP) = conflict
+    <=> ( ( ?[D]  : has_disjunct(R, D) )
+        & ( ?[DP] : has_disjunct(RP, DP) )
+        & ( ![D, DP] :
+              ( ( has_disjunct(R, D) & has_disjunct(RP, DP) )
+             => disjunct_conflict(D, DP) ) ) ) ) ).
+
+fof(rule_or_compatible, axiom,
+    ![R, RP] :
+      ( rule_or(R, RP) = compatible
+    <=> ?[D, DP] :
+          ( has_disjunct(R, D)
+          & has_disjunct(RP, DP)
+          & disjunct_compat(D, DP) ) ) ).
+
+fof(rule_or_unknown, axiom,
+    ![R, RP] :
+      ( rule_or(R, RP) = unknown
+    <=> ( rule_or(R, RP) != compatible
+        & rule_or(R, RP) != conflict ) ) ).
+
+fof(rule_or_total, axiom,
+    ![R, RP] :
+      ( rule_or(R, RP) = compatible
+      | rule_or(R, RP) = conflict
+      | rule_or(R, RP) = unknown ) ).

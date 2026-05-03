@@ -1,0 +1,31 @@
+@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+@prefix bcp:  <https://tools.ietf.org/html/bcp47#> .
+@prefix dpv:  <https://w3id.org/dpv#> .
+@prefix gn:   <https://www.geonames.org/ontology#> .
+@prefix gnf:  <https://sws.geonames.org/> .
+@prefix drk:  <http://w3id.org/drk/ontology/> .
+
+drk:offer_rule a odrl:Permission ;
+  odrl:constraint [
+    odrl:operator odrl:xone ;
+    odrl:rightOperand (
+      [ odrl:leftOperand odrl:language ; odrl:operator odrl:eq ;
+        odrl:rightOperand bcp:de ]
+      [ odrl:leftOperand odrl:language ; odrl:operator odrl:eq ;
+        odrl:rightOperand bcp:fr ]
+      [ odrl:leftOperand odrl:language ; odrl:operator odrl:eq ;
+        odrl:rightOperand bcp:es ]
+    )
+  ] .
+
+drk:request_rule a odrl:Permission ;
+  odrl:constraint [
+    odrl:leftOperand odrl:language ;
+    odrl:operator odrl:eq ;
+    odrl:rightOperand bcp:it
+  ] .
+# xone conservative reduction:
+#   r1 = xone(d1=eq:de, d2=eq:fr, d3=eq:es); r2 = eq:it.
+#   xone-Conflict reduces to or-Conflict over the same disjuncts.
+#   All three cross-pairs are atomic-Conflict (BCP47 registry uniqueness).
+#   rule_or(r1, r2) = conflict.

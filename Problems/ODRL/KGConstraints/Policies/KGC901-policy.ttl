@@ -1,0 +1,22 @@
+@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+@prefix gn:   <https://www.geonames.org/ontology#> .
+@prefix gnf:  <https://sws.geonames.org/> .
+@prefix iso:  <https://www.iso.org/iso/iso3166#> .
+@prefix drk:  <http://w3id.org/drk/ontology/> .
+
+drk:offer_rule a odrl:Permission ;
+  odrl:constraint [
+    odrl:leftOperand odrl:spatial ;
+    odrl:operator odrl:isPartOf ;
+    odrl:rightOperand <https://sws.geonames.org/2921044/>  # Germany
+  ] .
+drk:request_rule a odrl:Permission ;
+  odrl:constraint [
+    odrl:leftOperand odrl:spatial ;
+    odrl:operator odrl:eq ;
+    odrl:rightOperand <https://sws.geonames.org/2951839/>  # Bayern
+  ] .
+# Proposition 2 Compatible transport: Bayern is part of Germany in
+# GeoNames; under alignment, the witness transports to ISO 3166 with
+# iso_de_by serving as the aligned image. The grounding preservation
+# axiom is load-bearing.

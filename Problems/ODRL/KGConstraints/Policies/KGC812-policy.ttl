@@ -1,0 +1,15 @@
+@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+@prefix bcp:  <https://tools.ietf.org/html/bcp47#> .
+@prefix dpv:  <https://w3id.org/dpv#> .
+@prefix gn:   <https://www.geonames.org/ontology#> .
+@prefix gnf:  <https://sws.geonames.org/> .
+@prefix drk:  <http://w3id.org/drk/ontology/> .
+
+drk:context a odrl:Asset .
+
+# BOUNDARY audit: Assumption 1 violation.
+#   R: {bcp_de, bcp_fr} with kge_disjoint(de, fr).
+#   R': R + {bcp_z} with leq_R_prime(z, de) AND leq_R_prime(z, fr).
+#   This is internally inconsistent: a common subordinate of two
+#   disjoint concepts violates Assumption 1.
+#   Conjecture: $false. Expected: Theorem (inconsistency detected).

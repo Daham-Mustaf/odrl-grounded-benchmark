@@ -1,0 +1,26 @@
+@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+@prefix bcp:  <https://tools.ietf.org/html/bcp47#> .
+@prefix dpv:  <https://w3id.org/dpv#> .
+@prefix gn:   <https://www.geonames.org/ontology#> .
+@prefix gnf:  <https://sws.geonames.org/> .
+@prefix drk:  <http://w3id.org/drk/ontology/> .
+
+drk:offer_rule a odrl:Permission ;
+  odrl:constraint [
+    odrl:leftOperand odrl:purpose ;
+    odrl:operator odrl:isPartOf ;
+    odrl:rightOperand dpv:ScientificResearch
+  ] .
+
+drk:request_rule a odrl:Permission ;
+  odrl:constraint [
+    odrl:leftOperand odrl:purpose ;
+    odrl:operator odrl:isPartOf ;
+    odrl:rightOperand dpv:CommercialResearch
+  ] .
+
+# Proposition 1 Conflict preservation under edge addition:
+#   R: synthetic DPV-shaped, kge_disjoint(SR, CR) [HYPOTHETICAL]
+#   R': R + leq_R_prime(SR, AR) [new subsumption to AcademicResearch]
+#   Verdict in R is Conflict (forced_empty via synthetic disjointness)
+#   Conjecture: same Conflict survives in R'.

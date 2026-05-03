@@ -1,0 +1,104 @@
+%--------------------------------------------------------------------------
+% File     : COMPOSE000-0.ax
+% Domain   : ODRL Policy / KB Grounding Concept-valued
+% Axioms   : Strong Kleene `and` composition for rule-level verdicts
+% Version  : 2.0
+% English  : Encodes Corollary 3 (Operand-wise composition for `and`).
+%           : Strong Kleene conjunction over per-operand verdicts:
+%           : Compatible iff every operand pair Compatible;
+%           : Conflict   iff any operand pair Conflict;
+%           : Unknown    otherwise.
+%           : rule_and is total (returns one of compatible, conflict,
+%           : unknown) and the three verdict values are distinct.
+%           : `or` and `xone` are not encoded here: the paper's §4.3
+%           : satisfying-set semantics handles them via cross-disjunct
+%           : decomposition (Proposition 4), requiring σ-level reasoning.
+%           : See COMPOSE001-0.ax (deferred) for σ-level encoding.
+%
+% Refs     : ()
+% Source   : 
+% Authors  : 
+% Names    : COMPOSE000-0.ax
+%
+% Status   : Satisfiable
+% SPC      : FOF_SAT_RFN
+%
+% Comments : Logically independent of DENOT000-0.ax: COMPOSE works over
+%           : rule-level summary predicates, not directly over verdict_*/2.
+%           : Problem files using `and` composition must:
+%           : 1. include the foundation axiom files in order:
+%           : Axioms/KGE000-0.ax
+%           : Axioms/DENOT000-0.ax
+%           : Axioms/COMPOSE000-0.ax
+%           : Axioms/<resource>.ax
+%           : 2. emit per-rule bridge axioms linking has_conflict/1 and
+%           : all_compat/1 to the operand-level verdicts of that rule.
+%           : Example for a 2-operand rule R1:
+%           : has_conflict(r1) <=> (verdict_conflict(c1, c1') |
+%           : verdict_conflict(c2, c2'))
+%           : all_compat(r1)   <=> (verdict_compatible(c1, c1') &
+%           : verdict_compatible(c2, c2'))
+%           : 3. for partial-overlap cases (operand sets neither equal nor
+%           : disjoint), use Proposition 4 case (iii): rule-level
+%           : Conflict iff some shared operand has atomic-level Conflict.
+%           : Encode the bridge over only the shared operands.
+%           : 
+%           : `or` and `xone` audit requires COMPOSE001-0.ax (satisfying-set
+%           : semantics, σ-level), not yet authored. Deferred to extended work.
+%           : No axiom file self-includes this file.
+%           : 7 axioms: 4 rule_and + 3 distinct = 7 formulae.
+%--------------------------------------------------------------------------
+
+% ==========================================================================
+% Per-operand verdict aggregation for `and` composition (Corollary 3)
+%
+% Per-operand verdicts V_k come from Definition 6 (verdict_*).  At rule
+% level, two `and`-composed rules over the same operand set aggregate via
+% Strong Kleene three-valued logic.  We use a rule-level function
+% rule_and/1 over a rule R, valued in {compatible, conflict, unknown}.
+%
+% Rule-level summary hooks (instantiated by problem files from per-operand
+% verdict_compatible/2, verdict_conflict/2, verdict_unknown/2):
+%
+%   has_conflict(R)  : at least one operand-level verdict is Conflict
+%   all_compat(R)    : every operand-level verdict is Compatible
+%
+% Mutual exclusion (e.g., all_compat AND has_conflict cannot both hold)
+% follows from problem-file construction, not from axioms here.
+%
+% Note: `or` and `xone` composition are NOT encoded in this file.  The
+% paper's §4.3 satisfying-set semantics handles those connectives via
+% cross-disjunct decomposition (Proposition 4), which requires σ-level
+% reasoning over requests rather than per-operand summary predicates.
+% ==========================================================================
+% --------------------------------------------------------------------------
+% AND composition (Strong Kleene conjunction, Corollary 3)
+%   Compatible : every operand pair Compatible
+%   Conflict   : at least one operand pair Conflict
+%   Unknown    : otherwise (some Unknown, no Conflict)
+% --------------------------------------------------------------------------
+fof(rule_and_compatible, axiom,
+    ![R]:
+      (rule_and(R) = compatible <=> all_compat(R))).
+
+fof(rule_and_conflict, axiom,
+    ![R]:
+      (rule_and(R) = conflict <=> has_conflict(R))).
+
+fof(rule_and_unknown, axiom,
+    ![R]:
+      (rule_and(R) = unknown <=>
+        (~all_compat(R) & ~has_conflict(R)))).
+
+fof(rule_and_total, axiom,
+    ![R]:
+      (rule_and(R) = compatible |
+       rule_and(R) = conflict |
+       rule_and(R) = unknown)).
+
+% ==========================================================================
+% Verdict-value distinctness (so the prover can do case analysis)
+% ==========================================================================
+fof(verdicts_distinct_cf_cp, axiom, conflict   != compatible).
+fof(verdicts_distinct_cf_un, axiom, conflict   != unknown).
+fof(verdicts_distinct_cp_un, axiom, compatible != unknown).

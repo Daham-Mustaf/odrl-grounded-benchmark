@@ -1,0 +1,23 @@
+@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+@prefix dpv:  <https://w3id.org/dpv#> .
+@prefix drk:  <http://w3id.org/drk/ontology/> .
+
+drk:policyOffer a odrl:Set ;
+  odrl:permission [
+    odrl:action odrl:use ;
+    odrl:constraint [
+      odrl:leftOperand odrl:purpose ;
+      odrl:operator odrl:isA ;
+      odrl:rightOperand dpv:NonCommercialPurpose
+    ]
+  ] .
+
+drk:policyRequest a odrl:Set ;
+  odrl:permission [
+    odrl:action odrl:use ;
+    odrl:constraint [
+      odrl:leftOperand odrl:purpose ;
+      odrl:operator odrl:eq ;
+      odrl:rightOperand dpv:ScientificResearch
+    ]
+  ] .

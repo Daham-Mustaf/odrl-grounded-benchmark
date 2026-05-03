@@ -1,0 +1,19 @@
+@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+@prefix bcp:  <https://tools.ietf.org/html/bcp47#> .
+@prefix dpv:  <https://w3id.org/dpv#> .
+@prefix gn:   <https://www.geonames.org/ontology#> .
+@prefix gnf:  <https://sws.geonames.org/> .
+@prefix drk:  <http://w3id.org/drk/ontology/> .
+
+drk:offer_rule a odrl:Permission ;
+  odrl:constraint [
+    odrl:leftOperand odrl:spatial ;
+    odrl:operator odrl:isPartOf ;
+    odrl:rightOperand <https://sws.geonames.org/6255148/>  # Europe
+  ] .
+
+# Proposition 1 denotation growth under concept addition:
+#   R: {europe, france} with leq_R(france, europe).
+#   R': R + {spain} with leq_R_prime(spain, europe).
+#   Conjecture: every concept in [c_ispartof(europe)]_R is in
+#   [c_ispartof(europe)]_R' (universal denotation-growth claim).

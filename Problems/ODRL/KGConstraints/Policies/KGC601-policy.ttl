@@ -1,0 +1,19 @@
+@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+@prefix bcp:  <https://tools.ietf.org/html/bcp47#> .
+@prefix drk:  <http://w3id.org/drk/ontology/> .
+
+drk:c1 a odrl:Constraint ;
+  odrl:leftOperand odrl:language ;
+  odrl:operator odrl:eq ;
+  odrl:rightOperand bcp:de .
+
+drk:c2 a odrl:Constraint ;
+  odrl:leftOperand odrl:language ;
+  odrl:operator odrl:eq ;
+  odrl:rightOperand bcp:fr .
+
+# Theorem 3 concrete-request specialization:
+#   verdict_conflict(c1, c2) AND r0 satisfies c1
+#     ==> r0 does NOT satisfy c2.
+# r0 = the runtime request that assigns 'de' to language.
+# val_de grounds to bcp_de via gamma.

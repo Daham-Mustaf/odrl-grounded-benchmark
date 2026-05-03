@@ -1,0 +1,47 @@
+@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+@prefix bcp:  <https://tools.ietf.org/html/bcp47#> .
+@prefix dpv:  <https://w3id.org/dpv#> .
+@prefix gn:   <https://www.geonames.org/ontology#> .
+@prefix gnf:  <https://sws.geonames.org/> .
+@prefix drk:  <http://w3id.org/drk/ontology/> .
+
+drk:offer_rule a odrl:Permission ;
+  odrl:constraint [
+    odrl:leftOperand odrl:spatial ;
+    odrl:operator odrl:isPartOf ;
+    odrl:rightOperand <https://sws.geonames.org/6255148/>
+  ] ;
+  odrl:constraint [
+    odrl:leftOperand odrl:purpose ;
+    odrl:operator odrl:eq ;
+    odrl:rightOperand dpv:ScientificResearch
+  ] ;
+  odrl:constraint [
+    odrl:leftOperand odrl:language ;
+    odrl:operator odrl:eq ;
+    odrl:rightOperand bcp:de
+  ] .
+
+drk:request_rule a odrl:Permission ;
+  odrl:constraint [
+    odrl:leftOperand odrl:spatial ;
+    odrl:operator odrl:eq ;
+    odrl:rightOperand <https://sws.geonames.org/3017382/>
+  ] ;
+  odrl:constraint [
+    odrl:leftOperand odrl:purpose ;
+    odrl:operator odrl:isA ;
+    odrl:rightOperand dpv:Purpose
+  ] ;
+  odrl:constraint [
+    odrl:leftOperand odrl:language ;
+    odrl:operator odrl:isAnyOf ;
+    odrl:rightOperand ( bcp:de bcp:fr )
+  ] .
+
+# Theorem 2 three-operand AND-Compatible all-pass:
+#   spatial:  isPartOf Europe vs eq France   -> Compatible
+#   purpose:  eq SR vs isA Purpose            -> Compatible
+#   language: eq de vs isAnyOf {de, fr}       -> Compatible
+#   Strong Kleene: all Compatible -> rule_and(r1) = compatible.
+#   Conjecture asserts Conflict; must NOT derive.

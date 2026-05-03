@@ -1,0 +1,13 @@
+@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+@prefix bcp:  <https://tools.ietf.org/html/bcp47#> .
+@prefix drk:  <http://w3id.org/drk/ontology/> .
+
+drk:c_undef a odrl:Constraint ;
+  odrl:leftOperand odrl:language ;
+  odrl:operator odrl:eq ;
+  odrl:rightOperand bcp:xz .
+
+# bcp:xz is not a registered BCP 47 tag.
+# Per Definition 4 of the paper, gamma(bcp:xz) is undefined,
+# so denotation(c_undef) = undef. Default-deny applies at runtime:
+# no request can satisfy c_undef regardless of its assignment.

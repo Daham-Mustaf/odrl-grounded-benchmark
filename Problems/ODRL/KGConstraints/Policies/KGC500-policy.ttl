@@ -1,0 +1,27 @@
+@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+@prefix bcp:  <https://tools.ietf.org/html/bcp47#> .
+@prefix dpv:  <https://w3id.org/dpv#> .
+@prefix gn:   <https://www.geonames.org/ontology#> .
+@prefix gnf:  <https://sws.geonames.org/> .
+@prefix drk:  <http://w3id.org/drk/ontology/> .
+
+drk:c1 a odrl:Constraint ;
+  odrl:leftOperand odrl:spatial ;
+  odrl:operator odrl:eq ;
+  odrl:rightOperand <https://sws.geonames.org/2951839/> .
+
+drk:c2 a odrl:Constraint ;
+  odrl:leftOperand odrl:spatial ;
+  odrl:operator odrl:isPartOf ;
+  odrl:rightOperand <https://sws.geonames.org/2921044/> .
+
+drk:c3 a odrl:Constraint ;
+  odrl:leftOperand odrl:spatial ;
+  odrl:operator odrl:eq ;
+  odrl:rightOperand <https://sws.geonames.org/3017382/> .
+
+# Lemma 1 (paper Definition 9 + Lemma 1):
+#   refines(c1, c2) AND verdict_conflict(c2, c3)
+#     ==> verdict_conflict(c1, c3)
+# c1 refines c2: Bayern is in the downward cone of Germany.
+# verdict(c2, c3) = Conflict via SDA: Germany disjoint France.
