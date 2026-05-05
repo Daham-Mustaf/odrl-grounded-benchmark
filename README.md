@@ -12,6 +12,33 @@ validating the formal results of the paper.
 - [Z3](https://github.com/Z3Prover/z3) 4.14+
 - [cvc5](https://cvc5.github.io) 1.3+
 
+```bash
+cd ~/Desktop/tptp-odrl-anon
+
+# Print versions for each prover claimed in the paper
+echo "=== Prover versions ==="
+echo ""
+echo "Vampire:"
+vampire --version 2>&1 | head -3
+echo ""
+echo "E:"
+eprover --version 2>&1 | head -3
+echo ""
+echo "Z3:"
+z3 --version 2>&1
+echo ""
+echo "cvc5:"
+cvc5 --version 2>&1 | head -3
+echo ""
+echo "tptp4X (optional):"
+tptp4X 2>&1 | head -2
+```
+If anything's missing or wrong-version, fix before proceeding. The paper claims specific versions:
+- Vampire 5.0.0
+- E 3.2.5
+- Z3 4.15+
+- cvc5 1.3+
+
 ## Layout
 
 ```
@@ -133,4 +160,107 @@ echo "Full CSV: /tmp/audit_full.csv"
 ## License
 
 MIT. See `LICENSE`.
+
+
+## 2. Time analysis per problem
+
+cd ~/Desktop/tptp-odrl-anon
+chmod +x audit_timed.sh
+bash audit_timed.sh
+
+
+
+```bash
+cd ~/Desktop/tptp-odrl-anon/Problems/ODRL/KGConstraints
+
+echo "problem,layer,expected,casc_status,casc_time,disc_status,disc_time,lrs_status,lrs_time,otter_status,otter_time,e_status,e_time,z3_status,z3_time,cvc5_status,cvc5_time" \
+    > /tmp/audit_timed.csv
+
+run_timed() {
+    # $1 = command (as string)
+    # Returns: status<TAB>elapsed_seconds
+    local start end elapsed result
+    start=$(date +%s.%N)
+    result=$(eval "$1" 2>&1)
+    end=$(date +%s.%N)
+    elapsed=$(awk "BEGIN { printf \"%.2f\", $end - $start }")
+    echo "${result}|${elapsed}"
+}
+
+for prob in Conflict/KGC*-1.p Refinement/KGC*-1.p Runtime/KGC*-1.p \
+            Composition/KGC*-1.p Monotonicity/KGC*-1.p Alignment/KGC*-1.p; do
+    base=$(basename "$prob" .p)
+    layer=$(dirname "$prob")
+    smt="${prob%.p}.smt2"
+    expected=$(grep -m 1 "^% Status" "$prob" | awk '{print $4}')
+
+    # Vampire CASC
+    t0=$(date +%s.%N)
+    casc=$(vampire --mode casc --time_limit 60 "$prob" 2>&1 | grep "SZS status" | head -1 | awk '{print $4}')
+    casc_t=$(awk "BEGIN { printf \"%.2f\", $(date +%s.%N) - $t0 }")
+
+    # Vampire discount
+    t0=$(date +%s.%N)
+    disc=$(vampire --saturation_algorithm discount --time_limit 60 "$prob" 2>&1 | grep "SZS status" | head -1 | awk '{print $4}')
+    disc_t=$(awk "BEGIN { printf \"%.2f\", $(date +%s.%N) - $t0 }")
+
+    # Vampire LRS
+    t0=$(date +%s.%N)
+    lrs=$(vampire --saturation_algorithm lrs --time_limit 60 "$prob" 2>&1 | grep "SZS status" | head -1 | awk '{print $4}')
+    lrs_t=$(awk "BEGIN { printf \"%.2f\", $(date +%s.%N) - $t0 }")
+
+    # Vampire otter
+    t0=$(date +%s.%N)
+    otter=$(vampire --saturation_algorithm otter --time_limit 60 "$prob" 2>&1 | grep "SZS status" | head -1 | awk '{print $4}')
+    otter_t=$(awk "BEGIN { printf \"%.2f\", $(date +%s.%N) - $t0 }")
+
+    # E
+    t0=$(date +%s.%N)
+    e_r=$(eprover --auto --tptp3-format -s --cpu-limit=60 "$prob" 2>&1 | grep "SZS status" | head -1 | awk '{print $4}')
+    e_t=$(awk "BEGIN { printf \"%.2f\", $(date +%s.%N) - $t0 }")
+
+    # Z3 / cvc5
+    z3_r=""; z3_t="0"; cvc5_r=""; cvc5_t="0"
+    if [ -f "$smt" ]; then
+        t0=$(date +%s.%N)
+        z3_r=$(z3 -T:60 "$smt" 2>&1 | grep -E "^(sat|unsat|unknown|timeout)$" | head -1)
+        z3_t=$(awk "BEGIN { printf \"%.2f\", $(date +%s.%N) - $t0 }")
+
+        t0=$(date +%s.%N)
+        cvc5_r=$(cvc5 --tlimit=60000 "$smt" 2>&1 | grep -E "^(sat|unsat|unknown)$" | head -1)
+        cvc5_t=$(awk "BEGIN { printf \"%.2f\", $(date +%s.%N) - $t0 }")
+    fi
+
+    echo "$base,$layer,$expected,$casc,$casc_t,$disc,$disc_t,$lrs,$lrs_t,$otter,$otter_t,$e_r,$e_t,$z3_r,$z3_t,$cvc5_r,$cvc5_t" \
+        >> /tmp/audit_timed.csv
+
+    printf "%-12s %s\n" "$base" "casc=${casc_t}s disc=${disc_t}s lrs=${lrs_t}s otter=${otter_t}s e=${e_t}s z3=${z3_t}s cvc5=${cvc5_t}s"
+done
+
+echo ""
+echo "Full timing CSV: /tmp/audit_timed.csv"
+```
+
+This captures wall-clock for each prover per problem. After it finishes (~30-90 min), you can summarize:
+
+```bash
+# Per-prover median, max, total
+python3 << 'EOF'
+import csv
+from statistics import median, mean
+
+with open('/tmp/audit_timed.csv') as f:
+    rows = list(csv.DictReader(f))
+
+provers = ['casc', 'disc', 'lrs', 'otter', 'e', 'z3', 'cvc5']
+print(f"{'Prover':<10} {'Median(s)':>10} {'Mean(s)':>10} {'Max(s)':>10} {'Total(s)':>10}")
+print("-" * 56)
+for p in provers:
+    times = [float(r[f'{p}_time']) for r in rows if r[f'{p}_time'] not in ('', '0')]
+    if not times:
+        continue
+    print(f"{p:<10} {median(times):>10.2f} {mean(times):>10.2f} {max(times):>10.2f} {sum(times):>10.2f}")
+EOF
+```
+
 
