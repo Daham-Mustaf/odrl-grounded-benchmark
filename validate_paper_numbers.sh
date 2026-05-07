@@ -17,9 +17,9 @@ Per-operator isAnyOf|440|441|442|
 Per-operator complement|450,460|451,461||
 Refinement|500||501,502|
 Runtime|600,601,602|||
-Composition and|700,704,706|701,703,705|702|
-Composition or/xone|710,713|711|712|
-Monotonicity|800,801,802|803,804,805|806,807,808|810,812
+Composition and|700,704,706,702|701,703,705||
+Composition or/xone|710,713,712|711||
+Monotonicity|800,801,802,806,807,808|803,804,805||810,812
 Alignment|900,902|901||910'
 
 EXPECTED_TOTAL=54
@@ -197,7 +197,7 @@ echo ""
 # ---- Step 5: cvc5 unknown count ---------------------------------------------
 echo "=== Step 5: cvc5 unknown count ==="
 if [ -n "$LATEST_CSV" ]; then
-    CVC5_UNK=$(awk -F, 'NR>1 && $NF=="unknown" {n++} END{print n+0}' "$LATEST_CSV")
+    CVC5_UNK=$(awk -F, 'NR>1 && $16=="unknown" {n++} END{print n+0}' "$LATEST_CSV")
     printf "cvc5 unknown count: %d (paper: %d)\n" "$CVC5_UNK" "$EXPECTED_CVC5_UNK"
     if [ "$CVC5_UNK" != "$EXPECTED_CVC5_UNK" ]; then
         echo "MISMATCH"

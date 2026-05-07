@@ -169,6 +169,26 @@ chmod +x audit_timed.sh
 bash audit_timed.sh
 
 
+## Mace4 (Unknown-class model construction)
+
+Optional: construct explicit countermodels for Unknown-class problems
+using Mace4. Requires `tptp_to_ladr` and `mace4` from the LADR
+distribution.
+
+```bash
+cd Problems/ODRL/KGConstraints
+for prob in Conflict/KGC301-1.p Conflict/KGC402-1.p Conflict/KGC412-1.p \
+            Conflict/KGC422-1.p Conflict/KGC432-1.p Conflict/KGC442-1.p; do
+    base=$(basename "$prob" .p)
+    cat Conflict/Axioms/KGE000-0.ax Conflict/Axioms/DENOT000-0.ax "$prob" \
+        | grep -v "^include" > /tmp/$base-flat.p
+    tptp_to_ladr < /tmp/$base-flat.p > /tmp/$base.in 2>/dev/null
+    result=$(mace4 -t 10 -n 6 < /tmp/$base.in 2>&1 | grep "Exiting" | head -1)
+    echo "$base: $result"
+done
+```
+
+Each problem returns "Exiting with 1 model" in under one second.
 
 ```bash
 cd ~/Desktop/tptp-odrl-anon/Problems/ODRL/KGConstraints
