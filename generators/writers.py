@@ -159,8 +159,10 @@ def _report_block(p: dict) -> str:
         "",
         f"drk:{pid}-report a vrep:OperandReport ;",
         f'    dcterms:identifier "{pid}" ;',
-        "    vrep:offer drk:bsb-offer ;",
-        "    vrep:request drk:bnf-request ;",
+        "    vrep:firstPolicy drk:bsb-offer ;",
+        "    vrep:secondPolicy drk:bnf-request ;",
+        f"    vrep:firstConstraint kgc:{pid}-offer-c1 ;",
+        f"    vrep:secondConstraint kgc:{pid}-request-c1 ;",
         f"    vrep:leftOperand odrl:{p['left_operand']} ;",
         f"    vrep:sort {SORT_CLASS[p['sort']]} ;",
         f"    vrep:resource <{p['resource']}> ;",
@@ -174,6 +176,9 @@ def _report_block(p: dict) -> str:
         lines.append(f'    rdfs:comment """{cert["comment"]}"""@en ;')
         if cert.get("witness"):
             lines.append(f'    vrep:witness "{cert["witness"]}" ;')
+        if cert["kind"] == "Refutation":
+            lines.append(f"    vrep:clashingConstraint kgc:{pid}-offer-c1, "
+                         f"kgc:{pid}-request-c1 ;")
         for i, (source, label) in enumerate(cert["premises"]):
             end = " ;" if i < len(cert["premises"]) - 1 else " ."
             lines.append(

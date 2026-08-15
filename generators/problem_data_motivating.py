@@ -99,6 +99,7 @@ fof(bt_de_distinct_fr, axiom,
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix odrlkb:  <https://w3id.org/odrl-kb/bcp47#> .
 @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+@prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
 @prefix vrep:    <https://w3id.org/odrl-verdict-report#> .
 
 drk:bsb-manuscripts a dcterms:Dataset ;
@@ -107,21 +108,33 @@ drk:bsb-manuscripts a dcterms:Dataset ;
 drk:bsb-offer a odrl:Offer ;
     dcterms:title "BSB offer: access in German"@en ;
     odrl:assigner drk:bavarian-state-library ;
-    odrl:permission [ odrl:action odrl:use ;
-        odrl:target drk:bsb-manuscripts ;
-        odrl:constraint [ odrl:leftOperand odrl:language ;
-                          odrl:operator odrl:eq ;
-                          odrl:rightOperand odrlkb:de ] ] .
+    odrl:permission kgc:KGC300-offer-r1 .
 
-drk:bnf-request a odrl:Request ;
+kgc:KGC300-offer-r1 a odrl:Permission ;
+    odrl:action odrl:use ;
+    odrl:target drk:bsb-manuscripts ;
+    odrl:constraint kgc:KGC300-offer-c1 .
+
+kgc:KGC300-offer-c1 a odrl:Constraint ;
+    odrl:leftOperand odrl:language ;
+    odrl:operator odrl:eq ;
+    odrl:rightOperand odrlkb:de .
+
+# ODRL has no Request class; the paper's request policy is modelled as a Set.
+drk:bnf-request a odrl:Set ;
     dcterms:title "BnF request: access in French"@en ;
     odrl:assignee drk:french-national-library ;
-    odrl:permission [ odrl:action odrl:use ;
-        odrl:target drk:bsb-manuscripts ;
-        odrl:constraint [ odrl:leftOperand odrl:language ;
-                          odrl:operator odrl:eq ;
-                          odrl:rightOperand odrlkb:fr ] ] .
-""",
+    odrl:permission kgc:KGC300-request-r1 .
+
+kgc:KGC300-request-r1 a odrl:Permission ;
+    odrl:action odrl:use ;
+    odrl:target drk:bsb-manuscripts ;
+    odrl:constraint kgc:KGC300-request-c1 .
+
+kgc:KGC300-request-c1 a odrl:Constraint ;
+    odrl:leftOperand odrl:language ;
+    odrl:operator odrl:eq ;
+    odrl:rightOperand odrlkb:fr .""",
     },
 
     # -----------------------------------------------------------------
@@ -185,6 +198,7 @@ drk:bnf-request a odrl:Request ;
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix dpv:     <https://w3id.org/dpv#> .
 @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+@prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
 @prefix vrep:    <https://w3id.org/odrl-verdict-report#> .
 
 drk:bsb-manuscripts a dcterms:Dataset ;
@@ -193,21 +207,33 @@ drk:bsb-manuscripts a dcterms:Dataset ;
 drk:bsb-offer a odrl:Offer ;
     dcterms:title "BSB offer: non-commercial research only"@en ;
     odrl:assigner drk:bavarian-state-library ;
-    odrl:permission [ odrl:action odrl:use ;
-        odrl:target drk:bsb-manuscripts ;
-        odrl:constraint [ odrl:leftOperand odrl:purpose ;
-                          odrl:operator odrl:isA ;
-                          odrl:rightOperand dpv:NonCommercialPurpose ] ] .
+    odrl:permission kgc:KGC301-offer-r1 .
 
-drk:bnf-request a odrl:Request ;
+kgc:KGC301-offer-r1 a odrl:Permission ;
+    odrl:action odrl:use ;
+    odrl:target drk:bsb-manuscripts ;
+    odrl:constraint kgc:KGC301-offer-c1 .
+
+kgc:KGC301-offer-c1 a odrl:Constraint ;
+    odrl:leftOperand odrl:purpose ;
+    odrl:operator odrl:isA ;
+    odrl:rightOperand dpv:NonCommercialPurpose .
+
+# ODRL has no Request class; the paper's request policy is modelled as a Set.
+drk:bnf-request a odrl:Set ;
     dcterms:title "BnF request: scientific research"@en ;
     odrl:assignee drk:french-national-library ;
-    odrl:permission [ odrl:action odrl:use ;
-        odrl:target drk:bsb-manuscripts ;
-        odrl:constraint [ odrl:leftOperand odrl:purpose ;
-                          odrl:operator odrl:eq ;
-                          odrl:rightOperand dpv:ScientificResearch ] ] .
-""",
+    odrl:permission kgc:KGC301-request-r1 .
+
+kgc:KGC301-request-r1 a odrl:Permission ;
+    odrl:action odrl:use ;
+    odrl:target drk:bsb-manuscripts ;
+    odrl:constraint kgc:KGC301-request-c1 .
+
+kgc:KGC301-request-c1 a odrl:Constraint ;
+    odrl:leftOperand odrl:purpose ;
+    odrl:operator odrl:eq ;
+    odrl:rightOperand dpv:ScientificResearch .""",
     },
 
     # -----------------------------------------------------------------
@@ -274,6 +300,7 @@ fof(res_france_within_europe, axiom,
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix gn:      <https://sws.geonames.org/> .
 @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+@prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
 @prefix vrep:    <https://w3id.org/odrl-verdict-report#> .
 
 drk:bsb-manuscripts a dcterms:Dataset ;
@@ -282,20 +309,32 @@ drk:bsb-manuscripts a dcterms:Dataset ;
 drk:bsb-offer a odrl:Offer ;
     dcterms:title "BSB offer: recipients in Europe"@en ;
     odrl:assigner drk:bavarian-state-library ;
-    odrl:permission [ odrl:action odrl:use ;
-        odrl:target drk:bsb-manuscripts ;
-        odrl:constraint [ odrl:leftOperand odrl:spatial ;
-                          odrl:operator odrl:isPartOf ;
-                          odrl:rightOperand <https://sws.geonames.org/6255148/> ] ] .
+    odrl:permission kgc:KGC302-offer-r1 .
 
-drk:bnf-request a odrl:Request ;
+kgc:KGC302-offer-r1 a odrl:Permission ;
+    odrl:action odrl:use ;
+    odrl:target drk:bsb-manuscripts ;
+    odrl:constraint kgc:KGC302-offer-c1 .
+
+kgc:KGC302-offer-c1 a odrl:Constraint ;
+    odrl:leftOperand odrl:spatial ;
+    odrl:operator odrl:isPartOf ;
+    odrl:rightOperand <https://sws.geonames.org/6255148/> .
+
+# ODRL has no Request class; the paper's request policy is modelled as a Set.
+drk:bnf-request a odrl:Set ;
     dcterms:title "BnF request: recipient in France"@en ;
     odrl:assignee drk:french-national-library ;
-    odrl:permission [ odrl:action odrl:use ;
-        odrl:target drk:bsb-manuscripts ;
-        odrl:constraint [ odrl:leftOperand odrl:spatial ;
-                          odrl:operator odrl:eq ;
-                          odrl:rightOperand <https://sws.geonames.org/3017382/> ] ] .
-""",
+    odrl:permission kgc:KGC302-request-r1 .
+
+kgc:KGC302-request-r1 a odrl:Permission ;
+    odrl:action odrl:use ;
+    odrl:target drk:bsb-manuscripts ;
+    odrl:constraint kgc:KGC302-request-c1 .
+
+kgc:KGC302-request-c1 a odrl:Constraint ;
+    odrl:leftOperand odrl:spatial ;
+    odrl:operator odrl:eq ;
+    odrl:rightOperand <https://sws.geonames.org/3017382/> .""",
     },
 ]

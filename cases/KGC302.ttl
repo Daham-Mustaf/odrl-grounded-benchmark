@@ -2,6 +2,7 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix gn:      <https://sws.geonames.org/> .
 @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+@prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
 @prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix vrep:    <https://w3id.org/odrl-verdict-report#> .
 
@@ -11,27 +12,42 @@ drk:bsb-manuscripts a dcterms:Dataset ;
 drk:bsb-offer a odrl:Offer ;
     dcterms:title "BSB offer: recipients in Europe"@en ;
     odrl:assigner drk:bavarian-state-library ;
-    odrl:permission [ odrl:action odrl:use ;
-        odrl:target drk:bsb-manuscripts ;
-        odrl:constraint [ odrl:leftOperand odrl:spatial ;
-                          odrl:operator odrl:isPartOf ;
-                          odrl:rightOperand <https://sws.geonames.org/6255148/> ] ] .
+    odrl:permission kgc:KGC302-offer-r1 .
 
-drk:bnf-request a odrl:Request ;
+kgc:KGC302-offer-r1 a odrl:Permission ;
+    odrl:action odrl:use ;
+    odrl:target drk:bsb-manuscripts ;
+    odrl:constraint kgc:KGC302-offer-c1 .
+
+kgc:KGC302-offer-c1 a odrl:Constraint ;
+    odrl:leftOperand odrl:spatial ;
+    odrl:operator odrl:isPartOf ;
+    odrl:rightOperand <https://sws.geonames.org/6255148/> .
+
+# ODRL has no Request class; the paper's request policy is modelled as a Set.
+drk:bnf-request a odrl:Set ;
     dcterms:title "BnF request: recipient in France"@en ;
     odrl:assignee drk:french-national-library ;
-    odrl:permission [ odrl:action odrl:use ;
-        odrl:target drk:bsb-manuscripts ;
-        odrl:constraint [ odrl:leftOperand odrl:spatial ;
-                          odrl:operator odrl:eq ;
-                          odrl:rightOperand <https://sws.geonames.org/3017382/> ] ] .
+    odrl:permission kgc:KGC302-request-r1 .
+
+kgc:KGC302-request-r1 a odrl:Permission ;
+    odrl:action odrl:use ;
+    odrl:target drk:bsb-manuscripts ;
+    odrl:constraint kgc:KGC302-request-c1 .
+
+kgc:KGC302-request-c1 a odrl:Constraint ;
+    odrl:leftOperand odrl:spatial ;
+    odrl:operator odrl:eq ;
+    odrl:rightOperand <https://sws.geonames.org/3017382/> .
 
 ### Expected result #######################################################
 
 drk:KGC302-report a vrep:OperandReport ;
     dcterms:identifier "KGC302" ;
-    vrep:offer drk:bsb-offer ;
-    vrep:request drk:bnf-request ;
+    vrep:firstPolicy drk:bsb-offer ;
+    vrep:secondPolicy drk:bnf-request ;
+    vrep:firstConstraint kgc:KGC302-offer-c1 ;
+    vrep:secondConstraint kgc:KGC302-request-c1 ;
     vrep:leftOperand odrl:spatial ;
     vrep:sort vrep:mer ;
     vrep:resource <https://w3id.org/odrl-kb/geonames-europe> ;
@@ -42,5 +58,6 @@ drk:KGC302-report a vrep:OperandReport ;
 drk:KGC302-certificate a vrep:Refutation ;
     rdfs:comment """No model lacks a common use.  The gazetteer places France within Europe, so France itself is an admissible use in every model."""@en ;
     vrep:witness "gn:France" ;
+    vrep:clashingConstraint kgc:KGC302-offer-c1, kgc:KGC302-request-c1 ;
     vrep:premise [ vrep:premiseSource vrep:fromResource ;
                    rdfs:label "gn:France lies within gn:Europe"@en ] .
