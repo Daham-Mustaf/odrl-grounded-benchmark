@@ -1,6 +1,11 @@
 kgc:KGC302-observed a vrep:Refutation ;
     vrep:producedBy "Vampire" ;
     vrep:proofArtefact <proofs/KGC302-2.tstp> ;
-    vrep:premise [ vrep:premiseSource vrep:fromConstraints ;
-                   vrep:formulaName "w_kgc302" ;
-                   rdfs:label "w_kgc302"@en ] .
+    vrep:attributedAssertion [
+        vrep:premiseSource vrep:fromResource ;
+        vrep:formulaName "res_france_within_europe" ;
+        rdfs:label "res_france_within_europe"@en ] ;
+    vrep:attributedAssertion [
+        vrep:premiseSource vrep:fromConstraints ;
+        vrep:formulaName "w_kgc302" ;
+        rdfs:label "w_kgc302"@en ] .

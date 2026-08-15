@@ -1,0 +1,40 @@
+@prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix gn:      <https://sws.geonames.org/> .
+@prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+@prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix vrep:    <https://w3id.org/odrl-verdict-report#> .
+
+drk:bsb-manuscripts a dcterms:Dataset ;
+    dcterms:title "Digitised manuscripts, Bavarian State Library"@en .
+
+drk:bsb-offer a odrl:Offer ;
+    dcterms:title "BSB offer, spatial constrained by isA"@en ;
+    odrl:assigner drk:bavarian-state-library ;
+    odrl:permission kgc:KGC100-offer-r1 .
+
+kgc:KGC100-offer-r1 a odrl:Permission ;
+    odrl:action odrl:use ;
+    odrl:target drk:bsb-manuscripts ;
+    odrl:constraint kgc:KGC100-offer-c1 .
+
+kgc:KGC100-offer-c1 a odrl:Constraint ;
+    odrl:leftOperand odrl:spatial ;
+    odrl:operator odrl:isA ;
+    odrl:rightOperand <https://sws.geonames.org/6255148/> .
+
+### Expected result #######################################################
+
+drk:KGC100-report a vrep:WellSortednessReport ;
+    dcterms:identifier "KGC100" ;
+    vrep:constraint kgc:KGC100-offer-c1 ;
+    vrep:leftOperand odrl:spatial ;
+    vrep:sort vrep:mer ;
+    vrep:resource <https://w3id.org/odrl-kb/geonames-europe> ;
+    vrep:wellSorted false ;
+    rdfs:comment """isA requires subsumption; the operand is mer, whose resource supplies parthood"""@en .
+
+# No query is built for a rejected constraint, and none is
+# built to accept one: the check reads the signature and
+# nothing else.

@@ -24,8 +24,7 @@ kgc:KGC301-offer-c1 a odrl:Constraint ;
     odrl:operator odrl:isA ;
     odrl:rightOperand dpv:NonCommercialPurpose .
 
-# ODRL has no Request class; the paper's request policy is modelled as a Set.
-drk:bnf-request a odrl:Set ;
+drk:bnf-request a odrl:Request ;
     dcterms:title "BnF request: scientific research"@en ;
     odrl:assignee drk:french-national-library ;
     odrl:permission kgc:KGC301-request-r1 .

@@ -1,0 +1,40 @@
+@prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix odrlkb:  <https://w3id.org/odrl-kb/bcp47#> .
+@prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+@prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix vrep:    <https://w3id.org/odrl-verdict-report#> .
+
+drk:bsb-manuscripts a dcterms:Dataset ;
+    dcterms:title "Digitised manuscripts, Bavarian State Library"@en .
+
+drk:bsb-offer a odrl:Offer ;
+    dcterms:title "BSB offer, language constrained by isA"@en ;
+    odrl:assigner drk:bavarian-state-library ;
+    odrl:permission kgc:KGC102-offer-r1 .
+
+kgc:KGC102-offer-r1 a odrl:Permission ;
+    odrl:action odrl:use ;
+    odrl:target drk:bsb-manuscripts ;
+    odrl:constraint kgc:KGC102-offer-c1 .
+
+kgc:KGC102-offer-c1 a odrl:Constraint ;
+    odrl:leftOperand odrl:language ;
+    odrl:operator odrl:isA ;
+    odrl:rightOperand odrlkb:de .
+
+### Expected result #######################################################
+
+drk:KGC102-report a vrep:WellSortednessReport ;
+    dcterms:identifier "KGC102" ;
+    vrep:constraint kgc:KGC102-offer-c1 ;
+    vrep:leftOperand odrl:language ;
+    vrep:sort vrep:nom ;
+    vrep:resource <https://w3id.org/odrl-kb/bcp47> ;
+    vrep:wellSorted false ;
+    rdfs:comment """isA requires subsumption; the operand is nom, whose resource supplies identity"""@en .
+
+# No query is built for a rejected constraint, and none is
+# built to accept one: the check reads the signature and
+# nothing else.

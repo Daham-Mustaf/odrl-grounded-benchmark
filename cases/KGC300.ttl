@@ -24,8 +24,7 @@ kgc:KGC300-offer-c1 a odrl:Constraint ;
     odrl:operator odrl:eq ;
     odrl:rightOperand odrlkb:de .
 
-# ODRL has no Request class; the paper's request policy is modelled as a Set.
-drk:bnf-request a odrl:Set ;
+drk:bnf-request a odrl:Request ;
     dcterms:title "BnF request: access in French"@en ;
     odrl:assignee drk:french-national-library ;
     odrl:permission kgc:KGC300-request-r1 .

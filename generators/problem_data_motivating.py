@@ -120,8 +120,7 @@ kgc:KGC300-offer-c1 a odrl:Constraint ;
     odrl:operator odrl:eq ;
     odrl:rightOperand odrlkb:de .
 
-# ODRL has no Request class; the paper's request policy is modelled as a Set.
-drk:bnf-request a odrl:Set ;
+drk:bnf-request a odrl:Request ;
     dcterms:title "BnF request: access in French"@en ;
     odrl:assignee drk:french-national-library ;
     odrl:permission kgc:KGC300-request-r1 .
@@ -219,8 +218,7 @@ kgc:KGC301-offer-c1 a odrl:Constraint ;
     odrl:operator odrl:isA ;
     odrl:rightOperand dpv:NonCommercialPurpose .
 
-# ODRL has no Request class; the paper's request policy is modelled as a Set.
-drk:bnf-request a odrl:Set ;
+drk:bnf-request a odrl:Request ;
     dcterms:title "BnF request: scientific research"@en ;
     odrl:assignee drk:french-national-library ;
     odrl:permission kgc:KGC301-request-r1 .
@@ -321,8 +319,7 @@ kgc:KGC302-offer-c1 a odrl:Constraint ;
     odrl:operator odrl:isPartOf ;
     odrl:rightOperand <https://sws.geonames.org/6255148/> .
 
-# ODRL has no Request class; the paper's request policy is modelled as a Set.
-drk:bnf-request a odrl:Set ;
+drk:bnf-request a odrl:Request ;
     dcterms:title "BnF request: recipient in France"@en ;
     odrl:assignee drk:french-national-library ;
     odrl:permission kgc:KGC302-request-r1 .

@@ -19,9 +19,12 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
 from certificate import (premises_from_vampire, classify, to_turtle,
-                         compare, NoAxiomNames, WITHDRAWABLE)
+                         withdrawable, NoAxiomNames, NoProof)
 
-VAMPIRE = ["vampire", "--mode", "casc", "--proof", "on",
+# --mode vampire rather than casc: the schedule mode does not always
+# propagate --output_axiom_names to its child strategies, and without
+# names no premise can be attributed.
+VAMPIRE = ["vampire", "--mode", "vampire", "--proof", "tptp",
            "--output_axiom_names", "on"]
 
 
@@ -104,14 +107,14 @@ def main() -> int:
 
         try:
             names = premises_from_vampire(raw)
-        except NoAxiomNames as e:
+        except (NoAxiomNames, NoProof) as e:
             print(f"    {e}")
             continue
         if not names:
             print("    no premises reported; is --proof on taking effect?")
             continue
 
-        c = classify(names, pid)
+        c = classify(names)
         ttl = to_turtle(pid, "Refutation", c,
                         artefact=f"proofs/{pid}-{which}.tstp",
                         prover="Vampire")
@@ -123,7 +126,7 @@ def main() -> int:
                 print(f"    {source:24s} {', '.join(ns)}")
         if c["unclassified"]:
             print(f"    UNCLASSIFIED             {', '.join(c['unclassified'])}")
-        w = [n for s in WITHDRAWABLE for n in c[s]]
+        w = withdrawable(c)
         print(f"    withdrawable             {', '.join(w) if w else 'none'}")
         print(f"    -> {odir / f'{pid}-observed.ttl'}")
 

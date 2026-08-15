@@ -3,31 +3,51 @@ certificate.py
 ==============
 Maps prover output onto the certificate vocabulary.
 
-A prover reports a refutation by naming the formulae it used.  Formula names
-in a problem file carry their provenance in the prefix, so the mapping is a
-lookup:
+Attribution, not verification
+-----------------------------
+This module records *which assertions a refutation used*.  It does not
+produce a checkable derivation.  A prover's proof uses unification,
+demodulation and superposition; the certificate proposition asks for
+propositionally valid steps over ground instances.  Turning one into the
+other is a normalisation step that does not exist yet.
 
-    res_...     an assertion of the resource            vrep:fromResource
-    bt_...      an assertion of the background theory   vrep:fromBackgroundTheory
-    w_...       a conjunct of the witness condition     vrep:fromConstraints
-    ax_...      an instance of an order axiom           vrep:fromOrderAxiom
+The distinction has a consequence for the vocabulary.  A quantified
+assertion the prover reports, an order axiom or a disjointness assertion of
+the background theory, is not itself a legitimate premise for the checker;
+its ground instances are, and only the ones the refutation used.  So the
+names harvested here are written as `vrep:attributedAssertion`, not as
+`vrep:premise`.  `vrep:premise` is reserved for the checker-level ground
+instances a normaliser would produce.
 
-Four sources, not two.  The refutation uses the constraint-derived conjuncts
-and may use order-axiom instances; both are premises the checker must accept
-as legitimate.  Contestability filters on the first two: a party may withdraw
-what they declared, not what the authority published, and not the constraints
-they themselves wrote.
+Attribution is nonetheless the half a party needs: they withdraw an
+assertion, not an instance of one, so naming the quantified formula is
+correct at that level.
 
-Both provers project onto the same names, which is what makes the certificate
-independent of how the query was decided.
+Provenance by prefix
+--------------------
+    res_    an assertion of the resource               fromResource
+    bt_     an assertion of the background theory      fromBackgroundTheory
+    w_      a conjunct of the witness condition        fromConstraints
+    ax_     an order axiom                             fromOrderAxiom
+    eq_     an equality axiom                          fromEqualityAxiom
 
-Vampire discards formula names unless asked to keep them.  Run it as
+The last is reserved and nothing emits it yet.  A refutation closing an
+identity literal against a distinctness assertion uses equality reasoning:
+Vampire's proof of the language pair cites a demodulation step.  Whether
+those instances become legitimate premises, or the encoding replaces builtin
+equality with a predicate, is open, and it reaches into the paper.
 
-    vampire --mode casc --proof on --output_axiom_names on <file>
+Only `bt_` assertions are withdrawable.  The resource is the authority's, the
+constraints are the parties' own, and the axioms are the framework's.
 
-or every premise comes back as `unknown` and nothing can be attributed.
+Running the provers
+-------------------
+Vampire discards formula names unless asked to keep them, and the schedule
+mode does not always propagate the flag to its children:
 
-Z3 needs the assertions named and cores enabled:
+    vampire --mode vampire --proof tptp --output_axiom_names on <file>
+
+Z3 needs named assertions and cores enabled:
 
     (set-option :produce-unsat-cores true)
     (assert (! <formula> :named bt_de_distinct_fr))
@@ -37,112 +57,142 @@ Z3 needs the assertions named and cores enabled:
 
 import re
 
-# Vampire:  fof(f129,axiom,( ... ), file('KGC300-1.p',bt_de_distinct_fr)).
-_VAMPIRE_LEAF = re.compile(r"file\('[^']*',\s*([A-Za-z0-9_]+)\s*\)")
-
-# Z3:  (bt_de_distinct_fr kgc300_w)
-_Z3_CORE = re.compile(r"\(([^()]*)\)")
-
 SOURCE = {
     "res": "fromResource",
     "bt":  "fromBackgroundTheory",
     "w":   "fromConstraints",
     "ax":  "fromOrderAxiom",
+    "eq":  "fromEqualityAxiom",     # reserved; nothing emits it yet
 }
 
-# A party may withdraw only these.
 WITHDRAWABLE = {"fromBackgroundTheory"}
+
+# Vampire delimits its proof; anything outside is echoed input or diagnostics.
+_PROOF_BLOCK = re.compile(
+    r"% SZS output start Proof.*?% SZS output end Proof", re.S)
+
+# fof(f129, axiom, ( ... ), file('KGE000-0.ax', ax_leq_transitive)).
+_LEAF = re.compile(r"file\(\s*'[^']*'\s*,\s*([A-Za-z0-9_]+)\s*\)")
+
+
+class NoProof(Exception):
+    """The output contains no proof block."""
 
 
 class NoAxiomNames(Exception):
-    """Raised when a proof carries no usable formula names."""
+    """The proof carries no usable formula names."""
 
 
-def premises_from_vampire(proof: str) -> list[str]:
-    """The leaves of a Vampire refutation, by formula name."""
-    names = _VAMPIRE_LEAF.findall(proof)
-    if not names:
-        return []
-    if all(n == "unknown" for n in names):
-        raise NoAxiomNames(
-            "Vampire reported every premise as 'unknown'.  Re-run with "
-            "--output_axiom_names on, or provenance cannot be attributed.")
-    return [n for n in dict.fromkeys(names) if n != "unknown"]
+def premises_from_vampire(output: str) -> list[str]:
+    """Leaf formula names from a Vampire refutation.
 
-
-def premises_from_z3(core_output: str) -> list[str]:
-    """The names in a Z3 unsatisfiable core."""
-    m = _Z3_CORE.search(core_output.strip())
+    Reads the proof block only.  A leaf whose name was lost is kept as the
+    literal 'unknown' rather than dropped: dropping it would understate the
+    premise count and make a comparison fail on the wrong side.
+    """
+    m = _PROOF_BLOCK.search(output)
     if not m:
-        return []
-    return [n for n in m.group(1).split() if n]
+        raise NoProof(
+            "no proof block in the output.  Either the query was satisfiable, "
+            "or --proof was not in effect.")
+    names = list(dict.fromkeys(_LEAF.findall(m.group(0))))
+    if names and all(n == "unknown" for n in names):
+        raise NoAxiomNames(
+            "every premise reported as 'unknown'.  Re-run with "
+            "--output_axiom_names on; with --mode casc the flag may not "
+            "reach the child strategy, so --mode vampire is safer.")
+    return names
 
 
-def classify(names: list[str], problem_id: str) -> dict:
-    """Split premise names into resource, background theory and the witness.
+def premises_from_z3(output: str) -> tuple[str, list[str]]:
+    """The status and the core names from Z3.
 
-    An unrecognised prefix is reported rather than guessed: a premise whose
-    provenance cannot be determined is a defect in the problem file, not
-    something to attribute by default.
+    Returns ("unsat", names) with names possibly empty: an unsatisfiable
+    query with an empty core is a real state, meaning the witness condition
+    is contradictory on its own.  Anything else returns the status and no
+    names, so a solver error is not mistaken for a core.
+    """
+    lines = [l.strip() for l in output.splitlines() if l.strip()]
+    status = next((l for l in lines if l in ("sat", "unsat", "unknown")), None)
+    if status != "unsat":
+        return (status or "no-status"), []
+    i = lines.index("unsat")
+    for line in lines[i + 1:]:
+        if line.startswith("(") and not line.startswith("(error"):
+            return "unsat", [n for n in line.strip("()").split() if n]
+    return "unsat", []
+
+
+def classify(names: list[str]) -> dict:
+    """Split names by provenance prefix.
+
+    An unrecognised prefix, and a name the prover lost, both land in
+    `unclassified`.  Neither is attributed by default: a premise whose origin
+    cannot be determined is a defect to report, not a guess to make.
     """
     out = {v: [] for v in SOURCE.values()}
     out["unclassified"] = []
     for n in names:
         prefix = n.split("_", 1)[0]
-        if prefix in SOURCE:
-            out[SOURCE[prefix]].append(n)
-        else:
-            out["unclassified"].append(n)
+        out.setdefault(SOURCE.get(prefix, "unclassified"), []).append(n) \
+            if prefix in SOURCE else out["unclassified"].append(n)
     return out
+
+
+def withdrawable(classified: dict) -> list[str]:
+    return [n for src in WITHDRAWABLE for n in classified[src]]
 
 
 def to_turtle(problem_id: str, kind: str, classified: dict,
               labels: dict | None = None, witness: str | None = None,
               artefact: str | None = None, prover: str | None = None) -> str:
-    """The observed certificate, in the report vocabulary.
+    """The observed certificate.
 
-    The premise attribution is the certificate's contestable part.  The
-    checkable derivation is a separate artefact: a prover's own proof uses
-    unification and superposition, which are not the propositionally valid
-    steps over ground instances the checker specification requires, so the
-    raw output has to be normalised before it can be checked.  Until that
-    exists, `artefact` points at the raw proof and `prover` records what
-    produced it, as provenance rather than as a checked object.
+    Writes `vrep:attributedAssertion`, not `vrep:premise`: these are the
+    assertions the refutation used, not the ground instances a checker would
+    replay.  `artefact` points at the raw proof, as provenance rather than as
+    a checked object.
     """
     labels = labels or {}
-    pid = problem_id
-    lines = [f"kgc:{pid}-observed a vrep:{kind} ;"]
+    lines = [f"kgc:{problem_id}-observed a vrep:{kind} ;"]
     if prover:
         lines.append(f'    vrep:producedBy "{prover}" ;')
     if artefact:
         lines.append(f"    vrep:proofArtefact <{artefact}> ;")
     if witness:
         lines.append(f"    vrep:witness {witness} ;")
-    prem = []
+
+    entries = []
     for source in SOURCE.values():
         for n in classified[source]:
-            label = labels.get(n, n)
-            prem.append(f"    vrep:premise [ vrep:premiseSource vrep:{source} ;\n"
-                        f'                   vrep:formulaName "{n}" ;\n'
-                        f'                   rdfs:label "{label}"@en ]')
-    if prem:
-        lines.append(" ;\n".join(prem) + " .")
+            entries.append(
+                f"    vrep:attributedAssertion [\n"
+                f"        vrep:premiseSource vrep:{source} ;\n"
+                f'        vrep:formulaName "{n}" ;\n'
+                f'        rdfs:label "{labels.get(n, n)}"@en ]')
+    for n in classified["unclassified"]:
+        entries.append(
+            f"    vrep:attributedAssertion [\n"
+            f"        vrep:premiseSource vrep:unclassified ;\n"
+            f'        vrep:formulaName "{n}" ]')
+
+    if entries:
+        lines.append(" ;\n".join(entries) + " .")
     else:
         lines[-1] = lines[-1].rstrip(" ;") + " ."
     return "\n".join(lines)
 
 
 def compare(expected: dict, observed: dict) -> list[str]:
-    """Differences between the expected and the observed premise split.
+    """Differences between the expected and observed attribution.
 
-    A verdict that is right for the wrong reason shows up here and nowhere
-    else, which is the point of recording certificates at all.
+    A verdict right for the wrong reason shows up here and nowhere else.
     """
     diffs = []
     for source in SOURCE.values():
         e, o = len(expected.get(source, [])), len(observed.get(source, []))
         if e != o:
-            diffs.append(f"{source}: expected {e} premise(s), observed {o}")
+            diffs.append(f"{source}: expected {e}, observed {o}")
     if observed["unclassified"]:
-        diffs.append("unclassified premises: " + ", ".join(observed["unclassified"]))
+        diffs.append("unattributable: " + ", ".join(observed["unclassified"]))
     return diffs
