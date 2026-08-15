@@ -2,6 +2,7 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix gn:      <https://sws.geonames.org/> .
 @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix vrep:    <https://w3id.org/odrl-verdict-report#> .
 
 drk:bsb-manuscripts a dcterms:Dataset ;
@@ -25,7 +26,7 @@ drk:bnf-request a odrl:Request ;
                           odrl:operator odrl:eq ;
                           odrl:rightOperand <https://sws.geonames.org/3017382/> ] ] .
 
-### Expected result ##########################################################
+### Expected result #######################################################
 
 drk:KGC302-report a vrep:OperandReport ;
     dcterms:identifier "KGC302" ;
@@ -35,4 +36,11 @@ drk:KGC302-report a vrep:OperandReport ;
     vrep:sort vrep:mer ;
     vrep:resource <https://w3id.org/odrl-kb/geonames-europe> ;
     vrep:backgroundTheory <https://w3id.org/odrl-kb/geonames-europe/admin-siblings> ;
-    vrep:verdict vrep:Compatible .
+    vrep:verdict vrep:Compatible ;
+    vrep:certificate drk:KGC302-certificate .
+
+drk:KGC302-certificate a vrep:Refutation ;
+    rdfs:comment """No model lacks a common use.  The gazetteer places France within Europe, so France itself is an admissible use in every model."""@en ;
+    vrep:witness "gn:France" ;
+    vrep:premise [ vrep:premiseSource vrep:fromResource ;
+                   rdfs:label "gn:France lies within gn:Europe"@en ] .

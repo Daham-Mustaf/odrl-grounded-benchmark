@@ -135,11 +135,69 @@ def write_problem(p: dict, out_dir: Path, cases_dir: Path) -> list[Path]:
     return written
 
 
+VERDICT_CLASS = {
+    "Compatible":   "vrep:Compatible",
+    "Incompatible": "vrep:Incompatible",
+    "Unknown":      "vrep:Unknown",
+}
+
+SORT_CLASS = {"nom": "vrep:nom", "tax": "vrep:tax", "mer": "vrep:mer"}
+
+
+def _report_block(p: dict) -> str:
+    """The expected report, generated from the problem's own fields.
+
+    Written here rather than kept in the ttl string so it cannot drift from
+    expected_q1 and expected_q2.
+    """
+    pid = p["id"]
+    verdict = expected_verdict(p)
+    cert = p.get("certificate")
+
+    lines = [
+        "### Expected result " + "#" * 55,
+        "",
+        f"drk:{pid}-report a vrep:OperandReport ;",
+        f'    dcterms:identifier "{pid}" ;',
+        "    vrep:offer drk:bsb-offer ;",
+        "    vrep:request drk:bnf-request ;",
+        f"    vrep:leftOperand odrl:{p['left_operand']} ;",
+        f"    vrep:sort {SORT_CLASS[p['sort']]} ;",
+        f"    vrep:resource <{p['resource']}> ;",
+        f"    vrep:backgroundTheory <{p['background_theory']}> ;",
+    ]
+    if cert:
+        lines.append(f"    vrep:verdict {VERDICT_CLASS[verdict]} ;")
+        lines.append(f"    vrep:certificate drk:{pid}-certificate .")
+        lines.append("")
+        lines.append(f"drk:{pid}-certificate a vrep:{cert['kind']} ;")
+        lines.append(f'    rdfs:comment """{cert["comment"]}"""@en ;')
+        if cert.get("witness"):
+            lines.append(f'    vrep:witness "{cert["witness"]}" ;')
+        for i, (source, label) in enumerate(cert["premises"]):
+            end = " ;" if i < len(cert["premises"]) - 1 else " ."
+            lines.append(
+                f"    vrep:premise [ vrep:premiseSource vrep:{source} ;\n"
+                f'                   rdfs:label "{label}"@en ]{end}'
+            )
+        if not cert["premises"]:
+            lines[-1] = lines[-1].rstrip(" ;") + " ."
+    else:
+        lines.append(f"    vrep:verdict {VERDICT_CLASS[verdict]} .")
+
+    return "\n".join(lines)
+
+
 def write_case(p: dict, cases_dir: Path) -> Path:
     """Policies and expected report, one graph per problem."""
     cases_dir.mkdir(parents=True, exist_ok=True)
     path = cases_dir / f"{p['id']}.ttl"
-    path.write_text(p["ttl"].strip() + "\n", encoding="utf-8")
+    body = p["ttl"].strip()
+    if "@prefix rdfs:" not in body:
+        body = body.replace(
+            "@prefix vrep:",
+            "@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .\n@prefix vrep:", 1)
+    path.write_text(body + "\n\n" + _report_block(p) + "\n", encoding="utf-8")
     return path
 
 

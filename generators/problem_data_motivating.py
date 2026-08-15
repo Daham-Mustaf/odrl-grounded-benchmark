@@ -84,6 +84,16 @@ fof(bt_de_distinct_fr, axiom,
 (or (and (= bcp_de bcp_de) (= bcp_de bcp_fr))
     (and (= bcp_fr bcp_de) (= bcp_fr bcp_fr)))""",
 
+        "certificate": {
+            "kind": "Refutation",
+            "comment": "No model admits a common use.  The two constraints "
+                       "require one concept to be both subtags, and the "
+                       "background theory holds them distinct.",
+            "premises": [
+                ("fromBackgroundTheory",
+                 "bcp:de and bcp:fr are distinct (registry uniqueness)"),
+            ],
+        },
         "ttl": """\
 @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
@@ -111,18 +121,7 @@ drk:bnf-request a odrl:Request ;
         odrl:constraint [ odrl:leftOperand odrl:language ;
                           odrl:operator odrl:eq ;
                           odrl:rightOperand odrlkb:fr ] ] .
-
-### Expected result ##########################################################
-
-drk:KGC300-report a vrep:OperandReport ;
-    dcterms:identifier "KGC300" ;
-    vrep:offer drk:bsb-offer ;
-    vrep:request drk:bnf-request ;
-    vrep:leftOperand odrl:language ;
-    vrep:sort vrep:nom ;
-    vrep:resource <https://w3id.org/odrl-kb/bcp47> ;
-    vrep:backgroundTheory <https://w3id.org/odrl-kb/bcp47/uniqueness> ;
-    vrep:verdict vrep:Incompatible .""",
+""",
     },
 
     # -----------------------------------------------------------------
@@ -172,6 +171,15 @@ drk:KGC300-report a vrep:OperandReport ;
 (or (and (kge_leq dpv_non_commercial_purpose dpv_non_commercial_purpose) (= dpv_non_commercial_purpose dpv_scientific_research))
     (and (kge_leq dpv_scientific_research  dpv_non_commercial_purpose) (= dpv_scientific_research  dpv_scientific_research)))""",
 
+        "certificate": {
+            "kind": "Models",
+            "comment": "Both queries are satisfiable, so some models admit a "
+                       "common use and some do not.  The models differ on "
+                       "whether dpv:ScientificResearch falls under "
+                       "dpv:NonCommercialPurpose, which is what the "
+                       "vocabulary leaves open.",
+            "premises": [],
+        },
         "ttl": """\
 @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
@@ -199,18 +207,7 @@ drk:bnf-request a odrl:Request ;
         odrl:constraint [ odrl:leftOperand odrl:purpose ;
                           odrl:operator odrl:eq ;
                           odrl:rightOperand dpv:ScientificResearch ] ] .
-
-### Expected result ##########################################################
-
-drk:KGC301-report a vrep:OperandReport ;
-    dcterms:identifier "KGC301" ;
-    vrep:offer drk:bsb-offer ;
-    vrep:request drk:bnf-request ;
-    vrep:leftOperand odrl:purpose ;
-    vrep:sort vrep:tax ;
-    vrep:resource <https://w3id.org/odrl-kb/dpv-purpose> ;
-    vrep:backgroundTheory <https://w3id.org/odrl-kb/dpv-purpose/declared> ;
-    vrep:verdict vrep:Unknown .""",
+""",
     },
 
     # -----------------------------------------------------------------
@@ -262,6 +259,16 @@ fof(res_france_within_europe, axiom,
 (or (and (kge_leq gn_europe gn_europe) (= gn_europe gn_france))
     (and (kge_leq gn_france gn_europe) (= gn_france gn_france)))""",
 
+        "certificate": {
+            "kind": "Refutation",
+            "comment": "No model lacks a common use.  The gazetteer places "
+                       "France within Europe, so France itself is an "
+                       "admissible use in every model.",
+            "premises": [
+                ("fromResource", "gn:France lies within gn:Europe"),
+            ],
+            "witness": "gn:France",
+        },
         "ttl": """\
 @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
@@ -289,17 +296,6 @@ drk:bnf-request a odrl:Request ;
         odrl:constraint [ odrl:leftOperand odrl:spatial ;
                           odrl:operator odrl:eq ;
                           odrl:rightOperand <https://sws.geonames.org/3017382/> ] ] .
-
-### Expected result ##########################################################
-
-drk:KGC302-report a vrep:OperandReport ;
-    dcterms:identifier "KGC302" ;
-    vrep:offer drk:bsb-offer ;
-    vrep:request drk:bnf-request ;
-    vrep:leftOperand odrl:spatial ;
-    vrep:sort vrep:mer ;
-    vrep:resource <https://w3id.org/odrl-kb/geonames-europe> ;
-    vrep:backgroundTheory <https://w3id.org/odrl-kb/geonames-europe/admin-siblings> ;
-    vrep:verdict vrep:Compatible .""",
+""",
     },
 ]
