@@ -5,9 +5,9 @@
 % Version  : 1.0
 % English  : Offer (purpose, isA, dpv:NonCommercialPurpose) against request (purpose, eq, dpv:ScientificResearch).  The vocabulary neither places one under the other nor separates them, so both queries are satisfiable and the verdict is Unknown.
 %
-% Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL. Under submission.
-% Source   : TODO repository URL
-% Authors  : TODO Author Names
+% Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
+% Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark
+% Authors  : Daham Mustafa
 % Names    : KGC301-1.p
 %
 % Status   : Satisfiable
@@ -23,7 +23,7 @@ include('axioms/DPV000-0.ax').
 % asserting a negative would be the closed-world reading this paper rejects.
 
 % --- witness condition asserted ------------------------------------------
-fof(kgc301_w, axiom,
+fof(w_kgc301, axiom,
     ( ( kge_leq(dpv_non_commercial_purpose, dpv_non_commercial_purpose) & dpv_non_commercial_purpose = dpv_scientific_research )
 | ( kge_leq(dpv_scientific_research,  dpv_non_commercial_purpose) & dpv_scientific_research  = dpv_scientific_research  ) )).
 %--------------------------------------------------------------------------

@@ -3,9 +3,9 @@
 ; Domain   : ODRL Policy / Knowledge-Grounded Fragment
 ; Problem  : spatial, isPartOf gn:Europe against eq gn:France (witness condition asserted)
 ; Version  : 1.0
-; Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL. Under submission.
-; Source   : TODO repository URL
-; Authors  : TODO Author Names
+; Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
+; Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark
+; Authors  : Daham Mustafa
 ; Names    : KGC302-1.smt2
 ; Status   : sat
 ; Comments : Query 1 of 2.  Verdict is derived from both queries.

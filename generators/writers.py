@@ -60,7 +60,7 @@ def write_fof(p: dict, q: int, out_dir: Path) -> Path:
 
     witness = p[fof_key].strip()
     formula = f"~ ( {witness} )" if negate else witness
-    name = f"{p['id'].lower()}_w"
+    name = f"w_{p['id'].lower()}"
 
     header = Header(
         file     = f"{p['id']}-{q}.p",

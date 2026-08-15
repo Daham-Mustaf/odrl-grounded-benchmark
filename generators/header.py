@@ -21,10 +21,10 @@ from dataclasses import dataclass, field
 ANONYMOUS = os.environ.get("ODRL_ANON", "") == "1"
 
 _REAL = {
-    "authors": "TODO Author Names",
-    "source":  "TODO repository URL",
+    "authors": "Daham Mustafa",
+    "source":  "https://github.com/Daham-Mustaf/odrl-grounded-benchmark",
     "ref":     "TODO. A Sorted Semantics for the Knowledge-Grounded "
-               "Fragment of ODRL. Under submission.",
+               "Fragment of ODRL.",
 }
 
 _ANON = {

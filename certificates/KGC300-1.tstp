@@ -1,0 +1,39 @@
+% Running in auto input_syntax mode. Trying TPTP
+% Detected 'Essentially Bernays–Schönfinkel–Ramsey OR Essentially ground' problem, will run a specialized EPR schedule (with support for satisfiability detection).
+% WARNING: time unlimited strategy and instruction limiting not in place - attempting to translate instructions to time
+% ott+21_1_sil=128000:fs=off:lcm=predicate:random_seed=411767535:i=102:av=off:fsr=off_1 on KGC300-1 for (1ds/102Mi)
+% Solution written to "/tmp/vampire-proof-3942"
+% Refutation found. Thanks to Tanya!
+% SZS status Unsatisfiable for KGC300-1
+% SZS output start Proof for KGC300-1
+fof(f124,axiom,(
+  bcp_de != bcp_fr),
+  file('verdict/KGC300-1.p',bt_de_distinct_fr)).
+fof(f125,axiom,(
+  (bcp_de = bcp_de & bcp_de = bcp_fr) | (bcp_fr = bcp_de & bcp_fr = bcp_fr)),
+  file('verdict/KGC300-1.p',w_kgc300)).
+fof(f253,plain,(
+  bcp_de != bcp_fr),
+  inference(cnf_transformation,[],[f124])).
+fof(f255,plain,(
+  bcp_de = bcp_fr | bcp_de = bcp_fr),
+  inference(cnf_transformation,[],[f125])).
+fof(f258,plain,(
+  bcp_de = bcp_fr),
+  inference(duplicate_literal_removal,[],[f255])).
+fof(f259,plain,(
+  bcp_de != bcp_de),
+  inference(forward_demodulation,[],[f253,f258])).
+fof(f260,plain,(
+  $false),
+  inference(trivial_inequality_removal,[],[f259])).
+% SZS output end Proof for KGC300-1
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eafde on 2026-01-18 12:14:50 +0000)
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation
+% Time elapsed: 0.0000 s
+% Peak memory usage: 10 MB
+% ------------------------------
+% ------------------------------
+% Success in time 0.005 s
