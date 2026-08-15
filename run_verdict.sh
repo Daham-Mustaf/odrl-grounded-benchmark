@@ -2,8 +2,8 @@
 # Runs both queries of each problem and derives the verdict from the pair.
 # Usage:  bash run_verdict.sh [problem-glob]
 set -u
-cd "$(dirname "$0")/Problems/ODRL/KGConstraints" 2>/dev/null || cd .
-GLOB="${1:-Verdict/KGC*-1.p}"
+cd "$(git rev-parse --show-toplevel)/problems" 2>/dev/null || cd .
+GLOB="${1:-verdict/KGC*-1.p}"
 TIMEOUT="${TIMEOUT:-30}"
 
 norm () {  # SZS status -> sat | unsat | other

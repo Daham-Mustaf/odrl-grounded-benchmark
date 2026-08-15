@@ -1,0 +1,38 @@
+@prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix gn:      <https://sws.geonames.org/> .
+@prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+@prefix vrep:    <https://w3id.org/odrl-verdict-report#> .
+
+drk:bsb-manuscripts a dcterms:Dataset ;
+    dcterms:title "Digitised manuscripts, Bavarian State Library"@en .
+
+drk:bsb-offer a odrl:Offer ;
+    dcterms:title "BSB offer: recipients in Europe"@en ;
+    odrl:assigner drk:bavarian-state-library ;
+    odrl:permission [ odrl:action odrl:use ;
+        odrl:target drk:bsb-manuscripts ;
+        odrl:constraint [ odrl:leftOperand odrl:spatial ;
+                          odrl:operator odrl:isPartOf ;
+                          odrl:rightOperand <https://sws.geonames.org/6255148/> ] ] .
+
+drk:bnf-request a odrl:Request ;
+    dcterms:title "BnF request: recipient in France"@en ;
+    odrl:assignee drk:french-national-library ;
+    odrl:permission [ odrl:action odrl:use ;
+        odrl:target drk:bsb-manuscripts ;
+        odrl:constraint [ odrl:leftOperand odrl:spatial ;
+                          odrl:operator odrl:eq ;
+                          odrl:rightOperand <https://sws.geonames.org/3017382/> ] ] .
+
+### Expected result ##########################################################
+
+drk:KGC302-report a vrep:OperandReport ;
+    dcterms:identifier "KGC302" ;
+    vrep:offer drk:bsb-offer ;
+    vrep:request drk:bnf-request ;
+    vrep:leftOperand odrl:spatial ;
+    vrep:sort vrep:mer ;
+    vrep:resource <https://w3id.org/odrl-kb/geonames-europe> ;
+    vrep:backgroundTheory <https://w3id.org/odrl-kb/geonames-europe/admin-siblings> ;
+    vrep:verdict vrep:Compatible .
