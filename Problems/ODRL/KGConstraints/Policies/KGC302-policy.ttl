@@ -1,24 +1,15 @@
 @prefix odrl: <http://www.w3.org/ns/odrl/2/> .
-@prefix gn:   <https://www.geonames.org/ontology#> .
-@prefix gnf:  <https://sws.geonames.org/> .
-@prefix drk:  <http://w3id.org/drk/ontology/> .
+@prefix gn:   <https://sws.geonames.org/> .
+@prefix ex:   <https://example.org/> .
 
-drk:policyOffer a odrl:Set ;
-  odrl:permission [
-    odrl:action odrl:use ;
-    odrl:constraint [
-      odrl:leftOperand odrl:spatial ;
-      odrl:operator odrl:isPartOf ;
-      odrl:rightOperand <https://sws.geonames.org/6255148/>
-    ]
-  ] .
+ex:offer a odrl:Offer ;
+  odrl:permission [ odrl:action odrl:use ;
+    odrl:constraint [ odrl:leftOperand odrl:spatial ;
+                      odrl:operator odrl:isPartOf ;
+                      odrl:rightOperand <https://sws.geonames.org/6255148/> ] ] .
 
-drk:policyRequest a odrl:Set ;
-  odrl:permission [
-    odrl:action odrl:use ;
-    odrl:constraint [
-      odrl:leftOperand odrl:spatial ;
-      odrl:operator odrl:eq ;
-      odrl:rightOperand <https://sws.geonames.org/3017382/>
-    ]
-  ] .
+ex:request a odrl:Request ;
+  odrl:permission [ odrl:action odrl:use ;
+    odrl:constraint [ odrl:leftOperand odrl:spatial ;
+                      odrl:operator odrl:eq ;
+                      odrl:rightOperand <https://sws.geonames.org/3017382/> ] ] .

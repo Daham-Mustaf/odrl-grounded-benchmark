@@ -1,0 +1,12 @@
+@prefix vrep: <https://w3id.org/odrl-verdict-report#> .
+@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:KGC301-report a vrep:OperandReport ;
+    dcterms:identifier "KGC301" ;
+    vrep:leftOperand odrl:purpose ;
+    vrep:sort vrep:tax ;
+    vrep:resource <https://example.org/resources/dpv-purpose> ;
+    vrep:backgroundTheory <https://example.org/bt/dpv-declared> ;
+    vrep:verdict vrep:Unknown .

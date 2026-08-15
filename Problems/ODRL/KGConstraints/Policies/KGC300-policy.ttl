@@ -1,23 +1,15 @@
 @prefix odrl: <http://www.w3.org/ns/odrl/2/> .
 @prefix bcp:  <https://tools.ietf.org/html/bcp47#> .
-@prefix drk:  <http://w3id.org/drk/ontology/> .
+@prefix ex:   <https://example.org/> .
 
-drk:policyOffer a odrl:Set ;
-  odrl:permission [
-    odrl:action odrl:use ;
-    odrl:constraint [
-      odrl:leftOperand odrl:language ;
-      odrl:operator odrl:eq ;
-      odrl:rightOperand bcp:de
-    ]
-  ] .
+ex:offer a odrl:Offer ;
+  odrl:permission [ odrl:action odrl:use ;
+    odrl:constraint [ odrl:leftOperand odrl:language ;
+                      odrl:operator odrl:eq ;
+                      odrl:rightOperand bcp:de ] ] .
 
-drk:policyRequest a odrl:Set ;
-  odrl:permission [
-    odrl:action odrl:use ;
-    odrl:constraint [
-      odrl:leftOperand odrl:language ;
-      odrl:operator odrl:eq ;
-      odrl:rightOperand bcp:fr
-    ]
-  ] .
+ex:request a odrl:Request ;
+  odrl:permission [ odrl:action odrl:use ;
+    odrl:constraint [ odrl:leftOperand odrl:language ;
+                      odrl:operator odrl:eq ;
+                      odrl:rightOperand bcp:fr ] ] .

@@ -1,80 +1,85 @@
 """
 gen_motivating.py
 =================
-Generates the three motivating-example problems (KGC300, KGC301, KGC302)
-from problem_data_motivating.py, plus their .smt2 and .ttl companions.
+Generates the three motivating-example problems, each as two satisfiability
+queries, plus policies and expected reports.
 
-Output:
-    Problems/ODRL/KGConstraints/Conflict/KGC30x-1.p
-    Problems/ODRL/KGConstraints/Conflict/KGC30x-1.smt2
-    Problems/ODRL/KGConstraints/Policies/KGC30x-policy.ttl
+Output, per problem:
+    Problems/ODRL/KGConstraints/Verdict/<id>-1.p     R + B + W
+    Problems/ODRL/KGConstraints/Verdict/<id>-1.smt2
+    Problems/ODRL/KGConstraints/Verdict/<id>-2.p     R + B + not W
+    Problems/ODRL/KGConstraints/Verdict/<id>-2.smt2
+    Problems/ODRL/KGConstraints/Policies/<id>-policy.ttl
+    Problems/ODRL/KGConstraints/Reports/<id>-report.ttl
 
 Usage:
     uv run Generators/KGConstraints/gen_motivating.py
+    ODRL_ANON=1 uv run Generators/KGConstraints/gen_motivating.py
 """
+
 import argparse
 import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
+
 from problem_data_motivating import PROBLEMS
 from writers import (
-    write_fof_problem,
-    write_smt2_problem,
-    write_ttl_policy,
+    write_problem,
+    expected_verdict,
     collect_vocabulary,
     validate_problem_constants,
 )
 
-DEFAULT_OUT     = "Problems/ODRL/KGConstraints"
-DEFAULT_AXIOMS  = "Problems/ODRL/KGConstraints/Axioms"
+DEFAULT_OUT    = "Problems/ODRL/KGConstraints"
+DEFAULT_AXIOMS = "Problems/ODRL/KGConstraints/Axioms"
 
 
-def main():
+def main() -> int:
     parser = argparse.ArgumentParser(
-        description="Generate the motivating-example problems "
-                    "(KGC300, KGC301, KGC302)."
+        description="Generate the motivating-example problems."
     )
-    parser.add_argument("--out-dir", default=DEFAULT_OUT,
-                        help=f"Output root (default: {DEFAULT_OUT})")
-    parser.add_argument("--axioms-dir", default=DEFAULT_AXIOMS,
-                        help=f"Axioms directory for vocabulary check "
-                             f"(default: {DEFAULT_AXIOMS})")
+    parser.add_argument("--out-dir", default=DEFAULT_OUT)
+    parser.add_argument("--axioms-dir", default=DEFAULT_AXIOMS)
+    parser.add_argument("--check-only", action="store_true",
+                        help="Validate without writing anything.")
     args = parser.parse_args()
 
     out_dir    = Path(args.out_dir)
     axioms_dir = Path(args.axioms_dir)
 
-    # No-hallucination check: every (gn|dpv|bcp)_* constant referenced
-    # in any problem must exist in the included axiom files.
+    # Every gn_/dpv_/bcp_ constant a problem names must be declared by a
+    # resource axiom file.  Refuses to write otherwise.
     vocab = collect_vocabulary(axioms_dir)
     if not vocab:
-        print(f"WARNING: no vocabulary found in {axioms_dir}.  "
-              f"Did you generate the resource axiom files first?",
-              file=sys.stderr)
-    else:
-        print(f"Vocabulary: {len(vocab)} constants from "
-              f"GN000/DPV000/BCP47000.")
+        print(f"ERROR: no constants found in {axioms_dir}.  Generate the "
+              f"resource axiom files first.", file=sys.stderr)
+        return 1
+    print(f"Vocabulary: {len(vocab)} constants.")
 
     for p in PROBLEMS:
         validate_problem_constants(p, vocab)
 
-    # Generate
-    policies_dir = out_dir / "Policies"
-    written = []
-    for p in PROBLEMS:
-        p_path   = write_fof_problem(p, out_dir)
-        s_path   = write_smt2_problem(p, out_dir)
-        ttl_path = write_ttl_policy(p, policies_dir)
-        written.append((p, p_path, s_path, ttl_path))
+    if args.check_only:
+        print("Validation passed; nothing written.")
+        return 0
 
-    print(f"\nGenerated {len(written)} problems:")
-    for p, p_path, s_path, ttl_path in written:
-        print(f"  {p['id']} ({p['verdict']:>10s})")
-        print(f"    .p     {p_path}")
-        print(f"    .smt2  {s_path}")
-        print(f"    .ttl   {ttl_path}")
+    print()
+    for p in PROBLEMS:
+        paths = write_problem(p, out_dir,
+                              out_dir / "Policies",
+                              out_dir / "Reports")
+        print(f"{p['id']}  {p['left_operand']:9s} {p['sort']}  "
+              f"q1={p['expected_q1']:14s} q2={p['expected_q2']:14s} "
+              f"-> {expected_verdict(p)}")
+        for path in paths:
+            print(f"    {path}")
+
+    print(f"\n{len(PROBLEMS)} problems, "
+          f"{sum(1 for p in PROBLEMS if not p.get('ungrounded')) * 4} query "
+          f"files.")
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

@@ -1,0 +1,31 @@
+# Background theory for the BCP 47 slice: registry uniqueness
+#
+# RFC 5646 section 2.2.1 states that every primary language subtag identifies
+# a distinct language.  The parties adopt this as a rule, and it generates
+# pairwise distinctness over the fifteen subtags of the slice.
+#
+# Distinctness, not disjointness.  Distinctness denies that two concepts are
+# interpreted as the same element; disjointness denies that anything lies
+# below both.  A registry publishes no order, so only distinctness is
+# available and only distinctness is needed.
+#
+# A party may withdraw this rule.  Doing so reopens any Incompatible verdict
+# that rested on it, without disputing the registry itself.
+
+@prefix odrlkb:  <https://w3id.org/odrl-kb/bcp47#> .
+@prefix bt:      <https://w3id.org/odrl-kb/background#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+<https://w3id.org/odrl-kb/bcp47/uniqueness> a bt:BackgroundTheory ;
+    dcterms:title "Registry uniqueness for BCP 47 primary subtags"@en ;
+    dcterms:source <https://www.rfc-editor.org/rfc/rfc5646#section-2.2.1> ;
+    bt:generatedBy bt:PairwiseDistinctness ;
+    bt:appliesTo <https://w3id.org/odrl-kb/bcp47> .
+
+[] a owl:AllDifferent ;
+    owl:distinctMembers (
+        odrlkb:bg odrlkb:cs odrlkb:da odrlkb:de odrlkb:el
+        odrlkb:en odrlkb:es odrlkb:fi odrlkb:fr odrlkb:hu
+        odrlkb:it odrlkb:nl odrlkb:pl odrlkb:pt odrlkb:sv
+    ) .
