@@ -12,13 +12,17 @@
 ; -------------------------------------------------------------------------
 
 (set-logic UF)
+(set-option :produce-unsat-cores true)
+(set-option :produce-models true)
 (declare-sort Concept 0)
 (declare-fun bcp_de () Concept)
 (declare-fun bcp_fr () Concept)
 ; Background theory: registry uniqueness, as distinctness.
-(assert (distinct bcp_de bcp_fr))
+(assert (! (distinct bcp_de bcp_fr) :named bt_kgc300_0))
 ; witness condition asserted
-(assert (or (and (= bcp_de bcp_de) (= bcp_de bcp_fr))
-    (and (= bcp_fr bcp_de) (= bcp_fr bcp_fr))))
+(assert (! (or (and (= bcp_de bcp_de) (= bcp_de bcp_fr))
+    (and (= bcp_fr bcp_de) (= bcp_fr bcp_fr))) :named w_kgc300))
 (check-sat)
+(get-unsat-core)
+(get-model)
 (exit)

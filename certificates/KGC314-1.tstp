@@ -4,10 +4,10 @@
 % SZS output start Proof for KGC314-1
 fof(f13,axiom,(
   dpv_marketing != dpv_scientific_research),
-  file('verdict/KGC314-1.p',bt_dpv_marketing_distinct_dpv_scientific_research)).
+  file('problems/verdict/KGC314-1.p',bt_dpv_marketing_distinct_dpv_scientific_research)).
 fof(f14,axiom,(
   (dpv_marketing = dpv_marketing & dpv_marketing = dpv_scientific_research) | (dpv_scientific_research = dpv_marketing & dpv_scientific_research = dpv_scientific_research)),
-  file('verdict/KGC314-1.p',w_kgc314)).
+  file('problems/verdict/KGC314-1.p',w_kgc314)).
 fof(f31,plain,(
   dpv_marketing != dpv_scientific_research),
   inference(cnf_transformation,[],[f13])).
@@ -26,6 +26,6 @@ fof(f37,plain,(
 % CaDiCaL version: 2.1.3
 % Termination reason: Refutation
 % Time elapsed: 0.0000 s
-% Peak memory usage: 14 MB
+% Peak memory usage: 15 MB
 % ------------------------------
 % ------------------------------

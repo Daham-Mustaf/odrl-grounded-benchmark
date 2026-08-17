@@ -91,20 +91,6 @@ DECLARED_BT = "https://w3id.org/odrl-kb/dpv-purposes/declared"
 INCLUDES          = ["KGE000-0.ax", "DPV-milestone.ax"]
 INCLUDES_DECLARED = INCLUDES + ["DPV-milestone-declared.ax"]
 
-# The three order axioms, quantified, as SMT-LIB.  Emitted in full for every
-# problem rather than instantiated at the concepts each one happens to need:
-# selecting instances per problem makes the two encodings different theories
-# and reads as fitting the encoding to the expected answer.
-SMT_ORDER_AXIOMS = """\
-; Order axioms, quantified.  The same three axioms as KGE000-0.ax, so the
-; two encodings are the same theory.  Requires UF, not QF_UF.
-(assert (forall ((x Concept)) (kge_leq x x)))
-(assert (forall ((x Concept) (y Concept))
-    (=> (and (kge_leq x y) (kge_leq y x)) (= x y))))
-(assert (forall ((x Concept) (y Concept) (z Concept))
-    (=> (and (kge_leq x y) (kge_leq y z)) (kge_leq x z))))"""
-
-
 def _decls(*concepts):
     lines = ["(declare-sort Concept 0)"]
     lines += [f"(declare-fun {c} () Concept)" for c in concepts]
@@ -148,7 +134,7 @@ PROBLEMS = [
 
         "smt2_logic": "UF",
         "smt2_decls": _decls(RND, SR),
-        "smt2_asserts": SMT_ORDER_AXIOMS + f"""
+        "smt2_asserts": f"""\
 ; Resource: the containment DPV publishes.
 (assert (kge_leq {SR} {RND}))""",
         "smt2_witness": f"""\
@@ -237,7 +223,7 @@ kgc:KGC310-request-c1 a odrl:Constraint ;
 
         "smt2_logic": "UF",
         "smt2_decls": _decls(PUR, NCR, NCP),
-        "smt2_asserts": SMT_ORDER_AXIOMS + f"""
+        "smt2_asserts": f"""\
 ; Resource: the two steps.  Neither asserts the chain.
 (assert (kge_leq {NCR} {NCP}))
 (assert (kge_leq {NCP} {PUR}))""",
@@ -334,7 +320,7 @@ kgc:KGC311-request-c1 a odrl:Constraint ;
 
         "smt2_logic": "UF",
         "smt2_decls": _decls(NCP, SR, RND, PUR),
-        "smt2_asserts": SMT_ORDER_AXIOMS + f"""
+        "smt2_asserts": f"""\
 ; Resource: what DPV publishes about these concepts.  Note that it relates
 ; scientific research to research and development, and not to the offered
 ; purpose in either direction.
@@ -429,7 +415,7 @@ kgc:KGC312-request-c1 a odrl:Constraint ;
 
         "smt2_logic": "UF",
         "smt2_decls": _decls(MK, SR, RND, PUR),
-        "smt2_asserts": SMT_ORDER_AXIOMS + f"""
+        "smt2_asserts": f"""\
 ; Resource: both are purposes, by different routes.  Neither route makes
 ; them distinct.
 (assert (kge_leq {MK} {PUR}))
@@ -522,12 +508,15 @@ kgc:KGC313-request-c1 a odrl:Constraint ;
 
         "smt2_logic": "UF",
         "smt2_decls": _decls(MK, SR, RND, PUR),
-        "smt2_asserts": SMT_ORDER_AXIOMS + f"""
+        "smt2_resource": f"""\
 ; Resource: unchanged from KGC313.
 (assert (kge_leq {MK} {PUR}))
 (assert (kge_leq {SR} {RND}))
-(assert (kge_leq {RND} {PUR}))
+(assert (kge_leq {RND} {PUR}))""",
+        "smt2_background": f"""\
 ; Background theory: the declaration, and the only difference from KGC313.
+; Named bt_, so that an unsat core attributes it to the parties rather than
+; to the vocabulary.
 (assert (distinct {MK} {SR}))""",
         "smt2_witness": f"""\
 (or (and (= {MK} {MK}) (= {MK} {SR}))

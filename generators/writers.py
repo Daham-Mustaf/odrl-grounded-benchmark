@@ -44,6 +44,72 @@ QUERIES = {
 }
 
 
+# The three order axioms, quantified, as SMT-LIB.  Emitted whole into every
+# problem whose signature has the order, rather than instantiated at the
+# concepts each problem happens to need.  Two reasons: hand-selected instances
+# make the TPTP and SMT-LIB encodings different theories, so agreement between
+# them stops meaning anything; and selecting exactly the instances a proof
+# needs is indistinguishable, from outside, from fitting the encoding to the
+# expected answer.  Quantifiers put the queries in UF rather than QF_UF, which
+# costs nothing here.
+SMT_ORDER_AXIOMS = """\
+; Order axioms, quantified.  The same three as KGE000-0.ax, so the two
+; encodings are the same theory.
+(assert (forall ((x Concept)) (kge_leq x x)))
+(assert (forall ((x Concept) (y Concept))
+    (=> (and (kge_leq x y) (kge_leq y x)) (= x y))))
+(assert (forall ((x Concept) (y Concept) (z Concept))
+    (=> (and (kge_leq x y) (kge_leq y z)) (kge_leq x z))))"""
+
+
+# Assertion names, in the order the axioms appear.  These have to match the
+# TPTP names, since one provenance map reads both.
+_AX_NAMES = ["ax_leq_reflexive", "ax_leq_antisymmetric", "ax_leq_transitive"]
+
+
+def _name_asserts(block: str, default_prefix: str, p: dict) -> str:
+    """Wrap each bare (assert ...) as (assert (! ... :named <n>)).
+
+    Comments and blank lines pass through.  An assertion already carrying a
+    name is left alone.  Order axioms take their TPTP names; everything else
+    is numbered under the given prefix and the problem id.
+
+    The prefix is the caller's to supply, and it must be right: a core is
+    classified by prefix, so naming a background-theory assertion res_ makes
+    Z3 report it as the authority's when it is the parties'.  That is not a
+    cosmetic error.  It is the distinction the whole certificate rests on,
+    and it showed up as a spurious disagreement between the two provers on
+    the two problems whose refutations rest on a declaration.  Hence
+    smt2_resource and smt2_background are separate fields, and a problem
+    that puts a declaration in the resource block mislabels its own premise.
+    """
+    out, n, depth, buf = [], 0, 0, []
+    for line in block.rstrip().splitlines():
+        stripped = line.strip()
+        if not buf and (not stripped or stripped.startswith(";")):
+            out.append(line)
+            continue
+        buf.append(line)
+        depth += line.count("(") - line.count(")")
+        if depth > 0:
+            continue
+        chunk = "\n".join(buf)
+        buf = []
+        if ":named" in chunk or not chunk.lstrip().startswith("(assert"):
+            out.append(chunk)
+            continue
+        body = chunk.lstrip()[len("(assert"):].rstrip()
+        assert body.endswith(")")
+        body = body[:-1].strip()
+        if default_prefix == "ax":
+            name = _AX_NAMES[n] if n < len(_AX_NAMES) else f"ax_{n}"
+        else:
+            name = f"{default_prefix}_{p['id'].lower()}_{n}"
+        n += 1
+        out.append(f"(assert (! {body} :named {name}))")
+    return "\n".join(out + buf)
+
+
 def _includes(p: dict) -> str:
     return "\n".join(f"include('axioms/{ax}')." for ax in p["includes"]) + "\n"
 
@@ -93,7 +159,9 @@ def write_smt2(p: dict, q: int, out_dir: Path) -> Path:
     subdir.mkdir(parents=True, exist_ok=True)
 
     witness = p[smt_key].strip()
-    assertion = f"(assert (not {witness}))" if negate else f"(assert {witness})"
+    name = f"w_{p['id'].lower()}"
+    assertion = (f"(assert (! (not {witness}) :named {name}))" if negate
+                 else f"(assert (! {witness} :named {name}))")
     status = "unsat" if p[f"expected_q{q}"].lower().startswith("unsat") else "sat"
 
     header = SMTHeader(
@@ -104,14 +172,46 @@ def write_smt2(p: dict, q: int, out_dir: Path) -> Path:
         comments = f"Query {q} of 2.  Verdict is derived from both queries.",
     ).render()
 
-    content = "\n".join([
+    # A problem that declares the order gets all three axioms; one that does
+    # not (a purely nominal operand, where no constraint mentions the order)
+    # would reference an undeclared symbol, so it gets none.
+    #
+    # Every assertion is named, with the same prefixes the TPTP side uses, so
+    # that an unsat core from Z3 and a proof from Vampire classify through one
+    # provenance map.  Two provers naming the same premises is worth more than
+    # either naming them alone.
+    decls = p.get("smt2_decls", "").rstrip()
+    parts = [
         header,
         f"(set-logic {p.get('smt2_logic', 'UF')})",
-        p.get("smt2_decls", "").rstrip(),
-        p["smt2_asserts"].rstrip(),
+        "(set-option :produce-unsat-cores true)",
+        "(set-option :produce-models true)",
+        decls,
+    ]
+    if "kge_leq" in decls:
+        parts.append(_name_asserts(SMT_ORDER_AXIOMS, "ax", p))
+
+    # Resource and background theory are named apart, so that an unsat core
+    # attributes to the same place a TPTP proof does.  smt2_asserts is the
+    # older single field: a problem still using it is assumed to hold only
+    # resource assertions, and one that does not should be split.
+    if "smt2_resource" in p or "smt2_background" in p:
+        if p.get("smt2_resource", "").strip():
+            parts.append(_name_asserts(p["smt2_resource"], "res", p))
+        if p.get("smt2_background", "").strip():
+            parts.append(_name_asserts(p["smt2_background"], "bt", p))
+    else:
+        parts.append(_name_asserts(p["smt2_asserts"], "res", p))
+
+    content = "\n".join(parts + [
         f"; {label}",
         assertion,
         "(check-sat)",
+        # An unsat query yields a core, a sat one a model.  Z3 prints an
+        # error for the request that does not apply and continues, so both
+        # are emitted and the reader takes whichever arrived.
+        "(get-unsat-core)",
+        "(get-model)",
         "(exit)",
         "",
     ])

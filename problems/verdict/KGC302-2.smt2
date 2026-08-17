@@ -12,17 +12,26 @@
 ; -------------------------------------------------------------------------
 
 (set-logic UF)
+(set-option :produce-unsat-cores true)
+(set-option :produce-models true)
 (declare-sort Concept 0)
 (declare-fun gn_europe () Concept)
 (declare-fun gn_france () Concept)
 (declare-fun kge_leq (Concept Concept) Bool)
-; Order axioms, restricted to the named concepts.
-(assert (kge_leq gn_europe gn_europe))
-(assert (kge_leq gn_france gn_france))
-; Resource: France is within Europe.
-(assert (kge_leq gn_france gn_europe))
+; Order axioms, quantified.  The same three as KGE000-0.ax, so the two
+; encodings are the same theory.
+(assert (! (forall ((x Concept)) (kge_leq x x)) :named ax_leq_reflexive))
+(assert (! (forall ((x Concept) (y Concept))
+    (=> (and (kge_leq x y) (kge_leq y x)) (= x y))) :named ax_leq_antisymmetric))
+(assert (! (forall ((x Concept) (y Concept) (z Concept))
+    (=> (and (kge_leq x y) (kge_leq y z)) (kge_leq x z))) :named ax_leq_transitive))
+; Resource: France is within Europe.  The order axioms are emitted by the
+; writer, in full and quantified, so this file states only the resource.
+(assert (! (kge_leq gn_france gn_europe) :named res_kgc302_0))
 ; witness condition negated
-(assert (not (or (and (kge_leq gn_europe gn_europe) (= gn_europe gn_france))
-    (and (kge_leq gn_france gn_europe) (= gn_france gn_france)))))
+(assert (! (not (or (and (kge_leq gn_europe gn_europe) (= gn_europe gn_france))
+    (and (kge_leq gn_france gn_europe) (= gn_france gn_france)))) :named w_kgc302))
 (check-sat)
+(get-unsat-core)
+(get-model)
 (exit)

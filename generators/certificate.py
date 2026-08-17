@@ -40,6 +40,30 @@ equality with a predicate, is open, and it reaches into the paper.
 Only `bt_` assertions are withdrawable.  The resource is the authority's, the
 constraints are the parties' own, and the axioms are the framework's.
 
+Two provers, one provenance map
+-------------------------------
+Assertion names are the same on both sides, so a Vampire proof and a Z3
+unsat core classify through the one map below.  Agreement between them is
+worth more than either alone: the names come from the generator, but which
+ones a refutation needs is the prover's own finding, and two independent
+tools reaching for the same set is evidence the encoding says what it means
+to.  Disagreement is equally informative, and is reported rather than
+reconciled.
+
+Any prover reading TPTP works the same way, provided it prints the names.
+E needs --proof-object and prints them in its derivation; Zipperposition
+prints them by default.  The proof-block delimiters differ, so the reader
+takes a list of patterns rather than one.
+
+Models, for the queries that have them
+--------------------------------------
+An Unknown verdict has no refutation to attribute, and until now had an
+empty certificate.  Both its queries are satisfiable, so both have models,
+and what the two disagree about is exactly the question the resource leaves
+open.  Z3 prints a model for a satisfiable query; the reader keeps the
+interpretation of the witness literals, and the difference between the two
+models is the report.
+
 Running the provers
 -------------------
 Vampire discards formula names unless asked to keep them, and the schedule
@@ -56,6 +80,36 @@ Z3 needs named assertions and cores enabled:
 """
 
 import re
+
+
+# --- models, for the queries that have them -----------------------------
+
+def model_literals(text: str, symbols: list[str]) -> dict:
+    """What a model says about the given symbols.
+
+    Only a coarse reading: which constants a model identifies, and which
+    order pairs it makes true.  That is enough to say what two models of an
+    Unknown disagree about, which is the open question the resource leaves.
+    Anything finer would be reading Z3's model format as a theory, and the
+    certificate does not claim to.
+    """
+    out = {}
+    for sym in symbols:
+        m = re.search(rf"\(define-fun {re.escape(sym)} \(\)[^\n]*\n?\s*([^\n)]+)",
+                      text)
+        if m:
+            out[sym] = m.group(1).strip()
+    return out
+
+
+def compare_models(m1: dict, m2: dict) -> list[str]:
+    """The symbols the two models interpret differently.
+
+    For an Unknown verdict this is the report: the two queries are both
+    satisfiable, and these are the points on which their models differ.
+    """
+    keys = sorted(set(m1) | set(m2))
+    return [k for k in keys if m1.get(k) != m2.get(k)]
 
 SOURCE = {
     "res": "fromResource",

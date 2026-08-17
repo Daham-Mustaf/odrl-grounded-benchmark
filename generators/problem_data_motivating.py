@@ -77,7 +77,8 @@ fof(bt_de_distinct_fr, axiom,
 (declare-sort Concept 0)
 (declare-fun bcp_de () Concept)
 (declare-fun bcp_fr () Concept)""",
-        "smt2_asserts": """\
+        "smt2_resource": "",
+        "smt2_background": """\
 ; Background theory: registry uniqueness, as distinctness.
 (assert (distinct bcp_de bcp_fr))""",
         "smt2_witness": """\
@@ -175,10 +176,8 @@ kgc:KGC300-request-c1 a odrl:Constraint ;
 (declare-fun dpv_scientific_research  () Concept)
 (declare-fun kge_leq (Concept Concept) Bool)""",
         "smt2_asserts": """\
-; Order axioms, restricted to the named concepts.
-(assert (kge_leq dpv_non_commercial_purpose dpv_non_commercial_purpose))
-(assert (kge_leq dpv_scientific_research  dpv_scientific_research))
-; The vocabulary says nothing further.  No negative assertion is made.""",
+; The vocabulary says nothing about these two concepts.  No assertion is
+; made here: the order axioms are emitted by the writer, in full.""",
         "smt2_witness": """\
 (or (and (kge_leq dpv_non_commercial_purpose dpv_non_commercial_purpose) (= dpv_non_commercial_purpose dpv_scientific_research))
     (and (kge_leq dpv_scientific_research  dpv_non_commercial_purpose) (= dpv_scientific_research  dpv_scientific_research)))""",
@@ -274,10 +273,8 @@ fof(res_france_within_europe, axiom,
 (declare-fun gn_france () Concept)
 (declare-fun kge_leq (Concept Concept) Bool)""",
         "smt2_asserts": """\
-; Order axioms, restricted to the named concepts.
-(assert (kge_leq gn_europe gn_europe))
-(assert (kge_leq gn_france gn_france))
-; Resource: France is within Europe.
+; Resource: France is within Europe.  The order axioms are emitted by the
+; writer, in full and quantified, so this file states only the resource.
 (assert (kge_leq gn_france gn_europe))""",
         "smt2_witness": """\
 (or (and (kge_leq gn_europe gn_europe) (= gn_europe gn_france))

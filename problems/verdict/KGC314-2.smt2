@@ -12,27 +12,33 @@
 ; -------------------------------------------------------------------------
 
 (set-logic UF)
+(set-option :produce-unsat-cores true)
+(set-option :produce-models true)
 (declare-sort Concept 0)
 (declare-fun dpv_marketing () Concept)
 (declare-fun dpv_scientific_research () Concept)
 (declare-fun dpv_research_and_development () Concept)
 (declare-fun dpv_purpose () Concept)
 (declare-fun kge_leq (Concept Concept) Bool)
-; Order axioms, quantified.  The same three axioms as KGE000-0.ax, so the
-; two encodings are the same theory.  Requires UF, not QF_UF.
-(assert (forall ((x Concept)) (kge_leq x x)))
-(assert (forall ((x Concept) (y Concept))
-    (=> (and (kge_leq x y) (kge_leq y x)) (= x y))))
-(assert (forall ((x Concept) (y Concept) (z Concept))
-    (=> (and (kge_leq x y) (kge_leq y z)) (kge_leq x z))))
+; Order axioms, quantified.  The same three as KGE000-0.ax, so the two
+; encodings are the same theory.
+(assert (! (forall ((x Concept)) (kge_leq x x)) :named ax_leq_reflexive))
+(assert (! (forall ((x Concept) (y Concept))
+    (=> (and (kge_leq x y) (kge_leq y x)) (= x y))) :named ax_leq_antisymmetric))
+(assert (! (forall ((x Concept) (y Concept) (z Concept))
+    (=> (and (kge_leq x y) (kge_leq y z)) (kge_leq x z))) :named ax_leq_transitive))
 ; Resource: unchanged from KGC313.
-(assert (kge_leq dpv_marketing dpv_purpose))
-(assert (kge_leq dpv_scientific_research dpv_research_and_development))
-(assert (kge_leq dpv_research_and_development dpv_purpose))
+(assert (! (kge_leq dpv_marketing dpv_purpose) :named res_kgc314_0))
+(assert (! (kge_leq dpv_scientific_research dpv_research_and_development) :named res_kgc314_1))
+(assert (! (kge_leq dpv_research_and_development dpv_purpose) :named res_kgc314_2))
 ; Background theory: the declaration, and the only difference from KGC313.
-(assert (distinct dpv_marketing dpv_scientific_research))
+; Named bt_, so that an unsat core attributes it to the parties rather than
+; to the vocabulary.
+(assert (! (distinct dpv_marketing dpv_scientific_research) :named bt_kgc314_0))
 ; witness condition negated
-(assert (not (or (and (= dpv_marketing dpv_marketing) (= dpv_marketing dpv_scientific_research))
-    (and (= dpv_scientific_research dpv_marketing) (= dpv_scientific_research dpv_scientific_research)))))
+(assert (! (not (or (and (= dpv_marketing dpv_marketing) (= dpv_marketing dpv_scientific_research))
+    (and (= dpv_scientific_research dpv_marketing) (= dpv_scientific_research dpv_scientific_research)))) :named w_kgc314))
 (check-sat)
+(get-unsat-core)
+(get-model)
 (exit)

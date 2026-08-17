@@ -4,10 +4,10 @@
 % SZS output start Proof for KGC300-1
 fof(f124,axiom,(
   bcp_de != bcp_fr),
-  file('verdict/KGC300-1.p',bt_de_distinct_fr)).
+  file('problems/verdict/KGC300-1.p',bt_de_distinct_fr)).
 fof(f125,axiom,(
   (bcp_de = bcp_de & bcp_de = bcp_fr) | (bcp_fr = bcp_de & bcp_fr = bcp_fr)),
-  file('verdict/KGC300-1.p',w_kgc300)).
+  file('problems/verdict/KGC300-1.p',w_kgc300)).
 fof(f253,plain,(
   bcp_de != bcp_fr),
   inference(cnf_transformation,[],[f124])).
@@ -26,6 +26,6 @@ fof(f259,plain,(
 % CaDiCaL version: 2.1.3
 % Termination reason: Refutation
 % Time elapsed: 0.001 s
-% Peak memory usage: 14 MB
+% Peak memory usage: 15 MB
 % ------------------------------
 % ------------------------------

@@ -2,7 +2,13 @@
 # Runs both queries of each problem and derives the verdict from the pair.
 # Usage:  bash run_verdict.sh [problem-glob]
 set -u
-cd "$(git rev-parse --show-toplevel)/problems" 2>/dev/null || cd .
+ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
+# Vampire resolves include('axioms/...') against --include, or against the
+# working directory when it is not given.  Passing it explicitly means the
+# harness runs from anywhere, and so does a reviewer reproducing by hand:
+#   vampire --include "$ROOT/problems" problems/verdict/KGC311-2.p
+INC="$ROOT/problems"
+cd "$INC" 2>/dev/null || cd .
 GLOB="${1:-verdict/KGC*-1.p}"
 TIMEOUT="${TIMEOUT:-30}"
 
@@ -31,9 +37,9 @@ for q1 in $GLOB; do
 
   e1=$(norm "$(grep -m1 '^% Status' "$q1" | awk '{print $4}')")
   e2=$(norm "$(grep -m1 '^% Status' "$q2" | awk '{print $4}')")
-  a1=$(norm "$(vampire --mode casc --time_limit $TIMEOUT "$q1" 2>&1 \
+  a1=$(norm "$(vampire --include "$INC" --mode casc --time_limit $TIMEOUT "$q1" 2>&1 \
         | grep 'SZS status' | head -1 | awk '{print $4}')")
-  a2=$(norm "$(vampire --mode casc --time_limit $TIMEOUT "$q2" 2>&1 \
+  a2=$(norm "$(vampire --include "$INC" --mode casc --time_limit $TIMEOUT "$q2" 2>&1 \
         | grep 'SZS status' | head -1 | awk '{print $4}')")
 
   exp=$(verdict "$e1" "$e2"); got=$(verdict "$a1" "$a2")
