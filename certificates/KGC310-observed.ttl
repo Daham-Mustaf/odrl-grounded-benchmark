@@ -1,0 +1,11 @@
+kgc:KGC310-observed a vrep:Refutation ;
+    vrep:producedBy "Vampire" ;
+    vrep:proofArtefact <proofs/KGC310-2.tstp> ;
+    vrep:attributedAssertion [
+        vrep:premiseSource vrep:fromResource ;
+        vrep:formulaName "res_dpv_scientific_research_below_dpv_research_and_development" ;
+        rdfs:label "res_dpv_scientific_research_below_dpv_research_and_development"@en ] ;
+    vrep:attributedAssertion [
+        vrep:premiseSource vrep:fromConstraints ;
+        vrep:formulaName "w_kgc310" ;
+        rdfs:label "w_kgc310"@en ] .

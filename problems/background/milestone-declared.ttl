@@ -1,0 +1,24 @@
+# Background theory for the DPV purposes slice: one declared distinctness.
+#
+# DPV publishes nothing that separates these two purposes.  The parties
+# declare it, and the verdict that rests on it is theirs rather than the
+# vocabulary's.  A party may withdraw the declaration, and the verdict
+# reopens.
+#
+# This file exists to be compared against the empty theory over the same
+# resource and the same constraints: what moves is the declaration, and
+# nothing else.
+#
+# Source: https://w3id.org/dpv/2.3
+
+@prefix dpv:     <https://w3id.org/dpv#> .
+@prefix bt:      <https://w3id.org/odrl-kb/background#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+<https://w3id.org/odrl-kb/dpv-purposes/declared> a bt:BackgroundTheory ;
+    dcterms:title "One declared distinctness"@en ;
+    bt:appliesTo <https://w3id.org/odrl-kb/dpv-purposes> ;
+    bt:generatedBy bt:PartyDeclaration ;
+    bt:assertionCount 1 .
+
+dpv:Marketing bt:distinctFrom dpv:ScientificResearch .

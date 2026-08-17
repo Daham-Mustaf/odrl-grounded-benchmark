@@ -1,0 +1,56 @@
+@prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix dpv:     <https://w3id.org/dpv#> .
+@prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+@prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+
+drk:bsb-offer-310 a odrl:Offer ;
+    dcterms:title "BSB offer: research and development purposes"@en ;
+    odrl:assigner drk:bavarian-state-library ;
+    odrl:permission kgc:KGC310-offer-r1 .
+
+kgc:KGC310-offer-r1 a odrl:Permission ;
+    odrl:action odrl:use ;
+    odrl:target drk:bsb-manuscripts ;
+    odrl:constraint kgc:KGC310-offer-c1 .
+
+kgc:KGC310-offer-c1 a odrl:Constraint ;
+    odrl:leftOperand odrl:purpose ;
+    odrl:operator odrl:isA ;
+    odrl:rightOperand dpv:ResearchAndDevelopment .
+
+drk:bnf-request-310 a odrl:Request ;
+    dcterms:title "BnF request: scientific research"@en ;
+    odrl:assignee drk:french-national-library ;
+    odrl:permission kgc:KGC310-request-r1 .
+
+kgc:KGC310-request-r1 a odrl:Permission ;
+    odrl:action odrl:use ;
+    odrl:target drk:bsb-manuscripts ;
+    odrl:constraint kgc:KGC310-request-c1 .
+
+kgc:KGC310-request-c1 a odrl:Constraint ;
+    odrl:leftOperand odrl:purpose ;
+    odrl:operator odrl:eq ;
+    odrl:rightOperand dpv:ScientificResearch .
+
+### Expected result #######################################################
+
+drk:KGC310-report a vrep:OperandReport ;
+    dcterms:identifier "KGC310" ;
+    vrep:firstPolicy drk:bsb-offer ;
+    vrep:secondPolicy drk:bnf-request ;
+    vrep:firstConstraint kgc:KGC310-offer-c1 ;
+    vrep:secondConstraint kgc:KGC310-request-c1 ;
+    vrep:leftOperand odrl:purpose ;
+    vrep:sort vrep:tax ;
+    vrep:resource <https://w3id.org/odrl-kb/dpv-purposes> ;
+    vrep:backgroundTheory <https://w3id.org/odrl-kb/dpv-purposes/empty> ;
+    vrep:verdict vrep:Compatible ;
+    vrep:certificate drk:KGC310-certificate .
+
+drk:KGC310-certificate a vrep:Refutation ;
+    rdfs:comment """The resource places scientific research under research and development, so every model admits the common use and its absence is impossible."""@en ;
+    vrep:clashingConstraint kgc:KGC310-offer-c1, kgc:KGC310-request-c1 ;
+    vrep:premise [ vrep:premiseSource vrep:fromResource ;
+                   rdfs:label "dpv:ScientificResearch is below dpv:ResearchAndDevelopment"@en ] .

@@ -1,0 +1,296 @@
+# GeoNames slice: the containment the gazetteer publishes.
+#
+# Root 6255148, ADM-typed edges only, 1 level(s) deep.
+# The dump also carries entries added through the user interface;
+# those are not the administrative hierarchy and are excluded.
+#
+# Order assertions only.  GeoNames asserts no disjointness, so the
+# sibling rule the parties adopt is in the background theory.
+#
+# Source  : https://download.geonames.org/export/dump/
+# Licence : CC BY 4.0.  Credit GeoNames: https://www.geonames.org
+
+@prefix odrlkb:  <https://w3id.org/odrl-kb/geonames#> .
+@prefix dcat:    <http://www.w3.org/ns/dcat#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+
+<https://w3id.org/odrl-kb/geonames/europe-d1-55> a dcat:Dataset ;
+    dcterms:title "GeoNames containment below 6255148, depth 1"@en ;
+    dcterms:source <https://download.geonames.org/export/dump/> ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+    odrlkb:orderPredicate odrlkb:within ;
+    odrlkb:conceptCount 55 ;
+    odrlkb:orderAssertionCount 54 .
+
+odrlkb:europe a odrlkb:Feature ; rdfs:label "root"@en .
+
+odrlkb:146669 a odrlkb:Feature ;
+    rdfs:label "Cyprus"@en ;
+    dcterms:identifier <https://sws.geonames.org/146669/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:390903 a odrlkb:Feature ;
+    rdfs:label "Greece"@en ;
+    dcterms:identifier <https://sws.geonames.org/390903/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:453733 a odrlkb:Feature ;
+    rdfs:label "Estonia"@en ;
+    dcterms:identifier <https://sws.geonames.org/453733/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:458258 a odrlkb:Feature ;
+    rdfs:label "Latvia"@en ;
+    dcterms:identifier <https://sws.geonames.org/458258/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:597427 a odrlkb:Feature ;
+    rdfs:label "Lithuania"@en ;
+    dcterms:identifier <https://sws.geonames.org/597427/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:607072 a odrlkb:Feature ;
+    rdfs:label "Svalbard and Jan Mayen"@en ;
+    dcterms:identifier <https://sws.geonames.org/607072/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:617790 a odrlkb:Feature ;
+    rdfs:label "Moldova"@en ;
+    dcterms:identifier <https://sws.geonames.org/617790/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:630336 a odrlkb:Feature ;
+    rdfs:label "Belarus"@en ;
+    dcterms:identifier <https://sws.geonames.org/630336/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:660013 a odrlkb:Feature ;
+    rdfs:label "Finland"@en ;
+    dcterms:identifier <https://sws.geonames.org/660013/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:661882 a odrlkb:Feature ;
+    rdfs:label "Aland Islands"@en ;
+    dcterms:identifier <https://sws.geonames.org/661882/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:690791 a odrlkb:Feature ;
+    rdfs:label "Ukraine"@en ;
+    dcterms:identifier <https://sws.geonames.org/690791/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:718075 a odrlkb:Feature ;
+    rdfs:label "North Macedonia"@en ;
+    dcterms:identifier <https://sws.geonames.org/718075/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:719819 a odrlkb:Feature ;
+    rdfs:label "Hungary"@en ;
+    dcterms:identifier <https://sws.geonames.org/719819/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:732800 a odrlkb:Feature ;
+    rdfs:label "Bulgaria"@en ;
+    dcterms:identifier <https://sws.geonames.org/732800/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:783754 a odrlkb:Feature ;
+    rdfs:label "Albania"@en ;
+    dcterms:identifier <https://sws.geonames.org/783754/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:798544 a odrlkb:Feature ;
+    rdfs:label "Poland"@en ;
+    dcterms:identifier <https://sws.geonames.org/798544/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:798549 a odrlkb:Feature ;
+    rdfs:label "Romania"@en ;
+    dcterms:identifier <https://sws.geonames.org/798549/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:831053 a odrlkb:Feature ;
+    rdfs:label "Kosovo"@en ;
+    dcterms:identifier <https://sws.geonames.org/831053/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:2017370 a odrlkb:Feature ;
+    rdfs:label "Russia"@en ;
+    dcterms:identifier <https://sws.geonames.org/2017370/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:2264397 a odrlkb:Feature ;
+    rdfs:label "Portugal"@en ;
+    dcterms:identifier <https://sws.geonames.org/2264397/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:2411586 a odrlkb:Feature ;
+    rdfs:label "Gibraltar"@en ;
+    dcterms:identifier <https://sws.geonames.org/2411586/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:2510769 a odrlkb:Feature ;
+    rdfs:label "Spain"@en ;
+    dcterms:identifier <https://sws.geonames.org/2510769/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:2562770 a odrlkb:Feature ;
+    rdfs:label "Malta"@en ;
+    dcterms:identifier <https://sws.geonames.org/2562770/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:2622320 a odrlkb:Feature ;
+    rdfs:label "Faroe Islands"@en ;
+    dcterms:identifier <https://sws.geonames.org/2622320/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:2623032 a odrlkb:Feature ;
+    rdfs:label "Denmark"@en ;
+    dcterms:identifier <https://sws.geonames.org/2623032/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:2629691 a odrlkb:Feature ;
+    rdfs:label "Iceland"@en ;
+    dcterms:identifier <https://sws.geonames.org/2629691/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:2635167 a odrlkb:Feature ;
+    rdfs:label "United Kingdom"@en ;
+    dcterms:identifier <https://sws.geonames.org/2635167/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:2658434 a odrlkb:Feature ;
+    rdfs:label "Switzerland"@en ;
+    dcterms:identifier <https://sws.geonames.org/2658434/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:2661886 a odrlkb:Feature ;
+    rdfs:label "Sweden"@en ;
+    dcterms:identifier <https://sws.geonames.org/2661886/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:2750405 a odrlkb:Feature ;
+    rdfs:label "The Netherlands"@en ;
+    dcterms:identifier <https://sws.geonames.org/2750405/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:2782113 a odrlkb:Feature ;
+    rdfs:label "Austria"@en ;
+    dcterms:identifier <https://sws.geonames.org/2782113/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:2802361 a odrlkb:Feature ;
+    rdfs:label "Belgium"@en ;
+    dcterms:identifier <https://sws.geonames.org/2802361/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:2921044 a odrlkb:Feature ;
+    rdfs:label "Germany"@en ;
+    dcterms:identifier <https://sws.geonames.org/2921044/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:2960313 a odrlkb:Feature ;
+    rdfs:label "Luxembourg"@en ;
+    dcterms:identifier <https://sws.geonames.org/2960313/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:2963597 a odrlkb:Feature ;
+    rdfs:label "Ireland"@en ;
+    dcterms:identifier <https://sws.geonames.org/2963597/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:2993457 a odrlkb:Feature ;
+    rdfs:label "Monaco"@en ;
+    dcterms:identifier <https://sws.geonames.org/2993457/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:3017382 a odrlkb:Feature ;
+    rdfs:label "France"@en ;
+    dcterms:identifier <https://sws.geonames.org/3017382/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:3041565 a odrlkb:Feature ;
+    rdfs:label "Andorra"@en ;
+    dcterms:identifier <https://sws.geonames.org/3041565/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:3042058 a odrlkb:Feature ;
+    rdfs:label "Liechtenstein"@en ;
+    dcterms:identifier <https://sws.geonames.org/3042058/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:3042142 a odrlkb:Feature ;
+    rdfs:label "Jersey"@en ;
+    dcterms:identifier <https://sws.geonames.org/3042142/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:3042225 a odrlkb:Feature ;
+    rdfs:label "Isle of Man"@en ;
+    dcterms:identifier <https://sws.geonames.org/3042225/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:3042362 a odrlkb:Feature ;
+    rdfs:label "Guernsey"@en ;
+    dcterms:identifier <https://sws.geonames.org/3042362/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:3057568 a odrlkb:Feature ;
+    rdfs:label "Slovakia"@en ;
+    dcterms:identifier <https://sws.geonames.org/3057568/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:3077311 a odrlkb:Feature ;
+    rdfs:label "Czechia"@en ;
+    dcterms:identifier <https://sws.geonames.org/3077311/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:3144096 a odrlkb:Feature ;
+    rdfs:label "Norway"@en ;
+    dcterms:identifier <https://sws.geonames.org/3144096/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:3164670 a odrlkb:Feature ;
+    rdfs:label "Vatican"@en ;
+    dcterms:identifier <https://sws.geonames.org/3164670/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:3168068 a odrlkb:Feature ;
+    rdfs:label "San Marino"@en ;
+    dcterms:identifier <https://sws.geonames.org/3168068/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:3175395 a odrlkb:Feature ;
+    rdfs:label "Italy"@en ;
+    dcterms:identifier <https://sws.geonames.org/3175395/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:3190538 a odrlkb:Feature ;
+    rdfs:label "Slovenia"@en ;
+    dcterms:identifier <https://sws.geonames.org/3190538/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:3194884 a odrlkb:Feature ;
+    rdfs:label "Montenegro"@en ;
+    dcterms:identifier <https://sws.geonames.org/3194884/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:3202326 a odrlkb:Feature ;
+    rdfs:label "Croatia"@en ;
+    dcterms:identifier <https://sws.geonames.org/3202326/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:3277605 a odrlkb:Feature ;
+    rdfs:label "Bosnia and Herzegovina"@en ;
+    dcterms:identifier <https://sws.geonames.org/3277605/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:6290252 a odrlkb:Feature ;
+    rdfs:label "Serbia"@en ;
+    dcterms:identifier <https://sws.geonames.org/6290252/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:8505033 a odrlkb:Feature ;
+    rdfs:label "Serbia and Montenegro"@en ;
+    dcterms:identifier <https://sws.geonames.org/8505033/> ;
+    odrlkb:within odrlkb:6255148 .

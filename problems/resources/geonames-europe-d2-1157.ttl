@@ -1,0 +1,4704 @@
+# GeoNames slice: the containment the gazetteer publishes.
+#
+# Root 6255148, ADM-typed edges only, 2 level(s) deep.
+# The dump also carries entries added through the user interface;
+# those are not the administrative hierarchy and are excluded.
+#
+# Order assertions only.  GeoNames asserts no disjointness, so the
+# sibling rule the parties adopt is in the background theory.
+#
+# Source  : https://download.geonames.org/export/dump/
+# Licence : CC BY 4.0.  Credit GeoNames: https://www.geonames.org
+
+@prefix odrlkb:  <https://w3id.org/odrl-kb/geonames#> .
+@prefix dcat:    <http://www.w3.org/ns/dcat#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+
+<https://w3id.org/odrl-kb/geonames/europe-d2-1157> a dcat:Dataset ;
+    dcterms:title "GeoNames containment below 6255148, depth 2"@en ;
+    dcterms:source <https://download.geonames.org/export/dump/> ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+    odrlkb:orderPredicate odrlkb:within ;
+    odrlkb:conceptCount 1157 ;
+    odrlkb:orderAssertionCount 1156 .
+
+odrlkb:europe a odrlkb:Feature ; rdfs:label "root"@en .
+
+odrlkb:146669 a odrlkb:Feature ;
+    rdfs:label "Cyprus"@en ;
+    dcterms:identifier <https://sws.geonames.org/146669/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:390903 a odrlkb:Feature ;
+    rdfs:label "Greece"@en ;
+    dcterms:identifier <https://sws.geonames.org/390903/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:453733 a odrlkb:Feature ;
+    rdfs:label "Estonia"@en ;
+    dcterms:identifier <https://sws.geonames.org/453733/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:458258 a odrlkb:Feature ;
+    rdfs:label "Latvia"@en ;
+    dcterms:identifier <https://sws.geonames.org/458258/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:597427 a odrlkb:Feature ;
+    rdfs:label "Lithuania"@en ;
+    dcterms:identifier <https://sws.geonames.org/597427/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:607072 a odrlkb:Feature ;
+    rdfs:label "Svalbard and Jan Mayen"@en ;
+    dcterms:identifier <https://sws.geonames.org/607072/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:617790 a odrlkb:Feature ;
+    rdfs:label "Moldova"@en ;
+    dcterms:identifier <https://sws.geonames.org/617790/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:630336 a odrlkb:Feature ;
+    rdfs:label "Belarus"@en ;
+    dcterms:identifier <https://sws.geonames.org/630336/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:660013 a odrlkb:Feature ;
+    rdfs:label "Finland"@en ;
+    dcterms:identifier <https://sws.geonames.org/660013/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:661882 a odrlkb:Feature ;
+    rdfs:label "Aland Islands"@en ;
+    dcterms:identifier <https://sws.geonames.org/661882/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:690791 a odrlkb:Feature ;
+    rdfs:label "Ukraine"@en ;
+    dcterms:identifier <https://sws.geonames.org/690791/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:718075 a odrlkb:Feature ;
+    rdfs:label "North Macedonia"@en ;
+    dcterms:identifier <https://sws.geonames.org/718075/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:719819 a odrlkb:Feature ;
+    rdfs:label "Hungary"@en ;
+    dcterms:identifier <https://sws.geonames.org/719819/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:732800 a odrlkb:Feature ;
+    rdfs:label "Bulgaria"@en ;
+    dcterms:identifier <https://sws.geonames.org/732800/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:783754 a odrlkb:Feature ;
+    rdfs:label "Albania"@en ;
+    dcterms:identifier <https://sws.geonames.org/783754/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:798544 a odrlkb:Feature ;
+    rdfs:label "Poland"@en ;
+    dcterms:identifier <https://sws.geonames.org/798544/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:798549 a odrlkb:Feature ;
+    rdfs:label "Romania"@en ;
+    dcterms:identifier <https://sws.geonames.org/798549/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:831053 a odrlkb:Feature ;
+    rdfs:label "Kosovo"@en ;
+    dcterms:identifier <https://sws.geonames.org/831053/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:2017370 a odrlkb:Feature ;
+    rdfs:label "Russia"@en ;
+    dcterms:identifier <https://sws.geonames.org/2017370/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:2264397 a odrlkb:Feature ;
+    rdfs:label "Portugal"@en ;
+    dcterms:identifier <https://sws.geonames.org/2264397/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:2411586 a odrlkb:Feature ;
+    rdfs:label "Gibraltar"@en ;
+    dcterms:identifier <https://sws.geonames.org/2411586/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:2510769 a odrlkb:Feature ;
+    rdfs:label "Spain"@en ;
+    dcterms:identifier <https://sws.geonames.org/2510769/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:2562770 a odrlkb:Feature ;
+    rdfs:label "Malta"@en ;
+    dcterms:identifier <https://sws.geonames.org/2562770/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:2622320 a odrlkb:Feature ;
+    rdfs:label "Faroe Islands"@en ;
+    dcterms:identifier <https://sws.geonames.org/2622320/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:2623032 a odrlkb:Feature ;
+    rdfs:label "Denmark"@en ;
+    dcterms:identifier <https://sws.geonames.org/2623032/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:2629691 a odrlkb:Feature ;
+    rdfs:label "Iceland"@en ;
+    dcterms:identifier <https://sws.geonames.org/2629691/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:2635167 a odrlkb:Feature ;
+    rdfs:label "United Kingdom"@en ;
+    dcterms:identifier <https://sws.geonames.org/2635167/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:2658434 a odrlkb:Feature ;
+    rdfs:label "Switzerland"@en ;
+    dcterms:identifier <https://sws.geonames.org/2658434/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:2661886 a odrlkb:Feature ;
+    rdfs:label "Sweden"@en ;
+    dcterms:identifier <https://sws.geonames.org/2661886/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:2750405 a odrlkb:Feature ;
+    rdfs:label "The Netherlands"@en ;
+    dcterms:identifier <https://sws.geonames.org/2750405/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:2782113 a odrlkb:Feature ;
+    rdfs:label "Austria"@en ;
+    dcterms:identifier <https://sws.geonames.org/2782113/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:2802361 a odrlkb:Feature ;
+    rdfs:label "Belgium"@en ;
+    dcterms:identifier <https://sws.geonames.org/2802361/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:2921044 a odrlkb:Feature ;
+    rdfs:label "Germany"@en ;
+    dcterms:identifier <https://sws.geonames.org/2921044/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:2960313 a odrlkb:Feature ;
+    rdfs:label "Luxembourg"@en ;
+    dcterms:identifier <https://sws.geonames.org/2960313/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:2963597 a odrlkb:Feature ;
+    rdfs:label "Ireland"@en ;
+    dcterms:identifier <https://sws.geonames.org/2963597/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:2993457 a odrlkb:Feature ;
+    rdfs:label "Monaco"@en ;
+    dcterms:identifier <https://sws.geonames.org/2993457/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:3017382 a odrlkb:Feature ;
+    rdfs:label "France"@en ;
+    dcterms:identifier <https://sws.geonames.org/3017382/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:3041565 a odrlkb:Feature ;
+    rdfs:label "Andorra"@en ;
+    dcterms:identifier <https://sws.geonames.org/3041565/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:3042058 a odrlkb:Feature ;
+    rdfs:label "Liechtenstein"@en ;
+    dcterms:identifier <https://sws.geonames.org/3042058/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:3042142 a odrlkb:Feature ;
+    rdfs:label "Jersey"@en ;
+    dcterms:identifier <https://sws.geonames.org/3042142/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:3042225 a odrlkb:Feature ;
+    rdfs:label "Isle of Man"@en ;
+    dcterms:identifier <https://sws.geonames.org/3042225/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:3042362 a odrlkb:Feature ;
+    rdfs:label "Guernsey"@en ;
+    dcterms:identifier <https://sws.geonames.org/3042362/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:3057568 a odrlkb:Feature ;
+    rdfs:label "Slovakia"@en ;
+    dcterms:identifier <https://sws.geonames.org/3057568/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:3077311 a odrlkb:Feature ;
+    rdfs:label "Czechia"@en ;
+    dcterms:identifier <https://sws.geonames.org/3077311/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:3144096 a odrlkb:Feature ;
+    rdfs:label "Norway"@en ;
+    dcterms:identifier <https://sws.geonames.org/3144096/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:3164670 a odrlkb:Feature ;
+    rdfs:label "Vatican"@en ;
+    dcterms:identifier <https://sws.geonames.org/3164670/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:3168068 a odrlkb:Feature ;
+    rdfs:label "San Marino"@en ;
+    dcterms:identifier <https://sws.geonames.org/3168068/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:3175395 a odrlkb:Feature ;
+    rdfs:label "Italy"@en ;
+    dcterms:identifier <https://sws.geonames.org/3175395/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:3190538 a odrlkb:Feature ;
+    rdfs:label "Slovenia"@en ;
+    dcterms:identifier <https://sws.geonames.org/3190538/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:3194884 a odrlkb:Feature ;
+    rdfs:label "Montenegro"@en ;
+    dcterms:identifier <https://sws.geonames.org/3194884/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:3202326 a odrlkb:Feature ;
+    rdfs:label "Croatia"@en ;
+    dcterms:identifier <https://sws.geonames.org/3202326/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:3277605 a odrlkb:Feature ;
+    rdfs:label "Bosnia and Herzegovina"@en ;
+    dcterms:identifier <https://sws.geonames.org/3277605/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:6290252 a odrlkb:Feature ;
+    rdfs:label "Serbia"@en ;
+    dcterms:identifier <https://sws.geonames.org/6290252/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:8505033 a odrlkb:Feature ;
+    rdfs:label "Serbia and Montenegro"@en ;
+    dcterms:identifier <https://sws.geonames.org/8505033/> ;
+    odrlkb:within odrlkb:6255148 .
+
+odrlkb:146213 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/146213/> ;
+    odrlkb:within odrlkb:146669 .
+
+odrlkb:146267 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/146267/> ;
+    odrlkb:within odrlkb:146669 .
+
+odrlkb:146383 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/146383/> ;
+    odrlkb:within odrlkb:146669 .
+
+odrlkb:146398 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/146398/> ;
+    odrlkb:within odrlkb:146669 .
+
+odrlkb:146411 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/146411/> ;
+    odrlkb:within odrlkb:146669 .
+
+odrlkb:146615 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/146615/> ;
+    odrlkb:within odrlkb:146669 .
+
+odrlkb:736572 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/736572/> ;
+    odrlkb:within odrlkb:390903 .
+
+odrlkb:6692632 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/6692632/> ;
+    odrlkb:within odrlkb:390903 .
+
+odrlkb:6697800 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/6697800/> ;
+    odrlkb:within odrlkb:390903 .
+
+odrlkb:6697801 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/6697801/> ;
+    odrlkb:within odrlkb:390903 .
+
+odrlkb:6697802 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/6697802/> ;
+    odrlkb:within odrlkb:390903 .
+
+odrlkb:6697803 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/6697803/> ;
+    odrlkb:within odrlkb:390903 .
+
+odrlkb:6697804 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/6697804/> ;
+    odrlkb:within odrlkb:390903 .
+
+odrlkb:6697805 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/6697805/> ;
+    odrlkb:within odrlkb:390903 .
+
+odrlkb:6697806 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/6697806/> ;
+    odrlkb:within odrlkb:390903 .
+
+odrlkb:6697807 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/6697807/> ;
+    odrlkb:within odrlkb:390903 .
+
+odrlkb:6697808 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/6697808/> ;
+    odrlkb:within odrlkb:390903 .
+
+odrlkb:6697809 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/6697809/> ;
+    odrlkb:within odrlkb:390903 .
+
+odrlkb:6697810 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/6697810/> ;
+    odrlkb:within odrlkb:390903 .
+
+odrlkb:6697811 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/6697811/> ;
+    odrlkb:within odrlkb:390903 .
+
+odrlkb:587448 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/587448/> ;
+    odrlkb:within odrlkb:453733 .
+
+odrlkb:587590 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/587590/> ;
+    odrlkb:within odrlkb:453733 .
+
+odrlkb:587875 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/587875/> ;
+    odrlkb:within odrlkb:453733 .
+
+odrlkb:588334 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/588334/> ;
+    odrlkb:within odrlkb:453733 .
+
+odrlkb:588879 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/588879/> ;
+    odrlkb:within odrlkb:453733 .
+
+odrlkb:589115 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/589115/> ;
+    odrlkb:within odrlkb:453733 .
+
+odrlkb:589373 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/589373/> ;
+    odrlkb:within odrlkb:453733 .
+
+odrlkb:589576 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/589576/> ;
+    odrlkb:within odrlkb:453733 .
+
+odrlkb:590854 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/590854/> ;
+    odrlkb:within odrlkb:453733 .
+
+odrlkb:590856 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/590856/> ;
+    odrlkb:within odrlkb:453733 .
+
+odrlkb:591901 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/591901/> ;
+    odrlkb:within odrlkb:453733 .
+
+odrlkb:591961 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/591961/> ;
+    odrlkb:within odrlkb:453733 .
+
+odrlkb:592075 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/592075/> ;
+    odrlkb:within odrlkb:453733 .
+
+odrlkb:592133 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/592133/> ;
+    odrlkb:within odrlkb:453733 .
+
+odrlkb:592170 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/592170/> ;
+    odrlkb:within odrlkb:453733 .
+
+odrlkb:454307 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/454307/> ;
+    odrlkb:within odrlkb:458258 .
+
+odrlkb:454311 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/454311/> ;
+    odrlkb:within odrlkb:458258 .
+
+odrlkb:454564 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/454564/> ;
+    odrlkb:within odrlkb:458258 .
+
+odrlkb:454571 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/454571/> ;
+    odrlkb:within odrlkb:458258 .
+
+odrlkb:454771 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/454771/> ;
+    odrlkb:within odrlkb:458258 .
+
+odrlkb:454968 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/454968/> ;
+    odrlkb:within odrlkb:458258 .
+
+odrlkb:455888 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/455888/> ;
+    odrlkb:within odrlkb:458258 .
+
+odrlkb:456173 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/456173/> ;
+    odrlkb:within odrlkb:458258 .
+
+odrlkb:456197 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/456197/> ;
+    odrlkb:within odrlkb:458258 .
+
+odrlkb:456203 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/456203/> ;
+    odrlkb:within odrlkb:458258 .
+
+odrlkb:456528 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/456528/> ;
+    odrlkb:within odrlkb:458258 .
+
+odrlkb:457061 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/457061/> ;
+    odrlkb:within odrlkb:458258 .
+
+odrlkb:457712 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/457712/> ;
+    odrlkb:within odrlkb:458258 .
+
+odrlkb:457773 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/457773/> ;
+    odrlkb:within odrlkb:458258 .
+
+odrlkb:457889 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/457889/> ;
+    odrlkb:within odrlkb:458258 .
+
+odrlkb:457955 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/457955/> ;
+    odrlkb:within odrlkb:458258 .
+
+odrlkb:458459 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/458459/> ;
+    odrlkb:within odrlkb:458258 .
+
+odrlkb:458621 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/458621/> ;
+    odrlkb:within odrlkb:458258 .
+
+odrlkb:459202 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/459202/> ;
+    odrlkb:within odrlkb:458258 .
+
+odrlkb:459278 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/459278/> ;
+    odrlkb:within odrlkb:458258 .
+
+odrlkb:459281 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/459281/> ;
+    odrlkb:within odrlkb:458258 .
+
+odrlkb:459282 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/459282/> ;
+    odrlkb:within odrlkb:458258 .
+
+odrlkb:459664 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/459664/> ;
+    odrlkb:within odrlkb:458258 .
+
+odrlkb:460311 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/460311/> ;
+    odrlkb:within odrlkb:458258 .
+
+odrlkb:460414 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/460414/> ;
+    odrlkb:within odrlkb:458258 .
+
+odrlkb:460569 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/460569/> ;
+    odrlkb:within odrlkb:458258 .
+
+odrlkb:461112 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/461112/> ;
+    odrlkb:within odrlkb:458258 .
+
+odrlkb:461160 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/461160/> ;
+    odrlkb:within odrlkb:458258 .
+
+odrlkb:461525 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/461525/> ;
+    odrlkb:within odrlkb:458258 .
+
+odrlkb:461613 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/461613/> ;
+    odrlkb:within odrlkb:458258 .
+
+odrlkb:7628319 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/7628319/> ;
+    odrlkb:within odrlkb:458258 .
+
+odrlkb:7628320 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/7628320/> ;
+    odrlkb:within odrlkb:458258 .
+
+odrlkb:7628322 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/7628322/> ;
+    odrlkb:within odrlkb:458258 .
+
+odrlkb:7628323 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/7628323/> ;
+    odrlkb:within odrlkb:458258 .
+
+odrlkb:7628327 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/7628327/> ;
+    odrlkb:within odrlkb:458258 .
+
+odrlkb:7628341 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/7628341/> ;
+    odrlkb:within odrlkb:458258 .
+
+odrlkb:7628342 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/7628342/> ;
+    odrlkb:within odrlkb:458258 .
+
+odrlkb:7628359 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/7628359/> ;
+    odrlkb:within odrlkb:458258 .
+
+odrlkb:7628362 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/7628362/> ;
+    odrlkb:within odrlkb:458258 .
+
+odrlkb:7628366 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/7628366/> ;
+    odrlkb:within odrlkb:458258 .
+
+odrlkb:7628380 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/7628380/> ;
+    odrlkb:within odrlkb:458258 .
+
+odrlkb:12276857 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/12276857/> ;
+    odrlkb:within odrlkb:458258 .
+
+odrlkb:12276858 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/12276858/> ;
+    odrlkb:within odrlkb:458258 .
+
+odrlkb:864389 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/864389/> ;
+    odrlkb:within odrlkb:597427 .
+
+odrlkb:864477 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/864477/> ;
+    odrlkb:within odrlkb:597427 .
+
+odrlkb:864478 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/864478/> ;
+    odrlkb:within odrlkb:597427 .
+
+odrlkb:864479 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/864479/> ;
+    odrlkb:within odrlkb:597427 .
+
+odrlkb:864480 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/864480/> ;
+    odrlkb:within odrlkb:597427 .
+
+odrlkb:864481 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/864481/> ;
+    odrlkb:within odrlkb:597427 .
+
+odrlkb:864482 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/864482/> ;
+    odrlkb:within odrlkb:597427 .
+
+odrlkb:864483 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/864483/> ;
+    odrlkb:within odrlkb:597427 .
+
+odrlkb:864484 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/864484/> ;
+    odrlkb:within odrlkb:597427 .
+
+odrlkb:864485 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/864485/> ;
+    odrlkb:within odrlkb:597427 .
+
+odrlkb:3041964 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3041964/> ;
+    odrlkb:within odrlkb:607072 .
+
+odrlkb:7521757 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/7521757/> ;
+    odrlkb:within odrlkb:607072 .
+
+odrlkb:617077 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/617077/> ;
+    odrlkb:within odrlkb:617790 .
+
+odrlkb:617181 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/617181/> ;
+    odrlkb:within odrlkb:617790 .
+
+odrlkb:617255 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/617255/> ;
+    odrlkb:within odrlkb:617790 .
+
+odrlkb:617264 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/617264/> ;
+    odrlkb:within odrlkb:617790 .
+
+odrlkb:617283 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/617283/> ;
+    odrlkb:within odrlkb:617790 .
+
+odrlkb:617301 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/617301/> ;
+    odrlkb:within odrlkb:617790 .
+
+odrlkb:617366 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/617366/> ;
+    odrlkb:within odrlkb:617790 .
+
+odrlkb:617483 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/617483/> ;
+    odrlkb:within odrlkb:617790 .
+
+odrlkb:617501 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/617501/> ;
+    odrlkb:within odrlkb:617790 .
+
+odrlkb:617639 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/617639/> ;
+    odrlkb:within odrlkb:617790 .
+
+odrlkb:617656 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/617656/> ;
+    odrlkb:within odrlkb:617790 .
+
+odrlkb:617715 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/617715/> ;
+    odrlkb:within odrlkb:617790 .
+
+odrlkb:617754 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/617754/> ;
+    odrlkb:within odrlkb:617790 .
+
+odrlkb:617903 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/617903/> ;
+    odrlkb:within odrlkb:617790 .
+
+odrlkb:617913 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/617913/> ;
+    odrlkb:within odrlkb:617790 .
+
+odrlkb:617962 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/617962/> ;
+    odrlkb:within odrlkb:617790 .
+
+odrlkb:617991 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/617991/> ;
+    odrlkb:within odrlkb:617790 .
+
+odrlkb:618069 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/618069/> ;
+    odrlkb:within odrlkb:617790 .
+
+odrlkb:618119 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/618119/> ;
+    odrlkb:within odrlkb:617790 .
+
+odrlkb:618142 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/618142/> ;
+    odrlkb:within odrlkb:617790 .
+
+odrlkb:618162 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/618162/> ;
+    odrlkb:within odrlkb:617790 .
+
+odrlkb:618164 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/618164/> ;
+    odrlkb:within odrlkb:617790 .
+
+odrlkb:618260 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/618260/> ;
+    odrlkb:within odrlkb:617790 .
+
+odrlkb:618331 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/618331/> ;
+    odrlkb:within odrlkb:617790 .
+
+odrlkb:618345 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/618345/> ;
+    odrlkb:within odrlkb:617790 .
+
+odrlkb:618363 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/618363/> ;
+    odrlkb:within odrlkb:617790 .
+
+odrlkb:618369 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/618369/> ;
+    odrlkb:within odrlkb:617790 .
+
+odrlkb:618381 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/618381/> ;
+    odrlkb:within odrlkb:617790 .
+
+odrlkb:618430 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/618430/> ;
+    odrlkb:within odrlkb:617790 .
+
+odrlkb:618511 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/618511/> ;
+    odrlkb:within odrlkb:617790 .
+
+odrlkb:618565 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/618565/> ;
+    odrlkb:within odrlkb:617790 .
+
+odrlkb:858803 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/858803/> ;
+    odrlkb:within odrlkb:617790 .
+
+odrlkb:858808 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/858808/> ;
+    odrlkb:within odrlkb:617790 .
+
+odrlkb:858889 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/858889/> ;
+    odrlkb:within odrlkb:617790 .
+
+odrlkb:858895 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/858895/> ;
+    odrlkb:within odrlkb:617790 .
+
+odrlkb:861487 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/861487/> ;
+    odrlkb:within odrlkb:617790 .
+
+odrlkb:873909 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/873909/> ;
+    odrlkb:within odrlkb:617790 .
+
+odrlkb:620134 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/620134/> ;
+    odrlkb:within odrlkb:630336 .
+
+odrlkb:625073 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/625073/> ;
+    odrlkb:within odrlkb:630336 .
+
+odrlkb:625142 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/625142/> ;
+    odrlkb:within odrlkb:630336 .
+
+odrlkb:625143 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/625143/> ;
+    odrlkb:within odrlkb:630336 .
+
+odrlkb:628035 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/628035/> ;
+    odrlkb:within odrlkb:630336 .
+
+odrlkb:628281 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/628281/> ;
+    odrlkb:within odrlkb:630336 .
+
+odrlkb:629631 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/629631/> ;
+    odrlkb:within odrlkb:630336 .
+
+odrlkb:830603 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/830603/> ;
+    odrlkb:within odrlkb:660013 .
+
+odrlkb:830664 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/830664/> ;
+    odrlkb:within odrlkb:660013 .
+
+odrlkb:830667 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/830667/> ;
+    odrlkb:within odrlkb:660013 .
+
+odrlkb:830675 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/830675/> ;
+    odrlkb:within odrlkb:660013 .
+
+odrlkb:830676 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/830676/> ;
+    odrlkb:within odrlkb:660013 .
+
+odrlkb:830682 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/830682/> ;
+    odrlkb:within odrlkb:660013 .
+
+odrlkb:830685 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/830685/> ;
+    odrlkb:within odrlkb:660013 .
+
+odrlkb:830686 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/830686/> ;
+    odrlkb:within odrlkb:660013 .
+
+odrlkb:830690 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/830690/> ;
+    odrlkb:within odrlkb:660013 .
+
+odrlkb:830695 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/830695/> ;
+    odrlkb:within odrlkb:660013 .
+
+odrlkb:830699 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/830699/> ;
+    odrlkb:within odrlkb:660013 .
+
+odrlkb:830703 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/830703/> ;
+    odrlkb:within odrlkb:660013 .
+
+odrlkb:830704 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/830704/> ;
+    odrlkb:within odrlkb:660013 .
+
+odrlkb:830705 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/830705/> ;
+    odrlkb:within odrlkb:660013 .
+
+odrlkb:830708 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/830708/> ;
+    odrlkb:within odrlkb:660013 .
+
+odrlkb:830709 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/830709/> ;
+    odrlkb:within odrlkb:660013 .
+
+odrlkb:831040 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/831040/> ;
+    odrlkb:within odrlkb:660013 .
+
+odrlkb:831041 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/831041/> ;
+    odrlkb:within odrlkb:660013 .
+
+odrlkb:9611689 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/9611689/> ;
+    odrlkb:within odrlkb:661882 .
+
+odrlkb:9611692 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/9611692/> ;
+    odrlkb:within odrlkb:661882 .
+
+odrlkb:9611694 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/9611694/> ;
+    odrlkb:within odrlkb:661882 .
+
+odrlkb:686966 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/686966/> ;
+    odrlkb:within odrlkb:690791 .
+
+odrlkb:687699 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/687699/> ;
+    odrlkb:within odrlkb:690791 .
+
+odrlkb:687869 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/687869/> ;
+    odrlkb:within odrlkb:690791 .
+
+odrlkb:689064 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/689064/> ;
+    odrlkb:within odrlkb:690791 .
+
+odrlkb:689559 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/689559/> ;
+    odrlkb:within odrlkb:690791 .
+
+odrlkb:691649 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/691649/> ;
+    odrlkb:within odrlkb:690791 .
+
+odrlkb:692196 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/692196/> ;
+    odrlkb:within odrlkb:690791 .
+
+odrlkb:694422 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/694422/> ;
+    odrlkb:within odrlkb:690791 .
+
+odrlkb:695592 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/695592/> ;
+    odrlkb:within odrlkb:690791 .
+
+odrlkb:696634 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/696634/> ;
+    odrlkb:within odrlkb:690791 .
+
+odrlkb:698738 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/698738/> ;
+    odrlkb:within odrlkb:690791 .
+
+odrlkb:700567 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/700567/> ;
+    odrlkb:within odrlkb:690791 .
+
+odrlkb:702549 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/702549/> ;
+    odrlkb:within odrlkb:690791 .
+
+odrlkb:702657 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/702657/> ;
+    odrlkb:within odrlkb:690791 .
+
+odrlkb:703446 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/703446/> ;
+    odrlkb:within odrlkb:690791 .
+
+odrlkb:703447 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/703447/> ;
+    odrlkb:within odrlkb:690791 .
+
+odrlkb:703883 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/703883/> ;
+    odrlkb:within odrlkb:690791 .
+
+odrlkb:705811 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/705811/> ;
+    odrlkb:within odrlkb:690791 .
+
+odrlkb:706370 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/706370/> ;
+    odrlkb:within odrlkb:690791 .
+
+odrlkb:706442 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/706442/> ;
+    odrlkb:within odrlkb:690791 .
+
+odrlkb:706482 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/706482/> ;
+    odrlkb:within odrlkb:690791 .
+
+odrlkb:707470 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/707470/> ;
+    odrlkb:within odrlkb:690791 .
+
+odrlkb:709716 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/709716/> ;
+    odrlkb:within odrlkb:690791 .
+
+odrlkb:709929 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/709929/> ;
+    odrlkb:within odrlkb:690791 .
+
+odrlkb:710720 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/710720/> ;
+    odrlkb:within odrlkb:690791 .
+
+odrlkb:710734 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/710734/> ;
+    odrlkb:within odrlkb:690791 .
+
+odrlkb:710802 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/710802/> ;
+    odrlkb:within odrlkb:690791 .
+
+odrlkb:784732 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/784732/> ;
+    odrlkb:within odrlkb:718075 .
+
+odrlkb:786339 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/786339/> ;
+    odrlkb:within odrlkb:718075 .
+
+odrlkb:789090 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/789090/> ;
+    odrlkb:within odrlkb:718075 .
+
+odrlkb:862938 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/862938/> ;
+    odrlkb:within odrlkb:718075 .
+
+odrlkb:862945 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/862945/> ;
+    odrlkb:within odrlkb:718075 .
+
+odrlkb:862946 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/862946/> ;
+    odrlkb:within odrlkb:718075 .
+
+odrlkb:862947 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/862947/> ;
+    odrlkb:within odrlkb:718075 .
+
+odrlkb:862949 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/862949/> ;
+    odrlkb:within odrlkb:718075 .
+
+odrlkb:862950 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/862950/> ;
+    odrlkb:within odrlkb:718075 .
+
+odrlkb:862953 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/862953/> ;
+    odrlkb:within odrlkb:718075 .
+
+odrlkb:862956 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/862956/> ;
+    odrlkb:within odrlkb:718075 .
+
+odrlkb:862958 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/862958/> ;
+    odrlkb:within odrlkb:718075 .
+
+odrlkb:862960 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/862960/> ;
+    odrlkb:within odrlkb:718075 .
+
+odrlkb:862961 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/862961/> ;
+    odrlkb:within odrlkb:718075 .
+
+odrlkb:862973 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/862973/> ;
+    odrlkb:within odrlkb:718075 .
+
+odrlkb:862974 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/862974/> ;
+    odrlkb:within odrlkb:718075 .
+
+odrlkb:862975 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/862975/> ;
+    odrlkb:within odrlkb:718075 .
+
+odrlkb:862977 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/862977/> ;
+    odrlkb:within odrlkb:718075 .
+
+odrlkb:863468 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/863468/> ;
+    odrlkb:within odrlkb:718075 .
+
+odrlkb:863485 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/863485/> ;
+    odrlkb:within odrlkb:718075 .
+
+odrlkb:863486 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/863486/> ;
+    odrlkb:within odrlkb:718075 .
+
+odrlkb:863488 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/863488/> ;
+    odrlkb:within odrlkb:718075 .
+
+odrlkb:863831 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/863831/> ;
+    odrlkb:within odrlkb:718075 .
+
+odrlkb:863834 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/863834/> ;
+    odrlkb:within odrlkb:718075 .
+
+odrlkb:863835 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/863835/> ;
+    odrlkb:within odrlkb:718075 .
+
+odrlkb:863838 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/863838/> ;
+    odrlkb:within odrlkb:718075 .
+
+odrlkb:863841 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/863841/> ;
+    odrlkb:within odrlkb:718075 .
+
+odrlkb:863842 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/863842/> ;
+    odrlkb:within odrlkb:718075 .
+
+odrlkb:863843 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/863843/> ;
+    odrlkb:within odrlkb:718075 .
+
+odrlkb:863844 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/863844/> ;
+    odrlkb:within odrlkb:718075 .
+
+odrlkb:863846 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/863846/> ;
+    odrlkb:within odrlkb:718075 .
+
+odrlkb:863849 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/863849/> ;
+    odrlkb:within odrlkb:718075 .
+
+odrlkb:863854 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/863854/> ;
+    odrlkb:within odrlkb:718075 .
+
+odrlkb:863855 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/863855/> ;
+    odrlkb:within odrlkb:718075 .
+
+odrlkb:863856 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/863856/> ;
+    odrlkb:within odrlkb:718075 .
+
+odrlkb:863858 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/863858/> ;
+    odrlkb:within odrlkb:718075 .
+
+odrlkb:863861 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/863861/> ;
+    odrlkb:within odrlkb:718075 .
+
+odrlkb:863862 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/863862/> ;
+    odrlkb:within odrlkb:718075 .
+
+odrlkb:863865 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/863865/> ;
+    odrlkb:within odrlkb:718075 .
+
+odrlkb:863869 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/863869/> ;
+    odrlkb:within odrlkb:718075 .
+
+odrlkb:863870 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/863870/> ;
+    odrlkb:within odrlkb:718075 .
+
+odrlkb:863871 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/863871/> ;
+    odrlkb:within odrlkb:718075 .
+
+odrlkb:863873 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/863873/> ;
+    odrlkb:within odrlkb:718075 .
+
+odrlkb:863875 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/863875/> ;
+    odrlkb:within odrlkb:718075 .
+
+odrlkb:863877 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/863877/> ;
+    odrlkb:within odrlkb:718075 .
+
+odrlkb:863881 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/863881/> ;
+    odrlkb:within odrlkb:718075 .
+
+odrlkb:863883 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/863883/> ;
+    odrlkb:within odrlkb:718075 .
+
+odrlkb:863886 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/863886/> ;
+    odrlkb:within odrlkb:718075 .
+
+odrlkb:863887 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/863887/> ;
+    odrlkb:within odrlkb:718075 .
+
+odrlkb:863888 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/863888/> ;
+    odrlkb:within odrlkb:718075 .
+
+odrlkb:863889 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/863889/> ;
+    odrlkb:within odrlkb:718075 .
+
+odrlkb:863890 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/863890/> ;
+    odrlkb:within odrlkb:718075 .
+
+odrlkb:863891 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/863891/> ;
+    odrlkb:within odrlkb:718075 .
+
+odrlkb:863892 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/863892/> ;
+    odrlkb:within odrlkb:718075 .
+
+odrlkb:863896 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/863896/> ;
+    odrlkb:within odrlkb:718075 .
+
+odrlkb:863899 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/863899/> ;
+    odrlkb:within odrlkb:718075 .
+
+odrlkb:863900 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/863900/> ;
+    odrlkb:within odrlkb:718075 .
+
+odrlkb:863901 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/863901/> ;
+    odrlkb:within odrlkb:718075 .
+
+odrlkb:863902 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/863902/> ;
+    odrlkb:within odrlkb:718075 .
+
+odrlkb:863903 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/863903/> ;
+    odrlkb:within odrlkb:718075 .
+
+odrlkb:863905 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/863905/> ;
+    odrlkb:within odrlkb:718075 .
+
+odrlkb:863906 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/863906/> ;
+    odrlkb:within odrlkb:718075 .
+
+odrlkb:863907 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/863907/> ;
+    odrlkb:within odrlkb:718075 .
+
+odrlkb:863909 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/863909/> ;
+    odrlkb:within odrlkb:718075 .
+
+odrlkb:863911 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/863911/> ;
+    odrlkb:within odrlkb:718075 .
+
+odrlkb:863912 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/863912/> ;
+    odrlkb:within odrlkb:718075 .
+
+odrlkb:863914 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/863914/> ;
+    odrlkb:within odrlkb:718075 .
+
+odrlkb:863918 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/863918/> ;
+    odrlkb:within odrlkb:718075 .
+
+odrlkb:863919 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/863919/> ;
+    odrlkb:within odrlkb:718075 .
+
+odrlkb:7056271 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/7056271/> ;
+    odrlkb:within odrlkb:718075 .
+
+odrlkb:11398357 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/11398357/> ;
+    odrlkb:within odrlkb:718075 .
+
+odrlkb:715593 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/715593/> ;
+    odrlkb:within odrlkb:719819 .
+
+odrlkb:719637 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/719637/> ;
+    odrlkb:within odrlkb:719819 .
+
+odrlkb:720002 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/720002/> ;
+    odrlkb:within odrlkb:719819 .
+
+odrlkb:720293 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/720293/> ;
+    odrlkb:within odrlkb:719819 .
+
+odrlkb:721589 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/721589/> ;
+    odrlkb:within odrlkb:719819 .
+
+odrlkb:722064 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/722064/> ;
+    odrlkb:within odrlkb:719819 .
+
+odrlkb:722433 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/722433/> ;
+    odrlkb:within odrlkb:719819 .
+
+odrlkb:3042613 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3042613/> ;
+    odrlkb:within odrlkb:719819 .
+
+odrlkb:3042925 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3042925/> ;
+    odrlkb:within odrlkb:719819 .
+
+odrlkb:3043047 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3043047/> ;
+    odrlkb:within odrlkb:719819 .
+
+odrlkb:3043845 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3043845/> ;
+    odrlkb:within odrlkb:719819 .
+
+odrlkb:3045226 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3045226/> ;
+    odrlkb:within odrlkb:719819 .
+
+odrlkb:3046431 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3046431/> ;
+    odrlkb:within odrlkb:719819 .
+
+odrlkb:3047348 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3047348/> ;
+    odrlkb:within odrlkb:719819 .
+
+odrlkb:3049518 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3049518/> ;
+    odrlkb:within odrlkb:719819 .
+
+odrlkb:3051977 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3051977/> ;
+    odrlkb:within odrlkb:719819 .
+
+odrlkb:3053028 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3053028/> ;
+    odrlkb:within odrlkb:719819 .
+
+odrlkb:3054638 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3054638/> ;
+    odrlkb:within odrlkb:719819 .
+
+odrlkb:3055399 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3055399/> ;
+    odrlkb:within odrlkb:719819 .
+
+odrlkb:3055744 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3055744/> ;
+    odrlkb:within odrlkb:719819 .
+
+odrlkb:453751 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/453751/> ;
+    odrlkb:within odrlkb:732800 .
+
+odrlkb:453753 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/453753/> ;
+    odrlkb:within odrlkb:732800 .
+
+odrlkb:725713 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/725713/> ;
+    odrlkb:within odrlkb:732800 .
+
+odrlkb:726051 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/726051/> ;
+    odrlkb:within odrlkb:732800 .
+
+odrlkb:726419 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/726419/> ;
+    odrlkb:within odrlkb:732800 .
+
+odrlkb:727012 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/727012/> ;
+    odrlkb:within odrlkb:732800 .
+
+odrlkb:727524 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/727524/> ;
+    odrlkb:within odrlkb:732800 .
+
+odrlkb:728194 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/728194/> ;
+    odrlkb:within odrlkb:732800 .
+
+odrlkb:728204 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/728204/> ;
+    odrlkb:within odrlkb:732800 .
+
+odrlkb:728331 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/728331/> ;
+    odrlkb:within odrlkb:732800 .
+
+odrlkb:728379 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/728379/> ;
+    odrlkb:within odrlkb:732800 .
+
+odrlkb:729560 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/729560/> ;
+    odrlkb:within odrlkb:732800 .
+
+odrlkb:730436 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/730436/> ;
+    odrlkb:within odrlkb:732800 .
+
+odrlkb:731061 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/731061/> ;
+    odrlkb:within odrlkb:732800 .
+
+odrlkb:732771 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/732771/> ;
+    odrlkb:within odrlkb:732800 .
+
+odrlkb:733192 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/733192/> ;
+    odrlkb:within odrlkb:732800 .
+
+odrlkb:864552 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/864552/> ;
+    odrlkb:within odrlkb:732800 .
+
+odrlkb:864553 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/864553/> ;
+    odrlkb:within odrlkb:732800 .
+
+odrlkb:864554 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/864554/> ;
+    odrlkb:within odrlkb:732800 .
+
+odrlkb:864555 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/864555/> ;
+    odrlkb:within odrlkb:732800 .
+
+odrlkb:864556 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/864556/> ;
+    odrlkb:within odrlkb:732800 .
+
+odrlkb:864557 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/864557/> ;
+    odrlkb:within odrlkb:732800 .
+
+odrlkb:864558 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/864558/> ;
+    odrlkb:within odrlkb:732800 .
+
+odrlkb:864559 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/864559/> ;
+    odrlkb:within odrlkb:732800 .
+
+odrlkb:864560 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/864560/> ;
+    odrlkb:within odrlkb:732800 .
+
+odrlkb:864561 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/864561/> ;
+    odrlkb:within odrlkb:732800 .
+
+odrlkb:864562 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/864562/> ;
+    odrlkb:within odrlkb:732800 .
+
+odrlkb:864563 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/864563/> ;
+    odrlkb:within odrlkb:732800 .
+
+odrlkb:865730 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/865730/> ;
+    odrlkb:within odrlkb:783754 .
+
+odrlkb:865731 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/865731/> ;
+    odrlkb:within odrlkb:783754 .
+
+odrlkb:865732 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/865732/> ;
+    odrlkb:within odrlkb:783754 .
+
+odrlkb:865733 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/865733/> ;
+    odrlkb:within odrlkb:783754 .
+
+odrlkb:865734 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/865734/> ;
+    odrlkb:within odrlkb:783754 .
+
+odrlkb:865735 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/865735/> ;
+    odrlkb:within odrlkb:783754 .
+
+odrlkb:3344947 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3344947/> ;
+    odrlkb:within odrlkb:783754 .
+
+odrlkb:3344948 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3344948/> ;
+    odrlkb:within odrlkb:783754 .
+
+odrlkb:3344949 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3344949/> ;
+    odrlkb:within odrlkb:783754 .
+
+odrlkb:3344950 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3344950/> ;
+    odrlkb:within odrlkb:783754 .
+
+odrlkb:3344951 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3344951/> ;
+    odrlkb:within odrlkb:783754 .
+
+odrlkb:3344952 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3344952/> ;
+    odrlkb:within odrlkb:783754 .
+
+odrlkb:858785 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/858785/> ;
+    odrlkb:within odrlkb:798544 .
+
+odrlkb:858786 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/858786/> ;
+    odrlkb:within odrlkb:798544 .
+
+odrlkb:858787 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/858787/> ;
+    odrlkb:within odrlkb:798544 .
+
+odrlkb:858788 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/858788/> ;
+    odrlkb:within odrlkb:798544 .
+
+odrlkb:858789 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/858789/> ;
+    odrlkb:within odrlkb:798544 .
+
+odrlkb:858790 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/858790/> ;
+    odrlkb:within odrlkb:798544 .
+
+odrlkb:858791 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/858791/> ;
+    odrlkb:within odrlkb:798544 .
+
+odrlkb:3337492 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3337492/> ;
+    odrlkb:within odrlkb:798544 .
+
+odrlkb:3337493 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3337493/> ;
+    odrlkb:within odrlkb:798544 .
+
+odrlkb:3337494 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3337494/> ;
+    odrlkb:within odrlkb:798544 .
+
+odrlkb:3337495 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3337495/> ;
+    odrlkb:within odrlkb:798544 .
+
+odrlkb:3337496 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3337496/> ;
+    odrlkb:within odrlkb:798544 .
+
+odrlkb:3337497 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3337497/> ;
+    odrlkb:within odrlkb:798544 .
+
+odrlkb:3337498 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3337498/> ;
+    odrlkb:within odrlkb:798544 .
+
+odrlkb:3337499 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3337499/> ;
+    odrlkb:within odrlkb:798544 .
+
+odrlkb:3337500 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3337500/> ;
+    odrlkb:within odrlkb:798544 .
+
+odrlkb:662447 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/662447/> ;
+    odrlkb:within odrlkb:798549 .
+
+odrlkb:662892 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/662892/> ;
+    odrlkb:within odrlkb:798549 .
+
+odrlkb:663116 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/663116/> ;
+    odrlkb:within odrlkb:798549 .
+
+odrlkb:664517 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/664517/> ;
+    odrlkb:within odrlkb:798549 .
+
+odrlkb:665091 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/665091/> ;
+    odrlkb:within odrlkb:798549 .
+
+odrlkb:665283 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/665283/> ;
+    odrlkb:within odrlkb:798549 .
+
+odrlkb:665849 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/665849/> ;
+    odrlkb:within odrlkb:798549 .
+
+odrlkb:667267 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/667267/> ;
+    odrlkb:within odrlkb:798549 .
+
+odrlkb:667869 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/667869/> ;
+    odrlkb:within odrlkb:798549 .
+
+odrlkb:668248 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/668248/> ;
+    odrlkb:within odrlkb:798549 .
+
+odrlkb:669737 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/669737/> ;
+    odrlkb:within odrlkb:798549 .
+
+odrlkb:671857 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/671857/> ;
+    odrlkb:within odrlkb:798549 .
+
+odrlkb:672460 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/672460/> ;
+    odrlkb:within odrlkb:798549 .
+
+odrlkb:672628 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/672628/> ;
+    odrlkb:within odrlkb:798549 .
+
+odrlkb:673612 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/673612/> ;
+    odrlkb:within odrlkb:798549 .
+
+odrlkb:673887 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/673887/> ;
+    odrlkb:within odrlkb:798549 .
+
+odrlkb:675809 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/675809/> ;
+    odrlkb:within odrlkb:798549 .
+
+odrlkb:675848 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/675848/> ;
+    odrlkb:within odrlkb:798549 .
+
+odrlkb:675917 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/675917/> ;
+    odrlkb:within odrlkb:798549 .
+
+odrlkb:676309 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/676309/> ;
+    odrlkb:within odrlkb:798549 .
+
+odrlkb:676898 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/676898/> ;
+    odrlkb:within odrlkb:798549 .
+
+odrlkb:677104 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/677104/> ;
+    odrlkb:within odrlkb:798549 .
+
+odrlkb:677692 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/677692/> ;
+    odrlkb:within odrlkb:798549 .
+
+odrlkb:679134 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/679134/> ;
+    odrlkb:within odrlkb:798549 .
+
+odrlkb:679385 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/679385/> ;
+    odrlkb:within odrlkb:798549 .
+
+odrlkb:680428 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/680428/> ;
+    odrlkb:within odrlkb:798549 .
+
+odrlkb:680962 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/680962/> ;
+    odrlkb:within odrlkb:798549 .
+
+odrlkb:681291 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/681291/> ;
+    odrlkb:within odrlkb:798549 .
+
+odrlkb:682714 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/682714/> ;
+    odrlkb:within odrlkb:798549 .
+
+odrlkb:683016 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/683016/> ;
+    odrlkb:within odrlkb:798549 .
+
+odrlkb:683121 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/683121/> ;
+    odrlkb:within odrlkb:798549 .
+
+odrlkb:683504 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/683504/> ;
+    odrlkb:within odrlkb:798549 .
+
+odrlkb:683843 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/683843/> ;
+    odrlkb:within odrlkb:798549 .
+
+odrlkb:683901 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/683901/> ;
+    odrlkb:within odrlkb:798549 .
+
+odrlkb:684038 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/684038/> ;
+    odrlkb:within odrlkb:798549 .
+
+odrlkb:684647 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/684647/> ;
+    odrlkb:within odrlkb:798549 .
+
+odrlkb:684878 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/684878/> ;
+    odrlkb:within odrlkb:798549 .
+
+odrlkb:685947 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/685947/> ;
+    odrlkb:within odrlkb:798549 .
+
+odrlkb:686192 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/686192/> ;
+    odrlkb:within odrlkb:798549 .
+
+odrlkb:686253 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/686253/> ;
+    odrlkb:within odrlkb:798549 .
+
+odrlkb:686581 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/686581/> ;
+    odrlkb:within odrlkb:798549 .
+
+odrlkb:865518 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/865518/> ;
+    odrlkb:within odrlkb:798549 .
+
+odrlkb:10096138 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/10096138/> ;
+    odrlkb:within odrlkb:831053 .
+
+odrlkb:10096859 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/10096859/> ;
+    odrlkb:within odrlkb:831053 .
+
+odrlkb:10097357 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/10097357/> ;
+    odrlkb:within odrlkb:831053 .
+
+odrlkb:10097358 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/10097358/> ;
+    odrlkb:within odrlkb:831053 .
+
+odrlkb:10097359 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/10097359/> ;
+    odrlkb:within odrlkb:831053 .
+
+odrlkb:10097360 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/10097360/> ;
+    odrlkb:within odrlkb:831053 .
+
+odrlkb:10097361 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/10097361/> ;
+    odrlkb:within odrlkb:831053 .
+
+odrlkb:468898 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/468898/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:472039 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/472039/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:472454 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/472454/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:472755 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/472755/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:479119 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/479119/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:479613 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/479613/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:480041 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/480041/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:480508 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/480508/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:484048 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/484048/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:484638 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/484638/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:487839 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/487839/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:491684 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/491684/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:498671 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/498671/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:499068 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/499068/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:500059 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/500059/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:501165 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/501165/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:504338 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/504338/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:511180 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/511180/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:511555 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/511555/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:514801 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/514801/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:515001 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/515001/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:519324 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/519324/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:519969 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/519969/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:522652 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/522652/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:524304 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/524304/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:524894 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/524894/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:524925 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/524925/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:525369 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/525369/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:529352 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/529352/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:535120 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/535120/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:536199 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/536199/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:536203 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/536203/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:538555 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/538555/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:542415 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/542415/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:543871 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/543871/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:545854 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/545854/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:548389 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/548389/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:552548 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/552548/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:552927 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/552927/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:553899 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/553899/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:553972 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/553972/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:554230 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/554230/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:554667 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/554667/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:555235 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/555235/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:556349 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/556349/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:559838 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/559838/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:567293 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/567293/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:567395 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/567395/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:569665 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/569665/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:571473 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/571473/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:578071 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/578071/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:578853 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/578853/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:580491 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/580491/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:581043 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/581043/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:584222 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/584222/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:826294 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/826294/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:1486462 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/1486462/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:1488747 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/1488747/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:1488873 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/1488873/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:1489421 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/1489421/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:1490542 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/1490542/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:1496152 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/1496152/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:1496745 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/1496745/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:1501312 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/1501312/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:1502020 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/1502020/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:1503773 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/1503773/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:1503834 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/1503834/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:1503900 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/1503900/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:1506272 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/1506272/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:1508290 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/1508290/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:1511732 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/1511732/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:2013162 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2013162/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:2017623 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2017623/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:2022888 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2022888/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:2023468 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2023468/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:2026639 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2026639/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:2027748 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2027748/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:2050915 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2050915/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:2121529 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2121529/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:2123627 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2123627/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:2125072 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2125072/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:2126099 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2126099/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:7779061 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/7779061/> ;
+    odrlkb:within odrlkb:2017370 .
+
+odrlkb:2262961 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2262961/> ;
+    odrlkb:within odrlkb:2264397 .
+
+odrlkb:2263478 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2263478/> ;
+    odrlkb:within odrlkb:2264397 .
+
+odrlkb:2264507 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2264507/> ;
+    odrlkb:within odrlkb:2264397 .
+
+odrlkb:2267056 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2267056/> ;
+    odrlkb:within odrlkb:2264397 .
+
+odrlkb:2267094 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2267094/> ;
+    odrlkb:within odrlkb:2264397 .
+
+odrlkb:2268337 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2268337/> ;
+    odrlkb:within odrlkb:2264397 .
+
+odrlkb:2268404 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2268404/> ;
+    odrlkb:within odrlkb:2264397 .
+
+odrlkb:2269513 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2269513/> ;
+    odrlkb:within odrlkb:2264397 .
+
+odrlkb:2270984 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2270984/> ;
+    odrlkb:within odrlkb:2264397 .
+
+odrlkb:2593105 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2593105/> ;
+    odrlkb:within odrlkb:2264397 .
+
+odrlkb:2732264 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2732264/> ;
+    odrlkb:within odrlkb:2264397 .
+
+odrlkb:2732437 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2732437/> ;
+    odrlkb:within odrlkb:2264397 .
+
+odrlkb:2732772 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2732772/> ;
+    odrlkb:within odrlkb:2264397 .
+
+odrlkb:2735941 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2735941/> ;
+    odrlkb:within odrlkb:2264397 .
+
+odrlkb:2738782 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2738782/> ;
+    odrlkb:within odrlkb:2264397 .
+
+odrlkb:2740636 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2740636/> ;
+    odrlkb:within odrlkb:2264397 .
+
+odrlkb:2742026 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2742026/> ;
+    odrlkb:within odrlkb:2264397 .
+
+odrlkb:2742031 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2742031/> ;
+    odrlkb:within odrlkb:2264397 .
+
+odrlkb:2742610 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2742610/> ;
+    odrlkb:within odrlkb:2264397 .
+
+odrlkb:3411865 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3411865/> ;
+    odrlkb:within odrlkb:2264397 .
+
+odrlkb:2513413 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2513413/> ;
+    odrlkb:within odrlkb:2510769 .
+
+odrlkb:2519582 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2519582/> ;
+    odrlkb:within odrlkb:2510769 .
+
+odrlkb:2521383 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2521383/> ;
+    odrlkb:within odrlkb:2510769 .
+
+odrlkb:2593109 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2593109/> ;
+    odrlkb:within odrlkb:2510769 .
+
+odrlkb:2593110 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2593110/> ;
+    odrlkb:within odrlkb:2510769 .
+
+odrlkb:2593111 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2593111/> ;
+    odrlkb:within odrlkb:2510769 .
+
+odrlkb:2593112 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2593112/> ;
+    odrlkb:within odrlkb:2510769 .
+
+odrlkb:2593113 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2593113/> ;
+    odrlkb:within odrlkb:2510769 .
+
+odrlkb:3114710 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3114710/> ;
+    odrlkb:within odrlkb:2510769 .
+
+odrlkb:3115609 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3115609/> ;
+    odrlkb:within odrlkb:2510769 .
+
+odrlkb:3117732 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3117732/> ;
+    odrlkb:within odrlkb:2510769 .
+
+odrlkb:3336897 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3336897/> ;
+    odrlkb:within odrlkb:2510769 .
+
+odrlkb:3336898 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3336898/> ;
+    odrlkb:within odrlkb:2510769 .
+
+odrlkb:3336899 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3336899/> ;
+    odrlkb:within odrlkb:2510769 .
+
+odrlkb:3336900 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3336900/> ;
+    odrlkb:within odrlkb:2510769 .
+
+odrlkb:3336901 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3336901/> ;
+    odrlkb:within odrlkb:2510769 .
+
+odrlkb:3336902 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3336902/> ;
+    odrlkb:within odrlkb:2510769 .
+
+odrlkb:3336903 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3336903/> ;
+    odrlkb:within odrlkb:2510769 .
+
+odrlkb:6362988 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/6362988/> ;
+    odrlkb:within odrlkb:2510769 .
+
+odrlkb:8299700 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8299700/> ;
+    odrlkb:within odrlkb:2562770 .
+
+odrlkb:8299701 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8299701/> ;
+    odrlkb:within odrlkb:2562770 .
+
+odrlkb:8299702 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8299702/> ;
+    odrlkb:within odrlkb:2562770 .
+
+odrlkb:8299703 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8299703/> ;
+    odrlkb:within odrlkb:2562770 .
+
+odrlkb:8299704 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8299704/> ;
+    odrlkb:within odrlkb:2562770 .
+
+odrlkb:8299705 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8299705/> ;
+    odrlkb:within odrlkb:2562770 .
+
+odrlkb:8299706 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8299706/> ;
+    odrlkb:within odrlkb:2562770 .
+
+odrlkb:8299707 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8299707/> ;
+    odrlkb:within odrlkb:2562770 .
+
+odrlkb:8299708 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8299708/> ;
+    odrlkb:within odrlkb:2562770 .
+
+odrlkb:8299709 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8299709/> ;
+    odrlkb:within odrlkb:2562770 .
+
+odrlkb:8299710 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8299710/> ;
+    odrlkb:within odrlkb:2562770 .
+
+odrlkb:8299711 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8299711/> ;
+    odrlkb:within odrlkb:2562770 .
+
+odrlkb:8299712 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8299712/> ;
+    odrlkb:within odrlkb:2562770 .
+
+odrlkb:8299713 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8299713/> ;
+    odrlkb:within odrlkb:2562770 .
+
+odrlkb:8299714 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8299714/> ;
+    odrlkb:within odrlkb:2562770 .
+
+odrlkb:8299715 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8299715/> ;
+    odrlkb:within odrlkb:2562770 .
+
+odrlkb:8299716 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8299716/> ;
+    odrlkb:within odrlkb:2562770 .
+
+odrlkb:8299717 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8299717/> ;
+    odrlkb:within odrlkb:2562770 .
+
+odrlkb:8299718 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8299718/> ;
+    odrlkb:within odrlkb:2562770 .
+
+odrlkb:8299719 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8299719/> ;
+    odrlkb:within odrlkb:2562770 .
+
+odrlkb:8299720 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8299720/> ;
+    odrlkb:within odrlkb:2562770 .
+
+odrlkb:8299721 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8299721/> ;
+    odrlkb:within odrlkb:2562770 .
+
+odrlkb:8299722 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8299722/> ;
+    odrlkb:within odrlkb:2562770 .
+
+odrlkb:8299723 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8299723/> ;
+    odrlkb:within odrlkb:2562770 .
+
+odrlkb:8299724 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8299724/> ;
+    odrlkb:within odrlkb:2562770 .
+
+odrlkb:8299725 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8299725/> ;
+    odrlkb:within odrlkb:2562770 .
+
+odrlkb:8299726 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8299726/> ;
+    odrlkb:within odrlkb:2562770 .
+
+odrlkb:8299727 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8299727/> ;
+    odrlkb:within odrlkb:2562770 .
+
+odrlkb:8299728 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8299728/> ;
+    odrlkb:within odrlkb:2562770 .
+
+odrlkb:8299729 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8299729/> ;
+    odrlkb:within odrlkb:2562770 .
+
+odrlkb:8299730 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8299730/> ;
+    odrlkb:within odrlkb:2562770 .
+
+odrlkb:8299731 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8299731/> ;
+    odrlkb:within odrlkb:2562770 .
+
+odrlkb:8299732 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8299732/> ;
+    odrlkb:within odrlkb:2562770 .
+
+odrlkb:8299733 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8299733/> ;
+    odrlkb:within odrlkb:2562770 .
+
+odrlkb:8299734 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8299734/> ;
+    odrlkb:within odrlkb:2562770 .
+
+odrlkb:8299735 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8299735/> ;
+    odrlkb:within odrlkb:2562770 .
+
+odrlkb:8299736 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8299736/> ;
+    odrlkb:within odrlkb:2562770 .
+
+odrlkb:8299737 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8299737/> ;
+    odrlkb:within odrlkb:2562770 .
+
+odrlkb:8299738 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8299738/> ;
+    odrlkb:within odrlkb:2562770 .
+
+odrlkb:8299739 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8299739/> ;
+    odrlkb:within odrlkb:2562770 .
+
+odrlkb:8299740 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8299740/> ;
+    odrlkb:within odrlkb:2562770 .
+
+odrlkb:8299741 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8299741/> ;
+    odrlkb:within odrlkb:2562770 .
+
+odrlkb:8299742 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8299742/> ;
+    odrlkb:within odrlkb:2562770 .
+
+odrlkb:8299743 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8299743/> ;
+    odrlkb:within odrlkb:2562770 .
+
+odrlkb:8299744 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8299744/> ;
+    odrlkb:within odrlkb:2562770 .
+
+odrlkb:8299745 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8299745/> ;
+    odrlkb:within odrlkb:2562770 .
+
+odrlkb:8299746 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8299746/> ;
+    odrlkb:within odrlkb:2562770 .
+
+odrlkb:8299747 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8299747/> ;
+    odrlkb:within odrlkb:2562770 .
+
+odrlkb:8299748 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8299748/> ;
+    odrlkb:within odrlkb:2562770 .
+
+odrlkb:8299749 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8299749/> ;
+    odrlkb:within odrlkb:2562770 .
+
+odrlkb:8299750 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8299750/> ;
+    odrlkb:within odrlkb:2562770 .
+
+odrlkb:8299751 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8299751/> ;
+    odrlkb:within odrlkb:2562770 .
+
+odrlkb:8299752 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8299752/> ;
+    odrlkb:within odrlkb:2562770 .
+
+odrlkb:8299753 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8299753/> ;
+    odrlkb:within odrlkb:2562770 .
+
+odrlkb:8299754 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8299754/> ;
+    odrlkb:within odrlkb:2562770 .
+
+odrlkb:8299755 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8299755/> ;
+    odrlkb:within odrlkb:2562770 .
+
+odrlkb:8299756 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8299756/> ;
+    odrlkb:within odrlkb:2562770 .
+
+odrlkb:8299757 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8299757/> ;
+    odrlkb:within odrlkb:2562770 .
+
+odrlkb:8299758 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8299758/> ;
+    odrlkb:within odrlkb:2562770 .
+
+odrlkb:8299759 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8299759/> ;
+    odrlkb:within odrlkb:2562770 .
+
+odrlkb:8299760 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8299760/> ;
+    odrlkb:within odrlkb:2562770 .
+
+odrlkb:8299761 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8299761/> ;
+    odrlkb:within odrlkb:2562770 .
+
+odrlkb:8299762 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8299762/> ;
+    odrlkb:within odrlkb:2562770 .
+
+odrlkb:8299763 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8299763/> ;
+    odrlkb:within odrlkb:2562770 .
+
+odrlkb:8299764 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8299764/> ;
+    odrlkb:within odrlkb:2562770 .
+
+odrlkb:8299765 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8299765/> ;
+    odrlkb:within odrlkb:2562770 .
+
+odrlkb:8299766 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8299766/> ;
+    odrlkb:within odrlkb:2562770 .
+
+odrlkb:8334638 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8334638/> ;
+    odrlkb:within odrlkb:2562770 .
+
+odrlkb:2610816 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2610816/> ;
+    odrlkb:within odrlkb:2622320 .
+
+odrlkb:2612137 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2612137/> ;
+    odrlkb:within odrlkb:2622320 .
+
+odrlkb:2612225 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2612225/> ;
+    odrlkb:within odrlkb:2622320 .
+
+odrlkb:2614219 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2614219/> ;
+    odrlkb:within odrlkb:2622320 .
+
+odrlkb:2616145 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2616145/> ;
+    odrlkb:within odrlkb:2622320 .
+
+odrlkb:2622387 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2622387/> ;
+    odrlkb:within odrlkb:2622320 .
+
+odrlkb:6418538 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/6418538/> ;
+    odrlkb:within odrlkb:2623032 .
+
+odrlkb:6418539 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/6418539/> ;
+    odrlkb:within odrlkb:2623032 .
+
+odrlkb:6418540 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/6418540/> ;
+    odrlkb:within odrlkb:2623032 .
+
+odrlkb:6418541 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/6418541/> ;
+    odrlkb:within odrlkb:2623032 .
+
+odrlkb:6418542 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/6418542/> ;
+    odrlkb:within odrlkb:2623032 .
+
+odrlkb:3337403 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3337403/> ;
+    odrlkb:within odrlkb:2629691 .
+
+odrlkb:3337404 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3337404/> ;
+    odrlkb:within odrlkb:2629691 .
+
+odrlkb:3337405 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3337405/> ;
+    odrlkb:within odrlkb:2629691 .
+
+odrlkb:3337406 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3337406/> ;
+    odrlkb:within odrlkb:2629691 .
+
+odrlkb:3426182 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3426182/> ;
+    odrlkb:within odrlkb:2629691 .
+
+odrlkb:3426183 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3426183/> ;
+    odrlkb:within odrlkb:2629691 .
+
+odrlkb:3426184 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3426184/> ;
+    odrlkb:within odrlkb:2629691 .
+
+odrlkb:3426185 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3426185/> ;
+    odrlkb:within odrlkb:2629691 .
+
+odrlkb:2634895 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2634895/> ;
+    odrlkb:within odrlkb:2635167 .
+
+odrlkb:2638360 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2638360/> ;
+    odrlkb:within odrlkb:2635167 .
+
+odrlkb:2641364 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2641364/> ;
+    odrlkb:within odrlkb:2635167 .
+
+odrlkb:6269131 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/6269131/> ;
+    odrlkb:within odrlkb:2635167 .
+
+odrlkb:2657895 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2657895/> ;
+    odrlkb:within odrlkb:2658434 .
+
+odrlkb:2657907 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2657907/> ;
+    odrlkb:within odrlkb:2658434 .
+
+odrlkb:2658182 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2658182/> ;
+    odrlkb:within odrlkb:2658434 .
+
+odrlkb:2658205 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2658205/> ;
+    odrlkb:within odrlkb:2658434 .
+
+odrlkb:2658226 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2658226/> ;
+    odrlkb:within odrlkb:2658434 .
+
+odrlkb:2658370 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2658370/> ;
+    odrlkb:within odrlkb:2658434 .
+
+odrlkb:2658372 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2658372/> ;
+    odrlkb:within odrlkb:2658434 .
+
+odrlkb:2658563 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2658563/> ;
+    odrlkb:within odrlkb:2658434 .
+
+odrlkb:2658664 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2658664/> ;
+    odrlkb:within odrlkb:2658434 .
+
+odrlkb:2658760 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2658760/> ;
+    odrlkb:within odrlkb:2658434 .
+
+odrlkb:2658821 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2658821/> ;
+    odrlkb:within odrlkb:2658434 .
+
+odrlkb:2659315 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2659315/> ;
+    odrlkb:within odrlkb:2658434 .
+
+odrlkb:2659471 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2659471/> ;
+    odrlkb:within odrlkb:2658434 .
+
+odrlkb:2659495 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2659495/> ;
+    odrlkb:within odrlkb:2658434 .
+
+odrlkb:2659810 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2659810/> ;
+    odrlkb:within odrlkb:2658434 .
+
+odrlkb:2660207 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2660207/> ;
+    odrlkb:within odrlkb:2658434 .
+
+odrlkb:2660522 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2660522/> ;
+    odrlkb:within odrlkb:2658434 .
+
+odrlkb:2660593 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2660593/> ;
+    odrlkb:within odrlkb:2658434 .
+
+odrlkb:2660645 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2660645/> ;
+    odrlkb:within odrlkb:2658434 .
+
+odrlkb:2660717 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2660717/> ;
+    odrlkb:within odrlkb:2658434 .
+
+odrlkb:2661551 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2661551/> ;
+    odrlkb:within odrlkb:2658434 .
+
+odrlkb:2661602 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2661602/> ;
+    odrlkb:within odrlkb:2658434 .
+
+odrlkb:2661603 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2661603/> ;
+    odrlkb:within odrlkb:2658434 .
+
+odrlkb:2661739 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2661739/> ;
+    odrlkb:within odrlkb:2658434 .
+
+odrlkb:2661741 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2661741/> ;
+    odrlkb:within odrlkb:2658434 .
+
+odrlkb:2661876 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2661876/> ;
+    odrlkb:within odrlkb:2658434 .
+
+odrlkb:604010 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/604010/> ;
+    odrlkb:within odrlkb:2661886 .
+
+odrlkb:2664179 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2664179/> ;
+    odrlkb:within odrlkb:2661886 .
+
+odrlkb:2664292 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2664292/> ;
+    odrlkb:within odrlkb:2661886 .
+
+odrlkb:2664415 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2664415/> ;
+    odrlkb:within odrlkb:2661886 .
+
+odrlkb:2664870 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2664870/> ;
+    odrlkb:within odrlkb:2661886 .
+
+odrlkb:2666218 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2666218/> ;
+    odrlkb:within odrlkb:2661886 .
+
+odrlkb:2673722 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2673722/> ;
+    odrlkb:within odrlkb:2661886 .
+
+odrlkb:2676207 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2676207/> ;
+    odrlkb:within odrlkb:2661886 .
+
+odrlkb:2685867 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2685867/> ;
+    odrlkb:within odrlkb:2661886 .
+
+odrlkb:2686655 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2686655/> ;
+    odrlkb:within odrlkb:2661886 .
+
+odrlkb:2699050 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2699050/> ;
+    odrlkb:within odrlkb:2661886 .
+
+odrlkb:2699767 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2699767/> ;
+    odrlkb:within odrlkb:2661886 .
+
+odrlkb:2702259 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2702259/> ;
+    odrlkb:within odrlkb:2661886 .
+
+odrlkb:2702976 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2702976/> ;
+    odrlkb:within odrlkb:2661886 .
+
+odrlkb:2703330 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2703330/> ;
+    odrlkb:within odrlkb:2661886 .
+
+odrlkb:2708794 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2708794/> ;
+    odrlkb:within odrlkb:2661886 .
+
+odrlkb:2711508 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2711508/> ;
+    odrlkb:within odrlkb:2661886 .
+
+odrlkb:2712411 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2712411/> ;
+    odrlkb:within odrlkb:2661886 .
+
+odrlkb:2721357 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2721357/> ;
+    odrlkb:within odrlkb:2661886 .
+
+odrlkb:3337385 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3337385/> ;
+    odrlkb:within odrlkb:2661886 .
+
+odrlkb:3337386 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3337386/> ;
+    odrlkb:within odrlkb:2661886 .
+
+odrlkb:2743698 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2743698/> ;
+    odrlkb:within odrlkb:2750405 .
+
+odrlkb:2744011 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2744011/> ;
+    odrlkb:within odrlkb:2750405 .
+
+odrlkb:2745909 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2745909/> ;
+    odrlkb:within odrlkb:2750405 .
+
+odrlkb:2748838 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2748838/> ;
+    odrlkb:within odrlkb:2750405 .
+
+odrlkb:2749879 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2749879/> ;
+    odrlkb:within odrlkb:2750405 .
+
+odrlkb:2749990 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2749990/> ;
+    odrlkb:within odrlkb:2750405 .
+
+odrlkb:2751596 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2751596/> ;
+    odrlkb:within odrlkb:2750405 .
+
+odrlkb:2755249 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2755249/> ;
+    odrlkb:within odrlkb:2750405 .
+
+odrlkb:2755634 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2755634/> ;
+    odrlkb:within odrlkb:2750405 .
+
+odrlkb:2755812 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2755812/> ;
+    odrlkb:within odrlkb:2750405 .
+
+odrlkb:2756631 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2756631/> ;
+    odrlkb:within odrlkb:2750405 .
+
+odrlkb:3319179 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3319179/> ;
+    odrlkb:within odrlkb:2750405 .
+
+odrlkb:2761367 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2761367/> ;
+    odrlkb:within odrlkb:2782113 .
+
+odrlkb:2762300 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2762300/> ;
+    odrlkb:within odrlkb:2782113 .
+
+odrlkb:2763586 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2763586/> ;
+    odrlkb:within odrlkb:2782113 .
+
+odrlkb:2764581 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2764581/> ;
+    odrlkb:within odrlkb:2782113 .
+
+odrlkb:2766823 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2766823/> ;
+    odrlkb:within odrlkb:2782113 .
+
+odrlkb:2769848 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2769848/> ;
+    odrlkb:within odrlkb:2782113 .
+
+odrlkb:2770542 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2770542/> ;
+    odrlkb:within odrlkb:2782113 .
+
+odrlkb:2774686 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2774686/> ;
+    odrlkb:within odrlkb:2782113 .
+
+odrlkb:2781194 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2781194/> ;
+    odrlkb:within odrlkb:2782113 .
+
+odrlkb:2800867 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2800867/> ;
+    odrlkb:within odrlkb:2802361 .
+
+odrlkb:3337387 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3337387/> ;
+    odrlkb:within odrlkb:2802361 .
+
+odrlkb:3337388 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3337388/> ;
+    odrlkb:within odrlkb:2802361 .
+
+odrlkb:2822542 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2822542/> ;
+    odrlkb:within odrlkb:2921044 .
+
+odrlkb:2838632 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2838632/> ;
+    odrlkb:within odrlkb:2921044 .
+
+odrlkb:2842565 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2842565/> ;
+    odrlkb:within odrlkb:2921044 .
+
+odrlkb:2842566 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2842566/> ;
+    odrlkb:within odrlkb:2921044 .
+
+odrlkb:2842635 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2842635/> ;
+    odrlkb:within odrlkb:2921044 .
+
+odrlkb:2847618 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2847618/> ;
+    odrlkb:within odrlkb:2921044 .
+
+odrlkb:2861876 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2861876/> ;
+    odrlkb:within odrlkb:2921044 .
+
+odrlkb:2862926 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2862926/> ;
+    odrlkb:within odrlkb:2921044 .
+
+odrlkb:2872567 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2872567/> ;
+    odrlkb:within odrlkb:2921044 .
+
+odrlkb:2905330 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2905330/> ;
+    odrlkb:within odrlkb:2921044 .
+
+odrlkb:2911297 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2911297/> ;
+    odrlkb:within odrlkb:2921044 .
+
+odrlkb:2944387 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2944387/> ;
+    odrlkb:within odrlkb:2921044 .
+
+odrlkb:2945356 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2945356/> ;
+    odrlkb:within odrlkb:2921044 .
+
+odrlkb:2950157 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2950157/> ;
+    odrlkb:within odrlkb:2921044 .
+
+odrlkb:2951839 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2951839/> ;
+    odrlkb:within odrlkb:2921044 .
+
+odrlkb:2953481 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2953481/> ;
+    odrlkb:within odrlkb:2921044 .
+
+odrlkb:2959975 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2959975/> ;
+    odrlkb:within odrlkb:2960313 .
+
+odrlkb:2960020 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2960020/> ;
+    odrlkb:within odrlkb:2960313 .
+
+odrlkb:2960152 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2960152/> ;
+    odrlkb:within odrlkb:2960313 .
+
+odrlkb:2960161 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2960161/> ;
+    odrlkb:within odrlkb:2960313 .
+
+odrlkb:2960275 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2960275/> ;
+    odrlkb:within odrlkb:2960313 .
+
+odrlkb:2960315 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2960315/> ;
+    odrlkb:within odrlkb:2960313 .
+
+odrlkb:2960514 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2960514/> ;
+    odrlkb:within odrlkb:2960313 .
+
+odrlkb:2960599 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2960599/> ;
+    odrlkb:within odrlkb:2960313 .
+
+odrlkb:2960629 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2960629/> ;
+    odrlkb:within odrlkb:2960313 .
+
+odrlkb:2960656 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2960656/> ;
+    odrlkb:within odrlkb:2960313 .
+
+odrlkb:2960683 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2960683/> ;
+    odrlkb:within odrlkb:2960313 .
+
+odrlkb:2960696 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2960696/> ;
+    odrlkb:within odrlkb:2960313 .
+
+odrlkb:7521313 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/7521313/> ;
+    odrlkb:within odrlkb:2963597 .
+
+odrlkb:7521314 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/7521314/> ;
+    odrlkb:within odrlkb:2963597 .
+
+odrlkb:7521315 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/7521315/> ;
+    odrlkb:within odrlkb:2963597 .
+
+odrlkb:7521316 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/7521316/> ;
+    odrlkb:within odrlkb:2963597 .
+
+odrlkb:3319178 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3319178/> ;
+    odrlkb:within odrlkb:2993457 .
+
+odrlkb:2985244 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2985244/> ;
+    odrlkb:within odrlkb:3017382 .
+
+odrlkb:2988289 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2988289/> ;
+    odrlkb:within odrlkb:3017382 .
+
+odrlkb:3012874 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3012874/> ;
+    odrlkb:within odrlkb:3017382 .
+
+odrlkb:3023519 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3023519/> ;
+    odrlkb:within odrlkb:3017382 .
+
+odrlkb:3027939 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3027939/> ;
+    odrlkb:within odrlkb:3017382 .
+
+odrlkb:3030293 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3030293/> ;
+    odrlkb:within odrlkb:3017382 .
+
+odrlkb:11071619 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/11071619/> ;
+    odrlkb:within odrlkb:3017382 .
+
+odrlkb:11071620 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/11071620/> ;
+    odrlkb:within odrlkb:3017382 .
+
+odrlkb:11071621 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/11071621/> ;
+    odrlkb:within odrlkb:3017382 .
+
+odrlkb:11071622 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/11071622/> ;
+    odrlkb:within odrlkb:3017382 .
+
+odrlkb:11071623 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/11071623/> ;
+    odrlkb:within odrlkb:3017382 .
+
+odrlkb:11071624 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/11071624/> ;
+    odrlkb:within odrlkb:3017382 .
+
+odrlkb:11071625 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/11071625/> ;
+    odrlkb:within odrlkb:3017382 .
+
+odrlkb:3039162 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3039162/> ;
+    odrlkb:within odrlkb:3041565 .
+
+odrlkb:3039676 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3039676/> ;
+    odrlkb:within odrlkb:3041565 .
+
+odrlkb:3040131 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3040131/> ;
+    odrlkb:within odrlkb:3041565 .
+
+odrlkb:3040684 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3040684/> ;
+    odrlkb:within odrlkb:3041565 .
+
+odrlkb:3041203 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3041203/> ;
+    odrlkb:within odrlkb:3041565 .
+
+odrlkb:3041566 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3041566/> ;
+    odrlkb:within odrlkb:3041565 .
+
+odrlkb:3338529 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3338529/> ;
+    odrlkb:within odrlkb:3041565 .
+
+odrlkb:3042031 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3042031/> ;
+    odrlkb:within odrlkb:3042058 .
+
+odrlkb:3042034 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3042034/> ;
+    odrlkb:within odrlkb:3042058 .
+
+odrlkb:3042036 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3042036/> ;
+    odrlkb:within odrlkb:3042058 .
+
+odrlkb:3042038 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3042038/> ;
+    odrlkb:within odrlkb:3042058 .
+
+odrlkb:3042042 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3042042/> ;
+    odrlkb:within odrlkb:3042058 .
+
+odrlkb:3042047 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3042047/> ;
+    odrlkb:within odrlkb:3042058 .
+
+odrlkb:3042050 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3042050/> ;
+    odrlkb:within odrlkb:3042058 .
+
+odrlkb:3042056 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3042056/> ;
+    odrlkb:within odrlkb:3042058 .
+
+odrlkb:3042063 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3042063/> ;
+    odrlkb:within odrlkb:3042058 .
+
+odrlkb:3042069 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3042069/> ;
+    odrlkb:within odrlkb:3042058 .
+
+odrlkb:3042074 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3042074/> ;
+    odrlkb:within odrlkb:3042058 .
+
+odrlkb:3237072 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3237072/> ;
+    odrlkb:within odrlkb:3042142 .
+
+odrlkb:3237073 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3237073/> ;
+    odrlkb:within odrlkb:3042142 .
+
+odrlkb:3237200 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3237200/> ;
+    odrlkb:within odrlkb:3042142 .
+
+odrlkb:3237203 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3237203/> ;
+    odrlkb:within odrlkb:3042142 .
+
+odrlkb:3237212 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3237212/> ;
+    odrlkb:within odrlkb:3042142 .
+
+odrlkb:3237214 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3237214/> ;
+    odrlkb:within odrlkb:3042142 .
+
+odrlkb:3237221 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3237221/> ;
+    odrlkb:within odrlkb:3042142 .
+
+odrlkb:3237229 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3237229/> ;
+    odrlkb:within odrlkb:3042142 .
+
+odrlkb:3237497 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3237497/> ;
+    odrlkb:within odrlkb:3042142 .
+
+odrlkb:3237530 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3237530/> ;
+    odrlkb:within odrlkb:3042142 .
+
+odrlkb:3237716 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3237716/> ;
+    odrlkb:within odrlkb:3042142 .
+
+odrlkb:3237864 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3237864/> ;
+    odrlkb:within odrlkb:3042142 .
+
+odrlkb:9782164 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/9782164/> ;
+    odrlkb:within odrlkb:3042225 .
+
+odrlkb:9782165 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/9782165/> ;
+    odrlkb:within odrlkb:3042225 .
+
+odrlkb:9782166 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/9782166/> ;
+    odrlkb:within odrlkb:3042225 .
+
+odrlkb:9782167 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/9782167/> ;
+    odrlkb:within odrlkb:3042225 .
+
+odrlkb:9782168 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/9782168/> ;
+    odrlkb:within odrlkb:3042225 .
+
+odrlkb:9782169 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/9782169/> ;
+    odrlkb:within odrlkb:3042225 .
+
+odrlkb:9782170 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/9782170/> ;
+    odrlkb:within odrlkb:3042225 .
+
+odrlkb:9782171 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/9782171/> ;
+    odrlkb:within odrlkb:3042225 .
+
+odrlkb:9782172 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/9782172/> ;
+    odrlkb:within odrlkb:3042225 .
+
+odrlkb:9782173 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/9782173/> ;
+    odrlkb:within odrlkb:3042225 .
+
+odrlkb:9782176 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/9782176/> ;
+    odrlkb:within odrlkb:3042225 .
+
+odrlkb:9782180 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/9782180/> ;
+    odrlkb:within odrlkb:3042225 .
+
+odrlkb:9782182 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/9782182/> ;
+    odrlkb:within odrlkb:3042225 .
+
+odrlkb:9782183 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/9782183/> ;
+    odrlkb:within odrlkb:3042225 .
+
+odrlkb:9782184 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/9782184/> ;
+    odrlkb:within odrlkb:3042225 .
+
+odrlkb:9782185 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/9782185/> ;
+    odrlkb:within odrlkb:3042225 .
+
+odrlkb:9782186 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/9782186/> ;
+    odrlkb:within odrlkb:3042225 .
+
+odrlkb:9782187 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/9782187/> ;
+    odrlkb:within odrlkb:3042225 .
+
+odrlkb:9782188 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/9782188/> ;
+    odrlkb:within odrlkb:3042225 .
+
+odrlkb:9782189 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/9782189/> ;
+    odrlkb:within odrlkb:3042225 .
+
+odrlkb:9782190 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/9782190/> ;
+    odrlkb:within odrlkb:3042225 .
+
+odrlkb:9782191 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/9782191/> ;
+    odrlkb:within odrlkb:3042225 .
+
+odrlkb:9782192 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/9782192/> ;
+    odrlkb:within odrlkb:3042225 .
+
+odrlkb:9782193 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/9782193/> ;
+    odrlkb:within odrlkb:3042225 .
+
+odrlkb:6417213 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/6417213/> ;
+    odrlkb:within odrlkb:3042362 .
+
+odrlkb:6417214 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/6417214/> ;
+    odrlkb:within odrlkb:3042362 .
+
+odrlkb:6417215 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/6417215/> ;
+    odrlkb:within odrlkb:3042362 .
+
+odrlkb:6417223 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/6417223/> ;
+    odrlkb:within odrlkb:3042362 .
+
+odrlkb:6417224 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/6417224/> ;
+    odrlkb:within odrlkb:3042362 .
+
+odrlkb:6417226 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/6417226/> ;
+    odrlkb:within odrlkb:3042362 .
+
+odrlkb:6417228 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/6417228/> ;
+    odrlkb:within odrlkb:3042362 .
+
+odrlkb:6417229 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/6417229/> ;
+    odrlkb:within odrlkb:3042362 .
+
+odrlkb:6417230 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/6417230/> ;
+    odrlkb:within odrlkb:3042362 .
+
+odrlkb:6417233 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/6417233/> ;
+    odrlkb:within odrlkb:3042362 .
+
+odrlkb:8989934 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8989934/> ;
+    odrlkb:within odrlkb:3042362 .
+
+odrlkb:865084 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/865084/> ;
+    odrlkb:within odrlkb:3057568 .
+
+odrlkb:865085 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/865085/> ;
+    odrlkb:within odrlkb:3057568 .
+
+odrlkb:3056506 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3056506/> ;
+    odrlkb:within odrlkb:3057568 .
+
+odrlkb:3343954 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3343954/> ;
+    odrlkb:within odrlkb:3057568 .
+
+odrlkb:3343955 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3343955/> ;
+    odrlkb:within odrlkb:3057568 .
+
+odrlkb:3343956 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3343956/> ;
+    odrlkb:within odrlkb:3057568 .
+
+odrlkb:3343957 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3343957/> ;
+    odrlkb:within odrlkb:3057568 .
+
+odrlkb:3343958 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3343958/> ;
+    odrlkb:within odrlkb:3057568 .
+
+odrlkb:3067695 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3067695/> ;
+    odrlkb:within odrlkb:3077311 .
+
+odrlkb:3339536 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3339536/> ;
+    odrlkb:within odrlkb:3077311 .
+
+odrlkb:3339537 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3339537/> ;
+    odrlkb:within odrlkb:3077311 .
+
+odrlkb:3339538 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3339538/> ;
+    odrlkb:within odrlkb:3077311 .
+
+odrlkb:3339539 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3339539/> ;
+    odrlkb:within odrlkb:3077311 .
+
+odrlkb:3339540 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3339540/> ;
+    odrlkb:within odrlkb:3077311 .
+
+odrlkb:3339541 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3339541/> ;
+    odrlkb:within odrlkb:3077311 .
+
+odrlkb:3339542 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3339542/> ;
+    odrlkb:within odrlkb:3077311 .
+
+odrlkb:3339573 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3339573/> ;
+    odrlkb:within odrlkb:3077311 .
+
+odrlkb:3339574 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3339574/> ;
+    odrlkb:within odrlkb:3077311 .
+
+odrlkb:3339575 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3339575/> ;
+    odrlkb:within odrlkb:3077311 .
+
+odrlkb:3339576 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3339576/> ;
+    odrlkb:within odrlkb:3077311 .
+
+odrlkb:3339577 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3339577/> ;
+    odrlkb:within odrlkb:3077311 .
+
+odrlkb:3339578 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3339578/> ;
+    odrlkb:within odrlkb:3077311 .
+
+odrlkb:780166 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/780166/> ;
+    odrlkb:within odrlkb:3144096 .
+
+odrlkb:3132015 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3132015/> ;
+    odrlkb:within odrlkb:3144096 .
+
+odrlkb:3133897 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3133897/> ;
+    odrlkb:within odrlkb:3144096 .
+
+odrlkb:3134723 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3134723/> ;
+    odrlkb:within odrlkb:3144096 .
+
+odrlkb:3141558 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3141558/> ;
+    odrlkb:within odrlkb:3144096 .
+
+odrlkb:3143188 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3143188/> ;
+    odrlkb:within odrlkb:3144096 .
+
+odrlkb:3143242 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3143242/> ;
+    odrlkb:within odrlkb:3144096 .
+
+odrlkb:3144301 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3144301/> ;
+    odrlkb:within odrlkb:3144096 .
+
+odrlkb:3145495 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3145495/> ;
+    odrlkb:within odrlkb:3144096 .
+
+odrlkb:3159665 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3159665/> ;
+    odrlkb:within odrlkb:3144096 .
+
+odrlkb:3163480 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3163480/> ;
+    odrlkb:within odrlkb:3144096 .
+
+odrlkb:11862827 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/11862827/> ;
+    odrlkb:within odrlkb:3144096 .
+
+odrlkb:12110596 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/12110596/> ;
+    odrlkb:within odrlkb:3144096 .
+
+odrlkb:12110598 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/12110598/> ;
+    odrlkb:within odrlkb:3144096 .
+
+odrlkb:12110600 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/12110600/> ;
+    odrlkb:within odrlkb:3144096 .
+
+odrlkb:3166650 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3166650/> ;
+    odrlkb:within odrlkb:3168068 .
+
+odrlkb:3178807 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3178807/> ;
+    odrlkb:within odrlkb:3168068 .
+
+odrlkb:3345302 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3345302/> ;
+    odrlkb:within odrlkb:3168068 .
+
+odrlkb:3345303 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3345303/> ;
+    odrlkb:within odrlkb:3168068 .
+
+odrlkb:3345304 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3345304/> ;
+    odrlkb:within odrlkb:3168068 .
+
+odrlkb:3345305 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3345305/> ;
+    odrlkb:within odrlkb:3168068 .
+
+odrlkb:3345306 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3345306/> ;
+    odrlkb:within odrlkb:3168068 .
+
+odrlkb:3345307 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3345307/> ;
+    odrlkb:within odrlkb:3168068 .
+
+odrlkb:3345308 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3345308/> ;
+    odrlkb:within odrlkb:3168068 .
+
+odrlkb:2523119 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2523119/> ;
+    odrlkb:within odrlkb:3175395 .
+
+odrlkb:2523228 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2523228/> ;
+    odrlkb:within odrlkb:3175395 .
+
+odrlkb:2525468 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/2525468/> ;
+    odrlkb:within odrlkb:3175395 .
+
+odrlkb:3164604 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3164604/> ;
+    odrlkb:within odrlkb:3175395 .
+
+odrlkb:3164857 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3164857/> ;
+    odrlkb:within odrlkb:3175395 .
+
+odrlkb:3165048 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3165048/> ;
+    odrlkb:within odrlkb:3175395 .
+
+odrlkb:3165244 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3165244/> ;
+    odrlkb:within odrlkb:3175395 .
+
+odrlkb:3165361 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3165361/> ;
+    odrlkb:within odrlkb:3175395 .
+
+odrlkb:3169778 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3169778/> ;
+    odrlkb:within odrlkb:3175395 .
+
+odrlkb:3170831 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3170831/> ;
+    odrlkb:within odrlkb:3175395 .
+
+odrlkb:3173222 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3173222/> ;
+    odrlkb:within odrlkb:3175395 .
+
+odrlkb:3174004 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3174004/> ;
+    odrlkb:within odrlkb:3175395 .
+
+odrlkb:3174618 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3174618/> ;
+    odrlkb:within odrlkb:3175395 .
+
+odrlkb:3174725 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3174725/> ;
+    odrlkb:within odrlkb:3175395 .
+
+odrlkb:3174976 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3174976/> ;
+    odrlkb:within odrlkb:3175395 .
+
+odrlkb:3176525 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3176525/> ;
+    odrlkb:within odrlkb:3175395 .
+
+odrlkb:3177401 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3177401/> ;
+    odrlkb:within odrlkb:3175395 .
+
+odrlkb:3181042 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3181042/> ;
+    odrlkb:within odrlkb:3175395 .
+
+odrlkb:3182306 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3182306/> ;
+    odrlkb:within odrlkb:3175395 .
+
+odrlkb:3183560 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3183560/> ;
+    odrlkb:within odrlkb:3175395 .
+
+odrlkb:3186843 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3186843/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3186905 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3186905/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3187213 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3187213/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3188687 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3188687/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3188885 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3188885/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3188914 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3188914/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3189037 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3189037/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3189074 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3189074/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3190509 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3190509/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3190529 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3190529/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3190533 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3190533/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3190535 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3190535/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3190716 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3190716/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3190944 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3190944/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3190949 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3190949/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3191028 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3191028/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3191679 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3191679/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3192062 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3192062/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3192120 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3192120/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3192240 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3192240/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3192672 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3192672/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3193340 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3193340/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3193964 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3193964/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3194350 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3194350/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3194451 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3194451/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3194647 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3194647/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3194791 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3194791/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3195213 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3195213/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3195505 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3195505/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3196288 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3196288/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3196306 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3196306/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3196424 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3196424/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3196684 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3196684/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3196759 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3196759/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3197146 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3197146/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3197377 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3197377/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3197752 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3197752/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3197942 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3197942/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3198364 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3198364/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3198646 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3198646/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3199016 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3199016/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3199130 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3199130/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3199169 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3199169/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3199296 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3199296/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3199522 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3199522/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3200196 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3200196/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3201252 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3201252/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3201729 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3201729/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3202332 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3202332/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3202707 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3202707/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3202780 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3202780/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3203411 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3203411/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3204853 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3204853/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239050 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239050/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239051 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239051/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239054 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239054/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239056 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239056/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239059 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239059/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239061 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239061/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239062 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239062/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239066 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239066/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239069 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239069/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239071 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239071/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239073 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239073/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239075 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239075/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239078 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239078/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239080 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239080/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239083 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239083/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239086 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239086/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239087 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239087/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239091 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239091/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239093 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239093/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239095 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239095/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239096 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239096/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239098 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239098/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239100 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239100/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239101 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239101/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239103 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239103/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239104 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239104/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239105 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239105/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239107 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239107/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239110 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239110/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239111 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239111/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239112 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239112/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239113 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239113/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239114 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239114/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239115 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239115/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239132 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239132/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239133 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239133/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239134 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239134/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239175 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239175/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239177 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239177/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239179 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239179/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239180 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239180/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239181 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239181/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239184 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239184/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239185 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239185/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239187 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239187/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239188 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239188/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239189 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239189/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239191 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239191/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239193 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239193/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239195 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239195/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239197 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239197/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239199 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239199/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239200 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239200/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239202 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239202/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239204 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239204/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239205 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239205/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239207 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239207/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239211 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239211/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239213 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239213/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239214 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239214/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239215 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239215/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239216 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239216/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239224 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239224/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239226 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239226/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239227 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239227/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239229 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239229/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239231 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239231/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239234 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239234/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239237 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239237/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239241 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239241/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239243 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239243/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239245 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239245/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239247 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239247/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239248 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239248/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239251 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239251/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239259 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239259/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239262 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239262/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239268 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239268/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239270 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239270/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239272 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239272/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239275 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239275/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239279 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239279/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239280 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239280/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239282 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239282/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239283 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239283/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239285 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239285/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239286 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239286/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239294 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239294/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3239318 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3239318/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3344893 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3344893/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3344894 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3344894/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3344895 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3344895/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3344896 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3344896/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3344897 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3344897/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3344898 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3344898/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3344899 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3344899/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3344900 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3344900/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3344901 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3344901/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3344902 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3344902/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3344903 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3344903/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3344904 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3344904/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3344905 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3344905/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3344906 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3344906/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3344907 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3344907/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3344908 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3344908/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3344909 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3344909/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3344910 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3344910/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3344911 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3344911/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3344912 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3344912/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3344913 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3344913/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3344914 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3344914/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3344915 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3344915/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3344916 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3344916/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3344917 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3344917/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3344918 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3344918/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3344919 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3344919/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3344920 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3344920/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3344921 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3344921/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3344922 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3344922/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3344923 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3344923/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3344924 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3344924/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3344925 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3344925/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3344926 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3344926/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3344927 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3344927/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3344928 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3344928/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3344929 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3344929/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3344930 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3344930/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3344931 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3344931/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3344932 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3344932/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3344933 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3344933/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3344934 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3344934/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3344935 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3344935/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3344936 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3344936/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3344937 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3344937/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3344938 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3344938/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3344939 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3344939/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3344940 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3344940/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3344941 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3344941/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3344942 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3344942/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:3344943 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3344943/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:8133579 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8133579/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:8133580 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8133580/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:8133581 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8133581/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:8133582 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8133582/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:8133583 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8133583/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:8133584 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8133584/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:8133585 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8133585/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:8133586 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8133586/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:8133587 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8133587/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:8133588 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8133588/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:8133589 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8133589/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:8133590 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8133590/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:8133591 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8133591/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:8133592 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8133592/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:8133593 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8133593/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:8469236 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8469236/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:8986279 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/8986279/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:11288217 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/11288217/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:11288255 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/11288255/> ;
+    odrlkb:within odrlkb:3190538 .
+
+odrlkb:786233 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/786233/> ;
+    odrlkb:within odrlkb:3194884 .
+
+odrlkb:3186995 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3186995/> ;
+    odrlkb:within odrlkb:3194884 .
+
+odrlkb:3188514 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3188514/> ;
+    odrlkb:within odrlkb:3194884 .
+
+odrlkb:3189071 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3189071/> ;
+    odrlkb:within odrlkb:3194884 .
+
+odrlkb:3189077 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3189077/> ;
+    odrlkb:within odrlkb:3194884 .
+
+odrlkb:3191221 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3191221/> ;
+    odrlkb:within odrlkb:3194884 .
+
+odrlkb:3193129 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3193129/> ;
+    odrlkb:within odrlkb:3194884 .
+
+odrlkb:3193160 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3193160/> ;
+    odrlkb:within odrlkb:3194884 .
+
+odrlkb:3193227 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3193227/> ;
+    odrlkb:within odrlkb:3194884 .
+
+odrlkb:3194493 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3194493/> ;
+    odrlkb:within odrlkb:3194884 .
+
+odrlkb:3194925 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3194925/> ;
+    odrlkb:within odrlkb:3194884 .
+
+odrlkb:3197537 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3197537/> ;
+    odrlkb:within odrlkb:3194884 .
+
+odrlkb:3197895 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3197895/> ;
+    odrlkb:within odrlkb:3194884 .
+
+odrlkb:3199070 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3199070/> ;
+    odrlkb:within odrlkb:3194884 .
+
+odrlkb:3199393 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3199393/> ;
+    odrlkb:within odrlkb:3194884 .
+
+odrlkb:3202193 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3202193/> ;
+    odrlkb:within odrlkb:3194884 .
+
+odrlkb:3202640 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3202640/> ;
+    odrlkb:within odrlkb:3194884 .
+
+odrlkb:3203104 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3203104/> ;
+    odrlkb:within odrlkb:3194884 .
+
+odrlkb:3204173 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3204173/> ;
+    odrlkb:within odrlkb:3194884 .
+
+odrlkb:3204508 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3204508/> ;
+    odrlkb:within odrlkb:3194884 .
+
+odrlkb:3343959 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3343959/> ;
+    odrlkb:within odrlkb:3194884 .
+
+odrlkb:11497642 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/11497642/> ;
+    odrlkb:within odrlkb:3194884 .
+
+odrlkb:11497643 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/11497643/> ;
+    odrlkb:within odrlkb:3194884 .
+
+odrlkb:12104729 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/12104729/> ;
+    odrlkb:within odrlkb:3194884 .
+
+odrlkb:12640530 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/12640530/> ;
+    odrlkb:within odrlkb:3194884 .
+
+odrlkb:3337511 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3337511/> ;
+    odrlkb:within odrlkb:3202326 .
+
+odrlkb:3337512 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3337512/> ;
+    odrlkb:within odrlkb:3202326 .
+
+odrlkb:3337513 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3337513/> ;
+    odrlkb:within odrlkb:3202326 .
+
+odrlkb:3337514 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3337514/> ;
+    odrlkb:within odrlkb:3202326 .
+
+odrlkb:3337515 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3337515/> ;
+    odrlkb:within odrlkb:3202326 .
+
+odrlkb:3337518 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3337518/> ;
+    odrlkb:within odrlkb:3202326 .
+
+odrlkb:3337519 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3337519/> ;
+    odrlkb:within odrlkb:3202326 .
+
+odrlkb:3337520 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3337520/> ;
+    odrlkb:within odrlkb:3202326 .
+
+odrlkb:3337521 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3337521/> ;
+    odrlkb:within odrlkb:3202326 .
+
+odrlkb:3337522 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3337522/> ;
+    odrlkb:within odrlkb:3202326 .
+
+odrlkb:3337523 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3337523/> ;
+    odrlkb:within odrlkb:3202326 .
+
+odrlkb:3337524 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3337524/> ;
+    odrlkb:within odrlkb:3202326 .
+
+odrlkb:3337525 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3337525/> ;
+    odrlkb:within odrlkb:3202326 .
+
+odrlkb:3337526 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3337526/> ;
+    odrlkb:within odrlkb:3202326 .
+
+odrlkb:3337527 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3337527/> ;
+    odrlkb:within odrlkb:3202326 .
+
+odrlkb:3337528 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3337528/> ;
+    odrlkb:within odrlkb:3202326 .
+
+odrlkb:3337529 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3337529/> ;
+    odrlkb:within odrlkb:3202326 .
+
+odrlkb:3337530 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3337530/> ;
+    odrlkb:within odrlkb:3202326 .
+
+odrlkb:3337531 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3337531/> ;
+    odrlkb:within odrlkb:3202326 .
+
+odrlkb:3337532 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3337532/> ;
+    odrlkb:within odrlkb:3202326 .
+
+odrlkb:3337533 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3337533/> ;
+    odrlkb:within odrlkb:3202326 .
+
+odrlkb:3229999 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3229999/> ;
+    odrlkb:within odrlkb:3277605 .
+
+odrlkb:3230000 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3230000/> ;
+    odrlkb:within odrlkb:3277605 .
+
+odrlkb:3294903 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/3294903/> ;
+    odrlkb:within odrlkb:3277605 .
+
+odrlkb:784272 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/784272/> ;
+    odrlkb:within odrlkb:6290252 .
+
+odrlkb:785958 a odrlkb:Feature ;
+    dcterms:identifier <https://sws.geonames.org/785958/> ;
+    odrlkb:within odrlkb:6290252 .

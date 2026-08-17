@@ -1,0 +1,641 @@
+# DPV purposes: the subsumption the vocabulary publishes.
+#
+# skos:broader edges only.  rdf:type dpv:Purpose is a typing
+# assertion, not an order assertion, and is not read here.
+#
+# skos:broader is the only hierarchy predicate here, and SKOS
+# declines to fix its logical reading.  That the order is
+# subsumption is declared by the profile, not published here.
+#
+# Source   : w3c/dpv 2.3/dpv/modules/purposes.ttl
+# Version  : https://w3id.org/dpv/2.3
+# Modified : 2026-02-25
+# Retrieved: 2026-08-16
+# Licence  : W3C Software and Document License 2023 (verify before redistributing the slice)
+
+@prefix dpv:     <https://w3id.org/dpv#> .
+@prefix odrlkb:  <https://w3id.org/odrl-kb/dpv-purposes#> .
+@prefix dcat:    <http://www.w3.org/ns/dcat#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+
+<https://w3id.org/odrl-kb/dpv-purposes> a dcat:Dataset ;
+    dcterms:title "DPV purposes, subsumption slice"@en ;
+    dcterms:source <https://w3id.org/dpv/2.3> ;
+    dcterms:modified "2026-02-25"^^<http://www.w3.org/2001/XMLSchema#date> ;
+    odrlkb:orderPredicate skos:broader ;
+    odrlkb:conceptCount 123 ;
+    odrlkb:orderAssertionCount 132 .
+
+odrlkb:academicresearch a odrlkb:Purpose ;
+    rdfs:label "Academic Research"@en ;
+    dcterms:identifier dpv:AcademicResearch ;
+    skos:broader odrlkb:researchanddevelopment .
+
+odrlkb:accountmanagement a odrlkb:Purpose ;
+    rdfs:label "Account Management"@en ;
+    dcterms:identifier dpv:AccountManagement ;
+    skos:broader odrlkb:purpose .
+
+odrlkb:advertising a odrlkb:Purpose ;
+    rdfs:label "Advertising"@en ;
+    dcterms:identifier dpv:Advertising ;
+    skos:broader odrlkb:marketing .
+
+odrlkb:ageverification a odrlkb:Purpose ;
+    rdfs:label "Age Verification"@en ;
+    dcterms:identifier dpv:AgeVerification ;
+    skos:broader odrlkb:verification .
+
+odrlkb:combatclimatechange a odrlkb:Purpose ;
+    rdfs:label "Combat Climate Change"@en ;
+    dcterms:identifier dpv:CombatClimateChange ;
+    skos:broader odrlkb:publicbenefit .
+
+odrlkb:commercialpurpose a odrlkb:Purpose ;
+    rdfs:label "Commercial Purpose"@en ;
+    dcterms:identifier dpv:CommercialPurpose ;
+    skos:broader odrlkb:purpose .
+
+odrlkb:commercialresearch a odrlkb:Purpose ;
+    rdfs:label "Commercial Research"@en ;
+    dcterms:identifier dpv:CommercialResearch ;
+    skos:broader odrlkb:commercialpurpose, odrlkb:researchanddevelopment .
+
+odrlkb:communicationforcustomercare a odrlkb:Purpose ;
+    rdfs:label "Communication for Customer Care"@en ;
+    dcterms:identifier dpv:CommunicationForCustomerCare ;
+    skos:broader odrlkb:communicationmanagement, odrlkb:customercare .
+
+odrlkb:communicationmanagement a odrlkb:Purpose ;
+    rdfs:label "Communication Management"@en ;
+    dcterms:identifier dpv:CommunicationManagement ;
+    skos:broader odrlkb:purpose .
+
+odrlkb:countermoneylaundering a odrlkb:Purpose ;
+    rdfs:label "Counter Money Laundering"@en ;
+    dcterms:identifier dpv:CounterMoneyLaundering ;
+    skos:broader odrlkb:fraudpreventionanddetection .
+
+odrlkb:counterterrorism a odrlkb:Purpose ;
+    rdfs:label "Counterterrorism"@en ;
+    dcterms:identifier dpv:Counterterrorism ;
+    skos:broader odrlkb:publicbenefit .
+
+odrlkb:customercare a odrlkb:Purpose ;
+    rdfs:label "Customer Care"@en ;
+    dcterms:identifier dpv:CustomerCare ;
+    skos:broader odrlkb:customermanagement .
+
+odrlkb:customerclaimsmanagement a odrlkb:Purpose ;
+    rdfs:label "Customer Claims Management"@en ;
+    dcterms:identifier dpv:CustomerClaimsManagement ;
+    skos:broader odrlkb:customermanagement .
+
+odrlkb:customermanagement a odrlkb:Purpose ;
+    rdfs:label "Customer Management"@en ;
+    dcterms:identifier dpv:CustomerManagement ;
+    skos:broader odrlkb:purpose .
+
+odrlkb:customerordermanagement a odrlkb:Purpose ;
+    rdfs:label "Customer Order Management"@en ;
+    dcterms:identifier dpv:CustomerOrderManagement ;
+    skos:broader odrlkb:customermanagement .
+
+odrlkb:customerrelationshipmanagement a odrlkb:Purpose ;
+    rdfs:label "Customer Relationship Management"@en ;
+    dcterms:identifier dpv:CustomerRelationshipManagement ;
+    skos:broader odrlkb:customermanagement .
+
+odrlkb:customersolvencymonitoring a odrlkb:Purpose ;
+    rdfs:label "Customer Solvency Monitoring"@en ;
+    dcterms:identifier dpv:CustomerSolvencyMonitoring ;
+    skos:broader odrlkb:customermanagement .
+
+odrlkb:dataaltruism a odrlkb:Purpose ;
+    rdfs:label "Data Altruism"@en ;
+    dcterms:identifier dpv:DataAltruism ;
+    skos:broader odrlkb:publicbenefit .
+
+odrlkb:deliveryofgoods a odrlkb:Purpose ;
+    rdfs:label "Delivery of Goods"@en ;
+    dcterms:identifier dpv:DeliveryOfGoods ;
+    skos:broader odrlkb:requestedserviceprovision .
+
+odrlkb:directmarketing a odrlkb:Purpose ;
+    rdfs:label "Direct Marketing"@en ;
+    dcterms:identifier dpv:DirectMarketing ;
+    skos:broader odrlkb:marketing .
+
+odrlkb:disputemanagement a odrlkb:Purpose ;
+    rdfs:label "Dispute Management"@en ;
+    dcterms:identifier dpv:DisputeManagement ;
+    skos:broader odrlkb:organisationgovernance .
+
+odrlkb:enforceaccesscontrol a odrlkb:Purpose ;
+    rdfs:label "Enforce Access Control"@en ;
+    dcterms:identifier dpv:EnforceAccessControl ;
+    skos:broader odrlkb:enforcesecurity .
+
+odrlkb:enforcesecurity a odrlkb:Purpose ;
+    rdfs:label "Enforce Security"@en ;
+    dcterms:identifier dpv:EnforceSecurity ;
+    skos:broader odrlkb:purpose .
+
+odrlkb:establishcontractualagreement a odrlkb:Purpose ;
+    rdfs:label "Establish Contractual Agreement"@en ;
+    dcterms:identifier dpv:EstablishContractualAgreement ;
+    skos:broader odrlkb:purpose .
+
+odrlkb:fraudpreventionanddetection a odrlkb:Purpose ;
+    rdfs:label "Fraud Prevention and Detection"@en ;
+    dcterms:identifier dpv:FraudPreventionAndDetection ;
+    skos:broader odrlkb:misusepreventionanddetection .
+
+odrlkb:fulfilmentofcontractualobligation a odrlkb:Purpose ;
+    rdfs:label "Fulfilment of Contractual Obligation"@en ;
+    dcterms:identifier dpv:FulfilmentOfContractualObligation ;
+    skos:broader odrlkb:fulfilmentofobligation .
+
+odrlkb:fulfilmentofobligation a odrlkb:Purpose ;
+    rdfs:label "Fulfilment of Obligation"@en ;
+    dcterms:identifier dpv:FulfilmentOfObligation ;
+    skos:broader odrlkb:purpose .
+
+odrlkb:humanresourcemanagement a odrlkb:Purpose ;
+    rdfs:label "Human Resource Management"@en ;
+    dcterms:identifier dpv:HumanResourceManagement ;
+    skos:broader odrlkb:purpose .
+
+odrlkb:identityauthentication a odrlkb:Purpose ;
+    rdfs:label "Identity Authentication"@en ;
+    dcterms:identifier dpv:IdentityAuthentication ;
+    skos:broader odrlkb:enforcesecurity .
+
+odrlkb:identityverification a odrlkb:Purpose ;
+    rdfs:label "Identity Verification"@en ;
+    dcterms:identifier dpv:IdentityVerification ;
+    skos:broader odrlkb:verification .
+
+odrlkb:improveexistingproductsandservices a odrlkb:Purpose ;
+    rdfs:label "Improve Existing Products and Services"@en ;
+    dcterms:identifier dpv:ImproveExistingProductsAndServices ;
+    skos:broader odrlkb:optimisationforcontroller .
+
+odrlkb:improvehealthcare a odrlkb:Purpose ;
+    rdfs:label "Improve Healthcare"@en ;
+    dcterms:identifier dpv:ImproveHealthcare ;
+    skos:broader odrlkb:publicbenefit .
+
+odrlkb:improveinternalcrmprocesses a odrlkb:Purpose ;
+    rdfs:label "Improve Internal CRM Processes"@en ;
+    dcterms:identifier dpv:ImproveInternalCRMProcesses ;
+    skos:broader odrlkb:customerrelationshipmanagement, odrlkb:optimisationforcontroller .
+
+odrlkb:improvepublicservices a odrlkb:Purpose ;
+    rdfs:label "Improve Public Services"@en ;
+    dcterms:identifier dpv:ImprovePublicServices ;
+    skos:broader odrlkb:publicbenefit .
+
+odrlkb:improvetransportmobility a odrlkb:Purpose ;
+    rdfs:label "Improve Transport and Mobility"@en ;
+    dcterms:identifier dpv:ImproveTransportMobility ;
+    skos:broader odrlkb:publicbenefit .
+
+odrlkb:increaseservicerobustness a odrlkb:Purpose ;
+    rdfs:label "Increase Service Robustness"@en ;
+    dcterms:identifier dpv:IncreaseServiceRobustness ;
+    skos:broader odrlkb:optimisationforcontroller .
+
+odrlkb:internalresourceoptimisation a odrlkb:Purpose ;
+    rdfs:label "Internal Resource Optimisation"@en ;
+    dcterms:identifier dpv:InternalResourceOptimisation ;
+    skos:broader odrlkb:optimisationforcontroller .
+
+odrlkb:legalcompliance a odrlkb:Purpose ;
+    rdfs:label "Legal Compliance"@en ;
+    dcterms:identifier dpv:LegalCompliance ;
+    skos:broader odrlkb:fulfilmentofobligation .
+
+odrlkb:legalobligation a odrlkb:Purpose ;
+    dcterms:identifier dpv:LegalObligation .
+
+odrlkb:maintainfrauddatabase a odrlkb:Purpose ;
+    rdfs:label "Maintain Fraud Database"@en ;
+    dcterms:identifier dpv:MaintainFraudDatabase ;
+    skos:broader odrlkb:fraudpreventionanddetection .
+
+odrlkb:marketing a odrlkb:Purpose ;
+    rdfs:label "Marketing"@en ;
+    dcterms:identifier dpv:Marketing ;
+    skos:broader odrlkb:purpose .
+
+odrlkb:memberpartnermanagement a odrlkb:Purpose ;
+    rdfs:label "Members and Partners Management"@en ;
+    dcterms:identifier dpv:MemberPartnerManagement ;
+    skos:broader odrlkb:organisationgovernance .
+
+odrlkb:misusepreventionanddetection a odrlkb:Purpose ;
+    rdfs:label "Misuse, Prevention and Detection"@en ;
+    dcterms:identifier dpv:MisusePreventionAndDetection ;
+    skos:broader odrlkb:enforcesecurity .
+
+odrlkb:noncommercialpurpose a odrlkb:Purpose ;
+    rdfs:label "Non-commercial Purpose"@en ;
+    dcterms:identifier dpv:NonCommercialPurpose ;
+    skos:broader odrlkb:purpose .
+
+odrlkb:noncommercialresearch a odrlkb:Purpose ;
+    rdfs:label "Non-Commercial Research"@en ;
+    dcterms:identifier dpv:NonCommercialResearch ;
+    skos:broader odrlkb:noncommercialpurpose, odrlkb:researchanddevelopment .
+
+odrlkb:optimisationforconsumer a odrlkb:Purpose ;
+    rdfs:label "Optimisation for Consumer"@en ;
+    dcterms:identifier dpv:OptimisationForConsumer ;
+    skos:broader odrlkb:serviceoptimisation .
+
+odrlkb:optimisationforcontroller a odrlkb:Purpose ;
+    rdfs:label "Optimisation for Controller"@en ;
+    dcterms:identifier dpv:OptimisationForController ;
+    skos:broader odrlkb:serviceoptimisation .
+
+odrlkb:optimiseuserinterface a odrlkb:Purpose ;
+    rdfs:label "Optimise User Interface"@en ;
+    dcterms:identifier dpv:OptimiseUserInterface ;
+    skos:broader odrlkb:optimisationforconsumer .
+
+odrlkb:organisationcompliancemanagement a odrlkb:Purpose ;
+    rdfs:label "Organisation Compliance Management"@en ;
+    dcterms:identifier dpv:OrganisationComplianceManagement ;
+    skos:broader odrlkb:organisationgovernance .
+
+odrlkb:organisationgovernance a odrlkb:Purpose ;
+    rdfs:label "Organisation Governance"@en ;
+    dcterms:identifier dpv:OrganisationGovernance ;
+    skos:broader odrlkb:purpose .
+
+odrlkb:organisationriskmanagement a odrlkb:Purpose ;
+    rdfs:label "Organisation Risk Management"@en ;
+    dcterms:identifier dpv:OrganisationRiskManagement ;
+    skos:broader odrlkb:organisationgovernance .
+
+odrlkb:paymentmanagement a odrlkb:Purpose ;
+    rdfs:label "Payment Management"@en ;
+    dcterms:identifier dpv:PaymentManagement ;
+    skos:broader odrlkb:servicemanagement .
+
+odrlkb:personalisation a odrlkb:Purpose ;
+    rdfs:label "Personalisation"@en ;
+    dcterms:identifier dpv:Personalisation ;
+    skos:broader odrlkb:purpose .
+
+odrlkb:personalisedadvertising a odrlkb:Purpose ;
+    rdfs:label "Personalised Advertising"@en ;
+    dcterms:identifier dpv:PersonalisedAdvertising ;
+    skos:broader odrlkb:advertising, odrlkb:personalisation .
+
+odrlkb:personalisedbenefits a odrlkb:Purpose ;
+    rdfs:label "Personalised Benefits"@en ;
+    dcterms:identifier dpv:PersonalisedBenefits ;
+    skos:broader odrlkb:servicepersonalisation .
+
+odrlkb:personnelbehaviourmonitoring a odrlkb:Purpose ;
+    rdfs:label "Personnel Behaviour Monitoring"@en ;
+    dcterms:identifier dpv:PersonnelBehaviourMonitoring ;
+    skos:broader odrlkb:personnelmonitoring .
+
+odrlkb:personnelhiring a odrlkb:Purpose ;
+    rdfs:label "Personnel Hiring"@en ;
+    dcterms:identifier dpv:PersonnelHiring ;
+    skos:broader odrlkb:personnelmanagement .
+
+odrlkb:personnelmanagement a odrlkb:Purpose ;
+    rdfs:label "Personnel Management"@en ;
+    dcterms:identifier dpv:PersonnelManagement ;
+    skos:broader odrlkb:humanresourcemanagement .
+
+odrlkb:personnelmonitoring a odrlkb:Purpose ;
+    rdfs:label "Personnel Monitoring"@en ;
+    dcterms:identifier dpv:PersonnelMonitoring ;
+    skos:broader odrlkb:personnelmanagement .
+
+odrlkb:personneloffboarding a odrlkb:Purpose ;
+    rdfs:label "Personnel Offboarding"@en ;
+    dcterms:identifier dpv:PersonnelOffboarding ;
+    skos:broader odrlkb:personnelmanagement .
+
+odrlkb:personnelonboarding a odrlkb:Purpose ;
+    rdfs:label "Personnel Onboarding"@en ;
+    dcterms:identifier dpv:PersonnelOnboarding ;
+    skos:broader odrlkb:personnelhiring .
+
+odrlkb:personnelpayment a odrlkb:Purpose ;
+    rdfs:label "Personnel Payment"@en ;
+    dcterms:identifier dpv:PersonnelPayment ;
+    skos:broader odrlkb:personnelmanagement .
+
+odrlkb:personnelperformanceevaluation a odrlkb:Purpose ;
+    rdfs:label "Personnel Performance Evaluation"@en ;
+    dcterms:identifier dpv:PersonnelPerformanceEvaluation ;
+    skos:broader odrlkb:personnelperformancemanagement .
+
+odrlkb:personnelperformancemanagement a odrlkb:Purpose ;
+    rdfs:label "Personnel Performance Management"@en ;
+    dcterms:identifier dpv:PersonnelPerformanceManagement ;
+    skos:broader odrlkb:personnelmanagement, odrlkb:personnelmonitoring .
+
+odrlkb:personnelperformancemonitoring a odrlkb:Purpose ;
+    rdfs:label "Personnel Performance Monitoring"@en ;
+    dcterms:identifier dpv:PersonnelPerformanceMonitoring ;
+    skos:broader odrlkb:personnelmonitoring, odrlkb:personnelperformancemanagement .
+
+odrlkb:personnelperformanceprediction a odrlkb:Purpose ;
+    rdfs:label "Personnel Performance Prediction"@en ;
+    dcterms:identifier dpv:PersonnelPerformancePrediction ;
+    skos:broader odrlkb:personnelperformancemanagement .
+
+odrlkb:personnelpromotionmanagement a odrlkb:Purpose ;
+    rdfs:label "Personnel Promotion Management"@en ;
+    dcterms:identifier dpv:PersonnelPromotionManagement ;
+    skos:broader odrlkb:personnelmanagement .
+
+odrlkb:personnelterminationmanagement a odrlkb:Purpose ;
+    rdfs:label "Personnel Termination Management"@en ;
+    dcterms:identifier dpv:PersonnelTerminationManagement ;
+    skos:broader odrlkb:personnelmanagement .
+
+odrlkb:personnelworkloadmanagement a odrlkb:Purpose ;
+    rdfs:label "Personnel Workload Management"@en ;
+    dcterms:identifier dpv:PersonnelWorkloadManagement ;
+    skos:broader odrlkb:personnelmanagement .
+
+odrlkb:politicalcampaign a odrlkb:Purpose ;
+    rdfs:label "Political Campaign"@en ;
+    dcterms:identifier dpv:PoliticalCampaign ;
+    skos:broader odrlkb:advertising, odrlkb:personalisation .
+
+odrlkb:protectionofipr a odrlkb:Purpose ;
+    rdfs:label "Protection of Intellectual Property Rights"@en ;
+    dcterms:identifier dpv:ProtectionOfIPR ;
+    skos:broader odrlkb:fulfilmentofobligation .
+
+odrlkb:protectionofnationalsecurity a odrlkb:Purpose ;
+    rdfs:label "Protection of National Security"@en ;
+    dcterms:identifier dpv:ProtectionOfNationalSecurity ;
+    skos:broader odrlkb:publicbenefit .
+
+odrlkb:protectionofpublicsecurity a odrlkb:Purpose ;
+    rdfs:label "Protection of Public Security"@en ;
+    dcterms:identifier dpv:ProtectionOfPublicSecurity ;
+    skos:broader odrlkb:publicbenefit .
+
+odrlkb:provideeventrecommendations a odrlkb:Purpose ;
+    rdfs:label "Provide Event Recommendations"@en ;
+    dcterms:identifier dpv:ProvideEventRecommendations ;
+    skos:broader odrlkb:providepersonalisedrecommendations .
+
+odrlkb:provideofficialstatistics a odrlkb:Purpose ;
+    rdfs:label "Provide Official Statistics"@en ;
+    dcterms:identifier dpv:ProvideOfficialStatistics ;
+    skos:broader odrlkb:publicbenefit .
+
+odrlkb:providepersonalisedrecommendations a odrlkb:Purpose ;
+    rdfs:label "Provide Personalised Recommendations"@en ;
+    dcterms:identifier dpv:ProvidePersonalisedRecommendations ;
+    skos:broader odrlkb:servicepersonalisation .
+
+odrlkb:provideproductrecommendations a odrlkb:Purpose ;
+    rdfs:label "Provide Product Recommendations"@en ;
+    dcterms:identifier dpv:ProvideProductRecommendations ;
+    skos:broader odrlkb:providepersonalisedrecommendations .
+
+odrlkb:publicbenefit a odrlkb:Purpose ;
+    rdfs:label "Public Benefit"@en ;
+    dcterms:identifier dpv:PublicBenefit ;
+    skos:broader odrlkb:purpose .
+
+odrlkb:publicpolicymaking a odrlkb:Purpose ;
+    rdfs:label "Public Policy Making"@en ;
+    dcterms:identifier dpv:PublicPolicyMaking ;
+    skos:broader odrlkb:publicbenefit .
+
+odrlkb:publicrelations a odrlkb:Purpose ;
+    rdfs:label "Public Relations"@en ;
+    dcterms:identifier dpv:PublicRelations ;
+    skos:broader odrlkb:marketing .
+
+odrlkb:purpose a odrlkb:Purpose ;
+    rdfs:label "Purpose"@en ;
+    dcterms:identifier dpv:Purpose .
+
+odrlkb:recordmanagement a odrlkb:Purpose ;
+    rdfs:label "Record Management"@en ;
+    dcterms:identifier dpv:RecordManagement ;
+    skos:broader odrlkb:purpose .
+
+odrlkb:recruitmentadvertising a odrlkb:Purpose ;
+    rdfs:label "Recruitment Advertising"@en ;
+    dcterms:identifier dpv:RecruitmentAdvertising ;
+    skos:broader odrlkb:advertising, odrlkb:personnelhiring .
+
+odrlkb:recruitmentapplicantbackgroundcheck a odrlkb:Purpose ;
+    rdfs:label "Recruitment Applicant Background Check"@en ;
+    dcterms:identifier dpv:RecruitmentApplicantBackgroundCheck ;
+    skos:broader odrlkb:recruitmentmanagement .
+
+odrlkb:recruitmentapplicantcriminalbackgroundcheck a odrlkb:Purpose ;
+    rdfs:label "Recruitment Applicant Criminal Background Check"@en ;
+    dcterms:identifier dpv:RecruitmentApplicantCriminalBackgroundCheck ;
+    skos:broader odrlkb:recruitmentmanagement .
+
+odrlkb:recruitmentapplicantinformationauthentication a odrlkb:Purpose ;
+    rdfs:label "Recruitment Applicant Information Authentication"@en ;
+    dcterms:identifier dpv:RecruitmentApplicantInformationAuthentication ;
+    skos:broader odrlkb:recruitmentmanagement .
+
+odrlkb:recruitmentapplicantselection a odrlkb:Purpose ;
+    rdfs:label "Recruitment Applicant Selection"@en ;
+    dcterms:identifier dpv:RecruitmentApplicantSelection ;
+    skos:broader odrlkb:recruitmentmanagement .
+
+odrlkb:recruitmentapplicationanalysis a odrlkb:Purpose ;
+    rdfs:label "Recruitment Application Analysis"@en ;
+    dcterms:identifier dpv:RecruitmentApplicationAnalysis ;
+    skos:broader odrlkb:recruitmentapplicationmanagement .
+
+odrlkb:recruitmentapplicationmanagement a odrlkb:Purpose ;
+    rdfs:label "Recruitment Application Management"@en ;
+    dcterms:identifier dpv:RecruitmentApplicationManagement ;
+    skos:broader odrlkb:recruitmentmanagement .
+
+odrlkb:recruitmentapplicationscreening a odrlkb:Purpose ;
+    rdfs:label "Recruitment Application Screening"@en ;
+    dcterms:identifier dpv:RecruitmentApplicationScreening ;
+    skos:broader odrlkb:recruitmentapplicationmanagement .
+
+odrlkb:recruitmentinterviewanalysis a odrlkb:Purpose ;
+    rdfs:label "Recruitment Interview Analysis"@en ;
+    dcterms:identifier dpv:RecruitmentInterviewAnalysis ;
+    skos:broader odrlkb:recruitmentinterviewmanagement .
+
+odrlkb:recruitmentinterviewassessment a odrlkb:Purpose ;
+    rdfs:label "Recruitment Interview Assessment"@en ;
+    dcterms:identifier dpv:RecruitmentInterviewAssessment ;
+    skos:broader odrlkb:recruitmentinterviewmanagement .
+
+odrlkb:recruitmentinterviewmanagement a odrlkb:Purpose ;
+    rdfs:label "Recruitment Interview Management"@en ;
+    dcterms:identifier dpv:RecruitmentInterviewManagement ;
+    skos:broader odrlkb:recruitmentmanagement .
+
+odrlkb:recruitmentinterviewscheduling a odrlkb:Purpose ;
+    rdfs:label "Recruitment Interview Scheduling"@en ;
+    dcterms:identifier dpv:RecruitmentInterviewScheduling ;
+    skos:broader odrlkb:recruitmentinterviewmanagement .
+
+odrlkb:recruitmentmanagement a odrlkb:Purpose ;
+    rdfs:label "Recruitment Management"@en ;
+    dcterms:identifier dpv:RecruitmentManagement ;
+    skos:broader odrlkb:personnelhiring .
+
+odrlkb:recruitmenttargetedadvertising a odrlkb:Purpose ;
+    rdfs:label "Targeted Recruitment Advertising"@en ;
+    dcterms:identifier dpv:RecruitmentTargetedAdvertising ;
+    skos:broader odrlkb:recruitmentadvertising, odrlkb:targetedadvertising .
+
+odrlkb:repairimpairments a odrlkb:Purpose ;
+    rdfs:label "Repair Impairments"@en ;
+    dcterms:identifier dpv:RepairImpairments ;
+    skos:broader odrlkb:servicemanagement .
+
+odrlkb:requestedserviceprovision a odrlkb:Purpose ;
+    rdfs:label "Requested Service Provision"@en ;
+    dcterms:identifier dpv:RequestedServiceProvision ;
+    skos:broader odrlkb:serviceprovision .
+
+odrlkb:researchanddevelopment a odrlkb:Purpose ;
+    rdfs:label "Research and Development"@en ;
+    dcterms:identifier dpv:ResearchAndDevelopment ;
+    skos:broader odrlkb:purpose .
+
+odrlkb:rightsfulfilment a odrlkb:Purpose ;
+    rdfs:label "Rights Fulfilment"@en ;
+    dcterms:identifier dpv:RightsFulfilment ;
+    skos:broader odrlkb:legalobligation .
+
+odrlkb:scientificresearch a odrlkb:Purpose ;
+    rdfs:label "Scientific Research"@en ;
+    dcterms:identifier dpv:ScientificResearch ;
+    skos:broader odrlkb:researchanddevelopment .
+
+odrlkb:searchfunctionalities a odrlkb:Purpose ;
+    rdfs:label "Search Functionalities"@en ;
+    dcterms:identifier dpv:SearchFunctionalities ;
+    skos:broader odrlkb:serviceprovision .
+
+odrlkb:selldatatothirdparties a odrlkb:Purpose ;
+    rdfs:label "Sell Data to Third Parties"@en ;
+    dcterms:identifier dpv:SellDataToThirdParties ;
+    skos:broader odrlkb:sellproducts .
+
+odrlkb:sellinsightsfromdata a odrlkb:Purpose ;
+    rdfs:label "Sell Insights from Data"@en ;
+    dcterms:identifier dpv:SellInsightsFromData ;
+    skos:broader odrlkb:sellproducts .
+
+odrlkb:sellproducts a odrlkb:Purpose ;
+    rdfs:label "Sell Products"@en ;
+    dcterms:identifier dpv:SellProducts ;
+    skos:broader odrlkb:serviceprovision .
+
+odrlkb:sellproductstodatasubject a odrlkb:Purpose ;
+    rdfs:label "Sell Products to Data Subject"@en ;
+    dcterms:identifier dpv:SellProductsToDataSubject ;
+    skos:broader odrlkb:sellproducts .
+
+odrlkb:serviceaccessdetermination a odrlkb:Purpose ;
+    rdfs:label "Service Access Determination"@en ;
+    dcterms:identifier dpv:ServiceAccessDetermination ;
+    skos:broader odrlkb:servicemanagement .
+
+odrlkb:servicemanagement a odrlkb:Purpose ;
+    rdfs:label "Service Management"@en ;
+    dcterms:identifier dpv:ServiceManagement ;
+    skos:broader odrlkb:purpose .
+
+odrlkb:servicemonitoring a odrlkb:Purpose ;
+    rdfs:label "Service Monitoring"@en ;
+    dcterms:identifier dpv:ServiceMonitoring ;
+    skos:broader odrlkb:servicemanagement .
+
+odrlkb:serviceoptimisation a odrlkb:Purpose ;
+    rdfs:label "Service Optimisation"@en ;
+    dcterms:identifier dpv:ServiceOptimisation ;
+    skos:broader odrlkb:servicemanagement .
+
+odrlkb:servicepersonalisation a odrlkb:Purpose ;
+    rdfs:label "Service Personalisation"@en ;
+    dcterms:identifier dpv:ServicePersonalisation ;
+    skos:broader odrlkb:personalisation, odrlkb:servicemanagement .
+
+odrlkb:serviceprovision a odrlkb:Purpose ;
+    rdfs:label "Service Provision"@en ;
+    dcterms:identifier dpv:ServiceProvision ;
+    skos:broader odrlkb:servicemanagement .
+
+odrlkb:serviceregistration a odrlkb:Purpose ;
+    rdfs:label "Service Registration"@en ;
+    dcterms:identifier dpv:ServiceRegistration ;
+    skos:broader odrlkb:servicemanagement .
+
+odrlkb:serviceusageanalytics a odrlkb:Purpose ;
+    rdfs:label "Service Usage Analytics"@en ;
+    dcterms:identifier dpv:ServiceUsageAnalytics ;
+    skos:broader odrlkb:servicemonitoring .
+
+odrlkb:socialmediamarketing a odrlkb:Purpose ;
+    rdfs:label "Social Media Marketing"@en ;
+    dcterms:identifier dpv:SocialMediaMarketing ;
+    skos:broader odrlkb:marketing .
+
+odrlkb:targetedadvertising a odrlkb:Purpose ;
+    rdfs:label "Targeted Advertising"@en ;
+    dcterms:identifier dpv:TargetedAdvertising ;
+    skos:broader odrlkb:personalisedadvertising .
+
+odrlkb:technicalserviceprovision a odrlkb:Purpose ;
+    rdfs:label "Technical Service Provision"@en ;
+    dcterms:identifier dpv:TechnicalServiceProvision ;
+    skos:broader odrlkb:serviceprovision .
+
+odrlkb:userinterfacepersonalisation a odrlkb:Purpose ;
+    rdfs:label "User Interface Personalisation"@en ;
+    dcterms:identifier dpv:UserInterfacePersonalisation ;
+    skos:broader odrlkb:servicepersonalisation .
+
+odrlkb:vendormanagement a odrlkb:Purpose ;
+    rdfs:label "Vendor Management"@en ;
+    dcterms:identifier dpv:VendorManagement ;
+    skos:broader odrlkb:purpose .
+
+odrlkb:vendorpayment a odrlkb:Purpose ;
+    rdfs:label "Vendor Payment"@en ;
+    dcterms:identifier dpv:VendorPayment ;
+    skos:broader odrlkb:vendormanagement .
+
+odrlkb:vendorrecordsmanagement a odrlkb:Purpose ;
+    rdfs:label "Vendor Records Management"@en ;
+    dcterms:identifier dpv:VendorRecordsManagement ;
+    skos:broader odrlkb:vendormanagement .
+
+odrlkb:vendorselectionassessment a odrlkb:Purpose ;
+    rdfs:label "Vendor Selection Assessment"@en ;
+    dcterms:identifier dpv:VendorSelectionAssessment ;
+    skos:broader odrlkb:vendormanagement .
+
+odrlkb:verification a odrlkb:Purpose ;
+    rdfs:label "Verification"@en ;
+    dcterms:identifier dpv:Verification ;
+    skos:broader odrlkb:enforcesecurity .

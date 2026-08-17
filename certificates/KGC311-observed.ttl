@@ -1,0 +1,19 @@
+kgc:KGC311-observed a vrep:Refutation ;
+    vrep:producedBy "Vampire" ;
+    vrep:proofArtefact <proofs/KGC311-2.tstp> ;
+    vrep:attributedAssertion [
+        vrep:premiseSource vrep:fromResource ;
+        vrep:formulaName "res_dpv_non_commercial_research_below_dpv_research_and_development" ;
+        rdfs:label "res_dpv_non_commercial_research_below_dpv_research_and_development"@en ] ;
+    vrep:attributedAssertion [
+        vrep:premiseSource vrep:fromResource ;
+        vrep:formulaName "res_dpv_research_and_development_below_dpv_purpose" ;
+        rdfs:label "res_dpv_research_and_development_below_dpv_purpose"@en ] ;
+    vrep:attributedAssertion [
+        vrep:premiseSource vrep:fromConstraints ;
+        vrep:formulaName "w_kgc311" ;
+        rdfs:label "w_kgc311"@en ] ;
+    vrep:attributedAssertion [
+        vrep:premiseSource vrep:fromOrderAxiom ;
+        vrep:formulaName "ax_leq_transitive" ;
+        rdfs:label "ax_leq_transitive"@en ] .

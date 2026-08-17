@@ -1,0 +1,16 @@
+# Profile entry.  ODRL cannot carry this, so it is agreed out of band; the
+# paper's conclusion proposes an extension that would.
+#
+# The order predicate is a property of the resource, not of this binding, so
+# it is declared in the resource file and not repeated here.
+
+@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+@prefix vrep: <https://w3id.org/odrl-verdict-report#> .
+@prefix ex:   <https://w3id.org/odrl-kb/profile/> .
+
+ex:b-spatial a vrep:OperandBinding ;
+    vrep:leftOperand odrl:spatial ;
+    vrep:sort vrep:mer ;
+    vrep:resource <https://w3id.org/odrl-kb/geonames/europe-d2-1157> ;
+    vrep:backgroundTheory <https://w3id.org/odrl-kb/geonames/europe-d2-1157/siblings> ;
+    vrep:grounding vrep:sliceMembership .

@@ -1,0 +1,2978 @@
+% Resource: administrative containment.  res_ names mark what
+% the authority published.
+
+fof(res_gn_146669_within_gn_6255148, axiom,
+    kge_leq(gn_146669, gn_6255148)).
+fof(res_gn_390903_within_gn_6255148, axiom,
+    kge_leq(gn_390903, gn_6255148)).
+fof(res_gn_453733_within_gn_6255148, axiom,
+    kge_leq(gn_453733, gn_6255148)).
+fof(res_gn_458258_within_gn_6255148, axiom,
+    kge_leq(gn_458258, gn_6255148)).
+fof(res_gn_597427_within_gn_6255148, axiom,
+    kge_leq(gn_597427, gn_6255148)).
+fof(res_gn_607072_within_gn_6255148, axiom,
+    kge_leq(gn_607072, gn_6255148)).
+fof(res_gn_617790_within_gn_6255148, axiom,
+    kge_leq(gn_617790, gn_6255148)).
+fof(res_gn_630336_within_gn_6255148, axiom,
+    kge_leq(gn_630336, gn_6255148)).
+fof(res_gn_660013_within_gn_6255148, axiom,
+    kge_leq(gn_660013, gn_6255148)).
+fof(res_gn_661882_within_gn_6255148, axiom,
+    kge_leq(gn_661882, gn_6255148)).
+fof(res_gn_690791_within_gn_6255148, axiom,
+    kge_leq(gn_690791, gn_6255148)).
+fof(res_gn_718075_within_gn_6255148, axiom,
+    kge_leq(gn_718075, gn_6255148)).
+fof(res_gn_719819_within_gn_6255148, axiom,
+    kge_leq(gn_719819, gn_6255148)).
+fof(res_gn_732800_within_gn_6255148, axiom,
+    kge_leq(gn_732800, gn_6255148)).
+fof(res_gn_783754_within_gn_6255148, axiom,
+    kge_leq(gn_783754, gn_6255148)).
+fof(res_gn_798544_within_gn_6255148, axiom,
+    kge_leq(gn_798544, gn_6255148)).
+fof(res_gn_798549_within_gn_6255148, axiom,
+    kge_leq(gn_798549, gn_6255148)).
+fof(res_gn_831053_within_gn_6255148, axiom,
+    kge_leq(gn_831053, gn_6255148)).
+fof(res_gn_2017370_within_gn_6255148, axiom,
+    kge_leq(gn_2017370, gn_6255148)).
+fof(res_gn_2264397_within_gn_6255148, axiom,
+    kge_leq(gn_2264397, gn_6255148)).
+fof(res_gn_2411586_within_gn_6255148, axiom,
+    kge_leq(gn_2411586, gn_6255148)).
+fof(res_gn_2510769_within_gn_6255148, axiom,
+    kge_leq(gn_2510769, gn_6255148)).
+fof(res_gn_2562770_within_gn_6255148, axiom,
+    kge_leq(gn_2562770, gn_6255148)).
+fof(res_gn_2622320_within_gn_6255148, axiom,
+    kge_leq(gn_2622320, gn_6255148)).
+fof(res_gn_2623032_within_gn_6255148, axiom,
+    kge_leq(gn_2623032, gn_6255148)).
+fof(res_gn_2629691_within_gn_6255148, axiom,
+    kge_leq(gn_2629691, gn_6255148)).
+fof(res_gn_2635167_within_gn_6255148, axiom,
+    kge_leq(gn_2635167, gn_6255148)).
+fof(res_gn_2658434_within_gn_6255148, axiom,
+    kge_leq(gn_2658434, gn_6255148)).
+fof(res_gn_2661886_within_gn_6255148, axiom,
+    kge_leq(gn_2661886, gn_6255148)).
+fof(res_gn_2750405_within_gn_6255148, axiom,
+    kge_leq(gn_2750405, gn_6255148)).
+fof(res_gn_2782113_within_gn_6255148, axiom,
+    kge_leq(gn_2782113, gn_6255148)).
+fof(res_gn_2802361_within_gn_6255148, axiom,
+    kge_leq(gn_2802361, gn_6255148)).
+fof(res_gn_2921044_within_gn_6255148, axiom,
+    kge_leq(gn_2921044, gn_6255148)).
+fof(res_gn_2960313_within_gn_6255148, axiom,
+    kge_leq(gn_2960313, gn_6255148)).
+fof(res_gn_2963597_within_gn_6255148, axiom,
+    kge_leq(gn_2963597, gn_6255148)).
+fof(res_gn_2993457_within_gn_6255148, axiom,
+    kge_leq(gn_2993457, gn_6255148)).
+fof(res_gn_3017382_within_gn_6255148, axiom,
+    kge_leq(gn_3017382, gn_6255148)).
+fof(res_gn_3041565_within_gn_6255148, axiom,
+    kge_leq(gn_3041565, gn_6255148)).
+fof(res_gn_3042058_within_gn_6255148, axiom,
+    kge_leq(gn_3042058, gn_6255148)).
+fof(res_gn_3042142_within_gn_6255148, axiom,
+    kge_leq(gn_3042142, gn_6255148)).
+fof(res_gn_3042225_within_gn_6255148, axiom,
+    kge_leq(gn_3042225, gn_6255148)).
+fof(res_gn_3042362_within_gn_6255148, axiom,
+    kge_leq(gn_3042362, gn_6255148)).
+fof(res_gn_3057568_within_gn_6255148, axiom,
+    kge_leq(gn_3057568, gn_6255148)).
+fof(res_gn_3077311_within_gn_6255148, axiom,
+    kge_leq(gn_3077311, gn_6255148)).
+fof(res_gn_3144096_within_gn_6255148, axiom,
+    kge_leq(gn_3144096, gn_6255148)).
+fof(res_gn_3164670_within_gn_6255148, axiom,
+    kge_leq(gn_3164670, gn_6255148)).
+fof(res_gn_3168068_within_gn_6255148, axiom,
+    kge_leq(gn_3168068, gn_6255148)).
+fof(res_gn_3175395_within_gn_6255148, axiom,
+    kge_leq(gn_3175395, gn_6255148)).
+fof(res_gn_3190538_within_gn_6255148, axiom,
+    kge_leq(gn_3190538, gn_6255148)).
+fof(res_gn_3194884_within_gn_6255148, axiom,
+    kge_leq(gn_3194884, gn_6255148)).
+fof(res_gn_3202326_within_gn_6255148, axiom,
+    kge_leq(gn_3202326, gn_6255148)).
+fof(res_gn_3277605_within_gn_6255148, axiom,
+    kge_leq(gn_3277605, gn_6255148)).
+fof(res_gn_6290252_within_gn_6255148, axiom,
+    kge_leq(gn_6290252, gn_6255148)).
+fof(res_gn_8505033_within_gn_6255148, axiom,
+    kge_leq(gn_8505033, gn_6255148)).
+
+% Background theory: sibling disjointness, as the denial of
+% a common lower bound.  bt_ names mark what a party may
+% withdraw.
+
+fof(bt_gn_146669_disjoint_gn_390903, axiom,
+    ~ ? [X] : (kge_leq(X, gn_146669) & kge_leq(X, gn_390903))).
+fof(bt_gn_146669_disjoint_gn_453733, axiom,
+    ~ ? [X] : (kge_leq(X, gn_146669) & kge_leq(X, gn_453733))).
+fof(bt_gn_146669_disjoint_gn_458258, axiom,
+    ~ ? [X] : (kge_leq(X, gn_146669) & kge_leq(X, gn_458258))).
+fof(bt_gn_146669_disjoint_gn_597427, axiom,
+    ~ ? [X] : (kge_leq(X, gn_146669) & kge_leq(X, gn_597427))).
+fof(bt_gn_146669_disjoint_gn_607072, axiom,
+    ~ ? [X] : (kge_leq(X, gn_146669) & kge_leq(X, gn_607072))).
+fof(bt_gn_146669_disjoint_gn_617790, axiom,
+    ~ ? [X] : (kge_leq(X, gn_146669) & kge_leq(X, gn_617790))).
+fof(bt_gn_146669_disjoint_gn_630336, axiom,
+    ~ ? [X] : (kge_leq(X, gn_146669) & kge_leq(X, gn_630336))).
+fof(bt_gn_146669_disjoint_gn_660013, axiom,
+    ~ ? [X] : (kge_leq(X, gn_146669) & kge_leq(X, gn_660013))).
+fof(bt_gn_146669_disjoint_gn_661882, axiom,
+    ~ ? [X] : (kge_leq(X, gn_146669) & kge_leq(X, gn_661882))).
+fof(bt_gn_146669_disjoint_gn_690791, axiom,
+    ~ ? [X] : (kge_leq(X, gn_146669) & kge_leq(X, gn_690791))).
+fof(bt_gn_146669_disjoint_gn_718075, axiom,
+    ~ ? [X] : (kge_leq(X, gn_146669) & kge_leq(X, gn_718075))).
+fof(bt_gn_146669_disjoint_gn_719819, axiom,
+    ~ ? [X] : (kge_leq(X, gn_146669) & kge_leq(X, gn_719819))).
+fof(bt_gn_146669_disjoint_gn_732800, axiom,
+    ~ ? [X] : (kge_leq(X, gn_146669) & kge_leq(X, gn_732800))).
+fof(bt_gn_146669_disjoint_gn_783754, axiom,
+    ~ ? [X] : (kge_leq(X, gn_146669) & kge_leq(X, gn_783754))).
+fof(bt_gn_146669_disjoint_gn_798544, axiom,
+    ~ ? [X] : (kge_leq(X, gn_146669) & kge_leq(X, gn_798544))).
+fof(bt_gn_146669_disjoint_gn_798549, axiom,
+    ~ ? [X] : (kge_leq(X, gn_146669) & kge_leq(X, gn_798549))).
+fof(bt_gn_146669_disjoint_gn_831053, axiom,
+    ~ ? [X] : (kge_leq(X, gn_146669) & kge_leq(X, gn_831053))).
+fof(bt_gn_146669_disjoint_gn_2017370, axiom,
+    ~ ? [X] : (kge_leq(X, gn_146669) & kge_leq(X, gn_2017370))).
+fof(bt_gn_146669_disjoint_gn_2264397, axiom,
+    ~ ? [X] : (kge_leq(X, gn_146669) & kge_leq(X, gn_2264397))).
+fof(bt_gn_146669_disjoint_gn_2411586, axiom,
+    ~ ? [X] : (kge_leq(X, gn_146669) & kge_leq(X, gn_2411586))).
+fof(bt_gn_146669_disjoint_gn_2510769, axiom,
+    ~ ? [X] : (kge_leq(X, gn_146669) & kge_leq(X, gn_2510769))).
+fof(bt_gn_146669_disjoint_gn_2562770, axiom,
+    ~ ? [X] : (kge_leq(X, gn_146669) & kge_leq(X, gn_2562770))).
+fof(bt_gn_146669_disjoint_gn_2622320, axiom,
+    ~ ? [X] : (kge_leq(X, gn_146669) & kge_leq(X, gn_2622320))).
+fof(bt_gn_146669_disjoint_gn_2623032, axiom,
+    ~ ? [X] : (kge_leq(X, gn_146669) & kge_leq(X, gn_2623032))).
+fof(bt_gn_146669_disjoint_gn_2629691, axiom,
+    ~ ? [X] : (kge_leq(X, gn_146669) & kge_leq(X, gn_2629691))).
+fof(bt_gn_146669_disjoint_gn_2635167, axiom,
+    ~ ? [X] : (kge_leq(X, gn_146669) & kge_leq(X, gn_2635167))).
+fof(bt_gn_146669_disjoint_gn_2658434, axiom,
+    ~ ? [X] : (kge_leq(X, gn_146669) & kge_leq(X, gn_2658434))).
+fof(bt_gn_146669_disjoint_gn_2661886, axiom,
+    ~ ? [X] : (kge_leq(X, gn_146669) & kge_leq(X, gn_2661886))).
+fof(bt_gn_146669_disjoint_gn_2750405, axiom,
+    ~ ? [X] : (kge_leq(X, gn_146669) & kge_leq(X, gn_2750405))).
+fof(bt_gn_146669_disjoint_gn_2782113, axiom,
+    ~ ? [X] : (kge_leq(X, gn_146669) & kge_leq(X, gn_2782113))).
+fof(bt_gn_146669_disjoint_gn_2802361, axiom,
+    ~ ? [X] : (kge_leq(X, gn_146669) & kge_leq(X, gn_2802361))).
+fof(bt_gn_146669_disjoint_gn_2921044, axiom,
+    ~ ? [X] : (kge_leq(X, gn_146669) & kge_leq(X, gn_2921044))).
+fof(bt_gn_146669_disjoint_gn_2960313, axiom,
+    ~ ? [X] : (kge_leq(X, gn_146669) & kge_leq(X, gn_2960313))).
+fof(bt_gn_146669_disjoint_gn_2963597, axiom,
+    ~ ? [X] : (kge_leq(X, gn_146669) & kge_leq(X, gn_2963597))).
+fof(bt_gn_146669_disjoint_gn_2993457, axiom,
+    ~ ? [X] : (kge_leq(X, gn_146669) & kge_leq(X, gn_2993457))).
+fof(bt_gn_146669_disjoint_gn_3017382, axiom,
+    ~ ? [X] : (kge_leq(X, gn_146669) & kge_leq(X, gn_3017382))).
+fof(bt_gn_146669_disjoint_gn_3041565, axiom,
+    ~ ? [X] : (kge_leq(X, gn_146669) & kge_leq(X, gn_3041565))).
+fof(bt_gn_146669_disjoint_gn_3042058, axiom,
+    ~ ? [X] : (kge_leq(X, gn_146669) & kge_leq(X, gn_3042058))).
+fof(bt_gn_146669_disjoint_gn_3042142, axiom,
+    ~ ? [X] : (kge_leq(X, gn_146669) & kge_leq(X, gn_3042142))).
+fof(bt_gn_146669_disjoint_gn_3042225, axiom,
+    ~ ? [X] : (kge_leq(X, gn_146669) & kge_leq(X, gn_3042225))).
+fof(bt_gn_146669_disjoint_gn_3042362, axiom,
+    ~ ? [X] : (kge_leq(X, gn_146669) & kge_leq(X, gn_3042362))).
+fof(bt_gn_146669_disjoint_gn_3057568, axiom,
+    ~ ? [X] : (kge_leq(X, gn_146669) & kge_leq(X, gn_3057568))).
+fof(bt_gn_146669_disjoint_gn_3077311, axiom,
+    ~ ? [X] : (kge_leq(X, gn_146669) & kge_leq(X, gn_3077311))).
+fof(bt_gn_146669_disjoint_gn_3144096, axiom,
+    ~ ? [X] : (kge_leq(X, gn_146669) & kge_leq(X, gn_3144096))).
+fof(bt_gn_146669_disjoint_gn_3164670, axiom,
+    ~ ? [X] : (kge_leq(X, gn_146669) & kge_leq(X, gn_3164670))).
+fof(bt_gn_146669_disjoint_gn_3168068, axiom,
+    ~ ? [X] : (kge_leq(X, gn_146669) & kge_leq(X, gn_3168068))).
+fof(bt_gn_146669_disjoint_gn_3175395, axiom,
+    ~ ? [X] : (kge_leq(X, gn_146669) & kge_leq(X, gn_3175395))).
+fof(bt_gn_146669_disjoint_gn_3190538, axiom,
+    ~ ? [X] : (kge_leq(X, gn_146669) & kge_leq(X, gn_3190538))).
+fof(bt_gn_146669_disjoint_gn_3194884, axiom,
+    ~ ? [X] : (kge_leq(X, gn_146669) & kge_leq(X, gn_3194884))).
+fof(bt_gn_146669_disjoint_gn_3202326, axiom,
+    ~ ? [X] : (kge_leq(X, gn_146669) & kge_leq(X, gn_3202326))).
+fof(bt_gn_146669_disjoint_gn_3277605, axiom,
+    ~ ? [X] : (kge_leq(X, gn_146669) & kge_leq(X, gn_3277605))).
+fof(bt_gn_146669_disjoint_gn_6290252, axiom,
+    ~ ? [X] : (kge_leq(X, gn_146669) & kge_leq(X, gn_6290252))).
+fof(bt_gn_146669_disjoint_gn_8505033, axiom,
+    ~ ? [X] : (kge_leq(X, gn_146669) & kge_leq(X, gn_8505033))).
+fof(bt_gn_390903_disjoint_gn_453733, axiom,
+    ~ ? [X] : (kge_leq(X, gn_390903) & kge_leq(X, gn_453733))).
+fof(bt_gn_390903_disjoint_gn_458258, axiom,
+    ~ ? [X] : (kge_leq(X, gn_390903) & kge_leq(X, gn_458258))).
+fof(bt_gn_390903_disjoint_gn_597427, axiom,
+    ~ ? [X] : (kge_leq(X, gn_390903) & kge_leq(X, gn_597427))).
+fof(bt_gn_390903_disjoint_gn_607072, axiom,
+    ~ ? [X] : (kge_leq(X, gn_390903) & kge_leq(X, gn_607072))).
+fof(bt_gn_390903_disjoint_gn_617790, axiom,
+    ~ ? [X] : (kge_leq(X, gn_390903) & kge_leq(X, gn_617790))).
+fof(bt_gn_390903_disjoint_gn_630336, axiom,
+    ~ ? [X] : (kge_leq(X, gn_390903) & kge_leq(X, gn_630336))).
+fof(bt_gn_390903_disjoint_gn_660013, axiom,
+    ~ ? [X] : (kge_leq(X, gn_390903) & kge_leq(X, gn_660013))).
+fof(bt_gn_390903_disjoint_gn_661882, axiom,
+    ~ ? [X] : (kge_leq(X, gn_390903) & kge_leq(X, gn_661882))).
+fof(bt_gn_390903_disjoint_gn_690791, axiom,
+    ~ ? [X] : (kge_leq(X, gn_390903) & kge_leq(X, gn_690791))).
+fof(bt_gn_390903_disjoint_gn_718075, axiom,
+    ~ ? [X] : (kge_leq(X, gn_390903) & kge_leq(X, gn_718075))).
+fof(bt_gn_390903_disjoint_gn_719819, axiom,
+    ~ ? [X] : (kge_leq(X, gn_390903) & kge_leq(X, gn_719819))).
+fof(bt_gn_390903_disjoint_gn_732800, axiom,
+    ~ ? [X] : (kge_leq(X, gn_390903) & kge_leq(X, gn_732800))).
+fof(bt_gn_390903_disjoint_gn_783754, axiom,
+    ~ ? [X] : (kge_leq(X, gn_390903) & kge_leq(X, gn_783754))).
+fof(bt_gn_390903_disjoint_gn_798544, axiom,
+    ~ ? [X] : (kge_leq(X, gn_390903) & kge_leq(X, gn_798544))).
+fof(bt_gn_390903_disjoint_gn_798549, axiom,
+    ~ ? [X] : (kge_leq(X, gn_390903) & kge_leq(X, gn_798549))).
+fof(bt_gn_390903_disjoint_gn_831053, axiom,
+    ~ ? [X] : (kge_leq(X, gn_390903) & kge_leq(X, gn_831053))).
+fof(bt_gn_390903_disjoint_gn_2017370, axiom,
+    ~ ? [X] : (kge_leq(X, gn_390903) & kge_leq(X, gn_2017370))).
+fof(bt_gn_390903_disjoint_gn_2264397, axiom,
+    ~ ? [X] : (kge_leq(X, gn_390903) & kge_leq(X, gn_2264397))).
+fof(bt_gn_390903_disjoint_gn_2411586, axiom,
+    ~ ? [X] : (kge_leq(X, gn_390903) & kge_leq(X, gn_2411586))).
+fof(bt_gn_390903_disjoint_gn_2510769, axiom,
+    ~ ? [X] : (kge_leq(X, gn_390903) & kge_leq(X, gn_2510769))).
+fof(bt_gn_390903_disjoint_gn_2562770, axiom,
+    ~ ? [X] : (kge_leq(X, gn_390903) & kge_leq(X, gn_2562770))).
+fof(bt_gn_390903_disjoint_gn_2622320, axiom,
+    ~ ? [X] : (kge_leq(X, gn_390903) & kge_leq(X, gn_2622320))).
+fof(bt_gn_390903_disjoint_gn_2623032, axiom,
+    ~ ? [X] : (kge_leq(X, gn_390903) & kge_leq(X, gn_2623032))).
+fof(bt_gn_390903_disjoint_gn_2629691, axiom,
+    ~ ? [X] : (kge_leq(X, gn_390903) & kge_leq(X, gn_2629691))).
+fof(bt_gn_390903_disjoint_gn_2635167, axiom,
+    ~ ? [X] : (kge_leq(X, gn_390903) & kge_leq(X, gn_2635167))).
+fof(bt_gn_390903_disjoint_gn_2658434, axiom,
+    ~ ? [X] : (kge_leq(X, gn_390903) & kge_leq(X, gn_2658434))).
+fof(bt_gn_390903_disjoint_gn_2661886, axiom,
+    ~ ? [X] : (kge_leq(X, gn_390903) & kge_leq(X, gn_2661886))).
+fof(bt_gn_390903_disjoint_gn_2750405, axiom,
+    ~ ? [X] : (kge_leq(X, gn_390903) & kge_leq(X, gn_2750405))).
+fof(bt_gn_390903_disjoint_gn_2782113, axiom,
+    ~ ? [X] : (kge_leq(X, gn_390903) & kge_leq(X, gn_2782113))).
+fof(bt_gn_390903_disjoint_gn_2802361, axiom,
+    ~ ? [X] : (kge_leq(X, gn_390903) & kge_leq(X, gn_2802361))).
+fof(bt_gn_390903_disjoint_gn_2921044, axiom,
+    ~ ? [X] : (kge_leq(X, gn_390903) & kge_leq(X, gn_2921044))).
+fof(bt_gn_390903_disjoint_gn_2960313, axiom,
+    ~ ? [X] : (kge_leq(X, gn_390903) & kge_leq(X, gn_2960313))).
+fof(bt_gn_390903_disjoint_gn_2963597, axiom,
+    ~ ? [X] : (kge_leq(X, gn_390903) & kge_leq(X, gn_2963597))).
+fof(bt_gn_390903_disjoint_gn_2993457, axiom,
+    ~ ? [X] : (kge_leq(X, gn_390903) & kge_leq(X, gn_2993457))).
+fof(bt_gn_390903_disjoint_gn_3017382, axiom,
+    ~ ? [X] : (kge_leq(X, gn_390903) & kge_leq(X, gn_3017382))).
+fof(bt_gn_390903_disjoint_gn_3041565, axiom,
+    ~ ? [X] : (kge_leq(X, gn_390903) & kge_leq(X, gn_3041565))).
+fof(bt_gn_390903_disjoint_gn_3042058, axiom,
+    ~ ? [X] : (kge_leq(X, gn_390903) & kge_leq(X, gn_3042058))).
+fof(bt_gn_390903_disjoint_gn_3042142, axiom,
+    ~ ? [X] : (kge_leq(X, gn_390903) & kge_leq(X, gn_3042142))).
+fof(bt_gn_390903_disjoint_gn_3042225, axiom,
+    ~ ? [X] : (kge_leq(X, gn_390903) & kge_leq(X, gn_3042225))).
+fof(bt_gn_390903_disjoint_gn_3042362, axiom,
+    ~ ? [X] : (kge_leq(X, gn_390903) & kge_leq(X, gn_3042362))).
+fof(bt_gn_390903_disjoint_gn_3057568, axiom,
+    ~ ? [X] : (kge_leq(X, gn_390903) & kge_leq(X, gn_3057568))).
+fof(bt_gn_390903_disjoint_gn_3077311, axiom,
+    ~ ? [X] : (kge_leq(X, gn_390903) & kge_leq(X, gn_3077311))).
+fof(bt_gn_390903_disjoint_gn_3144096, axiom,
+    ~ ? [X] : (kge_leq(X, gn_390903) & kge_leq(X, gn_3144096))).
+fof(bt_gn_390903_disjoint_gn_3164670, axiom,
+    ~ ? [X] : (kge_leq(X, gn_390903) & kge_leq(X, gn_3164670))).
+fof(bt_gn_390903_disjoint_gn_3168068, axiom,
+    ~ ? [X] : (kge_leq(X, gn_390903) & kge_leq(X, gn_3168068))).
+fof(bt_gn_390903_disjoint_gn_3175395, axiom,
+    ~ ? [X] : (kge_leq(X, gn_390903) & kge_leq(X, gn_3175395))).
+fof(bt_gn_390903_disjoint_gn_3190538, axiom,
+    ~ ? [X] : (kge_leq(X, gn_390903) & kge_leq(X, gn_3190538))).
+fof(bt_gn_390903_disjoint_gn_3194884, axiom,
+    ~ ? [X] : (kge_leq(X, gn_390903) & kge_leq(X, gn_3194884))).
+fof(bt_gn_390903_disjoint_gn_3202326, axiom,
+    ~ ? [X] : (kge_leq(X, gn_390903) & kge_leq(X, gn_3202326))).
+fof(bt_gn_390903_disjoint_gn_3277605, axiom,
+    ~ ? [X] : (kge_leq(X, gn_390903) & kge_leq(X, gn_3277605))).
+fof(bt_gn_390903_disjoint_gn_6290252, axiom,
+    ~ ? [X] : (kge_leq(X, gn_390903) & kge_leq(X, gn_6290252))).
+fof(bt_gn_390903_disjoint_gn_8505033, axiom,
+    ~ ? [X] : (kge_leq(X, gn_390903) & kge_leq(X, gn_8505033))).
+fof(bt_gn_453733_disjoint_gn_458258, axiom,
+    ~ ? [X] : (kge_leq(X, gn_453733) & kge_leq(X, gn_458258))).
+fof(bt_gn_453733_disjoint_gn_597427, axiom,
+    ~ ? [X] : (kge_leq(X, gn_453733) & kge_leq(X, gn_597427))).
+fof(bt_gn_453733_disjoint_gn_607072, axiom,
+    ~ ? [X] : (kge_leq(X, gn_453733) & kge_leq(X, gn_607072))).
+fof(bt_gn_453733_disjoint_gn_617790, axiom,
+    ~ ? [X] : (kge_leq(X, gn_453733) & kge_leq(X, gn_617790))).
+fof(bt_gn_453733_disjoint_gn_630336, axiom,
+    ~ ? [X] : (kge_leq(X, gn_453733) & kge_leq(X, gn_630336))).
+fof(bt_gn_453733_disjoint_gn_660013, axiom,
+    ~ ? [X] : (kge_leq(X, gn_453733) & kge_leq(X, gn_660013))).
+fof(bt_gn_453733_disjoint_gn_661882, axiom,
+    ~ ? [X] : (kge_leq(X, gn_453733) & kge_leq(X, gn_661882))).
+fof(bt_gn_453733_disjoint_gn_690791, axiom,
+    ~ ? [X] : (kge_leq(X, gn_453733) & kge_leq(X, gn_690791))).
+fof(bt_gn_453733_disjoint_gn_718075, axiom,
+    ~ ? [X] : (kge_leq(X, gn_453733) & kge_leq(X, gn_718075))).
+fof(bt_gn_453733_disjoint_gn_719819, axiom,
+    ~ ? [X] : (kge_leq(X, gn_453733) & kge_leq(X, gn_719819))).
+fof(bt_gn_453733_disjoint_gn_732800, axiom,
+    ~ ? [X] : (kge_leq(X, gn_453733) & kge_leq(X, gn_732800))).
+fof(bt_gn_453733_disjoint_gn_783754, axiom,
+    ~ ? [X] : (kge_leq(X, gn_453733) & kge_leq(X, gn_783754))).
+fof(bt_gn_453733_disjoint_gn_798544, axiom,
+    ~ ? [X] : (kge_leq(X, gn_453733) & kge_leq(X, gn_798544))).
+fof(bt_gn_453733_disjoint_gn_798549, axiom,
+    ~ ? [X] : (kge_leq(X, gn_453733) & kge_leq(X, gn_798549))).
+fof(bt_gn_453733_disjoint_gn_831053, axiom,
+    ~ ? [X] : (kge_leq(X, gn_453733) & kge_leq(X, gn_831053))).
+fof(bt_gn_453733_disjoint_gn_2017370, axiom,
+    ~ ? [X] : (kge_leq(X, gn_453733) & kge_leq(X, gn_2017370))).
+fof(bt_gn_453733_disjoint_gn_2264397, axiom,
+    ~ ? [X] : (kge_leq(X, gn_453733) & kge_leq(X, gn_2264397))).
+fof(bt_gn_453733_disjoint_gn_2411586, axiom,
+    ~ ? [X] : (kge_leq(X, gn_453733) & kge_leq(X, gn_2411586))).
+fof(bt_gn_453733_disjoint_gn_2510769, axiom,
+    ~ ? [X] : (kge_leq(X, gn_453733) & kge_leq(X, gn_2510769))).
+fof(bt_gn_453733_disjoint_gn_2562770, axiom,
+    ~ ? [X] : (kge_leq(X, gn_453733) & kge_leq(X, gn_2562770))).
+fof(bt_gn_453733_disjoint_gn_2622320, axiom,
+    ~ ? [X] : (kge_leq(X, gn_453733) & kge_leq(X, gn_2622320))).
+fof(bt_gn_453733_disjoint_gn_2623032, axiom,
+    ~ ? [X] : (kge_leq(X, gn_453733) & kge_leq(X, gn_2623032))).
+fof(bt_gn_453733_disjoint_gn_2629691, axiom,
+    ~ ? [X] : (kge_leq(X, gn_453733) & kge_leq(X, gn_2629691))).
+fof(bt_gn_453733_disjoint_gn_2635167, axiom,
+    ~ ? [X] : (kge_leq(X, gn_453733) & kge_leq(X, gn_2635167))).
+fof(bt_gn_453733_disjoint_gn_2658434, axiom,
+    ~ ? [X] : (kge_leq(X, gn_453733) & kge_leq(X, gn_2658434))).
+fof(bt_gn_453733_disjoint_gn_2661886, axiom,
+    ~ ? [X] : (kge_leq(X, gn_453733) & kge_leq(X, gn_2661886))).
+fof(bt_gn_453733_disjoint_gn_2750405, axiom,
+    ~ ? [X] : (kge_leq(X, gn_453733) & kge_leq(X, gn_2750405))).
+fof(bt_gn_453733_disjoint_gn_2782113, axiom,
+    ~ ? [X] : (kge_leq(X, gn_453733) & kge_leq(X, gn_2782113))).
+fof(bt_gn_453733_disjoint_gn_2802361, axiom,
+    ~ ? [X] : (kge_leq(X, gn_453733) & kge_leq(X, gn_2802361))).
+fof(bt_gn_453733_disjoint_gn_2921044, axiom,
+    ~ ? [X] : (kge_leq(X, gn_453733) & kge_leq(X, gn_2921044))).
+fof(bt_gn_453733_disjoint_gn_2960313, axiom,
+    ~ ? [X] : (kge_leq(X, gn_453733) & kge_leq(X, gn_2960313))).
+fof(bt_gn_453733_disjoint_gn_2963597, axiom,
+    ~ ? [X] : (kge_leq(X, gn_453733) & kge_leq(X, gn_2963597))).
+fof(bt_gn_453733_disjoint_gn_2993457, axiom,
+    ~ ? [X] : (kge_leq(X, gn_453733) & kge_leq(X, gn_2993457))).
+fof(bt_gn_453733_disjoint_gn_3017382, axiom,
+    ~ ? [X] : (kge_leq(X, gn_453733) & kge_leq(X, gn_3017382))).
+fof(bt_gn_453733_disjoint_gn_3041565, axiom,
+    ~ ? [X] : (kge_leq(X, gn_453733) & kge_leq(X, gn_3041565))).
+fof(bt_gn_453733_disjoint_gn_3042058, axiom,
+    ~ ? [X] : (kge_leq(X, gn_453733) & kge_leq(X, gn_3042058))).
+fof(bt_gn_453733_disjoint_gn_3042142, axiom,
+    ~ ? [X] : (kge_leq(X, gn_453733) & kge_leq(X, gn_3042142))).
+fof(bt_gn_453733_disjoint_gn_3042225, axiom,
+    ~ ? [X] : (kge_leq(X, gn_453733) & kge_leq(X, gn_3042225))).
+fof(bt_gn_453733_disjoint_gn_3042362, axiom,
+    ~ ? [X] : (kge_leq(X, gn_453733) & kge_leq(X, gn_3042362))).
+fof(bt_gn_453733_disjoint_gn_3057568, axiom,
+    ~ ? [X] : (kge_leq(X, gn_453733) & kge_leq(X, gn_3057568))).
+fof(bt_gn_453733_disjoint_gn_3077311, axiom,
+    ~ ? [X] : (kge_leq(X, gn_453733) & kge_leq(X, gn_3077311))).
+fof(bt_gn_453733_disjoint_gn_3144096, axiom,
+    ~ ? [X] : (kge_leq(X, gn_453733) & kge_leq(X, gn_3144096))).
+fof(bt_gn_453733_disjoint_gn_3164670, axiom,
+    ~ ? [X] : (kge_leq(X, gn_453733) & kge_leq(X, gn_3164670))).
+fof(bt_gn_453733_disjoint_gn_3168068, axiom,
+    ~ ? [X] : (kge_leq(X, gn_453733) & kge_leq(X, gn_3168068))).
+fof(bt_gn_453733_disjoint_gn_3175395, axiom,
+    ~ ? [X] : (kge_leq(X, gn_453733) & kge_leq(X, gn_3175395))).
+fof(bt_gn_453733_disjoint_gn_3190538, axiom,
+    ~ ? [X] : (kge_leq(X, gn_453733) & kge_leq(X, gn_3190538))).
+fof(bt_gn_453733_disjoint_gn_3194884, axiom,
+    ~ ? [X] : (kge_leq(X, gn_453733) & kge_leq(X, gn_3194884))).
+fof(bt_gn_453733_disjoint_gn_3202326, axiom,
+    ~ ? [X] : (kge_leq(X, gn_453733) & kge_leq(X, gn_3202326))).
+fof(bt_gn_453733_disjoint_gn_3277605, axiom,
+    ~ ? [X] : (kge_leq(X, gn_453733) & kge_leq(X, gn_3277605))).
+fof(bt_gn_453733_disjoint_gn_6290252, axiom,
+    ~ ? [X] : (kge_leq(X, gn_453733) & kge_leq(X, gn_6290252))).
+fof(bt_gn_453733_disjoint_gn_8505033, axiom,
+    ~ ? [X] : (kge_leq(X, gn_453733) & kge_leq(X, gn_8505033))).
+fof(bt_gn_458258_disjoint_gn_597427, axiom,
+    ~ ? [X] : (kge_leq(X, gn_458258) & kge_leq(X, gn_597427))).
+fof(bt_gn_458258_disjoint_gn_607072, axiom,
+    ~ ? [X] : (kge_leq(X, gn_458258) & kge_leq(X, gn_607072))).
+fof(bt_gn_458258_disjoint_gn_617790, axiom,
+    ~ ? [X] : (kge_leq(X, gn_458258) & kge_leq(X, gn_617790))).
+fof(bt_gn_458258_disjoint_gn_630336, axiom,
+    ~ ? [X] : (kge_leq(X, gn_458258) & kge_leq(X, gn_630336))).
+fof(bt_gn_458258_disjoint_gn_660013, axiom,
+    ~ ? [X] : (kge_leq(X, gn_458258) & kge_leq(X, gn_660013))).
+fof(bt_gn_458258_disjoint_gn_661882, axiom,
+    ~ ? [X] : (kge_leq(X, gn_458258) & kge_leq(X, gn_661882))).
+fof(bt_gn_458258_disjoint_gn_690791, axiom,
+    ~ ? [X] : (kge_leq(X, gn_458258) & kge_leq(X, gn_690791))).
+fof(bt_gn_458258_disjoint_gn_718075, axiom,
+    ~ ? [X] : (kge_leq(X, gn_458258) & kge_leq(X, gn_718075))).
+fof(bt_gn_458258_disjoint_gn_719819, axiom,
+    ~ ? [X] : (kge_leq(X, gn_458258) & kge_leq(X, gn_719819))).
+fof(bt_gn_458258_disjoint_gn_732800, axiom,
+    ~ ? [X] : (kge_leq(X, gn_458258) & kge_leq(X, gn_732800))).
+fof(bt_gn_458258_disjoint_gn_783754, axiom,
+    ~ ? [X] : (kge_leq(X, gn_458258) & kge_leq(X, gn_783754))).
+fof(bt_gn_458258_disjoint_gn_798544, axiom,
+    ~ ? [X] : (kge_leq(X, gn_458258) & kge_leq(X, gn_798544))).
+fof(bt_gn_458258_disjoint_gn_798549, axiom,
+    ~ ? [X] : (kge_leq(X, gn_458258) & kge_leq(X, gn_798549))).
+fof(bt_gn_458258_disjoint_gn_831053, axiom,
+    ~ ? [X] : (kge_leq(X, gn_458258) & kge_leq(X, gn_831053))).
+fof(bt_gn_458258_disjoint_gn_2017370, axiom,
+    ~ ? [X] : (kge_leq(X, gn_458258) & kge_leq(X, gn_2017370))).
+fof(bt_gn_458258_disjoint_gn_2264397, axiom,
+    ~ ? [X] : (kge_leq(X, gn_458258) & kge_leq(X, gn_2264397))).
+fof(bt_gn_458258_disjoint_gn_2411586, axiom,
+    ~ ? [X] : (kge_leq(X, gn_458258) & kge_leq(X, gn_2411586))).
+fof(bt_gn_458258_disjoint_gn_2510769, axiom,
+    ~ ? [X] : (kge_leq(X, gn_458258) & kge_leq(X, gn_2510769))).
+fof(bt_gn_458258_disjoint_gn_2562770, axiom,
+    ~ ? [X] : (kge_leq(X, gn_458258) & kge_leq(X, gn_2562770))).
+fof(bt_gn_458258_disjoint_gn_2622320, axiom,
+    ~ ? [X] : (kge_leq(X, gn_458258) & kge_leq(X, gn_2622320))).
+fof(bt_gn_458258_disjoint_gn_2623032, axiom,
+    ~ ? [X] : (kge_leq(X, gn_458258) & kge_leq(X, gn_2623032))).
+fof(bt_gn_458258_disjoint_gn_2629691, axiom,
+    ~ ? [X] : (kge_leq(X, gn_458258) & kge_leq(X, gn_2629691))).
+fof(bt_gn_458258_disjoint_gn_2635167, axiom,
+    ~ ? [X] : (kge_leq(X, gn_458258) & kge_leq(X, gn_2635167))).
+fof(bt_gn_458258_disjoint_gn_2658434, axiom,
+    ~ ? [X] : (kge_leq(X, gn_458258) & kge_leq(X, gn_2658434))).
+fof(bt_gn_458258_disjoint_gn_2661886, axiom,
+    ~ ? [X] : (kge_leq(X, gn_458258) & kge_leq(X, gn_2661886))).
+fof(bt_gn_458258_disjoint_gn_2750405, axiom,
+    ~ ? [X] : (kge_leq(X, gn_458258) & kge_leq(X, gn_2750405))).
+fof(bt_gn_458258_disjoint_gn_2782113, axiom,
+    ~ ? [X] : (kge_leq(X, gn_458258) & kge_leq(X, gn_2782113))).
+fof(bt_gn_458258_disjoint_gn_2802361, axiom,
+    ~ ? [X] : (kge_leq(X, gn_458258) & kge_leq(X, gn_2802361))).
+fof(bt_gn_458258_disjoint_gn_2921044, axiom,
+    ~ ? [X] : (kge_leq(X, gn_458258) & kge_leq(X, gn_2921044))).
+fof(bt_gn_458258_disjoint_gn_2960313, axiom,
+    ~ ? [X] : (kge_leq(X, gn_458258) & kge_leq(X, gn_2960313))).
+fof(bt_gn_458258_disjoint_gn_2963597, axiom,
+    ~ ? [X] : (kge_leq(X, gn_458258) & kge_leq(X, gn_2963597))).
+fof(bt_gn_458258_disjoint_gn_2993457, axiom,
+    ~ ? [X] : (kge_leq(X, gn_458258) & kge_leq(X, gn_2993457))).
+fof(bt_gn_458258_disjoint_gn_3017382, axiom,
+    ~ ? [X] : (kge_leq(X, gn_458258) & kge_leq(X, gn_3017382))).
+fof(bt_gn_458258_disjoint_gn_3041565, axiom,
+    ~ ? [X] : (kge_leq(X, gn_458258) & kge_leq(X, gn_3041565))).
+fof(bt_gn_458258_disjoint_gn_3042058, axiom,
+    ~ ? [X] : (kge_leq(X, gn_458258) & kge_leq(X, gn_3042058))).
+fof(bt_gn_458258_disjoint_gn_3042142, axiom,
+    ~ ? [X] : (kge_leq(X, gn_458258) & kge_leq(X, gn_3042142))).
+fof(bt_gn_458258_disjoint_gn_3042225, axiom,
+    ~ ? [X] : (kge_leq(X, gn_458258) & kge_leq(X, gn_3042225))).
+fof(bt_gn_458258_disjoint_gn_3042362, axiom,
+    ~ ? [X] : (kge_leq(X, gn_458258) & kge_leq(X, gn_3042362))).
+fof(bt_gn_458258_disjoint_gn_3057568, axiom,
+    ~ ? [X] : (kge_leq(X, gn_458258) & kge_leq(X, gn_3057568))).
+fof(bt_gn_458258_disjoint_gn_3077311, axiom,
+    ~ ? [X] : (kge_leq(X, gn_458258) & kge_leq(X, gn_3077311))).
+fof(bt_gn_458258_disjoint_gn_3144096, axiom,
+    ~ ? [X] : (kge_leq(X, gn_458258) & kge_leq(X, gn_3144096))).
+fof(bt_gn_458258_disjoint_gn_3164670, axiom,
+    ~ ? [X] : (kge_leq(X, gn_458258) & kge_leq(X, gn_3164670))).
+fof(bt_gn_458258_disjoint_gn_3168068, axiom,
+    ~ ? [X] : (kge_leq(X, gn_458258) & kge_leq(X, gn_3168068))).
+fof(bt_gn_458258_disjoint_gn_3175395, axiom,
+    ~ ? [X] : (kge_leq(X, gn_458258) & kge_leq(X, gn_3175395))).
+fof(bt_gn_458258_disjoint_gn_3190538, axiom,
+    ~ ? [X] : (kge_leq(X, gn_458258) & kge_leq(X, gn_3190538))).
+fof(bt_gn_458258_disjoint_gn_3194884, axiom,
+    ~ ? [X] : (kge_leq(X, gn_458258) & kge_leq(X, gn_3194884))).
+fof(bt_gn_458258_disjoint_gn_3202326, axiom,
+    ~ ? [X] : (kge_leq(X, gn_458258) & kge_leq(X, gn_3202326))).
+fof(bt_gn_458258_disjoint_gn_3277605, axiom,
+    ~ ? [X] : (kge_leq(X, gn_458258) & kge_leq(X, gn_3277605))).
+fof(bt_gn_458258_disjoint_gn_6290252, axiom,
+    ~ ? [X] : (kge_leq(X, gn_458258) & kge_leq(X, gn_6290252))).
+fof(bt_gn_458258_disjoint_gn_8505033, axiom,
+    ~ ? [X] : (kge_leq(X, gn_458258) & kge_leq(X, gn_8505033))).
+fof(bt_gn_597427_disjoint_gn_607072, axiom,
+    ~ ? [X] : (kge_leq(X, gn_597427) & kge_leq(X, gn_607072))).
+fof(bt_gn_597427_disjoint_gn_617790, axiom,
+    ~ ? [X] : (kge_leq(X, gn_597427) & kge_leq(X, gn_617790))).
+fof(bt_gn_597427_disjoint_gn_630336, axiom,
+    ~ ? [X] : (kge_leq(X, gn_597427) & kge_leq(X, gn_630336))).
+fof(bt_gn_597427_disjoint_gn_660013, axiom,
+    ~ ? [X] : (kge_leq(X, gn_597427) & kge_leq(X, gn_660013))).
+fof(bt_gn_597427_disjoint_gn_661882, axiom,
+    ~ ? [X] : (kge_leq(X, gn_597427) & kge_leq(X, gn_661882))).
+fof(bt_gn_597427_disjoint_gn_690791, axiom,
+    ~ ? [X] : (kge_leq(X, gn_597427) & kge_leq(X, gn_690791))).
+fof(bt_gn_597427_disjoint_gn_718075, axiom,
+    ~ ? [X] : (kge_leq(X, gn_597427) & kge_leq(X, gn_718075))).
+fof(bt_gn_597427_disjoint_gn_719819, axiom,
+    ~ ? [X] : (kge_leq(X, gn_597427) & kge_leq(X, gn_719819))).
+fof(bt_gn_597427_disjoint_gn_732800, axiom,
+    ~ ? [X] : (kge_leq(X, gn_597427) & kge_leq(X, gn_732800))).
+fof(bt_gn_597427_disjoint_gn_783754, axiom,
+    ~ ? [X] : (kge_leq(X, gn_597427) & kge_leq(X, gn_783754))).
+fof(bt_gn_597427_disjoint_gn_798544, axiom,
+    ~ ? [X] : (kge_leq(X, gn_597427) & kge_leq(X, gn_798544))).
+fof(bt_gn_597427_disjoint_gn_798549, axiom,
+    ~ ? [X] : (kge_leq(X, gn_597427) & kge_leq(X, gn_798549))).
+fof(bt_gn_597427_disjoint_gn_831053, axiom,
+    ~ ? [X] : (kge_leq(X, gn_597427) & kge_leq(X, gn_831053))).
+fof(bt_gn_597427_disjoint_gn_2017370, axiom,
+    ~ ? [X] : (kge_leq(X, gn_597427) & kge_leq(X, gn_2017370))).
+fof(bt_gn_597427_disjoint_gn_2264397, axiom,
+    ~ ? [X] : (kge_leq(X, gn_597427) & kge_leq(X, gn_2264397))).
+fof(bt_gn_597427_disjoint_gn_2411586, axiom,
+    ~ ? [X] : (kge_leq(X, gn_597427) & kge_leq(X, gn_2411586))).
+fof(bt_gn_597427_disjoint_gn_2510769, axiom,
+    ~ ? [X] : (kge_leq(X, gn_597427) & kge_leq(X, gn_2510769))).
+fof(bt_gn_597427_disjoint_gn_2562770, axiom,
+    ~ ? [X] : (kge_leq(X, gn_597427) & kge_leq(X, gn_2562770))).
+fof(bt_gn_597427_disjoint_gn_2622320, axiom,
+    ~ ? [X] : (kge_leq(X, gn_597427) & kge_leq(X, gn_2622320))).
+fof(bt_gn_597427_disjoint_gn_2623032, axiom,
+    ~ ? [X] : (kge_leq(X, gn_597427) & kge_leq(X, gn_2623032))).
+fof(bt_gn_597427_disjoint_gn_2629691, axiom,
+    ~ ? [X] : (kge_leq(X, gn_597427) & kge_leq(X, gn_2629691))).
+fof(bt_gn_597427_disjoint_gn_2635167, axiom,
+    ~ ? [X] : (kge_leq(X, gn_597427) & kge_leq(X, gn_2635167))).
+fof(bt_gn_597427_disjoint_gn_2658434, axiom,
+    ~ ? [X] : (kge_leq(X, gn_597427) & kge_leq(X, gn_2658434))).
+fof(bt_gn_597427_disjoint_gn_2661886, axiom,
+    ~ ? [X] : (kge_leq(X, gn_597427) & kge_leq(X, gn_2661886))).
+fof(bt_gn_597427_disjoint_gn_2750405, axiom,
+    ~ ? [X] : (kge_leq(X, gn_597427) & kge_leq(X, gn_2750405))).
+fof(bt_gn_597427_disjoint_gn_2782113, axiom,
+    ~ ? [X] : (kge_leq(X, gn_597427) & kge_leq(X, gn_2782113))).
+fof(bt_gn_597427_disjoint_gn_2802361, axiom,
+    ~ ? [X] : (kge_leq(X, gn_597427) & kge_leq(X, gn_2802361))).
+fof(bt_gn_597427_disjoint_gn_2921044, axiom,
+    ~ ? [X] : (kge_leq(X, gn_597427) & kge_leq(X, gn_2921044))).
+fof(bt_gn_597427_disjoint_gn_2960313, axiom,
+    ~ ? [X] : (kge_leq(X, gn_597427) & kge_leq(X, gn_2960313))).
+fof(bt_gn_597427_disjoint_gn_2963597, axiom,
+    ~ ? [X] : (kge_leq(X, gn_597427) & kge_leq(X, gn_2963597))).
+fof(bt_gn_597427_disjoint_gn_2993457, axiom,
+    ~ ? [X] : (kge_leq(X, gn_597427) & kge_leq(X, gn_2993457))).
+fof(bt_gn_597427_disjoint_gn_3017382, axiom,
+    ~ ? [X] : (kge_leq(X, gn_597427) & kge_leq(X, gn_3017382))).
+fof(bt_gn_597427_disjoint_gn_3041565, axiom,
+    ~ ? [X] : (kge_leq(X, gn_597427) & kge_leq(X, gn_3041565))).
+fof(bt_gn_597427_disjoint_gn_3042058, axiom,
+    ~ ? [X] : (kge_leq(X, gn_597427) & kge_leq(X, gn_3042058))).
+fof(bt_gn_597427_disjoint_gn_3042142, axiom,
+    ~ ? [X] : (kge_leq(X, gn_597427) & kge_leq(X, gn_3042142))).
+fof(bt_gn_597427_disjoint_gn_3042225, axiom,
+    ~ ? [X] : (kge_leq(X, gn_597427) & kge_leq(X, gn_3042225))).
+fof(bt_gn_597427_disjoint_gn_3042362, axiom,
+    ~ ? [X] : (kge_leq(X, gn_597427) & kge_leq(X, gn_3042362))).
+fof(bt_gn_597427_disjoint_gn_3057568, axiom,
+    ~ ? [X] : (kge_leq(X, gn_597427) & kge_leq(X, gn_3057568))).
+fof(bt_gn_597427_disjoint_gn_3077311, axiom,
+    ~ ? [X] : (kge_leq(X, gn_597427) & kge_leq(X, gn_3077311))).
+fof(bt_gn_597427_disjoint_gn_3144096, axiom,
+    ~ ? [X] : (kge_leq(X, gn_597427) & kge_leq(X, gn_3144096))).
+fof(bt_gn_597427_disjoint_gn_3164670, axiom,
+    ~ ? [X] : (kge_leq(X, gn_597427) & kge_leq(X, gn_3164670))).
+fof(bt_gn_597427_disjoint_gn_3168068, axiom,
+    ~ ? [X] : (kge_leq(X, gn_597427) & kge_leq(X, gn_3168068))).
+fof(bt_gn_597427_disjoint_gn_3175395, axiom,
+    ~ ? [X] : (kge_leq(X, gn_597427) & kge_leq(X, gn_3175395))).
+fof(bt_gn_597427_disjoint_gn_3190538, axiom,
+    ~ ? [X] : (kge_leq(X, gn_597427) & kge_leq(X, gn_3190538))).
+fof(bt_gn_597427_disjoint_gn_3194884, axiom,
+    ~ ? [X] : (kge_leq(X, gn_597427) & kge_leq(X, gn_3194884))).
+fof(bt_gn_597427_disjoint_gn_3202326, axiom,
+    ~ ? [X] : (kge_leq(X, gn_597427) & kge_leq(X, gn_3202326))).
+fof(bt_gn_597427_disjoint_gn_3277605, axiom,
+    ~ ? [X] : (kge_leq(X, gn_597427) & kge_leq(X, gn_3277605))).
+fof(bt_gn_597427_disjoint_gn_6290252, axiom,
+    ~ ? [X] : (kge_leq(X, gn_597427) & kge_leq(X, gn_6290252))).
+fof(bt_gn_597427_disjoint_gn_8505033, axiom,
+    ~ ? [X] : (kge_leq(X, gn_597427) & kge_leq(X, gn_8505033))).
+fof(bt_gn_607072_disjoint_gn_617790, axiom,
+    ~ ? [X] : (kge_leq(X, gn_607072) & kge_leq(X, gn_617790))).
+fof(bt_gn_607072_disjoint_gn_630336, axiom,
+    ~ ? [X] : (kge_leq(X, gn_607072) & kge_leq(X, gn_630336))).
+fof(bt_gn_607072_disjoint_gn_660013, axiom,
+    ~ ? [X] : (kge_leq(X, gn_607072) & kge_leq(X, gn_660013))).
+fof(bt_gn_607072_disjoint_gn_661882, axiom,
+    ~ ? [X] : (kge_leq(X, gn_607072) & kge_leq(X, gn_661882))).
+fof(bt_gn_607072_disjoint_gn_690791, axiom,
+    ~ ? [X] : (kge_leq(X, gn_607072) & kge_leq(X, gn_690791))).
+fof(bt_gn_607072_disjoint_gn_718075, axiom,
+    ~ ? [X] : (kge_leq(X, gn_607072) & kge_leq(X, gn_718075))).
+fof(bt_gn_607072_disjoint_gn_719819, axiom,
+    ~ ? [X] : (kge_leq(X, gn_607072) & kge_leq(X, gn_719819))).
+fof(bt_gn_607072_disjoint_gn_732800, axiom,
+    ~ ? [X] : (kge_leq(X, gn_607072) & kge_leq(X, gn_732800))).
+fof(bt_gn_607072_disjoint_gn_783754, axiom,
+    ~ ? [X] : (kge_leq(X, gn_607072) & kge_leq(X, gn_783754))).
+fof(bt_gn_607072_disjoint_gn_798544, axiom,
+    ~ ? [X] : (kge_leq(X, gn_607072) & kge_leq(X, gn_798544))).
+fof(bt_gn_607072_disjoint_gn_798549, axiom,
+    ~ ? [X] : (kge_leq(X, gn_607072) & kge_leq(X, gn_798549))).
+fof(bt_gn_607072_disjoint_gn_831053, axiom,
+    ~ ? [X] : (kge_leq(X, gn_607072) & kge_leq(X, gn_831053))).
+fof(bt_gn_607072_disjoint_gn_2017370, axiom,
+    ~ ? [X] : (kge_leq(X, gn_607072) & kge_leq(X, gn_2017370))).
+fof(bt_gn_607072_disjoint_gn_2264397, axiom,
+    ~ ? [X] : (kge_leq(X, gn_607072) & kge_leq(X, gn_2264397))).
+fof(bt_gn_607072_disjoint_gn_2411586, axiom,
+    ~ ? [X] : (kge_leq(X, gn_607072) & kge_leq(X, gn_2411586))).
+fof(bt_gn_607072_disjoint_gn_2510769, axiom,
+    ~ ? [X] : (kge_leq(X, gn_607072) & kge_leq(X, gn_2510769))).
+fof(bt_gn_607072_disjoint_gn_2562770, axiom,
+    ~ ? [X] : (kge_leq(X, gn_607072) & kge_leq(X, gn_2562770))).
+fof(bt_gn_607072_disjoint_gn_2622320, axiom,
+    ~ ? [X] : (kge_leq(X, gn_607072) & kge_leq(X, gn_2622320))).
+fof(bt_gn_607072_disjoint_gn_2623032, axiom,
+    ~ ? [X] : (kge_leq(X, gn_607072) & kge_leq(X, gn_2623032))).
+fof(bt_gn_607072_disjoint_gn_2629691, axiom,
+    ~ ? [X] : (kge_leq(X, gn_607072) & kge_leq(X, gn_2629691))).
+fof(bt_gn_607072_disjoint_gn_2635167, axiom,
+    ~ ? [X] : (kge_leq(X, gn_607072) & kge_leq(X, gn_2635167))).
+fof(bt_gn_607072_disjoint_gn_2658434, axiom,
+    ~ ? [X] : (kge_leq(X, gn_607072) & kge_leq(X, gn_2658434))).
+fof(bt_gn_607072_disjoint_gn_2661886, axiom,
+    ~ ? [X] : (kge_leq(X, gn_607072) & kge_leq(X, gn_2661886))).
+fof(bt_gn_607072_disjoint_gn_2750405, axiom,
+    ~ ? [X] : (kge_leq(X, gn_607072) & kge_leq(X, gn_2750405))).
+fof(bt_gn_607072_disjoint_gn_2782113, axiom,
+    ~ ? [X] : (kge_leq(X, gn_607072) & kge_leq(X, gn_2782113))).
+fof(bt_gn_607072_disjoint_gn_2802361, axiom,
+    ~ ? [X] : (kge_leq(X, gn_607072) & kge_leq(X, gn_2802361))).
+fof(bt_gn_607072_disjoint_gn_2921044, axiom,
+    ~ ? [X] : (kge_leq(X, gn_607072) & kge_leq(X, gn_2921044))).
+fof(bt_gn_607072_disjoint_gn_2960313, axiom,
+    ~ ? [X] : (kge_leq(X, gn_607072) & kge_leq(X, gn_2960313))).
+fof(bt_gn_607072_disjoint_gn_2963597, axiom,
+    ~ ? [X] : (kge_leq(X, gn_607072) & kge_leq(X, gn_2963597))).
+fof(bt_gn_607072_disjoint_gn_2993457, axiom,
+    ~ ? [X] : (kge_leq(X, gn_607072) & kge_leq(X, gn_2993457))).
+fof(bt_gn_607072_disjoint_gn_3017382, axiom,
+    ~ ? [X] : (kge_leq(X, gn_607072) & kge_leq(X, gn_3017382))).
+fof(bt_gn_607072_disjoint_gn_3041565, axiom,
+    ~ ? [X] : (kge_leq(X, gn_607072) & kge_leq(X, gn_3041565))).
+fof(bt_gn_607072_disjoint_gn_3042058, axiom,
+    ~ ? [X] : (kge_leq(X, gn_607072) & kge_leq(X, gn_3042058))).
+fof(bt_gn_607072_disjoint_gn_3042142, axiom,
+    ~ ? [X] : (kge_leq(X, gn_607072) & kge_leq(X, gn_3042142))).
+fof(bt_gn_607072_disjoint_gn_3042225, axiom,
+    ~ ? [X] : (kge_leq(X, gn_607072) & kge_leq(X, gn_3042225))).
+fof(bt_gn_607072_disjoint_gn_3042362, axiom,
+    ~ ? [X] : (kge_leq(X, gn_607072) & kge_leq(X, gn_3042362))).
+fof(bt_gn_607072_disjoint_gn_3057568, axiom,
+    ~ ? [X] : (kge_leq(X, gn_607072) & kge_leq(X, gn_3057568))).
+fof(bt_gn_607072_disjoint_gn_3077311, axiom,
+    ~ ? [X] : (kge_leq(X, gn_607072) & kge_leq(X, gn_3077311))).
+fof(bt_gn_607072_disjoint_gn_3144096, axiom,
+    ~ ? [X] : (kge_leq(X, gn_607072) & kge_leq(X, gn_3144096))).
+fof(bt_gn_607072_disjoint_gn_3164670, axiom,
+    ~ ? [X] : (kge_leq(X, gn_607072) & kge_leq(X, gn_3164670))).
+fof(bt_gn_607072_disjoint_gn_3168068, axiom,
+    ~ ? [X] : (kge_leq(X, gn_607072) & kge_leq(X, gn_3168068))).
+fof(bt_gn_607072_disjoint_gn_3175395, axiom,
+    ~ ? [X] : (kge_leq(X, gn_607072) & kge_leq(X, gn_3175395))).
+fof(bt_gn_607072_disjoint_gn_3190538, axiom,
+    ~ ? [X] : (kge_leq(X, gn_607072) & kge_leq(X, gn_3190538))).
+fof(bt_gn_607072_disjoint_gn_3194884, axiom,
+    ~ ? [X] : (kge_leq(X, gn_607072) & kge_leq(X, gn_3194884))).
+fof(bt_gn_607072_disjoint_gn_3202326, axiom,
+    ~ ? [X] : (kge_leq(X, gn_607072) & kge_leq(X, gn_3202326))).
+fof(bt_gn_607072_disjoint_gn_3277605, axiom,
+    ~ ? [X] : (kge_leq(X, gn_607072) & kge_leq(X, gn_3277605))).
+fof(bt_gn_607072_disjoint_gn_6290252, axiom,
+    ~ ? [X] : (kge_leq(X, gn_607072) & kge_leq(X, gn_6290252))).
+fof(bt_gn_607072_disjoint_gn_8505033, axiom,
+    ~ ? [X] : (kge_leq(X, gn_607072) & kge_leq(X, gn_8505033))).
+fof(bt_gn_617790_disjoint_gn_630336, axiom,
+    ~ ? [X] : (kge_leq(X, gn_617790) & kge_leq(X, gn_630336))).
+fof(bt_gn_617790_disjoint_gn_660013, axiom,
+    ~ ? [X] : (kge_leq(X, gn_617790) & kge_leq(X, gn_660013))).
+fof(bt_gn_617790_disjoint_gn_661882, axiom,
+    ~ ? [X] : (kge_leq(X, gn_617790) & kge_leq(X, gn_661882))).
+fof(bt_gn_617790_disjoint_gn_690791, axiom,
+    ~ ? [X] : (kge_leq(X, gn_617790) & kge_leq(X, gn_690791))).
+fof(bt_gn_617790_disjoint_gn_718075, axiom,
+    ~ ? [X] : (kge_leq(X, gn_617790) & kge_leq(X, gn_718075))).
+fof(bt_gn_617790_disjoint_gn_719819, axiom,
+    ~ ? [X] : (kge_leq(X, gn_617790) & kge_leq(X, gn_719819))).
+fof(bt_gn_617790_disjoint_gn_732800, axiom,
+    ~ ? [X] : (kge_leq(X, gn_617790) & kge_leq(X, gn_732800))).
+fof(bt_gn_617790_disjoint_gn_783754, axiom,
+    ~ ? [X] : (kge_leq(X, gn_617790) & kge_leq(X, gn_783754))).
+fof(bt_gn_617790_disjoint_gn_798544, axiom,
+    ~ ? [X] : (kge_leq(X, gn_617790) & kge_leq(X, gn_798544))).
+fof(bt_gn_617790_disjoint_gn_798549, axiom,
+    ~ ? [X] : (kge_leq(X, gn_617790) & kge_leq(X, gn_798549))).
+fof(bt_gn_617790_disjoint_gn_831053, axiom,
+    ~ ? [X] : (kge_leq(X, gn_617790) & kge_leq(X, gn_831053))).
+fof(bt_gn_617790_disjoint_gn_2017370, axiom,
+    ~ ? [X] : (kge_leq(X, gn_617790) & kge_leq(X, gn_2017370))).
+fof(bt_gn_617790_disjoint_gn_2264397, axiom,
+    ~ ? [X] : (kge_leq(X, gn_617790) & kge_leq(X, gn_2264397))).
+fof(bt_gn_617790_disjoint_gn_2411586, axiom,
+    ~ ? [X] : (kge_leq(X, gn_617790) & kge_leq(X, gn_2411586))).
+fof(bt_gn_617790_disjoint_gn_2510769, axiom,
+    ~ ? [X] : (kge_leq(X, gn_617790) & kge_leq(X, gn_2510769))).
+fof(bt_gn_617790_disjoint_gn_2562770, axiom,
+    ~ ? [X] : (kge_leq(X, gn_617790) & kge_leq(X, gn_2562770))).
+fof(bt_gn_617790_disjoint_gn_2622320, axiom,
+    ~ ? [X] : (kge_leq(X, gn_617790) & kge_leq(X, gn_2622320))).
+fof(bt_gn_617790_disjoint_gn_2623032, axiom,
+    ~ ? [X] : (kge_leq(X, gn_617790) & kge_leq(X, gn_2623032))).
+fof(bt_gn_617790_disjoint_gn_2629691, axiom,
+    ~ ? [X] : (kge_leq(X, gn_617790) & kge_leq(X, gn_2629691))).
+fof(bt_gn_617790_disjoint_gn_2635167, axiom,
+    ~ ? [X] : (kge_leq(X, gn_617790) & kge_leq(X, gn_2635167))).
+fof(bt_gn_617790_disjoint_gn_2658434, axiom,
+    ~ ? [X] : (kge_leq(X, gn_617790) & kge_leq(X, gn_2658434))).
+fof(bt_gn_617790_disjoint_gn_2661886, axiom,
+    ~ ? [X] : (kge_leq(X, gn_617790) & kge_leq(X, gn_2661886))).
+fof(bt_gn_617790_disjoint_gn_2750405, axiom,
+    ~ ? [X] : (kge_leq(X, gn_617790) & kge_leq(X, gn_2750405))).
+fof(bt_gn_617790_disjoint_gn_2782113, axiom,
+    ~ ? [X] : (kge_leq(X, gn_617790) & kge_leq(X, gn_2782113))).
+fof(bt_gn_617790_disjoint_gn_2802361, axiom,
+    ~ ? [X] : (kge_leq(X, gn_617790) & kge_leq(X, gn_2802361))).
+fof(bt_gn_617790_disjoint_gn_2921044, axiom,
+    ~ ? [X] : (kge_leq(X, gn_617790) & kge_leq(X, gn_2921044))).
+fof(bt_gn_617790_disjoint_gn_2960313, axiom,
+    ~ ? [X] : (kge_leq(X, gn_617790) & kge_leq(X, gn_2960313))).
+fof(bt_gn_617790_disjoint_gn_2963597, axiom,
+    ~ ? [X] : (kge_leq(X, gn_617790) & kge_leq(X, gn_2963597))).
+fof(bt_gn_617790_disjoint_gn_2993457, axiom,
+    ~ ? [X] : (kge_leq(X, gn_617790) & kge_leq(X, gn_2993457))).
+fof(bt_gn_617790_disjoint_gn_3017382, axiom,
+    ~ ? [X] : (kge_leq(X, gn_617790) & kge_leq(X, gn_3017382))).
+fof(bt_gn_617790_disjoint_gn_3041565, axiom,
+    ~ ? [X] : (kge_leq(X, gn_617790) & kge_leq(X, gn_3041565))).
+fof(bt_gn_617790_disjoint_gn_3042058, axiom,
+    ~ ? [X] : (kge_leq(X, gn_617790) & kge_leq(X, gn_3042058))).
+fof(bt_gn_617790_disjoint_gn_3042142, axiom,
+    ~ ? [X] : (kge_leq(X, gn_617790) & kge_leq(X, gn_3042142))).
+fof(bt_gn_617790_disjoint_gn_3042225, axiom,
+    ~ ? [X] : (kge_leq(X, gn_617790) & kge_leq(X, gn_3042225))).
+fof(bt_gn_617790_disjoint_gn_3042362, axiom,
+    ~ ? [X] : (kge_leq(X, gn_617790) & kge_leq(X, gn_3042362))).
+fof(bt_gn_617790_disjoint_gn_3057568, axiom,
+    ~ ? [X] : (kge_leq(X, gn_617790) & kge_leq(X, gn_3057568))).
+fof(bt_gn_617790_disjoint_gn_3077311, axiom,
+    ~ ? [X] : (kge_leq(X, gn_617790) & kge_leq(X, gn_3077311))).
+fof(bt_gn_617790_disjoint_gn_3144096, axiom,
+    ~ ? [X] : (kge_leq(X, gn_617790) & kge_leq(X, gn_3144096))).
+fof(bt_gn_617790_disjoint_gn_3164670, axiom,
+    ~ ? [X] : (kge_leq(X, gn_617790) & kge_leq(X, gn_3164670))).
+fof(bt_gn_617790_disjoint_gn_3168068, axiom,
+    ~ ? [X] : (kge_leq(X, gn_617790) & kge_leq(X, gn_3168068))).
+fof(bt_gn_617790_disjoint_gn_3175395, axiom,
+    ~ ? [X] : (kge_leq(X, gn_617790) & kge_leq(X, gn_3175395))).
+fof(bt_gn_617790_disjoint_gn_3190538, axiom,
+    ~ ? [X] : (kge_leq(X, gn_617790) & kge_leq(X, gn_3190538))).
+fof(bt_gn_617790_disjoint_gn_3194884, axiom,
+    ~ ? [X] : (kge_leq(X, gn_617790) & kge_leq(X, gn_3194884))).
+fof(bt_gn_617790_disjoint_gn_3202326, axiom,
+    ~ ? [X] : (kge_leq(X, gn_617790) & kge_leq(X, gn_3202326))).
+fof(bt_gn_617790_disjoint_gn_3277605, axiom,
+    ~ ? [X] : (kge_leq(X, gn_617790) & kge_leq(X, gn_3277605))).
+fof(bt_gn_617790_disjoint_gn_6290252, axiom,
+    ~ ? [X] : (kge_leq(X, gn_617790) & kge_leq(X, gn_6290252))).
+fof(bt_gn_617790_disjoint_gn_8505033, axiom,
+    ~ ? [X] : (kge_leq(X, gn_617790) & kge_leq(X, gn_8505033))).
+fof(bt_gn_630336_disjoint_gn_660013, axiom,
+    ~ ? [X] : (kge_leq(X, gn_630336) & kge_leq(X, gn_660013))).
+fof(bt_gn_630336_disjoint_gn_661882, axiom,
+    ~ ? [X] : (kge_leq(X, gn_630336) & kge_leq(X, gn_661882))).
+fof(bt_gn_630336_disjoint_gn_690791, axiom,
+    ~ ? [X] : (kge_leq(X, gn_630336) & kge_leq(X, gn_690791))).
+fof(bt_gn_630336_disjoint_gn_718075, axiom,
+    ~ ? [X] : (kge_leq(X, gn_630336) & kge_leq(X, gn_718075))).
+fof(bt_gn_630336_disjoint_gn_719819, axiom,
+    ~ ? [X] : (kge_leq(X, gn_630336) & kge_leq(X, gn_719819))).
+fof(bt_gn_630336_disjoint_gn_732800, axiom,
+    ~ ? [X] : (kge_leq(X, gn_630336) & kge_leq(X, gn_732800))).
+fof(bt_gn_630336_disjoint_gn_783754, axiom,
+    ~ ? [X] : (kge_leq(X, gn_630336) & kge_leq(X, gn_783754))).
+fof(bt_gn_630336_disjoint_gn_798544, axiom,
+    ~ ? [X] : (kge_leq(X, gn_630336) & kge_leq(X, gn_798544))).
+fof(bt_gn_630336_disjoint_gn_798549, axiom,
+    ~ ? [X] : (kge_leq(X, gn_630336) & kge_leq(X, gn_798549))).
+fof(bt_gn_630336_disjoint_gn_831053, axiom,
+    ~ ? [X] : (kge_leq(X, gn_630336) & kge_leq(X, gn_831053))).
+fof(bt_gn_630336_disjoint_gn_2017370, axiom,
+    ~ ? [X] : (kge_leq(X, gn_630336) & kge_leq(X, gn_2017370))).
+fof(bt_gn_630336_disjoint_gn_2264397, axiom,
+    ~ ? [X] : (kge_leq(X, gn_630336) & kge_leq(X, gn_2264397))).
+fof(bt_gn_630336_disjoint_gn_2411586, axiom,
+    ~ ? [X] : (kge_leq(X, gn_630336) & kge_leq(X, gn_2411586))).
+fof(bt_gn_630336_disjoint_gn_2510769, axiom,
+    ~ ? [X] : (kge_leq(X, gn_630336) & kge_leq(X, gn_2510769))).
+fof(bt_gn_630336_disjoint_gn_2562770, axiom,
+    ~ ? [X] : (kge_leq(X, gn_630336) & kge_leq(X, gn_2562770))).
+fof(bt_gn_630336_disjoint_gn_2622320, axiom,
+    ~ ? [X] : (kge_leq(X, gn_630336) & kge_leq(X, gn_2622320))).
+fof(bt_gn_630336_disjoint_gn_2623032, axiom,
+    ~ ? [X] : (kge_leq(X, gn_630336) & kge_leq(X, gn_2623032))).
+fof(bt_gn_630336_disjoint_gn_2629691, axiom,
+    ~ ? [X] : (kge_leq(X, gn_630336) & kge_leq(X, gn_2629691))).
+fof(bt_gn_630336_disjoint_gn_2635167, axiom,
+    ~ ? [X] : (kge_leq(X, gn_630336) & kge_leq(X, gn_2635167))).
+fof(bt_gn_630336_disjoint_gn_2658434, axiom,
+    ~ ? [X] : (kge_leq(X, gn_630336) & kge_leq(X, gn_2658434))).
+fof(bt_gn_630336_disjoint_gn_2661886, axiom,
+    ~ ? [X] : (kge_leq(X, gn_630336) & kge_leq(X, gn_2661886))).
+fof(bt_gn_630336_disjoint_gn_2750405, axiom,
+    ~ ? [X] : (kge_leq(X, gn_630336) & kge_leq(X, gn_2750405))).
+fof(bt_gn_630336_disjoint_gn_2782113, axiom,
+    ~ ? [X] : (kge_leq(X, gn_630336) & kge_leq(X, gn_2782113))).
+fof(bt_gn_630336_disjoint_gn_2802361, axiom,
+    ~ ? [X] : (kge_leq(X, gn_630336) & kge_leq(X, gn_2802361))).
+fof(bt_gn_630336_disjoint_gn_2921044, axiom,
+    ~ ? [X] : (kge_leq(X, gn_630336) & kge_leq(X, gn_2921044))).
+fof(bt_gn_630336_disjoint_gn_2960313, axiom,
+    ~ ? [X] : (kge_leq(X, gn_630336) & kge_leq(X, gn_2960313))).
+fof(bt_gn_630336_disjoint_gn_2963597, axiom,
+    ~ ? [X] : (kge_leq(X, gn_630336) & kge_leq(X, gn_2963597))).
+fof(bt_gn_630336_disjoint_gn_2993457, axiom,
+    ~ ? [X] : (kge_leq(X, gn_630336) & kge_leq(X, gn_2993457))).
+fof(bt_gn_630336_disjoint_gn_3017382, axiom,
+    ~ ? [X] : (kge_leq(X, gn_630336) & kge_leq(X, gn_3017382))).
+fof(bt_gn_630336_disjoint_gn_3041565, axiom,
+    ~ ? [X] : (kge_leq(X, gn_630336) & kge_leq(X, gn_3041565))).
+fof(bt_gn_630336_disjoint_gn_3042058, axiom,
+    ~ ? [X] : (kge_leq(X, gn_630336) & kge_leq(X, gn_3042058))).
+fof(bt_gn_630336_disjoint_gn_3042142, axiom,
+    ~ ? [X] : (kge_leq(X, gn_630336) & kge_leq(X, gn_3042142))).
+fof(bt_gn_630336_disjoint_gn_3042225, axiom,
+    ~ ? [X] : (kge_leq(X, gn_630336) & kge_leq(X, gn_3042225))).
+fof(bt_gn_630336_disjoint_gn_3042362, axiom,
+    ~ ? [X] : (kge_leq(X, gn_630336) & kge_leq(X, gn_3042362))).
+fof(bt_gn_630336_disjoint_gn_3057568, axiom,
+    ~ ? [X] : (kge_leq(X, gn_630336) & kge_leq(X, gn_3057568))).
+fof(bt_gn_630336_disjoint_gn_3077311, axiom,
+    ~ ? [X] : (kge_leq(X, gn_630336) & kge_leq(X, gn_3077311))).
+fof(bt_gn_630336_disjoint_gn_3144096, axiom,
+    ~ ? [X] : (kge_leq(X, gn_630336) & kge_leq(X, gn_3144096))).
+fof(bt_gn_630336_disjoint_gn_3164670, axiom,
+    ~ ? [X] : (kge_leq(X, gn_630336) & kge_leq(X, gn_3164670))).
+fof(bt_gn_630336_disjoint_gn_3168068, axiom,
+    ~ ? [X] : (kge_leq(X, gn_630336) & kge_leq(X, gn_3168068))).
+fof(bt_gn_630336_disjoint_gn_3175395, axiom,
+    ~ ? [X] : (kge_leq(X, gn_630336) & kge_leq(X, gn_3175395))).
+fof(bt_gn_630336_disjoint_gn_3190538, axiom,
+    ~ ? [X] : (kge_leq(X, gn_630336) & kge_leq(X, gn_3190538))).
+fof(bt_gn_630336_disjoint_gn_3194884, axiom,
+    ~ ? [X] : (kge_leq(X, gn_630336) & kge_leq(X, gn_3194884))).
+fof(bt_gn_630336_disjoint_gn_3202326, axiom,
+    ~ ? [X] : (kge_leq(X, gn_630336) & kge_leq(X, gn_3202326))).
+fof(bt_gn_630336_disjoint_gn_3277605, axiom,
+    ~ ? [X] : (kge_leq(X, gn_630336) & kge_leq(X, gn_3277605))).
+fof(bt_gn_630336_disjoint_gn_6290252, axiom,
+    ~ ? [X] : (kge_leq(X, gn_630336) & kge_leq(X, gn_6290252))).
+fof(bt_gn_630336_disjoint_gn_8505033, axiom,
+    ~ ? [X] : (kge_leq(X, gn_630336) & kge_leq(X, gn_8505033))).
+fof(bt_gn_660013_disjoint_gn_661882, axiom,
+    ~ ? [X] : (kge_leq(X, gn_660013) & kge_leq(X, gn_661882))).
+fof(bt_gn_660013_disjoint_gn_690791, axiom,
+    ~ ? [X] : (kge_leq(X, gn_660013) & kge_leq(X, gn_690791))).
+fof(bt_gn_660013_disjoint_gn_718075, axiom,
+    ~ ? [X] : (kge_leq(X, gn_660013) & kge_leq(X, gn_718075))).
+fof(bt_gn_660013_disjoint_gn_719819, axiom,
+    ~ ? [X] : (kge_leq(X, gn_660013) & kge_leq(X, gn_719819))).
+fof(bt_gn_660013_disjoint_gn_732800, axiom,
+    ~ ? [X] : (kge_leq(X, gn_660013) & kge_leq(X, gn_732800))).
+fof(bt_gn_660013_disjoint_gn_783754, axiom,
+    ~ ? [X] : (kge_leq(X, gn_660013) & kge_leq(X, gn_783754))).
+fof(bt_gn_660013_disjoint_gn_798544, axiom,
+    ~ ? [X] : (kge_leq(X, gn_660013) & kge_leq(X, gn_798544))).
+fof(bt_gn_660013_disjoint_gn_798549, axiom,
+    ~ ? [X] : (kge_leq(X, gn_660013) & kge_leq(X, gn_798549))).
+fof(bt_gn_660013_disjoint_gn_831053, axiom,
+    ~ ? [X] : (kge_leq(X, gn_660013) & kge_leq(X, gn_831053))).
+fof(bt_gn_660013_disjoint_gn_2017370, axiom,
+    ~ ? [X] : (kge_leq(X, gn_660013) & kge_leq(X, gn_2017370))).
+fof(bt_gn_660013_disjoint_gn_2264397, axiom,
+    ~ ? [X] : (kge_leq(X, gn_660013) & kge_leq(X, gn_2264397))).
+fof(bt_gn_660013_disjoint_gn_2411586, axiom,
+    ~ ? [X] : (kge_leq(X, gn_660013) & kge_leq(X, gn_2411586))).
+fof(bt_gn_660013_disjoint_gn_2510769, axiom,
+    ~ ? [X] : (kge_leq(X, gn_660013) & kge_leq(X, gn_2510769))).
+fof(bt_gn_660013_disjoint_gn_2562770, axiom,
+    ~ ? [X] : (kge_leq(X, gn_660013) & kge_leq(X, gn_2562770))).
+fof(bt_gn_660013_disjoint_gn_2622320, axiom,
+    ~ ? [X] : (kge_leq(X, gn_660013) & kge_leq(X, gn_2622320))).
+fof(bt_gn_660013_disjoint_gn_2623032, axiom,
+    ~ ? [X] : (kge_leq(X, gn_660013) & kge_leq(X, gn_2623032))).
+fof(bt_gn_660013_disjoint_gn_2629691, axiom,
+    ~ ? [X] : (kge_leq(X, gn_660013) & kge_leq(X, gn_2629691))).
+fof(bt_gn_660013_disjoint_gn_2635167, axiom,
+    ~ ? [X] : (kge_leq(X, gn_660013) & kge_leq(X, gn_2635167))).
+fof(bt_gn_660013_disjoint_gn_2658434, axiom,
+    ~ ? [X] : (kge_leq(X, gn_660013) & kge_leq(X, gn_2658434))).
+fof(bt_gn_660013_disjoint_gn_2661886, axiom,
+    ~ ? [X] : (kge_leq(X, gn_660013) & kge_leq(X, gn_2661886))).
+fof(bt_gn_660013_disjoint_gn_2750405, axiom,
+    ~ ? [X] : (kge_leq(X, gn_660013) & kge_leq(X, gn_2750405))).
+fof(bt_gn_660013_disjoint_gn_2782113, axiom,
+    ~ ? [X] : (kge_leq(X, gn_660013) & kge_leq(X, gn_2782113))).
+fof(bt_gn_660013_disjoint_gn_2802361, axiom,
+    ~ ? [X] : (kge_leq(X, gn_660013) & kge_leq(X, gn_2802361))).
+fof(bt_gn_660013_disjoint_gn_2921044, axiom,
+    ~ ? [X] : (kge_leq(X, gn_660013) & kge_leq(X, gn_2921044))).
+fof(bt_gn_660013_disjoint_gn_2960313, axiom,
+    ~ ? [X] : (kge_leq(X, gn_660013) & kge_leq(X, gn_2960313))).
+fof(bt_gn_660013_disjoint_gn_2963597, axiom,
+    ~ ? [X] : (kge_leq(X, gn_660013) & kge_leq(X, gn_2963597))).
+fof(bt_gn_660013_disjoint_gn_2993457, axiom,
+    ~ ? [X] : (kge_leq(X, gn_660013) & kge_leq(X, gn_2993457))).
+fof(bt_gn_660013_disjoint_gn_3017382, axiom,
+    ~ ? [X] : (kge_leq(X, gn_660013) & kge_leq(X, gn_3017382))).
+fof(bt_gn_660013_disjoint_gn_3041565, axiom,
+    ~ ? [X] : (kge_leq(X, gn_660013) & kge_leq(X, gn_3041565))).
+fof(bt_gn_660013_disjoint_gn_3042058, axiom,
+    ~ ? [X] : (kge_leq(X, gn_660013) & kge_leq(X, gn_3042058))).
+fof(bt_gn_660013_disjoint_gn_3042142, axiom,
+    ~ ? [X] : (kge_leq(X, gn_660013) & kge_leq(X, gn_3042142))).
+fof(bt_gn_660013_disjoint_gn_3042225, axiom,
+    ~ ? [X] : (kge_leq(X, gn_660013) & kge_leq(X, gn_3042225))).
+fof(bt_gn_660013_disjoint_gn_3042362, axiom,
+    ~ ? [X] : (kge_leq(X, gn_660013) & kge_leq(X, gn_3042362))).
+fof(bt_gn_660013_disjoint_gn_3057568, axiom,
+    ~ ? [X] : (kge_leq(X, gn_660013) & kge_leq(X, gn_3057568))).
+fof(bt_gn_660013_disjoint_gn_3077311, axiom,
+    ~ ? [X] : (kge_leq(X, gn_660013) & kge_leq(X, gn_3077311))).
+fof(bt_gn_660013_disjoint_gn_3144096, axiom,
+    ~ ? [X] : (kge_leq(X, gn_660013) & kge_leq(X, gn_3144096))).
+fof(bt_gn_660013_disjoint_gn_3164670, axiom,
+    ~ ? [X] : (kge_leq(X, gn_660013) & kge_leq(X, gn_3164670))).
+fof(bt_gn_660013_disjoint_gn_3168068, axiom,
+    ~ ? [X] : (kge_leq(X, gn_660013) & kge_leq(X, gn_3168068))).
+fof(bt_gn_660013_disjoint_gn_3175395, axiom,
+    ~ ? [X] : (kge_leq(X, gn_660013) & kge_leq(X, gn_3175395))).
+fof(bt_gn_660013_disjoint_gn_3190538, axiom,
+    ~ ? [X] : (kge_leq(X, gn_660013) & kge_leq(X, gn_3190538))).
+fof(bt_gn_660013_disjoint_gn_3194884, axiom,
+    ~ ? [X] : (kge_leq(X, gn_660013) & kge_leq(X, gn_3194884))).
+fof(bt_gn_660013_disjoint_gn_3202326, axiom,
+    ~ ? [X] : (kge_leq(X, gn_660013) & kge_leq(X, gn_3202326))).
+fof(bt_gn_660013_disjoint_gn_3277605, axiom,
+    ~ ? [X] : (kge_leq(X, gn_660013) & kge_leq(X, gn_3277605))).
+fof(bt_gn_660013_disjoint_gn_6290252, axiom,
+    ~ ? [X] : (kge_leq(X, gn_660013) & kge_leq(X, gn_6290252))).
+fof(bt_gn_660013_disjoint_gn_8505033, axiom,
+    ~ ? [X] : (kge_leq(X, gn_660013) & kge_leq(X, gn_8505033))).
+fof(bt_gn_661882_disjoint_gn_690791, axiom,
+    ~ ? [X] : (kge_leq(X, gn_661882) & kge_leq(X, gn_690791))).
+fof(bt_gn_661882_disjoint_gn_718075, axiom,
+    ~ ? [X] : (kge_leq(X, gn_661882) & kge_leq(X, gn_718075))).
+fof(bt_gn_661882_disjoint_gn_719819, axiom,
+    ~ ? [X] : (kge_leq(X, gn_661882) & kge_leq(X, gn_719819))).
+fof(bt_gn_661882_disjoint_gn_732800, axiom,
+    ~ ? [X] : (kge_leq(X, gn_661882) & kge_leq(X, gn_732800))).
+fof(bt_gn_661882_disjoint_gn_783754, axiom,
+    ~ ? [X] : (kge_leq(X, gn_661882) & kge_leq(X, gn_783754))).
+fof(bt_gn_661882_disjoint_gn_798544, axiom,
+    ~ ? [X] : (kge_leq(X, gn_661882) & kge_leq(X, gn_798544))).
+fof(bt_gn_661882_disjoint_gn_798549, axiom,
+    ~ ? [X] : (kge_leq(X, gn_661882) & kge_leq(X, gn_798549))).
+fof(bt_gn_661882_disjoint_gn_831053, axiom,
+    ~ ? [X] : (kge_leq(X, gn_661882) & kge_leq(X, gn_831053))).
+fof(bt_gn_661882_disjoint_gn_2017370, axiom,
+    ~ ? [X] : (kge_leq(X, gn_661882) & kge_leq(X, gn_2017370))).
+fof(bt_gn_661882_disjoint_gn_2264397, axiom,
+    ~ ? [X] : (kge_leq(X, gn_661882) & kge_leq(X, gn_2264397))).
+fof(bt_gn_661882_disjoint_gn_2411586, axiom,
+    ~ ? [X] : (kge_leq(X, gn_661882) & kge_leq(X, gn_2411586))).
+fof(bt_gn_661882_disjoint_gn_2510769, axiom,
+    ~ ? [X] : (kge_leq(X, gn_661882) & kge_leq(X, gn_2510769))).
+fof(bt_gn_661882_disjoint_gn_2562770, axiom,
+    ~ ? [X] : (kge_leq(X, gn_661882) & kge_leq(X, gn_2562770))).
+fof(bt_gn_661882_disjoint_gn_2622320, axiom,
+    ~ ? [X] : (kge_leq(X, gn_661882) & kge_leq(X, gn_2622320))).
+fof(bt_gn_661882_disjoint_gn_2623032, axiom,
+    ~ ? [X] : (kge_leq(X, gn_661882) & kge_leq(X, gn_2623032))).
+fof(bt_gn_661882_disjoint_gn_2629691, axiom,
+    ~ ? [X] : (kge_leq(X, gn_661882) & kge_leq(X, gn_2629691))).
+fof(bt_gn_661882_disjoint_gn_2635167, axiom,
+    ~ ? [X] : (kge_leq(X, gn_661882) & kge_leq(X, gn_2635167))).
+fof(bt_gn_661882_disjoint_gn_2658434, axiom,
+    ~ ? [X] : (kge_leq(X, gn_661882) & kge_leq(X, gn_2658434))).
+fof(bt_gn_661882_disjoint_gn_2661886, axiom,
+    ~ ? [X] : (kge_leq(X, gn_661882) & kge_leq(X, gn_2661886))).
+fof(bt_gn_661882_disjoint_gn_2750405, axiom,
+    ~ ? [X] : (kge_leq(X, gn_661882) & kge_leq(X, gn_2750405))).
+fof(bt_gn_661882_disjoint_gn_2782113, axiom,
+    ~ ? [X] : (kge_leq(X, gn_661882) & kge_leq(X, gn_2782113))).
+fof(bt_gn_661882_disjoint_gn_2802361, axiom,
+    ~ ? [X] : (kge_leq(X, gn_661882) & kge_leq(X, gn_2802361))).
+fof(bt_gn_661882_disjoint_gn_2921044, axiom,
+    ~ ? [X] : (kge_leq(X, gn_661882) & kge_leq(X, gn_2921044))).
+fof(bt_gn_661882_disjoint_gn_2960313, axiom,
+    ~ ? [X] : (kge_leq(X, gn_661882) & kge_leq(X, gn_2960313))).
+fof(bt_gn_661882_disjoint_gn_2963597, axiom,
+    ~ ? [X] : (kge_leq(X, gn_661882) & kge_leq(X, gn_2963597))).
+fof(bt_gn_661882_disjoint_gn_2993457, axiom,
+    ~ ? [X] : (kge_leq(X, gn_661882) & kge_leq(X, gn_2993457))).
+fof(bt_gn_661882_disjoint_gn_3017382, axiom,
+    ~ ? [X] : (kge_leq(X, gn_661882) & kge_leq(X, gn_3017382))).
+fof(bt_gn_661882_disjoint_gn_3041565, axiom,
+    ~ ? [X] : (kge_leq(X, gn_661882) & kge_leq(X, gn_3041565))).
+fof(bt_gn_661882_disjoint_gn_3042058, axiom,
+    ~ ? [X] : (kge_leq(X, gn_661882) & kge_leq(X, gn_3042058))).
+fof(bt_gn_661882_disjoint_gn_3042142, axiom,
+    ~ ? [X] : (kge_leq(X, gn_661882) & kge_leq(X, gn_3042142))).
+fof(bt_gn_661882_disjoint_gn_3042225, axiom,
+    ~ ? [X] : (kge_leq(X, gn_661882) & kge_leq(X, gn_3042225))).
+fof(bt_gn_661882_disjoint_gn_3042362, axiom,
+    ~ ? [X] : (kge_leq(X, gn_661882) & kge_leq(X, gn_3042362))).
+fof(bt_gn_661882_disjoint_gn_3057568, axiom,
+    ~ ? [X] : (kge_leq(X, gn_661882) & kge_leq(X, gn_3057568))).
+fof(bt_gn_661882_disjoint_gn_3077311, axiom,
+    ~ ? [X] : (kge_leq(X, gn_661882) & kge_leq(X, gn_3077311))).
+fof(bt_gn_661882_disjoint_gn_3144096, axiom,
+    ~ ? [X] : (kge_leq(X, gn_661882) & kge_leq(X, gn_3144096))).
+fof(bt_gn_661882_disjoint_gn_3164670, axiom,
+    ~ ? [X] : (kge_leq(X, gn_661882) & kge_leq(X, gn_3164670))).
+fof(bt_gn_661882_disjoint_gn_3168068, axiom,
+    ~ ? [X] : (kge_leq(X, gn_661882) & kge_leq(X, gn_3168068))).
+fof(bt_gn_661882_disjoint_gn_3175395, axiom,
+    ~ ? [X] : (kge_leq(X, gn_661882) & kge_leq(X, gn_3175395))).
+fof(bt_gn_661882_disjoint_gn_3190538, axiom,
+    ~ ? [X] : (kge_leq(X, gn_661882) & kge_leq(X, gn_3190538))).
+fof(bt_gn_661882_disjoint_gn_3194884, axiom,
+    ~ ? [X] : (kge_leq(X, gn_661882) & kge_leq(X, gn_3194884))).
+fof(bt_gn_661882_disjoint_gn_3202326, axiom,
+    ~ ? [X] : (kge_leq(X, gn_661882) & kge_leq(X, gn_3202326))).
+fof(bt_gn_661882_disjoint_gn_3277605, axiom,
+    ~ ? [X] : (kge_leq(X, gn_661882) & kge_leq(X, gn_3277605))).
+fof(bt_gn_661882_disjoint_gn_6290252, axiom,
+    ~ ? [X] : (kge_leq(X, gn_661882) & kge_leq(X, gn_6290252))).
+fof(bt_gn_661882_disjoint_gn_8505033, axiom,
+    ~ ? [X] : (kge_leq(X, gn_661882) & kge_leq(X, gn_8505033))).
+fof(bt_gn_690791_disjoint_gn_718075, axiom,
+    ~ ? [X] : (kge_leq(X, gn_690791) & kge_leq(X, gn_718075))).
+fof(bt_gn_690791_disjoint_gn_719819, axiom,
+    ~ ? [X] : (kge_leq(X, gn_690791) & kge_leq(X, gn_719819))).
+fof(bt_gn_690791_disjoint_gn_732800, axiom,
+    ~ ? [X] : (kge_leq(X, gn_690791) & kge_leq(X, gn_732800))).
+fof(bt_gn_690791_disjoint_gn_783754, axiom,
+    ~ ? [X] : (kge_leq(X, gn_690791) & kge_leq(X, gn_783754))).
+fof(bt_gn_690791_disjoint_gn_798544, axiom,
+    ~ ? [X] : (kge_leq(X, gn_690791) & kge_leq(X, gn_798544))).
+fof(bt_gn_690791_disjoint_gn_798549, axiom,
+    ~ ? [X] : (kge_leq(X, gn_690791) & kge_leq(X, gn_798549))).
+fof(bt_gn_690791_disjoint_gn_831053, axiom,
+    ~ ? [X] : (kge_leq(X, gn_690791) & kge_leq(X, gn_831053))).
+fof(bt_gn_690791_disjoint_gn_2017370, axiom,
+    ~ ? [X] : (kge_leq(X, gn_690791) & kge_leq(X, gn_2017370))).
+fof(bt_gn_690791_disjoint_gn_2264397, axiom,
+    ~ ? [X] : (kge_leq(X, gn_690791) & kge_leq(X, gn_2264397))).
+fof(bt_gn_690791_disjoint_gn_2411586, axiom,
+    ~ ? [X] : (kge_leq(X, gn_690791) & kge_leq(X, gn_2411586))).
+fof(bt_gn_690791_disjoint_gn_2510769, axiom,
+    ~ ? [X] : (kge_leq(X, gn_690791) & kge_leq(X, gn_2510769))).
+fof(bt_gn_690791_disjoint_gn_2562770, axiom,
+    ~ ? [X] : (kge_leq(X, gn_690791) & kge_leq(X, gn_2562770))).
+fof(bt_gn_690791_disjoint_gn_2622320, axiom,
+    ~ ? [X] : (kge_leq(X, gn_690791) & kge_leq(X, gn_2622320))).
+fof(bt_gn_690791_disjoint_gn_2623032, axiom,
+    ~ ? [X] : (kge_leq(X, gn_690791) & kge_leq(X, gn_2623032))).
+fof(bt_gn_690791_disjoint_gn_2629691, axiom,
+    ~ ? [X] : (kge_leq(X, gn_690791) & kge_leq(X, gn_2629691))).
+fof(bt_gn_690791_disjoint_gn_2635167, axiom,
+    ~ ? [X] : (kge_leq(X, gn_690791) & kge_leq(X, gn_2635167))).
+fof(bt_gn_690791_disjoint_gn_2658434, axiom,
+    ~ ? [X] : (kge_leq(X, gn_690791) & kge_leq(X, gn_2658434))).
+fof(bt_gn_690791_disjoint_gn_2661886, axiom,
+    ~ ? [X] : (kge_leq(X, gn_690791) & kge_leq(X, gn_2661886))).
+fof(bt_gn_690791_disjoint_gn_2750405, axiom,
+    ~ ? [X] : (kge_leq(X, gn_690791) & kge_leq(X, gn_2750405))).
+fof(bt_gn_690791_disjoint_gn_2782113, axiom,
+    ~ ? [X] : (kge_leq(X, gn_690791) & kge_leq(X, gn_2782113))).
+fof(bt_gn_690791_disjoint_gn_2802361, axiom,
+    ~ ? [X] : (kge_leq(X, gn_690791) & kge_leq(X, gn_2802361))).
+fof(bt_gn_690791_disjoint_gn_2921044, axiom,
+    ~ ? [X] : (kge_leq(X, gn_690791) & kge_leq(X, gn_2921044))).
+fof(bt_gn_690791_disjoint_gn_2960313, axiom,
+    ~ ? [X] : (kge_leq(X, gn_690791) & kge_leq(X, gn_2960313))).
+fof(bt_gn_690791_disjoint_gn_2963597, axiom,
+    ~ ? [X] : (kge_leq(X, gn_690791) & kge_leq(X, gn_2963597))).
+fof(bt_gn_690791_disjoint_gn_2993457, axiom,
+    ~ ? [X] : (kge_leq(X, gn_690791) & kge_leq(X, gn_2993457))).
+fof(bt_gn_690791_disjoint_gn_3017382, axiom,
+    ~ ? [X] : (kge_leq(X, gn_690791) & kge_leq(X, gn_3017382))).
+fof(bt_gn_690791_disjoint_gn_3041565, axiom,
+    ~ ? [X] : (kge_leq(X, gn_690791) & kge_leq(X, gn_3041565))).
+fof(bt_gn_690791_disjoint_gn_3042058, axiom,
+    ~ ? [X] : (kge_leq(X, gn_690791) & kge_leq(X, gn_3042058))).
+fof(bt_gn_690791_disjoint_gn_3042142, axiom,
+    ~ ? [X] : (kge_leq(X, gn_690791) & kge_leq(X, gn_3042142))).
+fof(bt_gn_690791_disjoint_gn_3042225, axiom,
+    ~ ? [X] : (kge_leq(X, gn_690791) & kge_leq(X, gn_3042225))).
+fof(bt_gn_690791_disjoint_gn_3042362, axiom,
+    ~ ? [X] : (kge_leq(X, gn_690791) & kge_leq(X, gn_3042362))).
+fof(bt_gn_690791_disjoint_gn_3057568, axiom,
+    ~ ? [X] : (kge_leq(X, gn_690791) & kge_leq(X, gn_3057568))).
+fof(bt_gn_690791_disjoint_gn_3077311, axiom,
+    ~ ? [X] : (kge_leq(X, gn_690791) & kge_leq(X, gn_3077311))).
+fof(bt_gn_690791_disjoint_gn_3144096, axiom,
+    ~ ? [X] : (kge_leq(X, gn_690791) & kge_leq(X, gn_3144096))).
+fof(bt_gn_690791_disjoint_gn_3164670, axiom,
+    ~ ? [X] : (kge_leq(X, gn_690791) & kge_leq(X, gn_3164670))).
+fof(bt_gn_690791_disjoint_gn_3168068, axiom,
+    ~ ? [X] : (kge_leq(X, gn_690791) & kge_leq(X, gn_3168068))).
+fof(bt_gn_690791_disjoint_gn_3175395, axiom,
+    ~ ? [X] : (kge_leq(X, gn_690791) & kge_leq(X, gn_3175395))).
+fof(bt_gn_690791_disjoint_gn_3190538, axiom,
+    ~ ? [X] : (kge_leq(X, gn_690791) & kge_leq(X, gn_3190538))).
+fof(bt_gn_690791_disjoint_gn_3194884, axiom,
+    ~ ? [X] : (kge_leq(X, gn_690791) & kge_leq(X, gn_3194884))).
+fof(bt_gn_690791_disjoint_gn_3202326, axiom,
+    ~ ? [X] : (kge_leq(X, gn_690791) & kge_leq(X, gn_3202326))).
+fof(bt_gn_690791_disjoint_gn_3277605, axiom,
+    ~ ? [X] : (kge_leq(X, gn_690791) & kge_leq(X, gn_3277605))).
+fof(bt_gn_690791_disjoint_gn_6290252, axiom,
+    ~ ? [X] : (kge_leq(X, gn_690791) & kge_leq(X, gn_6290252))).
+fof(bt_gn_690791_disjoint_gn_8505033, axiom,
+    ~ ? [X] : (kge_leq(X, gn_690791) & kge_leq(X, gn_8505033))).
+fof(bt_gn_718075_disjoint_gn_719819, axiom,
+    ~ ? [X] : (kge_leq(X, gn_718075) & kge_leq(X, gn_719819))).
+fof(bt_gn_718075_disjoint_gn_732800, axiom,
+    ~ ? [X] : (kge_leq(X, gn_718075) & kge_leq(X, gn_732800))).
+fof(bt_gn_718075_disjoint_gn_783754, axiom,
+    ~ ? [X] : (kge_leq(X, gn_718075) & kge_leq(X, gn_783754))).
+fof(bt_gn_718075_disjoint_gn_798544, axiom,
+    ~ ? [X] : (kge_leq(X, gn_718075) & kge_leq(X, gn_798544))).
+fof(bt_gn_718075_disjoint_gn_798549, axiom,
+    ~ ? [X] : (kge_leq(X, gn_718075) & kge_leq(X, gn_798549))).
+fof(bt_gn_718075_disjoint_gn_831053, axiom,
+    ~ ? [X] : (kge_leq(X, gn_718075) & kge_leq(X, gn_831053))).
+fof(bt_gn_718075_disjoint_gn_2017370, axiom,
+    ~ ? [X] : (kge_leq(X, gn_718075) & kge_leq(X, gn_2017370))).
+fof(bt_gn_718075_disjoint_gn_2264397, axiom,
+    ~ ? [X] : (kge_leq(X, gn_718075) & kge_leq(X, gn_2264397))).
+fof(bt_gn_718075_disjoint_gn_2411586, axiom,
+    ~ ? [X] : (kge_leq(X, gn_718075) & kge_leq(X, gn_2411586))).
+fof(bt_gn_718075_disjoint_gn_2510769, axiom,
+    ~ ? [X] : (kge_leq(X, gn_718075) & kge_leq(X, gn_2510769))).
+fof(bt_gn_718075_disjoint_gn_2562770, axiom,
+    ~ ? [X] : (kge_leq(X, gn_718075) & kge_leq(X, gn_2562770))).
+fof(bt_gn_718075_disjoint_gn_2622320, axiom,
+    ~ ? [X] : (kge_leq(X, gn_718075) & kge_leq(X, gn_2622320))).
+fof(bt_gn_718075_disjoint_gn_2623032, axiom,
+    ~ ? [X] : (kge_leq(X, gn_718075) & kge_leq(X, gn_2623032))).
+fof(bt_gn_718075_disjoint_gn_2629691, axiom,
+    ~ ? [X] : (kge_leq(X, gn_718075) & kge_leq(X, gn_2629691))).
+fof(bt_gn_718075_disjoint_gn_2635167, axiom,
+    ~ ? [X] : (kge_leq(X, gn_718075) & kge_leq(X, gn_2635167))).
+fof(bt_gn_718075_disjoint_gn_2658434, axiom,
+    ~ ? [X] : (kge_leq(X, gn_718075) & kge_leq(X, gn_2658434))).
+fof(bt_gn_718075_disjoint_gn_2661886, axiom,
+    ~ ? [X] : (kge_leq(X, gn_718075) & kge_leq(X, gn_2661886))).
+fof(bt_gn_718075_disjoint_gn_2750405, axiom,
+    ~ ? [X] : (kge_leq(X, gn_718075) & kge_leq(X, gn_2750405))).
+fof(bt_gn_718075_disjoint_gn_2782113, axiom,
+    ~ ? [X] : (kge_leq(X, gn_718075) & kge_leq(X, gn_2782113))).
+fof(bt_gn_718075_disjoint_gn_2802361, axiom,
+    ~ ? [X] : (kge_leq(X, gn_718075) & kge_leq(X, gn_2802361))).
+fof(bt_gn_718075_disjoint_gn_2921044, axiom,
+    ~ ? [X] : (kge_leq(X, gn_718075) & kge_leq(X, gn_2921044))).
+fof(bt_gn_718075_disjoint_gn_2960313, axiom,
+    ~ ? [X] : (kge_leq(X, gn_718075) & kge_leq(X, gn_2960313))).
+fof(bt_gn_718075_disjoint_gn_2963597, axiom,
+    ~ ? [X] : (kge_leq(X, gn_718075) & kge_leq(X, gn_2963597))).
+fof(bt_gn_718075_disjoint_gn_2993457, axiom,
+    ~ ? [X] : (kge_leq(X, gn_718075) & kge_leq(X, gn_2993457))).
+fof(bt_gn_718075_disjoint_gn_3017382, axiom,
+    ~ ? [X] : (kge_leq(X, gn_718075) & kge_leq(X, gn_3017382))).
+fof(bt_gn_718075_disjoint_gn_3041565, axiom,
+    ~ ? [X] : (kge_leq(X, gn_718075) & kge_leq(X, gn_3041565))).
+fof(bt_gn_718075_disjoint_gn_3042058, axiom,
+    ~ ? [X] : (kge_leq(X, gn_718075) & kge_leq(X, gn_3042058))).
+fof(bt_gn_718075_disjoint_gn_3042142, axiom,
+    ~ ? [X] : (kge_leq(X, gn_718075) & kge_leq(X, gn_3042142))).
+fof(bt_gn_718075_disjoint_gn_3042225, axiom,
+    ~ ? [X] : (kge_leq(X, gn_718075) & kge_leq(X, gn_3042225))).
+fof(bt_gn_718075_disjoint_gn_3042362, axiom,
+    ~ ? [X] : (kge_leq(X, gn_718075) & kge_leq(X, gn_3042362))).
+fof(bt_gn_718075_disjoint_gn_3057568, axiom,
+    ~ ? [X] : (kge_leq(X, gn_718075) & kge_leq(X, gn_3057568))).
+fof(bt_gn_718075_disjoint_gn_3077311, axiom,
+    ~ ? [X] : (kge_leq(X, gn_718075) & kge_leq(X, gn_3077311))).
+fof(bt_gn_718075_disjoint_gn_3144096, axiom,
+    ~ ? [X] : (kge_leq(X, gn_718075) & kge_leq(X, gn_3144096))).
+fof(bt_gn_718075_disjoint_gn_3164670, axiom,
+    ~ ? [X] : (kge_leq(X, gn_718075) & kge_leq(X, gn_3164670))).
+fof(bt_gn_718075_disjoint_gn_3168068, axiom,
+    ~ ? [X] : (kge_leq(X, gn_718075) & kge_leq(X, gn_3168068))).
+fof(bt_gn_718075_disjoint_gn_3175395, axiom,
+    ~ ? [X] : (kge_leq(X, gn_718075) & kge_leq(X, gn_3175395))).
+fof(bt_gn_718075_disjoint_gn_3190538, axiom,
+    ~ ? [X] : (kge_leq(X, gn_718075) & kge_leq(X, gn_3190538))).
+fof(bt_gn_718075_disjoint_gn_3194884, axiom,
+    ~ ? [X] : (kge_leq(X, gn_718075) & kge_leq(X, gn_3194884))).
+fof(bt_gn_718075_disjoint_gn_3202326, axiom,
+    ~ ? [X] : (kge_leq(X, gn_718075) & kge_leq(X, gn_3202326))).
+fof(bt_gn_718075_disjoint_gn_3277605, axiom,
+    ~ ? [X] : (kge_leq(X, gn_718075) & kge_leq(X, gn_3277605))).
+fof(bt_gn_718075_disjoint_gn_6290252, axiom,
+    ~ ? [X] : (kge_leq(X, gn_718075) & kge_leq(X, gn_6290252))).
+fof(bt_gn_718075_disjoint_gn_8505033, axiom,
+    ~ ? [X] : (kge_leq(X, gn_718075) & kge_leq(X, gn_8505033))).
+fof(bt_gn_719819_disjoint_gn_732800, axiom,
+    ~ ? [X] : (kge_leq(X, gn_719819) & kge_leq(X, gn_732800))).
+fof(bt_gn_719819_disjoint_gn_783754, axiom,
+    ~ ? [X] : (kge_leq(X, gn_719819) & kge_leq(X, gn_783754))).
+fof(bt_gn_719819_disjoint_gn_798544, axiom,
+    ~ ? [X] : (kge_leq(X, gn_719819) & kge_leq(X, gn_798544))).
+fof(bt_gn_719819_disjoint_gn_798549, axiom,
+    ~ ? [X] : (kge_leq(X, gn_719819) & kge_leq(X, gn_798549))).
+fof(bt_gn_719819_disjoint_gn_831053, axiom,
+    ~ ? [X] : (kge_leq(X, gn_719819) & kge_leq(X, gn_831053))).
+fof(bt_gn_719819_disjoint_gn_2017370, axiom,
+    ~ ? [X] : (kge_leq(X, gn_719819) & kge_leq(X, gn_2017370))).
+fof(bt_gn_719819_disjoint_gn_2264397, axiom,
+    ~ ? [X] : (kge_leq(X, gn_719819) & kge_leq(X, gn_2264397))).
+fof(bt_gn_719819_disjoint_gn_2411586, axiom,
+    ~ ? [X] : (kge_leq(X, gn_719819) & kge_leq(X, gn_2411586))).
+fof(bt_gn_719819_disjoint_gn_2510769, axiom,
+    ~ ? [X] : (kge_leq(X, gn_719819) & kge_leq(X, gn_2510769))).
+fof(bt_gn_719819_disjoint_gn_2562770, axiom,
+    ~ ? [X] : (kge_leq(X, gn_719819) & kge_leq(X, gn_2562770))).
+fof(bt_gn_719819_disjoint_gn_2622320, axiom,
+    ~ ? [X] : (kge_leq(X, gn_719819) & kge_leq(X, gn_2622320))).
+fof(bt_gn_719819_disjoint_gn_2623032, axiom,
+    ~ ? [X] : (kge_leq(X, gn_719819) & kge_leq(X, gn_2623032))).
+fof(bt_gn_719819_disjoint_gn_2629691, axiom,
+    ~ ? [X] : (kge_leq(X, gn_719819) & kge_leq(X, gn_2629691))).
+fof(bt_gn_719819_disjoint_gn_2635167, axiom,
+    ~ ? [X] : (kge_leq(X, gn_719819) & kge_leq(X, gn_2635167))).
+fof(bt_gn_719819_disjoint_gn_2658434, axiom,
+    ~ ? [X] : (kge_leq(X, gn_719819) & kge_leq(X, gn_2658434))).
+fof(bt_gn_719819_disjoint_gn_2661886, axiom,
+    ~ ? [X] : (kge_leq(X, gn_719819) & kge_leq(X, gn_2661886))).
+fof(bt_gn_719819_disjoint_gn_2750405, axiom,
+    ~ ? [X] : (kge_leq(X, gn_719819) & kge_leq(X, gn_2750405))).
+fof(bt_gn_719819_disjoint_gn_2782113, axiom,
+    ~ ? [X] : (kge_leq(X, gn_719819) & kge_leq(X, gn_2782113))).
+fof(bt_gn_719819_disjoint_gn_2802361, axiom,
+    ~ ? [X] : (kge_leq(X, gn_719819) & kge_leq(X, gn_2802361))).
+fof(bt_gn_719819_disjoint_gn_2921044, axiom,
+    ~ ? [X] : (kge_leq(X, gn_719819) & kge_leq(X, gn_2921044))).
+fof(bt_gn_719819_disjoint_gn_2960313, axiom,
+    ~ ? [X] : (kge_leq(X, gn_719819) & kge_leq(X, gn_2960313))).
+fof(bt_gn_719819_disjoint_gn_2963597, axiom,
+    ~ ? [X] : (kge_leq(X, gn_719819) & kge_leq(X, gn_2963597))).
+fof(bt_gn_719819_disjoint_gn_2993457, axiom,
+    ~ ? [X] : (kge_leq(X, gn_719819) & kge_leq(X, gn_2993457))).
+fof(bt_gn_719819_disjoint_gn_3017382, axiom,
+    ~ ? [X] : (kge_leq(X, gn_719819) & kge_leq(X, gn_3017382))).
+fof(bt_gn_719819_disjoint_gn_3041565, axiom,
+    ~ ? [X] : (kge_leq(X, gn_719819) & kge_leq(X, gn_3041565))).
+fof(bt_gn_719819_disjoint_gn_3042058, axiom,
+    ~ ? [X] : (kge_leq(X, gn_719819) & kge_leq(X, gn_3042058))).
+fof(bt_gn_719819_disjoint_gn_3042142, axiom,
+    ~ ? [X] : (kge_leq(X, gn_719819) & kge_leq(X, gn_3042142))).
+fof(bt_gn_719819_disjoint_gn_3042225, axiom,
+    ~ ? [X] : (kge_leq(X, gn_719819) & kge_leq(X, gn_3042225))).
+fof(bt_gn_719819_disjoint_gn_3042362, axiom,
+    ~ ? [X] : (kge_leq(X, gn_719819) & kge_leq(X, gn_3042362))).
+fof(bt_gn_719819_disjoint_gn_3057568, axiom,
+    ~ ? [X] : (kge_leq(X, gn_719819) & kge_leq(X, gn_3057568))).
+fof(bt_gn_719819_disjoint_gn_3077311, axiom,
+    ~ ? [X] : (kge_leq(X, gn_719819) & kge_leq(X, gn_3077311))).
+fof(bt_gn_719819_disjoint_gn_3144096, axiom,
+    ~ ? [X] : (kge_leq(X, gn_719819) & kge_leq(X, gn_3144096))).
+fof(bt_gn_719819_disjoint_gn_3164670, axiom,
+    ~ ? [X] : (kge_leq(X, gn_719819) & kge_leq(X, gn_3164670))).
+fof(bt_gn_719819_disjoint_gn_3168068, axiom,
+    ~ ? [X] : (kge_leq(X, gn_719819) & kge_leq(X, gn_3168068))).
+fof(bt_gn_719819_disjoint_gn_3175395, axiom,
+    ~ ? [X] : (kge_leq(X, gn_719819) & kge_leq(X, gn_3175395))).
+fof(bt_gn_719819_disjoint_gn_3190538, axiom,
+    ~ ? [X] : (kge_leq(X, gn_719819) & kge_leq(X, gn_3190538))).
+fof(bt_gn_719819_disjoint_gn_3194884, axiom,
+    ~ ? [X] : (kge_leq(X, gn_719819) & kge_leq(X, gn_3194884))).
+fof(bt_gn_719819_disjoint_gn_3202326, axiom,
+    ~ ? [X] : (kge_leq(X, gn_719819) & kge_leq(X, gn_3202326))).
+fof(bt_gn_719819_disjoint_gn_3277605, axiom,
+    ~ ? [X] : (kge_leq(X, gn_719819) & kge_leq(X, gn_3277605))).
+fof(bt_gn_719819_disjoint_gn_6290252, axiom,
+    ~ ? [X] : (kge_leq(X, gn_719819) & kge_leq(X, gn_6290252))).
+fof(bt_gn_719819_disjoint_gn_8505033, axiom,
+    ~ ? [X] : (kge_leq(X, gn_719819) & kge_leq(X, gn_8505033))).
+fof(bt_gn_732800_disjoint_gn_783754, axiom,
+    ~ ? [X] : (kge_leq(X, gn_732800) & kge_leq(X, gn_783754))).
+fof(bt_gn_732800_disjoint_gn_798544, axiom,
+    ~ ? [X] : (kge_leq(X, gn_732800) & kge_leq(X, gn_798544))).
+fof(bt_gn_732800_disjoint_gn_798549, axiom,
+    ~ ? [X] : (kge_leq(X, gn_732800) & kge_leq(X, gn_798549))).
+fof(bt_gn_732800_disjoint_gn_831053, axiom,
+    ~ ? [X] : (kge_leq(X, gn_732800) & kge_leq(X, gn_831053))).
+fof(bt_gn_732800_disjoint_gn_2017370, axiom,
+    ~ ? [X] : (kge_leq(X, gn_732800) & kge_leq(X, gn_2017370))).
+fof(bt_gn_732800_disjoint_gn_2264397, axiom,
+    ~ ? [X] : (kge_leq(X, gn_732800) & kge_leq(X, gn_2264397))).
+fof(bt_gn_732800_disjoint_gn_2411586, axiom,
+    ~ ? [X] : (kge_leq(X, gn_732800) & kge_leq(X, gn_2411586))).
+fof(bt_gn_732800_disjoint_gn_2510769, axiom,
+    ~ ? [X] : (kge_leq(X, gn_732800) & kge_leq(X, gn_2510769))).
+fof(bt_gn_732800_disjoint_gn_2562770, axiom,
+    ~ ? [X] : (kge_leq(X, gn_732800) & kge_leq(X, gn_2562770))).
+fof(bt_gn_732800_disjoint_gn_2622320, axiom,
+    ~ ? [X] : (kge_leq(X, gn_732800) & kge_leq(X, gn_2622320))).
+fof(bt_gn_732800_disjoint_gn_2623032, axiom,
+    ~ ? [X] : (kge_leq(X, gn_732800) & kge_leq(X, gn_2623032))).
+fof(bt_gn_732800_disjoint_gn_2629691, axiom,
+    ~ ? [X] : (kge_leq(X, gn_732800) & kge_leq(X, gn_2629691))).
+fof(bt_gn_732800_disjoint_gn_2635167, axiom,
+    ~ ? [X] : (kge_leq(X, gn_732800) & kge_leq(X, gn_2635167))).
+fof(bt_gn_732800_disjoint_gn_2658434, axiom,
+    ~ ? [X] : (kge_leq(X, gn_732800) & kge_leq(X, gn_2658434))).
+fof(bt_gn_732800_disjoint_gn_2661886, axiom,
+    ~ ? [X] : (kge_leq(X, gn_732800) & kge_leq(X, gn_2661886))).
+fof(bt_gn_732800_disjoint_gn_2750405, axiom,
+    ~ ? [X] : (kge_leq(X, gn_732800) & kge_leq(X, gn_2750405))).
+fof(bt_gn_732800_disjoint_gn_2782113, axiom,
+    ~ ? [X] : (kge_leq(X, gn_732800) & kge_leq(X, gn_2782113))).
+fof(bt_gn_732800_disjoint_gn_2802361, axiom,
+    ~ ? [X] : (kge_leq(X, gn_732800) & kge_leq(X, gn_2802361))).
+fof(bt_gn_732800_disjoint_gn_2921044, axiom,
+    ~ ? [X] : (kge_leq(X, gn_732800) & kge_leq(X, gn_2921044))).
+fof(bt_gn_732800_disjoint_gn_2960313, axiom,
+    ~ ? [X] : (kge_leq(X, gn_732800) & kge_leq(X, gn_2960313))).
+fof(bt_gn_732800_disjoint_gn_2963597, axiom,
+    ~ ? [X] : (kge_leq(X, gn_732800) & kge_leq(X, gn_2963597))).
+fof(bt_gn_732800_disjoint_gn_2993457, axiom,
+    ~ ? [X] : (kge_leq(X, gn_732800) & kge_leq(X, gn_2993457))).
+fof(bt_gn_732800_disjoint_gn_3017382, axiom,
+    ~ ? [X] : (kge_leq(X, gn_732800) & kge_leq(X, gn_3017382))).
+fof(bt_gn_732800_disjoint_gn_3041565, axiom,
+    ~ ? [X] : (kge_leq(X, gn_732800) & kge_leq(X, gn_3041565))).
+fof(bt_gn_732800_disjoint_gn_3042058, axiom,
+    ~ ? [X] : (kge_leq(X, gn_732800) & kge_leq(X, gn_3042058))).
+fof(bt_gn_732800_disjoint_gn_3042142, axiom,
+    ~ ? [X] : (kge_leq(X, gn_732800) & kge_leq(X, gn_3042142))).
+fof(bt_gn_732800_disjoint_gn_3042225, axiom,
+    ~ ? [X] : (kge_leq(X, gn_732800) & kge_leq(X, gn_3042225))).
+fof(bt_gn_732800_disjoint_gn_3042362, axiom,
+    ~ ? [X] : (kge_leq(X, gn_732800) & kge_leq(X, gn_3042362))).
+fof(bt_gn_732800_disjoint_gn_3057568, axiom,
+    ~ ? [X] : (kge_leq(X, gn_732800) & kge_leq(X, gn_3057568))).
+fof(bt_gn_732800_disjoint_gn_3077311, axiom,
+    ~ ? [X] : (kge_leq(X, gn_732800) & kge_leq(X, gn_3077311))).
+fof(bt_gn_732800_disjoint_gn_3144096, axiom,
+    ~ ? [X] : (kge_leq(X, gn_732800) & kge_leq(X, gn_3144096))).
+fof(bt_gn_732800_disjoint_gn_3164670, axiom,
+    ~ ? [X] : (kge_leq(X, gn_732800) & kge_leq(X, gn_3164670))).
+fof(bt_gn_732800_disjoint_gn_3168068, axiom,
+    ~ ? [X] : (kge_leq(X, gn_732800) & kge_leq(X, gn_3168068))).
+fof(bt_gn_732800_disjoint_gn_3175395, axiom,
+    ~ ? [X] : (kge_leq(X, gn_732800) & kge_leq(X, gn_3175395))).
+fof(bt_gn_732800_disjoint_gn_3190538, axiom,
+    ~ ? [X] : (kge_leq(X, gn_732800) & kge_leq(X, gn_3190538))).
+fof(bt_gn_732800_disjoint_gn_3194884, axiom,
+    ~ ? [X] : (kge_leq(X, gn_732800) & kge_leq(X, gn_3194884))).
+fof(bt_gn_732800_disjoint_gn_3202326, axiom,
+    ~ ? [X] : (kge_leq(X, gn_732800) & kge_leq(X, gn_3202326))).
+fof(bt_gn_732800_disjoint_gn_3277605, axiom,
+    ~ ? [X] : (kge_leq(X, gn_732800) & kge_leq(X, gn_3277605))).
+fof(bt_gn_732800_disjoint_gn_6290252, axiom,
+    ~ ? [X] : (kge_leq(X, gn_732800) & kge_leq(X, gn_6290252))).
+fof(bt_gn_732800_disjoint_gn_8505033, axiom,
+    ~ ? [X] : (kge_leq(X, gn_732800) & kge_leq(X, gn_8505033))).
+fof(bt_gn_783754_disjoint_gn_798544, axiom,
+    ~ ? [X] : (kge_leq(X, gn_783754) & kge_leq(X, gn_798544))).
+fof(bt_gn_783754_disjoint_gn_798549, axiom,
+    ~ ? [X] : (kge_leq(X, gn_783754) & kge_leq(X, gn_798549))).
+fof(bt_gn_783754_disjoint_gn_831053, axiom,
+    ~ ? [X] : (kge_leq(X, gn_783754) & kge_leq(X, gn_831053))).
+fof(bt_gn_783754_disjoint_gn_2017370, axiom,
+    ~ ? [X] : (kge_leq(X, gn_783754) & kge_leq(X, gn_2017370))).
+fof(bt_gn_783754_disjoint_gn_2264397, axiom,
+    ~ ? [X] : (kge_leq(X, gn_783754) & kge_leq(X, gn_2264397))).
+fof(bt_gn_783754_disjoint_gn_2411586, axiom,
+    ~ ? [X] : (kge_leq(X, gn_783754) & kge_leq(X, gn_2411586))).
+fof(bt_gn_783754_disjoint_gn_2510769, axiom,
+    ~ ? [X] : (kge_leq(X, gn_783754) & kge_leq(X, gn_2510769))).
+fof(bt_gn_783754_disjoint_gn_2562770, axiom,
+    ~ ? [X] : (kge_leq(X, gn_783754) & kge_leq(X, gn_2562770))).
+fof(bt_gn_783754_disjoint_gn_2622320, axiom,
+    ~ ? [X] : (kge_leq(X, gn_783754) & kge_leq(X, gn_2622320))).
+fof(bt_gn_783754_disjoint_gn_2623032, axiom,
+    ~ ? [X] : (kge_leq(X, gn_783754) & kge_leq(X, gn_2623032))).
+fof(bt_gn_783754_disjoint_gn_2629691, axiom,
+    ~ ? [X] : (kge_leq(X, gn_783754) & kge_leq(X, gn_2629691))).
+fof(bt_gn_783754_disjoint_gn_2635167, axiom,
+    ~ ? [X] : (kge_leq(X, gn_783754) & kge_leq(X, gn_2635167))).
+fof(bt_gn_783754_disjoint_gn_2658434, axiom,
+    ~ ? [X] : (kge_leq(X, gn_783754) & kge_leq(X, gn_2658434))).
+fof(bt_gn_783754_disjoint_gn_2661886, axiom,
+    ~ ? [X] : (kge_leq(X, gn_783754) & kge_leq(X, gn_2661886))).
+fof(bt_gn_783754_disjoint_gn_2750405, axiom,
+    ~ ? [X] : (kge_leq(X, gn_783754) & kge_leq(X, gn_2750405))).
+fof(bt_gn_783754_disjoint_gn_2782113, axiom,
+    ~ ? [X] : (kge_leq(X, gn_783754) & kge_leq(X, gn_2782113))).
+fof(bt_gn_783754_disjoint_gn_2802361, axiom,
+    ~ ? [X] : (kge_leq(X, gn_783754) & kge_leq(X, gn_2802361))).
+fof(bt_gn_783754_disjoint_gn_2921044, axiom,
+    ~ ? [X] : (kge_leq(X, gn_783754) & kge_leq(X, gn_2921044))).
+fof(bt_gn_783754_disjoint_gn_2960313, axiom,
+    ~ ? [X] : (kge_leq(X, gn_783754) & kge_leq(X, gn_2960313))).
+fof(bt_gn_783754_disjoint_gn_2963597, axiom,
+    ~ ? [X] : (kge_leq(X, gn_783754) & kge_leq(X, gn_2963597))).
+fof(bt_gn_783754_disjoint_gn_2993457, axiom,
+    ~ ? [X] : (kge_leq(X, gn_783754) & kge_leq(X, gn_2993457))).
+fof(bt_gn_783754_disjoint_gn_3017382, axiom,
+    ~ ? [X] : (kge_leq(X, gn_783754) & kge_leq(X, gn_3017382))).
+fof(bt_gn_783754_disjoint_gn_3041565, axiom,
+    ~ ? [X] : (kge_leq(X, gn_783754) & kge_leq(X, gn_3041565))).
+fof(bt_gn_783754_disjoint_gn_3042058, axiom,
+    ~ ? [X] : (kge_leq(X, gn_783754) & kge_leq(X, gn_3042058))).
+fof(bt_gn_783754_disjoint_gn_3042142, axiom,
+    ~ ? [X] : (kge_leq(X, gn_783754) & kge_leq(X, gn_3042142))).
+fof(bt_gn_783754_disjoint_gn_3042225, axiom,
+    ~ ? [X] : (kge_leq(X, gn_783754) & kge_leq(X, gn_3042225))).
+fof(bt_gn_783754_disjoint_gn_3042362, axiom,
+    ~ ? [X] : (kge_leq(X, gn_783754) & kge_leq(X, gn_3042362))).
+fof(bt_gn_783754_disjoint_gn_3057568, axiom,
+    ~ ? [X] : (kge_leq(X, gn_783754) & kge_leq(X, gn_3057568))).
+fof(bt_gn_783754_disjoint_gn_3077311, axiom,
+    ~ ? [X] : (kge_leq(X, gn_783754) & kge_leq(X, gn_3077311))).
+fof(bt_gn_783754_disjoint_gn_3144096, axiom,
+    ~ ? [X] : (kge_leq(X, gn_783754) & kge_leq(X, gn_3144096))).
+fof(bt_gn_783754_disjoint_gn_3164670, axiom,
+    ~ ? [X] : (kge_leq(X, gn_783754) & kge_leq(X, gn_3164670))).
+fof(bt_gn_783754_disjoint_gn_3168068, axiom,
+    ~ ? [X] : (kge_leq(X, gn_783754) & kge_leq(X, gn_3168068))).
+fof(bt_gn_783754_disjoint_gn_3175395, axiom,
+    ~ ? [X] : (kge_leq(X, gn_783754) & kge_leq(X, gn_3175395))).
+fof(bt_gn_783754_disjoint_gn_3190538, axiom,
+    ~ ? [X] : (kge_leq(X, gn_783754) & kge_leq(X, gn_3190538))).
+fof(bt_gn_783754_disjoint_gn_3194884, axiom,
+    ~ ? [X] : (kge_leq(X, gn_783754) & kge_leq(X, gn_3194884))).
+fof(bt_gn_783754_disjoint_gn_3202326, axiom,
+    ~ ? [X] : (kge_leq(X, gn_783754) & kge_leq(X, gn_3202326))).
+fof(bt_gn_783754_disjoint_gn_3277605, axiom,
+    ~ ? [X] : (kge_leq(X, gn_783754) & kge_leq(X, gn_3277605))).
+fof(bt_gn_783754_disjoint_gn_6290252, axiom,
+    ~ ? [X] : (kge_leq(X, gn_783754) & kge_leq(X, gn_6290252))).
+fof(bt_gn_783754_disjoint_gn_8505033, axiom,
+    ~ ? [X] : (kge_leq(X, gn_783754) & kge_leq(X, gn_8505033))).
+fof(bt_gn_798544_disjoint_gn_798549, axiom,
+    ~ ? [X] : (kge_leq(X, gn_798544) & kge_leq(X, gn_798549))).
+fof(bt_gn_798544_disjoint_gn_831053, axiom,
+    ~ ? [X] : (kge_leq(X, gn_798544) & kge_leq(X, gn_831053))).
+fof(bt_gn_798544_disjoint_gn_2017370, axiom,
+    ~ ? [X] : (kge_leq(X, gn_798544) & kge_leq(X, gn_2017370))).
+fof(bt_gn_798544_disjoint_gn_2264397, axiom,
+    ~ ? [X] : (kge_leq(X, gn_798544) & kge_leq(X, gn_2264397))).
+fof(bt_gn_798544_disjoint_gn_2411586, axiom,
+    ~ ? [X] : (kge_leq(X, gn_798544) & kge_leq(X, gn_2411586))).
+fof(bt_gn_798544_disjoint_gn_2510769, axiom,
+    ~ ? [X] : (kge_leq(X, gn_798544) & kge_leq(X, gn_2510769))).
+fof(bt_gn_798544_disjoint_gn_2562770, axiom,
+    ~ ? [X] : (kge_leq(X, gn_798544) & kge_leq(X, gn_2562770))).
+fof(bt_gn_798544_disjoint_gn_2622320, axiom,
+    ~ ? [X] : (kge_leq(X, gn_798544) & kge_leq(X, gn_2622320))).
+fof(bt_gn_798544_disjoint_gn_2623032, axiom,
+    ~ ? [X] : (kge_leq(X, gn_798544) & kge_leq(X, gn_2623032))).
+fof(bt_gn_798544_disjoint_gn_2629691, axiom,
+    ~ ? [X] : (kge_leq(X, gn_798544) & kge_leq(X, gn_2629691))).
+fof(bt_gn_798544_disjoint_gn_2635167, axiom,
+    ~ ? [X] : (kge_leq(X, gn_798544) & kge_leq(X, gn_2635167))).
+fof(bt_gn_798544_disjoint_gn_2658434, axiom,
+    ~ ? [X] : (kge_leq(X, gn_798544) & kge_leq(X, gn_2658434))).
+fof(bt_gn_798544_disjoint_gn_2661886, axiom,
+    ~ ? [X] : (kge_leq(X, gn_798544) & kge_leq(X, gn_2661886))).
+fof(bt_gn_798544_disjoint_gn_2750405, axiom,
+    ~ ? [X] : (kge_leq(X, gn_798544) & kge_leq(X, gn_2750405))).
+fof(bt_gn_798544_disjoint_gn_2782113, axiom,
+    ~ ? [X] : (kge_leq(X, gn_798544) & kge_leq(X, gn_2782113))).
+fof(bt_gn_798544_disjoint_gn_2802361, axiom,
+    ~ ? [X] : (kge_leq(X, gn_798544) & kge_leq(X, gn_2802361))).
+fof(bt_gn_798544_disjoint_gn_2921044, axiom,
+    ~ ? [X] : (kge_leq(X, gn_798544) & kge_leq(X, gn_2921044))).
+fof(bt_gn_798544_disjoint_gn_2960313, axiom,
+    ~ ? [X] : (kge_leq(X, gn_798544) & kge_leq(X, gn_2960313))).
+fof(bt_gn_798544_disjoint_gn_2963597, axiom,
+    ~ ? [X] : (kge_leq(X, gn_798544) & kge_leq(X, gn_2963597))).
+fof(bt_gn_798544_disjoint_gn_2993457, axiom,
+    ~ ? [X] : (kge_leq(X, gn_798544) & kge_leq(X, gn_2993457))).
+fof(bt_gn_798544_disjoint_gn_3017382, axiom,
+    ~ ? [X] : (kge_leq(X, gn_798544) & kge_leq(X, gn_3017382))).
+fof(bt_gn_798544_disjoint_gn_3041565, axiom,
+    ~ ? [X] : (kge_leq(X, gn_798544) & kge_leq(X, gn_3041565))).
+fof(bt_gn_798544_disjoint_gn_3042058, axiom,
+    ~ ? [X] : (kge_leq(X, gn_798544) & kge_leq(X, gn_3042058))).
+fof(bt_gn_798544_disjoint_gn_3042142, axiom,
+    ~ ? [X] : (kge_leq(X, gn_798544) & kge_leq(X, gn_3042142))).
+fof(bt_gn_798544_disjoint_gn_3042225, axiom,
+    ~ ? [X] : (kge_leq(X, gn_798544) & kge_leq(X, gn_3042225))).
+fof(bt_gn_798544_disjoint_gn_3042362, axiom,
+    ~ ? [X] : (kge_leq(X, gn_798544) & kge_leq(X, gn_3042362))).
+fof(bt_gn_798544_disjoint_gn_3057568, axiom,
+    ~ ? [X] : (kge_leq(X, gn_798544) & kge_leq(X, gn_3057568))).
+fof(bt_gn_798544_disjoint_gn_3077311, axiom,
+    ~ ? [X] : (kge_leq(X, gn_798544) & kge_leq(X, gn_3077311))).
+fof(bt_gn_798544_disjoint_gn_3144096, axiom,
+    ~ ? [X] : (kge_leq(X, gn_798544) & kge_leq(X, gn_3144096))).
+fof(bt_gn_798544_disjoint_gn_3164670, axiom,
+    ~ ? [X] : (kge_leq(X, gn_798544) & kge_leq(X, gn_3164670))).
+fof(bt_gn_798544_disjoint_gn_3168068, axiom,
+    ~ ? [X] : (kge_leq(X, gn_798544) & kge_leq(X, gn_3168068))).
+fof(bt_gn_798544_disjoint_gn_3175395, axiom,
+    ~ ? [X] : (kge_leq(X, gn_798544) & kge_leq(X, gn_3175395))).
+fof(bt_gn_798544_disjoint_gn_3190538, axiom,
+    ~ ? [X] : (kge_leq(X, gn_798544) & kge_leq(X, gn_3190538))).
+fof(bt_gn_798544_disjoint_gn_3194884, axiom,
+    ~ ? [X] : (kge_leq(X, gn_798544) & kge_leq(X, gn_3194884))).
+fof(bt_gn_798544_disjoint_gn_3202326, axiom,
+    ~ ? [X] : (kge_leq(X, gn_798544) & kge_leq(X, gn_3202326))).
+fof(bt_gn_798544_disjoint_gn_3277605, axiom,
+    ~ ? [X] : (kge_leq(X, gn_798544) & kge_leq(X, gn_3277605))).
+fof(bt_gn_798544_disjoint_gn_6290252, axiom,
+    ~ ? [X] : (kge_leq(X, gn_798544) & kge_leq(X, gn_6290252))).
+fof(bt_gn_798544_disjoint_gn_8505033, axiom,
+    ~ ? [X] : (kge_leq(X, gn_798544) & kge_leq(X, gn_8505033))).
+fof(bt_gn_798549_disjoint_gn_831053, axiom,
+    ~ ? [X] : (kge_leq(X, gn_798549) & kge_leq(X, gn_831053))).
+fof(bt_gn_798549_disjoint_gn_2017370, axiom,
+    ~ ? [X] : (kge_leq(X, gn_798549) & kge_leq(X, gn_2017370))).
+fof(bt_gn_798549_disjoint_gn_2264397, axiom,
+    ~ ? [X] : (kge_leq(X, gn_798549) & kge_leq(X, gn_2264397))).
+fof(bt_gn_798549_disjoint_gn_2411586, axiom,
+    ~ ? [X] : (kge_leq(X, gn_798549) & kge_leq(X, gn_2411586))).
+fof(bt_gn_798549_disjoint_gn_2510769, axiom,
+    ~ ? [X] : (kge_leq(X, gn_798549) & kge_leq(X, gn_2510769))).
+fof(bt_gn_798549_disjoint_gn_2562770, axiom,
+    ~ ? [X] : (kge_leq(X, gn_798549) & kge_leq(X, gn_2562770))).
+fof(bt_gn_798549_disjoint_gn_2622320, axiom,
+    ~ ? [X] : (kge_leq(X, gn_798549) & kge_leq(X, gn_2622320))).
+fof(bt_gn_798549_disjoint_gn_2623032, axiom,
+    ~ ? [X] : (kge_leq(X, gn_798549) & kge_leq(X, gn_2623032))).
+fof(bt_gn_798549_disjoint_gn_2629691, axiom,
+    ~ ? [X] : (kge_leq(X, gn_798549) & kge_leq(X, gn_2629691))).
+fof(bt_gn_798549_disjoint_gn_2635167, axiom,
+    ~ ? [X] : (kge_leq(X, gn_798549) & kge_leq(X, gn_2635167))).
+fof(bt_gn_798549_disjoint_gn_2658434, axiom,
+    ~ ? [X] : (kge_leq(X, gn_798549) & kge_leq(X, gn_2658434))).
+fof(bt_gn_798549_disjoint_gn_2661886, axiom,
+    ~ ? [X] : (kge_leq(X, gn_798549) & kge_leq(X, gn_2661886))).
+fof(bt_gn_798549_disjoint_gn_2750405, axiom,
+    ~ ? [X] : (kge_leq(X, gn_798549) & kge_leq(X, gn_2750405))).
+fof(bt_gn_798549_disjoint_gn_2782113, axiom,
+    ~ ? [X] : (kge_leq(X, gn_798549) & kge_leq(X, gn_2782113))).
+fof(bt_gn_798549_disjoint_gn_2802361, axiom,
+    ~ ? [X] : (kge_leq(X, gn_798549) & kge_leq(X, gn_2802361))).
+fof(bt_gn_798549_disjoint_gn_2921044, axiom,
+    ~ ? [X] : (kge_leq(X, gn_798549) & kge_leq(X, gn_2921044))).
+fof(bt_gn_798549_disjoint_gn_2960313, axiom,
+    ~ ? [X] : (kge_leq(X, gn_798549) & kge_leq(X, gn_2960313))).
+fof(bt_gn_798549_disjoint_gn_2963597, axiom,
+    ~ ? [X] : (kge_leq(X, gn_798549) & kge_leq(X, gn_2963597))).
+fof(bt_gn_798549_disjoint_gn_2993457, axiom,
+    ~ ? [X] : (kge_leq(X, gn_798549) & kge_leq(X, gn_2993457))).
+fof(bt_gn_798549_disjoint_gn_3017382, axiom,
+    ~ ? [X] : (kge_leq(X, gn_798549) & kge_leq(X, gn_3017382))).
+fof(bt_gn_798549_disjoint_gn_3041565, axiom,
+    ~ ? [X] : (kge_leq(X, gn_798549) & kge_leq(X, gn_3041565))).
+fof(bt_gn_798549_disjoint_gn_3042058, axiom,
+    ~ ? [X] : (kge_leq(X, gn_798549) & kge_leq(X, gn_3042058))).
+fof(bt_gn_798549_disjoint_gn_3042142, axiom,
+    ~ ? [X] : (kge_leq(X, gn_798549) & kge_leq(X, gn_3042142))).
+fof(bt_gn_798549_disjoint_gn_3042225, axiom,
+    ~ ? [X] : (kge_leq(X, gn_798549) & kge_leq(X, gn_3042225))).
+fof(bt_gn_798549_disjoint_gn_3042362, axiom,
+    ~ ? [X] : (kge_leq(X, gn_798549) & kge_leq(X, gn_3042362))).
+fof(bt_gn_798549_disjoint_gn_3057568, axiom,
+    ~ ? [X] : (kge_leq(X, gn_798549) & kge_leq(X, gn_3057568))).
+fof(bt_gn_798549_disjoint_gn_3077311, axiom,
+    ~ ? [X] : (kge_leq(X, gn_798549) & kge_leq(X, gn_3077311))).
+fof(bt_gn_798549_disjoint_gn_3144096, axiom,
+    ~ ? [X] : (kge_leq(X, gn_798549) & kge_leq(X, gn_3144096))).
+fof(bt_gn_798549_disjoint_gn_3164670, axiom,
+    ~ ? [X] : (kge_leq(X, gn_798549) & kge_leq(X, gn_3164670))).
+fof(bt_gn_798549_disjoint_gn_3168068, axiom,
+    ~ ? [X] : (kge_leq(X, gn_798549) & kge_leq(X, gn_3168068))).
+fof(bt_gn_798549_disjoint_gn_3175395, axiom,
+    ~ ? [X] : (kge_leq(X, gn_798549) & kge_leq(X, gn_3175395))).
+fof(bt_gn_798549_disjoint_gn_3190538, axiom,
+    ~ ? [X] : (kge_leq(X, gn_798549) & kge_leq(X, gn_3190538))).
+fof(bt_gn_798549_disjoint_gn_3194884, axiom,
+    ~ ? [X] : (kge_leq(X, gn_798549) & kge_leq(X, gn_3194884))).
+fof(bt_gn_798549_disjoint_gn_3202326, axiom,
+    ~ ? [X] : (kge_leq(X, gn_798549) & kge_leq(X, gn_3202326))).
+fof(bt_gn_798549_disjoint_gn_3277605, axiom,
+    ~ ? [X] : (kge_leq(X, gn_798549) & kge_leq(X, gn_3277605))).
+fof(bt_gn_798549_disjoint_gn_6290252, axiom,
+    ~ ? [X] : (kge_leq(X, gn_798549) & kge_leq(X, gn_6290252))).
+fof(bt_gn_798549_disjoint_gn_8505033, axiom,
+    ~ ? [X] : (kge_leq(X, gn_798549) & kge_leq(X, gn_8505033))).
+fof(bt_gn_831053_disjoint_gn_2017370, axiom,
+    ~ ? [X] : (kge_leq(X, gn_831053) & kge_leq(X, gn_2017370))).
+fof(bt_gn_831053_disjoint_gn_2264397, axiom,
+    ~ ? [X] : (kge_leq(X, gn_831053) & kge_leq(X, gn_2264397))).
+fof(bt_gn_831053_disjoint_gn_2411586, axiom,
+    ~ ? [X] : (kge_leq(X, gn_831053) & kge_leq(X, gn_2411586))).
+fof(bt_gn_831053_disjoint_gn_2510769, axiom,
+    ~ ? [X] : (kge_leq(X, gn_831053) & kge_leq(X, gn_2510769))).
+fof(bt_gn_831053_disjoint_gn_2562770, axiom,
+    ~ ? [X] : (kge_leq(X, gn_831053) & kge_leq(X, gn_2562770))).
+fof(bt_gn_831053_disjoint_gn_2622320, axiom,
+    ~ ? [X] : (kge_leq(X, gn_831053) & kge_leq(X, gn_2622320))).
+fof(bt_gn_831053_disjoint_gn_2623032, axiom,
+    ~ ? [X] : (kge_leq(X, gn_831053) & kge_leq(X, gn_2623032))).
+fof(bt_gn_831053_disjoint_gn_2629691, axiom,
+    ~ ? [X] : (kge_leq(X, gn_831053) & kge_leq(X, gn_2629691))).
+fof(bt_gn_831053_disjoint_gn_2635167, axiom,
+    ~ ? [X] : (kge_leq(X, gn_831053) & kge_leq(X, gn_2635167))).
+fof(bt_gn_831053_disjoint_gn_2658434, axiom,
+    ~ ? [X] : (kge_leq(X, gn_831053) & kge_leq(X, gn_2658434))).
+fof(bt_gn_831053_disjoint_gn_2661886, axiom,
+    ~ ? [X] : (kge_leq(X, gn_831053) & kge_leq(X, gn_2661886))).
+fof(bt_gn_831053_disjoint_gn_2750405, axiom,
+    ~ ? [X] : (kge_leq(X, gn_831053) & kge_leq(X, gn_2750405))).
+fof(bt_gn_831053_disjoint_gn_2782113, axiom,
+    ~ ? [X] : (kge_leq(X, gn_831053) & kge_leq(X, gn_2782113))).
+fof(bt_gn_831053_disjoint_gn_2802361, axiom,
+    ~ ? [X] : (kge_leq(X, gn_831053) & kge_leq(X, gn_2802361))).
+fof(bt_gn_831053_disjoint_gn_2921044, axiom,
+    ~ ? [X] : (kge_leq(X, gn_831053) & kge_leq(X, gn_2921044))).
+fof(bt_gn_831053_disjoint_gn_2960313, axiom,
+    ~ ? [X] : (kge_leq(X, gn_831053) & kge_leq(X, gn_2960313))).
+fof(bt_gn_831053_disjoint_gn_2963597, axiom,
+    ~ ? [X] : (kge_leq(X, gn_831053) & kge_leq(X, gn_2963597))).
+fof(bt_gn_831053_disjoint_gn_2993457, axiom,
+    ~ ? [X] : (kge_leq(X, gn_831053) & kge_leq(X, gn_2993457))).
+fof(bt_gn_831053_disjoint_gn_3017382, axiom,
+    ~ ? [X] : (kge_leq(X, gn_831053) & kge_leq(X, gn_3017382))).
+fof(bt_gn_831053_disjoint_gn_3041565, axiom,
+    ~ ? [X] : (kge_leq(X, gn_831053) & kge_leq(X, gn_3041565))).
+fof(bt_gn_831053_disjoint_gn_3042058, axiom,
+    ~ ? [X] : (kge_leq(X, gn_831053) & kge_leq(X, gn_3042058))).
+fof(bt_gn_831053_disjoint_gn_3042142, axiom,
+    ~ ? [X] : (kge_leq(X, gn_831053) & kge_leq(X, gn_3042142))).
+fof(bt_gn_831053_disjoint_gn_3042225, axiom,
+    ~ ? [X] : (kge_leq(X, gn_831053) & kge_leq(X, gn_3042225))).
+fof(bt_gn_831053_disjoint_gn_3042362, axiom,
+    ~ ? [X] : (kge_leq(X, gn_831053) & kge_leq(X, gn_3042362))).
+fof(bt_gn_831053_disjoint_gn_3057568, axiom,
+    ~ ? [X] : (kge_leq(X, gn_831053) & kge_leq(X, gn_3057568))).
+fof(bt_gn_831053_disjoint_gn_3077311, axiom,
+    ~ ? [X] : (kge_leq(X, gn_831053) & kge_leq(X, gn_3077311))).
+fof(bt_gn_831053_disjoint_gn_3144096, axiom,
+    ~ ? [X] : (kge_leq(X, gn_831053) & kge_leq(X, gn_3144096))).
+fof(bt_gn_831053_disjoint_gn_3164670, axiom,
+    ~ ? [X] : (kge_leq(X, gn_831053) & kge_leq(X, gn_3164670))).
+fof(bt_gn_831053_disjoint_gn_3168068, axiom,
+    ~ ? [X] : (kge_leq(X, gn_831053) & kge_leq(X, gn_3168068))).
+fof(bt_gn_831053_disjoint_gn_3175395, axiom,
+    ~ ? [X] : (kge_leq(X, gn_831053) & kge_leq(X, gn_3175395))).
+fof(bt_gn_831053_disjoint_gn_3190538, axiom,
+    ~ ? [X] : (kge_leq(X, gn_831053) & kge_leq(X, gn_3190538))).
+fof(bt_gn_831053_disjoint_gn_3194884, axiom,
+    ~ ? [X] : (kge_leq(X, gn_831053) & kge_leq(X, gn_3194884))).
+fof(bt_gn_831053_disjoint_gn_3202326, axiom,
+    ~ ? [X] : (kge_leq(X, gn_831053) & kge_leq(X, gn_3202326))).
+fof(bt_gn_831053_disjoint_gn_3277605, axiom,
+    ~ ? [X] : (kge_leq(X, gn_831053) & kge_leq(X, gn_3277605))).
+fof(bt_gn_831053_disjoint_gn_6290252, axiom,
+    ~ ? [X] : (kge_leq(X, gn_831053) & kge_leq(X, gn_6290252))).
+fof(bt_gn_831053_disjoint_gn_8505033, axiom,
+    ~ ? [X] : (kge_leq(X, gn_831053) & kge_leq(X, gn_8505033))).
+fof(bt_gn_2017370_disjoint_gn_2264397, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2017370) & kge_leq(X, gn_2264397))).
+fof(bt_gn_2017370_disjoint_gn_2411586, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2017370) & kge_leq(X, gn_2411586))).
+fof(bt_gn_2017370_disjoint_gn_2510769, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2017370) & kge_leq(X, gn_2510769))).
+fof(bt_gn_2017370_disjoint_gn_2562770, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2017370) & kge_leq(X, gn_2562770))).
+fof(bt_gn_2017370_disjoint_gn_2622320, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2017370) & kge_leq(X, gn_2622320))).
+fof(bt_gn_2017370_disjoint_gn_2623032, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2017370) & kge_leq(X, gn_2623032))).
+fof(bt_gn_2017370_disjoint_gn_2629691, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2017370) & kge_leq(X, gn_2629691))).
+fof(bt_gn_2017370_disjoint_gn_2635167, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2017370) & kge_leq(X, gn_2635167))).
+fof(bt_gn_2017370_disjoint_gn_2658434, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2017370) & kge_leq(X, gn_2658434))).
+fof(bt_gn_2017370_disjoint_gn_2661886, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2017370) & kge_leq(X, gn_2661886))).
+fof(bt_gn_2017370_disjoint_gn_2750405, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2017370) & kge_leq(X, gn_2750405))).
+fof(bt_gn_2017370_disjoint_gn_2782113, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2017370) & kge_leq(X, gn_2782113))).
+fof(bt_gn_2017370_disjoint_gn_2802361, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2017370) & kge_leq(X, gn_2802361))).
+fof(bt_gn_2017370_disjoint_gn_2921044, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2017370) & kge_leq(X, gn_2921044))).
+fof(bt_gn_2017370_disjoint_gn_2960313, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2017370) & kge_leq(X, gn_2960313))).
+fof(bt_gn_2017370_disjoint_gn_2963597, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2017370) & kge_leq(X, gn_2963597))).
+fof(bt_gn_2017370_disjoint_gn_2993457, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2017370) & kge_leq(X, gn_2993457))).
+fof(bt_gn_2017370_disjoint_gn_3017382, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2017370) & kge_leq(X, gn_3017382))).
+fof(bt_gn_2017370_disjoint_gn_3041565, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2017370) & kge_leq(X, gn_3041565))).
+fof(bt_gn_2017370_disjoint_gn_3042058, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2017370) & kge_leq(X, gn_3042058))).
+fof(bt_gn_2017370_disjoint_gn_3042142, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2017370) & kge_leq(X, gn_3042142))).
+fof(bt_gn_2017370_disjoint_gn_3042225, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2017370) & kge_leq(X, gn_3042225))).
+fof(bt_gn_2017370_disjoint_gn_3042362, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2017370) & kge_leq(X, gn_3042362))).
+fof(bt_gn_2017370_disjoint_gn_3057568, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2017370) & kge_leq(X, gn_3057568))).
+fof(bt_gn_2017370_disjoint_gn_3077311, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2017370) & kge_leq(X, gn_3077311))).
+fof(bt_gn_2017370_disjoint_gn_3144096, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2017370) & kge_leq(X, gn_3144096))).
+fof(bt_gn_2017370_disjoint_gn_3164670, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2017370) & kge_leq(X, gn_3164670))).
+fof(bt_gn_2017370_disjoint_gn_3168068, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2017370) & kge_leq(X, gn_3168068))).
+fof(bt_gn_2017370_disjoint_gn_3175395, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2017370) & kge_leq(X, gn_3175395))).
+fof(bt_gn_2017370_disjoint_gn_3190538, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2017370) & kge_leq(X, gn_3190538))).
+fof(bt_gn_2017370_disjoint_gn_3194884, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2017370) & kge_leq(X, gn_3194884))).
+fof(bt_gn_2017370_disjoint_gn_3202326, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2017370) & kge_leq(X, gn_3202326))).
+fof(bt_gn_2017370_disjoint_gn_3277605, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2017370) & kge_leq(X, gn_3277605))).
+fof(bt_gn_2017370_disjoint_gn_6290252, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2017370) & kge_leq(X, gn_6290252))).
+fof(bt_gn_2017370_disjoint_gn_8505033, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2017370) & kge_leq(X, gn_8505033))).
+fof(bt_gn_2264397_disjoint_gn_2411586, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2264397) & kge_leq(X, gn_2411586))).
+fof(bt_gn_2264397_disjoint_gn_2510769, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2264397) & kge_leq(X, gn_2510769))).
+fof(bt_gn_2264397_disjoint_gn_2562770, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2264397) & kge_leq(X, gn_2562770))).
+fof(bt_gn_2264397_disjoint_gn_2622320, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2264397) & kge_leq(X, gn_2622320))).
+fof(bt_gn_2264397_disjoint_gn_2623032, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2264397) & kge_leq(X, gn_2623032))).
+fof(bt_gn_2264397_disjoint_gn_2629691, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2264397) & kge_leq(X, gn_2629691))).
+fof(bt_gn_2264397_disjoint_gn_2635167, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2264397) & kge_leq(X, gn_2635167))).
+fof(bt_gn_2264397_disjoint_gn_2658434, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2264397) & kge_leq(X, gn_2658434))).
+fof(bt_gn_2264397_disjoint_gn_2661886, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2264397) & kge_leq(X, gn_2661886))).
+fof(bt_gn_2264397_disjoint_gn_2750405, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2264397) & kge_leq(X, gn_2750405))).
+fof(bt_gn_2264397_disjoint_gn_2782113, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2264397) & kge_leq(X, gn_2782113))).
+fof(bt_gn_2264397_disjoint_gn_2802361, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2264397) & kge_leq(X, gn_2802361))).
+fof(bt_gn_2264397_disjoint_gn_2921044, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2264397) & kge_leq(X, gn_2921044))).
+fof(bt_gn_2264397_disjoint_gn_2960313, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2264397) & kge_leq(X, gn_2960313))).
+fof(bt_gn_2264397_disjoint_gn_2963597, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2264397) & kge_leq(X, gn_2963597))).
+fof(bt_gn_2264397_disjoint_gn_2993457, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2264397) & kge_leq(X, gn_2993457))).
+fof(bt_gn_2264397_disjoint_gn_3017382, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2264397) & kge_leq(X, gn_3017382))).
+fof(bt_gn_2264397_disjoint_gn_3041565, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2264397) & kge_leq(X, gn_3041565))).
+fof(bt_gn_2264397_disjoint_gn_3042058, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2264397) & kge_leq(X, gn_3042058))).
+fof(bt_gn_2264397_disjoint_gn_3042142, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2264397) & kge_leq(X, gn_3042142))).
+fof(bt_gn_2264397_disjoint_gn_3042225, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2264397) & kge_leq(X, gn_3042225))).
+fof(bt_gn_2264397_disjoint_gn_3042362, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2264397) & kge_leq(X, gn_3042362))).
+fof(bt_gn_2264397_disjoint_gn_3057568, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2264397) & kge_leq(X, gn_3057568))).
+fof(bt_gn_2264397_disjoint_gn_3077311, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2264397) & kge_leq(X, gn_3077311))).
+fof(bt_gn_2264397_disjoint_gn_3144096, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2264397) & kge_leq(X, gn_3144096))).
+fof(bt_gn_2264397_disjoint_gn_3164670, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2264397) & kge_leq(X, gn_3164670))).
+fof(bt_gn_2264397_disjoint_gn_3168068, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2264397) & kge_leq(X, gn_3168068))).
+fof(bt_gn_2264397_disjoint_gn_3175395, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2264397) & kge_leq(X, gn_3175395))).
+fof(bt_gn_2264397_disjoint_gn_3190538, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2264397) & kge_leq(X, gn_3190538))).
+fof(bt_gn_2264397_disjoint_gn_3194884, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2264397) & kge_leq(X, gn_3194884))).
+fof(bt_gn_2264397_disjoint_gn_3202326, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2264397) & kge_leq(X, gn_3202326))).
+fof(bt_gn_2264397_disjoint_gn_3277605, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2264397) & kge_leq(X, gn_3277605))).
+fof(bt_gn_2264397_disjoint_gn_6290252, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2264397) & kge_leq(X, gn_6290252))).
+fof(bt_gn_2264397_disjoint_gn_8505033, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2264397) & kge_leq(X, gn_8505033))).
+fof(bt_gn_2411586_disjoint_gn_2510769, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2411586) & kge_leq(X, gn_2510769))).
+fof(bt_gn_2411586_disjoint_gn_2562770, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2411586) & kge_leq(X, gn_2562770))).
+fof(bt_gn_2411586_disjoint_gn_2622320, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2411586) & kge_leq(X, gn_2622320))).
+fof(bt_gn_2411586_disjoint_gn_2623032, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2411586) & kge_leq(X, gn_2623032))).
+fof(bt_gn_2411586_disjoint_gn_2629691, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2411586) & kge_leq(X, gn_2629691))).
+fof(bt_gn_2411586_disjoint_gn_2635167, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2411586) & kge_leq(X, gn_2635167))).
+fof(bt_gn_2411586_disjoint_gn_2658434, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2411586) & kge_leq(X, gn_2658434))).
+fof(bt_gn_2411586_disjoint_gn_2661886, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2411586) & kge_leq(X, gn_2661886))).
+fof(bt_gn_2411586_disjoint_gn_2750405, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2411586) & kge_leq(X, gn_2750405))).
+fof(bt_gn_2411586_disjoint_gn_2782113, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2411586) & kge_leq(X, gn_2782113))).
+fof(bt_gn_2411586_disjoint_gn_2802361, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2411586) & kge_leq(X, gn_2802361))).
+fof(bt_gn_2411586_disjoint_gn_2921044, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2411586) & kge_leq(X, gn_2921044))).
+fof(bt_gn_2411586_disjoint_gn_2960313, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2411586) & kge_leq(X, gn_2960313))).
+fof(bt_gn_2411586_disjoint_gn_2963597, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2411586) & kge_leq(X, gn_2963597))).
+fof(bt_gn_2411586_disjoint_gn_2993457, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2411586) & kge_leq(X, gn_2993457))).
+fof(bt_gn_2411586_disjoint_gn_3017382, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2411586) & kge_leq(X, gn_3017382))).
+fof(bt_gn_2411586_disjoint_gn_3041565, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2411586) & kge_leq(X, gn_3041565))).
+fof(bt_gn_2411586_disjoint_gn_3042058, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2411586) & kge_leq(X, gn_3042058))).
+fof(bt_gn_2411586_disjoint_gn_3042142, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2411586) & kge_leq(X, gn_3042142))).
+fof(bt_gn_2411586_disjoint_gn_3042225, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2411586) & kge_leq(X, gn_3042225))).
+fof(bt_gn_2411586_disjoint_gn_3042362, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2411586) & kge_leq(X, gn_3042362))).
+fof(bt_gn_2411586_disjoint_gn_3057568, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2411586) & kge_leq(X, gn_3057568))).
+fof(bt_gn_2411586_disjoint_gn_3077311, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2411586) & kge_leq(X, gn_3077311))).
+fof(bt_gn_2411586_disjoint_gn_3144096, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2411586) & kge_leq(X, gn_3144096))).
+fof(bt_gn_2411586_disjoint_gn_3164670, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2411586) & kge_leq(X, gn_3164670))).
+fof(bt_gn_2411586_disjoint_gn_3168068, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2411586) & kge_leq(X, gn_3168068))).
+fof(bt_gn_2411586_disjoint_gn_3175395, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2411586) & kge_leq(X, gn_3175395))).
+fof(bt_gn_2411586_disjoint_gn_3190538, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2411586) & kge_leq(X, gn_3190538))).
+fof(bt_gn_2411586_disjoint_gn_3194884, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2411586) & kge_leq(X, gn_3194884))).
+fof(bt_gn_2411586_disjoint_gn_3202326, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2411586) & kge_leq(X, gn_3202326))).
+fof(bt_gn_2411586_disjoint_gn_3277605, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2411586) & kge_leq(X, gn_3277605))).
+fof(bt_gn_2411586_disjoint_gn_6290252, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2411586) & kge_leq(X, gn_6290252))).
+fof(bt_gn_2411586_disjoint_gn_8505033, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2411586) & kge_leq(X, gn_8505033))).
+fof(bt_gn_2510769_disjoint_gn_2562770, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2510769) & kge_leq(X, gn_2562770))).
+fof(bt_gn_2510769_disjoint_gn_2622320, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2510769) & kge_leq(X, gn_2622320))).
+fof(bt_gn_2510769_disjoint_gn_2623032, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2510769) & kge_leq(X, gn_2623032))).
+fof(bt_gn_2510769_disjoint_gn_2629691, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2510769) & kge_leq(X, gn_2629691))).
+fof(bt_gn_2510769_disjoint_gn_2635167, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2510769) & kge_leq(X, gn_2635167))).
+fof(bt_gn_2510769_disjoint_gn_2658434, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2510769) & kge_leq(X, gn_2658434))).
+fof(bt_gn_2510769_disjoint_gn_2661886, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2510769) & kge_leq(X, gn_2661886))).
+fof(bt_gn_2510769_disjoint_gn_2750405, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2510769) & kge_leq(X, gn_2750405))).
+fof(bt_gn_2510769_disjoint_gn_2782113, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2510769) & kge_leq(X, gn_2782113))).
+fof(bt_gn_2510769_disjoint_gn_2802361, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2510769) & kge_leq(X, gn_2802361))).
+fof(bt_gn_2510769_disjoint_gn_2921044, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2510769) & kge_leq(X, gn_2921044))).
+fof(bt_gn_2510769_disjoint_gn_2960313, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2510769) & kge_leq(X, gn_2960313))).
+fof(bt_gn_2510769_disjoint_gn_2963597, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2510769) & kge_leq(X, gn_2963597))).
+fof(bt_gn_2510769_disjoint_gn_2993457, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2510769) & kge_leq(X, gn_2993457))).
+fof(bt_gn_2510769_disjoint_gn_3017382, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2510769) & kge_leq(X, gn_3017382))).
+fof(bt_gn_2510769_disjoint_gn_3041565, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2510769) & kge_leq(X, gn_3041565))).
+fof(bt_gn_2510769_disjoint_gn_3042058, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2510769) & kge_leq(X, gn_3042058))).
+fof(bt_gn_2510769_disjoint_gn_3042142, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2510769) & kge_leq(X, gn_3042142))).
+fof(bt_gn_2510769_disjoint_gn_3042225, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2510769) & kge_leq(X, gn_3042225))).
+fof(bt_gn_2510769_disjoint_gn_3042362, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2510769) & kge_leq(X, gn_3042362))).
+fof(bt_gn_2510769_disjoint_gn_3057568, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2510769) & kge_leq(X, gn_3057568))).
+fof(bt_gn_2510769_disjoint_gn_3077311, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2510769) & kge_leq(X, gn_3077311))).
+fof(bt_gn_2510769_disjoint_gn_3144096, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2510769) & kge_leq(X, gn_3144096))).
+fof(bt_gn_2510769_disjoint_gn_3164670, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2510769) & kge_leq(X, gn_3164670))).
+fof(bt_gn_2510769_disjoint_gn_3168068, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2510769) & kge_leq(X, gn_3168068))).
+fof(bt_gn_2510769_disjoint_gn_3175395, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2510769) & kge_leq(X, gn_3175395))).
+fof(bt_gn_2510769_disjoint_gn_3190538, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2510769) & kge_leq(X, gn_3190538))).
+fof(bt_gn_2510769_disjoint_gn_3194884, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2510769) & kge_leq(X, gn_3194884))).
+fof(bt_gn_2510769_disjoint_gn_3202326, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2510769) & kge_leq(X, gn_3202326))).
+fof(bt_gn_2510769_disjoint_gn_3277605, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2510769) & kge_leq(X, gn_3277605))).
+fof(bt_gn_2510769_disjoint_gn_6290252, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2510769) & kge_leq(X, gn_6290252))).
+fof(bt_gn_2510769_disjoint_gn_8505033, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2510769) & kge_leq(X, gn_8505033))).
+fof(bt_gn_2562770_disjoint_gn_2622320, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2562770) & kge_leq(X, gn_2622320))).
+fof(bt_gn_2562770_disjoint_gn_2623032, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2562770) & kge_leq(X, gn_2623032))).
+fof(bt_gn_2562770_disjoint_gn_2629691, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2562770) & kge_leq(X, gn_2629691))).
+fof(bt_gn_2562770_disjoint_gn_2635167, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2562770) & kge_leq(X, gn_2635167))).
+fof(bt_gn_2562770_disjoint_gn_2658434, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2562770) & kge_leq(X, gn_2658434))).
+fof(bt_gn_2562770_disjoint_gn_2661886, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2562770) & kge_leq(X, gn_2661886))).
+fof(bt_gn_2562770_disjoint_gn_2750405, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2562770) & kge_leq(X, gn_2750405))).
+fof(bt_gn_2562770_disjoint_gn_2782113, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2562770) & kge_leq(X, gn_2782113))).
+fof(bt_gn_2562770_disjoint_gn_2802361, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2562770) & kge_leq(X, gn_2802361))).
+fof(bt_gn_2562770_disjoint_gn_2921044, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2562770) & kge_leq(X, gn_2921044))).
+fof(bt_gn_2562770_disjoint_gn_2960313, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2562770) & kge_leq(X, gn_2960313))).
+fof(bt_gn_2562770_disjoint_gn_2963597, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2562770) & kge_leq(X, gn_2963597))).
+fof(bt_gn_2562770_disjoint_gn_2993457, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2562770) & kge_leq(X, gn_2993457))).
+fof(bt_gn_2562770_disjoint_gn_3017382, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2562770) & kge_leq(X, gn_3017382))).
+fof(bt_gn_2562770_disjoint_gn_3041565, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2562770) & kge_leq(X, gn_3041565))).
+fof(bt_gn_2562770_disjoint_gn_3042058, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2562770) & kge_leq(X, gn_3042058))).
+fof(bt_gn_2562770_disjoint_gn_3042142, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2562770) & kge_leq(X, gn_3042142))).
+fof(bt_gn_2562770_disjoint_gn_3042225, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2562770) & kge_leq(X, gn_3042225))).
+fof(bt_gn_2562770_disjoint_gn_3042362, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2562770) & kge_leq(X, gn_3042362))).
+fof(bt_gn_2562770_disjoint_gn_3057568, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2562770) & kge_leq(X, gn_3057568))).
+fof(bt_gn_2562770_disjoint_gn_3077311, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2562770) & kge_leq(X, gn_3077311))).
+fof(bt_gn_2562770_disjoint_gn_3144096, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2562770) & kge_leq(X, gn_3144096))).
+fof(bt_gn_2562770_disjoint_gn_3164670, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2562770) & kge_leq(X, gn_3164670))).
+fof(bt_gn_2562770_disjoint_gn_3168068, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2562770) & kge_leq(X, gn_3168068))).
+fof(bt_gn_2562770_disjoint_gn_3175395, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2562770) & kge_leq(X, gn_3175395))).
+fof(bt_gn_2562770_disjoint_gn_3190538, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2562770) & kge_leq(X, gn_3190538))).
+fof(bt_gn_2562770_disjoint_gn_3194884, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2562770) & kge_leq(X, gn_3194884))).
+fof(bt_gn_2562770_disjoint_gn_3202326, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2562770) & kge_leq(X, gn_3202326))).
+fof(bt_gn_2562770_disjoint_gn_3277605, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2562770) & kge_leq(X, gn_3277605))).
+fof(bt_gn_2562770_disjoint_gn_6290252, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2562770) & kge_leq(X, gn_6290252))).
+fof(bt_gn_2562770_disjoint_gn_8505033, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2562770) & kge_leq(X, gn_8505033))).
+fof(bt_gn_2622320_disjoint_gn_2623032, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2622320) & kge_leq(X, gn_2623032))).
+fof(bt_gn_2622320_disjoint_gn_2629691, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2622320) & kge_leq(X, gn_2629691))).
+fof(bt_gn_2622320_disjoint_gn_2635167, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2622320) & kge_leq(X, gn_2635167))).
+fof(bt_gn_2622320_disjoint_gn_2658434, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2622320) & kge_leq(X, gn_2658434))).
+fof(bt_gn_2622320_disjoint_gn_2661886, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2622320) & kge_leq(X, gn_2661886))).
+fof(bt_gn_2622320_disjoint_gn_2750405, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2622320) & kge_leq(X, gn_2750405))).
+fof(bt_gn_2622320_disjoint_gn_2782113, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2622320) & kge_leq(X, gn_2782113))).
+fof(bt_gn_2622320_disjoint_gn_2802361, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2622320) & kge_leq(X, gn_2802361))).
+fof(bt_gn_2622320_disjoint_gn_2921044, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2622320) & kge_leq(X, gn_2921044))).
+fof(bt_gn_2622320_disjoint_gn_2960313, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2622320) & kge_leq(X, gn_2960313))).
+fof(bt_gn_2622320_disjoint_gn_2963597, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2622320) & kge_leq(X, gn_2963597))).
+fof(bt_gn_2622320_disjoint_gn_2993457, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2622320) & kge_leq(X, gn_2993457))).
+fof(bt_gn_2622320_disjoint_gn_3017382, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2622320) & kge_leq(X, gn_3017382))).
+fof(bt_gn_2622320_disjoint_gn_3041565, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2622320) & kge_leq(X, gn_3041565))).
+fof(bt_gn_2622320_disjoint_gn_3042058, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2622320) & kge_leq(X, gn_3042058))).
+fof(bt_gn_2622320_disjoint_gn_3042142, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2622320) & kge_leq(X, gn_3042142))).
+fof(bt_gn_2622320_disjoint_gn_3042225, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2622320) & kge_leq(X, gn_3042225))).
+fof(bt_gn_2622320_disjoint_gn_3042362, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2622320) & kge_leq(X, gn_3042362))).
+fof(bt_gn_2622320_disjoint_gn_3057568, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2622320) & kge_leq(X, gn_3057568))).
+fof(bt_gn_2622320_disjoint_gn_3077311, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2622320) & kge_leq(X, gn_3077311))).
+fof(bt_gn_2622320_disjoint_gn_3144096, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2622320) & kge_leq(X, gn_3144096))).
+fof(bt_gn_2622320_disjoint_gn_3164670, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2622320) & kge_leq(X, gn_3164670))).
+fof(bt_gn_2622320_disjoint_gn_3168068, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2622320) & kge_leq(X, gn_3168068))).
+fof(bt_gn_2622320_disjoint_gn_3175395, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2622320) & kge_leq(X, gn_3175395))).
+fof(bt_gn_2622320_disjoint_gn_3190538, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2622320) & kge_leq(X, gn_3190538))).
+fof(bt_gn_2622320_disjoint_gn_3194884, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2622320) & kge_leq(X, gn_3194884))).
+fof(bt_gn_2622320_disjoint_gn_3202326, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2622320) & kge_leq(X, gn_3202326))).
+fof(bt_gn_2622320_disjoint_gn_3277605, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2622320) & kge_leq(X, gn_3277605))).
+fof(bt_gn_2622320_disjoint_gn_6290252, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2622320) & kge_leq(X, gn_6290252))).
+fof(bt_gn_2622320_disjoint_gn_8505033, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2622320) & kge_leq(X, gn_8505033))).
+fof(bt_gn_2623032_disjoint_gn_2629691, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2623032) & kge_leq(X, gn_2629691))).
+fof(bt_gn_2623032_disjoint_gn_2635167, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2623032) & kge_leq(X, gn_2635167))).
+fof(bt_gn_2623032_disjoint_gn_2658434, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2623032) & kge_leq(X, gn_2658434))).
+fof(bt_gn_2623032_disjoint_gn_2661886, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2623032) & kge_leq(X, gn_2661886))).
+fof(bt_gn_2623032_disjoint_gn_2750405, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2623032) & kge_leq(X, gn_2750405))).
+fof(bt_gn_2623032_disjoint_gn_2782113, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2623032) & kge_leq(X, gn_2782113))).
+fof(bt_gn_2623032_disjoint_gn_2802361, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2623032) & kge_leq(X, gn_2802361))).
+fof(bt_gn_2623032_disjoint_gn_2921044, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2623032) & kge_leq(X, gn_2921044))).
+fof(bt_gn_2623032_disjoint_gn_2960313, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2623032) & kge_leq(X, gn_2960313))).
+fof(bt_gn_2623032_disjoint_gn_2963597, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2623032) & kge_leq(X, gn_2963597))).
+fof(bt_gn_2623032_disjoint_gn_2993457, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2623032) & kge_leq(X, gn_2993457))).
+fof(bt_gn_2623032_disjoint_gn_3017382, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2623032) & kge_leq(X, gn_3017382))).
+fof(bt_gn_2623032_disjoint_gn_3041565, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2623032) & kge_leq(X, gn_3041565))).
+fof(bt_gn_2623032_disjoint_gn_3042058, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2623032) & kge_leq(X, gn_3042058))).
+fof(bt_gn_2623032_disjoint_gn_3042142, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2623032) & kge_leq(X, gn_3042142))).
+fof(bt_gn_2623032_disjoint_gn_3042225, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2623032) & kge_leq(X, gn_3042225))).
+fof(bt_gn_2623032_disjoint_gn_3042362, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2623032) & kge_leq(X, gn_3042362))).
+fof(bt_gn_2623032_disjoint_gn_3057568, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2623032) & kge_leq(X, gn_3057568))).
+fof(bt_gn_2623032_disjoint_gn_3077311, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2623032) & kge_leq(X, gn_3077311))).
+fof(bt_gn_2623032_disjoint_gn_3144096, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2623032) & kge_leq(X, gn_3144096))).
+fof(bt_gn_2623032_disjoint_gn_3164670, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2623032) & kge_leq(X, gn_3164670))).
+fof(bt_gn_2623032_disjoint_gn_3168068, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2623032) & kge_leq(X, gn_3168068))).
+fof(bt_gn_2623032_disjoint_gn_3175395, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2623032) & kge_leq(X, gn_3175395))).
+fof(bt_gn_2623032_disjoint_gn_3190538, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2623032) & kge_leq(X, gn_3190538))).
+fof(bt_gn_2623032_disjoint_gn_3194884, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2623032) & kge_leq(X, gn_3194884))).
+fof(bt_gn_2623032_disjoint_gn_3202326, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2623032) & kge_leq(X, gn_3202326))).
+fof(bt_gn_2623032_disjoint_gn_3277605, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2623032) & kge_leq(X, gn_3277605))).
+fof(bt_gn_2623032_disjoint_gn_6290252, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2623032) & kge_leq(X, gn_6290252))).
+fof(bt_gn_2623032_disjoint_gn_8505033, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2623032) & kge_leq(X, gn_8505033))).
+fof(bt_gn_2629691_disjoint_gn_2635167, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2629691) & kge_leq(X, gn_2635167))).
+fof(bt_gn_2629691_disjoint_gn_2658434, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2629691) & kge_leq(X, gn_2658434))).
+fof(bt_gn_2629691_disjoint_gn_2661886, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2629691) & kge_leq(X, gn_2661886))).
+fof(bt_gn_2629691_disjoint_gn_2750405, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2629691) & kge_leq(X, gn_2750405))).
+fof(bt_gn_2629691_disjoint_gn_2782113, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2629691) & kge_leq(X, gn_2782113))).
+fof(bt_gn_2629691_disjoint_gn_2802361, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2629691) & kge_leq(X, gn_2802361))).
+fof(bt_gn_2629691_disjoint_gn_2921044, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2629691) & kge_leq(X, gn_2921044))).
+fof(bt_gn_2629691_disjoint_gn_2960313, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2629691) & kge_leq(X, gn_2960313))).
+fof(bt_gn_2629691_disjoint_gn_2963597, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2629691) & kge_leq(X, gn_2963597))).
+fof(bt_gn_2629691_disjoint_gn_2993457, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2629691) & kge_leq(X, gn_2993457))).
+fof(bt_gn_2629691_disjoint_gn_3017382, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2629691) & kge_leq(X, gn_3017382))).
+fof(bt_gn_2629691_disjoint_gn_3041565, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2629691) & kge_leq(X, gn_3041565))).
+fof(bt_gn_2629691_disjoint_gn_3042058, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2629691) & kge_leq(X, gn_3042058))).
+fof(bt_gn_2629691_disjoint_gn_3042142, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2629691) & kge_leq(X, gn_3042142))).
+fof(bt_gn_2629691_disjoint_gn_3042225, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2629691) & kge_leq(X, gn_3042225))).
+fof(bt_gn_2629691_disjoint_gn_3042362, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2629691) & kge_leq(X, gn_3042362))).
+fof(bt_gn_2629691_disjoint_gn_3057568, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2629691) & kge_leq(X, gn_3057568))).
+fof(bt_gn_2629691_disjoint_gn_3077311, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2629691) & kge_leq(X, gn_3077311))).
+fof(bt_gn_2629691_disjoint_gn_3144096, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2629691) & kge_leq(X, gn_3144096))).
+fof(bt_gn_2629691_disjoint_gn_3164670, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2629691) & kge_leq(X, gn_3164670))).
+fof(bt_gn_2629691_disjoint_gn_3168068, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2629691) & kge_leq(X, gn_3168068))).
+fof(bt_gn_2629691_disjoint_gn_3175395, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2629691) & kge_leq(X, gn_3175395))).
+fof(bt_gn_2629691_disjoint_gn_3190538, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2629691) & kge_leq(X, gn_3190538))).
+fof(bt_gn_2629691_disjoint_gn_3194884, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2629691) & kge_leq(X, gn_3194884))).
+fof(bt_gn_2629691_disjoint_gn_3202326, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2629691) & kge_leq(X, gn_3202326))).
+fof(bt_gn_2629691_disjoint_gn_3277605, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2629691) & kge_leq(X, gn_3277605))).
+fof(bt_gn_2629691_disjoint_gn_6290252, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2629691) & kge_leq(X, gn_6290252))).
+fof(bt_gn_2629691_disjoint_gn_8505033, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2629691) & kge_leq(X, gn_8505033))).
+fof(bt_gn_2635167_disjoint_gn_2658434, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2635167) & kge_leq(X, gn_2658434))).
+fof(bt_gn_2635167_disjoint_gn_2661886, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2635167) & kge_leq(X, gn_2661886))).
+fof(bt_gn_2635167_disjoint_gn_2750405, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2635167) & kge_leq(X, gn_2750405))).
+fof(bt_gn_2635167_disjoint_gn_2782113, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2635167) & kge_leq(X, gn_2782113))).
+fof(bt_gn_2635167_disjoint_gn_2802361, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2635167) & kge_leq(X, gn_2802361))).
+fof(bt_gn_2635167_disjoint_gn_2921044, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2635167) & kge_leq(X, gn_2921044))).
+fof(bt_gn_2635167_disjoint_gn_2960313, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2635167) & kge_leq(X, gn_2960313))).
+fof(bt_gn_2635167_disjoint_gn_2963597, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2635167) & kge_leq(X, gn_2963597))).
+fof(bt_gn_2635167_disjoint_gn_2993457, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2635167) & kge_leq(X, gn_2993457))).
+fof(bt_gn_2635167_disjoint_gn_3017382, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2635167) & kge_leq(X, gn_3017382))).
+fof(bt_gn_2635167_disjoint_gn_3041565, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2635167) & kge_leq(X, gn_3041565))).
+fof(bt_gn_2635167_disjoint_gn_3042058, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2635167) & kge_leq(X, gn_3042058))).
+fof(bt_gn_2635167_disjoint_gn_3042142, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2635167) & kge_leq(X, gn_3042142))).
+fof(bt_gn_2635167_disjoint_gn_3042225, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2635167) & kge_leq(X, gn_3042225))).
+fof(bt_gn_2635167_disjoint_gn_3042362, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2635167) & kge_leq(X, gn_3042362))).
+fof(bt_gn_2635167_disjoint_gn_3057568, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2635167) & kge_leq(X, gn_3057568))).
+fof(bt_gn_2635167_disjoint_gn_3077311, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2635167) & kge_leq(X, gn_3077311))).
+fof(bt_gn_2635167_disjoint_gn_3144096, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2635167) & kge_leq(X, gn_3144096))).
+fof(bt_gn_2635167_disjoint_gn_3164670, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2635167) & kge_leq(X, gn_3164670))).
+fof(bt_gn_2635167_disjoint_gn_3168068, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2635167) & kge_leq(X, gn_3168068))).
+fof(bt_gn_2635167_disjoint_gn_3175395, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2635167) & kge_leq(X, gn_3175395))).
+fof(bt_gn_2635167_disjoint_gn_3190538, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2635167) & kge_leq(X, gn_3190538))).
+fof(bt_gn_2635167_disjoint_gn_3194884, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2635167) & kge_leq(X, gn_3194884))).
+fof(bt_gn_2635167_disjoint_gn_3202326, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2635167) & kge_leq(X, gn_3202326))).
+fof(bt_gn_2635167_disjoint_gn_3277605, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2635167) & kge_leq(X, gn_3277605))).
+fof(bt_gn_2635167_disjoint_gn_6290252, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2635167) & kge_leq(X, gn_6290252))).
+fof(bt_gn_2635167_disjoint_gn_8505033, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2635167) & kge_leq(X, gn_8505033))).
+fof(bt_gn_2658434_disjoint_gn_2661886, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2658434) & kge_leq(X, gn_2661886))).
+fof(bt_gn_2658434_disjoint_gn_2750405, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2658434) & kge_leq(X, gn_2750405))).
+fof(bt_gn_2658434_disjoint_gn_2782113, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2658434) & kge_leq(X, gn_2782113))).
+fof(bt_gn_2658434_disjoint_gn_2802361, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2658434) & kge_leq(X, gn_2802361))).
+fof(bt_gn_2658434_disjoint_gn_2921044, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2658434) & kge_leq(X, gn_2921044))).
+fof(bt_gn_2658434_disjoint_gn_2960313, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2658434) & kge_leq(X, gn_2960313))).
+fof(bt_gn_2658434_disjoint_gn_2963597, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2658434) & kge_leq(X, gn_2963597))).
+fof(bt_gn_2658434_disjoint_gn_2993457, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2658434) & kge_leq(X, gn_2993457))).
+fof(bt_gn_2658434_disjoint_gn_3017382, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2658434) & kge_leq(X, gn_3017382))).
+fof(bt_gn_2658434_disjoint_gn_3041565, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2658434) & kge_leq(X, gn_3041565))).
+fof(bt_gn_2658434_disjoint_gn_3042058, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2658434) & kge_leq(X, gn_3042058))).
+fof(bt_gn_2658434_disjoint_gn_3042142, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2658434) & kge_leq(X, gn_3042142))).
+fof(bt_gn_2658434_disjoint_gn_3042225, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2658434) & kge_leq(X, gn_3042225))).
+fof(bt_gn_2658434_disjoint_gn_3042362, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2658434) & kge_leq(X, gn_3042362))).
+fof(bt_gn_2658434_disjoint_gn_3057568, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2658434) & kge_leq(X, gn_3057568))).
+fof(bt_gn_2658434_disjoint_gn_3077311, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2658434) & kge_leq(X, gn_3077311))).
+fof(bt_gn_2658434_disjoint_gn_3144096, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2658434) & kge_leq(X, gn_3144096))).
+fof(bt_gn_2658434_disjoint_gn_3164670, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2658434) & kge_leq(X, gn_3164670))).
+fof(bt_gn_2658434_disjoint_gn_3168068, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2658434) & kge_leq(X, gn_3168068))).
+fof(bt_gn_2658434_disjoint_gn_3175395, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2658434) & kge_leq(X, gn_3175395))).
+fof(bt_gn_2658434_disjoint_gn_3190538, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2658434) & kge_leq(X, gn_3190538))).
+fof(bt_gn_2658434_disjoint_gn_3194884, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2658434) & kge_leq(X, gn_3194884))).
+fof(bt_gn_2658434_disjoint_gn_3202326, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2658434) & kge_leq(X, gn_3202326))).
+fof(bt_gn_2658434_disjoint_gn_3277605, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2658434) & kge_leq(X, gn_3277605))).
+fof(bt_gn_2658434_disjoint_gn_6290252, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2658434) & kge_leq(X, gn_6290252))).
+fof(bt_gn_2658434_disjoint_gn_8505033, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2658434) & kge_leq(X, gn_8505033))).
+fof(bt_gn_2661886_disjoint_gn_2750405, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2661886) & kge_leq(X, gn_2750405))).
+fof(bt_gn_2661886_disjoint_gn_2782113, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2661886) & kge_leq(X, gn_2782113))).
+fof(bt_gn_2661886_disjoint_gn_2802361, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2661886) & kge_leq(X, gn_2802361))).
+fof(bt_gn_2661886_disjoint_gn_2921044, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2661886) & kge_leq(X, gn_2921044))).
+fof(bt_gn_2661886_disjoint_gn_2960313, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2661886) & kge_leq(X, gn_2960313))).
+fof(bt_gn_2661886_disjoint_gn_2963597, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2661886) & kge_leq(X, gn_2963597))).
+fof(bt_gn_2661886_disjoint_gn_2993457, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2661886) & kge_leq(X, gn_2993457))).
+fof(bt_gn_2661886_disjoint_gn_3017382, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2661886) & kge_leq(X, gn_3017382))).
+fof(bt_gn_2661886_disjoint_gn_3041565, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2661886) & kge_leq(X, gn_3041565))).
+fof(bt_gn_2661886_disjoint_gn_3042058, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2661886) & kge_leq(X, gn_3042058))).
+fof(bt_gn_2661886_disjoint_gn_3042142, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2661886) & kge_leq(X, gn_3042142))).
+fof(bt_gn_2661886_disjoint_gn_3042225, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2661886) & kge_leq(X, gn_3042225))).
+fof(bt_gn_2661886_disjoint_gn_3042362, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2661886) & kge_leq(X, gn_3042362))).
+fof(bt_gn_2661886_disjoint_gn_3057568, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2661886) & kge_leq(X, gn_3057568))).
+fof(bt_gn_2661886_disjoint_gn_3077311, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2661886) & kge_leq(X, gn_3077311))).
+fof(bt_gn_2661886_disjoint_gn_3144096, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2661886) & kge_leq(X, gn_3144096))).
+fof(bt_gn_2661886_disjoint_gn_3164670, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2661886) & kge_leq(X, gn_3164670))).
+fof(bt_gn_2661886_disjoint_gn_3168068, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2661886) & kge_leq(X, gn_3168068))).
+fof(bt_gn_2661886_disjoint_gn_3175395, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2661886) & kge_leq(X, gn_3175395))).
+fof(bt_gn_2661886_disjoint_gn_3190538, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2661886) & kge_leq(X, gn_3190538))).
+fof(bt_gn_2661886_disjoint_gn_3194884, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2661886) & kge_leq(X, gn_3194884))).
+fof(bt_gn_2661886_disjoint_gn_3202326, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2661886) & kge_leq(X, gn_3202326))).
+fof(bt_gn_2661886_disjoint_gn_3277605, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2661886) & kge_leq(X, gn_3277605))).
+fof(bt_gn_2661886_disjoint_gn_6290252, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2661886) & kge_leq(X, gn_6290252))).
+fof(bt_gn_2661886_disjoint_gn_8505033, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2661886) & kge_leq(X, gn_8505033))).
+fof(bt_gn_2750405_disjoint_gn_2782113, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2750405) & kge_leq(X, gn_2782113))).
+fof(bt_gn_2750405_disjoint_gn_2802361, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2750405) & kge_leq(X, gn_2802361))).
+fof(bt_gn_2750405_disjoint_gn_2921044, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2750405) & kge_leq(X, gn_2921044))).
+fof(bt_gn_2750405_disjoint_gn_2960313, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2750405) & kge_leq(X, gn_2960313))).
+fof(bt_gn_2750405_disjoint_gn_2963597, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2750405) & kge_leq(X, gn_2963597))).
+fof(bt_gn_2750405_disjoint_gn_2993457, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2750405) & kge_leq(X, gn_2993457))).
+fof(bt_gn_2750405_disjoint_gn_3017382, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2750405) & kge_leq(X, gn_3017382))).
+fof(bt_gn_2750405_disjoint_gn_3041565, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2750405) & kge_leq(X, gn_3041565))).
+fof(bt_gn_2750405_disjoint_gn_3042058, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2750405) & kge_leq(X, gn_3042058))).
+fof(bt_gn_2750405_disjoint_gn_3042142, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2750405) & kge_leq(X, gn_3042142))).
+fof(bt_gn_2750405_disjoint_gn_3042225, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2750405) & kge_leq(X, gn_3042225))).
+fof(bt_gn_2750405_disjoint_gn_3042362, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2750405) & kge_leq(X, gn_3042362))).
+fof(bt_gn_2750405_disjoint_gn_3057568, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2750405) & kge_leq(X, gn_3057568))).
+fof(bt_gn_2750405_disjoint_gn_3077311, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2750405) & kge_leq(X, gn_3077311))).
+fof(bt_gn_2750405_disjoint_gn_3144096, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2750405) & kge_leq(X, gn_3144096))).
+fof(bt_gn_2750405_disjoint_gn_3164670, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2750405) & kge_leq(X, gn_3164670))).
+fof(bt_gn_2750405_disjoint_gn_3168068, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2750405) & kge_leq(X, gn_3168068))).
+fof(bt_gn_2750405_disjoint_gn_3175395, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2750405) & kge_leq(X, gn_3175395))).
+fof(bt_gn_2750405_disjoint_gn_3190538, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2750405) & kge_leq(X, gn_3190538))).
+fof(bt_gn_2750405_disjoint_gn_3194884, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2750405) & kge_leq(X, gn_3194884))).
+fof(bt_gn_2750405_disjoint_gn_3202326, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2750405) & kge_leq(X, gn_3202326))).
+fof(bt_gn_2750405_disjoint_gn_3277605, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2750405) & kge_leq(X, gn_3277605))).
+fof(bt_gn_2750405_disjoint_gn_6290252, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2750405) & kge_leq(X, gn_6290252))).
+fof(bt_gn_2750405_disjoint_gn_8505033, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2750405) & kge_leq(X, gn_8505033))).
+fof(bt_gn_2782113_disjoint_gn_2802361, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2782113) & kge_leq(X, gn_2802361))).
+fof(bt_gn_2782113_disjoint_gn_2921044, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2782113) & kge_leq(X, gn_2921044))).
+fof(bt_gn_2782113_disjoint_gn_2960313, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2782113) & kge_leq(X, gn_2960313))).
+fof(bt_gn_2782113_disjoint_gn_2963597, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2782113) & kge_leq(X, gn_2963597))).
+fof(bt_gn_2782113_disjoint_gn_2993457, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2782113) & kge_leq(X, gn_2993457))).
+fof(bt_gn_2782113_disjoint_gn_3017382, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2782113) & kge_leq(X, gn_3017382))).
+fof(bt_gn_2782113_disjoint_gn_3041565, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2782113) & kge_leq(X, gn_3041565))).
+fof(bt_gn_2782113_disjoint_gn_3042058, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2782113) & kge_leq(X, gn_3042058))).
+fof(bt_gn_2782113_disjoint_gn_3042142, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2782113) & kge_leq(X, gn_3042142))).
+fof(bt_gn_2782113_disjoint_gn_3042225, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2782113) & kge_leq(X, gn_3042225))).
+fof(bt_gn_2782113_disjoint_gn_3042362, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2782113) & kge_leq(X, gn_3042362))).
+fof(bt_gn_2782113_disjoint_gn_3057568, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2782113) & kge_leq(X, gn_3057568))).
+fof(bt_gn_2782113_disjoint_gn_3077311, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2782113) & kge_leq(X, gn_3077311))).
+fof(bt_gn_2782113_disjoint_gn_3144096, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2782113) & kge_leq(X, gn_3144096))).
+fof(bt_gn_2782113_disjoint_gn_3164670, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2782113) & kge_leq(X, gn_3164670))).
+fof(bt_gn_2782113_disjoint_gn_3168068, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2782113) & kge_leq(X, gn_3168068))).
+fof(bt_gn_2782113_disjoint_gn_3175395, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2782113) & kge_leq(X, gn_3175395))).
+fof(bt_gn_2782113_disjoint_gn_3190538, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2782113) & kge_leq(X, gn_3190538))).
+fof(bt_gn_2782113_disjoint_gn_3194884, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2782113) & kge_leq(X, gn_3194884))).
+fof(bt_gn_2782113_disjoint_gn_3202326, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2782113) & kge_leq(X, gn_3202326))).
+fof(bt_gn_2782113_disjoint_gn_3277605, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2782113) & kge_leq(X, gn_3277605))).
+fof(bt_gn_2782113_disjoint_gn_6290252, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2782113) & kge_leq(X, gn_6290252))).
+fof(bt_gn_2782113_disjoint_gn_8505033, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2782113) & kge_leq(X, gn_8505033))).
+fof(bt_gn_2802361_disjoint_gn_2921044, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2802361) & kge_leq(X, gn_2921044))).
+fof(bt_gn_2802361_disjoint_gn_2960313, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2802361) & kge_leq(X, gn_2960313))).
+fof(bt_gn_2802361_disjoint_gn_2963597, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2802361) & kge_leq(X, gn_2963597))).
+fof(bt_gn_2802361_disjoint_gn_2993457, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2802361) & kge_leq(X, gn_2993457))).
+fof(bt_gn_2802361_disjoint_gn_3017382, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2802361) & kge_leq(X, gn_3017382))).
+fof(bt_gn_2802361_disjoint_gn_3041565, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2802361) & kge_leq(X, gn_3041565))).
+fof(bt_gn_2802361_disjoint_gn_3042058, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2802361) & kge_leq(X, gn_3042058))).
+fof(bt_gn_2802361_disjoint_gn_3042142, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2802361) & kge_leq(X, gn_3042142))).
+fof(bt_gn_2802361_disjoint_gn_3042225, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2802361) & kge_leq(X, gn_3042225))).
+fof(bt_gn_2802361_disjoint_gn_3042362, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2802361) & kge_leq(X, gn_3042362))).
+fof(bt_gn_2802361_disjoint_gn_3057568, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2802361) & kge_leq(X, gn_3057568))).
+fof(bt_gn_2802361_disjoint_gn_3077311, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2802361) & kge_leq(X, gn_3077311))).
+fof(bt_gn_2802361_disjoint_gn_3144096, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2802361) & kge_leq(X, gn_3144096))).
+fof(bt_gn_2802361_disjoint_gn_3164670, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2802361) & kge_leq(X, gn_3164670))).
+fof(bt_gn_2802361_disjoint_gn_3168068, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2802361) & kge_leq(X, gn_3168068))).
+fof(bt_gn_2802361_disjoint_gn_3175395, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2802361) & kge_leq(X, gn_3175395))).
+fof(bt_gn_2802361_disjoint_gn_3190538, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2802361) & kge_leq(X, gn_3190538))).
+fof(bt_gn_2802361_disjoint_gn_3194884, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2802361) & kge_leq(X, gn_3194884))).
+fof(bt_gn_2802361_disjoint_gn_3202326, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2802361) & kge_leq(X, gn_3202326))).
+fof(bt_gn_2802361_disjoint_gn_3277605, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2802361) & kge_leq(X, gn_3277605))).
+fof(bt_gn_2802361_disjoint_gn_6290252, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2802361) & kge_leq(X, gn_6290252))).
+fof(bt_gn_2802361_disjoint_gn_8505033, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2802361) & kge_leq(X, gn_8505033))).
+fof(bt_gn_2921044_disjoint_gn_2960313, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2921044) & kge_leq(X, gn_2960313))).
+fof(bt_gn_2921044_disjoint_gn_2963597, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2921044) & kge_leq(X, gn_2963597))).
+fof(bt_gn_2921044_disjoint_gn_2993457, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2921044) & kge_leq(X, gn_2993457))).
+fof(bt_gn_2921044_disjoint_gn_3017382, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2921044) & kge_leq(X, gn_3017382))).
+fof(bt_gn_2921044_disjoint_gn_3041565, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2921044) & kge_leq(X, gn_3041565))).
+fof(bt_gn_2921044_disjoint_gn_3042058, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2921044) & kge_leq(X, gn_3042058))).
+fof(bt_gn_2921044_disjoint_gn_3042142, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2921044) & kge_leq(X, gn_3042142))).
+fof(bt_gn_2921044_disjoint_gn_3042225, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2921044) & kge_leq(X, gn_3042225))).
+fof(bt_gn_2921044_disjoint_gn_3042362, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2921044) & kge_leq(X, gn_3042362))).
+fof(bt_gn_2921044_disjoint_gn_3057568, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2921044) & kge_leq(X, gn_3057568))).
+fof(bt_gn_2921044_disjoint_gn_3077311, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2921044) & kge_leq(X, gn_3077311))).
+fof(bt_gn_2921044_disjoint_gn_3144096, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2921044) & kge_leq(X, gn_3144096))).
+fof(bt_gn_2921044_disjoint_gn_3164670, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2921044) & kge_leq(X, gn_3164670))).
+fof(bt_gn_2921044_disjoint_gn_3168068, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2921044) & kge_leq(X, gn_3168068))).
+fof(bt_gn_2921044_disjoint_gn_3175395, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2921044) & kge_leq(X, gn_3175395))).
+fof(bt_gn_2921044_disjoint_gn_3190538, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2921044) & kge_leq(X, gn_3190538))).
+fof(bt_gn_2921044_disjoint_gn_3194884, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2921044) & kge_leq(X, gn_3194884))).
+fof(bt_gn_2921044_disjoint_gn_3202326, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2921044) & kge_leq(X, gn_3202326))).
+fof(bt_gn_2921044_disjoint_gn_3277605, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2921044) & kge_leq(X, gn_3277605))).
+fof(bt_gn_2921044_disjoint_gn_6290252, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2921044) & kge_leq(X, gn_6290252))).
+fof(bt_gn_2921044_disjoint_gn_8505033, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2921044) & kge_leq(X, gn_8505033))).
+fof(bt_gn_2960313_disjoint_gn_2963597, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2960313) & kge_leq(X, gn_2963597))).
+fof(bt_gn_2960313_disjoint_gn_2993457, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2960313) & kge_leq(X, gn_2993457))).
+fof(bt_gn_2960313_disjoint_gn_3017382, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2960313) & kge_leq(X, gn_3017382))).
+fof(bt_gn_2960313_disjoint_gn_3041565, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2960313) & kge_leq(X, gn_3041565))).
+fof(bt_gn_2960313_disjoint_gn_3042058, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2960313) & kge_leq(X, gn_3042058))).
+fof(bt_gn_2960313_disjoint_gn_3042142, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2960313) & kge_leq(X, gn_3042142))).
+fof(bt_gn_2960313_disjoint_gn_3042225, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2960313) & kge_leq(X, gn_3042225))).
+fof(bt_gn_2960313_disjoint_gn_3042362, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2960313) & kge_leq(X, gn_3042362))).
+fof(bt_gn_2960313_disjoint_gn_3057568, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2960313) & kge_leq(X, gn_3057568))).
+fof(bt_gn_2960313_disjoint_gn_3077311, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2960313) & kge_leq(X, gn_3077311))).
+fof(bt_gn_2960313_disjoint_gn_3144096, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2960313) & kge_leq(X, gn_3144096))).
+fof(bt_gn_2960313_disjoint_gn_3164670, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2960313) & kge_leq(X, gn_3164670))).
+fof(bt_gn_2960313_disjoint_gn_3168068, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2960313) & kge_leq(X, gn_3168068))).
+fof(bt_gn_2960313_disjoint_gn_3175395, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2960313) & kge_leq(X, gn_3175395))).
+fof(bt_gn_2960313_disjoint_gn_3190538, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2960313) & kge_leq(X, gn_3190538))).
+fof(bt_gn_2960313_disjoint_gn_3194884, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2960313) & kge_leq(X, gn_3194884))).
+fof(bt_gn_2960313_disjoint_gn_3202326, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2960313) & kge_leq(X, gn_3202326))).
+fof(bt_gn_2960313_disjoint_gn_3277605, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2960313) & kge_leq(X, gn_3277605))).
+fof(bt_gn_2960313_disjoint_gn_6290252, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2960313) & kge_leq(X, gn_6290252))).
+fof(bt_gn_2960313_disjoint_gn_8505033, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2960313) & kge_leq(X, gn_8505033))).
+fof(bt_gn_2963597_disjoint_gn_2993457, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2963597) & kge_leq(X, gn_2993457))).
+fof(bt_gn_2963597_disjoint_gn_3017382, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2963597) & kge_leq(X, gn_3017382))).
+fof(bt_gn_2963597_disjoint_gn_3041565, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2963597) & kge_leq(X, gn_3041565))).
+fof(bt_gn_2963597_disjoint_gn_3042058, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2963597) & kge_leq(X, gn_3042058))).
+fof(bt_gn_2963597_disjoint_gn_3042142, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2963597) & kge_leq(X, gn_3042142))).
+fof(bt_gn_2963597_disjoint_gn_3042225, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2963597) & kge_leq(X, gn_3042225))).
+fof(bt_gn_2963597_disjoint_gn_3042362, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2963597) & kge_leq(X, gn_3042362))).
+fof(bt_gn_2963597_disjoint_gn_3057568, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2963597) & kge_leq(X, gn_3057568))).
+fof(bt_gn_2963597_disjoint_gn_3077311, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2963597) & kge_leq(X, gn_3077311))).
+fof(bt_gn_2963597_disjoint_gn_3144096, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2963597) & kge_leq(X, gn_3144096))).
+fof(bt_gn_2963597_disjoint_gn_3164670, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2963597) & kge_leq(X, gn_3164670))).
+fof(bt_gn_2963597_disjoint_gn_3168068, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2963597) & kge_leq(X, gn_3168068))).
+fof(bt_gn_2963597_disjoint_gn_3175395, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2963597) & kge_leq(X, gn_3175395))).
+fof(bt_gn_2963597_disjoint_gn_3190538, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2963597) & kge_leq(X, gn_3190538))).
+fof(bt_gn_2963597_disjoint_gn_3194884, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2963597) & kge_leq(X, gn_3194884))).
+fof(bt_gn_2963597_disjoint_gn_3202326, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2963597) & kge_leq(X, gn_3202326))).
+fof(bt_gn_2963597_disjoint_gn_3277605, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2963597) & kge_leq(X, gn_3277605))).
+fof(bt_gn_2963597_disjoint_gn_6290252, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2963597) & kge_leq(X, gn_6290252))).
+fof(bt_gn_2963597_disjoint_gn_8505033, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2963597) & kge_leq(X, gn_8505033))).
+fof(bt_gn_2993457_disjoint_gn_3017382, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2993457) & kge_leq(X, gn_3017382))).
+fof(bt_gn_2993457_disjoint_gn_3041565, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2993457) & kge_leq(X, gn_3041565))).
+fof(bt_gn_2993457_disjoint_gn_3042058, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2993457) & kge_leq(X, gn_3042058))).
+fof(bt_gn_2993457_disjoint_gn_3042142, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2993457) & kge_leq(X, gn_3042142))).
+fof(bt_gn_2993457_disjoint_gn_3042225, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2993457) & kge_leq(X, gn_3042225))).
+fof(bt_gn_2993457_disjoint_gn_3042362, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2993457) & kge_leq(X, gn_3042362))).
+fof(bt_gn_2993457_disjoint_gn_3057568, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2993457) & kge_leq(X, gn_3057568))).
+fof(bt_gn_2993457_disjoint_gn_3077311, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2993457) & kge_leq(X, gn_3077311))).
+fof(bt_gn_2993457_disjoint_gn_3144096, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2993457) & kge_leq(X, gn_3144096))).
+fof(bt_gn_2993457_disjoint_gn_3164670, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2993457) & kge_leq(X, gn_3164670))).
+fof(bt_gn_2993457_disjoint_gn_3168068, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2993457) & kge_leq(X, gn_3168068))).
+fof(bt_gn_2993457_disjoint_gn_3175395, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2993457) & kge_leq(X, gn_3175395))).
+fof(bt_gn_2993457_disjoint_gn_3190538, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2993457) & kge_leq(X, gn_3190538))).
+fof(bt_gn_2993457_disjoint_gn_3194884, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2993457) & kge_leq(X, gn_3194884))).
+fof(bt_gn_2993457_disjoint_gn_3202326, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2993457) & kge_leq(X, gn_3202326))).
+fof(bt_gn_2993457_disjoint_gn_3277605, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2993457) & kge_leq(X, gn_3277605))).
+fof(bt_gn_2993457_disjoint_gn_6290252, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2993457) & kge_leq(X, gn_6290252))).
+fof(bt_gn_2993457_disjoint_gn_8505033, axiom,
+    ~ ? [X] : (kge_leq(X, gn_2993457) & kge_leq(X, gn_8505033))).
+fof(bt_gn_3017382_disjoint_gn_3041565, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3017382) & kge_leq(X, gn_3041565))).
+fof(bt_gn_3017382_disjoint_gn_3042058, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3017382) & kge_leq(X, gn_3042058))).
+fof(bt_gn_3017382_disjoint_gn_3042142, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3017382) & kge_leq(X, gn_3042142))).
+fof(bt_gn_3017382_disjoint_gn_3042225, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3017382) & kge_leq(X, gn_3042225))).
+fof(bt_gn_3017382_disjoint_gn_3042362, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3017382) & kge_leq(X, gn_3042362))).
+fof(bt_gn_3017382_disjoint_gn_3057568, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3017382) & kge_leq(X, gn_3057568))).
+fof(bt_gn_3017382_disjoint_gn_3077311, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3017382) & kge_leq(X, gn_3077311))).
+fof(bt_gn_3017382_disjoint_gn_3144096, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3017382) & kge_leq(X, gn_3144096))).
+fof(bt_gn_3017382_disjoint_gn_3164670, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3017382) & kge_leq(X, gn_3164670))).
+fof(bt_gn_3017382_disjoint_gn_3168068, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3017382) & kge_leq(X, gn_3168068))).
+fof(bt_gn_3017382_disjoint_gn_3175395, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3017382) & kge_leq(X, gn_3175395))).
+fof(bt_gn_3017382_disjoint_gn_3190538, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3017382) & kge_leq(X, gn_3190538))).
+fof(bt_gn_3017382_disjoint_gn_3194884, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3017382) & kge_leq(X, gn_3194884))).
+fof(bt_gn_3017382_disjoint_gn_3202326, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3017382) & kge_leq(X, gn_3202326))).
+fof(bt_gn_3017382_disjoint_gn_3277605, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3017382) & kge_leq(X, gn_3277605))).
+fof(bt_gn_3017382_disjoint_gn_6290252, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3017382) & kge_leq(X, gn_6290252))).
+fof(bt_gn_3017382_disjoint_gn_8505033, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3017382) & kge_leq(X, gn_8505033))).
+fof(bt_gn_3041565_disjoint_gn_3042058, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3041565) & kge_leq(X, gn_3042058))).
+fof(bt_gn_3041565_disjoint_gn_3042142, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3041565) & kge_leq(X, gn_3042142))).
+fof(bt_gn_3041565_disjoint_gn_3042225, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3041565) & kge_leq(X, gn_3042225))).
+fof(bt_gn_3041565_disjoint_gn_3042362, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3041565) & kge_leq(X, gn_3042362))).
+fof(bt_gn_3041565_disjoint_gn_3057568, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3041565) & kge_leq(X, gn_3057568))).
+fof(bt_gn_3041565_disjoint_gn_3077311, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3041565) & kge_leq(X, gn_3077311))).
+fof(bt_gn_3041565_disjoint_gn_3144096, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3041565) & kge_leq(X, gn_3144096))).
+fof(bt_gn_3041565_disjoint_gn_3164670, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3041565) & kge_leq(X, gn_3164670))).
+fof(bt_gn_3041565_disjoint_gn_3168068, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3041565) & kge_leq(X, gn_3168068))).
+fof(bt_gn_3041565_disjoint_gn_3175395, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3041565) & kge_leq(X, gn_3175395))).
+fof(bt_gn_3041565_disjoint_gn_3190538, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3041565) & kge_leq(X, gn_3190538))).
+fof(bt_gn_3041565_disjoint_gn_3194884, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3041565) & kge_leq(X, gn_3194884))).
+fof(bt_gn_3041565_disjoint_gn_3202326, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3041565) & kge_leq(X, gn_3202326))).
+fof(bt_gn_3041565_disjoint_gn_3277605, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3041565) & kge_leq(X, gn_3277605))).
+fof(bt_gn_3041565_disjoint_gn_6290252, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3041565) & kge_leq(X, gn_6290252))).
+fof(bt_gn_3041565_disjoint_gn_8505033, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3041565) & kge_leq(X, gn_8505033))).
+fof(bt_gn_3042058_disjoint_gn_3042142, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3042058) & kge_leq(X, gn_3042142))).
+fof(bt_gn_3042058_disjoint_gn_3042225, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3042058) & kge_leq(X, gn_3042225))).
+fof(bt_gn_3042058_disjoint_gn_3042362, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3042058) & kge_leq(X, gn_3042362))).
+fof(bt_gn_3042058_disjoint_gn_3057568, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3042058) & kge_leq(X, gn_3057568))).
+fof(bt_gn_3042058_disjoint_gn_3077311, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3042058) & kge_leq(X, gn_3077311))).
+fof(bt_gn_3042058_disjoint_gn_3144096, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3042058) & kge_leq(X, gn_3144096))).
+fof(bt_gn_3042058_disjoint_gn_3164670, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3042058) & kge_leq(X, gn_3164670))).
+fof(bt_gn_3042058_disjoint_gn_3168068, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3042058) & kge_leq(X, gn_3168068))).
+fof(bt_gn_3042058_disjoint_gn_3175395, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3042058) & kge_leq(X, gn_3175395))).
+fof(bt_gn_3042058_disjoint_gn_3190538, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3042058) & kge_leq(X, gn_3190538))).
+fof(bt_gn_3042058_disjoint_gn_3194884, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3042058) & kge_leq(X, gn_3194884))).
+fof(bt_gn_3042058_disjoint_gn_3202326, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3042058) & kge_leq(X, gn_3202326))).
+fof(bt_gn_3042058_disjoint_gn_3277605, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3042058) & kge_leq(X, gn_3277605))).
+fof(bt_gn_3042058_disjoint_gn_6290252, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3042058) & kge_leq(X, gn_6290252))).
+fof(bt_gn_3042058_disjoint_gn_8505033, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3042058) & kge_leq(X, gn_8505033))).
+fof(bt_gn_3042142_disjoint_gn_3042225, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3042142) & kge_leq(X, gn_3042225))).
+fof(bt_gn_3042142_disjoint_gn_3042362, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3042142) & kge_leq(X, gn_3042362))).
+fof(bt_gn_3042142_disjoint_gn_3057568, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3042142) & kge_leq(X, gn_3057568))).
+fof(bt_gn_3042142_disjoint_gn_3077311, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3042142) & kge_leq(X, gn_3077311))).
+fof(bt_gn_3042142_disjoint_gn_3144096, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3042142) & kge_leq(X, gn_3144096))).
+fof(bt_gn_3042142_disjoint_gn_3164670, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3042142) & kge_leq(X, gn_3164670))).
+fof(bt_gn_3042142_disjoint_gn_3168068, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3042142) & kge_leq(X, gn_3168068))).
+fof(bt_gn_3042142_disjoint_gn_3175395, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3042142) & kge_leq(X, gn_3175395))).
+fof(bt_gn_3042142_disjoint_gn_3190538, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3042142) & kge_leq(X, gn_3190538))).
+fof(bt_gn_3042142_disjoint_gn_3194884, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3042142) & kge_leq(X, gn_3194884))).
+fof(bt_gn_3042142_disjoint_gn_3202326, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3042142) & kge_leq(X, gn_3202326))).
+fof(bt_gn_3042142_disjoint_gn_3277605, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3042142) & kge_leq(X, gn_3277605))).
+fof(bt_gn_3042142_disjoint_gn_6290252, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3042142) & kge_leq(X, gn_6290252))).
+fof(bt_gn_3042142_disjoint_gn_8505033, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3042142) & kge_leq(X, gn_8505033))).
+fof(bt_gn_3042225_disjoint_gn_3042362, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3042225) & kge_leq(X, gn_3042362))).
+fof(bt_gn_3042225_disjoint_gn_3057568, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3042225) & kge_leq(X, gn_3057568))).
+fof(bt_gn_3042225_disjoint_gn_3077311, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3042225) & kge_leq(X, gn_3077311))).
+fof(bt_gn_3042225_disjoint_gn_3144096, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3042225) & kge_leq(X, gn_3144096))).
+fof(bt_gn_3042225_disjoint_gn_3164670, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3042225) & kge_leq(X, gn_3164670))).
+fof(bt_gn_3042225_disjoint_gn_3168068, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3042225) & kge_leq(X, gn_3168068))).
+fof(bt_gn_3042225_disjoint_gn_3175395, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3042225) & kge_leq(X, gn_3175395))).
+fof(bt_gn_3042225_disjoint_gn_3190538, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3042225) & kge_leq(X, gn_3190538))).
+fof(bt_gn_3042225_disjoint_gn_3194884, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3042225) & kge_leq(X, gn_3194884))).
+fof(bt_gn_3042225_disjoint_gn_3202326, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3042225) & kge_leq(X, gn_3202326))).
+fof(bt_gn_3042225_disjoint_gn_3277605, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3042225) & kge_leq(X, gn_3277605))).
+fof(bt_gn_3042225_disjoint_gn_6290252, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3042225) & kge_leq(X, gn_6290252))).
+fof(bt_gn_3042225_disjoint_gn_8505033, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3042225) & kge_leq(X, gn_8505033))).
+fof(bt_gn_3042362_disjoint_gn_3057568, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3042362) & kge_leq(X, gn_3057568))).
+fof(bt_gn_3042362_disjoint_gn_3077311, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3042362) & kge_leq(X, gn_3077311))).
+fof(bt_gn_3042362_disjoint_gn_3144096, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3042362) & kge_leq(X, gn_3144096))).
+fof(bt_gn_3042362_disjoint_gn_3164670, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3042362) & kge_leq(X, gn_3164670))).
+fof(bt_gn_3042362_disjoint_gn_3168068, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3042362) & kge_leq(X, gn_3168068))).
+fof(bt_gn_3042362_disjoint_gn_3175395, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3042362) & kge_leq(X, gn_3175395))).
+fof(bt_gn_3042362_disjoint_gn_3190538, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3042362) & kge_leq(X, gn_3190538))).
+fof(bt_gn_3042362_disjoint_gn_3194884, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3042362) & kge_leq(X, gn_3194884))).
+fof(bt_gn_3042362_disjoint_gn_3202326, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3042362) & kge_leq(X, gn_3202326))).
+fof(bt_gn_3042362_disjoint_gn_3277605, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3042362) & kge_leq(X, gn_3277605))).
+fof(bt_gn_3042362_disjoint_gn_6290252, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3042362) & kge_leq(X, gn_6290252))).
+fof(bt_gn_3042362_disjoint_gn_8505033, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3042362) & kge_leq(X, gn_8505033))).
+fof(bt_gn_3057568_disjoint_gn_3077311, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3057568) & kge_leq(X, gn_3077311))).
+fof(bt_gn_3057568_disjoint_gn_3144096, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3057568) & kge_leq(X, gn_3144096))).
+fof(bt_gn_3057568_disjoint_gn_3164670, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3057568) & kge_leq(X, gn_3164670))).
+fof(bt_gn_3057568_disjoint_gn_3168068, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3057568) & kge_leq(X, gn_3168068))).
+fof(bt_gn_3057568_disjoint_gn_3175395, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3057568) & kge_leq(X, gn_3175395))).
+fof(bt_gn_3057568_disjoint_gn_3190538, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3057568) & kge_leq(X, gn_3190538))).
+fof(bt_gn_3057568_disjoint_gn_3194884, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3057568) & kge_leq(X, gn_3194884))).
+fof(bt_gn_3057568_disjoint_gn_3202326, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3057568) & kge_leq(X, gn_3202326))).
+fof(bt_gn_3057568_disjoint_gn_3277605, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3057568) & kge_leq(X, gn_3277605))).
+fof(bt_gn_3057568_disjoint_gn_6290252, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3057568) & kge_leq(X, gn_6290252))).
+fof(bt_gn_3057568_disjoint_gn_8505033, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3057568) & kge_leq(X, gn_8505033))).
+fof(bt_gn_3077311_disjoint_gn_3144096, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3077311) & kge_leq(X, gn_3144096))).
+fof(bt_gn_3077311_disjoint_gn_3164670, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3077311) & kge_leq(X, gn_3164670))).
+fof(bt_gn_3077311_disjoint_gn_3168068, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3077311) & kge_leq(X, gn_3168068))).
+fof(bt_gn_3077311_disjoint_gn_3175395, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3077311) & kge_leq(X, gn_3175395))).
+fof(bt_gn_3077311_disjoint_gn_3190538, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3077311) & kge_leq(X, gn_3190538))).
+fof(bt_gn_3077311_disjoint_gn_3194884, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3077311) & kge_leq(X, gn_3194884))).
+fof(bt_gn_3077311_disjoint_gn_3202326, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3077311) & kge_leq(X, gn_3202326))).
+fof(bt_gn_3077311_disjoint_gn_3277605, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3077311) & kge_leq(X, gn_3277605))).
+fof(bt_gn_3077311_disjoint_gn_6290252, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3077311) & kge_leq(X, gn_6290252))).
+fof(bt_gn_3077311_disjoint_gn_8505033, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3077311) & kge_leq(X, gn_8505033))).
+fof(bt_gn_3144096_disjoint_gn_3164670, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3144096) & kge_leq(X, gn_3164670))).
+fof(bt_gn_3144096_disjoint_gn_3168068, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3144096) & kge_leq(X, gn_3168068))).
+fof(bt_gn_3144096_disjoint_gn_3175395, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3144096) & kge_leq(X, gn_3175395))).
+fof(bt_gn_3144096_disjoint_gn_3190538, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3144096) & kge_leq(X, gn_3190538))).
+fof(bt_gn_3144096_disjoint_gn_3194884, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3144096) & kge_leq(X, gn_3194884))).
+fof(bt_gn_3144096_disjoint_gn_3202326, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3144096) & kge_leq(X, gn_3202326))).
+fof(bt_gn_3144096_disjoint_gn_3277605, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3144096) & kge_leq(X, gn_3277605))).
+fof(bt_gn_3144096_disjoint_gn_6290252, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3144096) & kge_leq(X, gn_6290252))).
+fof(bt_gn_3144096_disjoint_gn_8505033, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3144096) & kge_leq(X, gn_8505033))).
+fof(bt_gn_3164670_disjoint_gn_3168068, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3164670) & kge_leq(X, gn_3168068))).
+fof(bt_gn_3164670_disjoint_gn_3175395, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3164670) & kge_leq(X, gn_3175395))).
+fof(bt_gn_3164670_disjoint_gn_3190538, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3164670) & kge_leq(X, gn_3190538))).
+fof(bt_gn_3164670_disjoint_gn_3194884, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3164670) & kge_leq(X, gn_3194884))).
+fof(bt_gn_3164670_disjoint_gn_3202326, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3164670) & kge_leq(X, gn_3202326))).
+fof(bt_gn_3164670_disjoint_gn_3277605, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3164670) & kge_leq(X, gn_3277605))).
+fof(bt_gn_3164670_disjoint_gn_6290252, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3164670) & kge_leq(X, gn_6290252))).
+fof(bt_gn_3164670_disjoint_gn_8505033, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3164670) & kge_leq(X, gn_8505033))).
+fof(bt_gn_3168068_disjoint_gn_3175395, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3168068) & kge_leq(X, gn_3175395))).
+fof(bt_gn_3168068_disjoint_gn_3190538, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3168068) & kge_leq(X, gn_3190538))).
+fof(bt_gn_3168068_disjoint_gn_3194884, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3168068) & kge_leq(X, gn_3194884))).
+fof(bt_gn_3168068_disjoint_gn_3202326, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3168068) & kge_leq(X, gn_3202326))).
+fof(bt_gn_3168068_disjoint_gn_3277605, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3168068) & kge_leq(X, gn_3277605))).
+fof(bt_gn_3168068_disjoint_gn_6290252, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3168068) & kge_leq(X, gn_6290252))).
+fof(bt_gn_3168068_disjoint_gn_8505033, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3168068) & kge_leq(X, gn_8505033))).
+fof(bt_gn_3175395_disjoint_gn_3190538, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3175395) & kge_leq(X, gn_3190538))).
+fof(bt_gn_3175395_disjoint_gn_3194884, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3175395) & kge_leq(X, gn_3194884))).
+fof(bt_gn_3175395_disjoint_gn_3202326, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3175395) & kge_leq(X, gn_3202326))).
+fof(bt_gn_3175395_disjoint_gn_3277605, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3175395) & kge_leq(X, gn_3277605))).
+fof(bt_gn_3175395_disjoint_gn_6290252, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3175395) & kge_leq(X, gn_6290252))).
+fof(bt_gn_3175395_disjoint_gn_8505033, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3175395) & kge_leq(X, gn_8505033))).
+fof(bt_gn_3190538_disjoint_gn_3194884, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3190538) & kge_leq(X, gn_3194884))).
+fof(bt_gn_3190538_disjoint_gn_3202326, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3190538) & kge_leq(X, gn_3202326))).
+fof(bt_gn_3190538_disjoint_gn_3277605, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3190538) & kge_leq(X, gn_3277605))).
+fof(bt_gn_3190538_disjoint_gn_6290252, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3190538) & kge_leq(X, gn_6290252))).
+fof(bt_gn_3190538_disjoint_gn_8505033, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3190538) & kge_leq(X, gn_8505033))).
+fof(bt_gn_3194884_disjoint_gn_3202326, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3194884) & kge_leq(X, gn_3202326))).
+fof(bt_gn_3194884_disjoint_gn_3277605, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3194884) & kge_leq(X, gn_3277605))).
+fof(bt_gn_3194884_disjoint_gn_6290252, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3194884) & kge_leq(X, gn_6290252))).
+fof(bt_gn_3194884_disjoint_gn_8505033, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3194884) & kge_leq(X, gn_8505033))).
+fof(bt_gn_3202326_disjoint_gn_3277605, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3202326) & kge_leq(X, gn_3277605))).
+fof(bt_gn_3202326_disjoint_gn_6290252, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3202326) & kge_leq(X, gn_6290252))).
+fof(bt_gn_3202326_disjoint_gn_8505033, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3202326) & kge_leq(X, gn_8505033))).
+fof(bt_gn_3277605_disjoint_gn_6290252, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3277605) & kge_leq(X, gn_6290252))).
+fof(bt_gn_3277605_disjoint_gn_8505033, axiom,
+    ~ ? [X] : (kge_leq(X, gn_3277605) & kge_leq(X, gn_8505033))).
+fof(bt_gn_6290252_disjoint_gn_8505033, axiom,
+    ~ ? [X] : (kge_leq(X, gn_6290252) & kge_leq(X, gn_8505033))).
