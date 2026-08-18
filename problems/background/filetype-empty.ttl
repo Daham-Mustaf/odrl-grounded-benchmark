@@ -1,0 +1,22 @@
+# Background theory for the EU File type resource: empty.
+#
+# The table asserts no disjointness and no distinctness between its formats.
+# It does not, for instance, say that a PDF/A-1a file is not a PDF, nor that
+# it is one.  With this theory in force, two constraints naming different
+# formats are Unknown unless they name the same one.
+#
+# At nom the background theory carries more of a verdict than it does at the
+# other sorts, because there is no order for the resource to contribute.
+# Whatever separates two formats here was declared by the parties, and the
+# certificate marks it withdrawable.  That is the honest position: the
+# authority lists formats and says nothing about how they relate.
+#
+# Source: http://publications.europa.eu/resource/authority/file-type/20260715-0
+
+@prefix bt:      <https://w3id.org/odrl-kb/background#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+<https://w3id.org/odrl-kb/eu-file-type/empty> a bt:BackgroundTheory ;
+    dcterms:title "No declared distinctness or disjointness"@en ;
+    bt:appliesTo <https://w3id.org/odrl-kb/eu-file-type> ;
+    bt:assertionCount 0 .

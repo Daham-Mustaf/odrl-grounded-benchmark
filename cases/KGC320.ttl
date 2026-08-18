@@ -1,0 +1,53 @@
+@prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ft:      <http://publications.europa.eu/resource/authority/file-type/> .
+@prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+@prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+
+drk:bsb-offer-320 a odrl:Offer ;
+    dcterms:title "BSB offer: PDF"@en ;
+    odrl:assigner drk:bavarian-state-library ;
+    odrl:permission kgc:KGC320-offer-r1 .
+
+kgc:KGC320-offer-r1 a odrl:Permission ;
+    odrl:action odrl:use ;
+    odrl:target drk:bsb-manuscripts ;
+    odrl:constraint kgc:KGC320-offer-c1 .
+
+kgc:KGC320-offer-c1 a odrl:Constraint ;
+    odrl:leftOperand odrl:fileFormat ;
+    odrl:operator odrl:eq ;
+    odrl:rightOperand ft:PDF .
+
+drk:bnf-request-320 a odrl:Request ;
+    dcterms:title "BnF request: PDF/A-1a"@en ;
+    odrl:assignee drk:french-national-library ;
+    odrl:permission kgc:KGC320-request-r1 .
+
+kgc:KGC320-request-r1 a odrl:Permission ;
+    odrl:action odrl:use ;
+    odrl:target drk:bsb-manuscripts ;
+    odrl:constraint kgc:KGC320-request-c1 .
+
+kgc:KGC320-request-c1 a odrl:Constraint ;
+    odrl:leftOperand odrl:fileFormat ;
+    odrl:operator odrl:eq ;
+    odrl:rightOperand ft:PDFA1A .
+
+### Expected result #######################################################
+
+drk:KGC320-report a vrep:OperandReport ;
+    dcterms:identifier "KGC320" ;
+    vrep:firstPolicy drk:bsb-offer ;
+    vrep:secondPolicy drk:bnf-request ;
+    vrep:firstConstraint kgc:KGC320-offer-c1 ;
+    vrep:secondConstraint kgc:KGC320-request-c1 ;
+    vrep:leftOperand odrl:fileFormat ;
+    vrep:sort vrep:nom ;
+    vrep:resource <https://w3id.org/odrl-kb/eu-file-type> ;
+    vrep:backgroundTheory <https://w3id.org/odrl-kb/eu-file-type/empty> ;
+    vrep:verdict vrep:Unknown ;
+    vrep:certificate drk:KGC320-certificate .
+
+drk:KGC320-certificate a vrep:Models ;
+    rdfs:comment """Both queries are satisfiable.  The models differ on whether the two names denote one format.  No assertion in the table bears on the question, so the verdict reports the authority's silence rather than resolving it."""@en .

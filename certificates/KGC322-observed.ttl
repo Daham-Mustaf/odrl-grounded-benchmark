@@ -1,0 +1,7 @@
+kgc:KGC322-observed a vrep:Refutation ;
+    vrep:producedBy "Vampire" ;
+    vrep:proofArtefact <proofs/KGC322-2.tstp> ;
+    vrep:attributedAssertion [
+        vrep:premiseSource vrep:fromConstraints ;
+        vrep:formulaName "w_kgc322" ;
+        rdfs:label "w_kgc322"@en ] .

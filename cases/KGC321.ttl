@@ -1,0 +1,56 @@
+@prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ft:      <http://publications.europa.eu/resource/authority/file-type/> .
+@prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+@prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+
+drk:bsb-offer-321 a odrl:Offer ;
+    dcterms:title "BSB offer: PDF"@en ;
+    odrl:assigner drk:bavarian-state-library ;
+    odrl:permission kgc:KGC321-offer-r1 .
+
+kgc:KGC321-offer-r1 a odrl:Permission ;
+    odrl:action odrl:use ;
+    odrl:target drk:bsb-manuscripts ;
+    odrl:constraint kgc:KGC321-offer-c1 .
+
+kgc:KGC321-offer-c1 a odrl:Constraint ;
+    odrl:leftOperand odrl:fileFormat ;
+    odrl:operator odrl:eq ;
+    odrl:rightOperand ft:PDF .
+
+drk:bnf-request-321 a odrl:Request ;
+    dcterms:title "BnF request: PDF/A-1a"@en ;
+    odrl:assignee drk:french-national-library ;
+    odrl:permission kgc:KGC321-request-r1 .
+
+kgc:KGC321-request-r1 a odrl:Permission ;
+    odrl:action odrl:use ;
+    odrl:target drk:bsb-manuscripts ;
+    odrl:constraint kgc:KGC321-request-c1 .
+
+kgc:KGC321-request-c1 a odrl:Constraint ;
+    odrl:leftOperand odrl:fileFormat ;
+    odrl:operator odrl:eq ;
+    odrl:rightOperand ft:PDFA1A .
+
+### Expected result #######################################################
+
+drk:KGC321-report a vrep:OperandReport ;
+    dcterms:identifier "KGC321" ;
+    vrep:firstPolicy drk:bsb-offer ;
+    vrep:secondPolicy drk:bnf-request ;
+    vrep:firstConstraint kgc:KGC321-offer-c1 ;
+    vrep:secondConstraint kgc:KGC321-request-c1 ;
+    vrep:leftOperand odrl:fileFormat ;
+    vrep:sort vrep:nom ;
+    vrep:resource <https://w3id.org/odrl-kb/eu-file-type> ;
+    vrep:backgroundTheory <https://w3id.org/odrl-kb/eu-file-type/declared> ;
+    vrep:verdict vrep:Incompatible ;
+    vrep:certificate drk:KGC321-certificate .
+
+drk:KGC321-certificate a vrep:Refutation ;
+    rdfs:comment """The two constraints require one format to be both concepts, and the declaration holds them apart.  Compare KGC314, where a declaration moved a verdict over a resource that also published an order: here the declaration is doing all of the work, because the table publishes nothing at all."""@en ;
+    vrep:clashingConstraint kgc:KGC321-offer-c1, kgc:KGC321-request-c1 ;
+    vrep:premise [ vrep:premiseSource vrep:fromBackgroundTheory ;
+                   rdfs:label "ft:PDF and ft:PDFA1A are declared distinct"@en ] .

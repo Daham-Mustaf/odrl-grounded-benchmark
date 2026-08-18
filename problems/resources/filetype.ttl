@@ -1,0 +1,953 @@
+# EU File type: the concepts the authority publishes, and no order.
+#
+# The table relates none of its concepts to any other.  Every one is
+# a top concept of the scheme; there is no skos:broader, narrower,
+# related, or mapping relation between them.  This file therefore
+# has no order assertions, and that is a property of the table.
+#
+# The table does classify its formats, through boolean attributes
+# such as euvoc:isDocumentFormat.  Those are not read here: a class
+# recorded as an attribute is not a concept, and turning it into one
+# would add an order the authority chose not to publish.
+#
+# Two formats are marked as replacing earlier ones (Formex 2, 3, 4).
+# Supersession between versions is not identity, so it is not read
+# as an order assertion either.
+#
+# Source    : EU Vocabularies, File type authority table, SKOS_AP_ACT
+# Version   : 20260715-0
+# VersionIRI: http://publications.europa.eu/resource/authority/file-type/20260715-0
+# Published : 2026-07-15
+# Retrieved : 2026-08-18
+# Licence   : Creative Commons Attribution 4.0 International
+# Governance: Interinstitutional Metadata and Formats Committee; Publications Office of the European Union
+
+@prefix ft:      <http://publications.europa.eu/resource/authority/file-type/> .
+@prefix odrlkb:  <https://w3id.org/odrl-kb/eu-file-type#> .
+@prefix dcat:    <http://www.w3.org/ns/dcat#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+
+<https://w3id.org/odrl-kb/eu-file-type> a dcat:Dataset ;
+    dcterms:title "EU File type, concept set"@en ;
+    dcterms:source <http://publications.europa.eu/resource/authority/file-type/20260715-0> ;
+    dcterms:license <http://creativecommons.org/licenses/by/4.0/> ;
+    odrlkb:conceptCount 228 ;
+    odrlkb:orderAssertionCount 0 .
+
+odrlkb:7z a odrlkb:FileType ;
+    rdfs:label "7z"@en ;
+    dcterms:identifier ft:7Z .
+
+odrlkb:aab a odrlkb:FileType ;
+    rdfs:label "AAB"@en ;
+    dcterms:identifier ft:AAB .
+
+odrlkb:aac a odrlkb:FileType ;
+    rdfs:label "AAC"@en ;
+    dcterms:identifier ft:AAC .
+
+odrlkb:akn4eu a odrlkb:FileType ;
+    rdfs:label "AKN4EU file"@en ;
+    dcterms:identifier ft:AKN4EU .
+
+odrlkb:akn4eu_leg a odrlkb:FileType ;
+    rdfs:label "AKN4EU LEG"@en ;
+    dcterms:identifier ft:AKN4EU_LEG .
+
+odrlkb:akn4eu_zip a odrlkb:FileType ;
+    rdfs:label "AKN4EU ZIP"@en ;
+    owl:deprecated true ;
+    dcterms:identifier ft:AKN4EU_ZIP .
+
+odrlkb:apk a odrlkb:FileType ;
+    rdfs:label "APK"@en ;
+    dcterms:identifier ft:APK .
+
+odrlkb:appx a odrlkb:FileType ;
+    rdfs:label "AppX"@en ;
+    dcterms:identifier ft:APPX .
+
+odrlkb:arc a odrlkb:FileType ;
+    rdfs:label "ARC"@en ;
+    dcterms:identifier ft:ARC .
+
+odrlkb:arcinfo_cov a odrlkb:FileType ;
+    rdfs:label "ArcInfo coverage"@en ;
+    dcterms:identifier ft:ARCINFO_COV .
+
+odrlkb:arc_gz a odrlkb:FileType ;
+    rdfs:label "ARC GZ"@en ;
+    dcterms:identifier ft:ARC_GZ .
+
+odrlkb:arff a odrlkb:FileType ;
+    rdfs:label "ARFF"@en ;
+    dcterms:identifier ft:ARFF .
+
+odrlkb:arj a odrlkb:FileType ;
+    rdfs:label "ARJ"@en ;
+    dcterms:identifier ft:ARJ .
+
+odrlkb:arrow_file a odrlkb:FileType ;
+    rdfs:label "Arrow file"@en ;
+    dcterms:identifier ft:ARROW_FILE .
+
+odrlkb:arrow_stream a odrlkb:FileType ;
+    rdfs:label "Arrow stream"@en ;
+    dcterms:identifier ft:ARROW_STREAM .
+
+odrlkb:atom a odrlkb:FileType ;
+    rdfs:label "Atom Feed"@en ;
+    dcterms:identifier ft:ATOM .
+
+odrlkb:azw a odrlkb:FileType ;
+    rdfs:label "Amazon Kindle eBook"@en ;
+    dcterms:identifier ft:AZW .
+
+odrlkb:bin a odrlkb:FileType ;
+    rdfs:label "Binary Data"@en ;
+    dcterms:identifier ft:BIN .
+
+odrlkb:bits a odrlkb:FileType ;
+    rdfs:label "BITS XML"@en ;
+    dcterms:identifier ft:BITS .
+
+odrlkb:bmp a odrlkb:FileType ;
+    rdfs:label "Bitmap Image File"@en ;
+    dcterms:identifier ft:BMP .
+
+odrlkb:bwf a odrlkb:FileType ;
+    rdfs:label "BWF"@en ;
+    dcterms:identifier ft:BWF .
+
+odrlkb:bzip2 a odrlkb:FileType ;
+    rdfs:label "bzip2"@en ;
+    dcterms:identifier ft:BZIP2 .
+
+odrlkb:css a odrlkb:FileType ;
+    rdfs:label "CSS"@en ;
+    dcterms:identifier ft:CSS .
+
+odrlkb:csv a odrlkb:FileType ;
+    rdfs:label "CSV"@en ;
+    dcterms:identifier ft:CSV .
+
+odrlkb:dapk a odrlkb:FileType ;
+    rdfs:label "DAPK"@en ;
+    dcterms:identifier ft:DAPK .
+
+odrlkb:dbf a odrlkb:FileType ;
+    rdfs:label "DBF"@en ;
+    dcterms:identifier ft:DBF .
+
+odrlkb:dcr a odrlkb:FileType ;
+    rdfs:label "DCR File"@en ;
+    dcterms:identifier ft:DCR .
+
+odrlkb:deb a odrlkb:FileType ;
+    rdfs:label "deb"@en ;
+    dcterms:identifier ft:DEB .
+
+odrlkb:dgn a odrlkb:FileType ;
+    rdfs:label "DGN"@en ;
+    dcterms:identifier ft:DGN .
+
+odrlkb:dmg a odrlkb:FileType ;
+    rdfs:label "DMG"@en ;
+    dcterms:identifier ft:DMG .
+
+odrlkb:dmp a odrlkb:FileType ;
+    rdfs:label "Oracle Dump"@en ;
+    dcterms:identifier ft:DMP .
+
+odrlkb:doc a odrlkb:FileType ;
+    rdfs:label "Word DOC"@en ;
+    dcterms:identifier ft:DOC .
+
+odrlkb:docx a odrlkb:FileType ;
+    rdfs:label "Word DOCX"@en ;
+    dcterms:identifier ft:DOCX .
+
+odrlkb:dtd_sgml a odrlkb:FileType ;
+    rdfs:label "SGML DTD"@en ;
+    dcterms:identifier ft:DTD_SGML .
+
+odrlkb:dtd_xml a odrlkb:FileType ;
+    rdfs:label "XML DTD"@en ;
+    dcterms:identifier ft:DTD_XML .
+
+odrlkb:dwca a odrlkb:FileType ;
+    rdfs:label "DwC-A"@en ;
+    dcterms:identifier ft:DWCA .
+
+odrlkb:dwg a odrlkb:FileType ;
+    rdfs:label "DWG"@en ;
+    dcterms:identifier ft:DWG .
+
+odrlkb:dxf a odrlkb:FileType ;
+    rdfs:label "DXF"@en ;
+    dcterms:identifier ft:DXF .
+
+odrlkb:e00 a odrlkb:FileType ;
+    rdfs:label "E00"@en ;
+    dcterms:identifier ft:E00 .
+
+odrlkb:ear a odrlkb:FileType ;
+    rdfs:label "EAR"@en ;
+    dcterms:identifier ft:EAR .
+
+odrlkb:ecw a odrlkb:FileType ;
+    rdfs:label "ECW"@en ;
+    dcterms:identifier ft:ECW .
+
+odrlkb:eforms_xml a odrlkb:FileType ;
+    rdfs:label "eForms XML"@en ;
+    dcterms:identifier ft:EFORMS_XML .
+
+odrlkb:eps a odrlkb:FileType ;
+    rdfs:label "Encapsulated Postscript"@en ;
+    dcterms:identifier ft:EPS .
+
+odrlkb:epub a odrlkb:FileType ;
+    rdfs:label "EPUB"@en ;
+    dcterms:identifier ft:EPUB .
+
+odrlkb:etsi_tsl a odrlkb:FileType ;
+    rdfs:label "ETSI TSL"@en ;
+    dcterms:identifier ft:ETSI_TSL .
+
+odrlkb:etsi_xml a odrlkb:FileType ;
+    rdfs:label "ETSI signature validation report"@en ;
+    dcterms:identifier ft:ETSI_XML .
+
+odrlkb:exe a odrlkb:FileType ;
+    rdfs:label "EXE"@en ;
+    dcterms:identifier ft:EXE .
+
+odrlkb:fmx2 a odrlkb:FileType ;
+    rdfs:label "Formex 2"@en ;
+    owl:deprecated true ;
+    dcterms:identifier ft:FMX2 .
+
+odrlkb:fmx3 a odrlkb:FileType ;
+    rdfs:label "Formex 3"@en ;
+    owl:deprecated true ;
+    dcterms:identifier ft:FMX3 .
+
+odrlkb:fmx4 a odrlkb:FileType ;
+    rdfs:label "Formex 4"@en ;
+    dcterms:identifier ft:FMX4 .
+
+odrlkb:fmx4_zip a odrlkb:FileType ;
+    rdfs:label "FMX4 ZIP"@en ;
+    dcterms:identifier ft:FMX4_ZIP .
+
+odrlkb:gdb a odrlkb:FileType ;
+    rdfs:label "Esri File Geodatabase"@en ;
+    dcterms:identifier ft:GDB .
+
+odrlkb:geojson a odrlkb:FileType ;
+    rdfs:label "GeoJSON"@en ;
+    dcterms:identifier ft:GEOJSON .
+
+odrlkb:geotiff a odrlkb:FileType ;
+    rdfs:label "GeoTIFF"@en ;
+    dcterms:identifier ft:GEOTIFF .
+
+odrlkb:gif a odrlkb:FileType ;
+    rdfs:label "GIF"@en ;
+    dcterms:identifier ft:GIF .
+
+odrlkb:gml a odrlkb:FileType ;
+    rdfs:label "GML"@en ;
+    dcterms:identifier ft:GML .
+
+odrlkb:gmz a odrlkb:FileType ;
+    rdfs:label "Zipped GML"@en ;
+    dcterms:identifier ft:GMZ .
+
+odrlkb:gpkg a odrlkb:FileType ;
+    rdfs:label "GeoPackage"@en ;
+    dcterms:identifier ft:GPKG .
+
+odrlkb:gpx a odrlkb:FileType ;
+    rdfs:label "GPX"@en ;
+    dcterms:identifier ft:GPX .
+
+odrlkb:grid a odrlkb:FileType ;
+    rdfs:label "Esri binary grid"@en ;
+    dcterms:identifier ft:GRID .
+
+odrlkb:grid_ascii a odrlkb:FileType ;
+    rdfs:label "Esri ASCII grid"@en ;
+    dcterms:identifier ft:GRID_ASCII .
+
+odrlkb:gtfs a odrlkb:FileType ;
+    rdfs:label "GTFS"@en ;
+    dcterms:identifier ft:GTFS .
+
+odrlkb:gzip a odrlkb:FileType ;
+    rdfs:label "GNU zip"@en ;
+    dcterms:identifier ft:GZIP .
+
+odrlkb:hdf a odrlkb:FileType ;
+    rdfs:label "HDF"@en ;
+    dcterms:identifier ft:HDF .
+
+odrlkb:hdt a odrlkb:FileType ;
+    rdfs:label "HDT"@en ;
+    dcterms:identifier ft:HDT .
+
+odrlkb:html a odrlkb:FileType ;
+    rdfs:label "HTML"@en ;
+    dcterms:identifier ft:HTML .
+
+odrlkb:html5 a odrlkb:FileType ;
+    rdfs:label "HTML5"@en ;
+    dcterms:identifier ft:HTML5 .
+
+odrlkb:html_simpl a odrlkb:FileType ;
+    rdfs:label "HTML simplified"@en ;
+    dcterms:identifier ft:HTML_SIMPL .
+
+odrlkb:ics a odrlkb:FileType ;
+    rdfs:label "ICalendar"@en ;
+    dcterms:identifier ft:ICS .
+
+odrlkb:immc_xml a odrlkb:FileType ;
+    rdfs:label "IMMC XML message"@en ;
+    dcterms:identifier ft:IMMC_XML .
+
+odrlkb:indd a odrlkb:FileType ;
+    rdfs:label "INDD"@en ;
+    dcterms:identifier ft:INDD .
+
+odrlkb:ipa a odrlkb:FileType ;
+    rdfs:label "IPA"@en ;
+    dcterms:identifier ft:IPA .
+
+odrlkb:iso a odrlkb:FileType ;
+    rdfs:label "ISO image"@en ;
+    dcterms:identifier ft:ISO .
+
+odrlkb:iso_zip a odrlkb:FileType ;
+    rdfs:label "Zipped ISO image"@en ;
+    dcterms:identifier ft:ISO_ZIP .
+
+odrlkb:jar a odrlkb:FileType ;
+    rdfs:label "JAR"@en ;
+    dcterms:identifier ft:JAR .
+
+odrlkb:jats a odrlkb:FileType ;
+    rdfs:label "JATS XML"@en ;
+    dcterms:identifier ft:JATS .
+
+odrlkb:jpeg a odrlkb:FileType ;
+    rdfs:label "JPEG"@en ;
+    dcterms:identifier ft:JPEG .
+
+odrlkb:jpeg2000 a odrlkb:FileType ;
+    rdfs:label "JPEG 2000"@en ;
+    dcterms:identifier ft:JPEG2000 .
+
+odrlkb:js a odrlkb:FileType ;
+    rdfs:label "JavaScript"@en ;
+    dcterms:identifier ft:JS .
+
+odrlkb:json a odrlkb:FileType ;
+    rdfs:label "JSON"@en ;
+    dcterms:identifier ft:JSON .
+
+odrlkb:json_ld a odrlkb:FileType ;
+    rdfs:label "JSON-LD"@en ;
+    dcterms:identifier ft:JSON_LD .
+
+odrlkb:kml a odrlkb:FileType ;
+    rdfs:label "KML"@en ;
+    dcterms:identifier ft:KML .
+
+odrlkb:kmz a odrlkb:FileType ;
+    rdfs:label "KMZ"@en ;
+    dcterms:identifier ft:KMZ .
+
+odrlkb:las a odrlkb:FileType ;
+    rdfs:label "LASer file"@en ;
+    dcterms:identifier ft:LAS .
+
+odrlkb:laz a odrlkb:FileType ;
+    rdfs:label "Compressed LAS file"@en ;
+    dcterms:identifier ft:LAZ .
+
+odrlkb:leg a odrlkb:FileType ;
+    rdfs:label "LEG"@en ;
+    owl:deprecated true ;
+    dcterms:identifier ft:LEG .
+
+odrlkb:legalhtml a odrlkb:FileType ;
+    rdfs:label "LegalHTML"@en ;
+    dcterms:identifier ft:LEGALHTML .
+
+odrlkb:lha a odrlkb:FileType ;
+    rdfs:label "LHA"@en ;
+    dcterms:identifier ft:LHA .
+
+odrlkb:lpk a odrlkb:FileType ;
+    rdfs:label "Layer package"@en ;
+    dcterms:identifier ft:LPK .
+
+odrlkb:lzip a odrlkb:FileType ;
+    rdfs:label "lzip"@en ;
+    dcterms:identifier ft:LZIP .
+
+odrlkb:lzma a odrlkb:FileType ;
+    rdfs:label "lzma"@en ;
+    dcterms:identifier ft:LZMA .
+
+odrlkb:lzo a odrlkb:FileType ;
+    rdfs:label "lzo"@en ;
+    dcterms:identifier ft:LZO .
+
+odrlkb:map_prvw a odrlkb:FileType ;
+    rdfs:label "ArcGIS Map Preview"@en ;
+    dcterms:identifier ft:MAP_PRVW .
+
+odrlkb:map_srvc a odrlkb:FileType ;
+    rdfs:label "ArcGIS Map Service"@en ;
+    dcterms:identifier ft:MAP_SRVC .
+
+odrlkb:markdown a odrlkb:FileType ;
+    rdfs:label "Markdown"@en ;
+    dcterms:identifier ft:MARKDOWN .
+
+odrlkb:mathml a odrlkb:FileType ;
+    rdfs:label "MathML"@en ;
+    dcterms:identifier ft:MATHML .
+
+odrlkb:matlab_mat a odrlkb:FileType ;
+    rdfs:label "MATLAB MAT"@en ;
+    dcterms:identifier ft:MATLAB_MAT .
+
+odrlkb:mbox a odrlkb:FileType ;
+    rdfs:label "MBOX"@en ;
+    dcterms:identifier ft:MBOX .
+
+odrlkb:mdb a odrlkb:FileType ;
+    rdfs:label "MDB"@en ;
+    dcterms:identifier ft:MDB .
+
+odrlkb:mets a odrlkb:FileType ;
+    rdfs:label "METS XML"@en ;
+    dcterms:identifier ft:METS .
+
+odrlkb:mets_zip a odrlkb:FileType ;
+    rdfs:label "METS package"@en ;
+    dcterms:identifier ft:METS_ZIP .
+
+odrlkb:mhtml a odrlkb:FileType ;
+    rdfs:label "MHTML"@en ;
+    dcterms:identifier ft:MHTML .
+
+odrlkb:mif_mid a odrlkb:FileType ;
+    rdfs:label "MIF/MID"@en ;
+    dcterms:identifier ft:MIF_MID .
+
+odrlkb:mobi a odrlkb:FileType ;
+    rdfs:label "Mobipocket eBook"@en ;
+    dcterms:identifier ft:MOBI .
+
+odrlkb:mop a odrlkb:FileType ;
+    rdfs:label "MOP"@en ;
+    dcterms:identifier ft:MOP .
+
+odrlkb:mov a odrlkb:FileType ;
+    rdfs:label "MOV"@en ;
+    dcterms:identifier ft:MOV .
+
+odrlkb:mp3 a odrlkb:FileType ;
+    rdfs:label "MP3"@en ;
+    dcterms:identifier ft:MP3 .
+
+odrlkb:mpeg2 a odrlkb:FileType ;
+    rdfs:label "MPEG-2"@en ;
+    dcterms:identifier ft:MPEG2 .
+
+odrlkb:mpeg4 a odrlkb:FileType ;
+    rdfs:label "MPEG-4"@en ;
+    dcterms:identifier ft:MPEG4 .
+
+odrlkb:mpeg4_avc a odrlkb:FileType ;
+    rdfs:label "MPEG-4 AVC"@en ;
+    dcterms:identifier ft:MPEG4_AVC .
+
+odrlkb:mrsid a odrlkb:FileType ;
+    rdfs:label "MrSID"@en ;
+    dcterms:identifier ft:MRSID .
+
+odrlkb:msg_http a odrlkb:FileType ;
+    rdfs:label "HTTP Message"@en ;
+    dcterms:identifier ft:MSG_HTTP .
+
+odrlkb:msi a odrlkb:FileType ;
+    rdfs:label "MSI"@en ;
+    dcterms:identifier ft:MSI .
+
+odrlkb:mxd a odrlkb:FileType ;
+    rdfs:label "MXD"@en ;
+    dcterms:identifier ft:MXD .
+
+odrlkb:n3 a odrlkb:FileType ;
+    rdfs:label "N3"@en ;
+    dcterms:identifier ft:N3 .
+
+odrlkb:netcdf a odrlkb:FileType ;
+    rdfs:label "NetCDF"@en ;
+    dcterms:identifier ft:NETCDF .
+
+odrlkb:oapk a odrlkb:FileType ;
+    rdfs:label "OAPK"@en ;
+    dcterms:identifier ft:OAPK .
+
+odrlkb:octet a odrlkb:FileType ;
+    rdfs:label "Octet Stream"@en ;
+    dcterms:identifier ft:OCTET .
+
+odrlkb:odb a odrlkb:FileType ;
+    rdfs:label "OpenDocument Database"@en ;
+    dcterms:identifier ft:ODB .
+
+odrlkb:odc a odrlkb:FileType ;
+    rdfs:label "OpenDocument Chart"@en ;
+    dcterms:identifier ft:ODC .
+
+odrlkb:odf a odrlkb:FileType ;
+    rdfs:label "ODF"@en ;
+    dcterms:identifier ft:ODF .
+
+odrlkb:odg a odrlkb:FileType ;
+    rdfs:label "OpenDocument Image"@en ;
+    dcterms:identifier ft:ODG .
+
+odrlkb:odp a odrlkb:FileType ;
+    rdfs:label "ODP"@en ;
+    dcterms:identifier ft:ODP .
+
+odrlkb:ods a odrlkb:FileType ;
+    rdfs:label "ODS"@en ;
+    dcterms:identifier ft:ODS .
+
+odrlkb:odt a odrlkb:FileType ;
+    rdfs:label "ODT"@en ;
+    dcterms:identifier ft:ODT .
+
+odrlkb:ogcfeat a odrlkb:FileType ;
+    rdfs:label "OGCFeat"@en ;
+    dcterms:identifier ft:OGCFEAT .
+
+odrlkb:op_datpro a odrlkb:FileType ;
+    rdfs:label "Provisional data"@en ;
+    dcterms:identifier ft:OP_DATPRO .
+
+odrlkb:ovf a odrlkb:FileType ;
+    rdfs:label "OVF"@en ;
+    dcterms:identifier ft:OVF .
+
+odrlkb:owl a odrlkb:FileType ;
+    rdfs:label "OWL"@en ;
+    dcterms:identifier ft:OWL .
+
+odrlkb:parquet a odrlkb:FileType ;
+    rdfs:label "Parquet"@en ;
+    dcterms:identifier ft:PARQUET .
+
+odrlkb:pdf a odrlkb:FileType ;
+    rdfs:label "PDF"@en ;
+    dcterms:identifier ft:PDF .
+
+odrlkb:pdf1x a odrlkb:FileType ;
+    rdfs:label "PDF1X"@en ;
+    dcterms:identifier ft:PDF1X .
+
+odrlkb:pdfa1a a odrlkb:FileType ;
+    rdfs:label "PDF/A-1a"@en ;
+    dcterms:identifier ft:PDFA1A .
+
+odrlkb:pdfa1b a odrlkb:FileType ;
+    rdfs:label "PDF/A-1b"@en ;
+    dcterms:identifier ft:PDFA1B .
+
+odrlkb:pdfa2a a odrlkb:FileType ;
+    rdfs:label "PDF/A-2a"@en ;
+    dcterms:identifier ft:PDFA2A .
+
+odrlkb:pdfa2b a odrlkb:FileType ;
+    rdfs:label "PDF/A-2b"@en ;
+    dcterms:identifier ft:PDFA2B .
+
+odrlkb:pdfa3 a odrlkb:FileType ;
+    rdfs:label "PDF/A-3"@en ;
+    dcterms:identifier ft:PDFA3 .
+
+odrlkb:pdfa3a a odrlkb:FileType ;
+    rdfs:label "PDF/A-3a"@en ;
+    dcterms:identifier ft:PDFA3A .
+
+odrlkb:pdfa3b a odrlkb:FileType ;
+    rdfs:label "PDF/A-3b"@en ;
+    dcterms:identifier ft:PDFA3B .
+
+odrlkb:pdfa3u a odrlkb:FileType ;
+    rdfs:label "PDF/A-3u"@en ;
+    dcterms:identifier ft:PDFA3U .
+
+odrlkb:pdfua a odrlkb:FileType ;
+    rdfs:label "PDF/UA"@en ;
+    dcterms:identifier ft:PDFUA .
+
+odrlkb:pdfx a odrlkb:FileType ;
+    rdfs:label "PDF/X"@en ;
+    dcterms:identifier ft:PDFX .
+
+odrlkb:pdfx1a a odrlkb:FileType ;
+    rdfs:label "PDF/X-1a"@en ;
+    dcterms:identifier ft:PDFX1A .
+
+odrlkb:pdfx2a a odrlkb:FileType ;
+    rdfs:label "PDF/X-2a"@en ;
+    dcterms:identifier ft:PDFX2A .
+
+odrlkb:pdfx4 a odrlkb:FileType ;
+    rdfs:label "PDF/X-4"@en ;
+    dcterms:identifier ft:PDFX4 .
+
+odrlkb:pl a odrlkb:FileType ;
+    rdfs:label "Perl script"@en ;
+    dcterms:identifier ft:PL .
+
+odrlkb:png a odrlkb:FileType ;
+    rdfs:label "PNG"@en ;
+    dcterms:identifier ft:PNG .
+
+odrlkb:pps a odrlkb:FileType ;
+    rdfs:label "PowerPoint Slide Show"@en ;
+    dcterms:identifier ft:PPS .
+
+odrlkb:ppsx a odrlkb:FileType ;
+    rdfs:label "PowerPoint PPSX"@en ;
+    dcterms:identifier ft:PPSX .
+
+odrlkb:ppt a odrlkb:FileType ;
+    rdfs:label "PowerPoint PPT"@en ;
+    dcterms:identifier ft:PPT .
+
+odrlkb:pptx a odrlkb:FileType ;
+    rdfs:label "PowerPoint PPTX"@en ;
+    dcterms:identifier ft:PPTX .
+
+odrlkb:ps a odrlkb:FileType ;
+    rdfs:label "PS"@en ;
+    dcterms:identifier ft:PS .
+
+odrlkb:psd a odrlkb:FileType ;
+    rdfs:label "PSD"@en ;
+    dcterms:identifier ft:PSD .
+
+odrlkb:pwp a odrlkb:FileType ;
+    rdfs:label "PWP"@en ;
+    dcterms:identifier ft:PWP .
+
+odrlkb:qgs a odrlkb:FileType ;
+    rdfs:label "QGS"@en ;
+    dcterms:identifier ft:QGS .
+
+odrlkb:rar a odrlkb:FileType ;
+    rdfs:label "RAR"@en ;
+    dcterms:identifier ft:RAR .
+
+odrlkb:rdata a odrlkb:FileType ;
+    rdfs:label "RData"@en ;
+    dcterms:identifier ft:RDATA .
+
+odrlkb:rdf a odrlkb:FileType ;
+    rdfs:label "RDF"@en ;
+    dcterms:identifier ft:RDF .
+
+odrlkb:rdfa a odrlkb:FileType ;
+    rdfs:label "RDFa"@en ;
+    dcterms:identifier ft:RDFA .
+
+odrlkb:rdf_n_quads a odrlkb:FileType ;
+    rdfs:label "RDF N-Quads"@en ;
+    dcterms:identifier ft:RDF_N_QUADS .
+
+odrlkb:rdf_n_triples a odrlkb:FileType ;
+    rdfs:label "RDF N-Triples"@en ;
+    dcterms:identifier ft:RDF_N_TRIPLES .
+
+odrlkb:rdf_thrift a odrlkb:FileType ;
+    rdfs:label "RDF Thrift"@en ;
+    dcterms:identifier ft:RDF_THRIFT .
+
+odrlkb:rdf_trig a odrlkb:FileType ;
+    rdfs:label "RDF TriG"@en ;
+    dcterms:identifier ft:RDF_TRIG .
+
+odrlkb:rdf_trix a odrlkb:FileType ;
+    rdfs:label "RDF TriX"@en ;
+    dcterms:identifier ft:RDF_TRIX .
+
+odrlkb:rdf_turtle a odrlkb:FileType ;
+    rdfs:label "RDF Turtle"@en ;
+    dcterms:identifier ft:RDF_TURTLE .
+
+odrlkb:rdf_xml a odrlkb:FileType ;
+    rdfs:label "RDF XML"@en ;
+    dcterms:identifier ft:RDF_XML .
+
+odrlkb:rest a odrlkb:FileType ;
+    rdfs:label "Esri REST"@en ;
+    dcterms:identifier ft:REST .
+
+odrlkb:rpm a odrlkb:FileType ;
+    rdfs:label "RPM"@en ;
+    dcterms:identifier ft:RPM .
+
+odrlkb:rss a odrlkb:FileType ;
+    rdfs:label "RSS feed"@en ;
+    dcterms:identifier ft:RSS .
+
+odrlkb:rtf a odrlkb:FileType ;
+    rdfs:label "RTF"@en ;
+    dcterms:identifier ft:RTF .
+
+odrlkb:sas a odrlkb:FileType ;
+    rdfs:label "SAS"@en ;
+    dcterms:identifier ft:SAS .
+
+odrlkb:sb3 a odrlkb:FileType ;
+    rdfs:label "sb3"@en ;
+    dcterms:identifier ft:SB3 .
+
+odrlkb:sch a odrlkb:FileType ;
+    rdfs:label "Schematron"@en ;
+    dcterms:identifier ft:SCH .
+
+odrlkb:schema_xml a odrlkb:FileType ;
+    rdfs:label "XML schema"@en ;
+    dcterms:identifier ft:SCHEMA_XML .
+
+odrlkb:sdmx a odrlkb:FileType ;
+    rdfs:label "SDMX"@en ;
+    dcterms:identifier ft:SDMX .
+
+odrlkb:sgml a odrlkb:FileType ;
+    rdfs:label "SGML"@en ;
+    dcterms:identifier ft:SGML .
+
+odrlkb:shp a odrlkb:FileType ;
+    rdfs:label "Esri Shape"@en ;
+    dcterms:identifier ft:SHP .
+
+odrlkb:skos_xml a odrlkb:FileType ;
+    rdfs:label "SKOS"@en ;
+    dcterms:identifier ft:SKOS_XML .
+
+odrlkb:sparqlq a odrlkb:FileType ;
+    rdfs:label "SPARQL"@en ;
+    dcterms:identifier ft:SPARQLQ .
+
+odrlkb:sparqlqres a odrlkb:FileType ;
+    rdfs:label "SPARQL results"@en ;
+    dcterms:identifier ft:SPARQLQRES .
+
+odrlkb:spss_sav a odrlkb:FileType ;
+    rdfs:label "SPSS SAV"@en ;
+    dcterms:identifier ft:SPSS_SAV .
+
+odrlkb:sql a odrlkb:FileType ;
+    rdfs:label "SQL"@en ;
+    dcterms:identifier ft:SQL .
+
+odrlkb:stata_dta a odrlkb:FileType ;
+    rdfs:label "Stata DTA"@en ;
+    dcterms:identifier ft:STATA_DTA .
+
+odrlkb:stl a odrlkb:FileType ;
+    rdfs:label "StL"@en ;
+    dcterms:identifier ft:STL .
+
+odrlkb:svg a odrlkb:FileType ;
+    rdfs:label "SVG"@en ;
+    dcterms:identifier ft:SVG .
+
+odrlkb:swm a odrlkb:FileType ;
+    rdfs:label "SWM"@en ;
+    dcterms:identifier ft:SWM .
+
+odrlkb:tab a odrlkb:FileType ;
+    rdfs:label "MapInfo TAB file"@en ;
+    dcterms:identifier ft:TAB .
+
+odrlkb:tab_rstr a odrlkb:FileType ;
+    rdfs:label "MapInfo TAB raster file"@en ;
+    dcterms:identifier ft:TAB_RSTR .
+
+odrlkb:tar a odrlkb:FileType ;
+    rdfs:label "TAR"@en ;
+    dcterms:identifier ft:TAR .
+
+odrlkb:tar_gz a odrlkb:FileType ;
+    rdfs:label "TAR GZ"@en ;
+    dcterms:identifier ft:TAR_GZ .
+
+odrlkb:tar_xz a odrlkb:FileType ;
+    rdfs:label "TAR XZ"@en ;
+    dcterms:identifier ft:TAR_XZ .
+
+odrlkb:thrift_binary a odrlkb:FileType ;
+    rdfs:label "Thrift binary"@en ;
+    dcterms:identifier ft:THRIFT_BINARY .
+
+odrlkb:thrift_compact a odrlkb:FileType ;
+    rdfs:label "Thrift compact"@en ;
+    dcterms:identifier ft:THRIFT_COMPACT .
+
+odrlkb:thrift_json a odrlkb:FileType ;
+    rdfs:label "Thrift JSON"@en ;
+    dcterms:identifier ft:THRIFT_JSON .
+
+odrlkb:tiff a odrlkb:FileType ;
+    rdfs:label "TIFF"@en ;
+    dcterms:identifier ft:TIFF .
+
+odrlkb:tiff_fx a odrlkb:FileType ;
+    rdfs:label "TIFF FX"@en ;
+    dcterms:identifier ft:TIFF_FX .
+
+odrlkb:tmx a odrlkb:FileType ;
+    rdfs:label "TMX"@en ;
+    dcterms:identifier ft:TMX .
+
+odrlkb:tsv a odrlkb:FileType ;
+    rdfs:label "TSV"@en ;
+    dcterms:identifier ft:TSV .
+
+odrlkb:txt a odrlkb:FileType ;
+    rdfs:label "Plain text"@en ;
+    dcterms:identifier ft:TXT .
+
+odrlkb:ungen a odrlkb:FileType ;
+    rdfs:label "Ungen"@en ;
+    dcterms:identifier ft:UNGEN .
+
+odrlkb:vcf a odrlkb:FileType ;
+    rdfs:label "VCF"@en ;
+    dcterms:identifier ft:VCF .
+
+odrlkb:war a odrlkb:FileType ;
+    rdfs:label "WAR"@en ;
+    dcterms:identifier ft:WAR .
+
+odrlkb:warc a odrlkb:FileType ;
+    rdfs:label "WARC"@en ;
+    dcterms:identifier ft:WARC .
+
+odrlkb:warc_gz a odrlkb:FileType ;
+    rdfs:label "WARC GZ"@en ;
+    dcterms:identifier ft:WARC_GZ .
+
+odrlkb:wav a odrlkb:FileType ;
+    rdfs:label "WAV"@en ;
+    dcterms:identifier ft:WAV .
+
+odrlkb:wcs_srvc a odrlkb:FileType ;
+    rdfs:label "WCS"@en ;
+    dcterms:identifier ft:WCS_SRVC .
+
+odrlkb:webp a odrlkb:FileType ;
+    rdfs:label "WebP"@en ;
+    dcterms:identifier ft:WEBP .
+
+odrlkb:wfs_srvc a odrlkb:FileType ;
+    rdfs:label "WFS"@en ;
+    dcterms:identifier ft:WFS_SRVC .
+
+odrlkb:wim a odrlkb:FileType ;
+    rdfs:label "WIM"@en ;
+    dcterms:identifier ft:WIM .
+
+odrlkb:wms_srvc a odrlkb:FileType ;
+    rdfs:label "WMS"@en ;
+    dcterms:identifier ft:WMS_SRVC .
+
+odrlkb:wmts_srvc a odrlkb:FileType ;
+    rdfs:label "WMTS"@en ;
+    dcterms:identifier ft:WMTS_SRVC .
+
+odrlkb:world a odrlkb:FileType ;
+    rdfs:label "World file"@en ;
+    dcterms:identifier ft:WORLD .
+
+odrlkb:xhtml a odrlkb:FileType ;
+    rdfs:label "XHTML"@en ;
+    dcterms:identifier ft:XHTML .
+
+odrlkb:xhtml5 a odrlkb:FileType ;
+    rdfs:label "XHTML5"@en ;
+    dcterms:identifier ft:XHTML5 .
+
+odrlkb:xhtml_simpl a odrlkb:FileType ;
+    rdfs:label "XHTML simplified"@en ;
+    dcterms:identifier ft:XHTML_SIMPL .
+
+odrlkb:xliff a odrlkb:FileType ;
+    rdfs:label "XLIFF"@en ;
+    dcterms:identifier ft:XLIFF .
+
+odrlkb:xls a odrlkb:FileType ;
+    rdfs:label "Excel XLS"@en ;
+    dcterms:identifier ft:XLS .
+
+odrlkb:xlsb a odrlkb:FileType ;
+    rdfs:label "XLSB"@en ;
+    dcterms:identifier ft:XLSB .
+
+odrlkb:xlsm a odrlkb:FileType ;
+    rdfs:label "XLSM"@en ;
+    dcterms:identifier ft:XLSM .
+
+odrlkb:xlsx a odrlkb:FileType ;
+    rdfs:label "Excel XLSX"@en ;
+    dcterms:identifier ft:XLSX .
+
+odrlkb:xml a odrlkb:FileType ;
+    rdfs:label "XML"@en ;
+    dcterms:identifier ft:XML .
+
+odrlkb:xslfo a odrlkb:FileType ;
+    rdfs:label "XSL-FO"@en ;
+    dcterms:identifier ft:XSLFO .
+
+odrlkb:xslt a odrlkb:FileType ;
+    rdfs:label "XSLT"@en ;
+    dcterms:identifier ft:XSLT .
+
+odrlkb:xyz a odrlkb:FileType ;
+    rdfs:label "XYZ Chemical File"@en ;
+    dcterms:identifier ft:XYZ .
+
+odrlkb:xz a odrlkb:FileType ;
+    rdfs:label "xz"@en ;
+    dcterms:identifier ft:XZ .
+
+odrlkb:yaml a odrlkb:FileType ;
+    rdfs:label "YAML"@en ;
+    dcterms:identifier ft:YAML .
+
+odrlkb:z a odrlkb:FileType ;
+    rdfs:label "Z"@en ;
+    dcterms:identifier ft:Z .
+
+odrlkb:zip a odrlkb:FileType ;
+    rdfs:label "ZIP"@en ;
+    dcterms:identifier ft:ZIP .
