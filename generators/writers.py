@@ -346,13 +346,18 @@ def _terms_only(text: str) -> str:
 
 
 def collect_vocabulary(axioms_dir: Path) -> set[str]:
-    """Constants declared by the resource axiom files, formula names excluded."""
+    """Constants declared by the resource axiom files, formula names excluded.
+
+    Every .ax except the shared order axioms, which declare no constants.
+    A fixed filename list was wrong here: generated slices are named per
+    resource and per tag, so the validator was checking new problems against
+    whatever hand-written files happened to predate the builders.
+    """
     vocab: set[str] = set()
-    for ax in ("GN000-0.ax", "DPV000-0.ax", "BCP47000-0.ax"):
-        path = axioms_dir / ax
-        if path.exists():
-            body = _terms_only(path.read_text(encoding="utf-8"))
-            vocab |= set(_CONST.findall(body))
+    for path in sorted(axioms_dir.glob("*.ax")):
+        if path.name.startswith("KGE"):
+            continue
+        vocab |= set(_CONST.findall(_terms_only(path.read_text(encoding="utf-8"))))
     return vocab
 
 

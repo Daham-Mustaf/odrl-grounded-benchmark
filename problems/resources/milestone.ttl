@@ -7,6 +7,12 @@
 # declines to fix its logical reading.  That the order is
 # subsumption is declared by the profile, not published here.
 #
+# Scope: this module only.  DPV publishes one edge out of it,
+# RightsFulfilment below LegalObligation, and a legal basis is a
+# different left operand with its own binding.  That edge is not
+# read here, so RightsFulfilment is a root of this resource and
+# not of DPV.  Any excluded edge is listed by the generator.
+#
 # Source   : w3c/dpv 2.3/dpv/modules/purposes.ttl
 # Version  : https://w3id.org/dpv/2.3
 # Modified : 2026-02-25
@@ -25,8 +31,8 @@
     dcterms:source <https://w3id.org/dpv/2.3> ;
     dcterms:modified "2026-02-25"^^<http://www.w3.org/2001/XMLSchema#date> ;
     odrlkb:orderPredicate skos:broader ;
-    odrlkb:conceptCount 8 ;
-    odrlkb:orderAssertionCount 9 .
+    odrlkb:conceptCount 14 ;
+    odrlkb:orderAssertionCount 15 .
 
 odrlkb:commercial_purpose a odrlkb:Purpose ;
     rdfs:label "Commercial Purpose"@en ;
@@ -37,6 +43,11 @@ odrlkb:commercial_research a odrlkb:Purpose ;
     rdfs:label "Commercial Research"@en ;
     dcterms:identifier dpv:CommercialResearch ;
     skos:broader odrlkb:commercial_purpose, odrlkb:research_and_development .
+
+odrlkb:human_resource_management a odrlkb:Purpose ;
+    rdfs:label "Human Resource Management"@en ;
+    dcterms:identifier dpv:HumanResourceManagement ;
+    skos:broader odrlkb:purpose .
 
 odrlkb:marketing a odrlkb:Purpose ;
     rdfs:label "Marketing"@en ;
@@ -53,9 +64,34 @@ odrlkb:non_commercial_research a odrlkb:Purpose ;
     dcterms:identifier dpv:NonCommercialResearch ;
     skos:broader odrlkb:non_commercial_purpose, odrlkb:research_and_development .
 
+odrlkb:personnel_hiring a odrlkb:Purpose ;
+    rdfs:label "Personnel Hiring"@en ;
+    dcterms:identifier dpv:PersonnelHiring ;
+    skos:broader odrlkb:personnel_management .
+
+odrlkb:personnel_management a odrlkb:Purpose ;
+    rdfs:label "Personnel Management"@en ;
+    dcterms:identifier dpv:PersonnelManagement ;
+    skos:broader odrlkb:human_resource_management .
+
 odrlkb:purpose a odrlkb:Purpose ;
     rdfs:label "Purpose"@en ;
     dcterms:identifier dpv:Purpose .
+
+odrlkb:recruitment_interview_management a odrlkb:Purpose ;
+    rdfs:label "Recruitment Interview Management"@en ;
+    dcterms:identifier dpv:RecruitmentInterviewManagement ;
+    skos:broader odrlkb:recruitment_management .
+
+odrlkb:recruitment_interview_scheduling a odrlkb:Purpose ;
+    rdfs:label "Recruitment Interview Scheduling"@en ;
+    dcterms:identifier dpv:RecruitmentInterviewScheduling ;
+    skos:broader odrlkb:recruitment_interview_management .
+
+odrlkb:recruitment_management a odrlkb:Purpose ;
+    rdfs:label "Recruitment Management"@en ;
+    dcterms:identifier dpv:RecruitmentManagement ;
+    skos:broader odrlkb:personnel_hiring .
 
 odrlkb:research_and_development a odrlkb:Purpose ;
     rdfs:label "Research and Development"@en ;

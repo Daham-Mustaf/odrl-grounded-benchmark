@@ -1,17 +1,36 @@
 """
 problem_data_dpv.py
 ===================
-Five problems over the DPV purposes slice, one per thing that can go wrong.
+Seven problems over the DPV purposes slice, one per thing that can go wrong.
 
     KGC310  isA R&D      x eq SR    -> Compatible    one resource premise
     KGC311  isA Purpose  x eq NCR   -> Compatible    two premises + transitivity
-    KGC312  isA NCP      x eq SR    -> Unknown       the vocabulary is silent
     KGC313  eq Marketing x eq SR    -> Unknown       nothing declares them apart
     KGC314  the same pair under a background theory that does  -> Incompatible
+    KGC315  isA Purpose  x eq RIS   -> Compatible    six premises + transitivity
+    KGC316  isA RIS      x eq Purpose -> Unknown     the order runs one way
+    KGC317  isNoneOf {Mk} x eq Mk   -> Incompatible  from the constraints alone
+
+KGC315 and KGC316 are the same two concepts in the two possible arrangements.
+The order relates them in one direction only, so one is Compatible and the
+other Unknown.  That asymmetry is what distinguishes isA from eq, and it is
+why the sort has to be declared: at nom neither problem is well sorted.
+
+KGC317 is the only Incompatible in the suite that rests on no declaration.
+Its refutation cites the witness condition and nothing else, so no party can
+withdraw a premise and reopen it.  Compare KGC300 and KGC314, whose verdicts
+each rest on one withdrawable assertion.
 
 KGC313 and KGC314 are the same constraints over the same resource, differing
 only in the background theory.  What moves the verdict is the declaration,
 and the certificate names it and marks it withdrawable.
+
+KGC312 is not here.  It was (purpose, isA, NonCommercialPurpose) against
+(purpose, eq, ScientificResearch), which is the motivating pair and is
+already KGC301 in problem_data_motivating.py.  Both were built over this
+resource and this background theory, so they were one test entered twice.
+The number is left unused rather than reassigned, since it appears in the
+run logs of earlier sessions.
 
 The resource
 ------------
@@ -31,7 +50,8 @@ The order assertions the slice uses:
 
 The witness condition
 ---------------------
-All four pairs use subset-mode operators only, so W(K) reduces to D != empty,
+Every pair below uses subset-mode operators only, so W(K) reduces to
+D != empty,
 the finite disjunction over the concepts the grounding names:
 
     OR_c ( c is in every subset-mode denotation of K )
@@ -53,10 +73,28 @@ Derived per problem before running anything:
           chain is needed is the point, and this is the first problem in
           the suite whose refutation must use the transitivity axiom.
 
-  KGC312  D = {x | x <= ncp} and {sr},  named {ncp, sr}
-          W = (ncp <= ncp & ncp = sr) | (sr <= ncp & sr = sr)
-          No path relates them and nothing separates them, so a model may
-          place sr under ncp and a model may not: both queries satisfiable.
+  KGC315  D = {x | x <= purpose} and {ris},  named {purpose, ris}
+          W = (purpose <= purpose & purpose = ris)
+            | (ris <= purpose & ris = ris)
+          ris <= purpose is six transitivity steps from the resource:
+          ris <= rim <= rm <= ph <= pm <= hrm <= purpose.  Compatible, and
+          the certificate should name six resource assertions.
+
+  KGC316  D = {x | x <= ris} and {purpose},  named {ris, purpose}
+          W = (ris <= ris & ris = purpose) | (purpose <= ris & purpose = purpose)
+          The first disjunct needs ris = purpose, the second purpose <= ris.
+          Neither is asserted and neither is denied, so both queries are
+          satisfiable: Unknown.  Note that reflexivity makes ris <= ris hold
+          in the first disjunct and purpose = purpose hold in the second, so
+          what is left open is exactly the relation between the two concepts
+          and nothing else.
+
+  KGC317  D = complement{marketing} and {marketing},  named {marketing}
+          W = (mk != mk & mk = mk)
+          The only concept the grounding names is the one the offer excludes
+          and the request requires.  The witness is false in every structure,
+          on equality alone: no order assertion and no declaration takes
+          part.  Incompatible, and nothing in the certificate is withdrawable.
 
   KGC313  D = {marketing} and {sr},  named {marketing, sr}
           W = (mk = mk & mk = sr) | (sr = mk & sr = sr)
@@ -67,8 +105,12 @@ Derived per problem before running anything:
 The unsimplified disjunction is emitted, since that is what the definition
 prescribes and what a generator produces mechanically.
 
-On KGC312 and NonCommercialResearch
------------------------------------
+On the motivating pair and NonCommercialResearch
+------------------------------------------------
+This concerns KGC301 rather than any problem in this file, but the reading
+of the resource belongs with the resource.
+
+
 DPV publishes NonCommercialResearch under both NonCommercialPurpose and
 ResearchAndDevelopment.  The publisher therefore had the vocabulary to say
 that research can be non-commercial, and placed ScientificResearch under
@@ -84,6 +126,16 @@ NCP  = "dpv_non_commercial_purpose"
 NCR  = "dpv_non_commercial_research"
 PUR  = "dpv_purpose"
 MK   = "dpv_marketing"
+
+# The longest chain in the module, six edges with a single parent at each
+# step.  Measured, not assumed: no concept on it has a second parent, so the
+# route from bottom to top is unique and the certificate is predictable.
+RIS  = "dpv_recruitment_interview_scheduling"
+RIM  = "dpv_recruitment_interview_management"
+RM   = "dpv_recruitment_management"
+PH   = "dpv_personnel_hiring"
+PM   = "dpv_personnel_management"
+HRM  = "dpv_human_resource_management"
 
 RESOURCE = "https://w3id.org/odrl-kb/dpv-purposes"
 EMPTY_BT    = "https://w3id.org/odrl-kb/dpv-purposes/empty"
@@ -284,100 +336,6 @@ kgc:KGC311-request-c1 a odrl:Constraint ;
     },
 
     # -----------------------------------------------------------------
-    # KGC312  The motivating pair, on the published slice.  Unknown
-    # because DPV relates the two concepts in neither direction and
-    # separates them in neither direction.
-    # -----------------------------------------------------------------
-    {
-        "id":                "KGC312",
-        "subdir":            "verdict",
-        "name":              "purpose, isA dpv:NCP against eq dpv:SR",
-        "left_operand":      "purpose",
-        "sort":              "tax",
-        "resource":          RESOURCE,
-        "background_theory": EMPTY_BT,
-        "includes":          INCLUDES,
-        "description": (
-            "Offer (purpose, isA, dpv:NonCommercialPurpose) against request "
-            "(purpose, eq, dpv:ScientificResearch).  DPV places scientific "
-            "research under research and development only, and publishes no "
-            "disjointness, so a model may place it under non-commercial "
-            "purpose and a model may not.  Unknown.  DPV does publish "
-            "dpv:NonCommercialResearch under both parents, so the silence "
-            "here is a decision rather than an omission."
-        ),
-
-        "fof_decls": """\
-% Background theory: empty.  Asserting that the two concepts are unrelated
-% would be the closed-world reading this paper rejects.
-""",
-        "fof_witness": f"""\
-( ( kge_leq({NCP}, {NCP}) & {NCP} = {SR} )
-| ( kge_leq({SR},  {NCP}) & {SR}  = {SR}  ) )""",
-
-        "expected_q1": "Satisfiable",
-        "expected_q2": "Satisfiable",
-
-        "smt2_logic": "UF",
-        "smt2_decls": _decls(NCP, SR, RND, PUR),
-        "smt2_asserts": f"""\
-; Resource: what DPV publishes about these concepts.  Note that it relates
-; scientific research to research and development, and not to the offered
-; purpose in either direction.
-(assert (kge_leq {SR} {RND}))
-(assert (kge_leq {RND} {PUR}))
-(assert (kge_leq {NCP} {PUR}))""",
-        "smt2_witness": f"""\
-(or (and (kge_leq {NCP} {NCP}) (= {NCP} {SR}))
-    (and (kge_leq {SR}  {NCP}) (= {SR}  {SR})))""",
-
-        "certificate": {
-            "kind": "Models",
-            "comment": "Both queries are satisfiable.  The models differ on "
-                       "whether scientific research falls under "
-                       "non-commercial purpose, which is what the vocabulary "
-                       "leaves open.",
-            "premises": [],
-        },
-        "ttl": f"""\
-@prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
-@prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix dpv:     <https://w3id.org/dpv#> .
-@prefix drk:     <https://w3id.org/odrl-kb/drk/> .
-@prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
-
-drk:bsb-offer-312 a odrl:Offer ;
-    dcterms:title "BSB offer: non-commercial purposes"@en ;
-    odrl:assigner drk:bavarian-state-library ;
-    odrl:permission kgc:KGC312-offer-r1 .
-
-kgc:KGC312-offer-r1 a odrl:Permission ;
-    odrl:action odrl:use ;
-    odrl:target drk:bsb-manuscripts ;
-    odrl:constraint kgc:KGC312-offer-c1 .
-
-kgc:KGC312-offer-c1 a odrl:Constraint ;
-    odrl:leftOperand odrl:purpose ;
-    odrl:operator odrl:isA ;
-    odrl:rightOperand dpv:NonCommercialPurpose .
-
-drk:bnf-request-312 a odrl:Request ;
-    dcterms:title "BnF request: scientific research"@en ;
-    odrl:assignee drk:french-national-library ;
-    odrl:permission kgc:KGC312-request-r1 .
-
-kgc:KGC312-request-r1 a odrl:Permission ;
-    odrl:action odrl:use ;
-    odrl:target drk:bsb-manuscripts ;
-    odrl:constraint kgc:KGC312-request-c1 .
-
-kgc:KGC312-request-c1 a odrl:Constraint ;
-    odrl:leftOperand odrl:purpose ;
-    odrl:operator odrl:eq ;
-    odrl:rightOperand dpv:ScientificResearch .""",
-    },
-
-    # -----------------------------------------------------------------
     # KGC313  Unknown for the other reason: two names the resource never
     # relates and the background theory never separates.  Pair this with
     # a background theory declaring them distinct and the verdict moves
@@ -570,5 +528,293 @@ kgc:KGC314-request-c1 a odrl:Constraint ;
     odrl:leftOperand odrl:purpose ;
     odrl:operator odrl:eq ;
     odrl:rightOperand dpv:ScientificResearch .""",
+    },
+
+    # -----------------------------------------------------------------
+    # KGC315  The longest chain in the module, taken in the direction the
+    # order runs.  Six resource assertions and transitivity.
+    # -----------------------------------------------------------------
+    {
+        "id":                "KGC315",
+        "subdir":            "verdict",
+        "name":              "purpose, isA dpv:Purpose against eq dpv:RIS",
+        "left_operand":      "purpose",
+        "sort":              "tax",
+        "resource":          RESOURCE,
+        "background_theory": EMPTY_BT,
+        "includes":          INCLUDES,
+        "description": (
+            "Offer (purpose, isA, dpv:Purpose) against request (purpose, eq, "
+            "dpv:RecruitmentInterviewScheduling), the deepest concept in the "
+            "module.  The resource relates them only through six steps, so "
+            "the refutation must chain all six.  Compatible.  The verdict is "
+            "the same as KGC310's; what grows with the depth is the "
+            "certificate, not the answer."
+        ),
+
+        "fof_decls": """\
+% Background theory: empty.
+""",
+        "fof_witness": f"""\
+( ( kge_leq({PUR}, {PUR}) & {PUR} = {RIS} )
+| ( kge_leq({RIS}, {PUR}) & {RIS} = {RIS} ) )""",
+
+        "expected_q1": "Satisfiable",
+        "expected_q2": "Unsatisfiable",
+
+        "smt2_logic": "UF",
+        "smt2_decls": _decls(RIS, RIM, RM, PH, PM, HRM, PUR),
+        "smt2_resource": f"""\
+; Resource: the six steps.  None of them asserts the chain.
+(assert (kge_leq {RIS} {RIM}))
+(assert (kge_leq {RIM} {RM}))
+(assert (kge_leq {RM} {PH}))
+(assert (kge_leq {PH} {PM}))
+(assert (kge_leq {PM} {HRM}))
+(assert (kge_leq {HRM} {PUR}))""",
+        "smt2_background": "",
+        "smt2_witness": f"""\
+(or (and (kge_leq {PUR} {PUR}) (= {PUR} {RIS}))
+    (and (kge_leq {RIS} {PUR}) (= {RIS} {RIS})))""",
+
+        "certificate": {
+            "kind": "Refutation",
+            "comment": "Interview scheduling for recruitment lies below "
+                       "purpose by six steps through recruitment, personnel, "
+                       "and human resource management.  Every step is the "
+                       "vocabulary's; none is the parties'.",
+            "premises": [
+                ("fromResource", "the six order assertions of the chain"),
+                ("fromOrderAxiom", "transitivity"),
+            ],
+        },
+        "ttl": f"""\
+@prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix dpv:     <https://w3id.org/dpv#> .
+@prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+@prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+
+drk:bsb-offer-315 a odrl:Offer ;
+    dcterms:title "BSB offer: any declared purpose"@en ;
+    odrl:assigner drk:bavarian-state-library ;
+    odrl:permission kgc:KGC315-offer-r1 .
+
+kgc:KGC315-offer-r1 a odrl:Permission ;
+    odrl:action odrl:use ;
+    odrl:target drk:bsb-manuscripts ;
+    odrl:constraint kgc:KGC315-offer-c1 .
+
+kgc:KGC315-offer-c1 a odrl:Constraint ;
+    odrl:leftOperand odrl:purpose ;
+    odrl:operator odrl:isA ;
+    odrl:rightOperand dpv:Purpose .
+
+drk:bnf-request-315 a odrl:Request ;
+    dcterms:title "BnF request: recruitment interview scheduling"@en ;
+    odrl:assignee drk:french-national-library ;
+    odrl:permission kgc:KGC315-request-r1 .
+
+kgc:KGC315-request-r1 a odrl:Permission ;
+    odrl:action odrl:use ;
+    odrl:target drk:bsb-manuscripts ;
+    odrl:constraint kgc:KGC315-request-c1 .
+
+kgc:KGC315-request-c1 a odrl:Constraint ;
+    odrl:leftOperand odrl:purpose ;
+    odrl:operator odrl:eq ;
+    odrl:rightOperand dpv:RecruitmentInterviewScheduling .""",
+    },
+
+    # -----------------------------------------------------------------
+    # KGC316  The same two concepts, the other way round.  The order
+    # relates them downward and not upward, so the verdict changes even
+    # though nothing about the resource has.
+    # -----------------------------------------------------------------
+    {
+        "id":                "KGC316",
+        "subdir":            "verdict",
+        "name":              "purpose, isA dpv:RIS against eq dpv:Purpose",
+        "left_operand":      "purpose",
+        "sort":              "tax",
+        "resource":          RESOURCE,
+        "background_theory": EMPTY_BT,
+        "includes":          INCLUDES,
+        "description": (
+            "KGC315 reversed: offer (purpose, isA, "
+            "dpv:RecruitmentInterviewScheduling) against request (purpose, "
+            "eq, dpv:Purpose).  The resource places the narrow concept below "
+            "the broad one and says nothing the other way, so the verdict is "
+            "Unknown.  The pair shows that isA reads the order in one "
+            "direction: swapping the operands is not a symmetry of the "
+            "semantics, and a reader who expects Compatible here has "
+            "confused subsumption with identity."
+        ),
+
+        "fof_decls": """\
+% Background theory: empty.
+""",
+        "fof_witness": f"""\
+( ( kge_leq({RIS}, {RIS}) & {RIS} = {PUR} )
+| ( kge_leq({PUR}, {RIS}) & {PUR} = {PUR} ) )""",
+
+        "expected_q1": "Satisfiable",
+        "expected_q2": "Satisfiable",
+
+        "smt2_logic": "UF",
+        "smt2_decls": _decls(RIS, RIM, RM, PH, PM, HRM, PUR),
+        "smt2_resource": f"""\
+; Resource: unchanged from KGC315.  What changed is the pair of
+; constraints, and with it the direction the witness asks about.
+(assert (kge_leq {RIS} {RIM}))
+(assert (kge_leq {RIM} {RM}))
+(assert (kge_leq {RM} {PH}))
+(assert (kge_leq {PH} {PM}))
+(assert (kge_leq {PM} {HRM}))
+(assert (kge_leq {HRM} {PUR}))""",
+        "smt2_background": "",
+        "smt2_witness": f"""\
+(or (and (kge_leq {RIS} {RIS}) (= {RIS} {PUR}))
+    (and (kge_leq {PUR} {RIS}) (= {PUR} {PUR})))""",
+
+        "certificate": {
+            "kind": "Models",
+            "comment": "Both queries are satisfiable.  A structure may place "
+                       "purpose below interview scheduling, or identify the "
+                       "two, or do neither; the vocabulary settles none of "
+                       "these, and the chain it does publish runs the other "
+                       "way.",
+            "premises": [],
+        },
+        "ttl": f"""\
+@prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix dpv:     <https://w3id.org/dpv#> .
+@prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+@prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+
+drk:bsb-offer-316 a odrl:Offer ;
+    dcterms:title "BSB offer: recruitment interview scheduling"@en ;
+    odrl:assigner drk:bavarian-state-library ;
+    odrl:permission kgc:KGC316-offer-r1 .
+
+kgc:KGC316-offer-r1 a odrl:Permission ;
+    odrl:action odrl:use ;
+    odrl:target drk:bsb-manuscripts ;
+    odrl:constraint kgc:KGC316-offer-c1 .
+
+kgc:KGC316-offer-c1 a odrl:Constraint ;
+    odrl:leftOperand odrl:purpose ;
+    odrl:operator odrl:isA ;
+    odrl:rightOperand dpv:RecruitmentInterviewScheduling .
+
+drk:bnf-request-316 a odrl:Request ;
+    dcterms:title "BnF request: any declared purpose"@en ;
+    odrl:assignee drk:french-national-library ;
+    odrl:permission kgc:KGC316-request-r1 .
+
+kgc:KGC316-request-r1 a odrl:Permission ;
+    odrl:action odrl:use ;
+    odrl:target drk:bsb-manuscripts ;
+    odrl:constraint kgc:KGC316-request-c1 .
+
+kgc:KGC316-request-c1 a odrl:Constraint ;
+    odrl:leftOperand odrl:purpose ;
+    odrl:operator odrl:eq ;
+    odrl:rightOperand dpv:Purpose .""",
+    },
+
+    # -----------------------------------------------------------------
+    # KGC317  Complement against identity on one concept.  The only
+    # Incompatible in the suite that rests on nothing withdrawable.
+    # -----------------------------------------------------------------
+    {
+        "id":                "KGC317",
+        "subdir":            "verdict",
+        "name":              "purpose, isNoneOf {dpv:Marketing} against eq "
+                             "dpv:Marketing",
+        "left_operand":      "purpose",
+        "sort":              "tax",
+        "resource":          RESOURCE,
+        "background_theory": EMPTY_BT,
+        "includes":          INCLUDES,
+        "description": (
+            "Offer (purpose, isNoneOf, {dpv:Marketing}) against request "
+            "(purpose, eq, dpv:Marketing).  The offer excludes exactly the "
+            "purpose the request requires.  No order assertion and no "
+            "declaration takes part: the witness asks for a concept both "
+            "distinct from and identical to marketing, which no structure "
+            "provides.  Incompatible, and the certificate has nothing "
+            "withdrawable in it, so unlike KGC300 and KGC314 no party can "
+            "reopen the verdict by retracting an assertion."
+        ),
+
+        "fof_decls": """\
+% Background theory: empty, and it stays empty.  The incompatibility here
+% is between the two constraints, not between a constraint and something a
+% party declared.
+""",
+        "fof_witness": f"""\
+( {MK} != {MK} & {MK} = {MK} )""",
+
+        "expected_q1": "Unsatisfiable",
+        "expected_q2": "Satisfiable",
+
+        "smt2_logic": "UF",
+        "smt2_decls": _decls(MK, PUR),
+        "smt2_resource": f"""\
+; Resource: marketing is a purpose.  The verdict does not use this.
+(assert (kge_leq {MK} {PUR}))""",
+        "smt2_background": "",
+        "smt2_witness": f"""\
+(and (not (= {MK} {MK})) (= {MK} {MK}))""",
+
+        "certificate": {
+            "kind": "Refutation",
+            "comment": "The offer admits every purpose but marketing and the "
+                       "request admits only marketing, so no purpose "
+                       "satisfies both.  The refutation is on equality "
+                       "alone and cites no assertion any party could "
+                       "withdraw.",
+            "premises": [
+                ("fromConstraints", "the witness condition"),
+            ],
+        },
+        "ttl": f"""\
+@prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix dpv:     <https://w3id.org/dpv#> .
+@prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+@prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+
+drk:bsb-offer-317 a odrl:Offer ;
+    dcterms:title "BSB offer: any purpose other than marketing"@en ;
+    odrl:assigner drk:bavarian-state-library ;
+    odrl:permission kgc:KGC317-offer-r1 .
+
+kgc:KGC317-offer-r1 a odrl:Permission ;
+    odrl:action odrl:use ;
+    odrl:target drk:bsb-manuscripts ;
+    odrl:constraint kgc:KGC317-offer-c1 .
+
+kgc:KGC317-offer-c1 a odrl:Constraint ;
+    odrl:leftOperand odrl:purpose ;
+    odrl:operator odrl:isNoneOf ;
+    odrl:rightOperand dpv:Marketing .
+
+drk:bnf-request-317 a odrl:Request ;
+    dcterms:title "BnF request: marketing"@en ;
+    odrl:assignee drk:french-national-library ;
+    odrl:permission kgc:KGC317-request-r1 .
+
+kgc:KGC317-request-r1 a odrl:Permission ;
+    odrl:action odrl:use ;
+    odrl:target drk:bsb-manuscripts ;
+    odrl:constraint kgc:KGC317-request-c1 .
+
+kgc:KGC317-request-c1 a odrl:Constraint ;
+    odrl:leftOperand odrl:purpose ;
+    odrl:operator odrl:eq ;
+    odrl:rightOperand dpv:Marketing .""",
     },
 ]

@@ -16,7 +16,7 @@
 % Comments : Query 1 of 2.  Verdict is derived from both queries.
 %--------------------------------------------------------------------------
 include('axioms/KGE000-0.ax').
-include('axioms/DPV000-0.ax').
+include('axioms/DPV-milestone.ax').
 
 % --- constants, groundings and resource hooks ----------------------------
 % The vocabulary is silent on the two concepts.  Nothing is asserted here:

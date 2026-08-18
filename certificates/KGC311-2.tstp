@@ -5,48 +5,48 @@
 fof(f3,axiom,(
   ! [X0,X1,X2] : ((kge_leq(X0,X1) & kge_leq(X1,X2)) => kge_leq(X0,X2))),
   file('problems/verdict/KGC311-2.p',ax_leq_transitive)).
-fof(f10,axiom,(
+fof(f11,axiom,(
   kge_leq(dpv_non_commercial_research,dpv_research_and_development)),
   file('problems/verdict/KGC311-2.p',res_dpv_non_commercial_research_below_dpv_research_and_development)).
-fof(f11,axiom,(
+fof(f17,axiom,(
   kge_leq(dpv_research_and_development,dpv_purpose)),
   file('problems/verdict/KGC311-2.p',res_dpv_research_and_development_below_dpv_purpose)).
-fof(f13,axiom,(
+fof(f19,axiom,(
   ~((kge_leq(dpv_purpose,dpv_purpose) & dpv_purpose = dpv_non_commercial_research) | (kge_leq(dpv_non_commercial_research,dpv_purpose) & dpv_non_commercial_research = dpv_non_commercial_research))),
   file('problems/verdict/KGC311-2.p',w_kgc311)).
-fof(f16,plain,(
+fof(f22,plain,(
   ! [X0,X1,X2] : (kge_leq(X0,X2) | (~kge_leq(X0,X1) | ~kge_leq(X1,X2)))),
   inference(ennf_transformation,[],[f3])).
-fof(f17,plain,(
+fof(f23,plain,(
   ! [X0,X1,X2] : (kge_leq(X0,X2) | ~kge_leq(X0,X1) | ~kge_leq(X1,X2))),
-  inference(flattening,[],[f16])).
-fof(f18,plain,(
+  inference(flattening,[],[f22])).
+fof(f24,plain,(
   (~kge_leq(dpv_purpose,dpv_purpose) | dpv_purpose != dpv_non_commercial_research) & (~kge_leq(dpv_non_commercial_research,dpv_purpose) | dpv_non_commercial_research != dpv_non_commercial_research)),
-  inference(ennf_transformation,[],[f13])).
-fof(f21,plain,(
+  inference(ennf_transformation,[],[f19])).
+fof(f27,plain,(
   ( ! [X2,X0,X1] : (~kge_leq(X1,X2) | ~kge_leq(X0,X1) | kge_leq(X0,X2)) )),
-  inference(cnf_transformation,[],[f17])).
-fof(f28,plain,(
+  inference(cnf_transformation,[],[f23])).
+fof(f35,plain,(
   kge_leq(dpv_non_commercial_research,dpv_research_and_development)),
-  inference(cnf_transformation,[],[f10])).
-fof(f29,plain,(
-  kge_leq(dpv_research_and_development,dpv_purpose)),
   inference(cnf_transformation,[],[f11])).
-fof(f31,plain,(
+fof(f41,plain,(
+  kge_leq(dpv_research_and_development,dpv_purpose)),
+  inference(cnf_transformation,[],[f17])).
+fof(f43,plain,(
   ~kge_leq(dpv_non_commercial_research,dpv_purpose) | dpv_non_commercial_research != dpv_non_commercial_research),
-  inference(cnf_transformation,[],[f18])).
-fof(f33,plain,(
+  inference(cnf_transformation,[],[f24])).
+fof(f45,plain,(
   ~kge_leq(dpv_non_commercial_research,dpv_purpose)),
-  inference(trivial_inequality_removal,[],[f31])).
-fof(f138,plain,(
+  inference(trivial_inequality_removal,[],[f43])).
+fof(f210,plain,(
   ( ! [X0] : (~kge_leq(X0,dpv_research_and_development) | kge_leq(X0,dpv_purpose)) )),
-  inference(resolution,[],[f21,f29])).
-fof(f161,plain,(
+  inference(resolution,[],[f27,f41])).
+fof(f239,plain,(
   kge_leq(dpv_non_commercial_research,dpv_purpose)),
-  inference(resolution,[],[f138,f28])).
-fof(f163,plain,(
+  inference(resolution,[],[f210,f35])).
+fof(f241,plain,(
   $false),
-  inference(forward_subsumption_resolution,[],[f161,f33])).
+  inference(forward_subsumption_resolution,[],[f239,f45])).
 % SZS output end Proof for KGC311-2
 % ------------------------------
 % Version: Vampire 5.0.1 (Release build, commit 1b13eafde on 2026-01-18 12:14:50 +0000)

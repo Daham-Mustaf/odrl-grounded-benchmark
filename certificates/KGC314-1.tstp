@@ -2,24 +2,24 @@
 % Refutation found. Thanks to Tanya!
 % SZS status Unsatisfiable for KGC314-1
 % SZS output start Proof for KGC314-1
-fof(f13,axiom,(
+fof(f19,axiom,(
   dpv_marketing != dpv_scientific_research),
   file('problems/verdict/KGC314-1.p',bt_dpv_marketing_distinct_dpv_scientific_research)).
-fof(f14,axiom,(
+fof(f20,axiom,(
   (dpv_marketing = dpv_marketing & dpv_marketing = dpv_scientific_research) | (dpv_scientific_research = dpv_marketing & dpv_scientific_research = dpv_scientific_research)),
   file('problems/verdict/KGC314-1.p',w_kgc314)).
-fof(f31,plain,(
+fof(f43,plain,(
   dpv_marketing != dpv_scientific_research),
-  inference(cnf_transformation,[],[f13])).
-fof(f33,plain,(
+  inference(cnf_transformation,[],[f19])).
+fof(f45,plain,(
   dpv_marketing = dpv_scientific_research | dpv_marketing = dpv_scientific_research),
-  inference(cnf_transformation,[],[f14])).
-fof(f36,plain,(
+  inference(cnf_transformation,[],[f20])).
+fof(f48,plain,(
   dpv_marketing = dpv_scientific_research),
-  inference(duplicate_literal_removal,[],[f33])).
-fof(f37,plain,(
+  inference(duplicate_literal_removal,[],[f45])).
+fof(f49,plain,(
   $false),
-  inference(forward_subsumption_resolution,[],[f31,f36])).
+  inference(forward_subsumption_resolution,[],[f43,f48])).
 % SZS output end Proof for KGC314-1
 % ------------------------------
 % Version: Vampire 5.0.1 (Release build, commit 1b13eafde on 2026-01-18 12:14:50 +0000)

@@ -60,14 +60,35 @@ def parse(path: Path):
     """
     g = Graph()
     g.parse(path, format="turtle")
-    edges, labels = [], {}
+
+    # Subjects defined in this file.  The purposes module publishes one edge
+    # whose target is not: RightsFulfilment is below LegalObligation, which
+    # is a legal basis defined in legal_basis.ttl.  That edge is dropped.
+    #
+    # The reason is the operand, not tidiness.  This resource grounds
+    # odrl:purpose, and a legal basis is a different left operand with its
+    # own binding in the DPV-ODRL mapping.  Keeping the edge would put a
+    # concept from one operand's vocabulary into another operand's
+    # resource, and a verdict could then rest on an order assertion the
+    # profile never bound.  Where a module's boundary falls is a choice,
+    # so the resource header states it.
+    defined = {str(sub)[len(DPV):] for sub in g.subjects()
+               if str(sub).startswith(str(DPV))}
+
+    edges, labels, external = [], {}, []
     for child, parent in g.subject_objects(SKOS.broader):
-        if str(child).startswith(str(DPV)) and str(parent).startswith(str(DPV)):
-            edges.append((str(child)[len(DPV):], str(parent)[len(DPV):]))
+        if not (str(child).startswith(str(DPV))
+                and str(parent).startswith(str(DPV))):
+            continue
+        c, p = str(child)[len(DPV):], str(parent)[len(DPV):]
+        if p not in defined:
+            external.append((c, p))
+            continue
+        edges.append((c, p))
     for subj, lab in g.subject_objects(SKOS.prefLabel):
         if str(subj).startswith(str(DPV)):
             labels[str(subj)[len(DPV):]] = str(lab)
-    return sorted(set(edges)), labels
+    return sorted(set(edges)), labels, sorted(set(external))
 
 
 def ancestors(edges, seeds):
@@ -144,6 +165,12 @@ def resource_ttl(edges, labels, concepts, meta) -> str:
         "# skos:broader is the only hierarchy predicate here, and SKOS",
         "# declines to fix its logical reading.  That the order is",
         "# subsumption is declared by the profile, not published here.",
+        "#",
+        "# Scope: this module only.  DPV publishes one edge out of it,",
+        "# RightsFulfilment below LegalObligation, and a legal basis is a",
+        "# different left operand with its own binding.  That edge is not",
+        "# read here, so RightsFulfilment is a root of this resource and",
+        "# not of DPV.  Any excluded edge is listed by the generator.",
         "#",
         f"# Source   : {meta['source']}",
         f"# Version  : {meta['version']}",
@@ -303,7 +330,7 @@ def main() -> int:
     ap.add_argument("--out", default="problems", type=Path)
     args = ap.parse_args()
 
-    edges, labels = parse(args.purposes)
+    edges, labels, external = parse(args.purposes)
     if not edges:
         print("no skos:broader edges found; check the file", file=sys.stderr)
         return 1
@@ -357,6 +384,8 @@ def main() -> int:
     multi = sum(1 for c in concepts if sum(1 for x, _ in kept if x == c) > 1)
     print(f"{len(concepts)} concepts, {len(kept)} order assertions, "
           f"0 disjointness assertions")
+    for c, p in external:
+        print(f"excluded: {c} below {p} ({p} is not defined in this module)")
     print(f"{multi} concepts have more than one parent")
     print(f"transitivity ground instances: {len(concepts)**3:,}  "
           f"(the checker's cost; the prover instantiates lazily)")

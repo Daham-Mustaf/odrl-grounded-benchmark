@@ -149,7 +149,7 @@ kgc:KGC300-request-c1 a odrl:Constraint ;
         "sort":              "tax",
         "resource":          "https://w3id.org/odrl-kb/dpv-purpose",
         "background_theory": "https://w3id.org/odrl-kb/dpv-purpose/declared",
-        "includes":          ["KGE000-0.ax", "DPV000-0.ax"],
+        "includes":          ["KGE000-0.ax", "DPV-milestone.ax"],
         "description": (
             "Offer (purpose, isA, dpv:NonCommercialPurpose) against request "
             "(purpose, eq, dpv:ScientificResearch).  The vocabulary neither "

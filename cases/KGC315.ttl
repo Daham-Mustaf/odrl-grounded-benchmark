@@ -1,0 +1,58 @@
+@prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix dpv:     <https://w3id.org/dpv#> .
+@prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+@prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+
+drk:bsb-offer-315 a odrl:Offer ;
+    dcterms:title "BSB offer: any declared purpose"@en ;
+    odrl:assigner drk:bavarian-state-library ;
+    odrl:permission kgc:KGC315-offer-r1 .
+
+kgc:KGC315-offer-r1 a odrl:Permission ;
+    odrl:action odrl:use ;
+    odrl:target drk:bsb-manuscripts ;
+    odrl:constraint kgc:KGC315-offer-c1 .
+
+kgc:KGC315-offer-c1 a odrl:Constraint ;
+    odrl:leftOperand odrl:purpose ;
+    odrl:operator odrl:isA ;
+    odrl:rightOperand dpv:Purpose .
+
+drk:bnf-request-315 a odrl:Request ;
+    dcterms:title "BnF request: recruitment interview scheduling"@en ;
+    odrl:assignee drk:french-national-library ;
+    odrl:permission kgc:KGC315-request-r1 .
+
+kgc:KGC315-request-r1 a odrl:Permission ;
+    odrl:action odrl:use ;
+    odrl:target drk:bsb-manuscripts ;
+    odrl:constraint kgc:KGC315-request-c1 .
+
+kgc:KGC315-request-c1 a odrl:Constraint ;
+    odrl:leftOperand odrl:purpose ;
+    odrl:operator odrl:eq ;
+    odrl:rightOperand dpv:RecruitmentInterviewScheduling .
+
+### Expected result #######################################################
+
+drk:KGC315-report a vrep:OperandReport ;
+    dcterms:identifier "KGC315" ;
+    vrep:firstPolicy drk:bsb-offer ;
+    vrep:secondPolicy drk:bnf-request ;
+    vrep:firstConstraint kgc:KGC315-offer-c1 ;
+    vrep:secondConstraint kgc:KGC315-request-c1 ;
+    vrep:leftOperand odrl:purpose ;
+    vrep:sort vrep:tax ;
+    vrep:resource <https://w3id.org/odrl-kb/dpv-purposes> ;
+    vrep:backgroundTheory <https://w3id.org/odrl-kb/dpv-purposes/empty> ;
+    vrep:verdict vrep:Compatible ;
+    vrep:certificate drk:KGC315-certificate .
+
+drk:KGC315-certificate a vrep:Refutation ;
+    rdfs:comment """Interview scheduling for recruitment lies below purpose by six steps through recruitment, personnel, and human resource management.  Every step is the vocabulary's; none is the parties'."""@en ;
+    vrep:clashingConstraint kgc:KGC315-offer-c1, kgc:KGC315-request-c1 ;
+    vrep:premise [ vrep:premiseSource vrep:fromResource ;
+                   rdfs:label "the six order assertions of the chain"@en ] ;
+    vrep:premise [ vrep:premiseSource vrep:fromOrderAxiom ;
+                   rdfs:label "transitivity"@en ] .

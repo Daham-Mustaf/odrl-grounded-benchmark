@@ -1,0 +1,35 @@
+kgc:KGC315-observed a vrep:Refutation ;
+    vrep:producedBy "Vampire" ;
+    vrep:proofArtefact <proofs/KGC315-2.tstp> ;
+    vrep:attributedAssertion [
+        vrep:premiseSource vrep:fromResource ;
+        vrep:formulaName "res_dpv_human_resource_management_below_dpv_purpose" ;
+        rdfs:label "res_dpv_human_resource_management_below_dpv_purpose"@en ] ;
+    vrep:attributedAssertion [
+        vrep:premiseSource vrep:fromResource ;
+        vrep:formulaName "res_dpv_personnel_hiring_below_dpv_personnel_management" ;
+        rdfs:label "res_dpv_personnel_hiring_below_dpv_personnel_management"@en ] ;
+    vrep:attributedAssertion [
+        vrep:premiseSource vrep:fromResource ;
+        vrep:formulaName "res_dpv_personnel_management_below_dpv_human_resource_management" ;
+        rdfs:label "res_dpv_personnel_management_below_dpv_human_resource_management"@en ] ;
+    vrep:attributedAssertion [
+        vrep:premiseSource vrep:fromResource ;
+        vrep:formulaName "res_dpv_recruitment_interview_management_below_dpv_recruitment_management" ;
+        rdfs:label "res_dpv_recruitment_interview_management_below_dpv_recruitment_management"@en ] ;
+    vrep:attributedAssertion [
+        vrep:premiseSource vrep:fromResource ;
+        vrep:formulaName "res_dpv_recruitment_interview_scheduling_below_dpv_recruitment_interview_management" ;
+        rdfs:label "res_dpv_recruitment_interview_scheduling_below_dpv_recruitment_interview_management"@en ] ;
+    vrep:attributedAssertion [
+        vrep:premiseSource vrep:fromResource ;
+        vrep:formulaName "res_dpv_recruitment_management_below_dpv_personnel_hiring" ;
+        rdfs:label "res_dpv_recruitment_management_below_dpv_personnel_hiring"@en ] ;
+    vrep:attributedAssertion [
+        vrep:premiseSource vrep:fromConstraints ;
+        vrep:formulaName "w_kgc315" ;
+        rdfs:label "w_kgc315"@en ] ;
+    vrep:attributedAssertion [
+        vrep:premiseSource vrep:fromOrderAxiom ;
+        vrep:formulaName "ax_leq_transitive" ;
+        rdfs:label "ax_leq_transitive"@en ] .
