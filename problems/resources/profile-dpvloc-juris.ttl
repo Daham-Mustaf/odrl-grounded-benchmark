@@ -1,0 +1,24 @@
+# Profile entry for odrl:spatial over DPV Locations, the jurisdictional slice.
+#
+# The sort is mer, the same sort the GeoNames profile declares for the same
+# operand, and the same sort the other DPV Locations profile declares.  What
+# differs between the three is the resource: which file, and which of the
+# relations in that file the binding reads.  That is what it means for the
+# meaning to belong to the binding rather than to the operand.
+#
+# The resource is containment together with union membership,
+# read as jurisdictional containment.  isPartOf EU has an answer
+# here and does not under the geographic profile.  Neither is
+# the correct reading of the file: they are two readings, and
+# the profile is where a party says which one it means.
+
+@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+@prefix vrep: <https://w3id.org/odrl-verdict-report#> .
+@prefix ex:   <https://w3id.org/odrl-kb/profile/> .
+
+ex:b-spatial-dpvloc-juris a vrep:OperandBinding ;
+    vrep:leftOperand odrl:spatial ;
+    vrep:sort vrep:mer ;
+    vrep:resource <https://w3id.org/odrl-kb/dpv-loc-juris> ;
+    vrep:backgroundTheory <https://w3id.org/odrl-kb/dpv-loc/empty> ;
+    vrep:grounding vrep:sliceMembership .

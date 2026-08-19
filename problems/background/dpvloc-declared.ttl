@@ -1,0 +1,19 @@
+# Background theory for the DPV Locations resource: one distinctness.
+#
+# The parties declare that these two places are different.  The extension
+# does not: it lists both and separates them in no way.  A verdict resting
+# on this assertion is the parties' and can be reopened by withdrawing it.
+#
+# Source: https://w3id.org/dpv/2.3/loc
+
+@prefix loc:     <https://w3id.org/dpv/loc#> .
+@prefix bt:      <https://w3id.org/odrl-kb/background#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+<https://w3id.org/odrl-kb/dpv-loc/declared> a bt:BackgroundTheory ;
+    dcterms:title "One declared distinctness"@en ;
+    bt:appliesTo <https://w3id.org/odrl-kb/dpv-loc> ;
+    bt:generatedBy bt:PartyDeclaration ;
+    bt:assertionCount 1 .
+
+loc:DE bt:distinctFrom loc:FR .

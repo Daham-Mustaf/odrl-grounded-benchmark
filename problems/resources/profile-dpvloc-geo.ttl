@@ -1,0 +1,23 @@
+# Profile entry for odrl:spatial over DPV Locations, the containment slice.
+#
+# The sort is mer, the same sort the GeoNames profile declares for the same
+# operand, and the same sort the other DPV Locations profile declares.  What
+# differs between the three is the resource: which file, and which of the
+# relations in that file the binding reads.  That is what it means for the
+# meaning to belong to the binding rather than to the operand.
+#
+# The resource is containment only.  A constraint whose right
+# operand is a supranational union does not ground under this
+# profile: the union edges are membership, and this reading does
+# not take them as containment.
+
+@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+@prefix vrep: <https://w3id.org/odrl-verdict-report#> .
+@prefix ex:   <https://w3id.org/odrl-kb/profile/> .
+
+ex:b-spatial-dpvloc-geo a vrep:OperandBinding ;
+    vrep:leftOperand odrl:spatial ;
+    vrep:sort vrep:mer ;
+    vrep:resource <https://w3id.org/odrl-kb/dpv-loc-geo> ;
+    vrep:backgroundTheory <https://w3id.org/odrl-kb/dpv-loc/empty> ;
+    vrep:grounding vrep:sliceMembership .

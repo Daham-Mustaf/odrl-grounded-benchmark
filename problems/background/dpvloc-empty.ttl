@@ -1,0 +1,28 @@
+# Background theory for the DPV Locations resource: empty.
+#
+# The extension asserts no disjointness between places and no distinctness
+# between the codes it lists.  Two constraints naming different countries
+# are therefore satisfiable together unless a party declares them apart, and
+# the certificate for such a verdict names the declaration.
+#
+# The absence is worth stating plainly, because the file looks as though it
+# supplies distinctness and does not.  Every country has an inverse
+# jurisdiction concept, and non-IE is narrower than every country but
+# Ireland.  A reader may take that as saying the countries are pairwise
+# distinct.  It does not: it says which concepts belong to a complement, and
+# a structure identifying two countries satisfies those memberships as well.
+#
+# Distinctness is available as a generated rule rather than as an assertion
+# in the file: see the iso theory, which the parties may adopt on the
+# strength of ISO 3166 assigning one code per area.  Adopting it is their
+# decision and the certificate records it as theirs.
+#
+# Source: https://w3id.org/dpv/2.3/loc
+
+@prefix bt:      <https://w3id.org/odrl-kb/background#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+<https://w3id.org/odrl-kb/dpv-loc/empty> a bt:BackgroundTheory ;
+    dcterms:title "No declared distinctness or disjointness"@en ;
+    bt:appliesTo <https://w3id.org/odrl-kb/dpv-loc> ;
+    bt:assertionCount 0 .
