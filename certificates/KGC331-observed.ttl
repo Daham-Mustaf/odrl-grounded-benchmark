@@ -1,0 +1,11 @@
+kgc:KGC331-observed a vrep:Refutation ;
+    vrep:producedBy "Vampire" ;
+    vrep:proofArtefact <proofs/KGC331-2.tstp> ;
+    vrep:attributedAssertion [
+        vrep:premiseSource vrep:fromResource ;
+        vrep:formulaName "res_loc_de_within_loc_eu" ;
+        rdfs:label "res_loc_de_within_loc_eu"@en ] ;
+    vrep:attributedAssertion [
+        vrep:premiseSource vrep:fromConstraints ;
+        vrep:formulaName "w_kgc331" ;
+        rdfs:label "w_kgc331"@en ] .

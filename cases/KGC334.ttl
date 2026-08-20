@@ -1,0 +1,56 @@
+@prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix loc:     <https://w3id.org/dpv/loc#> .
+@prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+@prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+
+drk:bsb-offer-334 a odrl:Offer ;
+    dcterms:title "BSB offer: use in Germany"@en ;
+    odrl:assigner drk:bavarian-state-library ;
+    odrl:permission kgc:KGC334-offer-r1 .
+
+kgc:KGC334-offer-r1 a odrl:Permission ;
+    odrl:action odrl:use ;
+    odrl:target drk:bsb-manuscripts ;
+    odrl:constraint kgc:KGC334-offer-c1 .
+
+kgc:KGC334-offer-c1 a odrl:Constraint ;
+    odrl:leftOperand odrl:spatial ;
+    odrl:operator odrl:eq ;
+    odrl:rightOperand loc:DE .
+
+drk:bnf-request-334 a odrl:Request ;
+    dcterms:title "BnF request: use in France"@en ;
+    odrl:assignee drk:french-national-library ;
+    odrl:permission kgc:KGC334-request-r1 .
+
+kgc:KGC334-request-r1 a odrl:Permission ;
+    odrl:action odrl:use ;
+    odrl:target drk:bsb-manuscripts ;
+    odrl:constraint kgc:KGC334-request-c1 .
+
+kgc:KGC334-request-c1 a odrl:Constraint ;
+    odrl:leftOperand odrl:spatial ;
+    odrl:operator odrl:eq ;
+    odrl:rightOperand loc:FR .
+
+### Expected result #######################################################
+
+drk:KGC334-report a vrep:OperandReport ;
+    dcterms:identifier "KGC334" ;
+    vrep:firstPolicy drk:bsb-offer ;
+    vrep:secondPolicy drk:bnf-request ;
+    vrep:firstConstraint kgc:KGC334-offer-c1 ;
+    vrep:secondConstraint kgc:KGC334-request-c1 ;
+    vrep:leftOperand odrl:spatial ;
+    vrep:sort vrep:mer ;
+    vrep:resource <https://w3id.org/odrl-kb/dpv-loc-geo> ;
+    vrep:backgroundTheory <https://w3id.org/odrl-kb/dpv-loc/iso> ;
+    vrep:verdict vrep:Incompatible ;
+    vrep:certificate drk:KGC334-certificate .
+
+drk:KGC334-certificate a vrep:Refutation ;
+    rdfs:comment """The two constraints require one place to be both codes, and the registry rule holds the areas apart.  The premise is a rule the parties adopted on the authority of ISO 3166, not an assertion the extension makes: abandoning the rule returns the verdict to Unknown."""@en ;
+    vrep:clashingConstraint kgc:KGC334-offer-c1, kgc:KGC334-request-c1 ;
+    vrep:premise [ vrep:premiseSource vrep:fromBackgroundTheory ;
+                   rdfs:label "loc:DE and loc:FR are distinct areas under ISO 3166"@en ] .

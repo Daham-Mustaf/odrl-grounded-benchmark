@@ -1,0 +1,56 @@
+@prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix loc:     <https://w3id.org/dpv/loc#> .
+@prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+@prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+
+drk:bsb-offer-330 a odrl:Offer ;
+    dcterms:title "BSB offer: use within the Netherlands"@en ;
+    odrl:assigner drk:bavarian-state-library ;
+    odrl:permission kgc:KGC330-offer-r1 .
+
+kgc:KGC330-offer-r1 a odrl:Permission ;
+    odrl:action odrl:use ;
+    odrl:target drk:bsb-manuscripts ;
+    odrl:constraint kgc:KGC330-offer-c1 .
+
+kgc:KGC330-offer-c1 a odrl:Constraint ;
+    odrl:leftOperand odrl:spatial ;
+    odrl:operator odrl:isPartOf ;
+    odrl:rightOperand loc:NL .
+
+drk:bnf-request-330 a odrl:Request ;
+    dcterms:title "BnF request: use in Bonaire, Sint Eustatius and Saba"@en ;
+    odrl:assignee drk:french-national-library ;
+    odrl:permission kgc:KGC330-request-r1 .
+
+kgc:KGC330-request-r1 a odrl:Permission ;
+    odrl:action odrl:use ;
+    odrl:target drk:bsb-manuscripts ;
+    odrl:constraint kgc:KGC330-request-c1 .
+
+kgc:KGC330-request-c1 a odrl:Constraint ;
+    odrl:leftOperand odrl:spatial ;
+    odrl:operator odrl:eq ;
+    odrl:rightOperand loc:BQ .
+
+### Expected result #######################################################
+
+drk:KGC330-report a vrep:OperandReport ;
+    dcterms:identifier "KGC330" ;
+    vrep:firstPolicy drk:bsb-offer ;
+    vrep:secondPolicy drk:bnf-request ;
+    vrep:firstConstraint kgc:KGC330-offer-c1 ;
+    vrep:secondConstraint kgc:KGC330-request-c1 ;
+    vrep:leftOperand odrl:spatial ;
+    vrep:sort vrep:mer ;
+    vrep:resource <https://w3id.org/odrl-kb/dpv-loc-geo> ;
+    vrep:backgroundTheory <https://w3id.org/odrl-kb/dpv-loc/empty> ;
+    vrep:verdict vrep:Compatible ;
+    vrep:certificate drk:KGC330-certificate .
+
+drk:KGC330-certificate a vrep:Refutation ;
+    rdfs:comment """The extension places Bonaire within the Netherlands, so every model admits the common use and its absence is impossible."""@en ;
+    vrep:clashingConstraint kgc:KGC330-offer-c1, kgc:KGC330-request-c1 ;
+    vrep:premise [ vrep:premiseSource vrep:fromResource ;
+                   rdfs:label "loc:BQ is within loc:NL"@en ] .

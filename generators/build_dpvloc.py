@@ -121,7 +121,6 @@ EXPECT = {
     "typing":       255,
     "membership":   177,
     "complement": 63073,
-    "annotation":     4,
     "identity":      30,
 }
 
@@ -151,20 +150,13 @@ def classify(g):
     Both containment and membership are returned.  Which of them a profile
     reads is the profile's decision, not this function's: see --read.
     """
-    containment, typing, membership, complement = [], [], [], []
-    annotation, other = [], []
+    containment, typing, membership, complement, other = [], [], [], [], []
 
     def is_a(n, cls):
         return (n, RDF.type, cls) in g
 
     for s, o in g.subject_objects(SKOS.broader):
         if not str(s).startswith(str(LOC)):
-            continue
-        # A sixth use of the predicate: the four ISO code properties declare
-        # themselves below skos:altLabel.  That is a property hierarchy, not
-        # a relation between places, and nothing here reads it.
-        if (s, RDF.type, RDF.Property) in g or str(o).startswith(str(SKOS)):
-            annotation.append((local(s), str(o)))
             continue
         if str(o).startswith(str(DPV)):
             typing.append((local(s), str(o)))
@@ -183,7 +175,7 @@ def classify(g):
             complement.append((local(s_), local(o_)))
 
     return (sorted(containment), sorted(typing), sorted(membership),
-            sorted(complement), sorted(annotation), sorted(other))
+            sorted(complement), sorted(other))
 
 
 def identities(g):
@@ -523,25 +515,52 @@ def axioms(order, ident, meta, mode) -> str:
 
 
 def iso_axioms(reps) -> str:
-    """Pairwise distinctness between areas, as one TPTP distinct_object block.
+    """The registry rule, stated but not instantiated.
 
-    Written as a single all-different over the class representatives rather
-    than as O(n^2) inequations: the provers handle it directly and an unsat
-    core cites one assertion, which is what the certificate should say.
+    The rule licenses pairwise distinctness over 249 areas, which is 30876
+    inequations.  Instantiating all of them in every problem would bury the
+    one assertion a refutation actually uses, and TPTP's $distinct is a
+    typed-language construct that a first-order prover reads as an ordinary
+    predicate, constraining nothing.
+
+    So the file states the rule, lists the areas it ranges over, and leaves
+    the instances to the problems.  A problem naming two areas carries the
+    one inequation between them, named bt_, and an unsat core then cites the
+    rule instance the verdict rests on rather than a term the prover
+    ignored.  The SMT encoding has always worked this way; this makes the
+    two agree.
     """
-    names = ", ".join(slug(c) for c in reps)
+    listing = "\n".join(
+        "% " + ", ".join(reps[i:i + 12]) for i in range(0, len(reps), 12))
     return (
-        "% Background theory: ISO 3166 areas are pairwise distinct.\n"
+        "% Background theory: the ISO 3166 uniqueness rule.\n"
         "%\n"
-        "% Generated from the registry rule, not read from the extension,\n"
-        "% which asserts no distinctness.  Between areas rather than codes:\n"
-        "% codes the extension identifies name one area and are represented\n"
-        "% once here.\n"
-        f"% Classes: {len(reps)}\n"
-        "\n"
-        "fof(bt_iso_areas_distinct, axiom,\n"
-        f"    $distinct({names})).\n"
+        "% ISO 3166 assigns one code to an area, so two areas listed by the\n"
+        "% extension are two places.  The extension asserts none of this: the\n"
+        "% rule is the parties', and a verdict resting on an instance of it is\n"
+        "% withdrawable by abandoning the rule.\n"
+        "%\n"
+        "% Distinctness is between areas rather than codes.  Where the\n"
+        "% extension records two codes for one area, a country code and a\n"
+        "% subdivision code, the area appears once below under its country\n"
+        "% code; a rule applied to the codes would contradict the identity\n"
+        "% the extension publishes.\n"
+        "%\n"
+        "% The rule is stated here and instantiated by the problems.  A\n"
+        "% problem naming two of the areas below carries the inequation\n"
+        "% between them as a bt_ assertion, so that a refutation cites the\n"
+        "% instance it used.\n"
+        "%\n"
+        f"% Areas: {len(reps)}\n"
+        "%\n"
+        f"{listing}\n"
     )
+
+
+def iso_instance(a: str, b: str) -> str:
+    """The inequation a problem carries when it adopts the registry rule."""
+    return (f"fof(bt_{slug(a)}_distinct_{slug(b)}, axiom,\n"
+            f"    {slug(a)} != {slug(b)}).")
 
 
 def declared_axioms(pair) -> str:
@@ -626,7 +645,7 @@ def main() -> int:
     g = Graph()
     g.parse(args.loc, format="turtle")
 
-    containment, typing, membership, complement, annotation, other = classify(g)
+    containment, typing, membership, complement, other = classify(g)
     ident, id_preds = identities(g)
     concepts, labels, kinds = concepts_and_labels(g)
 
@@ -697,15 +716,8 @@ def main() -> int:
     # ISO distinctness, between areas rather than codes.  Codes the extension
     # identifies name one area, so the rule is applied to the quotient.
     cls = classes(concepts, ident)
-    # One representative per area, and it must be the country code: ISO
-    # gives some areas both a country and a subdivision code, and a problem
-    # naming TF must be the constant the distinctness theory separates.
-    reps = []
-    for members in cls.values():
-        countries = [c for c in members if kinds.get(c) == "Country"]
-        if countries:
-            reps.append(min(countries))
-    reps = sorted(reps)
+    reps = sorted(k for k, v in cls.items()
+                  if any(kinds.get(c) == "Country" for c in v))
     (args.out / "background" / "dpvloc-iso.ttl").write_text(
         iso_ttl(reps, meta), encoding="utf-8")
     (args.out / "axioms" / "LOC-dpvloc-iso.ax").write_text(

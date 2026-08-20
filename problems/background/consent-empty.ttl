@@ -1,0 +1,20 @@
+# Background theory for the DPV consent status resource: empty.
+#
+# The module asserts no disjointness and no distinctness.  Two constraints
+# naming different states are therefore satisfiable together, and a verdict
+# separating them rests on something the parties supply.
+#
+# The absence is worth stating, because the definitions read as though they
+# supply it.  A state that may justify processing and a state that may not
+# cannot be the same state; the module says so in prose and asserts nothing.
+# See the definitional theory.
+#
+# Source: https://w3id.org/dpv/2.3
+
+@prefix bt:      <https://w3id.org/odrl-kb/background#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+<https://w3id.org/odrl-kb/dpv-consent/empty> a bt:BackgroundTheory ;
+    dcterms:title "No declared distinctness or disjointness"@en ;
+    bt:appliesTo <https://w3id.org/odrl-kb/dpv-consent> ;
+    bt:assertionCount 0 .

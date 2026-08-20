@@ -1,0 +1,56 @@
+@prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix loc:     <https://w3id.org/dpv/loc#> .
+@prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+@prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+
+drk:bsb-offer-331 a odrl:Offer ;
+    dcterms:title "BSB offer: use within the European Union"@en ;
+    odrl:assigner drk:bavarian-state-library ;
+    odrl:permission kgc:KGC331-offer-r1 .
+
+kgc:KGC331-offer-r1 a odrl:Permission ;
+    odrl:action odrl:use ;
+    odrl:target drk:bsb-manuscripts ;
+    odrl:constraint kgc:KGC331-offer-c1 .
+
+kgc:KGC331-offer-c1 a odrl:Constraint ;
+    odrl:leftOperand odrl:spatial ;
+    odrl:operator odrl:isPartOf ;
+    odrl:rightOperand loc:EU .
+
+drk:bnf-request-331 a odrl:Request ;
+    dcterms:title "BnF request: use in Germany"@en ;
+    odrl:assignee drk:french-national-library ;
+    odrl:permission kgc:KGC331-request-r1 .
+
+kgc:KGC331-request-r1 a odrl:Permission ;
+    odrl:action odrl:use ;
+    odrl:target drk:bsb-manuscripts ;
+    odrl:constraint kgc:KGC331-request-c1 .
+
+kgc:KGC331-request-c1 a odrl:Constraint ;
+    odrl:leftOperand odrl:spatial ;
+    odrl:operator odrl:eq ;
+    odrl:rightOperand loc:DE .
+
+### Expected result #######################################################
+
+drk:KGC331-report a vrep:OperandReport ;
+    dcterms:identifier "KGC331" ;
+    vrep:firstPolicy drk:bsb-offer ;
+    vrep:secondPolicy drk:bnf-request ;
+    vrep:firstConstraint kgc:KGC331-offer-c1 ;
+    vrep:secondConstraint kgc:KGC331-request-c1 ;
+    vrep:leftOperand odrl:spatial ;
+    vrep:sort vrep:mer ;
+    vrep:resource <https://w3id.org/odrl-kb/dpv-loc-juris> ;
+    vrep:backgroundTheory <https://w3id.org/odrl-kb/dpv-loc/empty> ;
+    vrep:verdict vrep:Compatible ;
+    vrep:certificate drk:KGC331-certificate .
+
+drk:KGC331-certificate a vrep:Refutation ;
+    rdfs:comment """Germany is a member of the European Union and this profile reads membership as the order.  The premise is the extension's; what is the profile's is the decision to read it, and the geographic profile does not."""@en ;
+    vrep:clashingConstraint kgc:KGC331-offer-c1, kgc:KGC331-request-c1 ;
+    vrep:premise [ vrep:premiseSource vrep:fromResource ;
+                   rdfs:label "loc:DE is a member of loc:EU"@en ] .

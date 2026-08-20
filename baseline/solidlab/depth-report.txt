@@ -1,0 +1,34 @@
+(node:11834) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+==============================================================================
+D0  0 hop(s):  isA ScientificResearch  against  ScientificResearch
+  ours   : Compatible, no resource premise needed
+  theirs : Satisfied
+  Control.  The offered and requested purposes are the same, so the type matches directly and no traversal is called for.
+==============================================================================
+D1  1 hop(s):  isA ResearchAndDevelopment  against  ScientificResearch
+  ours   : Compatible, one resource premise (KGC310)
+  theirs : Unsatisfied
+  One edge.  DPV places scientific research directly below research and development.
+==============================================================================
+D2  2 hop(s):  isA Purpose  against  NonCommercialResearch
+  ours   : Compatible, two premises and transitivity (KGC311)
+  theirs : Unsatisfied
+  Two edges, through non-commercial purpose.  The first case whose refutation on our side needs the transitivity axiom.
+==============================================================================
+D6  6 hop(s):  isA Purpose  against  RecruitmentInterviewScheduling
+  ours   : Compatible, six premises and transitivity (KGC315)
+  theirs : Unsatisfied
+  The longest chain in the purposes module.  If the answer here is the same as at one hop, the divergence does not depend on distance.
+
+==============================================================================
+id   hops  constraint / requested purpose                       theirs
+------------------------------------------------------------------------------
+D0   0     isA ScientificResearch / ScientificResearch          Satisfied
+D1   1     isA ResearchAndDevelopment / ScientificResearch      Unsatisfied
+D2   2     isA Purpose / NonCommercialResearch                  Unsatisfied
+D6   6     isA Purpose / RecruitmentInterviewScheduling         Unsatisfied
+
+All four states of the world contain the same DPV edges.  The
+only difference between the rows is how far apart the two
+purposes are in the vocabulary.

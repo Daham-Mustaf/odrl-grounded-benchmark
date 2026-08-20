@@ -1,0 +1,305 @@
+(node:11767) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+========================================================================
+B00  isA R&D, purpose typed R&D directly
+  ours        : Compatible
+  theirs      : Satisfied (rule Active)
+  expected    : Satisfied
+  Control.  One rdf:type hop and the rule matches.  If this fails the input is malformed and nothing below means anything.
+
+@prefix cr: <https://w3id.org/force/compliance-report#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix ex: <http://example.org/> .
+@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dpv: <https://w3id.org/dpv#> .
+
+<urn:uuid:1ec06ccc-d6a2-02d6-22c8-fd0e7cf86d4a> a cr:ConstraintReport ;
+  cr:constraint <urn:uuid:constraint> ;
+  cr:satisfactionState cr:Satisfied ;
+  cr:constraintLeftOperand ex:project ;
+  cr:constraintOperator odrl:isA ;
+  cr:constraintRightOperand dpv:ResearchAndDevelopment .
+
+<urn:uuid:37e4eac3-8667-454e-6c3d-2cd4f6694b8e> a cr:PolicyReport ;
+  dct:created "2026-08-19T09:00:00.000Z"^^xsd:dateTime ;
+  cr:policy <urn:uuid:policy> ;
+  cr:policyRequest <urn:uuid:request> ;
+  cr:ruleReport <urn:uuid:96141982-0847-04c7-8e22-4d5e16c86fcc> .
+
+<urn:uuid:96141982-0847-04c7-8e22-4d5e16c86fcc> a cr:PermissionReport ;
+  cr:attemptState cr:Attempted ;
+  cr:rule <urn:uuid:permission> ;
+  cr:ruleRequest <urn:uuid:request-permission> ;
+  cr:premiseReport <urn:uuid:1ec06ccc-d6a2-02d6-22c8-fd0e7cf86d4a>, <urn:uuid:e9740560-1f5d-f45d-bb2b-d8caa14ef447>, <urn:uuid:3ab9cf2e-1ace-d7c1-5d12-907c7107fb18>, <urn:uuid:d810ea34-bfad-8193-4143-61626ad95c7d> ;
+  cr:activationState cr:Active .
+
+<urn:uuid:e9740560-1f5d-f45d-bb2b-d8caa14ef447> a cr:TargetReport ;
+  cr:satisfactionState cr:Satisfied .
+
+<urn:uuid:3ab9cf2e-1ace-d7c1-5d12-907c7107fb18> a cr:PartyReport ;
+  cr:satisfactionState cr:Satisfied .
+
+<urn:uuid:d810ea34-bfad-8193-4143-61626ad95c7d> a cr:ActionReport ;
+  cr:satisfactionState cr:Satisfied .
+
+
+========================================================================
+B01  isA R&D, purpose typed SR, DPV skos:broader
+  ours        : Compatible
+  theirs      : Unsatisfied (rule Inactive)
+  expected    : Unsatisfied
+  KGC310.  DPV places scientific research below research and development.  The rule reads rdf:type and stops, so a use the vocabulary supports is refused.  Restrictive divergence.
+
+@prefix cr: <https://w3id.org/force/compliance-report#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix ex: <http://example.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<urn:uuid:f5130c89-82cb-a29f-b136-ea18157047d2> a cr:ConstraintReport ;
+  cr:constraint <urn:uuid:constraint> ;
+  cr:constraintLeftOperand ex:project ;
+  cr:satisfactionState cr:Unsatisfied .
+
+<urn:uuid:8f561811-61a1-6bdb-0714-a0474ece8ab3> a cr:PolicyReport ;
+  dct:created "2026-08-19T09:00:00.000Z"^^xsd:dateTime ;
+  cr:policy <urn:uuid:policy> ;
+  cr:policyRequest <urn:uuid:request> ;
+  cr:ruleReport <urn:uuid:821aa705-0a52-b1bb-a9da-1d0841c99095> .
+
+<urn:uuid:821aa705-0a52-b1bb-a9da-1d0841c99095> a cr:PermissionReport ;
+  cr:attemptState cr:Attempted ;
+  cr:rule <urn:uuid:permission> ;
+  cr:ruleRequest <urn:uuid:request-permission> ;
+  cr:premiseReport <urn:uuid:f5130c89-82cb-a29f-b136-ea18157047d2>, <urn:uuid:d9f10a2e-7ac1-adca-d729-98b92bbc21ba>, <urn:uuid:8ca10fa6-effb-3f30-ab00-fb1c955e4bc4>, <urn:uuid:975708d3-f204-23a6-39d7-193b7484ac3a> ;
+  cr:activationState cr:Inactive .
+
+<urn:uuid:d9f10a2e-7ac1-adca-d729-98b92bbc21ba> a cr:TargetReport ;
+  cr:satisfactionState cr:Satisfied .
+
+<urn:uuid:8ca10fa6-effb-3f30-ab00-fb1c955e4bc4> a cr:PartyReport ;
+  cr:satisfactionState cr:Satisfied .
+
+<urn:uuid:975708d3-f204-23a6-39d7-193b7484ac3a> a cr:ActionReport ;
+  cr:satisfactionState cr:Satisfied .
+
+
+========================================================================
+B02  isA R&D, purpose typed SR, DPV rdfs:subClassOf
+  ours        : Compatible
+  theirs      : Unsatisfied (rule Inactive)
+  expected    : Unsatisfied
+  The same pair in the OWL serialisation DPV also publishes.  Neither form of the edge is read, so this is not a matter of having chosen the wrong file.
+
+@prefix cr: <https://w3id.org/force/compliance-report#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix ex: <http://example.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<urn:uuid:c27e4d9b-c290-3bea-cfa4-e8c62e0729ee> a cr:ConstraintReport ;
+  cr:constraint <urn:uuid:constraint> ;
+  cr:constraintLeftOperand ex:project ;
+  cr:satisfactionState cr:Unsatisfied .
+
+<urn:uuid:fa2c723a-e71e-dd62-27b8-896dfce2bd36> a cr:PolicyReport ;
+  dct:created "2026-08-19T09:00:00.000Z"^^xsd:dateTime ;
+  cr:policy <urn:uuid:policy> ;
+  cr:policyRequest <urn:uuid:request> ;
+  cr:ruleReport <urn:uuid:54afcf99-9145-5a9b-938f-62503c4d6c5c> .
+
+<urn:uuid:54afcf99-9145-5a9b-938f-62503c4d6c5c> a cr:PermissionReport ;
+  cr:attemptState cr:Attempted ;
+  cr:rule <urn:uuid:permission> ;
+  cr:ruleRequest <urn:uuid:request-permission> ;
+  cr:premiseReport <urn:uuid:c27e4d9b-c290-3bea-cfa4-e8c62e0729ee>, <urn:uuid:822aa7fc-eab8-7ba7-eb65-1781c560827b>, <urn:uuid:f5a477e2-8829-e491-a1d1-049a04894ae9>, <urn:uuid:1020cc67-571e-8c65-4c74-930ef660cf7f> ;
+  cr:activationState cr:Inactive .
+
+<urn:uuid:822aa7fc-eab8-7ba7-eb65-1781c560827b> a cr:TargetReport ;
+  cr:satisfactionState cr:Satisfied .
+
+<urn:uuid:f5a477e2-8829-e491-a1d1-049a04894ae9> a cr:PartyReport ;
+  cr:satisfactionState cr:Satisfied .
+
+<urn:uuid:1020cc67-571e-8c65-4c74-930ef660cf7f> a cr:ActionReport ;
+  cr:satisfactionState cr:Satisfied .
+
+
+========================================================================
+B10  isNoneOf {SR}, purpose typed SR directly
+  ours        : Incompatible
+  theirs      : Satisfied (rule Active)   <-- NOT AS EXPECTED
+  expected    : Unsatisfied
+  Control for the exclusion.  The excluded purpose is exactly the requested one, so both refuse it.
+
+@prefix cr: <https://w3id.org/force/compliance-report#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix ex: <http://example.org/> .
+@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dpv: <https://w3id.org/dpv#> .
+
+<urn:uuid:403aeaad-80a2-2b5d-06e9-6c7631f07c6b> a cr:ConstraintReport ;
+  cr:constraint <urn:uuid:constraint> ;
+  cr:satisfactionState cr:Satisfied ;
+  cr:constraintLeftOperand ex:project ;
+  cr:constraintOperator odrl:isNoneOf ;
+  cr:constraintRightOperand dpv:ScientificResearch .
+
+<urn:uuid:e29f50fc-b891-6c8c-4eb8-1a2fadb14224> a cr:PolicyReport ;
+  dct:created "2026-08-19T09:00:00.000Z"^^xsd:dateTime ;
+  cr:policy <urn:uuid:policy> ;
+  cr:policyRequest <urn:uuid:request> ;
+  cr:ruleReport <urn:uuid:8db21d1f-7f87-a246-c0ba-9ee486c1b02b> .
+
+<urn:uuid:8db21d1f-7f87-a246-c0ba-9ee486c1b02b> a cr:PermissionReport ;
+  cr:attemptState cr:Attempted ;
+  cr:rule <urn:uuid:permission> ;
+  cr:ruleRequest <urn:uuid:request-permission> ;
+  cr:premiseReport <urn:uuid:403aeaad-80a2-2b5d-06e9-6c7631f07c6b>, <urn:uuid:7070b3fb-3f4f-dff7-ae67-871707f1cfb4>, <urn:uuid:629c7839-5358-5e2f-cd92-d07878de3c55>, <urn:uuid:6b2e1d2d-d968-0e4b-a85e-b565ef193381> ;
+  cr:activationState cr:Active .
+
+<urn:uuid:7070b3fb-3f4f-dff7-ae67-871707f1cfb4> a cr:TargetReport ;
+  cr:satisfactionState cr:Satisfied .
+
+<urn:uuid:629c7839-5358-5e2f-cd92-d07878de3c55> a cr:PartyReport ;
+  cr:satisfactionState cr:Satisfied .
+
+<urn:uuid:6b2e1d2d-d968-0e4b-a85e-b565ef193381> a cr:ActionReport ;
+  cr:satisfactionState cr:Satisfied .
+
+
+========================================================================
+B11  isNoneOf {R&D}, purpose typed SR, DPV skos:broader
+  ours        : Unknown
+  theirs      : Satisfied (rule Active)
+  expected    : Satisfied
+  The offer excludes research and development.  The requested purpose lies below it in DPV, and the rule compares named values only, so the exclusion is escaped and the use is allowed.  Permissive divergence, and the direction an author is least likely to test.  Our verdict is Unknown rather than Incompatible because isNoneOf at tax excludes the concept and not its subtypes: the offer as written does not exclude this use either, and saying so is the point.
+
+@prefix cr: <https://w3id.org/force/compliance-report#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix ex: <http://example.org/> .
+@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dpv: <https://w3id.org/dpv#> .
+
+<urn:uuid:c566e7a6-c3bd-8eb7-e018-78d3871fac06> a cr:ConstraintReport ;
+  cr:constraint <urn:uuid:constraint> ;
+  cr:satisfactionState cr:Satisfied ;
+  cr:constraintLeftOperand ex:project ;
+  cr:constraintOperator odrl:isNoneOf ;
+  cr:constraintRightOperand dpv:ResearchAndDevelopment .
+
+<urn:uuid:6f40adc2-8254-b889-d17e-a420163270b0> a cr:PolicyReport ;
+  dct:created "2026-08-19T09:00:00.000Z"^^xsd:dateTime ;
+  cr:policy <urn:uuid:policy> ;
+  cr:policyRequest <urn:uuid:request> ;
+  cr:ruleReport <urn:uuid:bc9eb3bc-a2e3-773e-17a4-4d97200964cd> .
+
+<urn:uuid:bc9eb3bc-a2e3-773e-17a4-4d97200964cd> a cr:PermissionReport ;
+  cr:attemptState cr:Attempted ;
+  cr:rule <urn:uuid:permission> ;
+  cr:ruleRequest <urn:uuid:request-permission> ;
+  cr:premiseReport <urn:uuid:c566e7a6-c3bd-8eb7-e018-78d3871fac06>, <urn:uuid:e678f3b1-3496-9fd3-ad26-bbe507d2276b>, <urn:uuid:8b86ad2d-c18a-d36e-1e1d-5d5dbeba5d5c>, <urn:uuid:4ee72435-3d98-e118-bb50-697d3d33948a> ;
+  cr:activationState cr:Active .
+
+<urn:uuid:e678f3b1-3496-9fd3-ad26-bbe507d2276b> a cr:TargetReport ;
+  cr:satisfactionState cr:Satisfied .
+
+<urn:uuid:8b86ad2d-c18a-d36e-1e1d-5d5dbeba5d5c> a cr:PartyReport ;
+  cr:satisfactionState cr:Satisfied .
+
+<urn:uuid:4ee72435-3d98-e118-bb50-697d3d33948a> a cr:ActionReport ;
+  cr:satisfactionState cr:Satisfied .
+
+
+========================================================================
+B20  eq R&D, purpose typed SR, DPV skos:broader
+  ours        : Unknown
+  theirs      : Unsatisfied (rule Inactive)
+  expected    : Unsatisfied
+  Identity rather than order.  Nothing in DPV says the two purposes are distinct, so a structure may identify them and the verdict is open.  A two-valued report has no way to say that and returns a definite refusal.
+
+@prefix cr: <https://w3id.org/force/compliance-report#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix ex: <http://example.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<urn:uuid:7accaea2-1894-ec17-b6a6-d290e087b3f9> a cr:ConstraintReport ;
+  cr:constraint <urn:uuid:constraint> ;
+  cr:constraintLeftOperand ex:project ;
+  cr:satisfactionState cr:Unsatisfied .
+
+<urn:uuid:850b3b63-1e4e-e944-53e1-11daa3cad6df> a cr:PolicyReport ;
+  dct:created "2026-08-19T09:00:00.000Z"^^xsd:dateTime ;
+  cr:policy <urn:uuid:policy> ;
+  cr:policyRequest <urn:uuid:request> ;
+  cr:ruleReport <urn:uuid:42cb5cc4-6772-748d-88ee-e73c2a9d9592> .
+
+<urn:uuid:42cb5cc4-6772-748d-88ee-e73c2a9d9592> a cr:PermissionReport ;
+  cr:attemptState cr:Attempted ;
+  cr:rule <urn:uuid:permission> ;
+  cr:ruleRequest <urn:uuid:request-permission> ;
+  cr:premiseReport <urn:uuid:7accaea2-1894-ec17-b6a6-d290e087b3f9>, <urn:uuid:d290f2f2-5222-5261-e410-e693de5aa575>, <urn:uuid:beacce12-e1a1-f5c2-bf87-b7f1ada3659d>, <urn:uuid:46ad953e-7de9-4ee7-e0e5-f75a5dd21df1> ;
+  cr:activationState cr:Inactive .
+
+<urn:uuid:d290f2f2-5222-5261-e410-e693de5aa575> a cr:TargetReport ;
+  cr:satisfactionState cr:Satisfied .
+
+<urn:uuid:beacce12-e1a1-f5c2-bf87-b7f1ada3659d> a cr:PartyReport ;
+  cr:satisfactionState cr:Satisfied .
+
+<urn:uuid:46ad953e-7de9-4ee7-e0e5-f75a5dd21df1> a cr:ActionReport ;
+  cr:satisfactionState cr:Satisfied .
+
+
+========================================================================
+B30  isAnyOf {R&D, SR}, purpose typed SR directly
+  ours        : Compatible
+  theirs      : Unsatisfied (rule Inactive)   <-- NOT AS EXPECTED
+  expected    : Satisfied
+  A genuine set-valued right operand.  Worth running because the rule matches one right operand at a time; this checks that a two-member set behaves as the operator's definition requires.
+
+@prefix cr: <https://w3id.org/force/compliance-report#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix ex: <http://example.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<urn:uuid:7e19c888-6c9e-0f57-e4a7-bab2080f9346> a cr:ConstraintReport ;
+  cr:constraint <urn:uuid:constraint> ;
+  cr:constraintLeftOperand ex:project ;
+  cr:satisfactionState cr:Unsatisfied .
+
+<urn:uuid:b709f498-d362-52a8-04f3-6881aaa6fbcd> a cr:PolicyReport ;
+  dct:created "2026-08-19T09:00:00.000Z"^^xsd:dateTime ;
+  cr:policy <urn:uuid:policy> ;
+  cr:policyRequest <urn:uuid:request> ;
+  cr:ruleReport <urn:uuid:360fd831-dcfd-982d-1c10-704a9f9820fa> .
+
+<urn:uuid:360fd831-dcfd-982d-1c10-704a9f9820fa> a cr:PermissionReport ;
+  cr:attemptState cr:Attempted ;
+  cr:rule <urn:uuid:permission> ;
+  cr:ruleRequest <urn:uuid:request-permission> ;
+  cr:premiseReport <urn:uuid:7e19c888-6c9e-0f57-e4a7-bab2080f9346>, <urn:uuid:58d0f396-55b6-9d33-e27f-f80e1bea0b80>, <urn:uuid:37a1d64f-b0f6-576e-69d5-c6a7f90ccdc7>, <urn:uuid:37ed13cb-c9d0-e504-3131-516c88a3e37a> ;
+  cr:activationState cr:Inactive .
+
+<urn:uuid:58d0f396-55b6-9d33-e27f-f80e1bea0b80> a cr:TargetReport ;
+  cr:satisfactionState cr:Satisfied .
+
+<urn:uuid:37a1d64f-b0f6-576e-69d5-c6a7f90ccdc7> a cr:PartyReport ;
+  cr:satisfactionState cr:Satisfied .
+
+<urn:uuid:37ed13cb-c9d0-e504-3131-516c88a3e37a> a cr:ActionReport ;
+  cr:satisfactionState cr:Satisfied .
+
+
+========================================================================
+SUMMARY
+========================================================================
+id    case                                                 ours          theirs
+B00   isA R&D, purpose typed R&D directly                  Compatible    Satisfied
+B01   isA R&D, purpose typed SR, DPV skos:broader          Compatible    Unsatisfied
+B02   isA R&D, purpose typed SR, DPV rdfs:subClassOf       Compatible    Unsatisfied
+B10   isNoneOf {SR}, purpose typed SR directly             Incompatible  Satisfied   <-- NOT AS EXPECTED
+B11   isNoneOf {R&D}, purpose typed SR, DPV skos:broader   Unknown       Satisfied
+B20   eq R&D, purpose typed SR, DPV skos:broader           Unknown       Unsatisfied
+B30   isAnyOf {R&D, SR}, purpose typed SR directly         Compatible    Unsatisfied   <-- NOT AS EXPECTED

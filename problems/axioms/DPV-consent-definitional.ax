@@ -1,0 +1,12 @@
+% Background theory: the valid and invalid branches are disjoint.
+%
+% Adopted from the module's definitions, which say that one branch
+% holds the states that can justify processing and the other the
+% states that cannot.  The module asserts no owl:disjointWith, so a
+% verdict resting on this is the parties'.
+%
+% Disjointness rather than distinctness: nothing lies below both, so
+% no state of consent is at once valid and invalid for processing.
+
+fof(bt_dpv_consent_status_valid_for_processing_disjoint_dpv_consent_status_invalid_for_processing, axiom,
+    ! [X] : ~ ( kge_leq(X, dpv_consent_status_valid_for_processing) & kge_leq(X, dpv_consent_status_invalid_for_processing) )).

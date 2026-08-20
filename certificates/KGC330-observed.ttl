@@ -1,0 +1,11 @@
+kgc:KGC330-observed a vrep:Refutation ;
+    vrep:producedBy "Vampire" ;
+    vrep:proofArtefact <proofs/KGC330-2.tstp> ;
+    vrep:attributedAssertion [
+        vrep:premiseSource vrep:fromResource ;
+        vrep:formulaName "res_loc_bq_within_loc_nl" ;
+        rdfs:label "res_loc_bq_within_loc_nl"@en ] ;
+    vrep:attributedAssertion [
+        vrep:premiseSource vrep:fromConstraints ;
+        vrep:formulaName "w_kgc330" ;
+        rdfs:label "w_kgc330"@en ] .

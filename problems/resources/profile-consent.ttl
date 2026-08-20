@@ -1,0 +1,21 @@
+# Profile entry for a consent status operand over the DPV consent module.
+#
+# The sort is tax.  The module publishes a hierarchy of states, and the
+# constraint a controller writes, that the status be one which may justify
+# processing, is a question about that hierarchy: which states lie below the
+# concept the offer names.
+#
+# The module also types its concepts, and a profile binding this operand to
+# the typing rather than to the order would answer a different question.
+# Section 7 reports what that reading returns.
+
+@prefix dpvo: <https://w3id.org/dpv/mappings/odrl#> .
+@prefix vrep: <https://w3id.org/odrl-verdict-report#> .
+@prefix ex:   <https://w3id.org/odrl-kb/profile/> .
+
+ex:b-consent-status a vrep:OperandBinding ;
+    vrep:leftOperand dpvo:Status ;
+    vrep:sort vrep:tax ;
+    vrep:resource <https://w3id.org/odrl-kb/dpv-consent> ;
+    vrep:backgroundTheory <https://w3id.org/odrl-kb/dpv-consent/empty> ;
+    vrep:grounding vrep:sliceMembership .

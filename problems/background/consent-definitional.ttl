@@ -1,0 +1,29 @@
+# Background theory for the DPV consent status resource: the two branches are
+# disjoint.
+#
+# Adopted on the strength of the module's own definitions.
+# ConsentStatusValidForProcessing is defined as the states of consent that
+# can be used as valid justifications for processing data, and
+# ConsentStatusInvalidForProcessing as the states that cannot.  Nothing below
+# both can therefore exist, which is disjointness.
+#
+# The module does not assert it.  A party adopting this theory follows the
+# publisher's stated intent rather than adding to it, and the certificate
+# still marks the premise withdrawable: what the definitions warrant, they do
+# not assert, and a reader who disagrees with the reading can withdraw the
+# assertion and see the verdict reopen.
+#
+# Source: https://w3id.org/dpv/2.3
+
+@prefix dpv:     <https://w3id.org/dpv#> .
+@prefix bt:      <https://w3id.org/odrl-kb/background#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+<https://w3id.org/odrl-kb/dpv-consent/definitional> a bt:BackgroundTheory ;
+    dcterms:title "The valid and invalid branches are disjoint"@en ;
+    bt:appliesTo <https://w3id.org/odrl-kb/dpv-consent> ;
+    bt:generatedBy bt:PublishedDefinition ;
+    bt:rule "states that can and cannot justify processing have nothing in common"@en ;
+    bt:assertionCount 1 .
+
+dpv:ConsentStatusValidForProcessing bt:disjointFrom dpv:ConsentStatusInvalidForProcessing .

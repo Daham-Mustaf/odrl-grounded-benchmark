@@ -1,0 +1,18 @@
+(node:11800) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+==============================================================================
+The requested purpose is scientific research in every case.
+The intended answer is therefore fixed by the offer, and does
+not depend on how the request names the purpose.
+==============================================================================
+
+constraint                             intended      individual                 concept
+------------------------------------------------------------------------------
+isA ScientificResearch                 Satisfied     Satisfied                  Unsatisfied (rule did not fire)
+eq ScientificResearch                  Satisfied     Unsatisfied (rule did not fire) Satisfied
+isAnyOf {Marketing, ScientificResearch} Satisfied     Unsatisfied (rule did not fire) Satisfied
+isNoneOf {ScientificResearch}          Unsatisfied   Satisfied                  Unsatisfied (rule did not fire)
+
+If each operator matches its intended answer under one
+convention and not the other, then a policy using operators
+from both families cannot be satisfied by any single request.

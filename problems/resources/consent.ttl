@@ -1,0 +1,114 @@
+# DPV consent status: the order the module publishes.
+#
+# Thirteen states of consent under two mid-level concepts, one for
+# the states that may justify processing and one for the states that
+# may not.  The module asserts no disjointness between the two and no
+# distinctness between any pair; see the background theories.
+#
+# The module also types every concept dpv:ConsentStatus.  That is not
+# read here: typing relates an individual to a class, and a resource
+# relates concepts to concepts.
+#
+# Dropped at the module boundary:
+#   ConsentStatus below Status, which belongs to another module
+#
+# Source    : Data Privacy Vocabulary, consent status module
+# Version   : 2.0 (as the file states)
+# Retrieved : 2026-08-19
+# Licence   : W3C Document License 2023
+# NOTE      : permits verbatim redistribution, not derivatives; this slice is a derivative and the licence is unresolved
+#
+# Concepts         : 13
+# Order assertions : 12
+
+@prefix dpv:     <https://w3id.org/dpv#> .
+@prefix odrlkb:  <https://w3id.org/odrl-kb/dpv-consent#> .
+@prefix dcat:    <http://www.w3.org/ns/dcat#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+
+<https://w3id.org/odrl-kb/dpv-consent> a dcat:Dataset ;
+    dcterms:title "DPV consent status, module slice"@en ;
+    dcterms:source <https://w3id.org/dpv/2.3> ;
+    odrlkb:conceptCount 13 ;
+    odrlkb:orderAssertionCount 12 .
+
+odrlkb:consent_expired a odrlkb:ConsentState ;
+    rdfs:label "Consent Expired"@en ;
+    skos:definition "The state where the temporal or contextual validity of consent has 'expired'"@en ;
+    dcterms:identifier dpv:ConsentExpired .
+
+odrlkb:consent_given a odrlkb:ConsentState ;
+    rdfs:label "Consent Given"@en ;
+    skos:definition "The state where consent has been given"@en ;
+    dcterms:identifier dpv:ConsentGiven .
+
+odrlkb:consent_invalidated a odrlkb:ConsentState ;
+    rdfs:label "Consent Invalidated"@en ;
+    skos:definition "The state where consent has been deemed to be invalid"@en ;
+    dcterms:identifier dpv:ConsentInvalidated .
+
+odrlkb:consent_refused a odrlkb:ConsentState ;
+    rdfs:label "Consent Refused"@en ;
+    skos:definition "The state where consent has been refused"@en ;
+    dcterms:identifier dpv:ConsentRefused .
+
+odrlkb:consent_request_deferred a odrlkb:ConsentState ;
+    rdfs:label "Consent Request Deferred"@en ;
+    skos:definition "State where a request for consent has been deferred without a decision"@en ;
+    dcterms:identifier dpv:ConsentRequestDeferred .
+
+odrlkb:consent_requested a odrlkb:ConsentState ;
+    rdfs:label "Consent Requested"@en ;
+    skos:definition "State where a request for consent has been made and is awaiting a decision"@en ;
+    dcterms:identifier dpv:ConsentRequested .
+
+odrlkb:consent_revoked a odrlkb:ConsentState ;
+    rdfs:label "Consent Revoked"@en ;
+    skos:definition "The state where the consent is revoked by an entity other than the data subject and which prevents it from being further used as a valid state"@en ;
+    dcterms:identifier dpv:ConsentRevoked .
+
+odrlkb:consent_status a odrlkb:ConsentState ;
+    rdfs:label "Consent Status"@en ;
+    skos:definition "The state or status of 'consent' that provides information reflecting its operational status and validity for processing data"@en ;
+    dcterms:identifier dpv:ConsentStatus .
+
+odrlkb:consent_status_invalid_for_processing a odrlkb:ConsentState ;
+    rdfs:label "Consent Status Invalid for Processing"@en ;
+    skos:definition "States of consent that cannot be used as valid justifications for processing data"@en ;
+    dcterms:identifier dpv:ConsentStatusInvalidForProcessing .
+
+odrlkb:consent_status_valid_for_processing a odrlkb:ConsentState ;
+    rdfs:label "Consent Status Valid for Processing"@en ;
+    skos:definition "States of consent that can be used as valid justifications for processing data"@en ;
+    dcterms:identifier dpv:ConsentStatusValidForProcessing .
+
+odrlkb:consent_unknown a odrlkb:ConsentState ;
+    rdfs:label "Consent Unknown"@en ;
+    skos:definition "State where information about consent is not available or is unknown"@en ;
+    dcterms:identifier dpv:ConsentUnknown .
+
+odrlkb:consent_withdrawn a odrlkb:ConsentState ;
+    rdfs:label "Consent Withdrawn"@en ;
+    skos:definition "The state where the consent is withdrawn or revoked specifically by the data subject and which prevents it from being further used as a valid state"@en ;
+    dcterms:identifier dpv:ConsentWithdrawn .
+
+odrlkb:renewed_consent_given a odrlkb:ConsentState ;
+    rdfs:label "Renewed Consent Given"@en ;
+    skos:definition "The state where a previously given consent has been 'renewed' or 'refreshed' or 'reaffirmed' to form a new instance of given consent"@en ;
+    dcterms:identifier dpv:RenewedConsentGiven .
+
+# The order, as the module publishes it.
+odrlkb:consent_expired odrlkb:below odrlkb:consent_status_invalid_for_processing .
+odrlkb:consent_given odrlkb:below odrlkb:consent_status_valid_for_processing .
+odrlkb:consent_invalidated odrlkb:below odrlkb:consent_status_invalid_for_processing .
+odrlkb:consent_refused odrlkb:below odrlkb:consent_status_invalid_for_processing .
+odrlkb:consent_request_deferred odrlkb:below odrlkb:consent_status_invalid_for_processing .
+odrlkb:consent_requested odrlkb:below odrlkb:consent_status_invalid_for_processing .
+odrlkb:consent_revoked odrlkb:below odrlkb:consent_status_invalid_for_processing .
+odrlkb:consent_status_invalid_for_processing odrlkb:below odrlkb:consent_status .
+odrlkb:consent_status_valid_for_processing odrlkb:below odrlkb:consent_status .
+odrlkb:consent_unknown odrlkb:below odrlkb:consent_status_invalid_for_processing .
+odrlkb:consent_withdrawn odrlkb:below odrlkb:consent_status_invalid_for_processing .
+odrlkb:renewed_consent_given odrlkb:below odrlkb:consent_status_valid_for_processing .
