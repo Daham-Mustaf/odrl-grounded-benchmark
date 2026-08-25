@@ -159,7 +159,7 @@ def _offer_logical(pid, title, operand, alts):
     the alternatives are written out as constraints and referenced from the
     list.
     """
-    refs = ", ".join(f"kgc:{pid}-offer-a{i}" for i in range(1, len(alts) + 1))
+    refs = " ".join(f"kgc:{pid}-offer-a{i}" for i in range(1, len(alts) + 1))
     body = f"""
 drk:offer-{pid[3:]} a odrl:Offer ;
     dcterms:title "{title}"@en ;
