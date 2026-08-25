@@ -25,7 +25,7 @@ include('axioms/DPV-tom.ax').
 
 % --- witness condition negated -------------------------------------------
 fof(w_kgc360, axiom,
-    ~ ( ( kge_leq(tm_encryption, tm_technical_measure) & kge_leq(tm_access_control_method, tm_technical_measure) & ( ( kge_leq(tm_encryption, tm_technical_measure) )
-| ( kge_leq(tm_access_control_method, tm_technical_measure) )
-| ( kge_leq(tm_technical_measure, tm_technical_measure) ) ) ) )).
+    ~ ( ( kge_leq(tm_encryption, tm_technical_measure) & kge_leq(tm_access_control_method, tm_technical_measure) & ( kge_leq(tm_encryption, tm_technical_measure)
+| kge_leq(tm_access_control_method, tm_technical_measure)
+| kge_leq(tm_technical_measure, tm_technical_measure) ) ) )).
 %--------------------------------------------------------------------------

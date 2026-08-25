@@ -23,6 +23,6 @@ include('axioms/DPV-gdprlb.ax').
 
 % --- witness condition negated -------------------------------------------
 fof(w_kgc353, axiom,
-    ~ ( ( ( ( kge_leq(lb_dpv_legal_basis, lb_dpv_legal_basis) & lb_dpv_legal_basis = lb_gdpr_a6_1_a_explicit_consent ) )
-| ( ( kge_leq(lb_gdpr_a6_1_a_explicit_consent, lb_dpv_legal_basis) & lb_gdpr_a6_1_a_explicit_consent = lb_gdpr_a6_1_a_explicit_consent ) ) ) )).
+    ~ ( ( ( kge_leq(lb_dpv_legal_basis, lb_dpv_legal_basis) & lb_dpv_legal_basis = lb_gdpr_a6_1_a_explicit_consent )
+| ( kge_leq(lb_gdpr_a6_1_a_explicit_consent, lb_dpv_legal_basis) & lb_gdpr_a6_1_a_explicit_consent = lb_gdpr_a6_1_a_explicit_consent ) ) )).
 %--------------------------------------------------------------------------

@@ -1,334 +1,221 @@
 """
-problem_data_motivating.py
-==========================
-The three constraint pairs of the motivating example, one per sort, one per
-verdict.  Reproducing this table mechanically is the first milestone.
+problem_data_tom.py
+===================
+Two problems over the technical and organisational measures resource, at
+tax. They are the only problems in the suite that exercise isAllOf.
 
-    KGC300  language  nom  eq bcp:de        x eq bcp:fr      -> Incompatible
-    KGC301  purpose   tax  isA dpv:NCP      x eq dpv:SR      -> Unknown
-    KGC302  spatial   mer  isPartOf gn:EU   x eq gn:FR       -> Compatible
+    KGC360  isAllOf(encryption, access control) x isA TechnicalMeasure
+                                                        -> Compatible
+    KGC361  isAllOf(encryption, access control) x isNoneOf(access control)
+                                                        -> Incompatible
 
-Each problem is decided by two queries over the same witness condition.
+Why isAllOf needs this operand and no other
+--------------------------------------------
+A valuation binds a finite set of concepts to an operand, and for every
+other operand of the suite that set has one element: a processing operation
+has one purpose in the sense the constraint asks about, a consent record is
+in one state, a transfer rests on one legal basis. Measures are different.
+A controller has encryption in place and access control and
+pseudonymisation, together, and a clause requiring safeguards requires them
+together rather than requiring one of them.
 
-The witness condition
----------------------
-For the constraints K on one operand, W(K) is computed over the concepts the
-grounding names.  All three pairs here use subset-mode operators only, with
-no isAllOf and no isAnyOf, so F is empty and there are no A_k.  W reduces to
-D != empty, which over the named concepts c is the finite disjunction
+isAllOf is the operator for that, and it is the only one whose satisfaction
+condition runs the other way: the constraint's denotation must lie inside
+what the use supplies, where every other operator asks that the use lie
+inside the denotation. On a single-valued use the operator has nothing of
+its own to show. Over one value it says what eq says. Over two it asks
+whether a one-element set contains both, which holds exactly when the two
+values denote one concept, so the problem becomes a question about identity
+rather than about containment; and questions about identity are what the
+eq-against-eq problems already exercise, KGC313 and KGC351 among them.
+Nothing new is tested until the use itself binds several concepts, which is
+what this resource provides.
 
-    OR_c ( c is in every subset-mode denotation of K )
+What the two show
+-----------------
+KGC360 puts the requirement against a use whose measures are technical
+ones. Both required measures lie below dpv:TechnicalMeasure, which the
+resource asserts, so a use supplying exactly those two satisfies the
+offer and the request together. The verdict is Compatible, and the
+certificate cites the two assertions that carry it.
 
-and is therefore quantifier-free.  Worked per problem:
+KGC361 puts the same requirement against a processor that excludes access
+control. The requirement needs access control among the measures supplied
+and the exclusion keeps it out, so no structure admits a common use: the
+verdict is Incompatible, and it holds without any declaration by the
+parties. The certificate cites the constraints and nothing else. That is
+worth contrasting with the legal-basis problems, where a definite
+Incompatible needed the parties to declare concepts distinct: here the two
+constraints contradict each other over the same named concept, and the
+vocabulary is not consulted at all.
 
-  KGC300  D = [[eq de]] and [[eq fr]] = {de} and {fr}
-          W = (de = de & de = fr) | (fr = de & fr = fr)
-            = (de = fr)                                  after simplification
-
-  KGC301  D = [[isA ncp]] and [[eq sr]] = {x | x leq ncp} and {sr}
-          W = (ncp leq ncp & ncp = sr) | (sr leq ncp & sr = sr)
-            = (ncp = sr) | (sr leq ncp)
-          with ncp = dpv_non_commercial_purpose, sr = dpv_scientific_research
-
-  KGC302  D = [[isPartOf eu]] and [[eq fr]] = {x | x leq eu} and {fr}
-          W = (eu = fr) | (fr leq eu)
-
-We emit the unsimplified disjunction, since that is what Definition Witness
-prescribes and what a generator produces mechanically.
+Together they exercise both directions of the superset mode: the case
+where the required set is carried by the order, and the case where it is
+kept out by a complement.
 """
+
+from compile import Constraint
+
+TOM        = "tm_technical_organisational_measure"
+TECHNICAL  = "tm_technical_measure"
+ENCRYPTION = "tm_encryption"
+ACCESS     = "tm_access_control_method"
+
+RESOURCE = "https://w3id.org/odrl-kb/dpv-tom"
+EMPTY_BT = "https://w3id.org/odrl-kb/dpv-tom/empty"
+
+INCLUDES = ["KGE000-0.ax", "DPV-tom.ax"]
+
+
+def C(op, *vals, side="offer"):
+    return Constraint(op, tuple(vals), side)
+
+
+_TTL_HEAD = """\
+@prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dpv:     <https://w3id.org/dpv#> .
+@prefix dpvo:    <https://w3id.org/dpv/mappings/odrl#> .
+@prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+@prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+"""
+
+
+def _offer(pid):
+    return f"""
+drk:offer-{pid[3:]} a odrl:Offer ;
+    dcterms:title "Use is permitted where encryption and access control are both in place"@en ;
+    rdfs:comment "The kind of clause the DPV-ODRL guidance describes for this operand: access to a dataset permitted only where stated measures are implemented. Both are required, not one of them, which is what distinguishes isAllOf from isAnyOf here."@en ;
+    odrl:assigner drk:controller ;
+    odrl:permission kgc:{pid}-offer-r1 .
+
+kgc:{pid}-offer-r1 a odrl:Permission ;
+    odrl:action odrl:use ;
+    odrl:target drk:dataset ;
+    odrl:constraint kgc:{pid}-offer-c1 .
+
+kgc:{pid}-offer-c1 a odrl:Constraint ;
+    odrl:leftOperand dpvo:TechnicalOrganisationalMeasure ;
+    odrl:operator odrl:isAllOf ;
+    odrl:rightOperand ( dpv:Encryption dpv:AccessControlMethod ) .
+"""
+
+
+def _request(pid, title, operator, value):
+    return f"""
+drk:request-{pid[3:]} a odrl:Request ;
+    dcterms:title "{title}"@en ;
+    odrl:assignee drk:processor ;
+    odrl:permission kgc:{pid}-request-r1 .
+
+kgc:{pid}-request-r1 a odrl:Permission ;
+    odrl:action odrl:use ;
+    odrl:target drk:dataset ;
+    odrl:constraint kgc:{pid}-request-c1 .
+
+kgc:{pid}-request-c1 a odrl:Constraint ;
+    odrl:leftOperand dpvo:TechnicalOrganisationalMeasure ;
+    odrl:operator odrl:{operator} ;
+    odrl:rightOperand {value} .
+"""
+
 
 PROBLEMS = [
 
-    # -----------------------------------------------------------------
-    # KGC300  language, nominal.  B declares the two subtags distinct,
-    # so no structure identifies them and no witness exists.
-    # -----------------------------------------------------------------
     {
-        "id":                "KGC300",
+        "id":                "KGC360",
         "subdir":            "verdict",
-        "name":              "language, eq bcp:de against eq bcp:fr",
-        "left_operand":      "language",
-        "sort":              "nom",
-        "resource":          "https://w3id.org/odrl-kb/bcp47",
-        "background_theory": "https://w3id.org/odrl-kb/bcp47/uniqueness",
-        "includes":          ["KGE000-0.ax", "BCP47000-0.ax"],
-        "description": (
-            "Offer (language, eq, bcp:de) against request (language, eq, "
-            "bcp:fr).  The registry's uniqueness rule places the two subtags "
-            "in the background theory as distinct, so no model identifies "
-            "them and the witness condition fails in every model."
-        ),
-
-        "fof_decls": """\
-% Background theory: the registry's uniqueness rule, as distinctness.
-fof(bt_de_distinct_fr, axiom,
-    bcp_de != bcp_fr).
-""",
-        # D != empty over the named concepts {de, fr}
-        "fof_witness": """\
-( ( bcp_de = bcp_de & bcp_de = bcp_fr )
-| ( bcp_fr = bcp_de & bcp_fr = bcp_fr ) )""",
-
-        "expected_q1": "Unsatisfiable",   # no model admits a witness
-        "expected_q2": "Satisfiable",
-
-        "smt2_logic": "UF",
-        "smt2_decls": """\
-(declare-sort Concept 0)
-(declare-fun bcp_de () Concept)
-(declare-fun bcp_fr () Concept)""",
-        "smt2_resource": "",
-        "smt2_background": """\
-; Background theory: registry uniqueness, as distinctness.
-(assert (distinct bcp_de bcp_fr))""",
-        "smt2_witness": """\
-(or (and (= bcp_de bcp_de) (= bcp_de bcp_fr))
-    (and (= bcp_fr bcp_de) (= bcp_fr bcp_fr)))""",
-
-        "certificate": {
-            "kind": "Refutation",
-            "comment": "No model admits a common use.  The two constraints "
-                       "require one concept to be both subtags, and the "
-                       "background theory holds them distinct.",
-            "premises": [
-                ("fromBackgroundTheory",
-                 "bcp:de and bcp:fr are distinct (registry uniqueness)"),
-            ],
-        },
-        "ttl": """\
-@prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
-@prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix odrlkb:  <https://w3id.org/odrl-kb/bcp47#> .
-@prefix drk:     <https://w3id.org/odrl-kb/drk/> .
-@prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
-@prefix vrep:    <https://w3id.org/odrl-verdict-report#> .
-
-drk:bsb-manuscripts a dcterms:Dataset ;
-    dcterms:title "Digitised manuscripts, Bavarian State Library"@en .
-
-drk:bsb-offer a odrl:Offer ;
-    dcterms:title "BSB offer: access in German"@en ;
-    odrl:assigner drk:bavarian-state-library ;
-    odrl:permission kgc:KGC300-offer-r1 .
-
-kgc:KGC300-offer-r1 a odrl:Permission ;
-    odrl:action odrl:use ;
-    odrl:target drk:bsb-manuscripts ;
-    odrl:constraint kgc:KGC300-offer-c1 .
-
-kgc:KGC300-offer-c1 a odrl:Constraint ;
-    odrl:leftOperand odrl:language ;
-    odrl:operator odrl:eq ;
-    odrl:rightOperand odrlkb:de .
-
-drk:bnf-request a odrl:Request ;
-    dcterms:title "BnF request: access in French"@en ;
-    odrl:assignee drk:french-national-library ;
-    odrl:permission kgc:KGC300-request-r1 .
-
-kgc:KGC300-request-r1 a odrl:Permission ;
-    odrl:action odrl:use ;
-    odrl:target drk:bsb-manuscripts ;
-    odrl:constraint kgc:KGC300-request-c1 .
-
-kgc:KGC300-request-c1 a odrl:Constraint ;
-    odrl:leftOperand odrl:language ;
-    odrl:operator odrl:eq ;
-    odrl:rightOperand odrlkb:fr .""",
-    },
-
-    # -----------------------------------------------------------------
-    # KGC301  purpose, taxonomic.  DPV neither places SR under NCP nor
-    # separates them, so some models admit a witness and some do not.
-    # -----------------------------------------------------------------
-    {
-        "id":                "KGC301",
-        "subdir":            "verdict",
-        "name":              "purpose, isA dpv:NCP against eq dpv:SR",
-        "left_operand":      "purpose",
+        "name":              "measures, isAllOf(Encryption, "
+                             "AccessControlMethod) against "
+                             "isA TechnicalMeasure",
+        "left_operand":      "TechnicalOrganisationalMeasure",
         "sort":              "tax",
-        "resource":          "https://w3id.org/odrl-kb/dpv-purpose",
-        "background_theory": "https://w3id.org/odrl-kb/dpv-purpose/declared",
-        "includes":          ["KGE000-0.ax", "DPV-milestone.ax"],
+        "resource":          RESOURCE,
+        "background_theory": EMPTY_BT,
+        "includes":          INCLUDES,
+        "tree": [C("isAllOf", ENCRYPTION, ACCESS),
+                 C("isA", TECHNICAL, side="request")],
         "description": (
-            "Offer (purpose, isA, dpv:NonCommercialPurpose) against request "
-            "(purpose, eq, dpv:ScientificResearch).  The vocabulary neither "
-            "places one under the other nor separates them, so both queries "
-            "are satisfiable and the verdict is Unknown."
+            "The controller requires encryption and access control to be "
+            "in place together; the processor states that the measures it "
+            "applies are technical ones. Both required measures lie below "
+            "dpv:TechnicalMeasure in the resource, so a use supplying just "
+            "those two satisfies the requirement and the statement at "
+            "once, and it does so in every structure. Verdict: "
+            "Compatible.\n\n"
+            "This is the superset mode carried by the order: isAllOf asks "
+            "that its two values lie inside what the use supplies, the "
+            "request bounds what the use may supply to the technical "
+            "measures, and the two published assertions place the values "
+            "within that bound."
         ),
-
-        "fof_decls": """\
-% The vocabulary is silent on the two concepts.  Nothing is asserted here:
-% asserting a negative would be the closed-world reading this paper rejects.
-""",
-        # D != empty over the named concepts {ncp, sr}
-        "fof_witness": """\
-( ( kge_leq(dpv_non_commercial_purpose, dpv_non_commercial_purpose) & dpv_non_commercial_purpose = dpv_scientific_research )
-| ( kge_leq(dpv_scientific_research,  dpv_non_commercial_purpose) & dpv_scientific_research  = dpv_scientific_research  ) )""",
-
-        "expected_q1": "Satisfiable",     # some model admits a witness
-        "expected_q2": "Satisfiable",     # some model admits none
-
-        "smt2_logic": "UF",
-        "smt2_decls": """\
-(declare-sort Concept 0)
-(declare-fun dpv_non_commercial_purpose () Concept)
-(declare-fun dpv_scientific_research  () Concept)
-(declare-fun kge_leq (Concept Concept) Bool)""",
-        "smt2_asserts": """\
-; The vocabulary says nothing about these two concepts.  No assertion is
-; made here: the order axioms are emitted by the writer, in full.""",
-        "smt2_witness": """\
-(or (and (kge_leq dpv_non_commercial_purpose dpv_non_commercial_purpose) (= dpv_non_commercial_purpose dpv_scientific_research))
-    (and (kge_leq dpv_scientific_research  dpv_non_commercial_purpose) (= dpv_scientific_research  dpv_scientific_research)))""",
-
-        "certificate": {
-            "kind": "Models",
-            "comment": "Both queries are satisfiable, so some models admit a "
-                       "common use and some do not.  The models differ on "
-                       "whether dpv:ScientificResearch falls under "
-                       "dpv:NonCommercialPurpose, which is what the "
-                       "vocabulary leaves open.",
-            "premises": [],
-        },
-        "ttl": """\
-@prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
-@prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix dpv:     <https://w3id.org/dpv#> .
-@prefix drk:     <https://w3id.org/odrl-kb/drk/> .
-@prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
-@prefix vrep:    <https://w3id.org/odrl-verdict-report#> .
-
-drk:bsb-manuscripts a dcterms:Dataset ;
-    dcterms:title "Digitised manuscripts, Bavarian State Library"@en .
-
-drk:bsb-offer a odrl:Offer ;
-    dcterms:title "BSB offer: non-commercial research only"@en ;
-    odrl:assigner drk:bavarian-state-library ;
-    odrl:permission kgc:KGC301-offer-r1 .
-
-kgc:KGC301-offer-r1 a odrl:Permission ;
-    odrl:action odrl:use ;
-    odrl:target drk:bsb-manuscripts ;
-    odrl:constraint kgc:KGC301-offer-c1 .
-
-kgc:KGC301-offer-c1 a odrl:Constraint ;
-    odrl:leftOperand odrl:purpose ;
-    odrl:operator odrl:isA ;
-    odrl:rightOperand dpv:NonCommercialPurpose .
-
-drk:bnf-request a odrl:Request ;
-    dcterms:title "BnF request: scientific research"@en ;
-    odrl:assignee drk:french-national-library ;
-    odrl:permission kgc:KGC301-request-r1 .
-
-kgc:KGC301-request-r1 a odrl:Permission ;
-    odrl:action odrl:use ;
-    odrl:target drk:bsb-manuscripts ;
-    odrl:constraint kgc:KGC301-request-c1 .
-
-kgc:KGC301-request-c1 a odrl:Constraint ;
-    odrl:leftOperand odrl:purpose ;
-    odrl:operator odrl:eq ;
-    odrl:rightOperand dpv:ScientificResearch .""",
-    },
-
-    # -----------------------------------------------------------------
-    # KGC302  spatial, mereological.  The gazetteer places France within
-    # Europe, so every model admits the witness.
-    # -----------------------------------------------------------------
-    {
-        "id":                "KGC302",
-        "subdir":            "verdict",
-        "name":              "spatial, isPartOf gn:Europe against eq gn:France",
-        "left_operand":      "spatial",
-        "sort":              "mer",
-        "resource":          "https://w3id.org/odrl-kb/geonames-europe",
-        "background_theory": "https://w3id.org/odrl-kb/geonames-europe/admin-siblings",
-        "includes":          ["KGE000-0.ax", "GN000-0.ax"],
-        "description": (
-            "Offer (spatial, isPartOf, gn:Europe) against request (spatial, "
-            "eq, gn:France).  The gazetteer places France within Europe, so "
-            "the witness condition holds in every model and the negated "
-            "query is unsatisfiable."
-        ),
-
-        "fof_decls": """\
-% Resource: the gazetteer places France within Europe.
-fof(res_france_within_europe, axiom,
-    kge_leq(gn_france, gn_europe)).
-""",
-        # D != empty over the named concepts {europe, france}
-        "fof_witness": """\
-( ( kge_leq(gn_europe, gn_europe) & gn_europe = gn_france )
-| ( kge_leq(gn_france, gn_europe) & gn_france = gn_france ) )""",
-
         "expected_q1": "Satisfiable",
-        "expected_q2": "Unsatisfiable",   # no model lacks a witness
-
-        "smt2_logic": "UF",
-        "smt2_decls": """\
-(declare-sort Concept 0)
-(declare-fun gn_europe () Concept)
-(declare-fun gn_france () Concept)
-(declare-fun kge_leq (Concept Concept) Bool)""",
-        "smt2_asserts": """\
-; Resource: France is within Europe.  The order axioms are emitted by the
-; writer, in full and quantified, so this file states only the resource.
-(assert (kge_leq gn_france gn_europe))""",
-        "smt2_witness": """\
-(or (and (kge_leq gn_europe gn_europe) (= gn_europe gn_france))
-    (and (kge_leq gn_france gn_europe) (= gn_france gn_france)))""",
-
+        "expected_q2": "Unsatisfiable",
         "certificate": {
             "kind": "Refutation",
-            "comment": "No model lacks a common use.  The gazetteer places "
-                       "France within Europe, so France itself is an "
-                       "admissible use in every model.",
+            "comment": "Both required measures are technical measures in "
+                       "the vocabulary, so a use supplying them satisfies "
+                       "the request as well as the offer.",
             "premises": [
-                ("fromResource", "gn:France lies within gn:Europe"),
+                ("fromResource",
+                 "dpv:Encryption is below dpv:TechnicalMeasure"),
+                ("fromResource",
+                 "dpv:AccessControlMethod is below dpv:TechnicalMeasure"),
             ],
-            "witness": "gn:France",
         },
-        "ttl": """\
-@prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
-@prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix gn:      <https://sws.geonames.org/> .
-@prefix drk:     <https://w3id.org/odrl-kb/drk/> .
-@prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
-@prefix vrep:    <https://w3id.org/odrl-verdict-report#> .
+        "ttl": _TTL_HEAD + _offer("KGC360")
+               + _request("KGC360",
+                          "The measures applied are technical measures",
+                          "isA", "dpv:TechnicalMeasure"),
+    },
 
-drk:bsb-manuscripts a dcterms:Dataset ;
-    dcterms:title "Digitised manuscripts, Bavarian State Library"@en .
-
-drk:bsb-offer a odrl:Offer ;
-    dcterms:title "BSB offer: recipients in Europe"@en ;
-    odrl:assigner drk:bavarian-state-library ;
-    odrl:permission kgc:KGC302-offer-r1 .
-
-kgc:KGC302-offer-r1 a odrl:Permission ;
-    odrl:action odrl:use ;
-    odrl:target drk:bsb-manuscripts ;
-    odrl:constraint kgc:KGC302-offer-c1 .
-
-kgc:KGC302-offer-c1 a odrl:Constraint ;
-    odrl:leftOperand odrl:spatial ;
-    odrl:operator odrl:isPartOf ;
-    odrl:rightOperand <https://sws.geonames.org/6255148/> .
-
-drk:bnf-request a odrl:Request ;
-    dcterms:title "BnF request: recipient in France"@en ;
-    odrl:assignee drk:french-national-library ;
-    odrl:permission kgc:KGC302-request-r1 .
-
-kgc:KGC302-request-r1 a odrl:Permission ;
-    odrl:action odrl:use ;
-    odrl:target drk:bsb-manuscripts ;
-    odrl:constraint kgc:KGC302-request-c1 .
-
-kgc:KGC302-request-c1 a odrl:Constraint ;
-    odrl:leftOperand odrl:spatial ;
-    odrl:operator odrl:eq ;
-    odrl:rightOperand <https://sws.geonames.org/3017382/> .""",
+    {
+        "id":                "KGC361",
+        "subdir":            "verdict",
+        "name":              "measures, isAllOf(Encryption, "
+                             "AccessControlMethod) against "
+                             "isNoneOf(AccessControlMethod)",
+        "left_operand":      "TechnicalOrganisationalMeasure",
+        "sort":              "tax",
+        "resource":          RESOURCE,
+        "background_theory": EMPTY_BT,
+        "includes":          INCLUDES,
+        "tree": [C("isAllOf", ENCRYPTION, ACCESS),
+                 C("isNoneOf", ACCESS, side="request")],
+        "description": (
+            "The same requirement against a processor that does not apply "
+            "access control. The requirement needs access control among "
+            "the measures the use supplies and the exclusion keeps it "
+            "out, so no structure admits a common use and the verdict is "
+            "Incompatible.\n\n"
+            "It is definite without any declaration by the parties, which "
+            "is unlike the legal-basis problems: there an Incompatible "
+            "verdict needed the parties to declare two concepts distinct, "
+            "because the question was whether two names denote one thing. "
+            "Here the two constraints name the same concept and pull "
+            "against each other over it, so the vocabulary is not "
+            "consulted and the certificate cites the constraints alone."
+        ),
+        "expected_q1": "Unsatisfiable",
+        "expected_q2": "Satisfiable",
+        "certificate": {
+            "kind": "Refutation",
+            "comment": "No premise of the vocabulary or of the parties is "
+                       "used. The refutation rests on the query formula "
+                       "and on reflexivity of identity: the witness "
+                       "condition requires access control to lie inside a "
+                       "set from which the request excludes it, which is "
+                       "the literal that access control differs from "
+                       "itself.",
+            "premises": [
+                ("fromEqualityAxiom",
+                 "reflexivity: dpv:AccessControlMethod is itself"),
+            ],
+        },
+        "ttl": _TTL_HEAD + _offer("KGC361")
+               + _request("KGC361",
+                          "Access control is not among the measures applied",
+                          "isNoneOf", "( dpv:AccessControlMethod )"),
     },
 ]

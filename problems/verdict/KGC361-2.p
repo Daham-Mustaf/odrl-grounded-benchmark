@@ -25,6 +25,6 @@ include('axioms/DPV-tom.ax').
 
 % --- witness condition negated -------------------------------------------
 fof(w_kgc361, axiom,
-    ~ ( ( tm_encryption != tm_access_control_method & tm_access_control_method != tm_access_control_method & ( ( tm_encryption != tm_access_control_method )
-| ( tm_access_control_method != tm_access_control_method ) ) ) )).
+    ~ ( ( tm_encryption != tm_access_control_method & tm_access_control_method != tm_access_control_method & ( tm_encryption != tm_access_control_method
+| tm_access_control_method != tm_access_control_method ) ) )).
 %--------------------------------------------------------------------------

@@ -24,67 +24,67 @@ include('axioms/DPV-gdprlb-declared.ax').
 
 % --- witness condition asserted ------------------------------------------
 fof(w_kgc352, axiom,
-    ( ( ( lb_dpv_consent = lb_gdpr_a6_1_a_explicit_consent )
-| ( lb_dpv_contract = lb_gdpr_a6_1_a_explicit_consent )
-| ( lb_dpv_legal_obligation = lb_gdpr_a6_1_a_explicit_consent )
-| ( lb_dpv_vital_interest = lb_gdpr_a6_1_a_explicit_consent )
-| ( lb_dpv_public_interest = lb_gdpr_a6_1_a_explicit_consent )
-| ( lb_dpv_official_authority_of_controller = lb_gdpr_a6_1_a_explicit_consent )
-| ( lb_dpv_legitimate_interest = lb_gdpr_a6_1_a_explicit_consent )
-| ( lb_gdpr_a6_1_a_explicit_consent = lb_gdpr_a6_1_a_explicit_consent ) ) & ( ( ( lb_dpv_consent = lb_gdpr_a6_1_a_explicit_consent & ( ( lb_dpv_consent = lb_dpv_consent )
-| ( lb_dpv_consent = lb_dpv_contract )
-| ( lb_dpv_consent = lb_dpv_legal_obligation )
-| ( lb_dpv_consent = lb_dpv_vital_interest )
-| ( lb_dpv_consent = lb_dpv_public_interest )
-| ( lb_dpv_consent = lb_dpv_official_authority_of_controller )
-| ( lb_dpv_consent = lb_dpv_legitimate_interest ) ) ) )
-| ( ( lb_dpv_contract = lb_gdpr_a6_1_a_explicit_consent & ( ( lb_dpv_contract = lb_dpv_consent )
-| ( lb_dpv_contract = lb_dpv_contract )
-| ( lb_dpv_contract = lb_dpv_legal_obligation )
-| ( lb_dpv_contract = lb_dpv_vital_interest )
-| ( lb_dpv_contract = lb_dpv_public_interest )
-| ( lb_dpv_contract = lb_dpv_official_authority_of_controller )
-| ( lb_dpv_contract = lb_dpv_legitimate_interest ) ) ) )
-| ( ( lb_dpv_legal_obligation = lb_gdpr_a6_1_a_explicit_consent & ( ( lb_dpv_legal_obligation = lb_dpv_consent )
-| ( lb_dpv_legal_obligation = lb_dpv_contract )
-| ( lb_dpv_legal_obligation = lb_dpv_legal_obligation )
-| ( lb_dpv_legal_obligation = lb_dpv_vital_interest )
-| ( lb_dpv_legal_obligation = lb_dpv_public_interest )
-| ( lb_dpv_legal_obligation = lb_dpv_official_authority_of_controller )
-| ( lb_dpv_legal_obligation = lb_dpv_legitimate_interest ) ) ) )
-| ( ( lb_dpv_vital_interest = lb_gdpr_a6_1_a_explicit_consent & ( ( lb_dpv_vital_interest = lb_dpv_consent )
-| ( lb_dpv_vital_interest = lb_dpv_contract )
-| ( lb_dpv_vital_interest = lb_dpv_legal_obligation )
-| ( lb_dpv_vital_interest = lb_dpv_vital_interest )
-| ( lb_dpv_vital_interest = lb_dpv_public_interest )
-| ( lb_dpv_vital_interest = lb_dpv_official_authority_of_controller )
-| ( lb_dpv_vital_interest = lb_dpv_legitimate_interest ) ) ) )
-| ( ( lb_dpv_public_interest = lb_gdpr_a6_1_a_explicit_consent & ( ( lb_dpv_public_interest = lb_dpv_consent )
-| ( lb_dpv_public_interest = lb_dpv_contract )
-| ( lb_dpv_public_interest = lb_dpv_legal_obligation )
-| ( lb_dpv_public_interest = lb_dpv_vital_interest )
-| ( lb_dpv_public_interest = lb_dpv_public_interest )
-| ( lb_dpv_public_interest = lb_dpv_official_authority_of_controller )
-| ( lb_dpv_public_interest = lb_dpv_legitimate_interest ) ) ) )
-| ( ( lb_dpv_official_authority_of_controller = lb_gdpr_a6_1_a_explicit_consent & ( ( lb_dpv_official_authority_of_controller = lb_dpv_consent )
-| ( lb_dpv_official_authority_of_controller = lb_dpv_contract )
-| ( lb_dpv_official_authority_of_controller = lb_dpv_legal_obligation )
-| ( lb_dpv_official_authority_of_controller = lb_dpv_vital_interest )
-| ( lb_dpv_official_authority_of_controller = lb_dpv_public_interest )
-| ( lb_dpv_official_authority_of_controller = lb_dpv_official_authority_of_controller )
-| ( lb_dpv_official_authority_of_controller = lb_dpv_legitimate_interest ) ) ) )
-| ( ( lb_dpv_legitimate_interest = lb_gdpr_a6_1_a_explicit_consent & ( ( lb_dpv_legitimate_interest = lb_dpv_consent )
-| ( lb_dpv_legitimate_interest = lb_dpv_contract )
-| ( lb_dpv_legitimate_interest = lb_dpv_legal_obligation )
-| ( lb_dpv_legitimate_interest = lb_dpv_vital_interest )
-| ( lb_dpv_legitimate_interest = lb_dpv_public_interest )
-| ( lb_dpv_legitimate_interest = lb_dpv_official_authority_of_controller )
-| ( lb_dpv_legitimate_interest = lb_dpv_legitimate_interest ) ) ) )
-| ( ( lb_gdpr_a6_1_a_explicit_consent = lb_gdpr_a6_1_a_explicit_consent & ( ( lb_gdpr_a6_1_a_explicit_consent = lb_dpv_consent )
-| ( lb_gdpr_a6_1_a_explicit_consent = lb_dpv_contract )
-| ( lb_gdpr_a6_1_a_explicit_consent = lb_dpv_legal_obligation )
-| ( lb_gdpr_a6_1_a_explicit_consent = lb_dpv_vital_interest )
-| ( lb_gdpr_a6_1_a_explicit_consent = lb_dpv_public_interest )
-| ( lb_gdpr_a6_1_a_explicit_consent = lb_dpv_official_authority_of_controller )
-| ( lb_gdpr_a6_1_a_explicit_consent = lb_dpv_legitimate_interest ) ) ) ) ) )).
+    ( ( lb_dpv_consent = lb_gdpr_a6_1_a_explicit_consent
+| lb_dpv_contract = lb_gdpr_a6_1_a_explicit_consent
+| lb_dpv_legal_obligation = lb_gdpr_a6_1_a_explicit_consent
+| lb_dpv_vital_interest = lb_gdpr_a6_1_a_explicit_consent
+| lb_dpv_public_interest = lb_gdpr_a6_1_a_explicit_consent
+| lb_dpv_official_authority_of_controller = lb_gdpr_a6_1_a_explicit_consent
+| lb_dpv_legitimate_interest = lb_gdpr_a6_1_a_explicit_consent
+| lb_gdpr_a6_1_a_explicit_consent = lb_gdpr_a6_1_a_explicit_consent ) & ( ( lb_dpv_consent = lb_gdpr_a6_1_a_explicit_consent & ( lb_dpv_consent = lb_dpv_consent
+| lb_dpv_consent = lb_dpv_contract
+| lb_dpv_consent = lb_dpv_legal_obligation
+| lb_dpv_consent = lb_dpv_vital_interest
+| lb_dpv_consent = lb_dpv_public_interest
+| lb_dpv_consent = lb_dpv_official_authority_of_controller
+| lb_dpv_consent = lb_dpv_legitimate_interest ) )
+| ( lb_dpv_contract = lb_gdpr_a6_1_a_explicit_consent & ( lb_dpv_contract = lb_dpv_consent
+| lb_dpv_contract = lb_dpv_contract
+| lb_dpv_contract = lb_dpv_legal_obligation
+| lb_dpv_contract = lb_dpv_vital_interest
+| lb_dpv_contract = lb_dpv_public_interest
+| lb_dpv_contract = lb_dpv_official_authority_of_controller
+| lb_dpv_contract = lb_dpv_legitimate_interest ) )
+| ( lb_dpv_legal_obligation = lb_gdpr_a6_1_a_explicit_consent & ( lb_dpv_legal_obligation = lb_dpv_consent
+| lb_dpv_legal_obligation = lb_dpv_contract
+| lb_dpv_legal_obligation = lb_dpv_legal_obligation
+| lb_dpv_legal_obligation = lb_dpv_vital_interest
+| lb_dpv_legal_obligation = lb_dpv_public_interest
+| lb_dpv_legal_obligation = lb_dpv_official_authority_of_controller
+| lb_dpv_legal_obligation = lb_dpv_legitimate_interest ) )
+| ( lb_dpv_vital_interest = lb_gdpr_a6_1_a_explicit_consent & ( lb_dpv_vital_interest = lb_dpv_consent
+| lb_dpv_vital_interest = lb_dpv_contract
+| lb_dpv_vital_interest = lb_dpv_legal_obligation
+| lb_dpv_vital_interest = lb_dpv_vital_interest
+| lb_dpv_vital_interest = lb_dpv_public_interest
+| lb_dpv_vital_interest = lb_dpv_official_authority_of_controller
+| lb_dpv_vital_interest = lb_dpv_legitimate_interest ) )
+| ( lb_dpv_public_interest = lb_gdpr_a6_1_a_explicit_consent & ( lb_dpv_public_interest = lb_dpv_consent
+| lb_dpv_public_interest = lb_dpv_contract
+| lb_dpv_public_interest = lb_dpv_legal_obligation
+| lb_dpv_public_interest = lb_dpv_vital_interest
+| lb_dpv_public_interest = lb_dpv_public_interest
+| lb_dpv_public_interest = lb_dpv_official_authority_of_controller
+| lb_dpv_public_interest = lb_dpv_legitimate_interest ) )
+| ( lb_dpv_official_authority_of_controller = lb_gdpr_a6_1_a_explicit_consent & ( lb_dpv_official_authority_of_controller = lb_dpv_consent
+| lb_dpv_official_authority_of_controller = lb_dpv_contract
+| lb_dpv_official_authority_of_controller = lb_dpv_legal_obligation
+| lb_dpv_official_authority_of_controller = lb_dpv_vital_interest
+| lb_dpv_official_authority_of_controller = lb_dpv_public_interest
+| lb_dpv_official_authority_of_controller = lb_dpv_official_authority_of_controller
+| lb_dpv_official_authority_of_controller = lb_dpv_legitimate_interest ) )
+| ( lb_dpv_legitimate_interest = lb_gdpr_a6_1_a_explicit_consent & ( lb_dpv_legitimate_interest = lb_dpv_consent
+| lb_dpv_legitimate_interest = lb_dpv_contract
+| lb_dpv_legitimate_interest = lb_dpv_legal_obligation
+| lb_dpv_legitimate_interest = lb_dpv_vital_interest
+| lb_dpv_legitimate_interest = lb_dpv_public_interest
+| lb_dpv_legitimate_interest = lb_dpv_official_authority_of_controller
+| lb_dpv_legitimate_interest = lb_dpv_legitimate_interest ) )
+| ( lb_gdpr_a6_1_a_explicit_consent = lb_gdpr_a6_1_a_explicit_consent & ( lb_gdpr_a6_1_a_explicit_consent = lb_dpv_consent
+| lb_gdpr_a6_1_a_explicit_consent = lb_dpv_contract
+| lb_gdpr_a6_1_a_explicit_consent = lb_dpv_legal_obligation
+| lb_gdpr_a6_1_a_explicit_consent = lb_dpv_vital_interest
+| lb_gdpr_a6_1_a_explicit_consent = lb_dpv_public_interest
+| lb_gdpr_a6_1_a_explicit_consent = lb_dpv_official_authority_of_controller
+| lb_gdpr_a6_1_a_explicit_consent = lb_dpv_legitimate_interest ) ) ) )).
 %--------------------------------------------------------------------------
