@@ -249,35 +249,65 @@ def background_ttl(meta) -> str:
 """
 
 
-def definitional_ttl(meta) -> str:
+def definitional_ttl(definitions, meta) -> str:
+    """The disjointness the module's definitions warrant.
+
+    The warrant is quoted rather than paraphrased.  A party adopting this
+    theory is claiming the publisher already said it, and a reader deciding
+    whether to accept or withdraw the premise needs the publisher's words,
+    not this generator's reading of them.  The definitions are taken from the
+    module at build time, so the quotation cannot drift from the file.
+    """
+    d_valid = definitions.get(VALID, "")
+    d_invalid = definitions.get(INVALID, "")
+    d_withdrawn = definitions.get("ConsentWithdrawn", "")
+
     return f"""\
 # Background theory for the DPV consent status resource: the two branches are
 # disjoint.
 #
-# Adopted on the strength of the module's own definitions.
-# ConsentStatusValidForProcessing is defined as the states of consent that
-# can be used as valid justifications for processing data, and
-# ConsentStatusInvalidForProcessing as the states that cannot.  Nothing below
-# both can therefore exist, which is disjointness.
+# Adopted on the strength of the module's own definitions, which are quoted
+# below as bt:warrant.  One branch is defined as the states of consent that
+# CAN be used as valid justifications for processing, the other as the states
+# that CANNOT.  Individual states say the same again: the withdrawn state is
+# defined as one that prevents consent from being further used as a valid
+# state.  Nothing can lie below both branches if those definitions hold.
 #
-# The module does not assert it.  A party adopting this theory follows the
-# publisher's stated intent rather than adding to it, and the certificate
-# still marks the premise withdrawable: what the definitions warrant, they do
-# not assert, and a reader who disagrees with the reading can withdraw the
-# assertion and see the verdict reopen.
+# The module asserts no owl:disjointWith, anywhere.  So the disjointness is
+# stated three times in prose and carried nowhere in the file, and a consumer
+# reading the RDF alone cannot recover it.
+#
+# What follows is a decision, not a derivation.  A party adopting this theory
+# is following what the publisher wrote; the certificate still marks the
+# premise withdrawable, because what the definitions warrant they do not
+# assert, and a party who reads them differently can withdraw the assertion
+# and watch the verdict reopen as Unknown.
 #
 # Source: {meta['source_iri']}
 
 @prefix dpv:     <https://w3id.org/dpv#> .
 @prefix bt:      <https://w3id.org/odrl-kb/background#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
 
 <https://w3id.org/odrl-kb/dpv-consent/definitional> a bt:BackgroundTheory ;
     dcterms:title "The valid and invalid branches are disjoint"@en ;
     bt:appliesTo <https://w3id.org/odrl-kb/dpv-consent> ;
     bt:generatedBy bt:PublishedDefinition ;
-    bt:rule "states that can and cannot justify processing have nothing in common"@en ;
-    bt:assertionCount 1 .
+    bt:assertionCount 1 ;
+    bt:warrant [
+        bt:concept dpv:{VALID} ;
+        skos:definition "{d_valid}"@en ] ,
+      [
+        bt:concept dpv:{INVALID} ;
+        skos:definition "{d_invalid}"@en ] ,
+      [
+        bt:concept dpv:ConsentWithdrawn ;
+        skos:definition "{d_withdrawn}"@en ] ;
+    bt:assertedByPublisher false ;
+    rdfs:comment "The module defines one branch as the states that can \
+justify processing and the other as the states that cannot, and asserts no \
+disjointness between them."@en .
 
 dpv:{VALID} bt:disjointFrom dpv:{INVALID} .
 """
@@ -333,28 +363,60 @@ def axioms(order, crossing, meta) -> str:
     return "\n".join(lines)
 
 
-def definitional_axioms() -> str:
+def _wrap(text: str, width: int = 72) -> list:
+    """Wrap a definition into TPTP comment lines."""
+    words, lines, cur = text.split(), [], "%   "
+    for w in words:
+        if len(cur) + len(w) + 1 > width:
+            lines.append(cur)
+            cur = "%   " + w
+        else:
+            cur += (" " if cur.strip("% ") else "") + w
+    if cur.strip("% "):
+        lines.append(cur)
+    return lines
+
+
+def definitional_axioms(definitions) -> str:
     """Disjointness of the two branches, on the module's own definitions.
 
     The order clause of Definition 4: nothing lies below both.  Not an
     inequation, which would separate the two mid-level concepts and leave
     their subtrees free to overlap.
+
+    The definitions are quoted in the header.  A reader of a refutation that
+    cites this axiom sees the premise's warrant beside it, and can judge
+    whether the reading is right without opening the vocabulary.
     """
     v, i = slug(VALID), slug(INVALID)
-    return (
-        "% Background theory: the valid and invalid branches are disjoint.\n"
-        "%\n"
-        "% Adopted from the module's definitions, which say that one branch\n"
-        "% holds the states that can justify processing and the other the\n"
-        "% states that cannot.  The module asserts no owl:disjointWith, so a\n"
-        "% verdict resting on this is the parties'.\n"
-        "%\n"
-        "% Disjointness rather than distinctness: nothing lies below both, so\n"
-        "% no state of consent is at once valid and invalid for processing.\n"
-        "\n"
-        f"fof(bt_{v}_disjoint_{i}, axiom,\n"
-        f"    ! [X] : ~ ( kge_leq(X, {v}) & kge_leq(X, {i}) )).\n"
-    )
+    lines = [
+        "% Background theory: the valid and invalid branches are disjoint.",
+        "%",
+        "% Adopted from the module's own definitions, quoted here:",
+        "%",
+        f"% {VALID}:",
+    ]
+    lines += _wrap(definitions.get(VALID, "(not found)"))
+    lines += ["%", f"% {INVALID}:"]
+    lines += _wrap(definitions.get(INVALID, "(not found)"))
+    if definitions.get("ConsentWithdrawn"):
+        lines += ["%", "% ConsentWithdrawn:"]
+        lines += _wrap(definitions["ConsentWithdrawn"])
+    lines += [
+        "%",
+        "% Can and cannot: nothing lies below both branches if the",
+        "% definitions hold.  The module asserts no owl:disjointWith, so a",
+        "% verdict resting on this axiom rests on a reading the parties",
+        "% adopted, and the certificate marks it withdrawable.",
+        "%",
+        "% Disjointness rather than distinctness: nothing below both, so no",
+        "% state of consent is at once valid and invalid for processing.",
+        "",
+        f"fof(bt_{v}_disjoint_{i}, axiom,",
+        f"    ! [X] : ~ ( kge_leq(X, {v}) & kge_leq(X, {i}) )).",
+        "",
+    ]
+    return "\n".join(lines)
 
 
 def declared_axioms(pair) -> str:
@@ -452,11 +514,11 @@ def main() -> int:
     (args.out / "background" / f"{tag}-empty.ttl").write_text(
         background_ttl(meta), encoding="utf-8")
     (args.out / "background" / f"{tag}-definitional.ttl").write_text(
-        definitional_ttl(meta), encoding="utf-8")
+        definitional_ttl(definitions, meta), encoding="utf-8")
     (args.out / "axioms" / f"DPV-{tag}.ax").write_text(
         axioms(order, crossing, meta), encoding="utf-8")
     (args.out / "axioms" / f"DPV-{tag}-definitional.ax").write_text(
-        definitional_axioms(), encoding="utf-8")
+        definitional_axioms(definitions), encoding="utf-8")
     (args.out / "resources" / f"profile-{tag}.ttl").write_text(
         profile_ttl(), encoding="utf-8")
 

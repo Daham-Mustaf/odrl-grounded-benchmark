@@ -1,0 +1,62 @@
+@prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix dpv:     <https://w3id.org/dpv#> .
+@prefix dpvo:    <https://w3id.org/dpv/mappings/odrl#> .
+@prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+@prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+
+drk:offer-346 a odrl:Offer ;
+    dcterms:title "Use is permitted while the consent record falls under exactly one of the two branches"@en ;
+    odrl:assigner drk:controller ;
+    odrl:permission kgc:KGC346-offer-r1 .
+
+kgc:KGC346-offer-r1 a odrl:Permission ;
+    odrl:action odrl:use ;
+    odrl:target drk:dataset ;
+    odrl:constraint kgc:KGC346-offer-c1 .
+
+kgc:KGC346-offer-c1 a odrl:LogicalConstraint ;
+    odrl:xone ( kgc:KGC346-offer-a1, kgc:KGC346-offer-a2 ) .
+
+kgc:KGC346-offer-a1 a odrl:Constraint ;
+    odrl:leftOperand dpvo:Status ;
+    odrl:operator odrl:isA ;
+    odrl:rightOperand dpv:ConsentStatusValidForProcessing .
+
+kgc:KGC346-offer-a2 a odrl:Constraint ;
+    odrl:leftOperand dpvo:Status ;
+    odrl:operator odrl:isA ;
+    odrl:rightOperand dpv:ConsentStatusInvalidForProcessing .
+
+drk:request-346 a odrl:Request ;
+    dcterms:title "The consent record is in the given state"@en ;
+    odrl:assignee drk:processor ;
+    odrl:permission kgc:KGC346-request-r1 .
+
+kgc:KGC346-request-r1 a odrl:Permission ;
+    odrl:action odrl:use ;
+    odrl:target drk:dataset ;
+    odrl:constraint kgc:KGC346-request-c1 .
+
+kgc:KGC346-request-c1 a odrl:Constraint ;
+    odrl:leftOperand dpvo:Status ;
+    odrl:operator odrl:eq ;
+    odrl:rightOperand dpv:ConsentGiven .
+
+### Expected result #######################################################
+
+drk:KGC346-report a vrep:OperandReport ;
+    dcterms:identifier "KGC346" ;
+    vrep:firstPolicy drk:bsb-offer ;
+    vrep:secondPolicy drk:bnf-request ;
+    vrep:firstConstraint kgc:KGC346-offer-c1 ;
+    vrep:secondConstraint kgc:KGC346-request-c1 ;
+    vrep:leftOperand odrl:Status ;
+    vrep:sort vrep:tax ;
+    vrep:resource <https://w3id.org/odrl-kb/dpv-consent> ;
+    vrep:backgroundTheory <https://w3id.org/odrl-kb/dpv-consent/empty> ;
+    vrep:verdict vrep:Unknown ;
+    vrep:certificate drk:KGC346-certificate .
+
+drk:KGC346-certificate a vrep:Models ;
+    rdfs:comment """Both queries are satisfiable.  The models differ on whether the given state also lies below the invalid branch, which the module does not rule out."""@en .

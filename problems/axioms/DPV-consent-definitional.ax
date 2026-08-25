@@ -1,12 +1,27 @@
 % Background theory: the valid and invalid branches are disjoint.
 %
-% Adopted from the module's definitions, which say that one branch
-% holds the states that can justify processing and the other the
-% states that cannot.  The module asserts no owl:disjointWith, so a
-% verdict resting on this is the parties'.
+% Adopted from the module's own definitions, quoted here:
 %
-% Disjointness rather than distinctness: nothing lies below both, so
-% no state of consent is at once valid and invalid for processing.
+% ConsentStatusValidForProcessing:
+%   States of consent that can be used as valid justifications for
+%   processing data
+%
+% ConsentStatusInvalidForProcessing:
+%   States of consent that cannot be used as valid justifications for
+%   processing data
+%
+% ConsentWithdrawn:
+%   The state where the consent is withdrawn or revoked specifically by
+%   the data subject and which prevents it from being further used as a
+%   valid state
+%
+% Can and cannot: nothing lies below both branches if the
+% definitions hold.  The module asserts no owl:disjointWith, so a
+% verdict resting on this axiom rests on a reading the parties
+% adopted, and the certificate marks it withdrawable.
+%
+% Disjointness rather than distinctness: nothing below both, so no
+% state of consent is at once valid and invalid for processing.
 
 fof(bt_dpv_consent_status_valid_for_processing_disjoint_dpv_consent_status_invalid_for_processing, axiom,
     ! [X] : ~ ( kge_leq(X, dpv_consent_status_valid_for_processing) & kge_leq(X, dpv_consent_status_invalid_for_processing) )).

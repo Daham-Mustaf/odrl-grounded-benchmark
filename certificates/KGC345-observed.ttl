@@ -1,0 +1,11 @@
+kgc:KGC345-observed a vrep:Refutation ;
+    vrep:producedBy "Vampire" ;
+    vrep:proofArtefact <proofs/KGC345-2.tstp> ;
+    vrep:attributedAssertion [
+        vrep:premiseSource vrep:fromBackgroundTheory ;
+        vrep:formulaName "bt_dpv_consent_given_distinct_dpv_consent_withdrawn" ;
+        rdfs:label "bt_dpv_consent_given_distinct_dpv_consent_withdrawn"@en ] ;
+    vrep:attributedAssertion [
+        vrep:premiseSource vrep:fromConstraints ;
+        vrep:formulaName "w_kgc345" ;
+        rdfs:label "w_kgc345"@en ] .

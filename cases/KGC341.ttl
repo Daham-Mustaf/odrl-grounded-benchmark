@@ -1,0 +1,63 @@
+@prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix dpv:     <https://w3id.org/dpv#> .
+@prefix dpvo:    <https://w3id.org/dpv/mappings/odrl#> .
+@prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+@prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+
+drk:offer-341 a odrl:Offer ;
+    dcterms:title "Use is permitted for consent given or renewed consent given"@en ;
+    odrl:assigner drk:controller ;
+    odrl:permission kgc:KGC341-offer-r1 .
+
+kgc:KGC341-offer-r1 a odrl:Permission ;
+    odrl:action odrl:use ;
+    odrl:target drk:dataset ;
+    odrl:constraint kgc:KGC341-offer-c1 .
+
+kgc:KGC341-offer-c1 a odrl:LogicalConstraint ;
+    odrl:or ( kgc:KGC341-offer-a1, kgc:KGC341-offer-a2 ) .
+
+kgc:KGC341-offer-a1 a odrl:Constraint ;
+    odrl:leftOperand dpvo:Status ;
+    odrl:operator odrl:eq ;
+    odrl:rightOperand dpv:ConsentGiven .
+
+kgc:KGC341-offer-a2 a odrl:Constraint ;
+    odrl:leftOperand dpvo:Status ;
+    odrl:operator odrl:eq ;
+    odrl:rightOperand dpv:RenewedConsentGiven .
+
+drk:request-341 a odrl:Request ;
+    dcterms:title "The consent record is in the renewed given state"@en ;
+    odrl:assignee drk:processor ;
+    odrl:permission kgc:KGC341-request-r1 .
+
+kgc:KGC341-request-r1 a odrl:Permission ;
+    odrl:action odrl:use ;
+    odrl:target drk:dataset ;
+    odrl:constraint kgc:KGC341-request-c1 .
+
+kgc:KGC341-request-c1 a odrl:Constraint ;
+    odrl:leftOperand dpvo:Status ;
+    odrl:operator odrl:eq ;
+    odrl:rightOperand dpv:RenewedConsentGiven .
+
+### Expected result #######################################################
+
+drk:KGC341-report a vrep:OperandReport ;
+    dcterms:identifier "KGC341" ;
+    vrep:firstPolicy drk:bsb-offer ;
+    vrep:secondPolicy drk:bnf-request ;
+    vrep:firstConstraint kgc:KGC341-offer-c1 ;
+    vrep:secondConstraint kgc:KGC341-request-c1 ;
+    vrep:leftOperand odrl:Status ;
+    vrep:sort vrep:tax ;
+    vrep:resource <https://w3id.org/odrl-kb/dpv-consent> ;
+    vrep:backgroundTheory <https://w3id.org/odrl-kb/dpv-consent/empty> ;
+    vrep:verdict vrep:Compatible ;
+    vrep:certificate drk:KGC341-certificate .
+
+drk:KGC341-certificate a vrep:Refutation ;
+    rdfs:comment """The requested state is one the offer names, so the constraints settle the verdict without the resource."""@en ;
+    vrep:clashingConstraint kgc:KGC341-offer-c1, kgc:KGC341-request-c1 .

@@ -1,0 +1,57 @@
+@prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix dpv:     <https://w3id.org/dpv#> .
+@prefix dpvo:    <https://w3id.org/dpv/mappings/odrl#> .
+@prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+@prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+
+drk:offer-340 a odrl:Offer ;
+    dcterms:title "Use is permitted while consent may justify processing"@en ;
+    odrl:assigner drk:controller ;
+    odrl:permission kgc:KGC340-offer-r1 .
+
+kgc:KGC340-offer-r1 a odrl:Permission ;
+    odrl:action odrl:use ;
+    odrl:target drk:dataset ;
+    odrl:constraint kgc:KGC340-offer-c1 .
+
+kgc:KGC340-offer-c1 a odrl:Constraint ;
+    odrl:leftOperand dpvo:Status ;
+    odrl:operator odrl:isA ;
+    odrl:rightOperand dpv:ConsentStatusValidForProcessing .
+
+drk:request-340 a odrl:Request ;
+    dcterms:title "The consent record is in the given state"@en ;
+    odrl:assignee drk:processor ;
+    odrl:permission kgc:KGC340-request-r1 .
+
+kgc:KGC340-request-r1 a odrl:Permission ;
+    odrl:action odrl:use ;
+    odrl:target drk:dataset ;
+    odrl:constraint kgc:KGC340-request-c1 .
+
+kgc:KGC340-request-c1 a odrl:Constraint ;
+    odrl:leftOperand dpvo:Status ;
+    odrl:operator odrl:eq ;
+    odrl:rightOperand dpv:ConsentGiven .
+
+### Expected result #######################################################
+
+drk:KGC340-report a vrep:OperandReport ;
+    dcterms:identifier "KGC340" ;
+    vrep:firstPolicy drk:bsb-offer ;
+    vrep:secondPolicy drk:bnf-request ;
+    vrep:firstConstraint kgc:KGC340-offer-c1 ;
+    vrep:secondConstraint kgc:KGC340-request-c1 ;
+    vrep:leftOperand odrl:Status ;
+    vrep:sort vrep:tax ;
+    vrep:resource <https://w3id.org/odrl-kb/dpv-consent> ;
+    vrep:backgroundTheory <https://w3id.org/odrl-kb/dpv-consent/empty> ;
+    vrep:verdict vrep:Compatible ;
+    vrep:certificate drk:KGC340-certificate .
+
+drk:KGC340-certificate a vrep:Refutation ;
+    rdfs:comment """DPV places consent given among the states valid for processing."""@en ;
+    vrep:clashingConstraint kgc:KGC340-offer-c1, kgc:KGC340-request-c1 ;
+    vrep:premise [ vrep:premiseSource vrep:fromResource ;
+                   rdfs:label "dpv:ConsentGiven is below dpv:ConsentStatusValidForProcessing"@en ] .
