@@ -1,3 +1,6 @@
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix vrep:    <https://w3id.org/odrl-verdict-report#> .
 @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix dpv:     <https://w3id.org/dpv#> .
@@ -16,7 +19,7 @@ kgc:KGC344-offer-r1 a odrl:Permission ;
     odrl:constraint kgc:KGC344-offer-c1 .
 
 kgc:KGC344-offer-c1 a odrl:LogicalConstraint ;
-    odrl:xone ( kgc:KGC344-offer-a1, kgc:KGC344-offer-a2 ) .
+    odrl:xone ( kgc:KGC344-offer-a1 kgc:KGC344-offer-a2 ) .
 
 kgc:KGC344-offer-a1 a odrl:Constraint ;
     odrl:leftOperand dpvo:Status ;
@@ -47,8 +50,8 @@ kgc:KGC344-request-c1 a odrl:Constraint ;
 
 drk:KGC344-report a vrep:OperandReport ;
     dcterms:identifier "KGC344" ;
-    vrep:firstPolicy drk:bsb-offer ;
-    vrep:secondPolicy drk:bnf-request ;
+    vrep:firstPolicy drk:offer-344 ;
+    vrep:secondPolicy drk:request-344 ;
     vrep:firstConstraint kgc:KGC344-offer-c1 ;
     vrep:secondConstraint kgc:KGC344-request-c1 ;
     vrep:leftOperand odrl:Status ;

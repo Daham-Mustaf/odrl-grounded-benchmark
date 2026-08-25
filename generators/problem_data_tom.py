@@ -82,13 +82,8 @@ _TTL_HEAD = """\
 def _offer(pid):
     return f"""
 drk:offer-{pid[3:]} a odrl:Offer ;
-    dcterms:title "Use is permitted where encryption and access control "
-                  "are both in place"@en ;
-    rdfs:comment "The kind of clause the DPV-ODRL guidance describes for "
-                 "this operand: access to a dataset permitted only where "
-                 "stated measures are implemented. Both are required, not "
-                 "one of them, which is what distinguishes isAllOf from "
-                 "isAnyOf here."@en ;
+    dcterms:title "Use is permitted where encryption and access control are both in place"@en ;
+    rdfs:comment "The kind of clause the DPV-ODRL guidance describes for this operand: access to a dataset permitted only where stated measures are implemented. Both are required, not one of them, which is what distinguishes isAllOf from isAnyOf here."@en ;
     odrl:assigner drk:controller ;
     odrl:permission kgc:{pid}-offer-r1 .
 

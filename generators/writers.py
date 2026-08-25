@@ -294,11 +294,16 @@ def _report_block(p: dict) -> str:
 
 
 def write_case(p: dict, cases_dir: Path) -> Path:
-    """Policies and expected report, one graph per problem."""
-    cases_dir.mkdir(parents=True, exist_ok=True)
     path = cases_dir / f"{p['id']}.ttl"
     body = p["ttl"].strip()
-    if "@prefix rdfs:" not in body:
+    needed = [
+        ("rdfs:", "@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> ."),
+        ("vrep:", "@prefix vrep:    <https://w3id.org/odrl-verdict-report#> ."),
+        ("dcterms:", "@prefix dcterms: <http://purl.org/dc/terms/> ."),
+    ]
+    missing = [line for pre, line in needed if f"@prefix {pre}" not in body]
+    if missing:
+        body = "\n".join(missing) + "\n" + body
         body = body.replace(
             "@prefix vrep:",
             "@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .\n@prefix vrep:", 1)
@@ -333,7 +338,7 @@ def expected_verdict(p: dict) -> str:
 # Vocabulary check.  Refuses a problem naming constants no resource declares.
 # ---------------------------------------------------------------------------
 
-_CONST = re.compile(r"\b(?:gn|dpv|bcp)_[a-z0-9_]+\b")
+_CONST = re.compile(r"\b(?:gn|dpv|bcp|loc|ft|lb|tm)_[a-z0-9_]+\b")
 
 # A formula name is the first argument of fof(...).  Names are not terms, so
 # they must be removed before scanning, or an axiom called gn_france_in_europe

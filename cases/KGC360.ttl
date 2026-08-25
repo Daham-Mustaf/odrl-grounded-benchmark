@@ -1,3 +1,5 @@
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix vrep:    <https://w3id.org/odrl-verdict-report#> .
 @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
@@ -7,13 +9,8 @@
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
 
 drk:offer-360 a odrl:Offer ;
-    dcterms:title "Use is permitted where encryption and access control "
-                  "are both in place"@en ;
-    rdfs:comment "The kind of clause the DPV-ODRL guidance describes for "
-                 "this operand: access to a dataset permitted only where "
-                 "stated measures are implemented. Both are required, not "
-                 "one of them, which is what distinguishes isAllOf from "
-                 "isAnyOf here."@en ;
+    dcterms:title "Use is permitted where encryption and access control are both in place"@en ;
+    rdfs:comment "The kind of clause the DPV-ODRL guidance describes for this operand: access to a dataset permitted only where stated measures are implemented. Both are required, not one of them, which is what distinguishes isAllOf from isAnyOf here."@en ;
     odrl:assigner drk:controller ;
     odrl:permission kgc:KGC360-offer-r1 .
 
@@ -46,8 +43,8 @@ kgc:KGC360-request-c1 a odrl:Constraint ;
 
 drk:KGC360-report a vrep:OperandReport ;
     dcterms:identifier "KGC360" ;
-    vrep:firstPolicy drk:bsb-offer ;
-    vrep:secondPolicy drk:bnf-request ;
+    vrep:firstPolicy drk:offer-360 ;
+    vrep:secondPolicy drk:request-360 ;
     vrep:firstConstraint kgc:KGC360-offer-c1 ;
     vrep:secondConstraint kgc:KGC360-request-c1 ;
     vrep:leftOperand odrl:TechnicalOrganisationalMeasure ;

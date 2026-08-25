@@ -1,3 +1,6 @@
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix vrep:    <https://w3id.org/odrl-verdict-report#> .
 @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix dpv:     <https://w3id.org/dpv#> .
@@ -38,8 +41,8 @@ kgc:KGC317-request-c1 a odrl:Constraint ;
 
 drk:KGC317-report a vrep:OperandReport ;
     dcterms:identifier "KGC317" ;
-    vrep:firstPolicy drk:bsb-offer ;
-    vrep:secondPolicy drk:bnf-request ;
+    vrep:firstPolicy drk:offer-317 ;
+    vrep:secondPolicy drk:request-317 ;
     vrep:firstConstraint kgc:KGC317-offer-c1 ;
     vrep:secondConstraint kgc:KGC317-request-c1 ;
     vrep:leftOperand odrl:purpose ;

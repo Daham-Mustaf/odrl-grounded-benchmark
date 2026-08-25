@@ -1,3 +1,6 @@
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix vrep:    <https://w3id.org/odrl-verdict-report#> .
 @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ft:      <http://publications.europa.eu/resource/authority/file-type/> .
@@ -38,8 +41,8 @@ kgc:KGC320-request-c1 a odrl:Constraint ;
 
 drk:KGC320-report a vrep:OperandReport ;
     dcterms:identifier "KGC320" ;
-    vrep:firstPolicy drk:bsb-offer ;
-    vrep:secondPolicy drk:bnf-request ;
+    vrep:firstPolicy drk:offer-320 ;
+    vrep:secondPolicy drk:request-320 ;
     vrep:firstConstraint kgc:KGC320-offer-c1 ;
     vrep:secondConstraint kgc:KGC320-request-c1 ;
     vrep:leftOperand odrl:fileFormat ;
