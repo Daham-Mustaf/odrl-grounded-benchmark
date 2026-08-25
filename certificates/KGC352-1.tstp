@@ -1,0 +1,206 @@
+% Running in auto input_syntax mode. Trying TPTP
+% Refutation found. Thanks to Tanya!
+% SZS status Unsatisfiable for KGC352-1
+% SZS output start Proof for KGC352-1
+fof(f63,axiom,(
+  lb_dpv_consent != lb_gdpr_a6_1_a_explicit_consent),
+  file('problems/verdict/KGC352-1.p',bt_lb_dpv_consent_distinct_lb_gdpr_a6_1_a_explicit_consent)).
+fof(f94,axiom,(
+  lb_dpv_contract != lb_gdpr_a6_1_a_explicit_consent),
+  file('problems/verdict/KGC352-1.p',bt_lb_dpv_contract_distinct_lb_gdpr_a6_1_a_explicit_consent)).
+fof(f234,axiom,(
+  lb_dpv_legal_obligation != lb_gdpr_a6_1_a_explicit_consent),
+  file('problems/verdict/KGC352-1.p',bt_lb_dpv_legal_obligation_distinct_lb_gdpr_a6_1_a_explicit_consent)).
+fof(f259,axiom,(
+  lb_dpv_legitimate_interest != lb_gdpr_a6_1_a_explicit_consent),
+  file('problems/verdict/KGC352-1.p',bt_lb_dpv_legitimate_interest_distinct_lb_gdpr_a6_1_a_explicit_consent)).
+fof(f349,axiom,(
+  lb_dpv_official_authority_of_controller != lb_gdpr_a6_1_a_explicit_consent),
+  file('problems/verdict/KGC352-1.p',bt_lb_dpv_official_authority_of_controller_distinct_lb_gdpr_a6_1_a_explicit_consent)).
+fof(f369,axiom,(
+  lb_dpv_public_interest != lb_gdpr_a6_1_a_explicit_consent),
+  file('problems/verdict/KGC352-1.p',bt_lb_dpv_public_interest_distinct_lb_gdpr_a6_1_a_explicit_consent)).
+fof(f388,axiom,(
+  lb_dpv_vital_interest != lb_gdpr_a6_1_a_explicit_consent),
+  file('problems/verdict/KGC352-1.p',bt_lb_dpv_vital_interest_distinct_lb_gdpr_a6_1_a_explicit_consent)).
+fof(f575,axiom,(
+  (lb_dpv_consent = lb_gdpr_a6_1_a_explicit_consent | lb_dpv_contract = lb_gdpr_a6_1_a_explicit_consent | lb_dpv_legal_obligation = lb_gdpr_a6_1_a_explicit_consent | lb_dpv_vital_interest = lb_gdpr_a6_1_a_explicit_consent | lb_dpv_public_interest = lb_gdpr_a6_1_a_explicit_consent | lb_dpv_official_authority_of_controller = lb_gdpr_a6_1_a_explicit_consent | lb_dpv_legitimate_interest = lb_gdpr_a6_1_a_explicit_consent | lb_gdpr_a6_1_a_explicit_consent = lb_gdpr_a6_1_a_explicit_consent) & ((lb_dpv_consent = lb_gdpr_a6_1_a_explicit_consent & (lb_dpv_consent = lb_dpv_consent | lb_dpv_consent = lb_dpv_contract | lb_dpv_consent = lb_dpv_legal_obligation | lb_dpv_consent = lb_dpv_vital_interest | lb_dpv_consent = lb_dpv_public_interest | lb_dpv_consent = lb_dpv_official_authority_of_controller | lb_dpv_consent = lb_dpv_legitimate_interest)) | (lb_dpv_contract = lb_gdpr_a6_1_a_explicit_consent & (lb_dpv_contract = lb_dpv_consent | lb_dpv_contract = lb_dpv_contract | lb_dpv_contract = lb_dpv_legal_obligation | lb_dpv_contract = lb_dpv_vital_interest | lb_dpv_contract = lb_dpv_public_interest | lb_dpv_contract = lb_dpv_official_authority_of_controller | lb_dpv_contract = lb_dpv_legitimate_interest)) | (lb_dpv_legal_obligation = lb_gdpr_a6_1_a_explicit_consent & (lb_dpv_legal_obligation = lb_dpv_consent | lb_dpv_legal_obligation = lb_dpv_contract | lb_dpv_legal_obligation = lb_dpv_legal_obligation | lb_dpv_legal_obligation = lb_dpv_vital_interest | lb_dpv_legal_obligation = lb_dpv_public_interest | lb_dpv_legal_obligation = lb_dpv_official_authority_of_controller | lb_dpv_legal_obligation = lb_dpv_legitimate_interest)) | (lb_dpv_vital_interest = lb_gdpr_a6_1_a_explicit_consent & (lb_dpv_vital_interest = lb_dpv_consent | lb_dpv_vital_interest = lb_dpv_contract | lb_dpv_vital_interest = lb_dpv_legal_obligation | lb_dpv_vital_interest = lb_dpv_vital_interest | lb_dpv_vital_interest = lb_dpv_public_interest | lb_dpv_vital_interest = lb_dpv_official_authority_of_controller | lb_dpv_vital_interest = lb_dpv_legitimate_interest)) | (lb_dpv_public_interest = lb_gdpr_a6_1_a_explicit_consent & (lb_dpv_public_interest = lb_dpv_consent | lb_dpv_public_interest = lb_dpv_contract | lb_dpv_public_interest = lb_dpv_legal_obligation | lb_dpv_public_interest = lb_dpv_vital_interest | lb_dpv_public_interest = lb_dpv_public_interest | lb_dpv_public_interest = lb_dpv_official_authority_of_controller | lb_dpv_public_interest = lb_dpv_legitimate_interest)) | (lb_dpv_official_authority_of_controller = lb_gdpr_a6_1_a_explicit_consent & (lb_dpv_official_authority_of_controller = lb_dpv_consent | lb_dpv_official_authority_of_controller = lb_dpv_contract | lb_dpv_official_authority_of_controller = lb_dpv_legal_obligation | lb_dpv_official_authority_of_controller = lb_dpv_vital_interest | lb_dpv_official_authority_of_controller = lb_dpv_public_interest | lb_dpv_official_authority_of_controller = lb_dpv_official_authority_of_controller | lb_dpv_official_authority_of_controller = lb_dpv_legitimate_interest)) | (lb_dpv_legitimate_interest = lb_gdpr_a6_1_a_explicit_consent & (lb_dpv_legitimate_interest = lb_dpv_consent | lb_dpv_legitimate_interest = lb_dpv_contract | lb_dpv_legitimate_interest = lb_dpv_legal_obligation | lb_dpv_legitimate_interest = lb_dpv_vital_interest | lb_dpv_legitimate_interest = lb_dpv_public_interest | lb_dpv_legitimate_interest = lb_dpv_official_authority_of_controller | lb_dpv_legitimate_interest = lb_dpv_legitimate_interest)) | (lb_gdpr_a6_1_a_explicit_consent = lb_gdpr_a6_1_a_explicit_consent & (lb_gdpr_a6_1_a_explicit_consent = lb_dpv_consent | lb_gdpr_a6_1_a_explicit_consent = lb_dpv_contract | lb_gdpr_a6_1_a_explicit_consent = lb_dpv_legal_obligation | lb_gdpr_a6_1_a_explicit_consent = lb_dpv_vital_interest | lb_gdpr_a6_1_a_explicit_consent = lb_dpv_public_interest | lb_gdpr_a6_1_a_explicit_consent = lb_dpv_official_authority_of_controller | lb_gdpr_a6_1_a_explicit_consent = lb_dpv_legitimate_interest)))),
+  file('problems/verdict/KGC352-1.p',w_kgc352)).
+fof(f580,plain,(
+  (lb_gdpr_a6_1_a_explicit_consent = lb_gdpr_a6_1_a_explicit_consent & (lb_gdpr_a6_1_a_explicit_consent = lb_dpv_consent | lb_gdpr_a6_1_a_explicit_consent = lb_dpv_contract | lb_gdpr_a6_1_a_explicit_consent = lb_dpv_legal_obligation | lb_gdpr_a6_1_a_explicit_consent = lb_dpv_vital_interest | lb_gdpr_a6_1_a_explicit_consent = lb_dpv_public_interest | lb_gdpr_a6_1_a_explicit_consent = lb_dpv_official_authority_of_controller | lb_gdpr_a6_1_a_explicit_consent = lb_dpv_legitimate_interest)) | ~sP0),
+  introduced(definition,[new_symbols(naming,[sP0])],[predicate_definition_introduction])).
+fof(f581,plain,(
+  (lb_dpv_legitimate_interest = lb_gdpr_a6_1_a_explicit_consent & (lb_dpv_legitimate_interest = lb_dpv_consent | lb_dpv_legitimate_interest = lb_dpv_contract | lb_dpv_legitimate_interest = lb_dpv_legal_obligation | lb_dpv_legitimate_interest = lb_dpv_vital_interest | lb_dpv_legitimate_interest = lb_dpv_public_interest | lb_dpv_legitimate_interest = lb_dpv_official_authority_of_controller | lb_dpv_legitimate_interest = lb_dpv_legitimate_interest)) | ~sP1),
+  introduced(definition,[new_symbols(naming,[sP1])],[predicate_definition_introduction])).
+fof(f582,plain,(
+  (lb_dpv_official_authority_of_controller = lb_gdpr_a6_1_a_explicit_consent & (lb_dpv_official_authority_of_controller = lb_dpv_consent | lb_dpv_official_authority_of_controller = lb_dpv_contract | lb_dpv_official_authority_of_controller = lb_dpv_legal_obligation | lb_dpv_official_authority_of_controller = lb_dpv_vital_interest | lb_dpv_official_authority_of_controller = lb_dpv_public_interest | lb_dpv_official_authority_of_controller = lb_dpv_official_authority_of_controller | lb_dpv_official_authority_of_controller = lb_dpv_legitimate_interest)) | ~sP2),
+  introduced(definition,[new_symbols(naming,[sP2])],[predicate_definition_introduction])).
+fof(f583,plain,(
+  (lb_dpv_public_interest = lb_gdpr_a6_1_a_explicit_consent & (lb_dpv_public_interest = lb_dpv_consent | lb_dpv_public_interest = lb_dpv_contract | lb_dpv_public_interest = lb_dpv_legal_obligation | lb_dpv_public_interest = lb_dpv_vital_interest | lb_dpv_public_interest = lb_dpv_public_interest | lb_dpv_public_interest = lb_dpv_official_authority_of_controller | lb_dpv_public_interest = lb_dpv_legitimate_interest)) | ~sP3),
+  introduced(definition,[new_symbols(naming,[sP3])],[predicate_definition_introduction])).
+fof(f584,plain,(
+  (lb_dpv_vital_interest = lb_gdpr_a6_1_a_explicit_consent & (lb_dpv_vital_interest = lb_dpv_consent | lb_dpv_vital_interest = lb_dpv_contract | lb_dpv_vital_interest = lb_dpv_legal_obligation | lb_dpv_vital_interest = lb_dpv_vital_interest | lb_dpv_vital_interest = lb_dpv_public_interest | lb_dpv_vital_interest = lb_dpv_official_authority_of_controller | lb_dpv_vital_interest = lb_dpv_legitimate_interest)) | ~sP4),
+  introduced(definition,[new_symbols(naming,[sP4])],[predicate_definition_introduction])).
+fof(f585,plain,(
+  (lb_dpv_consent = lb_gdpr_a6_1_a_explicit_consent | lb_dpv_contract = lb_gdpr_a6_1_a_explicit_consent | lb_dpv_legal_obligation = lb_gdpr_a6_1_a_explicit_consent | lb_dpv_vital_interest = lb_gdpr_a6_1_a_explicit_consent | lb_dpv_public_interest = lb_gdpr_a6_1_a_explicit_consent | lb_dpv_official_authority_of_controller = lb_gdpr_a6_1_a_explicit_consent | lb_dpv_legitimate_interest = lb_gdpr_a6_1_a_explicit_consent | lb_gdpr_a6_1_a_explicit_consent = lb_gdpr_a6_1_a_explicit_consent) & ((lb_dpv_consent = lb_gdpr_a6_1_a_explicit_consent & (lb_dpv_consent = lb_dpv_consent | lb_dpv_consent = lb_dpv_contract | lb_dpv_consent = lb_dpv_legal_obligation | lb_dpv_consent = lb_dpv_vital_interest | lb_dpv_consent = lb_dpv_public_interest | lb_dpv_consent = lb_dpv_official_authority_of_controller | lb_dpv_consent = lb_dpv_legitimate_interest)) | (lb_dpv_contract = lb_gdpr_a6_1_a_explicit_consent & (lb_dpv_contract = lb_dpv_consent | lb_dpv_contract = lb_dpv_contract | lb_dpv_contract = lb_dpv_legal_obligation | lb_dpv_contract = lb_dpv_vital_interest | lb_dpv_contract = lb_dpv_public_interest | lb_dpv_contract = lb_dpv_official_authority_of_controller | lb_dpv_contract = lb_dpv_legitimate_interest)) | (lb_dpv_legal_obligation = lb_gdpr_a6_1_a_explicit_consent & (lb_dpv_legal_obligation = lb_dpv_consent | lb_dpv_legal_obligation = lb_dpv_contract | lb_dpv_legal_obligation = lb_dpv_legal_obligation | lb_dpv_legal_obligation = lb_dpv_vital_interest | lb_dpv_legal_obligation = lb_dpv_public_interest | lb_dpv_legal_obligation = lb_dpv_official_authority_of_controller | lb_dpv_legal_obligation = lb_dpv_legitimate_interest)) | sP4 | sP3 | sP2 | sP1 | sP0)),
+  inference(definition_folding,[],[f575,f584,f583,f582,f581,f580])).
+fof(f586,plain,(
+  (lb_dpv_vital_interest = lb_gdpr_a6_1_a_explicit_consent & (lb_dpv_vital_interest = lb_dpv_consent | lb_dpv_vital_interest = lb_dpv_contract | lb_dpv_vital_interest = lb_dpv_legal_obligation | lb_dpv_vital_interest = lb_dpv_vital_interest | lb_dpv_vital_interest = lb_dpv_public_interest | lb_dpv_vital_interest = lb_dpv_official_authority_of_controller | lb_dpv_vital_interest = lb_dpv_legitimate_interest)) | ~sP4),
+  inference(nnf_transformation,[],[f584])).
+fof(f587,plain,(
+  (lb_dpv_public_interest = lb_gdpr_a6_1_a_explicit_consent & (lb_dpv_public_interest = lb_dpv_consent | lb_dpv_public_interest = lb_dpv_contract | lb_dpv_public_interest = lb_dpv_legal_obligation | lb_dpv_public_interest = lb_dpv_vital_interest | lb_dpv_public_interest = lb_dpv_public_interest | lb_dpv_public_interest = lb_dpv_official_authority_of_controller | lb_dpv_public_interest = lb_dpv_legitimate_interest)) | ~sP3),
+  inference(nnf_transformation,[],[f583])).
+fof(f588,plain,(
+  (lb_dpv_official_authority_of_controller = lb_gdpr_a6_1_a_explicit_consent & (lb_dpv_official_authority_of_controller = lb_dpv_consent | lb_dpv_official_authority_of_controller = lb_dpv_contract | lb_dpv_official_authority_of_controller = lb_dpv_legal_obligation | lb_dpv_official_authority_of_controller = lb_dpv_vital_interest | lb_dpv_official_authority_of_controller = lb_dpv_public_interest | lb_dpv_official_authority_of_controller = lb_dpv_official_authority_of_controller | lb_dpv_official_authority_of_controller = lb_dpv_legitimate_interest)) | ~sP2),
+  inference(nnf_transformation,[],[f582])).
+fof(f589,plain,(
+  (lb_dpv_legitimate_interest = lb_gdpr_a6_1_a_explicit_consent & (lb_dpv_legitimate_interest = lb_dpv_consent | lb_dpv_legitimate_interest = lb_dpv_contract | lb_dpv_legitimate_interest = lb_dpv_legal_obligation | lb_dpv_legitimate_interest = lb_dpv_vital_interest | lb_dpv_legitimate_interest = lb_dpv_public_interest | lb_dpv_legitimate_interest = lb_dpv_official_authority_of_controller | lb_dpv_legitimate_interest = lb_dpv_legitimate_interest)) | ~sP1),
+  inference(nnf_transformation,[],[f581])).
+fof(f590,plain,(
+  (lb_gdpr_a6_1_a_explicit_consent = lb_gdpr_a6_1_a_explicit_consent & (lb_gdpr_a6_1_a_explicit_consent = lb_dpv_consent | lb_gdpr_a6_1_a_explicit_consent = lb_dpv_contract | lb_gdpr_a6_1_a_explicit_consent = lb_dpv_legal_obligation | lb_gdpr_a6_1_a_explicit_consent = lb_dpv_vital_interest | lb_gdpr_a6_1_a_explicit_consent = lb_dpv_public_interest | lb_gdpr_a6_1_a_explicit_consent = lb_dpv_official_authority_of_controller | lb_gdpr_a6_1_a_explicit_consent = lb_dpv_legitimate_interest)) | ~sP0),
+  inference(nnf_transformation,[],[f580])).
+fof(f653,plain,(
+  lb_dpv_consent != lb_gdpr_a6_1_a_explicit_consent),
+  inference(cnf_transformation,[],[f63])).
+fof(f684,plain,(
+  lb_dpv_contract != lb_gdpr_a6_1_a_explicit_consent),
+  inference(cnf_transformation,[],[f94])).
+fof(f824,plain,(
+  lb_dpv_legal_obligation != lb_gdpr_a6_1_a_explicit_consent),
+  inference(cnf_transformation,[],[f234])).
+fof(f849,plain,(
+  lb_dpv_legitimate_interest != lb_gdpr_a6_1_a_explicit_consent),
+  inference(cnf_transformation,[],[f259])).
+fof(f939,plain,(
+  lb_dpv_official_authority_of_controller != lb_gdpr_a6_1_a_explicit_consent),
+  inference(cnf_transformation,[],[f349])).
+fof(f959,plain,(
+  lb_dpv_public_interest != lb_gdpr_a6_1_a_explicit_consent),
+  inference(cnf_transformation,[],[f369])).
+fof(f978,plain,(
+  lb_dpv_vital_interest != lb_gdpr_a6_1_a_explicit_consent),
+  inference(cnf_transformation,[],[f388])).
+fof(f1166,plain,(
+  lb_dpv_vital_interest = lb_gdpr_a6_1_a_explicit_consent | ~sP4),
+  inference(cnf_transformation,[],[f586])).
+fof(f1168,plain,(
+  lb_dpv_public_interest = lb_gdpr_a6_1_a_explicit_consent | ~sP3),
+  inference(cnf_transformation,[],[f587])).
+fof(f1170,plain,(
+  lb_dpv_official_authority_of_controller = lb_gdpr_a6_1_a_explicit_consent | ~sP2),
+  inference(cnf_transformation,[],[f588])).
+fof(f1172,plain,(
+  lb_dpv_legitimate_interest = lb_gdpr_a6_1_a_explicit_consent | ~sP1),
+  inference(cnf_transformation,[],[f589])).
+fof(f1173,plain,(
+  lb_dpv_consent = lb_gdpr_a6_1_a_explicit_consent | lb_dpv_contract = lb_gdpr_a6_1_a_explicit_consent | lb_dpv_legal_obligation = lb_gdpr_a6_1_a_explicit_consent | lb_dpv_vital_interest = lb_gdpr_a6_1_a_explicit_consent | lb_dpv_public_interest = lb_gdpr_a6_1_a_explicit_consent | lb_dpv_official_authority_of_controller = lb_gdpr_a6_1_a_explicit_consent | lb_dpv_legitimate_interest = lb_gdpr_a6_1_a_explicit_consent | ~sP0),
+  inference(cnf_transformation,[],[f590])).
+fof(f1182,plain,(
+  lb_dpv_consent = lb_gdpr_a6_1_a_explicit_consent | lb_dpv_contract = lb_gdpr_a6_1_a_explicit_consent | lb_dpv_legal_obligation = lb_gdpr_a6_1_a_explicit_consent | sP4 | sP3 | sP2 | sP1 | sP0),
+  inference(cnf_transformation,[],[f585])).
+fof(f1189,definition,(
+  spl5_1 <=> sP0),
+  introduced(definition,[new_symbols(naming,[spl5_1])],[avatar_definition])).
+fof(f1193,definition,(
+  spl5_2 <=> sP1),
+  introduced(definition,[new_symbols(naming,[spl5_2])],[avatar_definition])).
+fof(f1197,definition,(
+  spl5_3 <=> sP2),
+  introduced(definition,[new_symbols(naming,[spl5_3])],[avatar_definition])).
+fof(f1201,definition,(
+  spl5_4 <=> sP3),
+  introduced(definition,[new_symbols(naming,[spl5_4])],[avatar_definition])).
+fof(f1205,definition,(
+  spl5_5 <=> sP4),
+  introduced(definition,[new_symbols(naming,[spl5_5])],[avatar_definition])).
+fof(f1209,definition,(
+  spl5_6 <=> lb_dpv_legal_obligation = lb_gdpr_a6_1_a_explicit_consent),
+  introduced(definition,[new_symbols(naming,[spl5_6])],[avatar_definition])).
+fof(f1213,definition,(
+  spl5_7 <=> lb_dpv_contract = lb_gdpr_a6_1_a_explicit_consent),
+  introduced(definition,[new_symbols(naming,[spl5_7])],[avatar_definition])).
+fof(f1217,definition,(
+  spl5_8 <=> lb_dpv_consent = lb_gdpr_a6_1_a_explicit_consent),
+  introduced(definition,[new_symbols(naming,[spl5_8])],[avatar_definition])).
+fof(f1220,plain,(
+  spl5_1 | spl5_2 | spl5_3 | spl5_4 | spl5_5 | spl5_6 | spl5_7 | spl5_8),
+  inference(avatar_split_clause,[],[f1182,f1217,f1213,f1209,f1205,f1201,f1197,f1193,f1189])).
+fof(f1222,definition,(
+  spl5_9 <=> lb_dpv_legitimate_interest = lb_gdpr_a6_1_a_explicit_consent),
+  introduced(definition,[new_symbols(naming,[spl5_9])],[avatar_definition])).
+fof(f1226,definition,(
+  spl5_10 <=> lb_dpv_official_authority_of_controller = lb_gdpr_a6_1_a_explicit_consent),
+  introduced(definition,[new_symbols(naming,[spl5_10])],[avatar_definition])).
+fof(f1230,definition,(
+  spl5_11 <=> lb_dpv_public_interest = lb_gdpr_a6_1_a_explicit_consent),
+  introduced(definition,[new_symbols(naming,[spl5_11])],[avatar_definition])).
+fof(f1234,definition,(
+  spl5_12 <=> lb_dpv_vital_interest = lb_gdpr_a6_1_a_explicit_consent),
+  introduced(definition,[new_symbols(naming,[spl5_12])],[avatar_definition])).
+fof(f1237,plain,(
+  ~spl5_1 | spl5_9 | spl5_10 | spl5_11 | spl5_12 | spl5_6 | spl5_7 | spl5_8),
+  inference(avatar_split_clause,[],[f1173,f1217,f1213,f1209,f1234,f1230,f1226,f1222,f1189])).
+fof(f1238,plain,(
+  ~spl5_2 | spl5_9),
+  inference(avatar_split_clause,[],[f1172,f1222,f1193])).
+fof(f1239,plain,(
+  ~spl5_3 | spl5_10),
+  inference(avatar_split_clause,[],[f1170,f1226,f1197])).
+fof(f1240,plain,(
+  ~spl5_4 | spl5_11),
+  inference(avatar_split_clause,[],[f1168,f1230,f1201])).
+fof(f1241,plain,(
+  ~spl5_5 | spl5_12),
+  inference(avatar_split_clause,[],[f1166,f1234,f1205])).
+fof(f1242,plain,(
+  ~spl5_12),
+  inference(avatar_split_clause,[],[f978,f1234])).
+fof(f1243,plain,(
+  ~spl5_11),
+  inference(avatar_split_clause,[],[f959,f1230])).
+fof(f1244,plain,(
+  ~spl5_10),
+  inference(avatar_split_clause,[],[f939,f1226])).
+fof(f1245,plain,(
+  ~spl5_9),
+  inference(avatar_split_clause,[],[f849,f1222])).
+fof(f1246,plain,(
+  ~spl5_6),
+  inference(avatar_split_clause,[],[f824,f1209])).
+fof(f1247,plain,(
+  ~spl5_7),
+  inference(avatar_split_clause,[],[f684,f1213])).
+fof(f1248,plain,(
+  ~spl5_8),
+  inference(avatar_split_clause,[],[f653,f1217])).
+cnf(s1, plain, spl5_1 | spl5_2 | spl5_3 | spl5_4 | spl5_5 | spl5_6 | spl5_7 | spl5_8, inference(sat_conversion,[],[f1220])).
+cnf(s2, plain, ~spl5_1 | spl5_6 | spl5_7 | spl5_8 | spl5_9 | spl5_10 | spl5_11 | spl5_12, inference(sat_conversion,[],[f1237])).
+cnf(s3, plain, ~spl5_2 | spl5_9, inference(sat_conversion,[],[f1238])).
+cnf(s4, plain, ~spl5_3 | spl5_10, inference(sat_conversion,[],[f1239])).
+cnf(s5, plain, ~spl5_4 | spl5_11, inference(sat_conversion,[],[f1240])).
+cnf(s6, plain, ~spl5_5 | spl5_12, inference(sat_conversion,[],[f1241])).
+cnf(s7, plain, ~spl5_12, inference(sat_conversion,[],[f1242])).
+cnf(s8, plain, ~spl5_11, inference(sat_conversion,[],[f1243])).
+cnf(s9, plain, ~spl5_10, inference(sat_conversion,[],[f1244])).
+cnf(s10, plain, ~spl5_9, inference(sat_conversion,[],[f1245])).
+cnf(s11, plain, ~spl5_6, inference(sat_conversion,[],[f1246])).
+cnf(s12, plain, ~spl5_7, inference(sat_conversion,[],[f1247])).
+cnf(s13, plain, ~spl5_8, inference(sat_conversion,[],[f1248])).
+cnf(s14, plain, ~spl5_5, inference(rat,[],[s6,s7])).
+cnf(s15, plain, ~spl5_4, inference(rat,[],[s5,s8])).
+cnf(s16, plain, ~spl5_3, inference(rat,[],[s4,s9])).
+cnf(s17, plain, ~spl5_2, inference(rat,[],[s3,s10])).
+cnf(s18, plain, ~spl5_1, inference(rat,[],[s2,s7,s8,s9,s10,s13,s12,s11])).
+cnf(s19, plain, $false, inference(rat,[],[s1,s13,s12,s11,s14,s15,s16,s17,s18])).
+fof(f1249,plain,(
+  $false),
+  inference(avatar_sat_refutation,[],[s19])).
+% SZS output end Proof for KGC352-1
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eafde on 2026-01-18 12:14:50 +0000)
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation
+% Time elapsed: 0.004 s
+% Peak memory usage: 28 MB
+% ------------------------------
+% ------------------------------

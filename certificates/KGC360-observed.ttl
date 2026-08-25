@@ -1,0 +1,15 @@
+kgc:KGC360-observed a vrep:Refutation ;
+    vrep:producedBy "Vampire" ;
+    vrep:proofArtefact <proofs/KGC360-2.tstp> ;
+    vrep:attributedAssertion [
+        vrep:premiseSource vrep:fromResource ;
+        vrep:formulaName "res_tm_access_control_method_below_tm_technical_measure" ;
+        rdfs:label "res_tm_access_control_method_below_tm_technical_measure"@en ] ;
+    vrep:attributedAssertion [
+        vrep:premiseSource vrep:fromResource ;
+        vrep:formulaName "res_tm_encryption_below_tm_technical_measure" ;
+        rdfs:label "res_tm_encryption_below_tm_technical_measure"@en ] ;
+    vrep:attributedAssertion [
+        vrep:premiseSource vrep:fromConstraints ;
+        vrep:formulaName "w_kgc360" ;
+        rdfs:label "w_kgc360"@en ] .

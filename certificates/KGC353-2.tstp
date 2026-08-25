@@ -1,0 +1,70 @@
+% Running in auto input_syntax mode. Trying TPTP
+% Refutation found. Thanks to Tanya!
+% SZS status Unsatisfiable for KGC353-2
+% SZS output start Proof for KGC353-2
+fof(f3,axiom,(
+  ! [X0,X1,X2] : ((kge_leq(X0,X1) & kge_leq(X1,X2)) => kge_leq(X0,X2))),
+  file('problems/verdict/KGC353-2.p',ax_leq_transitive)).
+fof(f4,axiom,(
+  kge_leq(lb_dpv_consent,lb_dpv_legal_basis)),
+  file('problems/verdict/KGC353-2.p',res_lb_dpv_consent_below_lb_dpv_legal_basis)).
+fof(f21,axiom,(
+  kge_leq(lb_gdpr_a6_1_a_explicit_consent,lb_gdpr_consent)),
+  file('problems/verdict/KGC353-2.p',res_lb_gdpr_a6_1_a_explicit_consent_below_lb_gdpr_consent)).
+fof(f46,axiom,(
+  kge_leq(lb_gdpr_consent,lb_dpv_consent)),
+  file('problems/verdict/KGC353-2.p',res_lb_gdpr_consent_below_lb_dpv_consent)).
+fof(f47,axiom,(
+  ~((kge_leq(lb_dpv_legal_basis,lb_dpv_legal_basis) & lb_dpv_legal_basis = lb_gdpr_a6_1_a_explicit_consent) | (kge_leq(lb_gdpr_a6_1_a_explicit_consent,lb_dpv_legal_basis) & lb_gdpr_a6_1_a_explicit_consent = lb_gdpr_a6_1_a_explicit_consent))),
+  file('problems/verdict/KGC353-2.p',w_kgc353)).
+fof(f50,plain,(
+  ! [X0,X1,X2] : (kge_leq(X0,X2) | (~kge_leq(X0,X1) | ~kge_leq(X1,X2)))),
+  inference(ennf_transformation,[],[f3])).
+fof(f51,plain,(
+  ! [X0,X1,X2] : (kge_leq(X0,X2) | ~kge_leq(X0,X1) | ~kge_leq(X1,X2))),
+  inference(flattening,[],[f50])).
+fof(f52,plain,(
+  (~kge_leq(lb_dpv_legal_basis,lb_dpv_legal_basis) | lb_dpv_legal_basis != lb_gdpr_a6_1_a_explicit_consent) & (~kge_leq(lb_gdpr_a6_1_a_explicit_consent,lb_dpv_legal_basis) | lb_gdpr_a6_1_a_explicit_consent != lb_gdpr_a6_1_a_explicit_consent)),
+  inference(ennf_transformation,[],[f47])).
+fof(f55,plain,(
+  ( ! [X2,X0,X1] : (~kge_leq(X1,X2) | ~kge_leq(X0,X1) | kge_leq(X0,X2)) )),
+  inference(cnf_transformation,[],[f51])).
+fof(f56,plain,(
+  kge_leq(lb_dpv_consent,lb_dpv_legal_basis)),
+  inference(cnf_transformation,[],[f4])).
+fof(f73,plain,(
+  kge_leq(lb_gdpr_a6_1_a_explicit_consent,lb_gdpr_consent)),
+  inference(cnf_transformation,[],[f21])).
+fof(f98,plain,(
+  kge_leq(lb_gdpr_consent,lb_dpv_consent)),
+  inference(cnf_transformation,[],[f46])).
+fof(f99,plain,(
+  ~kge_leq(lb_gdpr_a6_1_a_explicit_consent,lb_dpv_legal_basis) | lb_gdpr_a6_1_a_explicit_consent != lb_gdpr_a6_1_a_explicit_consent),
+  inference(cnf_transformation,[],[f52])).
+fof(f101,plain,(
+  ~kge_leq(lb_gdpr_a6_1_a_explicit_consent,lb_dpv_legal_basis)),
+  inference(trivial_inequality_removal,[],[f99])).
+fof(f543,plain,(
+  ( ! [X0] : (~kge_leq(X0,lb_dpv_consent) | kge_leq(X0,lb_dpv_legal_basis)) )),
+  inference(resolution,[],[f55,f56])).
+fof(f559,plain,(
+  ( ! [X0] : (~kge_leq(X0,lb_gdpr_consent) | kge_leq(X0,lb_dpv_consent)) )),
+  inference(resolution,[],[f55,f98])).
+fof(f808,plain,(
+  kge_leq(lb_gdpr_a6_1_a_explicit_consent,lb_dpv_consent)),
+  inference(resolution,[],[f559,f73])).
+fof(f888,plain,(
+  kge_leq(lb_gdpr_a6_1_a_explicit_consent,lb_dpv_legal_basis)),
+  inference(resolution,[],[f808,f543])).
+fof(f900,plain,(
+  $false),
+  inference(forward_subsumption_resolution,[],[f888,f101])).
+% SZS output end Proof for KGC353-2
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eafde on 2026-01-18 12:14:50 +0000)
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation
+% Time elapsed: 0.003 s
+% Peak memory usage: 28 MB
+% ------------------------------
+% ------------------------------

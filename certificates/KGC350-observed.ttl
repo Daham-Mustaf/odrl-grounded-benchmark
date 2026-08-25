@@ -1,0 +1,7 @@
+kgc:KGC350-observed a vrep:Refutation ;
+    vrep:producedBy "Vampire" ;
+    vrep:proofArtefact <proofs/KGC350-2.tstp> ;
+    vrep:attributedAssertion [
+        vrep:premiseSource vrep:fromConstraints ;
+        vrep:formulaName "w_kgc350" ;
+        rdfs:label "w_kgc350"@en ] .

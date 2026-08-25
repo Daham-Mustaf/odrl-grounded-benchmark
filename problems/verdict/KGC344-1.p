@@ -23,10 +23,10 @@ include('axioms/DPV-consent.ax').
 
 % --- witness condition asserted ------------------------------------------
 fof(w_kgc344, axiom,
-    ( ( ( ( dpv_consent_given = dpv_consent_given & dpv_consent_given = dpv_consent_given ) )
-| ( ( dpv_consent_withdrawn = dpv_consent_given & dpv_consent_withdrawn = dpv_consent_given ) ) ) & ( ( ( dpv_consent_given = dpv_consent_given & dpv_consent_given = dpv_consent_given & ~ ( dpv_consent_given = dpv_consent_withdrawn ) ) )
-| ( ( dpv_consent_withdrawn = dpv_consent_given & dpv_consent_withdrawn = dpv_consent_given & ~ ( dpv_consent_withdrawn = dpv_consent_withdrawn ) ) ) ) )
-| ( ( ( ( dpv_consent_given = dpv_consent_withdrawn & dpv_consent_given = dpv_consent_given ) )
-| ( ( dpv_consent_withdrawn = dpv_consent_withdrawn & dpv_consent_withdrawn = dpv_consent_given ) ) ) & ( ( ( dpv_consent_given = dpv_consent_withdrawn & dpv_consent_given = dpv_consent_given & ~ ( dpv_consent_given = dpv_consent_given ) ) )
-| ( ( dpv_consent_withdrawn = dpv_consent_withdrawn & dpv_consent_withdrawn = dpv_consent_given & ~ ( dpv_consent_withdrawn = dpv_consent_given ) ) ) ) )).
+    ( ( ( ( ( ( dpv_consent_given = dpv_consent_given & dpv_consent_given = dpv_consent_given ) )
+| ( ( dpv_consent_withdrawn = dpv_consent_given & dpv_consent_withdrawn = dpv_consent_given ) ) ) & ( ( ( ( dpv_consent_given = dpv_consent_given & dpv_consent_given = dpv_consent_given ) & ~ ( dpv_consent_given = dpv_consent_withdrawn ) ) )
+| ( ( ( dpv_consent_withdrawn = dpv_consent_given & dpv_consent_withdrawn = dpv_consent_given ) & ~ ( dpv_consent_withdrawn = dpv_consent_withdrawn ) ) ) ) ) )
+| ( ( ( ( ( dpv_consent_given = dpv_consent_withdrawn & dpv_consent_given = dpv_consent_given ) )
+| ( ( dpv_consent_withdrawn = dpv_consent_withdrawn & dpv_consent_withdrawn = dpv_consent_given ) ) ) & ( ( ( ( dpv_consent_given = dpv_consent_withdrawn & dpv_consent_given = dpv_consent_given ) & ~ ( dpv_consent_given = dpv_consent_given ) ) )
+| ( ( ( dpv_consent_withdrawn = dpv_consent_withdrawn & dpv_consent_withdrawn = dpv_consent_given ) & ~ ( dpv_consent_withdrawn = dpv_consent_given ) ) ) ) ) ) )).
 %--------------------------------------------------------------------------

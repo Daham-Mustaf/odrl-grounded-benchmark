@@ -1,0 +1,83 @@
+% Resource: the legal bases of GDPR Article 6, as the Data Privacy
+% Vocabulary and its GDPR extension publish them.
+%
+% Each assertion is one skos:broader triple.  The extension places
+% each Article 6 concept both under the article it refines and
+% under the DPV category it belongs to, so a concept may appear
+% below more than one other.
+
+fof(res_tm_access_control_method_below_tm_technical_measure, axiom, kge_leq(tm_access_control_method, tm_technical_measure)).
+fof(res_tm_activity_monitoring_below_tm_technical_measure, axiom, kge_leq(tm_activity_monitoring, tm_technical_measure)).
+fof(res_tm_anonymisation_below_tm_deidentification, axiom, kge_leq(tm_anonymisation, tm_deidentification)).
+fof(res_tm_asymmetric_cryptography_below_tm_cryptographic_methods, axiom, kge_leq(tm_asymmetric_cryptography, tm_cryptographic_methods)).
+fof(res_tm_asymmetric_encryption_below_tm_encryption, axiom, kge_leq(tm_asymmetric_encryption, tm_encryption)).
+fof(res_tm_authentication_a_b_c_below_tm_cryptographic_authentication, axiom, kge_leq(tm_authentication_a_b_c, tm_cryptographic_authentication)).
+fof(res_tm_authentication_p_a_b_c_below_tm_cryptographic_authentication, axiom, kge_leq(tm_authentication_p_a_b_c, tm_cryptographic_authentication)).
+fof(res_tm_authentication_protocols_below_tm_technical_measure, axiom, kge_leq(tm_authentication_protocols, tm_technical_measure)).
+fof(res_tm_authorisation_protocols_below_tm_technical_measure, axiom, kge_leq(tm_authorisation_protocols, tm_technical_measure)).
+fof(res_tm_biometric_authentication_below_tm_authentication_protocols, axiom, kge_leq(tm_biometric_authentication, tm_authentication_protocols)).
+fof(res_tm_cryptographic_authentication_below_tm_authentication_protocols, axiom, kge_leq(tm_cryptographic_authentication, tm_authentication_protocols)).
+fof(res_tm_cryptographic_authentication_below_tm_cryptographic_methods, axiom, kge_leq(tm_cryptographic_authentication, tm_cryptographic_methods)).
+fof(res_tm_cryptographic_key_management_below_tm_cryptographic_methods, axiom, kge_leq(tm_cryptographic_key_management, tm_cryptographic_methods)).
+fof(res_tm_cryptographic_methods_below_tm_technical_measure, axiom, kge_leq(tm_cryptographic_methods, tm_technical_measure)).
+fof(res_tm_data_backup_protocols_below_tm_technical_measure, axiom, kge_leq(tm_data_backup_protocols, tm_technical_measure)).
+fof(res_tm_data_redaction_below_tm_data_sanitisation_technique, axiom, kge_leq(tm_data_redaction, tm_data_sanitisation_technique)).
+fof(res_tm_data_sanitisation_technique_below_tm_technical_measure, axiom, kge_leq(tm_data_sanitisation_technique, tm_technical_measure)).
+fof(res_tm_deidentification_below_tm_data_sanitisation_technique, axiom, kge_leq(tm_deidentification, tm_data_sanitisation_technique)).
+fof(res_tm_deterministic_pseudonymisation_below_tm_pseudonymisation, axiom, kge_leq(tm_deterministic_pseudonymisation, tm_pseudonymisation)).
+fof(res_tm_differential_privacy_below_tm_cryptographic_methods, axiom, kge_leq(tm_differential_privacy, tm_cryptographic_methods)).
+fof(res_tm_digital_rights_management_below_tm_technical_measure, axiom, kge_leq(tm_digital_rights_management, tm_technical_measure)).
+fof(res_tm_digital_signatures_below_tm_cryptographic_methods, axiom, kge_leq(tm_digital_signatures, tm_cryptographic_methods)).
+fof(res_tm_distributed_system_security_below_tm_security_method, axiom, kge_leq(tm_distributed_system_security, tm_security_method)).
+fof(res_tm_document_randomised_pseudonymisation_below_tm_pseudonymisation, axiom, kge_leq(tm_document_randomised_pseudonymisation, tm_pseudonymisation)).
+fof(res_tm_document_security_below_tm_security_method, axiom, kge_leq(tm_document_security, tm_security_method)).
+fof(res_tm_encryption_below_tm_technical_measure, axiom, kge_leq(tm_encryption, tm_technical_measure)).
+fof(res_tm_encryption_at_rest_below_tm_encryption, axiom, kge_leq(tm_encryption_at_rest, tm_encryption)).
+fof(res_tm_encryption_in_transfer_below_tm_encryption, axiom, kge_leq(tm_encryption_in_transfer, tm_encryption)).
+fof(res_tm_encryption_in_use_below_tm_encryption, axiom, kge_leq(tm_encryption_in_use, tm_encryption)).
+fof(res_tm_end_to_end_encryption_below_tm_encryption, axiom, kge_leq(tm_end_to_end_encryption, tm_encryption)).
+fof(res_tm_fail_safe_protocols_below_tm_technical_measure, axiom, kge_leq(tm_fail_safe_protocols, tm_technical_measure)).
+fof(res_tm_file_system_security_below_tm_security_method, axiom, kge_leq(tm_file_system_security, tm_security_method)).
+fof(res_tm_fully_randomised_pseudonymisation_below_tm_pseudonymisation, axiom, kge_leq(tm_fully_randomised_pseudonymisation, tm_pseudonymisation)).
+fof(res_tm_hardware_security_protocols_below_tm_security_method, axiom, kge_leq(tm_hardware_security_protocols, tm_security_method)).
+fof(res_tm_hash_functions_below_tm_cryptographic_methods, axiom, kge_leq(tm_hash_functions, tm_cryptographic_methods)).
+fof(res_tm_hash_message_authentication_code_below_tm_cryptographic_authentication, axiom, kge_leq(tm_hash_message_authentication_code, tm_cryptographic_authentication)).
+fof(res_tm_homomorphic_encryption_below_tm_cryptographic_methods, axiom, kge_leq(tm_homomorphic_encryption, tm_cryptographic_methods)).
+fof(res_tm_information_flow_control_below_tm_technical_measure, axiom, kge_leq(tm_information_flow_control, tm_technical_measure)).
+fof(res_tm_intrusion_detection_system_below_tm_security_method, axiom, kge_leq(tm_intrusion_detection_system, tm_security_method)).
+fof(res_tm_legal_measure_below_tm_technical_organisational_measure, axiom, kge_leq(tm_legal_measure, tm_technical_organisational_measure)).
+fof(res_tm_message_authentication_codes_below_tm_cryptographic_authentication, axiom, kge_leq(tm_message_authentication_codes, tm_cryptographic_authentication)).
+fof(res_tm_mobile_platform_security_below_tm_security_method, axiom, kge_leq(tm_mobile_platform_security, tm_security_method)).
+fof(res_tm_monotonic_counter_pseudonymisation_below_tm_pseudonymisation, axiom, kge_leq(tm_monotonic_counter_pseudonymisation, tm_pseudonymisation)).
+fof(res_tm_multi_factor_authentication_below_tm_authentication_protocols, axiom, kge_leq(tm_multi_factor_authentication, tm_authentication_protocols)).
+fof(res_tm_network_proxy_routing_below_tm_security_method, axiom, kge_leq(tm_network_proxy_routing, tm_security_method)).
+fof(res_tm_network_security_protocols_below_tm_security_method, axiom, kge_leq(tm_network_security_protocols, tm_security_method)).
+fof(res_tm_operating_system_security_below_tm_security_method, axiom, kge_leq(tm_operating_system_security, tm_security_method)).
+fof(res_tm_organisational_measure_below_tm_technical_organisational_measure, axiom, kge_leq(tm_organisational_measure, tm_technical_organisational_measure)).
+fof(res_tm_password_authentication_below_tm_authentication_protocols, axiom, kge_leq(tm_password_authentication, tm_authentication_protocols)).
+fof(res_tm_penetration_testing_methods_below_tm_security_method, axiom, kge_leq(tm_penetration_testing_methods, tm_security_method)).
+fof(res_tm_physical_measure_below_tm_technical_organisational_measure, axiom, kge_leq(tm_physical_measure, tm_technical_organisational_measure)).
+fof(res_tm_post_quantum_cryptography_below_tm_cryptographic_methods, axiom, kge_leq(tm_post_quantum_cryptography, tm_cryptographic_methods)).
+fof(res_tm_privacy_preserving_protocol_below_tm_cryptographic_methods, axiom, kge_leq(tm_privacy_preserving_protocol, tm_cryptographic_methods)).
+fof(res_tm_private_information_retrieval_below_tm_cryptographic_methods, axiom, kge_leq(tm_private_information_retrieval, tm_cryptographic_methods)).
+fof(res_tm_pseudonymisation_below_tm_deidentification, axiom, kge_leq(tm_pseudonymisation, tm_deidentification)).
+fof(res_tm_quantum_cryptography_below_tm_cryptographic_methods, axiom, kge_leq(tm_quantum_cryptography, tm_cryptographic_methods)).
+fof(res_tm_r_n_g_pseudonymisation_below_tm_pseudonymisation, axiom, kge_leq(tm_r_n_g_pseudonymisation, tm_pseudonymisation)).
+fof(res_tm_secret_sharing_schemes_below_tm_cryptographic_methods, axiom, kge_leq(tm_secret_sharing_schemes, tm_cryptographic_methods)).
+fof(res_tm_secure_multi_party_computation_below_tm_cryptographic_methods, axiom, kge_leq(tm_secure_multi_party_computation, tm_cryptographic_methods)).
+fof(res_tm_security_method_below_tm_technical_measure, axiom, kge_leq(tm_security_method, tm_technical_measure)).
+fof(res_tm_single_sign_on_below_tm_authentication_protocols, axiom, kge_leq(tm_single_sign_on, tm_authentication_protocols)).
+fof(res_tm_symmetric_cryptography_below_tm_cryptographic_methods, axiom, kge_leq(tm_symmetric_cryptography, tm_cryptographic_methods)).
+fof(res_tm_symmetric_encryption_below_tm_encryption, axiom, kge_leq(tm_symmetric_encryption, tm_encryption)).
+fof(res_tm_technical_measure_below_tm_technical_organisational_measure, axiom, kge_leq(tm_technical_measure, tm_technical_organisational_measure)).
+fof(res_tm_trusted_computing_below_tm_cryptographic_methods, axiom, kge_leq(tm_trusted_computing, tm_cryptographic_methods)).
+fof(res_tm_trusted_execution_environment_below_tm_cryptographic_methods, axiom, kge_leq(tm_trusted_execution_environment, tm_cryptographic_methods)).
+fof(res_tm_usage_control_below_tm_access_control_method, axiom, kge_leq(tm_usage_control, tm_access_control_method)).
+fof(res_tm_use_synthetic_data_below_tm_security_method, axiom, kge_leq(tm_use_synthetic_data, tm_security_method)).
+fof(res_tm_virtualisation_security_below_tm_security_method, axiom, kge_leq(tm_virtualisation_security, tm_security_method)).
+fof(res_tm_vulnerability_testing_methods_below_tm_security_method, axiom, kge_leq(tm_vulnerability_testing_methods, tm_security_method)).
+fof(res_tm_web_browser_security_below_tm_security_method, axiom, kge_leq(tm_web_browser_security, tm_security_method)).
+fof(res_tm_web_security_protocols_below_tm_security_method, axiom, kge_leq(tm_web_security_protocols, tm_security_method)).
+fof(res_tm_wireless_security_protocols_below_tm_security_method, axiom, kge_leq(tm_wireless_security_protocols, tm_security_method)).
+fof(res_tm_zero_knowledge_authentication_below_tm_authentication_protocols, axiom, kge_leq(tm_zero_knowledge_authentication, tm_authentication_protocols)).
+fof(res_tm_zero_knowledge_authentication_below_tm_cryptographic_methods, axiom, kge_leq(tm_zero_knowledge_authentication, tm_cryptographic_methods)).

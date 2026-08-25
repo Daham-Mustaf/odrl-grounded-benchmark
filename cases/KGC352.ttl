@@ -1,0 +1,70 @@
+@prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix dpv:     <https://w3id.org/dpv#> .
+@prefix eu-gdpr: <https://w3id.org/dpv/legal/eu/gdpr#> .
+@prefix dpvo:    <https://w3id.org/dpv/mappings/odrl#> .
+@prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+
+# The constraint below is the predicateConstraint of the permission rule in
+# Example 1 of the ODRL Regulatory Compliance Profile, section 2.10.1, at
+# https://ai.wu.ac.at/policies/orcp/regulatory-model.html .  The rule's
+# deontic role is not modelled: the verdict decides whether two constraint
+# sets admit a common use, not which rule prevails where they do.
+
+drk:offer-352 a odrl:Offer ;
+    dcterms:title "Processing is lawful on any legal basis of Article 6(1)"@en ;
+    dcterms:source <https://ai.wu.ac.at/policies/orcp/regulatory-model.html> ;
+    rdfs:comment "The predicateConstraint of Example 1 of the ODRL Regulatory Compliance Profile, section 2.10.1, with the profile's own names for the seven bases of Article 6(1) read as concepts of the Data Privacy Vocabulary."@en ;
+    odrl:assigner drk:controller ;
+    odrl:permission kgc:KGC352-offer-r1 .
+
+kgc:KGC352-offer-r1 a odrl:Permission ;
+    odrl:action odrl:use ;
+    odrl:target drk:dataset ;
+    odrl:constraint kgc:KGC352-offer-c1 .
+
+kgc:KGC352-offer-c1 a odrl:Constraint ;
+    odrl:leftOperand dpvo:LegalBasis ;
+    odrl:operator odrl:isAnyOf ;
+    odrl:rightOperand ( dpv:Consent dpv:Contract dpv:LegalObligation
+                             dpv:VitalInterest dpv:PublicInterest
+                             dpv:OfficialAuthorityOfController
+                             dpv:LegitimateInterest ) .
+
+drk:request-352 a odrl:Request ;
+    dcterms:title "Processing is on the basis of explicit consent under Article 6(1)(a)"@en ;
+    odrl:assignee drk:processor ;
+    odrl:permission kgc:KGC352-request-r1 .
+
+kgc:KGC352-request-r1 a odrl:Permission ;
+    odrl:action odrl:use ;
+    odrl:target drk:dataset ;
+    odrl:constraint kgc:KGC352-request-c1 .
+
+kgc:KGC352-request-c1 a odrl:Constraint ;
+    odrl:leftOperand dpvo:LegalBasis ;
+    odrl:operator odrl:eq ;
+    odrl:rightOperand eu-gdpr:A6-1-a-explicit-consent .
+
+### Expected result #######################################################
+
+drk:KGC352-report a vrep:OperandReport ;
+    dcterms:identifier "KGC352" ;
+    vrep:firstPolicy drk:bsb-offer ;
+    vrep:secondPolicy drk:bnf-request ;
+    vrep:firstConstraint kgc:KGC352-offer-c1 ;
+    vrep:secondConstraint kgc:KGC352-request-c1 ;
+    vrep:leftOperand odrl:LegalBasis ;
+    vrep:sort vrep:tax ;
+    vrep:resource <https://w3id.org/odrl-kb/dpv-gdpr-legal-basis> ;
+    vrep:backgroundTheory <https://w3id.org/odrl-kb/dpv-gdpr-legal-basis/declared> ;
+    vrep:verdict vrep:Incompatible ;
+    vrep:certificate drk:KGC352-certificate .
+
+drk:KGC352-certificate a vrep:Refutation ;
+    rdfs:comment """Explicit consent under Article 6(1)(a) is declared distinct from each basis the offer enumerates. The premises are the parties' and can be withdrawn, which returns the verdict to Unknown."""@en ;
+    vrep:clashingConstraint kgc:KGC352-offer-c1, kgc:KGC352-request-c1 ;
+    vrep:premise [ vrep:premiseSource vrep:fromBackgroundTheory ;
+                   rdfs:label "explicit consent under Article 6(1)(a) is distinct from each of the seven bases the offer names"@en ] .
