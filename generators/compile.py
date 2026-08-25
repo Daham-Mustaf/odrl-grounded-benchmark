@@ -15,18 +15,22 @@ tree and its resource; so does a real policy pair.
 A note on the syntax classes
 ----------------------------
 Every method of FOF and SMT returns a term that can be dropped into any
-other without changing how it parses.  In TPTP that means a compound is
-parenthesised by whoever builds it, not by whoever uses it: & binds tighter
-than |, so an unwrapped disjunction handed to and_ silently loses all but
-its first disjunct to the conjunction.  That is not a hypothetical.  It
-happened, in the meets-mode conjunct of witness_condition, and the effect
-was a formula weaker than Definition Witness states, which a prover then
-refuted without the resource entailing anything.  The two provers disagreed
-and the disagreement was the encoding rather than either prover.
+other without changing how it parses.  In TPTP that has to be arranged: the
+grammar composes a disjunction out of unit formulas, and a conjunction is
+not one, so a mixed unparenthesised chain such as a & b | c is not derivable
+at all.  It is ill formed rather than badly bracketed, and a lenient parser
+that accepts it is guessing.
+
+That is not a hypothetical.  It happened here, in the meets-mode conjunct of
+witness_condition, where a multi-valued isAnyOf produced an unwrapped
+disjunction that and_ then joined with &.  Two provers accepted the result
+and guessed differently, so the suite reported a disagreement that was
+neither prover's doing.  A conforming parser would have rejected the file
+and the defect would have surfaced at once, which is the argument for not
+relying on a folk precedence rule anywhere in this emitter.
 
 The invariant is therefore: and_, or_ and not_ return self-contained terms.
-SMT is prefix and gets this for free; FOF has to do it explicitly, and wrap
-is the identity on the SMT side so the two encodings stay in step.
+SMT is prefix and gets this for free; FOF arranges it explicitly.
 """
 
 from dataclasses import dataclass
@@ -78,8 +82,19 @@ class IllSorted(ValueError):
 
 
 def check_tree(items):
-    """The xone clause of Definition Signature, decided on operator names."""
+    """The xone clause of Definition Signature, decided on operator names.
+
+    Also rejects a Logical Constraint with no alternatives.  ODRL ranges the
+    operands of one over Constraint instances and an empty list is
+    malformed, but without the check the failure surfaces three calls away:
+    product over an empty alternatives tuple yields nothing, the disjunct
+    list is empty, and or_ is handed an empty sequence.  Naming the defect
+    here is worth the line, and it makes the empty case unreachable in the
+    syntax classes below.
+    """
     for it in items:
+        if isinstance(it, (Or, Xone)) and not it.alts:
+            raise IllSorted("Logical Constraint with no alternatives")
         if isinstance(it, Xone):
             for c in it.alts:
                 if c.operator == "isAllOf":
@@ -143,17 +158,24 @@ class FOF:
     def eq(self, a, b):      return f"{a} = {b}"
     def neq(self, a, b):     return f"{a} != {b}"
 
+    # xs is never empty: check_tree rejects a Logical Constraint with no
+    # alternatives, and witness_condition returns true_() rather than
+    # calling and_ on nothing.
     def and_(self, xs):
         xs = list(xs)
         return xs[0] if len(xs) == 1 else "( " + " & ".join(xs) + " )"
 
     def or_(self, xs):
         xs = list(xs)
-        return xs[0] if len(xs) == 1 else \
-            "( " + "\n| ".join(f"( {x} )" for x in xs) + " )"
+        return xs[0] if len(xs) == 1 else "( " + "\n| ".join(xs) + " )"
 
     def not_(self, x):       return f"~ ( {x} )"
+
+    # Kept for emitters outside this file, which may need to parenthesise a
+    # term they did not build.  Nothing here calls it: every constructor
+    # above already returns a self-contained term.
     def wrap(self, x):       return f"( {x} )"
+
     def true_(self):         return "$true"
 
 
@@ -164,6 +186,9 @@ class SMT:
     def eq(self, a, b):      return f"(= {a} {b})"
     def neq(self, a, b):     return f"(not (= {a} {b}))"
 
+    # Arity one returns the operand rather than (and x): SMT-LIB defines and
+    # and or as n-ary with n at least two, so the one-element form is of
+    # doubtful validity and some solvers reject it.
     def and_(self, xs):
         xs = list(xs)
         return xs[0] if len(xs) == 1 else "(and " + " ".join(xs) + ")"
@@ -173,7 +198,7 @@ class SMT:
         return xs[0] if len(xs) == 1 else "(or " + " ".join(xs) + ")"
 
     def not_(self, x):       return f"(not {x})"
-    def wrap(self, x):       return x
+    def wrap(self, x):       return x   # see FOF.wrap
     def true_(self):         return "true"
 
 
@@ -206,7 +231,14 @@ def witness_condition(literals, concepts, sort, s):
     """
     pos = [l.c for l in literals if l.positive]
     neg = [l.c for l in literals if not l.positive]
-    assert all(MODE[c.operator] == SUBSET for c in neg), "negate() invariant"
+    # Not an assert: this guards the soundness of the formula rather than a
+    # development invariant, and asserts are removed under python -O.  A
+    # negated isAllOf reaching here would compile to a witness condition
+    # that does not state Definition Witness.
+    for c in neg:
+        if MODE[c.operator] != SUBSET:
+            raise IllSorted(f"negated {c.operator} is not a subset-mode "
+                            f"literal; negate() should have rewritten it")
 
     subset = [c for c in pos if MODE[c.operator] == SUBSET]
     allof  = [c for c in pos if MODE[c.operator] == SUPERSET]
