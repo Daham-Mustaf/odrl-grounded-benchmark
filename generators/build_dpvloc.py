@@ -30,11 +30,15 @@ The file uses skos:broader for five different things, and separating them is
 the whole of the boundary decision below.  The counts are measured, not
 estimated, and the generator re-measures them on every run.
 
-    4760  Region  -> Country              containment       READ
-      26  Country -> Country              containment       READ
-     249  Country -> dpv:Country          typing            not read
-     173  Country -> SupraNationalUnion   membership        not read
-     510  * -> InverseJurisdiction        complement        not read
+   4786  location -> location             containment       READ
+    177  country  -> union                membership        READ by juris
+    255  location -> dpv: class           typing            not read
+  63073  inverse  -> location             complement        not read
+
+The last is counted from skos:narrower, which is how the file writes it:
+loc:non-IE skos:narrower loc:AD.  The other three are counted from
+skos:broader.  The extension also publishes 30 identity pairs, written as
+60 directed skos:sameAs assertions.
 
 The typing edges are the plainest case.  loc:AD skos:broader dpv:Country
 says Andorra is a country; it does not say Andorra lies inside a region
@@ -111,7 +115,6 @@ LOC = Namespace("https://w3id.org/dpv/loc#")
 SKOS_SAMEAS = URIRef("http://www.w3.org/2004/02/skos/core#sameAs")
 
 LOCATIONS_SCHEME = LOC["locations-classes"]
-INVERSE_SCHEME = LOC["inverse-classes"]
 
 # The counts the resource header and the paper quote.  If the file changes,
 # the generator stops rather than emitting a description that is no longer
@@ -129,14 +132,16 @@ def local(u) -> str:
     return str(u).rsplit("#", 1)[-1]
 
 
-def slug(code: str) -> str:
-    """TPTP constant for an ISO code.
+PREFIX = "loc_"
 
-    Codes are ASCII and unique: DE, FR-973, BQ-SE.  Lowercase, hyphens to
-    underscores, and a prefix that keeps places apart from the concepts of
-    the other resources in a shared vocabulary.
-    """
-    return "loc_" + code.lower().replace("-", "_")
+
+def slug(code: str) -> str:
+    return PREFIX + code.lower().replace("-", "_")
+
+
+def bare(code: str) -> str:
+    """The slug without the namespace prefix, for the Turtle serialisation."""
+    return slug(code)[len(PREFIX):]
 
 
 def classify(g):
@@ -311,6 +316,8 @@ def resource_ttl(concepts, labels, kinds, order, ident, meta, mode) -> str:
         ],
     }[mode]
 
+    title = ("DPV Locations, containment slice" if mode == "geo"
+             else "DPV Locations, containment and union membership slice")
     head = reads + [
         "#",
         "# The identity assertions use skos:sameAs, which SKOS does not",
@@ -339,8 +346,8 @@ def resource_ttl(concepts, labels, kinds, order, ident, meta, mode) -> str:
         "@prefix dcterms: <http://purl.org/dc/terms/> .",
         "@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .",
         "",
-        "<https://w3id.org/odrl-kb/dpv-loc> a dcat:Dataset ;",
-        '    dcterms:title "DPV Locations, containment slice"@en ;',
+        f"<https://w3id.org/odrl-kb/dpv-loc-{mode}> a dcat:Dataset ;",
+        f'    dcterms:title "{title}"@en ;',
         f"    dcterms:source <{meta['source_iri']}> ;",
         f"    odrlkb:conceptCount {len(concepts)} ;",
         f"    odrlkb:publishedOrderAssertionCount {len(order)} ;",
@@ -351,21 +358,26 @@ def resource_ttl(concepts, labels, kinds, order, ident, meta, mode) -> str:
 
     body = []
     for c in concepts:
-        body.append(f"odrlkb:{slug(c)[4:]} a odrlkb:{kinds.get(c, 'Place')} ;")
+        body.append(f"odrlkb:{bare(c)} a odrlkb:{kinds.get(c, 'Place')} ;")
         if labels.get(c):
             body.append(f'    rdfs:label "{labels[c]}"@en ;')
         body.append(f"    dcterms:identifier loc:{c} .")
         body.append("")
-
+    if mode == "juris":
+        body.append("# Unions, read as containers under this reading only.")
+        body.append("")
+        for u in sorted({b for _, b in order} - set(concepts)):
+            body.append(f"odrlkb:{bare(u)} a odrlkb:Union ;")
+            body.append(f"    dcterms:identifier loc:{u} .")
+            body.append("")
     body.append("# The order, as the extension publishes it.")
     for a, b in order:
-        body.append(f"odrlkb:{slug(a)[4:]} odrlkb:within odrlkb:{slug(b)[4:]} .")
+        body.append(f"odrlkb:{bare(a)} odrlkb:within odrlkb:{bare(b)} .")
     body.append("")
-
     body.append("# Identity: one place, two ISO codes.  Not an order")
     body.append("# assertion in the file; two of them in the encoding.")
     for a, b in ident:
-        body.append(f"odrlkb:{slug(a)[4:]} odrlkb:sameAs odrlkb:{slug(b)[4:]} .")
+        body.append(f"odrlkb:{bare(a)} odrlkb:sameAs odrlkb:{bare(b)} .")
 
     return "\n".join(head + body)
 
@@ -403,7 +415,7 @@ def background_ttl(meta) -> str:
 """
 
 
-def iso_ttl(reps, meta) -> str:
+def iso_ttl(reps, multi, meta) -> str:
     """Background theory generated from the ISO 3166 one-code-per-area rule.
 
     ISO 3166 assigns one code to an area, so two country codes name two
@@ -426,7 +438,7 @@ def iso_ttl(reps, meta) -> str:
 # withdrawable by abandoning the rule.
 #
 # The distinctness is between areas, not between codes.  The extension
-# records {n if False else 'some'} places under two codes, a country code and a
+# records {multi} places under two codes, a country code and a
 # subdivision code for the same area, and those pairs are identified rather
 # than separated.  Distinctness is asserted between the classes those
 # identities induce.
@@ -499,7 +511,6 @@ def axioms(order, ident, meta, mode) -> str:
         lines.append(f"fof(res_{slug(a)}_within_{slug(b)}, axiom,")
         lines.append(f"    kge_leq({slug(a)}, {slug(b)})).")
         lines.append("")
-
     if ident:
         lines.append("% Identity: one place under two ISO codes.")
         lines.append("")
@@ -510,7 +521,6 @@ def axioms(order, ident, meta, mode) -> str:
             lines.append(f"fof(res_{slug(b)}_same_{slug(a)}, axiom,")
             lines.append(f"    kge_leq({slug(b)}, {slug(a)})).")
             lines.append("")
-
     return "\n".join(lines)
 
 
@@ -699,7 +709,6 @@ def main() -> int:
     for mode in modes:
         tag = f"dpvloc-{mode}"
         order = containment if mode == "geo" else sorted(containment + membership)
-
         (args.out / "resources" / f"{tag}.ttl").write_text(
             resource_ttl(concepts, labels, kinds, order, ident, meta, mode),
             encoding="utf-8")
@@ -716,10 +725,11 @@ def main() -> int:
     # ISO distinctness, between areas rather than codes.  Codes the extension
     # identifies name one area, so the rule is applied to the quotient.
     cls = classes(concepts, ident)
+    multi = sum(1 for v in cls.values() if len(v) > 1)   # pass this in
     reps = sorted(k for k, v in cls.items()
                   if any(kinds.get(c) == "Country" for c in v))
     (args.out / "background" / "dpvloc-iso.ttl").write_text(
-        iso_ttl(reps, meta), encoding="utf-8")
+        iso_ttl(reps, multi, meta), encoding="utf-8")
     (args.out / "axioms" / "LOC-dpvloc-iso.ax").write_text(
         iso_axioms(reps), encoding="utf-8")
 
@@ -737,7 +747,6 @@ def main() -> int:
 
     hops, witness = depth(containment)
     hops_j, witness_j = depth(sorted(containment + membership))
-
     print(f"\n{len(concepts)} concepts")
     print(f"longest chain, containment  : {hops} hops"
           + (f" ({' < '.join(witness)})" if witness else ""))
@@ -756,6 +765,7 @@ def main() -> int:
     print()
     for p in sorted(args.out.rglob("*dpvloc*")):
         print(f"  {p}")
+
     return 0
 
 

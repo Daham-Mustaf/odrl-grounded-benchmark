@@ -188,8 +188,7 @@ def classify(names: list[str]) -> dict:
     out["unclassified"] = []
     for n in names:
         prefix = n.split("_", 1)[0]
-        out.setdefault(SOURCE.get(prefix, "unclassified"), []).append(n) \
-            if prefix in SOURCE else out["unclassified"].append(n)
+        out[SOURCE.get(prefix, "unclassified")].append(n)
     return out
 
 
