@@ -9,7 +9,7 @@
 @prefix vrep: <https://w3id.org/odrl-verdict-report#> .
 @prefix ex:   <https://w3id.org/odrl-kb/profile/> .
 
-ex:b-spatial a bind:OperandBinding ;
+ex:b-spatial-geonames-d3 a bind:OperandBinding ;
     bind:leftOperand odrl:spatial ;
     bind:sort bind:mer ;
     bind:resource <https://w3id.org/odrl-kb/geonames/europe-d3-13050> ;

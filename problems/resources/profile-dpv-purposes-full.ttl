@@ -8,7 +8,7 @@
 @prefix vrep: <https://w3id.org/odrl-verdict-report#> .
 @prefix ex:   <https://w3id.org/odrl-kb/profile/> .
 
-ex:b-purpose a bind:OperandBinding ;
+ex:b-purpose-dpv a bind:OperandBinding ;
     bind:leftOperand odrl:purpose ;
     bind:sort bind:tax ;
     bind:resource <https://w3id.org/odrl-kb/dpv-purposes> ;
