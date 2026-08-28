@@ -1,6 +1,7 @@
 @prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix report:  <https://w3id.org/force/compliance-report#> .
 @prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix vrep:    <https://w3id.org/odrl-verdict-report#> .
+@prefix vrep:    <https://w3id.org/odrl-kb/verdict-report#> .
 @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix loc:     <https://w3id.org/dpv/loc#> .
@@ -39,17 +40,15 @@ kgc:KGC330-request-c1 a odrl:Constraint ;
 
 ### Expected result #######################################################
 
-drk:KGC330-report a vrep:OperandReport ;
+drk:KGC330-report a vrep:OperandVerdictReport ;
     dcterms:identifier "KGC330" ;
-    vrep:firstPolicy drk:offer-330 ;
-    vrep:secondPolicy drk:request-330 ;
-    vrep:firstConstraint kgc:KGC330-offer-c1 ;
-    vrep:secondConstraint kgc:KGC330-request-c1 ;
-    vrep:leftOperand odrl:spatial ;
-    vrep:sort vrep:mer ;
-    vrep:resource <https://w3id.org/odrl-kb/dpv-loc-geo> ;
+    report:policy drk:offer-330 ;
+    report:policyRequest drk:request-330 ;
+    report:constraint kgc:KGC330-offer-c1 ;
+    vrep:constraintRequest kgc:KGC330-request-c1 ;
+    vrep:binding <https://w3id.org/odrl-kb/profile/b-spatial-dpvloc-geo> ;
     vrep:backgroundTheory <https://w3id.org/odrl-kb/dpv-loc/empty> ;
-    vrep:verdict vrep:Compatible ;
+    report:satisfactionState report:Satisfied ;
     vrep:certificate drk:KGC330-certificate .
 
 drk:KGC330-certificate a vrep:Refutation ;

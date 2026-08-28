@@ -86,7 +86,6 @@ over the concepts the grounding names.
           witness fails everywhere, and the verdict is Incompatible.  The
           premise is a rule the parties adopted, not an assertion the
           extension makes, and the certificate marks it withdrawable.
-
           The rule ranges over 249 areas and is stated in the axiom file
           rather than expanded there: instantiating it would add thirty
           thousand inequations to every problem, and a refutation should
@@ -122,6 +121,11 @@ GEO_RESOURCE   = "https://w3id.org/odrl-kb/dpv-loc-geo"
 JURIS_RESOURCE = "https://w3id.org/odrl-kb/dpv-loc-juris"
 EMPTY_BT       = "https://w3id.org/odrl-kb/dpv-loc/empty"
 ISO_BT         = "https://w3id.org/odrl-kb/dpv-loc/iso"
+
+# profile_ttl() in build_dpvloc.py names these exactly: ex:b-spatial-dpvloc-geo
+# and ex:b-spatial-dpvloc-juris, under ex: <https://w3id.org/odrl-kb/profile/>.
+BINDING_GEO    = "https://w3id.org/odrl-kb/profile/b-spatial-dpvloc-geo"
+BINDING_JURIS  = "https://w3id.org/odrl-kb/profile/b-spatial-dpvloc-juris"
 
 INCLUDES_GEO   = ["KGE000-0.ax", "LOC-dpvloc-geo.ax"]
 INCLUDES_JURIS = ["KGE000-0.ax", "LOC-dpvloc-juris.ax"]
@@ -178,7 +182,6 @@ kgc:{pid}-request-c1 a odrl:Constraint ;
 
 
 PROBLEMS = [
-
     # -----------------------------------------------------------------
     # KGC330  One step of the containment order.  The smoke test for this
     # resource: if it fails, the slice or the boundary filter is wrong.
@@ -191,6 +194,7 @@ PROBLEMS = [
         "sort":              "mer",
         "resource":          GEO_RESOURCE,
         "background_theory": EMPTY_BT,
+        "binding":           BINDING_GEO,
         "includes":          INCLUDES_GEO,
         "description": (
             "Offer (spatial, isPartOf, loc:NL) against request (spatial, eq, "
@@ -230,7 +234,6 @@ PROBLEMS = [
         "ttl": _ttl("KGC330", "use within the Netherlands", "isPartOf", "NL",
                     "use in Bonaire, Sint Eustatius and Saba", "BQ"),
     },
-
     # -----------------------------------------------------------------
     # KGC331  The pair the resource exists for.  Compatible under the
     # jurisdictional reading; not grounded at all under the geographic.
@@ -243,6 +246,7 @@ PROBLEMS = [
         "sort":              "mer",
         "resource":          JURIS_RESOURCE,
         "background_theory": EMPTY_BT,
+        "binding":           BINDING_JURIS,
         "includes":          INCLUDES_JURIS,
         "description": (
             "Offer (spatial, isPartOf, loc:EU) against request (spatial, eq, "
@@ -289,7 +293,6 @@ PROBLEMS = [
         "ttl": _ttl("KGC331", "use within the European Union", "isPartOf", "EU",
                     "use in Germany", "DE"),
     },
-
     # -----------------------------------------------------------------
     # KGC333  Two country codes the extension never separates.  Unknown,
     # and the pair to re-run once the parties adopt the registry rule.
@@ -302,6 +305,7 @@ PROBLEMS = [
         "sort":              "mer",
         "resource":          GEO_RESOURCE,
         "background_theory": EMPTY_BT,
+        "binding":           BINDING_GEO,
         "includes":          INCLUDES_GEO,
         "description": (
             "Offer (spatial, eq, loc:DE) against request (spatial, eq, "
@@ -340,7 +344,6 @@ PROBLEMS = [
         "ttl": _ttl("KGC333", "use in Germany", "eq", "DE",
                     "use in France", "FR"),
     },
-
     # -----------------------------------------------------------------
     # KGC334  KGC333 under the ISO rule.  Same resource, same constraints:
     # what moves the verdict is a rule the parties adopted, and the rule
@@ -355,6 +358,7 @@ PROBLEMS = [
         "sort":              "mer",
         "resource":          GEO_RESOURCE,
         "background_theory": ISO_BT,
+        "binding":           BINDING_GEO,
         "includes":          INCLUDES_ISO,
         "description": (
             "The constraints of KGC333 under a background theory generated "
@@ -385,11 +389,10 @@ fof(bt_loc_de_distinct_loc_fr, axiom,
         "smt2_decls": _decls(DE, FR),
         "smt2_resource": """\
 ; Resource: unchanged from KGC333.""",
-        "smt2_background": f"""\
-; Background theory: the instance of the registry rule that bears on this
-; problem, so that an unsat core attributes the verdict to the rule the
-; parties adopted rather than to the extension.
-(assert (distinct {DE} {FR}))""",
+        "smt2_background": """\
+; The instance of the registry rule this problem adopts, named as the TPTP
+; side names it so that a proof and an unsat core cite one assertion.
+(assert (! (distinct loc_de loc_fr) :named bt_loc_de_distinct_loc_fr))""",
         "smt2_witness": f"""\
 (or (and (= {DE} {DE}) (= {DE} {FR}))
     (and (= {FR} {DE}) (= {FR} {FR})))""",

@@ -30,12 +30,19 @@ bt:PairwiseDistinctness a bt:GenerationRule ;
     rdfs:label "Pairwise Distinctness" ;
     skos:definition "Names the rule by which the generator expands an owl:AllDifferent member list of n concepts into n(n-1)/2 ground inequations, subject to the theory's scope condition. The expansion is performed and verified by the generator; this individual records which rule was applied."@en .
 
+bt:RegistryUniquenessRule a bt:GenerationRule ;
+    rdfs:label "Registry Uniqueness Rule" ;
+    skos:definition "Names the rule by which distinct registry records, subject to the stated registry conditions, are treated as denoting distinct concepts. The rule is adopted for the benchmark reading and is applied by the generator to produce ground inequations."@en .
+
+bt:PartyDeclaration a bt:GenerationRule ;
+    rdfs:label "Party Declaration" ;
+    skos:definition "Names a distinction or other semantic assertion explicitly declared by the parties for the benchmark case. The declaration is part of the background theory and may be withdrawn."@en .
+
 bt:appliesTo a rdfs:Property, skos:Concept ;
     rdfs:isDefinedBy <https://w3id.org/odrl-kb/background> ;
     rdfs:label "applies to" ;
-    skos:definition "The concept scheme over whose concepts the theory speaks."@en ;
-    rdfs:domain bt:BackgroundTheory ;
-    rdfs:range skos:ConceptScheme .
+    skos:definition "The resource over whose concepts or assertions the theory speaks."@en ;
+    rdfs:domain bt:BackgroundTheory .
 
 bt:generatedBy a rdfs:Property, skos:Concept ;
     rdfs:isDefinedBy <https://w3id.org/odrl-kb/background> ;

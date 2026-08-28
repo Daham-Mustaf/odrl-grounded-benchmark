@@ -1,5 +1,6 @@
+@prefix report:  <https://w3id.org/force/compliance-report#> .
 @prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix vrep:    <https://w3id.org/odrl-verdict-report#> .
+@prefix vrep:    <https://w3id.org/odrl-kb/verdict-report#> .
 @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
@@ -41,17 +42,14 @@ kgc:KGC360-request-c1 a odrl:Constraint ;
 
 ### Expected result #######################################################
 
-drk:KGC360-report a vrep:OperandReport ;
+drk:KGC360-report a vrep:OperandVerdictReport ;
     dcterms:identifier "KGC360" ;
-    vrep:firstPolicy drk:offer-360 ;
-    vrep:secondPolicy drk:request-360 ;
-    vrep:firstConstraint kgc:KGC360-offer-c1 ;
-    vrep:secondConstraint kgc:KGC360-request-c1 ;
-    vrep:leftOperand odrl:TechnicalOrganisationalMeasure ;
-    vrep:sort vrep:tax ;
-    vrep:resource <https://w3id.org/odrl-kb/dpv-tom> ;
+    report:policy drk:offer-360 ;
+    report:policyRequest drk:request-360 ;
+    report:constraint kgc:KGC360-offer-c1 ;
+    vrep:constraintRequest kgc:KGC360-request-c1 ;
     vrep:backgroundTheory <https://w3id.org/odrl-kb/dpv-tom/empty> ;
-    vrep:verdict vrep:Compatible ;
+    report:satisfactionState report:Satisfied ;
     vrep:certificate drk:KGC360-certificate .
 
 drk:KGC360-certificate a vrep:Refutation ;

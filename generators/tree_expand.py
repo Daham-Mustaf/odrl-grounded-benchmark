@@ -5,48 +5,122 @@ Turns a problem carrying a constraint tree into the shape the writers expect.
 
     from tree_expand import expand_tree
     problems = [expand_tree(p) for p in PROBLEMS]
-
-Why this exists
----------------
-Most problems in the suite carry their witness condition as a hand-written
-formula, which is readable and reviewable: a reader of the problem data sees
-exactly what will be asserted.  That stops working once constraints are
-composed under or and xone.  A xone of two alternatives expands to a
-disjunction of two literal sets, each carrying the negation of the other, and
-the witness condition of the whole is the disjunction of theirs.  Writing
-that out by hand would be transcribing the compiler's output, and any
-transcription error would show up as a wrong verdict that looks like a
-finding.
-
-So a composed problem carries the tree, and this module derives everything
-the writers need from it.  The compiler does the expansion; nothing here
-duplicates it.
-
-What is derived and what is not
---------------------------------
-Derived: the constants the tree names, the two witness formulas, and the SMT
-declarations.  These follow from the tree with no choices to make.
-
-Not derived: the SMT resource and background blocks.  The TPTP query includes
-the whole axiom file, so it has the resource and the background theory in
-full; the SMT query is assembled from the problem data, and which assertions
-it needs depends on which ones bear on the verdict.  That is a judgement, and
-a problem composed under xone needs it as much as any other: the point of
-running both provers is that they see the same theory by two routes, and
-deriving one route from the other would defeat it.  A problem that supplies
-neither block gets empty ones, and the two provers will then disagree, which
-is the intended signal.
-
-The constant order
-------------------
-Constants are collected in the order the tree names them, not sorted.  The
-witness condition ranges over them in that order, so a stable order keeps the
-generated formula stable across runs, and a regenerated problem diffs
-cleanly.
 """
 import re
+from collections import deque
+from pathlib import Path
 
 from compile import Constraint, Or, Xone, compile_operand
+
+
+_ASSERTION = re.compile(
+    r"fof\(\s*((?:res|bt|bg)_[a-z0-9_]+)\s*,\s*axiom,\s*"
+    r"(?:kge_leq\(\s*([a-z0-9_]+)\s*,\s*([a-z0-9_]+)\s*\)"
+    r"|kge_concept\(\s*([a-z0-9_]+)\s*\)"
+    r"|([a-z0-9_]+)\s*!=\s*([a-z0-9_]+))\s*\)\s*\.",
+    re.S)
+
+
+def _parse_assertions(text):
+    """Yield (label, kind, args) for every matching assertion, file order.
+
+    kind is one of leq, concept, dist.  Anything the pattern does not
+    match (quantified disjointness, definitions) is left to the axiom
+    module includes on the TPTP side and to the writer's axiom template on
+    the SMT side; only ground resource and background facts are inlined.
+    """
+    for m in _ASSERTION.finditer(text):
+        label = m.group(1)
+        if m.group(2):
+            yield label, "leq", (m.group(2), m.group(3))
+        elif m.group(4):
+            yield label, "concept", (m.group(4),)
+        else:
+            yield label, "dist", (m.group(5), m.group(6))
+
+
+def _betweenness(constants, leq_edges):
+    """Constants plus every concept on a directed path between two of them.
+
+    Edges are (below, above).  A concept m is kept when it is above some
+    constant a and below some constant b: the chain a <= m <= b is then a
+    derivation the query can make, and dropping m drops it.
+    """
+    up: dict = {}
+    down: dict = {}
+    for a, b in leq_edges:
+        up.setdefault(a, set()).add(b)
+        down.setdefault(b, set()).add(a)
+
+    def reach(start, adj):
+        seen = {start}
+        queue = deque([start])
+        while queue:
+            for nxt in adj.get(queue.popleft(), ()):
+                if nxt not in seen:
+                    seen.add(nxt)
+                    queue.append(nxt)
+        return seen
+
+    ups = {c: reach(c, up) for c in constants}
+    downs = {c: reach(c, down) for c in constants}
+    keep = set(constants)
+    for a in constants:
+        for b in constants:
+            if a is not b:
+                keep |= ups[a] & downs[b]
+    return keep
+
+
+def assertions_for(constants, includes,
+                   axioms_dir: Path = Path("problems/axioms")):
+    """The included assertions the SMT side needs, and the extra constants.
+
+    Returns (resource_block, background_block, extras): the two blocks as
+    strings of named asserts, either possibly empty, and the closure
+    concepts that appear in them beyond the given constants, which the
+    caller must declare.
+
+    Duplicate premise names across the included files abort: :named must
+    be unique in one SMT query, and two files defining one name is a build
+    bug the TPTP side would also mislabel.
+    """
+    entries = []
+    seen: dict = {}
+    for name in includes:
+        path = axioms_dir / name
+        if not path.exists() or name.startswith("KGE"):
+            continue
+        for label, kind, args in _parse_assertions(
+                path.read_text(encoding="utf-8")):
+            if label in seen:
+                if seen[label] != (kind, args):
+                    raise ValueError(
+                        f"premise name {label} defined twice with different "
+                        f"content across {includes}")
+                continue
+            seen[label] = (kind, args)
+            entries.append((label, kind, args))
+
+    leq_edges = [args for _, kind, args in entries if kind == "leq"]
+    keep = _betweenness(list(constants), leq_edges)
+
+    res, bg, extras = [], [], []
+    for label, kind, args in entries:
+        if any(a not in keep for a in args):
+            continue
+        if kind == "leq":
+            body = f"(kge_leq {args[0]} {args[1]})"
+        elif kind == "concept":
+            body = f"(kge_concept {args[0]})"
+        else:
+            body = f"(not (= {args[0]} {args[1]}))"
+        line = f"(assert (! {body} :named {label}))"
+        (res if label.startswith("res_") else bg).append(line)
+        for a in args:
+            if a not in constants and a not in extras:
+                extras.append(a)
+    return "\n".join(res), "\n".join(bg), sorted(extras)
 
 
 def constants_of_tree(items) -> list:
@@ -65,11 +139,13 @@ def constants_of_tree(items) -> list:
     return seen
 
 
-def smt_declarations(constants) -> str:
-    return "\n".join(
-        ["(declare-sort Concept 0)"]
-        + [f"(declare-fun {c} () Concept)" for c in constants]
-        + ["(declare-fun kge_leq (Concept Concept) Bool)"])
+def smt_declarations(constants, with_concept: bool = False) -> str:
+    lines = (["(declare-sort Concept 0)"]
+             + [f"(declare-fun {c} () Concept)" for c in constants]
+             + ["(declare-fun kge_leq (Concept Concept) Bool)"])
+    if with_concept:
+        lines.append("(declare-fun kge_concept (Concept) Bool)")
+    return "\n".join(lines)
 
 
 def _map_constraint(c: Constraint, g: dict) -> Constraint:
@@ -91,28 +167,19 @@ def _map_item(item, g: dict):
 
 
 def expand_tree(p: dict) -> dict:
-    """Fill the witness and declaration fields of a tree-carrying problem.
+    """Fill the witness, declaration, and theory fields of a tree problem.
 
     A problem without a tree is returned unchanged, so the two kinds sit in
     one list and the generator does not branch.
     """
     if "tree" not in p:
         return p
-    # Grounding, recorded rather than computed.  The binding's rule maps a
-    # policy value to a concept of the bound resource; that map lives in
-    # the manifest because grounding procedures are in design/grounding.py
-    # and are not wired into this pipeline yet.  A value with no entry is
-    # assumed already to be a concept, which is true of every problem whose
-    # policies name concepts directly.
-    #
-    # This runs before the constants are collected, so no policy value can
-    # reach the signature.  KGC373 is why it exists: "en-US" became
-    # (declare-fun en-US () Concept), a fresh constant satisfying anything,
-    # and both provers were asked a question about nothing.
+
     grounding = p.get("grounding")
     if grounding:
         p = dict(p)
         p["tree"] = [_map_item(item, grounding) for item in p["tree"]]
+
     constants = constants_of_tree(p["tree"])
     bad = [c for c in constants
            if not re.fullmatch(r"[a-z][a-zA-Z0-9_]*", c)]
@@ -122,13 +189,24 @@ def expand_tree(p: dict) -> dict:
             f"value reached the signature without being grounded; either "
             f"add it to the problem's grounding map, or mark the problem "
             f"ungrounded if the binding's rule does not resolve it.")
+
     w = compile_operand(p["tree"], constants, p["sort"])
+
+    derived_res, derived_bg, extras = assertions_for(
+        constants, p.get("includes", []))
+
     q = dict(p)
     q.setdefault("fof_decls", "")
     q["fof_witness"] = w["fof"]
     q.setdefault("smt2_logic", "UF")
-    q["smt2_decls"] = smt_declarations(constants)
-    q.setdefault("smt2_resource", "")
-    q.setdefault("smt2_background", "")
+    # An explicit field wins; the derivation fills only what is absent.
+    q.setdefault("smt2_resource", derived_res)
+    q.setdefault("smt2_background", derived_bg)
+    used_derived = (q["smt2_resource"] == derived_res
+                    or q["smt2_background"] == derived_bg)
+    decl_constants = constants + (extras if used_derived else [])
+    with_concept = used_derived and "(kge_concept " in (
+        q["smt2_resource"] + q["smt2_background"])
+    q["smt2_decls"] = smt_declarations(decl_constants, with_concept)
     q["smt2_witness"] = w["smt"]
     return q

@@ -1,6 +1,7 @@
 @prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix report:  <https://w3id.org/force/compliance-report#> .
 @prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix vrep:    <https://w3id.org/odrl-verdict-report#> .
+@prefix vrep:    <https://w3id.org/odrl-kb/verdict-report#> .
 @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix dpv:     <https://w3id.org/dpv#> .
@@ -39,17 +40,14 @@ kgc:KGC313-request-c1 a odrl:Constraint ;
 
 ### Expected result #######################################################
 
-drk:KGC313-report a vrep:OperandReport ;
+drk:KGC313-report a vrep:OperandVerdictReport ;
     dcterms:identifier "KGC313" ;
-    vrep:firstPolicy drk:offer-313 ;
-    vrep:secondPolicy drk:request-313 ;
-    vrep:firstConstraint kgc:KGC313-offer-c1 ;
-    vrep:secondConstraint kgc:KGC313-request-c1 ;
-    vrep:leftOperand odrl:purpose ;
-    vrep:sort vrep:tax ;
-    vrep:resource <https://w3id.org/odrl-kb/dpv-purposes> ;
+    report:policy drk:offer-313 ;
+    report:policyRequest drk:request-313 ;
+    report:constraint kgc:KGC313-offer-c1 ;
+    vrep:constraintRequest kgc:KGC313-request-c1 ;
     vrep:backgroundTheory <https://w3id.org/odrl-kb/dpv-purposes/empty> ;
-    vrep:verdict vrep:Unknown ;
+    report:satisfactionState vrep:Undetermined ;
     vrep:certificate drk:KGC313-certificate .
 
 drk:KGC313-certificate a vrep:Models ;

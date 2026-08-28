@@ -1,6 +1,7 @@
 @prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix report:  <https://w3id.org/force/compliance-report#> .
 @prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix vrep:    <https://w3id.org/odrl-verdict-report#> .
+@prefix vrep:    <https://w3id.org/odrl-kb/verdict-report#> .
 @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix dpv:     <https://w3id.org/dpv#> .
@@ -48,17 +49,14 @@ kgc:KGC344-request-c1 a odrl:Constraint ;
 
 ### Expected result #######################################################
 
-drk:KGC344-report a vrep:OperandReport ;
+drk:KGC344-report a vrep:OperandVerdictReport ;
     dcterms:identifier "KGC344" ;
-    vrep:firstPolicy drk:offer-344 ;
-    vrep:secondPolicy drk:request-344 ;
-    vrep:firstConstraint kgc:KGC344-offer-c1 ;
-    vrep:secondConstraint kgc:KGC344-request-c1 ;
-    vrep:leftOperand odrl:Status ;
-    vrep:sort vrep:tax ;
-    vrep:resource <https://w3id.org/odrl-kb/dpv-consent> ;
+    report:policy drk:offer-344 ;
+    report:policyRequest drk:request-344 ;
+    report:constraint kgc:KGC344-offer-c1 ;
+    vrep:constraintRequest kgc:KGC344-request-c1 ;
     vrep:backgroundTheory <https://w3id.org/odrl-kb/dpv-consent/empty> ;
-    vrep:verdict vrep:Unknown ;
+    report:satisfactionState vrep:Undetermined ;
     vrep:certificate drk:KGC344-certificate .
 
 drk:KGC344-certificate a vrep:Models ;

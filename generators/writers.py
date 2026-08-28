@@ -288,8 +288,10 @@ def _report_block(p: dict) -> str:
         f"    report:policyRequest drk:request-{pid[3:]} ;",
         f"    report:constraint kgc:{pid}-offer-c1 ;",
         f"    vrep:constraintRequest kgc:{pid}-request-c1 ;",
-        f"    vrep:binding <{p['binding']}> ;",
     ]
+
+    if p.get("binding"):
+        lines.append(f"    vrep:binding <{p['binding']}> ;")
     if p.get("background_theory"):
         lines.append(
             f"    vrep:backgroundTheory <{p['background_theory']}> ;")

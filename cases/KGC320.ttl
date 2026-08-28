@@ -1,6 +1,7 @@
 @prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix report:  <https://w3id.org/force/compliance-report#> .
 @prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix vrep:    <https://w3id.org/odrl-verdict-report#> .
+@prefix vrep:    <https://w3id.org/odrl-kb/verdict-report#> .
 @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix ft:      <http://publications.europa.eu/resource/authority/file-type/> .
@@ -39,17 +40,14 @@ kgc:KGC320-request-c1 a odrl:Constraint ;
 
 ### Expected result #######################################################
 
-drk:KGC320-report a vrep:OperandReport ;
+drk:KGC320-report a vrep:OperandVerdictReport ;
     dcterms:identifier "KGC320" ;
-    vrep:firstPolicy drk:offer-320 ;
-    vrep:secondPolicy drk:request-320 ;
-    vrep:firstConstraint kgc:KGC320-offer-c1 ;
-    vrep:secondConstraint kgc:KGC320-request-c1 ;
-    vrep:leftOperand odrl:fileFormat ;
-    vrep:sort vrep:nom ;
-    vrep:resource <https://w3id.org/odrl-kb/eu-file-type> ;
+    report:policy drk:offer-320 ;
+    report:policyRequest drk:request-320 ;
+    report:constraint kgc:KGC320-offer-c1 ;
+    vrep:constraintRequest kgc:KGC320-request-c1 ;
     vrep:backgroundTheory <https://w3id.org/odrl-kb/eu-file-type/empty> ;
-    vrep:verdict vrep:Unknown ;
+    report:satisfactionState vrep:Undetermined ;
     vrep:certificate drk:KGC320-certificate .
 
 drk:KGC320-certificate a vrep:Models ;

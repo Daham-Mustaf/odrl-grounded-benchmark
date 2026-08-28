@@ -26,6 +26,8 @@
     (=> (and (kge_leq x y) (kge_leq y x)) (= x y))) :named ax_leq_antisymmetric))
 (assert (! (forall ((x Concept) (y Concept) (z Concept))
     (=> (and (kge_leq x y) (kge_leq y z)) (kge_leq x z))) :named ax_leq_transitive))
+(assert (! (kge_leq tm_access_control_method tm_technical_measure) :named res_tm_access_control_method_below_tm_technical_measure))
+(assert (! (kge_leq tm_encryption tm_technical_measure) :named res_tm_encryption_below_tm_technical_measure))
 ; witness condition asserted
 (assert (! (and (kge_leq tm_encryption tm_technical_measure) (kge_leq tm_access_control_method tm_technical_measure) (or (kge_leq tm_encryption tm_technical_measure) (kge_leq tm_access_control_method tm_technical_measure) (kge_leq tm_technical_measure tm_technical_measure))) :named w_kgc360))
 (check-sat)

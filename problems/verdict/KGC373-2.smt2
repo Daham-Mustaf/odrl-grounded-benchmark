@@ -18,6 +18,7 @@
 (declare-fun bcp_de () Concept)
 (declare-fun bcp_en () Concept)
 (declare-fun kge_leq (Concept Concept) Bool)
+(declare-fun kge_concept (Concept) Bool)
 ; Order axioms, quantified.  The same three as KGE000-0.ax, so the two
 ; encodings are the same theory.
 (assert (! (forall ((x Concept)) (kge_leq x x)) :named ax_leq_reflexive))
@@ -25,6 +26,8 @@
     (=> (and (kge_leq x y) (kge_leq y x)) (= x y))) :named ax_leq_antisymmetric))
 (assert (! (forall ((x Concept) (y Concept) (z Concept))
     (=> (and (kge_leq x y) (kge_leq y z)) (kge_leq x z))) :named ax_leq_transitive))
+(assert (! (kge_concept bcp_de) :named res_bcp47_de))
+(assert (! (kge_concept bcp_en) :named res_bcp47_en))
 (assert (! (not (= bcp_de bcp_en)) :named bg_dist_bcp47_de_en))
 ; witness condition negated
 (assert (! (not (or (and (= bcp_de bcp_de) (= bcp_de bcp_en)) (and (= bcp_en bcp_de) (= bcp_en bcp_en)))) :named w_kgc373))

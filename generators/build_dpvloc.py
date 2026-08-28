@@ -96,6 +96,7 @@ suite.  Resolve this before publishing the artefact.
 """
 
 import argparse
+import hashlib
 import sys
 from pathlib import Path
 
@@ -280,7 +281,7 @@ def depth(containment):
     return best, witness
 
 
-def resource_ttl(concepts, labels, kinds, order, ident, meta, mode) -> str:
+def resource_ttl(concepts, labels, kinds, order, ident, meta, mode, digest) -> str:
     reads = {
         "geo": [
             "# DPV Locations, geographic reading: containment only.",
@@ -345,14 +346,15 @@ def resource_ttl(concepts, labels, kinds, order, ident, meta, mode) -> str:
         "@prefix dcat:    <http://www.w3.org/ns/dcat#> .",
         "@prefix dcterms: <http://purl.org/dc/terms/> .",
         "@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .",
+        "@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .",
         "",
         f"<https://w3id.org/odrl-kb/dpv-loc-{mode}> a dcat:Dataset ;",
         f'    dcterms:title "{title}"@en ;',
         f"    dcterms:source <{meta['source_iri']}> ;",
-        f"    odrlkb:conceptCount {len(concepts)} ;",
-        f"    odrlkb:publishedOrderAssertionCount {len(order)} ;",
-        f"    odrlkb:identityPairCount {len(ident)} ;",
-        f"    odrlkb:encodedOrderAssertionCount {2 * len(ident)} .",
+        f'    dcterms:hasVersion "{meta["version"]}" ;',
+        f'    dcterms:issued "{meta["retrieved"]}"^^xsd:date ;',
+        f'    dcterms:identifier "sha256:{digest}" ;',
+        "    dcterms:license <https://www.w3.org/copyright/document-license-2023/> .",
         "",
     ]
 
@@ -410,8 +412,9 @@ def background_ttl(meta) -> str:
 
 <https://w3id.org/odrl-kb/dpv-loc/empty> a bt:BackgroundTheory ;
     dcterms:title "No declared distinctness or disjointness"@en ;
-    bt:appliesTo <https://w3id.org/odrl-kb/dpv-loc> ;
-    bt:assertionCount 0 .
+    bt:appliesTo <https://w3id.org/odrl-kb/dpv-loc-geo>,
+                 <https://w3id.org/odrl-kb/dpv-loc-juris> ;
+    bt:pairCount 0 .
 """
 
 
@@ -451,10 +454,10 @@ def iso_ttl(reps, multi, meta) -> str:
 
 <https://w3id.org/odrl-kb/dpv-loc/iso> a bt:BackgroundTheory ;
     dcterms:title "Pairwise distinctness of ISO 3166 areas"@en ;
-    bt:appliesTo <https://w3id.org/odrl-kb/dpv-loc> ;
+    bt:appliesTo <https://w3id.org/odrl-kb/dpv-loc-geo>,
+                 <https://w3id.org/odrl-kb/dpv-loc-juris> ;
     bt:generatedBy bt:RegistryUniquenessRule ;
-    bt:rule "ISO 3166 assigns one code per area; codes identified by the extension name one area"@en ;
-    bt:classCount {n} .
+    bt:scopeCondition "Distinctness holds between equivalence classes under the extension's identity assertions, not between codes; codes the extension identifies name one area."@en .
 """
 
 
@@ -471,15 +474,19 @@ def declared_ttl(pair, meta) -> str:
 
 @prefix loc:     <https://w3id.org/dpv/loc#> .
 @prefix bt:      <https://w3id.org/odrl-kb/background#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 
 <https://w3id.org/odrl-kb/dpv-loc/declared> a bt:BackgroundTheory ;
     dcterms:title "One declared distinctness"@en ;
-    bt:appliesTo <https://w3id.org/odrl-kb/dpv-loc> ;
+    bt:appliesTo <https://w3id.org/odrl-kb/dpv-loc-geo>,
+                 <https://w3id.org/odrl-kb/dpv-loc-juris> ;
     bt:generatedBy bt:PartyDeclaration ;
-    bt:assertionCount 1 .
-
-loc:{a} bt:distinctFrom loc:{b} .
+    bt:pairCount 1 ;
+    bt:asserts [
+        a owl:AllDifferent ;
+        owl:members ( loc:{a} loc:{b} )
+    ] .
 """
 
 
@@ -621,15 +628,15 @@ def profile_ttl(mode) -> str:
 {note}
 
 @prefix odrl: <http://www.w3.org/ns/odrl/2/> .
-@prefix vrep: <https://w3id.org/odrl-verdict-report#> .
+@prefix bind: <https://w3id.org/odrl-kb/binding#> .
 @prefix ex:   <https://w3id.org/odrl-kb/profile/> .
 
-ex:b-spatial-dpvloc-{tag} a vrep:OperandBinding ;
-    vrep:leftOperand odrl:spatial ;
-    vrep:sort vrep:mer ;
-    vrep:resource <https://w3id.org/odrl-kb/dpv-loc-{tag}> ;
-    vrep:backgroundTheory <https://w3id.org/odrl-kb/dpv-loc/empty> ;
-    vrep:grounding vrep:sliceMembership .
+ex:b-spatial-dpvloc-{tag} a bind:OperandBinding ;
+    bind:leftOperand odrl:spatial ;
+    bind:sort bind:mer ;
+    bind:resource <https://w3id.org/odrl-kb/dpv-loc-{tag}> ;
+    bind:backgroundTheory <https://w3id.org/odrl-kb/dpv-loc/empty> ;
+    bind:grounding bind:sliceMembership .
 """
 
 
@@ -654,6 +661,7 @@ def main() -> int:
 
     g = Graph()
     g.parse(args.loc, format="turtle")
+    digest = hashlib.sha256(args.loc.read_bytes()).hexdigest()
 
     containment, typing, membership, complement, other = classify(g)
     ident, id_preds = identities(g)
@@ -690,10 +698,18 @@ def main() -> int:
             print(f"  {a} -> {b}", file=sys.stderr)
         return 1
 
+    version_subjects = list(g.subjects(OWL.versionInfo, None))
+    if not version_subjects:
+        print("no subject in the graph carries owl:versionInfo; cannot "
+              "determine the extension's version rather than guess it.",
+              file=sys.stderr)
+        return 1
+    version = str(g.value(version_subjects[0], OWL.versionInfo))
+
     meta = {
         "source": "DPV Locations extension 2.3 (W3C DPVCG), SKOS serialisation",
         "source_iri": "https://w3id.org/dpv/2.3/loc",
-        "version": str(g.value(LOC[""], OWL.versionInfo) or "2.3"),
+        "version": version,
         "retrieved": args.retrieved,
         "licence": "W3C Document License 2023",
         "licence_note": "permits verbatim redistribution, not derivatives; "
@@ -710,7 +726,7 @@ def main() -> int:
         tag = f"dpvloc-{mode}"
         order = containment if mode == "geo" else sorted(containment + membership)
         (args.out / "resources" / f"{tag}.ttl").write_text(
-            resource_ttl(concepts, labels, kinds, order, ident, meta, mode),
+            resource_ttl(concepts, labels, kinds, order, ident, meta, mode, digest),
             encoding="utf-8")
         (args.out / "axioms" / f"LOC-{tag}.ax").write_text(
             axioms(order, ident, meta, mode), encoding="utf-8")
@@ -725,7 +741,7 @@ def main() -> int:
     # ISO distinctness, between areas rather than codes.  Codes the extension
     # identifies name one area, so the rule is applied to the quotient.
     cls = classes(concepts, ident)
-    multi = sum(1 for v in cls.values() if len(v) > 1)   # pass this in
+    multi = sum(1 for v in cls.values() if len(v) > 1)
     reps = sorted(k for k, v in cls.items()
                   if any(kinds.get(c) == "Country" for c in v))
     (args.out / "background" / "dpvloc-iso.ttl").write_text(

@@ -25,6 +25,7 @@
     (=> (and (kge_leq x y) (kge_leq y x)) (= x y))) :named ax_leq_antisymmetric))
 (assert (! (forall ((x Concept) (y Concept) (z Concept))
     (=> (and (kge_leq x y) (kge_leq y z)) (kge_leq x z))) :named ax_leq_transitive))
+(assert (! (not (= dpv_consent_given dpv_consent_withdrawn)) :named bt_dpv_consent_given_distinct_dpv_consent_withdrawn))
 ; witness condition negated
 (assert (! (not (or (and (or (and (= dpv_consent_given dpv_consent_given) (= dpv_consent_given dpv_consent_given)) (and (= dpv_consent_withdrawn dpv_consent_given) (= dpv_consent_withdrawn dpv_consent_given))) (or (and (and (= dpv_consent_given dpv_consent_given) (= dpv_consent_given dpv_consent_given)) (not (= dpv_consent_given dpv_consent_withdrawn))) (and (and (= dpv_consent_withdrawn dpv_consent_given) (= dpv_consent_withdrawn dpv_consent_given)) (not (= dpv_consent_withdrawn dpv_consent_withdrawn))))) (and (or (and (= dpv_consent_given dpv_consent_withdrawn) (= dpv_consent_given dpv_consent_given)) (and (= dpv_consent_withdrawn dpv_consent_withdrawn) (= dpv_consent_withdrawn dpv_consent_given))) (or (and (and (= dpv_consent_given dpv_consent_withdrawn) (= dpv_consent_given dpv_consent_given)) (not (= dpv_consent_given dpv_consent_given))) (and (and (= dpv_consent_withdrawn dpv_consent_withdrawn) (= dpv_consent_withdrawn dpv_consent_given)) (not (= dpv_consent_withdrawn dpv_consent_given))))))) :named w_kgc345))
 (check-sat)

@@ -36,14 +36,15 @@
 @prefix dcat:    <http://www.w3.org/ns/dcat#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
 
-<https://w3id.org/odrl-kb/dpv-loc> a dcat:Dataset ;
+<https://w3id.org/odrl-kb/dpv-loc-geo> a dcat:Dataset ;
     dcterms:title "DPV Locations, containment slice"@en ;
     dcterms:source <https://w3id.org/dpv/2.3/loc> ;
-    odrlkb:conceptCount 5009 ;
-    odrlkb:publishedOrderAssertionCount 4786 ;
-    odrlkb:identityPairCount 30 ;
-    odrlkb:encodedOrderAssertionCount 60 .
+    dcterms:hasVersion "2.3" ;
+    dcterms:issued "2026-08-19"^^xsd:date ;
+    dcterms:identifier "sha256:31d93f0680f1e7009b592148316800a3c27f6871a5eba6ab03f3024d0597b13b" ;
+    dcterms:license <https://www.w3.org/copyright/document-license-2023/> .
 
 odrlkb:ad a odrlkb:Country ;
     rdfs:label "Andorra"@en ;

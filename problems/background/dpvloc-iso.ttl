@@ -6,7 +6,7 @@
 # withdrawable by abandoning the rule.
 #
 # The distinctness is between areas, not between codes.  The extension
-# records some places under two codes, a country code and a
+# records 27 places under two codes, a country code and a
 # subdivision code for the same area, and those pairs are identified rather
 # than separated.  Distinctness is asserted between the classes those
 # identities induce.
@@ -19,7 +19,8 @@
 
 <https://w3id.org/odrl-kb/dpv-loc/iso> a bt:BackgroundTheory ;
     dcterms:title "Pairwise distinctness of ISO 3166 areas"@en ;
-    bt:appliesTo <https://w3id.org/odrl-kb/dpv-loc> ;
+    bt:appliesTo <https://w3id.org/odrl-kb/dpv-loc-geo>,
+                 <https://w3id.org/odrl-kb/dpv-loc-juris> ;
     bt:generatedBy bt:RegistryUniquenessRule ;
-    bt:rule "ISO 3166 assigns one code per area; codes identified by the extension name one area"@en ;
-    bt:classCount 249 .
+    bt:scopeCondition "Distinctness holds between equivalence classes under the extension's identity assertions, not between codes; codes the extension identifies name one area."@en ;
+    bt:pairCount 249 .

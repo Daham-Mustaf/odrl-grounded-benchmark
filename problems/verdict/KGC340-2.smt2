@@ -25,6 +25,7 @@
     (=> (and (kge_leq x y) (kge_leq y x)) (= x y))) :named ax_leq_antisymmetric))
 (assert (! (forall ((x Concept) (y Concept) (z Concept))
     (=> (and (kge_leq x y) (kge_leq y z)) (kge_leq x z))) :named ax_leq_transitive))
+(assert (! (kge_leq dpv_consent_given dpv_consent_status_valid_for_processing) :named res_dpv_consent_given_below_dpv_consent_status_valid_for_processing))
 ; witness condition negated
 (assert (! (not (or (and (kge_leq dpv_consent_status_valid_for_processing dpv_consent_status_valid_for_processing) (= dpv_consent_status_valid_for_processing dpv_consent_given)) (and (kge_leq dpv_consent_given dpv_consent_status_valid_for_processing) (= dpv_consent_given dpv_consent_given)))) :named w_kgc340))
 (check-sat)
