@@ -1,323 +1,251 @@
 """
 certificate.py
 ==============
-Evidence for a verdict, checkable without trusting what produced it.
+Maps prover output onto the certificate vocabulary.
 
-A decision procedure returns a verdict and, on its own, the verdict must be
-taken on the procedure's word.  A certificate is what a party against whom
-the verdict goes can examine instead: for an unsatisfiable query, the
-premises a refutation used; for a satisfiable one, a structure satisfying
-it; for an ungrounded value, the value.
+Attribution, not verification
+-----------------------------
+This module records *which assertions a refutation used*.  It does not
+produce a checkable derivation.  A prover's proof uses unification,
+demodulation and superposition; the certificate proposition asks for
+propositionally valid steps over ground instances.  Turning one into the
+other is a normalisation step that does not exist yet.
 
-This module has its own evaluator and does not import the encoders.  That
-is the point of it.  A checker sharing the compiler's code would agree with
-the compiler about anything the compiler got wrong, and the one bug that
-mattered this year was exactly of that kind: a formula the encoder built
-incorrectly and two provers then disagreed about.
+The distinction has a consequence for the vocabulary.  A quantified
+assertion the prover reports, an order axiom or a disjointness assertion of
+the background theory, is not itself a legitimate premise for the checker;
+its ground instances are, and only the ones the refutation used.  So the
+names harvested here are written as `vrep:attributedAssertion`, not as
+`vrep:premise`.  `vrep:premise` is reserved for the checker-level ground
+instances a normaliser would produce.
 
-What is checked, and what is only recorded
-------------------------------------------
-A model certificate is checked: the structure is finite and explicit, and
-every formula of the query is evaluated in it.  A refutation certificate is
-checked only for premise legality, not for derivation: a prover's proof
-uses unification and superposition, and the propositional replay the
-proposition asks for is a normalisation step that does not exist here.
+Attribution is nonetheless the half a party needs: they withdraw an
+assertion, not an instance of one, so naming the quantified formula is
+correct at that level.
 
-So the names are ``attributed`` rather than ``verified``, and the report
-says which.  Attribution is still the half a party needs, since they
-withdraw an assertion rather than an inference step.
+Provenance by prefix
+--------------------
+    res_    an assertion of the resource               fromResource
+    bt_     an assertion of the background theory      fromBackgroundTheory
+    w_      a conjunct of the witness condition        fromConstraints
+    ax_     an order axiom                             fromOrderAxiom
+    eq_     an equality axiom                          fromEqualityAxiom
+
+The last is reserved and nothing emits it yet.  A refutation closing an
+identity literal against a distinctness assertion uses equality reasoning:
+Vampire's proof of the language pair cites a demodulation step.  Whether
+those instances become legitimate premises, or the encoding replaces builtin
+equality with a predicate, is open, and it reaches into the paper.
+
+Only `bt_` assertions are withdrawable.  The resource is the authority's, the
+constraints are the parties' own, and the axioms are the framework's.
+
+Two provers, one provenance map
+-------------------------------
+Assertion names are the same on both sides, so a Vampire proof and a Z3
+unsat core classify through the one map below.  Agreement between them is
+worth more than either alone: the names come from the generator, but which
+ones a refutation needs is the prover's own finding, and two independent
+tools reaching for the same set is evidence the encoding says what it means
+to.  Disagreement is equally informative, and is reported rather than
+reconciled.
+
+Any prover reading TPTP works the same way, provided it prints the names.
+E needs --proof-object and prints them in its derivation; Zipperposition
+prints them by default.  The proof-block delimiters differ, so the reader
+takes a list of patterns rather than one.
+
+Models, for the queries that have them
+--------------------------------------
+An Unknown verdict has no refutation to attribute, and until now had an
+empty certificate.  Both its queries are satisfiable, so both have models,
+and what the two disagree about is exactly the question the resource leaves
+open.  Z3 prints a model for a satisfiable query; the reader keeps the
+interpretation of the witness literals, and the difference between the two
+models is the report.
+
+Running the provers
+-------------------
+Vampire discards formula names unless asked to keep them, and the schedule
+mode does not always propagate the flag to its children:
+
+    vampire --mode vampire --proof tptp --output_axiom_names on <file>
+
+Z3 needs named assertions and cores enabled:
+
+    (set-option :produce-unsat-cores true)
+    (assert (! <formula> :named bt_de_distinct_fr))
+    (check-sat)
+    (get-unsat-core)
 """
 
-from __future__ import annotations
-
-from dataclasses import dataclass, field
-
-from query import And, Eq, Formula, Leq, Not, Or_, Query, QueryPair, Top
-from runner import RunResult
-from vocabulary import (PremiseClass, RunStatus, UnknownReason, Verdict,
-                        derive_verdict)
+import re
 
 
-# --- a structure, and evaluation in it ---------------------------------
+# --- models, for the queries that have them -----------------------------
 
-@dataclass(frozen=True)
-class Structure:
-    """A finite interpretation of the query's constants.
+def model_literals(text: str, symbols: list[str]) -> dict:
+    """What a model says about the given symbols.
 
-    ``classes`` sends each constant to an element of the domain, so two
-    constants naming one element is how a structure identifies concepts.
-    ``leq`` holds the pairs of elements the order relates.
-
-    Explicit and small: a model certificate has at most as many elements as
-    the query has constants, and a reader can check it by hand.
+    Only a coarse reading: which constants a model identifies, and which
+    order pairs it makes true.  That is enough to say what two models of an
+    Unknown disagree about, which is the open question the resource leaves.
+    Anything finer would be reading Z3's model format as a theory, and the
+    certificate does not claim to.
     """
-
-    classes: dict[str, int]
-    leq: frozenset[tuple[int, int]]
-
-    def eq(self, a: str, b: str) -> bool:
-        return self.classes[a] == self.classes[b]
-
-    def below(self, a: str, b: str) -> bool:
-        return (self.classes[a], self.classes[b]) in self.leq
-
-    def holds(self, f: Formula) -> bool:
-        if isinstance(f, Top):
-            return True
-        if isinstance(f, Eq):
-            return self.eq(f.lhs, f.rhs)
-        if isinstance(f, Leq):
-            return self.below(f.lhs, f.rhs)
-        if isinstance(f, Not):
-            return not self.holds(f.inner)
-        if isinstance(f, And):
-            return all(self.holds(p) for p in f.parts)
-        if isinstance(f, Or_):
-            return any(self.holds(p) for p in f.parts)
-        raise TypeError(f"not a formula: {f!r}")
-
-    def order_axioms_hold(self) -> str | None:
-        """Whether the order is reflexive, antisymmetric and transitive.
-
-        A structure violating them is not admissible, so a model
-        certificate over one proves nothing.  Returned as a message rather
-        than a boolean so a report can say which axiom failed.
-        """
-        elems = set(self.classes.values())
-        for x in elems:
-            if (x, x) not in self.leq:
-                return "not reflexive"
-        for x, y in self.leq:
-            if (y, x) in self.leq and x != y:
-                return "not antisymmetric"
-        for x, y in self.leq:
-            for y2, z in self.leq:
-                if y == y2 and (x, z) not in self.leq:
-                    return "not transitive"
-        return None
+    out = {}
+    for sym in symbols:
+        m = re.search(rf"\(define-fun {re.escape(sym)} \(\)[^\n]*\n?\s*([^\n)]+)",
+                      text)
+        if m:
+            out[sym] = m.group(1).strip()
+    return out
 
 
-# --- the certificates --------------------------------------------------
+def compare_models(m1: dict, m2: dict) -> list[str]:
+    """The symbols the two models interpret differently.
 
-@dataclass(frozen=True)
-class Refutation:
-    """The premises a refutation used, for an unsatisfiable query.
-
-    ``attributed`` is what the prover reported; nothing here reconstructs
-    the derivation.  ``withdrawable`` is the subset a party may retract,
-    and retracting any of them returns the verdict to Unknown.
+    For an Unknown verdict this is the report: the two queries are both
+    satisfiable, and these are the points on which their models differ.
     """
+    keys = sorted(set(m1) | set(m2))
+    return [k for k in keys if m1.get(k) != m2.get(k)]
 
-    problem_id: str
-    query_kind: str
-    attributed: tuple[str, ...]
-    prover: str
+SOURCE = {
+    "res": "fromResource",
+    "bt":  "fromBackgroundTheory",
+    "w":   "fromConstraints",
+    "ax":  "fromOrderAxiom",
+    "eq":  "fromEqualityAxiom",     # reserved; nothing emits it yet
+}
 
-    def by_class(self) -> dict[PremiseClass | None, list[str]]:
-        out: dict[PremiseClass | None, list[str]] = {}
-        for n in self.attributed:
-            out.setdefault(PremiseClass.from_name(n), []).append(n)
-        return out
+WITHDRAWABLE = {"fromBackgroundTheory"}
 
-    def withdrawable(self) -> list[str]:
-        return [n for n in self.attributed
-                if (c := PremiseClass.from_name(n)) and c.is_withdrawable]
+# Vampire delimits its proof; anything outside is echoed input or diagnostics.
+_PROOF_BLOCK = re.compile(
+    r"% SZS output start Proof.*?% SZS output end Proof", re.S)
+
+# fof(f129, axiom, ( ... ), file('KGE000-0.ax', ax_leq_transitive)).
+_LEAF = re.compile(r"file\(\s*'[^']*'\s*,\s*([A-Za-z0-9_]+)\s*\)")
 
 
-@dataclass(frozen=True)
-class Models:
-    """Two structures, for an Unknown that is epistemic.
+class NoProof(Exception):
+    """The output contains no proof block."""
 
-    They satisfy the two queries respectively, so they differ on the
-    witness condition, and what they disagree about is the question the
-    resource leaves open.
+
+class NoAxiomNames(Exception):
+    """The proof carries no usable formula names."""
+
+
+def premises_from_vampire(output: str) -> list[str]:
+    """Leaf formula names from a Vampire refutation.
+
+    Reads the proof block only.  A leaf whose name was lost is kept as the
+    literal 'unknown' rather than dropped: dropping it would understate the
+    premise count and make a comparison fail on the wrong side.
     """
-
-    problem_id: str
-    inc_model: Structure
-    comp_model: Structure
-
-    def differ_on(self) -> list[str]:
-        """The constants the two structures interpret differently.
-
-        Read as: whether these name one concept is what nothing published
-        or declared decides.
-        """
-        keys = sorted(set(self.inc_model.classes) | set(self.comp_model.classes))
-        out = []
-        for a in keys:
-            for b in keys:
-                if a >= b:
-                    continue
-                if self.inc_model.eq(a, b) != self.comp_model.eq(a, b):
-                    out.append(f"{a} = {b}")
-        return out
+    m = _PROOF_BLOCK.search(output)
+    if not m:
+        raise NoProof(
+            "no proof block in the output.  Either the query was satisfiable, "
+            "or --proof was not in effect.")
+    names = list(dict.fromkeys(_LEAF.findall(m.group(0))))
+    if names and all(n == "unknown" for n in names):
+        raise NoAxiomNames(
+            "every premise reported as 'unknown'.  Re-run with "
+            "--output_axiom_names on; with --mode casc the flag may not "
+            "reach the child strategy, so --mode vampire is safer.")
+    return names
 
 
-@dataclass(frozen=True)
-class UngroundedCertificate:
-    """The values that named no concept."""
+def premises_from_z3(output: str) -> tuple[str, list[str]]:
+    """The status and the core names from Z3.
 
-    problem_id: str
-    procedure: str
-    values: tuple[str, ...]
-
-
-Certificate = Refutation | Models | UngroundedCertificate
-
-
-# --- checking ----------------------------------------------------------
-
-@dataclass
-class CheckResult:
-    """What the checker found.
-
-    ``ok`` is the conjunction of the complaints being empty.  A certificate
-    that cannot be checked at all, as against one that fails, is reported
-    as a complaint too, since silence would read as approval.
+    Returns ("unsat", names) with names possibly empty: an unsatisfiable
+    query with an empty core is a real state, meaning the witness condition
+    is contradictory on its own.  Anything else returns the status and no
+    names, so a solver error is not mistaken for a core.
     """
+    lines = [l.strip() for l in output.splitlines() if l.strip()]
+    status = next((l for l in lines if l in ("sat", "unsat", "unknown")), None)
+    if status != "unsat":
+        return (status or "no-status"), []
+    i = lines.index("unsat")
+    for line in lines[i + 1:]:
+        if line.startswith("(") and not line.startswith("(error"):
+            return "unsat", [n for n in line.strip("()").split() if n]
+    return "unsat", []
 
-    problem_id: str
-    ok: bool
-    complaints: list[str] = field(default_factory=list)
-    notes: list[str] = field(default_factory=list)
 
-    def __str__(self) -> str:
-        head = "ok  " if self.ok else "FAIL"
-        body = "; ".join(self.complaints or self.notes)
-        return f"{head} {self.problem_id}  {body}"
+def classify(names: list[str]) -> dict:
+    """Split names by provenance prefix.
 
-
-def check_refutation(cert: Refutation, pair: QueryPair) -> CheckResult:
-    """Whether every cited premise is one the query permits.
-
-    The query's own formulas, and ground instances of the axioms it
-    declares.  A name outside both is either a premise from somewhere else
-    or a name the checker cannot classify, and both are defects.
+    An unrecognised prefix, and a name the prover lost, both land in
+    `unclassified`.  Neither is attributed by default: a premise whose origin
+    cannot be determined is a defect to report, not a guess to make.
     """
-    q = pair.inc if cert.query_kind == "inc" else pair.comp
-    r = CheckResult(cert.problem_id, True)
-
-    if not cert.attributed:
-        r.notes.append("no premises reported; the contradiction lies in the "
-                       "target alone, which is possible and unverified here")
-
-    for name in cert.attributed:
-        if q.legal_premise(name):
-            continue
-        cls = PremiseClass.from_name(name)
-        if cls is None:
-            r.complaints.append(
-                f"{name}: no provenance class; a premise whose origin "
-                f"cannot be determined is a defect, not a guess")
-        else:
-            r.complaints.append(
-                f"{name}: {cls} is not a premise of this query")
-
-    used = {PremiseClass.from_name(n) for n in cert.attributed}
-    if PremiseClass.AX_EQUALITY in used:
-        r.notes.append(
-            "an equality axiom instance was used; the premise list of "
-            "Proposition (Certificates) does not yet admit these")
-
-    r.ok = not r.complaints
-    return r
+    out = {v: [] for v in SOURCE.values()}
+    out["unclassified"] = []
+    for n in names:
+        prefix = n.split("_", 1)[0]
+        out[SOURCE.get(prefix, "unclassified")].append(n)
+    return out
 
 
-def check_models(cert: Models, pair: QueryPair) -> CheckResult:
-    """Whether each structure satisfies the query it is offered for.
+def withdrawable(classified: dict) -> list[str]:
+    return [n for src in WITHDRAWABLE for n in classified[src]]
 
-    Every formula, not a sample: the premises and the target.  A structure
-    that satisfies the premises but not the target is not a model of the
-    query, and one that violates an order axiom is not admissible at all.
+
+def to_turtle(problem_id: str, kind: str, classified: dict,
+              labels: dict | None = None, witness: str | None = None,
+              artefact: str | None = None, prover: str | None = None) -> str:
+    """The observed certificate.
+
+    Writes `vrep:attributedAssertion`, not `vrep:premise`: these are the
+    assertions the refutation used, not the ground instances a checker would
+    replay.  `artefact` points at the raw proof, as provenance rather than as
+    a checked object.
     """
-    r = CheckResult(cert.problem_id, True)
+    labels = labels or {}
+    lines = [f"kgc:{problem_id}-observed a vrep:{kind} ;"]
+    if prover:
+        lines.append(f'    vrep:producedBy "{prover}" ;')
+    if artefact:
+        lines.append(f"    vrep:proofArtefact <{artefact}> ;")
+    if witness:
+        lines.append(f"    vrep:witness {witness} ;")
 
-    for kind, model, q in (("inc", cert.inc_model, pair.inc),
-                           ("comp", cert.comp_model, pair.comp)):
-        bad = model.order_axioms_hold()
-        if bad:
-            r.complaints.append(f"{kind} model is {bad}, so not admissible")
-            continue
-        for p in q.premises:
-            f = Leq(p.lhs, p.rhs) if p.kind is PremiseClass.RESOURCE else \
-                Not(Eq(p.lhs, p.rhs)) if p.kind is PremiseClass.BG_DISTINCTNESS \
-                else None
-            if f is None:
-                r.notes.append(f"{p.name}: quantified, not evaluated here")
-                continue
-            if not model.holds(f):
-                r.complaints.append(
-                    f"{kind} model does not satisfy {p.name}")
-        try:
-            if not model.holds(q.target):
-                r.complaints.append(
-                    f"{kind} model does not satisfy the target, so it is "
-                    f"not a model of this query")
-        except KeyError as e:
-            r.complaints.append(
-                f"{kind} model does not interpret {e}, so the target "
-                f"cannot be evaluated in it")
+    entries = []
+    for source in SOURCE.values():
+        for n in classified[source]:
+            entries.append(
+                f"    vrep:attributedAssertion [\n"
+                f"        vrep:premiseSource vrep:{source} ;\n"
+                f'        vrep:formulaName "{n}" ;\n'
+                f'        rdfs:label "{labels.get(n, n)}"@en ]')
+    for n in classified["unclassified"]:
+        entries.append(
+            f"    vrep:attributedAssertion [\n"
+            f"        vrep:premiseSource vrep:unclassified ;\n"
+            f'        vrep:formulaName "{n}" ]')
 
-    if not r.complaints and not cert.differ_on():
-        r.complaints.append(
-            "the two models agree on every constant; an Unknown needs two "
-            "structures that disagree, or the verdict is not Unknown")
-
-    r.ok = not r.complaints
-    return r
+    if entries:
+        lines.append(" ;\n".join(entries) + " .")
+    else:
+        lines[-1] = lines[-1].rstrip(" ;") + " ."
+    return "\n".join(lines)
 
 
-def check(cert: Certificate, pair: QueryPair | None) -> CheckResult:
-    if isinstance(cert, UngroundedCertificate):
-        return CheckResult(
-            cert.problem_id, True,
-            notes=[f"{len(cert.values)} value(s) unresolved by "
-                   f"{cert.procedure}; re-check by applying it"])
-    if pair is None:
-        return CheckResult(cert.problem_id, False,
-                           ["no query pair to check against"])
-    if isinstance(cert, Refutation):
-        return check_refutation(cert, pair)
-    return check_models(cert, pair)
+def compare(expected: dict, observed: dict) -> list[str]:
+    """Differences between the expected and observed attribution.
 
-
-# --- from runs ---------------------------------------------------------
-
-@dataclass(frozen=True)
-class VerdictResult:
-    """The verdict, its reason, and the certificate, from a pair of runs.
-
-    Holds the derived verdict only.  An expectation lives in the manifest
-    and the two meet in the report, in separate columns, so that neither
-    can be filled from the other.
+    A verdict right for the wrong reason shows up here and nowhere else.
     """
-
-    problem_id: str
-    verdict: Verdict | None
-    reason: UnknownReason | None
-    certificate: Certificate | None
-    inc: RunResult
-    comp: RunResult
-
-    @property
-    def determined(self) -> bool:
-        return self.verdict is not None
-
-
-def from_runs(inc: RunResult, comp: RunResult) -> VerdictResult:
-    """The verdict a pair of runs gives, with the refutation if there is one.
-
-    Model certificates are not built here: a structure has to be read out
-    of a solver's model, which is that adapter's business, and a run that
-    was satisfiable carries the text rather than the structure.
-    """
-    verdict, reason = derive_verdict(inc.status, comp.status)
-    cert: Certificate | None = None
-    if verdict is Verdict.INCOMPATIBLE:
-        cert = Refutation(inc.problem_id, "inc", inc.premises,
-                          inc.solver.name)
-    elif verdict is Verdict.COMPATIBLE:
-        cert = Refutation(comp.problem_id, "comp", comp.premises,
-                          comp.solver.name)
-    return VerdictResult(inc.problem_id, verdict, reason, cert, inc, comp)
+    diffs = []
+    for source in SOURCE.values():
+        e, o = len(expected.get(source, [])), len(observed.get(source, []))
+        if e != o:
+            diffs.append(f"{source}: expected {e}, observed {o}")
+    if observed["unclassified"]:
+        diffs.append("unattributable: " + ", ".join(observed["unclassified"]))
+    return diffs
