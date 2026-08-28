@@ -8,51 +8,51 @@
 @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
 
-drk:offer-370 a odrl:Offer ;
+drk:offer-374 a odrl:Offer ;
     dcterms:title "Distribution in German"@en ;
     odrl:assigner drk:publisher ;
-    odrl:permission kgc:KGC370-offer-r1 .
+    odrl:permission kgc:KGC374-offer-r1 .
 
-kgc:KGC370-offer-r1 a odrl:Permission ;
+kgc:KGC374-offer-r1 a odrl:Permission ;
     odrl:action odrl:distribute ;
     odrl:target drk:dataset ;
-    odrl:constraint kgc:KGC370-offer-c1 .
+    odrl:constraint kgc:KGC374-offer-c1 .
 
-kgc:KGC370-offer-c1 a odrl:Constraint ;
+kgc:KGC374-offer-c1 a odrl:Constraint ;
     odrl:leftOperand odrl:language ;
     odrl:operator odrl:eq ;
     odrl:rightOperand bcp47:de .
 
-drk:request-370 a odrl:Request ;
-    dcterms:title "Distribution in French"@en ;
+drk:request-374 a odrl:Request ;
+    dcterms:title "Anything but French"@en ;
     odrl:assignee drk:reuser ;
-    odrl:permission kgc:KGC370-request-r1 .
+    odrl:permission kgc:KGC374-request-r1 .
 
-kgc:KGC370-request-r1 a odrl:Permission ;
+kgc:KGC374-request-r1 a odrl:Permission ;
     odrl:action odrl:distribute ;
     odrl:target drk:dataset ;
-    odrl:constraint kgc:KGC370-request-c1 .
+    odrl:constraint kgc:KGC374-request-c1 .
 
-kgc:KGC370-request-c1 a odrl:Constraint ;
+kgc:KGC374-request-c1 a odrl:Constraint ;
     odrl:leftOperand odrl:language ;
     odrl:operator odrl:eq ;
     odrl:rightOperand bcp47:fr .
 
 ### Expected result #######################################################
 
-drk:KGC370-report a vrep:OperandVerdictReport ;
-    dcterms:identifier "KGC370" ;
-    report:policy drk:offer-370 ;
-    report:policyRequest drk:request-370 ;
-    report:constraint kgc:KGC370-offer-c1 ;
-    vrep:constraintRequest kgc:KGC370-request-c1 ;
+drk:KGC374-report a vrep:OperandVerdictReport ;
+    dcterms:identifier "KGC374" ;
+    report:policy drk:offer-374 ;
+    report:policyRequest drk:request-374 ;
+    report:constraint kgc:KGC374-offer-c1 ;
+    vrep:constraintRequest kgc:KGC374-request-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-language-bcp47> ;
     vrep:backgroundTheory <https://w3id.org/odrl-kb/bcp47/uniqueness> ;
-    report:satisfactionState report:Unsatisfied ;
-    vrep:certificate drk:KGC370-certificate .
+    report:satisfactionState report:Satisfied ;
+    vrep:certificate drk:KGC374-certificate .
 
-drk:KGC370-certificate a vrep:Refutation ;
-    rdfs:comment """The two subtags are declared to name distinct languages, which is the parties' rule and not the registry's content. Withdrawing it returns the verdict to Unknown, which is KGC371."""@en ;
-    vrep:clashingConstraint kgc:KGC370-offer-c1, kgc:KGC370-request-c1 ;
+drk:KGC374-certificate a vrep:Refutation ;
+    rdfs:comment """Refutes the negated witness condition: denying the witness forces de and fr to be one concept, against the declared distinctness."""@en ;
+    vrep:clashingConstraint kgc:KGC374-offer-c1, kgc:KGC374-request-c1 ;
     vrep:premise [ vrep:premiseSource vrep:fromBackgroundTheory ;
                    rdfs:label "bcp47:de and bcp47:fr are declared distinct, on RFC 5646's registry uniqueness"@en ] .

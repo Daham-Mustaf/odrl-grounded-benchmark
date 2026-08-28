@@ -3,9 +3,11 @@
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
 % Problem  : language, eq de against eq "en-US", primary-subtag grounding (witness condition asserted)
 % Version  : 1.0
-% English  : The policies of KGC372 read under the binding whose grounding reduces a well-formed tag to its primary subtag. en-US resolves to en, the request is interpretable, and the pair gets an ordinary verdict: German and English are declared distinct, so no use satisfies both and the verdict is Incompatible.
+% English  : The policies of KGC372, read under the profile's other grounding rule.
 %           : 
-%           : Neither reading is wrong. A party who cares which variety of English is distributed declines the reduction and gets an uninterpretable policy rather than a wrong answer; a party who does not, adopts it. The two verdicts differ without any disagreement about a concept, and the profile is where the difference is recorded.
+%           : That rule takes a well-formed language tag to its primary subtag, so en-US resolves to en. The request becomes interpretable and the pair gets an ordinary verdict: German and English are declared distinct under the same registry-uniqueness rule as KGC370, so no use satisfies both constraints and the verdict is Incompatible.
+%           : 
+%           : Neither rule is the correct one. A party who cares which variety of English is distributed declines the reduction and would rather have an uninterpretable policy than a wrong answer; a party who does not, adopts it. The two problems return different verdicts on identical policies over an identical vocabulary, and the parties disagree about no concept: what differs is a reading rule, which the profile records and a report cites.
 %
 % Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark

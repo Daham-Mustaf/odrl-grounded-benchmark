@@ -1,14 +1,14 @@
 ; -------------------------------------------------------------------------
-; File     : KGC370-1.smt2
+; File     : KGC374-2.smt2
 ; Domain   : ODRL Policy / Knowledge-Grounded Fragment
-; Problem  : language, eq de against eq fr, registry uniqueness declared (witness condition asserted)
+; Problem  : language, eq de against neq fr, registry uniqueness declared (witness condition negated)
 ; Version  : 1.0
 ; Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
 ; Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark
 ; Authors  : Daham Mustafa
-; Names    : KGC370-1.smt2
+; Names    : KGC374-2.smt2
 ; Status   : unsat
-; Comments : Query 1 of 2.  Verdict is derived from both queries.
+; Comments : Query 2 of 2.  Verdict is derived from both queries.
 ; -------------------------------------------------------------------------
 
 (set-logic UF)
@@ -26,8 +26,8 @@
 (assert (! (forall ((x Concept) (y Concept) (z Concept))
     (=> (and (kge_leq x y) (kge_leq y z)) (kge_leq x z))) :named ax_leq_transitive))
 (assert (! (not (= bcp_de bcp_fr)) :named bg_dist_bcp47_de_fr))
-; witness condition asserted
-(assert (! (or (and (= bcp_de bcp_de) (= bcp_de bcp_fr)) (and (= bcp_fr bcp_de) (= bcp_fr bcp_fr))) :named w_kgc370))
+; witness condition negated
+(assert (! (not (or (and (= bcp_de bcp_de) (not (= bcp_de bcp_fr))) (and (= bcp_fr bcp_de) (not (= bcp_fr bcp_fr))))) :named w_kgc374))
 (check-sat)
 (get-unsat-core)
 (get-model)

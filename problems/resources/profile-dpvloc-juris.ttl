@@ -13,12 +13,13 @@
 # the profile is where a party says which one it means.
 
 @prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+@prefix bind:    <https://w3id.org/odrl-kb/binding#> .
 @prefix vrep: <https://w3id.org/odrl-verdict-report#> .
 @prefix ex:   <https://w3id.org/odrl-kb/profile/> .
 
-ex:b-spatial-dpvloc-juris a vrep:OperandBinding ;
-    vrep:leftOperand odrl:spatial ;
-    vrep:sort vrep:mer ;
-    vrep:resource <https://w3id.org/odrl-kb/dpv-loc-juris> ;
-    vrep:backgroundTheory <https://w3id.org/odrl-kb/dpv-loc/empty> ;
-    vrep:grounding vrep:sliceMembership .
+ex:b-spatial-dpvloc-juris a bind:OperandBinding ;
+    bind:leftOperand odrl:spatial ;
+    bind:sort bind:mer ;
+    bind:resource <https://w3id.org/odrl-kb/dpv-loc-juris> ;
+    bind:backgroundTheory <https://w3id.org/odrl-kb/dpv-loc/empty> ;
+    bind:grounding bind:sliceMembership .

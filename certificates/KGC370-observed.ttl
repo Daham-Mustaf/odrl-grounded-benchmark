@@ -1,0 +1,11 @@
+kgc:KGC370-observed a vrep:Refutation ;
+    vrep:producedBy "Vampire" ;
+    vrep:proofArtefact <proofs/KGC370-1.tstp> ;
+    vrep:attributedAssertion [
+        vrep:premiseSource vrep:fromBackgroundTheory ;
+        vrep:formulaName "bg_dist_bcp47_de_fr" ;
+        rdfs:label "bg_dist_bcp47_de_fr"@en ] ;
+    vrep:attributedAssertion [
+        vrep:premiseSource vrep:fromConstraints ;
+        vrep:formulaName "w_kgc370" ;
+        rdfs:label "w_kgc370"@en ] .

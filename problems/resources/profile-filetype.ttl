@@ -8,12 +8,13 @@
 # would be taxonomic.  The sort belongs to the binding.
 
 @prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+@prefix bind:    <https://w3id.org/odrl-kb/binding#> .
 @prefix vrep: <https://w3id.org/odrl-verdict-report#> .
 @prefix ex:   <https://w3id.org/odrl-kb/profile/> .
 
-ex:b-fileformat a vrep:OperandBinding ;
-    vrep:leftOperand odrl:fileFormat ;
-    vrep:sort vrep:nom ;
-    vrep:resource <https://w3id.org/odrl-kb/eu-file-type> ;
-    vrep:backgroundTheory <https://w3id.org/odrl-kb/eu-file-type/empty> ;
-    vrep:grounding vrep:sliceMembership .
+ex:b-fileformat a bind:OperandBinding ;
+    bind:leftOperand odrl:fileFormat ;
+    bind:sort bind:nom ;
+    bind:resource <https://w3id.org/odrl-kb/eu-file-type> ;
+    bind:backgroundTheory <https://w3id.org/odrl-kb/eu-file-type/empty> ;
+    bind:grounding bind:sliceMembership .

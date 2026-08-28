@@ -25,6 +25,7 @@
     (=> (and (kge_leq x y) (kge_leq y x)) (= x y))) :named ax_leq_antisymmetric))
 (assert (! (forall ((x Concept) (y Concept) (z Concept))
     (=> (and (kge_leq x y) (kge_leq y z)) (kge_leq x z))) :named ax_leq_transitive))
+(assert (! (not (= bcp_de bcp_fr)) :named bg_dist_bcp47_de_fr))
 ; witness condition negated
 (assert (! (not (or (and (= bcp_de bcp_de) (= bcp_de bcp_fr)) (and (= bcp_fr bcp_de) (= bcp_fr bcp_fr)))) :named w_kgc370))
 (check-sat)

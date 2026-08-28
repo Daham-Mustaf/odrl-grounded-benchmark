@@ -44,6 +44,7 @@ witness condition ranges over them in that order, so a stable order keeps the
 generated formula stable across runs, and a regenerated problem diffs
 cleanly.
 """
+import re
 
 from compile import Constraint, Or, Xone, compile_operand
 
@@ -71,6 +72,24 @@ def smt_declarations(constants) -> str:
         + ["(declare-fun kge_leq (Concept Concept) Bool)"])
 
 
+def _map_constraint(c: Constraint, g: dict) -> Constraint:
+    return Constraint(c.operator, tuple(g.get(v, v) for v in c.values),
+                      c.side)
+
+
+def _map_item(item, g: dict):
+    """A tree item with its policy values replaced by concepts.
+
+    The shape is preserved, so the reduction to disjuncts is unchanged by
+    grounding and a certificate can still point back at a constraint of
+    the original.
+    """
+    if isinstance(item, Constraint):
+        return _map_constraint(item, g)
+    alts = tuple(_map_constraint(c, g) for c in item.alts)
+    return Or(alts) if isinstance(item, Or) else Xone(alts)
+
+
 def expand_tree(p: dict) -> dict:
     """Fill the witness and declaration fields of a tree-carrying problem.
 
@@ -79,10 +98,31 @@ def expand_tree(p: dict) -> dict:
     """
     if "tree" not in p:
         return p
-
+    # Grounding, recorded rather than computed.  The binding's rule maps a
+    # policy value to a concept of the bound resource; that map lives in
+    # the manifest because grounding procedures are in design/grounding.py
+    # and are not wired into this pipeline yet.  A value with no entry is
+    # assumed already to be a concept, which is true of every problem whose
+    # policies name concepts directly.
+    #
+    # This runs before the constants are collected, so no policy value can
+    # reach the signature.  KGC373 is why it exists: "en-US" became
+    # (declare-fun en-US () Concept), a fresh constant satisfying anything,
+    # and both provers were asked a question about nothing.
+    grounding = p.get("grounding")
+    if grounding:
+        p = dict(p)
+        p["tree"] = [_map_item(item, grounding) for item in p["tree"]]
     constants = constants_of_tree(p["tree"])
+    bad = [c for c in constants
+           if not re.fullmatch(r"[a-z][a-zA-Z0-9_]*", c)]
+    if bad:
+        raise ValueError(
+            f"{p['id']}: {bad} are not well-formed constants. A policy "
+            f"value reached the signature without being grounded; either "
+            f"add it to the problem's grounding map, or mark the problem "
+            f"ungrounded if the binding's rule does not resolve it.")
     w = compile_operand(p["tree"], constants, p["sort"])
-
     q = dict(p)
     q.setdefault("fof_decls", "")
     q["fof_witness"] = w["fof"]

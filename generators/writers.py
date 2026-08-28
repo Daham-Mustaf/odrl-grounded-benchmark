@@ -30,7 +30,6 @@ Problem dict keys:
     ttl               the ODRL policy pair, Turtle
     ungrounded        optional; if set, no query is built
 """
-
 import re
 import sys
 from pathlib import Path
@@ -42,7 +41,6 @@ QUERIES = {
     1: ("witness condition asserted",  "fof_witness",  "smt2_witness",  False),
     2: ("witness condition negated",   "fof_witness",  "smt2_witness",  True),
 }
-
 
 # The three order axioms, quantified, as SMT-LIB.  Emitted whole into every
 # problem whose signature has the order, rather than instantiated at the
@@ -60,7 +58,6 @@ SMT_ORDER_AXIOMS = """\
     (=> (and (kge_leq x y) (kge_leq y x)) (= x y))))
 (assert (forall ((x Concept) (y Concept) (z Concept))
     (=> (and (kge_leq x y) (kge_leq y z)) (kge_leq x z))))"""
-
 
 # Assertion names, in the order the axioms appear.  These have to match the
 # TPTP names, since one provenance map reads both.
@@ -116,6 +113,16 @@ def _includes(p: dict) -> str:
 
 def _rule(label: str) -> str:
     return f"% --- {label} " + "-" * max(0, 68 - len(label)) + "\n"
+
+
+def _resolve(value: str, p: dict) -> str:
+    """The concept a value names under this problem's binding.
+
+    Recorded in the manifest, not computed: grounding procedures live in
+    design/grounding.py and are not wired in. A value with no entry is
+    assumed already to be a concept.
+    """
+    return p.get("grounding", {}).get(value, value)
 
 
 def write_fof(p: dict, q: int, out_dir: Path) -> Path:
@@ -235,13 +242,18 @@ def write_problem(p: dict, out_dir: Path, cases_dir: Path) -> list[Path]:
     return written
 
 
-VERDICT_CLASS = {
-    "Compatible":   "vrep:Compatible",
-    "Incompatible": "vrep:Incompatible",
-    "Unknown":      "vrep:Unknown",
+SATISFACTION_STATE = {
+    "Compatible":   "report:Satisfied",
+    "Incompatible": "report:Unsatisfied",
+    "Unknown":      "vrep:Undetermined",
 }
 
-SORT_CLASS = {"nom": "vrep:nom", "tax": "vrep:tax", "mer": "vrep:mer"}
+# vrep:Ungrounded is already the reason class used by undeterminedReason
+# (see the vocab file), so it can't also name the certificate's own type
+# without one IRI meaning two things.  Refutation and whatever the
+# Epistemic-certificate class turns out to be called don't have this
+# problem, so only Ungrounded needs remapping here.
+CERTIFICATE_CLASS = {"Ungrounded": "UngroundedCertificate"}
 
 
 def _report_block(p: dict) -> str:
@@ -249,6 +261,19 @@ def _report_block(p: dict) -> str:
 
     Written here rather than kept in the ttl string so it cannot drift from
     expected_q1 and expected_q2.
+
+    leftOperand, sort, and resource are not restated here: they live on the
+    binding referenced by vrep:binding, one hop away, and duplicating them
+    on the report is how the two copies drift.  p['binding'] is therefore
+    required, not optional, and every generator that builds a problem dict
+    needs to supply it before this function will run without a KeyError.
+
+    vrep:backgroundTheory is left exactly as it was: not named for either
+    renaming or removal.  It is one of seven vrep: terms still undefined
+    after this pass, not the only one: also premise, premiseSource,
+    clashingConstraint, witness, ungroundedValue, and the certificate
+    classes (Refutation, Models, and now UngroundedCertificate) are none
+    of them in vocab/verdict-report.ttl or the parent's imports either.
     """
     pid = p["id"]
     verdict = expected_verdict(p)
@@ -257,25 +282,31 @@ def _report_block(p: dict) -> str:
     lines = [
         "### Expected result " + "#" * 55,
         "",
-        f"drk:{pid}-report a vrep:OperandReport ;",
+        f"drk:{pid}-report a vrep:OperandVerdictReport ;",
         f'    dcterms:identifier "{pid}" ;',
-        f"    vrep:firstPolicy drk:offer-{pid[3:]} ;",
-        f"    vrep:secondPolicy drk:request-{pid[3:]} ;",
-        f"    vrep:firstConstraint kgc:{pid}-offer-c1 ;",
-        f"    vrep:secondConstraint kgc:{pid}-request-c1 ;",
-        f"    vrep:leftOperand odrl:{p['left_operand']} ;",
-        f"    vrep:sort {SORT_CLASS[p['sort']]} ;",
-        f"    vrep:resource <{p['resource']}> ;",
-        f"    vrep:backgroundTheory <{p['background_theory']}> ;",
+        f"    report:policy drk:offer-{pid[3:]} ;",
+        f"    report:policyRequest drk:request-{pid[3:]} ;",
+        f"    report:constraint kgc:{pid}-offer-c1 ;",
+        f"    vrep:constraintRequest kgc:{pid}-request-c1 ;",
+        f"    vrep:binding <{p['binding']}> ;",
     ]
+    if p.get("background_theory"):
+        lines.append(
+            f"    vrep:backgroundTheory <{p['background_theory']}> ;")
     if cert:
-        lines.append(f"    vrep:verdict {VERDICT_CLASS[verdict]} ;")
+        lines.append(f"    report:satisfactionState {SATISFACTION_STATE[verdict]} ;")
+        if p.get("unknown_reason"):
+            lines.append(f"    vrep:undeterminedReason "
+                         f"vrep:{p['unknown_reason'].capitalize()} ;")
         lines.append(f"    vrep:certificate drk:{pid}-certificate .")
         lines.append("")
-        lines.append(f"drk:{pid}-certificate a vrep:{cert['kind']} ;")
+        cert_class = CERTIFICATE_CLASS.get(cert["kind"], cert["kind"])
+        lines.append(f"drk:{pid}-certificate a vrep:{cert_class} ;")
         lines.append(f'    rdfs:comment """{cert["comment"]}"""@en ;')
         if cert.get("witness"):
             lines.append(f'    vrep:witness "{cert["witness"]}" ;')
+        if cert["kind"] == "Ungrounded" and p.get("ungrounded"):
+            lines.append(f'    vrep:ungroundedValue "{p["ungrounded"]}" ;')
         if cert["kind"] == "Refutation":
             lines.append(f"    vrep:clashingConstraint kgc:{pid}-offer-c1, "
                          f"kgc:{pid}-request-c1 ;")
@@ -288,8 +319,12 @@ def _report_block(p: dict) -> str:
         if not cert["premises"]:
             lines[-1] = lines[-1].rstrip(" ;") + " ."
     else:
-        lines.append(f"    vrep:verdict {VERDICT_CLASS[verdict]} .")
-
+        if p.get("unknown_reason"):
+            lines.append(f"    report:satisfactionState {SATISFACTION_STATE[verdict]} ;")
+            lines.append(f"    vrep:undeterminedReason "
+                         f"vrep:{p['unknown_reason'].capitalize()} .")
+        else:
+            lines.append(f"    report:satisfactionState {SATISFACTION_STATE[verdict]} .")
     return "\n".join(lines)
 
 
@@ -298,7 +333,8 @@ def write_case(p: dict, cases_dir: Path) -> Path:
     body = p["ttl"].strip()
     needed = [
         ("rdfs:", "@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> ."),
-        ("vrep:", "@prefix vrep:    <https://w3id.org/odrl-verdict-report#> ."),
+        ("report:", "@prefix report:  <https://w3id.org/force/compliance-report#> ."),
+        ("vrep:", "@prefix vrep:    <https://w3id.org/odrl-kb/verdict-report#> ."),
         ("dcterms:", "@prefix dcterms: <http://purl.org/dc/terms/> ."),
     ]
     missing = [line for pre, line in needed if f"@prefix {pre}" not in body]
@@ -339,7 +375,6 @@ def expected_verdict(p: dict) -> str:
 # ---------------------------------------------------------------------------
 
 _CONST = re.compile(r"\b(?:gn|dpv|bcp|loc|ft|lb|tm)_[a-z0-9_]+\b")
-
 # A formula name is the first argument of fof(...).  Names are not terms, so
 # they must be removed before scanning, or an axiom called gn_france_in_europe
 # is mistaken for a constant.

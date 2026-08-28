@@ -16,6 +16,7 @@
 # the registry lists both subtags and says nothing that separates them.
 
 @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+@prefix bind:    <https://w3id.org/odrl-kb/binding#> .
 @prefix vrep:    <https://w3id.org/odrl-verdict-report#> .
 @prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
@@ -30,7 +31,7 @@
 # rules disagree about which policies are interpretable rather than about
 # what the languages are.
 
-ex:g-bcp47-exact a vrep:GroundingProcedure ;
+ex:g-bcp47-exact a bind:GroundingProcedure ;
     dcterms:title "Exact subtag match"@en ;
     rdfs:comment """A right-operand value resolves to a concept of the scheme when it
          is that concept's IRI, or when it is a literal equal to the
@@ -42,7 +43,7 @@ ex:g-bcp47-exact a vrep:GroundingProcedure ;
     vrep:acceptsIRI true ;
     dcterms:source <https://www.rfc-editor.org/rfc/rfc5646#section-2.2> .
 
-ex:g-bcp47-primary a vrep:GroundingProcedure ;
+ex:g-bcp47-primary a bind:GroundingProcedure ;
     dcterms:title "Primary subtag reduction"@en ;
     rdfs:comment """As the exact rule, and additionally: a value that is a
          well-formed language tag resolves to the concept whose notation
@@ -63,19 +64,19 @@ ex:g-bcp47-primary a vrep:GroundingProcedure ;
 
 # --- the bindings -----------------------------------------------------
 
-ex:b-language-bcp47 a vrep:OperandBinding ;
+ex:b-language-bcp47 a bind:OperandBinding ;
     dcterms:title "Language over BCP 47, exact subtags"@en ;
     rdfs:comment """The default binding. A policy naming a subtag of the slice is
          interpretable; one naming anything else is not, and the verdict
          is Unknown with that value as its certificate rather than a
          guess at what was meant."""@en ;
-    vrep:leftOperand      odrl:language ;
-    vrep:sort             vrep:nom ;
-    vrep:resource         <https://w3id.org/odrl-kb/bcp47> ;
-    vrep:backgroundTheory <https://w3id.org/odrl-kb/bcp47/uniqueness> ;
-    vrep:grounding        ex:g-bcp47-exact .
+    bind:leftOperand      odrl:language ;
+    bind:sort             bind:nom ;
+    bind:resource         <https://w3id.org/odrl-kb/bcp47> ;
+    bind:backgroundTheory <https://w3id.org/odrl-kb/bcp47/uniqueness> ;
+    bind:grounding        ex:g-bcp47-exact .
 
-ex:b-language-bcp47-primary a vrep:OperandBinding ;
+ex:b-language-bcp47-primary a bind:OperandBinding ;
     dcterms:title "Language over BCP 47, composed tags reduced"@en ;
     rdfs:comment """The same resource, the same sort, the same theory, read by a
          wider rule. A policy that the default binding cannot interpret
@@ -85,8 +86,8 @@ ex:b-language-bcp47-primary a vrep:OperandBinding ;
 
          That difference is the profile's, and a report citing this
          binding says so."""@en ;
-    vrep:leftOperand      odrl:language ;
-    vrep:sort             vrep:nom ;
-    vrep:resource         <https://w3id.org/odrl-kb/bcp47> ;
-    vrep:backgroundTheory <https://w3id.org/odrl-kb/bcp47/uniqueness> ;
-    vrep:grounding        ex:g-bcp47-primary .
+    bind:leftOperand      odrl:language ;
+    bind:sort             bind:nom ;
+    bind:resource         <https://w3id.org/odrl-kb/bcp47> ;
+    bind:backgroundTheory <https://w3id.org/odrl-kb/bcp47/uniqueness> ;
+    bind:grounding        ex:g-bcp47-primary .

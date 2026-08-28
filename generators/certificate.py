@@ -78,7 +78,6 @@ Z3 needs named assertions and cores enabled:
     (check-sat)
     (get-unsat-core)
 """
-
 import re
 
 
@@ -111,20 +110,29 @@ def compare_models(m1: dict, m2: dict) -> list[str]:
     keys = sorted(set(m1) | set(m2))
     return [k for k in keys if m1.get(k) != m2.get(k)]
 
+
 SOURCE = {
     "res": "fromResource",
     "bt":  "fromBackgroundTheory",
+    "bg_dist": "fromBackgroundTheory",
+    "bg_disj": "fromBackgroundTheory",
+    "bg":  "fromBackgroundTheory",
     "w":   "fromConstraints",
+    "wc":  "fromConstraints",
     "ax":  "fromOrderAxiom",
-    "eq":  "fromEqualityAxiom",     # reserved; nothing emits it yet
+    "eq":  "fromEqualityAxiom",
 }
 
+# SOURCE maps several prefixes to one provenance class (bt, bg, bg_dist and
+# bg_disj all mean the parties' declaration), so its values repeat.  Loops
+# over the classes must use this list: iterating SOURCE.values() visits
+# fromBackgroundTheory four times and emits every such premise four times.
+CLASSES = list(dict.fromkeys(SOURCE.values()))
 WITHDRAWABLE = {"fromBackgroundTheory"}
 
 # Vampire delimits its proof; anything outside is echoed input or diagnostics.
 _PROOF_BLOCK = re.compile(
     r"% SZS output start Proof.*?% SZS output end Proof", re.S)
-
 # fof(f129, axiom, ( ... ), file('KGE000-0.ax', ax_leq_transitive)).
 _LEAF = re.compile(r"file\(\s*'[^']*'\s*,\s*([A-Za-z0-9_]+)\s*\)")
 
@@ -180,13 +188,13 @@ def premises_from_z3(output: str) -> tuple[str, list[str]]:
 def classify(names: list[str]) -> dict:
     """Split names by provenance prefix.
 
-    An unrecognised prefix, and a name the prover lost, both land in
-    `unclassified`.  Neither is attributed by default: a premise whose origin
-    cannot be determined is a defect to report, not a guess to make.
+    Deduplicated: a proof may use one assertion at several steps, but it is
+    one assertion, and a party withdrawing it withdraws it once. The order
+    of first appearance is kept.
     """
     out = {v: [] for v in SOURCE.values()}
     out["unclassified"] = []
-    for n in names:
+    for n in dict.fromkeys(names):
         prefix = n.split("_", 1)[0]
         out[SOURCE.get(prefix, "unclassified")].append(n)
     return out
@@ -216,7 +224,7 @@ def to_turtle(problem_id: str, kind: str, classified: dict,
         lines.append(f"    vrep:witness {witness} ;")
 
     entries = []
-    for source in SOURCE.values():
+    for source in CLASSES:
         for n in classified[source]:
             entries.append(
                 f"    vrep:attributedAssertion [\n"
@@ -242,7 +250,7 @@ def compare(expected: dict, observed: dict) -> list[str]:
     A verdict right for the wrong reason shows up here and nowhere else.
     """
     diffs = []
-    for source in SOURCE.values():
+    for source in CLASSES:
         e, o = len(expected.get(source, [])), len(observed.get(source, []))
         if e != o:
             diffs.append(f"{source}: expected {e}, observed {o}")

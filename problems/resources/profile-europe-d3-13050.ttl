@@ -5,12 +5,13 @@
 # it is declared in the resource file and not repeated here.
 
 @prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+@prefix bind:    <https://w3id.org/odrl-kb/binding#> .
 @prefix vrep: <https://w3id.org/odrl-verdict-report#> .
 @prefix ex:   <https://w3id.org/odrl-kb/profile/> .
 
-ex:b-spatial a vrep:OperandBinding ;
-    vrep:leftOperand odrl:spatial ;
-    vrep:sort vrep:mer ;
-    vrep:resource <https://w3id.org/odrl-kb/geonames/europe-d3-13050> ;
-    vrep:backgroundTheory <https://w3id.org/odrl-kb/geonames/europe-d3-13050/siblings> ;
-    vrep:grounding vrep:sliceMembership .
+ex:b-spatial a bind:OperandBinding ;
+    bind:leftOperand odrl:spatial ;
+    bind:sort bind:mer ;
+    bind:resource <https://w3id.org/odrl-kb/geonames/europe-d3-13050> ;
+    bind:backgroundTheory <https://w3id.org/odrl-kb/geonames/europe-d3-13050/siblings> ;
+    bind:grounding bind:sliceMembership .

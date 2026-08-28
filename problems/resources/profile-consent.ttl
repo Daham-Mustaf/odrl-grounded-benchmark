@@ -10,12 +10,13 @@
 # Section 7 reports what that reading returns.
 
 @prefix dpvo: <https://w3id.org/dpv/mappings/odrl#> .
+@prefix bind:    <https://w3id.org/odrl-kb/binding#> .
 @prefix vrep: <https://w3id.org/odrl-verdict-report#> .
 @prefix ex:   <https://w3id.org/odrl-kb/profile/> .
 
-ex:b-consent-status a vrep:OperandBinding ;
-    vrep:leftOperand dpvo:Status ;
-    vrep:sort vrep:tax ;
-    vrep:resource <https://w3id.org/odrl-kb/dpv-consent> ;
-    vrep:backgroundTheory <https://w3id.org/odrl-kb/dpv-consent/empty> ;
-    vrep:grounding vrep:sliceMembership .
+ex:b-consent-status a bind:OperandBinding ;
+    bind:leftOperand dpvo:Status ;
+    bind:sort bind:tax ;
+    bind:resource <https://w3id.org/odrl-kb/dpv-consent> ;
+    bind:backgroundTheory <https://w3id.org/odrl-kb/dpv-consent/empty> ;
+    bind:grounding bind:sliceMembership .

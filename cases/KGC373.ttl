@@ -1,8 +1,10 @@
+@prefix report:  <https://w3id.org/force/compliance-report#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix vrep:    <https://w3id.org/odrl-kb/verdict-report#> .
 @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix bcp47:   <https://w3id.org/odrl-kb/bcp47#> .
-@prefix vrep:    <https://w3id.org/odrl-verdict-report#> .
 @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
 
@@ -23,7 +25,7 @@ kgc:KGC373-offer-c1 a odrl:Constraint ;
 
 drk:request-373 a odrl:Request ;
     dcterms:title "Distribution in American English"@en ;
-    rdfs:comment """A well-formed BCP 47 language tag: RFC 5646 composes it from the registered primary subtag en and the registered region subtag US. It is not a concept of this slice, which holds primary subtags, and whether it resolves to one is the profile's grounding rule to decide."""@en ;
+    rdfs:comment """A well-formed BCP 47 language tag, composed by RFC 5646 from the registered primary subtag en and the registered region subtag US. It is not itself an entry of the registry and not a concept of the resource this operand is bound to, which holds primary subtags. Whether it resolves to one is the profile's grounding rule to decide, and the two problems using this request are read under rules that decide it differently."""@en ;
     odrl:assignee drk:reuser ;
     odrl:permission kgc:KGC373-request-r1 .
 
@@ -37,26 +39,21 @@ kgc:KGC373-request-c1 a odrl:Constraint ;
     odrl:operator odrl:eq ;
     odrl:rightOperand "en-US" .
 
-drk:offer-373 vrep:readUnder <https://w3id.org/odrl-kb/profile/b-language-bcp47-primary> .
-drk:request-373 vrep:readUnder <https://w3id.org/odrl-kb/profile/b-language-bcp47-primary> .
-
 ### Expected result #######################################################
 
-drk:KGC373-report a vrep:OperandReport ;
+drk:KGC373-report a vrep:OperandVerdictReport ;
     dcterms:identifier "KGC373" ;
-    vrep:firstPolicy drk:offer-373 ;
-    vrep:secondPolicy drk:request-373 ;
-    vrep:firstConstraint kgc:KGC373-offer-c1 ;
-    vrep:secondConstraint kgc:KGC373-request-c1 ;
-    vrep:leftOperand odrl:language ;
-    vrep:sort vrep:nom ;
-    vrep:resource <https://w3id.org/odrl-kb/bcp47> ;
+    report:policy drk:offer-373 ;
+    report:policyRequest drk:request-373 ;
+    report:constraint kgc:KGC373-offer-c1 ;
+    vrep:constraintRequest kgc:KGC373-request-c1 ;
+    vrep:binding <https://w3id.org/odrl-kb/profile/b-language-bcp47-primary> ;
     vrep:backgroundTheory <https://w3id.org/odrl-kb/bcp47/uniqueness> ;
-    vrep:verdict vrep:Incompatible ;
+    report:satisfactionState report:Unsatisfied ;
     vrep:certificate drk:KGC373-certificate .
 
 drk:KGC373-certificate a vrep:Refutation ;
-    rdfs:comment """The request's value resolved to bcp_en under this binding's grounding, and bcp_de and bcp_en are declared distinct."""@en ;
+    rdfs:comment """The request's value resolved to bcp_en under this binding's grounding rule, and bcp_de and bcp_en are declared distinct by the same rule that carries KGC370."""@en ;
     vrep:clashingConstraint kgc:KGC373-offer-c1, kgc:KGC373-request-c1 ;
     vrep:premise [ vrep:premiseSource vrep:fromBackgroundTheory ;
                    rdfs:label "bcp47:de and bcp47:en are declared distinct, on RFC 5646's registry uniqueness"@en ] .

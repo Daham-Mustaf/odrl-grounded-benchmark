@@ -1,8 +1,10 @@
+@prefix report:  <https://w3id.org/force/compliance-report#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix vrep:    <https://w3id.org/odrl-kb/verdict-report#> .
 @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix bcp47:   <https://w3id.org/odrl-kb/bcp47#> .
-@prefix vrep:    <https://w3id.org/odrl-verdict-report#> .
 @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
 
@@ -23,7 +25,7 @@ kgc:KGC372-offer-c1 a odrl:Constraint ;
 
 drk:request-372 a odrl:Request ;
     dcterms:title "Distribution in American English"@en ;
-    rdfs:comment """A well-formed BCP 47 language tag: RFC 5646 composes it from the registered primary subtag en and the registered region subtag US. It is not a concept of this slice, which holds primary subtags, and whether it resolves to one is the profile's grounding rule to decide."""@en ;
+    rdfs:comment """A well-formed BCP 47 language tag, composed by RFC 5646 from the registered primary subtag en and the registered region subtag US. It is not itself an entry of the registry and not a concept of the resource this operand is bound to, which holds primary subtags. Whether it resolves to one is the profile's grounding rule to decide, and the two problems using this request are read under rules that decide it differently."""@en ;
     odrl:assignee drk:reuser ;
     odrl:permission kgc:KGC372-request-r1 .
 
@@ -37,23 +39,20 @@ kgc:KGC372-request-c1 a odrl:Constraint ;
     odrl:operator odrl:eq ;
     odrl:rightOperand "en-US" .
 
-drk:offer-372 vrep:readUnder <https://w3id.org/odrl-kb/profile/b-language-bcp47> .
-drk:request-372 vrep:readUnder <https://w3id.org/odrl-kb/profile/b-language-bcp47> .
-
 ### Expected result #######################################################
 
-drk:KGC372-report a vrep:OperandReport ;
+drk:KGC372-report a vrep:OperandVerdictReport ;
     dcterms:identifier "KGC372" ;
-    vrep:firstPolicy drk:offer-372 ;
-    vrep:secondPolicy drk:request-372 ;
-    vrep:firstConstraint kgc:KGC372-offer-c1 ;
-    vrep:secondConstraint kgc:KGC372-request-c1 ;
-    vrep:leftOperand odrl:language ;
-    vrep:sort vrep:nom ;
-    vrep:resource <https://w3id.org/odrl-kb/bcp47> ;
+    report:policy drk:offer-372 ;
+    report:policyRequest drk:request-372 ;
+    report:constraint kgc:KGC372-offer-c1 ;
+    vrep:constraintRequest kgc:KGC372-request-c1 ;
+    vrep:binding <https://w3id.org/odrl-kb/profile/b-language-bcp47> ;
     vrep:backgroundTheory <https://w3id.org/odrl-kb/bcp47/uniqueness> ;
-    vrep:verdict vrep:Unknown ;
+    report:satisfactionState vrep:Undetermined ;
+    vrep:undeterminedReason vrep:Ungrounded ;
     vrep:certificate drk:KGC372-certificate .
 
-drk:KGC372-certificate a vrep:Ungrounded ;
-    rdfs:comment """The value en-US names no concept of the slice under this binding's grounding. Checkable by applying the grounding to it."""@en .
+drk:KGC372-certificate a vrep:UngroundedCertificate ;
+    rdfs:comment """The value en-US resolves to no concept of the resource under this binding's grounding rule. Checkable by applying that rule to the value and seeing that it yields nothing."""@en ;
+    vrep:ungroundedValue "en-US" .

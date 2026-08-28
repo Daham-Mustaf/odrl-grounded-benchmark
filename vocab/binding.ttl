@@ -26,28 +26,49 @@
     dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
     dcterms:description "A binding pairs an ODRL left operand with an external resource and declares the sort at which its published assertions are read. The sort is a property of the binding, not of the operand or of the resource."@en .
 
+
+# --- classes ----------------------------------------------------------
+
 bind:OperandBinding a rdfs:Class, skos:Concept ;
-    rdfs:isDefinedBy bind: ;
+    rdfs:isDefinedBy <https://w3id.org/odrl-kb/binding> ;
     rdfs:label "Operand Binding" ;
     skos:definition "A profile's pairing of a left operand with a resource, declaring the sort, the grounding rule, and optionally a background theory. Declaring the sort is the one judgment a profile makes about an operand."@en .
 
 bind:Sort a rdfs:Class, skos:Concept ;
-    rdfs:isDefinedBy bind: ;
+    rdfs:isDefinedBy <https://w3id.org/odrl-kb/binding> ;
     rdfs:label "Sort" ;
-    skos:definition "The declared reading of the bound resource's published assertions. Three individuals exist and no others."@en .
+    skos:definition "The declared reading of the bound resource's published assertions. Three individuals exist and no others; the enumeration below makes that a theorem of this file rather than a hope of its prose."@en ;
+    owl:equivalentClass [ a owl:Class ;
+        owl:oneOf ( bind:tax bind:mer bind:nom ) ] .
+
+bind:GroundingProcedure a rdfs:Class, skos:Concept ;
+    rdfs:isDefinedBy <https://w3id.org/odrl-kb/binding> ;
+    rdfs:label "Grounding Procedure" ;
+    skos:definition "A declared rule mapping a right-operand value to a concept of the bound resource. Partial by nature: a value the rule does not resolve is ungrounded, and the verdict is Undetermined with that value as its certificate. Which rule a profile adopts is a decision about reading, and two profiles over one resource may adopt different ones."@en .
+
+
+# --- the three sorts --------------------------------------------------
 
 bind:tax a bind:Sort ;
     rdfs:label "tax" ;
     skos:definition "The published assertions are read as subsumption."@en .
+
 bind:mer a bind:Sort ;
     rdfs:label "mer" ;
     skos:definition "The published assertions are read as parthood."@en .
+
 bind:nom a bind:Sort ;
     rdfs:label "nom" ;
     skos:definition "The resource supplies a set of concepts and nothing further; identity is the only relation available."@en .
 
+[] a owl:AllDifferent ;
+    owl:members ( bind:tax bind:mer bind:nom ) .
+
+
+# --- properties -------------------------------------------------------
+
 bind:leftOperand a rdfs:Property, skos:Concept ;
-    rdfs:isDefinedBy bind: ;
+    rdfs:isDefinedBy <https://w3id.org/odrl-kb/binding> ;
     rdfs:label "left operand" ;
     rdfs:seeAlso odrl:leftOperand ;
     skos:definition "The ODRL left operand this binding covers."@en ;
@@ -55,28 +76,41 @@ bind:leftOperand a rdfs:Property, skos:Concept ;
     rdfs:range odrl:LeftOperand .
 
 bind:sort a rdfs:Property, skos:Concept ;
-    rdfs:isDefinedBy bind: ;
+    rdfs:isDefinedBy <https://w3id.org/odrl-kb/binding> ;
     rdfs:label "sort" ;
     skos:definition "The declared sort of the binding."@en ;
     rdfs:domain bind:OperandBinding ;
     rdfs:range bind:Sort .
 
 bind:resource a rdfs:Property, skos:Concept ;
-    rdfs:isDefinedBy bind: ;
+    rdfs:isDefinedBy <https://w3id.org/odrl-kb/binding> ;
     rdfs:label "resource" ;
-    skos:definition "The external resource whose published assertions the binding reads: a versioned concept scheme."@en ;
-    rdfs:domain bind:OperandBinding ;
-    rdfs:range skos:ConceptScheme .
+    skos:definition "The external resource whose published assertions the binding reads: a versioned slice of a published vocabulary, with its provenance recorded."@en ;
+    rdfs:domain bind:OperandBinding .
 
 bind:backgroundTheory a rdfs:Property, skos:Concept ;
-    rdfs:isDefinedBy bind: ;
+    rdfs:isDefinedBy <https://w3id.org/odrl-kb/binding> ;
     rdfs:label "background theory" ;
-    skos:definition "A declared, withdrawable background theory in force for this binding."@en ;
+    skos:definition "A declared, withdrawable background theory in force for this binding. Absent when the parties have declared nothing: withdrawal is the absence of the property, not the presence of an empty theory."@en ;
     rdfs:domain bind:OperandBinding ;
     rdfs:range bt:BackgroundTheory .
 
 bind:grounding a rdfs:Property, skos:Concept ;
-    rdfs:isDefinedBy bind: ;
+    rdfs:isDefinedBy <https://w3id.org/odrl-kb/binding> ;
     rdfs:label "grounding" ;
-    skos:definition "The declared rule mapping right-operand values to concepts of the resource, such as notation match or IRI identity. Resource-dependent; a value the rule does not resolve is ungrounded."@en ;
-    rdfs:domain bind:OperandBinding .
+    skos:definition "The rule this binding adopts for mapping right-operand values to concepts of the resource."@en ;
+    rdfs:domain bind:OperandBinding ;
+    rdfs:range bind:GroundingProcedure .
+
+bind:sliceMembership a bind:GroundingProcedure ;
+    rdfs:isDefinedBy <https://w3id.org/odrl-kb/binding> ;
+    rdfs:label "Slice membership" ;
+    skos:definition """A right-operand value resolves when it names a concept of the
+         bound slice, by IRI identity. Nothing else resolves: no
+         normalisation, no reduction, no matching against a label. The
+         authority chose the IRIs, and two different IRIs are two
+         different concepts unless it says otherwise.
+
+         The default rule, adopted by every binding over a resource
+         published as a graph. A registry needs a different one, because
+         its concepts are not its entries."""@en .

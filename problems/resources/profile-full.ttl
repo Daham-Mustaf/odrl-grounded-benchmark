@@ -4,12 +4,13 @@
 # Nothing in the resource says so.
 
 @prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+@prefix bind:    <https://w3id.org/odrl-kb/binding#> .
 @prefix vrep: <https://w3id.org/odrl-verdict-report#> .
 @prefix ex:   <https://w3id.org/odrl-kb/profile/> .
 
-ex:b-purpose a vrep:OperandBinding ;
-    vrep:leftOperand odrl:purpose ;
-    vrep:sort vrep:tax ;
-    vrep:resource <https://w3id.org/odrl-kb/dpv-purposes> ;
-    vrep:backgroundTheory <https://w3id.org/odrl-kb/dpv-purposes/empty> ;
-    vrep:grounding vrep:sliceMembership .
+ex:b-purpose a bind:OperandBinding ;
+    bind:leftOperand odrl:purpose ;
+    bind:sort bind:tax ;
+    bind:resource <https://w3id.org/odrl-kb/dpv-purposes> ;
+    bind:backgroundTheory <https://w3id.org/odrl-kb/dpv-purposes/empty> ;
+    bind:grounding bind:sliceMembership .

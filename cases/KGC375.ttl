@@ -8,48 +8,48 @@
 @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
 
-drk:offer-371 a odrl:Offer ;
+drk:offer-375 a odrl:Offer ;
     dcterms:title "Distribution in German"@en ;
     odrl:assigner drk:publisher ;
-    odrl:permission kgc:KGC371-offer-r1 .
+    odrl:permission kgc:KGC375-offer-r1 .
 
-kgc:KGC371-offer-r1 a odrl:Permission ;
+kgc:KGC375-offer-r1 a odrl:Permission ;
     odrl:action odrl:distribute ;
     odrl:target drk:dataset ;
-    odrl:constraint kgc:KGC371-offer-c1 .
+    odrl:constraint kgc:KGC375-offer-c1 .
 
-kgc:KGC371-offer-c1 a odrl:Constraint ;
+kgc:KGC375-offer-c1 a odrl:Constraint ;
     odrl:leftOperand odrl:language ;
     odrl:operator odrl:eq ;
     odrl:rightOperand bcp47:de .
 
-drk:request-371 a odrl:Request ;
-    dcterms:title "Distribution in French"@en ;
+drk:request-375 a odrl:Request ;
+    dcterms:title "Anything but French"@en ;
     odrl:assignee drk:reuser ;
-    odrl:permission kgc:KGC371-request-r1 .
+    odrl:permission kgc:KGC375-request-r1 .
 
-kgc:KGC371-request-r1 a odrl:Permission ;
+kgc:KGC375-request-r1 a odrl:Permission ;
     odrl:action odrl:distribute ;
     odrl:target drk:dataset ;
-    odrl:constraint kgc:KGC371-request-c1 .
+    odrl:constraint kgc:KGC375-request-c1 .
 
-kgc:KGC371-request-c1 a odrl:Constraint ;
+kgc:KGC375-request-c1 a odrl:Constraint ;
     odrl:leftOperand odrl:language ;
     odrl:operator odrl:eq ;
     odrl:rightOperand bcp47:fr .
 
 ### Expected result #######################################################
 
-drk:KGC371-report a vrep:OperandVerdictReport ;
-    dcterms:identifier "KGC371" ;
-    report:policy drk:offer-371 ;
-    report:policyRequest drk:request-371 ;
-    report:constraint kgc:KGC371-offer-c1 ;
-    vrep:constraintRequest kgc:KGC371-request-c1 ;
+drk:KGC375-report a vrep:OperandVerdictReport ;
+    dcterms:identifier "KGC375" ;
+    report:policy drk:offer-375 ;
+    report:policyRequest drk:request-375 ;
+    report:constraint kgc:KGC375-offer-c1 ;
+    vrep:constraintRequest kgc:KGC375-request-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-language-bcp47> ;
     report:satisfactionState vrep:Undetermined ;
     vrep:undeterminedReason vrep:Epistemic ;
-    vrep:certificate drk:KGC371-certificate .
+    vrep:certificate drk:KGC375-certificate .
 
-drk:KGC371-certificate a vrep:Models ;
-    rdfs:comment """Both queries are satisfiable. One certifying structure interprets bcp47:de and bcp47:fr as one concept and the other keeps them apart; the registry decides neither."""@en .
+drk:KGC375-certificate a vrep:Models ;
+    rdfs:comment """One certifying structure separates bcp47:de and bcp47:fr and carries the witness; the other identifies them and carries none."""@en .

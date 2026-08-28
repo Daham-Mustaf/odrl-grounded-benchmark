@@ -41,7 +41,7 @@
 # ----- the third satisfaction state -----
 
 vrep:Undetermined a rdfs:Class, skos:Concept ;
-    rdfs:isDefinedBy vrep: ;
+    rdfs:isDefinedBy <https://w3id.org/odrl-kb/verdict-report> ;
     rdfs:label "Undetermined State" ;
     skos:altLabel "Unknown"@en ;
     rdfs:subClassOf report:SatisfactionState ;
@@ -50,19 +50,21 @@ vrep:Undetermined a rdfs:Class, skos:Concept ;
     rdfs:comment "Carries the verdict the paper names Unknown. Named Undetermined here because report:Unknown already denotes a PerformanceState in the parent model."@en .
 
 vrep:UndeterminedReason a rdfs:Class, skos:Concept ;
-    rdfs:isDefinedBy vrep: ;
+    rdfs:isDefinedBy <https://w3id.org/odrl-kb/verdict-report> ;
     rdfs:label "Undetermined Reason" ;
-    skos:definition "Why a report is Undetermined. Exactly one of the two subclasses applies."@en .
+    skos:definition "Why a report is Undetermined. Exactly one of the two subclasses applies: the union axiom gives coverage, their disjointness gives uniqueness. Unlike the parent's SatisfactionState, the closure here is axiomatised, not prose."@en ;
+    owl:equivalentClass [ a owl:Class ;
+        owl:unionOf ( vrep:Ungrounded vrep:Epistemic ) ] .
 
 vrep:Ungrounded a rdfs:Class, skos:Concept ;
-    rdfs:isDefinedBy vrep: ;
+    rdfs:isDefinedBy <https://w3id.org/odrl-kb/verdict-report> ;
     rdfs:label "Ungrounded" ;
     rdfs:subClassOf vrep:UndeterminedReason ;
     owl:disjointWith vrep:Epistemic ;
     skos:definition "A right-operand value the profile's grounding does not resolve. Repaired by correcting the policy or the binding; no further declaration settles it. The certificate is the value."@en .
 
 vrep:Epistemic a rdfs:Class, skos:Concept ;
-    rdfs:isDefinedBy vrep: ;
+    rdfs:isDefinedBy <https://w3id.org/odrl-kb/verdict-report> ;
     rdfs:label "Epistemic" ;
     rdfs:subClassOf vrep:UndeterminedReason ;
     owl:disjointWith vrep:Ungrounded ;
@@ -71,7 +73,7 @@ vrep:Epistemic a rdfs:Class, skos:Concept ;
 # ----- the report class -----
 
 vrep:OperandVerdictReport a rdfs:Class, skos:Concept ;
-    rdfs:isDefinedBy vrep: ;
+    rdfs:isDefinedBy <https://w3id.org/odrl-kb/verdict-report> ;
     rdfs:label "Operand Verdict Report" ;
     rdfs:subClassOf report:ConstraintReport ;
     skos:definition "The verdict for the constraints of a policy and a request on one left operand: whether some valuation satisfies both in every structure admitted by the bound resource and the background theory, in none, or in some but not all. report:constraint holds the policy-side constraint and vrep:constraintRequest the request side."@en ;
@@ -80,28 +82,28 @@ vrep:OperandVerdictReport a rdfs:Class, skos:Concept ;
 # ----- properties -----
 
 vrep:constraintRequest a rdfs:Property, skos:Concept ;
-    rdfs:isDefinedBy vrep: ;
+    rdfs:isDefinedBy <https://w3id.org/odrl-kb/verdict-report> ;
     rdfs:label "constraint request" ;
     skos:definition "Denotes the request-side constraint being evaluated against the policy-side constraint held by report:constraint. Mirrors report:policyRequest and report:ruleRequest."@en ;
     rdfs:domain vrep:OperandVerdictReport ;
     rdfs:range odrl:Constraint .
 
-vrep:undeterminedReason a rdfs:Property, skos:Concept ;
-    rdfs:isDefinedBy vrep: ;
+vrep:undeterminedReason a rdfs:Property, owl:FunctionalProperty, skos:Concept ;
+    rdfs:isDefinedBy <https://w3id.org/odrl-kb/verdict-report> ;
     rdfs:label "undetermined reason" ;
     skos:definition "The reason a report's satisfaction state is vrep:Undetermined. Required exactly when the state is Undetermined."@en ;
     rdfs:domain vrep:OperandVerdictReport ;
     rdfs:range vrep:UndeterminedReason .
 
 vrep:binding a rdfs:Property, skos:Concept ;
-    rdfs:isDefinedBy vrep: ;
+    rdfs:isDefinedBy <https://w3id.org/odrl-kb/verdict-report> ;
     rdfs:label "binding" ;
     skos:definition "The profile entry that decided the reading: which resource, at which sort, under which grounding rule, with which background theory."@en ;
     rdfs:domain vrep:OperandVerdictReport ;
     rdfs:range bind:OperandBinding .
 
 vrep:certificate a rdfs:Property, skos:Concept ;
-    rdfs:isDefinedBy vrep: ;
+    rdfs:isDefinedBy <https://w3id.org/odrl-kb/verdict-report> ;
     rdfs:label "certificate" ;
     skos:definition "The evidence for the verdict, checkable without trusting the procedure: a refutation whose premises are named resource, background, and axiom-instance formulas for a definite state; a pair of satisfying structures for Epistemic; the offending value for Ungrounded."@en ;
     rdfs:domain vrep:OperandVerdictReport ;

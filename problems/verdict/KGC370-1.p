@@ -3,9 +3,11 @@
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
 % Problem  : language, eq de against eq fr, registry uniqueness declared (witness condition asserted)
 % Version  : 1.0
-% English  : The publisher distributes in German; the reuser asks for French. With the parties' registry-uniqueness rule in force no structure interprets the two subtags as one language, so no use satisfies both constraints and the verdict is Incompatible.
+% English  : A publisher distributes a dataset in German. A reuser asks to distribute it in French. Both constraints are on odrl:language, which this profile binds to a fifteen-subtag slice of the IANA Language Subtag Registry at the nominal sort.
 %           : 
-%           : The refutation cites one background premise. The registry lists both subtags and asserts nothing that separates them, so what makes this verdict definite is a rule the parties adopted rather than something IANA published.
+%           : The parties have adopted the registry-uniqueness rule: distinct primary subtag records, neither deprecated and with no Preferred-Value link between them, name distinct languages. With that rule in force no structure interprets de and fr as one language, so no single use satisfies both constraints, and the verdict is Incompatible.
+%           : 
+%           : The refutation cites one premise, and it is the parties' rather than the registry's. IANA lists both subtags and asserts nothing that separates them; what makes this verdict definite is a declaration, and a party who withdraws it reopens the case. KGC371 is that withdrawal.
 %
 % Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark

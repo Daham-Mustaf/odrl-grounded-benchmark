@@ -1,95 +1,144 @@
 """
 problem_data_bcp47.py
 =====================
-Four problems over the BCP 47 language slice, at nom.
+Four problems over the BCP 47 language slice, at the nominal sort.
 
-    KGC370  eq de x eq fr, uniqueness declared      Incompatible
-    KGC371  the same pair, declaration withdrawn    Unknown, epistemic
-    KGC372  eq de x eq "en-US", exact grounding     Unknown, ungrounded
-    KGC373  the same pair, primary-subtag grounding Incompatible
+    KGC370  eq de  x  eq fr         uniqueness declared   Incompatible
+    KGC371  eq de  x  eq fr         declaration withdrawn Unknown, epistemic
+    KGC372  eq de  x  eq "en-US"    exact grounding       Unknown, ungrounded
+    KGC373  eq de  x  eq "en-US"    reducing grounding    Incompatible
 
-None of them is here to exercise an operator.  At nom the signature admits
-eq, neq, isAnyOf, isAllOf and isNoneOf, and every one of those is already
-exercised on another operand.  What this resource shows is three things
-about resources and one about profiles.
+The operators are beside the point.  At nom the signature admits eq, neq,
+isAnyOf, isAllOf and isNoneOf, and every one is already exercised on
+another operand; all four problems below use eq.  Each pair changes one
+thing and holds everything else fixed, so that the change is what the
+verdict responds to.
 
-The withdrawal pair
--------------------
-KGC370 and KGC371 are the same two policies over the same resource,
-differing in one include line.
+    370 -> 371   one background theory withdrawn
+    372 -> 373   one grounding rule widened
+    371 vs 372   two Unknowns with different repairs
 
-The registry publishes the subtags.  Separately it publishes identity,
-through Preferred-Value, and an order, through Macrolanguage.  It does not
-publish distinctness: that two subtags name two languages is a rule the
-parties adopt, warranted by RFC 5646's uniqueness discipline and absent
-from the data.
+A note on reading these
+-----------------------
+The two policies in each problem are ordinary ODRL: an Offer permitting
+distribution in German, a Request asking to distribute in some other
+language.  Nothing in them is unusual, and a reader who knows ODRL and not
+this paper can read the case files without further explanation.
 
-So without the declaration a structure may interpret de and fr as one
-language and nothing published rules it out, and the verdict is Unknown.
-With it, Incompatible, on one premise that belongs to the parties and that
-withdrawing reopens.
+What the problems are about is the layer underneath: which vocabulary the
+operand is bound to, what that vocabulary publishes, what the parties have
+declared on top of it, and how a policy value is resolved to a concept.
+Those four things live in the profile and the resource files, not in the
+policies, and changing any of them changes the verdict without touching a
+policy.
 
-The grounding pair
-------------------
-KGC372 and KGC373 are the same two policies over the same resource at the
-same sort, differing in which profile reads them.
+Problem one: what a registry publishes, and what it does not
+-------------------------------------------------------------
+The IANA Language Subtag Registry lists the subtags.  Separately it
+publishes identity, through Preferred-Value, which says that 'iw' and 'he'
+name one language; and an order, through Macrolanguage, which says that
+Bosnian falls under Serbo-Croatian.  It nowhere says that two subtags name
+two languages.
 
-en-US is a well-formed language tag: RFC 5646 composes it from a
-registered primary subtag and a registered region subtag.  It is not a
-concept of this slice, which holds primary subtags.
+That is not an oversight.  A registry states what it has established, and
+whether two of its entries may be treated as apart is a question about the
+use being made of them.  So the parties adopt it as a rule, warranted by
+RFC 5646's uniqueness discipline, and it enters as declared background.
 
-Under the exact binding the grounding resolves an IRI of the scheme or a
-literal equal to a published notation, and en-US is neither, so no query
-is built and the verdict is Unknown with that value as its certificate.
-Under the primary-subtag binding a well-formed tag reduces to its first
-component, en-US grounds to en, and the pair gets an ordinary verdict.
+KGC370 has that rule in force and KGC371 does not.  The policies are
+identical, the resource is identical, and the two problems differ in one
+include line.  With the rule, no structure interprets German and French as
+one language and the verdict is Incompatible.  Without it, some structures
+do and some do not, and the verdict is Unknown.
 
-Neither reading is wrong.  A party who cares which variety of English is
-distributed declines the reduction and gets an uninterpretable policy
-rather than a wrong answer; a party who does not, adopts it.  The profile
-is where that is recorded, which is what makes the two verdicts different
-without any disagreement about a concept.
+The refutation for KGC370 cites one premise and it belongs to the parties.
+That is the point of keeping the declaration in a file of its own: a party
+against whom the verdict goes can see exactly what to withdraw, and
+withdrawing it is KGC371.
 
-The two kinds of Unknown
-------------------------
-KGC371 and KGC372 both report Unknown and are repaired differently.
-KGC371's is epistemic: the resource admits structures either way, and a
-declaration settles it.  KGC372's is ungrounded: the policy names
-something the binding cannot read, and no declaration helps, because
-nothing has been left open.  The policy is corrected or the binding is
-widened.
+Problem two: what a value names
+--------------------------------
+"en-US" is a well-formed language tag.  RFC 5646 composes it from the
+registered primary subtag 'en' and the registered region subtag 'US', and
+any conformant parser accepts it.
 
-That is why an Unknown carries its reason, and why a report that gave only
-the verdict would be telling a reader to guess which repair applies.
+It is not a concept of this resource, which holds primary subtags.
 
-Why nom is a property of the slice
-----------------------------------
-The registry publishes Macrolanguage fields over its language subtags,
-each an order assertion between two of them; how many is measured from the
-snapshot by the builder and written into the resource header.  None of the
-fifteen members here carries one, and the builder aborts if a future
-member does.
+Whether it nonetheless resolves to one is the profile's decision, and the
+profile declares two rules.  The exact rule resolves an IRI of the scheme
+or a literal matching a published notation, and nothing else.  The
+reducing rule additionally takes a well-formed tag to its primary subtag,
+so "en-US" resolves to 'en'.
 
-So the nominal binding is right for this slice and would be wrong for one
-containing cmn and zh.  This is the suite's only case where one
-publisher's data supports two sorts depending on which concepts are taken.
+KGC372 is read under the first and KGC373 under the second.  Same
+policies, same resource, same sort, same declared theory.  Under the exact
+rule the request cannot be interpreted at all, no query is built, and the
+verdict is Unknown with the value itself as the certificate.  Under the
+reducing rule it is interpreted as a request for English, and the pair
+gets an ordinary verdict.
+
+Neither rule is the right one.  A party who cares which variety of English
+is distributed declines the reduction and would rather have an
+uninterpretable policy than a wrong answer; a party who does not, adopts
+it.  What matters is that the choice is written down where a reader can
+find it, rather than being whatever the software happened to do.
+
+Two verdicts that read the same and are repaired differently
+-------------------------------------------------------------
+KGC371 and KGC372 both report Unknown.
+
+KGC371's is epistemic.  The resource admits structures that identify the
+two subtags and structures that separate them, and a declaration by either
+party settles which.  The question is open and someone can close it.
+
+KGC372's is ungrounded.  Nothing has been left open: the policy names
+something the binding cannot read at all.  A declaration does not help,
+because there is nothing to declare about a value that names no concept.
+Either the policy is corrected or the binding is widened, and KGC373 is
+the second of those.
+
+A report that gave only the verdict would leave a reader to guess which
+repair applies, which is why the reason is part of the answer and not a
+gloss on it.
+
+Why the nominal sort is right here, and would not always be
+------------------------------------------------------------
+The registry publishes Macrolanguage relations over its language subtags,
+each of them an order assertion between two subtags.  How many is measured
+from the snapshot by the builder and written into the resource header
+rather than typed here.
+
+None of the fifteen members of this slice carries one, and the builder
+aborts if a future member does.  So the resource genuinely publishes no
+order over these concepts, which is what makes the nominal binding right:
+there is nothing for isA to read, and the signature rejects it before the
+resource is opened.
+
+A slice containing Mandarin and Chinese would carry such a relation and
+would belong at tax.  Same publisher, same file, different sort, depending
+on which concepts are taken.  This is the only place in the suite where
+that is visible.
 """
 
 from compile import Constraint
 
+# Concepts of the slice, as the constants the axiom files declare.
 DE = "bcp_de"
 FR = "bcp_fr"
 EN = "bcp_en"
 
+# What the authority published, and what the parties declared on top of it.
 RESOURCE   = "https://w3id.org/odrl-kb/bcp47"
 UNIQUENESS = "https://w3id.org/odrl-kb/bcp47/uniqueness"
 
+# The two profile entries.  They differ in the grounding rule and in
+# nothing else; both bind odrl:language at nom over the same resource.
 BINDING_EXACT   = "https://w3id.org/odrl-kb/profile/b-language-bcp47"
 BINDING_PRIMARY = ("https://w3id.org/odrl-kb/profile/"
                    "b-language-bcp47-primary")
 
 # The resource alone, and the resource with the parties' rule.  The
-# withdrawal pair is the difference between these two lists.
+# withdrawal pair is exactly the difference between these two lists.
 INCLUDES            = ["KGE000-0.ax", "BCP47000-0.ax"]
 INCLUDES_UNIQUENESS = INCLUDES + ["BCP47001-0.ax"]
 
@@ -98,18 +147,23 @@ def C(op, *vals, side="offer"):
     return Constraint(op, tuple(vals), side)
 
 
+# The case file holds the two policies and nothing else.  Which profile
+# reads them, what the expected verdict is, and what evidence supports it
+# are recorded here in the manifest and rendered into their own files, so
+# that a consumer loading a case file ingests policies rather than claims
+# about them.
 _TTL_HEAD = """\
 @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix bcp47:   <https://w3id.org/odrl-kb/bcp47#> .
-@prefix vrep:    <https://w3id.org/odrl-verdict-report#> .
 @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
 """
 
 
 def _offer(pid):
+    """The same offer in all four problems: distribution in German."""
     return f"""
 drk:offer-{pid[3:]} a odrl:Offer ;
     dcterms:title "Distribution in German"@en ;
@@ -128,7 +182,7 @@ kgc:{pid}-offer-c1 a odrl:Constraint ;
 """
 
 
-def _request(pid, title, value, comment=""):
+def _request(pid, title, value, comment="", operator="eq"):
     note = f'\n    rdfs:comment """{comment}"""@en ;' if comment else ""
     return f"""
 drk:request-{pid[3:]} a odrl:Request ;
@@ -148,18 +202,17 @@ kgc:{pid}-request-c1 a odrl:Constraint ;
 """
 
 
-def _binding_note(pid, binding):
-    return f"""
-drk:offer-{pid[3:]} vrep:readUnder <{binding}> .
-drk:request-{pid[3:]} vrep:readUnder <{binding}> .
-"""
-
-
-EN_US_COMMENT = (
-    "A well-formed BCP 47 language tag: RFC 5646 composes it from the "
-    "registered primary subtag en and the registered region subtag US. "
-    "It is not a concept of this slice, which holds primary subtags, and "
-    "whether it resolves to one is the profile's grounding rule to decide."
+# Attached to the request in KGC372 and KGC373, since the value is the
+# thing those two problems are about and a reader meeting it in a policy
+# file deserves to know why it is there.
+EN_US_NOTE = (
+    "A well-formed BCP 47 language tag, composed by RFC 5646 from the "
+    "registered primary subtag en and the registered region subtag US. It "
+    "is not itself an entry of the registry and not a concept of the "
+    "resource this operand is bound to, which holds primary subtags. "
+    "Whether it resolves to one is the profile's grounding rule to decide, "
+    "and the two problems using this request are read under rules that "
+    "decide it differently."
 )
 
 
@@ -174,19 +227,29 @@ PROBLEMS = [
         "sort":              "nom",
         "resource":          RESOURCE,
         "background_theory": UNIQUENESS,
+         "smt2_background":
+        "(assert (! (not (= bcp_de bcp_fr)) "
+        ":named bg_dist_bcp47_de_fr))",
         "binding":           BINDING_EXACT,
         "includes":          INCLUDES_UNIQUENESS,
         "tree": [C("eq", DE), C("eq", FR, side="request")],
         "description": (
-            "The publisher distributes in German; the reuser asks for "
-            "French. With the parties' registry-uniqueness rule in force "
-            "no structure interprets the two subtags as one language, so "
-            "no use satisfies both constraints and the verdict is "
-            "Incompatible.\n\n"
-            "The refutation cites one background premise. The registry "
-            "lists both subtags and asserts nothing that separates them, "
-            "so what makes this verdict definite is a rule the parties "
-            "adopted rather than something IANA published."
+            "A publisher distributes a dataset in German. A reuser asks "
+            "to distribute it in French. Both constraints are on "
+            "odrl:language, which this profile binds to a fifteen-subtag "
+            "slice of the IANA Language Subtag Registry at the nominal "
+            "sort.\n\n"
+            "The parties have adopted the registry-uniqueness rule: "
+            "distinct primary subtag records, neither deprecated and with "
+            "no Preferred-Value link between them, name distinct "
+            "languages. With that rule in force no structure interprets "
+            "de and fr as one language, so no single use satisfies both "
+            "constraints, and the verdict is Incompatible.\n\n"
+            "The refutation cites one premise, and it is the parties' "
+            "rather than the registry's. IANA lists both subtags and "
+            "asserts nothing that separates them; what makes this verdict "
+            "definite is a declaration, and a party who withdraws it "
+            "reopens the case. KGC371 is that withdrawal."
         ),
         "expected_verdict": "Incompatible",
         "expected_q1": "Unsatisfiable",
@@ -194,8 +257,9 @@ PROBLEMS = [
         "certificate": {
             "kind": "Refutation",
             "comment": "The two subtags are declared to name distinct "
-                       "languages. Withdrawing that declaration returns "
-                       "the verdict to Unknown, which is KGC371.",
+                       "languages, which is the parties' rule and not the "
+                       "registry's content. Withdrawing it returns the "
+                       "verdict to Unknown, which is KGC371.",
             "premises": [
                 ("fromBackgroundTheory",
                  "bcp47:de and bcp47:fr are declared distinct, on RFC "
@@ -203,8 +267,7 @@ PROBLEMS = [
             ],
         },
         "ttl": _TTL_HEAD + _offer("KGC370")
-               + _request("KGC370", "Distribution in French", "bcp47:fr")
-               + _binding_note("KGC370", BINDING_EXACT),
+               + _request("KGC370", "Distribution in French", "bcp47:fr"),
     },
 
     {
@@ -215,22 +278,27 @@ PROBLEMS = [
         "left_operand":      "language",
         "sort":              "nom",
         "resource":          RESOURCE,
+        # No background theory: withdrawal is the absence of a declaration,
+        # not the presence of an empty one.
         "background_theory": None,
         "binding":           BINDING_EXACT,
         "includes":          INCLUDES,
         "tree": [C("eq", DE), C("eq", FR, side="request")],
         "description": (
-            "The constraints of KGC370 with the uniqueness rule "
-            "withdrawn. The resource still lists both subtags and still "
-            "says nothing that separates them, so a structure may "
-            "interpret de and fr as one language and another may keep "
-            "them apart. The verdict is Unknown, and the reason is "
-            "epistemic: a declaration settles it.\n\n"
-            "Read with KGC370 this is what a withdrawable premise is. The "
-            "same policies over the same resource, one include line "
-            "apart, and the verdict moves from definite to open because a "
-            "party stopped asserting something the registry never "
-            "asserted."
+            "The policies of KGC370, over the same resource, with the "
+            "registry-uniqueness rule withdrawn.\n\n"
+            "The registry still lists both subtags and still asserts "
+            "nothing that separates them. So some structures admitted by "
+            "the resource interpret de and fr as one language and others "
+            "keep them apart, and whether a single use can satisfy both "
+            "constraints depends on which. The verdict is Unknown, and "
+            "the reason is epistemic: a declaration by either party "
+            "settles it.\n\n"
+            "Read against KGC370 this is what a withdrawable premise "
+            "means. Two identical policies over one vocabulary, one "
+            "include line apart, and the verdict moves from definite to "
+            "open because a party stopped asserting something the "
+            "registry never asserted."
         ),
         "expected_verdict": "Unknown",
         "unknown_reason":   "epistemic",
@@ -238,22 +306,24 @@ PROBLEMS = [
         "expected_q2": "Satisfiable",
         "certificate": {
             "kind": "Models",
-            "comment": "Both queries are satisfiable, and the models "
-                       "differ on whether bcp47:de and bcp47:fr are one "
-                       "concept, which the registry does not decide.",
+            "comment": "Both queries are satisfiable. One certifying "
+                       "structure interprets bcp47:de and bcp47:fr as one "
+                       "concept and the other keeps them apart; the "
+                       "registry decides neither.",
             "premises": [],
         },
         "ttl": _TTL_HEAD + _offer("KGC371")
-               + _request("KGC371", "Distribution in French", "bcp47:fr")
-               + _binding_note("KGC371", BINDING_EXACT),
+               + _request("KGC371", "Distribution in French", "bcp47:fr"),
     },
 
     {
-        # No queries are built for this problem: writers.py reads the
+        # No queries are built for this problem. writers.py reads the
         # ungrounded field and skips construction, so no expected_q1 or
-        # expected_q2 appears here.  Supplying them would mean the value
-        # had become a constant of the signature, which is the collapse
-        # this problem exists to rule out.
+        # expected_q2 appears below, and no tree either: supplying one
+        # would turn the unresolved value into a constant of the
+        # signature, which is the collapse this problem exists to rule
+        # out. A prover asked about such a constant would answer, and the
+        # answer would be about nothing.
         "id":                "KGC372",
         "subdir":            "verdict",
         "name":              "language, eq de against eq \"en-US\", "
@@ -266,32 +336,41 @@ PROBLEMS = [
         "includes":          INCLUDES_UNIQUENESS,
         "ungrounded":        "en-US",
         "description": (
-            "The reuser asks for en-US. Under the exact binding a value "
-            "resolves when it is an IRI of the scheme or a literal equal "
-            "to a published notation, and en-US is neither: the slice "
-            "holds primary subtags and en-US is a composed tag.\n\n"
-            "The grounding is therefore undefined on the request's right "
-            "operand, no query is built, and the verdict is Unknown with "
-            "that value as its certificate. The reason is ungrounded and "
-            "not epistemic, and the two are repaired differently: a "
-            "declaration settles an epistemic Unknown and does nothing "
-            "here, which needs the policy corrected or the binding "
-            "widened. KGC373 is the same pair read under the wider "
+            "A publisher distributes in German. A reuser asks to "
+            "distribute in en-US.\n\n"
+            "That is a well-formed language tag: RFC 5646 composes it "
+            "from the registered primary subtag en and the registered "
+            "region subtag US, and any conformant parser accepts it. It "
+            "is not a concept of the resource this operand is bound to, "
+            "which holds primary subtags.\n\n"
+            "This problem is read under the profile's exact grounding "
+            "rule, which resolves an IRI of the scheme or a literal "
+            "matching a published notation, and nothing else. The "
+            "request's right operand matches neither, so the policy "
+            "cannot be interpreted against this resource at all: no query "
+            "is built, and the verdict is Unknown with the value itself "
+            "as the certificate.\n\n"
+            "The reason is ungrounded, not epistemic, and the difference "
+            "decides the repair. An epistemic Unknown is settled by a "
+            "declaration. This one is not: nothing has been left open, "
+            "and there is nothing to declare about a value that names no "
+            "concept. Either the policy is corrected or the binding is "
+            "widened, and KGC373 is the same pair read under a wider "
             "binding."
         ),
         "expected_verdict": "Unknown",
         "unknown_reason":   "ungrounded",
         "certificate": {
             "kind": "Ungrounded",
-            "comment": "The value en-US names no concept of the slice "
-                       "under this binding's grounding. Checkable by "
-                       "applying the grounding to it.",
+            "comment": "The value en-US resolves to no concept of the "
+                       "resource under this binding's grounding rule. "
+                       "Checkable by applying that rule to the value and "
+                       "seeing that it yields nothing.",
             "premises": [],
         },
         "ttl": _TTL_HEAD + _offer("KGC372")
                + _request("KGC372", "Distribution in American English",
-                          '"en-US"', EN_US_COMMENT)
-               + _binding_note("KGC372", BINDING_EXACT),
+                          '"en-US"', EN_US_NOTE),
     },
 
     {
@@ -303,22 +382,30 @@ PROBLEMS = [
         "sort":              "nom",
         "resource":          RESOURCE,
         "background_theory": UNIQUENESS,
+        "smt2_background":
+            "(assert (! (not (= bcp_de bcp_en)) "
+            ":named bg_dist_bcp47_de_en))",
         "binding":           BINDING_PRIMARY,
         "includes":          INCLUDES_UNIQUENESS,
-        "tree": [C("eq", DE), C("eq", EN, side="request")],
+        "grounding": {"en-US": "bcp_en"},
+        "tree": [C("eq", DE), C("eq", "en-US", side="request")],
         "description": (
-            "The policies of KGC372 read under the binding whose "
-            "grounding reduces a well-formed tag to its primary subtag. "
-            "en-US resolves to en, the request is interpretable, and the "
-            "pair gets an ordinary verdict: German and English are "
-            "declared distinct, so no use satisfies both and the verdict "
-            "is Incompatible.\n\n"
-            "Neither reading is wrong. A party who cares which variety of "
-            "English is distributed declines the reduction and gets an "
-            "uninterpretable policy rather than a wrong answer; a party "
-            "who does not, adopts it. The two verdicts differ without any "
-            "disagreement about a concept, and the profile is where the "
-            "difference is recorded."
+            "The policies of KGC372, read under the profile's other "
+            "grounding rule.\n\n"
+            "That rule takes a well-formed language tag to its primary "
+            "subtag, so en-US resolves to en. The request becomes "
+            "interpretable and the pair gets an ordinary verdict: German "
+            "and English are declared distinct under the same "
+            "registry-uniqueness rule as KGC370, so no use satisfies both "
+            "constraints and the verdict is Incompatible.\n\n"
+            "Neither rule is the correct one. A party who cares which "
+            "variety of English is distributed declines the reduction and "
+            "would rather have an uninterpretable policy than a wrong "
+            "answer; a party who does not, adopts it. The two problems "
+            "return different verdicts on identical policies over an "
+            "identical vocabulary, and the parties disagree about no "
+            "concept: what differs is a reading rule, which the profile "
+            "records and a report cites."
         ),
         "expected_verdict": "Incompatible",
         "expected_q1": "Unsatisfiable",
@@ -326,8 +413,9 @@ PROBLEMS = [
         "certificate": {
             "kind": "Refutation",
             "comment": "The request's value resolved to bcp_en under this "
-                       "binding's grounding, and bcp_de and bcp_en are "
-                       "declared distinct.",
+                       "binding's grounding rule, and bcp_de and bcp_en "
+                       "are declared distinct by the same rule that "
+                       "carries KGC370.",
             "premises": [
                 ("fromBackgroundTheory",
                  "bcp47:de and bcp47:en are declared distinct, on RFC "
@@ -336,7 +424,91 @@ PROBLEMS = [
         },
         "ttl": _TTL_HEAD + _offer("KGC373")
                + _request("KGC373", "Distribution in American English",
-                          '"en-US"', EN_US_COMMENT)
-               + _binding_note("KGC373", BINDING_PRIMARY),
+                          '"en-US"', EN_US_NOTE),
+    },
+        {
+        "id":                "KGC374",
+        "subdir":            "verdict",
+        "name":              "language, eq de against neq fr, "
+                             "registry uniqueness declared",
+        "left_operand":      "language",
+        "sort":              "nom",
+        "resource":          RESOURCE,
+        "background_theory": UNIQUENESS,
+         "smt2_background":
+        "(assert (! (not (= bcp_de bcp_fr)) "
+        ":named bg_dist_bcp47_de_fr))",
+        "binding":           BINDING_EXACT,
+        "includes":          INCLUDES_UNIQUENESS,
+        "tree": [C("eq", DE), C("neq", FR, side="request")],
+        "expected_verdict":  "Compatible",
+        "expected_q1":       "Satisfiable",
+        "expected_q2":       "Unsatisfiable",
+        "description": (
+            "The publisher distributes in German; the reuser accepts "
+            "anything that is not French. German itself is the witness, "
+            "but only because the parties' uniqueness rule separates the "
+            "two subtags: in a structure interpreting de and fr as one "
+            "language, a use in German is a use in French and the "
+            "request excludes it.\n\n"
+            "So this Compatible rests on a declared premise exactly as "
+            "KGC370's Incompatible does. The refutation of the second "
+            "query cites the witness condition and one background "
+            "premise, and withdrawing that premise is KGC375. A definite "
+            "verdict of either polarity can stand on the parties' "
+            "declaration; polarity buys no exemption from provenance."
+        ),
+        "certificate": {
+            "kind": "Refutation",
+            "comment": "Refutes the negated witness condition: denying "
+                       "the witness forces de and fr to be one concept, "
+                       "against the declared distinctness.",
+            "premises": [
+                ("fromBackgroundTheory",
+                 "bcp47:de and bcp47:fr are declared distinct, on RFC "
+                 "5646's registry uniqueness"),
+            ],
+        },
+        "ttl": _TTL_HEAD + _offer("KGC374")
+               + _request("KGC374", "Anything but French",
+                          "bcp47:fr", operator="neq"),
+    },
+    {
+        "id":                "KGC375",
+        "subdir":            "verdict",
+        "name":              "language, eq de against neq fr, "
+                             "no declaration",
+        "left_operand":      "language",
+        "sort":              "nom",
+        "resource":          RESOURCE,
+        "background_theory": None,
+        "binding":           BINDING_EXACT,
+        "includes":          INCLUDES,
+        "tree": [C("eq", DE), C("neq", FR, side="request")],
+        "expected_verdict":  "Unknown",
+        "unknown_reason":    "epistemic",
+        "expected_q1":       "Satisfiable",
+        "expected_q2":       "Satisfiable",
+        "description": (
+            "KGC374 with the uniqueness rule withdrawn. A structure "
+            "separating de and fr admits the witness; a structure "
+            "identifying them admits none, because a use in German is "
+            "then a use in French. The registry decides neither, so the "
+            "verdict is Unknown.\n\n"
+            "Read with KGC370 and KGC371 this completes the symmetry: "
+            "the same withdrawal takes an Incompatible to Unknown there "
+            "and a Compatible to Unknown here. What the declaration "
+            "buys is definiteness, not a direction."
+        ),
+        "certificate": {
+            "kind": "Models",
+            "comment": "One certifying structure separates bcp47:de and "
+                       "bcp47:fr and carries the witness; the other "
+                       "identifies them and carries none.",
+            "premises": [],
+        },
+        "ttl": _TTL_HEAD + _offer("KGC375")
+               + _request("KGC375", "Anything but French",
+                          "bcp47:fr", operator="neq"),
     },
 ]
