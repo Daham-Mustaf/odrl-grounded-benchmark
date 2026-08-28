@@ -1,0 +1,29 @@
+# Profile entry for odrl:language over the BCP 47 slice.
+#
+# The sort is nom.  A registry supplies identity between its concepts and
+# no relation over them, so isA, isPartOf and hasPart are rejected by the
+# signature before the resource is opened.  That rejection is the sort
+# doing its work, and this is the clearest case of it in the suite: the
+# resource file has fifteen concept assertions and no order assertion at
+# all.
+#
+# Grounding is membership in the slice, matched against skos:notation.  A
+# composed tag such as en-US is well formed over registered subtags and
+# names no concept here, so it is ungrounded and the verdict is Unknown
+# with that value as the certificate.
+#
+# The background theory is the parties' registry-uniqueness rule.  A
+# problem binding this profile without it gets Unknown where the
+# declaration would have given a definite verdict, which is the withdrawal
+# case.
+
+@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+@prefix vrep: <https://w3id.org/odrl-verdict-report#> .
+@prefix ex:   <https://w3id.org/odrl-kb/profile/> .
+
+ex:b-language-bcp47 a vrep:OperandBinding ;
+    vrep:leftOperand      odrl:language ;
+    vrep:sort             vrep:nom ;
+    vrep:resource         <https://w3id.org/odrl-kb/bcp47> ;
+    vrep:backgroundTheory <https://w3id.org/odrl-kb/bcp47/uniqueness> ;
+    vrep:grounding        vrep:sliceMembership .

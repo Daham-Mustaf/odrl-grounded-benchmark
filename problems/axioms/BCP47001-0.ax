@@ -1,0 +1,142 @@
+%-------------------------------------------------------------------------
+% File     : BCP47001-0.ax
+% Domain   : ODRL policy, knowledge-grounded constraints
+% Axioms   : Registry uniqueness for BCP 47 primary subtags
+% Version  : 2.1
+% English  : The parties' rule that distinct primary language
+%            subtag records, neither deprecated and with no
+%            Preferred-Value link between them, name distinct
+%            languages.
+%
+%            The registry does not assert this.  It publishes
+%            identity, through Preferred-Value, and an order,
+%            through Macrolanguage, and no distinctness at all.
+%            The scope condition is not decoration: 'iw' is
+%            deprecated with Preferred-Value 'he', both described
+%            Hebrew, so unrestricted distinctness over registry
+%            subtags is false.  The generator checks every member
+%            against the snapshot and aborts if the condition
+%            fails.
+%
+%            Distinctness, not disjointness.  Distinctness denies
+%            that two concepts are the same element; disjointness
+%            denies that anything lies below both, which needs an
+%            order this sort does not have.
+%
+%            A party withdraws this theory by omitting the
+%            include.  Any definite verdict resting on it
+%            reopens, Compatible as well as Incompatible.
+%
+% Source   : https://www.rfc-editor.org/rfc/rfc5646#section-3.1
+% Slice    : File-Date 2026-08-08
+% Pairs    : 105
+%
+% Status   : Satisfiable
+% SPC      : FOF_SAT_EPR
+%-------------------------------------------------------------------------
+
+fof(bg_dist_bcp47_bg_cs, axiom, bcp_bg != bcp_cs).
+fof(bg_dist_bcp47_bg_da, axiom, bcp_bg != bcp_da).
+fof(bg_dist_bcp47_bg_de, axiom, bcp_bg != bcp_de).
+fof(bg_dist_bcp47_bg_el, axiom, bcp_bg != bcp_el).
+fof(bg_dist_bcp47_bg_en, axiom, bcp_bg != bcp_en).
+fof(bg_dist_bcp47_bg_es, axiom, bcp_bg != bcp_es).
+fof(bg_dist_bcp47_bg_fi, axiom, bcp_bg != bcp_fi).
+fof(bg_dist_bcp47_bg_fr, axiom, bcp_bg != bcp_fr).
+fof(bg_dist_bcp47_bg_hu, axiom, bcp_bg != bcp_hu).
+fof(bg_dist_bcp47_bg_it, axiom, bcp_bg != bcp_it).
+fof(bg_dist_bcp47_bg_nl, axiom, bcp_bg != bcp_nl).
+fof(bg_dist_bcp47_bg_pl, axiom, bcp_bg != bcp_pl).
+fof(bg_dist_bcp47_bg_pt, axiom, bcp_bg != bcp_pt).
+fof(bg_dist_bcp47_bg_sv, axiom, bcp_bg != bcp_sv).
+fof(bg_dist_bcp47_cs_da, axiom, bcp_cs != bcp_da).
+fof(bg_dist_bcp47_cs_de, axiom, bcp_cs != bcp_de).
+fof(bg_dist_bcp47_cs_el, axiom, bcp_cs != bcp_el).
+fof(bg_dist_bcp47_cs_en, axiom, bcp_cs != bcp_en).
+fof(bg_dist_bcp47_cs_es, axiom, bcp_cs != bcp_es).
+fof(bg_dist_bcp47_cs_fi, axiom, bcp_cs != bcp_fi).
+fof(bg_dist_bcp47_cs_fr, axiom, bcp_cs != bcp_fr).
+fof(bg_dist_bcp47_cs_hu, axiom, bcp_cs != bcp_hu).
+fof(bg_dist_bcp47_cs_it, axiom, bcp_cs != bcp_it).
+fof(bg_dist_bcp47_cs_nl, axiom, bcp_cs != bcp_nl).
+fof(bg_dist_bcp47_cs_pl, axiom, bcp_cs != bcp_pl).
+fof(bg_dist_bcp47_cs_pt, axiom, bcp_cs != bcp_pt).
+fof(bg_dist_bcp47_cs_sv, axiom, bcp_cs != bcp_sv).
+fof(bg_dist_bcp47_da_de, axiom, bcp_da != bcp_de).
+fof(bg_dist_bcp47_da_el, axiom, bcp_da != bcp_el).
+fof(bg_dist_bcp47_da_en, axiom, bcp_da != bcp_en).
+fof(bg_dist_bcp47_da_es, axiom, bcp_da != bcp_es).
+fof(bg_dist_bcp47_da_fi, axiom, bcp_da != bcp_fi).
+fof(bg_dist_bcp47_da_fr, axiom, bcp_da != bcp_fr).
+fof(bg_dist_bcp47_da_hu, axiom, bcp_da != bcp_hu).
+fof(bg_dist_bcp47_da_it, axiom, bcp_da != bcp_it).
+fof(bg_dist_bcp47_da_nl, axiom, bcp_da != bcp_nl).
+fof(bg_dist_bcp47_da_pl, axiom, bcp_da != bcp_pl).
+fof(bg_dist_bcp47_da_pt, axiom, bcp_da != bcp_pt).
+fof(bg_dist_bcp47_da_sv, axiom, bcp_da != bcp_sv).
+fof(bg_dist_bcp47_de_el, axiom, bcp_de != bcp_el).
+fof(bg_dist_bcp47_de_en, axiom, bcp_de != bcp_en).
+fof(bg_dist_bcp47_de_es, axiom, bcp_de != bcp_es).
+fof(bg_dist_bcp47_de_fi, axiom, bcp_de != bcp_fi).
+fof(bg_dist_bcp47_de_fr, axiom, bcp_de != bcp_fr).
+fof(bg_dist_bcp47_de_hu, axiom, bcp_de != bcp_hu).
+fof(bg_dist_bcp47_de_it, axiom, bcp_de != bcp_it).
+fof(bg_dist_bcp47_de_nl, axiom, bcp_de != bcp_nl).
+fof(bg_dist_bcp47_de_pl, axiom, bcp_de != bcp_pl).
+fof(bg_dist_bcp47_de_pt, axiom, bcp_de != bcp_pt).
+fof(bg_dist_bcp47_de_sv, axiom, bcp_de != bcp_sv).
+fof(bg_dist_bcp47_el_en, axiom, bcp_el != bcp_en).
+fof(bg_dist_bcp47_el_es, axiom, bcp_el != bcp_es).
+fof(bg_dist_bcp47_el_fi, axiom, bcp_el != bcp_fi).
+fof(bg_dist_bcp47_el_fr, axiom, bcp_el != bcp_fr).
+fof(bg_dist_bcp47_el_hu, axiom, bcp_el != bcp_hu).
+fof(bg_dist_bcp47_el_it, axiom, bcp_el != bcp_it).
+fof(bg_dist_bcp47_el_nl, axiom, bcp_el != bcp_nl).
+fof(bg_dist_bcp47_el_pl, axiom, bcp_el != bcp_pl).
+fof(bg_dist_bcp47_el_pt, axiom, bcp_el != bcp_pt).
+fof(bg_dist_bcp47_el_sv, axiom, bcp_el != bcp_sv).
+fof(bg_dist_bcp47_en_es, axiom, bcp_en != bcp_es).
+fof(bg_dist_bcp47_en_fi, axiom, bcp_en != bcp_fi).
+fof(bg_dist_bcp47_en_fr, axiom, bcp_en != bcp_fr).
+fof(bg_dist_bcp47_en_hu, axiom, bcp_en != bcp_hu).
+fof(bg_dist_bcp47_en_it, axiom, bcp_en != bcp_it).
+fof(bg_dist_bcp47_en_nl, axiom, bcp_en != bcp_nl).
+fof(bg_dist_bcp47_en_pl, axiom, bcp_en != bcp_pl).
+fof(bg_dist_bcp47_en_pt, axiom, bcp_en != bcp_pt).
+fof(bg_dist_bcp47_en_sv, axiom, bcp_en != bcp_sv).
+fof(bg_dist_bcp47_es_fi, axiom, bcp_es != bcp_fi).
+fof(bg_dist_bcp47_es_fr, axiom, bcp_es != bcp_fr).
+fof(bg_dist_bcp47_es_hu, axiom, bcp_es != bcp_hu).
+fof(bg_dist_bcp47_es_it, axiom, bcp_es != bcp_it).
+fof(bg_dist_bcp47_es_nl, axiom, bcp_es != bcp_nl).
+fof(bg_dist_bcp47_es_pl, axiom, bcp_es != bcp_pl).
+fof(bg_dist_bcp47_es_pt, axiom, bcp_es != bcp_pt).
+fof(bg_dist_bcp47_es_sv, axiom, bcp_es != bcp_sv).
+fof(bg_dist_bcp47_fi_fr, axiom, bcp_fi != bcp_fr).
+fof(bg_dist_bcp47_fi_hu, axiom, bcp_fi != bcp_hu).
+fof(bg_dist_bcp47_fi_it, axiom, bcp_fi != bcp_it).
+fof(bg_dist_bcp47_fi_nl, axiom, bcp_fi != bcp_nl).
+fof(bg_dist_bcp47_fi_pl, axiom, bcp_fi != bcp_pl).
+fof(bg_dist_bcp47_fi_pt, axiom, bcp_fi != bcp_pt).
+fof(bg_dist_bcp47_fi_sv, axiom, bcp_fi != bcp_sv).
+fof(bg_dist_bcp47_fr_hu, axiom, bcp_fr != bcp_hu).
+fof(bg_dist_bcp47_fr_it, axiom, bcp_fr != bcp_it).
+fof(bg_dist_bcp47_fr_nl, axiom, bcp_fr != bcp_nl).
+fof(bg_dist_bcp47_fr_pl, axiom, bcp_fr != bcp_pl).
+fof(bg_dist_bcp47_fr_pt, axiom, bcp_fr != bcp_pt).
+fof(bg_dist_bcp47_fr_sv, axiom, bcp_fr != bcp_sv).
+fof(bg_dist_bcp47_hu_it, axiom, bcp_hu != bcp_it).
+fof(bg_dist_bcp47_hu_nl, axiom, bcp_hu != bcp_nl).
+fof(bg_dist_bcp47_hu_pl, axiom, bcp_hu != bcp_pl).
+fof(bg_dist_bcp47_hu_pt, axiom, bcp_hu != bcp_pt).
+fof(bg_dist_bcp47_hu_sv, axiom, bcp_hu != bcp_sv).
+fof(bg_dist_bcp47_it_nl, axiom, bcp_it != bcp_nl).
+fof(bg_dist_bcp47_it_pl, axiom, bcp_it != bcp_pl).
+fof(bg_dist_bcp47_it_pt, axiom, bcp_it != bcp_pt).
+fof(bg_dist_bcp47_it_sv, axiom, bcp_it != bcp_sv).
+fof(bg_dist_bcp47_nl_pl, axiom, bcp_nl != bcp_pl).
+fof(bg_dist_bcp47_nl_pt, axiom, bcp_nl != bcp_pt).
+fof(bg_dist_bcp47_nl_sv, axiom, bcp_nl != bcp_sv).
+fof(bg_dist_bcp47_pl_pt, axiom, bcp_pl != bcp_pt).
+fof(bg_dist_bcp47_pl_sv, axiom, bcp_pl != bcp_sv).
+fof(bg_dist_bcp47_pt_sv, axiom, bcp_pt != bcp_sv).

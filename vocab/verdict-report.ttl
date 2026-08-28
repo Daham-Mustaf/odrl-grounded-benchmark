@@ -1,0 +1,108 @@
+# Verdict report extension over the Compliance Report Model
+#
+# This file extends https://w3id.org/force/compliance-report (0.9.0).
+# Every class and property it does not add comes from that model by
+# import: report:ConstraintReport, report:constraint,
+# report:satisfactionState, report:Satisfied, report:Unsatisfied,
+# report:PolicyReport, report:policy, report:policyRequest,
+# report:premiseReport.  Nothing from the parent is restated.
+#
+# Verdict-to-state mapping, stated here and nowhere else:
+#   Compatible    maps to  report:Satisfied
+#   Incompatible  maps to  report:Unsatisfied
+#   Unknown       maps to  vrep:Undetermined
+# The report generator's enum module mirrors this table.
+#
+# The parent closes SatisfactionState in prose ("either satisfied or
+# unsatisfied") but publishes no covering axiom, only the pairwise
+# disjointness of its two states.  The third state below is therefore a
+# consistent extension of the axioms and a deliberate extension of the
+# prose.
+
+@prefix vrep:    <https://w3id.org/odrl-kb/verdict-report#> .
+@prefix report:  <https://w3id.org/force/compliance-report#> .
+@prefix bind:    <https://w3id.org/odrl-kb/binding#> .
+@prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix vann:    <http://purl.org/vocab/vann/> .
+
+<https://w3id.org/odrl-kb/verdict-report> a owl:Ontology ;
+    dcterms:title "Verdict report extension"@en ;
+    vann:preferredNamespacePrefix "vrep" ;
+    vann:preferredNamespaceUri "https://w3id.org/odrl-kb/verdict-report#" ;
+    owl:imports <https://w3id.org/force/compliance-report> ;
+    rdfs:comment "Written against Compliance Report Model 0.9.0; the parent publishes no owl:versionIRI, so the version is recorded here rather than pinned by import."@en ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+    dcterms:description "Adds to the Compliance Report Model the one satisfaction state and the machinery needed to report knowledge-grounded verdicts: a third state for undecided answers, its two reasons, the pairwise constraint reference, the binding that fixed the reading, and the certificate."@en .
+
+# ----- the third satisfaction state -----
+
+vrep:Undetermined a rdfs:Class, skos:Concept ;
+    rdfs:isDefinedBy vrep: ;
+    rdfs:label "Undetermined State" ;
+    skos:altLabel "Unknown"@en ;
+    rdfs:subClassOf report:SatisfactionState ;
+    owl:disjointWith report:Satisfied, report:Unsatisfied ;
+    skos:definition "The available knowledge does not settle whether the premise is satisfied: either a right-operand value did not ground, or both satisfiability queries are satisfiable."@en ;
+    rdfs:comment "Carries the verdict the paper names Unknown. Named Undetermined here because report:Unknown already denotes a PerformanceState in the parent model."@en .
+
+vrep:UndeterminedReason a rdfs:Class, skos:Concept ;
+    rdfs:isDefinedBy vrep: ;
+    rdfs:label "Undetermined Reason" ;
+    skos:definition "Why a report is Undetermined. Exactly one of the two subclasses applies."@en .
+
+vrep:Ungrounded a rdfs:Class, skos:Concept ;
+    rdfs:isDefinedBy vrep: ;
+    rdfs:label "Ungrounded" ;
+    rdfs:subClassOf vrep:UndeterminedReason ;
+    owl:disjointWith vrep:Epistemic ;
+    skos:definition "A right-operand value the profile's grounding does not resolve. Repaired by correcting the policy or the binding; no further declaration settles it. The certificate is the value."@en .
+
+vrep:Epistemic a rdfs:Class, skos:Concept ;
+    rdfs:isDefinedBy vrep: ;
+    rdfs:label "Epistemic" ;
+    rdfs:subClassOf vrep:UndeterminedReason ;
+    owl:disjointWith vrep:Ungrounded ;
+    skos:definition "Both satisfiability queries are satisfiable: some admissible structures admit a common satisfier and some do not. Settled by a further declaration, such as party-declared distinctness. The certificate is a pair of satisfying structures."@en .
+
+# ----- the report class -----
+
+vrep:OperandVerdictReport a rdfs:Class, skos:Concept ;
+    rdfs:isDefinedBy vrep: ;
+    rdfs:label "Operand Verdict Report" ;
+    rdfs:subClassOf report:ConstraintReport ;
+    skos:definition "The verdict for the constraints of a policy and a request on one left operand: whether some valuation satisfies both in every structure admitted by the bound resource and the background theory, in none, or in some but not all. report:constraint holds the policy-side constraint and vrep:constraintRequest the request side."@en ;
+    rdfs:comment "Replaces the parent's closed-world State-of-the-World context: satisfaction here quantifies over the admissible structures of the binding's resource and background theory."@en .
+
+# ----- properties -----
+
+vrep:constraintRequest a rdfs:Property, skos:Concept ;
+    rdfs:isDefinedBy vrep: ;
+    rdfs:label "constraint request" ;
+    skos:definition "Denotes the request-side constraint being evaluated against the policy-side constraint held by report:constraint. Mirrors report:policyRequest and report:ruleRequest."@en ;
+    rdfs:domain vrep:OperandVerdictReport ;
+    rdfs:range odrl:Constraint .
+
+vrep:undeterminedReason a rdfs:Property, skos:Concept ;
+    rdfs:isDefinedBy vrep: ;
+    rdfs:label "undetermined reason" ;
+    skos:definition "The reason a report's satisfaction state is vrep:Undetermined. Required exactly when the state is Undetermined."@en ;
+    rdfs:domain vrep:OperandVerdictReport ;
+    rdfs:range vrep:UndeterminedReason .
+
+vrep:binding a rdfs:Property, skos:Concept ;
+    rdfs:isDefinedBy vrep: ;
+    rdfs:label "binding" ;
+    skos:definition "The profile entry that decided the reading: which resource, at which sort, under which grounding rule, with which background theory."@en ;
+    rdfs:domain vrep:OperandVerdictReport ;
+    rdfs:range bind:OperandBinding .
+
+vrep:certificate a rdfs:Property, skos:Concept ;
+    rdfs:isDefinedBy vrep: ;
+    rdfs:label "certificate" ;
+    skos:definition "The evidence for the verdict, checkable without trusting the procedure: a refutation whose premises are named resource, background, and axiom-instance formulas for a definite state; a pair of satisfying structures for Epistemic; the offending value for Ungrounded."@en ;
+    rdfs:domain vrep:OperandVerdictReport ;
+    rdfs:comment "The certificate artifact is referenced, not reified; its internal format is the benchmark's TPTP refutation or explicit structure. The range is deliberately unrestricted."@en .

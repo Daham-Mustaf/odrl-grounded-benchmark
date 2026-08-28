@@ -1,31 +1,42 @@
-# Background theory for the BCP 47 slice: registry uniqueness
 #
-# RFC 5646 section 2.2.1 states that every primary language subtag identifies
-# a distinct language.  The parties adopt this as a rule, and it generates
-# pairwise distinctness over the fifteen subtags of the slice.
+# What the registry publishes and what the parties add.  RFC 5646
+# section 3.1 guarantees that subtag meanings are unambiguous and stable,
+# and section 3.1.5 enforces this by requiring Description fields to be
+# unique within a record type.  The registry publishes identity
+# (Preferred-Value equivalences, section 3.1.7) and order (Macrolanguage,
+# section 3.1.10) but never distinctness.  The parties therefore adopt the
+# following rule as declared background: distinct primary language subtag
+# records, neither deprecated and with no Preferred-Value link between
+# them, name distinct languages.
 #
-# Distinctness, not disjointness.  Distinctness denies that two concepts are
-# interpreted as the same element; disjointness denies that anything lies
-# below both.  A registry publishes no order, so only distinctness is
-# available and only distinctness is needed.
 #
-# A party may withdraw this rule.  Doing so reopens any Incompatible verdict
-# that rested on it, without disputing the registry itself.
-
-@prefix odrlkb:  <https://w3id.org/odrl-kb/bcp47#> .
+# Distinctness, not disjointness.  Distinctness denies that two concepts
+# are interpreted as the same element; disjointness denies that anything
+# lies below both.  A registry publishes no order over this slice, so only
+# distinctness is available and only distinctness is needed.
+#
+# A party may withdraw this theory by omitting its include.  Doing so
+# reopens any definite verdict that rested on it, Compatible as well as
+# Incompatible, without disputing the registry itself.
+@prefix bcp47:   <https://w3id.org/odrl-kb/bcp47#> .
 @prefix bt:      <https://w3id.org/odrl-kb/background#> .
 @prefix owl:     <http://www.w3.org/2002/07/owl#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
-
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
 <https://w3id.org/odrl-kb/bcp47/uniqueness> a bt:BackgroundTheory ;
     dcterms:title "Registry uniqueness for BCP 47 primary subtags"@en ;
-    dcterms:source <https://www.rfc-editor.org/rfc/rfc5646#section-2.2.1> ;
+    dcterms:source <https://www.rfc-editor.org/rfc/rfc5646#section-3.1> ;
+    dcterms:description "Distinct primary language subtag records, neither deprecated and with no Preferred-Value link between them, name distinct languages. Warranted by RFC 5646 sections 3.1 and 3.1.5; scope condition per the 'he'/'iw' equivalence of section 3.1.5."@en ;
     bt:generatedBy bt:PairwiseDistinctness ;
-    bt:appliesTo <https://w3id.org/odrl-kb/bcp47> .
-
-[] a owl:AllDifferent ;
-    owl:distinctMembers (
-        odrlkb:bg odrlkb:cs odrlkb:da odrlkb:de odrlkb:el
-        odrlkb:en odrlkb:es odrlkb:fi odrlkb:fr odrlkb:hu
-        odrlkb:it odrlkb:nl odrlkb:pl odrlkb:pt odrlkb:sv
-    ) .
+    bt:scopeCondition "Type: language; Deprecated: absent; no Preferred-Value link within the member set"@en ;
+    bt:appliesTo <https://w3id.org/odrl-kb/bcp47> ;
+    bt:memberSourceFileDate "GENERATOR_FILE_DATE"^^xsd:date ;
+    bt:pairCount 105 ;
+    bt:asserts [
+        a owl:AllDifferent ;
+        owl:members (
+            bcp47:bg bcp47:cs bcp47:da bcp47:de bcp47:el
+            bcp47:en bcp47:es bcp47:fi bcp47:fr bcp47:hu
+            bcp47:it bcp47:nl bcp47:pl bcp47:pt bcp47:sv
+        )
+    ] .

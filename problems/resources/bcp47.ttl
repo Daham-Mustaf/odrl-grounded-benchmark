@@ -1,54 +1,63 @@
-# BCP 47 primary language subtags, fifteen-tag slice
-# Resource file.  Order assertions only; at the nominal sort there are none.
+# BCP 47 primary language subtags, fifteen-subtag slice
+# Resource file.  A resource is a set of order assertions; at the nominal
+# sort that set is empty, so this file publishes the concept set and
+# nothing over it.
 #
-# The slice holds fifteen ISO 639-1 two-letter primary subtags from the IANA
-# Language Subtag Registry.  A registry supplies identity between its
-# concepts and no relation over them, so this file asserts none.  The
-# concepts and their labels are carried as metadata.
-#
-# Registry uniqueness, which makes the subtags pairwise distinct, is a rule
-# the parties adopt and is recorded in bcp47-uniqueness.ttl.  Keeping it out
-# of the resource is what lets a refutation report which of its premises a
-# party may withdraw.
-#
-# Grounding for this operand is membership in the slice.  A value naming a
-# subtag outside it is ungrounded, and the verdict is Unknown with that value
-# as the certificate.
-#
-# Selection: de and fr are required by the motivating example; the remaining
-# thirteen give EU-official-language coverage for the set operators; fifteen
-# matches the GeoNames and DPV slices.
+# The slice holds fifteen ISO 639-1 two-letter primary subtags from the
+# IANA Language Subtag Registry.  Over this slice the registry publishes
+# no relation between concepts.  Registry-wide it does publish relations,
+# Preferred-Value equivalences (identity) and Macrolanguage encompassment
+# (an order a profile may read at tax); the generator verifies that no
+# member of this slice carries either field or a Deprecated field, which
+# is also the scope condition of the background theory.
 
-@prefix odrlkb:  <https://w3id.org/odrl-kb/bcp47#> .
-@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+# no Deprecated, no Preferred-Value, no Macrolanguage, no Scope on any of the fifteen.  the distinctness rule holds.
+
+
+@prefix bcp47:   <https://w3id.org/odrl-kb/bcp47#> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
 
-<https://w3id.org/odrl-kb/bcp47> a dcterms:Standard ;
-    dcterms:title "BCP 47 primary language subtags, fifteen-tag slice"@en ;
+<https://w3id.org/odrl-kb/bcp47> a skos:ConceptScheme ;
+    dcterms:title "BCP 47 primary language subtags, fifteen-subtag slice"@en ;
     dcterms:source
         <https://www.iana.org/assignments/language-subtag-registry> ;
     dcterms:conformsTo <https://www.rfc-editor.org/rfc/rfc5646> ;
-    dcterms:date "TODO registry file date"^^xsd:date ;
-    dcterms:issued "TODO retrieval date"^^xsd:date ;
+    dcterms:hasVersion "File-Date GENERATOR_FILE_DATE" ;
+    dcterms:issued "GENERATOR_RETRIEVAL_DATE"^^xsd:date ;
+    dcterms:identifier "sha256:GENERATOR_SHA256" ;
     dcterms:license <https://www.iana.org/help/licensing-terms> ;
-    dcterms:extent "15 concepts, no order assertions" .
+    dcterms:extent "15 concepts, no order assertions" ;
+    skos:scopeNote "RFC 5646 section 2.2 reserves Tag for a complete language tag and Subtag for a component; the concepts of this scheme are subtags."@en .
 
-odrlkb:LanguageTag a rdfs:Class ;
-    rdfs:label "BCP 47 primary language subtag"@en .
-
-odrlkb:bg a odrlkb:LanguageTag ; rdfs:label "Bulgarian"@en  .
-odrlkb:cs a odrlkb:LanguageTag ; rdfs:label "Czech"@en      .
-odrlkb:da a odrlkb:LanguageTag ; rdfs:label "Danish"@en     .
-odrlkb:de a odrlkb:LanguageTag ; rdfs:label "German"@en     .
-odrlkb:el a odrlkb:LanguageTag ; rdfs:label "Greek"@en      .
-odrlkb:en a odrlkb:LanguageTag ; rdfs:label "English"@en    .
-odrlkb:es a odrlkb:LanguageTag ; rdfs:label "Spanish"@en    .
-odrlkb:fi a odrlkb:LanguageTag ; rdfs:label "Finnish"@en    .
-odrlkb:fr a odrlkb:LanguageTag ; rdfs:label "French"@en     .
-odrlkb:hu a odrlkb:LanguageTag ; rdfs:label "Hungarian"@en  .
-odrlkb:it a odrlkb:LanguageTag ; rdfs:label "Italian"@en    .
-odrlkb:nl a odrlkb:LanguageTag ; rdfs:label "Dutch"@en      .
-odrlkb:pl a odrlkb:LanguageTag ; rdfs:label "Polish"@en     .
-odrlkb:pt a odrlkb:LanguageTag ; rdfs:label "Portuguese"@en .
-odrlkb:sv a odrlkb:LanguageTag ; rdfs:label "Swedish"@en    .
+bcp47:bg a skos:Concept ; skos:inScheme <https://w3id.org/odrl-kb/bcp47> ;
+    skos:notation "bg" ; skos:prefLabel "Bulgarian"@en .
+bcp47:cs a skos:Concept ; skos:inScheme <https://w3id.org/odrl-kb/bcp47> ;
+    skos:notation "cs" ; skos:prefLabel "Czech"@en .
+bcp47:da a skos:Concept ; skos:inScheme <https://w3id.org/odrl-kb/bcp47> ;
+    skos:notation "da" ; skos:prefLabel "Danish"@en .
+bcp47:de a skos:Concept ; skos:inScheme <https://w3id.org/odrl-kb/bcp47> ;
+    skos:notation "de" ; skos:prefLabel "German"@en .
+bcp47:el a skos:Concept ; skos:inScheme <https://w3id.org/odrl-kb/bcp47> ;
+    skos:notation "el" ; skos:prefLabel "Modern Greek (1453-)"@en .
+bcp47:en a skos:Concept ; skos:inScheme <https://w3id.org/odrl-kb/bcp47> ;
+    skos:notation "en" ; skos:prefLabel "English"@en .
+bcp47:es a skos:Concept ; skos:inScheme <https://w3id.org/odrl-kb/bcp47> ;
+    skos:notation "es" ; skos:prefLabel "Spanish and Castilian"@en .
+bcp47:fi a skos:Concept ; skos:inScheme <https://w3id.org/odrl-kb/bcp47> ;
+    skos:notation "fi" ; skos:prefLabel "Finnish"@en .
+bcp47:fr a skos:Concept ; skos:inScheme <https://w3id.org/odrl-kb/bcp47> ;
+    skos:notation "fr" ; skos:prefLabel "French"@en .
+bcp47:hu a skos:Concept ; skos:inScheme <https://w3id.org/odrl-kb/bcp47> ;
+    skos:notation "hu" ; skos:prefLabel "Hungarian"@en .
+bcp47:it a skos:Concept ; skos:inScheme <https://w3id.org/odrl-kb/bcp47> ;
+    skos:notation "it" ; skos:prefLabel "Italian"@en .
+bcp47:nl a skos:Concept ; skos:inScheme <https://w3id.org/odrl-kb/bcp47> ;
+    skos:notation "nl" ; skos:prefLabel "Dutch and Flemish"@en .
+bcp47:pl a skos:Concept ; skos:inScheme <https://w3id.org/odrl-kb/bcp47> ;
+    skos:notation "pl" ; skos:prefLabel "Polish"@en .
+bcp47:pt a skos:Concept ; skos:inScheme <https://w3id.org/odrl-kb/bcp47> ;
+    skos:notation "pt" ; skos:prefLabel "Portuguese"@en .
+bcp47:sv a skos:Concept ; skos:inScheme <https://w3id.org/odrl-kb/bcp47> ;
+    skos:notation "sv" ; skos:prefLabel "Swedish"@en .

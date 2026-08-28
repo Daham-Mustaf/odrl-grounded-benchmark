@@ -1,0 +1,82 @@
+# Binding vocabulary
+#
+# Not a new vocabulary; a definition of one already in use in every
+# profile-*.ttl.  A binding exists before any evaluation, which is why it
+# lives outside the report namespace: profile content must not be
+# date-stamped to the report model's lifecycle.
+#
+# One deliberate non-reuse: bind:leftOperand is not odrl:leftOperand.
+# ODRL declares that property with domain odrl:Constraint; redomaining it
+# onto bindings would be drift into a published vocabulary.  The two are
+# linked by rdfs:seeAlso instead.
+
+@prefix bind:    <https://w3id.org/odrl-kb/binding#> .
+@prefix bt:      <https://w3id.org/odrl-kb/background#> .
+@prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix vann:    <http://purl.org/vocab/vann/> .
+
+<https://w3id.org/odrl-kb/binding> a owl:Ontology ;
+    dcterms:title "Operand binding vocabulary"@en ;
+    vann:preferredNamespacePrefix "bind" ;
+    vann:preferredNamespaceUri "https://w3id.org/odrl-kb/binding#" ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+    dcterms:description "A binding pairs an ODRL left operand with an external resource and declares the sort at which its published assertions are read. The sort is a property of the binding, not of the operand or of the resource."@en .
+
+bind:OperandBinding a rdfs:Class, skos:Concept ;
+    rdfs:isDefinedBy bind: ;
+    rdfs:label "Operand Binding" ;
+    skos:definition "A profile's pairing of a left operand with a resource, declaring the sort, the grounding rule, and optionally a background theory. Declaring the sort is the one judgment a profile makes about an operand."@en .
+
+bind:Sort a rdfs:Class, skos:Concept ;
+    rdfs:isDefinedBy bind: ;
+    rdfs:label "Sort" ;
+    skos:definition "The declared reading of the bound resource's published assertions. Three individuals exist and no others."@en .
+
+bind:tax a bind:Sort ;
+    rdfs:label "tax" ;
+    skos:definition "The published assertions are read as subsumption."@en .
+bind:mer a bind:Sort ;
+    rdfs:label "mer" ;
+    skos:definition "The published assertions are read as parthood."@en .
+bind:nom a bind:Sort ;
+    rdfs:label "nom" ;
+    skos:definition "The resource supplies a set of concepts and nothing further; identity is the only relation available."@en .
+
+bind:leftOperand a rdfs:Property, skos:Concept ;
+    rdfs:isDefinedBy bind: ;
+    rdfs:label "left operand" ;
+    rdfs:seeAlso odrl:leftOperand ;
+    skos:definition "The ODRL left operand this binding covers."@en ;
+    rdfs:domain bind:OperandBinding ;
+    rdfs:range odrl:LeftOperand .
+
+bind:sort a rdfs:Property, skos:Concept ;
+    rdfs:isDefinedBy bind: ;
+    rdfs:label "sort" ;
+    skos:definition "The declared sort of the binding."@en ;
+    rdfs:domain bind:OperandBinding ;
+    rdfs:range bind:Sort .
+
+bind:resource a rdfs:Property, skos:Concept ;
+    rdfs:isDefinedBy bind: ;
+    rdfs:label "resource" ;
+    skos:definition "The external resource whose published assertions the binding reads: a versioned concept scheme."@en ;
+    rdfs:domain bind:OperandBinding ;
+    rdfs:range skos:ConceptScheme .
+
+bind:backgroundTheory a rdfs:Property, skos:Concept ;
+    rdfs:isDefinedBy bind: ;
+    rdfs:label "background theory" ;
+    skos:definition "A declared, withdrawable background theory in force for this binding."@en ;
+    rdfs:domain bind:OperandBinding ;
+    rdfs:range bt:BackgroundTheory .
+
+bind:grounding a rdfs:Property, skos:Concept ;
+    rdfs:isDefinedBy bind: ;
+    rdfs:label "grounding" ;
+    skos:definition "The declared rule mapping right-operand values to concepts of the resource, such as notation match or IRI identity. Resource-dependent; a value the rule does not resolve is ungrounded."@en ;
+    rdfs:domain bind:OperandBinding .
