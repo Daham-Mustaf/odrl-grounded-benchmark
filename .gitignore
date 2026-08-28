@@ -6,3 +6,5 @@ __pycache__/
 *.egg-info/
 .pytest_cache/
 __pycache__/
+cert-report.json
+cleanup.sh
