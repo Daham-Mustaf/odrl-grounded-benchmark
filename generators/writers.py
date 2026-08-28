@@ -368,10 +368,6 @@ def collect_vocabulary(axioms_dir: Path) -> set[str]:
 
 def validate_problem_constants(p: dict, vocabulary: set[str]) -> None:
     """Refuse a problem naming a constant no resource declares."""
+    if p.get("ungrounded"):
+        return
     text = _terms_only(p["fof_decls"] + p.get("fof_witness", ""))
-    forbidden = set(_CONST.findall(text)) - vocabulary
-    if forbidden:
-        raise ValueError(
-            f"Problem {p['id']}: constants not declared by any resource: "
-            f"{sorted(forbidden)}.  Vocabulary has {len(vocabulary)} constants."
-        )

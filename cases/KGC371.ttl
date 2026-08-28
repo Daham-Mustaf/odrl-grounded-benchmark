@@ -1,0 +1,58 @@
+@prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix bcp47:   <https://w3id.org/odrl-kb/bcp47#> .
+@prefix vrep:    <https://w3id.org/odrl-verdict-report#> .
+@prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+@prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+
+drk:offer-371 a odrl:Offer ;
+    dcterms:title "Distribution in German"@en ;
+    odrl:assigner drk:publisher ;
+    odrl:permission kgc:KGC371-offer-r1 .
+
+kgc:KGC371-offer-r1 a odrl:Permission ;
+    odrl:action odrl:distribute ;
+    odrl:target drk:dataset ;
+    odrl:constraint kgc:KGC371-offer-c1 .
+
+kgc:KGC371-offer-c1 a odrl:Constraint ;
+    odrl:leftOperand odrl:language ;
+    odrl:operator odrl:eq ;
+    odrl:rightOperand bcp47:de .
+
+drk:request-371 a odrl:Request ;
+    dcterms:title "Distribution in French"@en ;
+    odrl:assignee drk:reuser ;
+    odrl:permission kgc:KGC371-request-r1 .
+
+kgc:KGC371-request-r1 a odrl:Permission ;
+    odrl:action odrl:distribute ;
+    odrl:target drk:dataset ;
+    odrl:constraint kgc:KGC371-request-c1 .
+
+kgc:KGC371-request-c1 a odrl:Constraint ;
+    odrl:leftOperand odrl:language ;
+    odrl:operator odrl:eq ;
+    odrl:rightOperand bcp47:fr .
+
+drk:offer-371 vrep:readUnder <https://w3id.org/odrl-kb/profile/b-language-bcp47> .
+drk:request-371 vrep:readUnder <https://w3id.org/odrl-kb/profile/b-language-bcp47> .
+
+### Expected result #######################################################
+
+drk:KGC371-report a vrep:OperandReport ;
+    dcterms:identifier "KGC371" ;
+    vrep:firstPolicy drk:offer-371 ;
+    vrep:secondPolicy drk:request-371 ;
+    vrep:firstConstraint kgc:KGC371-offer-c1 ;
+    vrep:secondConstraint kgc:KGC371-request-c1 ;
+    vrep:leftOperand odrl:language ;
+    vrep:sort vrep:nom ;
+    vrep:resource <https://w3id.org/odrl-kb/bcp47> ;
+    vrep:backgroundTheory <None> ;
+    vrep:verdict vrep:Unknown ;
+    vrep:certificate drk:KGC371-certificate .
+
+drk:KGC371-certificate a vrep:Models ;
+    rdfs:comment """Both queries are satisfiable, and the models differ on whether bcp47:de and bcp47:fr are one concept, which the registry does not decide."""@en .

@@ -1,29 +1,92 @@
-# Profile entry for odrl:language over the BCP 47 slice.
+# Profile entries for odrl:language over the BCP 47 slice.
 #
-# The sort is nom.  A registry supplies identity between its concepts and
-# no relation over them, so isA, isPartOf and hasPart are rejected by the
-# signature before the resource is opened.  That rejection is the sort
-# doing its work, and this is the clearest case of it in the suite: the
-# resource file has fifteen concept assertions and no order assertion at
-# all.
+# Two bindings over one resource, differing in how a policy value is
+# resolved to a concept.  
+# The sort is nom, and language is where that does visible work.  A
+# registry publishes a set of subtags and, over this slice, no relation
+# between them, so the resource file carries fifteen concept assertions
+# and no order assertion at all.  There is nothing for isA to read, and
+# the signature rejects isA, isPartOf and hasPart on this operand before
+# the resource is opened.  Every other operand in the suite is tax or
+# mer.
 #
-# Grounding is membership in the slice, matched against skos:notation.  A
-# composed tag such as en-US is well formed over registered subtags and
-# names no concept here, so it is ungrounded and the verdict is Unknown
-# with that value as the certificate.
-#
-# The background theory is the parties' registry-uniqueness rule.  A
-# problem binding this profile without it gets Unknown where the
-# declaration would have given a definite verdict, which is the withdrawal
-# case.
+# Registry uniqueness is the parties' rule and lives in its own file.  A
+# problem citing a binding below without also including BCP47001-0.ax
+# gets Unknown where the declaration would have given a definite verdict:
+# the registry lists both subtags and says nothing that separates them.
 
-@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
-@prefix vrep: <https://w3id.org/odrl-verdict-report#> .
-@prefix ex:   <https://w3id.org/odrl-kb/profile/> .
+@prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+@prefix vrep:    <https://w3id.org/odrl-verdict-report#> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ex:      <https://w3id.org/odrl-kb/profile/> .
+
+# --- the grounding rules ---------------------------------------------
+#
+# Named, so that a binding cites one and a report says which was applied.
+# A rule is a statement about how values are read, not about what the
+# registry contains, and two parties reading one registry by different
+# rules disagree about which policies are interpretable rather than about
+# what the languages are.
+
+ex:g-bcp47-exact a vrep:GroundingProcedure ;
+    dcterms:title "Exact subtag match"@en ;
+    rdfs:comment """A right-operand value resolves to a concept of the scheme when it
+         is that concept's IRI, or when it is a literal equal to the
+         concept's skos:notation. Nothing else resolves. A composed tag
+         such as en-US is well formed under RFC 5646 and resolves to no
+         concept here, because the scheme holds primary subtags and
+         en-US is not one."""@en ;
+    vrep:matchesProperty skos:notation ;
+    vrep:acceptsIRI true ;
+    dcterms:source <https://www.rfc-editor.org/rfc/rfc5646#section-2.2> .
+
+ex:g-bcp47-primary a vrep:GroundingProcedure ;
+    dcterms:title "Primary subtag reduction"@en ;
+    rdfs:comment """As the exact rule, and additionally: a value that is a
+         well-formed language tag resolves to the concept whose notation
+         is the tag's primary language subtag. RFC 5646 section 2.2.1
+         defines the primary subtag as the first component, so en-US
+         resolves to en and de-DE to de.
+
+         This is a decision about reading, not about meaning. A party
+         adopting it treats a request for American English as a request
+         for English, which is right for some purposes and wrong for
+         others; a party who cares about the region declines the rule and
+         gets an ungrounded value instead of a wrong answer. The profile
+         is where that choice is recorded."""@en ;
+    vrep:matchesProperty skos:notation ;
+    vrep:acceptsIRI true ;
+    vrep:reducesToPrimarySubtag true ;
+    dcterms:source <https://www.rfc-editor.org/rfc/rfc5646#section-2.2.1> .
+
+# --- the bindings -----------------------------------------------------
 
 ex:b-language-bcp47 a vrep:OperandBinding ;
+    dcterms:title "Language over BCP 47, exact subtags"@en ;
+    rdfs:comment """The default binding. A policy naming a subtag of the slice is
+         interpretable; one naming anything else is not, and the verdict
+         is Unknown with that value as its certificate rather than a
+         guess at what was meant."""@en ;
     vrep:leftOperand      odrl:language ;
     vrep:sort             vrep:nom ;
     vrep:resource         <https://w3id.org/odrl-kb/bcp47> ;
     vrep:backgroundTheory <https://w3id.org/odrl-kb/bcp47/uniqueness> ;
-    vrep:grounding        vrep:sliceMembership .
+    vrep:grounding        ex:g-bcp47-exact .
+
+ex:b-language-bcp47-primary a vrep:OperandBinding ;
+    dcterms:title "Language over BCP 47, composed tags reduced"@en ;
+    rdfs:comment """The same resource, the same sort, the same theory, read by a
+         wider rule. A policy that the default binding cannot interpret
+         may be interpretable here, and the two bindings can therefore
+         return different verdicts on one pair of policies without
+         disagreeing about any concept.
+
+         That difference is the profile's, and a report citing this
+         binding says so."""@en ;
+    vrep:leftOperand      odrl:language ;
+    vrep:sort             vrep:nom ;
+    vrep:resource         <https://w3id.org/odrl-kb/bcp47> ;
+    vrep:backgroundTheory <https://w3id.org/odrl-kb/bcp47/uniqueness> ;
+    vrep:grounding        ex:g-bcp47-primary .

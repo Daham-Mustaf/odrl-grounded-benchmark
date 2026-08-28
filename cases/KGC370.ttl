@@ -1,0 +1,61 @@
+@prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix bcp47:   <https://w3id.org/odrl-kb/bcp47#> .
+@prefix vrep:    <https://w3id.org/odrl-verdict-report#> .
+@prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+@prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+
+drk:offer-370 a odrl:Offer ;
+    dcterms:title "Distribution in German"@en ;
+    odrl:assigner drk:publisher ;
+    odrl:permission kgc:KGC370-offer-r1 .
+
+kgc:KGC370-offer-r1 a odrl:Permission ;
+    odrl:action odrl:distribute ;
+    odrl:target drk:dataset ;
+    odrl:constraint kgc:KGC370-offer-c1 .
+
+kgc:KGC370-offer-c1 a odrl:Constraint ;
+    odrl:leftOperand odrl:language ;
+    odrl:operator odrl:eq ;
+    odrl:rightOperand bcp47:de .
+
+drk:request-370 a odrl:Request ;
+    dcterms:title "Distribution in French"@en ;
+    odrl:assignee drk:reuser ;
+    odrl:permission kgc:KGC370-request-r1 .
+
+kgc:KGC370-request-r1 a odrl:Permission ;
+    odrl:action odrl:distribute ;
+    odrl:target drk:dataset ;
+    odrl:constraint kgc:KGC370-request-c1 .
+
+kgc:KGC370-request-c1 a odrl:Constraint ;
+    odrl:leftOperand odrl:language ;
+    odrl:operator odrl:eq ;
+    odrl:rightOperand bcp47:fr .
+
+drk:offer-370 vrep:readUnder <https://w3id.org/odrl-kb/profile/b-language-bcp47> .
+drk:request-370 vrep:readUnder <https://w3id.org/odrl-kb/profile/b-language-bcp47> .
+
+### Expected result #######################################################
+
+drk:KGC370-report a vrep:OperandReport ;
+    dcterms:identifier "KGC370" ;
+    vrep:firstPolicy drk:offer-370 ;
+    vrep:secondPolicy drk:request-370 ;
+    vrep:firstConstraint kgc:KGC370-offer-c1 ;
+    vrep:secondConstraint kgc:KGC370-request-c1 ;
+    vrep:leftOperand odrl:language ;
+    vrep:sort vrep:nom ;
+    vrep:resource <https://w3id.org/odrl-kb/bcp47> ;
+    vrep:backgroundTheory <https://w3id.org/odrl-kb/bcp47/uniqueness> ;
+    vrep:verdict vrep:Incompatible ;
+    vrep:certificate drk:KGC370-certificate .
+
+drk:KGC370-certificate a vrep:Refutation ;
+    rdfs:comment """The two subtags are declared to name distinct languages. Withdrawing that declaration returns the verdict to Unknown, which is KGC371."""@en ;
+    vrep:clashingConstraint kgc:KGC370-offer-c1, kgc:KGC370-request-c1 ;
+    vrep:premise [ vrep:premiseSource vrep:fromBackgroundTheory ;
+                   rdfs:label "bcp47:de and bcp47:fr are declared distinct, on RFC 5646's registry uniqueness"@en ] .
