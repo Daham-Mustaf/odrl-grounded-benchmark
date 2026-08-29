@@ -28,7 +28,7 @@
 ; Resource: unchanged from KGC333.
 ; The instance of the registry rule this problem adopts, named as the TPTP
 ; side names it so that a proof and an unsat core cite one assertion.
-(assert (! (distinct loc_de loc_fr) :named bt_loc_de_distinct_loc_fr))
+(assert (! (distinct loc_de loc_fr) :named bg_dist_loc_de_loc_fr))
 ; witness condition negated
 (assert (! (not (or (and (= loc_de loc_de) (= loc_de loc_fr))
     (and (= loc_fr loc_de) (= loc_fr loc_fr)))) :named w_kgc334))

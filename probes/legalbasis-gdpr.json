@@ -1,0 +1,16 @@
+{
+  "binding": "legalbasis-gdpr",
+  "note": "DPV legal bases with the eu-gdpr Article 6 hierarchy, the only DAG among the resources: some bases sit under two parents. The finding this resource carries is that an isAnyOf enumeration of Article 6(1) misses explicit consent while an isA over the class reaches it, so the same record gets opposite verdicts from two readings of one Article.",
+  "includes": [
+    "DPV-gdprlb.ax"
+  ],
+  "present": [
+    "lb_dpv_consent"
+  ],
+  "not_leq": [
+    [
+      "lb_dpv_consent",
+      "lb_dpv_consent"
+    ]
+  ]
+}

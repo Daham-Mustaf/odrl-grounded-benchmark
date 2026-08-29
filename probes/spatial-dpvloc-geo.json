@@ -1,0 +1,38 @@
+{
+  "binding": "spatial-dpvloc-geo",
+  "note": "DPV Locations read as containment only. Bonaire lies within the Netherlands and the Netherlands does not lie within Bonaire: an edge reversed in the builder makes the second derivable and every spatial verdict silently wrong. The European Union is absent by construction, because union membership is not containment and this reading does not take it; that absence is the whole two-readings argument and is checked here rather than argued in prose.",
+  "includes": [
+    "LOC-dpvloc-geo.ax"
+  ],
+  "present": [
+    "loc_bq",
+    "loc_nl",
+    "loc_de",
+    "loc_fr"
+  ],
+  "absent": [
+    "loc_eu",
+    "loc_eea",
+    "loc_eu27"
+  ],
+  "leq": [
+    [
+      "loc_bq",
+      "loc_nl"
+    ]
+  ],
+  "not_leq": [
+    [
+      "loc_nl",
+      "loc_bq"
+    ],
+    [
+      "loc_de",
+      "loc_fr"
+    ],
+    [
+      "loc_fr",
+      "loc_de"
+    ]
+  ]
+}

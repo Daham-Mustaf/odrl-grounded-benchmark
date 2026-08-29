@@ -377,7 +377,7 @@ PROBLEMS = [
 % The rule is stated in LOC-dpvloc-iso.ax and ranges over 249 areas.  It is
 % instantiated here rather than expanded there: a refutation should cite the
 % inequation it used, not one term standing for thirty thousand.
-fof(bt_loc_de_distinct_loc_fr, axiom,
+fof(bg_dist_loc_de_loc_fr, axiom,
     loc_de != loc_fr).
 """,
         "fof_witness": f"""\
@@ -392,7 +392,7 @@ fof(bt_loc_de_distinct_loc_fr, axiom,
         "smt2_background": """\
 ; The instance of the registry rule this problem adopts, named as the TPTP
 ; side names it so that a proof and an unsat core cite one assertion.
-(assert (! (distinct loc_de loc_fr) :named bt_loc_de_distinct_loc_fr))""",
+(assert (! (distinct loc_de loc_fr) :named bg_dist_loc_de_loc_fr))""",
         "smt2_witness": f"""\
 (or (and (= {DE} {DE}) (= {DE} {FR}))
     (and (= {FR} {DE}) (= {FR} {FR})))""",

@@ -1,0 +1,23 @@
+% SZS output start Proof for KGC302-2
+fof(f33,axiom,(
+  kge_leq(gn_france,gn_europe)),
+  file('problems/verdict/KGC302-2.p',res_france_within_europe)).
+fof(f34,axiom,(
+  ~((kge_leq(gn_europe,gn_europe) & gn_europe = gn_france) | (kge_leq(gn_france,gn_europe) & gn_france = gn_france))),
+  file('problems/verdict/KGC302-2.p',w_kgc302)).
+fof(f54,plain,(
+  (~kge_leq(gn_europe,gn_europe) | gn_europe != gn_france) & (~kge_leq(gn_france,gn_europe) | gn_france != gn_france)),
+  inference(ennf_transformation,[],[f34])).
+fof(f72,plain,(
+  kge_leq(gn_france,gn_europe)),
+  inference(cnf_transformation,[],[f33])).
+fof(f73,plain,(
+  ~kge_leq(gn_france,gn_europe) | gn_france != gn_france),
+  inference(cnf_transformation,[],[f54])).
+fof(f75,plain,(
+  ~kge_leq(gn_france,gn_europe)),
+  inference(trivial_inequality_removal,[],[f73])).
+fof(f85,plain,(
+  $false),
+  inference(forward_subsumption_resolution,[],[f72,f75])).
+% SZS output end Proof

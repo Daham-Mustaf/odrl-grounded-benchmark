@@ -3,8 +3,8 @@ kgc:KGC334-observed a vrep:Refutation ;
     vrep:proofArtefact <proofs/KGC334-1.tstp> ;
     vrep:attributedAssertion [
         vrep:premiseSource vrep:fromBackgroundTheory ;
-        vrep:formulaName "bt_loc_de_distinct_loc_fr" ;
-        rdfs:label "bt_loc_de_distinct_loc_fr"@en ] ;
+        vrep:formulaName "bg_dist_loc_de_loc_fr" ;
+        rdfs:label "bg_dist_loc_de_loc_fr"@en ] ;
     vrep:attributedAssertion [
         vrep:premiseSource vrep:fromConstraints ;
         vrep:formulaName "w_kgc334" ;

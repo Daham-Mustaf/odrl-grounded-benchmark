@@ -1,0 +1,20 @@
+% SZS output start Proof for KGC321-1
+fof(f4,axiom,(
+  ft_pdf != ft_pdfa1a),
+  file('problems/verdict/KGC321-1.p',bt_ft_pdf_distinct_ft_pdfa1a)).
+fof(f5,axiom,(
+  (ft_pdf = ft_pdf & ft_pdf = ft_pdfa1a) | (ft_pdfa1a = ft_pdf & ft_pdfa1a = ft_pdfa1a)),
+  file('problems/verdict/KGC321-1.p',w_kgc321)).
+fof(f13,plain,(
+  ft_pdf != ft_pdfa1a),
+  inference(cnf_transformation,[],[f4])).
+fof(f15,plain,(
+  ft_pdf = ft_pdfa1a | ft_pdf = ft_pdfa1a),
+  inference(cnf_transformation,[],[f5])).
+fof(f18,plain,(
+  ft_pdf = ft_pdfa1a),
+  inference(duplicate_literal_removal,[],[f15])).
+fof(f19,plain,(
+  $false),
+  inference(forward_subsumption_resolution,[],[f13,f18])).
+% SZS output end Proof

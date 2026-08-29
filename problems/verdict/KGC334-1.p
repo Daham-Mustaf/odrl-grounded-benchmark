@@ -25,7 +25,7 @@ include('axioms/LOC-dpvloc-iso.ax').
 % The rule is stated in LOC-dpvloc-iso.ax and ranges over 249 areas.  It is
 % instantiated here rather than expanded there: a refutation should cite the
 % inequation it used, not one term standing for thirty thousand.
-fof(bt_loc_de_distinct_loc_fr, axiom,
+fof(bg_dist_loc_de_loc_fr, axiom,
     loc_de != loc_fr).
 
 % --- witness condition asserted ------------------------------------------

@@ -1,0 +1,17 @@
+% SZS output start Proof for KGC322-2
+fof(f4,axiom,(
+  ~(((ft_pdf = ft_pdf | ft_pdf = ft_pdfa1a) & ft_pdf = ft_pdfa1a) | ((ft_pdfa1a = ft_pdf | ft_pdfa1a = ft_pdfa1a) & ft_pdfa1a = ft_pdfa1a))),
+  file('problems/verdict/KGC322-2.p',w_kgc322)).
+fof(f9,plain,(
+  ((ft_pdf != ft_pdf & ft_pdf != ft_pdfa1a) | ft_pdf != ft_pdfa1a) & ((ft_pdf != ft_pdfa1a & ft_pdfa1a != ft_pdfa1a) | ft_pdfa1a != ft_pdfa1a)),
+  inference(ennf_transformation,[],[f4])).
+fof(f13,plain,(
+  ft_pdfa1a != ft_pdfa1a | ft_pdfa1a != ft_pdfa1a),
+  inference(cnf_transformation,[],[f9])).
+fof(f17,plain,(
+  ft_pdfa1a != ft_pdfa1a),
+  inference(duplicate_literal_removal,[],[f13])).
+fof(f18,plain,(
+  $false),
+  inference(trivial_inequality_removal,[],[f17])).
+% SZS output end Proof

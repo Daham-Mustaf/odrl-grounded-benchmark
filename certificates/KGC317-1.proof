@@ -1,0 +1,11 @@
+% SZS output start Proof for KGC317-1
+fof(f19,axiom,(
+  dpv_marketing != dpv_marketing & dpv_marketing = dpv_marketing),
+  file('problems/verdict/KGC317-1.p',w_kgc317)).
+fof(f43,plain,(
+  dpv_marketing != dpv_marketing),
+  inference(cnf_transformation,[],[f19])).
+fof(f44,plain,(
+  $false),
+  inference(trivial_inequality_removal,[],[f43])).
+% SZS output end Proof

@@ -1,0 +1,32 @@
+{
+  "binding": "tom-dpv",
+  "note": "DPV technical and organisational measures at tax, the only set-valued operand in the suite and so the only place isAllOf does work an identity constraint could not. Encryption and access control are both technical measures; the two verdicts over this resource turn on that chain and on nothing declared.",
+  "includes": [
+    "DPV-tom.ax"
+  ],
+  "present": [
+    "tm_encryption",
+    "tm_access_control_method",
+    "tm_technical_measure"
+  ],
+  "leq": [
+    [
+      "tm_encryption",
+      "tm_technical_measure"
+    ],
+    [
+      "tm_access_control_method",
+      "tm_technical_measure"
+    ]
+  ],
+  "not_leq": [
+    [
+      "tm_technical_measure",
+      "tm_encryption"
+    ],
+    [
+      "tm_encryption",
+      "tm_access_control_method"
+    ]
+  ]
+}

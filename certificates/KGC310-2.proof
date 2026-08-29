@@ -1,0 +1,23 @@
+% SZS output start Proof for KGC310-2
+fof(f18,axiom,(
+  kge_leq(dpv_scientific_research,dpv_research_and_development)),
+  file('problems/verdict/KGC310-2.p',res_dpv_scientific_research_below_dpv_research_and_development)).
+fof(f19,axiom,(
+  ~((kge_leq(dpv_research_and_development,dpv_research_and_development) & dpv_research_and_development = dpv_scientific_research) | (kge_leq(dpv_scientific_research,dpv_research_and_development) & dpv_scientific_research = dpv_scientific_research))),
+  file('problems/verdict/KGC310-2.p',w_kgc310)).
+fof(f24,plain,(
+  (~kge_leq(dpv_research_and_development,dpv_research_and_development) | dpv_research_and_development != dpv_scientific_research) & (~kge_leq(dpv_scientific_research,dpv_research_and_development) | dpv_scientific_research != dpv_scientific_research)),
+  inference(ennf_transformation,[],[f19])).
+fof(f42,plain,(
+  kge_leq(dpv_scientific_research,dpv_research_and_development)),
+  inference(cnf_transformation,[],[f18])).
+fof(f43,plain,(
+  ~kge_leq(dpv_scientific_research,dpv_research_and_development) | dpv_scientific_research != dpv_scientific_research),
+  inference(cnf_transformation,[],[f24])).
+fof(f45,plain,(
+  ~kge_leq(dpv_scientific_research,dpv_research_and_development)),
+  inference(trivial_inequality_removal,[],[f43])).
+fof(f55,plain,(
+  $false),
+  inference(forward_subsumption_resolution,[],[f42,f45])).
+% SZS output end Proof

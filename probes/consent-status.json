@@ -1,0 +1,34 @@
+{
+  "binding": "consent-status",
+  "note": "DPV consent statuses at tax. Consent given is a valid state and consent withdrawn is an invalid one, both under the root status. The two branches are separated by a definitional background theory warranted by the module's own words, which is the only publisher-warranted disjointness in the suite; a build that lost that file would turn the Incompatible verdicts into Unknown.",
+  "includes": [
+    "DPV-consent.ax",
+    "DPV-consent-definitional.ax"
+  ],
+  "present": [
+    "dpv_consent_given",
+    "dpv_consent_withdrawn",
+    "dpv_consent_status_valid_for_processing",
+    "dpv_consent_status_invalid_for_processing"
+  ],
+  "leq": [
+    [
+      "dpv_consent_given",
+      "dpv_consent_status_valid_for_processing"
+    ],
+    [
+      "dpv_consent_withdrawn",
+      "dpv_consent_status_invalid_for_processing"
+    ]
+  ],
+  "not_leq": [
+    [
+      "dpv_consent_given",
+      "dpv_consent_status_invalid_for_processing"
+    ],
+    [
+      "dpv_consent_status_valid_for_processing",
+      "dpv_consent_given"
+    ]
+  ]
+}

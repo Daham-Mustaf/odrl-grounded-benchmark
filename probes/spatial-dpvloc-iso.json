@@ -1,0 +1,18 @@
+{
+  "binding": "spatial-dpvloc-geo with the ISO uniqueness rule",
+  "note": "The rule is stated in its axiom file and instantiated by the problems that adopt it, so no inequation between two countries appears in the included files. This probe records that: it is the difference between a theory that generates assertions and one that licenses them, and a build that started expanding the rule would fail here.",
+  "includes": [
+    "LOC-dpvloc-geo.ax",
+    "LOC-dpvloc-iso.ax"
+  ],
+  "present": [
+    "loc_de",
+    "loc_fr"
+  ],
+  "not_distinct": [
+    [
+      "loc_de",
+      "loc_fr"
+    ]
+  ]
+}

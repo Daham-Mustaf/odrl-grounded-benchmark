@@ -1,0 +1,33 @@
+{
+  "binding": "spatial-dpvloc-juris",
+  "note": "The same file with union membership read as containment as well. Germany is then within the European Union and isPartOf EU has an answer, which it does not under the geographic reading. The containment facts must survive unchanged: a reading that gains the unions and loses Bonaire has taken the wrong edges.",
+  "includes": [
+    "LOC-dpvloc-juris.ax"
+  ],
+  "present": [
+    "loc_de",
+    "loc_eu",
+    "loc_bq",
+    "loc_nl"
+  ],
+  "leq": [
+    [
+      "loc_de",
+      "loc_eu"
+    ],
+    [
+      "loc_bq",
+      "loc_nl"
+    ]
+  ],
+  "not_leq": [
+    [
+      "loc_eu",
+      "loc_de"
+    ],
+    [
+      "loc_nl",
+      "loc_bq"
+    ]
+  ]
+}

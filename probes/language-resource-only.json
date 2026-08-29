@@ -1,0 +1,17 @@
+{
+  "binding": "language-strict, resource without the declaration",
+  "note": "The same resource with the uniqueness theory withdrawn, which is the difference between KGC370 and KGC371. Nothing separates the subtags, so no distinctness is declared and the verdict on eq de against eq fr is Unknown. If this probe starts failing, the withdrawal pair has stopped demonstrating withdrawal.",
+  "includes": [
+    "BCP47000-0.ax"
+  ],
+  "present": [
+    "bcp_de",
+    "bcp_fr"
+  ],
+  "not_distinct": [
+    [
+      "bcp_de",
+      "bcp_fr"
+    ]
+  ]
+}

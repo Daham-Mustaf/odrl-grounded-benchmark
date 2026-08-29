@@ -1,0 +1,38 @@
+{
+  "binding": "purpose-dpv",
+  "note": "DPV purposes at tax, the deepest order in the suite. Scientific research lies under research and development, which lies under the root: a chain the certificates cite along with transitivity, and the one resource where a Compatible verdict may need more than one published assertion. The direction matters and is checked both ways. Marketing is unrelated to research in the published order, which is what makes the Unknown problems Unknown.",
+  "includes": [
+    "DPV-milestone.ax"
+  ],
+  "present": [
+    "dpv_scientific_research",
+    "dpv_research_and_development",
+    "dpv_marketing"
+  ],
+  "leq": [
+    [
+      "dpv_scientific_research",
+      "dpv_research_and_development"
+    ]
+  ],
+  "not_leq": [
+    [
+      "dpv_research_and_development",
+      "dpv_scientific_research"
+    ],
+    [
+      "dpv_marketing",
+      "dpv_research_and_development"
+    ],
+    [
+      "dpv_scientific_research",
+      "dpv_marketing"
+    ]
+  ],
+  "not_distinct": [
+    [
+      "dpv_marketing",
+      "dpv_scientific_research"
+    ]
+  ]
+}

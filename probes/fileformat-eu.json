@@ -1,0 +1,28 @@
+{
+  "binding": "fileformat-eu",
+  "note": "The EU file type table at nom. The authority publishes 228 formats and relates none of them, so the resource file has no assertions at all and every constant is unrelated to every other. This probe is what makes that measurable: a build that started reading dcterms:isReplacedBy as an order would fail on the not_leq lines.",
+  "includes": [
+    "EUFT-filetype.ax",
+    "EUFT-filetype-declared.ax"
+  ],
+  "present": [
+    "ft_pdf",
+    "ft_pdfa1a"
+  ],
+  "distinct": [
+    [
+      "ft_pdf",
+      "ft_pdfa1a"
+    ]
+  ],
+  "not_leq": [
+    [
+      "ft_pdf",
+      "ft_pdfa1a"
+    ],
+    [
+      "ft_pdfa1a",
+      "ft_pdf"
+    ]
+  ]
+}

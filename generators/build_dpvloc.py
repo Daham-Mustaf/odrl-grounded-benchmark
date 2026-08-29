@@ -6,7 +6,7 @@ the identity assertions, the background theory, the TPTP axioms, and the
 profile entry.
 
     python build_dpvloc.py --loc vocabularies/dpv-loc-2.3/loc.ttl \\
-                           --out problems
+                           --retrieved 2026-08-19 --out problems
 
 Why this resource is in the suite
 ----------------------------------
@@ -40,6 +40,12 @@ loc:non-IE skos:narrower loc:AD.  The other three are counted from
 skos:broader.  The extension also publishes 30 identity pairs, written as
 60 directed skos:sameAs assertions.
 
+A census over the same file reports 259 skos:broader edges leaving the
+namespace: the four beyond the typing count are the extension's own
+annotation properties, iso_alpha2 and its three siblings, each
+refining skos:altLabel.  They relate properties rather than places and
+the partition skips them.
+
 The typing edges are the plainest case.  loc:AD skos:broader dpv:Country
 says Andorra is a country; it does not say Andorra lies inside a region
 called Country.  Reading it as containment would put a class into the order
@@ -64,7 +70,9 @@ is a resource that cannot express one.
 
 Identity
 --------
-The file also publishes 57 skos:sameAs pairs.  ISO 3166 assigns some places
+The file publishes these as directed assertions in both directions,
+which the generator reads as unordered pairs; the count is measured on
+every run and printed, not stated here.  ISO 3166 assigns some places
 both a country code and a subdivision code, TF and FR-TF for the French
 Southern Territories, and the extension records that these denote the same
 place.  This is the only resource in the suite whose identities come from
@@ -160,9 +168,15 @@ def classify(g):
 
     def is_a(n, cls):
         return (n, RDF.type, cls) in g
-
     for s, o in g.subject_objects(SKOS.broader):
         if not str(s).startswith(str(LOC)):
+            continue
+        # The extension declares four annotation properties in its own
+        # namespace -- iso_alpha2, iso_alpha3, iso_numeric, un_m49 -- and
+        # each carries skos:broader to skos:altLabel, refining a SKOS
+        # property rather than placing a location.  A property is not a
+        # place, and the partition below is over places.
+        if str(o).startswith(str(SKOS)):
             continue
         if str(o).startswith(str(DPV)):
             typing.append((local(s), str(o)))
@@ -207,13 +221,18 @@ def identities(g):
     return sorted(seen), sorted(found)
 
 
-def classes(concepts, ident):
+def classes(concepts, ident, kinds=None):
     """Equivalence classes of codes under the identity pairs.
 
-    Needed by the ISO distinctness rule below: the rule separates areas, and
-    two codes for one area are not two areas.  Union-find over the pairs,
-    with each class keyed by its least code.
+    Each class is keyed by its Country-typed member where it has one,
+    and by its least code otherwise. The ISO rule ranges over areas,
+    and an area with both a country code and a subdivision code is
+    named by the country code: keying by the lexicographic minimum
+    would name the French Southern Territories FR-TF, which is the
+    subdivision, and the emitted listing would then contradict the
+    rule it states.
     """
+    kinds = kinds or {}
     parent = {c: c for c in concepts}
 
     def find(x):
@@ -228,10 +247,17 @@ def classes(concepts, ident):
             if ra != rb:
                 parent[max(ra, rb)] = min(ra, rb)
 
-    out = {}
+    groups = {}
     for c in concepts:
-        out.setdefault(find(c), []).append(c)
-    return {k: sorted(v) for k, v in out.items()}
+        groups.setdefault(find(c), []).append(c)
+
+    out = {}
+    for members in groups.values():
+        members = sorted(members)
+        country = next((m for m in members
+                        if kinds.get(m) == "Country"), None)
+        out[country or members[0]] = members
+    return out
 
 
 def concepts_and_labels(g):
@@ -542,7 +568,8 @@ def iso_axioms(reps) -> str:
 
     So the file states the rule, lists the areas it ranges over, and leaves
     the instances to the problems.  A problem naming two areas carries the
-    one inequation between them, named bt_, and an unsat core then cites the
+    one inequation between them, named bg_dist_, and an unsat core then
+    cites the
     rule instance the verdict rests on rather than a term the prover
     ignored.  The SMT encoding has always worked this way; this makes the
     two agree.
@@ -565,8 +592,8 @@ def iso_axioms(reps) -> str:
         "%\n"
         "% The rule is stated here and instantiated by the problems.  A\n"
         "% problem naming two of the areas below carries the inequation\n"
-        "% between them as a bt_ assertion, so that a refutation cites the\n"
-        "% instance it used.\n"
+        "% between them as a bg_dist_ assertion, so that a refutation cites\n"
+        "% the instance it used.\n"
         "%\n"
         f"% Areas: {len(reps)}\n"
         "%\n"
@@ -576,7 +603,7 @@ def iso_axioms(reps) -> str:
 
 def iso_instance(a: str, b: str) -> str:
     """The inequation a problem carries when it adopts the registry rule."""
-    return (f"fof(bt_{slug(a)}_distinct_{slug(b)}, axiom,\n"
+    return (f"fof(bg_dist_{slug(a)}_{slug(b)}, axiom,\n"
             f"    {slug(a)} != {slug(b)}).")
 
 
@@ -586,7 +613,7 @@ def declared_axioms(pair) -> str:
         "% Background theory: one distinctness, declared by the parties.\n"
         "% The extension publishes nothing that separates these places.\n"
         "\n"
-        f"fof(bt_{slug(a)}_distinct_{slug(b)}, axiom,\n"
+        f"fof(bg_dist_{slug(a)}_{slug(b)}, axiom,\n"
         f"    {slug(a)} != {slug(b)}).\n"
     )
 
@@ -652,7 +679,10 @@ def main() -> int:
                     default=None,
                     help="also emit a background theory declaring two places "
                          "distinct, for the stability pair")
-    ap.add_argument("--retrieved", default="2026-08-19")
+    ap.add_argument("--retrieved", required=True,
+                    help="the date this snapshot of loc.ttl was fetched, "
+                         "ISO 8601; recorded in the resource and not "
+                         "guessable from the file")
     ap.add_argument("--out", default="problems", type=Path)
     ap.add_argument("--allow-count-change", action="store_true",
                     help="proceed even if the measured counts differ from "
@@ -740,7 +770,7 @@ def main() -> int:
 
     # ISO distinctness, between areas rather than codes.  Codes the extension
     # identifies name one area, so the rule is applied to the quotient.
-    cls = classes(concepts, ident)
+    cls = classes(concepts, ident, kinds)
     multi = sum(1 for v in cls.values() if len(v) > 1)
     reps = sorted(k for k, v in cls.items()
                   if any(kinds.get(c) == "Country" for c in v))

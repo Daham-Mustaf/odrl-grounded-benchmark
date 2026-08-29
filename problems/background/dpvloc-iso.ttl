@@ -22,5 +22,4 @@
     bt:appliesTo <https://w3id.org/odrl-kb/dpv-loc-geo>,
                  <https://w3id.org/odrl-kb/dpv-loc-juris> ;
     bt:generatedBy bt:RegistryUniquenessRule ;
-    bt:scopeCondition "Distinctness holds between equivalence classes under the extension's identity assertions, not between codes; codes the extension identifies name one area."@en ;
-    bt:pairCount 249 .
+    bt:scopeCondition "Distinctness holds between equivalence classes under the extension's identity assertions, not between codes; codes the extension identifies name one area."@en .
