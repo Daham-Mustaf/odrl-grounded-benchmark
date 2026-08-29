@@ -1,3 +1,5 @@
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix report:  <https://w3id.org/force/compliance-report#> .
 @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix odrlkb:  <https://w3id.org/odrl-kb/bcp47#> .
@@ -41,17 +43,14 @@ kgc:KGC300-request-c1 a odrl:Constraint ;
 
 ### Expected result #######################################################
 
-drk:KGC300-report a vrep:OperandReport ;
+drk:KGC300-report a vrep:OperandVerdictReport ;
     dcterms:identifier "KGC300" ;
-    vrep:firstPolicy drk:bsb-offer ;
-    vrep:secondPolicy drk:bnf-request ;
-    vrep:firstConstraint kgc:KGC300-offer-c1 ;
-    vrep:secondConstraint kgc:KGC300-request-c1 ;
-    vrep:leftOperand odrl:language ;
-    vrep:sort vrep:nom ;
-    vrep:resource <https://w3id.org/odrl-kb/bcp47> ;
+    report:policy drk:offer-300 ;
+    report:policyRequest drk:request-300 ;
+    report:constraint kgc:KGC300-offer-c1 ;
+    vrep:constraintRequest kgc:KGC300-request-c1 ;
     vrep:backgroundTheory <https://w3id.org/odrl-kb/bcp47/uniqueness> ;
-    vrep:verdict vrep:Incompatible ;
+    report:satisfactionState report:Unsatisfied ;
     vrep:certificate drk:KGC300-certificate .
 
 drk:KGC300-certificate a vrep:Refutation ;

@@ -6,11 +6,5 @@
   ],
   "present": [
     "lb_dpv_consent"
-  ],
-  "not_leq": [
-    [
-      "lb_dpv_consent",
-      "lb_dpv_consent"
-    ]
   ]
 }

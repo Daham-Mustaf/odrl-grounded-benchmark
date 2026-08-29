@@ -1,3 +1,5 @@
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix report:  <https://w3id.org/force/compliance-report#> .
 @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix dpv:     <https://w3id.org/dpv#> .
@@ -41,17 +43,14 @@ kgc:KGC301-request-c1 a odrl:Constraint ;
 
 ### Expected result #######################################################
 
-drk:KGC301-report a vrep:OperandReport ;
+drk:KGC301-report a vrep:OperandVerdictReport ;
     dcterms:identifier "KGC301" ;
-    vrep:firstPolicy drk:bsb-offer ;
-    vrep:secondPolicy drk:bnf-request ;
-    vrep:firstConstraint kgc:KGC301-offer-c1 ;
-    vrep:secondConstraint kgc:KGC301-request-c1 ;
-    vrep:leftOperand odrl:purpose ;
-    vrep:sort vrep:tax ;
-    vrep:resource <https://w3id.org/odrl-kb/dpv-purpose> ;
+    report:policy drk:offer-301 ;
+    report:policyRequest drk:request-301 ;
+    report:constraint kgc:KGC301-offer-c1 ;
+    vrep:constraintRequest kgc:KGC301-request-c1 ;
     vrep:backgroundTheory <https://w3id.org/odrl-kb/dpv-purpose/declared> ;
-    vrep:verdict vrep:Unknown ;
+    report:satisfactionState vrep:Undetermined ;
     vrep:certificate drk:KGC301-certificate .
 
 drk:KGC301-certificate a vrep:Models ;

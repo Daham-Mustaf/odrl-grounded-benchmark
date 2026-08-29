@@ -12,7 +12,6 @@ from pathlib import Path
 
 from compile import Constraint, Or, Xone, compile_operand
 
-
 _ASSERTION = re.compile(
     r"fof\(\s*((?:res|bt|bg)_[a-z0-9_]+)\s*,\s*axiom,\s*"
     r"(?:kge_leq\(\s*([a-z0-9_]+)\s*,\s*([a-z0-9_]+)\s*\)"
@@ -174,12 +173,25 @@ def expand_tree(p: dict) -> dict:
     """
     if "tree" not in p:
         return p
-
+    # Ungrounded problems build no queries (requirement D16); the raw
+    # value stays in the tree as documentation and the writers emit the
+    # case file only.  The marker is checked against the tree so a stale
+    # "ungrounded" field on a fixed problem is an error, not a silent skip.
+    ungrounded = p.get("ungrounded")
+    if ungrounded:
+        values = [v for item in p["tree"]
+                  for c in (item.alts if hasattr(item, "alts") else (item,))
+                  for v in c.values]
+        if ungrounded not in values:
+            raise ValueError(
+                f"{p['id']}: marked ungrounded on {ungrounded!r}, but no "
+                f"constraint carries that value; remove the marker or fix "
+                f"the tree")
+        return p
     grounding = p.get("grounding")
     if grounding:
         p = dict(p)
         p["tree"] = [_map_item(item, grounding) for item in p["tree"]]
-
     constants = constants_of_tree(p["tree"])
     bad = [c for c in constants
            if not re.fullmatch(r"[a-z][a-zA-Z0-9_]*", c)]
@@ -189,12 +201,9 @@ def expand_tree(p: dict) -> dict:
             f"value reached the signature without being grounded; either "
             f"add it to the problem's grounding map, or mark the problem "
             f"ungrounded if the binding's rule does not resolve it.")
-
     w = compile_operand(p["tree"], constants, p["sort"])
-
     derived_res, derived_bg, extras = assertions_for(
         constants, p.get("includes", []))
-
     q = dict(p)
     q.setdefault("fof_decls", "")
     q["fof_witness"] = w["fof"]
@@ -210,3 +219,22 @@ def expand_tree(p: dict) -> dict:
     q["smt2_decls"] = smt_declarations(decl_constants, with_concept)
     q["smt2_witness"] = w["smt"]
     return q
+
+
+def expect_rejection(p: dict) -> dict:
+    """Assert that expanding this problem fails in the signature.
+
+    Expected-error problems (requirement G29) are rejections the compiler
+    must make; a rejection that stops happening is a regression in the
+    signature, so this raises when expand_tree succeeds.  The exception
+    text is recorded on the problem for the writers to quote.
+    """
+    try:
+        expand_tree(p)
+    except (ValueError, TypeError) as e:
+        q = dict(p)
+        q["rejection"] = str(e)
+        return q
+    raise AssertionError(
+        f"{p['id']}: expected the signature to reject this tree, and it "
+        f"compiled; the well-sortedness check has regressed")

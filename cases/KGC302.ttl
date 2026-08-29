@@ -1,3 +1,5 @@
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix report:  <https://w3id.org/force/compliance-report#> .
 @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix gn:      <https://sws.geonames.org/> .
@@ -41,17 +43,14 @@ kgc:KGC302-request-c1 a odrl:Constraint ;
 
 ### Expected result #######################################################
 
-drk:KGC302-report a vrep:OperandReport ;
+drk:KGC302-report a vrep:OperandVerdictReport ;
     dcterms:identifier "KGC302" ;
-    vrep:firstPolicy drk:bsb-offer ;
-    vrep:secondPolicy drk:bnf-request ;
-    vrep:firstConstraint kgc:KGC302-offer-c1 ;
-    vrep:secondConstraint kgc:KGC302-request-c1 ;
-    vrep:leftOperand odrl:spatial ;
-    vrep:sort vrep:mer ;
-    vrep:resource <https://w3id.org/odrl-kb/geonames-europe> ;
+    report:policy drk:offer-302 ;
+    report:policyRequest drk:request-302 ;
+    report:constraint kgc:KGC302-offer-c1 ;
+    vrep:constraintRequest kgc:KGC302-request-c1 ;
     vrep:backgroundTheory <https://w3id.org/odrl-kb/geonames-europe/admin-siblings> ;
-    vrep:verdict vrep:Compatible ;
+    report:satisfactionState report:Satisfied ;
     vrep:certificate drk:KGC302-certificate .
 
 drk:KGC302-certificate a vrep:Refutation ;

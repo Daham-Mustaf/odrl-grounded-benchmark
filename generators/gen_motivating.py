@@ -19,6 +19,7 @@ Usage:
 import argparse
 import sys
 from pathlib import Path
+from tree_expand import expand_tree
 
 sys.path.insert(0, str(Path(__file__).parent))
 
@@ -58,8 +59,9 @@ def main() -> int:
               f"resource axiom files first.", file=sys.stderr)
         return 1
     print(f"Vocabulary: {len(vocab)} constants.")
+    problems = [expand_tree(p) for p in PROBLEMS]
 
-    for p in PROBLEMS:
+    for p in problems:
         validate_problem_constants(p, vocab)
 
     if args.check_only:
@@ -67,7 +69,7 @@ def main() -> int:
         return 0
 
     print()
-    for p in PROBLEMS:
+    for p in problems:
         paths = write_problem(p, out_dir, cases_dir)
         print(f"{p['id']}  {p['left_operand']:9s} {p['sort']}  "
               f"q1={p['expected_q1']:14s} q2={p['expected_q2']:14s} "

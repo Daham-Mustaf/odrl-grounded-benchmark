@@ -53,5 +53,7 @@ drk:KGC361-report a vrep:OperandVerdictReport ;
     vrep:certificate drk:KGC361-certificate .
 
 drk:KGC361-certificate a vrep:Refutation ;
-    rdfs:comment """The offer requires access control among the measures supplied and the request excludes it. No premise of the vocabulary or of the parties is used."""@en ;
-    vrep:clashingConstraint kgc:KGC361-offer-c1, kgc:KGC361-request-c1 .
+    rdfs:comment """No premise of the vocabulary or of the parties is used. The refutation rests on the query formula and on reflexivity of identity: the witness condition requires access control to lie inside a set from which the request excludes it, which is the literal that access control differs from itself."""@en ;
+    vrep:clashingConstraint kgc:KGC361-offer-c1, kgc:KGC361-request-c1 ;
+    vrep:premise [ vrep:premiseSource vrep:fromEqualityAxiom ;
+                   rdfs:label "reflexivity: dpv:AccessControlMethod is itself"@en ] .
