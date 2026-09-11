@@ -58,6 +58,8 @@ drk:KGC352-report a vrep:OperandVerdictReport ;
     report:policyRequest drk:request-352 ;
     report:constraint kgc:KGC352-offer-c1 ;
     vrep:constraintRequest kgc:KGC352-request-c1 ;
-    rdfs:comment """Explicit consent under Article 6(1)(a) is declared distinct from each basis the offer enumerates. The premises are the parties' and can be withdrawn, which returns the verdict to Unknown."""@en ;
+    vrep:binding <https://w3id.org/odrl-kb/profile/b-legalbasis> ;
+    rdfs:comment """The background theory declares explicit consent distinct from each of the seven values listed by isAnyOf. The requested value therefore cannot satisfy the offer."""@en ;
+    dcterms:description """A controller permits processing under any of the seven Article 6(1) legal bases, while a processor requests processing on the basis of explicit consent under Article 6(1)(a), with the two concepts declared distinct."""@en ;
     report:satisfactionState report:Unsatisfied ;
     vrep:certificate <certificates/KGC352-1.tstp> .

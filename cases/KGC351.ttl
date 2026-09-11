@@ -58,6 +58,8 @@ drk:KGC351-report a vrep:OperandVerdictReport ;
     report:policyRequest drk:request-351 ;
     report:constraint kgc:KGC351-offer-c1 ;
     vrep:constraintRequest kgc:KGC351-request-c1 ;
-    rdfs:comment """Both queries are satisfiable. The models differ on whether explicit consent under Article 6(1)(a) and consent are one concept, which neither module settles."""@en ;
+    vrep:binding <https://w3id.org/odrl-kb/profile/b-legalbasis> ;
+    rdfs:comment """Explicit consent is not one of the seven values listed by isAnyOf, and the resource does not declare it distinct from consent. The available knowledge therefore leaves the verdict Unknown."""@en ;
+    dcterms:description """A controller permits processing under any of the seven Article 6(1) legal bases, while a processor requests processing on the basis of explicit consent under Article 6(1)(a)."""@en ;
     report:satisfactionState vrep:Undetermined ;
     vrep:undeterminedReason vrep:Epistemic .

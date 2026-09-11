@@ -1,0 +1,27 @@
+# Profile entry for dpvo:LegalBasis over the DPV and GDPR modules.
+#
+# The binding assigns the taxonomic sort. The modules publish
+# skos:broader between bases, so isA reads a hierarchy: explicit consent
+# under Article 6(1)(a) lies below consent, which lies below the
+# legal-basis root.
+#
+# The left operand is the DPV-ODRL mapping's. ODRL's core vocabulary has
+# no term for a legal basis, and the mapping mints one; a policy using
+# it declares conformance to that profile.
+#
+# The mapping restricts which operators it uses on this operand. That
+# restriction is the profile's and is recorded there; the sort below
+# says which operators the semantics admits, which is a different and
+# wider question.
+
+@prefix dpvo: <https://w3id.org/dpv/mappings/odrl#> .
+@prefix bind: <https://w3id.org/odrl-kb/binding#> .
+@prefix ex:   <https://w3id.org/odrl-kb/profile/> .
+
+ex:b-legalbasis a bind:OperandBinding ;
+    bind:leftOperand dpvo:LegalBasis ;
+    bind:sort bind:tax ;
+    bind:resource <https://w3id.org/odrl-kb/dpv-gdpr-legal-basis> ;
+    bind:backgroundTheory
+        <https://w3id.org/odrl-kb/dpv-gdpr-legal-basis/empty> ;
+    bind:grounding bind:sliceMembership .

@@ -1,0 +1,198 @@
+# GDPR Article 6 legal bases: the subsumption the Data Privacy
+# Vocabulary and its GDPR extension publish.
+#
+# skos:broader edges between concepts the two modules define. An
+# edge whose target is defined in neither is reported by the
+# generator and not read.
+#
+# The extension places each Article 6 concept below the article
+# it refines and below the DPV category it belongs to, so a
+# concept may appear below more than one other. It also
+# publishes shortcuts: explicit consent lies below both
+# eu-gdpr:A6-1-a and eu-gdpr:Consent directly, and a refutation
+# will take whichever path is shorter.
+#
+# Source   : Data Privacy Vocabulary 2.3 and its GDPR extension
+# Modules  : legal_basis.ttl, legal_basis.ttl
+# Retrieved: 2026-08-19
+# Licence  : W3C Document License 2023
+#
+# Concepts                    : 33
+# Order assertions, published : 43
+
+@prefix dpv:     <https://w3id.org/dpv#> .
+@prefix eu-gdpr: <https://w3id.org/dpv/legal/eu/gdpr#> .
+@prefix odrlkb:  <https://w3id.org/odrl-kb/dpv-gdpr-legal-basis#> .
+@prefix dcat:    <http://www.w3.org/ns/dcat#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+
+<https://w3id.org/odrl-kb/dpv-gdpr-legal-basis> a dcat:Dataset ;
+    dcterms:title "GDPR Article 6 legal bases"@en ;
+    dcterms:source <https://w3id.org/dpv/2.3> ;
+    dcterms:license <https://www.w3.org/copyright/document-license-2023/> .
+
+odrlkb:dpv_consent a odrlkb:LegalBasis ;
+    rdfs:label "Consent"@en ;
+    dcterms:identifier <https://w3id.org/dpv#Consent> ;
+    skos:broader odrlkb:dpv_legal_basis .
+
+odrlkb:dpv_contract a odrlkb:LegalBasis ;
+    rdfs:label "Contract"@en ;
+    dcterms:identifier <https://w3id.org/dpv#Contract> ;
+    skos:broader odrlkb:dpv_legal_basis .
+
+odrlkb:dpv_contract_performance a odrlkb:LegalBasis ;
+    rdfs:label "Contract Performance"@en ;
+    dcterms:identifier <https://w3id.org/dpv#ContractPerformance> ;
+    skos:broader odrlkb:dpv_contract .
+
+odrlkb:dpv_data_transfer_legal_basis a odrlkb:LegalBasis ;
+    rdfs:label "Data Transfer Legal Basis"@en ;
+    dcterms:identifier <https://w3id.org/dpv#DataTransferLegalBasis> ;
+    skos:broader odrlkb:dpv_legal_basis .
+
+odrlkb:dpv_enter_into_contract a odrlkb:LegalBasis ;
+    rdfs:label "Enter Into Contract"@en ;
+    dcterms:identifier <https://w3id.org/dpv#EnterIntoContract> ;
+    skos:broader odrlkb:dpv_contract .
+
+odrlkb:dpv_legal_basis a odrlkb:LegalBasis ;
+    rdfs:label "Legal Basis"@en ;
+    dcterms:identifier <https://w3id.org/dpv#LegalBasis> .
+
+odrlkb:dpv_legal_obligation a odrlkb:LegalBasis ;
+    rdfs:label "Legal Obligation"@en ;
+    dcterms:identifier <https://w3id.org/dpv#LegalObligation> ;
+    skos:broader odrlkb:dpv_legal_basis .
+
+odrlkb:dpv_legitimate_interest a odrlkb:LegalBasis ;
+    rdfs:label "Legitimate Interest"@en ;
+    dcterms:identifier <https://w3id.org/dpv#LegitimateInterest> ;
+    skos:broader odrlkb:dpv_legal_basis .
+
+odrlkb:dpv_legitimate_interest_of_controller a odrlkb:LegalBasis ;
+    rdfs:label "Legitimate Interest of Controller"@en ;
+    dcterms:identifier <https://w3id.org/dpv#LegitimateInterestOfController> ;
+    skos:broader odrlkb:dpv_legitimate_interest .
+
+odrlkb:dpv_legitimate_interest_of_data_subject a odrlkb:LegalBasis ;
+    rdfs:label "Legitimate Interest of Data Subject"@en ;
+    dcterms:identifier <https://w3id.org/dpv#LegitimateInterestOfDataSubject> ;
+    skos:broader odrlkb:dpv_legitimate_interest .
+
+odrlkb:dpv_legitimate_interest_of_third_party a odrlkb:LegalBasis ;
+    rdfs:label "Legitimate Interest of Third Party"@en ;
+    dcterms:identifier <https://w3id.org/dpv#LegitimateInterestOfThirdParty> ;
+    skos:broader odrlkb:dpv_legitimate_interest .
+
+odrlkb:dpv_official_authority_of_controller a odrlkb:LegalBasis ;
+    rdfs:label "Official Authority of Controller"@en ;
+    dcterms:identifier <https://w3id.org/dpv#OfficialAuthorityOfController> ;
+    skos:broader odrlkb:dpv_legal_basis .
+
+odrlkb:dpv_public_interest a odrlkb:LegalBasis ;
+    rdfs:label "Public Interest"@en ;
+    dcterms:identifier <https://w3id.org/dpv#PublicInterest> ;
+    skos:broader odrlkb:dpv_legal_basis .
+
+odrlkb:dpv_vital_interest a odrlkb:LegalBasis ;
+    rdfs:label "Vital Interest"@en ;
+    dcterms:identifier <https://w3id.org/dpv#VitalInterest> ;
+    skos:broader odrlkb:dpv_legal_basis .
+
+odrlkb:dpv_vital_interest_of_data_subject a odrlkb:LegalBasis ;
+    rdfs:label "Vital Interest of Data Subject"@en ;
+    dcterms:identifier <https://w3id.org/dpv#VitalInterestOfDataSubject> ;
+    skos:broader odrlkb:dpv_vital_interest_of_natural_person .
+
+odrlkb:dpv_vital_interest_of_natural_person a odrlkb:LegalBasis ;
+    rdfs:label "Vital Interest of Natural Person"@en ;
+    dcterms:identifier <https://w3id.org/dpv#VitalInterestOfNaturalPerson> ;
+    skos:broader odrlkb:dpv_vital_interest .
+
+odrlkb:gdpr_a6_1_a a odrlkb:LegalBasis ;
+    rdfs:label "Art.6(1-a) consent"@en ;
+    dcterms:identifier <https://w3id.org/dpv/legal/eu/gdpr#A6-1-a> ;
+    skos:broader odrlkb:gdpr_consent .
+
+odrlkb:gdpr_a6_1_a_explicit_consent a odrlkb:LegalBasis ;
+    rdfs:label "Art 6(1-a) explicit consent"@en ;
+    dcterms:identifier <https://w3id.org/dpv/legal/eu/gdpr#A6-1-a-explicit-consent> ;
+    skos:broader odrlkb:gdpr_a6_1_a, odrlkb:gdpr_consent .
+
+odrlkb:gdpr_a6_1_a_non_explicit_consent a odrlkb:LegalBasis ;
+    rdfs:label "Art.6(1-a) regular consent"@en ;
+    dcterms:identifier <https://w3id.org/dpv/legal/eu/gdpr#A6-1-a-non-explicit-consent> ;
+    skos:broader odrlkb:gdpr_a6_1_a, odrlkb:gdpr_consent .
+
+odrlkb:gdpr_a6_1_b a odrlkb:LegalBasis ;
+    rdfs:label "Art 6(1-b) contract"@en ;
+    dcterms:identifier <https://w3id.org/dpv/legal/eu/gdpr#A6-1-b> ;
+    skos:broader odrlkb:dpv_contract .
+
+odrlkb:gdpr_a6_1_b_contract_performance a odrlkb:LegalBasis ;
+    rdfs:label "Art 6(1-b) contract performance"@en ;
+    dcterms:identifier <https://w3id.org/dpv/legal/eu/gdpr#A6-1-b-contract-performance> ;
+    skos:broader odrlkb:dpv_contract_performance, odrlkb:gdpr_a6_1_b .
+
+odrlkb:gdpr_a6_1_b_enter_into_contract a odrlkb:LegalBasis ;
+    rdfs:label "Art 6(1-b) enter into contract"@en ;
+    dcterms:identifier <https://w3id.org/dpv/legal/eu/gdpr#A6-1-b-enter-into-contract> ;
+    skos:broader odrlkb:dpv_enter_into_contract, odrlkb:gdpr_a6_1_b .
+
+odrlkb:gdpr_a6_1_c a odrlkb:LegalBasis ;
+    rdfs:label "Art 6(1-c) legal obligation"@en ;
+    dcterms:identifier <https://w3id.org/dpv/legal/eu/gdpr#A6-1-c> ;
+    skos:broader odrlkb:dpv_legal_obligation .
+
+odrlkb:gdpr_a6_1_d a odrlkb:LegalBasis ;
+    rdfs:label "Art 6(1-d) protect vital interests"@en ;
+    dcterms:identifier <https://w3id.org/dpv/legal/eu/gdpr#A6-1-d> ;
+    skos:broader odrlkb:dpv_vital_interest .
+
+odrlkb:gdpr_a6_1_d_data_subject a odrlkb:LegalBasis ;
+    rdfs:label "Art 6(1-d) protect vital interests of data subject"@en ;
+    dcterms:identifier <https://w3id.org/dpv/legal/eu/gdpr#A6-1-d-data-subject> ;
+    skos:broader odrlkb:dpv_vital_interest_of_data_subject, odrlkb:gdpr_a6_1_d .
+
+odrlkb:gdpr_a6_1_d_natural_person a odrlkb:LegalBasis ;
+    rdfs:label "Art 6(1-d) protect vital interests of natural person"@en ;
+    dcterms:identifier <https://w3id.org/dpv/legal/eu/gdpr#A6-1-d-natural-person> ;
+    skos:broader odrlkb:dpv_vital_interest_of_natural_person, odrlkb:gdpr_a6_1_d .
+
+odrlkb:gdpr_a6_1_e a odrlkb:LegalBasis ;
+    rdfs:label "Art 6(1-e) public interest or official authority"@en ;
+    dcterms:identifier <https://w3id.org/dpv/legal/eu/gdpr#A6-1-e> ;
+    skos:broader odrlkb:dpv_official_authority_of_controller, odrlkb:dpv_public_interest .
+
+odrlkb:gdpr_a6_1_e_official_authority a odrlkb:LegalBasis ;
+    rdfs:label "Art 6(1-e) official authority"@en ;
+    dcterms:identifier <https://w3id.org/dpv/legal/eu/gdpr#A6-1-e-official-authority> ;
+    skos:broader odrlkb:dpv_official_authority_of_controller, odrlkb:gdpr_a6_1_e .
+
+odrlkb:gdpr_a6_1_e_public_interest a odrlkb:LegalBasis ;
+    rdfs:label "Art 6(1-e) public interest"@en ;
+    dcterms:identifier <https://w3id.org/dpv/legal/eu/gdpr#A6-1-e-public-interest> ;
+    skos:broader odrlkb:dpv_public_interest, odrlkb:gdpr_a6_1_e .
+
+odrlkb:gdpr_a6_1_f a odrlkb:LegalBasis ;
+    rdfs:label "Art 6(1-f) legitimate interest"@en ;
+    dcterms:identifier <https://w3id.org/dpv/legal/eu/gdpr#A6-1-f> ;
+    skos:broader odrlkb:dpv_legitimate_interest .
+
+odrlkb:gdpr_a6_1_f_controller a odrlkb:LegalBasis ;
+    rdfs:label "Art 6(1-f) legitimate interest of controller"@en ;
+    dcterms:identifier <https://w3id.org/dpv/legal/eu/gdpr#A6-1-f-controller> ;
+    skos:broader odrlkb:dpv_legitimate_interest_of_controller, odrlkb:gdpr_a6_1_f .
+
+odrlkb:gdpr_a6_1_f_third_party a odrlkb:LegalBasis ;
+    rdfs:label "Art 6(1-f) legitimate interest of third party"@en ;
+    dcterms:identifier <https://w3id.org/dpv/legal/eu/gdpr#A6-1-f-third-party> ;
+    skos:broader odrlkb:dpv_legitimate_interest_of_third_party, odrlkb:gdpr_a6_1_f .
+
+odrlkb:gdpr_consent a odrlkb:LegalBasis ;
+    rdfs:label "Consent"@en ;
+    dcterms:identifier <https://w3id.org/dpv/legal/eu/gdpr#Consent> ;
+    skos:broader odrlkb:dpv_consent .

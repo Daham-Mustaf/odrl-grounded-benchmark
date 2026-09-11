@@ -47,6 +47,8 @@ drk:KGC353-report a vrep:OperandVerdictReport ;
     report:policyRequest drk:request-353 ;
     report:constraint kgc:KGC353-offer-c1 ;
     vrep:constraintRequest kgc:KGC353-request-c1 ;
-    rdfs:comment """The vocabulary carries explicit consent under Article 6(1)(a) up to the legal-basis root in four steps."""@en ;
+    vrep:binding <https://w3id.org/odrl-kb/profile/b-legalbasis> ;
+    rdfs:comment """The vocabulary places explicit consent below the legal-basis root through three published order assertions. Transitivity of the order yields the relation used by isA."""@en ;
+    dcterms:description """A controller permits processing under the legal-basis hierarchy, while a processor requests processing on the basis of explicit consent under Article 6(1)(a)."""@en ;
     report:satisfactionState report:Satisfied ;
     vrep:certificate <certificates/KGC353-2.tstp> .

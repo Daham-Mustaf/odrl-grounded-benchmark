@@ -1,0 +1,17 @@
+# Background theory for the legal-basis resource: empty.
+#
+# Neither module asserts distinctness or disjointness between legal
+# bases. Two constraints naming different bases are therefore
+# satisfiable together unless a party declares them apart, and the
+# certificate for such a verdict names the declaration.
+#
+# Source: {meta['source_iri']}
+
+@prefix bt:      <https://w3id.org/odrl-kb/background#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+<https://w3id.org/odrl-kb/dpv-gdpr-legal-basis/empty>
+        a bt:BackgroundTheory ;
+    dcterms:title "No declared distinctness or disjointness"@en ;
+    bt:appliesTo <https://w3id.org/odrl-kb/dpv-gdpr-legal-basis> ;
+    bt:pairCount 0 .

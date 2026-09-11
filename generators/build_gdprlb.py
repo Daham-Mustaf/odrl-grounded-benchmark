@@ -93,13 +93,18 @@ def load(core: Path, gdpr: Path):
     g.parse(gdpr, format="turtle")
     classes = {s for s in g.subjects(None, RDFS.Class)
                if str(s).startswith((DPV, GDPR))}
+    labels = {}
+    for s, o in g.subject_objects(SKOS.prefLabel):
+        if s in classes and getattr(o, "language", None) == "en":
+            labels[s] = str(o)
     inside, dangling = [], []
     for s, _, o in g.triples((None, SKOS.broader, None)):
         if s not in classes:
             continue
         (inside if o in classes else dangling).append((s, o))
     key = lambda e: (str(e[0]), str(e[1]))
-    return g, classes, sorted(inside, key=key), sorted(dangling, key=key)
+    return (g, classes, labels,
+            sorted(inside, key=key), sorted(dangling, key=key))
 
 
 def depth(concept, parents, memo):
@@ -141,6 +146,149 @@ def census(g, classes, inside, dangling):
     print(f"disjointness or identity assertions in either module: {n_dis}")
     return parents
 
+def resource_ttl(classes, labels, inside, meta) -> str:
+    """The concepts and the order, as the two modules publish them."""
+    parents = defaultdict(list)
+    for s, o in inside:
+        parents[s].append(o)
+    head = [
+        "# GDPR Article 6 legal bases: the subsumption the Data Privacy",
+        "# Vocabulary and its GDPR extension publish.",
+        "#",
+        "# skos:broader edges between concepts the two modules define. An",
+        "# edge whose target is defined in neither is reported by the",
+        "# generator and not read.",
+        "#",
+        "# The extension places each Article 6 concept below the article",
+        "# it refines and below the DPV category it belongs to, so a",
+        "# concept may appear below more than one other. It also",
+        "# publishes shortcuts: explicit consent lies below both",
+        "# eu-gdpr:A6-1-a and eu-gdpr:Consent directly, and a refutation",
+        "# will take whichever path is shorter.",
+        "#",
+        f"# Source   : {meta['source']}",
+        f"# Modules  : {meta['modules']}",
+        f"# Retrieved: {meta['retrieved']}",
+        f"# Licence  : {meta['licence']}",
+        "#",
+        f"# Concepts                    : {len(classes)}",
+        f"# Order assertions, published : {len(inside)}",
+        "",
+        "@prefix dpv:     <https://w3id.org/dpv#> .",
+        "@prefix eu-gdpr: <https://w3id.org/dpv/legal/eu/gdpr#> .",
+        "@prefix odrlkb:  <https://w3id.org/odrl-kb/dpv-gdpr-legal-basis#> .",
+        "@prefix dcat:    <http://www.w3.org/ns/dcat#> .",
+        "@prefix dcterms: <http://purl.org/dc/terms/> .",
+        "@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .",
+        "@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .",
+        "",
+        "<https://w3id.org/odrl-kb/dpv-gdpr-legal-basis> a dcat:Dataset ;",
+        '    dcterms:title "GDPR Article 6 legal bases"@en ;',
+        f"    dcterms:source <{meta['source_iri']}> ;",
+        "    dcterms:license "
+        "<https://www.w3.org/copyright/document-license-2023/> .",
+        "",
+    ]
+    body = []
+    for c in sorted(classes, key=str):
+        body.append(f"odrlkb:{slug(c)[3:]} a odrlkb:LegalBasis ;")
+        if labels.get(c):
+            body.append(f'    rdfs:label "{labels[c]}"@en ;')
+        body.append(f"    dcterms:identifier <{c}> ;")
+        ps = sorted(parents[c], key=str)
+        if ps:
+            body.append("    skos:broader "
+                        + ", ".join(f"odrlkb:{slug(p)[3:]}" for p in ps)
+                        + " .")
+        else:
+            body[-1] = body[-1].rstrip(" ;") + " ."
+        body.append("")
+    return "\n".join(head + body)
+
+def background_ttl(meta) -> str:
+        return """\
+# Background theory for the legal-basis resource: empty.
+#
+# Neither module asserts distinctness or disjointness between legal
+# bases. Two constraints naming different bases are therefore
+# satisfiable together unless a party declares them apart, and the
+# certificate for such a verdict names the declaration.
+#
+# Source: {meta['source_iri']}
+
+@prefix bt:      <https://w3id.org/odrl-kb/background#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+<https://w3id.org/odrl-kb/dpv-gdpr-legal-basis/empty>
+        a bt:BackgroundTheory ;
+    dcterms:title "No declared distinctness or disjointness"@en ;
+    bt:appliesTo <https://w3id.org/odrl-kb/dpv-gdpr-legal-basis> ;
+    bt:pairCount 0 .
+"""
+def declared_ttl(names, meta) -> str:
+    n = len(names)
+    return f"""\\
+# Background theory for the legal-basis resource: declared distinctness.
+#
+# The parties declare that no two of the listed names denote one legal
+# basis. Neither module asserts this, so the rule is the parties' and a
+# verdict resting on an instance of it is withdrawable.
+#
+# Whether it is right is a question of law. Article 6(1) lists its bases
+# without saying that a controller may rely on only one, and a party who
+# reads the Article as permitting a basis to coincide with another can
+# withdraw the declaration.
+#
+# Distinctness only, not disjointness: the extension places a concept
+# below two others in several places, and a disjointness over such a
+# pair would contradict the resource.
+#
+# Concepts: {n}
+# Pairs   : {n * (n - 1) // 2}
+# Source  : {meta['source_iri']}
+
+@prefix bt:      <https://w3id.org/odrl-kb/background#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+<https://w3id.org/odrl-kb/dpv-gdpr-legal-basis/declared>
+        a bt:BackgroundTheory ;
+    dcterms:title "Pairwise distinctness of legal bases"@en ;
+    bt:appliesTo <https://w3id.org/odrl-kb/dpv-gdpr-legal-basis> ;
+    bt:generatedBy bt:PairwiseDistinctness ;
+    bt:scopeCondition "Distinctness between the listed bases, and not disjointness: the extension publishes concepts below two parents."@en ;
+    bt:pairCount {n * (n - 1) // 2} .
+"""
+
+def profile_ttl() -> str:
+    return """\
+# Profile entry for dpvo:LegalBasis over the DPV and GDPR modules.
+#
+# The binding assigns the taxonomic sort. The modules publish
+# skos:broader between bases, so isA reads a hierarchy: explicit consent
+# under Article 6(1)(a) lies below consent, which lies below the
+# legal-basis root.
+#
+# The left operand is the DPV-ODRL mapping's. ODRL's core vocabulary has
+# no term for a legal basis, and the mapping mints one; a policy using
+# it declares conformance to that profile.
+#
+# The mapping restricts which operators it uses on this operand. That
+# restriction is the profile's and is recorded there; the sort below
+# says which operators the semantics admits, which is a different and
+# wider question.
+
+@prefix dpvo: <https://w3id.org/dpv/mappings/odrl#> .
+@prefix bind: <https://w3id.org/odrl-kb/binding#> .
+@prefix ex:   <https://w3id.org/odrl-kb/profile/> .
+
+ex:b-legalbasis a bind:OperandBinding ;
+    bind:leftOperand dpvo:LegalBasis ;
+    bind:sort bind:tax ;
+    bind:resource <https://w3id.org/odrl-kb/dpv-gdpr-legal-basis> ;
+    bind:backgroundTheory
+        <https://w3id.org/odrl-kb/dpv-gdpr-legal-basis/empty> ;
+    bind:grounding bind:sliceMembership .
+"""
 
 def resource_axioms(inside) -> str:
     lines = [
@@ -201,28 +349,44 @@ def declared_axioms(classes) -> str:
             x, y = slug(a), slug(b)
             lines.append(f"fof(bg_dist_{x}_distinct_{y}, axiom, {x} != {y}).")
     return "\n".join(lines) + "\n"
-
-
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[3])
     ap.add_argument("--core", required=True, type=Path)
     ap.add_argument("--gdpr", required=True, type=Path)
+    ap.add_argument("--retrieved", default="2026-08-19")
     ap.add_argument("--out", default="problems", type=Path)
     args = ap.parse_args()
 
-    g, classes, inside, dangling = load(args.core, args.gdpr)
+    g, classes, labels, inside, dangling = load(args.core, args.gdpr)
     census(g, classes, inside, dangling)
 
-    (args.out / "axioms").mkdir(parents=True, exist_ok=True)
-    (args.out / "background").mkdir(parents=True, exist_ok=True)
+    meta = {
+        "source": "Data Privacy Vocabulary 2.3 and its GDPR extension",
+        "modules": f"{args.core.name}, {args.gdpr.name}",
+        "source_iri": "https://w3id.org/dpv/2.3",
+        "retrieved": args.retrieved,
+        "licence": "W3C Document License 2023",
+    }
 
-    p = args.out / "axioms" / "DPV-gdprlb.ax"
-    p.write_text(resource_axioms(inside), encoding="utf-8")
-    print(f"  {p}")
+    for d in ("resources", "background", "axioms"):
+        (args.out / d).mkdir(parents=True, exist_ok=True)
 
-    p = args.out / "axioms" / "DPV-gdprlb-declared.ax"
-    p.write_text(declared_axioms(classes), encoding="utf-8")
-    print(f"  {p}")
+    (args.out / "axioms" / "DPV-gdprlb.ax").write_text(
+        resource_axioms(inside), encoding="utf-8")
+    (args.out / "axioms" / "DPV-gdprlb-declared.ax").write_text(
+        declared_axioms(classes), encoding="utf-8")
+    (args.out / "resources" / "gdprlb.ttl").write_text(
+        resource_ttl(classes, labels, inside, meta), encoding="utf-8")
+    (args.out / "resources" / "profile-gdprlb.ttl").write_text(
+        profile_ttl(), encoding="utf-8")
+    (args.out / "background" / "gdprlb-empty.ttl").write_text(
+        background_ttl(meta), encoding="utf-8")
+    (args.out / "background" / "gdprlb-declared.ttl").write_text(
+        declared_ttl(sorted(slug(c) for c in classes), meta),
+        encoding="utf-8")
+
+    for p in sorted(args.out.rglob("*gdprlb*")):
+        print(f"  {p}")
     return 0
 
 

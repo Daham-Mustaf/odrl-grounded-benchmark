@@ -3,7 +3,7 @@
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
 % Problem  : legal basis, isAnyOf Article 6(1) against eq A6-1-a-explicit-consent (witness condition asserted)
 % Version  : 1.0
-% English  : The same offer against a processor naming explicit consent under Article 6(1)(a). That is a legal basis the Article provides, and the extension places it below the Article 6(1)(a) concept, below consent, below the legal-basis root. The enumeration does not reach it: isAnyOf compares by identity and explicit consent is not one of the seven names. The verdict is Unknown rather than Incompatible, because nothing published declares the two apart and a structure may interpret explicit consent and consent as one concept.
+% English  : A controller permits processing under any of the seven Article 6(1) legal bases, while a processor requests processing on the basis of explicit consent under Article 6(1)(a).
 %
 % Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark

@@ -91,7 +91,7 @@ SEVEN = [CONSENT, CONTRACT, LEGALOB, VITAL, PUBLIC, AUTH, LEGITIM]
 RESOURCE     = "https://w3id.org/odrl-kb/dpv-gdpr-legal-basis"
 EMPTY_BT     = "https://w3id.org/odrl-kb/dpv-gdpr-legal-basis/empty"
 DECLARED_BT  = "https://w3id.org/odrl-kb/dpv-gdpr-legal-basis/declared"
-
+BINDING = "https://w3id.org/odrl-kb/profile/b-legalbasis"
 INCLUDES          = ["KGE000-0.ax", "DPV-gdprlb.ax"]
 INCLUDES_DECLARED = INCLUDES + ["DPV-gdprlb-declared.ax"]
 
@@ -208,11 +208,16 @@ PROBLEMS = [
         "subdir":            "verdict",
         "name":              "legal basis, isAnyOf Article 6(1) against "
                              "eq dpv:Consent",
+        "binding": BINDING,
         "left_operand":      "LegalBasis",
         "sort":              "tax",
         "resource":          RESOURCE,
         "background_theory": EMPTY_BT,
         "includes":          INCLUDES,
+        "summary": (
+    "A controller permits processing under any of the seven Article 6(1) "
+    "legal bases, and a processor requests processing on the basis of consent."
+),
         "tree": [C("isAnyOf", *SEVEN), C("eq", CONSENT, side="request")],
         "description": (
             "The controller permits processing on any of the seven legal "
@@ -226,7 +231,11 @@ PROBLEMS = [
         "expected_q2": "Unsatisfiable",
         "certificate": {
             "kind": "Refutation",
-            "comment": "The requested basis is one the offer enumerates.",
+            
+"comment": (
+    "Consent is one of the seven values listed by isAnyOf, so the two "
+    "constraints are Compatible without any resource or background assertion."
+),
             "premises": [],
         },
         "ttl": _TTL_HEAD + _offer_isanyof("KGC350")
@@ -242,6 +251,7 @@ PROBLEMS = [
                              "eq A6-1-a-explicit-consent",
         "left_operand":      "LegalBasis",
         "sort":              "tax",
+        "binding": BINDING,
         "resource":          RESOURCE,
         "background_theory": EMPTY_BT,
         "includes":          INCLUDES,
@@ -258,14 +268,20 @@ PROBLEMS = [
             "nothing published declares the two apart and a structure may "
             "interpret explicit consent and consent as one concept."
         ),
+        "summary": (
+    "A controller permits processing under any of the seven Article 6(1) "
+    "legal bases, while a processor requests processing on the basis of "
+    "explicit consent under Article 6(1)(a)."
+),
         "expected_q1": "Satisfiable",
         "expected_q2": "Satisfiable",
         "certificate": {
             "kind": "Models",
-            "comment": "Both queries are satisfiable. The models differ on "
-                       "whether explicit consent under Article 6(1)(a) and "
-                       "consent are one concept, which neither module "
-                       "settles.",
+ "comment": (
+    "Explicit consent is not one of the seven values listed by isAnyOf, "
+    "and the resource does not declare it distinct from consent. The "
+    "available knowledge therefore leaves the verdict Unknown."
+),
             "premises": [],
         },
         "ttl": _TTL_HEAD + _offer_isanyof("KGC351")
@@ -284,6 +300,7 @@ PROBLEMS = [
         "left_operand":      "LegalBasis",
         "sort":              "tax",
         "resource":          RESOURCE,
+        "binding": BINDING,
         "background_theory": DECLARED_BT,
         "includes":          INCLUDES_DECLARED,
         "tree": [C("isAnyOf", *SEVEN), C("eq", EXPLICIT, side="request")],
@@ -296,14 +313,22 @@ PROBLEMS = [
             "provides. The declaration is the parties', and it is what "
             "makes the refusal definite rather than open."
         ),
+        "summary": (
+    "A controller permits processing under any of the seven Article 6(1) "
+    "legal bases, while a processor requests processing on the basis of "
+    "explicit consent under Article 6(1)(a), with the two concepts "
+    "declared distinct."
+),
+
         "expected_q1": "Unsatisfiable",
         "expected_q2": "Satisfiable",
         "certificate": {
             "kind": "Refutation",
-            "comment": "Explicit consent under Article 6(1)(a) is declared "
-                       "distinct from each basis the offer enumerates. The "
-                       "premises are the parties' and can be withdrawn, "
-                       "which returns the verdict to Unknown.",
+ "comment": (
+        "The background theory declares explicit consent distinct from "
+        "each of the seven values listed by isAnyOf. The requested value "
+        "therefore cannot satisfy the offer."
+    ),
             "premises": [
                 ("fromBackgroundTheory",
                  "explicit consent under Article 6(1)(a) is distinct from "
@@ -327,6 +352,7 @@ PROBLEMS = [
         "resource":          RESOURCE,
         "background_theory": EMPTY_BT,
         "includes":          INCLUDES,
+         "binding": BINDING,
         "tree": [C("isA", LB), C("eq", EXPLICIT, side="request")],
         "description": (
             "The record of KGC351 and KGC352 against an offer that names "
@@ -338,13 +364,20 @@ PROBLEMS = [
             "record, opposite verdicts, and the certificates say which "
             "rests on what."
         ),
+          "summary": (
+        "A controller permits processing under the legal-basis hierarchy, "
+        "while a processor requests processing on the basis of explicit "
+        "consent under Article 6(1)(a)."
+    ),
         "expected_q1": "Satisfiable",
         "expected_q2": "Unsatisfiable",
         "certificate": {
             "kind": "Refutation",
-            "comment": "The vocabulary carries explicit consent under "
-                       "Article 6(1)(a) up to the legal-basis root in four "
-                       "steps.",
+  "comment": (
+            "The vocabulary places explicit consent below the legal-basis "
+            "root through three published order assertions. Transitivity "
+            "of the order yields the relation used by isA."
+        ),
             "premises": [
                 ("fromResource",
                  "eu-gdpr:A6-1-a-explicit-consent is below eu-gdpr:A6-1-a"),

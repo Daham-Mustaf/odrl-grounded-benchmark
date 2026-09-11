@@ -3,7 +3,7 @@
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
 % Problem  : legal basis, isA dpv:LegalBasis against eq A6-1-a-explicit-consent (witness condition negated)
 % Version  : 1.0
-% English  : The record of KGC351 and KGC352 against an offer that names the branch rather than enumerating its members. Four assertions of the vocabulary carry explicit consent up to the legal-basis root, and with transitivity the verdict is Compatible in every structure. Read together with KGC352 this is the cost of the enumeration: the same Article, the same record, opposite verdicts, and the certificates say which rests on what.
+% English  : A controller permits processing under the legal-basis hierarchy, while a processor requests processing on the basis of explicit consent under Article 6(1)(a).
 %
 % Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark

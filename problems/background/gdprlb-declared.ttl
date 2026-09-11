@@ -1,0 +1,30 @@
+\
+# Background theory for the legal-basis resource: declared distinctness.
+#
+# The parties declare that no two of the listed names denote one legal
+# basis. Neither module asserts this, so the rule is the parties' and a
+# verdict resting on an instance of it is withdrawable.
+#
+# Whether it is right is a question of law. Article 6(1) lists its bases
+# without saying that a controller may rely on only one, and a party who
+# reads the Article as permitting a basis to coincide with another can
+# withdraw the declaration.
+#
+# Distinctness only, not disjointness: the extension places a concept
+# below two others in several places, and a disjointness over such a
+# pair would contradict the resource.
+#
+# Concepts: 33
+# Pairs   : 528
+# Source  : https://w3id.org/dpv/2.3
+
+@prefix bt:      <https://w3id.org/odrl-kb/background#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+<https://w3id.org/odrl-kb/dpv-gdpr-legal-basis/declared>
+        a bt:BackgroundTheory ;
+    dcterms:title "Pairwise distinctness of legal bases"@en ;
+    bt:appliesTo <https://w3id.org/odrl-kb/dpv-gdpr-legal-basis> ;
+    bt:generatedBy bt:PairwiseDistinctness ;
+    bt:scopeCondition "Distinctness between the listed bases, and not disjointness: the extension publishes concepts below two parents."@en ;
+    bt:pairCount 528 .

@@ -68,10 +68,28 @@ A1A  = "ft_pdfa1a"
 RESOURCE    = "https://w3id.org/odrl-kb/eu-file-type"
 EMPTY_BT    = "https://w3id.org/odrl-kb/eu-file-type/empty"
 DECLARED_BT = "https://w3id.org/odrl-kb/eu-file-type/declared"
-
 INCLUDES          = ["KGE000-0.ax", "EUFT-filetype.ax"]
 INCLUDES_DECLARED = INCLUDES + ["EUFT-filetype-declared.ax"]
 BINDING = "https://w3id.org/odrl-kb/profile/b-fileformat"
+
+def _iso(*pairs):
+    """Declared-distinctness instances, named bg_dist_ on both encodings.
+
+    The declared theory states the rule and lists the purposes it ranges
+    over; a problem naming two of them carries the inequation between
+    them, so a refutation cites the instance it used rather than one
+    term standing for all of them. The name must match on both sides:
+    an unsat core and a TPTP proof are compared by premise name.
+    """
+    fof = ["% Background theory: declared distinctness instances, stated in",
+           "% the declared theory file and instantiated here.", ""]
+    smt = ["; Declared distinctness this problem adopts, named as the TPTP",
+           "; side names it."]
+    for a, b in pairs:
+        n = f"bg_dist_{a}_{b}"
+        fof.append(f"fof({n}, axiom,\n    {a} != {b}).")
+        smt.append(f"(assert (! (not (= {a} {b})) :named {n}))")
+    return "\n".join(fof) + "\n", "\n".join(smt)
 
 def _decls(*concepts):
     """Declarations for a nominal problem.
@@ -85,6 +103,7 @@ def _decls(*concepts):
     lines = ["(declare-sort Concept 0)"]
     lines += [f"(declare-fun {c} () Concept)" for c in concepts]
     return "\n".join(lines)
+
 
 
 _TTL_HEAD = """\
