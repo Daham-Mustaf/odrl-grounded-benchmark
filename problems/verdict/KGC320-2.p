@@ -3,7 +3,7 @@
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
 % Problem  : fileFormat, eq ft:PDF against eq ft:PDFA1A (witness condition negated)
 % Version  : 1.0
-% English  : Offer (fileFormat, eq, ft:PDF) against request (fileFormat, eq, ft:PDFA1A).  The authority lists both formats and relates them in no way, so nothing settles whether the two names denote one format: Unknown.  A PDF/A-1a file is a PDF, and the table does not say so; nor could the fragment read it if the table did, since conformance to a profile of a standard is not identity, subsumption or parthood.
+% English  : A library permits PDF, while a researcher requests PDF/A-1a.
 %
 % Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark

@@ -1,0 +1,11 @@
+kgc:KGC397-observed a vrep:Refutation ;
+    vrep:producedBy "Vampire" ;
+    vrep:proofArtefact <proofs/KGC397-2.tstp> ;
+    vrep:attributedAssertion [
+        vrep:premiseSource vrep:fromBackgroundTheory ;
+        vrep:formulaName "bg_dist_dpv_advertising_dpv_marketing" ;
+        rdfs:label "bg_dist_dpv_advertising_dpv_marketing"@en ] ;
+    vrep:attributedAssertion [
+        vrep:premiseSource vrep:fromConstraints ;
+        vrep:formulaName "w_kgc397" ;
+        rdfs:label "w_kgc397"@en ] .

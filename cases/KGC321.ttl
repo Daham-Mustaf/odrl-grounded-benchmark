@@ -45,6 +45,7 @@ drk:KGC321-report a vrep:OperandVerdictReport ;
     report:policyRequest drk:request-321 ;
     report:constraint kgc:KGC321-offer-c1 ;
     vrep:constraintRequest kgc:KGC321-request-c1 ;
-    rdfs:comment """The two constraints require one format to be both concepts, and the declaration holds them apart.  Compare KGC314, where a declaration moved a verdict over a resource that also published an order: here the declaration is doing all of the work, because the table publishes nothing at all."""@en ;
+    rdfs:comment """The two constraints require ft:PDF and ft:PDFA1A to denote the same element, while the background assertion requires them to denote different elements. The two conditions cannot both hold."""@en ;
+    dcterms:description """A library permits PDF, while a researcher requests PDF/A-1a, with the two formats declared distinct."""@en ;
     report:satisfactionState report:Unsatisfied ;
     vrep:certificate <certificates/KGC321-1.tstp> .

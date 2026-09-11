@@ -1,0 +1,11 @@
+kgc:KGC364-observed a vrep:Refutation ;
+    vrep:producedBy "Vampire" ;
+    vrep:proofArtefact <proofs/KGC364-1.tstp> ;
+    vrep:attributedAssertion [
+        vrep:premiseSource vrep:fromBackgroundTheory ;
+        vrep:formulaName "bg_dist_tm_encryption_tm_access_control_method" ;
+        rdfs:label "bg_dist_tm_encryption_tm_access_control_method"@en ] ;
+    vrep:attributedAssertion [
+        vrep:premiseSource vrep:fromConstraints ;
+        vrep:formulaName "w_kgc364" ;
+        rdfs:label "w_kgc364"@en ] .

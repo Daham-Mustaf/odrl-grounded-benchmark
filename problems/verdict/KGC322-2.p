@@ -3,7 +3,7 @@
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
 % Problem  : fileFormat, isAnyOf {ft:PDF, ft:PDFA1A} against eq ft:PDFA1A (witness condition negated)
 % Version  : 1.0
-% English  : Offer (fileFormat, isAnyOf, {ft:PDF, ft:PDFA1A}) against request (fileFormat, eq, ft:PDFA1A).  The offer admits either format and the request requires one of them, so the two are satisfiable together whatever the table says.  Compatible, and the refutation cites the witness alone: no resource assertion, no declaration, no order axiom.  isAnyOf asks only whether concepts are the same, which is why it is admissible at nom where isA is not.
+% English  : A library permits either PDF or PDF/A-1a, while a researcher requests PDF/A-1a.
 %
 % Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark

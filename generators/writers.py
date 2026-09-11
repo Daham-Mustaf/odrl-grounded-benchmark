@@ -10,12 +10,18 @@ two TPTP files and two SMT-LIB files:
     <id>-2.p / .smt2     R + B + not W(K)
 
 The verdict is a property of the pair and is not written into either file.
-The harness derives it:
+The harness derives it, and only from a pair that completed:
 
-    q1 unsatisfiable                      -> Incompatible
-    q2 unsatisfiable                      -> Compatible
+    q1 unsatisfiable, q2 satisfiable      -> Incompatible
+    q1 satisfiable,   q2 unsatisfiable    -> Compatible
     both satisfiable                      -> Unknown
+    both unsatisfiable                    -> inconsistent theory, an error
     grounding undefined (no query built)  -> Unknown
+    any incomplete outcome                -> no verdict
+
+The last line is the one worth stating: a timeout, a crash, or a prover
+that returned no status is not satisfiable, and reading it as one would
+turn a computation that did not finish into a semantic result.
 
 Problem dict keys:
     id, name, description, subdir
@@ -33,9 +39,12 @@ Problem dict keys:
     smt2_background   SMT-LIB assertions for B, named bt_
     smt2_asserts      the older single field; assumed to hold R only
     smt2_witness      the witness condition, as an SMT-LIB term
-    certificate       dict with comment and premises; the comment becomes
-                      the report's rdfs:comment, the premises stay in the
-                      proof artefact
+    summary           what the two policies ask, in the parties' terms.
+                      Reaches the report as dcterms:description.
+    certificate       dict with comment and premises. The comment says
+                      what the verdict rests on and reaches the report as
+                      rdfs:comment; the premises stay in the proof
+                      artefact, which is where a refutation names them.
     ttl               the ODRL policy pair, Turtle
     ungrounded        optional; if set, no query is built
 """
@@ -299,20 +308,6 @@ def write_problem(p: dict, out_dir: Path, cases_dir: Path,
     return written
 
 
-# SATISFACTION_STATE = {
-#     "Compatible":   "report:Satisfied",
-#     "Incompatible": "report:Unsatisfied",
-#     "Unknown":      "vrep:Undetermined",
-# }
-
-# # vrep:Ungrounded is already the reason class used by undeterminedReason
-# # (see the vocab file), so it can't also name the certificate's own type
-# # without one IRI meaning two things.  Refutation and whatever the
-# # Epistemic-certificate class turns out to be called don't have this
-# # problem, so only Ungrounded needs remapping here.
-# CERTIFICATE_CLASS = {"Ungrounded": "UngroundedCertificate"}
-
-
 # The verdict-to-state mapping, stated once. The vocabulary's header
 # carries the same table in prose; if the two ever disagree, the
 # vocabulary is right and this is the copy that drifted.
@@ -321,6 +316,7 @@ SATISFACTION_STATE = {
     "Incompatible": "report:Unsatisfied",
     "Unknown":      "vrep:Undetermined",
 }
+
 
 def _report_block(p: dict) -> str:
     """The expected report, from the problem's own fields.
@@ -379,13 +375,20 @@ def _report_block(p: dict) -> str:
         lines.append(f"    vrep:undeterminedReason "
                      f"vrep:{p['unknown_reason'].capitalize()} ;")
 
-    # An ungrounded problem builds no queries, so there is nothing to
-    # point at. Which value failed is recoverable by applying the
-    # binding's grounding rule to the constraint named above.
-    if p.get("ungrounded"):
+    # Only a definite verdict has a refutation to point at. An ungrounded
+    # problem builds no queries; an Unknown has two satisfiable ones, so
+    # no proof exists. The vocabulary says an Epistemic certificate is a
+    # pair of satisfying structures, and run_certify computes that pair
+    # and does not yet write it, so nothing is referenced here rather
+    # than a file that is not there.
+    #
+    # Which query carries the refutation follows from the verdict:
+    # Incompatible is the witness refuted, Compatible its negation
+    # refuted.
+    if p.get("ungrounded") or verdict == "Unknown":
         lines[-1] = lines[-1].rstrip(" ;") + " ."
     else:
-        which = 1 if p["expected_q1"] == "Unsatisfiable" else 2
+        which = 1 if verdict == "Incompatible" else 2
         lines.append(f"    vrep:certificate "
                      f"<certificates/{pid}-{which}.tstp> .")
 
@@ -428,23 +431,58 @@ def write_case(p: dict, cases_dir: Path) -> Path:
 # Verdict, derived from the two query outcomes
 # ---------------------------------------------------------------------------
 
+def _normalise(status: str) -> str:
+    """An SZS or SMT status, as sat, unsat, or itself.
+
+    Kept separate from verdict_of so that an unrecognised status reaches
+    it unchanged and is refused there by name, rather than being mapped
+    to something plausible on the way.
+    """
+    s = status.lower()
+    if s.startswith("unsat"):
+        return "unsat"
+    if s.startswith("sat"):
+        return "sat"
+    return s
+
+
 def verdict_of(q1: str, q2: str) -> str:
-    """Map a pair of SZS or SMT statuses to a verdict."""
-    unsat1 = q1.lower().startswith("unsat")
-    unsat2 = q2.lower().startswith("unsat")
-    if unsat1 and unsat2:
+    """Map a pair of statuses to a verdict.
+
+    Only four completed pairs yield one. An incomplete outcome - a
+    timeout, a crash, a prover that returned no status - is not
+    satisfiable, and reading it as one would turn a computation that did
+    not finish into a semantic result. Such a pair raises rather than
+    returning Unknown, because Unknown is an answer about the vocabulary
+    and this is a failure to compute.
+
+    Both unsatisfiable means the resource and the background theory share
+    no model. Every verdict is then vacuously true of the empty set of
+    admissible structures, so none is reported.
+    """
+    a, b = q1.lower(), q2.lower()
+    if a == "unsat" and b == "unsat":
         raise ValueError("both queries unsatisfiable: (R, B) is inconsistent")
-    if unsat1:
+    if a == "unsat" and b == "sat":
         return "Incompatible"
-    if unsat2:
+    if a == "sat" and b == "unsat":
         return "Compatible"
-    return "Unknown"
+    if a == "sat" and b == "sat":
+        return "Unknown"
+    raise ValueError(f"queries did not complete: q1={q1}, q2={q2}")
 
 
 def expected_verdict(p: dict) -> str:
+    """The verdict the problem declares, from its two expected statuses.
+
+    The statuses are written in SZS form, Satisfiable and Unsatisfiable,
+    and normalised here. A problem whose expectations are anything else
+    is a problem whose author did not decide what it should return.
+    """
     if p.get("ungrounded"):
         return "Unknown"
-    return verdict_of(p["expected_q1"], p["expected_q2"])
+    return verdict_of(_normalise(p["expected_q1"]),
+                      _normalise(p["expected_q2"]))
 
 
 # ---------------------------------------------------------------------------

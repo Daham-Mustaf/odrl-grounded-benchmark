@@ -45,6 +45,7 @@ drk:KGC322-report a vrep:OperandVerdictReport ;
     report:policyRequest drk:request-322 ;
     report:constraint kgc:KGC322-offer-c1 ;
     vrep:constraintRequest kgc:KGC322-request-c1 ;
-    rdfs:comment """The requested format is among those the offer admits, so the two constraints hold together in every structure.  Nothing the authority published and nothing the parties declared takes part, which is what a verdict looks like when identity alone settles it."""@en ;
+    rdfs:comment """The request requires ft:PDFA1A, and the offer includes ft:PDFA1A among the values accepted by isAnyOf. The two constraints can therefore be satisfied together without any resource or background assertion."""@en ;
+    dcterms:description """A library permits either PDF or PDF/A-1a, while a researcher requests PDF/A-1a."""@en ;
     report:satisfactionState report:Satisfied ;
     vrep:certificate <certificates/KGC322-2.tstp> .

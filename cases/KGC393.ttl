@@ -44,5 +44,4 @@ drk:KGC393-report a vrep:OperandVerdictReport ;
     rdfs:comment """One structure identifies scientific research with research and development and admits the use; one keeps them apart and does not. The published order is not consulted by isAnyOf."""@en ;
     dcterms:description """A provider permits use for research and development or marketing; a consumer commits to scientific research."""@en ;
     report:satisfactionState vrep:Undetermined ;
-    vrep:undeterminedReason vrep:Epistemic ;
-    vrep:certificate <certificates/KGC393-2.tstp> .
+    vrep:undeterminedReason vrep:Epistemic .

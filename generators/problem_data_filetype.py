@@ -1,29 +1,24 @@
 """
 problem_data_filetype.py
 ========================
-Three problems over the EU File type table, at nom.
+Four problems over the EU File Type table, at nom.
 
-    KGC320  eq PDF      x eq PDFA1A   -> Unknown       the table relates nothing
-    KGC321  the same pair under a declared distinctness -> Incompatible
-    KGC322  isAnyOf {PDF, PDFA1A} x eq PDFA1A -> Compatible  on identity alone
+    KGC320  eq PDF x eq PDFA1A
+            -> Unknown       the resource provides no relation between them
 
-What this resource adds that the others do not
------------------------------------------------
-DPV and GeoNames publish an order and the profile declares how to read it.
-This table publishes no order: 228 concepts, every one a top concept, and
-zero skos:broader, narrower, related, exactMatch or broadMatch.  The builder
-checks all five and refuses to emit a resource if any is non-empty, so the
-nom binding is not an interpretation.  It is the only sort with anything to
-bind, and the publisher decided that.
+    KGC321  same pair with declared distinctness
+            -> Incompatible  the declaration separates the two concepts
 
-The consequence for verdicts is visible in the certificates below.  At tax
-and mer a Compatible cites resource premises: KGC310 cites one, KGC315 six.
-Here no verdict cites a resource premise at all, because the resource has
-none to cite.  What a verdict rests on is the constraints and whatever the
-parties declared, and the certificate shows the shift.  The more a resource
-publishes, the more of a verdict belongs to the authority; the less it
-publishes, the more belongs to the parties.  That is a property of the
-binding, not a defect in either.
+    KGC322  isAnyOf {PDF, PDFA1A} x eq PDFA1A
+            -> Compatible    the requested value is explicitly included
+
+    KGC323  neq PDF x eq PDFA1A with declared distinctness
+            -> Compatible    the exclusion does not apply to the request
+
+The four cases cover equality, distinctness, set-valued identity, and
+inequality at the nominal sort. The resource contributes no selected
+relation between the file-type concepts, so the cases isolate what follows
+from the constraints and from explicit background assertions.
 
 The PDF family
 --------------
@@ -76,7 +71,7 @@ DECLARED_BT = "https://w3id.org/odrl-kb/eu-file-type/declared"
 
 INCLUDES          = ["KGE000-0.ax", "EUFT-filetype.ax"]
 INCLUDES_DECLARED = INCLUDES + ["EUFT-filetype-declared.ax"]
-
+BINDING = "https://w3id.org/odrl-kb/profile/b-fileformat"
 
 def _decls(*concepts):
     """Declarations for a nominal problem.
@@ -118,15 +113,16 @@ PROBLEMS = [
         "background_theory": EMPTY_BT,
          "unknown_reason": "epistemic",
         "includes":          INCLUDES,
+        "summary": (
+    "A library permits PDF, while a researcher requests PDF/A-1a."
+),
         "description": (
-            "Offer (fileFormat, eq, ft:PDF) against request (fileFormat, eq, "
-            "ft:PDFA1A).  The authority lists both formats and relates them "
-            "in no way, so nothing settles whether the two names denote one "
-            "format: Unknown.  A PDF/A-1a file is a PDF, and the table does "
-            "not say so; nor could the fragment read it if the table did, "
-            "since conformance to a profile of a standard is not identity, "
-            "subsumption or parthood."
-        ),
+    "The EU File Type table lists both PDF and PDF/A-1a but publishes no "
+    "selected relation between them. At the nominal sort, the formal "
+    "semantics therefore leaves their identity open. The case also shows "
+    "that the fragment does not interpret conformance to a file-format "
+    "profile as identity, subsumption, or parthood."
+),
 
         "fof_decls": """\
 % Resource: no order assertions.  The table publishes none.
@@ -150,11 +146,11 @@ PROBLEMS = [
 
         "certificate": {
             "kind": "Models",
-            "comment": "Both queries are satisfiable.  The models differ on "
-                       "whether the two names denote one format.  No "
-                       "assertion in the table bears on the question, so the "
-                       "verdict reports the authority's silence rather than "
-                       "resolving it.",
+"comment": (
+    "The two constraints can be satisfied both when ft:PDF and ft:PDFA1A "
+    "denote the same element and when they denote different elements. No "
+    "resource or background assertion selects between these possibilities."
+),
             "premises": [],
         },
         "ttl": _TTL_HEAD + """
@@ -204,14 +200,16 @@ kgc:KGC320-request-c1 a odrl:Constraint ;
         "resource":          RESOURCE,
         "background_theory": DECLARED_BT,
         "includes":          INCLUDES_DECLARED,
-        "description": (
-            "The constraints of KGC320 under a background theory in which "
-            "the parties declare the two formats distinct.  Incompatible, "
-            "and the sole premise is the declaration: the table contributed "
-            "nothing, so withdrawing the declaration returns the verdict to "
-            "Unknown and there is nothing else holding it."
-        ),
-
+        "summary": (
+    "A library permits PDF, while a researcher requests PDF/A-1a, with "
+    "the two formats declared distinct."
+),
+"description": (
+    "The case is the KGC320 pair with a background assertion declaring "
+    "ft:PDF and ft:PDFA1A distinct. The resource contributes no relation "
+    "between the two concepts, so the declaration is the premise that "
+    "changes the verdict from Unknown to Incompatible."
+),
         "fof_decls": """\
 % Background theory: one declared distinctness, from
 % EUFT-filetype-declared.ax.  The table separates nothing itself.
@@ -236,12 +234,11 @@ kgc:KGC320-request-c1 a odrl:Constraint ;
 
         "certificate": {
             "kind": "Refutation",
-            "comment": "The two constraints require one format to be both "
-                       "concepts, and the declaration holds them apart.  "
-                       "Compare KGC314, where a declaration moved a verdict "
-                       "over a resource that also published an order: here "
-                       "the declaration is doing all of the work, because "
-                       "the table publishes nothing at all.",
+   "comment": (
+        "The two constraints require ft:PDF and ft:PDFA1A to denote the "
+        "same element, while the background assertion requires them to "
+        "denote different elements. The two conditions cannot both hold."
+    ),
             "premises": [
                 ("fromBackgroundTheory",
                  "ft:PDF and ft:PDFA1A are declared distinct"),
@@ -278,12 +275,9 @@ kgc:KGC321-request-c1 a odrl:Constraint ;
     odrl:operator odrl:eq ;
     odrl:rightOperand ft:PDFA1A .""",
     },
-
-    # -----------------------------------------------------------------
-    # KGC322  A set-valued operator at nom.  isAnyOf needs only identity,
-    # so it is admissible at every sort, and here it produces a
-    # Compatible whose refutation cites nothing but the witness.
-    # -----------------------------------------------------------------
+# KGC322  A nominal set-valued case.  isAnyOf uses identity over its
+# explicitly listed values, so compatibility can follow from the
+# constraints alone.
     {
         "id":                "KGC322",
         "subdir":            "verdict",
@@ -294,6 +288,10 @@ kgc:KGC321-request-c1 a odrl:Constraint ;
         "resource":          RESOURCE,
         "background_theory": EMPTY_BT,
         "includes":          INCLUDES,
+        "summary": (
+    "A library permits either PDF or PDF/A-1a, while a researcher requests "
+    "PDF/A-1a."
+),
         "description": (
             "Offer (fileFormat, isAnyOf, {ft:PDF, ft:PDFA1A}) against "
             "request (fileFormat, eq, ft:PDFA1A).  The offer admits either "
@@ -328,13 +326,12 @@ kgc:KGC321-request-c1 a odrl:Constraint ;
 
         "certificate": {
             "kind": "Refutation",
-            "comment": "The requested format is among those the offer "
-                       "admits, so the two constraints hold together in "
-                       "every structure.  Nothing the authority published "
-                       "and nothing the parties declared takes part, which "
-                       "is what a verdict looks like when identity alone "
-                       "settles it.",
-            "premises": [
+    "comment": (
+        "The request requires ft:PDFA1A, and the offer includes ft:PDFA1A "
+        "among the values accepted by isAnyOf. The two constraints can "
+        "therefore be satisfied together without any resource or background "
+        "assertion."
+    ),        "premises": [
                 ("fromConstraints", "the witness condition"),
             ],
         },
@@ -369,4 +366,122 @@ kgc:KGC322-request-c1 a odrl:Constraint ;
     odrl:operator odrl:eq ;
     odrl:rightOperand ft:PDFA1A .""",
     },
+    # -----------------------------------------------------------------
+# KGC323  A nominal negation case.  This is the only benchmark case
+# for neq.  The offer excludes PDF, while the request requires
+# PDF/A-1a.  The explicit distinctness declaration makes the two
+# constraints compatible.
+# -----------------------------------------------------------------
+{
+    "id": "KGC323",
+    "subdir": "verdict",
+    "binding":           BINDING,
+    "name": (
+        "fileFormat, neq ft:PDF against eq ft:PDFA1A, "
+        "under a declared distinctness"
+    ),
+
+    "summary": (
+        "A library excludes PDF, while a researcher requests PDF/A-1a, "
+        "with the two formats declared distinct."
+    ),
+
+    "left_operand": "fileFormat",
+    "sort": "nom",
+    "resource": RESOURCE,
+    "background_theory": DECLARED_BT,
+    "binding": BINDING,
+    "includes": INCLUDES_DECLARED,
+
+    "description": (
+        "The offer excludes ft:PDF, while the request requires "
+        "ft:PDFA1A. The two concepts are declared distinct, so the "
+        "constraints are Compatible. At the nominal sort, exclusion by "
+        "identity is the applicable reading: the resource publishes no "
+        "order relation for file formats. This case therefore provides "
+        "a control for cases such as KGC392 and KGC397, where the same "
+        "identity-based exclusion is insufficient for an order-based "
+        "interpretation."
+    ),
+
+    "fof_decls": """\
+% Resource: no order assertions.
+% Background theory: ft:PDF and ft:PDFA1A are declared distinct.
+""",
+
+    "fof_witness": f"""\
+( ( {PDF} != {PDF} & {PDF} = {A1A} )
+| ( {A1A} != {PDF} & {A1A} = {A1A} ) )""",
+
+    "expected_q1": "Satisfiable",
+    "expected_q2": "Unsatisfiable",
+
+    "smt2_logic": "UF",
+
+    "smt2_decls": _decls(PDF, A1A),
+
+    "smt2_resource": """\
+; Resource: no order relation between the file-type concepts.
+""",
+
+    "smt2_background": f"""\
+; Background theory: ft:PDF and ft:PDFA1A are declared distinct.
+(assert (distinct {PDF} {A1A}))
+""",
+
+    "smt2_witness": f"""\
+(or (and (not (= {PDF} {PDF})) (= {PDF} {A1A}))
+    (and (not (= {A1A} {PDF})) (= {A1A} {A1A})))""",
+
+    "certificate": {
+        "kind": "Refutation",
+        "comment": (
+            "The offer excludes ft:PDF, while the request requires "
+            "ft:PDFA1A. The background assertion declares the two concepts "
+            "distinct, so the requested value is not excluded."
+        ),
+        "premises": [
+            (
+                "fromBackgroundTheory",
+                "ft:PDF and ft:PDFA1A are declared distinct"
+            ),
+            (
+                "fromConstraints",
+                "the witness condition"
+            ),
+        ],
+    },
+
+    "ttl": _TTL_HEAD + """
+drk:offer-323 a odrl:Offer ;
+    dcterms:title "BSB offer: not PDF"@en ;
+    odrl:assigner drk:library ;
+    odrl:permission kgc:KGC323-offer-r1 .
+
+kgc:KGC323-offer-r1 a odrl:Permission ;
+    odrl:action odrl:use ;
+    odrl:target drk:manuscripts ;
+    odrl:constraint kgc:KGC323-offer-c1 .
+
+kgc:KGC323-offer-c1 a odrl:Constraint ;
+    odrl:leftOperand odrl:fileFormat ;
+    odrl:operator odrl:neq ;
+    odrl:rightOperand ft:PDF .
+
+drk:request-323 a odrl:Request ;
+    dcterms:title "BnF request: PDF/A-1a"@en ;
+    odrl:assignee drk:researcher ;
+    odrl:permission kgc:KGC323-request-r1 .
+
+kgc:KGC323-request-r1 a odrl:Permission ;
+    odrl:action odrl:use ;
+    odrl:target drk:manuscripts ;
+    odrl:constraint kgc:KGC323-request-c1 .
+
+kgc:KGC323-request-c1 a odrl:Constraint ;
+    odrl:leftOperand odrl:fileFormat ;
+    odrl:operator odrl:eq ;
+    odrl:rightOperand ft:PDFA1A .
+""",
+},
 ]

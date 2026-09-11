@@ -7,8 +7,8 @@ kgc:KGC343-observed a vrep:Refutation ;
         rdfs:label "res_dpv_consent_withdrawn_below_dpv_consent_status_invalid_for_processing"@en ] ;
     vrep:attributedAssertion [
         vrep:premiseSource vrep:fromBackgroundTheory ;
-        vrep:formulaName "bt_dpv_consent_status_valid_for_processing_disjoint_dpv_consent_status_invalid_for_processing" ;
-        rdfs:label "bt_dpv_consent_status_valid_for_processing_disjoint_dpv_consent_status_invalid_for_processing"@en ] ;
+        vrep:formulaName "bg_disj_dpv_consent_status_valid_for_processing_disjoint_dpv_consent_status_invalid_for_processing" ;
+        rdfs:label "bg_disj_dpv_consent_status_valid_for_processing_disjoint_dpv_consent_status_invalid_for_processing"@en ] ;
     vrep:attributedAssertion [
         vrep:premiseSource vrep:fromConstraints ;
         vrep:formulaName "w_kgc343" ;

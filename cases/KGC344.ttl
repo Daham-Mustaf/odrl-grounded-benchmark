@@ -54,5 +54,4 @@ drk:KGC344-report a vrep:OperandVerdictReport ;
     rdfs:comment """One structure makes the given and withdrawn states one concept, and exactly-one then fails; nothing published forbids it."""@en ;
     dcterms:description """An offer requires the record to be in exactly one of the given and withdrawn states; a processor commits to processing only under given consent."""@en ;
     report:satisfactionState vrep:Undetermined ;
-    vrep:undeterminedReason vrep:Epistemic ;
-    vrep:certificate <certificates/KGC344-2.tstp> .
+    vrep:undeterminedReason vrep:Epistemic .

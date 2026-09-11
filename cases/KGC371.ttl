@@ -48,5 +48,4 @@ drk:KGC371-report a vrep:OperandVerdictReport ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-language-bcp47> ;
     rdfs:comment """Both queries are satisfiable. One certifying structure interprets bcp47:de and bcp47:fr as one concept and the other keeps them apart; the registry decides neither."""@en ;
     report:satisfactionState vrep:Undetermined ;
-    vrep:undeterminedReason vrep:Epistemic ;
-    vrep:certificate <certificates/KGC371-2.tstp> .
+    vrep:undeterminedReason vrep:Epistemic .

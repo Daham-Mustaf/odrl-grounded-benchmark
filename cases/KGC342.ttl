@@ -46,5 +46,4 @@ drk:KGC342-report a vrep:OperandVerdictReport ;
     rdfs:comment """Nothing published keeps the withdrawn state out of the valid branch, so one structure admits the use and one does not."""@en ;
     dcterms:description """A controller permits use only while consent may justify processing; a processor states that its processing continues after consent is withdrawn."""@en ;
     report:satisfactionState vrep:Undetermined ;
-    vrep:undeterminedReason vrep:Epistemic ;
-    vrep:certificate <certificates/KGC342-2.tstp> .
+    vrep:undeterminedReason vrep:Epistemic .

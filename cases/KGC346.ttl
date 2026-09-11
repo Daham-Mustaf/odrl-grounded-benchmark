@@ -54,5 +54,4 @@ drk:KGC346-report a vrep:OperandVerdictReport ;
     rdfs:comment """One structure places the given state below both branches; DPV does not rule it out."""@en ;
     dcterms:description """An offer requires the record to fall under exactly one of the two consent branches; a processor commits to processing only under given consent."""@en ;
     report:satisfactionState vrep:Undetermined ;
-    vrep:undeterminedReason vrep:Epistemic ;
-    vrep:certificate <certificates/KGC346-2.tstp> .
+    vrep:undeterminedReason vrep:Epistemic .

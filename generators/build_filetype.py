@@ -280,7 +280,7 @@ def declared_axioms(pair) -> str:
 
 
 def profile_ttl() -> str:
-    return """\\
+    return """\
 # Profile entry for odrl:fileFormat over the EU File type table.
 #
 # The binding assigns the nominal sort. The selected resource publishes

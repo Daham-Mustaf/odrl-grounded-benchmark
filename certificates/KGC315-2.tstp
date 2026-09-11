@@ -5,102 +5,102 @@
 fof(f3,axiom,(
   ! [X0,X1,X2] : ((kge_leq(X0,X1) & kge_leq(X1,X2)) => kge_leq(X0,X2))),
   file('problems/verdict/KGC315-2.p',ax_leq_transitive)).
-fof(f7,axiom,(
+fof(f33,axiom,(
   kge_leq(dpv_human_resource_management,dpv_purpose)),
   file('problems/verdict/KGC315-2.p',res_dpv_human_resource_management_below_dpv_purpose)).
-fof(f12,axiom,(
+fof(f64,axiom,(
   kge_leq(dpv_personnel_hiring,dpv_personnel_management)),
   file('problems/verdict/KGC315-2.p',res_dpv_personnel_hiring_below_dpv_personnel_management)).
-fof(f13,axiom,(
+fof(f65,axiom,(
   kge_leq(dpv_personnel_management,dpv_human_resource_management)),
   file('problems/verdict/KGC315-2.p',res_dpv_personnel_management_below_dpv_human_resource_management)).
-fof(f14,axiom,(
+fof(f103,axiom,(
   kge_leq(dpv_recruitment_interview_management,dpv_recruitment_management)),
   file('problems/verdict/KGC315-2.p',res_dpv_recruitment_interview_management_below_dpv_recruitment_management)).
-fof(f15,axiom,(
+fof(f104,axiom,(
   kge_leq(dpv_recruitment_interview_scheduling,dpv_recruitment_interview_management)),
   file('problems/verdict/KGC315-2.p',res_dpv_recruitment_interview_scheduling_below_dpv_recruitment_interview_management)).
-fof(f16,axiom,(
+fof(f105,axiom,(
   kge_leq(dpv_recruitment_management,dpv_personnel_hiring)),
   file('problems/verdict/KGC315-2.p',res_dpv_recruitment_management_below_dpv_personnel_hiring)).
-fof(f19,axiom,(
+fof(f135,axiom,(
   ~((kge_leq(dpv_purpose,dpv_purpose) & dpv_purpose = dpv_recruitment_interview_scheduling) | (kge_leq(dpv_recruitment_interview_scheduling,dpv_purpose) & dpv_recruitment_interview_scheduling = dpv_recruitment_interview_scheduling))),
   file('problems/verdict/KGC315-2.p',w_kgc315)).
-fof(f22,plain,(
+fof(f138,plain,(
   ! [X0,X1,X2] : (kge_leq(X0,X2) | (~kge_leq(X0,X1) | ~kge_leq(X1,X2)))),
   inference(ennf_transformation,[],[f3])).
-fof(f23,plain,(
+fof(f139,plain,(
   ! [X0,X1,X2] : (kge_leq(X0,X2) | ~kge_leq(X0,X1) | ~kge_leq(X1,X2))),
-  inference(flattening,[],[f22])).
-fof(f24,plain,(
+  inference(flattening,[],[f138])).
+fof(f140,plain,(
   (~kge_leq(dpv_purpose,dpv_purpose) | dpv_purpose != dpv_recruitment_interview_scheduling) & (~kge_leq(dpv_recruitment_interview_scheduling,dpv_purpose) | dpv_recruitment_interview_scheduling != dpv_recruitment_interview_scheduling)),
-  inference(ennf_transformation,[],[f19])).
-fof(f27,plain,(
+  inference(ennf_transformation,[],[f135])).
+fof(f143,plain,(
   ( ! [X2,X0,X1] : (~kge_leq(X1,X2) | ~kge_leq(X0,X1) | kge_leq(X0,X2)) )),
-  inference(cnf_transformation,[],[f23])).
-fof(f31,plain,(
+  inference(cnf_transformation,[],[f139])).
+fof(f173,plain,(
   kge_leq(dpv_human_resource_management,dpv_purpose)),
-  inference(cnf_transformation,[],[f7])).
-fof(f36,plain,(
+  inference(cnf_transformation,[],[f33])).
+fof(f204,plain,(
   kge_leq(dpv_personnel_hiring,dpv_personnel_management)),
-  inference(cnf_transformation,[],[f12])).
-fof(f37,plain,(
+  inference(cnf_transformation,[],[f64])).
+fof(f205,plain,(
   kge_leq(dpv_personnel_management,dpv_human_resource_management)),
-  inference(cnf_transformation,[],[f13])).
-fof(f38,plain,(
+  inference(cnf_transformation,[],[f65])).
+fof(f243,plain,(
   kge_leq(dpv_recruitment_interview_management,dpv_recruitment_management)),
-  inference(cnf_transformation,[],[f14])).
-fof(f39,plain,(
+  inference(cnf_transformation,[],[f103])).
+fof(f244,plain,(
   kge_leq(dpv_recruitment_interview_scheduling,dpv_recruitment_interview_management)),
-  inference(cnf_transformation,[],[f15])).
-fof(f40,plain,(
+  inference(cnf_transformation,[],[f104])).
+fof(f245,plain,(
   kge_leq(dpv_recruitment_management,dpv_personnel_hiring)),
-  inference(cnf_transformation,[],[f16])).
-fof(f43,plain,(
+  inference(cnf_transformation,[],[f105])).
+fof(f275,plain,(
   ~kge_leq(dpv_recruitment_interview_scheduling,dpv_purpose) | dpv_recruitment_interview_scheduling != dpv_recruitment_interview_scheduling),
-  inference(cnf_transformation,[],[f24])).
-fof(f45,plain,(
+  inference(cnf_transformation,[],[f140])).
+fof(f277,plain,(
   ~kge_leq(dpv_recruitment_interview_scheduling,dpv_purpose)),
-  inference(trivial_inequality_removal,[],[f43])).
-fof(f211,plain,(
+  inference(trivial_inequality_removal,[],[f275])).
+fof(f1635,plain,(
   ( ! [X0] : (~kge_leq(X0,dpv_human_resource_management) | kge_leq(X0,dpv_purpose)) )),
-  inference(resolution,[],[f27,f31])).
-fof(f216,plain,(
+  inference(resolution,[],[f143,f173])).
+fof(f1668,plain,(
   ( ! [X0] : (~kge_leq(X0,dpv_personnel_hiring) | kge_leq(X0,dpv_personnel_management)) )),
-  inference(resolution,[],[f27,f36])).
-fof(f218,plain,(
-  ( ! [X0] : (~kge_leq(X0,dpv_recruitment_interview_management) | kge_leq(X0,dpv_recruitment_management)) )),
-  inference(resolution,[],[f27,f38])).
-fof(f219,plain,(
+  inference(resolution,[],[f143,f204])).
+fof(f1697,plain,(
   ( ! [X0] : (~kge_leq(X0,dpv_recruitment_management) | kge_leq(X0,dpv_personnel_hiring)) )),
-  inference(resolution,[],[f27,f40])).
-fof(f242,plain,(
+  inference(resolution,[],[f143,f245])).
+fof(f1705,plain,(
+  ( ! [X0] : (~kge_leq(X0,dpv_recruitment_interview_management) | kge_leq(X0,dpv_recruitment_management)) )),
+  inference(resolution,[],[f143,f243])).
+fof(f2197,plain,(
   kge_leq(dpv_personnel_management,dpv_purpose)),
-  inference(resolution,[],[f211,f37])).
-fof(f268,plain,(
+  inference(resolution,[],[f1635,f205])).
+fof(f2347,plain,(
   ( ! [X0] : (~kge_leq(X0,dpv_personnel_management) | kge_leq(X0,dpv_purpose)) )),
-  inference(resolution,[],[f242,f27])).
-fof(f310,plain,(
+  inference(resolution,[],[f2197,f143])).
+fof(f3102,plain,(
   kge_leq(dpv_recruitment_interview_scheduling,dpv_recruitment_management)),
-  inference(resolution,[],[f218,f39])).
-fof(f324,plain,(
+  inference(resolution,[],[f1705,f244])).
+fof(f3129,plain,(
   kge_leq(dpv_recruitment_interview_scheduling,dpv_personnel_hiring)),
-  inference(resolution,[],[f219,f310])).
-fof(f362,plain,(
+  inference(resolution,[],[f3102,f1697])).
+fof(f3910,plain,(
   kge_leq(dpv_recruitment_interview_scheduling,dpv_personnel_management)),
-  inference(resolution,[],[f324,f216])).
-fof(f416,plain,(
+  inference(resolution,[],[f3129,f1668])).
+fof(f4520,plain,(
   kge_leq(dpv_recruitment_interview_scheduling,dpv_purpose)),
-  inference(resolution,[],[f268,f362])).
-fof(f417,plain,(
+  inference(resolution,[],[f3910,f2347])).
+fof(f4533,plain,(
   $false),
-  inference(forward_subsumption_resolution,[],[f416,f45])).
+  inference(forward_subsumption_resolution,[],[f4520,f277])).
 % SZS output end Proof for KGC315-2
 % ------------------------------
 % Version: Vampire 5.0.1 (Release build, commit 1b13eafde on 2026-01-18 12:14:50 +0000)
 % CaDiCaL version: 2.1.3
 % Termination reason: Refutation
-% Time elapsed: 0.002 s
-% Peak memory usage: 15 MB
+% Time elapsed: 0.040 s
+% Peak memory usage: 16 MB
 % ------------------------------
 % ------------------------------

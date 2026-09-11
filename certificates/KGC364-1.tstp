@@ -1,0 +1,31 @@
+% Running in auto input_syntax mode. Trying TPTP
+% Refutation found. Thanks to Tanya!
+% SZS status Unsatisfiable for KGC364-1
+% SZS output start Proof for KGC364-1
+fof(f79,axiom,(
+  tm_encryption != tm_access_control_method),
+  file('problems/verdict/KGC364-1.p',bg_dist_tm_encryption_tm_access_control_method)).
+fof(f80,axiom,(
+  tm_encryption = tm_encryption & tm_access_control_method = tm_encryption & (tm_encryption = tm_encryption | tm_access_control_method = tm_encryption)),
+  file('problems/verdict/KGC364-1.p',w_kgc364)).
+fof(f163,plain,(
+  tm_access_control_method != tm_encryption),
+  inference(cnf_transformation,[],[f79])).
+fof(f165,plain,(
+  tm_access_control_method = tm_encryption),
+  inference(cnf_transformation,[],[f80])).
+fof(f169,plain,(
+  tm_encryption != tm_encryption),
+  inference(definition_unfolding,[],[f163,f165])).
+fof(f172,plain,(
+  $false),
+  inference(trivial_inequality_removal,[],[f169])).
+% SZS output end Proof for KGC364-1
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eafde on 2026-01-18 12:14:50 +0000)
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation
+% Time elapsed: 0.004 s
+% Peak memory usage: 22 MB
+% ------------------------------
+% ------------------------------

@@ -1,0 +1,15 @@
+kgc:KGC394-observed a vrep:Refutation ;
+    vrep:producedBy "Vampire" ;
+    vrep:proofArtefact <proofs/KGC394-1.tstp> ;
+    vrep:attributedAssertion [
+        vrep:premiseSource vrep:fromBackgroundTheory ;
+        vrep:formulaName "bg_dist_dpv_scientific_research_dpv_research_and_development" ;
+        rdfs:label "bg_dist_dpv_scientific_research_dpv_research_and_development"@en ] ;
+    vrep:attributedAssertion [
+        vrep:premiseSource vrep:fromBackgroundTheory ;
+        vrep:formulaName "bg_dist_dpv_scientific_research_dpv_marketing" ;
+        rdfs:label "bg_dist_dpv_scientific_research_dpv_marketing"@en ] ;
+    vrep:attributedAssertion [
+        vrep:premiseSource vrep:fromConstraints ;
+        vrep:formulaName "w_kgc394" ;
+        rdfs:label "w_kgc394"@en ] .

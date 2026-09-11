@@ -1,0 +1,52 @@
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix report:  <https://w3id.org/force/compliance-report#> .
+@prefix vrep:    <https://w3id.org/odrl-kb/verdict-report#> .
+@prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ft:      <http://publications.europa.eu/resource/authority/file-type/> .
+@prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+@prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+
+drk:offer-323 a odrl:Offer ;
+    dcterms:title "BSB offer: not PDF"@en ;
+    odrl:assigner drk:library ;
+    odrl:permission kgc:KGC323-offer-r1 .
+
+kgc:KGC323-offer-r1 a odrl:Permission ;
+    odrl:action odrl:use ;
+    odrl:target drk:manuscripts ;
+    odrl:constraint kgc:KGC323-offer-c1 .
+
+kgc:KGC323-offer-c1 a odrl:Constraint ;
+    odrl:leftOperand odrl:fileFormat ;
+    odrl:operator odrl:neq ;
+    odrl:rightOperand ft:PDF .
+
+drk:request-323 a odrl:Request ;
+    dcterms:title "BnF request: PDF/A-1a"@en ;
+    odrl:assignee drk:researcher ;
+    odrl:permission kgc:KGC323-request-r1 .
+
+kgc:KGC323-request-r1 a odrl:Permission ;
+    odrl:action odrl:use ;
+    odrl:target drk:manuscripts ;
+    odrl:constraint kgc:KGC323-request-c1 .
+
+kgc:KGC323-request-c1 a odrl:Constraint ;
+    odrl:leftOperand odrl:fileFormat ;
+    odrl:operator odrl:eq ;
+    odrl:rightOperand ft:PDFA1A .
+
+### Expected result #######################################################
+
+drk:KGC323-report a vrep:OperandVerdictReport ;
+    dcterms:identifier "KGC323" ;
+    report:policy drk:offer-323 ;
+    report:policyRequest drk:request-323 ;
+    report:constraint kgc:KGC323-offer-c1 ;
+    vrep:constraintRequest kgc:KGC323-request-c1 ;
+    vrep:binding <https://w3id.org/odrl-kb/profile/b-fileformat> ;
+    rdfs:comment """The offer excludes ft:PDF, while the request requires ft:PDFA1A. The background assertion declares the two concepts distinct, so the requested value is not excluded."""@en ;
+    dcterms:description """A library excludes PDF, while a researcher requests PDF/A-1a, with the two formats declared distinct."""@en ;
+    report:satisfactionState report:Satisfied ;
+    vrep:certificate <certificates/KGC323-2.tstp> .

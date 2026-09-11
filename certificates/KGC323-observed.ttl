@@ -1,0 +1,11 @@
+kgc:KGC323-observed a vrep:Refutation ;
+    vrep:producedBy "Vampire" ;
+    vrep:proofArtefact <proofs/KGC323-2.tstp> ;
+    vrep:attributedAssertion [
+        vrep:premiseSource vrep:fromBackgroundTheory ;
+        vrep:formulaName "bg_dist_ft_pdf_distinct_ft_pdfa1a" ;
+        rdfs:label "bg_dist_ft_pdf_distinct_ft_pdfa1a"@en ] ;
+    vrep:attributedAssertion [
+        vrep:premiseSource vrep:fromConstraints ;
+        vrep:formulaName "w_kgc323" ;
+        rdfs:label "w_kgc323"@en ] .

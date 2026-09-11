@@ -1,21 +1,20 @@
 """
 gen_filetype.py
-=================
-Generates the three motivating-example problems, each as two satisfiability
-queries, plus policies and expected reports.
+===============
+Generates the four EU File Type benchmark problems, each as two
+satisfiability queries, together with the corresponding ODRL policies
+and expected verdict reports.
 
-Output, per problem:
+For each problem:
     problems/verdict/<id>-1.p     R + B + W
-    problems/verdict/<id>-1.smt2
+    problems/verdict/<id>-1.smt2  R + B + W
     problems/verdict/<id>-2.p     R + B + not W
-    problems/verdict/<id>-2.smt2
+    problems/verdict/<id>-2.smt2  R + B + not W
     cases/<id>.ttl                policies + expected report
 
-Usage:
-    uv run generators/gen_motivating.py
-    ODRL_ANON=1 uv run generators/gen_motivating.py
+The four cases cover equality, declared distinctness, isAnyOf, and neq
+at the nominal sort of odrl:fileFormat.
 """
-
 import argparse
 import sys
 from pathlib import Path
