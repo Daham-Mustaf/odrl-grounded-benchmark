@@ -1,41 +1,36 @@
 @prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix report:  <https://w3id.org/force/compliance-report#> .
-@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix vrep:    <https://w3id.org/odrl-kb/verdict-report#> .
 @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix dpv:     <https://w3id.org/dpv#> .
-@prefix dpvo:    <https://w3id.org/dpv/mappings/odrl#> .
+@prefix dpv-odrl:    <https://w3id.org/dpv/mappings/odrl#> .
 @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
 
 drk:offer-342 a odrl:Offer ;
-    dcterms:title "Use is permitted while consent may justify processing"@en ;
+    dcterms:title "Use is permitted while the consent on record may justify processing"@en ;
     odrl:assigner drk:controller ;
     odrl:permission kgc:KGC342-offer-r1 .
-
 kgc:KGC342-offer-r1 a odrl:Permission ;
     odrl:action odrl:use ;
     odrl:target drk:dataset ;
     odrl:constraint kgc:KGC342-offer-c1 .
-
 kgc:KGC342-offer-c1 a odrl:Constraint ;
-    odrl:leftOperand dpvo:Status ;
+    odrl:leftOperand dpv-odrl:Status ;
     odrl:operator odrl:isA ;
     odrl:rightOperand dpv:ConsentStatusValidForProcessing .
 
 drk:request-342 a odrl:Request ;
-    dcterms:title "The consent record is in the withdrawn state"@en ;
+    dcterms:title "Processing continues after consent is withdrawn"@en ;
     odrl:assignee drk:processor ;
     odrl:permission kgc:KGC342-request-r1 .
-
 kgc:KGC342-request-r1 a odrl:Permission ;
     odrl:action odrl:use ;
     odrl:target drk:dataset ;
     odrl:constraint kgc:KGC342-request-c1 .
-
 kgc:KGC342-request-c1 a odrl:Constraint ;
-    odrl:leftOperand dpvo:Status ;
+    odrl:leftOperand dpv-odrl:Status ;
     odrl:operator odrl:eq ;
     odrl:rightOperand dpv:ConsentWithdrawn .
 
@@ -47,9 +42,9 @@ drk:KGC342-report a vrep:OperandVerdictReport ;
     report:policyRequest drk:request-342 ;
     report:constraint kgc:KGC342-offer-c1 ;
     vrep:constraintRequest kgc:KGC342-request-c1 ;
-    vrep:backgroundTheory <https://w3id.org/odrl-kb/dpv-consent/empty> ;
+    vrep:binding <https://w3id.org/odrl-kb/profile/b-consent-status> ;
+    rdfs:comment """Nothing published keeps the withdrawn state out of the valid branch, so one structure admits the use and one does not."""@en ;
+    dcterms:description """A controller permits use only while consent may justify processing; a processor states that its processing continues after consent is withdrawn."""@en ;
     report:satisfactionState vrep:Undetermined ;
-    vrep:certificate drk:KGC342-certificate .
-
-drk:KGC342-certificate a vrep:Models ;
-    rdfs:comment """Both queries are satisfiable.  The models differ on whether the withdrawn state lies below the branch of states valid for processing, which the module does not settle."""@en .
+    vrep:undeterminedReason vrep:Epistemic ;
+    vrep:certificate <certificates/KGC342-2.tstp> .

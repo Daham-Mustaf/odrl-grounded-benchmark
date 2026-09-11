@@ -1,6 +1,5 @@
 @prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix report:  <https://w3id.org/force/compliance-report#> .
-@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix vrep:    <https://w3id.org/odrl-kb/verdict-report#> .
 @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
@@ -8,14 +7,14 @@
 @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
 
-drk:bsb-offer-317 a odrl:Offer ;
+drk:offer-317 a odrl:Offer ;
     dcterms:title "BSB offer: any purpose other than marketing"@en ;
-    odrl:assigner drk:bavarian-state-library ;
+    odrl:assigner drk:library ;
     odrl:permission kgc:KGC317-offer-r1 .
 
 kgc:KGC317-offer-r1 a odrl:Permission ;
     odrl:action odrl:use ;
-    odrl:target drk:bsb-manuscripts ;
+    odrl:target drk:manuscripts ;
     odrl:constraint kgc:KGC317-offer-c1 .
 
 kgc:KGC317-offer-c1 a odrl:Constraint ;
@@ -23,14 +22,14 @@ kgc:KGC317-offer-c1 a odrl:Constraint ;
     odrl:operator odrl:isNoneOf ;
     odrl:rightOperand dpv:Marketing .
 
-drk:bnf-request-317 a odrl:Request ;
+drk:request-317 a odrl:Request ;
     dcterms:title "BnF request: marketing"@en ;
-    odrl:assignee drk:french-national-library ;
+    odrl:assignee drk:researcher ;
     odrl:permission kgc:KGC317-request-r1 .
 
 kgc:KGC317-request-r1 a odrl:Permission ;
     odrl:action odrl:use ;
-    odrl:target drk:bsb-manuscripts ;
+    odrl:target drk:manuscripts ;
     odrl:constraint kgc:KGC317-request-c1 .
 
 kgc:KGC317-request-c1 a odrl:Constraint ;
@@ -46,12 +45,8 @@ drk:KGC317-report a vrep:OperandVerdictReport ;
     report:policyRequest drk:request-317 ;
     report:constraint kgc:KGC317-offer-c1 ;
     vrep:constraintRequest kgc:KGC317-request-c1 ;
-    vrep:backgroundTheory <https://w3id.org/odrl-kb/dpv-purposes/empty> ;
+    vrep:binding <https://w3id.org/odrl-kb/profile/b-purpose> ;
+    rdfs:comment """The offer excludes exactly the purpose required by the request, so the constraints are Incompatible without any resource or background declaration."""@en ;
+    dcterms:description """A library excludes marketing, while a researcher requests use for marketing."""@en ;
     report:satisfactionState report:Unsatisfied ;
-    vrep:certificate drk:KGC317-certificate .
-
-drk:KGC317-certificate a vrep:Refutation ;
-    rdfs:comment """The offer admits every purpose but marketing and the request admits only marketing, so no purpose satisfies both.  The refutation is on equality alone and cites no assertion any party could withdraw."""@en ;
-    vrep:clashingConstraint kgc:KGC317-offer-c1, kgc:KGC317-request-c1 ;
-    vrep:premise [ vrep:premiseSource vrep:fromConstraints ;
-                   rdfs:label "the witness condition"@en ] .
+    vrep:certificate <certificates/KGC317-1.tstp> .

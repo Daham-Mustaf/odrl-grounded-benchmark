@@ -1,5 +1,5 @@
 """
-gen_consent.py
+gen_bcp47_problems.py
 ==============
 Generates the consent status problems, each as two satisfiability queries,
 plus the policies and the expected report.

@@ -1,0 +1,15 @@
+kgc:KGC387-observed a vrep:Refutation ;
+    vrep:producedBy "Vampire" ;
+    vrep:proofArtefact <proofs/KGC387-2.tstp> ;
+    vrep:attributedAssertion [
+        vrep:premiseSource vrep:fromBackgroundTheory ;
+        vrep:formulaName "bg_dist_loc_de_hh_loc_de_by" ;
+        rdfs:label "bg_dist_loc_de_hh_loc_de_by"@en ] ;
+    vrep:attributedAssertion [
+        vrep:premiseSource vrep:fromBackgroundTheory ;
+        vrep:formulaName "bg_dist_loc_de_hh_loc_de_be" ;
+        rdfs:label "bg_dist_loc_de_hh_loc_de_be"@en ] ;
+    vrep:attributedAssertion [
+        vrep:premiseSource vrep:fromConstraints ;
+        vrep:formulaName "w_kgc387" ;
+        rdfs:label "w_kgc387"@en ] .

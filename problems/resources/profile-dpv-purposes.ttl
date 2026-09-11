@@ -1,0 +1,15 @@
+# Profile entry.  ODRL cannot carry this, so it is agreed out of band.
+#
+# The sort is the declaration: DPV's skos:broader is read as subsumption.
+# Nothing in the resource says so.
+
+@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+@prefix bind: <https://w3id.org/odrl-kb/binding#> .
+@prefix ex:   <https://w3id.org/odrl-kb/profile/> .
+
+ex:b-purpose a bind:OperandBinding ;
+    bind:leftOperand odrl:purpose ;
+    bind:sort bind:tax ;
+    bind:resource <https://w3id.org/odrl-kb/dpv-purposes> ;
+    bind:backgroundTheory <https://w3id.org/odrl-kb/dpv-purposes/empty> ;
+    bind:grounding bind:sliceMembership .

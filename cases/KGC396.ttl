@@ -1,0 +1,48 @@
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix report:  <https://w3id.org/force/compliance-report#> .
+@prefix vrep:    <https://w3id.org/odrl-kb/verdict-report#> .
+@prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix dpv:     <https://w3id.org/dpv#> .
+@prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+@prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+drk:offer-396 a odrl:Offer ;
+    dcterms:title "Offer: use for research and development or marketing"@en ;
+    odrl:assigner drk:provider ;
+    odrl:permission kgc:KGC396-offer-r1 .
+kgc:KGC396-offer-r1 a odrl:Permission ;
+    odrl:action odrl:use ;
+    odrl:target drk:dataset ;
+    odrl:constraint kgc:KGC396-offer-c1 .
+kgc:KGC396-offer-c1 a odrl:Constraint ;
+    odrl:leftOperand odrl:purpose ;
+    odrl:operator odrl:isAnyOf ;
+    odrl:rightOperand dpv:ResearchAndDevelopment ,
+        dpv:Marketing .
+drk:request-396 a odrl:Request ;
+    dcterms:title "Request: research and development and service provision"@en ;
+    odrl:assignee drk:consumer ;
+    odrl:permission kgc:KGC396-request-r1 .
+kgc:KGC396-request-r1 a odrl:Permission ;
+    odrl:action odrl:use ;
+    odrl:target drk:dataset ;
+    odrl:constraint kgc:KGC396-request-c1 .
+kgc:KGC396-request-c1 a odrl:Constraint ;
+    odrl:leftOperand odrl:purpose ;
+    odrl:operator odrl:isAllOf ;
+    odrl:rightOperand dpv:ResearchAndDevelopment ,
+        dpv:ServiceProvision .
+
+### Expected result #######################################################
+
+drk:KGC396-report a vrep:OperandVerdictReport ;
+    dcterms:identifier "KGC396" ;
+    report:policy drk:offer-396 ;
+    report:policyRequest drk:request-396 ;
+    report:constraint kgc:KGC396-offer-c1 ;
+    vrep:constraintRequest kgc:KGC396-request-c1 ;
+    vrep:binding <https://w3id.org/odrl-kb/profile/b-purpose> ;
+    rdfs:comment """Research and development is among the offer's values, and nothing in the offer limits the use's other purposes."""@en ;
+    dcterms:description """A provider permits use for research and development or marketing; a consumer commits to research and development and to service provision, both."""@en ;
+    report:satisfactionState report:Satisfied ;
+    vrep:certificate <certificates/KGC396-2.tstp> .

@@ -14,6 +14,5 @@
     dcterms:title "One declared distinctness"@en ;
     bt:appliesTo <https://w3id.org/odrl-kb/eu-file-type> ;
     bt:generatedBy bt:PartyDeclaration ;
-    bt:assertionCount 1 .
+    bt:pairCount 1 .
 
-ft:PDF bt:distinctFrom ft:PDFA1A .

@@ -1,5 +1,4 @@
 @prefix report:  <https://w3id.org/force/compliance-report#> .
-@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix vrep:    <https://w3id.org/odrl-kb/verdict-report#> .
 @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
@@ -47,12 +46,6 @@ drk:KGC374-report a vrep:OperandVerdictReport ;
     report:constraint kgc:KGC374-offer-c1 ;
     vrep:constraintRequest kgc:KGC374-request-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-language-bcp47> ;
-    vrep:backgroundTheory <https://w3id.org/odrl-kb/bcp47/uniqueness> ;
-    report:satisfactionState report:Satisfied ;
-    vrep:certificate drk:KGC374-certificate .
-
-drk:KGC374-certificate a vrep:Refutation ;
     rdfs:comment """Refutes the negated witness condition: denying the witness forces de and fr to be one concept, against the declared distinctness."""@en ;
-    vrep:clashingConstraint kgc:KGC374-offer-c1, kgc:KGC374-request-c1 ;
-    vrep:premise [ vrep:premiseSource vrep:fromBackgroundTheory ;
-                   rdfs:label "bcp47:de and bcp47:fr are declared distinct, on RFC 5646's registry uniqueness"@en ] .
+    report:satisfactionState report:Satisfied ;
+    vrep:certificate <certificates/KGC374-2.tstp> .

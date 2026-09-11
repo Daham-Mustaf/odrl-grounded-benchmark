@@ -1,0 +1,47 @@
+% SZS output start Proof for KGC380-2
+fof(f3,axiom,(
+  ! [X0,X1,X2] : ((kge_leq(X0,X1) & kge_leq(X1,X2)) => kge_leq(X0,X2))),
+  file('problems/verdict/KGC380-2.p',ax_leq_transitive)).
+fof(f485,axiom,(
+  kge_leq(loc_bq,loc_nl)),
+  file('problems/verdict/KGC380-2.p',res_loc_bq_within_loc_nl)).
+fof(f3410,axiom,(
+  kge_leq(loc_nl,loc_eu)),
+  file('problems/verdict/KGC380-2.p',res_loc_nl_within_loc_eu)).
+fof(f5027,axiom,(
+  ~((kge_leq(loc_eu,loc_eu) & loc_eu = loc_bq) | (kge_leq(loc_bq,loc_eu) & loc_bq = loc_bq))),
+  file('problems/verdict/KGC380-2.p',w_kgc380)).
+fof(f5030,plain,(
+  ! [X0,X1,X2] : (kge_leq(X0,X2) | (~kge_leq(X0,X1) | ~kge_leq(X1,X2)))),
+  inference(ennf_transformation,[],[f3])).
+fof(f5031,plain,(
+  ! [X0,X1,X2] : (kge_leq(X0,X2) | ~kge_leq(X0,X1) | ~kge_leq(X1,X2))),
+  inference(flattening,[],[f5030])).
+fof(f5032,plain,(
+  (~kge_leq(loc_eu,loc_eu) | loc_eu != loc_bq) & (~kge_leq(loc_bq,loc_eu) | loc_bq != loc_bq)),
+  inference(ennf_transformation,[],[f5027])).
+fof(f5035,plain,(
+  ( ! [X2,X0,X1] : (~kge_leq(X1,X2) | ~kge_leq(X0,X1) | kge_leq(X0,X2)) )),
+  inference(cnf_transformation,[],[f5031])).
+fof(f5517,plain,(
+  kge_leq(loc_bq,loc_nl)),
+  inference(cnf_transformation,[],[f485])).
+fof(f8442,plain,(
+  kge_leq(loc_nl,loc_eu)),
+  inference(cnf_transformation,[],[f3410])).
+fof(f10059,plain,(
+  ~kge_leq(loc_bq,loc_eu) | loc_bq != loc_bq),
+  inference(cnf_transformation,[],[f5032])).
+fof(f10061,plain,(
+  ~kge_leq(loc_bq,loc_eu)),
+  inference(trivial_inequality_removal,[],[f10059])).
+fof(f60027,plain,(
+  ( ! [X0] : (~kge_leq(X0,loc_nl) | kge_leq(X0,loc_eu)) )),
+  inference(resolution,[],[f5035,f8442])).
+fof(f65836,plain,(
+  kge_leq(loc_bq,loc_eu)),
+  inference(resolution,[],[f60027,f5517])).
+fof(f65863,plain,(
+  $false),
+  inference(forward_subsumption_resolution,[],[f65836,f10061])).
+% SZS output end Proof

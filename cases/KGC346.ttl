@@ -1,49 +1,44 @@
 @prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix report:  <https://w3id.org/force/compliance-report#> .
-@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix vrep:    <https://w3id.org/odrl-kb/verdict-report#> .
 @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix dpv:     <https://w3id.org/dpv#> .
-@prefix dpvo:    <https://w3id.org/dpv/mappings/odrl#> .
+@prefix dpv-odrl:    <https://w3id.org/dpv/mappings/odrl#> .
 @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
 
 drk:offer-346 a odrl:Offer ;
-    dcterms:title "Use is permitted while the consent record falls under exactly one of the two branches"@en ;
+    dcterms:title "Use is permitted while the record falls under exactly one of the two consent branches"@en ;
     odrl:assigner drk:controller ;
     odrl:permission kgc:KGC346-offer-r1 .
-
 kgc:KGC346-offer-r1 a odrl:Permission ;
     odrl:action odrl:use ;
     odrl:target drk:dataset ;
     odrl:constraint kgc:KGC346-offer-c1 .
-
 kgc:KGC346-offer-c1 a odrl:LogicalConstraint ;
     odrl:xone ( kgc:KGC346-offer-a1 kgc:KGC346-offer-a2 ) .
 
 kgc:KGC346-offer-a1 a odrl:Constraint ;
-    odrl:leftOperand dpvo:Status ;
+    odrl:leftOperand dpv-odrl:Status ;
     odrl:operator odrl:isA ;
     odrl:rightOperand dpv:ConsentStatusValidForProcessing .
 
 kgc:KGC346-offer-a2 a odrl:Constraint ;
-    odrl:leftOperand dpvo:Status ;
+    odrl:leftOperand dpv-odrl:Status ;
     odrl:operator odrl:isA ;
     odrl:rightOperand dpv:ConsentStatusInvalidForProcessing .
 
 drk:request-346 a odrl:Request ;
-    dcterms:title "The consent record is in the given state"@en ;
+    dcterms:title "Processing only under given consent"@en ;
     odrl:assignee drk:processor ;
     odrl:permission kgc:KGC346-request-r1 .
-
 kgc:KGC346-request-r1 a odrl:Permission ;
     odrl:action odrl:use ;
     odrl:target drk:dataset ;
     odrl:constraint kgc:KGC346-request-c1 .
-
 kgc:KGC346-request-c1 a odrl:Constraint ;
-    odrl:leftOperand dpvo:Status ;
+    odrl:leftOperand dpv-odrl:Status ;
     odrl:operator odrl:eq ;
     odrl:rightOperand dpv:ConsentGiven .
 
@@ -55,9 +50,9 @@ drk:KGC346-report a vrep:OperandVerdictReport ;
     report:policyRequest drk:request-346 ;
     report:constraint kgc:KGC346-offer-c1 ;
     vrep:constraintRequest kgc:KGC346-request-c1 ;
-    vrep:backgroundTheory <https://w3id.org/odrl-kb/dpv-consent/empty> ;
+    vrep:binding <https://w3id.org/odrl-kb/profile/b-consent-status> ;
+    rdfs:comment """One structure places the given state below both branches; DPV does not rule it out."""@en ;
+    dcterms:description """An offer requires the record to fall under exactly one of the two consent branches; a processor commits to processing only under given consent."""@en ;
     report:satisfactionState vrep:Undetermined ;
-    vrep:certificate drk:KGC346-certificate .
-
-drk:KGC346-certificate a vrep:Models ;
-    rdfs:comment """Both queries are satisfiable.  The models differ on whether the given state also lies below the invalid branch, which the module does not rule out."""@en .
+    vrep:undeterminedReason vrep:Epistemic ;
+    vrep:certificate <certificates/KGC346-2.tstp> .

@@ -17,4 +17,4 @@
 <https://w3id.org/odrl-kb/dpv-consent/empty> a bt:BackgroundTheory ;
     dcterms:title "No declared distinctness or disjointness"@en ;
     bt:appliesTo <https://w3id.org/odrl-kb/dpv-consent> ;
-    bt:assertionCount 0 .
+    bt:pairCount 0 .

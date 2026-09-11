@@ -1,0 +1,59 @@
+% Running in auto input_syntax mode. Trying TPTP
+% Refutation found. Thanks to Tanya!
+% SZS status Unsatisfiable for KGC387-2
+% SZS output start Proof for KGC387-2
+fof(f4850,axiom,(
+  loc_de_hh != loc_de_by),
+  file('problems/verdict/KGC387-2.p',bg_dist_loc_de_hh_loc_de_by)).
+fof(f4851,axiom,(
+  loc_de_hh != loc_de_be),
+  file('problems/verdict/KGC387-2.p',bg_dist_loc_de_hh_loc_de_be)).
+fof(f4852,axiom,(
+  ~((loc_de_by != loc_de_by & loc_de_by != loc_de_be & loc_de_by = loc_de_hh) | (loc_de_be != loc_de_by & loc_de_be != loc_de_be & loc_de_be = loc_de_hh) | (loc_de_hh != loc_de_by & loc_de_hh != loc_de_be & loc_de_hh = loc_de_hh))),
+  file('problems/verdict/KGC387-2.p',w_kgc387)).
+fof(f4857,plain,(
+  (loc_de_by = loc_de_by | loc_de_be = loc_de_by | loc_de_by != loc_de_hh) & (loc_de_be = loc_de_by | loc_de_be = loc_de_be | loc_de_be != loc_de_hh) & (loc_de_by = loc_de_hh | loc_de_be = loc_de_hh | loc_de_hh != loc_de_hh)),
+  inference(ennf_transformation,[],[f4852])).
+fof(f9707,plain,(
+  loc_de_by != loc_de_hh),
+  inference(cnf_transformation,[],[f4850])).
+fof(f9708,plain,(
+  loc_de_be != loc_de_hh),
+  inference(cnf_transformation,[],[f4851])).
+fof(f9709,plain,(
+  loc_de_by = loc_de_hh | loc_de_be = loc_de_hh | loc_de_hh != loc_de_hh),
+  inference(cnf_transformation,[],[f4857])).
+fof(f9712,plain,(
+  loc_de_by = loc_de_hh | loc_de_be = loc_de_hh),
+  inference(trivial_inequality_removal,[],[f9709])).
+fof(f9714,definition,(
+  spl0_1 <=> loc_de_be = loc_de_hh),
+  introduced(definition,[new_symbols(naming,[spl0_1])],[avatar_definition])).
+fof(f9718,definition,(
+  spl0_2 <=> loc_de_by = loc_de_hh),
+  introduced(definition,[new_symbols(naming,[spl0_2])],[avatar_definition])).
+fof(f9721,plain,(
+  spl0_1 | spl0_2),
+  inference(avatar_split_clause,[],[f9712,f9718,f9714])).
+fof(f9722,plain,(
+  ~spl0_1),
+  inference(avatar_split_clause,[],[f9708,f9714])).
+fof(f9723,plain,(
+  ~spl0_2),
+  inference(avatar_split_clause,[],[f9707,f9718])).
+cnf(s1, plain, spl0_1 | spl0_2, inference(sat_conversion,[],[f9721])).
+cnf(s2, plain, ~spl0_1, inference(sat_conversion,[],[f9722])).
+cnf(s3, plain, ~spl0_2, inference(sat_conversion,[],[f9723])).
+cnf(s4, plain, $false, inference(rat,[],[s1,s3,s2])).
+fof(f9724,plain,(
+  $false),
+  inference(avatar_sat_refutation,[],[s4])).
+% SZS output end Proof for KGC387-2
+% ------------------------------
+% Version: Vampire 5.0.1 (Release build, commit 1b13eafde on 2026-01-18 12:14:50 +0000)
+% CaDiCaL version: 2.1.3
+% Termination reason: Refutation
+% Time elapsed: 0.026 s
+% Peak memory usage: 29 MB
+% ------------------------------
+% ------------------------------

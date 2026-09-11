@@ -1,5 +1,5 @@
 % Background theory: one distinctness, declared by the parties.
 % The extension publishes nothing that separates these places.
 
-fof(bt_loc_de_distinct_loc_fr, axiom,
+fof(bg_dist_loc_de_loc_fr, axiom,
     loc_de != loc_fr).

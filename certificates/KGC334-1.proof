@@ -1,7 +1,7 @@
 % SZS output start Proof for KGC334-1
 fof(f4850,axiom,(
   loc_de != loc_fr),
-  file('problems/verdict/KGC334-1.p',bt_loc_de_distinct_loc_fr)).
+  file('problems/verdict/KGC334-1.p',bg_dist_loc_de_loc_fr)).
 fof(f4851,axiom,(
   (loc_de = loc_de & loc_de = loc_fr) | (loc_fr = loc_de & loc_fr = loc_fr)),
   file('problems/verdict/KGC334-1.p',w_kgc334)).

@@ -1,0 +1,27 @@
+# Profile entry for dpvo:TechnicalOrganisationalMeasure over the DPV
+# measures modules.
+#
+# The binding assigns the taxonomic sort.  The modules publish skos:broader
+# between measures, so isA reads a hierarchy: a use employing symmetric
+# encryption employs encryption, and employs a technical measure.
+#
+# The left operand is the DPV-ODRL mapping's.  ODRL's core vocabulary has no
+# term for a security measure, and the mapping mints one; a policy using it
+# declares conformance to that profile.
+#
+# This is the suite's only set-valued operand: a use carries several
+# measures at once, which is what isAllOf is for and what makes it
+# exercisable here and nowhere else.  How many values an operand takes is
+# not something this binding can declare, and that is a limitation of the
+# framework rather than of the vocabulary.
+
+@prefix dpvo: <https://w3id.org/dpv/mappings/odrl#> .
+@prefix bind: <https://w3id.org/odrl-kb/binding#> .
+@prefix ex:   <https://w3id.org/odrl-kb/profile/> .
+
+ex:b-tom a bind:OperandBinding ;
+    bind:leftOperand dpvo:TechnicalOrganisationalMeasure ;
+    bind:sort bind:tax ;
+    bind:resource <https://w3id.org/odrl-kb/dpv-tom> ;
+    bind:backgroundTheory <https://w3id.org/odrl-kb/dpv-tom/empty> ;
+    bind:grounding bind:sliceMembership .

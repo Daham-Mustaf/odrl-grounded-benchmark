@@ -1,0 +1,274 @@
+% Resource: subsumption as published by DPV.  res_ names mark
+% what the vocabulary asserts.
+%
+% Several concepts appear as the subject of two assertions: the
+% hierarchy is a directed acyclic graph, not a tree.  A refutation
+% may reach a common ancestor by either path.
+
+fof(res_dpv_academic_research_below_dpv_research_and_development, axiom,
+    kge_leq(dpv_academic_research, dpv_research_and_development)).
+fof(res_dpv_account_management_below_dpv_purpose, axiom,
+    kge_leq(dpv_account_management, dpv_purpose)).
+fof(res_dpv_advertising_below_dpv_marketing, axiom,
+    kge_leq(dpv_advertising, dpv_marketing)).
+fof(res_dpv_age_verification_below_dpv_verification, axiom,
+    kge_leq(dpv_age_verification, dpv_verification)).
+fof(res_dpv_combat_climate_change_below_dpv_public_benefit, axiom,
+    kge_leq(dpv_combat_climate_change, dpv_public_benefit)).
+fof(res_dpv_commercial_purpose_below_dpv_purpose, axiom,
+    kge_leq(dpv_commercial_purpose, dpv_purpose)).
+fof(res_dpv_commercial_research_below_dpv_commercial_purpose, axiom,
+    kge_leq(dpv_commercial_research, dpv_commercial_purpose)).
+fof(res_dpv_commercial_research_below_dpv_research_and_development, axiom,
+    kge_leq(dpv_commercial_research, dpv_research_and_development)).
+fof(res_dpv_communication_for_customer_care_below_dpv_communication_management, axiom,
+    kge_leq(dpv_communication_for_customer_care, dpv_communication_management)).
+fof(res_dpv_communication_for_customer_care_below_dpv_customer_care, axiom,
+    kge_leq(dpv_communication_for_customer_care, dpv_customer_care)).
+fof(res_dpv_communication_management_below_dpv_purpose, axiom,
+    kge_leq(dpv_communication_management, dpv_purpose)).
+fof(res_dpv_counter_money_laundering_below_dpv_fraud_prevention_and_detection, axiom,
+    kge_leq(dpv_counter_money_laundering, dpv_fraud_prevention_and_detection)).
+fof(res_dpv_counterterrorism_below_dpv_public_benefit, axiom,
+    kge_leq(dpv_counterterrorism, dpv_public_benefit)).
+fof(res_dpv_customer_care_below_dpv_customer_management, axiom,
+    kge_leq(dpv_customer_care, dpv_customer_management)).
+fof(res_dpv_customer_claims_management_below_dpv_customer_management, axiom,
+    kge_leq(dpv_customer_claims_management, dpv_customer_management)).
+fof(res_dpv_customer_management_below_dpv_purpose, axiom,
+    kge_leq(dpv_customer_management, dpv_purpose)).
+fof(res_dpv_customer_order_management_below_dpv_customer_management, axiom,
+    kge_leq(dpv_customer_order_management, dpv_customer_management)).
+fof(res_dpv_customer_relationship_management_below_dpv_customer_management, axiom,
+    kge_leq(dpv_customer_relationship_management, dpv_customer_management)).
+fof(res_dpv_customer_solvency_monitoring_below_dpv_customer_management, axiom,
+    kge_leq(dpv_customer_solvency_monitoring, dpv_customer_management)).
+fof(res_dpv_data_altruism_below_dpv_public_benefit, axiom,
+    kge_leq(dpv_data_altruism, dpv_public_benefit)).
+fof(res_dpv_delivery_of_goods_below_dpv_requested_service_provision, axiom,
+    kge_leq(dpv_delivery_of_goods, dpv_requested_service_provision)).
+fof(res_dpv_direct_marketing_below_dpv_marketing, axiom,
+    kge_leq(dpv_direct_marketing, dpv_marketing)).
+fof(res_dpv_dispute_management_below_dpv_organisation_governance, axiom,
+    kge_leq(dpv_dispute_management, dpv_organisation_governance)).
+fof(res_dpv_enforce_access_control_below_dpv_enforce_security, axiom,
+    kge_leq(dpv_enforce_access_control, dpv_enforce_security)).
+fof(res_dpv_enforce_security_below_dpv_purpose, axiom,
+    kge_leq(dpv_enforce_security, dpv_purpose)).
+fof(res_dpv_establish_contractual_agreement_below_dpv_purpose, axiom,
+    kge_leq(dpv_establish_contractual_agreement, dpv_purpose)).
+fof(res_dpv_fraud_prevention_and_detection_below_dpv_misuse_prevention_and_detection, axiom,
+    kge_leq(dpv_fraud_prevention_and_detection, dpv_misuse_prevention_and_detection)).
+fof(res_dpv_fulfilment_of_contractual_obligation_below_dpv_fulfilment_of_obligation, axiom,
+    kge_leq(dpv_fulfilment_of_contractual_obligation, dpv_fulfilment_of_obligation)).
+fof(res_dpv_fulfilment_of_obligation_below_dpv_purpose, axiom,
+    kge_leq(dpv_fulfilment_of_obligation, dpv_purpose)).
+fof(res_dpv_human_resource_management_below_dpv_purpose, axiom,
+    kge_leq(dpv_human_resource_management, dpv_purpose)).
+fof(res_dpv_identity_authentication_below_dpv_enforce_security, axiom,
+    kge_leq(dpv_identity_authentication, dpv_enforce_security)).
+fof(res_dpv_identity_verification_below_dpv_verification, axiom,
+    kge_leq(dpv_identity_verification, dpv_verification)).
+fof(res_dpv_improve_existing_products_and_services_below_dpv_optimisation_for_controller, axiom,
+    kge_leq(dpv_improve_existing_products_and_services, dpv_optimisation_for_controller)).
+fof(res_dpv_improve_healthcare_below_dpv_public_benefit, axiom,
+    kge_leq(dpv_improve_healthcare, dpv_public_benefit)).
+fof(res_dpv_improve_internal_crm_processes_below_dpv_customer_relationship_management, axiom,
+    kge_leq(dpv_improve_internal_crm_processes, dpv_customer_relationship_management)).
+fof(res_dpv_improve_internal_crm_processes_below_dpv_optimisation_for_controller, axiom,
+    kge_leq(dpv_improve_internal_crm_processes, dpv_optimisation_for_controller)).
+fof(res_dpv_improve_public_services_below_dpv_public_benefit, axiom,
+    kge_leq(dpv_improve_public_services, dpv_public_benefit)).
+fof(res_dpv_improve_transport_mobility_below_dpv_public_benefit, axiom,
+    kge_leq(dpv_improve_transport_mobility, dpv_public_benefit)).
+fof(res_dpv_increase_service_robustness_below_dpv_optimisation_for_controller, axiom,
+    kge_leq(dpv_increase_service_robustness, dpv_optimisation_for_controller)).
+fof(res_dpv_internal_resource_optimisation_below_dpv_optimisation_for_controller, axiom,
+    kge_leq(dpv_internal_resource_optimisation, dpv_optimisation_for_controller)).
+fof(res_dpv_legal_compliance_below_dpv_fulfilment_of_obligation, axiom,
+    kge_leq(dpv_legal_compliance, dpv_fulfilment_of_obligation)).
+fof(res_dpv_maintain_fraud_database_below_dpv_fraud_prevention_and_detection, axiom,
+    kge_leq(dpv_maintain_fraud_database, dpv_fraud_prevention_and_detection)).
+fof(res_dpv_marketing_below_dpv_purpose, axiom,
+    kge_leq(dpv_marketing, dpv_purpose)).
+fof(res_dpv_member_partner_management_below_dpv_organisation_governance, axiom,
+    kge_leq(dpv_member_partner_management, dpv_organisation_governance)).
+fof(res_dpv_misuse_prevention_and_detection_below_dpv_enforce_security, axiom,
+    kge_leq(dpv_misuse_prevention_and_detection, dpv_enforce_security)).
+fof(res_dpv_non_commercial_purpose_below_dpv_purpose, axiom,
+    kge_leq(dpv_non_commercial_purpose, dpv_purpose)).
+fof(res_dpv_non_commercial_research_below_dpv_non_commercial_purpose, axiom,
+    kge_leq(dpv_non_commercial_research, dpv_non_commercial_purpose)).
+fof(res_dpv_non_commercial_research_below_dpv_research_and_development, axiom,
+    kge_leq(dpv_non_commercial_research, dpv_research_and_development)).
+fof(res_dpv_optimisation_for_consumer_below_dpv_service_optimisation, axiom,
+    kge_leq(dpv_optimisation_for_consumer, dpv_service_optimisation)).
+fof(res_dpv_optimisation_for_controller_below_dpv_service_optimisation, axiom,
+    kge_leq(dpv_optimisation_for_controller, dpv_service_optimisation)).
+fof(res_dpv_optimise_user_interface_below_dpv_optimisation_for_consumer, axiom,
+    kge_leq(dpv_optimise_user_interface, dpv_optimisation_for_consumer)).
+fof(res_dpv_organisation_compliance_management_below_dpv_organisation_governance, axiom,
+    kge_leq(dpv_organisation_compliance_management, dpv_organisation_governance)).
+fof(res_dpv_organisation_governance_below_dpv_purpose, axiom,
+    kge_leq(dpv_organisation_governance, dpv_purpose)).
+fof(res_dpv_organisation_risk_management_below_dpv_organisation_governance, axiom,
+    kge_leq(dpv_organisation_risk_management, dpv_organisation_governance)).
+fof(res_dpv_payment_management_below_dpv_service_management, axiom,
+    kge_leq(dpv_payment_management, dpv_service_management)).
+fof(res_dpv_personalisation_below_dpv_purpose, axiom,
+    kge_leq(dpv_personalisation, dpv_purpose)).
+fof(res_dpv_personalised_advertising_below_dpv_advertising, axiom,
+    kge_leq(dpv_personalised_advertising, dpv_advertising)).
+fof(res_dpv_personalised_advertising_below_dpv_personalisation, axiom,
+    kge_leq(dpv_personalised_advertising, dpv_personalisation)).
+fof(res_dpv_personalised_benefits_below_dpv_service_personalisation, axiom,
+    kge_leq(dpv_personalised_benefits, dpv_service_personalisation)).
+fof(res_dpv_personnel_behaviour_monitoring_below_dpv_personnel_monitoring, axiom,
+    kge_leq(dpv_personnel_behaviour_monitoring, dpv_personnel_monitoring)).
+fof(res_dpv_personnel_hiring_below_dpv_personnel_management, axiom,
+    kge_leq(dpv_personnel_hiring, dpv_personnel_management)).
+fof(res_dpv_personnel_management_below_dpv_human_resource_management, axiom,
+    kge_leq(dpv_personnel_management, dpv_human_resource_management)).
+fof(res_dpv_personnel_monitoring_below_dpv_personnel_management, axiom,
+    kge_leq(dpv_personnel_monitoring, dpv_personnel_management)).
+fof(res_dpv_personnel_offboarding_below_dpv_personnel_management, axiom,
+    kge_leq(dpv_personnel_offboarding, dpv_personnel_management)).
+fof(res_dpv_personnel_onboarding_below_dpv_personnel_hiring, axiom,
+    kge_leq(dpv_personnel_onboarding, dpv_personnel_hiring)).
+fof(res_dpv_personnel_payment_below_dpv_personnel_management, axiom,
+    kge_leq(dpv_personnel_payment, dpv_personnel_management)).
+fof(res_dpv_personnel_performance_evaluation_below_dpv_personnel_performance_management, axiom,
+    kge_leq(dpv_personnel_performance_evaluation, dpv_personnel_performance_management)).
+fof(res_dpv_personnel_performance_management_below_dpv_personnel_management, axiom,
+    kge_leq(dpv_personnel_performance_management, dpv_personnel_management)).
+fof(res_dpv_personnel_performance_management_below_dpv_personnel_monitoring, axiom,
+    kge_leq(dpv_personnel_performance_management, dpv_personnel_monitoring)).
+fof(res_dpv_personnel_performance_monitoring_below_dpv_personnel_monitoring, axiom,
+    kge_leq(dpv_personnel_performance_monitoring, dpv_personnel_monitoring)).
+fof(res_dpv_personnel_performance_monitoring_below_dpv_personnel_performance_management, axiom,
+    kge_leq(dpv_personnel_performance_monitoring, dpv_personnel_performance_management)).
+fof(res_dpv_personnel_performance_prediction_below_dpv_personnel_performance_management, axiom,
+    kge_leq(dpv_personnel_performance_prediction, dpv_personnel_performance_management)).
+fof(res_dpv_personnel_promotion_management_below_dpv_personnel_management, axiom,
+    kge_leq(dpv_personnel_promotion_management, dpv_personnel_management)).
+fof(res_dpv_personnel_termination_management_below_dpv_personnel_management, axiom,
+    kge_leq(dpv_personnel_termination_management, dpv_personnel_management)).
+fof(res_dpv_personnel_workload_management_below_dpv_personnel_management, axiom,
+    kge_leq(dpv_personnel_workload_management, dpv_personnel_management)).
+fof(res_dpv_political_campaign_below_dpv_advertising, axiom,
+    kge_leq(dpv_political_campaign, dpv_advertising)).
+fof(res_dpv_political_campaign_below_dpv_personalisation, axiom,
+    kge_leq(dpv_political_campaign, dpv_personalisation)).
+fof(res_dpv_protection_of_ipr_below_dpv_fulfilment_of_obligation, axiom,
+    kge_leq(dpv_protection_of_ipr, dpv_fulfilment_of_obligation)).
+fof(res_dpv_protection_of_national_security_below_dpv_public_benefit, axiom,
+    kge_leq(dpv_protection_of_national_security, dpv_public_benefit)).
+fof(res_dpv_protection_of_public_security_below_dpv_public_benefit, axiom,
+    kge_leq(dpv_protection_of_public_security, dpv_public_benefit)).
+fof(res_dpv_provide_event_recommendations_below_dpv_provide_personalised_recommendations, axiom,
+    kge_leq(dpv_provide_event_recommendations, dpv_provide_personalised_recommendations)).
+fof(res_dpv_provide_official_statistics_below_dpv_public_benefit, axiom,
+    kge_leq(dpv_provide_official_statistics, dpv_public_benefit)).
+fof(res_dpv_provide_personalised_recommendations_below_dpv_service_personalisation, axiom,
+    kge_leq(dpv_provide_personalised_recommendations, dpv_service_personalisation)).
+fof(res_dpv_provide_product_recommendations_below_dpv_provide_personalised_recommendations, axiom,
+    kge_leq(dpv_provide_product_recommendations, dpv_provide_personalised_recommendations)).
+fof(res_dpv_public_benefit_below_dpv_purpose, axiom,
+    kge_leq(dpv_public_benefit, dpv_purpose)).
+fof(res_dpv_public_policy_making_below_dpv_public_benefit, axiom,
+    kge_leq(dpv_public_policy_making, dpv_public_benefit)).
+fof(res_dpv_public_relations_below_dpv_marketing, axiom,
+    kge_leq(dpv_public_relations, dpv_marketing)).
+fof(res_dpv_record_management_below_dpv_purpose, axiom,
+    kge_leq(dpv_record_management, dpv_purpose)).
+fof(res_dpv_recruitment_advertising_below_dpv_advertising, axiom,
+    kge_leq(dpv_recruitment_advertising, dpv_advertising)).
+fof(res_dpv_recruitment_advertising_below_dpv_personnel_hiring, axiom,
+    kge_leq(dpv_recruitment_advertising, dpv_personnel_hiring)).
+fof(res_dpv_recruitment_applicant_background_check_below_dpv_recruitment_management, axiom,
+    kge_leq(dpv_recruitment_applicant_background_check, dpv_recruitment_management)).
+fof(res_dpv_recruitment_applicant_criminal_background_check_below_dpv_recruitment_management, axiom,
+    kge_leq(dpv_recruitment_applicant_criminal_background_check, dpv_recruitment_management)).
+fof(res_dpv_recruitment_applicant_information_authentication_below_dpv_recruitment_management, axiom,
+    kge_leq(dpv_recruitment_applicant_information_authentication, dpv_recruitment_management)).
+fof(res_dpv_recruitment_applicant_selection_below_dpv_recruitment_management, axiom,
+    kge_leq(dpv_recruitment_applicant_selection, dpv_recruitment_management)).
+fof(res_dpv_recruitment_application_analysis_below_dpv_recruitment_application_management, axiom,
+    kge_leq(dpv_recruitment_application_analysis, dpv_recruitment_application_management)).
+fof(res_dpv_recruitment_application_management_below_dpv_recruitment_management, axiom,
+    kge_leq(dpv_recruitment_application_management, dpv_recruitment_management)).
+fof(res_dpv_recruitment_application_screening_below_dpv_recruitment_application_management, axiom,
+    kge_leq(dpv_recruitment_application_screening, dpv_recruitment_application_management)).
+fof(res_dpv_recruitment_interview_analysis_below_dpv_recruitment_interview_management, axiom,
+    kge_leq(dpv_recruitment_interview_analysis, dpv_recruitment_interview_management)).
+fof(res_dpv_recruitment_interview_assessment_below_dpv_recruitment_interview_management, axiom,
+    kge_leq(dpv_recruitment_interview_assessment, dpv_recruitment_interview_management)).
+fof(res_dpv_recruitment_interview_management_below_dpv_recruitment_management, axiom,
+    kge_leq(dpv_recruitment_interview_management, dpv_recruitment_management)).
+fof(res_dpv_recruitment_interview_scheduling_below_dpv_recruitment_interview_management, axiom,
+    kge_leq(dpv_recruitment_interview_scheduling, dpv_recruitment_interview_management)).
+fof(res_dpv_recruitment_management_below_dpv_personnel_hiring, axiom,
+    kge_leq(dpv_recruitment_management, dpv_personnel_hiring)).
+fof(res_dpv_recruitment_targeted_advertising_below_dpv_recruitment_advertising, axiom,
+    kge_leq(dpv_recruitment_targeted_advertising, dpv_recruitment_advertising)).
+fof(res_dpv_recruitment_targeted_advertising_below_dpv_targeted_advertising, axiom,
+    kge_leq(dpv_recruitment_targeted_advertising, dpv_targeted_advertising)).
+fof(res_dpv_repair_impairments_below_dpv_service_management, axiom,
+    kge_leq(dpv_repair_impairments, dpv_service_management)).
+fof(res_dpv_requested_service_provision_below_dpv_service_provision, axiom,
+    kge_leq(dpv_requested_service_provision, dpv_service_provision)).
+fof(res_dpv_research_and_development_below_dpv_purpose, axiom,
+    kge_leq(dpv_research_and_development, dpv_purpose)).
+fof(res_dpv_scientific_research_below_dpv_research_and_development, axiom,
+    kge_leq(dpv_scientific_research, dpv_research_and_development)).
+fof(res_dpv_search_functionalities_below_dpv_service_provision, axiom,
+    kge_leq(dpv_search_functionalities, dpv_service_provision)).
+fof(res_dpv_sell_data_to_third_parties_below_dpv_sell_products, axiom,
+    kge_leq(dpv_sell_data_to_third_parties, dpv_sell_products)).
+fof(res_dpv_sell_insights_from_data_below_dpv_sell_products, axiom,
+    kge_leq(dpv_sell_insights_from_data, dpv_sell_products)).
+fof(res_dpv_sell_products_below_dpv_service_provision, axiom,
+    kge_leq(dpv_sell_products, dpv_service_provision)).
+fof(res_dpv_sell_products_to_data_subject_below_dpv_sell_products, axiom,
+    kge_leq(dpv_sell_products_to_data_subject, dpv_sell_products)).
+fof(res_dpv_service_access_determination_below_dpv_service_management, axiom,
+    kge_leq(dpv_service_access_determination, dpv_service_management)).
+fof(res_dpv_service_management_below_dpv_purpose, axiom,
+    kge_leq(dpv_service_management, dpv_purpose)).
+fof(res_dpv_service_monitoring_below_dpv_service_management, axiom,
+    kge_leq(dpv_service_monitoring, dpv_service_management)).
+fof(res_dpv_service_optimisation_below_dpv_service_management, axiom,
+    kge_leq(dpv_service_optimisation, dpv_service_management)).
+fof(res_dpv_service_personalisation_below_dpv_personalisation, axiom,
+    kge_leq(dpv_service_personalisation, dpv_personalisation)).
+fof(res_dpv_service_personalisation_below_dpv_service_management, axiom,
+    kge_leq(dpv_service_personalisation, dpv_service_management)).
+fof(res_dpv_service_provision_below_dpv_service_management, axiom,
+    kge_leq(dpv_service_provision, dpv_service_management)).
+fof(res_dpv_service_registration_below_dpv_service_management, axiom,
+    kge_leq(dpv_service_registration, dpv_service_management)).
+fof(res_dpv_service_usage_analytics_below_dpv_service_monitoring, axiom,
+    kge_leq(dpv_service_usage_analytics, dpv_service_monitoring)).
+fof(res_dpv_social_media_marketing_below_dpv_marketing, axiom,
+    kge_leq(dpv_social_media_marketing, dpv_marketing)).
+fof(res_dpv_targeted_advertising_below_dpv_personalised_advertising, axiom,
+    kge_leq(dpv_targeted_advertising, dpv_personalised_advertising)).
+fof(res_dpv_technical_service_provision_below_dpv_service_provision, axiom,
+    kge_leq(dpv_technical_service_provision, dpv_service_provision)).
+fof(res_dpv_user_interface_personalisation_below_dpv_service_personalisation, axiom,
+    kge_leq(dpv_user_interface_personalisation, dpv_service_personalisation)).
+fof(res_dpv_vendor_management_below_dpv_purpose, axiom,
+    kge_leq(dpv_vendor_management, dpv_purpose)).
+fof(res_dpv_vendor_payment_below_dpv_vendor_management, axiom,
+    kge_leq(dpv_vendor_payment, dpv_vendor_management)).
+fof(res_dpv_vendor_records_management_below_dpv_vendor_management, axiom,
+    kge_leq(dpv_vendor_records_management, dpv_vendor_management)).
+fof(res_dpv_vendor_selection_assessment_below_dpv_vendor_management, axiom,
+    kge_leq(dpv_vendor_selection_assessment, dpv_vendor_management)).
+fof(res_dpv_verification_below_dpv_enforce_security, axiom,
+    kge_leq(dpv_verification, dpv_enforce_security)).
+
+% Background theory: none here.  DPV publishes no disjointness
+% among purposes; what the parties declare lives in the
+% declared theory file.
+

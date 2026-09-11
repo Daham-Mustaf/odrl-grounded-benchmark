@@ -1,6 +1,5 @@
 @prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix report:  <https://w3id.org/force/compliance-report#> .
-@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix vrep:    <https://w3id.org/odrl-kb/verdict-report#> .
 @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
@@ -8,14 +7,14 @@
 @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
 
-drk:bsb-offer-310 a odrl:Offer ;
+drk:offer-310 a odrl:Offer ;
     dcterms:title "BSB offer: research and development purposes"@en ;
-    odrl:assigner drk:bavarian-state-library ;
+    odrl:assigner drk:library ;
     odrl:permission kgc:KGC310-offer-r1 .
 
 kgc:KGC310-offer-r1 a odrl:Permission ;
     odrl:action odrl:use ;
-    odrl:target drk:bsb-manuscripts ;
+    odrl:target drk:manuscripts ;
     odrl:constraint kgc:KGC310-offer-c1 .
 
 kgc:KGC310-offer-c1 a odrl:Constraint ;
@@ -23,14 +22,14 @@ kgc:KGC310-offer-c1 a odrl:Constraint ;
     odrl:operator odrl:isA ;
     odrl:rightOperand dpv:ResearchAndDevelopment .
 
-drk:bnf-request-310 a odrl:Request ;
+drk:request-310 a odrl:Request ;
     dcterms:title "BnF request: scientific research"@en ;
-    odrl:assignee drk:french-national-library ;
+    odrl:assignee drk:researcher ;
     odrl:permission kgc:KGC310-request-r1 .
 
 kgc:KGC310-request-r1 a odrl:Permission ;
     odrl:action odrl:use ;
-    odrl:target drk:bsb-manuscripts ;
+    odrl:target drk:manuscripts ;
     odrl:constraint kgc:KGC310-request-c1 .
 
 kgc:KGC310-request-c1 a odrl:Constraint ;
@@ -46,12 +45,8 @@ drk:KGC310-report a vrep:OperandVerdictReport ;
     report:policyRequest drk:request-310 ;
     report:constraint kgc:KGC310-offer-c1 ;
     vrep:constraintRequest kgc:KGC310-request-c1 ;
-    vrep:backgroundTheory <https://w3id.org/odrl-kb/dpv-purposes/empty> ;
+    vrep:binding <https://w3id.org/odrl-kb/profile/b-purpose> ;
+    rdfs:comment """ScientificResearch is directly below ResearchAndDevelopment in DPV, so the request is compatible with the offer."""@en ;
+    dcterms:description """A library permits use for research and development, and a researcher requests use for scientific research."""@en ;
     report:satisfactionState report:Satisfied ;
-    vrep:certificate drk:KGC310-certificate .
-
-drk:KGC310-certificate a vrep:Refutation ;
-    rdfs:comment """The resource places scientific research under research and development, so every model admits the common use and its absence is impossible."""@en ;
-    vrep:clashingConstraint kgc:KGC310-offer-c1, kgc:KGC310-request-c1 ;
-    vrep:premise [ vrep:premiseSource vrep:fromResource ;
-                   rdfs:label "dpv:ScientificResearch is below dpv:ResearchAndDevelopment"@en ] .
+    vrep:certificate <certificates/KGC310-2.tstp> .

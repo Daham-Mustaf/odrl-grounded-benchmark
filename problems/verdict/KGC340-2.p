@@ -3,7 +3,7 @@
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
 % Problem  : consent status, isA ValidForProcessing against eq ConsentGiven (witness condition negated)
 % Version  : 1.0
-% English  : The controller permits use while the consent may justify processing; the record is in the given state.  DPV places consent given below the branch of states valid for processing, so the verdict is Compatible on one assertion.  The offer names the branch rather than the states, so a state DPV adds to that branch later is covered without the offer being rewritten.
+% English  : A controller permits use while the consent on record may justify processing; a processor commits to processing only under given consent.
 %
 % Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark

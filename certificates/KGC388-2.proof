@@ -1,0 +1,23 @@
+% SZS output start Proof for KGC388-2
+fof(f1,axiom,(
+  ! [X0] : kge_leq(X0,X0)),
+  file('problems/verdict/KGC388-2.p',ax_leq_reflexive)).
+fof(f4850,axiom,(
+  ~((kge_leq(loc_de_nw,loc_de_nw) & loc_de_nw = loc_de_nw) | (kge_leq(loc_de_by,loc_de_nw) & loc_de_by = loc_de_nw) | (kge_leq(loc_de_nw,loc_de_by) & loc_de_nw = loc_de_nw) | (kge_leq(loc_de_by,loc_de_by) & loc_de_by = loc_de_nw))),
+  file('problems/verdict/KGC388-2.p',w_kgc388)).
+fof(f4855,plain,(
+  (~kge_leq(loc_de_nw,loc_de_nw) | loc_de_nw != loc_de_nw) & (~kge_leq(loc_de_by,loc_de_nw) | loc_de_by != loc_de_nw) & (~kge_leq(loc_de_nw,loc_de_by) | loc_de_nw != loc_de_nw) & (~kge_leq(loc_de_by,loc_de_by) | loc_de_by != loc_de_nw)),
+  inference(ennf_transformation,[],[f4850])).
+fof(f4856,plain,(
+  ( ! [X0] : (kge_leq(X0,X0)) )),
+  inference(cnf_transformation,[],[f1])).
+fof(f9708,plain,(
+  ~kge_leq(loc_de_nw,loc_de_nw) | loc_de_nw != loc_de_nw),
+  inference(cnf_transformation,[],[f4855])).
+fof(f9710,plain,(
+  ~kge_leq(loc_de_nw,loc_de_nw)),
+  inference(trivial_inequality_removal,[],[f9708])).
+fof(f9725,plain,(
+  $false),
+  inference(resolution,[],[f9710,f4856])).
+% SZS output end Proof

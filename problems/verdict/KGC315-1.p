@@ -3,7 +3,7 @@
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
 % Problem  : purpose, isA dpv:Purpose against eq dpv:RIS (witness condition asserted)
 % Version  : 1.0
-% English  : Offer (purpose, isA, dpv:Purpose) against request (purpose, eq, dpv:RecruitmentInterviewScheduling), the deepest concept in the module.  The resource relates them only through six steps, so the refutation must chain all six.  Compatible.  The verdict is the same as KGC310's; what grows with the depth is the certificate, not the answer.
+% English  : A library permits use for any DPV purpose, and a researcher requests use for recruitment interview scheduling.
 %
 % Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark
@@ -16,7 +16,7 @@
 % Comments : Query 1 of 2.  Verdict is derived from both queries.
 %--------------------------------------------------------------------------
 include('axioms/KGE000-0.ax').
-include('axioms/DPV-milestone.ax').
+include('axioms/DPV-dpv-purposes.ax').
 
 % --- constants, groundings and resource hooks ----------------------------
 % Background theory: empty.

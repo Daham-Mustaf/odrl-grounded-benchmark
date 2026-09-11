@@ -1,0 +1,16 @@
+# Background theory for the measures resource: empty.
+#
+# Neither module asserts disjointness or distinctness between measures.
+# Two constraints naming different measures are therefore satisfiable
+# together unless a party declares them apart, and the certificate for such
+# a verdict names the declaration.
+#
+# Source: https://w3id.org/dpv/2.3
+
+@prefix bt:      <https://w3id.org/odrl-kb/background#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+<https://w3id.org/odrl-kb/dpv-tom/empty> a bt:BackgroundTheory ;
+    dcterms:title "No declared distinctness or disjointness"@en ;
+    bt:appliesTo <https://w3id.org/odrl-kb/dpv-tom> ;
+    bt:pairCount 0 .

@@ -135,8 +135,6 @@ def resource_ttl(root, levels, names, root_slug, tag) -> str:
         "    dcterms:source <https://download.geonames.org/export/dump/> ;",
         "    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;",
         "    odrlkb:orderPredicate odrlkb:within ;",
-        f"    odrlkb:conceptCount {len(concepts)} ;",
-        f"    odrlkb:orderAssertionCount {len(edges)} .",
         "",
         f'odrlkb:{root_slug[3:]} a odrlkb:Feature ; rdfs:label "root"@en .',
         "",
@@ -230,7 +228,7 @@ def profile_ttl(tag) -> str:
 # it is declared in the resource file and not repeated here.
 
 @prefix odrl: <http://www.w3.org/ns/odrl/2/> .
-@prefix vrep: <https://w3id.org/odrl-verdict-report#> .
+@prefix vrep: <https://w3id.org/odrl-kb/verdict-report#> .
 @prefix ex:   <https://w3id.org/odrl-kb/profile/> .
 
 ex:b-spatial a vrep:OperandBinding ;

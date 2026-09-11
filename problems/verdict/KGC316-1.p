@@ -3,7 +3,7 @@
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
 % Problem  : purpose, isA dpv:RIS against eq dpv:Purpose (witness condition asserted)
 % Version  : 1.0
-% English  : KGC315 reversed: offer (purpose, isA, dpv:RecruitmentInterviewScheduling) against request (purpose, eq, dpv:Purpose).  The resource places the narrow concept below the broad one and says nothing the other way, so the verdict is Unknown.  The pair shows that isA reads the order in one direction: swapping the operands is not a symmetry of the semantics, and a reader who expects Compatible here has confused subsumption with identity.
+% English  : A library permits use for recruitment interview scheduling, while a researcher requests use for the general Purpose concept.
 %
 % Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark
@@ -16,7 +16,7 @@
 % Comments : Query 1 of 2.  Verdict is derived from both queries.
 %--------------------------------------------------------------------------
 include('axioms/KGE000-0.ax').
-include('axioms/DPV-milestone.ax').
+include('axioms/DPV-dpv-purposes.ax').
 
 % --- constants, groundings and resource hooks ----------------------------
 % Background theory: empty.

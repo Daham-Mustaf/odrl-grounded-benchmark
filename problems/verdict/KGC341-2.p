@@ -3,7 +3,7 @@
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
 % Problem  : consent status, or(eq ConsentGiven, eq RenewedConsentGiven) against eq RenewedConsentGiven (witness condition negated)
 % Version  : 1.0
-% English  : The same policy as KGC340, written by enumerating the two states rather than by naming the branch that holds them.  The verdict is again Compatible, and the certificate cites no resource assertion: the second alternative is the requested state, and nothing needs to be looked up.  The offer is fixed against the vocabulary as it stands, where KGC340's is not.
+% English  : A controller permits use under given or renewed consent; a processor commits to processing only under renewed consent.
 %
 % Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark

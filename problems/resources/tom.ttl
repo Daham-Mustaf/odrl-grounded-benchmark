@@ -1,0 +1,402 @@
+# DPV technical and organisational measures: the subsumption the
+# modules publish.
+#
+# skos:broader edges between concepts the two modules define.  An
+# edge whose target is defined in neither is reported by the
+# generator and not read, so a measure is placed here only under a
+# measure.
+#
+# The hierarchy is a directed acyclic graph and not a tree: some
+# measures have two parents.  A concept below two others is below
+# each of them.  What that forbids is a declaration of disjointness
+# between two such parents, since the resource publishes a concept
+# below both; distinctness over the same pair is untouched.
+#
+# Source   : Data Privacy Vocabulary 2.3, technical and organisational measures
+# Modules  : TOM.ttl, technical_measures.ttl
+# Retrieved: 2026-08-19
+# Licence  : W3C Document License 2023
+#
+# Concepts                    : 74
+# Order assertions, published : 75
+
+@prefix dpv:     <https://w3id.org/dpv#> .
+@prefix odrlkb:  <https://w3id.org/odrl-kb/dpv-tom#> .
+@prefix dcat:    <http://www.w3.org/ns/dcat#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+
+<https://w3id.org/odrl-kb/dpv-tom> a dcat:Dataset ;
+    dcterms:title "DPV technical and organisational measures"@en ;
+    dcterms:source <https://w3id.org/dpv/2.3> ;
+    dcterms:license <https://www.w3.org/copyright/document-license-2023/> .
+
+odrlkb:access_control_method a odrlkb:Measure ;
+    rdfs:label "Access Control Method"@en ;
+    dcterms:identifier dpv:AccessControlMethod ;
+    skos:broader odrlkb:technical_measure .
+
+odrlkb:activity_monitoring a odrlkb:Measure ;
+    rdfs:label "Activity Monitoring"@en ;
+    dcterms:identifier dpv:ActivityMonitoring ;
+    skos:broader odrlkb:technical_measure .
+
+odrlkb:anonymisation a odrlkb:Measure ;
+    rdfs:label "Anonymisation"@en ;
+    dcterms:identifier dpv:Anonymisation ;
+    skos:broader odrlkb:deidentification .
+
+odrlkb:asymmetric_cryptography a odrlkb:Measure ;
+    rdfs:label "Asymmetric Cryptography"@en ;
+    dcterms:identifier dpv:AsymmetricCryptography ;
+    skos:broader odrlkb:cryptographic_methods .
+
+odrlkb:asymmetric_encryption a odrlkb:Measure ;
+    rdfs:label "Asymmetric Encryption"@en ;
+    dcterms:identifier dpv:AsymmetricEncryption ;
+    skos:broader odrlkb:encryption .
+
+odrlkb:authentication_a_b_c a odrlkb:Measure ;
+    rdfs:label "Authentication using ABC"@en ;
+    dcterms:identifier dpv:Authentication-ABC ;
+    skos:broader odrlkb:cryptographic_authentication .
+
+odrlkb:authentication_p_a_b_c a odrlkb:Measure ;
+    rdfs:label "Authentication using PABC"@en ;
+    dcterms:identifier dpv:Authentication-PABC ;
+    skos:broader odrlkb:cryptographic_authentication .
+
+odrlkb:authentication_protocols a odrlkb:Measure ;
+    rdfs:label "Authentication Protocols"@en ;
+    dcterms:identifier dpv:AuthenticationProtocols ;
+    skos:broader odrlkb:technical_measure .
+
+odrlkb:authorisation_protocols a odrlkb:Measure ;
+    rdfs:label "Authorisation Protocols"@en ;
+    dcterms:identifier dpv:AuthorisationProtocols ;
+    skos:broader odrlkb:technical_measure .
+
+odrlkb:biometric_authentication a odrlkb:Measure ;
+    rdfs:label "Biometric Authentication"@en ;
+    dcterms:identifier dpv:BiometricAuthentication ;
+    skos:broader odrlkb:authentication_protocols .
+
+odrlkb:cryptographic_authentication a odrlkb:Measure ;
+    rdfs:label "Cryptographic Authentication"@en ;
+    dcterms:identifier dpv:CryptographicAuthentication ;
+    skos:broader odrlkb:authentication_protocols, odrlkb:cryptographic_methods .
+
+odrlkb:cryptographic_key_management a odrlkb:Measure ;
+    rdfs:label "Cryptographic Key Management"@en ;
+    dcterms:identifier dpv:CryptographicKeyManagement ;
+    skos:broader odrlkb:cryptographic_methods .
+
+odrlkb:cryptographic_methods a odrlkb:Measure ;
+    rdfs:label "Cryptographic Methods"@en ;
+    dcterms:identifier dpv:CryptographicMethods ;
+    skos:broader odrlkb:technical_measure .
+
+odrlkb:data_backup_protocols a odrlkb:Measure ;
+    rdfs:label "Data Backup Protocols"@en ;
+    dcterms:identifier dpv:DataBackupProtocols ;
+    skos:broader odrlkb:technical_measure .
+
+odrlkb:data_redaction a odrlkb:Measure ;
+    rdfs:label "Data Redaction"@en ;
+    dcterms:identifier dpv:DataRedaction ;
+    skos:broader odrlkb:data_sanitisation_technique .
+
+odrlkb:data_sanitisation_technique a odrlkb:Measure ;
+    rdfs:label "Data Sanitisation Technique"@en ;
+    dcterms:identifier dpv:DataSanitisationTechnique ;
+    skos:broader odrlkb:technical_measure .
+
+odrlkb:deidentification a odrlkb:Measure ;
+    rdfs:label "De-Identification"@en ;
+    dcterms:identifier dpv:Deidentification ;
+    skos:broader odrlkb:data_sanitisation_technique .
+
+odrlkb:deterministic_pseudonymisation a odrlkb:Measure ;
+    rdfs:label "Deterministic Pseudonymisation"@en ;
+    dcterms:identifier dpv:DeterministicPseudonymisation ;
+    skos:broader odrlkb:pseudonymisation .
+
+odrlkb:differential_privacy a odrlkb:Measure ;
+    rdfs:label "Differential Privacy"@en ;
+    dcterms:identifier dpv:DifferentialPrivacy ;
+    skos:broader odrlkb:cryptographic_methods .
+
+odrlkb:digital_rights_management a odrlkb:Measure ;
+    rdfs:label "Digital Rights Management"@en ;
+    dcterms:identifier dpv:DigitalRightsManagement ;
+    skos:broader odrlkb:technical_measure .
+
+odrlkb:digital_signatures a odrlkb:Measure ;
+    rdfs:label "Digital Signatures"@en ;
+    dcterms:identifier dpv:DigitalSignatures ;
+    skos:broader odrlkb:cryptographic_methods .
+
+odrlkb:distributed_system_security a odrlkb:Measure ;
+    rdfs:label "Distributed System Security"@en ;
+    dcterms:identifier dpv:DistributedSystemSecurity ;
+    skos:broader odrlkb:security_method .
+
+odrlkb:document_randomised_pseudonymisation a odrlkb:Measure ;
+    rdfs:label "Document Randomised Pseudonymisation"@en ;
+    dcterms:identifier dpv:DocumentRandomisedPseudonymisation ;
+    skos:broader odrlkb:pseudonymisation .
+
+odrlkb:document_security a odrlkb:Measure ;
+    rdfs:label "Document Security"@en ;
+    dcterms:identifier dpv:DocumentSecurity ;
+    skos:broader odrlkb:security_method .
+
+odrlkb:encryption a odrlkb:Measure ;
+    rdfs:label "Encryption"@en ;
+    dcterms:identifier dpv:Encryption ;
+    skos:broader odrlkb:technical_measure .
+
+odrlkb:encryption_at_rest a odrlkb:Measure ;
+    rdfs:label "Encryption at Rest"@en ;
+    dcterms:identifier dpv:EncryptionAtRest ;
+    skos:broader odrlkb:encryption .
+
+odrlkb:encryption_in_transfer a odrlkb:Measure ;
+    rdfs:label "Encryption in Transfer"@en ;
+    dcterms:identifier dpv:EncryptionInTransfer ;
+    skos:broader odrlkb:encryption .
+
+odrlkb:encryption_in_use a odrlkb:Measure ;
+    rdfs:label "Encryption in Use"@en ;
+    dcterms:identifier dpv:EncryptionInUse ;
+    skos:broader odrlkb:encryption .
+
+odrlkb:end_to_end_encryption a odrlkb:Measure ;
+    rdfs:label "End-to-End Encryption (E2EE)"@en ;
+    dcterms:identifier dpv:EndToEndEncryption ;
+    skos:broader odrlkb:encryption .
+
+odrlkb:fail_safe_protocols a odrlkb:Measure ;
+    rdfs:label "Fail-Safe Protocols"@en ;
+    dcterms:identifier dpv:FailSafeProtocols ;
+    skos:broader odrlkb:technical_measure .
+
+odrlkb:file_system_security a odrlkb:Measure ;
+    rdfs:label "File System Security"@en ;
+    dcterms:identifier dpv:FileSystemSecurity ;
+    skos:broader odrlkb:security_method .
+
+odrlkb:fully_randomised_pseudonymisation a odrlkb:Measure ;
+    rdfs:label "Fully Randomised Pseudonymisation"@en ;
+    dcterms:identifier dpv:FullyRandomisedPseudonymisation ;
+    skos:broader odrlkb:pseudonymisation .
+
+odrlkb:hardware_security_protocols a odrlkb:Measure ;
+    rdfs:label "Hardware Security Protocols"@en ;
+    dcterms:identifier dpv:HardwareSecurityProtocols ;
+    skos:broader odrlkb:security_method .
+
+odrlkb:hash_functions a odrlkb:Measure ;
+    rdfs:label "Hash Functions"@en ;
+    dcterms:identifier dpv:HashFunctions ;
+    skos:broader odrlkb:cryptographic_methods .
+
+odrlkb:hash_message_authentication_code a odrlkb:Measure ;
+    rdfs:label "Hash-based Message Authentication Code (HMAC)"@en ;
+    dcterms:identifier dpv:HashMessageAuthenticationCode ;
+    skos:broader odrlkb:cryptographic_authentication .
+
+odrlkb:homomorphic_encryption a odrlkb:Measure ;
+    rdfs:label "Homomorphic Encryption"@en ;
+    dcterms:identifier dpv:HomomorphicEncryption ;
+    skos:broader odrlkb:cryptographic_methods .
+
+odrlkb:information_flow_control a odrlkb:Measure ;
+    rdfs:label "Information Flow Control"@en ;
+    dcterms:identifier dpv:InformationFlowControl ;
+    skos:broader odrlkb:technical_measure .
+
+odrlkb:intrusion_detection_system a odrlkb:Measure ;
+    rdfs:label "Intrusion Detection System"@en ;
+    dcterms:identifier dpv:IntrusionDetectionSystem ;
+    skos:broader odrlkb:security_method .
+
+odrlkb:legal_measure a odrlkb:Measure ;
+    rdfs:label "Legal Measure"@en ;
+    dcterms:identifier dpv:LegalMeasure ;
+    skos:broader odrlkb:technical_organisational_measure .
+
+odrlkb:message_authentication_codes a odrlkb:Measure ;
+    rdfs:label "Message Authentication Codes (MAC)"@en ;
+    dcterms:identifier dpv:MessageAuthenticationCodes ;
+    skos:broader odrlkb:cryptographic_authentication .
+
+odrlkb:mobile_platform_security a odrlkb:Measure ;
+    rdfs:label "Mobile Platform Security"@en ;
+    dcterms:identifier dpv:MobilePlatformSecurity ;
+    skos:broader odrlkb:security_method .
+
+odrlkb:monotonic_counter_pseudonymisation a odrlkb:Measure ;
+    rdfs:label "Monotonic Counter Pseudonymisation"@en ;
+    dcterms:identifier dpv:MonotonicCounterPseudonymisation ;
+    skos:broader odrlkb:pseudonymisation .
+
+odrlkb:multi_factor_authentication a odrlkb:Measure ;
+    rdfs:label "Multi-Factor Authentication (MFA)"@en ;
+    dcterms:identifier dpv:MultiFactorAuthentication ;
+    skos:broader odrlkb:authentication_protocols .
+
+odrlkb:network_proxy_routing a odrlkb:Measure ;
+    rdfs:label "Network Proxy Routing"@en ;
+    dcterms:identifier dpv:NetworkProxyRouting ;
+    skos:broader odrlkb:security_method .
+
+odrlkb:network_security_protocols a odrlkb:Measure ;
+    rdfs:label "Network Security Protocols"@en ;
+    dcterms:identifier dpv:NetworkSecurityProtocols ;
+    skos:broader odrlkb:security_method .
+
+odrlkb:operating_system_security a odrlkb:Measure ;
+    rdfs:label "Operating System Security"@en ;
+    dcterms:identifier dpv:OperatingSystemSecurity ;
+    skos:broader odrlkb:security_method .
+
+odrlkb:organisational_measure a odrlkb:Measure ;
+    rdfs:label "Organisational Measure"@en ;
+    dcterms:identifier dpv:OrganisationalMeasure ;
+    skos:broader odrlkb:technical_organisational_measure .
+
+odrlkb:password_authentication a odrlkb:Measure ;
+    rdfs:label "Password Authentication"@en ;
+    dcterms:identifier dpv:PasswordAuthentication ;
+    skos:broader odrlkb:authentication_protocols .
+
+odrlkb:penetration_testing_methods a odrlkb:Measure ;
+    rdfs:label "Penetration Testing Methods"@en ;
+    dcterms:identifier dpv:PenetrationTestingMethods ;
+    skos:broader odrlkb:security_method .
+
+odrlkb:physical_measure a odrlkb:Measure ;
+    rdfs:label "Physical Measure"@en ;
+    dcterms:identifier dpv:PhysicalMeasure ;
+    skos:broader odrlkb:technical_organisational_measure .
+
+odrlkb:post_quantum_cryptography a odrlkb:Measure ;
+    rdfs:label "Post-Quantum Cryptography"@en ;
+    dcterms:identifier dpv:PostQuantumCryptography ;
+    skos:broader odrlkb:cryptographic_methods .
+
+odrlkb:privacy_preserving_protocol a odrlkb:Measure ;
+    rdfs:label "Privacy Preserving Protocol"@en ;
+    dcterms:identifier dpv:PrivacyPreservingProtocol ;
+    skos:broader odrlkb:cryptographic_methods .
+
+odrlkb:private_information_retrieval a odrlkb:Measure ;
+    rdfs:label "Private Information Retrieval"@en ;
+    dcterms:identifier dpv:PrivateInformationRetrieval ;
+    skos:broader odrlkb:cryptographic_methods .
+
+odrlkb:pseudonymisation a odrlkb:Measure ;
+    rdfs:label "Pseudonymisation"@en ;
+    dcterms:identifier dpv:Pseudonymisation ;
+    skos:broader odrlkb:deidentification .
+
+odrlkb:quantum_cryptography a odrlkb:Measure ;
+    rdfs:label "Quantum Cryptography"@en ;
+    dcterms:identifier dpv:QuantumCryptography ;
+    skos:broader odrlkb:cryptographic_methods .
+
+odrlkb:r_n_g_pseudonymisation a odrlkb:Measure ;
+    rdfs:label "RNG Pseudonymisation"@en ;
+    dcterms:identifier dpv:RNGPseudonymisation ;
+    skos:broader odrlkb:pseudonymisation .
+
+odrlkb:secret_sharing_schemes a odrlkb:Measure ;
+    rdfs:label "Secret Sharing Schemes"@en ;
+    dcterms:identifier dpv:SecretSharingSchemes ;
+    skos:broader odrlkb:cryptographic_methods .
+
+odrlkb:secure_multi_party_computation a odrlkb:Measure ;
+    rdfs:label "Secure Multi-Party Computation"@en ;
+    dcterms:identifier dpv:SecureMultiPartyComputation ;
+    skos:broader odrlkb:cryptographic_methods .
+
+odrlkb:security_method a odrlkb:Measure ;
+    rdfs:label "Security Method"@en ;
+    dcterms:identifier dpv:SecurityMethod ;
+    skos:broader odrlkb:technical_measure .
+
+odrlkb:single_sign_on a odrlkb:Measure ;
+    rdfs:label "Single Sign On"@en ;
+    dcterms:identifier dpv:SingleSignOn ;
+    skos:broader odrlkb:authentication_protocols .
+
+odrlkb:symmetric_cryptography a odrlkb:Measure ;
+    rdfs:label "Symmetric Cryptography"@en ;
+    dcterms:identifier dpv:SymmetricCryptography ;
+    skos:broader odrlkb:cryptographic_methods .
+
+odrlkb:symmetric_encryption a odrlkb:Measure ;
+    rdfs:label "Symmetric Encryption"@en ;
+    dcterms:identifier dpv:SymmetricEncryption ;
+    skos:broader odrlkb:encryption .
+
+odrlkb:technical_measure a odrlkb:Measure ;
+    rdfs:label "Technical Measure"@en ;
+    dcterms:identifier dpv:TechnicalMeasure ;
+    skos:broader odrlkb:technical_organisational_measure .
+
+odrlkb:technical_organisational_measure a odrlkb:Measure ;
+    rdfs:label "Technical and Organisational Measure"@en ;
+    dcterms:identifier dpv:TechnicalOrganisationalMeasure .
+
+odrlkb:trusted_computing a odrlkb:Measure ;
+    rdfs:label "Trusted Computing"@en ;
+    dcterms:identifier dpv:TrustedComputing ;
+    skos:broader odrlkb:cryptographic_methods .
+
+odrlkb:trusted_execution_environment a odrlkb:Measure ;
+    rdfs:label "Trusted Execution Environment"@en ;
+    dcterms:identifier dpv:TrustedExecutionEnvironment ;
+    skos:broader odrlkb:cryptographic_methods .
+
+odrlkb:usage_control a odrlkb:Measure ;
+    rdfs:label "Usage Control"@en ;
+    dcterms:identifier dpv:UsageControl ;
+    skos:broader odrlkb:access_control_method .
+
+odrlkb:use_synthetic_data a odrlkb:Measure ;
+    rdfs:label "Use of Synthetic Data"@en ;
+    dcterms:identifier dpv:UseSyntheticData ;
+    skos:broader odrlkb:security_method .
+
+odrlkb:virtualisation_security a odrlkb:Measure ;
+    rdfs:label "Virtualisation Security"@en ;
+    dcterms:identifier dpv:VirtualisationSecurity ;
+    skos:broader odrlkb:security_method .
+
+odrlkb:vulnerability_testing_methods a odrlkb:Measure ;
+    rdfs:label "Vulnerability Testing Methods"@en ;
+    dcterms:identifier dpv:VulnerabilityTestingMethods ;
+    skos:broader odrlkb:security_method .
+
+odrlkb:web_browser_security a odrlkb:Measure ;
+    rdfs:label "WebBrowser Security"@en ;
+    dcterms:identifier dpv:WebBrowserSecurity ;
+    skos:broader odrlkb:security_method .
+
+odrlkb:web_security_protocols a odrlkb:Measure ;
+    rdfs:label "Web Security Protocols"@en ;
+    dcterms:identifier dpv:WebSecurityProtocols ;
+    skos:broader odrlkb:security_method .
+
+odrlkb:wireless_security_protocols a odrlkb:Measure ;
+    rdfs:label "Wireless Security Protocols"@en ;
+    dcterms:identifier dpv:WirelessSecurityProtocols ;
+    skos:broader odrlkb:security_method .
+
+odrlkb:zero_knowledge_authentication a odrlkb:Measure ;
+    rdfs:label "Zero Knowledge Authentication"@en ;
+    dcterms:identifier dpv:ZeroKnowledgeAuthentication ;
+    skos:broader odrlkb:authentication_protocols, odrlkb:cryptographic_methods .

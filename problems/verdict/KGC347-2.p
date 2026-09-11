@@ -3,7 +3,7 @@
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
 % Problem  : consent status, xone(isA ValidForProcessing, isA InvalidForProcessing) against eq ConsentGiven, branches disjoint (witness condition negated)
 % Version  : 1.0
-% English  : The constraints of KGC346 with the branches declared disjoint.  Nothing lies below both, so the given state lies below the valid branch and not the invalid one, exactly one alternative holds, and the verdict is Compatible.  The refutation cites an assertion DPV published and a declaration the parties made, and the certificate marks which is which.
+% English  : As KGC346, with the valid and invalid branches declared disjoint on DPV's definitions.
 %
 % Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark

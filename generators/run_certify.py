@@ -8,46 +8,7 @@ certificate beside the expected one.
     uv run generators/run_certify.py
     uv run generators/run_certify.py --problem KGC311
     uv run generators/run_certify.py --prover vampire     # one only
-
-Two provers, and what agreement between them means
---------------------------------------------------
-Vampire reads the TPTP encoding, Z3 the SMT-LIB one.  The two are the same
-theory: the writer emits the same three order axioms into both, quantified,
-rather than instantiating them at whichever concepts a problem happens to
-need.  So a disagreement on a status is a real disagreement, not an artefact
-of one encoding being weaker.
-
-The premise sets are compared at the level of provenance, not of names.  The
-TPTP names come from the resource generator and say what each assertion is
-(res_dpv_scientific_research_below_dpv_research_and_development); the SMT-LIB
-ones are numbered by the writer (res_kgc311_0), because at that point it
-knows only the order in which assertions appear.  Comparing the counts by
-source is what the two can honestly be asked to agree on:
-
-    Vampire  2 resource, 1 order axiom, 1 constraint
-    Z3       2 resource, 1 order axiom, 1 constraint     agree
-
-That is weaker than name-level agreement and worth strengthening later, by
-having the problem data carry names for its SMT-LIB assertions.  Until then
-the comparison says what it can: the two refutations use the same number of
-assertions from the same places.
-
-A caution the KGC311 run makes concrete: two provers may take different
-routes through the same resource.  DPV publishes NonCommercialResearch under
-two parents, so there are two chains from it to Purpose, and the provers do
-not pick the same one.  Both refutations are correct and both cite two
-resource assertions and transitivity; they are not the same two assertions.
-Provenance-level agreement is therefore the right claim, and name-level
-agreement would be the wrong one to want.
-
-Unknown, and the models that report it
---------------------------------------
-An Unknown has no refutation.  Both its queries are satisfiable, and what
-their models disagree about is the question the resource leaves open.  Z3
-prints a model for each; the difference between them is recorded as the
-certificate, in place of the empty one an Unknown used to get.
 """
-
 import argparse
 import re
 import subprocess
@@ -57,7 +18,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent))
 from certificate import (premises_from_vampire, premises_from_z3, classify,
                          to_turtle, withdrawable, model_literals,
-                         compare_models, NoAxiomNames, NoProof)
+                         compare_models, compare, NoAxiomNames, NoProof)
 
 # --mode vampire rather than casc: the schedule mode does not always
 # propagate --output_axiom_names to its child strategies, and without names
@@ -132,6 +93,21 @@ def constants_of(smt2: Path) -> list[str]:
     return re.findall(r"\(declare-fun (\w+) \(\) Concept\)", text)
 
 
+def read_expected(path: Path) -> dict:
+    """The premise classes the expected certificate names, by class.
+
+    Returns the shape compare() takes: class name to list. The
+    descriptions are prose and are not compared; what is compared is how
+    many premises of each class the problem says the refutation needs.
+    """
+    out = {}
+    for line in path.read_text(encoding="utf-8").splitlines():
+        m = re.match(r'\s*vrep:(\w+)\s+"', line)
+        if m:
+            out.setdefault(m.group(1), []).append(line)
+    return out
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--problems-dir", default="problems/verdict")
@@ -154,14 +130,14 @@ def main() -> int:
 
     use_v = args.prover in ("both", "vampire")
     use_z = args.prover in ("both", "z3")
-    agree = disagree = 0
+    agree = disagree = matched = mismatched = 0
 
     for q1path in problems:
         pid = q1path.name[:-4]
         q2path = q1path.with_name(f"{pid}-2.p")
+
         s1 = s2 = None
         vout1 = vout2 = zout1 = zout2 = ""
-
         if use_v:
             s1, vout1 = run_vampire(q1path, args.timeout, root)
             s2, vout2 = run_vampire(q2path, args.timeout, root)
@@ -179,7 +155,6 @@ def main() -> int:
 
         # The refutation is whichever query came back unsatisfiable.
         which = 1 if s1 == "unsat" else 2 if s2 == "unsat" else None
-
         if which is None:
             if s1 not in ("sat", "unsat") or s2 not in ("sat", "unsat"):
                 print(f"    no verdict: provers returned {s1} and {s2}")
@@ -203,7 +178,6 @@ def main() -> int:
 
         # --- a refutation: attribute it under each prover available -----
         profiles, classified_v = {}, None
-
         if use_v:
             raw = vout1 if which == 1 else vout2
             try:
@@ -213,7 +187,6 @@ def main() -> int:
                 (odir / f"{pid}-{which}.tstp").write_text(raw, encoding="utf-8")
             except (NoAxiomNames, NoProof) as e:
                 print(f"    Vampire: {e}")
-
         if use_z:
             zraw = zout1 if which == 1 else zout2
             _, znames = premises_from_z3(zraw)
@@ -233,13 +206,26 @@ def main() -> int:
             w = withdrawable(classified_v)
             print(f"    withdrawable             "
                   f"{', '.join(w) if w else 'none'}")
-
             ttl = to_turtle(pid, "Refutation", classified_v,
                             artefact=f"proofs/{pid}-{which}.tstp",
                             prover="Vampire")
             (odir / f"{pid}-observed.ttl").write_text(ttl + "\n",
                                                       encoding="utf-8")
             print(f"    -> {odir / f'{pid}-observed.ttl'}")
+
+        # The problem's own claim about what the refutation needs, against
+        # what the prover used. Two provers agreeing with each other and
+        # both disagreeing with the problem is a verdict right for the
+        # wrong reason, and it is invisible without this.
+        exp_path = odir / f"{pid}-expected.ttl"
+        if classified_v is not None and exp_path.exists():
+            expected = read_expected(exp_path)
+            diffs = compare(expected, classified_v)
+            if diffs:
+                print(f"    CERTIFICATE MISMATCH  {'; '.join(diffs)}")
+                mismatched += 1
+            else:
+                matched += 1
 
         # Provenance-level comparison.  Not names: see the module docstring.
         if len(profiles) == 2:
@@ -255,6 +241,9 @@ def main() -> int:
 
     if use_v and use_z:
         print(f"\nprovenance agreement: {agree} agree, {disagree} differ")
+    if use_v:
+        print(f"certificate agreement: {matched} match, "
+              f"{mismatched} differ from the problem's declaration")
     return 0
 
 

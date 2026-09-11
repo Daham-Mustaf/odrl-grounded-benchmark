@@ -61,7 +61,7 @@ PROBLEMS = [
 
         "fof_decls": """\
 % Background theory: the registry's uniqueness rule, as distinctness.
-fof(bt_de_distinct_fr, axiom,
+fof(bg_disj_de_distinct_fr, axiom,
     bcp_de != bcp_fr).
 """,
         # D != empty over the named concepts {de, fr}
@@ -101,19 +101,19 @@ fof(bt_de_distinct_fr, axiom,
 @prefix odrlkb:  <https://w3id.org/odrl-kb/bcp47#> .
 @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
-@prefix vrep:    <https://w3id.org/odrl-verdict-report#> .
+@prefix vrep:    <https://w3id.org/odrl-kb/verdict-report#> .
 
-drk:bsb-manuscripts a dcterms:Dataset ;
+drk:manuscripts a dcterms:Dataset ;
     dcterms:title "Digitised manuscripts, Bavarian State Library"@en .
 
-drk:bsb-offer a odrl:Offer ;
+drk:offer a odrl:Offer ;
     dcterms:title "BSB offer: access in German"@en ;
-    odrl:assigner drk:bavarian-state-library ;
+    odrl:assigner drk:library ;
     odrl:permission kgc:KGC300-offer-r1 .
 
 kgc:KGC300-offer-r1 a odrl:Permission ;
     odrl:action odrl:use ;
-    odrl:target drk:bsb-manuscripts ;
+    odrl:target drk:manuscripts ;
     odrl:constraint kgc:KGC300-offer-c1 .
 
 kgc:KGC300-offer-c1 a odrl:Constraint ;
@@ -121,14 +121,14 @@ kgc:KGC300-offer-c1 a odrl:Constraint ;
     odrl:operator odrl:eq ;
     odrl:rightOperand odrlkb:de .
 
-drk:bnf-request a odrl:Request ;
+drk:request a odrl:Request ;
     dcterms:title "BnF request: access in French"@en ;
-    odrl:assignee drk:french-national-library ;
+    odrl:assignee drk:researcher ;
     odrl:permission kgc:KGC300-request-r1 .
 
 kgc:KGC300-request-r1 a odrl:Permission ;
     odrl:action odrl:use ;
-    odrl:target drk:bsb-manuscripts ;
+    odrl:target drk:manuscripts ;
     odrl:constraint kgc:KGC300-request-c1 .
 
 kgc:KGC300-request-c1 a odrl:Constraint ;
@@ -149,7 +149,8 @@ kgc:KGC300-request-c1 a odrl:Constraint ;
         "sort":              "tax",
         "resource":          "https://w3id.org/odrl-kb/dpv-purpose",
         "background_theory": "https://w3id.org/odrl-kb/dpv-purpose/declared",
-        "includes":          ["KGE000-0.ax", "DPV-milestone.ax"],
+        "unknown_reason": "epistemic",
+        "includes":          ["KGE000-0.ax", "DPV-dpv-purposes.ax"],
         "description": (
             "Offer (purpose, isA, dpv:NonCommercialPurpose) against request "
             "(purpose, eq, dpv:ScientificResearch).  The vocabulary neither "
@@ -197,19 +198,19 @@ kgc:KGC300-request-c1 a odrl:Constraint ;
 @prefix dpv:     <https://w3id.org/dpv#> .
 @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
-@prefix vrep:    <https://w3id.org/odrl-verdict-report#> .
+@prefix vrep:    <https://w3id.org/odrl-kb/verdict-report#> .
 
-drk:bsb-manuscripts a dcterms:Dataset ;
+drk:manuscripts a dcterms:Dataset ;
     dcterms:title "Digitised manuscripts, Bavarian State Library"@en .
 
-drk:bsb-offer a odrl:Offer ;
+drk:offer a odrl:Offer ;
     dcterms:title "BSB offer: non-commercial research only"@en ;
-    odrl:assigner drk:bavarian-state-library ;
+    odrl:assigner drk:library ;
     odrl:permission kgc:KGC301-offer-r1 .
 
 kgc:KGC301-offer-r1 a odrl:Permission ;
     odrl:action odrl:use ;
-    odrl:target drk:bsb-manuscripts ;
+    odrl:target drk:manuscripts ;
     odrl:constraint kgc:KGC301-offer-c1 .
 
 kgc:KGC301-offer-c1 a odrl:Constraint ;
@@ -217,14 +218,14 @@ kgc:KGC301-offer-c1 a odrl:Constraint ;
     odrl:operator odrl:isA ;
     odrl:rightOperand dpv:NonCommercialPurpose .
 
-drk:bnf-request a odrl:Request ;
+drk:request a odrl:Request ;
     dcterms:title "BnF request: scientific research"@en ;
-    odrl:assignee drk:french-national-library ;
+    odrl:assignee drk:researcher ;
     odrl:permission kgc:KGC301-request-r1 .
 
 kgc:KGC301-request-r1 a odrl:Permission ;
     odrl:action odrl:use ;
-    odrl:target drk:bsb-manuscripts ;
+    odrl:target drk:manuscripts ;
     odrl:constraint kgc:KGC301-request-c1 .
 
 kgc:KGC301-request-c1 a odrl:Constraint ;
@@ -296,19 +297,19 @@ fof(res_france_within_europe, axiom,
 @prefix gn:      <https://sws.geonames.org/> .
 @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
-@prefix vrep:    <https://w3id.org/odrl-verdict-report#> .
+@prefix vrep:    <https://w3id.org/odrl-kb/verdict-report#> .
 
-drk:bsb-manuscripts a dcterms:Dataset ;
+drk:manuscripts a dcterms:Dataset ;
     dcterms:title "Digitised manuscripts, Bavarian State Library"@en .
 
-drk:bsb-offer a odrl:Offer ;
+drk:offer a odrl:Offer ;
     dcterms:title "BSB offer: recipients in Europe"@en ;
-    odrl:assigner drk:bavarian-state-library ;
+    odrl:assigner drk:library ;
     odrl:permission kgc:KGC302-offer-r1 .
 
 kgc:KGC302-offer-r1 a odrl:Permission ;
     odrl:action odrl:use ;
-    odrl:target drk:bsb-manuscripts ;
+    odrl:target drk:manuscripts ;
     odrl:constraint kgc:KGC302-offer-c1 .
 
 kgc:KGC302-offer-c1 a odrl:Constraint ;
@@ -316,14 +317,14 @@ kgc:KGC302-offer-c1 a odrl:Constraint ;
     odrl:operator odrl:isPartOf ;
     odrl:rightOperand <https://sws.geonames.org/6255148/> .
 
-drk:bnf-request a odrl:Request ;
+drk:request a odrl:Request ;
     dcterms:title "BnF request: recipient in France"@en ;
-    odrl:assignee drk:french-national-library ;
+    odrl:assignee drk:researcher ;
     odrl:permission kgc:KGC302-request-r1 .
 
 kgc:KGC302-request-r1 a odrl:Permission ;
     odrl:action odrl:use ;
-    odrl:target drk:bsb-manuscripts ;
+    odrl:target drk:manuscripts ;
     odrl:constraint kgc:KGC302-request-c1 .
 
 kgc:KGC302-request-c1 a odrl:Constraint ;

@@ -1,6 +1,5 @@
 @prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix report:  <https://w3id.org/force/compliance-report#> .
-@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix vrep:    <https://w3id.org/odrl-kb/verdict-report#> .
 @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
@@ -8,14 +7,14 @@
 @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
 
-drk:bsb-offer-313 a odrl:Offer ;
+drk:offer-313 a odrl:Offer ;
     dcterms:title "BSB offer: marketing"@en ;
-    odrl:assigner drk:bavarian-state-library ;
+    odrl:assigner drk:library ;
     odrl:permission kgc:KGC313-offer-r1 .
 
 kgc:KGC313-offer-r1 a odrl:Permission ;
     odrl:action odrl:use ;
-    odrl:target drk:bsb-manuscripts ;
+    odrl:target drk:manuscripts ;
     odrl:constraint kgc:KGC313-offer-c1 .
 
 kgc:KGC313-offer-c1 a odrl:Constraint ;
@@ -23,14 +22,14 @@ kgc:KGC313-offer-c1 a odrl:Constraint ;
     odrl:operator odrl:eq ;
     odrl:rightOperand dpv:Marketing .
 
-drk:bnf-request-313 a odrl:Request ;
+drk:request-313 a odrl:Request ;
     dcterms:title "BnF request: scientific research"@en ;
-    odrl:assignee drk:french-national-library ;
+    odrl:assignee drk:researcher ;
     odrl:permission kgc:KGC313-request-r1 .
 
 kgc:KGC313-request-r1 a odrl:Permission ;
     odrl:action odrl:use ;
-    odrl:target drk:bsb-manuscripts ;
+    odrl:target drk:manuscripts ;
     odrl:constraint kgc:KGC313-request-c1 .
 
 kgc:KGC313-request-c1 a odrl:Constraint ;
@@ -46,9 +45,9 @@ drk:KGC313-report a vrep:OperandVerdictReport ;
     report:policyRequest drk:request-313 ;
     report:constraint kgc:KGC313-offer-c1 ;
     vrep:constraintRequest kgc:KGC313-request-c1 ;
-    vrep:backgroundTheory <https://w3id.org/odrl-kb/dpv-purposes/empty> ;
+    vrep:binding <https://w3id.org/odrl-kb/profile/b-purpose> ;
+    rdfs:comment """DPV does not declare Marketing and ScientificResearch distinct, so open-world semantics cannot establish either compatibility or conflict."""@en ;
+    dcterms:description """A library permits use for marketing, while a researcher requests use for scientific research."""@en ;
     report:satisfactionState vrep:Undetermined ;
-    vrep:certificate drk:KGC313-certificate .
-
-drk:KGC313-certificate a vrep:Models ;
-    rdfs:comment """Both queries are satisfiable.  The models differ on whether the two names denote one purpose, which no assertion settles."""@en .
+    vrep:undeterminedReason vrep:Epistemic ;
+    vrep:certificate <certificates/KGC313-2.tstp> .

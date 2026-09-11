@@ -1,0 +1,36 @@
+# Background theory for the DPV purposes slice: declared distinctness.
+#
+# The parties declare the purposes below pairwise distinct, on the ground
+# that DPV defines each of them as a purpose in its own right.  DPV
+# publishes no distinctness anywhere in this module, so the rule is the
+# parties' and a verdict resting on an instance of it is withdrawable by
+# abandoning the rule.
+#
+# Distinctness only.  Nothing here says two purposes have nothing below
+# both: that is disjointness, and this module publishes concepts below
+# two parents, so a disjointness over such a pair would contradict what
+# DPV asserts and leave the slice with no model.
+#
+# The rule is stated here and instantiated by the problems: a problem
+# naming two of these purposes carries the inequation between them, so
+# that a refutation cites the instance it used rather than a term
+# standing for all of them.
+#
+# Purposes: 4
+# Pairs   : 6
+# Advertising
+# Marketing
+# ResearchAndDevelopment
+# ScientificResearch
+#
+# Source: https://w3id.org/dpv/2.3
+
+@prefix bt:      <https://w3id.org/odrl-kb/background#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+<https://w3id.org/odrl-kb/dpv-purposes/declared> a bt:BackgroundTheory ;
+    dcterms:title "Pairwise distinctness of declared purposes"@en ;
+    bt:appliesTo <https://w3id.org/odrl-kb/dpv-purposes> ;
+    bt:generatedBy bt:PairwiseDistinctness ;
+    bt:scopeCondition "Distinctness between the listed purposes, and not disjointness: DPV publishes concepts below two parents, and a disjointness over such a pair would contradict it."@en ;
+    bt:pairCount 6 .

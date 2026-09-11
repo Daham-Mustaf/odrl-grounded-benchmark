@@ -1,0 +1,20 @@
+% Background theory: pairwise distinctness, declared by the parties.
+%
+% DPV publishes nothing that separates these purposes.  The rule is
+% the parties', on the ground that DPV defines each as a purpose in
+% its own right, and a verdict resting on an instance of it is
+% withdrawable by abandoning the rule.
+%
+% Distinctness, not disjointness: one purpose may lie below another
+% and still be a different purpose.  Disjointness over a pair with a
+% common child would contradict the resource, and this module
+% publishes concepts below two parents.
+%
+% The rule is stated here and instantiated by the problems.  A
+% problem naming two of the purposes below carries the inequation
+% between them as a bg_dist_ assertion.
+%
+% Purposes: 4
+% Pairs   : 6
+%
+% Advertising, Marketing, ResearchAndDevelopment, ScientificResearch

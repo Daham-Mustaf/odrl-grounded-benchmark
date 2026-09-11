@@ -3,7 +3,7 @@
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
 % Problem  : consent status, isA ValidForProcessing against eq ConsentWithdrawn, branches disjoint (witness condition negated)
 % Version  : 1.0
-% English  : The constraints of KGC342 with the two branches declared disjoint.  Nothing then lies below both, the withdrawn state lies below the invalid branch, and no structure places it below the valid one: Incompatible.  The declaration is warranted by the module's own definitions, one branch being the states that can justify processing and the other the states that cannot, and the module asserts it nowhere.  The certificate marks it withdrawable on that ground.
+% English  : As KGC342, with the valid and invalid branches declared disjoint on DPV's definitions.
 %
 % Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark

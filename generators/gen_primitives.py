@@ -63,7 +63,7 @@ fof(ax_leq_transitive, axiom,
 % Disjointness has no predicate.  A disjointness assertion is written where
 % it is declared, as the denial of a common lower bound:
 %
-%     fof(bt_a_disjoint_b, axiom, ~ ? [X] : (kge_leq(X, a) & kge_leq(X, b))).
+%     fof(bg_disj_a_b, axiom, ~ ? [X] : (kge_leq(X, a) & kge_leq(X, b))).
 %
 % Symmetry, the forcing of distinctness, and the impossibility of a concept
 % being disjoint from itself all follow from that shape.  A predicate with

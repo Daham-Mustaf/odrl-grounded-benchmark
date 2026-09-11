@@ -1,0 +1,29 @@
+%--------------------------------------------------------------------------
+% File     : KGC386-1.p
+% Domain   : ODRL Policy / Knowledge-Grounded Fragment
+% Problem  : spatial, isNoneOf {loc:DE-BY, loc:DE-BE} against eq loc:DE-HH (witness condition asserted)
+% Version  : 1.0
+% English  : Use anywhere except Bavaria and Berlin against use in Hamburg. Hamburg lies in the complement only if it differs from both, and the file publishes no distinctness: Unknown.
+%
+% Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
+% Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark
+% Authors  : Daham Mustafa
+% Names    : KGC386-1.p
+%
+% Status   : Satisfiable
+% SPC      : FOF_SAT_RFN
+%
+% Comments : Query 1 of 2.  Verdict is derived from both queries.
+%--------------------------------------------------------------------------
+include('axioms/KGE000-0.ax').
+include('axioms/LOC-dpvloc-geo.ax').
+
+% --- constants, groundings and resource hooks ----------------------------
+
+
+% --- witness condition asserted ------------------------------------------
+fof(w_kgc386, axiom,
+    ( ( ( loc_de_by != loc_de_by & loc_de_by != loc_de_be ) & loc_de_by = loc_de_hh )
+| ( ( loc_de_be != loc_de_by & loc_de_be != loc_de_be ) & loc_de_be = loc_de_hh )
+| ( ( loc_de_hh != loc_de_by & loc_de_hh != loc_de_be ) & loc_de_hh = loc_de_hh ) )).
+%--------------------------------------------------------------------------

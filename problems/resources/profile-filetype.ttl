@@ -1,15 +1,22 @@
+\
 # Profile entry for odrl:fileFormat over the EU File type table.
 #
-# The sort is nom, and here that is not a choice among readings.  The table
-# publishes no order, so identity is the only comparison it supports, and
-# isA, isPartOf and hasPart are rejected before any resource is consulted.
+# The binding assigns the nominal sort. The selected resource publishes
+# no skos:broader, skos:narrower, skos:related, skos:exactMatch or
+# skos:broadMatch between its concepts: both serialisations of the table
+# were parsed, and each carries skos:inScheme and nothing else over its
+# 228 file types. There is no relation for another sort to read.
 #
-# Bound to a registry that published a subtype relation, the same operand
-# would be taxonomic.  The sort belongs to the binding.
+# A constraint using isA, isPartOf or hasPart on this operand is
+# therefore not well sorted under this binding, and is rejected before
+# the resource is opened.
+#
+# Bound instead to a registry that published a subtype relation, the same
+# operand could be taxonomic. The sort is a property of the binding, not
+# of the left operand.
 
 @prefix odrl: <http://www.w3.org/ns/odrl/2/> .
-@prefix bind:    <https://w3id.org/odrl-kb/binding#> .
-@prefix vrep: <https://w3id.org/odrl-verdict-report#> .
+@prefix bind: <https://w3id.org/odrl-kb/binding#> .
 @prefix ex:   <https://w3id.org/odrl-kb/profile/> .
 
 ex:b-fileformat a bind:OperandBinding ;

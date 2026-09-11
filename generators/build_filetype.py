@@ -180,7 +180,6 @@ def resource_ttl(concepts, labels, deprecated, meta) -> str:
         '    dcterms:title "EU File type, concept set"@en ;',
         f"    dcterms:source <{meta['version_iri']}> ;",
         f'    dcterms:license <{meta["licence_uri"]}> ;',
-        f"    odrlkb:conceptCount {len(concepts)} ;",
         "    odrlkb:orderAssertionCount 0 .",
         "",
     ]
@@ -219,7 +218,7 @@ def background_ttl(meta) -> str:
 <https://w3id.org/odrl-kb/eu-file-type/empty> a bt:BackgroundTheory ;
     dcterms:title "No declared distinctness or disjointness"@en ;
     bt:appliesTo <https://w3id.org/odrl-kb/eu-file-type> ;
-    bt:assertionCount 0 .
+    bt:pairCount 0 .
 """
 
 
@@ -242,9 +241,8 @@ def declared_ttl(pair, meta) -> str:
     dcterms:title "One declared distinctness"@en ;
     bt:appliesTo <https://w3id.org/odrl-kb/eu-file-type> ;
     bt:generatedBy bt:PartyDeclaration ;
-    bt:assertionCount 1 .
+    bt:pairCount 1 .
 
-ft:{a} bt:distinctFrom ft:{b} .
 """
 
 
@@ -276,32 +274,39 @@ def declared_axioms(pair) -> str:
         "% Background theory: one distinctness, declared by the parties.\n"
         "% The table publishes nothing that separates these two formats.\n"
         "\n"
-        f"fof(bt_{slug(a)}_distinct_{slug(b)}, axiom,\n"
+        f"fof(bg_dist_{slug(a)}_distinct_{slug(b)}, axiom,\n"
         f"    {slug(a)} != {slug(b)}).\n"
     )
 
 
 def profile_ttl() -> str:
-    return """\
+    return """\\
 # Profile entry for odrl:fileFormat over the EU File type table.
 #
-# The sort is nom, and here that is not a choice among readings.  The table
-# publishes no order, so identity is the only comparison it supports, and
-# isA, isPartOf and hasPart are rejected before any resource is consulted.
+# The binding assigns the nominal sort. The selected resource publishes
+# no skos:broader, skos:narrower, skos:related, skos:exactMatch or
+# skos:broadMatch between its concepts: both serialisations of the table
+# were parsed, and each carries skos:inScheme and nothing else over its
+# 228 file types. There is no relation for another sort to read.
 #
-# Bound to a registry that published a subtype relation, the same operand
-# would be taxonomic.  The sort belongs to the binding.
+# A constraint using isA, isPartOf or hasPart on this operand is
+# therefore not well sorted under this binding, and is rejected before
+# the resource is opened.
+#
+# Bound instead to a registry that published a subtype relation, the same
+# operand could be taxonomic. The sort is a property of the binding, not
+# of the left operand.
 
 @prefix odrl: <http://www.w3.org/ns/odrl/2/> .
-@prefix vrep: <https://w3id.org/odrl-verdict-report#> .
+@prefix bind: <https://w3id.org/odrl-kb/binding#> .
 @prefix ex:   <https://w3id.org/odrl-kb/profile/> .
 
-ex:b-fileformat a vrep:OperandBinding ;
-    vrep:leftOperand odrl:fileFormat ;
-    vrep:sort vrep:nom ;
-    vrep:resource <https://w3id.org/odrl-kb/eu-file-type> ;
-    vrep:backgroundTheory <https://w3id.org/odrl-kb/eu-file-type/empty> ;
-    vrep:grounding vrep:sliceMembership .
+ex:b-fileformat a bind:OperandBinding ;
+    bind:leftOperand odrl:fileFormat ;
+    bind:sort bind:nom ;
+    bind:resource <https://w3id.org/odrl-kb/eu-file-type> ;
+    bind:backgroundTheory <https://w3id.org/odrl-kb/eu-file-type/empty> ;
+    bind:grounding bind:sliceMembership .
 """
 
 

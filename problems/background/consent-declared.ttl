@@ -14,6 +14,6 @@
     dcterms:title "One declared distinctness"@en ;
     bt:appliesTo <https://w3id.org/odrl-kb/dpv-consent> ;
     bt:generatedBy bt:PartyDeclaration ;
-    bt:assertionCount 1 .
+    bt:pairCount 1 .
 
 dpv:ConsentGiven bt:distinctFrom dpv:ConsentWithdrawn .

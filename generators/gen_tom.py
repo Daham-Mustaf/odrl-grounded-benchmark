@@ -1,5 +1,5 @@
 """
-gen_consent.py
+gen_tom.py
 ==============
 Generates the consent status problems, each as two satisfiability queries,
 plus the policies and the expected report.
@@ -47,7 +47,7 @@ DEFAULT_CASES  = "cases"
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="Generate the consent status problems."
+        description="Generate the DPV purposes problems."
     )
     parser.add_argument("--out-dir", default=DEFAULT_OUT)
     parser.add_argument("--axioms-dir", default=DEFAULT_AXIOMS)
@@ -60,8 +60,8 @@ def main() -> int:
     axioms_dir = Path(args.axioms_dir)
     cases_dir  = Path(args.cases_dir)
 
-    # Every constant a problem names must be declared by a resource axiom
-    # file.  Refuses to write otherwise.
+    # Every gn_/dpv_/bcp_ constant a problem names must be declared by a
+    # resource axiom file.  Refuses to write otherwise.
     vocab = collect_vocabulary(axioms_dir)
     if not vocab:
         print(f"ERROR: no constants found in {axioms_dir}.  Generate the "
@@ -70,7 +70,8 @@ def main() -> int:
     print(f"Vocabulary: {len(vocab)} constants.")
 
     # A tree-carrying problem is turned into the shape the writers expect
-    # before anything reads its fields.
+    # before anything reads its fields. A problem written the old way,
+    # with its witness spelled out, passes through unchanged.
     problems = [expand_tree(p) for p in PROBLEMS]
 
     for p in problems:
@@ -84,7 +85,8 @@ def main() -> int:
     for p in problems:
         paths = write_problem(p, out_dir, cases_dir)
         print(f"{p['id']}  {p['left_operand']:9s} {p['sort']}  "
-              f"q1={p['expected_q1']:14s} q2={p['expected_q2']:14s} "
+              f"q1={p.get('expected_q1', '-'):14s} "
+              f"q2={p.get('expected_q2', '-'):14s} "
               f"-> {expected_verdict(p)}")
         for path in paths:
             print(f"    {path}")
@@ -93,7 +95,6 @@ def main() -> int:
           f"{sum(1 for p in problems if not p.get('ungrounded')) * 4} query "
           f"files.")
     return 0
-
 
 if __name__ == "__main__":
     sys.exit(main())

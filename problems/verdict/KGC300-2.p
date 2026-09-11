@@ -20,7 +20,7 @@ include('axioms/BCP47000-0.ax').
 
 % --- constants, groundings and resource hooks ----------------------------
 % Background theory: the registry's uniqueness rule, as distinctness.
-fof(bt_de_distinct_fr, axiom,
+fof(bg_disj_de_distinct_fr, axiom,
     bcp_de != bcp_fr).
 
 % --- witness condition negated -------------------------------------------

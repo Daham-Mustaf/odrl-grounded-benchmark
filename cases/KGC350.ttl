@@ -1,11 +1,10 @@
 @prefix report:  <https://w3id.org/force/compliance-report#> .
-@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix vrep:    <https://w3id.org/odrl-kb/verdict-report#> .
 @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix dpv:     <https://w3id.org/dpv#> .
 @prefix eu-gdpr: <https://w3id.org/dpv/legal/eu/gdpr#> .
-@prefix dpvo:    <https://w3id.org/dpv/mappings/odrl#> .
+@prefix dpv-odrl:    <https://w3id.org/dpv/mappings/odrl#> .
 @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
 @prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
@@ -29,7 +28,7 @@ kgc:KGC350-offer-r1 a odrl:Permission ;
     odrl:constraint kgc:KGC350-offer-c1 .
 
 kgc:KGC350-offer-c1 a odrl:Constraint ;
-    odrl:leftOperand dpvo:LegalBasis ;
+    odrl:leftOperand dpv-odrl:LegalBasis ;
     odrl:operator odrl:isAnyOf ;
     odrl:rightOperand ( dpv:Consent dpv:Contract dpv:LegalObligation
                              dpv:VitalInterest dpv:PublicInterest
@@ -47,7 +46,7 @@ kgc:KGC350-request-r1 a odrl:Permission ;
     odrl:constraint kgc:KGC350-request-c1 .
 
 kgc:KGC350-request-c1 a odrl:Constraint ;
-    odrl:leftOperand dpvo:LegalBasis ;
+    odrl:leftOperand dpv-odrl:LegalBasis ;
     odrl:operator odrl:eq ;
     odrl:rightOperand dpv:Consent .
 
@@ -59,10 +58,6 @@ drk:KGC350-report a vrep:OperandVerdictReport ;
     report:policyRequest drk:request-350 ;
     report:constraint kgc:KGC350-offer-c1 ;
     vrep:constraintRequest kgc:KGC350-request-c1 ;
-    vrep:backgroundTheory <https://w3id.org/odrl-kb/dpv-gdpr-legal-basis/empty> ;
-    report:satisfactionState report:Satisfied ;
-    vrep:certificate drk:KGC350-certificate .
-
-drk:KGC350-certificate a vrep:Refutation ;
     rdfs:comment """The requested basis is one the offer enumerates."""@en ;
-    vrep:clashingConstraint kgc:KGC350-offer-c1, kgc:KGC350-request-c1 .
+    report:satisfactionState report:Satisfied ;
+    vrep:certificate <certificates/KGC350-2.tstp> .

@@ -24,7 +24,7 @@ except ImportError:                                   # pragma: no cover
     Graph = None
 
 ODRL = "http://www.w3.org/ns/odrl/2/"
-VREP = "https://w3id.org/odrl-verdict-report#"
+VREP = "https://w3id.org/odrl-kb/verdict-report#"
 
 SET_OPERATORS = {"isAnyOf", "isAllOf", "isNoneOf"}
 

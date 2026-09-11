@@ -58,10 +58,6 @@ MAX_CONSTANTS = 7        # partitions of 7 elements: 877
 MAX_ATOMS = 16
 MAX_INSTANCES = 4000
 
-# Rules whose conclusions are not expected to be entailed by their cited
-# parents: satisfiability-preserving or symbol-introducing mechanisms.
-# Entailment is attempted anyway; failure on these is UNSUPPORTED, failure
-# on anything else is REJECTED.
 NON_ENTAILMENT_RULES = {
     "avatar splitting", "avatar split clause", "avatar component clause",
     "avatar definition", "avatar sat refutation", "sat conversion", "rat",
@@ -77,6 +73,7 @@ PREMISE_CLASSES = [
     ("ax_order", "order axiom"),
     ("ax_eq", "equality axiom"),
     ("ax_", "axiom"),
+    ("bt_", "background declaration"),
     ("wc_", "witness condition"),
     ("w_", "witness condition"),
 ]

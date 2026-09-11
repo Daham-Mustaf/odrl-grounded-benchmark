@@ -19,10 +19,10 @@ extracted.  Until then a report carries the verdict alone.
 
 from pathlib import Path
 
-NS = "https://w3id.org/odrl-verdict-report#"
+NS = "https://w3id.org/odrl-kb/verdict-report#"
 
 PREFIXES = """\
-@prefix vrep: <https://w3id.org/odrl-verdict-report#> .
+@prefix vrep: <https://w3id.org/odrl-kb/verdict-report#> .
 @prefix odrl: <http://www.w3.org/ns/odrl/2/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
@@ -40,7 +40,7 @@ SORT = {"nom": "vrep:nom", "tax": "vrep:tax", "mer": "vrep:mer"}
 def vocabulary() -> str:
     """The vocabulary itself, written once into the artefact."""
     return PREFIXES + """
-<https://w3id.org/odrl-verdict-report> a owl:Ontology ;
+<https://w3id.org/odrl-kb/verdict-report> a owl:Ontology ;
     dcterms:title "ODRL Verdict Report Vocabulary"@en ;
     dcterms:description "Terms for recording the verdict on two ODRL "
         "constraint sets over one left operand, under a declared resource "

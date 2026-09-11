@@ -1,0 +1,26 @@
+% SZS output start Proof for KGC390-2
+fof(f4850,axiom,(
+  loc_de_nw != loc_de_by),
+  file('problems/verdict/KGC390-2.p',bg_dist_loc_de_nw_loc_de_by)).
+fof(f4851,axiom,(
+  ~((((loc_de_nw = loc_de_nw & loc_de_nw = loc_de_nw) | (loc_de_by = loc_de_nw & loc_de_by = loc_de_nw)) & ((loc_de_nw = loc_de_nw & loc_de_nw = loc_de_nw & loc_de_nw != loc_de_by) | (loc_de_by = loc_de_nw & loc_de_by = loc_de_nw & loc_de_by != loc_de_by))) | (((loc_de_nw = loc_de_by & loc_de_nw = loc_de_nw) | (loc_de_by = loc_de_by & loc_de_by = loc_de_nw)) & ((loc_de_nw = loc_de_by & loc_de_nw = loc_de_nw & loc_de_nw != loc_de_nw) | (loc_de_by = loc_de_by & loc_de_by = loc_de_nw & loc_de_by != loc_de_nw))))),
+  file('problems/verdict/KGC390-2.p',w_kgc390)).
+fof(f4856,plain,(
+  (((loc_de_nw != loc_de_nw | loc_de_nw != loc_de_nw) & (loc_de_by != loc_de_nw | loc_de_by != loc_de_nw)) | ((loc_de_nw != loc_de_nw | loc_de_nw != loc_de_nw | loc_de_by = loc_de_nw) & (loc_de_by != loc_de_nw | loc_de_by != loc_de_nw | loc_de_by = loc_de_by))) & (((loc_de_by != loc_de_nw | loc_de_nw != loc_de_nw) & (loc_de_by != loc_de_by | loc_de_by != loc_de_nw)) | ((loc_de_by != loc_de_nw | loc_de_nw != loc_de_nw | loc_de_nw = loc_de_nw) & (loc_de_by != loc_de_by | loc_de_by != loc_de_nw | loc_de_by = loc_de_nw)))),
+  inference(ennf_transformation,[],[f4851])).
+fof(f9706,plain,(
+  loc_de_by != loc_de_nw),
+  inference(cnf_transformation,[],[f4850])).
+fof(f9714,plain,(
+  loc_de_nw != loc_de_nw | loc_de_nw != loc_de_nw | loc_de_nw != loc_de_nw | loc_de_nw != loc_de_nw | loc_de_by = loc_de_nw),
+  inference(cnf_transformation,[],[f4856])).
+fof(f9722,plain,(
+  loc_de_nw != loc_de_nw | loc_de_by = loc_de_nw),
+  inference(duplicate_literal_removal,[],[f9714])).
+fof(f9723,plain,(
+  loc_de_by = loc_de_nw),
+  inference(trivial_inequality_removal,[],[f9722])).
+fof(f9724,plain,(
+  $false),
+  inference(forward_subsumption_resolution,[],[f9706,f9723])).
+% SZS output end Proof

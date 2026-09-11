@@ -31,10 +31,9 @@
 (assert (! (kge_leq dpv_marketing dpv_purpose) :named res_kgc314_0))
 (assert (! (kge_leq dpv_scientific_research dpv_research_and_development) :named res_kgc314_1))
 (assert (! (kge_leq dpv_research_and_development dpv_purpose) :named res_kgc314_2))
-; Background theory: the declaration, and the only difference from KGC313.
-; Named bt_, so that an unsat core attributes it to the parties rather than
-; to the vocabulary.
-(assert (! (distinct dpv_marketing dpv_scientific_research) :named bt_kgc314_0))
+; Declared distinctness this problem adopts, named as the TPTP
+; side names it.
+(assert (! (not (= dpv_marketing dpv_scientific_research)) :named bg_dist_dpv_marketing_dpv_scientific_research))
 ; witness condition asserted
 (assert (! (or (and (= dpv_marketing dpv_marketing) (= dpv_marketing dpv_scientific_research))
     (and (= dpv_scientific_research dpv_marketing) (= dpv_scientific_research dpv_scientific_research))) :named w_kgc314))

@@ -3,7 +3,7 @@
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
 % Problem  : spatial, eq loc:DE against eq loc:FR, under the ISO 3166 uniqueness rule (witness condition asserted)
 % Version  : 1.0
-% English  : The constraints of KGC333 under a background theory generated from the rule that ISO 3166 assigns one code to an area.  No model then identifies the two, the witness fails everywhere, and the verdict is Incompatible.  The extension asserts no such distinctness: the rule is the parties', and the certificate marks it withdrawable.  The rule separates areas rather than codes, since the extension itself records thirty pairs of codes denoting one area, and a rule applied to the codes would contradict it.
+% English  : A library permits use in Germany; a researcher requests use in France.
 %
 % Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark

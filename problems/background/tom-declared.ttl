@@ -1,0 +1,29 @@
+# Background theory for the measures resource: declared distinctness.
+#
+# The parties declare that no two of the listed names denote one measure.
+# Neither module asserts this, so the rule is the parties' and a verdict
+# resting on an instance of it is withdrawable by abandoning the rule.
+#
+# Distinctness only.  Nothing here says two measures have nothing below
+# both: that is disjointness, and the modules publish concepts below two
+# parents, so a disjointness over such a pair would contradict the resource
+# and leave it with no model.  A use employing both encryption and access
+# control is not thereby claiming the two are one measure.
+#
+# The rule is stated here and instantiated by the problems: a problem naming
+# two measures carries the inequation between them, so that a refutation
+# cites the instance it used.
+#
+# Concepts: 74
+# Pairs   : 2701
+# Source  : https://w3id.org/dpv/2.3
+
+@prefix bt:      <https://w3id.org/odrl-kb/background#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+<https://w3id.org/odrl-kb/dpv-tom/declared> a bt:BackgroundTheory ;
+    dcterms:title "Pairwise distinctness of measures"@en ;
+    bt:appliesTo <https://w3id.org/odrl-kb/dpv-tom> ;
+    bt:generatedBy bt:PairwiseDistinctness ;
+    bt:scopeCondition "Distinctness between the measures the modules list, and not disjointness: the modules publish concepts below two parents, and a disjointness over such a pair would contradict the resource."@en ;
+    bt:pairCount 2701 .

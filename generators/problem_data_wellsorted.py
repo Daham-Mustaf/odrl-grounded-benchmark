@@ -42,6 +42,11 @@ RESOURCE = {
                  "https://w3id.org/odrl-kb/bcp47/uniqueness"),
 }
 
+BINDING = {
+    "spatial":  "https://w3id.org/odrl-kb/profile/b-spatial-geonames",
+    "purpose":  "https://w3id.org/odrl-kb/profile/b-purpose-dpv",
+    "language": "https://w3id.org/odrl-kb/profile/b-language-bcp47",
+}
 
 def _ttl(pid: str, operand: str, operator: str, value: str) -> str:
     _, prefix_line = PREFIX[operand]
@@ -52,19 +57,21 @@ def _ttl(pid: str, operand: str, operator: str, value: str) -> str:
 @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
 @prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix vrep:    <https://w3id.org/odrl-verdict-report#> .
+@prefix vrep:    <https://w3id.org/odrl-kb/verdict-report#> .
+@prefix bind:    <https://w3id.org/odrl-kb/binding#> .
+@prefix report:  <https://w3id.org/force/compliance-report#> .
 
-drk:bsb-manuscripts a dcterms:Dataset ;
+drk:manuscripts a dcterms:Dataset ;
     dcterms:title "Digitised manuscripts, Bavarian State Library"@en .
 
-drk:bsb-offer a odrl:Offer ;
+drk:offer a odrl:Offer ;
     dcterms:title "BSB offer, {operand} constrained by {operator}"@en ;
-    odrl:assigner drk:bavarian-state-library ;
+    odrl:assigner drk:library ;
     odrl:permission kgc:{pid}-offer-r1 .
 
 kgc:{pid}-offer-r1 a odrl:Permission ;
     odrl:action odrl:use ;
-    odrl:target drk:bsb-manuscripts ;
+    odrl:target drk:manuscripts ;
     odrl:constraint kgc:{pid}-offer-c1 .
 
 kgc:{pid}-offer-c1 a odrl:Constraint ;
@@ -88,6 +95,7 @@ def _problem(pid, operand, operator, value, sort, accepted, description):
         "accepted":          accepted,
         "description":       description,
         "ttl":               _ttl(pid, operand, operator, value),
+        "binding":           BINDING[operand],
     }
 
 

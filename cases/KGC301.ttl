@@ -5,20 +5,19 @@
 @prefix dpv:     <https://w3id.org/dpv#> .
 @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
-@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix vrep:    <https://w3id.org/odrl-verdict-report#> .
+@prefix vrep:    <https://w3id.org/odrl-kb/verdict-report#> .
 
-drk:bsb-manuscripts a dcterms:Dataset ;
+drk:manuscripts a dcterms:Dataset ;
     dcterms:title "Digitised manuscripts, Bavarian State Library"@en .
 
-drk:bsb-offer a odrl:Offer ;
+drk:offer a odrl:Offer ;
     dcterms:title "BSB offer: non-commercial research only"@en ;
-    odrl:assigner drk:bavarian-state-library ;
+    odrl:assigner drk:library ;
     odrl:permission kgc:KGC301-offer-r1 .
 
 kgc:KGC301-offer-r1 a odrl:Permission ;
     odrl:action odrl:use ;
-    odrl:target drk:bsb-manuscripts ;
+    odrl:target drk:manuscripts ;
     odrl:constraint kgc:KGC301-offer-c1 .
 
 kgc:KGC301-offer-c1 a odrl:Constraint ;
@@ -26,14 +25,14 @@ kgc:KGC301-offer-c1 a odrl:Constraint ;
     odrl:operator odrl:isA ;
     odrl:rightOperand dpv:NonCommercialPurpose .
 
-drk:bnf-request a odrl:Request ;
+drk:request a odrl:Request ;
     dcterms:title "BnF request: scientific research"@en ;
-    odrl:assignee drk:french-national-library ;
+    odrl:assignee drk:researcher ;
     odrl:permission kgc:KGC301-request-r1 .
 
 kgc:KGC301-request-r1 a odrl:Permission ;
     odrl:action odrl:use ;
-    odrl:target drk:bsb-manuscripts ;
+    odrl:target drk:manuscripts ;
     odrl:constraint kgc:KGC301-request-c1 .
 
 kgc:KGC301-request-c1 a odrl:Constraint ;
@@ -49,9 +48,7 @@ drk:KGC301-report a vrep:OperandVerdictReport ;
     report:policyRequest drk:request-301 ;
     report:constraint kgc:KGC301-offer-c1 ;
     vrep:constraintRequest kgc:KGC301-request-c1 ;
-    vrep:backgroundTheory <https://w3id.org/odrl-kb/dpv-purpose/declared> ;
+    rdfs:comment """Both queries are satisfiable, so some models admit a common use and some do not.  The models differ on whether dpv:ScientificResearch falls under dpv:NonCommercialPurpose, which is what the vocabulary leaves open."""@en ;
     report:satisfactionState vrep:Undetermined ;
-    vrep:certificate drk:KGC301-certificate .
-
-drk:KGC301-certificate a vrep:Models ;
-    rdfs:comment """Both queries are satisfiable, so some models admit a common use and some do not.  The models differ on whether dpv:ScientificResearch falls under dpv:NonCommercialPurpose, which is what the vocabulary leaves open."""@en .
+    vrep:undeterminedReason vrep:Epistemic ;
+    vrep:certificate <certificates/KGC301-2.tstp> .

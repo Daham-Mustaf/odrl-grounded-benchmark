@@ -1,0 +1,19 @@
+kgc:KGC380-observed a vrep:Refutation ;
+    vrep:producedBy "Vampire" ;
+    vrep:proofArtefact <proofs/KGC380-2.tstp> ;
+    vrep:attributedAssertion [
+        vrep:premiseSource vrep:fromResource ;
+        vrep:formulaName "res_loc_bq_within_loc_nl" ;
+        rdfs:label "res_loc_bq_within_loc_nl"@en ] ;
+    vrep:attributedAssertion [
+        vrep:premiseSource vrep:fromResource ;
+        vrep:formulaName "res_loc_nl_within_loc_eu" ;
+        rdfs:label "res_loc_nl_within_loc_eu"@en ] ;
+    vrep:attributedAssertion [
+        vrep:premiseSource vrep:fromConstraints ;
+        vrep:formulaName "w_kgc380" ;
+        rdfs:label "w_kgc380"@en ] ;
+    vrep:attributedAssertion [
+        vrep:premiseSource vrep:fromOrderAxiom ;
+        vrep:formulaName "ax_leq_transitive" ;
+        rdfs:label "ax_leq_transitive"@en ] .

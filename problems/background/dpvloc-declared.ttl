@@ -8,12 +8,16 @@
 
 @prefix loc:     <https://w3id.org/dpv/loc#> .
 @prefix bt:      <https://w3id.org/odrl-kb/background#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 
 <https://w3id.org/odrl-kb/dpv-loc/declared> a bt:BackgroundTheory ;
     dcterms:title "One declared distinctness"@en ;
-    bt:appliesTo <https://w3id.org/odrl-kb/dpv-loc> ;
+    bt:appliesTo <https://w3id.org/odrl-kb/dpv-loc-geo>,
+                 <https://w3id.org/odrl-kb/dpv-loc-juris> ;
     bt:generatedBy bt:PartyDeclaration ;
-    bt:assertionCount 1 .
-
-loc:DE bt:distinctFrom loc:FR .
+    bt:pairCount 1 ;
+    bt:asserts [
+        a owl:AllDifferent ;
+        owl:members ( loc:DE loc:FR )
+    ] .

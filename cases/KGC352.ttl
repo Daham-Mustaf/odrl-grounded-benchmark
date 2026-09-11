@@ -1,11 +1,10 @@
 @prefix report:  <https://w3id.org/force/compliance-report#> .
-@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix vrep:    <https://w3id.org/odrl-kb/verdict-report#> .
 @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix dpv:     <https://w3id.org/dpv#> .
 @prefix eu-gdpr: <https://w3id.org/dpv/legal/eu/gdpr#> .
-@prefix dpvo:    <https://w3id.org/dpv/mappings/odrl#> .
+@prefix dpv-odrl:    <https://w3id.org/dpv/mappings/odrl#> .
 @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
 @prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
@@ -29,7 +28,7 @@ kgc:KGC352-offer-r1 a odrl:Permission ;
     odrl:constraint kgc:KGC352-offer-c1 .
 
 kgc:KGC352-offer-c1 a odrl:Constraint ;
-    odrl:leftOperand dpvo:LegalBasis ;
+    odrl:leftOperand dpv-odrl:LegalBasis ;
     odrl:operator odrl:isAnyOf ;
     odrl:rightOperand ( dpv:Consent dpv:Contract dpv:LegalObligation
                              dpv:VitalInterest dpv:PublicInterest
@@ -47,7 +46,7 @@ kgc:KGC352-request-r1 a odrl:Permission ;
     odrl:constraint kgc:KGC352-request-c1 .
 
 kgc:KGC352-request-c1 a odrl:Constraint ;
-    odrl:leftOperand dpvo:LegalBasis ;
+    odrl:leftOperand dpv-odrl:LegalBasis ;
     odrl:operator odrl:eq ;
     odrl:rightOperand eu-gdpr:A6-1-a-explicit-consent .
 
@@ -59,12 +58,6 @@ drk:KGC352-report a vrep:OperandVerdictReport ;
     report:policyRequest drk:request-352 ;
     report:constraint kgc:KGC352-offer-c1 ;
     vrep:constraintRequest kgc:KGC352-request-c1 ;
-    vrep:backgroundTheory <https://w3id.org/odrl-kb/dpv-gdpr-legal-basis/declared> ;
-    report:satisfactionState report:Unsatisfied ;
-    vrep:certificate drk:KGC352-certificate .
-
-drk:KGC352-certificate a vrep:Refutation ;
     rdfs:comment """Explicit consent under Article 6(1)(a) is declared distinct from each basis the offer enumerates. The premises are the parties' and can be withdrawn, which returns the verdict to Unknown."""@en ;
-    vrep:clashingConstraint kgc:KGC352-offer-c1, kgc:KGC352-request-c1 ;
-    vrep:premise [ vrep:premiseSource vrep:fromBackgroundTheory ;
-                   rdfs:label "explicit consent under Article 6(1)(a) is distinct from each of the seven bases the offer names"@en ] .
+    report:satisfactionState report:Unsatisfied ;
+    vrep:certificate <certificates/KGC352-1.tstp> .

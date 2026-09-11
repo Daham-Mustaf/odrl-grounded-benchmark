@@ -3,7 +3,7 @@
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
 % Problem  : consent status, isA ValidForProcessing against eq ConsentWithdrawn (witness condition asserted)
 % Version  : 1.0
-% English  : The record is withdrawn and the offer requires a state valid for processing.  DPV places consent withdrawn below the invalid branch and asserts nothing that keeps the two branches apart, so a structure may place the withdrawn state below both.  The verdict is Unknown, which is the right answer to what the module publishes even though the definitions read otherwise.
+% English  : A controller permits use only while consent may justify processing; a processor states that its processing continues after consent is withdrawn.
 %
 % Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark

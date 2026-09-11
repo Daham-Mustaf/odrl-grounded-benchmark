@@ -1,0 +1,11 @@
+kgc:KGC388-observed a vrep:Refutation ;
+    vrep:producedBy "Vampire" ;
+    vrep:proofArtefact <proofs/KGC388-2.tstp> ;
+    vrep:attributedAssertion [
+        vrep:premiseSource vrep:fromConstraints ;
+        vrep:formulaName "w_kgc388" ;
+        rdfs:label "w_kgc388"@en ] ;
+    vrep:attributedAssertion [
+        vrep:premiseSource vrep:fromOrderAxiom ;
+        vrep:formulaName "ax_leq_reflexive" ;
+        rdfs:label "ax_leq_reflexive"@en ] .

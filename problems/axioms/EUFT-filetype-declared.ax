@@ -1,5 +1,5 @@
 % Background theory: one distinctness, declared by the parties.
 % The table publishes nothing that separates these two formats.
 
-fof(bt_ft_pdf_distinct_ft_pdfa1a, axiom,
+fof(bg_dist_ft_pdf_distinct_ft_pdfa1a, axiom,
     ft_pdf != ft_pdfa1a).

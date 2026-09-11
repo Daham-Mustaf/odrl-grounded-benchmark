@@ -3,7 +3,7 @@
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
 % Problem  : spatial, isPartOf loc:EU against eq loc:DE (witness condition negated)
 % Version  : 1.0
-% English  : Offer (spatial, isPartOf, loc:EU) against request (spatial, eq, loc:DE), under the jurisdictional reading.  Germany is a member of the European Union, the reading takes membership as the order, and the verdict is Compatible on one assertion.  Under the geographic reading the same constraints are well sorted and have no verdict: that reading takes only containment, loc:EU is not among its concepts, and the offer's right operand grounds to nothing.  The difference is the profile and nothing else.
+% English  : A library permits use within the European Union; a researcher asks to use the material in Germany. DPV places Germany in the EU, and this binding reads membership as containment.
 %
 % Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark

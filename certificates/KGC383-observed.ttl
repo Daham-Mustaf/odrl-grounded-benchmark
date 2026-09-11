@@ -1,0 +1,19 @@
+kgc:KGC383-observed a vrep:Refutation ;
+    vrep:producedBy "Vampire" ;
+    vrep:proofArtefact <proofs/KGC383-2.tstp> ;
+    vrep:attributedAssertion [
+        vrep:premiseSource vrep:fromResource ;
+        vrep:formulaName "res_loc_de_within_loc_eu" ;
+        rdfs:label "res_loc_de_within_loc_eu"@en ] ;
+    vrep:attributedAssertion [
+        vrep:premiseSource vrep:fromResource ;
+        vrep:formulaName "res_loc_de_nw_within_loc_de" ;
+        rdfs:label "res_loc_de_nw_within_loc_de"@en ] ;
+    vrep:attributedAssertion [
+        vrep:premiseSource vrep:fromConstraints ;
+        vrep:formulaName "w_kgc383" ;
+        rdfs:label "w_kgc383"@en ] ;
+    vrep:attributedAssertion [
+        vrep:premiseSource vrep:fromOrderAxiom ;
+        vrep:formulaName "ax_leq_transitive" ;
+        rdfs:label "ax_leq_transitive"@en ] .

@@ -105,7 +105,7 @@ _TTL_HEAD = """\
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix dpv:     <https://w3id.org/dpv#> .
 @prefix eu-gdpr: <https://w3id.org/dpv/legal/eu/gdpr#> .
-@prefix dpvo:    <https://w3id.org/dpv/mappings/odrl#> .
+@prefix dpv-odrl:    <https://w3id.org/dpv/mappings/odrl#> .
 @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
 @prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
@@ -157,7 +157,7 @@ kgc:{pid}-offer-r1 a odrl:Permission ;
     odrl:constraint kgc:{pid}-offer-c1 .
 
 kgc:{pid}-offer-c1 a odrl:Constraint ;
-    odrl:leftOperand dpvo:LegalBasis ;
+    odrl:leftOperand dpv-odrl:LegalBasis ;
     odrl:operator odrl:isAnyOf ;
     odrl:rightOperand ( {_SEVEN_TTL} ) .
 """
@@ -176,7 +176,7 @@ kgc:{pid}-offer-r1 a odrl:Permission ;
     odrl:constraint kgc:{pid}-offer-c1 .
 
 kgc:{pid}-offer-c1 a odrl:Constraint ;
-    odrl:leftOperand dpvo:LegalBasis ;
+    odrl:leftOperand dpv-odrl:LegalBasis ;
     odrl:operator odrl:isA ;
     odrl:rightOperand dpv:LegalBasis .
 """
@@ -195,7 +195,7 @@ kgc:{pid}-request-r1 a odrl:Permission ;
     odrl:constraint kgc:{pid}-request-c1 .
 
 kgc:{pid}-request-c1 a odrl:Constraint ;
-    odrl:leftOperand dpvo:LegalBasis ;
+    odrl:leftOperand dpv-odrl:LegalBasis ;
     odrl:operator odrl:eq ;
     odrl:rightOperand {value} .
 """
@@ -245,6 +245,7 @@ PROBLEMS = [
         "resource":          RESOURCE,
         "background_theory": EMPTY_BT,
         "includes":          INCLUDES,
+        "unknown_reason": "epistemic",
         "tree": [C("isAnyOf", *SEVEN), C("eq", EXPLICIT, side="request")],
         "description": (
             "The same offer against a processor naming explicit consent "

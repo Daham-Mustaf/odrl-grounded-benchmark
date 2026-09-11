@@ -1,0 +1,54 @@
+@prefix report:  <https://w3id.org/force/compliance-report#> .
+@prefix vrep:    <https://w3id.org/odrl-kb/verdict-report#> .
+@prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dpv:     <https://w3id.org/dpv#> .
+@prefix dpv-odrl:    <https://w3id.org/dpv/mappings/odrl#> .
+@prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+@prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+
+drk:offer-363 a odrl:Offer ;
+    dcterms:title "Use is permitted with both encryption and access control in place"@en ;
+    odrl:assigner drk:controller ;
+    odrl:permission kgc:KGC363-offer-r1 .
+
+kgc:KGC363-offer-r1 a odrl:Permission ;
+    odrl:action odrl:use ;
+    odrl:target drk:dataset ;
+    odrl:constraint kgc:KGC363-offer-c1 .
+
+kgc:KGC363-offer-c1 a odrl:Constraint ;
+    odrl:leftOperand dpv-odrl:TechnicalOrganisationalMeasure ;
+    odrl:operator odrl:isAllOf ;
+    odrl:rightOperand ( dpv:Encryption dpv:AccessControlMethod ) .
+
+drk:request-363 a odrl:Request ;
+    dcterms:title "Use is requested with encryption in place"@en ;
+    odrl:assignee drk:processor ;
+    odrl:permission kgc:KGC363-request-r1 .
+
+kgc:KGC363-request-r1 a odrl:Permission ;
+    odrl:action odrl:use ;
+    odrl:target drk:dataset ;
+    odrl:constraint kgc:KGC363-request-c1 .
+
+kgc:KGC363-request-c1 a odrl:Constraint ;
+    odrl:leftOperand dpv-odrl:TechnicalOrganisationalMeasure ;
+    odrl:operator odrl:eq ;
+    odrl:rightOperand dpv:Encryption .
+
+### Expected result #######################################################
+
+drk:KGC363-report a vrep:OperandVerdictReport ;
+    dcterms:identifier "KGC363" ;
+    report:policy drk:offer-363 ;
+    report:policyRequest drk:request-363 ;
+    report:constraint kgc:KGC363-offer-c1 ;
+    vrep:constraintRequest kgc:KGC363-request-c1 ;
+    vrep:binding <https://w3id.org/odrl-kb/profile/b-tom> ;
+    rdfs:comment """One structure identifies encryption with access control and admits the use; nothing published forbids it."""@en ;
+    dcterms:description """A provider requires both encryption and access control; a consumer commits to encryption only."""@en ;
+    report:satisfactionState vrep:Undetermined ;
+    vrep:undeterminedReason vrep:Epistemic ;
+    vrep:certificate <certificates/KGC363-2.tstp> .

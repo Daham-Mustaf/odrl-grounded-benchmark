@@ -1,0 +1,45 @@
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix report:  <https://w3id.org/force/compliance-report#> .
+@prefix vrep:    <https://w3id.org/odrl-kb/verdict-report#> .
+@prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix loc:     <https://w3id.org/dpv/loc#> .
+@prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+@prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+drk:offer-381 a odrl:Offer ;
+    dcterms:title "Offer: use within the European Union"@en ;
+    odrl:assigner drk:library ;
+    odrl:permission kgc:KGC381-offer-r1 .
+kgc:KGC381-offer-r1 a odrl:Permission ;
+    odrl:action odrl:use ;
+    odrl:target drk:manuscripts ;
+    odrl:constraint kgc:KGC381-offer-c1 .
+kgc:KGC381-offer-c1 a odrl:Constraint ;
+    odrl:leftOperand odrl:spatial ;
+    odrl:operator odrl:isPartOf ;
+    odrl:rightOperand loc:EU .
+drk:request-381 a odrl:Request ;
+    dcterms:title "Request: use in Germany"@en ;
+    odrl:permission kgc:KGC381-request-r1 .
+kgc:KGC381-request-r1 a odrl:Permission ;
+    odrl:action odrl:use ;
+    odrl:target drk:manuscripts ;
+    odrl:constraint kgc:KGC381-request-c1 .
+kgc:KGC381-request-c1 a odrl:Constraint ;
+    odrl:leftOperand odrl:spatial ;
+    odrl:operator odrl:eq ;
+    odrl:rightOperand loc:DE .
+
+### Expected result #######################################################
+
+drk:KGC381-report a vrep:OperandVerdictReport ;
+    dcterms:identifier "KGC381" ;
+    report:policy drk:offer-381 ;
+    report:policyRequest drk:request-381 ;
+    report:constraint kgc:KGC381-offer-c1 ;
+    vrep:constraintRequest kgc:KGC381-request-c1 ;
+    vrep:binding <https://w3id.org/odrl-kb/profile/b-spatial-dpvloc-geo> ;
+    rdfs:comment """loc:EU names no concept of the geographic slice."""@en ;
+    dcterms:description """A library permits use within the European Union; a researcher requests use in Germany."""@en ;
+    report:satisfactionState vrep:Undetermined ;
+    vrep:undeterminedReason vrep:Ungrounded .

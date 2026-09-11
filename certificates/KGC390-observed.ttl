@@ -1,0 +1,11 @@
+kgc:KGC390-observed a vrep:Refutation ;
+    vrep:producedBy "Vampire" ;
+    vrep:proofArtefact <proofs/KGC390-2.tstp> ;
+    vrep:attributedAssertion [
+        vrep:premiseSource vrep:fromBackgroundTheory ;
+        vrep:formulaName "bg_dist_loc_de_nw_loc_de_by" ;
+        rdfs:label "bg_dist_loc_de_nw_loc_de_by"@en ] ;
+    vrep:attributedAssertion [
+        vrep:premiseSource vrep:fromConstraints ;
+        vrep:formulaName "w_kgc390" ;
+        rdfs:label "w_kgc390"@en ] .

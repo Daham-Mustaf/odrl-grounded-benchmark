@@ -1,6 +1,5 @@
 @prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix report:  <https://w3id.org/force/compliance-report#> .
-@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix vrep:    <https://w3id.org/odrl-kb/verdict-report#> .
 @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
@@ -8,14 +7,14 @@
 @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
 
-drk:bsb-offer-320 a odrl:Offer ;
+drk:offer-320 a odrl:Offer ;
     dcterms:title "BSB offer: PDF"@en ;
-    odrl:assigner drk:bavarian-state-library ;
+    odrl:assigner drk:library ;
     odrl:permission kgc:KGC320-offer-r1 .
 
 kgc:KGC320-offer-r1 a odrl:Permission ;
     odrl:action odrl:use ;
-    odrl:target drk:bsb-manuscripts ;
+    odrl:target drk:manuscripts ;
     odrl:constraint kgc:KGC320-offer-c1 .
 
 kgc:KGC320-offer-c1 a odrl:Constraint ;
@@ -23,14 +22,14 @@ kgc:KGC320-offer-c1 a odrl:Constraint ;
     odrl:operator odrl:eq ;
     odrl:rightOperand ft:PDF .
 
-drk:bnf-request-320 a odrl:Request ;
+drk:request-320 a odrl:Request ;
     dcterms:title "BnF request: PDF/A-1a"@en ;
-    odrl:assignee drk:french-national-library ;
+    odrl:assignee drk:researcher ;
     odrl:permission kgc:KGC320-request-r1 .
 
 kgc:KGC320-request-r1 a odrl:Permission ;
     odrl:action odrl:use ;
-    odrl:target drk:bsb-manuscripts ;
+    odrl:target drk:manuscripts ;
     odrl:constraint kgc:KGC320-request-c1 .
 
 kgc:KGC320-request-c1 a odrl:Constraint ;
@@ -46,9 +45,7 @@ drk:KGC320-report a vrep:OperandVerdictReport ;
     report:policyRequest drk:request-320 ;
     report:constraint kgc:KGC320-offer-c1 ;
     vrep:constraintRequest kgc:KGC320-request-c1 ;
-    vrep:backgroundTheory <https://w3id.org/odrl-kb/eu-file-type/empty> ;
+    rdfs:comment """Both queries are satisfiable.  The models differ on whether the two names denote one format.  No assertion in the table bears on the question, so the verdict reports the authority's silence rather than resolving it."""@en ;
     report:satisfactionState vrep:Undetermined ;
-    vrep:certificate drk:KGC320-certificate .
-
-drk:KGC320-certificate a vrep:Models ;
-    rdfs:comment """Both queries are satisfiable.  The models differ on whether the two names denote one format.  No assertion in the table bears on the question, so the verdict reports the authority's silence rather than resolving it."""@en .
+    vrep:undeterminedReason vrep:Epistemic ;
+    vrep:certificate <certificates/KGC320-2.tstp> .

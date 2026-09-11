@@ -1,5 +1,4 @@
 @prefix report:  <https://w3id.org/force/compliance-report#> .
-@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix vrep:    <https://w3id.org/odrl-kb/verdict-report#> .
 @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
@@ -47,9 +46,7 @@ drk:KGC375-report a vrep:OperandVerdictReport ;
     report:constraint kgc:KGC375-offer-c1 ;
     vrep:constraintRequest kgc:KGC375-request-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-language-bcp47> ;
+    rdfs:comment """One certifying structure separates bcp47:de and bcp47:fr and carries the witness; the other identifies them and carries none."""@en ;
     report:satisfactionState vrep:Undetermined ;
     vrep:undeterminedReason vrep:Epistemic ;
-    vrep:certificate drk:KGC375-certificate .
-
-drk:KGC375-certificate a vrep:Models ;
-    rdfs:comment """One certifying structure separates bcp47:de and bcp47:fr and carries the witness; the other identifies them and carries none."""@en .
+    vrep:certificate <certificates/KGC375-2.tstp> .

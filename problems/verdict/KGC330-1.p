@@ -3,7 +3,7 @@
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
 % Problem  : spatial, isPartOf loc:NL against eq loc:BQ (witness condition asserted)
 % Version  : 1.0
-% English  : Offer (spatial, isPartOf, loc:NL) against request (spatial, eq, loc:BQ).  The extension places Bonaire, Sint Eustatius and Saba within the Netherlands, so the witness holds in every model and the verdict is Compatible.  The refutation cites one resource premise and no transitivity: under the geographic reading the order is two levels deep and this is one step of it.
+% English  : A library permits use within the Netherlands; a researcher asks to use the material in Bonaire. DPV places Bonaire within the Netherlands.
 %
 % Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark

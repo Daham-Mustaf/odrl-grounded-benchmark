@@ -19,14 +19,23 @@ The harness derives it:
 
 Problem dict keys:
     id, name, description, subdir
+    left_operand, sort, resource, background_theory
+    binding           the profile entry that fixed the reading
     includes          list of .ax file names
     fof_decls         constants, groundings, resource hooks
     fof_witness       the witness condition W(K), as a FOF formula
     expected_q1       "Satisfiable" | "Unsatisfiable"
     expected_q2       "Satisfiable" | "Unsatisfiable"
+    unknown_reason    "epistemic" | "ungrounded"; required when the
+                      verdict is Unknown
     smt2_decls        SMT-LIB declarations
-    smt2_asserts      SMT-LIB assertions for R + B
+    smt2_resource     SMT-LIB assertions for R, named res_
+    smt2_background   SMT-LIB assertions for B, named bt_
+    smt2_asserts      the older single field; assumed to hold R only
     smt2_witness      the witness condition, as an SMT-LIB term
+    certificate       dict with comment and premises; the comment becomes
+                      the report's rdfs:comment, the premises stay in the
+                      proof artefact
     ttl               the ODRL policy pair, Turtle
     ungrounded        optional; if set, no query is built
 """
@@ -139,7 +148,7 @@ def write_fof(p: dict, q: int, out_dir: Path) -> Path:
         file     = f"{p['id']}-{q}.p",
         domain   = "kb",
         title    = f"{p['name']} ({label})",
-        english  = p.get("description", p["name"]),
+        english  = p.get("summary", p.get("description", p["name"])),
         status   = p[f"expected_q{q}"],
         comments = f"Query {q} of 2.  Verdict is derived from both queries.",
     ).render()
@@ -227,11 +236,57 @@ def write_smt2(p: dict, q: int, out_dir: Path) -> Path:
     return path
 
 
-def write_problem(p: dict, out_dir: Path, cases_dir: Path) -> list[Path]:
-    """Write both queries and the case file.
+def write_expected_certificate(p: dict, cert_dir: Path) -> Path:
+    """The certificate the problem's author says the refutation should have.
+
+    NOT YET ENABLED. The five vrep: terms this writes are not in
+    vocab/verdict-report.ttl: Certificate, fromResource,
+    fromBackgroundTheory, fromConstraints, fromOrderAxiom. Define them
+    there before any caller passes cert_dir, or this writes a file whose
+    every term is invented.
+
+    Written at generation time, from the problem's own declaration, so
+    that run_certify can compare it against what the provers produce. A
+    verdict right for the wrong reason is invisible without this file:
+    the two queries still return the expected statuses, and the premises
+    the refutation used are never checked against the premises the
+    problem claims it needs.
+    """
+    cert_dir.mkdir(parents=True, exist_ok=True)
+    c = p["certificate"]
+    by_class = {}
+    for source, description in c.get("premises", []):
+        by_class.setdefault(source, []).append(description)
+    lines = [
+        f"# Expected certificate for {p['id']}, from the problem's own",
+        f"# declaration. Compare with {p['id']}-observed.ttl.",
+        "",
+        "@prefix vrep:    <https://w3id.org/odrl-kb/verdict-report#> .",
+        "@prefix dcterms: <http://purl.org/dc/terms/> .",
+        "",
+        f"<urn:certificate:{p['id']}:expected> a vrep:Certificate ;",
+        f'    dcterms:identifier "{p["id"]}" ;',
+    ]
+    for source, descriptions in sorted(by_class.items()):
+        for d in descriptions:
+            lines.append(f'    vrep:{source} "{d}"@en ;')
+    lines.append(f'    rdfs:comment """{c.get("comment", "")}"""@en .')
+    path = cert_dir / f"{p['id']}-expected.ttl"
+    path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    return path
+
+
+def write_problem(p: dict, out_dir: Path, cases_dir: Path,
+                  cert_dir: Path | None = None) -> list[Path]:
+    """Write both queries, the case file, and the expected certificate.
 
     The case file holds the two policies and the expected report in one
     graph, so a reader sees the question and the answer together.
+
+    cert_dir is optional and defaults to skipping the expected certificate:
+    write_problem has existing callers that do not yet pass it, and making
+    it required here would break them rather than the feature landing
+    incrementally.
     """
     written = []
     if not p.get("ungrounded"):
@@ -239,45 +294,51 @@ def write_problem(p: dict, out_dir: Path, cases_dir: Path) -> list[Path]:
             written.append(write_fof(p, q, out_dir))
             written.append(write_smt2(p, q, out_dir))
     written.append(write_case(p, cases_dir))
+    if p.get("certificate") and cert_dir is not None:
+        written.append(write_expected_certificate(p, cert_dir))
     return written
 
 
+# SATISFACTION_STATE = {
+#     "Compatible":   "report:Satisfied",
+#     "Incompatible": "report:Unsatisfied",
+#     "Unknown":      "vrep:Undetermined",
+# }
+
+# # vrep:Ungrounded is already the reason class used by undeterminedReason
+# # (see the vocab file), so it can't also name the certificate's own type
+# # without one IRI meaning two things.  Refutation and whatever the
+# # Epistemic-certificate class turns out to be called don't have this
+# # problem, so only Ungrounded needs remapping here.
+# CERTIFICATE_CLASS = {"Ungrounded": "UngroundedCertificate"}
+
+
+# The verdict-to-state mapping, stated once. The vocabulary's header
+# carries the same table in prose; if the two ever disagree, the
+# vocabulary is right and this is the copy that drifted.
 SATISFACTION_STATE = {
     "Compatible":   "report:Satisfied",
     "Incompatible": "report:Unsatisfied",
     "Unknown":      "vrep:Undetermined",
 }
 
-# vrep:Ungrounded is already the reason class used by undeterminedReason
-# (see the vocab file), so it can't also name the certificate's own type
-# without one IRI meaning two things.  Refutation and whatever the
-# Epistemic-certificate class turns out to be called don't have this
-# problem, so only Ungrounded needs remapping here.
-CERTIFICATE_CLASS = {"Ungrounded": "UngroundedCertificate"}
-
-
 def _report_block(p: dict) -> str:
-    """The expected report, generated from the problem's own fields.
+    """The expected report, from the problem's own fields.
 
-    Written here rather than kept in the ttl string so it cannot drift from
-    expected_q1 and expected_q2.
+    The report carries the verdict, the two constraints it is about, the
+    binding that decided the reading, one sentence saying why the verdict
+    is what it is, and a reference to the evidence. It does not carry the
+    evidence itself: the premises a refutation rests on are named inside
+    the proof artefact, and writing them a second time here would give
+    one fact two records that can disagree without anything noticing.
 
-    leftOperand, sort, and resource are not restated here: they live on the
-    binding referenced by vrep:binding, one hop away, and duplicating them
-    on the report is how the two copies drift.  p['binding'] is therefore
-    required, not optional, and every generator that builds a problem dict
-    needs to supply it before this function will run without a KeyError.
-
-    vrep:backgroundTheory is left exactly as it was: not named for either
-    renaming or removal.  It is one of seven vrep: terms still undefined
-    after this pass, not the only one: also premise, premiseSource,
-    clashingConstraint, witness, ungroundedValue, and the certificate
-    classes (Refutation, Models, and now UngroundedCertificate) are none
-    of them in vocab/verdict-report.ttl or the parent's imports either.
+    The generic explanation of what a satisfaction state means lives in
+    vocab/verdict-report.ttl, where it is said once. What belongs here is
+    the particular: what this resource publishes about these concepts,
+    and what follows from it.
     """
     pid = p["id"]
     verdict = expected_verdict(p)
-    cert = p.get("certificate")
 
     lines = [
         "### Expected result " + "#" * 55,
@@ -290,62 +351,76 @@ def _report_block(p: dict) -> str:
         f"    vrep:constraintRequest kgc:{pid}-request-c1 ;",
     ]
 
+    # The binding is what fixed the reading; a report without one does
+    # not say what its verdict was relative to.
     if p.get("binding"):
         lines.append(f"    vrep:binding <{p['binding']}> ;")
-    if p.get("background_theory"):
-        lines.append(
-            f"    vrep:backgroundTheory <{p['background_theory']}> ;")
-    if cert:
-        lines.append(f"    report:satisfactionState {SATISFACTION_STATE[verdict]} ;")
-        if p.get("unknown_reason"):
-            lines.append(f"    vrep:undeterminedReason "
-                         f"vrep:{p['unknown_reason'].capitalize()} ;")
-        lines.append(f"    vrep:certificate drk:{pid}-certificate .")
-        lines.append("")
-        cert_class = CERTIFICATE_CLASS.get(cert["kind"], cert["kind"])
-        lines.append(f"drk:{pid}-certificate a vrep:{cert_class} ;")
-        lines.append(f'    rdfs:comment """{cert["comment"]}"""@en ;')
-        if cert.get("witness"):
-            lines.append(f'    vrep:witness "{cert["witness"]}" ;')
-        if cert["kind"] == "Ungrounded" and p.get("ungrounded"):
-            lines.append(f'    vrep:ungroundedValue "{p["ungrounded"]}" ;')
-        if cert["kind"] == "Refutation":
-            lines.append(f"    vrep:clashingConstraint kgc:{pid}-offer-c1, "
-                         f"kgc:{pid}-request-c1 ;")
-        for i, (source, label) in enumerate(cert["premises"]):
-            end = " ;" if i < len(cert["premises"]) - 1 else " ."
-            lines.append(
-                f"    vrep:premise [ vrep:premiseSource vrep:{source} ;\n"
-                f'                   rdfs:label "{label}"@en ]{end}'
-            )
-        if not cert["premises"]:
-            lines[-1] = lines[-1].rstrip(" ;") + " ."
+
+    # One sentence: what the resource publishes about these concepts, and
+    # what follows. Not how the procedure found it.
+    comment = p.get("certificate", {}).get("comment")
+    if comment:
+        lines.append(f'    rdfs:comment """{comment}"""@en ;')
+    if p.get("summary"):
+        lines.append(f'    dcterms:description """{p["summary"]}"""@en ;')
+
+    lines.append(f"    report:satisfactionState "
+                 f"{SATISFACTION_STATE[verdict]} ;")
+
+    if verdict == "Unknown":
+        if not p.get("unknown_reason"):
+            raise ValueError(
+                f"{pid}: Unknown verdict with no unknown_reason. The "
+                f"report cannot say whether a value failed to ground or "
+                f"the resource left the question open, and those are "
+                f"repaired differently: the first by correcting the "
+                f"policy or the binding, the second by a further "
+                f"declaration.")
+        lines.append(f"    vrep:undeterminedReason "
+                     f"vrep:{p['unknown_reason'].capitalize()} ;")
+
+    # An ungrounded problem builds no queries, so there is nothing to
+    # point at. Which value failed is recoverable by applying the
+    # binding's grounding rule to the constraint named above.
+    if p.get("ungrounded"):
+        lines[-1] = lines[-1].rstrip(" ;") + " ."
     else:
-        if p.get("unknown_reason"):
-            lines.append(f"    report:satisfactionState {SATISFACTION_STATE[verdict]} ;")
-            lines.append(f"    vrep:undeterminedReason "
-                         f"vrep:{p['unknown_reason'].capitalize()} .")
-        else:
-            lines.append(f"    report:satisfactionState {SATISFACTION_STATE[verdict]} .")
+        which = 1 if p["expected_q1"] == "Unsatisfiable" else 2
+        lines.append(f"    vrep:certificate "
+                     f"<certificates/{pid}-{which}.tstp> .")
+
     return "\n".join(lines)
 
 
 def write_case(p: dict, cases_dir: Path) -> Path:
+    """The case file: the two policies and the expected report, one graph.
+
+    A reader sees the question and the answer together, which is the
+    point of keeping them in one file.
+    """
     path = cases_dir / f"{p['id']}.ttl"
     body = p["ttl"].strip()
+
+    # Prefixes the report block needs that the policy TTL did not
+    # declare. Prepended once. An earlier version also ran a replace
+    # that inserted rdfs: a second time, which is where the duplicate
+    # @prefix rdfs: in every case file came from.
     needed = [
-        ("rdfs:", "@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> ."),
-        ("report:", "@prefix report:  <https://w3id.org/force/compliance-report#> ."),
-        ("vrep:", "@prefix vrep:    <https://w3id.org/odrl-kb/verdict-report#> ."),
-        ("dcterms:", "@prefix dcterms: <http://purl.org/dc/terms/> ."),
+        ("rdfs:",
+         "@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> ."),
+        ("report:",
+         "@prefix report:  <https://w3id.org/force/compliance-report#> ."),
+        ("vrep:",
+         "@prefix vrep:    <https://w3id.org/odrl-kb/verdict-report#> ."),
+        ("dcterms:",
+         "@prefix dcterms: <http://purl.org/dc/terms/> ."),
     ]
     missing = [line for pre, line in needed if f"@prefix {pre}" not in body]
     if missing:
         body = "\n".join(missing) + "\n" + body
-        body = body.replace(
-            "@prefix vrep:",
-            "@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .\n@prefix vrep:", 1)
-    path.write_text(body + "\n\n" + _report_block(p) + "\n", encoding="utf-8")
+
+    path.write_text(body + "\n\n" + _report_block(p) + "\n",
+                    encoding="utf-8")
     return path
 
 
@@ -404,7 +479,18 @@ def collect_vocabulary(axioms_dir: Path) -> set[str]:
 
 
 def validate_problem_constants(p: dict, vocabulary: set[str]) -> None:
-    """Refuse a problem naming a constant no resource declares."""
+    """Refuse a problem naming a constant no resource declares.
+
+    A typo in a concept name is otherwise invisible: the query is well
+    formed, the prover answers, and the answer is about a constant no
+    vocabulary contains.
+    """
     if p.get("ungrounded"):
         return
     text = _terms_only(p["fof_decls"] + p.get("fof_witness", ""))
+    unknown = sorted(set(_CONST.findall(text)) - vocabulary)
+    if unknown:
+        raise ValueError(
+            f"{p['id']}: {', '.join(unknown)} named by the problem but "
+            f"declared by no resource axiom file. Either the constant is "
+            f"mistyped, or the resource it belongs to has not been built.")

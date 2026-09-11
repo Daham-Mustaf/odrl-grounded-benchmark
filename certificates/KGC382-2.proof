@@ -1,0 +1,23 @@
+% SZS output start Proof for KGC382-2
+fof(f887,axiom,(
+  kge_leq(loc_de_nw,loc_de)),
+  file('problems/verdict/KGC382-2.p',res_loc_de_nw_within_loc_de)).
+fof(f4850,axiom,(
+  ~((kge_leq(loc_de,loc_de) & loc_de = loc_de_nw) | (kge_leq(loc_de_nw,loc_de) & loc_de_nw = loc_de_nw))),
+  file('problems/verdict/KGC382-2.p',w_kgc382)).
+fof(f4855,plain,(
+  (~kge_leq(loc_de,loc_de) | loc_de != loc_de_nw) & (~kge_leq(loc_de_nw,loc_de) | loc_de_nw != loc_de_nw)),
+  inference(ennf_transformation,[],[f4850])).
+fof(f5742,plain,(
+  kge_leq(loc_de_nw,loc_de)),
+  inference(cnf_transformation,[],[f887])).
+fof(f9705,plain,(
+  ~kge_leq(loc_de_nw,loc_de) | loc_de_nw != loc_de_nw),
+  inference(cnf_transformation,[],[f4855])).
+fof(f9707,plain,(
+  ~kge_leq(loc_de_nw,loc_de)),
+  inference(trivial_inequality_removal,[],[f9705])).
+fof(f9717,plain,(
+  $false),
+  inference(forward_subsumption_resolution,[],[f5742,f9707])).
+% SZS output end Proof

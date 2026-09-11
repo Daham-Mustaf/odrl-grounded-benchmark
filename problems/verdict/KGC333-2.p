@@ -3,7 +3,7 @@
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
 % Problem  : spatial, eq loc:DE against eq loc:FR (witness condition negated)
 % Version  : 1.0
-% English  : Offer (spatial, eq, loc:DE) against request (spatial, eq, loc:FR).  Both denote singletons, so the constraints hold together only if the two codes denote one place.  The extension asserts no distinctness anywhere, so a model may identify them: Unknown.  The file looks as though it settles this and does not: every country has an inverse jurisdiction concept, and non-DE is narrower than France, but that says which concepts belong to a complement and not that the two are different.
+% English  : A library permits use in Germany; a researcher requests use in France.
 %
 % Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark

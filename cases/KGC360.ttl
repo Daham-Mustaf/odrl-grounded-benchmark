@@ -1,11 +1,10 @@
 @prefix report:  <https://w3id.org/force/compliance-report#> .
-@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix vrep:    <https://w3id.org/odrl-kb/verdict-report#> .
 @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix dpv:     <https://w3id.org/dpv#> .
-@prefix dpvo:    <https://w3id.org/dpv/mappings/odrl#> .
+@prefix dpv-odrl:    <https://w3id.org/dpv/mappings/odrl#> .
 @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
 
@@ -21,7 +20,7 @@ kgc:KGC360-offer-r1 a odrl:Permission ;
     odrl:constraint kgc:KGC360-offer-c1 .
 
 kgc:KGC360-offer-c1 a odrl:Constraint ;
-    odrl:leftOperand dpvo:TechnicalOrganisationalMeasure ;
+    odrl:leftOperand dpv-odrl:TechnicalOrganisationalMeasure ;
     odrl:operator odrl:isAllOf ;
     odrl:rightOperand ( dpv:Encryption dpv:AccessControlMethod ) .
 
@@ -36,7 +35,7 @@ kgc:KGC360-request-r1 a odrl:Permission ;
     odrl:constraint kgc:KGC360-request-c1 .
 
 kgc:KGC360-request-c1 a odrl:Constraint ;
-    odrl:leftOperand dpvo:TechnicalOrganisationalMeasure ;
+    odrl:leftOperand dpv-odrl:TechnicalOrganisationalMeasure ;
     odrl:operator odrl:isA ;
     odrl:rightOperand dpv:TechnicalMeasure .
 
@@ -48,14 +47,6 @@ drk:KGC360-report a vrep:OperandVerdictReport ;
     report:policyRequest drk:request-360 ;
     report:constraint kgc:KGC360-offer-c1 ;
     vrep:constraintRequest kgc:KGC360-request-c1 ;
-    vrep:backgroundTheory <https://w3id.org/odrl-kb/dpv-tom/empty> ;
-    report:satisfactionState report:Satisfied ;
-    vrep:certificate drk:KGC360-certificate .
-
-drk:KGC360-certificate a vrep:Refutation ;
     rdfs:comment """Both required measures are technical measures in the vocabulary, so a use supplying them satisfies the request as well as the offer."""@en ;
-    vrep:clashingConstraint kgc:KGC360-offer-c1, kgc:KGC360-request-c1 ;
-    vrep:premise [ vrep:premiseSource vrep:fromResource ;
-                   rdfs:label "dpv:Encryption is below dpv:TechnicalMeasure"@en ] ;
-    vrep:premise [ vrep:premiseSource vrep:fromResource ;
-                   rdfs:label "dpv:AccessControlMethod is below dpv:TechnicalMeasure"@en ] .
+    report:satisfactionState report:Satisfied ;
+    vrep:certificate <certificates/KGC360-2.tstp> .

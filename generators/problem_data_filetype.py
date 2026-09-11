@@ -116,6 +116,7 @@ PROBLEMS = [
         "sort":              "nom",
         "resource":          RESOURCE,
         "background_theory": EMPTY_BT,
+         "unknown_reason": "epistemic",
         "includes":          INCLUDES,
         "description": (
             "Offer (fileFormat, eq, ft:PDF) against request (fileFormat, eq, "
@@ -157,14 +158,14 @@ PROBLEMS = [
             "premises": [],
         },
         "ttl": _TTL_HEAD + """
-drk:bsb-offer-320 a odrl:Offer ;
+drk:offer-320 a odrl:Offer ;
     dcterms:title "BSB offer: PDF"@en ;
-    odrl:assigner drk:bavarian-state-library ;
+    odrl:assigner drk:library ;
     odrl:permission kgc:KGC320-offer-r1 .
 
 kgc:KGC320-offer-r1 a odrl:Permission ;
     odrl:action odrl:use ;
-    odrl:target drk:bsb-manuscripts ;
+    odrl:target drk:manuscripts ;
     odrl:constraint kgc:KGC320-offer-c1 .
 
 kgc:KGC320-offer-c1 a odrl:Constraint ;
@@ -172,14 +173,14 @@ kgc:KGC320-offer-c1 a odrl:Constraint ;
     odrl:operator odrl:eq ;
     odrl:rightOperand ft:PDF .
 
-drk:bnf-request-320 a odrl:Request ;
+drk:request-320 a odrl:Request ;
     dcterms:title "BnF request: PDF/A-1a"@en ;
-    odrl:assignee drk:french-national-library ;
+    odrl:assignee drk:researcher ;
     odrl:permission kgc:KGC320-request-r1 .
 
 kgc:KGC320-request-r1 a odrl:Permission ;
     odrl:action odrl:use ;
-    odrl:target drk:bsb-manuscripts ;
+    odrl:target drk:manuscripts ;
     odrl:constraint kgc:KGC320-request-c1 .
 
 kgc:KGC320-request-c1 a odrl:Constraint ;
@@ -247,14 +248,14 @@ kgc:KGC320-request-c1 a odrl:Constraint ;
             ],
         },
         "ttl": _TTL_HEAD + """
-drk:bsb-offer-321 a odrl:Offer ;
+drk:offer-321 a odrl:Offer ;
     dcterms:title "BSB offer: PDF"@en ;
-    odrl:assigner drk:bavarian-state-library ;
+    odrl:assigner drk:library ;
     odrl:permission kgc:KGC321-offer-r1 .
 
 kgc:KGC321-offer-r1 a odrl:Permission ;
     odrl:action odrl:use ;
-    odrl:target drk:bsb-manuscripts ;
+    odrl:target drk:manuscripts ;
     odrl:constraint kgc:KGC321-offer-c1 .
 
 kgc:KGC321-offer-c1 a odrl:Constraint ;
@@ -262,14 +263,14 @@ kgc:KGC321-offer-c1 a odrl:Constraint ;
     odrl:operator odrl:eq ;
     odrl:rightOperand ft:PDF .
 
-drk:bnf-request-321 a odrl:Request ;
+drk:request-321 a odrl:Request ;
     dcterms:title "BnF request: PDF/A-1a"@en ;
-    odrl:assignee drk:french-national-library ;
+    odrl:assignee drk:researcher ;
     odrl:permission kgc:KGC321-request-r1 .
 
 kgc:KGC321-request-r1 a odrl:Permission ;
     odrl:action odrl:use ;
-    odrl:target drk:bsb-manuscripts ;
+    odrl:target drk:manuscripts ;
     odrl:constraint kgc:KGC321-request-c1 .
 
 kgc:KGC321-request-c1 a odrl:Constraint ;
@@ -338,14 +339,14 @@ kgc:KGC321-request-c1 a odrl:Constraint ;
             ],
         },
         "ttl": _TTL_HEAD + """
-drk:bsb-offer-322 a odrl:Offer ;
+drk:offer-322 a odrl:Offer ;
     dcterms:title "BSB offer: PDF or PDF/A-1a"@en ;
-    odrl:assigner drk:bavarian-state-library ;
+    odrl:assigner drk:library ;
     odrl:permission kgc:KGC322-offer-r1 .
 
 kgc:KGC322-offer-r1 a odrl:Permission ;
     odrl:action odrl:use ;
-    odrl:target drk:bsb-manuscripts ;
+    odrl:target drk:manuscripts ;
     odrl:constraint kgc:KGC322-offer-c1 .
 
 kgc:KGC322-offer-c1 a odrl:Constraint ;
@@ -353,14 +354,14 @@ kgc:KGC322-offer-c1 a odrl:Constraint ;
     odrl:operator odrl:isAnyOf ;
     odrl:rightOperand ft:PDF, ft:PDFA1A .
 
-drk:bnf-request-322 a odrl:Request ;
+drk:request-322 a odrl:Request ;
     dcterms:title "BnF request: PDF/A-1a"@en ;
-    odrl:assignee drk:french-national-library ;
+    odrl:assignee drk:researcher ;
     odrl:permission kgc:KGC322-request-r1 .
 
 kgc:KGC322-request-r1 a odrl:Permission ;
     odrl:action odrl:use ;
-    odrl:target drk:bsb-manuscripts ;
+    odrl:target drk:manuscripts ;
     odrl:constraint kgc:KGC322-request-c1 .
 
 kgc:KGC322-request-c1 a odrl:Constraint ;

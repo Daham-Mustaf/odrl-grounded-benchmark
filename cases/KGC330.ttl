@@ -1,6 +1,5 @@
 @prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix report:  <https://w3id.org/force/compliance-report#> .
-@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix vrep:    <https://w3id.org/odrl-kb/verdict-report#> .
 @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
@@ -8,14 +7,14 @@
 @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
 
-drk:bsb-offer-330 a odrl:Offer ;
-    dcterms:title "BSB offer: use within the Netherlands"@en ;
-    odrl:assigner drk:bavarian-state-library ;
+drk:offer-330 a odrl:Offer ;
+    dcterms:title "Offer: use within the Netherlands"@en ;
+    odrl:assigner drk:library ;
     odrl:permission kgc:KGC330-offer-r1 .
 
 kgc:KGC330-offer-r1 a odrl:Permission ;
     odrl:action odrl:use ;
-    odrl:target drk:bsb-manuscripts ;
+    odrl:target drk:manuscripts ;
     odrl:constraint kgc:KGC330-offer-c1 .
 
 kgc:KGC330-offer-c1 a odrl:Constraint ;
@@ -23,14 +22,13 @@ kgc:KGC330-offer-c1 a odrl:Constraint ;
     odrl:operator odrl:isPartOf ;
     odrl:rightOperand loc:NL .
 
-drk:bnf-request-330 a odrl:Request ;
-    dcterms:title "BnF request: use in Bonaire, Sint Eustatius and Saba"@en ;
-    odrl:assignee drk:french-national-library ;
+drk:request-330 a odrl:Request ;
+    dcterms:title "Request: use in Bonaire, Sint Eustatius and Saba"@en ;
     odrl:permission kgc:KGC330-request-r1 .
 
 kgc:KGC330-request-r1 a odrl:Permission ;
     odrl:action odrl:use ;
-    odrl:target drk:bsb-manuscripts ;
+    odrl:target drk:manuscripts ;
     odrl:constraint kgc:KGC330-request-c1 .
 
 kgc:KGC330-request-c1 a odrl:Constraint ;
@@ -47,12 +45,7 @@ drk:KGC330-report a vrep:OperandVerdictReport ;
     report:constraint kgc:KGC330-offer-c1 ;
     vrep:constraintRequest kgc:KGC330-request-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-spatial-dpvloc-geo> ;
-    vrep:backgroundTheory <https://w3id.org/odrl-kb/dpv-loc/empty> ;
+    rdfs:comment """DPV says Bonaire is part of the Netherlands, so a use in Bonaire is a use in the Netherlands and both sides get what they asked for."""@en ;
+    dcterms:description """A library permits use within the Netherlands; a researcher asks to use the material in Bonaire. DPV places Bonaire within the Netherlands."""@en ;
     report:satisfactionState report:Satisfied ;
-    vrep:certificate drk:KGC330-certificate .
-
-drk:KGC330-certificate a vrep:Refutation ;
-    rdfs:comment """The extension places Bonaire within the Netherlands, so every model admits the common use and its absence is impossible."""@en ;
-    vrep:clashingConstraint kgc:KGC330-offer-c1, kgc:KGC330-request-c1 ;
-    vrep:premise [ vrep:premiseSource vrep:fromResource ;
-                   rdfs:label "loc:BQ is within loc:NL"@en ] .
+    vrep:certificate <certificates/KGC330-2.tstp> .

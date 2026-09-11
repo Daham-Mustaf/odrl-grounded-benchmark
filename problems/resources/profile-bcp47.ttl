@@ -17,7 +17,6 @@
 
 @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
 @prefix bind:    <https://w3id.org/odrl-kb/binding#> .
-@prefix vrep:    <https://w3id.org/odrl-verdict-report#> .
 @prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
@@ -39,8 +38,8 @@ ex:g-bcp47-exact a bind:GroundingProcedure ;
          such as en-US is well formed under RFC 5646 and resolves to no
          concept here, because the scheme holds primary subtags and
          en-US is not one."""@en ;
-    vrep:matchesProperty skos:notation ;
-    vrep:acceptsIRI true ;
+    bind:matchesProperty skos:notation ;
+    bind:acceptsIRI true ;
     dcterms:source <https://www.rfc-editor.org/rfc/rfc5646#section-2.2> .
 
 ex:g-bcp47-primary a bind:GroundingProcedure ;
@@ -57,9 +56,9 @@ ex:g-bcp47-primary a bind:GroundingProcedure ;
          others; a party who cares about the region declines the rule and
          gets an ungrounded value instead of a wrong answer. The profile
          is where that choice is recorded."""@en ;
-    vrep:matchesProperty skos:notation ;
-    vrep:acceptsIRI true ;
-    vrep:reducesToPrimarySubtag true ;
+    bind:matchesProperty skos:notation ;
+    bind:acceptsIRI true ;
+    bind:reducesToPrimarySubtag true ;
     dcterms:source <https://www.rfc-editor.org/rfc/rfc5646#section-2.2.1> .
 
 # --- the bindings -----------------------------------------------------

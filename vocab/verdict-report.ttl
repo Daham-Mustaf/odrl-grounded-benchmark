@@ -1,24 +1,3 @@
-# Verdict report extension over the Compliance Report Model
-#
-# This file extends https://w3id.org/force/compliance-report (0.9.0).
-# Every class and property it does not add comes from that model by
-# import: report:ConstraintReport, report:constraint,
-# report:satisfactionState, report:Satisfied, report:Unsatisfied,
-# report:PolicyReport, report:policy, report:policyRequest,
-# report:premiseReport.  Nothing from the parent is restated.
-#
-# Verdict-to-state mapping, stated here and nowhere else:
-#   Compatible    maps to  report:Satisfied
-#   Incompatible  maps to  report:Unsatisfied
-#   Unknown       maps to  vrep:Undetermined
-# The report generator's enum module mirrors this table.
-#
-# The parent closes SatisfactionState in prose ("either satisfied or
-# unsatisfied") but publishes no covering axiom, only the pairwise
-# disjointness of its two states.  The third state below is therefore a
-# consistent extension of the axioms and a deliberate extension of the
-# prose.
-
 @prefix vrep:    <https://w3id.org/odrl-kb/verdict-report#> .
 @prefix report:  <https://w3id.org/force/compliance-report#> .
 @prefix bind:    <https://w3id.org/odrl-kb/binding#> .
@@ -28,6 +7,7 @@
 @prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix vann:    <http://purl.org/vocab/vann/> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
 
 <https://w3id.org/odrl-kb/verdict-report> a owl:Ontology ;
     dcterms:title "Verdict report extension"@en ;
@@ -54,7 +34,8 @@ vrep:UndeterminedReason a rdfs:Class, skos:Concept ;
     rdfs:label "Undetermined Reason" ;
     skos:definition "Why a report is Undetermined. Exactly one of the two subclasses applies: the union axiom gives coverage, their disjointness gives uniqueness. Unlike the parent's SatisfactionState, the closure here is axiomatised, not prose."@en ;
     owl:equivalentClass [ a owl:Class ;
-        owl:unionOf ( vrep:Ungrounded vrep:Epistemic ) ] .
+        owl:unionOf ( vrep:Ungrounded vrep:Epistemic )
+    ] .
 
 vrep:Ungrounded a rdfs:Class, skos:Concept ;
     rdfs:isDefinedBy <https://w3id.org/odrl-kb/verdict-report> ;
@@ -70,14 +51,21 @@ vrep:Epistemic a rdfs:Class, skos:Concept ;
     owl:disjointWith vrep:Ungrounded ;
     skos:definition "Both satisfiability queries are satisfiable: some admissible structures admit a common satisfier and some do not. Settled by a further declaration, such as party-declared distinctness. The certificate is a pair of satisfying structures."@en .
 
-# ----- the report class -----
+# ----- the report classes -----
 
 vrep:OperandVerdictReport a rdfs:Class, skos:Concept ;
     rdfs:isDefinedBy <https://w3id.org/odrl-kb/verdict-report> ;
     rdfs:label "Operand Verdict Report" ;
     rdfs:subClassOf report:ConstraintReport ;
-    skos:definition "The verdict for the constraints of a policy and a request on one left operand: whether some valuation satisfies both in every structure admitted by the bound resource and the background theory, in none, or in some but not all. report:constraint holds the policy-side constraint and vrep:constraintRequest the request side."@en ;
-    rdfs:comment "Replaces the parent's closed-world State-of-the-World context: satisfaction here quantifies over the admissible structures of the binding's resource and background theory."@en .
+    skos:definition "The verdict for the constraints of a policy and a request on one left operand: whether, in every structure the bound resource and background theory admit, some valuation satisfies both constraints; in no such structure; or in some but not all. report:constraint holds the policy-side constraint and vrep:constraintRequest the request side."@en ;
+    rdfs:comment "Refines the parent's State-of-the-World context by making satisfaction relative to the admissible structures the binding's resource and background theory determine, rather than to one closed world."@en .
+
+vrep:WellSortednessReport a rdfs:Class, skos:Concept ;
+    rdfs:isDefinedBy <https://w3id.org/odrl-kb/verdict-report> ;
+    rdfs:label "Well-Sortedness Report" ;
+    rdfs:subClassOf report:ConstraintReport ;
+    skos:definition "Whether a constraint can be evaluated at all under the sort its operand is bound at: whether the operator is admissible at that sort and the right operand has the arity the operator takes."@en ;
+    rdfs:comment "Decided by the signature alone. No resource is opened and no satisfiability question is asked, so a constraint that is not well sorted has no verdict rather than a negative one. Distinct from vrep:OperandVerdictReport, which reports satisfiability once a constraint has passed this check."@en .
 
 # ----- properties -----
 
@@ -91,9 +79,17 @@ vrep:constraintRequest a rdfs:Property, skos:Concept ;
 vrep:undeterminedReason a rdfs:Property, owl:FunctionalProperty, skos:Concept ;
     rdfs:isDefinedBy <https://w3id.org/odrl-kb/verdict-report> ;
     rdfs:label "undetermined reason" ;
-    skos:definition "The reason a report's satisfaction state is vrep:Undetermined. Required exactly when the state is Undetermined."@en ;
+    skos:definition "The reason a report's satisfaction state is vrep:Undetermined."@en ;
     rdfs:domain vrep:OperandVerdictReport ;
-    rdfs:range vrep:UndeterminedReason .
+    rdfs:range vrep:UndeterminedReason ;
+    rdfs:comment "Functional, so a report carries at most one reason. That a report carries exactly one when its state is Undetermined, and none otherwise, is a conditional cardinality OWL does not express; it is checked by the generator, which refuses to write an Undetermined report without a reason, and belongs in a SHACL shape for consumers."@en .
+
+vrep:wellSorted a rdfs:Property, owl:FunctionalProperty, skos:Concept ;
+    rdfs:isDefinedBy <https://w3id.org/odrl-kb/verdict-report> ;
+    rdfs:label "well sorted" ;
+    skos:definition "True when the operator is admissible at the binding's sort and the right operand has the arity the operator requires; false otherwise, in which case rdfs:comment carries the reason."@en ;
+    rdfs:domain vrep:WellSortednessReport ;
+    rdfs:range xsd:boolean .
 
 vrep:binding a rdfs:Property, skos:Concept ;
     rdfs:isDefinedBy <https://w3id.org/odrl-kb/verdict-report> ;

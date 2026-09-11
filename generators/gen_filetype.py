@@ -1,5 +1,5 @@
 """
-gen_motivating.py
+gen_filetype.py
 =================
 Generates the three motivating-example problems, each as two satisfiability
 queries, plus policies and expected reports.

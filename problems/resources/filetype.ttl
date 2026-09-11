@@ -33,7 +33,6 @@
     dcterms:title "EU File type, concept set"@en ;
     dcterms:source <http://publications.europa.eu/resource/authority/file-type/20260715-0> ;
     dcterms:license <http://creativecommons.org/licenses/by/4.0/> ;
-    odrlkb:conceptCount 228 ;
     odrlkb:orderAssertionCount 0 .
 
 odrlkb:7z a odrlkb:FileType ;

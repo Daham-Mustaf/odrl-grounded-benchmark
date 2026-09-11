@@ -1,11 +1,10 @@
 @prefix report:  <https://w3id.org/force/compliance-report#> .
-@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix vrep:    <https://w3id.org/odrl-kb/verdict-report#> .
 @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix dpv:     <https://w3id.org/dpv#> .
 @prefix eu-gdpr: <https://w3id.org/dpv/legal/eu/gdpr#> .
-@prefix dpvo:    <https://w3id.org/dpv/mappings/odrl#> .
+@prefix dpv-odrl:    <https://w3id.org/dpv/mappings/odrl#> .
 @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
 @prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
@@ -29,7 +28,7 @@ kgc:KGC351-offer-r1 a odrl:Permission ;
     odrl:constraint kgc:KGC351-offer-c1 .
 
 kgc:KGC351-offer-c1 a odrl:Constraint ;
-    odrl:leftOperand dpvo:LegalBasis ;
+    odrl:leftOperand dpv-odrl:LegalBasis ;
     odrl:operator odrl:isAnyOf ;
     odrl:rightOperand ( dpv:Consent dpv:Contract dpv:LegalObligation
                              dpv:VitalInterest dpv:PublicInterest
@@ -47,7 +46,7 @@ kgc:KGC351-request-r1 a odrl:Permission ;
     odrl:constraint kgc:KGC351-request-c1 .
 
 kgc:KGC351-request-c1 a odrl:Constraint ;
-    odrl:leftOperand dpvo:LegalBasis ;
+    odrl:leftOperand dpv-odrl:LegalBasis ;
     odrl:operator odrl:eq ;
     odrl:rightOperand eu-gdpr:A6-1-a-explicit-consent .
 
@@ -59,9 +58,7 @@ drk:KGC351-report a vrep:OperandVerdictReport ;
     report:policyRequest drk:request-351 ;
     report:constraint kgc:KGC351-offer-c1 ;
     vrep:constraintRequest kgc:KGC351-request-c1 ;
-    vrep:backgroundTheory <https://w3id.org/odrl-kb/dpv-gdpr-legal-basis/empty> ;
+    rdfs:comment """Both queries are satisfiable. The models differ on whether explicit consent under Article 6(1)(a) and consent are one concept, which neither module settles."""@en ;
     report:satisfactionState vrep:Undetermined ;
-    vrep:certificate drk:KGC351-certificate .
-
-drk:KGC351-certificate a vrep:Models ;
-    rdfs:comment """Both queries are satisfiable. The models differ on whether explicit consent under Article 6(1)(a) and consent are one concept, which neither module settles."""@en .
+    vrep:undeterminedReason vrep:Epistemic ;
+    vrep:certificate <certificates/KGC351-2.tstp> .

@@ -202,8 +202,6 @@ def resource_ttl(concepts, labels, definitions, order, crossing, meta) -> str:
         "<https://w3id.org/odrl-kb/dpv-consent> a dcat:Dataset ;",
         '    dcterms:title "DPV consent status, module slice"@en ;',
         f"    dcterms:source <{meta['source_iri']}> ;",
-        f"    odrlkb:conceptCount {len(concepts)} ;",
-        f"    odrlkb:orderAssertionCount {len(order)} .",
         "",
     ]
 
@@ -245,7 +243,7 @@ def background_ttl(meta) -> str:
 <https://w3id.org/odrl-kb/dpv-consent/empty> a bt:BackgroundTheory ;
     dcterms:title "No declared distinctness or disjointness"@en ;
     bt:appliesTo <https://w3id.org/odrl-kb/dpv-consent> ;
-    bt:assertionCount 0 .
+    bt:pairCount 0 .
 """
 
 
@@ -294,7 +292,7 @@ def definitional_ttl(definitions, meta) -> str:
     dcterms:title "The valid and invalid branches are disjoint"@en ;
     bt:appliesTo <https://w3id.org/odrl-kb/dpv-consent> ;
     bt:generatedBy bt:PublishedDefinition ;
-    bt:assertionCount 1 ;
+    bt:pairCount 1 ;
     bt:warrant [
         bt:concept dpv:{VALID} ;
         skos:definition "{d_valid}"@en ] ,
@@ -332,7 +330,7 @@ def declared_ttl(pair, meta) -> str:
     dcterms:title "One declared distinctness"@en ;
     bt:appliesTo <https://w3id.org/odrl-kb/dpv-consent> ;
     bt:generatedBy bt:PartyDeclaration ;
-    bt:assertionCount 1 .
+    bt:pairCount 1 .
 
 dpv:{a} bt:distinctFrom dpv:{b} .
 """
@@ -412,7 +410,7 @@ def definitional_axioms(definitions) -> str:
         "% Disjointness rather than distinctness: nothing below both, so no",
         "% state of consent is at once valid and invalid for processing.",
         "",
-        f"fof(bt_{v}_disjoint_{i}, axiom,",
+        f"fof(bg_disj_{v}_disjoint_{i}, axiom,",
         f"    ! [X] : ~ ( kge_leq(X, {v}) & kge_leq(X, {i}) )).",
         "",
     ]
@@ -425,7 +423,7 @@ def declared_axioms(pair) -> str:
         "% Background theory: one distinctness, declared by the parties.\n"
         "% The module publishes nothing that separates these two states.\n"
         "\n"
-        f"fof(bt_{slug(a)}_distinct_{slug(b)}, axiom,\n"
+        f"fof(bg_dist_{slug(a)}_distinct_{slug(b)}, axiom,\n"
         f"    {slug(a)} != {slug(b)}).\n"
     )
 
@@ -443,16 +441,16 @@ def profile_ttl() -> str:
 # the typing rather than to the order would answer a different question.
 # Section 7 reports what that reading returns.
 
-@prefix dpvo: <https://w3id.org/dpv/mappings/odrl#> .
-@prefix vrep: <https://w3id.org/odrl-verdict-report#> .
+@prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> .
+@prefix vrep: <https://w3id.org/odrl-kb/verdict-report#> .
 @prefix ex:   <https://w3id.org/odrl-kb/profile/> .
 
-ex:b-consent-status a vrep:OperandBinding ;
-    vrep:leftOperand dpvo:Status ;
-    vrep:sort vrep:tax ;
-    vrep:resource <https://w3id.org/odrl-kb/dpv-consent> ;
-    vrep:backgroundTheory <https://w3id.org/odrl-kb/dpv-consent/empty> ;
-    vrep:grounding vrep:sliceMembership .
+ex:b-consent-status a bind:OperandBinding ;
+    bind:leftOperand dpv-odrl:Status ;
+    bind:sort bind:tax ;
+    bind:resource <https://w3id.org/odrl-kb/dpv-consent> ;
+    bind:backgroundTheory <https://w3id.org/odrl-kb/dpv-consent/empty> ;
+    bind:grounding bind:sliceMembership .
 """
 
 

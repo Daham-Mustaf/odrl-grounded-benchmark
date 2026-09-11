@@ -3,7 +3,7 @@
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
 % Problem  : purpose, isA dpv:Purpose against eq dpv:NCR (witness condition asserted)
 % Version  : 1.0
-% English  : Offer (purpose, isA, dpv:Purpose) against request (purpose, eq, dpv:NonCommercialResearch).  The resource relates the two only through dpv:NonCommercialPurpose, so the refutation must chain two order assertions.  Compatible, and the certificate should cite two resource premises and one instance of transitivity.
+% English  : A library permits use for any DPV purpose, and a researcher requests use for non-commercial research.
 %
 % Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark
@@ -16,7 +16,7 @@
 % Comments : Query 1 of 2.  Verdict is derived from both queries.
 %--------------------------------------------------------------------------
 include('axioms/KGE000-0.ax').
-include('axioms/DPV-milestone.ax').
+include('axioms/DPV-dpv-purposes.ax').
 
 % --- constants, groundings and resource hooks ----------------------------
 % Background theory: empty, as above.

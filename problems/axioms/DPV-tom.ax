@@ -1,10 +1,9 @@
-% Resource: the legal bases of GDPR Article 6, as the Data Privacy
-% Vocabulary and its GDPR extension publish them.
+% Resource: the subsumption between technical and organisational
+% measures, as the Data Privacy Vocabulary publishes it.
 %
-% Each assertion is one skos:broader triple.  The extension places
-% each Article 6 concept both under the article it refines and
-% under the DPV category it belongs to, so a concept may appear
-% below more than one other.
+% Each assertion is one skos:broader triple.  Some measures appear
+% as the subject of two: the hierarchy is a directed acyclic graph,
+% and a refutation may reach a common ancestor by either path.
 
 fof(res_tm_access_control_method_below_tm_technical_measure, axiom, kge_leq(tm_access_control_method, tm_technical_measure)).
 fof(res_tm_activity_monitoring_below_tm_technical_measure, axiom, kge_leq(tm_activity_monitoring, tm_technical_measure)).

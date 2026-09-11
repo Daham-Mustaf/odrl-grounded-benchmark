@@ -3,7 +3,7 @@
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
 % Problem  : consent status, xone(isA ValidForProcessing, isA InvalidForProcessing) against eq ConsentGiven (witness condition negated)
 % Version  : 1.0
-% English  : The offer requires the record to fall under exactly one of the two branches, which is what the division means.  DPV places consent given below the valid branch; whether it also lies below the invalid branch is not settled, since a structure may order concepts the resource leaves unordered.  Both alternatives would then hold and the exclusive requirement fails.  Verdict: Unknown.
+% English  : An offer requires the record to fall under exactly one of the two consent branches; a processor commits to processing only under given consent.
 %
 % Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark

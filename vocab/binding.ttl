@@ -1,15 +1,3 @@
-# Binding vocabulary
-#
-# Not a new vocabulary; a definition of one already in use in every
-# profile-*.ttl.  A binding exists before any evaluation, which is why it
-# lives outside the report namespace: profile content must not be
-# date-stamped to the report model's lifecycle.
-#
-# One deliberate non-reuse: bind:leftOperand is not odrl:leftOperand.
-# ODRL declares that property with domain odrl:Constraint; redomaining it
-# onto bindings would be drift into a published vocabulary.  The two are
-# linked by rdfs:seeAlso instead.
-
 @prefix bind:    <https://w3id.org/odrl-kb/binding#> .
 @prefix bt:      <https://w3id.org/odrl-kb/background#> .
 @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
@@ -50,15 +38,15 @@ bind:GroundingProcedure a rdfs:Class, skos:Concept ;
 # --- the three sorts --------------------------------------------------
 
 bind:tax a bind:Sort ;
-    rdfs:label "tax" ;
+    rdfs:label "taxonomy" ;
     skos:definition "The published assertions are read as subsumption."@en .
 
 bind:mer a bind:Sort ;
-    rdfs:label "mer" ;
+    rdfs:label "meriology" ;
     skos:definition "The published assertions are read as parthood."@en .
 
 bind:nom a bind:Sort ;
-    rdfs:label "nom" ;
+    rdfs:label "nominal" ;
     skos:definition "The resource supplies a set of concepts and nothing further; identity is the only relation available."@en .
 
 [] a owl:AllDifferent ;
@@ -114,3 +102,18 @@ bind:sliceMembership a bind:GroundingProcedure ;
          The default rule, adopted by every binding over a resource
          published as a graph. A registry needs a different one, because
          its concepts are not its entries."""@en .
+
+bind:acceptsIRI a bind:GroundingProcedure ;
+    rdfs:isDefinedBy <https://w3id.org/odrl-kb/binding> ;
+    rdfs:label "accepts IRI" ;
+    skos:definition "A value that is an IRI names the concept with that IRI, if the resource has one; a value that is not an IRI does not ground."@en .
+
+bind:matchesProperty a bind:GroundingProcedure ;
+    rdfs:isDefinedBy <https://w3id.org/odrl-kb/binding> ;
+    rdfs:label "matches property" ;
+    skos:definition "A literal value names the concept carrying that value on a designated property of the resource, if exactly one does."@en .
+
+bind:reducesToPrimarySubtag a bind:GroundingProcedure ;
+    rdfs:isDefinedBy <https://w3id.org/odrl-kb/binding> ;
+    rdfs:label "reduces to primary subtag" ;
+    skos:definition "A well-formed language tag names the concept for its primary subtag; en-US names en. Distinguishes this reading from one under which en-US names nothing."@en .

@@ -1,5 +1,4 @@
 @prefix report:  <https://w3id.org/force/compliance-report#> .
-@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix vrep:    <https://w3id.org/odrl-kb/verdict-report#> .
 @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
@@ -48,12 +47,6 @@ drk:KGC373-report a vrep:OperandVerdictReport ;
     report:constraint kgc:KGC373-offer-c1 ;
     vrep:constraintRequest kgc:KGC373-request-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-language-bcp47-primary> ;
-    vrep:backgroundTheory <https://w3id.org/odrl-kb/bcp47/uniqueness> ;
-    report:satisfactionState report:Unsatisfied ;
-    vrep:certificate drk:KGC373-certificate .
-
-drk:KGC373-certificate a vrep:Refutation ;
     rdfs:comment """The request's value resolved to bcp_en under this binding's grounding rule, and bcp_de and bcp_en are declared distinct by the same rule that carries KGC370."""@en ;
-    vrep:clashingConstraint kgc:KGC373-offer-c1, kgc:KGC373-request-c1 ;
-    vrep:premise [ vrep:premiseSource vrep:fromBackgroundTheory ;
-                   rdfs:label "bcp47:de and bcp47:en are declared distinct, on RFC 5646's registry uniqueness"@en ] .
+    report:satisfactionState report:Unsatisfied ;
+    vrep:certificate <certificates/KGC373-1.tstp> .

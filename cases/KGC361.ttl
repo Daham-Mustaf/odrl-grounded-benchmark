@@ -1,11 +1,10 @@
 @prefix report:  <https://w3id.org/force/compliance-report#> .
-@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix vrep:    <https://w3id.org/odrl-kb/verdict-report#> .
 @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix dpv:     <https://w3id.org/dpv#> .
-@prefix dpvo:    <https://w3id.org/dpv/mappings/odrl#> .
+@prefix dpv-odrl:    <https://w3id.org/dpv/mappings/odrl#> .
 @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
 
@@ -21,7 +20,7 @@ kgc:KGC361-offer-r1 a odrl:Permission ;
     odrl:constraint kgc:KGC361-offer-c1 .
 
 kgc:KGC361-offer-c1 a odrl:Constraint ;
-    odrl:leftOperand dpvo:TechnicalOrganisationalMeasure ;
+    odrl:leftOperand dpv-odrl:TechnicalOrganisationalMeasure ;
     odrl:operator odrl:isAllOf ;
     odrl:rightOperand ( dpv:Encryption dpv:AccessControlMethod ) .
 
@@ -36,7 +35,7 @@ kgc:KGC361-request-r1 a odrl:Permission ;
     odrl:constraint kgc:KGC361-request-c1 .
 
 kgc:KGC361-request-c1 a odrl:Constraint ;
-    odrl:leftOperand dpvo:TechnicalOrganisationalMeasure ;
+    odrl:leftOperand dpv-odrl:TechnicalOrganisationalMeasure ;
     odrl:operator odrl:isNoneOf ;
     odrl:rightOperand ( dpv:AccessControlMethod ) .
 
@@ -48,12 +47,6 @@ drk:KGC361-report a vrep:OperandVerdictReport ;
     report:policyRequest drk:request-361 ;
     report:constraint kgc:KGC361-offer-c1 ;
     vrep:constraintRequest kgc:KGC361-request-c1 ;
-    vrep:backgroundTheory <https://w3id.org/odrl-kb/dpv-tom/empty> ;
+    rdfs:comment """The offer requires access control among the measures supplied and the request excludes it. No premise of the vocabulary or of the parties is used."""@en ;
     report:satisfactionState report:Unsatisfied ;
-    vrep:certificate drk:KGC361-certificate .
-
-drk:KGC361-certificate a vrep:Refutation ;
-    rdfs:comment """No premise of the vocabulary or of the parties is used. The refutation rests on the query formula and on reflexivity of identity: the witness condition requires access control to lie inside a set from which the request excludes it, which is the literal that access control differs from itself."""@en ;
-    vrep:clashingConstraint kgc:KGC361-offer-c1, kgc:KGC361-request-c1 ;
-    vrep:premise [ vrep:premiseSource vrep:fromEqualityAxiom ;
-                   rdfs:label "reflexivity: dpv:AccessControlMethod is itself"@en ] .
+    vrep:certificate <certificates/KGC361-1.tstp> .
