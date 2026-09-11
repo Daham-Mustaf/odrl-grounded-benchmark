@@ -1,0 +1,52 @@
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix report:  <https://w3id.org/force/compliance-report#> .
+@prefix vrep:    <https://w3id.org/odrl-kb/verdict-report#> .
+@prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix dpv:     <https://w3id.org/dpv#> .
+@prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+@prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+
+drk:offer-314 a odrl:Offer ;
+    dcterms:title "Offer: marketing"@en ;
+    odrl:assigner drk:library ;
+    odrl:permission kgc:KGC314-offer-r1 .
+
+kgc:KGC314-offer-r1 a odrl:Permission ;
+    odrl:action odrl:use ;
+    odrl:target drk:manuscripts ;
+    odrl:constraint kgc:KGC314-offer-c1 .
+
+kgc:KGC314-offer-c1 a odrl:Constraint ;
+    odrl:leftOperand odrl:purpose ;
+    odrl:operator odrl:eq ;
+    odrl:rightOperand dpv:Marketing .
+
+drk:request-314 a odrl:Request ;
+    dcterms:title "Request: scientific research"@en ;
+    odrl:assignee drk:researcher ;
+    odrl:permission kgc:KGC314-request-r1 .
+
+kgc:KGC314-request-r1 a odrl:Permission ;
+    odrl:action odrl:use ;
+    odrl:target drk:manuscripts ;
+    odrl:constraint kgc:KGC314-request-c1 .
+
+kgc:KGC314-request-c1 a odrl:Constraint ;
+    odrl:leftOperand odrl:purpose ;
+    odrl:operator odrl:eq ;
+    odrl:rightOperand dpv:ScientificResearch .
+
+### Expected result #######################################################
+
+drk:KGC314-report a vrep:OperandVerdictReport ;
+    dcterms:identifier "KGC314" ;
+    report:policy drk:offer-314 ;
+    report:policyRequest drk:request-314 ;
+    report:constraint kgc:KGC314-offer-c1 ;
+    vrep:constraintRequest kgc:KGC314-request-c1 ;
+    vrep:binding <https://w3id.org/odrl-kb/profile/b-purpose> ;
+    rdfs:comment """The background theory declares Marketing and ScientificResearch distinct, so the two constraints cannot be satisfied by the same purpose. This declaration changes the verdict from Unknown to Incompatible; withdrawing the declaration would return the verdict to Unknown."""@en ;
+    dcterms:description """The marketing offer and scientific-research request are evaluated with the two purpose concepts declared distinct."""@en ;
+    report:satisfactionState report:Unsatisfied ;
+    vrep:certificate <certificates/KGC314-1.tstp> .

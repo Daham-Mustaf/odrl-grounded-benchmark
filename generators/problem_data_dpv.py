@@ -230,7 +230,7 @@ PROBLEMS = [
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
 
 drk:offer-310 a odrl:Offer ;
-    dcterms:title "BSB offer: research and development purposes"@en ;
+    dcterms:title "Offer: research and development purposes"@en ;
     odrl:assigner drk:library ;
     odrl:permission kgc:KGC310-offer-r1 .
 
@@ -245,7 +245,7 @@ kgc:KGC310-offer-c1 a odrl:Constraint ;
     odrl:rightOperand dpv:ResearchAndDevelopment .
 
 drk:request-310 a odrl:Request ;
-    dcterms:title "BnF request: scientific research"@en ;
+    dcterms:title "Request: scientific research"@en ;
     odrl:assignee drk:researcher ;
     odrl:permission kgc:KGC310-request-r1 .
 
@@ -279,12 +279,14 @@ kgc:KGC310-request-c1 a odrl:Constraint ;
     "A library permits use for any DPV purpose, and a researcher requests "
     "use for non-commercial research."
 ),
-        "description": (
+            "description": (
             "Offer (purpose, isA, dpv:Purpose) against request (purpose, eq, "
-            "dpv:NonCommercialResearch).  The resource relates the two only "
-            "through dpv:NonCommercialPurpose, so the refutation must chain "
-            "two order assertions.  Compatible, and the certificate should "
-            "cite two resource premises and one instance of transitivity."
+            "dpv:NonCommercialResearch).  The resource places "
+            "NonCommercialResearch below two parents, including "
+            "dpv:ResearchAndDevelopment, which is below dpv:Purpose.  The "
+            "refutation uses that ResearchAndDevelopment path and transitivity. "
+            "Compatible, with two resource premises and one instance of "
+            "transitivity."
         ),
 
         "fof_decls": """\
@@ -306,20 +308,18 @@ kgc:KGC310-request-c1 a odrl:Constraint ;
         "smt2_witness": f"""\
 (or (and (kge_leq {PUR} {PUR}) (= {PUR} {NCR}))
     (and (kge_leq {NCR} {PUR}) (= {NCR} {NCR})))""",
-
-        "certificate": {
+ "certificate": {
             "kind": "Refutation",
-           "comment": (
-    "DPV places NonCommercialResearch below both NonCommercialPurpose and "
-    "ResearchAndDevelopment. Either path leads to Purpose by transitivity; "
-    "the certificate uses the ResearchAndDevelopment path."
-),
+            "comment": (
+                "NonCommercialResearch is below ResearchAndDevelopment, which "
+                "is below Purpose; the certificate uses this two-step path."
+            ),
             "premises": [
                 ("fromResource",
                  "dpv:NonCommercialResearch is below "
-                 "dpv:NonCommercialPurpose"),
+                 "dpv:ResearchAndDevelopment"),
                 ("fromResource",
-                 "dpv:NonCommercialPurpose is below dpv:Purpose"),
+                 "dpv:ResearchAndDevelopment is below dpv:Purpose"),
                 ("fromOrderAxiom", "transitivity"),
             ],
         },
@@ -331,7 +331,7 @@ kgc:KGC310-request-c1 a odrl:Constraint ;
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
 
 drk:offer-311 a odrl:Offer ;
-    dcterms:title "BSB offer: any declared purpose"@en ;
+    dcterms:title "Offer: any declared purpose"@en ;
     odrl:assigner drk:library ;
     odrl:permission kgc:KGC311-offer-r1 .
 
@@ -346,7 +346,7 @@ kgc:KGC311-offer-c1 a odrl:Constraint ;
     odrl:rightOperand dpv:Purpose .
 
 drk:request-311 a odrl:Request ;
-    dcterms:title "BnF request: non-commercial research"@en ;
+    dcterms:title "Request: non-commercial research"@en ;
     odrl:assignee drk:researcher ;
     odrl:permission kgc:KGC311-request-r1 .
 
@@ -431,7 +431,7 @@ kgc:KGC311-request-c1 a odrl:Constraint ;
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
 
 drk:offer-313 a odrl:Offer ;
-    dcterms:title "BSB offer: marketing"@en ;
+    dcterms:title "Offer: marketing"@en ;
     odrl:assigner drk:library ;
     odrl:permission kgc:KGC313-offer-r1 .
 
@@ -446,7 +446,7 @@ kgc:KGC313-offer-c1 a odrl:Constraint ;
     odrl:rightOperand dpv:Marketing .
 
 drk:request-313 a odrl:Request ;
-    dcterms:title "BnF request: scientific research"@en ;
+    dcterms:title "Request: scientific research"@en ;
     odrl:assignee drk:researcher ;
     odrl:permission kgc:KGC313-request-r1 .
 
@@ -534,7 +534,7 @@ kgc:KGC313-request-c1 a odrl:Constraint ;
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
 
 drk:offer-314 a odrl:Offer ;
-    dcterms:title "BSB offer: marketing"@en ;
+    dcterms:title "Offer: marketing"@en ;
     odrl:assigner drk:library ;
     odrl:permission kgc:KGC314-offer-r1 .
 
@@ -549,7 +549,7 @@ kgc:KGC314-offer-c1 a odrl:Constraint ;
     odrl:rightOperand dpv:Marketing .
 
 drk:request-314 a odrl:Request ;
-    dcterms:title "BnF request: scientific research"@en ;
+    dcterms:title "Request: scientific research"@en ;
     odrl:assignee drk:researcher ;
     odrl:permission kgc:KGC314-request-r1 .
 
@@ -637,7 +637,7 @@ kgc:KGC314-request-c1 a odrl:Constraint ;
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
 
 drk:offer-315 a odrl:Offer ;
-    dcterms:title "BSB offer: any declared purpose"@en ;
+    dcterms:title "Offer: any declared purpose"@en ;
     odrl:assigner drk:library ;
     odrl:permission kgc:KGC315-offer-r1 .
 
@@ -652,7 +652,7 @@ kgc:KGC315-offer-c1 a odrl:Constraint ;
     odrl:rightOperand dpv:Purpose .
 
 drk:request-315 a odrl:Request ;
-    dcterms:title "BnF request: recruitment interview scheduling"@en ;
+    dcterms:title "Request: recruitment interview scheduling"@en ;
     odrl:assignee drk:researcher ;
     odrl:permission kgc:KGC315-request-r1 .
 
@@ -741,7 +741,7 @@ kgc:KGC315-request-c1 a odrl:Constraint ;
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
 
 drk:offer-316 a odrl:Offer ;
-    dcterms:title "BSB offer: recruitment interview scheduling"@en ;
+    dcterms:title "Offer: recruitment interview scheduling"@en ;
     odrl:assigner drk:library ;
     odrl:permission kgc:KGC316-offer-r1 .
 
@@ -756,7 +756,7 @@ kgc:KGC316-offer-c1 a odrl:Constraint ;
     odrl:rightOperand dpv:RecruitmentInterviewScheduling .
 
 drk:request-316 a odrl:Request ;
-    dcterms:title "BnF request: any declared purpose"@en ;
+    dcterms:title "Request: any declared purpose"@en ;
     odrl:assignee drk:researcher ;
     odrl:permission kgc:KGC316-request-r1 .
 
@@ -840,7 +840,7 @@ kgc:KGC316-request-c1 a odrl:Constraint ;
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
 
 drk:offer-317 a odrl:Offer ;
-    dcterms:title "BSB offer: any purpose other than marketing"@en ;
+    dcterms:title "Offer: any purpose other than marketing"@en ;
     odrl:assigner drk:library ;
     odrl:permission kgc:KGC317-offer-r1 .
 
@@ -855,7 +855,7 @@ kgc:KGC317-offer-c1 a odrl:Constraint ;
     odrl:rightOperand dpv:Marketing .
 
 drk:request-317 a odrl:Request ;
-    dcterms:title "BnF request: marketing"@en ;
+    dcterms:title "Request: marketing"@en ;
     odrl:assignee drk:researcher ;
     odrl:permission kgc:KGC317-request-r1 .
 

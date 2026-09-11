@@ -347,7 +347,7 @@ def declared_axioms(classes) -> str:
     for i, a in enumerate(names):
         for b in names[i + 1:]:
             x, y = slug(a), slug(b)
-            lines.append(f"fof(bg_dist_{x}_distinct_{y}, axiom, {x} != {y}).")
+            lines.append(f"fof(bg_dist_{x}_{y}, axiom, {x} != {y}).")
     return "\n".join(lines) + "\n"
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[3])

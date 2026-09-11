@@ -281,6 +281,7 @@ PROBLEMS = [
     "Explicit consent is not one of the seven values listed by isAnyOf, "
     "and the resource does not declare it distinct from consent. The "
     "available knowledge therefore leaves the verdict Unknown."
+    "The requested basis is one the offer enumerates."
 ),
             "premises": [],
         },
@@ -329,11 +330,22 @@ PROBLEMS = [
         "each of the seven values listed by isAnyOf. The requested value "
         "therefore cannot satisfy the offer."
     ),
-            "premises": [
-                ("fromBackgroundTheory",
-                 "explicit consent under Article 6(1)(a) is distinct from "
-                 "each of the seven bases the offer names"),
-            ],
+             "premises": [
+        ("fromBackgroundTheory",
+         "dpv:Consent is distinct from explicit consent under Article 6(1)(a)"),
+        ("fromBackgroundTheory",
+         "dpv:Contract is distinct from explicit consent under Article 6(1)(a)"),
+        ("fromBackgroundTheory",
+         "dpv:LegalObligation is distinct from explicit consent under Article 6(1)(a)"),
+        ("fromBackgroundTheory",
+         "dpv:VitalInterest is distinct from explicit consent under Article 6(1)(a)"),
+        ("fromBackgroundTheory",
+         "dpv:PublicInterest is distinct from explicit consent under Article 6(1)(a)"),
+        ("fromBackgroundTheory",
+         "dpv:OfficialAuthorityOfController is distinct from explicit consent under Article 6(1)(a)"),
+        ("fromBackgroundTheory",
+         "dpv:LegitimateInterest is distinct from explicit consent under Article 6(1)(a)"),
+    ],
         },
         "ttl": _TTL_HEAD + _offer_isanyof("KGC352")
                + _request("KGC352",

@@ -1,0 +1,47 @@
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix report:  <https://w3id.org/force/compliance-report#> .
+@prefix vrep:    <https://w3id.org/odrl-kb/verdict-report#> .
+@prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix dpv:     <https://w3id.org/dpv#> .
+@prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+@prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+drk:offer-393 a odrl:Offer ;
+    dcterms:title "Offer: use for research and development or marketing"@en ;
+    odrl:assigner drk:provider ;
+    odrl:permission kgc:KGC393-offer-r1 .
+kgc:KGC393-offer-r1 a odrl:Permission ;
+    odrl:action odrl:use ;
+    odrl:target drk:dataset ;
+    odrl:constraint kgc:KGC393-offer-c1 .
+kgc:KGC393-offer-c1 a odrl:Constraint ;
+    odrl:leftOperand odrl:purpose ;
+    odrl:operator odrl:isAnyOf ;
+    odrl:rightOperand dpv:ResearchAndDevelopment ,
+        dpv:Marketing .
+drk:request-393 a odrl:Request ;
+    dcterms:title "Request: scientific research"@en ;
+    odrl:assignee drk:consumer ;
+    odrl:permission kgc:KGC393-request-r1 .
+kgc:KGC393-request-r1 a odrl:Permission ;
+    odrl:action odrl:use ;
+    odrl:target drk:dataset ;
+    odrl:constraint kgc:KGC393-request-c1 .
+kgc:KGC393-request-c1 a odrl:Constraint ;
+    odrl:leftOperand odrl:purpose ;
+    odrl:operator odrl:eq ;
+    odrl:rightOperand dpv:ScientificResearch .
+
+### Expected result #######################################################
+
+drk:KGC393-report a vrep:OperandVerdictReport ;
+    dcterms:identifier "KGC393" ;
+    report:policy drk:offer-393 ;
+    report:policyRequest drk:request-393 ;
+    report:constraint kgc:KGC393-offer-c1 ;
+    vrep:constraintRequest kgc:KGC393-request-c1 ;
+    vrep:binding <https://w3id.org/odrl-kb/profile/b-purpose> ;
+    rdfs:comment """One structure identifies scientific research with research and development and admits the use; one keeps them apart and does not. The published order is not consulted by isAnyOf."""@en ;
+    dcterms:description """A provider permits use for research and development or marketing; a consumer commits to scientific research."""@en ;
+    report:satisfactionState vrep:Undetermined ;
+    vrep:undeterminedReason vrep:Epistemic .
