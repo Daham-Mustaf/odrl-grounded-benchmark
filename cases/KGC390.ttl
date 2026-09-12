@@ -47,4 +47,4 @@ drk:KGC390-report a vrep:OperandVerdictReport ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-spatial-dpvloc-geo> ;
     rdfs:comment """The rule instance discharges the negated literal."""@en ;
     report:satisfactionState report:Satisfied ;
-    vrep:certificate <certificates/KGC390-2.tstp> .
+    vrep:certificate <../../certificates/KGC390-2.tstp> .

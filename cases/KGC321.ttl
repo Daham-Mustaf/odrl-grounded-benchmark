@@ -48,4 +48,4 @@ drk:KGC321-report a vrep:OperandVerdictReport ;
     rdfs:comment """The two constraints require ft:PDF and ft:PDFA1A to denote the same element, while the background assertion requires them to denote different elements. The two conditions cannot both hold."""@en ;
     dcterms:description """A library permits PDF, while a researcher requests PDF/A-1a, with the two formats declared distinct."""@en ;
     report:satisfactionState report:Unsatisfied ;
-    vrep:certificate <certificates/KGC321-1.tstp> .
+    vrep:certificate <../../certificates/KGC321-1.tstp> .

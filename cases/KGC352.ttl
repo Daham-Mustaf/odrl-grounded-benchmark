@@ -65,4 +65,4 @@ drk:KGC352-report a vrep:OperandVerdictReport ;
     rdfs:comment """The background theory declares explicit consent distinct from each of the seven values listed by isAnyOf. The requested value therefore cannot satisfy the offer."""@en ;
     dcterms:description """A controller permits processing under any of the seven Article 6(1) legal bases, while a processor requests processing on the basis of explicit consent under Article 6(1)(a), with the two concepts declared distinct."""@en ;
     report:satisfactionState report:Unsatisfied ;
-    vrep:certificate <certificates/KGC352-1.tstp> .
+    vrep:certificate <../../certificates/KGC352-1.tstp> .

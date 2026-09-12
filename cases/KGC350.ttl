@@ -65,4 +65,4 @@ drk:KGC350-report a vrep:OperandVerdictReport ;
     rdfs:comment """Consent is one of the seven values listed by isAnyOf, so the two constraints are Compatible without any resource or background assertion."""@en ;
     dcterms:description """A controller permits processing under any of the seven Article 6(1) legal bases, and a processor requests processing on the basis of consent."""@en ;
     report:satisfactionState report:Satisfied ;
-    vrep:certificate <certificates/KGC350-2.tstp> .
+    vrep:certificate <../../certificates/KGC350-2.tstp> .

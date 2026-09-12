@@ -44,4 +44,4 @@ drk:KGC394-report a vrep:OperandVerdictReport ;
     rdfs:comment """Scientific research is declared distinct from research and development and from marketing, so it is neither of the offer's values."""@en ;
     dcterms:description """As KGC393, with scientific research declared distinct from both named purposes."""@en ;
     report:satisfactionState report:Unsatisfied ;
-    vrep:certificate <certificates/KGC394-1.tstp> .
+    vrep:certificate <../../certificates/KGC394-1.tstp> .

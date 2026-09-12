@@ -47,4 +47,4 @@ drk:KGC388-report a vrep:OperandVerdictReport ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-spatial-dpvloc-geo> ;
     rdfs:comment """The first disjunct and reflexivity; the second disjunct is not consulted."""@en ;
     report:satisfactionState report:Satisfied ;
-    vrep:certificate <certificates/KGC388-2.tstp> .
+    vrep:certificate <../../certificates/KGC388-2.tstp> .

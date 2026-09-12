@@ -49,4 +49,4 @@ drk:KGC395-report a vrep:OperandVerdictReport ;
     rdfs:comment """DPV places scientific research below research and development; the first disjunct settles it."""@en ;
     dcterms:description """A provider permits use for any purpose under research and development or under marketing; a consumer commits to scientific research."""@en ;
     report:satisfactionState report:Satisfied ;
-    vrep:certificate <certificates/KGC395-2.tstp> .
+    vrep:certificate <../../certificates/KGC395-2.tstp> .

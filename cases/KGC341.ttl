@@ -54,4 +54,4 @@ drk:KGC341-report a vrep:OperandVerdictReport ;
     rdfs:comment """The requested state is one the offer names, so the constraints settle the verdict without the resource."""@en ;
     dcterms:description """A controller permits use under given or renewed consent; a processor commits to processing only under renewed consent."""@en ;
     report:satisfactionState report:Satisfied ;
-    vrep:certificate <certificates/KGC341-2.tstp> .
+    vrep:certificate <../../certificates/KGC341-2.tstp> .

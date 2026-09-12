@@ -51,4 +51,4 @@ drk:KGC364-report a vrep:OperandVerdictReport ;
     rdfs:comment """Encryption and access control are declared distinct, so a use supplying only encryption lacks the second."""@en ;
     dcterms:description """As KGC363, with encryption and access control declared distinct."""@en ;
     report:satisfactionState report:Unsatisfied ;
-    vrep:certificate <certificates/KGC364-1.tstp> .
+    vrep:certificate <../../certificates/KGC364-1.tstp> .

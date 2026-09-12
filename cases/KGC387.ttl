@@ -42,4 +42,4 @@ drk:KGC387-report a vrep:OperandVerdictReport ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-spatial-dpvloc-geo> ;
     rdfs:comment """Two rule instances place Hamburg outside the excluded pair."""@en ;
     report:satisfactionState report:Satisfied ;
-    vrep:certificate <certificates/KGC387-2.tstp> .
+    vrep:certificate <../../certificates/KGC387-2.tstp> .

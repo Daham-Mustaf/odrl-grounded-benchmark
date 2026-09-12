@@ -54,4 +54,4 @@ drk:KGC347-report a vrep:OperandVerdictReport ;
     rdfs:comment """The given state lies below the valid branch, and the branches are declared to have nothing below both, so it lies below that branch alone."""@en ;
     dcterms:description """As KGC346, with the valid and invalid branches declared disjoint on DPV's definitions."""@en ;
     report:satisfactionState report:Satisfied ;
-    vrep:certificate <certificates/KGC347-2.tstp> .
+    vrep:certificate <../../certificates/KGC347-2.tstp> .

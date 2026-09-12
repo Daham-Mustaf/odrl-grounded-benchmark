@@ -31,8 +31,6 @@
 <https://w3id.org/odrl-kb/dpv-consent> a dcat:Dataset ;
     dcterms:title "DPV consent status, module slice"@en ;
     dcterms:source <https://w3id.org/dpv/2.3> ;
-    odrlkb:conceptCount 13 ;
-    odrlkb:orderAssertionCount 12 .
 
 odrlkb:consent_expired a odrlkb:ConsentState ;
     rdfs:label "Consent Expired"@en ;

@@ -3,32 +3,32 @@ kgc:KGC352-observed a vrep:Refutation ;
     vrep:proofArtefact <proofs/KGC352-1.tstp> ;
     vrep:attributedAssertion [
         vrep:premiseSource vrep:fromBackgroundTheory ;
-        vrep:formulaName "bg_dist_lb_dpv_consent_distinct_lb_gdpr_a6_1_a_explicit_consent" ;
-        rdfs:label "bg_dist_lb_dpv_consent_distinct_lb_gdpr_a6_1_a_explicit_consent"@en ] ;
+        vrep:formulaName "bg_dist_lb_dpv_consent_lb_gdpr_a6_1_a_explicit_consent" ;
+        rdfs:label "bg_dist_lb_dpv_consent_lb_gdpr_a6_1_a_explicit_consent"@en ] ;
     vrep:attributedAssertion [
         vrep:premiseSource vrep:fromBackgroundTheory ;
-        vrep:formulaName "bg_dist_lb_dpv_contract_distinct_lb_gdpr_a6_1_a_explicit_consent" ;
-        rdfs:label "bg_dist_lb_dpv_contract_distinct_lb_gdpr_a6_1_a_explicit_consent"@en ] ;
+        vrep:formulaName "bg_dist_lb_dpv_contract_lb_gdpr_a6_1_a_explicit_consent" ;
+        rdfs:label "bg_dist_lb_dpv_contract_lb_gdpr_a6_1_a_explicit_consent"@en ] ;
     vrep:attributedAssertion [
         vrep:premiseSource vrep:fromBackgroundTheory ;
-        vrep:formulaName "bg_dist_lb_dpv_legal_obligation_distinct_lb_gdpr_a6_1_a_explicit_consent" ;
-        rdfs:label "bg_dist_lb_dpv_legal_obligation_distinct_lb_gdpr_a6_1_a_explicit_consent"@en ] ;
+        vrep:formulaName "bg_dist_lb_dpv_legal_obligation_lb_gdpr_a6_1_a_explicit_consent" ;
+        rdfs:label "bg_dist_lb_dpv_legal_obligation_lb_gdpr_a6_1_a_explicit_consent"@en ] ;
     vrep:attributedAssertion [
         vrep:premiseSource vrep:fromBackgroundTheory ;
-        vrep:formulaName "bg_dist_lb_dpv_legitimate_interest_distinct_lb_gdpr_a6_1_a_explicit_consent" ;
-        rdfs:label "bg_dist_lb_dpv_legitimate_interest_distinct_lb_gdpr_a6_1_a_explicit_consent"@en ] ;
+        vrep:formulaName "bg_dist_lb_dpv_legitimate_interest_lb_gdpr_a6_1_a_explicit_consent" ;
+        rdfs:label "bg_dist_lb_dpv_legitimate_interest_lb_gdpr_a6_1_a_explicit_consent"@en ] ;
     vrep:attributedAssertion [
         vrep:premiseSource vrep:fromBackgroundTheory ;
-        vrep:formulaName "bg_dist_lb_dpv_official_authority_of_controller_distinct_lb_gdpr_a6_1_a_explicit_consent" ;
-        rdfs:label "bg_dist_lb_dpv_official_authority_of_controller_distinct_lb_gdpr_a6_1_a_explicit_consent"@en ] ;
+        vrep:formulaName "bg_dist_lb_dpv_official_authority_of_controller_lb_gdpr_a6_1_a_explicit_consent" ;
+        rdfs:label "bg_dist_lb_dpv_official_authority_of_controller_lb_gdpr_a6_1_a_explicit_consent"@en ] ;
     vrep:attributedAssertion [
         vrep:premiseSource vrep:fromBackgroundTheory ;
-        vrep:formulaName "bg_dist_lb_dpv_public_interest_distinct_lb_gdpr_a6_1_a_explicit_consent" ;
-        rdfs:label "bg_dist_lb_dpv_public_interest_distinct_lb_gdpr_a6_1_a_explicit_consent"@en ] ;
+        vrep:formulaName "bg_dist_lb_dpv_public_interest_lb_gdpr_a6_1_a_explicit_consent" ;
+        rdfs:label "bg_dist_lb_dpv_public_interest_lb_gdpr_a6_1_a_explicit_consent"@en ] ;
     vrep:attributedAssertion [
         vrep:premiseSource vrep:fromBackgroundTheory ;
-        vrep:formulaName "bg_dist_lb_dpv_vital_interest_distinct_lb_gdpr_a6_1_a_explicit_consent" ;
-        rdfs:label "bg_dist_lb_dpv_vital_interest_distinct_lb_gdpr_a6_1_a_explicit_consent"@en ] ;
+        vrep:formulaName "bg_dist_lb_dpv_vital_interest_lb_gdpr_a6_1_a_explicit_consent" ;
+        rdfs:label "bg_dist_lb_dpv_vital_interest_lb_gdpr_a6_1_a_explicit_consent"@en ] ;
     vrep:attributedAssertion [
         vrep:premiseSource vrep:fromConstraints ;
         vrep:formulaName "w_kgc352" ;

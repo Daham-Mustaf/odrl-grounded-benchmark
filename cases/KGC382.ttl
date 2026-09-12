@@ -41,4 +41,4 @@ drk:KGC382-report a vrep:OperandVerdictReport ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-spatial-dpvloc-geo> ;
     rdfs:comment """One containment edge."""@en ;
     report:satisfactionState report:Satisfied ;
-    vrep:certificate <certificates/KGC382-2.tstp> .
+    vrep:certificate <../../certificates/KGC382-2.tstp> .

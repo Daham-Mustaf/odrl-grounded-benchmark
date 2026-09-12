@@ -50,4 +50,4 @@ drk:KGC300-report a vrep:OperandVerdictReport ;
     vrep:constraintRequest kgc:KGC300-request-c1 ;
     rdfs:comment """No model admits a common use.  The two constraints require one concept to be both subtags, and the background theory holds them distinct."""@en ;
     report:satisfactionState report:Unsatisfied ;
-    vrep:certificate <certificates/KGC300-1.tstp> .
+    vrep:certificate <../../certificates/KGC300-1.tstp> .

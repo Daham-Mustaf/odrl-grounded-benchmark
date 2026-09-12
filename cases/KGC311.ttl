@@ -49,4 +49,4 @@ drk:KGC311-report a vrep:OperandVerdictReport ;
     rdfs:comment """NonCommercialResearch is below ResearchAndDevelopment, which is below Purpose; the certificate uses this two-step path."""@en ;
     dcterms:description """A library permits use for any DPV purpose, and a researcher requests use for non-commercial research."""@en ;
     report:satisfactionState report:Satisfied ;
-    vrep:certificate <certificates/KGC311-2.tstp> .
+    vrep:certificate <../../certificates/KGC311-2.tstp> .

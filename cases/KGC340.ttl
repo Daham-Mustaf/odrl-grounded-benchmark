@@ -46,4 +46,4 @@ drk:KGC340-report a vrep:OperandVerdictReport ;
     rdfs:comment """DPV places consent given among the states valid for processing, so both sides can be satisfied."""@en ;
     dcterms:description """A controller permits use while the consent on record may justify processing; a processor commits to processing only under given consent."""@en ;
     report:satisfactionState report:Satisfied ;
-    vrep:certificate <certificates/KGC340-2.tstp> .
+    vrep:certificate <../../certificates/KGC340-2.tstp> .

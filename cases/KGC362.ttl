@@ -51,4 +51,4 @@ drk:KGC362-report a vrep:OperandVerdictReport ;
     rdfs:comment """Encryption is among the offer's values."""@en ;
     dcterms:description """A provider requires at least one of encryption and access control; a consumer commits to encryption."""@en ;
     report:satisfactionState report:Satisfied ;
-    vrep:certificate <certificates/KGC362-2.tstp> .
+    vrep:certificate <../../certificates/KGC362-2.tstp> .

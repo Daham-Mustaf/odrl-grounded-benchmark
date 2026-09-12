@@ -26,7 +26,7 @@ kgc:KGC361-offer-c1 a odrl:Constraint ;
         dpv:AccessControlMethod .
 
 drk:request-361 a odrl:Request ;
-    dcterms:title "Access control is not among the measures applied"@en ;
+    dcterms:title "Use without access control"@en ;
     odrl:assignee drk:processor ;
     odrl:permission kgc:KGC361-request-r1 .
 
@@ -52,4 +52,4 @@ drk:KGC361-report a vrep:OperandVerdictReport ;
     rdfs:comment """The offer requires access control among the measures supplied and the request excludes it. No premise of the vocabulary or of the parties is used."""@en ;
     dcterms:description """A controller requires encryption and access control, while a processor excludes access control."""@en ;
     report:satisfactionState report:Unsatisfied ;
-    vrep:certificate <certificates/KGC361-1.tstp> .
+    vrep:certificate <../../certificates/KGC361-1.tstp> .

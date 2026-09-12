@@ -41,4 +41,4 @@ drk:KGC383-report a vrep:OperandVerdictReport ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-spatial-dpvloc-juris> ;
     rdfs:comment """Containment composed with membership; true here."""@en ;
     report:satisfactionState report:Satisfied ;
-    vrep:certificate <certificates/KGC383-2.tstp> .
+    vrep:certificate <../../certificates/KGC383-2.tstp> .

@@ -41,4 +41,4 @@ drk:KGC392-report a vrep:OperandVerdictReport ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-spatial-dpvloc-geo> ;
     rdfs:comment """Uvea is distinct from Wallis and Futuna, so it lies in the complement; that it lies within it is not consulted."""@en ;
     report:satisfactionState report:Satisfied ;
-    vrep:certificate <certificates/KGC392-2.tstp> .
+    vrep:certificate <../../certificates/KGC392-2.tstp> .

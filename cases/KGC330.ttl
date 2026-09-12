@@ -48,4 +48,4 @@ drk:KGC330-report a vrep:OperandVerdictReport ;
     rdfs:comment """DPV says Bonaire is part of the Netherlands, so a use in Bonaire is a use in the Netherlands and both sides get what they asked for."""@en ;
     dcterms:description """A library permits use within the Netherlands; a researcher asks to use the material in Bonaire. DPV places Bonaire within the Netherlands."""@en ;
     report:satisfactionState report:Satisfied ;
-    vrep:certificate <certificates/KGC330-2.tstp> .
+    vrep:certificate <../../certificates/KGC330-2.tstp> .
