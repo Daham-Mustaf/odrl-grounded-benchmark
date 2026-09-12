@@ -54,4 +54,4 @@ drk:KGC345-report a vrep:OperandVerdictReport ;
     rdfs:comment """The two states are declared distinct, so exactly one alternative holds of a record in the given state. The premise is the parties'; withdrawing it returns the verdict to Unknown."""@en ;
     dcterms:description """As KGC344, with the given and withdrawn states declared distinct."""@en ;
     report:satisfactionState report:Satisfied ;
-    vrep:certificate <../../certificates/KGC345-2.tstp> .
+    vrep:certificate <certificates/KGC345-2.tstp> .

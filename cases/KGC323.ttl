@@ -49,4 +49,4 @@ drk:KGC323-report a vrep:OperandVerdictReport ;
     rdfs:comment """The offer excludes ft:PDF, while the request requires ft:PDFA1A. The background assertion declares the two concepts distinct, so the requested value is not excluded."""@en ;
     dcterms:description """A library excludes PDF, while a researcher requests PDF/A-1a, with the two formats declared distinct."""@en ;
     report:satisfactionState report:Satisfied ;
-    vrep:certificate <../../certificates/KGC323-2.tstp> .
+    vrep:certificate <certificates/KGC323-2.tstp> .

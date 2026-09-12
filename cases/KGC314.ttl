@@ -49,4 +49,4 @@ drk:KGC314-report a vrep:OperandVerdictReport ;
     rdfs:comment """The background theory declares Marketing and ScientificResearch distinct, so the two constraints cannot be satisfied by the same purpose. This declaration changes the verdict from Unknown to Incompatible; withdrawing the declaration would return the verdict to Unknown."""@en ;
     dcterms:description """The marketing offer and scientific-research request are evaluated with the two purpose concepts declared distinct."""@en ;
     report:satisfactionState report:Unsatisfied ;
-    vrep:certificate <../../certificates/KGC314-1.tstp> .
+    vrep:certificate <certificates/KGC314-1.tstp> .

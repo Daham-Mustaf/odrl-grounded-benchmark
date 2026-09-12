@@ -48,4 +48,4 @@ drk:KGC370-report a vrep:OperandVerdictReport ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-language-bcp47> ;
     rdfs:comment """The two subtags are declared to name distinct languages, which is the parties' rule and not the registry's content. Withdrawing it returns the verdict to Unknown, which is KGC371."""@en ;
     report:satisfactionState report:Unsatisfied ;
-    vrep:certificate <../../certificates/KGC370-1.tstp> .
+    vrep:certificate <certificates/KGC370-1.tstp> .

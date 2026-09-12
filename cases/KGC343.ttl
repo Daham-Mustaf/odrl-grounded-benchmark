@@ -46,4 +46,4 @@ drk:KGC343-report a vrep:OperandVerdictReport ;
     rdfs:comment """The withdrawn state lies below the invalid branch, and the branches are declared to have nothing below both. The declaration follows DPV's definitions but is not asserted by DPV; withdrawing it reopens the verdict."""@en ;
     dcterms:description """As KGC342, with the valid and invalid branches declared disjoint on DPV's definitions."""@en ;
     report:satisfactionState report:Unsatisfied ;
-    vrep:certificate <../../certificates/KGC343-1.tstp> .
+    vrep:certificate <certificates/KGC343-1.tstp> .

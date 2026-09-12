@@ -48,4 +48,4 @@ drk:KGC374-report a vrep:OperandVerdictReport ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-language-bcp47> ;
     dcterms:description """A publisher distributes in German, while a reuser accepts any language except French."""@en ;
     report:satisfactionState report:Satisfied ;
-    vrep:certificate <../../certificates/KGC374-2.tstp> .
+    vrep:certificate <certificates/KGC374-2.tstp> .

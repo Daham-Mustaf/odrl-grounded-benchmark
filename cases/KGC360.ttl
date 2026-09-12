@@ -52,4 +52,4 @@ drk:KGC360-report a vrep:OperandVerdictReport ;
     rdfs:comment """Both required measures are technical measures in the vocabulary, so a use supplying them satisfies the request as well as the offer."""@en ;
     dcterms:description """A controller requires encryption and access control, while a processor applies technical measures."""@en ;
     report:satisfactionState report:Satisfied ;
-    vrep:certificate <../../certificates/KGC360-2.tstp> .
+    vrep:certificate <certificates/KGC360-2.tstp> .

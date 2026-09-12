@@ -49,4 +49,4 @@ drk:KGC310-report a vrep:OperandVerdictReport ;
     rdfs:comment """ScientificResearch is directly below ResearchAndDevelopment in DPV, so the request is compatible with the offer."""@en ;
     dcterms:description """A library permits use for research and development, and a researcher requests use for scientific research."""@en ;
     report:satisfactionState report:Satisfied ;
-    vrep:certificate <../../certificates/KGC310-2.tstp> .
+    vrep:certificate <certificates/KGC310-2.tstp> .

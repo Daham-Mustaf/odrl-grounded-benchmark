@@ -49,4 +49,4 @@ drk:KGC317-report a vrep:OperandVerdictReport ;
     rdfs:comment """The offer excludes exactly the purpose required by the request, so the constraints are Incompatible without any resource or background declaration."""@en ;
     dcterms:description """A library excludes marketing, while a researcher requests use for marketing."""@en ;
     report:satisfactionState report:Unsatisfied ;
-    vrep:certificate <../../certificates/KGC317-1.tstp> .
+    vrep:certificate <certificates/KGC317-1.tstp> .

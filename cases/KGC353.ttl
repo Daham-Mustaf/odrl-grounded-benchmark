@@ -51,4 +51,4 @@ drk:KGC353-report a vrep:OperandVerdictReport ;
     rdfs:comment """The vocabulary places explicit consent below the legal-basis root through three published order assertions. Transitivity of the order yields the relation used by isA."""@en ;
     dcterms:description """A controller permits processing under the legal-basis hierarchy, while a processor requests processing on the basis of explicit consent under Article 6(1)(a)."""@en ;
     report:satisfactionState report:Satisfied ;
-    vrep:certificate <../../certificates/KGC353-2.tstp> .
+    vrep:certificate <certificates/KGC353-2.tstp> .

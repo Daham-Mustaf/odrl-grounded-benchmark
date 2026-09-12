@@ -50,4 +50,4 @@ drk:KGC373-report a vrep:OperandVerdictReport ;
     rdfs:comment """en-US resolves to English, which is distinct from German."""@en ;
     dcterms:description """A publisher distributes in German, while a reuser requests American English."""@en ;
     report:satisfactionState report:Unsatisfied ;
-    vrep:certificate <../../certificates/KGC373-1.tstp> .
+    vrep:certificate <certificates/KGC373-1.tstp> .

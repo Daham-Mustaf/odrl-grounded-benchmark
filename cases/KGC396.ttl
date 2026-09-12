@@ -45,4 +45,4 @@ drk:KGC396-report a vrep:OperandVerdictReport ;
     rdfs:comment """Research and development is among the offer's values, and nothing in the offer limits the use's other purposes."""@en ;
     dcterms:description """A provider permits use for research and development or marketing; a consumer commits to research and development and to service provision, both."""@en ;
     report:satisfactionState report:Satisfied ;
-    vrep:certificate <../../certificates/KGC396-2.tstp> .
+    vrep:certificate <certificates/KGC396-2.tstp> .

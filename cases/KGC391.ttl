@@ -41,4 +41,4 @@ drk:KGC391-report a vrep:OperandVerdictReport ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-spatial-dpvloc-geo> ;
     rdfs:comment """The containment edge, read as the up-set."""@en ;
     report:satisfactionState report:Satisfied ;
-    vrep:certificate <../../certificates/KGC391-2.tstp> .
+    vrep:certificate <certificates/KGC391-2.tstp> .

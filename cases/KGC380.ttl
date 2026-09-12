@@ -42,4 +42,4 @@ drk:KGC380-report a vrep:OperandVerdictReport ;
     rdfs:comment """The jurisdictional binding composes Bonaire's relation to the Netherlands with the Netherlands' relation to the EU, so the constraints are compatible under this reading."""@en ;
     dcterms:description """A library permits use within the European Union; a researcher requests use in Bonaire, Sint Eustatius and Saba."""@en ;
     report:satisfactionState report:Satisfied ;
-    vrep:certificate <../../certificates/KGC380-2.tstp> .
+    vrep:certificate <certificates/KGC380-2.tstp> .

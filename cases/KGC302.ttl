@@ -50,4 +50,4 @@ drk:KGC302-report a vrep:OperandVerdictReport ;
     vrep:constraintRequest kgc:KGC302-request-c1 ;
     rdfs:comment """No model lacks a common use.  The gazetteer places France within Europe, so France itself is an admissible use in every model."""@en ;
     report:satisfactionState report:Satisfied ;
-    vrep:certificate <../../certificates/KGC302-2.tstp> .
+    vrep:certificate <certificates/KGC302-2.tstp> .

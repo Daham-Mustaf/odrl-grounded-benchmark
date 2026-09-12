@@ -43,4 +43,4 @@ drk:KGC397-report a vrep:OperandVerdictReport ;
     rdfs:comment """Advertising is declared distinct from marketing, so it lies in the complement; that it lies below marketing is not consulted."""@en ;
     dcterms:description """A provider permits use for any purpose except marketing; a consumer commits to advertising."""@en ;
     report:satisfactionState report:Satisfied ;
-    vrep:certificate <../../certificates/KGC397-2.tstp> .
+    vrep:certificate <certificates/KGC397-2.tstp> .
