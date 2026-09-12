@@ -447,7 +447,7 @@ PROBLEMS = [
         "expected_verdict":  "Compatible",
         "expected_q1":       "Satisfiable",
         "expected_q2":       "Unsatisfiable",
-        "summary": (
+"summary": (
     "A publisher distributes in German, while a reuser accepts any "
     "language except French."
 ),
@@ -467,8 +467,9 @@ PROBLEMS = [
         ),
         "certificate": {
             "kind": "Refutation",
-"comment": (
-    "German is distinct from French, so the two constraints are compatible."
+"description": (
+    "The uniqueness rule is withdrawn. German and French may denote the "
+    "same language or different languages, so the verdict is Unknown."
 ),
             "premises": [
                 ("fromBackgroundTheory",

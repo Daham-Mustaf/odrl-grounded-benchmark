@@ -283,7 +283,7 @@ PROBLEMS = [
         },
         "ttl": _TTL_HEAD + _offer("KGC360")
                + _request("KGC360",
-                          "The measures applied are technical measures",
+                          "Use only with technical measures in place",
                           "isA", "dpv:TechnicalMeasure"),
     },
 
@@ -331,7 +331,7 @@ PROBLEMS = [
         },
         "ttl": _TTL_HEAD + _offer("KGC361")
                + _request("KGC361",
-                          "Access control is not among the measures applied",
+                          "Use without access control",
                           "isNoneOf", "dpv:AccessControlMethod"),
     },
 

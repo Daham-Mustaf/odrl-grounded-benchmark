@@ -70,15 +70,20 @@ _HEAD = """\
 """
 
 
-def _cnode(pid, side, i, left_operand, operator, values):
-    ro = " ,\n        ".join(f"dpv:{v}" for v in values)
-    return f"""
-kgc:{pid}-{side}-c{i} a odrl:Constraint ;
-    odrl:leftOperand {left_operand} ;
-    odrl:operator odrl:{operator} ;
+def _cnode(cid, lo, op, vals):
+    """One odrl:Constraint node.
+
+    A set-valued right operand is written as repeated objects rather than
+    as an RDF collection. ODRL's context gives odrl:rightOperand no
+    container, so the spec settles neither; the suite uses one form
+    throughout.
+    """
+    ro = " ,\n        ".join(f"dpv:{v}" for v in vals)
+    return f"""kgc:{cid} a odrl:Constraint ;
+    odrl:leftOperand {lo} ;
+    odrl:operator odrl:{op} ;
     odrl:rightOperand {ro} .
 """
-
 
 def _side(pid, role, cls, title, party, lo, constraints, connective=None):
     n = pid[3:]
