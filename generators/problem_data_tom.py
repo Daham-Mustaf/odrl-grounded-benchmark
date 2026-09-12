@@ -124,7 +124,8 @@ kgc:{pid}-offer-r1 a odrl:Permission ;
 kgc:{pid}-offer-c1 a odrl:Constraint ;
     odrl:leftOperand dpv-odrl:TechnicalOrganisationalMeasure ;
     odrl:operator odrl:isAllOf ;
-    odrl:rightOperand ( dpv:Encryption dpv:AccessControlMethod ) .
+    odrl:rightOperand dpv:Encryption ,
+        dpv:AccessControlMethod .
 """
 
 
@@ -152,7 +153,6 @@ kgc:{pid}-request-c1 a odrl:Constraint ;
 # the operator and values of each side passed in.
 # ---------------------------------------------------------------------
 
-_LIST_OPERATORS = {"isAnyOf", "isAllOf", "isNoneOf"}
 
 _PARTIES = {
     "offer":   ("odrl:Offer",   "odrl:assigner drk:controller"),
@@ -161,23 +161,21 @@ _PARTIES = {
 
 
 def _cnode(pid, side, i, left_operand, operator, values):
-    """One odrl:Constraint node. Values are DPV local names. The list
-    operators take an RDF list, even of one value. The others take one
-    IRI."""
-    iris = [f"dpv:{v}" for v in values]
-    if operator in _LIST_OPERATORS:
-        right = "( " + " ".join(iris) + " )"
-    elif len(iris) == 1:
-        right = iris[0]
-    else:
-        raise ValueError(f"{pid}: {operator} takes one value, got {values}")
+    """One odrl:Constraint node. Values are DPV local names.
+
+    A set-valued right operand is written as repeated objects rather than
+    as an RDF collection. ODRL's context gives odrl:rightOperand no
+    container, so the spec settles neither; the suite uses one form
+    throughout so that a consumer reading the case files does not have to
+    tell whether a difference in shape means a difference in meaning.
+    """
+    ro = " ,\n        ".join(f"dpv:{v}" for v in values)
     return f"""
 kgc:{pid}-{side}-c{i} a odrl:Constraint ;
     odrl:leftOperand {left_operand} ;
     odrl:operator odrl:{operator} ;
-    odrl:rightOperand {right} .
+    odrl:rightOperand {ro} .
 """
-
 
 def _side(pid, side, title, left_operand, constraints):
     """One policy (offer or request), its permission and its constraints.
@@ -249,6 +247,12 @@ PROBLEMS = [
         "includes":          INCLUDES,
         "tree": [C("isAllOf", ENCRYPTION, ACCESS),
                  C("isA", TECHNICAL, side="request")],
+        "binding": BINDING,
+"summary": (
+    "A controller requires encryption and access control, while a "
+    "processor applies technical measures."
+),
+
         "description": (
             "The controller requires encryption and access control to be "
             "in place together; the processor states that the measures it "
@@ -294,6 +298,11 @@ PROBLEMS = [
         "resource":          RESOURCE,
         "background_theory": EMPTY_BT,
         "includes":          INCLUDES,
+        "binding": BINDING,
+"summary": (
+    "A controller requires encryption and access control, while a "
+    "processor excludes access control."
+),
         "tree": [C("isAllOf", ENCRYPTION, ACCESS),
                  C("isNoneOf", ACCESS, side="request")],
         "description": (
@@ -323,7 +332,7 @@ PROBLEMS = [
         "ttl": _TTL_HEAD + _offer("KGC361")
                + _request("KGC361",
                           "Access control is not among the measures applied",
-                          "isNoneOf", "( dpv:AccessControlMethod )"),
+                          "isNoneOf", "dpv:AccessControlMethod"),
     },
 
     # -----------------------------------------------------------------
@@ -342,8 +351,10 @@ PROBLEMS = [
             "A provider requires at least one of encryption and access "
             "control; a consumer commits to encryption."),
         "description": (
-            "Encryption is one of the named safeguards, so the verdict is "
-            "Compatible on the constraints alone. The existential clause."),
+            "Encryption is one of the two named safeguards, so the "
+            "constraints are Compatible without consulting the "
+            "vocabulary. Read with KGC363, which changes only the "
+            "operator: at least one against both."),
         "certificate": {"kind": "Refutation",
             "comment": "Encryption is among the offer's values.",
             "premises": []},

@@ -3,9 +3,7 @@
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
 % Problem  : language, eq de against neq fr, registry uniqueness declared (witness condition negated)
 % Version  : 1.0
-% English  : The publisher distributes in German; the reuser accepts anything that is not French. German itself is the witness, but only because the parties' uniqueness rule separates the two subtags: in a structure interpreting de and fr as one language, a use in German is a use in French and the request excludes it.
-%           : 
-%           : So this Compatible rests on a declared premise exactly as KGC370's Incompatible does. The refutation of the second query cites the witness condition and one background premise, and withdrawing that premise is KGC375. A definite verdict of either polarity can stand on the parties' declaration; polarity buys no exemption from provenance.
+% English  : A publisher distributes in German, while a reuser accepts any language except French.
 %
 % Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark

@@ -1,0 +1,57 @@
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix report:  <https://w3id.org/force/compliance-report#> .
+@prefix vrep:    <https://w3id.org/odrl-kb/verdict-report#> .
+@prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix dpv:     <https://w3id.org/dpv#> .
+@prefix dpv-odrl:    <https://w3id.org/dpv/mappings/odrl#> .
+@prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+@prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+
+drk:offer-345 a odrl:Offer ;
+    dcterms:title "Use is permitted while the record is in exactly one of the given and withdrawn states"@en ;
+    odrl:assigner drk:controller ;
+    odrl:permission kgc:KGC345-offer-r1 .
+kgc:KGC345-offer-r1 a odrl:Permission ;
+    odrl:action odrl:use ;
+    odrl:target drk:dataset ;
+    odrl:constraint kgc:KGC345-offer-c1 .
+kgc:KGC345-offer-c1 a odrl:LogicalConstraint ;
+    odrl:xone ( kgc:KGC345-offer-a1 kgc:KGC345-offer-a2 ) .
+
+kgc:KGC345-offer-a1 a odrl:Constraint ;
+    odrl:leftOperand dpv-odrl:Status ;
+    odrl:operator odrl:eq ;
+    odrl:rightOperand dpv:ConsentGiven .
+
+kgc:KGC345-offer-a2 a odrl:Constraint ;
+    odrl:leftOperand dpv-odrl:Status ;
+    odrl:operator odrl:eq ;
+    odrl:rightOperand dpv:ConsentWithdrawn .
+
+drk:request-345 a odrl:Request ;
+    dcterms:title "Processing only under given consent"@en ;
+    odrl:assignee drk:processor ;
+    odrl:permission kgc:KGC345-request-r1 .
+kgc:KGC345-request-r1 a odrl:Permission ;
+    odrl:action odrl:use ;
+    odrl:target drk:dataset ;
+    odrl:constraint kgc:KGC345-request-c1 .
+kgc:KGC345-request-c1 a odrl:Constraint ;
+    odrl:leftOperand dpv-odrl:Status ;
+    odrl:operator odrl:eq ;
+    odrl:rightOperand dpv:ConsentGiven .
+
+### Expected result #######################################################
+
+drk:KGC345-report a vrep:OperandVerdictReport ;
+    dcterms:identifier "KGC345" ;
+    report:policy drk:offer-345 ;
+    report:policyRequest drk:request-345 ;
+    report:constraint kgc:KGC345-offer-c1 ;
+    vrep:constraintRequest kgc:KGC345-request-c1 ;
+    vrep:binding <https://w3id.org/odrl-kb/profile/b-consent-status> ;
+    rdfs:comment """The two states are declared distinct, so exactly one alternative holds of a record in the given state. The premise is the parties'; withdrawing it returns the verdict to Unknown."""@en ;
+    dcterms:description """As KGC344, with the given and withdrawn states declared distinct."""@en ;
+    report:satisfactionState report:Satisfied ;
+    vrep:certificate <certificates/KGC345-2.tstp> .

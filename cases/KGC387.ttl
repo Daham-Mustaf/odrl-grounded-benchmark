@@ -1,0 +1,45 @@
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix report:  <https://w3id.org/force/compliance-report#> .
+@prefix vrep:    <https://w3id.org/odrl-kb/verdict-report#> .
+@prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix loc:     <https://w3id.org/dpv/loc#> .
+@prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+@prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+drk:offer-387 a odrl:Offer ;
+    dcterms:title "Offer: use anywhere except Bavaria and Berlin"@en ;
+    odrl:assigner drk:library ;
+    odrl:permission kgc:KGC387-offer-r1 .
+kgc:KGC387-offer-r1 a odrl:Permission ;
+    odrl:action odrl:use ;
+    odrl:target drk:manuscripts ;
+    odrl:constraint kgc:KGC387-offer-c1 .
+kgc:KGC387-offer-c1 a odrl:Constraint ;
+    odrl:leftOperand odrl:spatial ;
+    odrl:operator odrl:isNoneOf ;
+    odrl:rightOperand loc:DE-BY ,
+        loc:DE-BE .
+drk:request-387 a odrl:Request ;
+    dcterms:title "Request: use in Hamburg"@en ;
+    odrl:permission kgc:KGC387-request-r1 .
+kgc:KGC387-request-r1 a odrl:Permission ;
+    odrl:action odrl:use ;
+    odrl:target drk:manuscripts ;
+    odrl:constraint kgc:KGC387-request-c1 .
+kgc:KGC387-request-c1 a odrl:Constraint ;
+    odrl:leftOperand odrl:spatial ;
+    odrl:operator odrl:eq ;
+    odrl:rightOperand loc:DE-HH .
+
+### Expected result #######################################################
+
+drk:KGC387-report a vrep:OperandVerdictReport ;
+    dcterms:identifier "KGC387" ;
+    report:policy drk:offer-387 ;
+    report:policyRequest drk:request-387 ;
+    report:constraint kgc:KGC387-offer-c1 ;
+    vrep:constraintRequest kgc:KGC387-request-c1 ;
+    vrep:binding <https://w3id.org/odrl-kb/profile/b-spatial-dpvloc-geo> ;
+    rdfs:comment """Two rule instances place Hamburg outside the excluded pair."""@en ;
+    report:satisfactionState report:Satisfied ;
+    vrep:certificate <certificates/KGC387-2.tstp> .

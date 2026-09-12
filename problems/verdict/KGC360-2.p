@@ -3,9 +3,7 @@
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
 % Problem  : measures, isAllOf(Encryption, AccessControlMethod) against isA TechnicalMeasure (witness condition negated)
 % Version  : 1.0
-% English  : The controller requires encryption and access control to be in place together; the processor states that the measures it applies are technical ones. Both required measures lie below dpv:TechnicalMeasure in the resource, so a use supplying just those two satisfies the requirement and the statement at once, and it does so in every structure. Verdict: Compatible.
-%           : 
-%           : This is the superset mode carried by the order: isAllOf asks that its two values lie inside what the use supplies, the request bounds what the use may supply to the technical measures, and the two published assertions place the values within that bound.
+% English  : A controller requires encryption and access control, while a processor applies technical measures.
 %
 % Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark

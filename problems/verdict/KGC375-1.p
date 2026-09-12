@@ -3,9 +3,7 @@
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
 % Problem  : language, eq de against neq fr, no declaration (witness condition asserted)
 % Version  : 1.0
-% English  : KGC374 with the uniqueness rule withdrawn. A structure separating de and fr admits the witness; a structure identifying them admits none, because a use in German is then a use in French. The registry decides neither, so the verdict is Unknown.
-%           : 
-%           : Read with KGC370 and KGC371 this completes the symmetry: the same withdrawal takes an Incompatible to Unknown there and a Compatible to Unknown here. What the declaration buys is definiteness, not a direction.
+% English  : A publisher distributes in German, while a reuser accepts any language except French.
 %
 % Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark

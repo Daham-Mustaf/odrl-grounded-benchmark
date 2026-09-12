@@ -1,0 +1,53 @@
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix report:  <https://w3id.org/force/compliance-report#> .
+@prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix odrlkb:  <https://w3id.org/odrl-kb/bcp47#> .
+@prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+@prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+@prefix vrep:    <https://w3id.org/odrl-kb/verdict-report#> .
+
+drk:manuscripts a dcterms:Dataset ;
+    dcterms:title "Digitised manuscripts, Bavarian State Library"@en .
+
+drk:offer a odrl:Offer ;
+    dcterms:title "BSB offer: access in German"@en ;
+    odrl:assigner drk:library ;
+    odrl:permission kgc:KGC300-offer-r1 .
+
+kgc:KGC300-offer-r1 a odrl:Permission ;
+    odrl:action odrl:use ;
+    odrl:target drk:manuscripts ;
+    odrl:constraint kgc:KGC300-offer-c1 .
+
+kgc:KGC300-offer-c1 a odrl:Constraint ;
+    odrl:leftOperand odrl:language ;
+    odrl:operator odrl:eq ;
+    odrl:rightOperand odrlkb:de .
+
+drk:request a odrl:Request ;
+    dcterms:title "BnF request: access in French"@en ;
+    odrl:assignee drk:researcher ;
+    odrl:permission kgc:KGC300-request-r1 .
+
+kgc:KGC300-request-r1 a odrl:Permission ;
+    odrl:action odrl:use ;
+    odrl:target drk:manuscripts ;
+    odrl:constraint kgc:KGC300-request-c1 .
+
+kgc:KGC300-request-c1 a odrl:Constraint ;
+    odrl:leftOperand odrl:language ;
+    odrl:operator odrl:eq ;
+    odrl:rightOperand odrlkb:fr .
+
+### Expected result #######################################################
+
+drk:KGC300-report a vrep:OperandVerdictReport ;
+    dcterms:identifier "KGC300" ;
+    report:policy drk:offer-300 ;
+    report:policyRequest drk:request-300 ;
+    report:constraint kgc:KGC300-offer-c1 ;
+    vrep:constraintRequest kgc:KGC300-request-c1 ;
+    rdfs:comment """No model admits a common use.  The two constraints require one concept to be both subtags, and the background theory holds them distinct."""@en ;
+    report:satisfactionState report:Unsatisfied ;
+    vrep:certificate <certificates/KGC300-1.tstp> .

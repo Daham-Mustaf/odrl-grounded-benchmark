@@ -30,10 +30,13 @@ kgc:KGC351-offer-r1 a odrl:Permission ;
 kgc:KGC351-offer-c1 a odrl:Constraint ;
     odrl:leftOperand dpv-odrl:LegalBasis ;
     odrl:operator odrl:isAnyOf ;
-    odrl:rightOperand ( dpv:Consent dpv:Contract dpv:LegalObligation
-                             dpv:VitalInterest dpv:PublicInterest
-                             dpv:OfficialAuthorityOfController
-                             dpv:LegitimateInterest ) .
+    odrl:rightOperand dpv:Consent ,
+        dpv:Contract ,
+        dpv:LegalObligation ,
+        dpv:VitalInterest ,
+        dpv:PublicInterest ,
+        dpv:OfficialAuthorityOfController ,
+        dpv:LegitimateInterest .
 
 drk:request-351 a odrl:Request ;
     dcterms:title "Processing is on the basis of explicit consent under Article 6(1)(a)"@en ;

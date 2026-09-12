@@ -47,6 +47,7 @@ drk:KGC373-report a vrep:OperandVerdictReport ;
     report:constraint kgc:KGC373-offer-c1 ;
     vrep:constraintRequest kgc:KGC373-request-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-language-bcp47-primary> ;
-    rdfs:comment """The request's value resolved to bcp_en under this binding's grounding rule, and bcp_de and bcp_en are declared distinct by the same rule that carries KGC370."""@en ;
+    rdfs:comment """en-US resolves to English, which is distinct from German."""@en ;
+    dcterms:description """A publisher distributes in German, while a reuser requests American English."""@en ;
     report:satisfactionState report:Unsatisfied ;
     vrep:certificate <certificates/KGC373-1.tstp> .

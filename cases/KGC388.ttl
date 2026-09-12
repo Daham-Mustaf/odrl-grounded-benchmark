@@ -1,0 +1,50 @@
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix report:  <https://w3id.org/force/compliance-report#> .
+@prefix vrep:    <https://w3id.org/odrl-kb/verdict-report#> .
+@prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix loc:     <https://w3id.org/dpv/loc#> .
+@prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+@prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+drk:offer-388 a odrl:Offer ;
+    dcterms:title "Offer: use within North Rhine-Westphalia or Bavaria"@en ;
+    odrl:assigner drk:library ;
+    odrl:permission kgc:KGC388-offer-r1 .
+kgc:KGC388-offer-r1 a odrl:Permission ;
+    odrl:action odrl:use ;
+    odrl:target drk:manuscripts ;
+    odrl:constraint kgc:KGC388-offer-lc .
+kgc:KGC388-offer-lc a odrl:LogicalConstraint ;
+    odrl:or ( kgc:KGC388-offer-c1 kgc:KGC388-offer-c2 ) .
+kgc:KGC388-offer-c1 a odrl:Constraint ;
+    odrl:leftOperand odrl:spatial ;
+    odrl:operator odrl:isPartOf ;
+    odrl:rightOperand loc:DE-NW .
+kgc:KGC388-offer-c2 a odrl:Constraint ;
+    odrl:leftOperand odrl:spatial ;
+    odrl:operator odrl:isPartOf ;
+    odrl:rightOperand loc:DE-BY .
+drk:request-388 a odrl:Request ;
+    dcterms:title "Request: use in North Rhine-Westphalia"@en ;
+    odrl:permission kgc:KGC388-request-r1 .
+kgc:KGC388-request-r1 a odrl:Permission ;
+    odrl:action odrl:use ;
+    odrl:target drk:manuscripts ;
+    odrl:constraint kgc:KGC388-request-c1 .
+kgc:KGC388-request-c1 a odrl:Constraint ;
+    odrl:leftOperand odrl:spatial ;
+    odrl:operator odrl:eq ;
+    odrl:rightOperand loc:DE-NW .
+
+### Expected result #######################################################
+
+drk:KGC388-report a vrep:OperandVerdictReport ;
+    dcterms:identifier "KGC388" ;
+    report:policy drk:offer-388 ;
+    report:policyRequest drk:request-388 ;
+    report:constraint kgc:KGC388-offer-c1 ;
+    vrep:constraintRequest kgc:KGC388-request-c1 ;
+    vrep:binding <https://w3id.org/odrl-kb/profile/b-spatial-dpvloc-geo> ;
+    rdfs:comment """The first disjunct and reflexivity; the second disjunct is not consulted."""@en ;
+    report:satisfactionState report:Satisfied ;
+    vrep:certificate <certificates/KGC388-2.tstp> .

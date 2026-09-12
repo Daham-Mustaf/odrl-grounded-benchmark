@@ -368,7 +368,8 @@ kgc:KGC322-offer-r1 a odrl:Permission ;
 kgc:KGC322-offer-c1 a odrl:Constraint ;
     odrl:leftOperand odrl:fileFormat ;
     odrl:operator odrl:isAnyOf ;
-    odrl:rightOperand ft:PDF, ft:PDFA1A .
+    odrl:rightOperand ft:PDF ,
+        ft:PDFA1A .
 
 drk:request-322 a odrl:Request ;
     dcterms:title "BnF request: PDF/A-1a"@en ;

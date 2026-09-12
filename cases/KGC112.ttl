@@ -1,0 +1,45 @@
+# A drafting-time check: whether this constraint can be evaluated at all
+# under the sort its operand is bound at.  The answer comes from the
+# signature and from nothing else, so no resource was opened and no prover
+# was run to produce it.
+#
+# A rejected constraint is not false.  It is a question the bound resource
+# cannot be asked: isA over a resource that publishes no subsumption has
+# nothing to test, and an evaluator that returned true or false would be
+# inventing an answer.
+
+@prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix odrlkb:  <https://w3id.org/odrl-kb/bcp47#> .
+@prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+@prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix vrep:    <https://w3id.org/odrl-kb/verdict-report#> .
+@prefix bind:    <https://w3id.org/odrl-kb/binding#> .
+@prefix report:  <https://w3id.org/force/compliance-report#> .
+
+drk:manuscripts a dcterms:Dataset ;
+    dcterms:title "Digitised manuscripts, Bavarian State Library"@en .
+
+drk:offer a odrl:Offer ;
+    dcterms:title "BSB offer, language constrained by eq"@en ;
+    odrl:assigner drk:library ;
+    odrl:permission kgc:KGC112-offer-r1 .
+
+kgc:KGC112-offer-r1 a odrl:Permission ;
+    odrl:action odrl:use ;
+    odrl:target drk:manuscripts ;
+    odrl:constraint kgc:KGC112-offer-c1 .
+
+kgc:KGC112-offer-c1 a odrl:Constraint ;
+    odrl:leftOperand odrl:language ;
+    odrl:operator odrl:eq ;
+    odrl:rightOperand odrlkb:de .
+
+### Expected result #######################################################
+
+drk:KGC112-report a vrep:WellSortednessReport ;
+    dcterms:identifier "KGC112" ;
+    report:constraint kgc:KGC112-offer-c1 ;
+    vrep:binding <https://w3id.org/odrl-kb/profile/b-language-bcp47> ;
+    vrep:wellSorted true .

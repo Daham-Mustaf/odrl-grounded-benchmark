@@ -1,0 +1,54 @@
+@prefix report:  <https://w3id.org/force/compliance-report#> .
+@prefix vrep:    <https://w3id.org/odrl-kb/verdict-report#> .
+@prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dpv:     <https://w3id.org/dpv#> .
+@prefix dpv-odrl:    <https://w3id.org/dpv/mappings/odrl#> .
+@prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+@prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+
+drk:offer-362 a odrl:Offer ;
+    dcterms:title "Use is permitted with at least one of encryption and access control in place"@en ;
+    odrl:assigner drk:controller ;
+    odrl:permission kgc:KGC362-offer-r1 .
+
+kgc:KGC362-offer-r1 a odrl:Permission ;
+    odrl:action odrl:use ;
+    odrl:target drk:dataset ;
+    odrl:constraint kgc:KGC362-offer-c1 .
+
+kgc:KGC362-offer-c1 a odrl:Constraint ;
+    odrl:leftOperand dpv-odrl:TechnicalOrganisationalMeasure ;
+    odrl:operator odrl:isAnyOf ;
+    odrl:rightOperand dpv:Encryption ,
+        dpv:AccessControlMethod .
+
+drk:request-362 a odrl:Request ;
+    dcterms:title "Use is requested with encryption in place"@en ;
+    odrl:assignee drk:processor ;
+    odrl:permission kgc:KGC362-request-r1 .
+
+kgc:KGC362-request-r1 a odrl:Permission ;
+    odrl:action odrl:use ;
+    odrl:target drk:dataset ;
+    odrl:constraint kgc:KGC362-request-c1 .
+
+kgc:KGC362-request-c1 a odrl:Constraint ;
+    odrl:leftOperand dpv-odrl:TechnicalOrganisationalMeasure ;
+    odrl:operator odrl:eq ;
+    odrl:rightOperand dpv:Encryption .
+
+### Expected result #######################################################
+
+drk:KGC362-report a vrep:OperandVerdictReport ;
+    dcterms:identifier "KGC362" ;
+    report:policy drk:offer-362 ;
+    report:policyRequest drk:request-362 ;
+    report:constraint kgc:KGC362-offer-c1 ;
+    vrep:constraintRequest kgc:KGC362-request-c1 ;
+    vrep:binding <https://w3id.org/odrl-kb/profile/b-tom> ;
+    rdfs:comment """Encryption is among the offer's values."""@en ;
+    dcterms:description """A provider requires at least one of encryption and access control; a consumer commits to encryption."""@en ;
+    report:satisfactionState report:Satisfied ;
+    vrep:certificate <certificates/KGC362-2.tstp> .

@@ -1,0 +1,49 @@
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix report:  <https://w3id.org/force/compliance-report#> .
+@prefix vrep:    <https://w3id.org/odrl-kb/verdict-report#> .
+@prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix dpv:     <https://w3id.org/dpv#> .
+@prefix dpv-odrl:    <https://w3id.org/dpv/mappings/odrl#> .
+@prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+@prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+
+drk:offer-340 a odrl:Offer ;
+    dcterms:title "Use is permitted while the consent on record may justify processing"@en ;
+    odrl:assigner drk:controller ;
+    odrl:permission kgc:KGC340-offer-r1 .
+kgc:KGC340-offer-r1 a odrl:Permission ;
+    odrl:action odrl:use ;
+    odrl:target drk:dataset ;
+    odrl:constraint kgc:KGC340-offer-c1 .
+kgc:KGC340-offer-c1 a odrl:Constraint ;
+    odrl:leftOperand dpv-odrl:Status ;
+    odrl:operator odrl:isA ;
+    odrl:rightOperand dpv:ConsentStatusValidForProcessing .
+
+drk:request-340 a odrl:Request ;
+    dcterms:title "Processing only under given consent"@en ;
+    odrl:assignee drk:processor ;
+    odrl:permission kgc:KGC340-request-r1 .
+kgc:KGC340-request-r1 a odrl:Permission ;
+    odrl:action odrl:use ;
+    odrl:target drk:dataset ;
+    odrl:constraint kgc:KGC340-request-c1 .
+kgc:KGC340-request-c1 a odrl:Constraint ;
+    odrl:leftOperand dpv-odrl:Status ;
+    odrl:operator odrl:eq ;
+    odrl:rightOperand dpv:ConsentGiven .
+
+### Expected result #######################################################
+
+drk:KGC340-report a vrep:OperandVerdictReport ;
+    dcterms:identifier "KGC340" ;
+    report:policy drk:offer-340 ;
+    report:policyRequest drk:request-340 ;
+    report:constraint kgc:KGC340-offer-c1 ;
+    vrep:constraintRequest kgc:KGC340-request-c1 ;
+    vrep:binding <https://w3id.org/odrl-kb/profile/b-consent-status> ;
+    rdfs:comment """DPV places consent given among the states valid for processing, so both sides can be satisfied."""@en ;
+    dcterms:description """A controller permits use while the consent on record may justify processing; a processor commits to processing only under given consent."""@en ;
+    report:satisfactionState report:Satisfied ;
+    vrep:certificate <certificates/KGC340-2.tstp> .

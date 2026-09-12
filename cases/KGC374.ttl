@@ -34,7 +34,7 @@ kgc:KGC374-request-r1 a odrl:Permission ;
 
 kgc:KGC374-request-c1 a odrl:Constraint ;
     odrl:leftOperand odrl:language ;
-    odrl:operator odrl:eq ;
+    odrl:operator odrl:neq ;
     odrl:rightOperand bcp47:fr .
 
 ### Expected result #######################################################
@@ -46,6 +46,7 @@ drk:KGC374-report a vrep:OperandVerdictReport ;
     report:constraint kgc:KGC374-offer-c1 ;
     vrep:constraintRequest kgc:KGC374-request-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-language-bcp47> ;
-    rdfs:comment """Refutes the negated witness condition: denying the witness forces de and fr to be one concept, against the declared distinctness."""@en ;
+    rdfs:comment """German is distinct from French, so the two constraints are compatible."""@en ;
+    dcterms:description """A publisher distributes in German, while a reuser accepts any language except French."""@en ;
     report:satisfactionState report:Satisfied ;
     vrep:certificate <certificates/KGC374-2.tstp> .

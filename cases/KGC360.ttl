@@ -1,0 +1,55 @@
+@prefix report:  <https://w3id.org/force/compliance-report#> .
+@prefix vrep:    <https://w3id.org/odrl-kb/verdict-report#> .
+@prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dpv:     <https://w3id.org/dpv#> .
+@prefix dpv-odrl:    <https://w3id.org/dpv/mappings/odrl#> .
+@prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+@prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+
+drk:offer-360 a odrl:Offer ;
+    dcterms:title "Use is permitted where encryption and access control are both in place"@en ;
+    rdfs:comment "The kind of clause the DPV-ODRL guidance describes for this operand: access to a dataset permitted only where stated measures are implemented. Both are required, not one of them, which is what distinguishes isAllOf from isAnyOf here."@en ;
+    odrl:assigner drk:controller ;
+    odrl:permission kgc:KGC360-offer-r1 .
+
+kgc:KGC360-offer-r1 a odrl:Permission ;
+    odrl:action odrl:use ;
+    odrl:target drk:dataset ;
+    odrl:constraint kgc:KGC360-offer-c1 .
+
+kgc:KGC360-offer-c1 a odrl:Constraint ;
+    odrl:leftOperand dpv-odrl:TechnicalOrganisationalMeasure ;
+    odrl:operator odrl:isAllOf ;
+    odrl:rightOperand dpv:Encryption ,
+        dpv:AccessControlMethod .
+
+drk:request-360 a odrl:Request ;
+    dcterms:title "The measures applied are technical measures"@en ;
+    odrl:assignee drk:processor ;
+    odrl:permission kgc:KGC360-request-r1 .
+
+kgc:KGC360-request-r1 a odrl:Permission ;
+    odrl:action odrl:use ;
+    odrl:target drk:dataset ;
+    odrl:constraint kgc:KGC360-request-c1 .
+
+kgc:KGC360-request-c1 a odrl:Constraint ;
+    odrl:leftOperand dpv-odrl:TechnicalOrganisationalMeasure ;
+    odrl:operator odrl:isA ;
+    odrl:rightOperand dpv:TechnicalMeasure .
+
+### Expected result #######################################################
+
+drk:KGC360-report a vrep:OperandVerdictReport ;
+    dcterms:identifier "KGC360" ;
+    report:policy drk:offer-360 ;
+    report:policyRequest drk:request-360 ;
+    report:constraint kgc:KGC360-offer-c1 ;
+    vrep:constraintRequest kgc:KGC360-request-c1 ;
+    vrep:binding <https://w3id.org/odrl-kb/profile/b-tom> ;
+    rdfs:comment """Both required measures are technical measures in the vocabulary, so a use supplying them satisfies the request as well as the offer."""@en ;
+    dcterms:description """A controller requires encryption and access control, while a processor applies technical measures."""@en ;
+    report:satisfactionState report:Satisfied ;
+    vrep:certificate <certificates/KGC360-2.tstp> .

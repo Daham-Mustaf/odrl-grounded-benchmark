@@ -197,7 +197,7 @@ kgc:{pid}-request-r1 a odrl:Permission ;
 
 kgc:{pid}-request-c1 a odrl:Constraint ;
     odrl:leftOperand odrl:language ;
-    odrl:operator odrl:eq ;
+    odrl:operator odrl:{operator} ;
     odrl:rightOperand {value} .
 """
 
@@ -382,6 +382,10 @@ PROBLEMS = [
         "sort":              "nom",
         "resource":          RESOURCE,
         "background_theory": UNIQUENESS,
+        "summary": (
+    "A publisher distributes in German, while a reuser requests American "
+    "English."
+),
         "smt2_background":
             "(assert (! (not (= bcp_de bcp_en)) "
             ":named bg_dist_bcp47_de_en))",
@@ -412,10 +416,9 @@ PROBLEMS = [
         "expected_q2": "Satisfiable",
         "certificate": {
             "kind": "Refutation",
-            "comment": "The request's value resolved to bcp_en under this "
-                       "binding's grounding rule, and bcp_de and bcp_en "
-                       "are declared distinct by the same rule that "
-                       "carries KGC370.",
+           "comment": (
+        "en-US resolves to English, which is distinct from German."
+    ),
             "premises": [
                 ("fromBackgroundTheory",
                  "bcp47:de and bcp47:en are declared distinct, on RFC "
@@ -444,6 +447,10 @@ PROBLEMS = [
         "expected_verdict":  "Compatible",
         "expected_q1":       "Satisfiable",
         "expected_q2":       "Unsatisfiable",
+        "summary": (
+    "A publisher distributes in German, while a reuser accepts any "
+    "language except French."
+),
         "description": (
             "The publisher distributes in German; the reuser accepts "
             "anything that is not French. German itself is the witness, "
@@ -460,9 +467,9 @@ PROBLEMS = [
         ),
         "certificate": {
             "kind": "Refutation",
-            "comment": "Refutes the negated witness condition: denying "
-                       "the witness forces de and fr to be one concept, "
-                       "against the declared distinctness.",
+"comment": (
+    "German is distinct from French, so the two constraints are compatible."
+),
             "premises": [
                 ("fromBackgroundTheory",
                  "bcp47:de and bcp47:fr are declared distinct, on RFC "
@@ -489,6 +496,10 @@ PROBLEMS = [
         "unknown_reason":    "epistemic",
         "expected_q1":       "Satisfiable",
         "expected_q2":       "Satisfiable",
+        "summary": (
+    "A publisher distributes in German, while a reuser accepts any "
+    "language except French."
+),
         "description": (
             "KGC374 with the uniqueness rule withdrawn. A structure "
             "separating de and fr admits the witness; a structure "
@@ -502,9 +513,10 @@ PROBLEMS = [
         ),
         "certificate": {
             "kind": "Models",
-            "comment": "One certifying structure separates bcp47:de and "
-                       "bcp47:fr and carries the witness; the other "
-                       "identifies them and carries none.",
+           "description": (
+    "The uniqueness rule is withdrawn. German and French may denote the "
+    "same language or different languages, so the verdict is Unknown."
+),
             "premises": [],
         },
         "ttl": _TTL_HEAD + _offer("KGC375")

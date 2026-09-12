@@ -1,0 +1,44 @@
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix report:  <https://w3id.org/force/compliance-report#> .
+@prefix vrep:    <https://w3id.org/odrl-kb/verdict-report#> .
+@prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix loc:     <https://w3id.org/dpv/loc#> .
+@prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+@prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+drk:offer-384 a odrl:Offer ;
+    dcterms:title "Offer: use in North Rhine-Westphalia"@en ;
+    odrl:assigner drk:library ;
+    odrl:permission kgc:KGC384-offer-r1 .
+kgc:KGC384-offer-r1 a odrl:Permission ;
+    odrl:action odrl:use ;
+    odrl:target drk:manuscripts ;
+    odrl:constraint kgc:KGC384-offer-c1 .
+kgc:KGC384-offer-c1 a odrl:Constraint ;
+    odrl:leftOperand odrl:spatial ;
+    odrl:operator odrl:eq ;
+    odrl:rightOperand loc:DE-NW .
+drk:request-384 a odrl:Request ;
+    dcterms:title "Request: use in Bavaria"@en ;
+    odrl:permission kgc:KGC384-request-r1 .
+kgc:KGC384-request-r1 a odrl:Permission ;
+    odrl:action odrl:use ;
+    odrl:target drk:manuscripts ;
+    odrl:constraint kgc:KGC384-request-c1 .
+kgc:KGC384-request-c1 a odrl:Constraint ;
+    odrl:leftOperand odrl:spatial ;
+    odrl:operator odrl:eq ;
+    odrl:rightOperand loc:DE-BY .
+
+### Expected result #######################################################
+
+drk:KGC384-report a vrep:OperandVerdictReport ;
+    dcterms:identifier "KGC384" ;
+    report:policy drk:offer-384 ;
+    report:policyRequest drk:request-384 ;
+    report:constraint kgc:KGC384-offer-c1 ;
+    vrep:constraintRequest kgc:KGC384-request-c1 ;
+    vrep:binding <https://w3id.org/odrl-kb/profile/b-spatial-dpvloc-geo> ;
+    rdfs:comment """One structure identifies the two Laender, one keeps them apart; the file decides neither."""@en ;
+    report:satisfactionState vrep:Undetermined ;
+    vrep:undeterminedReason vrep:Epistemic .

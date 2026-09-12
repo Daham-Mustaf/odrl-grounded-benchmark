@@ -1,0 +1,51 @@
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix report:  <https://w3id.org/force/compliance-report#> .
+@prefix vrep:    <https://w3id.org/odrl-kb/verdict-report#> .
+@prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ft:      <http://publications.europa.eu/resource/authority/file-type/> .
+@prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+@prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+
+drk:offer-320 a odrl:Offer ;
+    dcterms:title "BSB offer: PDF"@en ;
+    odrl:assigner drk:library ;
+    odrl:permission kgc:KGC320-offer-r1 .
+
+kgc:KGC320-offer-r1 a odrl:Permission ;
+    odrl:action odrl:use ;
+    odrl:target drk:manuscripts ;
+    odrl:constraint kgc:KGC320-offer-c1 .
+
+kgc:KGC320-offer-c1 a odrl:Constraint ;
+    odrl:leftOperand odrl:fileFormat ;
+    odrl:operator odrl:eq ;
+    odrl:rightOperand ft:PDF .
+
+drk:request-320 a odrl:Request ;
+    dcterms:title "BnF request: PDF/A-1a"@en ;
+    odrl:assignee drk:researcher ;
+    odrl:permission kgc:KGC320-request-r1 .
+
+kgc:KGC320-request-r1 a odrl:Permission ;
+    odrl:action odrl:use ;
+    odrl:target drk:manuscripts ;
+    odrl:constraint kgc:KGC320-request-c1 .
+
+kgc:KGC320-request-c1 a odrl:Constraint ;
+    odrl:leftOperand odrl:fileFormat ;
+    odrl:operator odrl:eq ;
+    odrl:rightOperand ft:PDFA1A .
+
+### Expected result #######################################################
+
+drk:KGC320-report a vrep:OperandVerdictReport ;
+    dcterms:identifier "KGC320" ;
+    report:policy drk:offer-320 ;
+    report:policyRequest drk:request-320 ;
+    report:constraint kgc:KGC320-offer-c1 ;
+    vrep:constraintRequest kgc:KGC320-request-c1 ;
+    rdfs:comment """The two constraints can be satisfied both when ft:PDF and ft:PDFA1A denote the same element and when they denote different elements. No resource or background assertion selects between these possibilities."""@en ;
+    dcterms:description """A library permits PDF, while a researcher requests PDF/A-1a."""@en ;
+    report:satisfactionState vrep:Undetermined ;
+    vrep:undeterminedReason vrep:Epistemic .

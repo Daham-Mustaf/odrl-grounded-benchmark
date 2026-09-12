@@ -1,21 +1,11 @@
 # =====================================================================
 # problem_data_dpv.py: three blocks to replace
-#
+# Twelve problems over the DPV purposes slice.
 # Nothing else in the file changes. The duplicates were being
 # overwritten by Python, so the verdicts do not move; what changes is
 # that the file stops carrying another resource's constants.
 # =====================================================================
 
-
-# ---------------------------------------------------------------------
-# 1. The constant block, replacing everything from `from compile` down
-#    to the `_decls` definition.
-#
-#    Removed: ENC and AC (technical measures, not purposes), the
-#    duplicate RND, the commented milestone line, and the seven T_
-#    constants, which belong in problem_data_tom.py. TOM and _D364 go
-#    with them.
-# ---------------------------------------------------------------------
 
 from compile import Constraint, Or
 
@@ -80,11 +70,12 @@ _HEAD = """\
 """
 
 
-def _cnode(cid, lo, op, vals):
-    ro = " ,\n        ".join(f"dpv:{v}" for v in vals)
-    return f"""kgc:{cid} a odrl:Constraint ;
-    odrl:leftOperand {lo} ;
-    odrl:operator odrl:{op} ;
+def _cnode(pid, side, i, left_operand, operator, values):
+    ro = " ,\n        ".join(f"dpv:{v}" for v in values)
+    return f"""
+kgc:{pid}-{side}-c{i} a odrl:Constraint ;
+    odrl:leftOperand {left_operand} ;
+    odrl:operator odrl:{operator} ;
     odrl:rightOperand {ro} .
 """
 
