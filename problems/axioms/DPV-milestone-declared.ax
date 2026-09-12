@@ -1,7 +1,0 @@
-% Background theory: one distinctness, declared by the parties.
-% DPV publishes nothing that separates these two purposes.  The
-% bt_ prefix marks the assertion as withdrawable, so a refutation
-% resting on it is attributable to the declaration.
-
-fof(bt_dpv_marketing_distinct_dpv_scientific_research, axiom,
-    dpv_marketing != dpv_scientific_research).
