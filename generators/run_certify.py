@@ -83,8 +83,16 @@ def verdict_of(q1: str, q2: str) -> str:
 
 
 def profile(classified: dict) -> dict:
-    """Counts by provenance: what two provers can be compared on."""
-    return {k: len(v) for k, v in classified.items() if v}
+    """Count case-specific provenance classes.
+
+    Constitutive order axioms are excluded because they are part of the
+    semantic theory, not case-specific premises attributable to a party.
+    """
+    return {
+        k: len(v)
+        for k, v in classified.items()
+        if v and k != "fromOrderAxiom"
+    }
 
 
 def constants_of(smt2: Path) -> list[str]:
