@@ -213,7 +213,9 @@ def expand_tree(p: dict) -> dict:
     q.setdefault("smt2_background", derived_bg)
     used_derived = (q["smt2_resource"] == derived_res
                     or q["smt2_background"] == derived_bg)
-    decl_constants = constants + (extras if used_derived else [])
+    extra = [c for c in p.get("extra_constants", [])
+             if c not in constants]
+    decl_constants = constants + (extras if used_derived else []) + extra
     with_concept = used_derived and "(kge_concept " in (
         q["smt2_resource"] + q["smt2_background"])
     q["smt2_decls"] = smt_declarations(decl_constants, with_concept)

@@ -8,68 +8,68 @@ fof(f1,axiom,(
 fof(f14,axiom,(
   kge_leq(dpv_consent_withdrawn,dpv_consent_status_invalid_for_processing)),
   file('problems/verdict/KGC343-1.p',res_dpv_consent_withdrawn_below_dpv_consent_status_invalid_for_processing)).
-fof(f16,axiom,(
+fof(f17,axiom,(
   ! [X0] : ~(kge_leq(X0,dpv_consent_status_valid_for_processing) & kge_leq(X0,dpv_consent_status_invalid_for_processing))),
   file('problems/verdict/KGC343-1.p',bg_disj_dpv_consent_status_valid_for_processing_disjoint_dpv_consent_status_invalid_for_processing)).
-fof(f17,axiom,(
+fof(f18,axiom,(
   (kge_leq(dpv_consent_status_valid_for_processing,dpv_consent_status_valid_for_processing) & dpv_consent_status_valid_for_processing = dpv_consent_withdrawn) | (kge_leq(dpv_consent_withdrawn,dpv_consent_status_valid_for_processing) & dpv_consent_withdrawn = dpv_consent_withdrawn)),
   file('problems/verdict/KGC343-1.p',w_kgc343)).
-fof(f22,plain,(
+fof(f24,plain,(
   ! [X0] : (~kge_leq(X0,dpv_consent_status_valid_for_processing) | ~kge_leq(X0,dpv_consent_status_invalid_for_processing))),
-  inference(ennf_transformation,[],[f16])).
-fof(f23,plain,(
+  inference(ennf_transformation,[],[f17])).
+fof(f25,plain,(
   ( ! [X0] : (kge_leq(X0,X0)) )),
   inference(cnf_transformation,[],[f1])).
-fof(f36,plain,(
+fof(f38,plain,(
   kge_leq(dpv_consent_withdrawn,dpv_consent_status_invalid_for_processing)),
   inference(cnf_transformation,[],[f14])).
-fof(f38,plain,(
+fof(f41,plain,(
   ( ! [X0] : (~kge_leq(X0,dpv_consent_status_valid_for_processing) | ~kge_leq(X0,dpv_consent_status_invalid_for_processing)) )),
-  inference(cnf_transformation,[],[f22])).
-fof(f40,plain,(
+  inference(cnf_transformation,[],[f24])).
+fof(f43,plain,(
   dpv_consent_status_valid_for_processing = dpv_consent_withdrawn | kge_leq(dpv_consent_withdrawn,dpv_consent_status_valid_for_processing)),
-  inference(cnf_transformation,[],[f17])).
-fof(f44,definition,(
+  inference(cnf_transformation,[],[f18])).
+fof(f47,definition,(
   spl0_1 <=> kge_leq(dpv_consent_withdrawn,dpv_consent_status_valid_for_processing)),
   introduced(definition,[new_symbols(naming,[spl0_1])],[avatar_definition])).
-fof(f46,plain,(
+fof(f49,plain,(
   kge_leq(dpv_consent_withdrawn,dpv_consent_status_valid_for_processing) | ~spl0_1),
-  inference(avatar_component_clause,[],[f44])).
-fof(f48,definition,(
+  inference(avatar_component_clause,[],[f47])).
+fof(f51,definition,(
   spl0_2 <=> dpv_consent_status_valid_for_processing = dpv_consent_withdrawn),
   introduced(definition,[new_symbols(naming,[spl0_2])],[avatar_definition])).
-fof(f50,plain,(
+fof(f53,plain,(
   dpv_consent_status_valid_for_processing = dpv_consent_withdrawn | ~spl0_2),
-  inference(avatar_component_clause,[],[f48])).
-fof(f51,plain,(
+  inference(avatar_component_clause,[],[f51])).
+fof(f54,plain,(
   spl0_1 | spl0_2),
-  inference(avatar_split_clause,[],[f40,f48,f44])).
-fof(f57,plain,(
+  inference(avatar_split_clause,[],[f43,f51,f47])).
+fof(f60,plain,(
   kge_leq(dpv_consent_status_valid_for_processing,dpv_consent_status_invalid_for_processing) | ~spl0_2),
-  inference(superposition,[],[f36,f50])).
-fof(f58,plain,(
-  ~kge_leq(dpv_consent_status_valid_for_processing,dpv_consent_status_invalid_for_processing)),
-  inference(resolution,[],[f38,f23])).
+  inference(superposition,[],[f38,f53])).
 fof(f61,plain,(
-  $false | ~spl0_2),
-  inference(forward_subsumption_resolution,[],[f58,f57])).
-fof(f62,plain,(
-  ~spl0_2),
-  inference(avatar_contradiction_clause,[],[f61])).
-fof(f63,plain,(
-  ~kge_leq(dpv_consent_withdrawn,dpv_consent_status_invalid_for_processing) | ~spl0_1),
-  inference(resolution,[],[f46,f38])).
+  ~kge_leq(dpv_consent_status_valid_for_processing,dpv_consent_status_invalid_for_processing)),
+  inference(resolution,[],[f41,f25])).
 fof(f64,plain,(
-  $false | ~spl0_1),
-  inference(forward_subsumption_resolution,[],[f63,f36])).
+  $false | ~spl0_2),
+  inference(forward_subsumption_resolution,[],[f61,f60])).
 fof(f65,plain,(
-  ~spl0_1),
+  ~spl0_2),
   inference(avatar_contradiction_clause,[],[f64])).
-cnf(s1, plain, spl0_1 | spl0_2, inference(sat_conversion,[],[f51])).
-cnf(s3, plain, ~spl0_2, inference(sat_conversion,[],[f62])).
-cnf(s4, plain, ~spl0_1, inference(sat_conversion,[],[f65])).
-cnf(s6, plain, $false, inference(rat,[],[s1,s3,s4])).
 fof(f66,plain,(
+  ~kge_leq(dpv_consent_withdrawn,dpv_consent_status_invalid_for_processing) | ~spl0_1),
+  inference(resolution,[],[f49,f41])).
+fof(f67,plain,(
+  $false | ~spl0_1),
+  inference(forward_subsumption_resolution,[],[f66,f38])).
+fof(f68,plain,(
+  ~spl0_1),
+  inference(avatar_contradiction_clause,[],[f67])).
+cnf(s1, plain, spl0_1 | spl0_2, inference(sat_conversion,[],[f54])).
+cnf(s3, plain, ~spl0_2, inference(sat_conversion,[],[f65])).
+cnf(s4, plain, ~spl0_1, inference(sat_conversion,[],[f68])).
+cnf(s6, plain, $false, inference(rat,[],[s1,s3,s4])).
+fof(f69,plain,(
   $false),
   inference(avatar_sat_refutation,[],[s6])).
 % SZS output end Proof for KGC343-1
@@ -77,7 +77,7 @@ fof(f66,plain,(
 % Version: Vampire 5.0.1 (Release build, commit 1b13eafde on 2026-01-18 12:14:50 +0000)
 % CaDiCaL version: 2.1.3
 % Termination reason: Refutation
-% Time elapsed: 0.003 s
+% Time elapsed: 0.001 s
 % Peak memory usage: 29 MB
 % ------------------------------
 % ------------------------------

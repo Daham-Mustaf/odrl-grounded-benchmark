@@ -17,6 +17,7 @@
 (declare-sort Concept 0)
 (declare-fun dpv_consent_status_valid_for_processing () Concept)
 (declare-fun dpv_consent_withdrawn () Concept)
+(declare-fun dpv_consent_status_invalid_for_processing () Concept)
 (declare-fun kge_leq (Concept Concept) Bool)
 ; Order axioms, quantified.  The same three as KGE000-0.ax, so the two
 ; encodings are the same theory.
@@ -25,6 +26,10 @@
     (=> (and (kge_leq x y) (kge_leq y x)) (= x y))) :named ax_leq_antisymmetric))
 (assert (! (forall ((x Concept) (y Concept) (z Concept))
     (=> (and (kge_leq x y) (kge_leq y z)) (kge_leq x z))) :named ax_leq_transitive))
+; The same disjointness, named as the TPTP side names it.
+(assert (! (forall ((x Concept))
+    (not (and (kge_leq x dpv_consent_status_valid_for_processing) (kge_leq x dpv_consent_status_invalid_for_processing))))
+  :named bg_disj_dpv_consent_status_valid_for_processing_disjoint_dpv_consent_status_invalid_for_processing))
 ; witness condition negated
 (assert (! (not (or (and (kge_leq dpv_consent_status_valid_for_processing dpv_consent_status_valid_for_processing) (= dpv_consent_status_valid_for_processing dpv_consent_withdrawn)) (and (kge_leq dpv_consent_withdrawn dpv_consent_status_valid_for_processing) (= dpv_consent_withdrawn dpv_consent_withdrawn)))) :named w_kgc343))
 (check-sat)

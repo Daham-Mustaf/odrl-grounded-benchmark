@@ -126,6 +126,28 @@ PROV_CONS = ("Construction: consent states are exclusive by nature, so the "
 def C(op, *vals, side="offer"):
     return Constraint(op, tuple(vals), side)
 
+def _disj(*pairs):
+    """Declared disjointness: nothing lies below both branches.
+
+    Quantified where _iso's distinctness is ground, so the SMT side
+    needs an explicit forall. The name matches what
+    DPV-consent-definitional.ax writes, or the two provers would cite
+    different names for one premise.
+    """
+    fof = ["% Background theory: the branches declared disjoint, warranted",
+           "% by the module's definitions and asserted by it nowhere.", ""]
+    smt = ["; The same disjointness, named as the TPTP side names it."]
+    for a, b in pairs:
+        n = f"bg_disj_{a}_disjoint_{b}"
+        fof.append(f"fof({n}, axiom,\n"
+                   f"    ! [X] : ~ ( kge_leq(X, {a}) & kge_leq(X, {b}) )).")
+        smt.append(f"(assert (! (forall ((x Concept))\n"
+                   f"    (not (and (kge_leq x {a}) (kge_leq x {b}))))\n"
+                   f"  :named {n}))")
+    return "\n".join(fof) + "\n", "\n".join(smt)
+
+
+_DISJ = _disj((VALID, INVALID))
 
 _TTL_HEAD = """\
 @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
@@ -318,8 +340,13 @@ PROBLEMS = [
                 "ConsentWithdrawn, branches disjoint",
         "left_operand": "Status", "sort": "tax",
         "resource": RESOURCE, "background_theory": DEFINITIONAL_BT,
+                "fof_decls": _DISJ[0],
+        "smt2_background": _DISJ[1],
+        "extra_constants": [INVALID],
         "binding": BINDING, "includes": INCLUDES_DEFINITIONAL,
         "tree": [C("isA", VALID), C("eq", WITHDRAWN, side="request")],
+                "fof_decls": _DISJ[0],
+        "smt2_background": _DISJ[1],
         "expected_verdict": "Incompatible",
         "expected_q1": "Unsatisfiable", "expected_q2": "Satisfiable",
         "summary": (
@@ -466,6 +493,9 @@ PROBLEMS = [
                 "InvalidForProcessing) against eq ConsentGiven, branches "
                 "disjoint",
         "left_operand": "Status", "sort": "tax",
+           "fof_decls": _DISJ[0],
+        "smt2_background": _DISJ[1],
+                        "extra_constants": [INVALID],
         "resource": RESOURCE, "background_theory": DEFINITIONAL_BT,
         "binding": BINDING, "includes": INCLUDES_DEFINITIONAL,
         "tree": [Xone((C("isA", VALID), C("isA", INVALID))),

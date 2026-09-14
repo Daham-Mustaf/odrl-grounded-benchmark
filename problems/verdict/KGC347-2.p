@@ -20,7 +20,11 @@ include('axioms/DPV-consent.ax').
 include('axioms/DPV-consent-definitional.ax').
 
 % --- constants, groundings and resource hooks ----------------------------
+% Background theory: the branches declared disjoint, warranted
+% by the module's definitions and asserted by it nowhere.
 
+fof(bg_disj_dpv_consent_status_valid_for_processing_disjoint_dpv_consent_status_invalid_for_processing, axiom,
+    ! [X] : ~ ( kge_leq(X, dpv_consent_status_valid_for_processing) & kge_leq(X, dpv_consent_status_invalid_for_processing) )).
 
 % --- witness condition negated -------------------------------------------
 fof(w_kgc347, axiom,
