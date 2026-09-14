@@ -26,6 +26,7 @@
     (=> (and (kge_leq x y) (kge_leq y x)) (= x y))) :named ax_leq_antisymmetric))
 (assert (! (forall ((x Concept) (y Concept) (z Concept))
     (=> (and (kge_leq x y) (kge_leq y z)) (kge_leq x z))) :named ax_leq_transitive))
+(assert (! (kge_leq dpv_consent_withdrawn dpv_consent_status_invalid_for_processing) :named res_dpv_consent_withdrawn_below_dpv_consent_status_invalid_for_processing))
 ; The same disjointness, named as the TPTP side names it.
 (assert (! (forall ((x Concept))
     (not (and (kge_leq x dpv_consent_status_valid_for_processing) (kge_leq x dpv_consent_status_invalid_for_processing))))

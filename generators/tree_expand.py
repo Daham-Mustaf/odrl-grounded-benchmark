@@ -202,8 +202,14 @@ def expand_tree(p: dict) -> dict:
             f"add it to the problem's grounding map, or mark the problem "
             f"ungrounded if the binding's rule does not resolve it.")
     w = compile_operand(p["tree"], constants, p["sort"])
+    # A background premise may name a concept neither constraint mentions:
+    # the consent disjointness ranges over both branches while the
+    # constraints name one. Those concepts go into the assertion filter as
+    # well as the declarations, or an edge to one of them is dropped as
+    # leading outside the problem.
+    extra = [c for c in p.get("extra_constants", []) if c not in constants]
     derived_res, derived_bg, extras = assertions_for(
-        constants, p.get("includes", []))
+        constants + extra, p.get("includes", []))
     q = dict(p)
     q.setdefault("fof_decls", "")
     q["fof_witness"] = w["fof"]
@@ -215,7 +221,7 @@ def expand_tree(p: dict) -> dict:
                     or q["smt2_background"] == derived_bg)
     extra = [c for c in p.get("extra_constants", [])
              if c not in constants]
-    decl_constants = constants + (extras if used_derived else []) + extra
+    decl_constants = constants + extra + (extras if used_derived else [])
     with_concept = used_derived and "(kge_concept " in (
         q["smt2_resource"] + q["smt2_background"])
     q["smt2_decls"] = smt_declarations(decl_constants, with_concept)

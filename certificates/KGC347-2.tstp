@@ -5,89 +5,89 @@
 fof(f5,axiom,(
   kge_leq(dpv_consent_given,dpv_consent_status_valid_for_processing)),
   file('problems/verdict/KGC347-2.p',res_dpv_consent_given_below_dpv_consent_status_valid_for_processing)).
-fof(f16,axiom,(
+fof(f17,axiom,(
   ! [X0] : ~(kge_leq(X0,dpv_consent_status_valid_for_processing) & kge_leq(X0,dpv_consent_status_invalid_for_processing))),
   file('problems/verdict/KGC347-2.p',bg_disj_dpv_consent_status_valid_for_processing_disjoint_dpv_consent_status_invalid_for_processing)).
-fof(f17,axiom,(
+fof(f18,axiom,(
   ~((((kge_leq(dpv_consent_status_valid_for_processing,dpv_consent_status_valid_for_processing) & dpv_consent_status_valid_for_processing = dpv_consent_given) | (kge_leq(dpv_consent_status_invalid_for_processing,dpv_consent_status_valid_for_processing) & dpv_consent_status_invalid_for_processing = dpv_consent_given) | (kge_leq(dpv_consent_given,dpv_consent_status_valid_for_processing) & dpv_consent_given = dpv_consent_given)) & ((kge_leq(dpv_consent_status_valid_for_processing,dpv_consent_status_valid_for_processing) & dpv_consent_status_valid_for_processing = dpv_consent_given & ~kge_leq(dpv_consent_status_valid_for_processing,dpv_consent_status_invalid_for_processing)) | (kge_leq(dpv_consent_status_invalid_for_processing,dpv_consent_status_valid_for_processing) & dpv_consent_status_invalid_for_processing = dpv_consent_given & ~kge_leq(dpv_consent_status_invalid_for_processing,dpv_consent_status_invalid_for_processing)) | (kge_leq(dpv_consent_given,dpv_consent_status_valid_for_processing) & dpv_consent_given = dpv_consent_given & ~kge_leq(dpv_consent_given,dpv_consent_status_invalid_for_processing)))) | (((kge_leq(dpv_consent_status_valid_for_processing,dpv_consent_status_invalid_for_processing) & dpv_consent_status_valid_for_processing = dpv_consent_given) | (kge_leq(dpv_consent_status_invalid_for_processing,dpv_consent_status_invalid_for_processing) & dpv_consent_status_invalid_for_processing = dpv_consent_given) | (kge_leq(dpv_consent_given,dpv_consent_status_invalid_for_processing) & dpv_consent_given = dpv_consent_given)) & ((kge_leq(dpv_consent_status_valid_for_processing,dpv_consent_status_invalid_for_processing) & dpv_consent_status_valid_for_processing = dpv_consent_given & ~kge_leq(dpv_consent_status_valid_for_processing,dpv_consent_status_valid_for_processing)) | (kge_leq(dpv_consent_status_invalid_for_processing,dpv_consent_status_invalid_for_processing) & dpv_consent_status_invalid_for_processing = dpv_consent_given & ~kge_leq(dpv_consent_status_invalid_for_processing,dpv_consent_status_valid_for_processing)) | (kge_leq(dpv_consent_given,dpv_consent_status_invalid_for_processing) & dpv_consent_given = dpv_consent_given & ~kge_leq(dpv_consent_given,dpv_consent_status_valid_for_processing)))))),
   file('problems/verdict/KGC347-2.p',w_kgc347)).
-fof(f22,plain,(
-  ! [X0] : (~kge_leq(X0,dpv_consent_status_valid_for_processing) | ~kge_leq(X0,dpv_consent_status_invalid_for_processing))),
-  inference(ennf_transformation,[],[f16])).
-fof(f23,plain,(
-  (((~kge_leq(dpv_consent_status_valid_for_processing,dpv_consent_status_valid_for_processing) | dpv_consent_given != dpv_consent_status_valid_for_processing) & (~kge_leq(dpv_consent_status_invalid_for_processing,dpv_consent_status_valid_for_processing) | dpv_consent_status_invalid_for_processing != dpv_consent_given) & (~kge_leq(dpv_consent_given,dpv_consent_status_valid_for_processing) | dpv_consent_given != dpv_consent_given)) | ((~kge_leq(dpv_consent_status_valid_for_processing,dpv_consent_status_valid_for_processing) | dpv_consent_given != dpv_consent_status_valid_for_processing | kge_leq(dpv_consent_status_valid_for_processing,dpv_consent_status_invalid_for_processing)) & (~kge_leq(dpv_consent_status_invalid_for_processing,dpv_consent_status_valid_for_processing) | dpv_consent_status_invalid_for_processing != dpv_consent_given | kge_leq(dpv_consent_status_invalid_for_processing,dpv_consent_status_invalid_for_processing)) & (~kge_leq(dpv_consent_given,dpv_consent_status_valid_for_processing) | dpv_consent_given != dpv_consent_given | kge_leq(dpv_consent_given,dpv_consent_status_invalid_for_processing)))) & (((~kge_leq(dpv_consent_status_valid_for_processing,dpv_consent_status_invalid_for_processing) | dpv_consent_given != dpv_consent_status_valid_for_processing) & (~kge_leq(dpv_consent_status_invalid_for_processing,dpv_consent_status_invalid_for_processing) | dpv_consent_status_invalid_for_processing != dpv_consent_given) & (~kge_leq(dpv_consent_given,dpv_consent_status_invalid_for_processing) | dpv_consent_given != dpv_consent_given)) | ((~kge_leq(dpv_consent_status_valid_for_processing,dpv_consent_status_invalid_for_processing) | dpv_consent_given != dpv_consent_status_valid_for_processing | kge_leq(dpv_consent_status_valid_for_processing,dpv_consent_status_valid_for_processing)) & (~kge_leq(dpv_consent_status_invalid_for_processing,dpv_consent_status_invalid_for_processing) | dpv_consent_status_invalid_for_processing != dpv_consent_given | kge_leq(dpv_consent_status_invalid_for_processing,dpv_consent_status_valid_for_processing)) & (~kge_leq(dpv_consent_given,dpv_consent_status_invalid_for_processing) | dpv_consent_given != dpv_consent_given | kge_leq(dpv_consent_given,dpv_consent_status_valid_for_processing))))),
-  inference(ennf_transformation,[],[f17])).
 fof(f24,plain,(
+  ! [X0] : (~kge_leq(X0,dpv_consent_status_valid_for_processing) | ~kge_leq(X0,dpv_consent_status_invalid_for_processing))),
+  inference(ennf_transformation,[],[f17])).
+fof(f25,plain,(
+  (((~kge_leq(dpv_consent_status_valid_for_processing,dpv_consent_status_valid_for_processing) | dpv_consent_given != dpv_consent_status_valid_for_processing) & (~kge_leq(dpv_consent_status_invalid_for_processing,dpv_consent_status_valid_for_processing) | dpv_consent_status_invalid_for_processing != dpv_consent_given) & (~kge_leq(dpv_consent_given,dpv_consent_status_valid_for_processing) | dpv_consent_given != dpv_consent_given)) | ((~kge_leq(dpv_consent_status_valid_for_processing,dpv_consent_status_valid_for_processing) | dpv_consent_given != dpv_consent_status_valid_for_processing | kge_leq(dpv_consent_status_valid_for_processing,dpv_consent_status_invalid_for_processing)) & (~kge_leq(dpv_consent_status_invalid_for_processing,dpv_consent_status_valid_for_processing) | dpv_consent_status_invalid_for_processing != dpv_consent_given | kge_leq(dpv_consent_status_invalid_for_processing,dpv_consent_status_invalid_for_processing)) & (~kge_leq(dpv_consent_given,dpv_consent_status_valid_for_processing) | dpv_consent_given != dpv_consent_given | kge_leq(dpv_consent_given,dpv_consent_status_invalid_for_processing)))) & (((~kge_leq(dpv_consent_status_valid_for_processing,dpv_consent_status_invalid_for_processing) | dpv_consent_given != dpv_consent_status_valid_for_processing) & (~kge_leq(dpv_consent_status_invalid_for_processing,dpv_consent_status_invalid_for_processing) | dpv_consent_status_invalid_for_processing != dpv_consent_given) & (~kge_leq(dpv_consent_given,dpv_consent_status_invalid_for_processing) | dpv_consent_given != dpv_consent_given)) | ((~kge_leq(dpv_consent_status_valid_for_processing,dpv_consent_status_invalid_for_processing) | dpv_consent_given != dpv_consent_status_valid_for_processing | kge_leq(dpv_consent_status_valid_for_processing,dpv_consent_status_valid_for_processing)) & (~kge_leq(dpv_consent_status_invalid_for_processing,dpv_consent_status_invalid_for_processing) | dpv_consent_status_invalid_for_processing != dpv_consent_given | kge_leq(dpv_consent_status_invalid_for_processing,dpv_consent_status_valid_for_processing)) & (~kge_leq(dpv_consent_given,dpv_consent_status_invalid_for_processing) | dpv_consent_given != dpv_consent_given | kge_leq(dpv_consent_given,dpv_consent_status_valid_for_processing))))),
+  inference(ennf_transformation,[],[f18])).
+fof(f26,plain,(
   ((~kge_leq(dpv_consent_status_valid_for_processing,dpv_consent_status_invalid_for_processing) | dpv_consent_given != dpv_consent_status_valid_for_processing | kge_leq(dpv_consent_status_valid_for_processing,dpv_consent_status_valid_for_processing)) & (~kge_leq(dpv_consent_status_invalid_for_processing,dpv_consent_status_invalid_for_processing) | dpv_consent_status_invalid_for_processing != dpv_consent_given | kge_leq(dpv_consent_status_invalid_for_processing,dpv_consent_status_valid_for_processing)) & (~kge_leq(dpv_consent_given,dpv_consent_status_invalid_for_processing) | dpv_consent_given != dpv_consent_given | kge_leq(dpv_consent_given,dpv_consent_status_valid_for_processing))) | ~sP0),
   introduced(definition,[new_symbols(naming,[sP0])],[predicate_definition_introduction])).
-fof(f25,plain,(
-  ((~kge_leq(dpv_consent_status_valid_for_processing,dpv_consent_status_valid_for_processing) | dpv_consent_given != dpv_consent_status_valid_for_processing | kge_leq(dpv_consent_status_valid_for_processing,dpv_consent_status_invalid_for_processing)) & (~kge_leq(dpv_consent_status_invalid_for_processing,dpv_consent_status_valid_for_processing) | dpv_consent_status_invalid_for_processing != dpv_consent_given | kge_leq(dpv_consent_status_invalid_for_processing,dpv_consent_status_invalid_for_processing)) & (~kge_leq(dpv_consent_given,dpv_consent_status_valid_for_processing) | dpv_consent_given != dpv_consent_given | kge_leq(dpv_consent_given,dpv_consent_status_invalid_for_processing))) | ~sP1),
-  introduced(definition,[new_symbols(naming,[sP1])],[predicate_definition_introduction])).
-fof(f26,plain,(
-  (((~kge_leq(dpv_consent_status_valid_for_processing,dpv_consent_status_valid_for_processing) | dpv_consent_given != dpv_consent_status_valid_for_processing) & (~kge_leq(dpv_consent_status_invalid_for_processing,dpv_consent_status_valid_for_processing) | dpv_consent_status_invalid_for_processing != dpv_consent_given) & (~kge_leq(dpv_consent_given,dpv_consent_status_valid_for_processing) | dpv_consent_given != dpv_consent_given)) | sP1) & (((~kge_leq(dpv_consent_status_valid_for_processing,dpv_consent_status_invalid_for_processing) | dpv_consent_given != dpv_consent_status_valid_for_processing) & (~kge_leq(dpv_consent_status_invalid_for_processing,dpv_consent_status_invalid_for_processing) | dpv_consent_status_invalid_for_processing != dpv_consent_given) & (~kge_leq(dpv_consent_given,dpv_consent_status_invalid_for_processing) | dpv_consent_given != dpv_consent_given)) | sP0)),
-  inference(definition_folding,[],[f23,f25,f24])).
 fof(f27,plain,(
   ((~kge_leq(dpv_consent_status_valid_for_processing,dpv_consent_status_valid_for_processing) | dpv_consent_given != dpv_consent_status_valid_for_processing | kge_leq(dpv_consent_status_valid_for_processing,dpv_consent_status_invalid_for_processing)) & (~kge_leq(dpv_consent_status_invalid_for_processing,dpv_consent_status_valid_for_processing) | dpv_consent_status_invalid_for_processing != dpv_consent_given | kge_leq(dpv_consent_status_invalid_for_processing,dpv_consent_status_invalid_for_processing)) & (~kge_leq(dpv_consent_given,dpv_consent_status_valid_for_processing) | dpv_consent_given != dpv_consent_given | kge_leq(dpv_consent_given,dpv_consent_status_invalid_for_processing))) | ~sP1),
-  inference(nnf_transformation,[],[f25])).
-fof(f33,plain,(
+  introduced(definition,[new_symbols(naming,[sP1])],[predicate_definition_introduction])).
+fof(f28,plain,(
+  (((~kge_leq(dpv_consent_status_valid_for_processing,dpv_consent_status_valid_for_processing) | dpv_consent_given != dpv_consent_status_valid_for_processing) & (~kge_leq(dpv_consent_status_invalid_for_processing,dpv_consent_status_valid_for_processing) | dpv_consent_status_invalid_for_processing != dpv_consent_given) & (~kge_leq(dpv_consent_given,dpv_consent_status_valid_for_processing) | dpv_consent_given != dpv_consent_given)) | sP1) & (((~kge_leq(dpv_consent_status_valid_for_processing,dpv_consent_status_invalid_for_processing) | dpv_consent_given != dpv_consent_status_valid_for_processing) & (~kge_leq(dpv_consent_status_invalid_for_processing,dpv_consent_status_invalid_for_processing) | dpv_consent_status_invalid_for_processing != dpv_consent_given) & (~kge_leq(dpv_consent_given,dpv_consent_status_invalid_for_processing) | dpv_consent_given != dpv_consent_given)) | sP0)),
+  inference(definition_folding,[],[f25,f27,f26])).
+fof(f29,plain,(
+  ((~kge_leq(dpv_consent_status_valid_for_processing,dpv_consent_status_valid_for_processing) | dpv_consent_given != dpv_consent_status_valid_for_processing | kge_leq(dpv_consent_status_valid_for_processing,dpv_consent_status_invalid_for_processing)) & (~kge_leq(dpv_consent_status_invalid_for_processing,dpv_consent_status_valid_for_processing) | dpv_consent_status_invalid_for_processing != dpv_consent_given | kge_leq(dpv_consent_status_invalid_for_processing,dpv_consent_status_invalid_for_processing)) & (~kge_leq(dpv_consent_given,dpv_consent_status_valid_for_processing) | dpv_consent_given != dpv_consent_given | kge_leq(dpv_consent_given,dpv_consent_status_invalid_for_processing))) | ~sP1),
+  inference(nnf_transformation,[],[f27])).
+fof(f35,plain,(
   kge_leq(dpv_consent_given,dpv_consent_status_valid_for_processing)),
   inference(cnf_transformation,[],[f5])).
-fof(f44,plain,(
+fof(f47,plain,(
   ( ! [X0] : (~kge_leq(X0,dpv_consent_status_valid_for_processing) | ~kge_leq(X0,dpv_consent_status_invalid_for_processing)) )),
-  inference(cnf_transformation,[],[f22])).
-fof(f45,plain,(
+  inference(cnf_transformation,[],[f24])).
+fof(f48,plain,(
   ~kge_leq(dpv_consent_given,dpv_consent_status_valid_for_processing) | dpv_consent_given != dpv_consent_given | kge_leq(dpv_consent_given,dpv_consent_status_invalid_for_processing) | ~sP1),
-  inference(cnf_transformation,[],[f27])).
-fof(f54,plain,(
+  inference(cnf_transformation,[],[f29])).
+fof(f57,plain,(
   ~kge_leq(dpv_consent_given,dpv_consent_status_valid_for_processing) | dpv_consent_given != dpv_consent_given | sP1),
-  inference(cnf_transformation,[],[f26])).
-fof(f58,plain,(
+  inference(cnf_transformation,[],[f28])).
+fof(f61,plain,(
   ~kge_leq(dpv_consent_given,dpv_consent_status_valid_for_processing) | sP1),
-  inference(trivial_inequality_removal,[],[f54])).
-fof(f60,plain,(
+  inference(trivial_inequality_removal,[],[f57])).
+fof(f63,plain,(
   ~kge_leq(dpv_consent_given,dpv_consent_status_valid_for_processing) | kge_leq(dpv_consent_given,dpv_consent_status_invalid_for_processing) | ~sP1),
-  inference(trivial_inequality_removal,[],[f45])).
-fof(f66,definition,(
+  inference(trivial_inequality_removal,[],[f48])).
+fof(f69,definition,(
   spl2_2 <=> kge_leq(dpv_consent_given,dpv_consent_status_invalid_for_processing)),
   introduced(definition,[new_symbols(naming,[spl2_2])],[avatar_definition])).
-fof(f67,plain,(
+fof(f70,plain,(
   kge_leq(dpv_consent_given,dpv_consent_status_invalid_for_processing) | ~spl2_2),
-  inference(avatar_component_clause,[],[f66])).
-fof(f89,definition,(
+  inference(avatar_component_clause,[],[f69])).
+fof(f92,definition,(
   spl2_7 <=> sP1),
   introduced(definition,[new_symbols(naming,[spl2_7])],[avatar_definition])).
-fof(f93,definition,(
+fof(f96,definition,(
   spl2_8 <=> kge_leq(dpv_consent_given,dpv_consent_status_valid_for_processing)),
   introduced(definition,[new_symbols(naming,[spl2_8])],[avatar_definition])).
-fof(f94,plain,(
+fof(f97,plain,(
   kge_leq(dpv_consent_given,dpv_consent_status_valid_for_processing) | ~spl2_8),
-  inference(avatar_component_clause,[],[f93])).
-fof(f96,plain,(
+  inference(avatar_component_clause,[],[f96])).
+fof(f99,plain,(
   spl2_7 | ~spl2_8),
-  inference(avatar_split_clause,[],[f58,f93,f89])).
-fof(f110,plain,(
-  ~spl2_7 | spl2_2 | ~spl2_8),
-  inference(avatar_split_clause,[],[f60,f93,f66,f89])).
+  inference(avatar_split_clause,[],[f61,f96,f92])).
 fof(f113,plain,(
+  ~spl2_7 | spl2_2 | ~spl2_8),
+  inference(avatar_split_clause,[],[f63,f96,f69,f92])).
+fof(f116,plain,(
   spl2_8),
-  inference(avatar_split_clause,[],[f33,f93])).
-fof(f115,plain,(
-  ~kge_leq(dpv_consent_given,dpv_consent_status_invalid_for_processing) | ~spl2_8),
-  inference(resolution,[],[f44,f94])).
-fof(f117,plain,(
-  $false | (~spl2_2 | ~spl2_8)),
-  inference(forward_subsumption_resolution,[],[f115,f67])).
+  inference(avatar_split_clause,[],[f35,f96])).
 fof(f118,plain,(
+  ~kge_leq(dpv_consent_given,dpv_consent_status_invalid_for_processing) | ~spl2_8),
+  inference(resolution,[],[f47,f97])).
+fof(f120,plain,(
+  $false | (~spl2_2 | ~spl2_8)),
+  inference(forward_subsumption_resolution,[],[f118,f70])).
+fof(f121,plain,(
   ~spl2_2 | ~spl2_8),
-  inference(avatar_contradiction_clause,[],[f117])).
-cnf(s4, plain, ~spl2_8 | spl2_7, inference(sat_conversion,[],[f96])).
-cnf(s10, plain, ~spl2_8 | ~spl2_7 | spl2_2, inference(sat_conversion,[],[f110])).
-cnf(s13, plain, spl2_8, inference(sat_conversion,[],[f113])).
-cnf(s14, plain, ~spl2_8 | ~spl2_2, inference(sat_conversion,[],[f118])).
+  inference(avatar_contradiction_clause,[],[f120])).
+cnf(s4, plain, ~spl2_8 | spl2_7, inference(sat_conversion,[],[f99])).
+cnf(s10, plain, ~spl2_8 | ~spl2_7 | spl2_2, inference(sat_conversion,[],[f113])).
+cnf(s13, plain, spl2_8, inference(sat_conversion,[],[f116])).
+cnf(s14, plain, ~spl2_8 | ~spl2_2, inference(sat_conversion,[],[f121])).
 cnf(s16, plain, ~spl2_2, inference(rat,[],[s14,s13])).
 cnf(s18, plain, ~spl2_7, inference(rat,[],[s10,s16,s13])).
 cnf(s21, plain, $false, inference(rat,[],[s4,s18,s13])).
-fof(f120,plain,(
+fof(f123,plain,(
   $false),
   inference(avatar_sat_refutation,[],[s21])).
 % SZS output end Proof for KGC347-2
