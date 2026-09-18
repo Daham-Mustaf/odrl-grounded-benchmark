@@ -8,6 +8,7 @@
 @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
 @prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+@prefix sotw:    <https://w3id.org/force/sotw#> .
 
 # The constraint below is the predicateConstraint of the permission rule in
 # Example 1 of the ODRL Regulatory Compliance Profile, section 2.10.1, at
@@ -52,6 +53,17 @@ kgc:KGC350-request-c1 a odrl:Constraint ;
     odrl:leftOperand dpv-odrl:LegalBasis ;
     odrl:operator odrl:eq ;
     odrl:rightOperand dpv:Consent .
+
+# instead of the odrl:Request above I would use:
+:request a sotw:EvaluationRequest ;
+    sotw:evaluatedParty drk:processor ;
+    sotw:evaluatedAction odrl:use ;
+    sotw:evaluatedTarget drk:dataset ;
+    sotw:requestParameter [
+        a sotw:RequestParameter ;
+        sotw:value dpv:Consent ;
+        sotw:describesFeature dpv:LegalBasis ;
+    ] .
 
 ### Expected result #######################################################
 
