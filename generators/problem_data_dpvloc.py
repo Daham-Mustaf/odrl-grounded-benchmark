@@ -223,7 +223,7 @@ def _side(pid, role, cls, title, party_line, constraints, connective=None):
  
 def _ttl2(pid, offer_title, offer_cs, req_title, req_cs, connective=None):
     return (_TTL_HEAD
-            + _side(pid, "offer", "Offer", "Offer: " + offer_title,
+            + _side(pid, "offer", "Set", "Offer: " + offer_title,
                     "odrl:assigner drk:library ;\n", offer_cs, connective)
             + _side(pid, "request", "Request", "Request: " + req_title,
                     "", req_cs))
@@ -235,7 +235,7 @@ _ISO_390 = _iso((DE_NW, DE_BY))
 
 def _ttl(pid, offer_title, offer_op, offer_val, req_title, req_val):
     return _TTL_HEAD + f"""
-drk:offer-{pid[3:]} a odrl:Offer ;
+drk:offer-{pid[3:]} a odrl:Set ;
     dcterms:title "Offer: {offer_title}"@en ;
     odrl:assigner drk:library ;
     odrl:permission kgc:{pid}-offer-r1 .

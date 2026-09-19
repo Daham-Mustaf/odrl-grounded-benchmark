@@ -7,7 +7,7 @@
 @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
 
-drk:offer-322 a odrl:Offer ;
+drk:offer-322 a odrl:Set ;
     dcterms:title "BSB offer: PDF or PDF/A-1a"@en ;
     odrl:assigner drk:library ;
     odrl:permission kgc:KGC322-offer-r1 .

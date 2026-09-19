@@ -21,7 +21,7 @@
 drk:manuscripts a dcterms:Dataset ;
     dcterms:title "Digitised manuscripts, Bavarian State Library"@en .
 
-drk:offer a odrl:Offer ;
+drk:offer a odrl:Set ;
     dcterms:title "BSB offer, purpose constrained by isA"@en ;
     odrl:assigner drk:library ;
     odrl:permission kgc:KGC111-offer-r1 .

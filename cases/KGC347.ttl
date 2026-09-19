@@ -8,7 +8,7 @@
 @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
 
-drk:offer-347 a odrl:Offer ;
+drk:offer-347 a odrl:Set ;
     dcterms:title "Use is permitted while the record falls under exactly one of the two consent branches"@en ;
     odrl:assigner drk:controller ;
     odrl:permission kgc:KGC347-offer-r1 .

@@ -6,7 +6,7 @@
 @prefix loc:     <https://w3id.org/dpv/loc#> .
 @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
-drk:offer-382 a odrl:Offer ;
+drk:offer-382 a odrl:Set ;
     dcterms:title "Offer: use within Germany"@en ;
     odrl:assigner drk:library ;
     odrl:permission kgc:KGC382-offer-r1 .

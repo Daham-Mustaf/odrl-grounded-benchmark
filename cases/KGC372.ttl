@@ -7,7 +7,7 @@
 @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
 
-drk:offer-372 a odrl:Offer ;
+drk:offer-372 a odrl:Set ;
     dcterms:title "Distribution in German"@en ;
     odrl:assigner drk:publisher ;
     odrl:permission kgc:KGC372-offer-r1 .

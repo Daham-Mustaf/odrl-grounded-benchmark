@@ -106,7 +106,7 @@ fof(bg_disj_de_distinct_fr, axiom,
 drk:manuscripts a dcterms:Dataset ;
     dcterms:title "Digitised manuscripts, Bavarian State Library"@en .
 
-drk:offer a odrl:Offer ;
+drk:offer a odrl:Set ;
     dcterms:title "BSB offer: access in German"@en ;
     odrl:assigner drk:library ;
     odrl:permission kgc:KGC300-offer-r1 .
@@ -203,7 +203,7 @@ kgc:KGC300-request-c1 a odrl:Constraint ;
 drk:manuscripts a dcterms:Dataset ;
     dcterms:title "Digitised manuscripts, Bavarian State Library"@en .
 
-drk:offer a odrl:Offer ;
+drk:offer a odrl:Set ;
     dcterms:title "BSB offer: non-commercial research only"@en ;
     odrl:assigner drk:library ;
     odrl:permission kgc:KGC301-offer-r1 .
@@ -302,7 +302,7 @@ fof(res_france_within_europe, axiom,
 drk:manuscripts a dcterms:Dataset ;
     dcterms:title "Digitised manuscripts, Bavarian State Library"@en .
 
-drk:offer a odrl:Offer ;
+drk:offer a odrl:Set ;
     dcterms:title "BSB offer: recipients in Europe"@en ;
     odrl:assigner drk:library ;
     odrl:permission kgc:KGC302-offer-r1 .

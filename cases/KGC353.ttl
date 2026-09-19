@@ -9,7 +9,7 @@
 @prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
 
-drk:offer-353 a odrl:Offer ;
+drk:offer-353 a odrl:Set ;
     dcterms:title "Processing is lawful on any legal basis"@en ;
     odrl:assigner drk:controller ;
     odrl:permission kgc:KGC353-offer-r1 .

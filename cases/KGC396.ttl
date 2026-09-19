@@ -6,7 +6,7 @@
 @prefix dpv:     <https://w3id.org/dpv#> .
 @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
-drk:offer-396 a odrl:Offer ;
+drk:offer-396 a odrl:Set ;
     dcterms:title "Offer: use for research and development or marketing"@en ;
     odrl:assigner drk:provider ;
     odrl:permission kgc:KGC396-offer-r1 .

@@ -64,7 +64,7 @@ def _ttl(pid: str, operand: str, operator: str, value: str) -> str:
 drk:manuscripts a dcterms:Dataset ;
     dcterms:title "Digitised manuscripts, Bavarian State Library"@en .
 
-drk:offer a odrl:Offer ;
+drk:offer a odrl:Set ;
     dcterms:title "BSB offer, {operand} constrained by {operator}"@en ;
     odrl:assigner drk:library ;
     odrl:permission kgc:{pid}-offer-r1 .

@@ -15,7 +15,7 @@
 # deontic role is not modelled: the verdict decides whether two constraint
 # sets admit a common use, not which rule prevails where they do.
 
-drk:offer-351 a odrl:Offer ;
+drk:offer-351 a odrl:Set ;
     dcterms:title "Processing is lawful on any legal basis of Article 6(1)"@en ;
     dcterms:source <https://ai.wu.ac.at/policies/orcp/regulatory-model.html> ;
     rdfs:comment "The predicateConstraint of Example 1 of the ODRL Regulatory Compliance Profile, section 2.10.1, with the profile's own names for the seven bases of Article 6(1) read as concepts of the Data Privacy Vocabulary."@en ;

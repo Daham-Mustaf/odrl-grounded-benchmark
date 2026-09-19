@@ -161,7 +161,7 @@ _TTL_HEAD = """\
 
 def _offer_atomic(pid, title, operator, value):
     return f"""
-drk:offer-{pid[3:]} a odrl:Offer ;
+drk:offer-{pid[3:]} a odrl:Set ;
     dcterms:title "{title}"@en ;
     odrl:assigner drk:controller ;
     odrl:permission kgc:{pid}-offer-r1 .
@@ -181,7 +181,7 @@ def _offer_logical(pid, title, connective, alts):
     2.2 serialises it: an rdf:List of constraint IRIs under the connective."""
     refs = " ".join(f"kgc:{pid}-offer-a{i}" for i in range(1, len(alts) + 1))
     body = f"""
-drk:offer-{pid[3:]} a odrl:Offer ;
+drk:offer-{pid[3:]} a odrl:Set ;
     dcterms:title "{title}"@en ;
     odrl:assigner drk:controller ;
     odrl:permission kgc:{pid}-offer-r1 .

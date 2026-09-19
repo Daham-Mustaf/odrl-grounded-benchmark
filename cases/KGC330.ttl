@@ -7,7 +7,7 @@
 @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
 
-drk:offer-330 a odrl:Offer ;
+drk:offer-330 a odrl:Set ;
     dcterms:title "Offer: use within the Netherlands"@en ;
     odrl:assigner drk:library ;
     odrl:permission kgc:KGC330-offer-r1 .

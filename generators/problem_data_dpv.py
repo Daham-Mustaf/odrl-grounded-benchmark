@@ -110,7 +110,7 @@ def _side(pid, role, cls, title, party, lo, constraints, connective=None):
 
 def _ttl(pid, lo, offer_title, offer_cs, req_title, req_cs, connective=None):
     return (_HEAD
-            + _side(pid, "offer", "Offer", "Offer: " + offer_title,
+            + _side(pid, "offer", "Set", "Offer: " + offer_title,
                     "odrl:assigner drk:provider ;", lo, offer_cs, connective)
             + _side(pid, "request", "Request", "Request: " + req_title,
                     "odrl:assignee drk:consumer ;", lo, req_cs))
@@ -225,7 +225,7 @@ PROBLEMS = [
 @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
 
-drk:offer-310 a odrl:Offer ;
+drk:offer-310 a odrl:Set ;
     dcterms:title "Offer: research and development purposes"@en ;
     odrl:assigner drk:library ;
     odrl:permission kgc:KGC310-offer-r1 .
@@ -326,7 +326,7 @@ kgc:KGC310-request-c1 a odrl:Constraint ;
 @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
 
-drk:offer-311 a odrl:Offer ;
+drk:offer-311 a odrl:Set ;
     dcterms:title "Offer: any declared purpose"@en ;
     odrl:assigner drk:library ;
     odrl:permission kgc:KGC311-offer-r1 .
@@ -426,7 +426,7 @@ kgc:KGC311-request-c1 a odrl:Constraint ;
 @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
 
-drk:offer-313 a odrl:Offer ;
+drk:offer-313 a odrl:Set ;
     dcterms:title "Offer: marketing"@en ;
     odrl:assigner drk:library ;
     odrl:permission kgc:KGC313-offer-r1 .
@@ -529,7 +529,7 @@ kgc:KGC313-request-c1 a odrl:Constraint ;
 @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
 
-drk:offer-314 a odrl:Offer ;
+drk:offer-314 a odrl:Set ;
     dcterms:title "Offer: marketing"@en ;
     odrl:assigner drk:library ;
     odrl:permission kgc:KGC314-offer-r1 .
@@ -632,7 +632,7 @@ kgc:KGC314-request-c1 a odrl:Constraint ;
 @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
 
-drk:offer-315 a odrl:Offer ;
+drk:offer-315 a odrl:Set ;
     dcterms:title "Offer: any declared purpose"@en ;
     odrl:assigner drk:library ;
     odrl:permission kgc:KGC315-offer-r1 .
@@ -736,7 +736,7 @@ kgc:KGC315-request-c1 a odrl:Constraint ;
 @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
 
-drk:offer-316 a odrl:Offer ;
+drk:offer-316 a odrl:Set ;
     dcterms:title "Offer: recruitment interview scheduling"@en ;
     odrl:assigner drk:library ;
     odrl:permission kgc:KGC316-offer-r1 .
@@ -835,7 +835,7 @@ kgc:KGC316-request-c1 a odrl:Constraint ;
 @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
 
-drk:offer-317 a odrl:Offer ;
+drk:offer-317 a odrl:Set ;
     dcterms:title "Offer: any purpose other than marketing"@en ;
     odrl:assigner drk:library ;
     odrl:permission kgc:KGC317-offer-r1 .

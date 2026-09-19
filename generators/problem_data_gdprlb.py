@@ -144,7 +144,7 @@ def _offer_isanyof(pid):
 # deontic role is not modelled: the verdict decides whether two constraint
 # sets admit a common use, not which rule prevails where they do.
 
-drk:offer-{pid[3:]} a odrl:Offer ;
+drk:offer-{pid[3:]} a odrl:Set ;
     dcterms:title "Processing is lawful on any legal basis of Article 6(1)"@en ;
     dcterms:source <https://ai.wu.ac.at/policies/orcp/regulatory-model.html> ;
     rdfs:comment "The predicateConstraint of Example 1 of the ODRL \
@@ -168,7 +168,7 @@ kgc:{pid}-offer-c1 a odrl:Constraint ;
 
 def _offer_isa(pid):
     return f"""
-drk:offer-{pid[3:]} a odrl:Offer ;
+drk:offer-{pid[3:]} a odrl:Set ;
     dcterms:title "Processing is lawful on any legal basis"@en ;
     odrl:assigner drk:controller ;
     odrl:permission kgc:{pid}-offer-r1 .

@@ -165,7 +165,7 @@ _TTL_HEAD = """\
 def _offer(pid):
     """The same offer in all four problems: distribution in German."""
     return f"""
-drk:offer-{pid[3:]} a odrl:Offer ;
+drk:offer-{pid[3:]} a odrl:Set ;
     dcterms:title "Distribution in German"@en ;
     odrl:assigner drk:publisher ;
     odrl:permission kgc:{pid}-offer-r1 .

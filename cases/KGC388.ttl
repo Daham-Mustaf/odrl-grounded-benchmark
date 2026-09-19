@@ -6,7 +6,7 @@
 @prefix loc:     <https://w3id.org/dpv/loc#> .
 @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
-drk:offer-388 a odrl:Offer ;
+drk:offer-388 a odrl:Set ;
     dcterms:title "Offer: use within North Rhine-Westphalia or Bavaria"@en ;
     odrl:assigner drk:library ;
     odrl:permission kgc:KGC388-offer-r1 .

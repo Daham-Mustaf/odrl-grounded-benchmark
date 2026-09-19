@@ -173,7 +173,7 @@ PROBLEMS = [
             "premises": [],
         },
         "ttl": _TTL_HEAD + """
-drk:offer-320 a odrl:Offer ;
+drk:offer-320 a odrl:Set ;
     dcterms:title "BSB offer: PDF"@en ;
     odrl:assigner drk:library ;
     odrl:permission kgc:KGC320-offer-r1 .
@@ -264,7 +264,7 @@ kgc:KGC320-request-c1 a odrl:Constraint ;
             ],
         },
         "ttl": _TTL_HEAD + """
-drk:offer-321 a odrl:Offer ;
+drk:offer-321 a odrl:Set ;
     dcterms:title "BSB offer: PDF"@en ;
     odrl:assigner drk:library ;
     odrl:permission kgc:KGC321-offer-r1 .
@@ -355,7 +355,7 @@ kgc:KGC321-request-c1 a odrl:Constraint ;
             ],
         },
         "ttl": _TTL_HEAD + """
-drk:offer-322 a odrl:Offer ;
+drk:offer-322 a odrl:Set ;
     dcterms:title "BSB offer: PDF or PDF/A-1a"@en ;
     odrl:assigner drk:library ;
     odrl:permission kgc:KGC322-offer-r1 .
@@ -472,7 +472,7 @@ kgc:KGC322-request-c1 a odrl:Constraint ;
     },
 
     "ttl": _TTL_HEAD + """
-drk:offer-323 a odrl:Offer ;
+drk:offer-323 a odrl:Set ;
     dcterms:title "BSB offer: not PDF"@en ;
     odrl:assigner drk:library ;
     odrl:permission kgc:KGC323-offer-r1 .

@@ -7,7 +7,7 @@
 @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
 
-drk:offer-334 a odrl:Offer ;
+drk:offer-334 a odrl:Set ;
     dcterms:title "Offer: use in Germany"@en ;
     odrl:assigner drk:library ;
     odrl:permission kgc:KGC334-offer-r1 .

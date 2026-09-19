@@ -7,7 +7,7 @@
 @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
 
-drk:offer-313 a odrl:Offer ;
+drk:offer-313 a odrl:Set ;
     dcterms:title "Offer: marketing"@en ;
     odrl:assigner drk:library ;
     odrl:permission kgc:KGC313-offer-r1 .

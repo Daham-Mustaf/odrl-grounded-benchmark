@@ -8,7 +8,7 @@
 @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
 
-drk:offer-344 a odrl:Offer ;
+drk:offer-344 a odrl:Set ;
     dcterms:title "Use is permitted while the record is in exactly one of the given and withdrawn states"@en ;
     odrl:assigner drk:controller ;
     odrl:permission kgc:KGC344-offer-r1 .
