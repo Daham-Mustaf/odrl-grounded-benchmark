@@ -124,8 +124,7 @@ kgc:{pid}-offer-r1 a odrl:Permission ;
 kgc:{pid}-offer-c1 a odrl:Constraint ;
     odrl:leftOperand dpv-odrl:TechnicalOrganisationalMeasure ;
     odrl:operator odrl:isAllOf ;
-    odrl:rightOperand dpv:Encryption ,
-        dpv:AccessControlMethod .
+    odrl:rightOperand ( dpv:Encryption dpv:AccessControlMethod ) .
 """
 
 

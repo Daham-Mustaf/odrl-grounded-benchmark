@@ -22,8 +22,7 @@ kgc:KGC361-offer-r1 a odrl:Permission ;
 kgc:KGC361-offer-c1 a odrl:Constraint ;
     odrl:leftOperand dpv-odrl:TechnicalOrganisationalMeasure ;
     odrl:operator odrl:isAllOf ;
-    odrl:rightOperand dpv:Encryption ,
-        dpv:AccessControlMethod .
+    odrl:rightOperand ( dpv:Encryption dpv:AccessControlMethod ) .
 
 drk:request-361 a odrl:Request ;
     dcterms:title "Use without access control"@en ;

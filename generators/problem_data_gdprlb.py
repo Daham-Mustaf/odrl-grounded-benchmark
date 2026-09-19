@@ -111,13 +111,13 @@ _TTL_HEAD = """\
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
 """
 
-_SEVEN_TTL = """dpv:Consent ,
-        dpv:Contract ,
-        dpv:LegalObligation ,
-        dpv:VitalInterest ,
-        dpv:PublicInterest ,
-        dpv:OfficialAuthorityOfController ,
-        dpv:LegitimateInterest"""
+_SEVEN_TTL = """( dpv:Consent
+        dpv:Contract
+        dpv:LegalObligation
+        dpv:VitalInterest
+        dpv:PublicInterest
+        dpv:OfficialAuthorityOfController
+        dpv:LegitimateInterest )"""
 
 
 def _offer_isanyof(pid):

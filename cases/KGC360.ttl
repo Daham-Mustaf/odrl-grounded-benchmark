@@ -22,8 +22,7 @@ kgc:KGC360-offer-r1 a odrl:Permission ;
 kgc:KGC360-offer-c1 a odrl:Constraint ;
     odrl:leftOperand dpv-odrl:TechnicalOrganisationalMeasure ;
     odrl:operator odrl:isAllOf ;
-    odrl:rightOperand dpv:Encryption ,
-        dpv:AccessControlMethod .
+    odrl:rightOperand ( dpv:Encryption dpv:AccessControlMethod ) .
 
 drk:request-360 a odrl:Request ;
     dcterms:title "Use only with technical measures in place"@en ;
