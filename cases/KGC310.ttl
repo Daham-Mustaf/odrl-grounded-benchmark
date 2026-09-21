@@ -6,6 +6,8 @@
 @prefix dpv:     <https://w3id.org/dpv#> .
 @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+@prefix sotw:    <https://w3id.org/force/sotw#> .
+@prefix ex:      <https://example.org#> .
 
 drk:offer-310 a odrl:Offer ;
     dcterms:title "Offer: research and development purposes"@en ;
@@ -36,6 +38,18 @@ kgc:KGC310-request-c1 a odrl:Constraint ;
     odrl:leftOperand odrl:purpose ;
     odrl:operator odrl:eq ;
     odrl:rightOperand dpv:ScientificResearch .
+
+# instead of the odrl:Request above I would use:
+ex:request a sotw:EvaluationRequest ;
+    sotw:evaluatedParty drk:researcher ;
+    sotw:evaluatedAction odrl:use ;
+    sotw:evaluatedTarget drk:manuscripts ;
+    sotw:requestParameter [
+        a sotw:RequestParameter ;
+        sotw:value ex:ResearchAndDevelopmentX ;
+        sotw:describesFeature odrl:purpose
+    ] .
+ex:ResearchAndDevelopmentX a dpv:ResearchAndDevelopment .
 
 ### Expected result #######################################################
 
