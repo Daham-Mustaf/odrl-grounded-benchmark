@@ -39,6 +39,7 @@ drk:KGC381-report a vrep:OperandVerdictReport ;
     report:constraint kgc:KGC381-offer-c1 ;
     vrep:constraintRequest kgc:KGC381-request-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-spatial-dpvloc-geo> ;
+    vrep:readAgainst drk:KGC331-report ;
     rdfs:comment """loc:EU names no concept of the geographic slice."""@en ;
     dcterms:description """A library permits use within the European Union; a researcher requests use in Germany."""@en ;
     report:satisfactionState vrep:Undetermined ;

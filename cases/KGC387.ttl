@@ -40,6 +40,7 @@ drk:KGC387-report a vrep:OperandVerdictReport ;
     report:constraint kgc:KGC387-offer-c1 ;
     vrep:constraintRequest kgc:KGC387-request-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-spatial-dpvloc-geo> ;
+    vrep:readAgainst drk:KGC386-report ;
     rdfs:comment """Two rule instances place Hamburg outside the excluded pair."""@en ;
     report:satisfactionState report:Satisfied ;
     vrep:certificate <certificates/KGC387-2.tstp> .

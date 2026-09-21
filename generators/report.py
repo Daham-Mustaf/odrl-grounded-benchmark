@@ -97,7 +97,7 @@ def _report(p: dict, verdict: str) -> str:
         f'    dcterms:identifier "{pid}" ;',
     ]
     if p.get("left_operand"):
-        lines.append(f"    vrep:leftOperand odrl:{p['left_operand']} ;")
+        lines.append(f"    vrep:leftOperan      d odrl:{p['left_operand']} ;")
     if p.get("sort"):
         lines.append(f"    vrep:sort {SORT[p['sort']]} ;")
     if p.get("resource"):

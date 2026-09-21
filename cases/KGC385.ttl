@@ -39,6 +39,7 @@ drk:KGC385-report a vrep:OperandVerdictReport ;
     report:constraint kgc:KGC385-offer-c1 ;
     vrep:constraintRequest kgc:KGC385-request-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-spatial-dpvloc-geo> ;
+    vrep:readAgainst drk:KGC384-report ;
     rdfs:comment """One instance of the registry rule over subdivision codes."""@en ;
     report:satisfactionState report:Unsatisfied ;
     vrep:certificate <certificates/KGC385-1.tstp> .

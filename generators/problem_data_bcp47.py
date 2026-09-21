@@ -280,7 +280,7 @@ PROBLEMS = [
         "resource":          RESOURCE,
         # No background theory: withdrawal is the absence of a declaration,
         # not the presence of an empty one.
-        "background_theory": None,
+        "background_theory": EMPTY_BT,
         "binding":           BINDING_EXACT,
         "includes":          INCLUDES,
         "tree": [C("eq", DE), C("eq", FR, side="request")],

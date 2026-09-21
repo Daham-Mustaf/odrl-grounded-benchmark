@@ -104,3 +104,13 @@ vrep:certificate a rdfs:Property, skos:Concept ;
     skos:definition "The evidence for the verdict, checkable without trusting the procedure: a refutation whose premises are named resource, background, and axiom-instance formulas for a definite state; a pair of satisfying structures for Epistemic; the offending value for Ungrounded."@en ;
     rdfs:domain vrep:OperandVerdictReport ;
     rdfs:comment "The certificate artifact is referenced, not reified; its internal format is the benchmark's TPTP refutation or explicit structure. The range is deliberately unrestricted."@en .
+
+vrep:comparedWith a rdf:Property ;
+    rdfs:label "compared with"@en ;
+    rdfs:comment "Another case whose verdict this one should be read against: the same policies under a different binding, or the same constraints with and without a declared theory."@en ;
+    rdfs:domain vrep:OperandVerdictReport ;
+    rdfs:range vrep:OperandVerdictReport .
+
+vrep:readAgainst a rdf:Property ;
+    rdfs:label "read against"@en ;
+    rdfs:comment "Another case in the suite whose verdict this one should be read with: the same policies under a different binding, or the same constraints with and without a declared theory."@en .

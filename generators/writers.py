@@ -352,6 +352,12 @@ def _report_block(p: dict) -> str:
     if p.get("binding"):
         lines.append(f"    vrep:binding <{p['binding']}> ;")
 
+    # The case this one is meant to be read with: the same policies under
+    # a different binding, or the same constraints with and without a
+    # declared theory.  Without it a reader compares the wrong pair.
+    if p.get("twin"):
+        lines.append(f"    vrep:readAgainst drk:{p['twin']}-report ;")
+
     # One sentence: what the resource publishes about these concepts, and
     # what follows. Not how the procedure found it.
     comment = p.get("certificate", {}).get("comment")

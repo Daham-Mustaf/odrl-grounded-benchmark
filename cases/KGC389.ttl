@@ -45,6 +45,7 @@ drk:KGC389-report a vrep:OperandVerdictReport ;
     report:constraint kgc:KGC389-offer-c1 ;
     vrep:constraintRequest kgc:KGC389-request-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-spatial-dpvloc-geo> ;
+    vrep:readAgainst drk:KGC390-report ;
     rdfs:comment """Identifying the two Laender makes both alternatives true and exactly-one false."""@en ;
     report:satisfactionState vrep:Undetermined ;
     vrep:undeterminedReason vrep:Epistemic .

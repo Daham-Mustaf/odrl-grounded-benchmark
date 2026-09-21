@@ -45,6 +45,7 @@ drk:KGC334-report a vrep:OperandVerdictReport ;
     report:constraint kgc:KGC334-offer-c1 ;
     vrep:constraintRequest kgc:KGC334-request-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-spatial-dpvloc-geo> ;
+    vrep:readAgainst drk:KGC333-report ;
     rdfs:comment """Both constraints can be satisfied only if Germany and France denote the same place. The adopted rule asserts that they are distinct, so the constraints cannot both be satisfied."""@en ;
     dcterms:description """A library permits use in Germany; a researcher requests use in France."""@en ;
     report:satisfactionState report:Unsatisfied ;

@@ -290,7 +290,7 @@ PROBLEMS = [
             "one published relation.\n\n"
             "This is the baseline for the resource: one hop, no "
             "transitivity, nothing declared by the parties. It is also "
-            "the control for KGC332, which puts the same request against "
+            "the control for KGC380, which puts the same request against "
             "an offer naming the European Union. There the verdict is "
             "Compatible as well, by composing this assertion with the "
             "one placing the Netherlands in the EU, and Bonaire lies "
@@ -340,6 +340,7 @@ PROBLEMS = [
     # -----------------------------------------------------------------
     {
         "id":                "KGC331",
+        "twin" :               "KGC381",
         "subdir":            "verdict",
         "name":              "spatial, isPartOf loc:EU against eq loc:DE",
         "left_operand":      "spatial",
@@ -404,6 +405,7 @@ PROBLEMS = [
     # -----------------------------------------------------------------
     {
         "id":                "KGC333",
+        "twin":              "KGC334",
         "subdir":            "verdict",
         "name":              "spatial, eq loc:DE against eq loc:FR",
         "left_operand":      "spatial",
@@ -467,6 +469,7 @@ PROBLEMS = [
         "left_operand":      "spatial",
         "sort":              "mer",
         "resource":          GEO_RESOURCE,
+        "twin":              "KGC333",
         "background_theory": ISO_BT,
         "binding":           BINDING_GEO,
         "includes":          INCLUDES_ISO,
@@ -578,6 +581,7 @@ fof(bg_dist_loc_de_loc_fr, axiom,
     # -----------------------------------------------------------------
     {
    "id": "KGC381", "subdir": "verdict",
+   "twin": "KGC331",
     "name": "spatial, isPartOf loc:EU against eq loc:DE, geographic",
     "left_operand": "spatial", "sort": "mer",
     "resource": GEO_RESOURCE, "background_theory": EMPTY_BT,
@@ -665,6 +669,7 @@ fof(bg_dist_loc_de_loc_fr, axiom,
     # -----------------------------------------------------------------
     {
         "id": "KGC384", "subdir": "verdict",
+        "twin": "KGC385",
         "name": "spatial, eq loc:DE-NW against eq loc:DE-BY",
         "left_operand": "spatial", "sort": "mer",
         "resource": GEO_RESOURCE, "background_theory": EMPTY_BT,
@@ -687,6 +692,7 @@ fof(bg_dist_loc_de_loc_fr, axiom,
     },
     {
         "id": "KGC385", "subdir": "verdict",
+        "twin": "KGC384",
         "name": "spatial, eq loc:DE-NW against eq loc:DE-BY, ISO rule",
         "left_operand": "spatial", "sort": "mer",
         "resource": GEO_RESOURCE, "background_theory": ISO_BT,
@@ -714,6 +720,7 @@ fof(bg_dist_loc_de_loc_fr, axiom,
     # -----------------------------------------------------------------
     {
         "id": "KGC386", "subdir": "verdict",
+"twin": "KGC387",
         "name": "spatial, isNoneOf {loc:DE-BY, loc:DE-BE} against eq loc:DE-HH",
         "left_operand": "spatial", "sort": "mer",
         "resource": GEO_RESOURCE, "background_theory": EMPTY_BT,
@@ -736,6 +743,7 @@ fof(bg_dist_loc_de_loc_fr, axiom,
     },
     {
         "id": "KGC387", "subdir": "verdict",
+        "twin": "KGC386",
         "name": "spatial, isNoneOf {loc:DE-BY, loc:DE-BE} against eq loc:DE-HH, "
                 "ISO rule",
         "left_operand": "spatial", "sort": "mer",
@@ -801,6 +809,7 @@ fof(bg_dist_loc_de_loc_fr, axiom,
     # -----------------------------------------------------------------
     {
         "id": "KGC389", "subdir": "verdict",
+        "twin": "KGC390",
         "name": "spatial, xone(eq loc:DE-NW, eq loc:DE-BY) against eq loc:DE-NW",
         "left_operand": "spatial", "sort": "mer",
         "resource": GEO_RESOURCE, "background_theory": EMPTY_BT,
@@ -830,6 +839,7 @@ fof(bg_dist_loc_de_loc_fr, axiom,
     },
     {
         "id": "KGC390", "subdir": "verdict",
+        "twin": "KGC389",
         "name": "spatial, xone(eq loc:DE-NW, eq loc:DE-BY) against eq loc:DE-NW, "
                 "ISO rule",
         "left_operand": "spatial", "sort": "mer",
