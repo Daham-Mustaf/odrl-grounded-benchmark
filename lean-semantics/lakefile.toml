@@ -1,0 +1,5 @@
+name = "odrl-grounded-semantics"
+defaultTargets = ["OdrlGrounded"]
+
+[[lean_lib]]
+name = "OdrlGrounded"
