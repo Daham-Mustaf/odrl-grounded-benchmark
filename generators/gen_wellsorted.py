@@ -23,6 +23,7 @@ sys.path.insert(0, str(Path(__file__).parent))
 
 from problem_data_wellsorted import PROBLEMS
 from signature import is_well_sorted
+from writers import GENERATED_HEADER
 
 DEFAULT_CASES = "cases"
 
@@ -55,6 +56,7 @@ def case_ttl(p: dict, accepted: bool, reason: str) -> str:
     """One case file: the constraint, and what the signature says about it."""
     pid = p["id"]
     lines = [
+        GENERATED_HEADER,
         _HEADER,
         p["ttl"],
         "",
@@ -62,7 +64,7 @@ def case_ttl(p: dict, accepted: bool, reason: str) -> str:
         "",
         f"drk:{pid}-report a vrep:WellSortednessReport ;",
         f'    dcterms:identifier "{pid}" ;',
-        f"    report:constraint kgc:{pid}-offer-c1 ;",
+        f"    vrep:constraint kgc:{pid}-p1-c1 ;",
         f"    vrep:binding <{p['binding']}> ;",
     ]
     if accepted:

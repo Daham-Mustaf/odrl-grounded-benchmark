@@ -108,7 +108,7 @@ It is also the reason the identity assertions are worth keeping even though
 no verdict rests on them: they are not load-bearing for reachability, and
 they are load-bearing for what the rule may say.
 """
-from compile import Constraint, Or, Xone
+from compile import right_operand as _ro, Constraint, Or, Xone
  
 EU    = "loc_eu"
 DE    = "loc_de"
@@ -186,7 +186,7 @@ _TTL_HEAD = """\
  
  
 def _cnode(cid, op, vals):
-    ro = " ,\n        ".join(f"loc:{v}" for v in vals)
+    ro = _ro(op, [f"loc:{v}" for v in vals])
     return f"""kgc:{cid} a odrl:Constraint ;
     odrl:leftOperand odrl:spatial ;
     odrl:operator odrl:{op} ;
@@ -194,11 +194,11 @@ def _cnode(cid, op, vals):
 """
  
  
-def _side(pid, role, cls, title, party_line, constraints, connective=None):
+def _side(pid, k, title, party_line, constraints, connective=None):
     """One policy.  constraints: list of (op, [vals]).  With more than one
     constraint a Logical Constraint under `connective` (or, xone) holds
     them, as ODRL 2.2 serialises it: an rdf:List of constraint IRIs."""
-    n = pid[3:]
+    n, role = pid[3:], f"p{k}"
     cids = [f"{pid}-{role}-c{i+1}" for i in range(len(constraints))]
     if len(cids) == 1:
         cref = f"kgc:{cids[0]}"
@@ -208,8 +208,9 @@ def _side(pid, role, cls, title, party_line, constraints, connective=None):
         lc = (f"kgc:{pid}-{role}-lc a odrl:LogicalConstraint ;\n"
               f"    odrl:{connective} ( " + " ".join(f"kgc:{c}" for c in cids)
               + " ) .\n")
-    body = (f"drk:{role}-{n} a odrl:{cls} ;\n"
-            f'    dcterms:title "{title}"@en ;\n'
+    body = (f"drk:policy-{n}-{k} a odrl:Set ;\n"
+            f"    odrl:uid drk:policy-{n}-{k} ;\n"
+            f'    dcterms:title "{title[:1].upper() + title[1:]}"@en ;\n'
             + (f"    {party_line}" if party_line else "")
             + f"    odrl:permission kgc:{pid}-{role}-r1 .\n"
             f"kgc:{pid}-{role}-r1 a odrl:Permission ;\n"
@@ -223,9 +224,9 @@ def _side(pid, role, cls, title, party_line, constraints, connective=None):
  
 def _ttl2(pid, offer_title, offer_cs, req_title, req_cs, connective=None):
     return (_TTL_HEAD
-            + _side(pid, "offer", "Set", "Offer: " + offer_title,
+            + _side(pid, 1, offer_title,
                     "odrl:assigner drk:library ;\n", offer_cs, connective)
-            + _side(pid, "request", "Request", "Request: " + req_title,
+            + _side(pid, 2, req_title,
                     "", req_cs))
  
  
@@ -235,31 +236,33 @@ _ISO_390 = _iso((DE_NW, DE_BY))
 
 def _ttl(pid, offer_title, offer_op, offer_val, req_title, req_val):
     return _TTL_HEAD + f"""
-drk:offer-{pid[3:]} a odrl:Set ;
-    dcterms:title "Offer: {offer_title}"@en ;
+drk:policy-{pid[3:]}-1 a odrl:Set ;
+    odrl:uid drk:policy-{pid[3:]}-1 ;
+    dcterms:title "{offer_title[:1].upper() + offer_title[1:]}"@en ;
     odrl:assigner drk:library ;
-    odrl:permission kgc:{pid}-offer-r1 .
+    odrl:permission kgc:{pid}-p1-r1 .
 
-kgc:{pid}-offer-r1 a odrl:Permission ;
+kgc:{pid}-p1-r1 a odrl:Permission ;
     odrl:action odrl:use ;
     odrl:target drk:manuscripts ;
-    odrl:constraint kgc:{pid}-offer-c1 .
+    odrl:constraint kgc:{pid}-p1-c1 .
 
-kgc:{pid}-offer-c1 a odrl:Constraint ;
+kgc:{pid}-p1-c1 a odrl:Constraint ;
     odrl:leftOperand odrl:spatial ;
     odrl:operator odrl:{offer_op} ;
     odrl:rightOperand loc:{offer_val} .
 
-drk:request-{pid[3:]} a odrl:Request ;
-    dcterms:title "Request: {req_title}"@en ;
-    odrl:permission kgc:{pid}-request-r1 .
+drk:policy-{pid[3:]}-2 a odrl:Set ;
+    odrl:uid drk:policy-{pid[3:]}-2 ;
+    dcterms:title "{req_title[:1].upper() + req_title[1:]}"@en ;
+    odrl:permission kgc:{pid}-p2-r1 .
 
-kgc:{pid}-request-r1 a odrl:Permission ;
+kgc:{pid}-p2-r1 a odrl:Permission ;
     odrl:action odrl:use ;
     odrl:target drk:manuscripts ;
-    odrl:constraint kgc:{pid}-request-c1 .
+    odrl:constraint kgc:{pid}-p2-c1 .
 
-kgc:{pid}-request-c1 a odrl:Constraint ;
+kgc:{pid}-p2-c1 a odrl:Constraint ;
     odrl:leftOperand odrl:spatial ;
     odrl:operator odrl:eq ;
     odrl:rightOperand loc:{req_val} ."""
@@ -340,7 +343,7 @@ PROBLEMS = [
     # -----------------------------------------------------------------
     {
         "id":                "KGC331",
-        "twin" :               "KGC381",
+        "twin":              "KGC381",
         "subdir":            "verdict",
         "name":              "spatial, isPartOf loc:EU against eq loc:DE",
         "left_operand":      "spatial",
@@ -533,6 +536,7 @@ fof(bg_dist_loc_de_loc_fr, axiom,
     # -----------------------------------------------------------------
     {
         "id": "KGC380", "subdir": "verdict",
+        "twin": "KGC383",
         "name": "spatial, isPartOf loc:EU against eq loc:BQ, jurisdictional",
         "left_operand": "spatial", "sort": "mer",
         "resource": JURIS_RESOURCE, "background_theory": EMPTY_BT,
@@ -580,8 +584,8 @@ fof(bg_dist_loc_de_loc_fr, axiom,
     # of that slice, so the offer's value does not ground.
     # -----------------------------------------------------------------
     {
-   "id": "KGC381", "subdir": "verdict",
-   "twin": "KGC331",
+        "id": "KGC381", "subdir": "verdict",
+        "twin": "KGC331",
     "name": "spatial, isPartOf loc:EU against eq loc:DE, geographic",
     "left_operand": "spatial", "sort": "mer",
     "resource": GEO_RESOURCE, "background_theory": EMPTY_BT,
@@ -639,6 +643,7 @@ fof(bg_dist_loc_de_loc_fr, axiom,
     # -----------------------------------------------------------------
     {
         "id": "KGC383", "subdir": "verdict",
+        "twin": "KGC380",
         "name": "spatial, isPartOf loc:EU against eq loc:DE-NW, jurisdictional",
         "left_operand": "spatial", "sort": "mer",
         "resource": JURIS_RESOURCE, "background_theory": EMPTY_BT,
@@ -720,7 +725,7 @@ fof(bg_dist_loc_de_loc_fr, axiom,
     # -----------------------------------------------------------------
     {
         "id": "KGC386", "subdir": "verdict",
-"twin": "KGC387",
+        "twin": "KGC387",
         "name": "spatial, isNoneOf {loc:DE-BY, loc:DE-BE} against eq loc:DE-HH",
         "left_operand": "spatial", "sort": "mer",
         "resource": GEO_RESOURCE, "background_theory": EMPTY_BT,
