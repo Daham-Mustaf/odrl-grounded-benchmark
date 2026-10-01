@@ -130,6 +130,7 @@ EN = "bcp_en"
 # What the authority published, and what the parties declared on top of it.
 RESOURCE   = "https://w3id.org/odrl-kb/bcp47"
 UNIQUENESS = "https://w3id.org/odrl-kb/bcp47/uniqueness"
+EMPTY_BT   = "https://w3id.org/odrl-kb/bcp47/empty"
 
 # The two profile entries.  They differ in the grounding rule and in
 # nothing else; both bind odrl:language at nom over the same resource.
@@ -165,17 +166,18 @@ _TTL_HEAD = """\
 def _offer(pid):
     """The same offer in all four problems: distribution in German."""
     return f"""
-drk:offer-{pid[3:]} a odrl:Set ;
+drk:policy-{pid[3:]}-1 a odrl:Set ;
+    odrl:uid drk:policy-{pid[3:]}-1 ;
     dcterms:title "Distribution in German"@en ;
     odrl:assigner drk:publisher ;
-    odrl:permission kgc:{pid}-offer-r1 .
+    odrl:permission kgc:{pid}-p1-r1 .
 
-kgc:{pid}-offer-r1 a odrl:Permission ;
+kgc:{pid}-p1-r1 a odrl:Permission ;
     odrl:action odrl:distribute ;
     odrl:target drk:dataset ;
-    odrl:constraint kgc:{pid}-offer-c1 .
+    odrl:constraint kgc:{pid}-p1-c1 .
 
-kgc:{pid}-offer-c1 a odrl:Constraint ;
+kgc:{pid}-p1-c1 a odrl:Constraint ;
     odrl:leftOperand odrl:language ;
     odrl:operator odrl:eq ;
     odrl:rightOperand bcp47:de .
@@ -185,17 +187,18 @@ kgc:{pid}-offer-c1 a odrl:Constraint ;
 def _request(pid, title, value, comment="", operator="eq"):
     note = f'\n    rdfs:comment """{comment}"""@en ;' if comment else ""
     return f"""
-drk:request-{pid[3:]} a odrl:Request ;
+drk:policy-{pid[3:]}-2 a odrl:Set ;
+    odrl:uid drk:policy-{pid[3:]}-2 ;
     dcterms:title "{title}"@en ;{note}
     odrl:assignee drk:reuser ;
-    odrl:permission kgc:{pid}-request-r1 .
+    odrl:permission kgc:{pid}-p2-r1 .
 
-kgc:{pid}-request-r1 a odrl:Permission ;
+kgc:{pid}-p2-r1 a odrl:Permission ;
     odrl:action odrl:distribute ;
     odrl:target drk:dataset ;
-    odrl:constraint kgc:{pid}-request-c1 .
+    odrl:constraint kgc:{pid}-p2-c1 .
 
-kgc:{pid}-request-c1 a odrl:Constraint ;
+kgc:{pid}-p2-c1 a odrl:Constraint ;
     odrl:leftOperand odrl:language ;
     odrl:operator odrl:{operator} ;
     odrl:rightOperand {value} .
@@ -489,7 +492,7 @@ PROBLEMS = [
         "left_operand":      "language",
         "sort":              "nom",
         "resource":          RESOURCE,
-        "background_theory": None,
+        "background_theory": EMPTY_BT,
         "binding":           BINDING_EXACT,
         "includes":          INCLUDES,
         "tree": [C("eq", DE), C("neq", FR, side="request")],

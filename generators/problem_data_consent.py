@@ -161,15 +161,17 @@ _TTL_HEAD = """\
 
 def _offer_atomic(pid, title, operator, value):
     return f"""
-drk:offer-{pid[3:]} a odrl:Set ;
+drk:policy-{pid[3:]}-1 a odrl:Set ;
+    odrl:uid drk:policy-{pid[3:]}-1 ;
+    odrl:profile dpv-odrl: ;
     dcterms:title "{title}"@en ;
     odrl:assigner drk:controller ;
-    odrl:permission kgc:{pid}-offer-r1 .
-kgc:{pid}-offer-r1 a odrl:Permission ;
+    odrl:permission kgc:{pid}-p1-r1 .
+kgc:{pid}-p1-r1 a odrl:Permission ;
     odrl:action odrl:use ;
     odrl:target drk:dataset ;
-    odrl:constraint kgc:{pid}-offer-c1 .
-kgc:{pid}-offer-c1 a odrl:Constraint ;
+    odrl:constraint kgc:{pid}-p1-c1 .
+kgc:{pid}-p1-c1 a odrl:Constraint ;
     odrl:leftOperand dpv-odrl:Status ;
     odrl:operator odrl:{operator} ;
     odrl:rightOperand dpv:{value} .
@@ -179,22 +181,24 @@ kgc:{pid}-offer-c1 a odrl:Constraint ;
 def _offer_logical(pid, title, connective, alts):
     """A Logical Constraint whose operands are atomic constraints, as ODRL
     2.2 serialises it: an rdf:List of constraint IRIs under the connective."""
-    refs = " ".join(f"kgc:{pid}-offer-a{i}" for i in range(1, len(alts) + 1))
+    refs = " ".join(f"kgc:{pid}-p1-a{i}" for i in range(1, len(alts) + 1))
     body = f"""
-drk:offer-{pid[3:]} a odrl:Set ;
+drk:policy-{pid[3:]}-1 a odrl:Set ;
+    odrl:uid drk:policy-{pid[3:]}-1 ;
+    odrl:profile dpv-odrl: ;
     dcterms:title "{title}"@en ;
     odrl:assigner drk:controller ;
-    odrl:permission kgc:{pid}-offer-r1 .
-kgc:{pid}-offer-r1 a odrl:Permission ;
+    odrl:permission kgc:{pid}-p1-r1 .
+kgc:{pid}-p1-r1 a odrl:Permission ;
     odrl:action odrl:use ;
     odrl:target drk:dataset ;
-    odrl:constraint kgc:{pid}-offer-c1 .
-kgc:{pid}-offer-c1 a odrl:LogicalConstraint ;
+    odrl:constraint kgc:{pid}-p1-c1 .
+kgc:{pid}-p1-c1 a odrl:LogicalConstraint ;
     odrl:{connective} ( {refs} ) .
 """
     for i, (op, val) in enumerate(alts, start=1):
         body += f"""
-kgc:{pid}-offer-a{i} a odrl:Constraint ;
+kgc:{pid}-p1-a{i} a odrl:Constraint ;
     odrl:leftOperand dpv-odrl:Status ;
     odrl:operator odrl:{op} ;
     odrl:rightOperand dpv:{val} .
@@ -204,15 +208,17 @@ kgc:{pid}-offer-a{i} a odrl:Constraint ;
 
 def _request(pid, title, value):
     return f"""
-drk:request-{pid[3:]} a odrl:Request ;
+drk:policy-{pid[3:]}-2 a odrl:Set ;
+    odrl:uid drk:policy-{pid[3:]}-2 ;
+    odrl:profile dpv-odrl: ;
     dcterms:title "{title}"@en ;
     odrl:assignee drk:processor ;
-    odrl:permission kgc:{pid}-request-r1 .
-kgc:{pid}-request-r1 a odrl:Permission ;
+    odrl:permission kgc:{pid}-p2-r1 .
+kgc:{pid}-p2-r1 a odrl:Permission ;
     odrl:action odrl:use ;
     odrl:target drk:dataset ;
-    odrl:constraint kgc:{pid}-request-c1 .
-kgc:{pid}-request-c1 a odrl:Constraint ;
+    odrl:constraint kgc:{pid}-p2-c1 .
+kgc:{pid}-p2-c1 a odrl:Constraint ;
     odrl:leftOperand dpv-odrl:Status ;
     odrl:operator odrl:eq ;
     odrl:rightOperand dpv:{value} .

@@ -59,22 +59,22 @@ def _ttl(pid: str, operand: str, operator: str, value: str) -> str:
 @prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix vrep:    <https://w3id.org/odrl-kb/verdict-report#> .
 @prefix bind:    <https://w3id.org/odrl-kb/binding#> .
-@prefix report:  <https://w3id.org/force/compliance-report#> .
 
 drk:manuscripts a dcterms:Dataset ;
     dcterms:title "Digitised manuscripts, Bavarian State Library"@en .
 
-drk:offer a odrl:Set ;
-    dcterms:title "BSB offer, {operand} constrained by {operator}"@en ;
+drk:policy-{pid[3:]}-1 a odrl:Set ;
+    odrl:uid drk:policy-{pid[3:]}-1 ;
+    dcterms:title "BSB, {operand} constrained by {operator}"@en ;
     odrl:assigner drk:library ;
-    odrl:permission kgc:{pid}-offer-r1 .
+    odrl:permission kgc:{pid}-p1-r1 .
 
-kgc:{pid}-offer-r1 a odrl:Permission ;
+kgc:{pid}-p1-r1 a odrl:Permission ;
     odrl:action odrl:use ;
     odrl:target drk:manuscripts ;
-    odrl:constraint kgc:{pid}-offer-c1 .
+    odrl:constraint kgc:{pid}-p1-c1 .
 
-kgc:{pid}-offer-c1 a odrl:Constraint ;
+kgc:{pid}-p1-c1 a odrl:Constraint ;
     odrl:leftOperand odrl:{operand} ;
     odrl:operator odrl:{operator} ;
     odrl:rightOperand {VALUE[value]} ."""

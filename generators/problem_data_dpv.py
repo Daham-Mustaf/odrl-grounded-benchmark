@@ -7,7 +7,7 @@
 # =====================================================================
 
 
-from compile import Constraint, Or
+from compile import right_operand as _ro, Constraint, Or
 
 SR   = "dpv_scientific_research"
 RND  = "dpv_research_and_development"
@@ -71,22 +71,18 @@ _HEAD = """\
 
 
 def _cnode(cid, lo, op, vals):
-    """One odrl:Constraint node.
-
-    A set-valued right operand is written as repeated objects rather than
-    as an RDF collection. ODRL's context gives odrl:rightOperand no
-    container, so the spec settles neither; the suite uses one form
-    throughout.
-    """
-    ro = " ,\n        ".join(f"dpv:{v}" for v in vals)
+    """One odrl:Constraint node.  A set operator's values are written as
+    an RDF collection, one-element lists included."""
+    ro = _ro(op, [f"dpv:{v}" for v in vals])
     return f"""kgc:{cid} a odrl:Constraint ;
     odrl:leftOperand {lo} ;
     odrl:operator odrl:{op} ;
     odrl:rightOperand {ro} .
 """
 
-def _side(pid, role, cls, title, party, lo, constraints, connective=None):
-    n = pid[3:]
+def _side(pid, k, title, party, lo, constraints, connective=None):
+    """Policy k (1 or 2) of the pair."""
+    n, role = pid[3:], f"p{k}"
     cids = [f"{pid}-{role}-c{i+1}" for i in range(len(constraints))]
     if len(cids) == 1:
         cref, lc = f"kgc:{cids[0]}", ""
@@ -95,8 +91,9 @@ def _side(pid, role, cls, title, party, lo, constraints, connective=None):
         lc = (f"kgc:{pid}-{role}-lc a odrl:LogicalConstraint ;\n"
               f"    odrl:{connective} ( "
               + " ".join(f"kgc:{c}" for c in cids) + " ) .\n")
-    body = (f"drk:{role}-{n} a odrl:{cls} ;\n"
-            f'    dcterms:title "{title}"@en ;\n'
+    body = (f"drk:policy-{n}-{k} a odrl:Set ;\n"
+            f"    odrl:uid drk:policy-{n}-{k} ;\n"
+            f'    dcterms:title "{title[:1].upper() + title[1:]}"@en ;\n'
             f"    {party}\n"
             f"    odrl:permission kgc:{pid}-{role}-r1 .\n"
             f"kgc:{pid}-{role}-r1 a odrl:Permission ;\n"
@@ -110,9 +107,9 @@ def _side(pid, role, cls, title, party, lo, constraints, connective=None):
 
 def _ttl(pid, lo, offer_title, offer_cs, req_title, req_cs, connective=None):
     return (_HEAD
-            + _side(pid, "offer", "Set", "Offer: " + offer_title,
+            + _side(pid, 1, offer_title,
                     "odrl:assigner drk:provider ;", lo, offer_cs, connective)
-            + _side(pid, "request", "Request", "Request: " + req_title,
+            + _side(pid, 2, req_title,
                     "odrl:assignee drk:consumer ;", lo, req_cs))
 
 
@@ -225,32 +222,34 @@ PROBLEMS = [
 @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
 
-drk:offer-310 a odrl:Set ;
-    dcterms:title "Offer: research and development purposes"@en ;
+drk:policy-310-1 a odrl:Set ;
+    odrl:uid drk:policy-310-1 ;
+    dcterms:title "Research and development purposes"@en ;
     odrl:assigner drk:library ;
-    odrl:permission kgc:KGC310-offer-r1 .
+    odrl:permission kgc:KGC310-p1-r1 .
 
-kgc:KGC310-offer-r1 a odrl:Permission ;
+kgc:KGC310-p1-r1 a odrl:Permission ;
     odrl:action odrl:use ;
     odrl:target drk:manuscripts ;
-    odrl:constraint kgc:KGC310-offer-c1 .
+    odrl:constraint kgc:KGC310-p1-c1 .
 
-kgc:KGC310-offer-c1 a odrl:Constraint ;
+kgc:KGC310-p1-c1 a odrl:Constraint ;
     odrl:leftOperand odrl:purpose ;
     odrl:operator odrl:isA ;
     odrl:rightOperand dpv:ResearchAndDevelopment .
 
-drk:request-310 a odrl:Request ;
-    dcterms:title "Request: scientific research"@en ;
+drk:policy-310-2 a odrl:Set ;
+    odrl:uid drk:policy-310-2 ;
+    dcterms:title "Scientific research"@en ;
     odrl:assignee drk:researcher ;
-    odrl:permission kgc:KGC310-request-r1 .
+    odrl:permission kgc:KGC310-p2-r1 .
 
-kgc:KGC310-request-r1 a odrl:Permission ;
+kgc:KGC310-p2-r1 a odrl:Permission ;
     odrl:action odrl:use ;
     odrl:target drk:manuscripts ;
-    odrl:constraint kgc:KGC310-request-c1 .
+    odrl:constraint kgc:KGC310-p2-c1 .
 
-kgc:KGC310-request-c1 a odrl:Constraint ;
+kgc:KGC310-p2-c1 a odrl:Constraint ;
     odrl:leftOperand odrl:purpose ;
     odrl:operator odrl:eq ;
     odrl:rightOperand dpv:ScientificResearch .""",
@@ -326,32 +325,34 @@ kgc:KGC310-request-c1 a odrl:Constraint ;
 @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
 
-drk:offer-311 a odrl:Set ;
-    dcterms:title "Offer: any declared purpose"@en ;
+drk:policy-311-1 a odrl:Set ;
+    odrl:uid drk:policy-311-1 ;
+    dcterms:title "Any declared purpose"@en ;
     odrl:assigner drk:library ;
-    odrl:permission kgc:KGC311-offer-r1 .
+    odrl:permission kgc:KGC311-p1-r1 .
 
-kgc:KGC311-offer-r1 a odrl:Permission ;
+kgc:KGC311-p1-r1 a odrl:Permission ;
     odrl:action odrl:use ;
     odrl:target drk:manuscripts ;
-    odrl:constraint kgc:KGC311-offer-c1 .
+    odrl:constraint kgc:KGC311-p1-c1 .
 
-kgc:KGC311-offer-c1 a odrl:Constraint ;
+kgc:KGC311-p1-c1 a odrl:Constraint ;
     odrl:leftOperand odrl:purpose ;
     odrl:operator odrl:isA ;
     odrl:rightOperand dpv:Purpose .
 
-drk:request-311 a odrl:Request ;
-    dcterms:title "Request: non-commercial research"@en ;
+drk:policy-311-2 a odrl:Set ;
+    odrl:uid drk:policy-311-2 ;
+    dcterms:title "Non-commercial research"@en ;
     odrl:assignee drk:researcher ;
-    odrl:permission kgc:KGC311-request-r1 .
+    odrl:permission kgc:KGC311-p2-r1 .
 
-kgc:KGC311-request-r1 a odrl:Permission ;
+kgc:KGC311-p2-r1 a odrl:Permission ;
     odrl:action odrl:use ;
     odrl:target drk:manuscripts ;
-    odrl:constraint kgc:KGC311-request-c1 .
+    odrl:constraint kgc:KGC311-p2-c1 .
 
-kgc:KGC311-request-c1 a odrl:Constraint ;
+kgc:KGC311-p2-c1 a odrl:Constraint ;
     odrl:leftOperand odrl:purpose ;
     odrl:operator odrl:eq ;
     odrl:rightOperand dpv:NonCommercialResearch .""",
@@ -426,32 +427,34 @@ kgc:KGC311-request-c1 a odrl:Constraint ;
 @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
 
-drk:offer-313 a odrl:Set ;
-    dcterms:title "Offer: marketing"@en ;
+drk:policy-313-1 a odrl:Set ;
+    odrl:uid drk:policy-313-1 ;
+    dcterms:title "Marketing"@en ;
     odrl:assigner drk:library ;
-    odrl:permission kgc:KGC313-offer-r1 .
+    odrl:permission kgc:KGC313-p1-r1 .
 
-kgc:KGC313-offer-r1 a odrl:Permission ;
+kgc:KGC313-p1-r1 a odrl:Permission ;
     odrl:action odrl:use ;
     odrl:target drk:manuscripts ;
-    odrl:constraint kgc:KGC313-offer-c1 .
+    odrl:constraint kgc:KGC313-p1-c1 .
 
-kgc:KGC313-offer-c1 a odrl:Constraint ;
+kgc:KGC313-p1-c1 a odrl:Constraint ;
     odrl:leftOperand odrl:purpose ;
     odrl:operator odrl:eq ;
     odrl:rightOperand dpv:Marketing .
 
-drk:request-313 a odrl:Request ;
-    dcterms:title "Request: scientific research"@en ;
+drk:policy-313-2 a odrl:Set ;
+    odrl:uid drk:policy-313-2 ;
+    dcterms:title "Scientific research"@en ;
     odrl:assignee drk:researcher ;
-    odrl:permission kgc:KGC313-request-r1 .
+    odrl:permission kgc:KGC313-p2-r1 .
 
-kgc:KGC313-request-r1 a odrl:Permission ;
+kgc:KGC313-p2-r1 a odrl:Permission ;
     odrl:action odrl:use ;
     odrl:target drk:manuscripts ;
-    odrl:constraint kgc:KGC313-request-c1 .
+    odrl:constraint kgc:KGC313-p2-c1 .
 
-kgc:KGC313-request-c1 a odrl:Constraint ;
+kgc:KGC313-p2-c1 a odrl:Constraint ;
     odrl:leftOperand odrl:purpose ;
     odrl:operator odrl:eq ;
     odrl:rightOperand dpv:ScientificResearch .""",
@@ -529,32 +532,34 @@ kgc:KGC313-request-c1 a odrl:Constraint ;
 @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
 
-drk:offer-314 a odrl:Set ;
-    dcterms:title "Offer: marketing"@en ;
+drk:policy-314-1 a odrl:Set ;
+    odrl:uid drk:policy-314-1 ;
+    dcterms:title "Marketing"@en ;
     odrl:assigner drk:library ;
-    odrl:permission kgc:KGC314-offer-r1 .
+    odrl:permission kgc:KGC314-p1-r1 .
 
-kgc:KGC314-offer-r1 a odrl:Permission ;
+kgc:KGC314-p1-r1 a odrl:Permission ;
     odrl:action odrl:use ;
     odrl:target drk:manuscripts ;
-    odrl:constraint kgc:KGC314-offer-c1 .
+    odrl:constraint kgc:KGC314-p1-c1 .
 
-kgc:KGC314-offer-c1 a odrl:Constraint ;
+kgc:KGC314-p1-c1 a odrl:Constraint ;
     odrl:leftOperand odrl:purpose ;
     odrl:operator odrl:eq ;
     odrl:rightOperand dpv:Marketing .
 
-drk:request-314 a odrl:Request ;
-    dcterms:title "Request: scientific research"@en ;
+drk:policy-314-2 a odrl:Set ;
+    odrl:uid drk:policy-314-2 ;
+    dcterms:title "Scientific research"@en ;
     odrl:assignee drk:researcher ;
-    odrl:permission kgc:KGC314-request-r1 .
+    odrl:permission kgc:KGC314-p2-r1 .
 
-kgc:KGC314-request-r1 a odrl:Permission ;
+kgc:KGC314-p2-r1 a odrl:Permission ;
     odrl:action odrl:use ;
     odrl:target drk:manuscripts ;
-    odrl:constraint kgc:KGC314-request-c1 .
+    odrl:constraint kgc:KGC314-p2-c1 .
 
-kgc:KGC314-request-c1 a odrl:Constraint ;
+kgc:KGC314-p2-c1 a odrl:Constraint ;
     odrl:leftOperand odrl:purpose ;
     odrl:operator odrl:eq ;
     odrl:rightOperand dpv:ScientificResearch .""",
@@ -632,32 +637,34 @@ kgc:KGC314-request-c1 a odrl:Constraint ;
 @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
 
-drk:offer-315 a odrl:Set ;
-    dcterms:title "Offer: any declared purpose"@en ;
+drk:policy-315-1 a odrl:Set ;
+    odrl:uid drk:policy-315-1 ;
+    dcterms:title "Any declared purpose"@en ;
     odrl:assigner drk:library ;
-    odrl:permission kgc:KGC315-offer-r1 .
+    odrl:permission kgc:KGC315-p1-r1 .
 
-kgc:KGC315-offer-r1 a odrl:Permission ;
+kgc:KGC315-p1-r1 a odrl:Permission ;
     odrl:action odrl:use ;
     odrl:target drk:manuscripts ;
-    odrl:constraint kgc:KGC315-offer-c1 .
+    odrl:constraint kgc:KGC315-p1-c1 .
 
-kgc:KGC315-offer-c1 a odrl:Constraint ;
+kgc:KGC315-p1-c1 a odrl:Constraint ;
     odrl:leftOperand odrl:purpose ;
     odrl:operator odrl:isA ;
     odrl:rightOperand dpv:Purpose .
 
-drk:request-315 a odrl:Request ;
-    dcterms:title "Request: recruitment interview scheduling"@en ;
+drk:policy-315-2 a odrl:Set ;
+    odrl:uid drk:policy-315-2 ;
+    dcterms:title "Recruitment interview scheduling"@en ;
     odrl:assignee drk:researcher ;
-    odrl:permission kgc:KGC315-request-r1 .
+    odrl:permission kgc:KGC315-p2-r1 .
 
-kgc:KGC315-request-r1 a odrl:Permission ;
+kgc:KGC315-p2-r1 a odrl:Permission ;
     odrl:action odrl:use ;
     odrl:target drk:manuscripts ;
-    odrl:constraint kgc:KGC315-request-c1 .
+    odrl:constraint kgc:KGC315-p2-c1 .
 
-kgc:KGC315-request-c1 a odrl:Constraint ;
+kgc:KGC315-p2-c1 a odrl:Constraint ;
     odrl:leftOperand odrl:purpose ;
     odrl:operator odrl:eq ;
     odrl:rightOperand dpv:RecruitmentInterviewScheduling .""",
@@ -736,32 +743,34 @@ kgc:KGC315-request-c1 a odrl:Constraint ;
 @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
 
-drk:offer-316 a odrl:Set ;
-    dcterms:title "Offer: recruitment interview scheduling"@en ;
+drk:policy-316-1 a odrl:Set ;
+    odrl:uid drk:policy-316-1 ;
+    dcterms:title "Recruitment interview scheduling"@en ;
     odrl:assigner drk:library ;
-    odrl:permission kgc:KGC316-offer-r1 .
+    odrl:permission kgc:KGC316-p1-r1 .
 
-kgc:KGC316-offer-r1 a odrl:Permission ;
+kgc:KGC316-p1-r1 a odrl:Permission ;
     odrl:action odrl:use ;
     odrl:target drk:manuscripts ;
-    odrl:constraint kgc:KGC316-offer-c1 .
+    odrl:constraint kgc:KGC316-p1-c1 .
 
-kgc:KGC316-offer-c1 a odrl:Constraint ;
+kgc:KGC316-p1-c1 a odrl:Constraint ;
     odrl:leftOperand odrl:purpose ;
     odrl:operator odrl:isA ;
     odrl:rightOperand dpv:RecruitmentInterviewScheduling .
 
-drk:request-316 a odrl:Request ;
-    dcterms:title "Request: any declared purpose"@en ;
+drk:policy-316-2 a odrl:Set ;
+    odrl:uid drk:policy-316-2 ;
+    dcterms:title "Any declared purpose"@en ;
     odrl:assignee drk:researcher ;
-    odrl:permission kgc:KGC316-request-r1 .
+    odrl:permission kgc:KGC316-p2-r1 .
 
-kgc:KGC316-request-r1 a odrl:Permission ;
+kgc:KGC316-p2-r1 a odrl:Permission ;
     odrl:action odrl:use ;
     odrl:target drk:manuscripts ;
-    odrl:constraint kgc:KGC316-request-c1 .
+    odrl:constraint kgc:KGC316-p2-c1 .
 
-kgc:KGC316-request-c1 a odrl:Constraint ;
+kgc:KGC316-p2-c1 a odrl:Constraint ;
     odrl:leftOperand odrl:purpose ;
     odrl:operator odrl:eq ;
     odrl:rightOperand dpv:Purpose .""",
@@ -835,32 +844,34 @@ kgc:KGC316-request-c1 a odrl:Constraint ;
 @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
 
-drk:offer-317 a odrl:Set ;
-    dcterms:title "Offer: any purpose other than marketing"@en ;
+drk:policy-317-1 a odrl:Set ;
+    odrl:uid drk:policy-317-1 ;
+    dcterms:title "Any purpose other than marketing"@en ;
     odrl:assigner drk:library ;
-    odrl:permission kgc:KGC317-offer-r1 .
+    odrl:permission kgc:KGC317-p1-r1 .
 
-kgc:KGC317-offer-r1 a odrl:Permission ;
+kgc:KGC317-p1-r1 a odrl:Permission ;
     odrl:action odrl:use ;
     odrl:target drk:manuscripts ;
-    odrl:constraint kgc:KGC317-offer-c1 .
+    odrl:constraint kgc:KGC317-p1-c1 .
 
-kgc:KGC317-offer-c1 a odrl:Constraint ;
+kgc:KGC317-p1-c1 a odrl:Constraint ;
     odrl:leftOperand odrl:purpose ;
     odrl:operator odrl:isNoneOf ;
-    odrl:rightOperand dpv:Marketing .
+    odrl:rightOperand ( dpv:Marketing ) .
 
-drk:request-317 a odrl:Request ;
-    dcterms:title "Request: marketing"@en ;
+drk:policy-317-2 a odrl:Set ;
+    odrl:uid drk:policy-317-2 ;
+    dcterms:title "Marketing"@en ;
     odrl:assignee drk:researcher ;
-    odrl:permission kgc:KGC317-request-r1 .
+    odrl:permission kgc:KGC317-p2-r1 .
 
-kgc:KGC317-request-r1 a odrl:Permission ;
+kgc:KGC317-p2-r1 a odrl:Permission ;
     odrl:action odrl:use ;
     odrl:target drk:manuscripts ;
-    odrl:constraint kgc:KGC317-request-c1 .
+    odrl:constraint kgc:KGC317-p2-c1 .
 
-kgc:KGC317-request-c1 a odrl:Constraint ;
+kgc:KGC317-p2-c1 a odrl:Constraint ;
     odrl:leftOperand odrl:purpose ;
     odrl:operator odrl:eq ;
     odrl:rightOperand dpv:Marketing .""",

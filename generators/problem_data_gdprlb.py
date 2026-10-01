@@ -144,7 +144,9 @@ def _offer_isanyof(pid):
 # deontic role is not modelled: the verdict decides whether two constraint
 # sets admit a common use, not which rule prevails where they do.
 
-drk:offer-{pid[3:]} a odrl:Set ;
+drk:policy-{pid[3:]}-1 a odrl:Set ;
+    odrl:uid drk:policy-{pid[3:]}-1 ;
+    odrl:profile dpv-odrl: ;
     dcterms:title "Processing is lawful on any legal basis of Article 6(1)"@en ;
     dcterms:source <https://ai.wu.ac.at/policies/orcp/regulatory-model.html> ;
     rdfs:comment "The predicateConstraint of Example 1 of the ODRL \
@@ -152,14 +154,14 @@ Regulatory Compliance Profile, section 2.10.1, with the profile's own \
 names for the seven bases of Article 6(1) read as concepts of the Data \
 Privacy Vocabulary."@en ;
     odrl:assigner drk:controller ;
-    odrl:permission kgc:{pid}-offer-r1 .
+    odrl:permission kgc:{pid}-p1-r1 .
 
-kgc:{pid}-offer-r1 a odrl:Permission ;
+kgc:{pid}-p1-r1 a odrl:Permission ;
     odrl:action odrl:use ;
     odrl:target drk:dataset ;
-    odrl:constraint kgc:{pid}-offer-c1 .
+    odrl:constraint kgc:{pid}-p1-c1 .
 
-kgc:{pid}-offer-c1 a odrl:Constraint ;
+kgc:{pid}-p1-c1 a odrl:Constraint ;
     odrl:leftOperand dpv-odrl:LegalBasis ;
     odrl:operator odrl:isAnyOf ;
     odrl:rightOperand {_SEVEN_TTL} .
@@ -168,17 +170,19 @@ kgc:{pid}-offer-c1 a odrl:Constraint ;
 
 def _offer_isa(pid):
     return f"""
-drk:offer-{pid[3:]} a odrl:Set ;
+drk:policy-{pid[3:]}-1 a odrl:Set ;
+    odrl:uid drk:policy-{pid[3:]}-1 ;
+    odrl:profile dpv-odrl: ;
     dcterms:title "Processing is lawful on any legal basis"@en ;
     odrl:assigner drk:controller ;
-    odrl:permission kgc:{pid}-offer-r1 .
+    odrl:permission kgc:{pid}-p1-r1 .
 
-kgc:{pid}-offer-r1 a odrl:Permission ;
+kgc:{pid}-p1-r1 a odrl:Permission ;
     odrl:action odrl:use ;
     odrl:target drk:dataset ;
-    odrl:constraint kgc:{pid}-offer-c1 .
+    odrl:constraint kgc:{pid}-p1-c1 .
 
-kgc:{pid}-offer-c1 a odrl:Constraint ;
+kgc:{pid}-p1-c1 a odrl:Constraint ;
     odrl:leftOperand dpv-odrl:LegalBasis ;
     odrl:operator odrl:isA ;
     odrl:rightOperand dpv:LegalBasis .
@@ -187,17 +191,19 @@ kgc:{pid}-offer-c1 a odrl:Constraint ;
 
 def _request(pid, title, value):
     return f"""
-drk:request-{pid[3:]} a odrl:Request ;
+drk:policy-{pid[3:]}-2 a odrl:Set ;
+    odrl:uid drk:policy-{pid[3:]}-2 ;
+    odrl:profile dpv-odrl: ;
     dcterms:title "{title}"@en ;
     odrl:assignee drk:processor ;
-    odrl:permission kgc:{pid}-request-r1 .
+    odrl:permission kgc:{pid}-p2-r1 .
 
-kgc:{pid}-request-r1 a odrl:Permission ;
+kgc:{pid}-p2-r1 a odrl:Permission ;
     odrl:action odrl:use ;
     odrl:target drk:dataset ;
-    odrl:constraint kgc:{pid}-request-c1 .
+    odrl:constraint kgc:{pid}-p2-c1 .
 
-kgc:{pid}-request-c1 a odrl:Constraint ;
+kgc:{pid}-p2-c1 a odrl:Constraint ;
     odrl:leftOperand dpv-odrl:LegalBasis ;
     odrl:operator odrl:eq ;
     odrl:rightOperand {value} .

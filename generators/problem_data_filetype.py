@@ -124,6 +124,7 @@ PROBLEMS = [
     # -----------------------------------------------------------------
     {
         "id":                "KGC320",
+        "binding":           BINDING,
         "subdir":            "verdict",
         "name":              "fileFormat, eq ft:PDF against eq ft:PDFA1A",
         "left_operand":      "fileFormat",
@@ -173,32 +174,34 @@ PROBLEMS = [
             "premises": [],
         },
         "ttl": _TTL_HEAD + """
-drk:offer-320 a odrl:Set ;
-    dcterms:title "BSB offer: PDF"@en ;
+drk:policy-320-1 a odrl:Set ;
+    odrl:uid drk:policy-320-1 ;
+    dcterms:title "BSB: PDF"@en ;
     odrl:assigner drk:library ;
-    odrl:permission kgc:KGC320-offer-r1 .
+    odrl:permission kgc:KGC320-p1-r1 .
 
-kgc:KGC320-offer-r1 a odrl:Permission ;
+kgc:KGC320-p1-r1 a odrl:Permission ;
     odrl:action odrl:use ;
     odrl:target drk:manuscripts ;
-    odrl:constraint kgc:KGC320-offer-c1 .
+    odrl:constraint kgc:KGC320-p1-c1 .
 
-kgc:KGC320-offer-c1 a odrl:Constraint ;
+kgc:KGC320-p1-c1 a odrl:Constraint ;
     odrl:leftOperand odrl:fileFormat ;
     odrl:operator odrl:eq ;
     odrl:rightOperand ft:PDF .
 
-drk:request-320 a odrl:Request ;
-    dcterms:title "BnF request: PDF/A-1a"@en ;
+drk:policy-320-2 a odrl:Set ;
+    odrl:uid drk:policy-320-2 ;
+    dcterms:title "BnF: PDF/A-1a"@en ;
     odrl:assignee drk:researcher ;
-    odrl:permission kgc:KGC320-request-r1 .
+    odrl:permission kgc:KGC320-p2-r1 .
 
-kgc:KGC320-request-r1 a odrl:Permission ;
+kgc:KGC320-p2-r1 a odrl:Permission ;
     odrl:action odrl:use ;
     odrl:target drk:manuscripts ;
-    odrl:constraint kgc:KGC320-request-c1 .
+    odrl:constraint kgc:KGC320-p2-c1 .
 
-kgc:KGC320-request-c1 a odrl:Constraint ;
+kgc:KGC320-p2-c1 a odrl:Constraint ;
     odrl:leftOperand odrl:fileFormat ;
     odrl:operator odrl:eq ;
     odrl:rightOperand ft:PDFA1A .""",
@@ -211,6 +214,7 @@ kgc:KGC320-request-c1 a odrl:Constraint ;
     # -----------------------------------------------------------------
     {
         "id":                "KGC321",
+        "binding":           BINDING,
         "subdir":            "verdict",
         "name":              "fileFormat, eq ft:PDF against eq ft:PDFA1A, "
                              "under a declared distinctness",
@@ -264,32 +268,34 @@ kgc:KGC320-request-c1 a odrl:Constraint ;
             ],
         },
         "ttl": _TTL_HEAD + """
-drk:offer-321 a odrl:Set ;
-    dcterms:title "BSB offer: PDF"@en ;
+drk:policy-321-1 a odrl:Set ;
+    odrl:uid drk:policy-321-1 ;
+    dcterms:title "BSB: PDF"@en ;
     odrl:assigner drk:library ;
-    odrl:permission kgc:KGC321-offer-r1 .
+    odrl:permission kgc:KGC321-p1-r1 .
 
-kgc:KGC321-offer-r1 a odrl:Permission ;
+kgc:KGC321-p1-r1 a odrl:Permission ;
     odrl:action odrl:use ;
     odrl:target drk:manuscripts ;
-    odrl:constraint kgc:KGC321-offer-c1 .
+    odrl:constraint kgc:KGC321-p1-c1 .
 
-kgc:KGC321-offer-c1 a odrl:Constraint ;
+kgc:KGC321-p1-c1 a odrl:Constraint ;
     odrl:leftOperand odrl:fileFormat ;
     odrl:operator odrl:eq ;
     odrl:rightOperand ft:PDF .
 
-drk:request-321 a odrl:Request ;
-    dcterms:title "BnF request: PDF/A-1a"@en ;
+drk:policy-321-2 a odrl:Set ;
+    odrl:uid drk:policy-321-2 ;
+    dcterms:title "BnF: PDF/A-1a"@en ;
     odrl:assignee drk:researcher ;
-    odrl:permission kgc:KGC321-request-r1 .
+    odrl:permission kgc:KGC321-p2-r1 .
 
-kgc:KGC321-request-r1 a odrl:Permission ;
+kgc:KGC321-p2-r1 a odrl:Permission ;
     odrl:action odrl:use ;
     odrl:target drk:manuscripts ;
-    odrl:constraint kgc:KGC321-request-c1 .
+    odrl:constraint kgc:KGC321-p2-c1 .
 
-kgc:KGC321-request-c1 a odrl:Constraint ;
+kgc:KGC321-p2-c1 a odrl:Constraint ;
     odrl:leftOperand odrl:fileFormat ;
     odrl:operator odrl:eq ;
     odrl:rightOperand ft:PDFA1A .""",
@@ -299,6 +305,7 @@ kgc:KGC321-request-c1 a odrl:Constraint ;
 # constraints alone.
     {
         "id":                "KGC322",
+        "binding":           BINDING,
         "subdir":            "verdict",
         "name":              "fileFormat, isAnyOf {ft:PDF, ft:PDFA1A} "
                              "against eq ft:PDFA1A",
@@ -355,32 +362,34 @@ kgc:KGC321-request-c1 a odrl:Constraint ;
             ],
         },
         "ttl": _TTL_HEAD + """
-drk:offer-322 a odrl:Set ;
-    dcterms:title "BSB offer: PDF or PDF/A-1a"@en ;
+drk:policy-322-1 a odrl:Set ;
+    odrl:uid drk:policy-322-1 ;
+    dcterms:title "BSB: PDF or PDF/A-1a"@en ;
     odrl:assigner drk:library ;
-    odrl:permission kgc:KGC322-offer-r1 .
+    odrl:permission kgc:KGC322-p1-r1 .
 
-kgc:KGC322-offer-r1 a odrl:Permission ;
+kgc:KGC322-p1-r1 a odrl:Permission ;
     odrl:action odrl:use ;
     odrl:target drk:manuscripts ;
-    odrl:constraint kgc:KGC322-offer-c1 .
+    odrl:constraint kgc:KGC322-p1-c1 .
 
-kgc:KGC322-offer-c1 a odrl:Constraint ;
+kgc:KGC322-p1-c1 a odrl:Constraint ;
     odrl:leftOperand odrl:fileFormat ;
     odrl:operator odrl:isAnyOf ;
     odrl:rightOperand ( ft:PDF ft:PDFA1A ) .
 
-drk:request-322 a odrl:Request ;
-    dcterms:title "BnF request: PDF/A-1a"@en ;
+drk:policy-322-2 a odrl:Set ;
+    odrl:uid drk:policy-322-2 ;
+    dcterms:title "BnF: PDF/A-1a"@en ;
     odrl:assignee drk:researcher ;
-    odrl:permission kgc:KGC322-request-r1 .
+    odrl:permission kgc:KGC322-p2-r1 .
 
-kgc:KGC322-request-r1 a odrl:Permission ;
+kgc:KGC322-p2-r1 a odrl:Permission ;
     odrl:action odrl:use ;
     odrl:target drk:manuscripts ;
-    odrl:constraint kgc:KGC322-request-c1 .
+    odrl:constraint kgc:KGC322-p2-c1 .
 
-kgc:KGC322-request-c1 a odrl:Constraint ;
+kgc:KGC322-p2-c1 a odrl:Constraint ;
     odrl:leftOperand odrl:fileFormat ;
     odrl:operator odrl:eq ;
     odrl:rightOperand ft:PDFA1A .""",
@@ -472,32 +481,34 @@ kgc:KGC322-request-c1 a odrl:Constraint ;
     },
 
     "ttl": _TTL_HEAD + """
-drk:offer-323 a odrl:Set ;
-    dcterms:title "BSB offer: not PDF"@en ;
+drk:policy-323-1 a odrl:Set ;
+    odrl:uid drk:policy-323-1 ;
+    dcterms:title "BSB: not PDF"@en ;
     odrl:assigner drk:library ;
-    odrl:permission kgc:KGC323-offer-r1 .
+    odrl:permission kgc:KGC323-p1-r1 .
 
-kgc:KGC323-offer-r1 a odrl:Permission ;
+kgc:KGC323-p1-r1 a odrl:Permission ;
     odrl:action odrl:use ;
     odrl:target drk:manuscripts ;
-    odrl:constraint kgc:KGC323-offer-c1 .
+    odrl:constraint kgc:KGC323-p1-c1 .
 
-kgc:KGC323-offer-c1 a odrl:Constraint ;
+kgc:KGC323-p1-c1 a odrl:Constraint ;
     odrl:leftOperand odrl:fileFormat ;
     odrl:operator odrl:neq ;
     odrl:rightOperand ft:PDF .
 
-drk:request-323 a odrl:Request ;
-    dcterms:title "BnF request: PDF/A-1a"@en ;
+drk:policy-323-2 a odrl:Set ;
+    odrl:uid drk:policy-323-2 ;
+    dcterms:title "BnF: PDF/A-1a"@en ;
     odrl:assignee drk:researcher ;
-    odrl:permission kgc:KGC323-request-r1 .
+    odrl:permission kgc:KGC323-p2-r1 .
 
-kgc:KGC323-request-r1 a odrl:Permission ;
+kgc:KGC323-p2-r1 a odrl:Permission ;
     odrl:action odrl:use ;
     odrl:target drk:manuscripts ;
-    odrl:constraint kgc:KGC323-request-c1 .
+    odrl:constraint kgc:KGC323-p2-c1 .
 
-kgc:KGC323-request-c1 a odrl:Constraint ;
+kgc:KGC323-p2-c1 a odrl:Constraint ;
     odrl:leftOperand odrl:fileFormat ;
     odrl:operator odrl:eq ;
     odrl:rightOperand ft:PDFA1A .

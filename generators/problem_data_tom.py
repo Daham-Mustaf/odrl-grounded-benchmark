@@ -69,7 +69,7 @@ parties' declaration that the two are distinct, and the verdict becomes
 Incompatible. Even the obvious conflict rested on a declared premise.
 """
 
-from compile import Constraint
+from compile import right_operand as _ro, Constraint
 
 # Concept slugs, as the TPTP and SMT-LIB encodings name them.
 TOM        = "tm_technical_organisational_measure"
@@ -110,18 +110,20 @@ _TTL_HEAD = """\
 
 def _offer(pid):
     return f"""
-drk:offer-{pid[3:]} a odrl:Set ;
+drk:policy-{pid[3:]}-1 a odrl:Set ;
+    odrl:uid drk:policy-{pid[3:]}-1 ;
+    odrl:profile dpv-odrl: ;
     dcterms:title "Use is permitted where encryption and access control are both in place"@en ;
     rdfs:comment "The kind of clause the DPV-ODRL guidance describes for this operand: access to a dataset permitted only where stated measures are implemented. Both are required, not one of them, which is what distinguishes isAllOf from isAnyOf here."@en ;
     odrl:assigner drk:controller ;
-    odrl:permission kgc:{pid}-offer-r1 .
+    odrl:permission kgc:{pid}-p1-r1 .
 
-kgc:{pid}-offer-r1 a odrl:Permission ;
+kgc:{pid}-p1-r1 a odrl:Permission ;
     odrl:action odrl:use ;
     odrl:target drk:dataset ;
-    odrl:constraint kgc:{pid}-offer-c1 .
+    odrl:constraint kgc:{pid}-p1-c1 .
 
-kgc:{pid}-offer-c1 a odrl:Constraint ;
+kgc:{pid}-p1-c1 a odrl:Constraint ;
     odrl:leftOperand dpv-odrl:TechnicalOrganisationalMeasure ;
     odrl:operator odrl:isAllOf ;
     odrl:rightOperand ( dpv:Encryption dpv:AccessControlMethod ) .
@@ -130,17 +132,19 @@ kgc:{pid}-offer-c1 a odrl:Constraint ;
 
 def _request(pid, title, operator, value):
     return f"""
-drk:request-{pid[3:]} a odrl:Request ;
+drk:policy-{pid[3:]}-2 a odrl:Set ;
+    odrl:uid drk:policy-{pid[3:]}-2 ;
+    odrl:profile dpv-odrl: ;
     dcterms:title "{title}"@en ;
     odrl:assignee drk:processor ;
-    odrl:permission kgc:{pid}-request-r1 .
+    odrl:permission kgc:{pid}-p2-r1 .
 
-kgc:{pid}-request-r1 a odrl:Permission ;
+kgc:{pid}-p2-r1 a odrl:Permission ;
     odrl:action odrl:use ;
     odrl:target drk:dataset ;
-    odrl:constraint kgc:{pid}-request-c1 .
+    odrl:constraint kgc:{pid}-p2-c1 .
 
-kgc:{pid}-request-c1 a odrl:Constraint ;
+kgc:{pid}-p2-c1 a odrl:Constraint ;
     odrl:leftOperand dpv-odrl:TechnicalOrganisationalMeasure ;
     odrl:operator odrl:{operator} ;
     odrl:rightOperand {value} .
@@ -154,58 +158,53 @@ kgc:{pid}-request-c1 a odrl:Constraint ;
 
 
 _PARTIES = {
-    "offer":   ("odrl:Set",   "odrl:assigner drk:controller"),
-    "request": ("odrl:Request", "odrl:assignee drk:processor"),
+    1: "odrl:assigner drk:controller",
+    2: "odrl:assignee drk:processor",
 }
 
 
-def _cnode(pid, side, i, left_operand, operator, values):
-    """One odrl:Constraint node. Values are DPV local names.
-
-    A set-valued right operand is written as repeated objects rather than
-    as an RDF collection. ODRL's context gives odrl:rightOperand no
-    container, so the spec settles neither; the suite uses one form
-    throughout so that a consumer reading the case files does not have to
-    tell whether a difference in shape means a difference in meaning.
-    """
-    ro = " ,\n        ".join(f"dpv:{v}" for v in values)
+def _cnode(pid, k, i, left_operand, operator, values):
+    """One odrl:Constraint node. Values are DPV local names; a set
+    operator's values are written as an RDF collection."""
+    ro = _ro(operator, [f"dpv:{v}" for v in values])
     return f"""
-kgc:{pid}-{side}-c{i} a odrl:Constraint ;
+kgc:{pid}-p{k}-c{i} a odrl:Constraint ;
     odrl:leftOperand {left_operand} ;
     odrl:operator odrl:{operator} ;
     odrl:rightOperand {ro} .
 """
 
-def _side(pid, side, title, left_operand, constraints):
-    """One policy (offer or request), its permission and its constraints.
+def _side(pid, k, title, left_operand, constraints):
+    """Policy k (1 or 2) of the pair, its permission and its constraints.
     constraints is a list of (operator, [DPV local names])."""
-    policy, party = _PARTIES[side]
-    nodes = ", ".join(f"kgc:{pid}-{side}-c{i}"
+    nodes = ", ".join(f"kgc:{pid}-p{k}-c{i}"
                       for i in range(1, len(constraints) + 1))
     head = f"""
-drk:{side}-{pid[3:]} a {policy} ;
+drk:policy-{pid[3:]}-{k} a odrl:Set ;
+    odrl:uid drk:policy-{pid[3:]}-{k} ;
+    odrl:profile dpv-odrl: ;
     dcterms:title "{title}"@en ;
-    {party} ;
-    odrl:permission kgc:{pid}-{side}-r1 .
+    {_PARTIES[k]} ;
+    odrl:permission kgc:{pid}-p{k}-r1 .
 
-kgc:{pid}-{side}-r1 a odrl:Permission ;
+kgc:{pid}-p{k}-r1 a odrl:Permission ;
     odrl:action odrl:use ;
     odrl:target drk:dataset ;
     odrl:constraint {nodes} .
 """
     return head + "".join(
-        _cnode(pid, side, i, left_operand, op, vals)
+        _cnode(pid, k, i, left_operand, op, vals)
         for i, (op, vals) in enumerate(constraints, start=1))
 
 
 def _ttl(pid, left_operand, offer_phrase, offer, request_phrase, request):
     """Full Turtle for one problem. The phrases fill the two titles."""
     return (_TTL_HEAD
-            + _side(pid, "offer",
+            + _side(pid, 1,
                     f"Use is permitted with {offer_phrase} in place",
                     left_operand, offer)
-            + _side(pid, "request",
-                    f"Use is requested with {request_phrase} in place",
+            + _side(pid, 2,
+                    f"Use with {request_phrase} in place",
                     left_operand, request))
 
 
@@ -331,7 +330,7 @@ PROBLEMS = [
         "ttl": _TTL_HEAD + _offer("KGC361")
                + _request("KGC361",
                           "Use without access control",
-                          "isNoneOf", "dpv:AccessControlMethod"),
+                          "isNoneOf", "( dpv:AccessControlMethod )"),
     },
 
     # -----------------------------------------------------------------

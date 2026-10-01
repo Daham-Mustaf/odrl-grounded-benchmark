@@ -1,0 +1,16 @@
+# Background theory for the BCP 47 resource: empty.
+#
+# The parties declare nothing beyond the registry. The registry publishes
+# no distinctness between primary subtags, so two constraints naming
+# different languages are satisfiable together unless the parties adopt
+# the uniqueness rule (bcp47-uniqueness.ttl).
+#
+# Source: https://www.iana.org/assignments/language-subtag-registry
+
+@prefix bt:      <https://w3id.org/odrl-kb/background#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+<https://w3id.org/odrl-kb/bcp47/empty> a bt:BackgroundTheory ;
+    dcterms:title "No declared distinctness"@en ;
+    bt:appliesTo <https://w3id.org/odrl-kb/bcp47> ;
+    bt:pairCount 0 .

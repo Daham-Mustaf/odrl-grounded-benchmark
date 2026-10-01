@@ -113,19 +113,19 @@ def suite_totals(cases_dir: Path, verdict_dir: Path) -> dict:
     reasons = Counter()
     for f in files:
         t = f.read_text(encoding="utf-8")
-        m = re.search(r"report:satisfactionState\s+(\S+)\s*[;.]", t)
+        m = re.search(r"vrep:compatibilityState\s+vrep:(\w+)\s*[;.]", t)
         if m:
             states[m.group(1)] += 1
-        m = re.search(r"vrep:undeterminedReason\s+vrep:(\w+)", t)
+        m = re.search(r"vrep:unknownReason\s+vrep:(\w+)", t)
         if m:
             reasons[m.group(1)] += 1
     queries = len(list(verdict_dir.glob("*-[12].p")))
     return {
         "files": len(files),
         "queries": queries,
-        "satisfied": states.get("report:Satisfied", 0),
-        "unsatisfied": states.get("report:Unsatisfied", 0),
-        "undetermined": states.get("vrep:Undetermined", 0),
+        "compatible": states.get("Compatible", 0),
+        "incompatible": states.get("Incompatible", 0),
+        "unknown": states.get("Unknown", 0),
         "epistemic": reasons.get("Epistemic", 0),
         "ungrounded": reasons.get("Ungrounded", 0),
     }
@@ -171,10 +171,12 @@ def main() -> int:
         print(f"\\newcommand{{\\suiteCases}}{{{totals['files']}}}")
         print(f"\\newcommand{{\\suiteQueries}}{{{totals['queries']}}}")
         print(f"\\newcommand{{\\suiteDefinite}}"
-              f"{{{totals['satisfied'] + totals['unsatisfied']}}}")
-        print(f"\\newcommand{{\\suiteCompatible}}{{{totals['satisfied']}}}")
-        print(f"\\newcommand{{\\suiteIncompatible}}{{{totals['unsatisfied']}}}")
-        print(f"\\newcommand{{\\suiteUndetermined}}{{{totals['undetermined']}}}")
+              f"{{{totals['compatible'] + totals['incompatible']}}}")
+        print(f"\\newcommand{{\\suiteCompatible}}{{{totals['compatible']}}}")
+        print(f"\\newcommand{{\\suiteIncompatible}}{{{totals['incompatible']}}}")
+        print(f"\\newcommand{{\\suiteUnknown}}{{{totals['unknown']}}}")
+        # Old name, kept until the paper stops using it.
+        print("\\newcommand{\\suiteUndetermined}{\\suiteUnknown}")
         print(f"\\newcommand{{\\suiteEpistemic}}{{{totals['epistemic']}}}")
         print(f"\\newcommand{{\\suiteUngrounded}}{{{totals['ungrounded']}}}")
         return 0

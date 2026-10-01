@@ -1,6 +1,7 @@
 @prefix bind:    <https://w3id.org/odrl-kb/binding#> .
 @prefix bt:      <https://w3id.org/odrl-kb/background#> .
 @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix owl:     <http://www.w3.org/2002/07/owl#> .
 @prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
@@ -55,7 +56,7 @@ bind:nom a bind:Sort ;
 
 # --- properties -------------------------------------------------------
 
-bind:leftOperand a rdfs:Property, skos:Concept ;
+bind:leftOperand a rdf:Property, skos:Concept ;
     rdfs:isDefinedBy <https://w3id.org/odrl-kb/binding> ;
     rdfs:label "left operand" ;
     rdfs:seeAlso odrl:leftOperand ;
@@ -63,27 +64,27 @@ bind:leftOperand a rdfs:Property, skos:Concept ;
     rdfs:domain bind:OperandBinding ;
     rdfs:range odrl:LeftOperand .
 
-bind:sort a rdfs:Property, skos:Concept ;
+bind:sort a rdf:Property, skos:Concept ;
     rdfs:isDefinedBy <https://w3id.org/odrl-kb/binding> ;
     rdfs:label "sort" ;
     skos:definition "The declared sort of the binding."@en ;
     rdfs:domain bind:OperandBinding ;
     rdfs:range bind:Sort .
 
-bind:resource a rdfs:Property, skos:Concept ;
+bind:resource a rdf:Property, skos:Concept ;
     rdfs:isDefinedBy <https://w3id.org/odrl-kb/binding> ;
     rdfs:label "resource" ;
     skos:definition "The external resource whose published assertions the binding reads: a versioned slice of a published vocabulary, with its provenance recorded."@en ;
     rdfs:domain bind:OperandBinding .
 
-bind:backgroundTheory a rdfs:Property, skos:Concept ;
+bind:backgroundTheory a rdf:Property, skos:Concept ;
     rdfs:isDefinedBy <https://w3id.org/odrl-kb/binding> ;
     rdfs:label "background theory" ;
     skos:definition "A declared, withdrawable background theory in force for this binding. Absent when the parties have declared nothing: withdrawal is the absence of the property, not the presence of an empty theory."@en ;
     rdfs:domain bind:OperandBinding ;
     rdfs:range bt:BackgroundTheory .
 
-bind:grounding a rdfs:Property, skos:Concept ;
+bind:grounding a rdf:Property, skos:Concept ;
     rdfs:isDefinedBy <https://w3id.org/odrl-kb/binding> ;
     rdfs:label "grounding" ;
     skos:definition "The rule this binding adopts for mapping right-operand values to concepts of the resource."@en ;

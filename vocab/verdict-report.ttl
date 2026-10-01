@@ -1,7 +1,8 @@
 @prefix vrep:    <https://w3id.org/odrl-kb/verdict-report#> .
-@prefix report:  <https://w3id.org/force/compliance-report#> .
 @prefix bind:    <https://w3id.org/odrl-kb/binding#> .
+@prefix bt:      <https://w3id.org/odrl-kb/background#> .
 @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix owl:     <http://www.w3.org/2002/07/owl#> .
 @prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
@@ -10,107 +11,159 @@
 @prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
 
 <https://w3id.org/odrl-kb/verdict-report> a owl:Ontology ;
-    dcterms:title "Verdict report extension"@en ;
+    dcterms:title "Verdict report"@en ;
     vann:preferredNamespacePrefix "vrep" ;
     vann:preferredNamespaceUri "https://w3id.org/odrl-kb/verdict-report#" ;
-    owl:imports <https://w3id.org/force/compliance-report> ;
-    rdfs:comment "Written against Compliance Report Model 0.9.0; the parent publishes no owl:versionIRI, so the version is recorded here rather than pinned by import."@en ;
     dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
-    dcterms:description "Adds to the Compliance Report Model the one satisfaction state and the machinery needed to report knowledge-grounded verdicts: a third state for undecided answers, its two reasons, the pairwise constraint reference, the binding that fixed the reading, and the certificate."@en .
+    dcterms:description "Reports the result of comparing two ODRL policies before any use: whether their constraints on one left operand can be satisfied together. The comparison involves no request and no state of the world, so this vocabulary does not extend a compliance report model, which records the evaluation of a policy against a request."@en .
 
-# ----- the third satisfaction state -----
+# ----- reports -----
 
-vrep:Undetermined a rdfs:Class, skos:Concept ;
+vrep:OperandVerdictReport a rdfs:Class ;
     rdfs:isDefinedBy <https://w3id.org/odrl-kb/verdict-report> ;
-    rdfs:label "Undetermined State" ;
-    skos:altLabel "Unknown"@en ;
-    rdfs:subClassOf report:SatisfactionState ;
-    owl:disjointWith report:Satisfied, report:Unsatisfied ;
-    skos:definition "The available knowledge does not settle whether the premise is satisfied: either a right-operand value did not ground, or both satisfiability queries are satisfiable."@en ;
-    rdfs:comment "Carries the verdict the paper names Unknown. Named Undetermined here because report:Unknown already denotes a PerformanceState in the parent model."@en .
+    rdfs:label "Operand Verdict Report"@en ;
+    skos:definition "The verdict for the constraints two policies place on one left operand, relative to a binding and a background theory: Compatible when every structure they admit has a use satisfying both constraints, Incompatible when none has, Unknown otherwise or when a value does not ground."@en .
 
-vrep:UndeterminedReason a rdfs:Class, skos:Concept ;
+vrep:WellSortednessReport a rdfs:Class ;
     rdfs:isDefinedBy <https://w3id.org/odrl-kb/verdict-report> ;
-    rdfs:label "Undetermined Reason" ;
-    skos:definition "Why a report is Undetermined. Exactly one of the two subclasses applies: the union axiom gives coverage, their disjointness gives uniqueness. Unlike the parent's SatisfactionState, the closure here is axiomatised, not prose."@en ;
-    owl:equivalentClass [ a owl:Class ;
-        owl:unionOf ( vrep:Ungrounded vrep:Epistemic )
-    ] .
+    rdfs:label "Well-Sortedness Report"@en ;
+    skos:definition "Whether one constraint can be evaluated at all under the sort its left operand is bound at: whether the operator is defined at that sort and the right operand has the arity the operator takes."@en ;
+    rdfs:comment "Decided by the signature alone. No resource is opened and no satisfiability question is asked, so an ill-sorted constraint has no verdict rather than a negative one."@en .
 
-vrep:Ungrounded a rdfs:Class, skos:Concept ;
+# ----- the three verdicts -----
+
+vrep:CompatibilityState a rdfs:Class ;
     rdfs:isDefinedBy <https://w3id.org/odrl-kb/verdict-report> ;
-    rdfs:label "Ungrounded" ;
-    rdfs:subClassOf vrep:UndeterminedReason ;
-    owl:disjointWith vrep:Epistemic ;
-    skos:definition "A right-operand value the profile's grounding does not resolve. Repaired by correcting the policy or the binding; no further declaration settles it. The certificate is the value."@en .
+    rdfs:label "Compatibility State"@en ;
+    skos:definition "The verdict of an operand verdict report. Exactly one of vrep:Compatible, vrep:Incompatible and vrep:Unknown."@en ;
+    owl:oneOf ( vrep:Compatible vrep:Incompatible vrep:Unknown ) .
 
-vrep:Epistemic a rdfs:Class, skos:Concept ;
+vrep:Compatible a vrep:CompatibilityState ;
     rdfs:isDefinedBy <https://w3id.org/odrl-kb/verdict-report> ;
-    rdfs:label "Epistemic" ;
-    rdfs:subClassOf vrep:UndeterminedReason ;
-    owl:disjointWith vrep:Ungrounded ;
-    skos:definition "Both satisfiability queries are satisfiable: some admissible structures admit a common satisfier and some do not. Settled by a further declaration, such as party-declared distinctness. The certificate is a pair of satisfying structures."@en .
+    rdfs:label "Compatible"@en ;
+    skos:definition "Every structure the resource and the background theory admit has a use satisfying both constraints. Certified by a refutation of the negated witness condition."@en .
 
-# ----- the report classes -----
-
-vrep:OperandVerdictReport a rdfs:Class, skos:Concept ;
+vrep:Incompatible a vrep:CompatibilityState ;
     rdfs:isDefinedBy <https://w3id.org/odrl-kb/verdict-report> ;
-    rdfs:label "Operand Verdict Report" ;
-    rdfs:subClassOf report:ConstraintReport ;
-    skos:definition "The verdict for the constraints of a policy and a request on one left operand: whether, in every structure the bound resource and background theory admit, some valuation satisfies both constraints; in no such structure; or in some but not all. report:constraint holds the policy-side constraint and vrep:constraintRequest the request side."@en ;
-    rdfs:comment "Refines the parent's State-of-the-World context by making satisfaction relative to the admissible structures the binding's resource and background theory determine, rather than to one closed world."@en .
+    rdfs:label "Incompatible"@en ;
+    skos:definition "No structure the resource and the background theory admit has a use satisfying both constraints. Certified by a refutation of the witness condition."@en .
 
-vrep:WellSortednessReport a rdfs:Class, skos:Concept ;
+vrep:Unknown a vrep:CompatibilityState ;
     rdfs:isDefinedBy <https://w3id.org/odrl-kb/verdict-report> ;
-    rdfs:label "Well-Sortedness Report" ;
-    rdfs:subClassOf report:ConstraintReport ;
-    skos:definition "Whether a constraint can be evaluated at all under the sort its operand is bound at: whether the operator is admissible at that sort and the right operand has the arity the operator takes."@en ;
-    rdfs:comment "Decided by the signature alone. No resource is opened and no satisfiability question is asked, so a constraint that is not well sorted has no verdict rather than a negative one. Distinct from vrep:OperandVerdictReport, which reports satisfiability once a constraint has passed this check."@en .
+    rdfs:label "Unknown"@en ;
+    skos:definition "The resource and the background theory do not settle the question, or a value does not ground. The report says which through vrep:unknownReason."@en .
 
-# ----- properties -----
+vrep:Compatible owl:differentFrom vrep:Incompatible, vrep:Unknown .
+vrep:Incompatible owl:differentFrom vrep:Unknown .
 
-vrep:constraintRequest a rdfs:Property, skos:Concept ;
+# ----- why a verdict is Unknown -----
+
+vrep:UnknownReason a rdfs:Class ;
     rdfs:isDefinedBy <https://w3id.org/odrl-kb/verdict-report> ;
-    rdfs:label "constraint request" ;
-    skos:definition "Denotes the request-side constraint being evaluated against the policy-side constraint held by report:constraint. Mirrors report:policyRequest and report:ruleRequest."@en ;
+    rdfs:label "Unknown Reason"@en ;
+    skos:definition "Why a report is Unknown. Exactly one of vrep:Epistemic and vrep:Ungrounded."@en ;
+    owl:oneOf ( vrep:Epistemic vrep:Ungrounded ) .
+
+vrep:Epistemic a vrep:UnknownReason ;
+    rdfs:isDefinedBy <https://w3id.org/odrl-kb/verdict-report> ;
+    rdfs:label "Epistemic"@en ;
+    skos:definition "Both satisfiability queries are satisfiable: some admissible structures have a use satisfying both constraints and some do not. Settled by a further declaration in the background theory."@en .
+
+vrep:Ungrounded a vrep:UnknownReason ;
+    rdfs:isDefinedBy <https://w3id.org/odrl-kb/verdict-report> ;
+    rdfs:label "Ungrounded"@en ;
+    skos:definition "A value names no concept of the bound resource, so no query is built. Repaired by correcting the policy or the binding. The value is given by vrep:ungroundedValue."@en .
+
+vrep:Epistemic owl:differentFrom vrep:Ungrounded .
+
+# ----- properties of an operand verdict report -----
+
+vrep:referencePolicy a rdf:Property, owl:FunctionalProperty ;
+    rdfs:isDefinedBy <https://w3id.org/odrl-kb/verdict-report> ;
+    rdfs:label "reference policy"@en ;
+    skos:definition "The first of the two policies compared."@en ;
+    rdfs:comment "The verdict is symmetric. Reference and compared only fix the order in which the report names the policies."@en ;
     rdfs:domain vrep:OperandVerdictReport ;
-    rdfs:range odrl:Constraint .
+    rdfs:range odrl:Policy .
 
-vrep:undeterminedReason a rdfs:Property, owl:FunctionalProperty, skos:Concept ;
+vrep:comparedPolicy a rdf:Property, owl:FunctionalProperty ;
     rdfs:isDefinedBy <https://w3id.org/odrl-kb/verdict-report> ;
-    rdfs:label "undetermined reason" ;
-    skos:definition "The reason a report's satisfaction state is vrep:Undetermined."@en ;
+    rdfs:label "compared policy"@en ;
+    skos:definition "The second of the two policies compared."@en ;
     rdfs:domain vrep:OperandVerdictReport ;
-    rdfs:range vrep:UndeterminedReason ;
-    rdfs:comment "Functional, so a report carries at most one reason. That a report carries exactly one when its state is Undetermined, and none otherwise, is a conditional cardinality OWL does not express; it is checked by the generator, which refuses to write an Undetermined report without a reason, and belongs in a SHACL shape for consumers."@en .
+    rdfs:range odrl:Policy .
 
-vrep:wellSorted a rdfs:Property, owl:FunctionalProperty, skos:Concept ;
+vrep:referenceConstraint a rdf:Property ;
     rdfs:isDefinedBy <https://w3id.org/odrl-kb/verdict-report> ;
-    rdfs:label "well sorted" ;
-    skos:definition "True when the operator is admissible at the binding's sort and the right operand has the arity the operator requires; false otherwise, in which case rdfs:comment carries the reason."@en ;
-    rdfs:domain vrep:WellSortednessReport ;
-    rdfs:range xsd:boolean .
+    rdfs:label "reference constraint"@en ;
+    skos:definition "A constraint of the reference policy on the operand the report is about. Where a rule carries several constraints, each is given; they hold together."@en ;
+    rdfs:domain vrep:OperandVerdictReport .
 
-vrep:binding a rdfs:Property, skos:Concept ;
+vrep:comparedConstraint a rdf:Property ;
     rdfs:isDefinedBy <https://w3id.org/odrl-kb/verdict-report> ;
-    rdfs:label "binding" ;
-    skos:definition "The profile entry that decided the reading: which resource, at which sort, under which grounding rule, with which background theory."@en ;
-    rdfs:domain vrep:OperandVerdictReport ;
+    rdfs:label "compared constraint"@en ;
+    skos:definition "A constraint of the compared policy on the operand the report is about."@en ;
+    rdfs:domain vrep:OperandVerdictReport .
+
+vrep:binding a rdf:Property, owl:FunctionalProperty ;
+    rdfs:isDefinedBy <https://w3id.org/odrl-kb/verdict-report> ;
+    rdfs:label "binding"@en ;
+    skos:definition "The binding that fixed the reading: which source supplies the concepts, at which sort, read how."@en ;
     rdfs:range bind:OperandBinding .
 
-vrep:certificate a rdfs:Property, skos:Concept ;
+vrep:backgroundTheory a rdf:Property, owl:FunctionalProperty ;
     rdfs:isDefinedBy <https://w3id.org/odrl-kb/verdict-report> ;
-    rdfs:label "certificate" ;
-    skos:definition "The evidence for the verdict, checkable without trusting the procedure: a refutation whose premises are named resource, background, and axiom-instance formulas for a definite state; a pair of satisfying structures for Epistemic; the offending value for Ungrounded."@en ;
+    rdfs:label "background theory"@en ;
+    skos:definition "What the parties declared beyond the resource. Every report names one, the empty theory included, so a reader sees what the verdict rests on."@en ;
     rdfs:domain vrep:OperandVerdictReport ;
-    rdfs:comment "The certificate artifact is referenced, not reified; its internal format is the benchmark's TPTP refutation or explicit structure. The range is deliberately unrestricted."@en .
+    rdfs:range bt:BackgroundTheory .
 
-vrep:comparedWith a rdf:Property ;
-    rdfs:label "compared with"@en ;
-    rdfs:comment "Another case whose verdict this one should be read against: the same policies under a different binding, or the same constraints with and without a declared theory."@en ;
+vrep:compatibilityState a rdf:Property, owl:FunctionalProperty ;
+    rdfs:isDefinedBy <https://w3id.org/odrl-kb/verdict-report> ;
+    rdfs:label "compatibility state"@en ;
+    skos:definition "The verdict."@en ;
+    rdfs:domain vrep:OperandVerdictReport ;
+    rdfs:range vrep:CompatibilityState .
+
+vrep:unknownReason a rdf:Property, owl:FunctionalProperty ;
+    rdfs:isDefinedBy <https://w3id.org/odrl-kb/verdict-report> ;
+    rdfs:label "unknown reason"@en ;
+    skos:definition "Why the verdict is vrep:Unknown. Present exactly when it is."@en ;
+    rdfs:comment "That a report carries a reason exactly when its state is Unknown is a conditional cardinality OWL does not express. The generator refuses to write an Unknown report without one."@en ;
+    rdfs:domain vrep:OperandVerdictReport ;
+    rdfs:range vrep:UnknownReason .
+
+vrep:ungroundedValue a rdf:Property ;
+    rdfs:isDefinedBy <https://w3id.org/odrl-kb/verdict-report> ;
+    rdfs:label "ungrounded value"@en ;
+    skos:definition "A value, as the policy writes it, that names no concept of the bound resource."@en ;
+    rdfs:domain vrep:OperandVerdictReport .
+
+vrep:certificate a rdf:Property ;
+    rdfs:isDefinedBy <https://w3id.org/odrl-kb/verdict-report> ;
+    rdfs:label "certificate"@en ;
+    skos:definition "The evidence for a definite verdict, checkable without trusting the procedure: a refutation naming the resource, background and axiom premises it uses."@en ;
+    rdfs:comment "Referenced, not reified. An Unknown verdict has no refutation to point at."@en ;
+    rdfs:domain vrep:OperandVerdictReport .
+
+vrep:readAgainst a rdf:Property, owl:SymmetricProperty ;
+    rdfs:isDefinedBy <https://w3id.org/odrl-kb/verdict-report> ;
+    rdfs:label "read against"@en ;
+    skos:definition "Another case this one should be read with, because the two differ in one thing: the binding, the background theory, or one value."@en ;
     rdfs:domain vrep:OperandVerdictReport ;
     rdfs:range vrep:OperandVerdictReport .
 
-vrep:readAgainst a rdf:Property ;
-    rdfs:label "read against"@en ;
-    rdfs:comment "Another case in the suite whose verdict this one should be read with: the same policies under a different binding, or the same constraints with and without a declared theory."@en .
+# ----- properties of a well-sortedness report -----
+
+vrep:constraint a rdf:Property, owl:FunctionalProperty ;
+    rdfs:isDefinedBy <https://w3id.org/odrl-kb/verdict-report> ;
+    rdfs:label "constraint"@en ;
+    skos:definition "The constraint checked."@en ;
+    rdfs:domain vrep:WellSortednessReport .
+
+vrep:wellSorted a rdf:Property, owl:FunctionalProperty ;
+    rdfs:isDefinedBy <https://w3id.org/odrl-kb/verdict-report> ;
+    rdfs:label "well sorted"@en ;
+    skos:definition "True when the operator is defined at the binding's sort and the right operand has the arity the operator takes. When false, rdfs:comment gives the reason."@en ;
+    rdfs:domain vrep:WellSortednessReport ;
+    rdfs:range xsd:boolean .

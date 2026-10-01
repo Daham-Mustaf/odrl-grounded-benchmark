@@ -45,6 +45,7 @@ PROBLEMS = [
     # -----------------------------------------------------------------
     {
         "id":                "KGC300",
+        "binding":           "https://w3id.org/odrl-kb/profile/b-language-bcp47",
         "subdir":            "verdict",
         "name":              "language, eq bcp:de against eq bcp:fr",
         "left_operand":      "language",
@@ -106,32 +107,34 @@ fof(bg_disj_de_distinct_fr, axiom,
 drk:manuscripts a dcterms:Dataset ;
     dcterms:title "Digitised manuscripts, Bavarian State Library"@en .
 
-drk:offer a odrl:Set ;
-    dcterms:title "BSB offer: access in German"@en ;
+drk:policy-300-1 a odrl:Set ;
+    odrl:uid drk:policy-300-1 ;
+    dcterms:title "BSB: access in German"@en ;
     odrl:assigner drk:library ;
-    odrl:permission kgc:KGC300-offer-r1 .
+    odrl:permission kgc:KGC300-p1-r1 .
 
-kgc:KGC300-offer-r1 a odrl:Permission ;
+kgc:KGC300-p1-r1 a odrl:Permission ;
     odrl:action odrl:use ;
     odrl:target drk:manuscripts ;
-    odrl:constraint kgc:KGC300-offer-c1 .
+    odrl:constraint kgc:KGC300-p1-c1 .
 
-kgc:KGC300-offer-c1 a odrl:Constraint ;
+kgc:KGC300-p1-c1 a odrl:Constraint ;
     odrl:leftOperand odrl:language ;
     odrl:operator odrl:eq ;
     odrl:rightOperand odrlkb:de .
 
-drk:request a odrl:Request ;
-    dcterms:title "BnF request: access in French"@en ;
+drk:policy-300-2 a odrl:Set ;
+    odrl:uid drk:policy-300-2 ;
+    dcterms:title "BnF: access in French"@en ;
     odrl:assignee drk:researcher ;
-    odrl:permission kgc:KGC300-request-r1 .
+    odrl:permission kgc:KGC300-p2-r1 .
 
-kgc:KGC300-request-r1 a odrl:Permission ;
+kgc:KGC300-p2-r1 a odrl:Permission ;
     odrl:action odrl:use ;
     odrl:target drk:manuscripts ;
-    odrl:constraint kgc:KGC300-request-c1 .
+    odrl:constraint kgc:KGC300-p2-c1 .
 
-kgc:KGC300-request-c1 a odrl:Constraint ;
+kgc:KGC300-p2-c1 a odrl:Constraint ;
     odrl:leftOperand odrl:language ;
     odrl:operator odrl:eq ;
     odrl:rightOperand odrlkb:fr .""",
@@ -143,6 +146,7 @@ kgc:KGC300-request-c1 a odrl:Constraint ;
     # -----------------------------------------------------------------
     {
         "id":                "KGC301",
+        "binding":           "https://w3id.org/odrl-kb/profile/b-purpose",
         "subdir":            "verdict",
         "name":              "purpose, isA dpv:NCP against eq dpv:SR",
         "left_operand":      "purpose",
@@ -203,32 +207,34 @@ kgc:KGC300-request-c1 a odrl:Constraint ;
 drk:manuscripts a dcterms:Dataset ;
     dcterms:title "Digitised manuscripts, Bavarian State Library"@en .
 
-drk:offer a odrl:Set ;
-    dcterms:title "BSB offer: non-commercial research only"@en ;
+drk:policy-301-1 a odrl:Set ;
+    odrl:uid drk:policy-301-1 ;
+    dcterms:title "BSB: non-commercial research only"@en ;
     odrl:assigner drk:library ;
-    odrl:permission kgc:KGC301-offer-r1 .
+    odrl:permission kgc:KGC301-p1-r1 .
 
-kgc:KGC301-offer-r1 a odrl:Permission ;
+kgc:KGC301-p1-r1 a odrl:Permission ;
     odrl:action odrl:use ;
     odrl:target drk:manuscripts ;
-    odrl:constraint kgc:KGC301-offer-c1 .
+    odrl:constraint kgc:KGC301-p1-c1 .
 
-kgc:KGC301-offer-c1 a odrl:Constraint ;
+kgc:KGC301-p1-c1 a odrl:Constraint ;
     odrl:leftOperand odrl:purpose ;
     odrl:operator odrl:isA ;
     odrl:rightOperand dpv:NonCommercialPurpose .
 
-drk:request a odrl:Request ;
-    dcterms:title "BnF request: scientific research"@en ;
+drk:policy-301-2 a odrl:Set ;
+    odrl:uid drk:policy-301-2 ;
+    dcterms:title "BnF: scientific research"@en ;
     odrl:assignee drk:researcher ;
-    odrl:permission kgc:KGC301-request-r1 .
+    odrl:permission kgc:KGC301-p2-r1 .
 
-kgc:KGC301-request-r1 a odrl:Permission ;
+kgc:KGC301-p2-r1 a odrl:Permission ;
     odrl:action odrl:use ;
     odrl:target drk:manuscripts ;
-    odrl:constraint kgc:KGC301-request-c1 .
+    odrl:constraint kgc:KGC301-p2-c1 .
 
-kgc:KGC301-request-c1 a odrl:Constraint ;
+kgc:KGC301-p2-c1 a odrl:Constraint ;
     odrl:leftOperand odrl:purpose ;
     odrl:operator odrl:eq ;
     odrl:rightOperand dpv:ScientificResearch .""",
@@ -240,6 +246,7 @@ kgc:KGC301-request-c1 a odrl:Constraint ;
     # -----------------------------------------------------------------
     {
         "id":                "KGC302",
+        "binding":           "https://w3id.org/odrl-kb/profile/b-spatial-geonames",
         "subdir":            "verdict",
         "name":              "spatial, isPartOf gn:Europe against eq gn:France",
         "left_operand":      "spatial",
@@ -302,32 +309,34 @@ fof(res_france_within_europe, axiom,
 drk:manuscripts a dcterms:Dataset ;
     dcterms:title "Digitised manuscripts, Bavarian State Library"@en .
 
-drk:offer a odrl:Set ;
-    dcterms:title "BSB offer: recipients in Europe"@en ;
+drk:policy-302-1 a odrl:Set ;
+    odrl:uid drk:policy-302-1 ;
+    dcterms:title "BSB: recipients in Europe"@en ;
     odrl:assigner drk:library ;
-    odrl:permission kgc:KGC302-offer-r1 .
+    odrl:permission kgc:KGC302-p1-r1 .
 
-kgc:KGC302-offer-r1 a odrl:Permission ;
+kgc:KGC302-p1-r1 a odrl:Permission ;
     odrl:action odrl:use ;
     odrl:target drk:manuscripts ;
-    odrl:constraint kgc:KGC302-offer-c1 .
+    odrl:constraint kgc:KGC302-p1-c1 .
 
-kgc:KGC302-offer-c1 a odrl:Constraint ;
+kgc:KGC302-p1-c1 a odrl:Constraint ;
     odrl:leftOperand odrl:spatial ;
     odrl:operator odrl:isPartOf ;
     odrl:rightOperand <https://sws.geonames.org/6255148/> .
 
-drk:request a odrl:Request ;
-    dcterms:title "BnF request: recipient in France"@en ;
+drk:policy-302-2 a odrl:Set ;
+    odrl:uid drk:policy-302-2 ;
+    dcterms:title "BnF: recipient in France"@en ;
     odrl:assignee drk:researcher ;
-    odrl:permission kgc:KGC302-request-r1 .
+    odrl:permission kgc:KGC302-p2-r1 .
 
-kgc:KGC302-request-r1 a odrl:Permission ;
+kgc:KGC302-p2-r1 a odrl:Permission ;
     odrl:action odrl:use ;
     odrl:target drk:manuscripts ;
-    odrl:constraint kgc:KGC302-request-c1 .
+    odrl:constraint kgc:KGC302-p2-c1 .
 
-kgc:KGC302-request-c1 a odrl:Constraint ;
+kgc:KGC302-p2-c1 a odrl:Constraint ;
     odrl:leftOperand odrl:spatial ;
     odrl:operator odrl:eq ;
     odrl:rightOperand <https://sws.geonames.org/3017382/> .""",

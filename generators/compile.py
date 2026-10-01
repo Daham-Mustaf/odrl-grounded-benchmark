@@ -48,6 +48,22 @@ MODE = {
 }
 
 
+# The set-based operators.  Their right operand is written as an RDF
+# collection, one-element lists included, so that the Turtle shows the arity
+# the signature checks.  Every other operator takes one value.
+SET_OPERATORS = ("isAnyOf", "isAllOf", "isNoneOf")
+
+
+def right_operand(op: str, values) -> str:
+    """The odrl:rightOperand object as Turtle, from already-prefixed terms."""
+    values = list(values)
+    if op in SET_OPERATORS:
+        return "( " + " ".join(values) + " )"
+    if len(values) != 1:
+        raise ValueError(f"{op} takes one value, got {len(values)}")
+    return values[0]
+
+
 @dataclass(frozen=True)
 class Constraint:
     operator: str
