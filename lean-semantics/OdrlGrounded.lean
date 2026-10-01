@@ -5,3 +5,4 @@ import OdrlGrounded.Verdict
 import OdrlGrounded.Examples.Language
 import OdrlGrounded.Grounding
 import OdrlGrounded.Examples.Grounding
+import OdrlGrounded.Witness

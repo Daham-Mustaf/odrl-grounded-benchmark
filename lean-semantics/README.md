@@ -12,8 +12,10 @@ Core Lean only, no Mathlib yet. Build from this folder:
 | OdrlGrounded/Semantics.lean | Denotation, Valuation and satisfaction |
 | OdrlGrounded/Verdict.lean | Verdict (one operand) |
 | OdrlGrounded/Grounding.lean | Grounding, candidate set, ungrounded clause |
+| OdrlGrounded/Witness.lean | Witness lemma for a conjunction of atoms |
 | OdrlGrounded/Examples/Language.lean | Figure 1, language row |
 | OdrlGrounded/Examples/Grounding.lean | Language row with values, ungrounded alternative |
 
-Later steps add Witness.lean, Collapse.lean, Factoring.lean and Checker.lean,
+Later steps extend Witness.lean to or, xone and negation, and add
+Collapse.lean, Factoring.lean and Checker.lean,
 and Examples/Purpose.lean and Examples/Spatial.lean.
