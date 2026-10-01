@@ -24,6 +24,7 @@ Disjunction, `xone` and negation come in the next step.
 
 namespace OdrlGrounded
 
+/-- A literal on the set of elements a valuation denotes. -/
 inductive Lit (C : Type) where
   | within (S : C → Prop)
   | covers (F : List C)

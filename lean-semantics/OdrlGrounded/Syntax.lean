@@ -76,4 +76,34 @@ def Item.wellSorted {C : Type} (σ : Srt) : Item C → Prop
 def ConstraintSet.wellSorted {C : Type} (σ : Srt) (t : ConstraintSet C) : Prop :=
   ∀ it ∈ t, it.wellSorted σ
 
+/-- The one part of well-sortedness that the reduction to disjuncts uses: no
+`xone` alternative is an `isAllOf`. A negated `isAllOf` is a disjunction, not a
+literal. -/
+def Item.xoneOk {C : Type} : Item C → Prop
+  | .xone alts => ∀ a ∈ alts, a.isAllOfAtom = false
+  | _ => True
+
+def ConstraintSet.xoneOk {C : Type} (t : ConstraintSet C) : Prop :=
+  ∀ it ∈ t, it.xoneOk
+
+theorem Item.xoneOk_of_wellSorted {C : Type} {σ : Srt} {it : Item C}
+    (h : it.wellSorted σ) : it.xoneOk := by
+  cases it with
+  | atom _ => exact True.intro
+  | or _ => exact True.intro
+  | xone alts =>
+    simp only [Item.wellSorted] at h
+    exact h.2.2
+
+theorem ConstraintSet.xoneOk_of_wellSorted {C : Type} {σ : Srt}
+    {t : ConstraintSet C} (h : t.wellSorted σ) : t.xoneOk :=
+  fun it hit => Item.xoneOk_of_wellSorted (h it hit)
+
+theorem ConstraintSet.xoneOk_append {C : Type} {t t' : ConstraintSet C}
+    (h : t.xoneOk) (h' : t'.xoneOk) : ConstraintSet.xoneOk (t ++ t') := by
+  intro it hit
+  rcases List.mem_append.mp hit with h1 | h1
+  · exact h it h1
+  · exact h' it h1
+
 end OdrlGrounded

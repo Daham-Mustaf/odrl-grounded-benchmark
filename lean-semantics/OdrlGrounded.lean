@@ -7,3 +7,5 @@ import OdrlGrounded.Grounding
 import OdrlGrounded.Examples.Grounding
 import OdrlGrounded.Witness
 import OdrlGrounded.Disjuncts
+import OdrlGrounded.VerdictProperties
+import OdrlGrounded.Decision

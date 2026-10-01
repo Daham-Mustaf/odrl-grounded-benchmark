@@ -236,8 +236,8 @@ theorem xone_disj_iff {C : Type} (M : Model C) (ρ : List C) :
         exact ih'.mpr ⟨K', hK', fun l hl =>
           hsK l (List.mem_cons.mpr (Or.inr hl))⟩
 
-theorem satItem_iff_disj {C : Type} (M : Model C) (ρ : List C) (σ : Srt)
-    (it : Item C) (h : it.wellSorted σ) :
+theorem satItem_iff_disj {C : Type} (M : Model C) (ρ : List C)
+    (it : Item C) (h : it.xoneOk) :
     M.satItem ρ it ↔ ∃ K ∈ Item.disj M it, ∀ l ∈ K, M.satLit ρ l := by
   cases it with
   | atom a =>
@@ -268,13 +268,13 @@ theorem satItem_iff_disj {C : Type} (M : Model C) (ρ : List C) (σ : Srt)
       exact ⟨a, ha, (satAtom_iff_satLit M ρ a).mpr (hsK _ (by simp))⟩
   | xone alts =>
     have hno : ∀ a ∈ alts, a.isAllOfAtom = false := by
-      simp only [Item.wellSorted] at h
-      exact h.2.2
+      simp only [Item.xoneOk] at h
+      exact h
     exact (exactlyOne_iff_index (M.satAtom ρ) alts).symm.trans
       (xone_disj_iff M ρ alts hno)
 
-theorem satSet_iff_disj {C : Type} (M : Model C) (ρ : List C) (σ : Srt) :
-    ∀ t : List (Item C), (∀ it ∈ t, it.wellSorted σ) →
+theorem satSet_iff_disj {C : Type} (M : Model C) (ρ : List C) :
+    ∀ t : List (Item C), (∀ it ∈ t, it.xoneOk) →
       (M.satSet ρ t ↔ ∃ K ∈ setDisj M t, ∀ l ∈ K, M.satLit ρ l) := by
   intro t
   induction t with
@@ -287,14 +287,14 @@ theorem satSet_iff_disj {C : Type} (M : Model C) (ρ : List C) (σ : Srt) :
       simp at hit
   | cons it rest ih =>
     intro ht
-    have hit : it.wellSorted σ := ht it (by simp)
-    have hrest : ∀ x ∈ rest, x.wellSorted σ := fun x hx => ht x (by simp [hx])
+    have hit : it.xoneOk := ht it (by simp)
+    have hrest : ∀ x ∈ rest, x.xoneOk := fun x hx => ht x (by simp [hx])
     have ih' := ih hrest
     simp only [setDisj]
     constructor
     · intro h
       obtain ⟨K1, hK1, hs1⟩ :=
-        (satItem_iff_disj M ρ σ it hit).mp (h it (by simp))
+        (satItem_iff_disj M ρ it hit).mp (h it (by simp))
       obtain ⟨K2, hK2, hs2⟩ := ih'.mp (fun x hx => h x (by simp [hx]))
       refine ⟨K1 ++ K2, ?_, ?_⟩
       · exact List.mem_flatMap.mpr ⟨K1, hK1, List.mem_map.mpr ⟨K2, hK2, rfl⟩⟩
@@ -306,7 +306,7 @@ theorem satSet_iff_disj {C : Type} (M : Model C) (ρ : List C) (σ : Srt) :
       obtain ⟨K1, hK1, hK'⟩ := List.mem_flatMap.mp hK
       obtain ⟨K2, hK2, rfl⟩ := List.mem_map.mp hK'
       have hitsat : M.satItem ρ it :=
-        (satItem_iff_disj M ρ σ it hit).mpr
+        (satItem_iff_disj M ρ it hit).mpr
           ⟨K1, hK1, fun l hl => hs l (List.mem_append.mpr (Or.inl hl))⟩
       have hrestsat : M.satSet ρ rest :=
         ih'.mpr ⟨K2, hK2, fun l hl => hs l (List.mem_append.mpr (Or.inr hl))⟩
@@ -380,19 +380,20 @@ theorem setDisj_closed {C : Type} (M : Model C) :
 
 /-! ## The reduction -/
 
-/-- A model admits a valuation for a well-sorted constraint set exactly when
-some disjunct satisfies W. -/
+/-- A model admits a valuation for a constraint set exactly when some disjunct
+satisfies W. The set needs no `isAllOf` under `xone`, which well-sortedness
+gives (`ConstraintSet.xoneOk_of_wellSorted`). -/
 theorem admits_iff_exists_witness {C : Type} (M : Model C) (N : C → Prop)
-    (σ : Srt) (t : ConstraintSet C) (ht : t.wellSorted σ) :
+    (t : ConstraintSet C) (ht : t.xoneOk) :
     M.admits N t ↔ ∃ K ∈ setDisj M t, M.witness N K := by
   constructor
   · rintro ⟨ρ, hne, hN, hsat⟩
-    obtain ⟨K, hK, hsK⟩ := (satSet_iff_disj M ρ σ t ht).mp hsat
+    obtain ⟨K, hK, hsK⟩ := (satSet_iff_disj M ρ t ht).mp hsat
     exact ⟨K, hK, (Model.witness_iff M N K (setDisj_closed M t K hK)).mp
       ⟨ρ, hne, hN, hsK⟩⟩
   · rintro ⟨K, hK, hw⟩
     obtain ⟨ρ, hne, hN, hsK⟩ :=
       (Model.witness_iff M N K (setDisj_closed M t K hK)).mpr hw
-    exact ⟨ρ, hne, hN, (satSet_iff_disj M ρ σ t ht).mpr ⟨K, hK, hsK⟩⟩
+    exact ⟨ρ, hne, hN, (satSet_iff_disj M ρ t ht).mpr ⟨K, hK, hsK⟩⟩
 
 end OdrlGrounded

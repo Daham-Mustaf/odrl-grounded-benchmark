@@ -7,7 +7,7 @@ set_option autoImplicit false
 
 Paper: Definition (Verdict), restricted to one operand. The ungrounded clause
 (`γ` undefined gives `Unknown`) is a layer above this one, and the theorems
-(exclusivity, monotonicity, soundness) come in a later step.
+(exclusivity, monotonicity, soundness) are in VerdictProperties.lean.
 -/
 
 namespace OdrlGrounded
