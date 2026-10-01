@@ -287,6 +287,7 @@ def definitional_ttl(definitions, meta) -> str:
 @prefix bt:      <https://w3id.org/odrl-kb/background#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 
 <https://w3id.org/odrl-kb/dpv-consent/definitional> a bt:BackgroundTheory ;
     dcterms:title "The valid and invalid branches are disjoint"@en ;
@@ -442,7 +443,7 @@ def profile_ttl() -> str:
 # Section 7 reports what that reading returns.
 
 @prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> .
-@prefix vrep: <https://w3id.org/odrl-kb/verdict-report#> .
+@prefix bind: <https://w3id.org/odrl-kb/binding#> .
 @prefix ex:   <https://w3id.org/odrl-kb/profile/> .
 
 ex:b-consent-status a bind:OperandBinding ;

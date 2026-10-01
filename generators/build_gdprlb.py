@@ -227,7 +227,7 @@ def background_ttl(meta) -> str:
 """
 def declared_ttl(names, meta) -> str:
     n = len(names)
-    return f"""\\
+    return f"""\
 # Background theory for the legal-basis resource: declared distinctness.
 #
 # The parties declare that no two of the listed names denote one legal

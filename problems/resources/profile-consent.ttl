@@ -10,7 +10,7 @@
 # Section 7 reports what that reading returns.
 
 @prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> .
-@prefix vrep: <https://w3id.org/odrl-kb/verdict-report#> .
+@prefix bind: <https://w3id.org/odrl-kb/binding#> .
 @prefix ex:   <https://w3id.org/odrl-kb/profile/> .
 
 ex:b-consent-status a bind:OperandBinding ;
