@@ -178,26 +178,41 @@ image records the prover versions it holds in `/benchmark/ENVIRONMENT`.
 
 ## Verdict reports
 
-Expected reports use the [Compliance Report Model](https://w3id.org/force/compliance-report)
-(Slabbinck and Esteves, 2024) and extend it with `vrep:`, defined in
-`vocab/verdict-report.ttl`. The parent supplies the report structure;
-`vrep:` adds only what the semantics needs and the parent lacks:
+Each case file holds two policies and the expected report. Both
+policies are `odrl:Set`, named `drk:policy-NNN-1` and `drk:policy-NNN-2`,
+each with `odrl:uid` and, when it uses a DPV-ODRL left operand,
+`odrl:profile dpv-odrl:`. Set-based operators take an RDF list, one-element
+lists included.
+
+The report uses `vrep:`, defined in `vocab/verdict-report.ttl`. It does
+not extend the [Compliance Report Model](https://w3id.org/force/compliance-report),
+which records the evaluation of a policy against a request. Here there is
+no request and no state of the world: two policies are compared before
+any use.
 
 ```
-Compatible     report:Satisfied
-Incompatible   report:Unsatisfied
-Unknown        vrep:Undetermined, with vrep:undeterminedReason
-               vrep:Epistemic or vrep:Ungrounded
+vrep:referencePolicy, vrep:comparedPolicy   the two policies, in order;
+                                            the verdict is symmetric
+vrep:referenceConstraint,                   the constraint on each rule
+vrep:comparedConstraint
+vrep:binding                                the reading the verdict is
+                                            relative to
+vrep:backgroundTheory                       what the parties declared,
+                                            the empty theory included
+vrep:compatibilityState                     vrep:Compatible,
+                                            vrep:Incompatible or
+                                            vrep:Unknown
+vrep:unknownReason                          vrep:Epistemic or
+                                            vrep:Ungrounded, on Unknown
+vrep:ungroundedValue                        the value, on Ungrounded
+vrep:certificate                            the refutation, on a
+                                            definite verdict
+vrep:readAgainst                            the case this one pairs with
 ```
 
-`vrep:OperandVerdictReport` extends `report:ConstraintReport` with the
-request-side constraint (`vrep:constraintRequest`), the binding the
-verdict was read under (`vrep:binding`), and the evidence
-(`vrep:certificate`). `vrep:Undetermined` is a new satisfaction state,
-not the parent's `report:Unknown`, which is a performance state.
-
-`validate_terms.py` fails any report using a term neither vocabulary
-defines.
+The case files are generated. `validate_cases.py` checks every file
+against this shape, and `validate_terms.py` fails any file using a
+`vrep:` term the schema does not define.
 
 ---
 
