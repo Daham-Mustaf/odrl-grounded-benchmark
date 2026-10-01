@@ -25,7 +25,7 @@ Run from this folder:
 | `N = C` is wrong when `N` is smaller | "N-vs-C" line | `Model.cand`, first clause |
 | Negated `isAllOf` can be lifted, so the `xone` restriction is optional | T1, second line | not in Lean yet |
 | Structures with unnamed elements lose nothing against preorders | T3 | not in Lean yet (collapse) |
-| Verdict of two operands is the minimum | T4 | not in Lean yet (factoring) |
+| Verdict of two operands is the minimum | T4 | Factoring.lean, `factoring` |
 | Monotonicity at a fixed concept set | T5 | not in Lean yet |
 | Concept growth: Compatible persists, Incompatible can weaken | growth_audit.py, T6 | not in Lean yet |
 
