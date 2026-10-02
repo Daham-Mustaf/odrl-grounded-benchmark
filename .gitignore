@@ -8,4 +8,6 @@ __pycache__/
 __pycache__/
 cert-report.json
 cleanup.sh
-_chek
+_cheklean/.lake/
+lean-semantics/.lake/
+lean-semantics/.lake/
