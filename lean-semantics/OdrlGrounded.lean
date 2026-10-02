@@ -10,3 +10,4 @@ import OdrlGrounded.Disjuncts
 import OdrlGrounded.VerdictProperties
 import OdrlGrounded.Decision
 import OdrlGrounded.Factoring
+import OdrlGrounded.Collapse
