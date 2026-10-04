@@ -1,0 +1,2062 @@
+diff --git a/cases/KGC101.ttl b/cases/KGC101.ttl
+index 5117fc3..f2d339c 100644
+--- a/cases/KGC101.ttl
++++ b/cases/KGC101.ttl
+@@ -14,6 +14,7 @@
+ @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+ @prefix dcterms: <http://purl.org/dc/terms/> .
+ @prefix dpv:     <https://w3id.org/dpv#> .
++@prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> .
+ @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+ @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+ @prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@@ -25,6 +26,7 @@ drk:manuscripts a dcterms:Dataset ;
+ 
+ drk:policy-101-1 a odrl:Set ;
+     odrl:uid drk:policy-101-1 ;
++    odrl:profile dpv-odrl: ;
+     dcterms:title "BSB, purpose constrained by isPartOf"@en ;
+     odrl:assigner drk:library ;
+     odrl:permission kgc:KGC101-p1-r1 .
+@@ -35,7 +37,7 @@ kgc:KGC101-p1-r1 a odrl:Permission ;
+     odrl:constraint kgc:KGC101-p1-c1 .
+ 
+ kgc:KGC101-p1-c1 a odrl:Constraint ;
+-    odrl:leftOperand odrl:purpose ;
++    odrl:leftOperand dpv-odrl:Purpose ;
+     odrl:operator odrl:isPartOf ;
+     odrl:rightOperand dpv:NonCommercialPurpose .
+ 
+diff --git a/cases/KGC111.ttl b/cases/KGC111.ttl
+index 59d9363..2908571 100644
+--- a/cases/KGC111.ttl
++++ b/cases/KGC111.ttl
+@@ -14,6 +14,7 @@
+ @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+ @prefix dcterms: <http://purl.org/dc/terms/> .
+ @prefix dpv:     <https://w3id.org/dpv#> .
++@prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> .
+ @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+ @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+ @prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@@ -25,6 +26,7 @@ drk:manuscripts a dcterms:Dataset ;
+ 
+ drk:policy-111-1 a odrl:Set ;
+     odrl:uid drk:policy-111-1 ;
++    odrl:profile dpv-odrl: ;
+     dcterms:title "BSB, purpose constrained by isA"@en ;
+     odrl:assigner drk:library ;
+     odrl:permission kgc:KGC111-p1-r1 .
+@@ -35,7 +37,7 @@ kgc:KGC111-p1-r1 a odrl:Permission ;
+     odrl:constraint kgc:KGC111-p1-c1 .
+ 
+ kgc:KGC111-p1-c1 a odrl:Constraint ;
+-    odrl:leftOperand odrl:purpose ;
++    odrl:leftOperand dpv-odrl:Purpose ;
+     odrl:operator odrl:isA ;
+     odrl:rightOperand dpv:NonCommercialPurpose .
+ 
+diff --git a/cases/KGC301.ttl b/cases/KGC301.ttl
+index e80acd1..eca5ec5 100644
+--- a/cases/KGC301.ttl
++++ b/cases/KGC301.ttl
+@@ -5,6 +5,7 @@
+ @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+ @prefix dcterms: <http://purl.org/dc/terms/> .
+ @prefix dpv:     <https://w3id.org/dpv#> .
++@prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> .
+ @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+ @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+ @prefix vrep:    <https://w3id.org/odrl-kb/verdict-report#> .
+@@ -14,6 +15,7 @@ drk:manuscripts a dcterms:Dataset ;
+ 
+ drk:policy-301-1 a odrl:Set ;
+     odrl:uid drk:policy-301-1 ;
++    odrl:profile dpv-odrl: ;
+     dcterms:title "BSB: non-commercial research only"@en ;
+     odrl:assigner drk:library ;
+     odrl:permission kgc:KGC301-p1-r1 .
+@@ -24,12 +26,13 @@ kgc:KGC301-p1-r1 a odrl:Permission ;
+     odrl:constraint kgc:KGC301-p1-c1 .
+ 
+ kgc:KGC301-p1-c1 a odrl:Constraint ;
+-    odrl:leftOperand odrl:purpose ;
++    odrl:leftOperand dpv-odrl:Purpose ;
+     odrl:operator odrl:isA ;
+     odrl:rightOperand dpv:NonCommercialPurpose .
+ 
+ drk:policy-301-2 a odrl:Set ;
+     odrl:uid drk:policy-301-2 ;
++    odrl:profile dpv-odrl: ;
+     dcterms:title "BnF: scientific research"@en ;
+     odrl:assignee drk:researcher ;
+     odrl:permission kgc:KGC301-p2-r1 .
+@@ -40,7 +43,7 @@ kgc:KGC301-p2-r1 a odrl:Permission ;
+     odrl:constraint kgc:KGC301-p2-c1 .
+ 
+ kgc:KGC301-p2-c1 a odrl:Constraint ;
+-    odrl:leftOperand odrl:purpose ;
++    odrl:leftOperand dpv-odrl:Purpose ;
+     odrl:operator odrl:eq ;
+     odrl:rightOperand dpv:ScientificResearch .
+ 
+diff --git a/cases/KGC310.ttl b/cases/KGC310.ttl
+index 338af82..664ad58 100644
+--- a/cases/KGC310.ttl
++++ b/cases/KGC310.ttl
+@@ -6,11 +6,13 @@
+ @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+ @prefix dcterms: <http://purl.org/dc/terms/> .
+ @prefix dpv:     <https://w3id.org/dpv#> .
++@prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> .
+ @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+ @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+ 
+ drk:policy-310-1 a odrl:Set ;
+     odrl:uid drk:policy-310-1 ;
++    odrl:profile dpv-odrl: ;
+     dcterms:title "Research and development purposes"@en ;
+     odrl:assigner drk:library ;
+     odrl:permission kgc:KGC310-p1-r1 .
+@@ -21,12 +23,13 @@ kgc:KGC310-p1-r1 a odrl:Permission ;
+     odrl:constraint kgc:KGC310-p1-c1 .
+ 
+ kgc:KGC310-p1-c1 a odrl:Constraint ;
+-    odrl:leftOperand odrl:purpose ;
++    odrl:leftOperand dpv-odrl:Purpose ;
+     odrl:operator odrl:isA ;
+     odrl:rightOperand dpv:ResearchAndDevelopment .
+ 
+ drk:policy-310-2 a odrl:Set ;
+     odrl:uid drk:policy-310-2 ;
++    odrl:profile dpv-odrl: ;
+     dcterms:title "Scientific research"@en ;
+     odrl:assignee drk:researcher ;
+     odrl:permission kgc:KGC310-p2-r1 .
+@@ -37,7 +40,7 @@ kgc:KGC310-p2-r1 a odrl:Permission ;
+     odrl:constraint kgc:KGC310-p2-c1 .
+ 
+ kgc:KGC310-p2-c1 a odrl:Constraint ;
+-    odrl:leftOperand odrl:purpose ;
++    odrl:leftOperand dpv-odrl:Purpose ;
+     odrl:operator odrl:eq ;
+     odrl:rightOperand dpv:ScientificResearch .
+ 
+diff --git a/cases/KGC311.ttl b/cases/KGC311.ttl
+index 88131c4..fb6a1b3 100644
+--- a/cases/KGC311.ttl
++++ b/cases/KGC311.ttl
+@@ -6,11 +6,13 @@
+ @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+ @prefix dcterms: <http://purl.org/dc/terms/> .
+ @prefix dpv:     <https://w3id.org/dpv#> .
++@prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> .
+ @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+ @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+ 
+ drk:policy-311-1 a odrl:Set ;
+     odrl:uid drk:policy-311-1 ;
++    odrl:profile dpv-odrl: ;
+     dcterms:title "Any declared purpose"@en ;
+     odrl:assigner drk:library ;
+     odrl:permission kgc:KGC311-p1-r1 .
+@@ -21,12 +23,13 @@ kgc:KGC311-p1-r1 a odrl:Permission ;
+     odrl:constraint kgc:KGC311-p1-c1 .
+ 
+ kgc:KGC311-p1-c1 a odrl:Constraint ;
+-    odrl:leftOperand odrl:purpose ;
++    odrl:leftOperand dpv-odrl:Purpose ;
+     odrl:operator odrl:isA ;
+     odrl:rightOperand dpv:Purpose .
+ 
+ drk:policy-311-2 a odrl:Set ;
+     odrl:uid drk:policy-311-2 ;
++    odrl:profile dpv-odrl: ;
+     dcterms:title "Non-commercial research"@en ;
+     odrl:assignee drk:researcher ;
+     odrl:permission kgc:KGC311-p2-r1 .
+@@ -37,7 +40,7 @@ kgc:KGC311-p2-r1 a odrl:Permission ;
+     odrl:constraint kgc:KGC311-p2-c1 .
+ 
+ kgc:KGC311-p2-c1 a odrl:Constraint ;
+-    odrl:leftOperand odrl:purpose ;
++    odrl:leftOperand dpv-odrl:Purpose ;
+     odrl:operator odrl:eq ;
+     odrl:rightOperand dpv:NonCommercialResearch .
+ 
+diff --git a/cases/KGC313.ttl b/cases/KGC313.ttl
+index 2bc0686..a39455e 100644
+--- a/cases/KGC313.ttl
++++ b/cases/KGC313.ttl
+@@ -6,11 +6,13 @@
+ @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+ @prefix dcterms: <http://purl.org/dc/terms/> .
+ @prefix dpv:     <https://w3id.org/dpv#> .
++@prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> .
+ @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+ @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+ 
+ drk:policy-313-1 a odrl:Set ;
+     odrl:uid drk:policy-313-1 ;
++    odrl:profile dpv-odrl: ;
+     dcterms:title "Marketing"@en ;
+     odrl:assigner drk:library ;
+     odrl:permission kgc:KGC313-p1-r1 .
+@@ -21,12 +23,13 @@ kgc:KGC313-p1-r1 a odrl:Permission ;
+     odrl:constraint kgc:KGC313-p1-c1 .
+ 
+ kgc:KGC313-p1-c1 a odrl:Constraint ;
+-    odrl:leftOperand odrl:purpose ;
++    odrl:leftOperand dpv-odrl:Purpose ;
+     odrl:operator odrl:eq ;
+     odrl:rightOperand dpv:Marketing .
+ 
+ drk:policy-313-2 a odrl:Set ;
+     odrl:uid drk:policy-313-2 ;
++    odrl:profile dpv-odrl: ;
+     dcterms:title "Scientific research"@en ;
+     odrl:assignee drk:researcher ;
+     odrl:permission kgc:KGC313-p2-r1 .
+@@ -37,7 +40,7 @@ kgc:KGC313-p2-r1 a odrl:Permission ;
+     odrl:constraint kgc:KGC313-p2-c1 .
+ 
+ kgc:KGC313-p2-c1 a odrl:Constraint ;
+-    odrl:leftOperand odrl:purpose ;
++    odrl:leftOperand dpv-odrl:Purpose ;
+     odrl:operator odrl:eq ;
+     odrl:rightOperand dpv:ScientificResearch .
+ 
+diff --git a/cases/KGC314.ttl b/cases/KGC314.ttl
+index d65d0b2..66d8e39 100644
+--- a/cases/KGC314.ttl
++++ b/cases/KGC314.ttl
+@@ -6,11 +6,13 @@
+ @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+ @prefix dcterms: <http://purl.org/dc/terms/> .
+ @prefix dpv:     <https://w3id.org/dpv#> .
++@prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> .
+ @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+ @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+ 
+ drk:policy-314-1 a odrl:Set ;
+     odrl:uid drk:policy-314-1 ;
++    odrl:profile dpv-odrl: ;
+     dcterms:title "Marketing"@en ;
+     odrl:assigner drk:library ;
+     odrl:permission kgc:KGC314-p1-r1 .
+@@ -21,12 +23,13 @@ kgc:KGC314-p1-r1 a odrl:Permission ;
+     odrl:constraint kgc:KGC314-p1-c1 .
+ 
+ kgc:KGC314-p1-c1 a odrl:Constraint ;
+-    odrl:leftOperand odrl:purpose ;
++    odrl:leftOperand dpv-odrl:Purpose ;
+     odrl:operator odrl:eq ;
+     odrl:rightOperand dpv:Marketing .
+ 
+ drk:policy-314-2 a odrl:Set ;
+     odrl:uid drk:policy-314-2 ;
++    odrl:profile dpv-odrl: ;
+     dcterms:title "Scientific research"@en ;
+     odrl:assignee drk:researcher ;
+     odrl:permission kgc:KGC314-p2-r1 .
+@@ -37,7 +40,7 @@ kgc:KGC314-p2-r1 a odrl:Permission ;
+     odrl:constraint kgc:KGC314-p2-c1 .
+ 
+ kgc:KGC314-p2-c1 a odrl:Constraint ;
+-    odrl:leftOperand odrl:purpose ;
++    odrl:leftOperand dpv-odrl:Purpose ;
+     odrl:operator odrl:eq ;
+     odrl:rightOperand dpv:ScientificResearch .
+ 
+diff --git a/cases/KGC315.ttl b/cases/KGC315.ttl
+index 1448673..c774a38 100644
+--- a/cases/KGC315.ttl
++++ b/cases/KGC315.ttl
+@@ -6,11 +6,13 @@
+ @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+ @prefix dcterms: <http://purl.org/dc/terms/> .
+ @prefix dpv:     <https://w3id.org/dpv#> .
++@prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> .
+ @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+ @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+ 
+ drk:policy-315-1 a odrl:Set ;
+     odrl:uid drk:policy-315-1 ;
++    odrl:profile dpv-odrl: ;
+     dcterms:title "Any declared purpose"@en ;
+     odrl:assigner drk:library ;
+     odrl:permission kgc:KGC315-p1-r1 .
+@@ -21,12 +23,13 @@ kgc:KGC315-p1-r1 a odrl:Permission ;
+     odrl:constraint kgc:KGC315-p1-c1 .
+ 
+ kgc:KGC315-p1-c1 a odrl:Constraint ;
+-    odrl:leftOperand odrl:purpose ;
++    odrl:leftOperand dpv-odrl:Purpose ;
+     odrl:operator odrl:isA ;
+     odrl:rightOperand dpv:Purpose .
+ 
+ drk:policy-315-2 a odrl:Set ;
+     odrl:uid drk:policy-315-2 ;
++    odrl:profile dpv-odrl: ;
+     dcterms:title "Recruitment interview scheduling"@en ;
+     odrl:assignee drk:researcher ;
+     odrl:permission kgc:KGC315-p2-r1 .
+@@ -37,7 +40,7 @@ kgc:KGC315-p2-r1 a odrl:Permission ;
+     odrl:constraint kgc:KGC315-p2-c1 .
+ 
+ kgc:KGC315-p2-c1 a odrl:Constraint ;
+-    odrl:leftOperand odrl:purpose ;
++    odrl:leftOperand dpv-odrl:Purpose ;
+     odrl:operator odrl:eq ;
+     odrl:rightOperand dpv:RecruitmentInterviewScheduling .
+ 
+diff --git a/cases/KGC316.ttl b/cases/KGC316.ttl
+index 1276698..0eb7897 100644
+--- a/cases/KGC316.ttl
++++ b/cases/KGC316.ttl
+@@ -6,11 +6,13 @@
+ @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+ @prefix dcterms: <http://purl.org/dc/terms/> .
+ @prefix dpv:     <https://w3id.org/dpv#> .
++@prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> .
+ @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+ @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+ 
+ drk:policy-316-1 a odrl:Set ;
+     odrl:uid drk:policy-316-1 ;
++    odrl:profile dpv-odrl: ;
+     dcterms:title "Recruitment interview scheduling"@en ;
+     odrl:assigner drk:library ;
+     odrl:permission kgc:KGC316-p1-r1 .
+@@ -21,12 +23,13 @@ kgc:KGC316-p1-r1 a odrl:Permission ;
+     odrl:constraint kgc:KGC316-p1-c1 .
+ 
+ kgc:KGC316-p1-c1 a odrl:Constraint ;
+-    odrl:leftOperand odrl:purpose ;
++    odrl:leftOperand dpv-odrl:Purpose ;
+     odrl:operator odrl:isA ;
+     odrl:rightOperand dpv:RecruitmentInterviewScheduling .
+ 
+ drk:policy-316-2 a odrl:Set ;
+     odrl:uid drk:policy-316-2 ;
++    odrl:profile dpv-odrl: ;
+     dcterms:title "Any declared purpose"@en ;
+     odrl:assignee drk:researcher ;
+     odrl:permission kgc:KGC316-p2-r1 .
+@@ -37,7 +40,7 @@ kgc:KGC316-p2-r1 a odrl:Permission ;
+     odrl:constraint kgc:KGC316-p2-c1 .
+ 
+ kgc:KGC316-p2-c1 a odrl:Constraint ;
+-    odrl:leftOperand odrl:purpose ;
++    odrl:leftOperand dpv-odrl:Purpose ;
+     odrl:operator odrl:eq ;
+     odrl:rightOperand dpv:Purpose .
+ 
+diff --git a/cases/KGC317.ttl b/cases/KGC317.ttl
+index 6141c4d..0a961be 100644
+--- a/cases/KGC317.ttl
++++ b/cases/KGC317.ttl
+@@ -6,11 +6,13 @@
+ @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+ @prefix dcterms: <http://purl.org/dc/terms/> .
+ @prefix dpv:     <https://w3id.org/dpv#> .
++@prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> .
+ @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+ @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+ 
+ drk:policy-317-1 a odrl:Set ;
+     odrl:uid drk:policy-317-1 ;
++    odrl:profile dpv-odrl: ;
+     dcterms:title "Any purpose other than marketing"@en ;
+     odrl:assigner drk:library ;
+     odrl:permission kgc:KGC317-p1-r1 .
+@@ -21,12 +23,13 @@ kgc:KGC317-p1-r1 a odrl:Permission ;
+     odrl:constraint kgc:KGC317-p1-c1 .
+ 
+ kgc:KGC317-p1-c1 a odrl:Constraint ;
+-    odrl:leftOperand odrl:purpose ;
++    odrl:leftOperand dpv-odrl:Purpose ;
+     odrl:operator odrl:isNoneOf ;
+     odrl:rightOperand ( dpv:Marketing ) .
+ 
+ drk:policy-317-2 a odrl:Set ;
+     odrl:uid drk:policy-317-2 ;
++    odrl:profile dpv-odrl: ;
+     dcterms:title "Marketing"@en ;
+     odrl:assignee drk:researcher ;
+     odrl:permission kgc:KGC317-p2-r1 .
+@@ -37,7 +40,7 @@ kgc:KGC317-p2-r1 a odrl:Permission ;
+     odrl:constraint kgc:KGC317-p2-c1 .
+ 
+ kgc:KGC317-p2-c1 a odrl:Constraint ;
+-    odrl:leftOperand odrl:purpose ;
++    odrl:leftOperand dpv-odrl:Purpose ;
+     odrl:operator odrl:eq ;
+     odrl:rightOperand dpv:Marketing .
+ 
+diff --git a/cases/KGC330.ttl b/cases/KGC330.ttl
+index d94a4ac..e9fef77 100644
+--- a/cases/KGC330.ttl
++++ b/cases/KGC330.ttl
+@@ -6,11 +6,13 @@
+ @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+ @prefix dcterms: <http://purl.org/dc/terms/> .
+ @prefix loc:     <https://w3id.org/dpv/loc#> .
++@prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> .
+ @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+ @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+ 
+ drk:policy-330-1 a odrl:Set ;
+     odrl:uid drk:policy-330-1 ;
++    odrl:profile dpv-odrl: ;
+     dcterms:title "Use within the Netherlands"@en ;
+     odrl:assigner drk:library ;
+     odrl:permission kgc:KGC330-p1-r1 .
+@@ -21,12 +23,13 @@ kgc:KGC330-p1-r1 a odrl:Permission ;
+     odrl:constraint kgc:KGC330-p1-c1 .
+ 
+ kgc:KGC330-p1-c1 a odrl:Constraint ;
+-    odrl:leftOperand odrl:spatial ;
++    odrl:leftOperand dpv-odrl:Location ;
+     odrl:operator odrl:isPartOf ;
+     odrl:rightOperand loc:NL .
+ 
+ drk:policy-330-2 a odrl:Set ;
+     odrl:uid drk:policy-330-2 ;
++    odrl:profile dpv-odrl: ;
+     dcterms:title "Use in Bonaire, Sint Eustatius and Saba"@en ;
+     odrl:permission kgc:KGC330-p2-r1 .
+ 
+@@ -36,7 +39,7 @@ kgc:KGC330-p2-r1 a odrl:Permission ;
+     odrl:constraint kgc:KGC330-p2-c1 .
+ 
+ kgc:KGC330-p2-c1 a odrl:Constraint ;
+-    odrl:leftOperand odrl:spatial ;
++    odrl:leftOperand dpv-odrl:Location ;
+     odrl:operator odrl:eq ;
+     odrl:rightOperand loc:BQ .
+ 
+diff --git a/cases/KGC331.ttl b/cases/KGC331.ttl
+index fb8df4e..ec3625c 100644
+--- a/cases/KGC331.ttl
++++ b/cases/KGC331.ttl
+@@ -6,11 +6,13 @@
+ @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+ @prefix dcterms: <http://purl.org/dc/terms/> .
+ @prefix loc:     <https://w3id.org/dpv/loc#> .
++@prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> .
+ @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+ @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+ 
+ drk:policy-331-1 a odrl:Set ;
+     odrl:uid drk:policy-331-1 ;
++    odrl:profile dpv-odrl: ;
+     dcterms:title "Use within the European Union"@en ;
+     odrl:assigner drk:library ;
+     odrl:permission kgc:KGC331-p1-r1 .
+@@ -21,12 +23,13 @@ kgc:KGC331-p1-r1 a odrl:Permission ;
+     odrl:constraint kgc:KGC331-p1-c1 .
+ 
+ kgc:KGC331-p1-c1 a odrl:Constraint ;
+-    odrl:leftOperand odrl:spatial ;
++    odrl:leftOperand dpv-odrl:Location ;
+     odrl:operator odrl:isPartOf ;
+     odrl:rightOperand loc:EU .
+ 
+ drk:policy-331-2 a odrl:Set ;
+     odrl:uid drk:policy-331-2 ;
++    odrl:profile dpv-odrl: ;
+     dcterms:title "Use in Germany"@en ;
+     odrl:permission kgc:KGC331-p2-r1 .
+ 
+@@ -36,7 +39,7 @@ kgc:KGC331-p2-r1 a odrl:Permission ;
+     odrl:constraint kgc:KGC331-p2-c1 .
+ 
+ kgc:KGC331-p2-c1 a odrl:Constraint ;
+-    odrl:leftOperand odrl:spatial ;
++    odrl:leftOperand dpv-odrl:Location ;
+     odrl:operator odrl:eq ;
+     odrl:rightOperand loc:DE .
+ 
+diff --git a/cases/KGC333.ttl b/cases/KGC333.ttl
+index 4fbe786..c23b401 100644
+--- a/cases/KGC333.ttl
++++ b/cases/KGC333.ttl
+@@ -6,11 +6,13 @@
+ @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+ @prefix dcterms: <http://purl.org/dc/terms/> .
+ @prefix loc:     <https://w3id.org/dpv/loc#> .
++@prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> .
+ @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+ @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+ 
+ drk:policy-333-1 a odrl:Set ;
+     odrl:uid drk:policy-333-1 ;
++    odrl:profile dpv-odrl: ;
+     dcterms:title "Use in Germany"@en ;
+     odrl:assigner drk:library ;
+     odrl:permission kgc:KGC333-p1-r1 .
+@@ -21,12 +23,13 @@ kgc:KGC333-p1-r1 a odrl:Permission ;
+     odrl:constraint kgc:KGC333-p1-c1 .
+ 
+ kgc:KGC333-p1-c1 a odrl:Constraint ;
+-    odrl:leftOperand odrl:spatial ;
++    odrl:leftOperand dpv-odrl:Location ;
+     odrl:operator odrl:eq ;
+     odrl:rightOperand loc:DE .
+ 
+ drk:policy-333-2 a odrl:Set ;
+     odrl:uid drk:policy-333-2 ;
++    odrl:profile dpv-odrl: ;
+     dcterms:title "Use in France"@en ;
+     odrl:permission kgc:KGC333-p2-r1 .
+ 
+@@ -36,7 +39,7 @@ kgc:KGC333-p2-r1 a odrl:Permission ;
+     odrl:constraint kgc:KGC333-p2-c1 .
+ 
+ kgc:KGC333-p2-c1 a odrl:Constraint ;
+-    odrl:leftOperand odrl:spatial ;
++    odrl:leftOperand dpv-odrl:Location ;
+     odrl:operator odrl:eq ;
+     odrl:rightOperand loc:FR .
+ 
+diff --git a/cases/KGC334.ttl b/cases/KGC334.ttl
+index 70103b1..d4c1623 100644
+--- a/cases/KGC334.ttl
++++ b/cases/KGC334.ttl
+@@ -6,11 +6,13 @@
+ @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+ @prefix dcterms: <http://purl.org/dc/terms/> .
+ @prefix loc:     <https://w3id.org/dpv/loc#> .
++@prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> .
+ @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+ @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+ 
+ drk:policy-334-1 a odrl:Set ;
+     odrl:uid drk:policy-334-1 ;
++    odrl:profile dpv-odrl: ;
+     dcterms:title "Use in Germany"@en ;
+     odrl:assigner drk:library ;
+     odrl:permission kgc:KGC334-p1-r1 .
+@@ -21,12 +23,13 @@ kgc:KGC334-p1-r1 a odrl:Permission ;
+     odrl:constraint kgc:KGC334-p1-c1 .
+ 
+ kgc:KGC334-p1-c1 a odrl:Constraint ;
+-    odrl:leftOperand odrl:spatial ;
++    odrl:leftOperand dpv-odrl:Location ;
+     odrl:operator odrl:eq ;
+     odrl:rightOperand loc:DE .
+ 
+ drk:policy-334-2 a odrl:Set ;
+     odrl:uid drk:policy-334-2 ;
++    odrl:profile dpv-odrl: ;
+     dcterms:title "Use in France"@en ;
+     odrl:permission kgc:KGC334-p2-r1 .
+ 
+@@ -36,7 +39,7 @@ kgc:KGC334-p2-r1 a odrl:Permission ;
+     odrl:constraint kgc:KGC334-p2-c1 .
+ 
+ kgc:KGC334-p2-c1 a odrl:Constraint ;
+-    odrl:leftOperand odrl:spatial ;
++    odrl:leftOperand dpv-odrl:Location ;
+     odrl:operator odrl:eq ;
+     odrl:rightOperand loc:FR .
+ 
+diff --git a/cases/KGC380.ttl b/cases/KGC380.ttl
+index 265d5ce..5864334 100644
+--- a/cases/KGC380.ttl
++++ b/cases/KGC380.ttl
+@@ -6,10 +6,12 @@
+ @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+ @prefix dcterms: <http://purl.org/dc/terms/> .
+ @prefix loc:     <https://w3id.org/dpv/loc#> .
++@prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> .
+ @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+ @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+ drk:policy-380-1 a odrl:Set ;
+     odrl:uid drk:policy-380-1 ;
++    odrl:profile dpv-odrl: ;
+     dcterms:title "Use within the European Union"@en ;
+     odrl:assigner drk:library ;
+     odrl:permission kgc:KGC380-p1-r1 .
+@@ -18,11 +20,12 @@ kgc:KGC380-p1-r1 a odrl:Permission ;
+     odrl:target drk:manuscripts ;
+     odrl:constraint kgc:KGC380-p1-c1 .
+ kgc:KGC380-p1-c1 a odrl:Constraint ;
+-    odrl:leftOperand odrl:spatial ;
++    odrl:leftOperand dpv-odrl:Location ;
+     odrl:operator odrl:isPartOf ;
+     odrl:rightOperand loc:EU .
+ drk:policy-380-2 a odrl:Set ;
+     odrl:uid drk:policy-380-2 ;
++    odrl:profile dpv-odrl: ;
+     dcterms:title "Use in Bonaire, Sint Eustatius and Saba"@en ;
+     odrl:permission kgc:KGC380-p2-r1 .
+ kgc:KGC380-p2-r1 a odrl:Permission ;
+@@ -30,7 +33,7 @@ kgc:KGC380-p2-r1 a odrl:Permission ;
+     odrl:target drk:manuscripts ;
+     odrl:constraint kgc:KGC380-p2-c1 .
+ kgc:KGC380-p2-c1 a odrl:Constraint ;
+-    odrl:leftOperand odrl:spatial ;
++    odrl:leftOperand dpv-odrl:Location ;
+     odrl:operator odrl:eq ;
+     odrl:rightOperand loc:BQ .
+ 
+diff --git a/cases/KGC381.ttl b/cases/KGC381.ttl
+index 37f5348..03dd8d4 100644
+--- a/cases/KGC381.ttl
++++ b/cases/KGC381.ttl
+@@ -6,10 +6,12 @@
+ @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+ @prefix dcterms: <http://purl.org/dc/terms/> .
+ @prefix loc:     <https://w3id.org/dpv/loc#> .
++@prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> .
+ @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+ @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+ drk:policy-381-1 a odrl:Set ;
+     odrl:uid drk:policy-381-1 ;
++    odrl:profile dpv-odrl: ;
+     dcterms:title "Use within the European Union"@en ;
+     odrl:assigner drk:library ;
+     odrl:permission kgc:KGC381-p1-r1 .
+@@ -18,11 +20,12 @@ kgc:KGC381-p1-r1 a odrl:Permission ;
+     odrl:target drk:manuscripts ;
+     odrl:constraint kgc:KGC381-p1-c1 .
+ kgc:KGC381-p1-c1 a odrl:Constraint ;
+-    odrl:leftOperand odrl:spatial ;
++    odrl:leftOperand dpv-odrl:Location ;
+     odrl:operator odrl:isPartOf ;
+     odrl:rightOperand loc:EU .
+ drk:policy-381-2 a odrl:Set ;
+     odrl:uid drk:policy-381-2 ;
++    odrl:profile dpv-odrl: ;
+     dcterms:title "Use in Germany"@en ;
+     odrl:permission kgc:KGC381-p2-r1 .
+ kgc:KGC381-p2-r1 a odrl:Permission ;
+@@ -30,7 +33,7 @@ kgc:KGC381-p2-r1 a odrl:Permission ;
+     odrl:target drk:manuscripts ;
+     odrl:constraint kgc:KGC381-p2-c1 .
+ kgc:KGC381-p2-c1 a odrl:Constraint ;
+-    odrl:leftOperand odrl:spatial ;
++    odrl:leftOperand dpv-odrl:Location ;
+     odrl:operator odrl:eq ;
+     odrl:rightOperand loc:DE .
+ 
+diff --git a/cases/KGC382.ttl b/cases/KGC382.ttl
+index c331682..e8edd5f 100644
+--- a/cases/KGC382.ttl
++++ b/cases/KGC382.ttl
+@@ -6,10 +6,12 @@
+ @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+ @prefix dcterms: <http://purl.org/dc/terms/> .
+ @prefix loc:     <https://w3id.org/dpv/loc#> .
++@prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> .
+ @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+ @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+ drk:policy-382-1 a odrl:Set ;
+     odrl:uid drk:policy-382-1 ;
++    odrl:profile dpv-odrl: ;
+     dcterms:title "Use within Germany"@en ;
+     odrl:assigner drk:library ;
+     odrl:permission kgc:KGC382-p1-r1 .
+@@ -18,11 +20,12 @@ kgc:KGC382-p1-r1 a odrl:Permission ;
+     odrl:target drk:manuscripts ;
+     odrl:constraint kgc:KGC382-p1-c1 .
+ kgc:KGC382-p1-c1 a odrl:Constraint ;
+-    odrl:leftOperand odrl:spatial ;
++    odrl:leftOperand dpv-odrl:Location ;
+     odrl:operator odrl:isPartOf ;
+     odrl:rightOperand loc:DE .
+ drk:policy-382-2 a odrl:Set ;
+     odrl:uid drk:policy-382-2 ;
++    odrl:profile dpv-odrl: ;
+     dcterms:title "Use in North Rhine-Westphalia"@en ;
+     odrl:permission kgc:KGC382-p2-r1 .
+ kgc:KGC382-p2-r1 a odrl:Permission ;
+@@ -30,7 +33,7 @@ kgc:KGC382-p2-r1 a odrl:Permission ;
+     odrl:target drk:manuscripts ;
+     odrl:constraint kgc:KGC382-p2-c1 .
+ kgc:KGC382-p2-c1 a odrl:Constraint ;
+-    odrl:leftOperand odrl:spatial ;
++    odrl:leftOperand dpv-odrl:Location ;
+     odrl:operator odrl:eq ;
+     odrl:rightOperand loc:DE-NW .
+ 
+diff --git a/cases/KGC383.ttl b/cases/KGC383.ttl
+index d480ce4..08c9f8d 100644
+--- a/cases/KGC383.ttl
++++ b/cases/KGC383.ttl
+@@ -6,10 +6,12 @@
+ @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+ @prefix dcterms: <http://purl.org/dc/terms/> .
+ @prefix loc:     <https://w3id.org/dpv/loc#> .
++@prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> .
+ @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+ @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+ drk:policy-383-1 a odrl:Set ;
+     odrl:uid drk:policy-383-1 ;
++    odrl:profile dpv-odrl: ;
+     dcterms:title "Use within the European Union"@en ;
+     odrl:assigner drk:library ;
+     odrl:permission kgc:KGC383-p1-r1 .
+@@ -18,11 +20,12 @@ kgc:KGC383-p1-r1 a odrl:Permission ;
+     odrl:target drk:manuscripts ;
+     odrl:constraint kgc:KGC383-p1-c1 .
+ kgc:KGC383-p1-c1 a odrl:Constraint ;
+-    odrl:leftOperand odrl:spatial ;
++    odrl:leftOperand dpv-odrl:Location ;
+     odrl:operator odrl:isPartOf ;
+     odrl:rightOperand loc:EU .
+ drk:policy-383-2 a odrl:Set ;
+     odrl:uid drk:policy-383-2 ;
++    odrl:profile dpv-odrl: ;
+     dcterms:title "Use in North Rhine-Westphalia"@en ;
+     odrl:permission kgc:KGC383-p2-r1 .
+ kgc:KGC383-p2-r1 a odrl:Permission ;
+@@ -30,7 +33,7 @@ kgc:KGC383-p2-r1 a odrl:Permission ;
+     odrl:target drk:manuscripts ;
+     odrl:constraint kgc:KGC383-p2-c1 .
+ kgc:KGC383-p2-c1 a odrl:Constraint ;
+-    odrl:leftOperand odrl:spatial ;
++    odrl:leftOperand dpv-odrl:Location ;
+     odrl:operator odrl:eq ;
+     odrl:rightOperand loc:DE-NW .
+ 
+diff --git a/cases/KGC384.ttl b/cases/KGC384.ttl
+index 0533274..a033a44 100644
+--- a/cases/KGC384.ttl
++++ b/cases/KGC384.ttl
+@@ -6,10 +6,12 @@
+ @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+ @prefix dcterms: <http://purl.org/dc/terms/> .
+ @prefix loc:     <https://w3id.org/dpv/loc#> .
++@prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> .
+ @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+ @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+ drk:policy-384-1 a odrl:Set ;
+     odrl:uid drk:policy-384-1 ;
++    odrl:profile dpv-odrl: ;
+     dcterms:title "Use in North Rhine-Westphalia"@en ;
+     odrl:assigner drk:library ;
+     odrl:permission kgc:KGC384-p1-r1 .
+@@ -18,11 +20,12 @@ kgc:KGC384-p1-r1 a odrl:Permission ;
+     odrl:target drk:manuscripts ;
+     odrl:constraint kgc:KGC384-p1-c1 .
+ kgc:KGC384-p1-c1 a odrl:Constraint ;
+-    odrl:leftOperand odrl:spatial ;
++    odrl:leftOperand dpv-odrl:Location ;
+     odrl:operator odrl:eq ;
+     odrl:rightOperand loc:DE-NW .
+ drk:policy-384-2 a odrl:Set ;
+     odrl:uid drk:policy-384-2 ;
++    odrl:profile dpv-odrl: ;
+     dcterms:title "Use in Bavaria"@en ;
+     odrl:permission kgc:KGC384-p2-r1 .
+ kgc:KGC384-p2-r1 a odrl:Permission ;
+@@ -30,7 +33,7 @@ kgc:KGC384-p2-r1 a odrl:Permission ;
+     odrl:target drk:manuscripts ;
+     odrl:constraint kgc:KGC384-p2-c1 .
+ kgc:KGC384-p2-c1 a odrl:Constraint ;
+-    odrl:leftOperand odrl:spatial ;
++    odrl:leftOperand dpv-odrl:Location ;
+     odrl:operator odrl:eq ;
+     odrl:rightOperand loc:DE-BY .
+ 
+diff --git a/cases/KGC385.ttl b/cases/KGC385.ttl
+index a6a7eb8..ed99865 100644
+--- a/cases/KGC385.ttl
++++ b/cases/KGC385.ttl
+@@ -6,10 +6,12 @@
+ @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+ @prefix dcterms: <http://purl.org/dc/terms/> .
+ @prefix loc:     <https://w3id.org/dpv/loc#> .
++@prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> .
+ @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+ @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+ drk:policy-385-1 a odrl:Set ;
+     odrl:uid drk:policy-385-1 ;
++    odrl:profile dpv-odrl: ;
+     dcterms:title "Use in North Rhine-Westphalia"@en ;
+     odrl:assigner drk:library ;
+     odrl:permission kgc:KGC385-p1-r1 .
+@@ -18,11 +20,12 @@ kgc:KGC385-p1-r1 a odrl:Permission ;
+     odrl:target drk:manuscripts ;
+     odrl:constraint kgc:KGC385-p1-c1 .
+ kgc:KGC385-p1-c1 a odrl:Constraint ;
+-    odrl:leftOperand odrl:spatial ;
++    odrl:leftOperand dpv-odrl:Location ;
+     odrl:operator odrl:eq ;
+     odrl:rightOperand loc:DE-NW .
+ drk:policy-385-2 a odrl:Set ;
+     odrl:uid drk:policy-385-2 ;
++    odrl:profile dpv-odrl: ;
+     dcterms:title "Use in Bavaria"@en ;
+     odrl:permission kgc:KGC385-p2-r1 .
+ kgc:KGC385-p2-r1 a odrl:Permission ;
+@@ -30,7 +33,7 @@ kgc:KGC385-p2-r1 a odrl:Permission ;
+     odrl:target drk:manuscripts ;
+     odrl:constraint kgc:KGC385-p2-c1 .
+ kgc:KGC385-p2-c1 a odrl:Constraint ;
+-    odrl:leftOperand odrl:spatial ;
++    odrl:leftOperand dpv-odrl:Location ;
+     odrl:operator odrl:eq ;
+     odrl:rightOperand loc:DE-BY .
+ 
+diff --git a/cases/KGC386.ttl b/cases/KGC386.ttl
+index 6afcb58..79643dc 100644
+--- a/cases/KGC386.ttl
++++ b/cases/KGC386.ttl
+@@ -6,10 +6,12 @@
+ @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+ @prefix dcterms: <http://purl.org/dc/terms/> .
+ @prefix loc:     <https://w3id.org/dpv/loc#> .
++@prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> .
+ @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+ @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+ drk:policy-386-1 a odrl:Set ;
+     odrl:uid drk:policy-386-1 ;
++    odrl:profile dpv-odrl: ;
+     dcterms:title "Use anywhere except Bavaria and Berlin"@en ;
+     odrl:assigner drk:library ;
+     odrl:permission kgc:KGC386-p1-r1 .
+@@ -18,11 +20,12 @@ kgc:KGC386-p1-r1 a odrl:Permission ;
+     odrl:target drk:manuscripts ;
+     odrl:constraint kgc:KGC386-p1-c1 .
+ kgc:KGC386-p1-c1 a odrl:Constraint ;
+-    odrl:leftOperand odrl:spatial ;
++    odrl:leftOperand dpv-odrl:Location ;
+     odrl:operator odrl:isNoneOf ;
+     odrl:rightOperand ( loc:DE-BY loc:DE-BE ) .
+ drk:policy-386-2 a odrl:Set ;
+     odrl:uid drk:policy-386-2 ;
++    odrl:profile dpv-odrl: ;
+     dcterms:title "Use in Hamburg"@en ;
+     odrl:permission kgc:KGC386-p2-r1 .
+ kgc:KGC386-p2-r1 a odrl:Permission ;
+@@ -30,7 +33,7 @@ kgc:KGC386-p2-r1 a odrl:Permission ;
+     odrl:target drk:manuscripts ;
+     odrl:constraint kgc:KGC386-p2-c1 .
+ kgc:KGC386-p2-c1 a odrl:Constraint ;
+-    odrl:leftOperand odrl:spatial ;
++    odrl:leftOperand dpv-odrl:Location ;
+     odrl:operator odrl:eq ;
+     odrl:rightOperand loc:DE-HH .
+ 
+diff --git a/cases/KGC387.ttl b/cases/KGC387.ttl
+index 705ca1d..4c41999 100644
+--- a/cases/KGC387.ttl
++++ b/cases/KGC387.ttl
+@@ -6,10 +6,12 @@
+ @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+ @prefix dcterms: <http://purl.org/dc/terms/> .
+ @prefix loc:     <https://w3id.org/dpv/loc#> .
++@prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> .
+ @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+ @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+ drk:policy-387-1 a odrl:Set ;
+     odrl:uid drk:policy-387-1 ;
++    odrl:profile dpv-odrl: ;
+     dcterms:title "Use anywhere except Bavaria and Berlin"@en ;
+     odrl:assigner drk:library ;
+     odrl:permission kgc:KGC387-p1-r1 .
+@@ -18,11 +20,12 @@ kgc:KGC387-p1-r1 a odrl:Permission ;
+     odrl:target drk:manuscripts ;
+     odrl:constraint kgc:KGC387-p1-c1 .
+ kgc:KGC387-p1-c1 a odrl:Constraint ;
+-    odrl:leftOperand odrl:spatial ;
++    odrl:leftOperand dpv-odrl:Location ;
+     odrl:operator odrl:isNoneOf ;
+     odrl:rightOperand ( loc:DE-BY loc:DE-BE ) .
+ drk:policy-387-2 a odrl:Set ;
+     odrl:uid drk:policy-387-2 ;
++    odrl:profile dpv-odrl: ;
+     dcterms:title "Use in Hamburg"@en ;
+     odrl:permission kgc:KGC387-p2-r1 .
+ kgc:KGC387-p2-r1 a odrl:Permission ;
+@@ -30,7 +33,7 @@ kgc:KGC387-p2-r1 a odrl:Permission ;
+     odrl:target drk:manuscripts ;
+     odrl:constraint kgc:KGC387-p2-c1 .
+ kgc:KGC387-p2-c1 a odrl:Constraint ;
+-    odrl:leftOperand odrl:spatial ;
++    odrl:leftOperand dpv-odrl:Location ;
+     odrl:operator odrl:eq ;
+     odrl:rightOperand loc:DE-HH .
+ 
+diff --git a/cases/KGC388.ttl b/cases/KGC388.ttl
+index 9e79b78..ee16ba8 100644
+--- a/cases/KGC388.ttl
++++ b/cases/KGC388.ttl
+@@ -6,10 +6,12 @@
+ @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+ @prefix dcterms: <http://purl.org/dc/terms/> .
+ @prefix loc:     <https://w3id.org/dpv/loc#> .
++@prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> .
+ @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+ @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+ drk:policy-388-1 a odrl:Set ;
+     odrl:uid drk:policy-388-1 ;
++    odrl:profile dpv-odrl: ;
+     dcterms:title "Use within North Rhine-Westphalia or Bavaria"@en ;
+     odrl:assigner drk:library ;
+     odrl:permission kgc:KGC388-p1-r1 .
+@@ -20,15 +22,16 @@ kgc:KGC388-p1-r1 a odrl:Permission ;
+ kgc:KGC388-p1-lc a odrl:LogicalConstraint ;
+     odrl:or ( kgc:KGC388-p1-c1 kgc:KGC388-p1-c2 ) .
+ kgc:KGC388-p1-c1 a odrl:Constraint ;
+-    odrl:leftOperand odrl:spatial ;
++    odrl:leftOperand dpv-odrl:Location ;
+     odrl:operator odrl:isPartOf ;
+     odrl:rightOperand loc:DE-NW .
+ kgc:KGC388-p1-c2 a odrl:Constraint ;
+-    odrl:leftOperand odrl:spatial ;
++    odrl:leftOperand dpv-odrl:Location ;
+     odrl:operator odrl:isPartOf ;
+     odrl:rightOperand loc:DE-BY .
+ drk:policy-388-2 a odrl:Set ;
+     odrl:uid drk:policy-388-2 ;
++    odrl:profile dpv-odrl: ;
+     dcterms:title "Use in North Rhine-Westphalia"@en ;
+     odrl:permission kgc:KGC388-p2-r1 .
+ kgc:KGC388-p2-r1 a odrl:Permission ;
+@@ -36,7 +39,7 @@ kgc:KGC388-p2-r1 a odrl:Permission ;
+     odrl:target drk:manuscripts ;
+     odrl:constraint kgc:KGC388-p2-c1 .
+ kgc:KGC388-p2-c1 a odrl:Constraint ;
+-    odrl:leftOperand odrl:spatial ;
++    odrl:leftOperand dpv-odrl:Location ;
+     odrl:operator odrl:eq ;
+     odrl:rightOperand loc:DE-NW .
+ 
+diff --git a/cases/KGC389.ttl b/cases/KGC389.ttl
+index d729648..97843a1 100644
+--- a/cases/KGC389.ttl
++++ b/cases/KGC389.ttl
+@@ -6,10 +6,12 @@
+ @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+ @prefix dcterms: <http://purl.org/dc/terms/> .
+ @prefix loc:     <https://w3id.org/dpv/loc#> .
++@prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> .
+ @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+ @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+ drk:policy-389-1 a odrl:Set ;
+     odrl:uid drk:policy-389-1 ;
++    odrl:profile dpv-odrl: ;
+     dcterms:title "Use in exactly one of North Rhine-Westphalia and Bavaria"@en ;
+     odrl:assigner drk:library ;
+     odrl:permission kgc:KGC389-p1-r1 .
+@@ -20,15 +22,16 @@ kgc:KGC389-p1-r1 a odrl:Permission ;
+ kgc:KGC389-p1-lc a odrl:LogicalConstraint ;
+     odrl:xone ( kgc:KGC389-p1-c1 kgc:KGC389-p1-c2 ) .
+ kgc:KGC389-p1-c1 a odrl:Constraint ;
+-    odrl:leftOperand odrl:spatial ;
++    odrl:leftOperand dpv-odrl:Location ;
+     odrl:operator odrl:eq ;
+     odrl:rightOperand loc:DE-NW .
+ kgc:KGC389-p1-c2 a odrl:Constraint ;
+-    odrl:leftOperand odrl:spatial ;
++    odrl:leftOperand dpv-odrl:Location ;
+     odrl:operator odrl:eq ;
+     odrl:rightOperand loc:DE-BY .
+ drk:policy-389-2 a odrl:Set ;
+     odrl:uid drk:policy-389-2 ;
++    odrl:profile dpv-odrl: ;
+     dcterms:title "Use in North Rhine-Westphalia"@en ;
+     odrl:permission kgc:KGC389-p2-r1 .
+ kgc:KGC389-p2-r1 a odrl:Permission ;
+@@ -36,7 +39,7 @@ kgc:KGC389-p2-r1 a odrl:Permission ;
+     odrl:target drk:manuscripts ;
+     odrl:constraint kgc:KGC389-p2-c1 .
+ kgc:KGC389-p2-c1 a odrl:Constraint ;
+-    odrl:leftOperand odrl:spatial ;
++    odrl:leftOperand dpv-odrl:Location ;
+     odrl:operator odrl:eq ;
+     odrl:rightOperand loc:DE-NW .
+ 
+diff --git a/cases/KGC390.ttl b/cases/KGC390.ttl
+index 7fd9cc9..8c17968 100644
+--- a/cases/KGC390.ttl
++++ b/cases/KGC390.ttl
+@@ -6,10 +6,12 @@
+ @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+ @prefix dcterms: <http://purl.org/dc/terms/> .
+ @prefix loc:     <https://w3id.org/dpv/loc#> .
++@prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> .
+ @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+ @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+ drk:policy-390-1 a odrl:Set ;
+     odrl:uid drk:policy-390-1 ;
++    odrl:profile dpv-odrl: ;
+     dcterms:title "Use in exactly one of North Rhine-Westphalia and Bavaria"@en ;
+     odrl:assigner drk:library ;
+     odrl:permission kgc:KGC390-p1-r1 .
+@@ -20,15 +22,16 @@ kgc:KGC390-p1-r1 a odrl:Permission ;
+ kgc:KGC390-p1-lc a odrl:LogicalConstraint ;
+     odrl:xone ( kgc:KGC390-p1-c1 kgc:KGC390-p1-c2 ) .
+ kgc:KGC390-p1-c1 a odrl:Constraint ;
+-    odrl:leftOperand odrl:spatial ;
++    odrl:leftOperand dpv-odrl:Location ;
+     odrl:operator odrl:eq ;
+     odrl:rightOperand loc:DE-NW .
+ kgc:KGC390-p1-c2 a odrl:Constraint ;
+-    odrl:leftOperand odrl:spatial ;
++    odrl:leftOperand dpv-odrl:Location ;
+     odrl:operator odrl:eq ;
+     odrl:rightOperand loc:DE-BY .
+ drk:policy-390-2 a odrl:Set ;
+     odrl:uid drk:policy-390-2 ;
++    odrl:profile dpv-odrl: ;
+     dcterms:title "Use in North Rhine-Westphalia"@en ;
+     odrl:permission kgc:KGC390-p2-r1 .
+ kgc:KGC390-p2-r1 a odrl:Permission ;
+@@ -36,7 +39,7 @@ kgc:KGC390-p2-r1 a odrl:Permission ;
+     odrl:target drk:manuscripts ;
+     odrl:constraint kgc:KGC390-p2-c1 .
+ kgc:KGC390-p2-c1 a odrl:Constraint ;
+-    odrl:leftOperand odrl:spatial ;
++    odrl:leftOperand dpv-odrl:Location ;
+     odrl:operator odrl:eq ;
+     odrl:rightOperand loc:DE-NW .
+ 
+diff --git a/cases/KGC391.ttl b/cases/KGC391.ttl
+index 2092f31..c5c511b 100644
+--- a/cases/KGC391.ttl
++++ b/cases/KGC391.ttl
+@@ -6,10 +6,12 @@
+ @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+ @prefix dcterms: <http://purl.org/dc/terms/> .
+ @prefix loc:     <https://w3id.org/dpv/loc#> .
++@prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> .
+ @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+ @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+ drk:policy-391-1 a odrl:Set ;
+     odrl:uid drk:policy-391-1 ;
++    odrl:profile dpv-odrl: ;
+     dcterms:title "Use in an area containing North Rhine-Westphalia"@en ;
+     odrl:assigner drk:library ;
+     odrl:permission kgc:KGC391-p1-r1 .
+@@ -18,11 +20,12 @@ kgc:KGC391-p1-r1 a odrl:Permission ;
+     odrl:target drk:manuscripts ;
+     odrl:constraint kgc:KGC391-p1-c1 .
+ kgc:KGC391-p1-c1 a odrl:Constraint ;
+-    odrl:leftOperand odrl:spatial ;
++    odrl:leftOperand dpv-odrl:Location ;
+     odrl:operator odrl:hasPart ;
+     odrl:rightOperand loc:DE-NW .
+ drk:policy-391-2 a odrl:Set ;
+     odrl:uid drk:policy-391-2 ;
++    odrl:profile dpv-odrl: ;
+     dcterms:title "Use in Germany"@en ;
+     odrl:permission kgc:KGC391-p2-r1 .
+ kgc:KGC391-p2-r1 a odrl:Permission ;
+@@ -30,7 +33,7 @@ kgc:KGC391-p2-r1 a odrl:Permission ;
+     odrl:target drk:manuscripts ;
+     odrl:constraint kgc:KGC391-p2-c1 .
+ kgc:KGC391-p2-c1 a odrl:Constraint ;
+-    odrl:leftOperand odrl:spatial ;
++    odrl:leftOperand dpv-odrl:Location ;
+     odrl:operator odrl:eq ;
+     odrl:rightOperand loc:DE .
+ 
+diff --git a/cases/KGC392.ttl b/cases/KGC392.ttl
+index f29e3c7..84a5b64 100644
+--- a/cases/KGC392.ttl
++++ b/cases/KGC392.ttl
+@@ -6,10 +6,12 @@
+ @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+ @prefix dcterms: <http://purl.org/dc/terms/> .
+ @prefix loc:     <https://w3id.org/dpv/loc#> .
++@prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> .
+ @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+ @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+ drk:policy-392-1 a odrl:Set ;
+     odrl:uid drk:policy-392-1 ;
++    odrl:profile dpv-odrl: ;
+     dcterms:title "Use anywhere except Wallis and Futuna"@en ;
+     odrl:assigner drk:library ;
+     odrl:permission kgc:KGC392-p1-r1 .
+@@ -18,11 +20,12 @@ kgc:KGC392-p1-r1 a odrl:Permission ;
+     odrl:target drk:manuscripts ;
+     odrl:constraint kgc:KGC392-p1-c1 .
+ kgc:KGC392-p1-c1 a odrl:Constraint ;
+-    odrl:leftOperand odrl:spatial ;
++    odrl:leftOperand dpv-odrl:Location ;
+     odrl:operator odrl:isNoneOf ;
+     odrl:rightOperand ( loc:WF ) .
+ drk:policy-392-2 a odrl:Set ;
+     odrl:uid drk:policy-392-2 ;
++    odrl:profile dpv-odrl: ;
+     dcterms:title "Use in Uvea"@en ;
+     odrl:permission kgc:KGC392-p2-r1 .
+ kgc:KGC392-p2-r1 a odrl:Permission ;
+@@ -30,7 +33,7 @@ kgc:KGC392-p2-r1 a odrl:Permission ;
+     odrl:target drk:manuscripts ;
+     odrl:constraint kgc:KGC392-p2-c1 .
+ kgc:KGC392-p2-c1 a odrl:Constraint ;
+-    odrl:leftOperand odrl:spatial ;
++    odrl:leftOperand dpv-odrl:Location ;
+     odrl:operator odrl:eq ;
+     odrl:rightOperand loc:WF-UV .
+ 
+diff --git a/cases/KGC393.ttl b/cases/KGC393.ttl
+index 5d8c431..8469d2e 100644
+--- a/cases/KGC393.ttl
++++ b/cases/KGC393.ttl
+@@ -6,10 +6,12 @@
+ @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+ @prefix dcterms: <http://purl.org/dc/terms/> .
+ @prefix dpv:     <https://w3id.org/dpv#> .
++@prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> .
+ @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+ @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+ drk:policy-393-1 a odrl:Set ;
+     odrl:uid drk:policy-393-1 ;
++    odrl:profile dpv-odrl: ;
+     dcterms:title "Use for research and development or marketing"@en ;
+     odrl:assigner drk:provider ;
+     odrl:permission kgc:KGC393-p1-r1 .
+@@ -18,11 +20,12 @@ kgc:KGC393-p1-r1 a odrl:Permission ;
+     odrl:target drk:dataset ;
+     odrl:constraint kgc:KGC393-p1-c1 .
+ kgc:KGC393-p1-c1 a odrl:Constraint ;
+-    odrl:leftOperand odrl:purpose ;
++    odrl:leftOperand dpv-odrl:Purpose ;
+     odrl:operator odrl:isAnyOf ;
+     odrl:rightOperand ( dpv:ResearchAndDevelopment dpv:Marketing ) .
+ drk:policy-393-2 a odrl:Set ;
+     odrl:uid drk:policy-393-2 ;
++    odrl:profile dpv-odrl: ;
+     dcterms:title "Scientific research"@en ;
+     odrl:assignee drk:consumer ;
+     odrl:permission kgc:KGC393-p2-r1 .
+@@ -31,7 +34,7 @@ kgc:KGC393-p2-r1 a odrl:Permission ;
+     odrl:target drk:dataset ;
+     odrl:constraint kgc:KGC393-p2-c1 .
+ kgc:KGC393-p2-c1 a odrl:Constraint ;
+-    odrl:leftOperand odrl:purpose ;
++    odrl:leftOperand dpv-odrl:Purpose ;
+     odrl:operator odrl:eq ;
+     odrl:rightOperand dpv:ScientificResearch .
+ 
+diff --git a/cases/KGC394.ttl b/cases/KGC394.ttl
+index c2d0a86..b759bd2 100644
+--- a/cases/KGC394.ttl
++++ b/cases/KGC394.ttl
+@@ -6,10 +6,12 @@
+ @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+ @prefix dcterms: <http://purl.org/dc/terms/> .
+ @prefix dpv:     <https://w3id.org/dpv#> .
++@prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> .
+ @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+ @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+ drk:policy-394-1 a odrl:Set ;
+     odrl:uid drk:policy-394-1 ;
++    odrl:profile dpv-odrl: ;
+     dcterms:title "Use for research and development or marketing"@en ;
+     odrl:assigner drk:provider ;
+     odrl:permission kgc:KGC394-p1-r1 .
+@@ -18,11 +20,12 @@ kgc:KGC394-p1-r1 a odrl:Permission ;
+     odrl:target drk:dataset ;
+     odrl:constraint kgc:KGC394-p1-c1 .
+ kgc:KGC394-p1-c1 a odrl:Constraint ;
+-    odrl:leftOperand odrl:purpose ;
++    odrl:leftOperand dpv-odrl:Purpose ;
+     odrl:operator odrl:isAnyOf ;
+     odrl:rightOperand ( dpv:ResearchAndDevelopment dpv:Marketing ) .
+ drk:policy-394-2 a odrl:Set ;
+     odrl:uid drk:policy-394-2 ;
++    odrl:profile dpv-odrl: ;
+     dcterms:title "Scientific research"@en ;
+     odrl:assignee drk:consumer ;
+     odrl:permission kgc:KGC394-p2-r1 .
+@@ -31,7 +34,7 @@ kgc:KGC394-p2-r1 a odrl:Permission ;
+     odrl:target drk:dataset ;
+     odrl:constraint kgc:KGC394-p2-c1 .
+ kgc:KGC394-p2-c1 a odrl:Constraint ;
+-    odrl:leftOperand odrl:purpose ;
++    odrl:leftOperand dpv-odrl:Purpose ;
+     odrl:operator odrl:eq ;
+     odrl:rightOperand dpv:ScientificResearch .
+ 
+diff --git a/cases/KGC395.ttl b/cases/KGC395.ttl
+index 5a3ba83..dbb80ee 100644
+--- a/cases/KGC395.ttl
++++ b/cases/KGC395.ttl
+@@ -6,10 +6,12 @@
+ @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+ @prefix dcterms: <http://purl.org/dc/terms/> .
+ @prefix dpv:     <https://w3id.org/dpv#> .
++@prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> .
+ @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+ @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+ drk:policy-395-1 a odrl:Set ;
+     odrl:uid drk:policy-395-1 ;
++    odrl:profile dpv-odrl: ;
+     dcterms:title "Use for research and development or marketing purposes"@en ;
+     odrl:assigner drk:provider ;
+     odrl:permission kgc:KGC395-p1-r1 .
+@@ -20,15 +22,16 @@ kgc:KGC395-p1-r1 a odrl:Permission ;
+ kgc:KGC395-p1-lc a odrl:LogicalConstraint ;
+     odrl:or ( kgc:KGC395-p1-c1 kgc:KGC395-p1-c2 ) .
+ kgc:KGC395-p1-c1 a odrl:Constraint ;
+-    odrl:leftOperand odrl:purpose ;
++    odrl:leftOperand dpv-odrl:Purpose ;
+     odrl:operator odrl:isA ;
+     odrl:rightOperand dpv:ResearchAndDevelopment .
+ kgc:KGC395-p1-c2 a odrl:Constraint ;
+-    odrl:leftOperand odrl:purpose ;
++    odrl:leftOperand dpv-odrl:Purpose ;
+     odrl:operator odrl:isA ;
+     odrl:rightOperand dpv:Marketing .
+ drk:policy-395-2 a odrl:Set ;
+     odrl:uid drk:policy-395-2 ;
++    odrl:profile dpv-odrl: ;
+     dcterms:title "Scientific research"@en ;
+     odrl:assignee drk:consumer ;
+     odrl:permission kgc:KGC395-p2-r1 .
+@@ -37,7 +40,7 @@ kgc:KGC395-p2-r1 a odrl:Permission ;
+     odrl:target drk:dataset ;
+     odrl:constraint kgc:KGC395-p2-c1 .
+ kgc:KGC395-p2-c1 a odrl:Constraint ;
+-    odrl:leftOperand odrl:purpose ;
++    odrl:leftOperand dpv-odrl:Purpose ;
+     odrl:operator odrl:eq ;
+     odrl:rightOperand dpv:ScientificResearch .
+ 
+diff --git a/cases/KGC396.ttl b/cases/KGC396.ttl
+index 618f95f..22bd887 100644
+--- a/cases/KGC396.ttl
++++ b/cases/KGC396.ttl
+@@ -6,10 +6,12 @@
+ @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+ @prefix dcterms: <http://purl.org/dc/terms/> .
+ @prefix dpv:     <https://w3id.org/dpv#> .
++@prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> .
+ @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+ @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+ drk:policy-396-1 a odrl:Set ;
+     odrl:uid drk:policy-396-1 ;
++    odrl:profile dpv-odrl: ;
+     dcterms:title "Use for research and development or marketing"@en ;
+     odrl:assigner drk:provider ;
+     odrl:permission kgc:KGC396-p1-r1 .
+@@ -18,11 +20,12 @@ kgc:KGC396-p1-r1 a odrl:Permission ;
+     odrl:target drk:dataset ;
+     odrl:constraint kgc:KGC396-p1-c1 .
+ kgc:KGC396-p1-c1 a odrl:Constraint ;
+-    odrl:leftOperand odrl:purpose ;
++    odrl:leftOperand dpv-odrl:Purpose ;
+     odrl:operator odrl:isAnyOf ;
+     odrl:rightOperand ( dpv:ResearchAndDevelopment dpv:Marketing ) .
+ drk:policy-396-2 a odrl:Set ;
+     odrl:uid drk:policy-396-2 ;
++    odrl:profile dpv-odrl: ;
+     dcterms:title "Research and development and service provision"@en ;
+     odrl:assignee drk:consumer ;
+     odrl:permission kgc:KGC396-p2-r1 .
+@@ -31,7 +34,7 @@ kgc:KGC396-p2-r1 a odrl:Permission ;
+     odrl:target drk:dataset ;
+     odrl:constraint kgc:KGC396-p2-c1 .
+ kgc:KGC396-p2-c1 a odrl:Constraint ;
+-    odrl:leftOperand odrl:purpose ;
++    odrl:leftOperand dpv-odrl:Purpose ;
+     odrl:operator odrl:isAllOf ;
+     odrl:rightOperand ( dpv:ResearchAndDevelopment dpv:ServiceProvision ) .
+ 
+diff --git a/cases/KGC397.ttl b/cases/KGC397.ttl
+index 34db669..8783409 100644
+--- a/cases/KGC397.ttl
++++ b/cases/KGC397.ttl
+@@ -6,10 +6,12 @@
+ @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+ @prefix dcterms: <http://purl.org/dc/terms/> .
+ @prefix dpv:     <https://w3id.org/dpv#> .
++@prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> .
+ @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+ @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+ drk:policy-397-1 a odrl:Set ;
+     odrl:uid drk:policy-397-1 ;
++    odrl:profile dpv-odrl: ;
+     dcterms:title "Use for any purpose except marketing"@en ;
+     odrl:assigner drk:provider ;
+     odrl:permission kgc:KGC397-p1-r1 .
+@@ -18,11 +20,12 @@ kgc:KGC397-p1-r1 a odrl:Permission ;
+     odrl:target drk:dataset ;
+     odrl:constraint kgc:KGC397-p1-c1 .
+ kgc:KGC397-p1-c1 a odrl:Constraint ;
+-    odrl:leftOperand odrl:purpose ;
++    odrl:leftOperand dpv-odrl:Purpose ;
+     odrl:operator odrl:isNoneOf ;
+     odrl:rightOperand ( dpv:Marketing ) .
+ drk:policy-397-2 a odrl:Set ;
+     odrl:uid drk:policy-397-2 ;
++    odrl:profile dpv-odrl: ;
+     dcterms:title "Advertising"@en ;
+     odrl:assignee drk:consumer ;
+     odrl:permission kgc:KGC397-p2-r1 .
+@@ -31,7 +34,7 @@ kgc:KGC397-p2-r1 a odrl:Permission ;
+     odrl:target drk:dataset ;
+     odrl:constraint kgc:KGC397-p2-c1 .
+ kgc:KGC397-p2-c1 a odrl:Constraint ;
+-    odrl:leftOperand odrl:purpose ;
++    odrl:leftOperand dpv-odrl:Purpose ;
+     odrl:operator odrl:eq ;
+     odrl:rightOperand dpv:Advertising .
+ 
+diff --git a/full-run.sh b/full-run.sh
+index 1a59d3a..2bd4322 100755
+--- a/full-run.sh
++++ b/full-run.sh
+@@ -57,7 +57,7 @@ uv run generators/validate_terms.py --schemas vocab \
+   --instances problems cases probes 2>&1 | tail -30
+ 
+ hdr "4b. case files: the agreed shape"
+-uv run generators/validate_cases.py 2>&1 | tail -15
++uv run generators/validate_cases.py 2>&1 | tail -40
+ 
+ hdr "5. bindings: do the probes hold"
+ uv run generators/validate_bindings.py --probes probes \
+diff --git a/generators/build_dpv.py b/generators/build_dpv.py
+index 22319ed..572997d 100644
+--- a/generators/build_dpv.py
++++ b/generators/build_dpv.py
+@@ -79,7 +79,7 @@ def parse(path: Path):
+     # is a legal basis defined in legal_basis.ttl.  That edge is dropped.
+     #
+     # The reason is the operand, not tidiness.  This resource grounds
+-    # odrl:purpose, and a legal basis is a different left operand with its
++    # dpv-odrl:Purpose, and a legal basis is a different left operand with its
+     # own binding in the DPV-ODRL mapping.  Keeping the edge would put a
+     # concept from one operand's vocabulary into another operand's
+     # resource, and a verdict could then rest on an order assertion the
+@@ -415,13 +415,16 @@ def profile_ttl() -> str:
+ #
+ # The sort is the declaration: DPV's skos:broader is read as subsumption.
+ # Nothing in the resource says so.
++#
++# The operand is dpv-odrl:Purpose, the DPV-ODRL left operand for purposes
++# drawn from DPV. DPV-ODRL places it below odrl:purpose.
+ 
+-@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
++@prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> .
+ @prefix bind: <https://w3id.org/odrl-kb/binding#> .
+ @prefix ex:   <https://w3id.org/odrl-kb/profile/> .
+ 
+ ex:b-purpose a bind:OperandBinding ;
+-    bind:leftOperand odrl:purpose ;
++    bind:leftOperand dpv-odrl:Purpose ;
+     bind:sort bind:tax ;
+     bind:resource <https://w3id.org/odrl-kb/dpv-purposes> ;
+     bind:backgroundTheory <https://w3id.org/odrl-kb/dpv-purposes/empty> ;
+diff --git a/generators/build_dpvloc.py b/generators/build_dpvloc.py
+index ebcd633..ae85fdb 100644
+--- a/generators/build_dpvloc.py
++++ b/generators/build_dpvloc.py
+@@ -10,12 +10,14 @@ profile entry.
+ 
+ Why this resource is in the suite
+ ----------------------------------
+-It is the second resource bound to odrl:spatial, and it is bound at the same
+-sort as the first.  GeoNames and DPV LOC are different files, published by
+-different bodies, on different principles, and a profile can name either one
+-for the same operand.  What the operand means is therefore not a property of
+-the operand: it is what the binding says, which is the claim of Section 4.1
+-stated as two profiles rather than as an argument.
++It is bound to dpv-odrl:Location, which DPV-ODRL places below odrl:spatial,
++the operand GeoNames is bound to, and at the same sort.  It is also bound
++twice, under two readings of the same file: containment only, and
++containment with union membership.  Same operand, same file, different
++binding, and KGC331 and KGC381 get different verdicts.  What the operand
++means is therefore not a property of the operand: it is what the binding
++says, which is the claim of Section 4.1 stated as two profiles rather than
++as an argument.
+ 
+ The two resources also have opposite shapes, and the certificates show it.
+ DPV purposes runs six levels deep, so a Compatible there may cite six order
+@@ -619,7 +621,7 @@ def declared_axioms(pair) -> str:
+ 
+ 
+ def profile_ttl(mode) -> str:
+-    """Profile entry for odrl:spatial over DPV Locations.
++    """Profile entry for dpv-odrl:Location over DPV Locations.
+ 
+     Two of these are emitted, differing only in which published relation the
+     resource reads.  Both bind the same operand at the same sort, and both
+@@ -644,22 +646,23 @@ def profile_ttl(mode) -> str:
+     }[mode]
+     tag, title, note = body
+     return f"""\
+-# Profile entry for odrl:spatial over DPV Locations, {title}.
++# Profile entry for dpv-odrl:Location over DPV Locations, {title}.
+ #
+-# The sort is mer, the same sort the GeoNames profile declares for the same
+-# operand, and the same sort the other DPV Locations profile declares.  What
+-# differs between the three is the resource: which file, and which of the
++# The operand is dpv-odrl:Location, the DPV-ODRL left operand for places
++# drawn from DPV. DPV-ODRL places it below odrl:spatial, the operand the
++# GeoNames profile binds. The sort is mer in all three profiles. What
++# differs between them is the resource: which file, and which of the
+ # relations in that file the binding reads.  That is what it means for the
+ # meaning to belong to the binding rather than to the operand.
+ #
+ {note}
+ 
+-@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
++@prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> .
+ @prefix bind: <https://w3id.org/odrl-kb/binding#> .
+ @prefix ex:   <https://w3id.org/odrl-kb/profile/> .
+ 
+ ex:b-spatial-dpvloc-{tag} a bind:OperandBinding ;
+-    bind:leftOperand odrl:spatial ;
++    bind:leftOperand dpv-odrl:Location ;
+     bind:sort bind:mer ;
+     bind:resource <https://w3id.org/odrl-kb/dpv-loc-{tag}> ;
+     bind:backgroundTheory <https://w3id.org/odrl-kb/dpv-loc/empty> ;
+diff --git a/generators/problem_data_dpv.py b/generators/problem_data_dpv.py
+index 0dc289c..2c63bef 100644
+--- a/generators/problem_data_dpv.py
++++ b/generators/problem_data_dpv.py
+@@ -65,6 +65,7 @@ _HEAD = """\
+ @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+ @prefix dcterms: <http://purl.org/dc/terms/> .
+ @prefix dpv:     <https://w3id.org/dpv#> .
++@prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> .
+ @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+ @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+ """
+@@ -93,6 +94,7 @@ def _side(pid, k, title, party, lo, constraints, connective=None):
+               + " ".join(f"kgc:{c}" for c in cids) + " ) .\n")
+     body = (f"drk:policy-{n}-{k} a odrl:Set ;\n"
+             f"    odrl:uid drk:policy-{n}-{k} ;\n"
++            f"    odrl:profile dpv-odrl: ;\n"
+             f'    dcterms:title "{title[:1].upper() + title[1:]}"@en ;\n'
+             f"    {party}\n"
+             f"    odrl:permission kgc:{pid}-{role}-r1 .\n"
+@@ -113,7 +115,7 @@ def _ttl(pid, lo, offer_title, offer_cs, req_title, req_cs, connective=None):
+                     "odrl:assignee drk:consumer ;", lo, req_cs))
+ 
+ 
+-PURPOSE = "odrl:purpose"
++PURPOSE = "dpv-odrl:Purpose"
+ 
+ _D394 = _iso((SR, RND), (SR, MK))
+ _D397 = _iso((ADV, MK))
+@@ -219,11 +221,13 @@ PROBLEMS = [
+ @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+ @prefix dcterms: <http://purl.org/dc/terms/> .
+ @prefix dpv:     <https://w3id.org/dpv#> .
++@prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> .
+ @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+ @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+ 
+ drk:policy-310-1 a odrl:Set ;
+     odrl:uid drk:policy-310-1 ;
++    odrl:profile dpv-odrl: ;
+     dcterms:title "Research and development purposes"@en ;
+     odrl:assigner drk:library ;
+     odrl:permission kgc:KGC310-p1-r1 .
+@@ -234,12 +238,13 @@ kgc:KGC310-p1-r1 a odrl:Permission ;
+     odrl:constraint kgc:KGC310-p1-c1 .
+ 
+ kgc:KGC310-p1-c1 a odrl:Constraint ;
+-    odrl:leftOperand odrl:purpose ;
++    odrl:leftOperand dpv-odrl:Purpose ;
+     odrl:operator odrl:isA ;
+     odrl:rightOperand dpv:ResearchAndDevelopment .
+ 
+ drk:policy-310-2 a odrl:Set ;
+     odrl:uid drk:policy-310-2 ;
++    odrl:profile dpv-odrl: ;
+     dcterms:title "Scientific research"@en ;
+     odrl:assignee drk:researcher ;
+     odrl:permission kgc:KGC310-p2-r1 .
+@@ -250,7 +255,7 @@ kgc:KGC310-p2-r1 a odrl:Permission ;
+     odrl:constraint kgc:KGC310-p2-c1 .
+ 
+ kgc:KGC310-p2-c1 a odrl:Constraint ;
+-    odrl:leftOperand odrl:purpose ;
++    odrl:leftOperand dpv-odrl:Purpose ;
+     odrl:operator odrl:eq ;
+     odrl:rightOperand dpv:ScientificResearch .""",
+     },
+@@ -322,11 +327,13 @@ kgc:KGC310-p2-c1 a odrl:Constraint ;
+ @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+ @prefix dcterms: <http://purl.org/dc/terms/> .
+ @prefix dpv:     <https://w3id.org/dpv#> .
++@prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> .
+ @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+ @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+ 
+ drk:policy-311-1 a odrl:Set ;
+     odrl:uid drk:policy-311-1 ;
++    odrl:profile dpv-odrl: ;
+     dcterms:title "Any declared purpose"@en ;
+     odrl:assigner drk:library ;
+     odrl:permission kgc:KGC311-p1-r1 .
+@@ -337,12 +344,13 @@ kgc:KGC311-p1-r1 a odrl:Permission ;
+     odrl:constraint kgc:KGC311-p1-c1 .
+ 
+ kgc:KGC311-p1-c1 a odrl:Constraint ;
+-    odrl:leftOperand odrl:purpose ;
++    odrl:leftOperand dpv-odrl:Purpose ;
+     odrl:operator odrl:isA ;
+     odrl:rightOperand dpv:Purpose .
+ 
+ drk:policy-311-2 a odrl:Set ;
+     odrl:uid drk:policy-311-2 ;
++    odrl:profile dpv-odrl: ;
+     dcterms:title "Non-commercial research"@en ;
+     odrl:assignee drk:researcher ;
+     odrl:permission kgc:KGC311-p2-r1 .
+@@ -353,7 +361,7 @@ kgc:KGC311-p2-r1 a odrl:Permission ;
+     odrl:constraint kgc:KGC311-p2-c1 .
+ 
+ kgc:KGC311-p2-c1 a odrl:Constraint ;
+-    odrl:leftOperand odrl:purpose ;
++    odrl:leftOperand dpv-odrl:Purpose ;
+     odrl:operator odrl:eq ;
+     odrl:rightOperand dpv:NonCommercialResearch .""",
+     },
+@@ -424,11 +432,13 @@ kgc:KGC311-p2-c1 a odrl:Constraint ;
+ @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+ @prefix dcterms: <http://purl.org/dc/terms/> .
+ @prefix dpv:     <https://w3id.org/dpv#> .
++@prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> .
+ @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+ @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+ 
+ drk:policy-313-1 a odrl:Set ;
+     odrl:uid drk:policy-313-1 ;
++    odrl:profile dpv-odrl: ;
+     dcterms:title "Marketing"@en ;
+     odrl:assigner drk:library ;
+     odrl:permission kgc:KGC313-p1-r1 .
+@@ -439,12 +449,13 @@ kgc:KGC313-p1-r1 a odrl:Permission ;
+     odrl:constraint kgc:KGC313-p1-c1 .
+ 
+ kgc:KGC313-p1-c1 a odrl:Constraint ;
+-    odrl:leftOperand odrl:purpose ;
++    odrl:leftOperand dpv-odrl:Purpose ;
+     odrl:operator odrl:eq ;
+     odrl:rightOperand dpv:Marketing .
+ 
+ drk:policy-313-2 a odrl:Set ;
+     odrl:uid drk:policy-313-2 ;
++    odrl:profile dpv-odrl: ;
+     dcterms:title "Scientific research"@en ;
+     odrl:assignee drk:researcher ;
+     odrl:permission kgc:KGC313-p2-r1 .
+@@ -455,7 +466,7 @@ kgc:KGC313-p2-r1 a odrl:Permission ;
+     odrl:constraint kgc:KGC313-p2-c1 .
+ 
+ kgc:KGC313-p2-c1 a odrl:Constraint ;
+-    odrl:leftOperand odrl:purpose ;
++    odrl:leftOperand dpv-odrl:Purpose ;
+     odrl:operator odrl:eq ;
+     odrl:rightOperand dpv:ScientificResearch .""",
+     },
+@@ -529,11 +540,13 @@ kgc:KGC313-p2-c1 a odrl:Constraint ;
+ @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+ @prefix dcterms: <http://purl.org/dc/terms/> .
+ @prefix dpv:     <https://w3id.org/dpv#> .
++@prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> .
+ @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+ @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+ 
+ drk:policy-314-1 a odrl:Set ;
+     odrl:uid drk:policy-314-1 ;
++    odrl:profile dpv-odrl: ;
+     dcterms:title "Marketing"@en ;
+     odrl:assigner drk:library ;
+     odrl:permission kgc:KGC314-p1-r1 .
+@@ -544,12 +557,13 @@ kgc:KGC314-p1-r1 a odrl:Permission ;
+     odrl:constraint kgc:KGC314-p1-c1 .
+ 
+ kgc:KGC314-p1-c1 a odrl:Constraint ;
+-    odrl:leftOperand odrl:purpose ;
++    odrl:leftOperand dpv-odrl:Purpose ;
+     odrl:operator odrl:eq ;
+     odrl:rightOperand dpv:Marketing .
+ 
+ drk:policy-314-2 a odrl:Set ;
+     odrl:uid drk:policy-314-2 ;
++    odrl:profile dpv-odrl: ;
+     dcterms:title "Scientific research"@en ;
+     odrl:assignee drk:researcher ;
+     odrl:permission kgc:KGC314-p2-r1 .
+@@ -560,7 +574,7 @@ kgc:KGC314-p2-r1 a odrl:Permission ;
+     odrl:constraint kgc:KGC314-p2-c1 .
+ 
+ kgc:KGC314-p2-c1 a odrl:Constraint ;
+-    odrl:leftOperand odrl:purpose ;
++    odrl:leftOperand dpv-odrl:Purpose ;
+     odrl:operator odrl:eq ;
+     odrl:rightOperand dpv:ScientificResearch .""",
+     },
+@@ -634,11 +648,13 @@ kgc:KGC314-p2-c1 a odrl:Constraint ;
+ @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+ @prefix dcterms: <http://purl.org/dc/terms/> .
+ @prefix dpv:     <https://w3id.org/dpv#> .
++@prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> .
+ @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+ @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+ 
+ drk:policy-315-1 a odrl:Set ;
+     odrl:uid drk:policy-315-1 ;
++    odrl:profile dpv-odrl: ;
+     dcterms:title "Any declared purpose"@en ;
+     odrl:assigner drk:library ;
+     odrl:permission kgc:KGC315-p1-r1 .
+@@ -649,12 +665,13 @@ kgc:KGC315-p1-r1 a odrl:Permission ;
+     odrl:constraint kgc:KGC315-p1-c1 .
+ 
+ kgc:KGC315-p1-c1 a odrl:Constraint ;
+-    odrl:leftOperand odrl:purpose ;
++    odrl:leftOperand dpv-odrl:Purpose ;
+     odrl:operator odrl:isA ;
+     odrl:rightOperand dpv:Purpose .
+ 
+ drk:policy-315-2 a odrl:Set ;
+     odrl:uid drk:policy-315-2 ;
++    odrl:profile dpv-odrl: ;
+     dcterms:title "Recruitment interview scheduling"@en ;
+     odrl:assignee drk:researcher ;
+     odrl:permission kgc:KGC315-p2-r1 .
+@@ -665,7 +682,7 @@ kgc:KGC315-p2-r1 a odrl:Permission ;
+     odrl:constraint kgc:KGC315-p2-c1 .
+ 
+ kgc:KGC315-p2-c1 a odrl:Constraint ;
+-    odrl:leftOperand odrl:purpose ;
++    odrl:leftOperand dpv-odrl:Purpose ;
+     odrl:operator odrl:eq ;
+     odrl:rightOperand dpv:RecruitmentInterviewScheduling .""",
+     },
+@@ -740,11 +757,13 @@ kgc:KGC315-p2-c1 a odrl:Constraint ;
+ @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+ @prefix dcterms: <http://purl.org/dc/terms/> .
+ @prefix dpv:     <https://w3id.org/dpv#> .
++@prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> .
+ @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+ @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+ 
+ drk:policy-316-1 a odrl:Set ;
+     odrl:uid drk:policy-316-1 ;
++    odrl:profile dpv-odrl: ;
+     dcterms:title "Recruitment interview scheduling"@en ;
+     odrl:assigner drk:library ;
+     odrl:permission kgc:KGC316-p1-r1 .
+@@ -755,12 +774,13 @@ kgc:KGC316-p1-r1 a odrl:Permission ;
+     odrl:constraint kgc:KGC316-p1-c1 .
+ 
+ kgc:KGC316-p1-c1 a odrl:Constraint ;
+-    odrl:leftOperand odrl:purpose ;
++    odrl:leftOperand dpv-odrl:Purpose ;
+     odrl:operator odrl:isA ;
+     odrl:rightOperand dpv:RecruitmentInterviewScheduling .
+ 
+ drk:policy-316-2 a odrl:Set ;
+     odrl:uid drk:policy-316-2 ;
++    odrl:profile dpv-odrl: ;
+     dcterms:title "Any declared purpose"@en ;
+     odrl:assignee drk:researcher ;
+     odrl:permission kgc:KGC316-p2-r1 .
+@@ -771,7 +791,7 @@ kgc:KGC316-p2-r1 a odrl:Permission ;
+     odrl:constraint kgc:KGC316-p2-c1 .
+ 
+ kgc:KGC316-p2-c1 a odrl:Constraint ;
+-    odrl:leftOperand odrl:purpose ;
++    odrl:leftOperand dpv-odrl:Purpose ;
+     odrl:operator odrl:eq ;
+     odrl:rightOperand dpv:Purpose .""",
+     },
+@@ -841,11 +861,13 @@ kgc:KGC316-p2-c1 a odrl:Constraint ;
+ @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+ @prefix dcterms: <http://purl.org/dc/terms/> .
+ @prefix dpv:     <https://w3id.org/dpv#> .
++@prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> .
+ @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+ @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+ 
+ drk:policy-317-1 a odrl:Set ;
+     odrl:uid drk:policy-317-1 ;
++    odrl:profile dpv-odrl: ;
+     dcterms:title "Any purpose other than marketing"@en ;
+     odrl:assigner drk:library ;
+     odrl:permission kgc:KGC317-p1-r1 .
+@@ -856,12 +878,13 @@ kgc:KGC317-p1-r1 a odrl:Permission ;
+     odrl:constraint kgc:KGC317-p1-c1 .
+ 
+ kgc:KGC317-p1-c1 a odrl:Constraint ;
+-    odrl:leftOperand odrl:purpose ;
++    odrl:leftOperand dpv-odrl:Purpose ;
+     odrl:operator odrl:isNoneOf ;
+     odrl:rightOperand ( dpv:Marketing ) .
+ 
+ drk:policy-317-2 a odrl:Set ;
+     odrl:uid drk:policy-317-2 ;
++    odrl:profile dpv-odrl: ;
+     dcterms:title "Marketing"@en ;
+     odrl:assignee drk:researcher ;
+     odrl:permission kgc:KGC317-p2-r1 .
+@@ -872,7 +895,7 @@ kgc:KGC317-p2-r1 a odrl:Permission ;
+     odrl:constraint kgc:KGC317-p2-c1 .
+ 
+ kgc:KGC317-p2-c1 a odrl:Constraint ;
+-    odrl:leftOperand odrl:purpose ;
++    odrl:leftOperand dpv-odrl:Purpose ;
+     odrl:operator odrl:eq ;
+     odrl:rightOperand dpv:Marketing .""",
+     },
+diff --git a/generators/problem_data_dpvloc.py b/generators/problem_data_dpvloc.py
+index 6c251f1..a6a3f3d 100644
+--- a/generators/problem_data_dpvloc.py
++++ b/generators/problem_data_dpvloc.py
+@@ -154,6 +154,7 @@ _TTL_HEAD = """\
+ @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+ @prefix dcterms: <http://purl.org/dc/terms/> .
+ @prefix loc:     <https://w3id.org/dpv/loc#> .
++@prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> .
+ @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+ @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+ """
+@@ -180,6 +181,7 @@ _TTL_HEAD = """\
+ @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+ @prefix dcterms: <http://purl.org/dc/terms/> .
+ @prefix loc:     <https://w3id.org/dpv/loc#> .
++@prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> .
+ @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+ @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+ """
+@@ -188,7 +190,7 @@ _TTL_HEAD = """\
+ def _cnode(cid, op, vals):
+     ro = _ro(op, [f"loc:{v}" for v in vals])
+     return f"""kgc:{cid} a odrl:Constraint ;
+-    odrl:leftOperand odrl:spatial ;
++    odrl:leftOperand dpv-odrl:Location ;
+     odrl:operator odrl:{op} ;
+     odrl:rightOperand {ro} .
+ """
+@@ -210,6 +212,7 @@ def _side(pid, k, title, party_line, constraints, connective=None):
+               + " ) .\n")
+     body = (f"drk:policy-{n}-{k} a odrl:Set ;\n"
+             f"    odrl:uid drk:policy-{n}-{k} ;\n"
++            f"    odrl:profile dpv-odrl: ;\n"
+             f'    dcterms:title "{title[:1].upper() + title[1:]}"@en ;\n'
+             + (f"    {party_line}" if party_line else "")
+             + f"    odrl:permission kgc:{pid}-{role}-r1 .\n"
+@@ -238,6 +241,7 @@ def _ttl(pid, offer_title, offer_op, offer_val, req_title, req_val):
+     return _TTL_HEAD + f"""
+ drk:policy-{pid[3:]}-1 a odrl:Set ;
+     odrl:uid drk:policy-{pid[3:]}-1 ;
++    odrl:profile dpv-odrl: ;
+     dcterms:title "{offer_title[:1].upper() + offer_title[1:]}"@en ;
+     odrl:assigner drk:library ;
+     odrl:permission kgc:{pid}-p1-r1 .
+@@ -248,12 +252,13 @@ kgc:{pid}-p1-r1 a odrl:Permission ;
+     odrl:constraint kgc:{pid}-p1-c1 .
+ 
+ kgc:{pid}-p1-c1 a odrl:Constraint ;
+-    odrl:leftOperand odrl:spatial ;
++    odrl:leftOperand dpv-odrl:Location ;
+     odrl:operator odrl:{offer_op} ;
+     odrl:rightOperand loc:{offer_val} .
+ 
+ drk:policy-{pid[3:]}-2 a odrl:Set ;
+     odrl:uid drk:policy-{pid[3:]}-2 ;
++    odrl:profile dpv-odrl: ;
+     dcterms:title "{req_title[:1].upper() + req_title[1:]}"@en ;
+     odrl:permission kgc:{pid}-p2-r1 .
+ 
+@@ -263,7 +268,7 @@ kgc:{pid}-p2-r1 a odrl:Permission ;
+     odrl:constraint kgc:{pid}-p2-c1 .
+ 
+ kgc:{pid}-p2-c1 a odrl:Constraint ;
+-    odrl:leftOperand odrl:spatial ;
++    odrl:leftOperand dpv-odrl:Location ;
+     odrl:operator odrl:eq ;
+     odrl:rightOperand loc:{req_val} ."""
+ 
+diff --git a/generators/problem_data_motivating.py b/generators/problem_data_motivating.py
+index ca14a0f..327b80e 100644
+--- a/generators/problem_data_motivating.py
++++ b/generators/problem_data_motivating.py
+@@ -200,6 +200,7 @@ kgc:KGC300-p2-c1 a odrl:Constraint ;
+ @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+ @prefix dcterms: <http://purl.org/dc/terms/> .
+ @prefix dpv:     <https://w3id.org/dpv#> .
++@prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> .
+ @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
+ @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+ @prefix vrep:    <https://w3id.org/odrl-kb/verdict-report#> .
+@@ -209,6 +210,7 @@ drk:manuscripts a dcterms:Dataset ;
+ 
+ drk:policy-301-1 a odrl:Set ;
+     odrl:uid drk:policy-301-1 ;
++    odrl:profile dpv-odrl: ;
+     dcterms:title "BSB: non-commercial research only"@en ;
+     odrl:assigner drk:library ;
+     odrl:permission kgc:KGC301-p1-r1 .
+@@ -219,12 +221,13 @@ kgc:KGC301-p1-r1 a odrl:Permission ;
+     odrl:constraint kgc:KGC301-p1-c1 .
+ 
+ kgc:KGC301-p1-c1 a odrl:Constraint ;
+-    odrl:leftOperand odrl:purpose ;
++    odrl:leftOperand dpv-odrl:Purpose ;
+     odrl:operator odrl:isA ;
+     odrl:rightOperand dpv:NonCommercialPurpose .
+ 
+ drk:policy-301-2 a odrl:Set ;
+     odrl:uid drk:policy-301-2 ;
++    odrl:profile dpv-odrl: ;
+     dcterms:title "BnF: scientific research"@en ;
+     odrl:assignee drk:researcher ;
+     odrl:permission kgc:KGC301-p2-r1 .
+@@ -235,7 +238,7 @@ kgc:KGC301-p2-r1 a odrl:Permission ;
+     odrl:constraint kgc:KGC301-p2-c1 .
+ 
+ kgc:KGC301-p2-c1 a odrl:Constraint ;
+-    odrl:leftOperand odrl:purpose ;
++    odrl:leftOperand dpv-odrl:Purpose ;
+     odrl:operator odrl:eq ;
+     odrl:rightOperand dpv:ScientificResearch .""",
+     },
+diff --git a/generators/problem_data_wellsorted.py b/generators/problem_data_wellsorted.py
+index be76103..67dc140 100644
+--- a/generators/problem_data_wellsorted.py
++++ b/generators/problem_data_wellsorted.py
+@@ -29,7 +29,8 @@ VALUE = {
+ 
+ PREFIX = {
+     "spatial":  ("gn",      "@prefix gn:      <https://sws.geonames.org/> ."),
+-    "purpose":  ("dpv",     "@prefix dpv:     <https://w3id.org/dpv#> ."),
++    "purpose":  ("dpv",     "@prefix dpv:     <https://w3id.org/dpv#> .\n"
++                            "@prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> ."),
+     "language": ("odrlkb",  "@prefix odrlkb:  <https://w3id.org/odrl-kb/bcp47#> ."),
+ }
+ 
+@@ -42,6 +43,15 @@ RESOURCE = {
+                  "https://w3id.org/odrl-kb/bcp47/uniqueness"),
+ }
+ 
++# The left operand each problem writes.  Purposes are DPV concepts, so the
++# DPV-ODRL operand is used, as DPV-ODRL recommends; the GeoNames and BCP 47
++# values are not from DPV and keep the ODRL operands.
++LEFT = {
++    "spatial":  "odrl:spatial",
++    "purpose":  "dpv-odrl:Purpose",
++    "language": "odrl:language",
++}
++
+ BINDING = {
+     "spatial":  "https://w3id.org/odrl-kb/profile/b-spatial-geonames",
+     "purpose":  "https://w3id.org/odrl-kb/profile/b-purpose-dpv",
+@@ -50,6 +60,8 @@ BINDING = {
+ 
+ def _ttl(pid: str, operand: str, operator: str, value: str) -> str:
+     _, prefix_line = PREFIX[operand]
++    profile = ("\n    odrl:profile dpv-odrl: ;"
++               if LEFT[operand].startswith("dpv-odrl:") else "")
+     return f"""\
+ @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+ @prefix dcterms: <http://purl.org/dc/terms/> .
+@@ -64,7 +76,7 @@ drk:manuscripts a dcterms:Dataset ;
+     dcterms:title "Digitised manuscripts, Bavarian State Library"@en .
+ 
+ drk:policy-{pid[3:]}-1 a odrl:Set ;
+-    odrl:uid drk:policy-{pid[3:]}-1 ;
++    odrl:uid drk:policy-{pid[3:]}-1 ;{profile}
+     dcterms:title "BSB, {operand} constrained by {operator}"@en ;
+     odrl:assigner drk:library ;
+     odrl:permission kgc:{pid}-p1-r1 .
+@@ -75,7 +87,7 @@ kgc:{pid}-p1-r1 a odrl:Permission ;
+     odrl:constraint kgc:{pid}-p1-c1 .
+ 
+ kgc:{pid}-p1-c1 a odrl:Constraint ;
+-    odrl:leftOperand odrl:{operand} ;
++    odrl:leftOperand {LEFT[operand]} ;
+     odrl:operator odrl:{operator} ;
+     odrl:rightOperand {VALUE[value]} ."""
+ 
+diff --git a/generators/validate_cases.py b/generators/validate_cases.py
+index e231d7e..4d090ce 100644
+--- a/generators/validate_cases.py
++++ b/generators/validate_cases.py
+@@ -25,9 +25,13 @@ Warnings (reported, exit 0):
+     - a binding IRI that no profile file under problems/resources declares
+     - a background theory IRI that no file under problems/background
+       declares
++    - a constraint on a dpv-odrl left operand whose operator the operand's
++      DPV-ODRL usage note does not allow
+ 
+-The warnings are the known binding drift. They are listed rather than
+-failed so the report shape can be fixed first and the drift next.
++The first two warnings are the known binding drift. The third lists the
++cases that break the operator notes of the profile they declare; which of
++them change, and which notes change, is being settled with the DPV-ODRL
++editors. All are listed rather than failed so that they stay visible.
+ """
+ 
+ import argparse
+@@ -45,6 +49,21 @@ VREP = Namespace("https://w3id.org/odrl-kb/verdict-report#")
+ DPVODRL = "https://w3id.org/dpv/mappings/odrl#"
+ CRM = "https://w3id.org/force/compliance-report#"
+ SET_OPERATORS = {"isAnyOf", "isAllOf", "isNoneOf"}
++
++# The skos:note of each DPV-ODRL left operand: "Only the ... operators MUST
++# be used."  Copied from mappings/odrl/dpv-odrl.ttl on the dev branch of
++# https://github.com/w3c-cg/dpv (commit 8a50545, 6 August 2026).  The
++# measure operands all carry the same note as TechnicalOrganisationalMeasure.
++_FIVE = {"isA", "eq", "neq", "isAnyOf", "isNoneOf"}
++OPERATOR_NOTES = {
++    "LegalBasis": {"isA", "eq", "neq"},
++    "Purpose": _FIVE,
++    "Location": {"eq", "neq", "isAnyOf", "isNoneOf"},
++    "Status": _FIVE,
++    "TechnicalOrganisationalMeasure": _FIVE,
++    "TechnicalMeasure": _FIVE,
++    "OrganisationalMeasure": _FIVE,
++}
+ HEADER = "# Generated by the scripts in generators/. Do not edit by hand"
+ 
+ 
+@@ -72,7 +91,7 @@ def atomic(g, c):
+     return out or [c]
+ 
+ 
+-def check(path: Path, bindings, theories, errs, warns, twins):
++def check(path: Path, bindings, theories, errs, warns, twins, notes):
+     text = path.read_text(encoding="utf-8")
+     e = lambda msg: errs.append(f"{path.name}: {msg}")
+     if not text.startswith(HEADER):
+@@ -98,8 +117,16 @@ def check(path: Path, bindings, theories, errs, warns, twins):
+         prof = URIRef(DPVODRL) in set(g.objects(pol, ODRL.profile))
+         if uses != prof:
+             e(f"{pol}: odrl:profile dpv-odrl: {'missing' if uses else 'without a dpv-odrl operand'}")
++        rejected = any(o.toPython() is False
++                       for o in g.objects(None, VREP.wellSorted))
+         for c in cons:
+             op = str(next(g.objects(c, ODRL.operator), "")).rsplit("/", 1)[-1]
++            for lo in g.objects(c, ODRL.leftOperand):
++                name = str(lo)[len(DPVODRL):] if str(lo).startswith(DPVODRL) else None
++                allowed = OPERATOR_NOTES.get(name)
++                if allowed is not None and op not in allowed:
++                    notes.append(f"{path.stem}: dpv-odrl:{name} with {op}"
++                                 + (" (ill-sorted by design)" if rejected else ""))
+             ros = list(g.objects(c, ODRL.rightOperand))
+             is_list = len(ros) == 1 and (ros[0] == RDF.nil or
+                                          (ros[0], RDF.first, None) in g)
+@@ -179,10 +206,10 @@ def main() -> int:
+     theories = declared(sorted((args.problems / "background").glob("*.ttl")),
+                         bt.BackgroundTheory)
+ 
+-    errs, warns, twins = [], [], defaultdict(set)
++    errs, warns, twins, notes = [], [], defaultdict(set), []
+     files = sorted(args.cases.glob("*.ttl"))
+     for f in files:
+-        check(f, bindings, theories, errs, warns, twins)
++        check(f, bindings, theories, errs, warns, twins, notes)
+     names = {f.stem for f in files}
+     for a, bs in twins.items():
+         for b in bs:
+@@ -193,10 +220,13 @@ def main() -> int:
+ 
+     for w in sorted(set(warns)):
+         print("warning:", w)
++    for n in sorted(set(notes)):
++        print("note:   ", n)
+     for x in errs:
+         print("ERROR:  ", x)
+     print(f"\n{len(files)} case files, {len(errs)} errors, "
+           f"{len(set(warns))} warnings, "
++          f"{len(set(notes))} operator-note conflicts, "
+           f"{sum(len(v) for v in twins.values()) // 2} read-against pairs")
+     return 1 if errs else 0
+ 
+diff --git a/problems/resources/profile-dpv-purposes.ttl b/problems/resources/profile-dpv-purposes.ttl
+index 58a8cc6..eb31130 100644
+--- a/problems/resources/profile-dpv-purposes.ttl
++++ b/problems/resources/profile-dpv-purposes.ttl
+@@ -2,13 +2,16 @@
+ #
+ # The sort is the declaration: DPV's skos:broader is read as subsumption.
+ # Nothing in the resource says so.
++#
++# The operand is dpv-odrl:Purpose, the DPV-ODRL left operand for purposes
++# drawn from DPV. DPV-ODRL places it below odrl:purpose.
+ 
+-@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
++@prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> .
+ @prefix bind: <https://w3id.org/odrl-kb/binding#> .
+ @prefix ex:   <https://w3id.org/odrl-kb/profile/> .
+ 
+ ex:b-purpose a bind:OperandBinding ;
+-    bind:leftOperand odrl:purpose ;
++    bind:leftOperand dpv-odrl:Purpose ;
+     bind:sort bind:tax ;
+     bind:resource <https://w3id.org/odrl-kb/dpv-purposes> ;
+     bind:backgroundTheory <https://w3id.org/odrl-kb/dpv-purposes/empty> ;
+diff --git a/problems/resources/profile-dpvloc-geo.ttl b/problems/resources/profile-dpvloc-geo.ttl
+index b746caf..8b011d5 100644
+--- a/problems/resources/profile-dpvloc-geo.ttl
++++ b/problems/resources/profile-dpvloc-geo.ttl
+@@ -1,8 +1,9 @@
+-# Profile entry for odrl:spatial over DPV Locations, the containment slice.
++# Profile entry for dpv-odrl:Location over DPV Locations, the containment slice.
+ #
+-# The sort is mer, the same sort the GeoNames profile declares for the same
+-# operand, and the same sort the other DPV Locations profile declares.  What
+-# differs between the three is the resource: which file, and which of the
++# The operand is dpv-odrl:Location, the DPV-ODRL left operand for places
++# drawn from DPV. DPV-ODRL places it below odrl:spatial, the operand the
++# GeoNames profile binds. The sort is mer in all three profiles. What
++# differs between them is the resource: which file, and which of the
+ # relations in that file the binding reads.  That is what it means for the
+ # meaning to belong to the binding rather than to the operand.
+ #
+@@ -11,12 +12,12 @@
+ # profile: the union edges are membership, and this reading does
+ # not take them as containment.
+ 
+-@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
++@prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> .
+ @prefix bind: <https://w3id.org/odrl-kb/binding#> .
+ @prefix ex:   <https://w3id.org/odrl-kb/profile/> .
+ 
+ ex:b-spatial-dpvloc-geo a bind:OperandBinding ;
+-    bind:leftOperand odrl:spatial ;
++    bind:leftOperand dpv-odrl:Location ;
+     bind:sort bind:mer ;
+     bind:resource <https://w3id.org/odrl-kb/dpv-loc-geo> ;
+     bind:backgroundTheory <https://w3id.org/odrl-kb/dpv-loc/empty> ;
+diff --git a/problems/resources/profile-dpvloc-juris.ttl b/problems/resources/profile-dpvloc-juris.ttl
+index 2eee8ff..71aedf8 100644
+--- a/problems/resources/profile-dpvloc-juris.ttl
++++ b/problems/resources/profile-dpvloc-juris.ttl
+@@ -1,8 +1,9 @@
+-# Profile entry for odrl:spatial over DPV Locations, the jurisdictional slice.
++# Profile entry for dpv-odrl:Location over DPV Locations, the jurisdictional slice.
+ #
+-# The sort is mer, the same sort the GeoNames profile declares for the same
+-# operand, and the same sort the other DPV Locations profile declares.  What
+-# differs between the three is the resource: which file, and which of the
++# The operand is dpv-odrl:Location, the DPV-ODRL left operand for places
++# drawn from DPV. DPV-ODRL places it below odrl:spatial, the operand the
++# GeoNames profile binds. The sort is mer in all three profiles. What
++# differs between them is the resource: which file, and which of the
+ # relations in that file the binding reads.  That is what it means for the
+ # meaning to belong to the binding rather than to the operand.
+ #
+@@ -12,12 +13,12 @@
+ # the correct reading of the file: they are two readings, and
+ # the profile is where a party says which one it means.
+ 
+-@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
++@prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> .
+ @prefix bind: <https://w3id.org/odrl-kb/binding#> .
+ @prefix ex:   <https://w3id.org/odrl-kb/profile/> .
+ 
+ ex:b-spatial-dpvloc-juris a bind:OperandBinding ;
+-    bind:leftOperand odrl:spatial ;
++    bind:leftOperand dpv-odrl:Location ;
+     bind:sort bind:mer ;
+     bind:resource <https://w3id.org/odrl-kb/dpv-loc-juris> ;
+     bind:backgroundTheory <https://w3id.org/odrl-kb/dpv-loc/empty> ;

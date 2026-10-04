@@ -3,7 +3,7 @@
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
 % Problem  : consent status, isA ValidForProcessing against eq ConsentWithdrawn, branches disjoint (witness condition negated)
 % Version  : 1.0
-% English  : As KGC342, with the valid and invalid branches declared disjoint on DPV's definitions.
+% English  : As KGC342, with the valid and invalid branches declared disjoint by the background theory.
 %
 % Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark
