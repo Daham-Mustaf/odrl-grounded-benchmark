@@ -200,6 +200,7 @@ kgc:KGC300-p2-c1 a odrl:Constraint ;
 @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix dpv:     <https://w3id.org/dpv#> .
+@prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> .
 @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
 @prefix vrep:    <https://w3id.org/odrl-kb/verdict-report#> .
@@ -209,6 +210,7 @@ drk:manuscripts a dcterms:Dataset ;
 
 drk:policy-301-1 a odrl:Set ;
     odrl:uid drk:policy-301-1 ;
+    odrl:profile dpv-odrl: ;
     dcterms:title "BSB: non-commercial research only"@en ;
     odrl:assigner drk:library ;
     odrl:permission kgc:KGC301-p1-r1 .
@@ -219,12 +221,13 @@ kgc:KGC301-p1-r1 a odrl:Permission ;
     odrl:constraint kgc:KGC301-p1-c1 .
 
 kgc:KGC301-p1-c1 a odrl:Constraint ;
-    odrl:leftOperand odrl:purpose ;
+    odrl:leftOperand dpv-odrl:Purpose ;
     odrl:operator odrl:isA ;
     odrl:rightOperand dpv:NonCommercialPurpose .
 
 drk:policy-301-2 a odrl:Set ;
     odrl:uid drk:policy-301-2 ;
+    odrl:profile dpv-odrl: ;
     dcterms:title "BnF: scientific research"@en ;
     odrl:assignee drk:researcher ;
     odrl:permission kgc:KGC301-p2-r1 .
@@ -235,7 +238,7 @@ kgc:KGC301-p2-r1 a odrl:Permission ;
     odrl:constraint kgc:KGC301-p2-c1 .
 
 kgc:KGC301-p2-c1 a odrl:Constraint ;
-    odrl:leftOperand odrl:purpose ;
+    odrl:leftOperand dpv-odrl:Purpose ;
     odrl:operator odrl:eq ;
     odrl:rightOperand dpv:ScientificResearch .""",
     },

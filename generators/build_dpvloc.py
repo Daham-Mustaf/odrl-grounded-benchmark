@@ -10,12 +10,14 @@ profile entry.
 
 Why this resource is in the suite
 ----------------------------------
-It is the second resource bound to odrl:spatial, and it is bound at the same
-sort as the first.  GeoNames and DPV LOC are different files, published by
-different bodies, on different principles, and a profile can name either one
-for the same operand.  What the operand means is therefore not a property of
-the operand: it is what the binding says, which is the claim of Section 4.1
-stated as two profiles rather than as an argument.
+It is bound to dpv-odrl:Location, which DPV-ODRL places below odrl:spatial,
+the operand GeoNames is bound to, and at the same sort.  It is also bound
+twice, under two readings of the same file: containment only, and
+containment with union membership.  Same operand, same file, different
+binding, and KGC331 and KGC381 get different verdicts.  What the operand
+means is therefore not a property of the operand: it is what the binding
+says, which is the claim of Section 4.1 stated as two profiles rather than
+as an argument.
 
 The two resources also have opposite shapes, and the certificates show it.
 DPV purposes runs six levels deep, so a Compatible there may cite six order
@@ -619,7 +621,7 @@ def declared_axioms(pair) -> str:
 
 
 def profile_ttl(mode) -> str:
-    """Profile entry for odrl:spatial over DPV Locations.
+    """Profile entry for dpv-odrl:Location over DPV Locations.
 
     Two of these are emitted, differing only in which published relation the
     resource reads.  Both bind the same operand at the same sort, and both
@@ -644,22 +646,23 @@ def profile_ttl(mode) -> str:
     }[mode]
     tag, title, note = body
     return f"""\
-# Profile entry for odrl:spatial over DPV Locations, {title}.
+# Profile entry for dpv-odrl:Location over DPV Locations, {title}.
 #
-# The sort is mer, the same sort the GeoNames profile declares for the same
-# operand, and the same sort the other DPV Locations profile declares.  What
-# differs between the three is the resource: which file, and which of the
+# The operand is dpv-odrl:Location, the DPV-ODRL left operand for places
+# drawn from DPV. DPV-ODRL places it below odrl:spatial, the operand the
+# GeoNames profile binds. The sort is mer in all three profiles. What
+# differs between them is the resource: which file, and which of the
 # relations in that file the binding reads.  That is what it means for the
 # meaning to belong to the binding rather than to the operand.
 #
 {note}
 
-@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+@prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> .
 @prefix bind: <https://w3id.org/odrl-kb/binding#> .
 @prefix ex:   <https://w3id.org/odrl-kb/profile/> .
 
 ex:b-spatial-dpvloc-{tag} a bind:OperandBinding ;
-    bind:leftOperand odrl:spatial ;
+    bind:leftOperand dpv-odrl:Location ;
     bind:sort bind:mer ;
     bind:resource <https://w3id.org/odrl-kb/dpv-loc-{tag}> ;
     bind:backgroundTheory <https://w3id.org/odrl-kb/dpv-loc/empty> ;

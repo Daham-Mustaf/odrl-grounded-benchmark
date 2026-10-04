@@ -57,7 +57,7 @@ uv run generators/validate_terms.py --schemas vocab \
   --instances problems cases probes 2>&1 | tail -30
 
 hdr "4b. case files: the agreed shape"
-uv run generators/validate_cases.py 2>&1 | tail -15
+uv run generators/validate_cases.py 2>&1 | tail -40
 
 hdr "5. bindings: do the probes hold"
 uv run generators/validate_bindings.py --probes probes \

@@ -79,7 +79,7 @@ def parse(path: Path):
     # is a legal basis defined in legal_basis.ttl.  That edge is dropped.
     #
     # The reason is the operand, not tidiness.  This resource grounds
-    # odrl:purpose, and a legal basis is a different left operand with its
+    # dpv-odrl:Purpose, and a legal basis is a different left operand with its
     # own binding in the DPV-ODRL mapping.  Keeping the edge would put a
     # concept from one operand's vocabulary into another operand's
     # resource, and a verdict could then rest on an order assertion the
@@ -415,13 +415,16 @@ def profile_ttl() -> str:
 #
 # The sort is the declaration: DPV's skos:broader is read as subsumption.
 # Nothing in the resource says so.
+#
+# The operand is dpv-odrl:Purpose, the DPV-ODRL left operand for purposes
+# drawn from DPV. DPV-ODRL places it below odrl:purpose.
 
-@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+@prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> .
 @prefix bind: <https://w3id.org/odrl-kb/binding#> .
 @prefix ex:   <https://w3id.org/odrl-kb/profile/> .
 
 ex:b-purpose a bind:OperandBinding ;
-    bind:leftOperand odrl:purpose ;
+    bind:leftOperand dpv-odrl:Purpose ;
     bind:sort bind:tax ;
     bind:resource <https://w3id.org/odrl-kb/dpv-purposes> ;
     bind:backgroundTheory <https://w3id.org/odrl-kb/dpv-purposes/empty> ;
