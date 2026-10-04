@@ -26,7 +26,7 @@
 (assert (! (forall ((x Concept) (y Concept) (z Concept))
     (=> (and (kge_leq x y) (kge_leq y z)) (kge_leq x z))) :named ax_leq_transitive))
 ; Resource: membership, read as the order by the jurisdictional profile and
-; not read at all by the geographic one.
+; not read at all by the territorial one.
 (assert (! (kge_leq loc_de loc_eu) :named res_kgc331_0))
 ; witness condition asserted
 (assert (! (or (and (kge_leq loc_eu loc_eu) (= loc_eu loc_de))

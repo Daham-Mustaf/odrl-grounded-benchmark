@@ -224,9 +224,8 @@ PROBLEMS = [
         "background_theory": EMPTY_BT,
         "includes":          INCLUDES,
         "summary": (
-    "A controller permits processing under any of the seven Article 6(1) "
-    "legal bases, and a processor requests processing on the basis of consent."
-),
+            "A controller permits processing on any of the seven Article 6(1) "
+            "legal bases. A processor's policy relies on consent."),
         "tree": [C("isAnyOf", *SEVEN), C("eq", CONSENT, side="request")],
         "description": (
             "The controller permits processing on any of the seven legal "
@@ -255,6 +254,7 @@ PROBLEMS = [
 
     {
         "id":                "KGC351",
+        "twin":              "KGC352",
         "subdir":            "verdict",
         "name":              "legal basis, isAnyOf Article 6(1) against "
                              "eq A6-1-a-explicit-consent",
@@ -278,20 +278,17 @@ PROBLEMS = [
             "interpret explicit consent and consent as one concept."
         ),
         "summary": (
-    "A controller permits processing under any of the seven Article 6(1) "
-    "legal bases, while a processor requests processing on the basis of "
-    "explicit consent under Article 6(1)(a)."
-),
+            "A controller permits processing on any of the seven Article 6(1) "
+            "legal bases. A processor's policy relies on explicit consent "
+            "under Article 6(1)(a)."),
         "expected_q1": "Satisfiable",
         "expected_q2": "Satisfiable",
         "certificate": {
             "kind": "Models",
  "comment": (
-    "Explicit consent is not one of the seven values listed by isAnyOf, "
-    "and the resource does not declare it distinct from consent. The "
-    "available knowledge therefore leaves the verdict Unknown."
-    "The requested basis is one the offer enumerates."
-),
+     "Explicit consent is not one of the seven values listed by isAnyOf, and "
+     "DPV does not declare it distinct from consent. The verdict is therefore "
+     "Unknown."),
             "premises": [],
         },
         "ttl": _TTL_HEAD + _offer_isanyof("KGC351")
@@ -303,6 +300,7 @@ PROBLEMS = [
 
     {
         "id":                "KGC352",
+        "twin":              "KGC351",
         "subdir":            "verdict",
         "name":              "legal basis, isAnyOf Article 6(1) against "
                              "eq A6-1-a-explicit-consent, concepts declared "
@@ -324,21 +322,17 @@ PROBLEMS = [
             "makes the refusal definite rather than open."
         ),
         "summary": (
-    "A controller permits processing under any of the seven Article 6(1) "
-    "legal bases, while a processor requests processing on the basis of "
-    "explicit consent under Article 6(1)(a), with the two concepts "
-    "declared distinct."
-),
+            "As KGC351, with explicit consent declared distinct from each of "
+            "the seven bases."),
 
         "expected_q1": "Unsatisfiable",
         "expected_q2": "Satisfiable",
         "certificate": {
             "kind": "Refutation",
  "comment": (
-        "The background theory declares explicit consent distinct from "
-        "each of the seven values listed by isAnyOf. The requested value "
-        "therefore cannot satisfy the offer."
-    ),
+     "The background theory declares explicit consent distinct from each of "
+     "the seven values listed by isAnyOf, so the basis the processor relies "
+     "on cannot satisfy the first policy."),
              "premises": [
         ("fromBackgroundTheory",
          "dpv:Consent is distinct from explicit consent under Article 6(1)(a)"),
@@ -386,10 +380,9 @@ PROBLEMS = [
             "rests on what."
         ),
           "summary": (
-        "A controller permits processing under the legal-basis hierarchy, "
-        "while a processor requests processing on the basis of explicit "
-        "consent under Article 6(1)(a)."
-    ),
+              "A controller permits processing on any legal basis in the DPV "
+              "hierarchy. A processor's policy relies on explicit consent "
+              "under Article 6(1)(a)."),
         "expected_q1": "Satisfiable",
         "expected_q2": "Unsatisfiable",
         "certificate": {

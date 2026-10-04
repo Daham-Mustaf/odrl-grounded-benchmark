@@ -44,5 +44,6 @@ drk:KGC102-report a vrep:WellSortednessReport ;
     dcterms:identifier "KGC102" ;
     vrep:constraint kgc:KGC102-p1-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-language-bcp47> ;
-    vrep:wellSorted false ;
-    rdfs:comment """isA requires subsumption; the operand is nom, whose resource supplies identity"""@en .
+    dcterms:description """A library's policy constrains language with isA bcp:de, and the binding reads language at sort nom."""@en ;
+    rdfs:comment """isA requires subsumption; the operand is nom, whose resource supplies identity."""@en ;
+    vrep:wellSorted false .

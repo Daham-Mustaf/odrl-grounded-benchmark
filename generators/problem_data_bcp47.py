@@ -223,6 +223,7 @@ PROBLEMS = [
 
     {
         "id":                "KGC370",
+        "twin":              "KGC371",
         "subdir":            "verdict",
         "name":              "language, eq de against eq fr, "
                              "registry uniqueness declared",
@@ -257,6 +258,10 @@ PROBLEMS = [
         "expected_verdict": "Incompatible",
         "expected_q1": "Unsatisfiable",
         "expected_q2": "Satisfiable",
+        "summary": (
+            "A publisher distributes in German. A reuser's policy commits to "
+            "French. The parties adopt the registry rule that different "
+            "primary subtags name different languages."),
         "certificate": {
             "kind": "Refutation",
             "comment": "The two subtags are declared to name distinct "
@@ -275,6 +280,7 @@ PROBLEMS = [
 
     {
         "id":                "KGC371",
+        "twin":              "KGC370",
         "subdir":            "verdict",
         "name":              "language, eq de against eq fr, "
                              "declaration withdrawn",
@@ -307,6 +313,8 @@ PROBLEMS = [
         "unknown_reason":   "epistemic",
         "expected_q1": "Satisfiable",
         "expected_q2": "Satisfiable",
+        "summary": (
+            "As KGC370, without the registry rule."),
         "certificate": {
             "kind": "Models",
             "comment": "Both queries are satisfiable. One certifying "
@@ -328,6 +336,7 @@ PROBLEMS = [
         # out. A prover asked about such a constant would answer, and the
         # answer would be about nothing.
         "id":                "KGC372",
+        "twin":              "KGC373",
         "subdir":            "verdict",
         "name":              "language, eq de against eq \"en-US\", "
                              "exact grounding",
@@ -363,6 +372,9 @@ PROBLEMS = [
         ),
         "expected_verdict": "Unknown",
         "unknown_reason":   "ungrounded",
+        "summary": (
+            "A publisher distributes in German. A reuser's policy commits to "
+            "American English (en-US), under the exact-match grounding rule."),
         "certificate": {
             "kind": "Ungrounded",
             "comment": "The value en-US resolves to no concept of the "
@@ -378,6 +390,7 @@ PROBLEMS = [
 
     {
         "id":                "KGC373",
+        "twin":              "KGC372",
         "subdir":            "verdict",
         "name":              "language, eq de against eq \"en-US\", "
                              "primary-subtag grounding",
@@ -386,9 +399,9 @@ PROBLEMS = [
         "resource":          RESOURCE,
         "background_theory": UNIQUENESS,
         "summary": (
-    "A publisher distributes in German, while a reuser requests American "
-    "English."
-),
+            "A publisher distributes in German. A reuser's policy commits to "
+            "American English (en-US), under the rule that reduces a tag to "
+            "its primary subtag."),
         "smt2_background":
             "(assert (! (not (= bcp_de bcp_en)) "
             ":named bg_dist_bcp47_de_en))",
@@ -420,8 +433,8 @@ PROBLEMS = [
         "certificate": {
             "kind": "Refutation",
            "comment": (
-        "en-US resolves to English, which is distinct from German."
-    ),
+               "en-US reduces to English, which the registry rule makes "
+               "distinct from German."),
             "premises": [
                 ("fromBackgroundTheory",
                  "bcp47:de and bcp47:en are declared distinct, on RFC "
@@ -434,6 +447,7 @@ PROBLEMS = [
     },
         {
         "id":                "KGC374",
+        "twin":              "KGC375",
         "subdir":            "verdict",
         "name":              "language, eq de against neq fr, "
                              "registry uniqueness declared",
@@ -451,9 +465,8 @@ PROBLEMS = [
         "expected_q1":       "Satisfiable",
         "expected_q2":       "Unsatisfiable",
 "summary": (
-    "A publisher distributes in German, while a reuser accepts any "
-    "language except French."
-),
+    "A publisher distributes in German. A reuser's policy accepts any "
+    "language except French."),
         "description": (
             "The publisher distributes in German; the reuser accepts "
             "anything that is not French. German itself is the witness, "
@@ -470,10 +483,10 @@ PROBLEMS = [
         ),
         "certificate": {
             "kind": "Refutation",
-"description": (
-    "The uniqueness rule is withdrawn. German and French may denote the "
-    "same language or different languages, so the verdict is Unknown."
-),
+            "comment": (
+                "The registry rule the parties adopt makes different primary "
+                "subtags name different languages, so German is not French, "
+                "and a use in German satisfies both policies."),
             "premises": [
                 ("fromBackgroundTheory",
                  "bcp47:de and bcp47:fr are declared distinct, on RFC "
@@ -486,6 +499,7 @@ PROBLEMS = [
     },
     {
         "id":                "KGC375",
+        "twin":              "KGC374",
         "subdir":            "verdict",
         "name":              "language, eq de against neq fr, "
                              "no declaration",
@@ -501,9 +515,7 @@ PROBLEMS = [
         "expected_q1":       "Satisfiable",
         "expected_q2":       "Satisfiable",
         "summary": (
-    "A publisher distributes in German, while a reuser accepts any "
-    "language except French."
-),
+            "As KGC374, without the registry rule."),
         "description": (
             "KGC374 with the uniqueness rule withdrawn. A structure "
             "separating de and fr admits the witness; a structure "
@@ -517,10 +529,10 @@ PROBLEMS = [
         ),
         "certificate": {
             "kind": "Models",
-           "description": (
-    "The uniqueness rule is withdrawn. German and French may denote the "
-    "same language or different languages, so the verdict is Unknown."
-),
+            "comment": (
+                "Nothing says that German and French are different languages. "
+                "One structure identifies them, and then a use in German is a "
+                "use in French, so the verdict is Unknown."),
             "premises": [],
         },
         "ttl": _TTL_HEAD + _offer("KGC375")

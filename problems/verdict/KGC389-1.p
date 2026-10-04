@@ -3,9 +3,7 @@
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
 % Problem  : spatial, xone(eq loc:DE-NW, eq loc:DE-BY) against eq loc:DE-NW (witness condition asserted)
 % Version  : 1.0
-% English  : Exactly one of North Rhine-Westphalia and Bavaria, against North Rhine-Westphalia. Expanded, the live alternative is NRW and not Bavaria, which needs the two to differ; the file does not say so: Unknown as published.
-%           : 
-%           : A construction: rights managers rarely write exactly-one-region; the case exists to exercise the negated literal of the xone expansion.
+% English  : A library permits use in exactly one of North Rhine-Westphalia and Bavaria. A researcher's policy commits to use in North Rhine-Westphalia.
 %
 % Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark

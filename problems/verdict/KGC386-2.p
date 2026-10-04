@@ -3,7 +3,7 @@
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
 % Problem  : spatial, isNoneOf {loc:DE-BY, loc:DE-BE} against eq loc:DE-HH (witness condition negated)
 % Version  : 1.0
-% English  : Use anywhere except Bavaria and Berlin against use in Hamburg. Hamburg lies in the complement only if it differs from both, and the file publishes no distinctness: Unknown.
+% English  : A library permits use anywhere except Bavaria and Berlin. A researcher's policy commits to use in Hamburg.
 %
 % Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark

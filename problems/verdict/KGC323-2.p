@@ -3,7 +3,7 @@
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
 % Problem  : fileFormat, neq ft:PDF against eq ft:PDFA1A, under a declared distinctness (witness condition negated)
 % Version  : 1.0
-% English  : A library excludes PDF, while a researcher requests PDF/A-1a, with the two formats declared distinct.
+% English  : BSB permits any format except PDF. BnF's policy commits to PDF/A-1a. The two formats are declared distinct.
 %
 % Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark

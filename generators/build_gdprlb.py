@@ -285,8 +285,6 @@ ex:b-legalbasis a bind:OperandBinding ;
     bind:leftOperand dpvo:LegalBasis ;
     bind:sort bind:tax ;
     bind:resource <https://w3id.org/odrl-kb/dpv-gdpr-legal-basis> ;
-    bind:backgroundTheory
-        <https://w3id.org/odrl-kb/dpv-gdpr-legal-basis/empty> ;
     bind:grounding bind:sliceMembership .
 """
 

@@ -45,6 +45,7 @@ kgc:KGC101-p1-c1 a odrl:Constraint ;
 drk:KGC101-report a vrep:WellSortednessReport ;
     dcterms:identifier "KGC101" ;
     vrep:constraint kgc:KGC101-p1-c1 ;
-    vrep:binding <https://w3id.org/odrl-kb/profile/b-purpose-dpv> ;
-    vrep:wellSorted false ;
-    rdfs:comment """isPartOf requires parthood; the operand is tax, whose resource supplies subsumption"""@en .
+    vrep:binding <https://w3id.org/odrl-kb/profile/b-purpose> ;
+    dcterms:description """A library's policy constrains purpose with isPartOf dpv:NCP, and the binding reads purpose at sort tax."""@en ;
+    rdfs:comment """isPartOf requires parthood; the operand is tax, whose resource supplies subsumption."""@en ;
+    vrep:wellSorted false .

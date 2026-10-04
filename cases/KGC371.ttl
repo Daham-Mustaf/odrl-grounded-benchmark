@@ -50,6 +50,8 @@ drk:KGC371-report a vrep:OperandVerdictReport ;
     vrep:comparedConstraint kgc:KGC371-p2-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-language-bcp47> ;
     vrep:backgroundTheory <https://w3id.org/odrl-kb/bcp47/empty> ;
+    vrep:readAgainst drk:KGC370-report ;
     rdfs:comment """Both queries are satisfiable. One certifying structure interprets bcp47:de and bcp47:fr as one concept and the other keeps them apart; the registry decides neither."""@en ;
+    dcterms:description """As KGC370, without the registry rule."""@en ;
     vrep:compatibilityState vrep:Unknown ;
     vrep:unknownReason vrep:Epistemic .

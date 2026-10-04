@@ -3,7 +3,7 @@
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
 % Problem  : spatial, isNoneOf {loc:DE-BY, loc:DE-BE} against eq loc:DE-HH, ISO rule (witness condition negated)
 % Version  : 1.0
-% English  : KGC386 under the ISO rule: Hamburg is distinct from Bavaria and from Berlin, so it lies in the complement in every structure and the verdict is Compatible. The only case in the suite where a declaration settles a complement positively; KGC317's isNoneOf is Incompatible on the constraints alone.
+% English  : As KGC386, with the ISO 3166-2 rule.
 %
 % Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark

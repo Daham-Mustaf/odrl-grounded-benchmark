@@ -47,6 +47,7 @@ drk:KGC393-report a vrep:OperandVerdictReport ;
     vrep:comparedConstraint kgc:KGC393-p2-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-purpose> ;
     vrep:backgroundTheory <https://w3id.org/odrl-kb/dpv-purposes/empty> ;
+    vrep:readAgainst drk:KGC394-report ;
     rdfs:comment """One structure identifies scientific research with research and development and admits the use; one keeps them apart and does not. The published order is not consulted by isAnyOf."""@en ;
     dcterms:description """A provider permits use for research and development or marketing; a consumer commits to scientific research."""@en ;
     vrep:compatibilityState vrep:Unknown ;

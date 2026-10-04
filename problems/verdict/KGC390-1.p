@@ -3,7 +3,7 @@
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
 % Problem  : spatial, xone(eq loc:DE-NW, eq loc:DE-BY) against eq loc:DE-NW, ISO rule (witness condition asserted)
 % Version  : 1.0
-% English  : KGC389 under the ISO rule: the two Laender differ, the negated literal holds, and the verdict is Compatible. The only place in the suite where a declaration yields a positive verdict through a negated literal.
+% English  : As KGC389, with the ISO 3166-2 rule.
 %
 % Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark

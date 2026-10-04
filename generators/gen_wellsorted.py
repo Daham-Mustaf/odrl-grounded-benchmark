@@ -67,11 +67,17 @@ def case_ttl(p: dict, accepted: bool, reason: str) -> str:
         f"    vrep:constraint kgc:{pid}-p1-c1 ;",
         f"    vrep:binding <{p['binding']}> ;",
     ]
+    summary = (f"A library's policy constrains {p['left_operand']} with "
+               f"{p['operator']} {p['value']}, and the binding reads "
+               f"{p['left_operand']} at sort {p['sort']}.")
     if accepted:
-        lines.append("    vrep:wellSorted true .")
+        comment = (f"{p['operator']} is defined at sort {p['sort']}, so the "
+                   f"constraint is well sorted and goes on to the verdict.")
     else:
-        lines.append("    vrep:wellSorted false ;")
-        lines.append(f'    rdfs:comment """{reason}"""@en .')
+        comment = reason if reason.endswith(".") else reason + "."
+    lines.append(f'    dcterms:description """{summary}"""@en ;')
+    lines.append(f'    rdfs:comment """{comment}"""@en ;')
+    lines.append(f"    vrep:wellSorted {'true' if accepted else 'false'} .")
     return "\n".join(lines) + "\n"
 
 

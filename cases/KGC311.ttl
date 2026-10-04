@@ -54,6 +54,6 @@ drk:KGC311-report a vrep:OperandVerdictReport ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-purpose> ;
     vrep:backgroundTheory <https://w3id.org/odrl-kb/dpv-purposes/empty> ;
     rdfs:comment """NonCommercialResearch is below ResearchAndDevelopment, which is below Purpose; the certificate uses this two-step path."""@en ;
-    dcterms:description """A library permits use for any DPV purpose, and a researcher requests use for non-commercial research."""@en ;
+    dcterms:description """A library permits use for any DPV purpose. A researcher's policy commits to use for non-commercial research."""@en ;
     vrep:compatibilityState vrep:Compatible ;
     vrep:certificate <certificates/KGC311-2.tstp> .

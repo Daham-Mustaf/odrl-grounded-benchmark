@@ -3,7 +3,7 @@
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
 % Problem  : purpose, isA dpv:Purpose against eq dpv:NCR (witness condition asserted)
 % Version  : 1.0
-% English  : A library permits use for any DPV purpose, and a researcher requests use for non-commercial research.
+% English  : A library permits use for any DPV purpose. A researcher's policy commits to use for non-commercial research.
 %
 % Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark

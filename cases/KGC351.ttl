@@ -68,7 +68,8 @@ drk:KGC351-report a vrep:OperandVerdictReport ;
     vrep:comparedConstraint kgc:KGC351-p2-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-legalbasis> ;
     vrep:backgroundTheory <https://w3id.org/odrl-kb/dpv-gdpr-legal-basis/empty> ;
-    rdfs:comment """Explicit consent is not one of the seven values listed by isAnyOf, and the resource does not declare it distinct from consent. The available knowledge therefore leaves the verdict Unknown.The requested basis is one the offer enumerates."""@en ;
-    dcterms:description """A controller permits processing under any of the seven Article 6(1) legal bases, while a processor requests processing on the basis of explicit consent under Article 6(1)(a)."""@en ;
+    vrep:readAgainst drk:KGC352-report ;
+    rdfs:comment """Explicit consent is not one of the seven values listed by isAnyOf, and DPV does not declare it distinct from consent. The verdict is therefore Unknown."""@en ;
+    dcterms:description """A controller permits processing on any of the seven Article 6(1) legal bases. A processor's policy relies on explicit consent under Article 6(1)(a)."""@en ;
     vrep:compatibilityState vrep:Unknown ;
     vrep:unknownReason vrep:Epistemic .

@@ -50,6 +50,8 @@ drk:KGC374-report a vrep:OperandVerdictReport ;
     vrep:comparedConstraint kgc:KGC374-p2-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-language-bcp47> ;
     vrep:backgroundTheory <https://w3id.org/odrl-kb/bcp47/uniqueness> ;
-    dcterms:description """A publisher distributes in German, while a reuser accepts any language except French."""@en ;
+    vrep:readAgainst drk:KGC375-report ;
+    rdfs:comment """The registry rule the parties adopt makes different primary subtags name different languages, so German is not French, and a use in German satisfies both policies."""@en ;
+    dcterms:description """A publisher distributes in German. A reuser's policy accepts any language except French."""@en ;
     vrep:compatibilityState vrep:Compatible ;
     vrep:certificate <certificates/KGC374-2.tstp> .

@@ -51,7 +51,9 @@ drk:KGC372-report a vrep:OperandVerdictReport ;
     vrep:comparedConstraint kgc:KGC372-p2-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-language-bcp47> ;
     vrep:backgroundTheory <https://w3id.org/odrl-kb/bcp47/uniqueness> ;
+    vrep:readAgainst drk:KGC373-report ;
     rdfs:comment """The value en-US resolves to no concept of the resource under this binding's grounding rule. Checkable by applying that rule to the value and seeing that it yields nothing."""@en ;
+    dcterms:description """A publisher distributes in German. A reuser's policy commits to American English (en-US), under the exact-match grounding rule."""@en ;
     vrep:compatibilityState vrep:Unknown ;
     vrep:unknownReason vrep:Ungrounded ;
     vrep:ungroundedValue "en-US" .

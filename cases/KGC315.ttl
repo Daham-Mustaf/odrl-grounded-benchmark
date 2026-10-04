@@ -54,6 +54,6 @@ drk:KGC315-report a vrep:OperandVerdictReport ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-purpose> ;
     vrep:backgroundTheory <https://w3id.org/odrl-kb/dpv-purposes/empty> ;
     rdfs:comment """RecruitmentInterviewScheduling lies below Purpose through a six-step hierarchy: RecruitmentInterviewManagement, RecruitmentManagement, PersonnelHiring, PersonnelManagement, and HumanResourceManagement. All six relations are published by DPV."""@en ;
-    dcterms:description """A library permits use for any DPV purpose, and a researcher requests use for recruitment interview scheduling."""@en ;
+    dcterms:description """A library permits use for any DPV purpose. A researcher's policy commits to use for recruitment interview scheduling."""@en ;
     vrep:compatibilityState vrep:Compatible ;
     vrep:certificate <certificates/KGC315-2.tstp> .

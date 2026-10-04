@@ -54,6 +54,6 @@ drk:KGC316-report a vrep:OperandVerdictReport ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-purpose> ;
     vrep:backgroundTheory <https://w3id.org/odrl-kb/dpv-purposes/empty> ;
     rdfs:comment """DPV places RecruitmentInterviewScheduling below Purpose, but does not establish the reverse relation or that the two concepts are distinct. The available knowledge therefore leaves the verdict Unknown."""@en ;
-    dcterms:description """A library permits use for recruitment interview scheduling, while a researcher requests use for the general Purpose concept."""@en ;
+    dcterms:description """A library permits use for recruitment interview scheduling only. A researcher's policy commits to use for the general concept Purpose."""@en ;
     vrep:compatibilityState vrep:Unknown ;
     vrep:unknownReason vrep:Epistemic .

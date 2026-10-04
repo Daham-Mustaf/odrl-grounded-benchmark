@@ -37,8 +37,8 @@ done
 
 # --- 2. problems -------------------------------------------------------
 hdr "2. generators"
-for g in gen_motivating gen_dpv gen_dpvloc gen_filetype gen_consent \
-         gen_gdprlb gen_tom gen_bcp47_problems gen_wellsorted; do
+for g in gen_motivating gen_geonames gen_dpv gen_dpvloc gen_filetype \
+         gen_consent gen_gdprlb gen_tom gen_bcp47_problems gen_wellsorted; do
   if uv run "generators/$g.py" >/dev/null 2>&1; then
     echo "  ok     $g"
   else
@@ -70,7 +70,7 @@ bash run_verdict.sh 2>/dev/null | tail -3
 # --- 7. provers agree --------------------------------------------------
 hdr "7. two provers, and what they cite"
 uv run generators/run_certify.py 2>&1 | grep -E \
-  "STATUS DISAGREEMENT|PROVERS DIFFER|provenance agreement" | tail -10
+  "STATUS DISAGREEMENT|STATUS INCONCLUSIVE|PROVERS DIFFER|provenance agreement" | tail -10
 
 hdr "8. proof checking"
 uv run generators/check_certificates.py 2>&1 | tail -12

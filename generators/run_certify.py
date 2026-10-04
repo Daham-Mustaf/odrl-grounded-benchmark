@@ -155,8 +155,20 @@ def main() -> int:
             if s1 is None:
                 s1, s2 = z1, z2
             elif (s1, s2) != (z1, z2):
-                print(f"{pid}  STATUS DISAGREEMENT  "
+                definite = ("sat", "unsat")
+                clash = any(a in definite and b in definite and a != b
+                            for a, b in ((s1, z1), (s2, z2)))
+                # A prover that returns no status has not disagreed: it has
+                # not answered.  Only sat against unsat is a disagreement.
+                # Vampire runs one strategy here (--mode vampire, for axiom
+                # names), which can miss a model that the casc schedule of
+                # the verdict step finds.
+                label = "STATUS DISAGREEMENT" if clash else "STATUS INCONCLUSIVE"
+                print(f"{pid}  {label}  "
                       f"vampire=({s1},{s2}) z3=({z1},{z2})")
+                if not clash:
+                    s1 = s1 if s1 in definite else z1
+                    s2 = s2 if s2 in definite else z2
 
         v = verdict_of(s1, s2)
         print(f"{pid}  q1={s1:8s} q2={s2:8s} -> {v}")

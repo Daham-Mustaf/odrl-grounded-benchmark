@@ -3,7 +3,7 @@
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
 % Problem  : purpose, isA dpv:RIS against eq dpv:Purpose (witness condition negated)
 % Version  : 1.0
-% English  : A library permits use for recruitment interview scheduling, while a researcher requests use for the general Purpose concept.
+% English  : A library permits use for recruitment interview scheduling only. A researcher's policy commits to use for the general concept Purpose.
 %
 % Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark

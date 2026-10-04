@@ -305,7 +305,6 @@ ex:b-fileformat a bind:OperandBinding ;
     bind:leftOperand odrl:fileFormat ;
     bind:sort bind:nom ;
     bind:resource <https://w3id.org/odrl-kb/eu-file-type> ;
-    bind:backgroundTheory <https://w3id.org/odrl-kb/eu-file-type/empty> ;
     bind:grounding bind:sliceMembership .
 """
 

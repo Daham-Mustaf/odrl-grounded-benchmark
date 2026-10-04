@@ -72,7 +72,6 @@ ex:b-language-bcp47 a bind:OperandBinding ;
     bind:leftOperand      odrl:language ;
     bind:sort             bind:nom ;
     bind:resource         <https://w3id.org/odrl-kb/bcp47> ;
-    bind:backgroundTheory <https://w3id.org/odrl-kb/bcp47/uniqueness> ;
     bind:grounding        ex:g-bcp47-exact .
 
 ex:b-language-bcp47-primary a bind:OperandBinding ;
@@ -88,5 +87,4 @@ ex:b-language-bcp47-primary a bind:OperandBinding ;
     bind:leftOperand      odrl:language ;
     bind:sort             bind:nom ;
     bind:resource         <https://w3id.org/odrl-kb/bcp47> ;
-    bind:backgroundTheory <https://w3id.org/odrl-kb/bcp47/uniqueness> ;
     bind:grounding        ex:g-bcp47-primary .

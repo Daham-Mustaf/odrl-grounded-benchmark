@@ -50,7 +50,8 @@ drk:KGC321-report a vrep:OperandVerdictReport ;
     vrep:comparedConstraint kgc:KGC321-p2-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-fileformat> ;
     vrep:backgroundTheory <https://w3id.org/odrl-kb/eu-file-type/declared> ;
+    vrep:readAgainst drk:KGC320-report ;
     rdfs:comment """The two constraints require ft:PDF and ft:PDFA1A to denote the same element, while the background assertion requires them to denote different elements. The two conditions cannot both hold."""@en ;
-    dcterms:description """A library permits PDF, while a researcher requests PDF/A-1a, with the two formats declared distinct."""@en ;
+    dcterms:description """As KGC320, with the two formats declared distinct."""@en ;
     vrep:compatibilityState vrep:Incompatible ;
     vrep:certificate <certificates/KGC321-1.tstp> .

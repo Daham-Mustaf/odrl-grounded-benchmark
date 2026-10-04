@@ -17,5 +17,4 @@ ex:b-consent-status a bind:OperandBinding ;
     bind:leftOperand dpv-odrl:Status ;
     bind:sort bind:tax ;
     bind:resource <https://w3id.org/odrl-kb/dpv-consent> ;
-    bind:backgroundTheory <https://w3id.org/odrl-kb/dpv-consent/empty> ;
     bind:grounding bind:sliceMembership .

@@ -3,7 +3,7 @@
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
 % Problem  : fileFormat, eq ft:PDF against eq ft:PDFA1A (witness condition negated)
 % Version  : 1.0
-% English  : A library permits PDF, while a researcher requests PDF/A-1a.
+% English  : BSB permits PDF. BnF's policy commits to PDF/A-1a.
 %
 % Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark

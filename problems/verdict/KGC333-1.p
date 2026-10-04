@@ -3,7 +3,7 @@
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
 % Problem  : spatial, eq loc:DE against eq loc:FR (witness condition asserted)
 % Version  : 1.0
-% English  : A library permits use in Germany; a researcher requests use in France.
+% English  : A library permits use in Germany. A researcher's policy commits to use in France.
 %
 % Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark

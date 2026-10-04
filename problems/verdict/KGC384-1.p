@@ -3,7 +3,7 @@
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
 % Problem  : spatial, eq loc:DE-NW against eq loc:DE-BY (witness condition asserted)
 % Version  : 1.0
-% English  : Use in North Rhine-Westphalia against use in Bavaria. Both sides name one Land, and both can be satisfied only if the two are one place. The file relates the Laender to DE and to nothing sideways, and separates nothing: Unknown.
+% English  : A library permits use in North Rhine-Westphalia. A researcher's policy commits to use in Bavaria.
 %
 % Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark

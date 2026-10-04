@@ -3,7 +3,7 @@
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
 % Problem  : spatial, eq loc:DE-NW against eq loc:DE-BY, ISO rule (witness condition asserted)
 % Version  : 1.0
-% English  : KGC384 under the ISO 3166-2 rule, one code per subdivision within a country. The two Laender are then distinct areas, no use satisfies both sides, and the verdict is Incompatible on the parties' rule, withdrawable by dropping it.
+% English  : As KGC384, with the ISO 3166-2 rule that different subdivision codes name different areas.
 %
 % Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark

@@ -3,7 +3,7 @@
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
 % Problem  : consent status, or(eq ConsentGiven, eq RenewedConsentGiven) against eq RenewedConsentGiven (witness condition asserted)
 % Version  : 1.0
-% English  : A controller permits use under given or renewed consent; a processor commits to processing only under renewed consent.
+% English  : A controller permits use under given or renewed consent. A processor's policy commits to processing only under renewed consent.
 %
 % Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark

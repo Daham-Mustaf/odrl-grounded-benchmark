@@ -175,9 +175,8 @@ PROBLEMS = [
         "binding": BINDING,
         "includes":          INCLUDES,
         "summary": (
-    "A library permits use for research and development, and a researcher "
-    "requests use for scientific research."
-),
+            "A library permits use for research and development. A "
+            "researcher's policy commits to use for scientific research."),
         "description": (
             "Offer (purpose, isA, dpv:ResearchAndDevelopment) against request "
             "(purpose, eq, dpv:ScientificResearch).  The vocabulary places "
@@ -209,9 +208,8 @@ PROBLEMS = [
         "certificate": {
             "kind": "Refutation",
 "comment": (
-    "ScientificResearch is directly below ResearchAndDevelopment in DPV, "
-    "so the request is compatible with the offer."
-),
+    "DPV places scientific research directly below research and development, "
+    "so a use for scientific research satisfies both policies."),
             "premises": [
                 ("fromResource",
                  "dpv:ScientificResearch is below dpv:ResearchAndDevelopment"),
@@ -276,9 +274,8 @@ kgc:KGC310-p2-c1 a odrl:Constraint ;
         "includes":          INCLUDES,
          "binding": BINDING,
         "summary": (
-    "A library permits use for any DPV purpose, and a researcher requests "
-    "use for non-commercial research."
-),
+            "A library permits use for any DPV purpose. A researcher's policy "
+            "commits to use for non-commercial research."),
             "description": (
             "Offer (purpose, isA, dpv:Purpose) against request (purpose, eq, "
             "dpv:NonCommercialResearch).  The resource places "
@@ -374,6 +371,7 @@ kgc:KGC311-p2-c1 a odrl:Constraint ;
     # -----------------------------------------------------------------
     {
         "id":                "KGC313",
+        "twin":              "KGC314",
         "subdir":            "verdict",
         "name":              "purpose, eq dpv:Marketing against eq dpv:SR",
         "left_operand":      "purpose",
@@ -383,9 +381,8 @@ kgc:KGC311-p2-c1 a odrl:Constraint ;
         "background_theory": EMPTY_BT,
         "unknown_reason": "epistemic",
         "summary": (
-    "A library permits use for marketing, while a researcher requests use "
-    "for scientific research."
-),
+            "A library permits use for marketing. A researcher's policy "
+            "commits to use for scientific research."),
         "includes":          INCLUDES,
         "description": (
             "Offer (purpose, eq, dpv:Marketing) against request (purpose, eq, "
@@ -423,9 +420,9 @@ kgc:KGC311-p2-c1 a odrl:Constraint ;
         "certificate": {
             "kind": "Models",                   
                        "comment": (
-    "DPV does not declare Marketing and ScientificResearch distinct, so "
-    "open-world semantics cannot establish either compatibility or conflict."
-),
+                           "DPV does not declare marketing and scientific "
+                           "research distinct. One structure identifies them "
+                           "and one does not, so the verdict is Unknown."),
             "premises": [],
         },
         "ttl": f"""\
@@ -479,6 +476,7 @@ kgc:KGC313-p2-c1 a odrl:Constraint ;
     # -----------------------------------------------------------------
     {
         "id":                "KGC314",
+        "twin":              "KGC313",
         "subdir":            "verdict",
         "name":              "purpose, eq dpv:Marketing against eq dpv:SR, "
                              "under a declared distinctness",
@@ -489,9 +487,8 @@ kgc:KGC313-p2-c1 a odrl:Constraint ;
         "binding": BINDING,
         "includes":          INCLUDES_DECLARED,
         "summary": (
-    "The marketing offer and scientific-research request are evaluated with "
-    "the two purpose concepts declared distinct."
-),
+            "As KGC313, with marketing and scientific research declared "
+            "distinct."),
         "description": (
             "The constraints of KGC313, over the same resource, under a "
             "background theory in which the parties declare the two purposes "
@@ -594,9 +591,8 @@ kgc:KGC314-p2-c1 a odrl:Constraint ;
         "binding": BINDING,  
         "includes":          INCLUDES,
         "summary": (
-    "A library permits use for any DPV purpose, and a researcher requests "
-    "use for recruitment interview scheduling."
-),
+            "A library permits use for any DPV purpose. A researcher's policy "
+            "commits to use for recruitment interview scheduling."),
         "description": (
             "Offer (purpose, isA, dpv:Purpose) against request (purpose, eq, "
             "dpv:RecruitmentInterviewScheduling), the deepest concept in the "
@@ -704,9 +700,9 @@ kgc:KGC315-p2-c1 a odrl:Constraint ;
         "includes":          INCLUDES,
         "binding": BINDING,
         "summary": (
-    "A library permits use for recruitment interview scheduling, while a "
-    "researcher requests use for the general Purpose concept."
-),
+            "A library permits use for recruitment interview scheduling only. "
+            "A researcher's policy commits to use for the general concept "
+            "Purpose."),
         "description": (
             "KGC315 reversed: offer (purpose, isA, "
             "dpv:RecruitmentInterviewScheduling) against request (purpose, "
@@ -812,9 +808,8 @@ kgc:KGC316-p2-c1 a odrl:Constraint ;
         "binding": BINDING,
         "includes":          INCLUDES,
         "summary": (
-    "A library excludes marketing, while a researcher requests use for "
-    "marketing."
-),
+            "A library permits use for any purpose other than marketing. A "
+            "researcher's policy commits to use for marketing."),
         "description": (
             "Offer (purpose, isNoneOf, {dpv:Marketing}) against request "
             "(purpose, eq, dpv:Marketing).  The offer excludes exactly the "
@@ -849,10 +844,9 @@ kgc:KGC316-p2-c1 a odrl:Constraint ;
         "certificate": {
             "kind": "Refutation",
 "comment": (
-    "The offer excludes exactly the purpose required by the request, so the "
-    "constraints are Incompatible without any resource or background "
-    "declaration."
-),
+    "The first policy excludes exactly the purpose the second requires, so "
+    "the verdict is Incompatible without any resource or background "
+    "assertion."),
             "premises": [
                 ("fromConstraints", "the witness condition"),
             ],
@@ -904,6 +898,7 @@ kgc:KGC317-p2-c1 a odrl:Constraint ;
     # -----------------------------------------------------------------
     {
         "id": "KGC393", "subdir": "verdict",
+        "twin":              "KGC394",
         "name": "purpose, isAnyOf {RnD, Marketing} against eq ScientificResearch",
         "left_operand": "purpose", "sort": "tax",
         "resource": RESOURCE, "background_theory": EMPTY_BT,
@@ -935,6 +930,7 @@ kgc:KGC317-p2-c1 a odrl:Constraint ;
     },
     {
         "id": "KGC394", "subdir": "verdict",
+        "twin":              "KGC393",
         "name": "purpose, isAnyOf {RnD, Marketing} against eq ScientificResearch, "
                 "declared distinct",
         "left_operand": "purpose", "sort": "tax",
@@ -946,7 +942,7 @@ kgc:KGC317-p2-c1 a odrl:Constraint ;
         "expected_q1": "Unsatisfiable", "expected_q2": "Satisfiable",
         "summary": (
             "As KGC393, with scientific research declared distinct from both "
-            "named purposes."),
+            "purposes the first policy names."),
         "description": (
             "Scientific research is then neither of the two concepts, the "
             "witness fails everywhere, and the verdict is Incompatible. The "
@@ -954,9 +950,10 @@ kgc:KGC317-p2-c1 a odrl:Constraint ;
             "make them one, and it refutes exactly the compatibility the "
             "drafter intended. The operator, not the taxonomy, decided."),
         "certificate": {"kind": "Refutation",
-            "comment": "Scientific research is declared distinct from research "
-                       "and development and from marketing, so it is neither "
-                       "of the offer's values.",
+            "comment": (
+                "Scientific research is declared distinct from research and "
+                "development and from marketing, so it is neither value the "
+                "first policy lists."),
             "premises": [("fromBackgroundTheory", "SR distinct from RnD"),
                          ("fromBackgroundTheory", "SR distinct from Marketing")]},
         "provenance": "As KGC393; warrant DPV's definitions of distinct purposes.",
@@ -1011,8 +1008,8 @@ kgc:KGC317-p2-c1 a odrl:Constraint ;
         "expected_q1": "Satisfiable", "expected_q2": "Unsatisfiable",
         "summary": (
             "A provider permits use for research and development or "
-            "marketing; a consumer commits to research and development and "
-            "to service provision, both."),
+            "marketing. A consumer's policy commits to both research and "
+            "development and service provision."),
         "description": (
             "The use carries two purposes. isAnyOf asks only that one of them "
             "is among the offer's values, and research and development is, so "
@@ -1024,9 +1021,10 @@ kgc:KGC317-p2-c1 a odrl:Constraint ;
             "then ill-sorted at drafting, and isAnyOf means 'the one purpose "
             "is among these'."),
         "certificate": {"kind": "Refutation",
-            "comment": "Research and development is among the offer's values, "
-                       "and nothing in the offer limits the use's other "
-                       "purposes.",
+            "comment": (
+                "Research and development is one of the values the first "
+                "policy lists, and nothing in the first policy limits the "
+                "use's other purposes."),
             "premises": []},
         "provenance": "Purpose limitation (GDPR Art. 5(1)(b)) against a "
                       "consumer declaring several purposes.",

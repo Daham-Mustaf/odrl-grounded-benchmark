@@ -1,0 +1,11 @@
+kgc:KGC304-observed a vrep:Refutation ;
+    vrep:producedBy "Vampire" ;
+    vrep:proofArtefact <proofs/KGC304-2.tstp> ;
+    vrep:attributedAssertion [
+        vrep:premiseSource vrep:fromBackgroundTheory ;
+        vrep:formulaName "bg_dist_gn_france_gn_germany" ;
+        rdfs:label "bg_dist_gn_france_gn_germany"@en ] ;
+    vrep:attributedAssertion [
+        vrep:premiseSource vrep:fromConstraints ;
+        vrep:formulaName "w_kgc304" ;
+        rdfs:label "w_kgc304"@en ] .

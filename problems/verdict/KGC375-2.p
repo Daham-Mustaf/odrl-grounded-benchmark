@@ -3,7 +3,7 @@
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
 % Problem  : language, eq de against neq fr, no declaration (witness condition negated)
 % Version  : 1.0
-% English  : A publisher distributes in German, while a reuser accepts any language except French.
+% English  : As KGC374, without the registry rule.
 %
 % Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark

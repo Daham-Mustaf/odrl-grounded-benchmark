@@ -3,7 +3,7 @@
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
 % Problem  : purpose, isA dpv:NCP against eq dpv:SR (witness condition asserted)
 % Version  : 1.0
-% English  : Offer (purpose, isA, dpv:NonCommercialPurpose) against request (purpose, eq, dpv:ScientificResearch).  The vocabulary neither places one under the other nor separates them, so both queries are satisfiable and the verdict is Unknown.
+% English  : BSB permits use for non-commercial research only. BnF's policy commits to use for scientific research.
 %
 % Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark

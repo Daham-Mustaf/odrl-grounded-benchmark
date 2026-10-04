@@ -50,7 +50,8 @@ drk:KGC320-report a vrep:OperandVerdictReport ;
     vrep:comparedConstraint kgc:KGC320-p2-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-fileformat> ;
     vrep:backgroundTheory <https://w3id.org/odrl-kb/eu-file-type/empty> ;
+    vrep:readAgainst drk:KGC321-report ;
     rdfs:comment """The two constraints can be satisfied both when ft:PDF and ft:PDFA1A denote the same element and when they denote different elements. No resource or background assertion selects between these possibilities."""@en ;
-    dcterms:description """A library permits PDF, while a researcher requests PDF/A-1a."""@en ;
+    dcterms:description """BSB permits PDF. BnF's policy commits to PDF/A-1a."""@en ;
     vrep:compatibilityState vrep:Unknown ;
     vrep:unknownReason vrep:Epistemic .

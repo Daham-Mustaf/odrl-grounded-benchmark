@@ -54,6 +54,6 @@ drk:KGC334-report a vrep:OperandVerdictReport ;
     vrep:backgroundTheory <https://w3id.org/odrl-kb/dpv-loc/iso> ;
     vrep:readAgainst drk:KGC333-report ;
     rdfs:comment """Both constraints can be satisfied only if Germany and France denote the same place. The adopted rule asserts that they are distinct, so the constraints cannot both be satisfied."""@en ;
-    dcterms:description """A library permits use in Germany; a researcher requests use in France."""@en ;
+    dcterms:description """As KGC333, with the ISO 3166 rule that different country codes name different countries."""@en ;
     vrep:compatibilityState vrep:Incompatible ;
     vrep:certificate <certificates/KGC334-1.tstp> .

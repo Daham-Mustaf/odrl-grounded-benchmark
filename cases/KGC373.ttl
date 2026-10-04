@@ -51,7 +51,8 @@ drk:KGC373-report a vrep:OperandVerdictReport ;
     vrep:comparedConstraint kgc:KGC373-p2-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-language-bcp47-primary> ;
     vrep:backgroundTheory <https://w3id.org/odrl-kb/bcp47/uniqueness> ;
-    rdfs:comment """en-US resolves to English, which is distinct from German."""@en ;
-    dcterms:description """A publisher distributes in German, while a reuser requests American English."""@en ;
+    vrep:readAgainst drk:KGC372-report ;
+    rdfs:comment """en-US reduces to English, which the registry rule makes distinct from German."""@en ;
+    dcterms:description """A publisher distributes in German. A reuser's policy commits to American English (en-US), under the rule that reduces a tag to its primary subtag."""@en ;
     vrep:compatibilityState vrep:Incompatible ;
     vrep:certificate <certificates/KGC373-1.tstp> .

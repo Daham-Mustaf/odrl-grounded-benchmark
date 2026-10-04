@@ -53,6 +53,7 @@ drk:KGC364-report a vrep:OperandVerdictReport ;
     vrep:comparedConstraint kgc:KGC364-p2-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-tom> ;
     vrep:backgroundTheory <https://w3id.org/odrl-kb/dpv-tom/declared> ;
+    vrep:readAgainst drk:KGC363-report ;
     rdfs:comment """Encryption and access control are declared distinct, so a use supplying only encryption lacks the second."""@en ;
     dcterms:description """As KGC363, with encryption and access control declared distinct."""@en ;
     vrep:compatibilityState vrep:Incompatible ;

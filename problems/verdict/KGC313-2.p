@@ -3,7 +3,7 @@
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
 % Problem  : purpose, eq dpv:Marketing against eq dpv:SR (witness condition negated)
 % Version  : 1.0
-% English  : A library permits use for marketing, while a researcher requests use for scientific research.
+% English  : A library permits use for marketing. A researcher's policy commits to use for scientific research.
 %
 % Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark

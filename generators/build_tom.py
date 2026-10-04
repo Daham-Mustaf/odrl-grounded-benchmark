@@ -407,7 +407,6 @@ ex:b-tom a bind:OperandBinding ;
     bind:leftOperand dpvo:TechnicalOrganisationalMeasure ;
     bind:sort bind:tax ;
     bind:resource <https://w3id.org/odrl-kb/dpv-tom> ;
-    bind:backgroundTheory <https://w3id.org/odrl-kb/dpv-tom/empty> ;
     bind:grounding bind:sliceMembership .
 """
 

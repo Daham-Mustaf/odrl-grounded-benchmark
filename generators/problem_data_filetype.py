@@ -124,6 +124,7 @@ PROBLEMS = [
     # -----------------------------------------------------------------
     {
         "id":                "KGC320",
+        "twin":              "KGC321",
         "binding":           BINDING,
         "subdir":            "verdict",
         "name":              "fileFormat, eq ft:PDF against eq ft:PDFA1A",
@@ -134,8 +135,7 @@ PROBLEMS = [
          "unknown_reason": "epistemic",
         "includes":          INCLUDES,
         "summary": (
-    "A library permits PDF, while a researcher requests PDF/A-1a."
-),
+            "BSB permits PDF. BnF's policy commits to PDF/A-1a."),
         "description": (
     "The EU File Type table lists both PDF and PDF/A-1a but publishes no "
     "selected relation between them. At the nominal sort, the formal "
@@ -214,6 +214,7 @@ kgc:KGC320-p2-c1 a odrl:Constraint ;
     # -----------------------------------------------------------------
     {
         "id":                "KGC321",
+        "twin":              "KGC320",
         "binding":           BINDING,
         "subdir":            "verdict",
         "name":              "fileFormat, eq ft:PDF against eq ft:PDFA1A, "
@@ -224,9 +225,7 @@ kgc:KGC320-p2-c1 a odrl:Constraint ;
         "background_theory": DECLARED_BT,
         "includes":          INCLUDES_DECLARED,
         "summary": (
-    "A library permits PDF, while a researcher requests PDF/A-1a, with "
-    "the two formats declared distinct."
-),
+            "As KGC320, with the two formats declared distinct."),
 "description": (
     "The case is the KGC320 pair with a background assertion declaring "
     "ft:PDF and ft:PDFA1A distinct. The resource contributes no relation "
@@ -315,9 +314,7 @@ kgc:KGC321-p2-c1 a odrl:Constraint ;
         "background_theory": EMPTY_BT,
         "includes":          INCLUDES,
         "summary": (
-    "A library permits either PDF or PDF/A-1a, while a researcher requests "
-    "PDF/A-1a."
-),
+            "BSB permits PDF or PDF/A-1a. BnF's policy commits to PDF/A-1a."),
         "description": (
             "Offer (fileFormat, isAnyOf, {ft:PDF, ft:PDFA1A}) against "
             "request (fileFormat, eq, ft:PDFA1A).  The offer admits either "
@@ -353,11 +350,9 @@ kgc:KGC321-p2-c1 a odrl:Constraint ;
         "certificate": {
             "kind": "Refutation",
     "comment": (
-        "The request requires ft:PDFA1A, and the offer includes ft:PDFA1A "
-        "among the values accepted by isAnyOf. The two constraints can "
-        "therefore be satisfied together without any resource or background "
-        "assertion."
-    ),        "premises": [
+        "The second policy requires PDF/A-1a, and the first lists it among "
+        "the values isAnyOf accepts. The two constraints can be satisfied "
+        "together without any resource or background assertion."),        "premises": [
                 ("fromConstraints", "the witness condition"),
             ],
         },
@@ -410,9 +405,8 @@ kgc:KGC322-p2-c1 a odrl:Constraint ;
     ),
 
     "summary": (
-        "A library excludes PDF, while a researcher requests PDF/A-1a, "
-        "with the two formats declared distinct."
-    ),
+        "BSB permits any format except PDF. BnF's policy commits to PDF/A-1a. "
+        "The two formats are declared distinct."),
 
     "left_operand": "fileFormat",
     "sort": "nom",
@@ -464,10 +458,9 @@ kgc:KGC322-p2-c1 a odrl:Constraint ;
     "certificate": {
         "kind": "Refutation",
         "comment": (
-            "The offer excludes ft:PDF, while the request requires "
-            "ft:PDFA1A. The background assertion declares the two concepts "
-            "distinct, so the requested value is not excluded."
-        ),
+            "The first policy excludes PDF, and the second requires PDF/A-1a. "
+            "The background theory declares the two formats distinct, so the "
+            "required format is not excluded."),
         "premises": [
             (
                 "fromBackgroundTheory",

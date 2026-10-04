@@ -46,6 +46,7 @@ drk:KGC391-report a vrep:OperandVerdictReport ;
     vrep:comparedConstraint kgc:KGC391-p2-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-spatial-dpvloc-geo> ;
     vrep:backgroundTheory <https://w3id.org/odrl-kb/dpv-loc/empty> ;
-    rdfs:comment """The containment edge, read as the up-set."""@en ;
+    rdfs:comment """DPV places North Rhine-Westphalia within Germany, so Germany is an area that contains it, and a use in Germany satisfies both policies."""@en ;
+    dcterms:description """A library permits use in an area that contains North Rhine-Westphalia. A researcher's policy commits to use in Germany."""@en ;
     vrep:compatibilityState vrep:Compatible ;
     vrep:certificate <certificates/KGC391-2.tstp> .

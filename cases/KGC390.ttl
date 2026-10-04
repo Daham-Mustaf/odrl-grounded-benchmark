@@ -53,6 +53,7 @@ drk:KGC390-report a vrep:OperandVerdictReport ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-spatial-dpvloc-geo> ;
     vrep:backgroundTheory <https://w3id.org/odrl-kb/dpv-loc/iso> ;
     vrep:readAgainst drk:KGC389-report ;
-    rdfs:comment """The rule instance discharges the negated literal."""@en ;
+    rdfs:comment """The ISO rule makes the two Laender distinct, so only the first alternative holds and 'exactly one' is satisfied."""@en ;
+    dcterms:description """As KGC389, with the ISO 3166-2 rule."""@en ;
     vrep:compatibilityState vrep:Compatible ;
     vrep:certificate <certificates/KGC390-2.tstp> .

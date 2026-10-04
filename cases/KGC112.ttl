@@ -44,4 +44,6 @@ drk:KGC112-report a vrep:WellSortednessReport ;
     dcterms:identifier "KGC112" ;
     vrep:constraint kgc:KGC112-p1-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-language-bcp47> ;
+    dcterms:description """A library's policy constrains language with eq bcp:de, and the binding reads language at sort nom."""@en ;
+    rdfs:comment """eq is defined at sort nom, so the constraint is well sorted and goes on to the verdict."""@en ;
     vrep:wellSorted true .

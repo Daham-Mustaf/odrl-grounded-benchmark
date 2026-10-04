@@ -20,5 +20,4 @@ ex:b-spatial-dpvloc-geo a bind:OperandBinding ;
     bind:leftOperand dpv-odrl:Location ;
     bind:sort bind:mer ;
     bind:resource <https://w3id.org/odrl-kb/dpv-loc-geo> ;
-    bind:backgroundTheory <https://w3id.org/odrl-kb/dpv-loc/empty> ;
     bind:grounding bind:sliceMembership .

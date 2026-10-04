@@ -21,7 +21,7 @@
 bind:OperandBinding a rdfs:Class, skos:Concept ;
     rdfs:isDefinedBy <https://w3id.org/odrl-kb/binding> ;
     rdfs:label "Operand Binding" ;
-    skos:definition "A profile's pairing of a left operand with a resource, declaring the sort, the grounding rule, and optionally a background theory. Declaring the sort is the one judgment a profile makes about an operand."@en .
+    skos:definition "A profile's pairing of a left operand with a resource, declaring the sort and the grounding rule. Declaring the sort is the one judgment a profile makes about an operand. What the parties declare beyond the resource is not part of the binding: each verdict report names it with vrep:backgroundTheory."@en .
 
 bind:Sort a rdfs:Class, skos:Concept ;
     rdfs:isDefinedBy <https://w3id.org/odrl-kb/binding> ;
@@ -77,12 +77,6 @@ bind:resource a rdf:Property, skos:Concept ;
     skos:definition "The external resource whose published assertions the binding reads: a versioned slice of a published vocabulary, with its provenance recorded."@en ;
     rdfs:domain bind:OperandBinding .
 
-bind:backgroundTheory a rdf:Property, skos:Concept ;
-    rdfs:isDefinedBy <https://w3id.org/odrl-kb/binding> ;
-    rdfs:label "background theory" ;
-    skos:definition "A declared, withdrawable background theory in force for this binding. Absent when the parties have declared nothing: withdrawal is the absence of the property, not the presence of an empty theory."@en ;
-    rdfs:domain bind:OperandBinding ;
-    rdfs:range bt:BackgroundTheory .
 
 bind:grounding a rdf:Property, skos:Concept ;
     rdfs:isDefinedBy <https://w3id.org/odrl-kb/binding> ;

@@ -3,7 +3,7 @@
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
 % Problem  : spatial, isPartOf gn:Europe against eq gn:France (witness condition asserted)
 % Version  : 1.0
-% English  : Offer (spatial, isPartOf, gn:Europe) against request (spatial, eq, gn:France).  The gazetteer places France within Europe, so the witness condition holds in every model and the negated query is unsatisfiable.
+% English  : BSB permits use by recipients in Europe. BnF's policy names a recipient in France.
 %
 % Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark

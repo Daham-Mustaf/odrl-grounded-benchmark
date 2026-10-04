@@ -53,7 +53,8 @@ drk:KGC314-report a vrep:OperandVerdictReport ;
     vrep:comparedConstraint kgc:KGC314-p2-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-purpose> ;
     vrep:backgroundTheory <https://w3id.org/odrl-kb/dpv-purposes/declared> ;
+    vrep:readAgainst drk:KGC313-report ;
     rdfs:comment """The background theory declares Marketing and ScientificResearch distinct, so the two constraints cannot be satisfied by the same purpose. This declaration changes the verdict from Unknown to Incompatible; withdrawing the declaration would return the verdict to Unknown."""@en ;
-    dcterms:description """The marketing offer and scientific-research request are evaluated with the two purpose concepts declared distinct."""@en ;
+    dcterms:description """As KGC313, with marketing and scientific research declared distinct."""@en ;
     vrep:compatibilityState vrep:Incompatible ;
     vrep:certificate <certificates/KGC314-1.tstp> .

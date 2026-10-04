@@ -50,7 +50,7 @@ drk:KGC323-report a vrep:OperandVerdictReport ;
     vrep:comparedConstraint kgc:KGC323-p2-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-fileformat> ;
     vrep:backgroundTheory <https://w3id.org/odrl-kb/eu-file-type/declared> ;
-    rdfs:comment """The offer excludes ft:PDF, while the request requires ft:PDFA1A. The background assertion declares the two concepts distinct, so the requested value is not excluded."""@en ;
-    dcterms:description """A library excludes PDF, while a researcher requests PDF/A-1a, with the two formats declared distinct."""@en ;
+    rdfs:comment """The first policy excludes PDF, and the second requires PDF/A-1a. The background theory declares the two formats distinct, so the required format is not excluded."""@en ;
+    dcterms:description """BSB permits any format except PDF. BnF's policy commits to PDF/A-1a. The two formats are declared distinct."""@en ;
     vrep:compatibilityState vrep:Compatible ;
     vrep:certificate <certificates/KGC323-2.tstp> .

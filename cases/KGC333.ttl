@@ -54,6 +54,6 @@ drk:KGC333-report a vrep:OperandVerdictReport ;
     vrep:backgroundTheory <https://w3id.org/odrl-kb/dpv-loc/empty> ;
     vrep:readAgainst drk:KGC334-report ;
     rdfs:comment """Neither the resource nor the parties assert that Germany and France are distinct, so the compatibility cannot be determined."""@en ;
-    dcterms:description """A library permits use in Germany; a researcher requests use in France."""@en ;
+    dcterms:description """A library permits use in Germany. A researcher's policy commits to use in France."""@en ;
     vrep:compatibilityState vrep:Unknown ;
     vrep:unknownReason vrep:Epistemic .

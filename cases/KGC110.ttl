@@ -44,4 +44,6 @@ drk:KGC110-report a vrep:WellSortednessReport ;
     dcterms:identifier "KGC110" ;
     vrep:constraint kgc:KGC110-p1-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-spatial-geonames> ;
+    dcterms:description """A library's policy constrains spatial with isPartOf gn:Europe, and the binding reads spatial at sort mer."""@en ;
+    rdfs:comment """isPartOf is defined at sort mer, so the constraint is well sorted and goes on to the verdict."""@en ;
     vrep:wellSorted true .

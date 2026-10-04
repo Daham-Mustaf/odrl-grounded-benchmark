@@ -50,7 +50,7 @@ drk:KGC322-report a vrep:OperandVerdictReport ;
     vrep:comparedConstraint kgc:KGC322-p2-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-fileformat> ;
     vrep:backgroundTheory <https://w3id.org/odrl-kb/eu-file-type/empty> ;
-    rdfs:comment """The request requires ft:PDFA1A, and the offer includes ft:PDFA1A among the values accepted by isAnyOf. The two constraints can therefore be satisfied together without any resource or background assertion."""@en ;
-    dcterms:description """A library permits either PDF or PDF/A-1a, while a researcher requests PDF/A-1a."""@en ;
+    rdfs:comment """The second policy requires PDF/A-1a, and the first lists it among the values isAnyOf accepts. The two constraints can be satisfied together without any resource or background assertion."""@en ;
+    dcterms:description """BSB permits PDF or PDF/A-1a. BnF's policy commits to PDF/A-1a."""@en ;
     vrep:compatibilityState vrep:Compatible ;
     vrep:certificate <certificates/KGC322-2.tstp> .

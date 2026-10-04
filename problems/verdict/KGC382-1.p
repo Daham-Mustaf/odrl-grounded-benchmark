@@ -3,7 +3,7 @@
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
 % Problem  : spatial, isPartOf loc:DE against eq loc:DE-NW (witness condition asserted)
 % Version  : 1.0
-% English  : Use within Germany against use in North Rhine-Westphalia. DPV places DE-NW within DE; one published assertion, both readings agree. The baseline for subdivisions.
+% English  : A library permits use within Germany. A researcher's policy commits to use in North Rhine-Westphalia.
 %
 % Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark

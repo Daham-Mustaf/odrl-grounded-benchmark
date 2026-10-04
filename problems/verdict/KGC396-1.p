@@ -3,7 +3,7 @@
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
 % Problem  : purpose, isAnyOf {RnD, Marketing} against isAllOf {RnD, ServiceProvision} (witness condition asserted)
 % Version  : 1.0
-% English  : A provider permits use for research and development or marketing; a consumer commits to research and development and to service provision, both.
+% English  : A provider permits use for research and development or marketing. A consumer's policy commits to both research and development and service provision.
 %
 % Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark

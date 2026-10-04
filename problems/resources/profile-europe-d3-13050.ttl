@@ -13,5 +13,4 @@ ex:b-spatial-geonames-d3 a bind:OperandBinding ;
     bind:leftOperand odrl:spatial ;
     bind:sort bind:mer ;
     bind:resource <https://w3id.org/odrl-kb/geonames/europe-d3-13050> ;
-    bind:backgroundTheory <https://w3id.org/odrl-kb/geonames/europe-d3-13050/siblings> ;
     bind:grounding bind:sliceMembership .

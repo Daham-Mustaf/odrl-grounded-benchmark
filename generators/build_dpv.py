@@ -427,7 +427,6 @@ ex:b-purpose a bind:OperandBinding ;
     bind:leftOperand dpv-odrl:Purpose ;
     bind:sort bind:tax ;
     bind:resource <https://w3id.org/odrl-kb/dpv-purposes> ;
-    bind:backgroundTheory <https://w3id.org/odrl-kb/dpv-purposes/empty> ;
     bind:grounding bind:sliceMembership .
 """
 

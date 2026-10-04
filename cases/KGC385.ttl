@@ -47,6 +47,7 @@ drk:KGC385-report a vrep:OperandVerdictReport ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-spatial-dpvloc-geo> ;
     vrep:backgroundTheory <https://w3id.org/odrl-kb/dpv-loc/iso> ;
     vrep:readAgainst drk:KGC384-report ;
-    rdfs:comment """One instance of the registry rule over subdivision codes."""@en ;
+    rdfs:comment """The ISO rule makes North Rhine-Westphalia and Bavaria distinct, so no use satisfies both policies."""@en ;
+    dcterms:description """As KGC384, with the ISO 3166-2 rule that different subdivision codes name different areas."""@en ;
     vrep:compatibilityState vrep:Incompatible ;
     vrep:certificate <certificates/KGC385-1.tstp> .

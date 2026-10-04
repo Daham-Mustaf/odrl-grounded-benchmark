@@ -3,7 +3,7 @@
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
 % Problem  : purpose, eq dpv:Marketing against eq dpv:SR, under a declared distinctness (witness condition asserted)
 % Version  : 1.0
-% English  : The marketing offer and scientific-research request are evaluated with the two purpose concepts declared distinct.
+% English  : As KGC313, with marketing and scientific research declared distinct.
 %
 % Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark

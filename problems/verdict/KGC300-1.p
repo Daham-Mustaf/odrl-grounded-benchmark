@@ -3,7 +3,7 @@
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
 % Problem  : language, eq bcp:de against eq bcp:fr (witness condition asserted)
 % Version  : 1.0
-% English  : Offer (language, eq, bcp:de) against request (language, eq, bcp:fr).  The registry's uniqueness rule places the two subtags in the background theory as distinct, so no model identifies them and the witness condition fails in every model.
+% English  : BSB permits access to the manuscripts in German. BnF's policy commits to access in French.
 %
 % Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark

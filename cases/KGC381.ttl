@@ -47,8 +47,8 @@ drk:KGC381-report a vrep:OperandVerdictReport ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-spatial-dpvloc-geo> ;
     vrep:backgroundTheory <https://w3id.org/odrl-kb/dpv-loc/empty> ;
     vrep:readAgainst drk:KGC331-report ;
-    rdfs:comment """loc:EU names no concept of the geographic slice."""@en ;
-    dcterms:description """A library permits use within the European Union; a researcher requests use in Germany."""@en ;
+    rdfs:comment """The territorial binding does not read union membership, so loc:EU names no concept of its slice and the first policy's value does not ground."""@en ;
+    dcterms:description """As KGC331, under the territorial binding. A library permits use within the European Union, and a researcher's policy commits to use in Germany."""@en ;
     vrep:compatibilityState vrep:Unknown ;
     vrep:unknownReason vrep:Ungrounded ;
     vrep:ungroundedValue loc:EU .

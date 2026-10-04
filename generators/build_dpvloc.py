@@ -33,9 +33,16 @@ the whole of the boundary decision below.  The counts are measured, not
 estimated, and the generator re-measures them on every run.
 
    4786  location -> location             containment       READ
+           of which 4760 region  -> country   subdivision
+                       26 country -> country   territory of a state
     177  country  -> union                membership        READ by juris
     255  location -> dpv: class           typing            not read
   63073  inverse  -> location             complement        not read
+
+Both kinds of containment are read as one order.  A territory of a state,
+such as loc:BQ below loc:NL or loc:WF below loc:FR, is not a subdivision
+and does not lie inside its state geographically, which is why the reading
+that takes containment only is called territorial rather than geographic.
 
 The last is counted from skos:narrower, which is how the file writes it:
 loc:non-IE skos:narrower loc:AD.  The other three are counted from
@@ -312,7 +319,7 @@ def depth(containment):
 def resource_ttl(concepts, labels, kinds, order, ident, meta, mode, digest) -> str:
     reads = {
         "geo": [
-            "# DPV Locations, geographic reading: containment only.",
+            "# DPV Locations, territorial reading: containment only.",
             "#",
             "# The file uses skos:broader for five relations.  This resource",
             "# reads the two that are containment, region within country and",
@@ -329,7 +336,7 @@ def resource_ttl(concepts, labels, kinds, order, ident, meta, mode, digest) -> s
             "# DPV Locations, jurisdictional reading: containment and union",
             "# membership.",
             "#",
-            "# The same file as the geographic reading, with the membership",
+            "# The same file as the territorial reading, with the membership",
             "# edges to supranational unions read as containment as well.",
             "# Germany within the EU is then an order assertion, and",
             "# isPartOf EU has an answer.",
@@ -639,7 +646,7 @@ def profile_ttl(mode) -> str:
             "juris", "the jurisdictional slice",
             "# The resource is containment together with union membership,\n"
             "# read as jurisdictional containment.  isPartOf EU has an answer\n"
-            "# here and does not under the geographic profile.  Neither is\n"
+            "# here and does not under the territorial profile.  Neither is\n"
             "# the correct reading of the file: they are two readings, and\n"
             "# the profile is where a party says which one it means.",
         ),
@@ -665,7 +672,6 @@ ex:b-spatial-dpvloc-{tag} a bind:OperandBinding ;
     bind:leftOperand dpv-odrl:Location ;
     bind:sort bind:mer ;
     bind:resource <https://w3id.org/odrl-kb/dpv-loc-{tag}> ;
-    bind:backgroundTheory <https://w3id.org/odrl-kb/dpv-loc/empty> ;
     bind:grounding bind:sliceMembership .
 """
 

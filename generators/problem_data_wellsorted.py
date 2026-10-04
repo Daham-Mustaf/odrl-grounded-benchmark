@@ -36,9 +36,9 @@ PREFIX = {
 
 RESOURCE = {
     "spatial":  ("https://w3id.org/odrl-kb/geonames-europe",
-                 "https://w3id.org/odrl-kb/geonames-europe/admin-siblings"),
-    "purpose":  ("https://w3id.org/odrl-kb/dpv-purpose",
-                 "https://w3id.org/odrl-kb/dpv-purpose/declared"),
+                 "https://w3id.org/odrl-kb/geonames-europe/empty"),
+    "purpose":  ("https://w3id.org/odrl-kb/dpv-purposes",
+                 "https://w3id.org/odrl-kb/dpv-purposes/empty"),
     "language": ("https://w3id.org/odrl-kb/bcp47",
                  "https://w3id.org/odrl-kb/bcp47/uniqueness"),
 }
@@ -54,7 +54,7 @@ LEFT = {
 
 BINDING = {
     "spatial":  "https://w3id.org/odrl-kb/profile/b-spatial-geonames",
-    "purpose":  "https://w3id.org/odrl-kb/profile/b-purpose-dpv",
+    "purpose":  "https://w3id.org/odrl-kb/profile/b-purpose",
     "language": "https://w3id.org/odrl-kb/profile/b-language-bcp47",
 }
 
@@ -100,6 +100,7 @@ def _problem(pid, operand, operator, value, sort, accepted, description):
         "name":              f"{operand}, {operator} {value}",
         "left_operand":      operand,
         "operator":          operator,
+        "value":             value,
         "arity":             1,
         "sort":              sort,
         "resource":          resource,

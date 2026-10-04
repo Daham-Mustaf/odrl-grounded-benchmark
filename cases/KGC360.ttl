@@ -54,7 +54,7 @@ drk:KGC360-report a vrep:OperandVerdictReport ;
     vrep:comparedConstraint kgc:KGC360-p2-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-tom> ;
     vrep:backgroundTheory <https://w3id.org/odrl-kb/dpv-tom/empty> ;
-    rdfs:comment """Both required measures are technical measures in the vocabulary, so a use supplying them satisfies the request as well as the offer."""@en ;
-    dcterms:description """A controller requires encryption and access control, while a processor applies technical measures."""@en ;
+    rdfs:comment """Both required measures are technical measures in DPV, so a use with encryption and access control satisfies both policies."""@en ;
+    dcterms:description """A controller permits use where encryption and access control are both in place. A processor's policy commits to technical measures."""@en ;
     vrep:compatibilityState vrep:Compatible ;
     vrep:certificate <certificates/KGC360-2.tstp> .

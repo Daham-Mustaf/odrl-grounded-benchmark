@@ -247,9 +247,8 @@ PROBLEMS = [
                  C("isA", TECHNICAL, side="request")],
         "binding": BINDING,
 "summary": (
-    "A controller requires encryption and access control, while a "
-    "processor applies technical measures."
-),
+    "A controller permits use where encryption and access control are both in "
+    "place. A processor's policy commits to technical measures."),
 
         "description": (
             "The controller requires encryption and access control to be "
@@ -269,9 +268,10 @@ PROBLEMS = [
         "expected_q2": "Unsatisfiable",
         "certificate": {
             "kind": "Refutation",
-            "comment": "Both required measures are technical measures in "
-                       "the vocabulary, so a use supplying them satisfies "
-                       "the request as well as the offer.",
+            "comment": (
+                "Both required measures are technical measures in DPV, so a "
+                "use with encryption and access control satisfies both "
+                "policies."),
             "premises": [
                 ("fromResource",
                  "dpv:Encryption is below dpv:TechnicalMeasure"),
@@ -298,9 +298,8 @@ PROBLEMS = [
         "includes":          INCLUDES,
         "binding": BINDING,
 "summary": (
-    "A controller requires encryption and access control, while a "
-    "processor excludes access control."
-),
+    "A controller requires encryption and access control. A processor's "
+    "policy excludes access control."),
         "tree": [C("isAllOf", ENCRYPTION, ACCESS),
                  C("isNoneOf", ACCESS, side="request")],
         "description": (
@@ -321,10 +320,10 @@ PROBLEMS = [
         "expected_q2": "Satisfiable",
         "certificate": {
             "kind": "Refutation",
-            "comment": "The offer requires access control among the "
-                       "measures supplied and the request excludes it. No "
-                       "premise of the vocabulary or of the parties is "
-                       "used.",
+            "comment": (
+                "The first policy requires access control and the second "
+                "excludes it. No premise of the vocabulary or of the parties "
+                "is used."),
             "premises": [],
         },
         "ttl": _TTL_HEAD + _offer("KGC361")
@@ -347,14 +346,16 @@ PROBLEMS = [
         "expected_q1": "Satisfiable", "expected_q2": "Unsatisfiable",
         "summary": (
             "A provider requires at least one of encryption and access "
-            "control; a consumer commits to encryption."),
+            "control. A consumer's policy commits to encryption."),
         "description": (
             "Encryption is one of the two named safeguards, so the "
             "constraints are Compatible without consulting the "
             "vocabulary. Read with KGC363, which changes only the "
             "operator: at least one against both."),
         "certificate": {"kind": "Refutation",
-            "comment": "Encryption is among the offer's values.",
+            "comment": (
+                "Encryption is one of the values the first policy lists, so a "
+                "use with encryption satisfies both policies."),
             "premises": []},
         "provenance": "Safeguard clauses in data-sharing agreements.",
         "ttl": _ttl("KGC362", TOM_LO, "at least one of encryption and access control",
@@ -363,6 +364,7 @@ PROBLEMS = [
     },
     {
         "id": "KGC363", "subdir": "verdict",
+        "twin":              "KGC364",
         "name": "measures, isAllOf {Encryption, AccessControl} against eq Encryption",
         "left_operand": "TechnicalOrganisationalMeasure", "sort": "tax",
         "resource": RESOURCE, "background_theory": EMPTY_BT,
@@ -389,6 +391,7 @@ PROBLEMS = [
     },
     {
         "id": "KGC364", "subdir": "verdict",
+        "twin":              "KGC363",
         "name": "measures, isAllOf {Encryption, AccessControl} against eq "
                 "Encryption, declared distinct",
         "left_operand": "TechnicalOrganisationalMeasure", "sort": "tax",

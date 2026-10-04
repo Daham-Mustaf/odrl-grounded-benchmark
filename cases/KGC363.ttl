@@ -53,6 +53,7 @@ drk:KGC363-report a vrep:OperandVerdictReport ;
     vrep:comparedConstraint kgc:KGC363-p2-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-tom> ;
     vrep:backgroundTheory <https://w3id.org/odrl-kb/dpv-tom/empty> ;
+    vrep:readAgainst drk:KGC364-report ;
     rdfs:comment """One structure identifies encryption with access control and admits the use; nothing published forbids it."""@en ;
     dcterms:description """A provider requires both encryption and access control; a consumer commits to encryption only."""@en ;
     vrep:compatibilityState vrep:Unknown ;

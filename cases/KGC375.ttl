@@ -50,6 +50,8 @@ drk:KGC375-report a vrep:OperandVerdictReport ;
     vrep:comparedConstraint kgc:KGC375-p2-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-language-bcp47> ;
     vrep:backgroundTheory <https://w3id.org/odrl-kb/bcp47/empty> ;
-    dcterms:description """A publisher distributes in German, while a reuser accepts any language except French."""@en ;
+    vrep:readAgainst drk:KGC374-report ;
+    rdfs:comment """Nothing says that German and French are different languages. One structure identifies them, and then a use in German is a use in French, so the verdict is Unknown."""@en ;
+    dcterms:description """As KGC374, without the registry rule."""@en ;
     vrep:compatibilityState vrep:Unknown ;
     vrep:unknownReason vrep:Epistemic .

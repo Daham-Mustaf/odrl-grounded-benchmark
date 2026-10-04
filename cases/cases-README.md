@@ -6,10 +6,11 @@ reading, and the report the semantics produces for them.
 ```
 KGC100-112   well-sortedness, rejected at drafting time
 KGC300-302   the motivating example, one per sort
+KGC303-306   spatial: exactly one of two countries, over GeoNames
 KGC310-317   purpose, over DPV purposes
 KGC320-323   fileFormat, over the EU file type table
 KGC330-334   spatial, over DPV Locations
-KGC340-347   consent status, over the DPV consent module
+KGC340-343   consent status, over the DPV consent module
 KGC350-353   legal basis, over DPV and its GDPR extension
 KGC360-364   technical and organisational measures
 KGC370-375   language, over a BCP 47 slice

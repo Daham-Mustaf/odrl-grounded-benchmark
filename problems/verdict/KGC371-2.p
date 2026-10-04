@@ -3,11 +3,7 @@
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
 % Problem  : language, eq de against eq fr, declaration withdrawn (witness condition negated)
 % Version  : 1.0
-% English  : The policies of KGC370, over the same resource, with the registry-uniqueness rule withdrawn.
-%           : 
-%           : The registry still lists both subtags and still asserts nothing that separates them. So some structures admitted by the resource interpret de and fr as one language and others keep them apart, and whether a single use can satisfy both constraints depends on which. The verdict is Unknown, and the reason is epistemic: a declaration by either party settles it.
-%           : 
-%           : Read against KGC370 this is what a withdrawable premise means. Two identical policies over one vocabulary, one include line apart, and the verdict moves from definite to open because a party stopped asserting something the registry never asserted.
+% English  : As KGC370, without the registry rule.
 %
 % Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark

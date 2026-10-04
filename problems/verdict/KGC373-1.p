@@ -3,7 +3,7 @@
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
 % Problem  : language, eq de against eq "en-US", primary-subtag grounding (witness condition asserted)
 % Version  : 1.0
-% English  : A publisher distributes in German, while a reuser requests American English.
+% English  : A publisher distributes in German. A reuser's policy commits to American English (en-US), under the rule that reduces a tag to its primary subtag.
 %
 % Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark

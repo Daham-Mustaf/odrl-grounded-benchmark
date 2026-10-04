@@ -1,7 +1,7 @@
 # DPV Locations, jurisdictional reading: containment and union
 # membership.
 #
-# The same file as the geographic reading, with the membership
+# The same file as the territorial reading, with the membership
 # edges to supranational unions read as containment as well.
 # Germany within the EU is then an order assertion, and
 # isPartOf EU has an answer.

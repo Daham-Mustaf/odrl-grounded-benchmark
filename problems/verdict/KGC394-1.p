@@ -3,7 +3,7 @@
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
 % Problem  : purpose, isAnyOf {RnD, Marketing} against eq ScientificResearch, declared distinct (witness condition asserted)
 % Version  : 1.0
-% English  : As KGC393, with scientific research declared distinct from both named purposes.
+% English  : As KGC393, with scientific research declared distinct from both purposes the first policy names.
 %
 % Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark

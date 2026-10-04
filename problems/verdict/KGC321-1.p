@@ -3,7 +3,7 @@
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
 % Problem  : fileFormat, eq ft:PDF against eq ft:PDFA1A, under a declared distinctness (witness condition asserted)
 % Version  : 1.0
-% English  : A library permits PDF, while a researcher requests PDF/A-1a, with the two formats declared distinct.
+% English  : As KGC320, with the two formats declared distinct.
 %
 % Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark

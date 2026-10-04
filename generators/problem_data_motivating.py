@@ -86,11 +86,15 @@ fof(bg_disj_de_distinct_fr, axiom,
 (or (and (= bcp_de bcp_de) (= bcp_de bcp_fr))
     (and (= bcp_fr bcp_de) (= bcp_fr bcp_fr)))""",
 
+        "summary": (
+            "BSB permits access to the manuscripts in German. BnF's policy "
+            "commits to access in French."),
         "certificate": {
             "kind": "Refutation",
-            "comment": "No model admits a common use.  The two constraints "
-                       "require one concept to be both subtags, and the "
-                       "background theory holds them distinct.",
+            "comment": (
+                "Both constraints can hold only if German and French are one "
+                "language. The registry rule the parties adopt makes them "
+                "distinct, so no use satisfies both policies."),
             "premises": [
                 ("fromBackgroundTheory",
                  "bcp:de and bcp:fr are distinct (registry uniqueness)"),
@@ -151,8 +155,8 @@ kgc:KGC300-p2-c1 a odrl:Constraint ;
         "name":              "purpose, isA dpv:NCP against eq dpv:SR",
         "left_operand":      "purpose",
         "sort":              "tax",
-        "resource":          "https://w3id.org/odrl-kb/dpv-purpose",
-        "background_theory": "https://w3id.org/odrl-kb/dpv-purpose/declared",
+        "resource":          "https://w3id.org/odrl-kb/dpv-purposes",
+        "background_theory": "https://w3id.org/odrl-kb/dpv-purposes/empty",
         "unknown_reason": "epistemic",
         "includes":          ["KGE000-0.ax", "DPV-dpv-purposes.ax"],
         "description": (
@@ -187,13 +191,16 @@ kgc:KGC300-p2-c1 a odrl:Constraint ;
 (or (and (kge_leq dpv_non_commercial_purpose dpv_non_commercial_purpose) (= dpv_non_commercial_purpose dpv_scientific_research))
     (and (kge_leq dpv_scientific_research  dpv_non_commercial_purpose) (= dpv_scientific_research  dpv_scientific_research)))""",
 
+        "summary": (
+            "BSB permits use for non-commercial research only. BnF's policy "
+            "commits to use for scientific research."),
         "certificate": {
             "kind": "Models",
-            "comment": "Both queries are satisfiable, so some models admit a "
-                       "common use and some do not.  The models differ on "
-                       "whether dpv:ScientificResearch falls under "
-                       "dpv:NonCommercialPurpose, which is what the "
-                       "vocabulary leaves open.",
+            "comment": (
+                "DPV does not say whether scientific research is a "
+                "non-commercial purpose. One structure places it below "
+                "non-commercial purposes and one does not, so the verdict is "
+                "Unknown."),
             "premises": [],
         },
         "ttl": """\
@@ -255,7 +262,7 @@ kgc:KGC301-p2-c1 a odrl:Constraint ;
         "left_operand":      "spatial",
         "sort":              "mer",
         "resource":          "https://w3id.org/odrl-kb/geonames-europe",
-        "background_theory": "https://w3id.org/odrl-kb/geonames-europe/admin-siblings",
+        "background_theory": "https://w3id.org/odrl-kb/geonames-europe/empty",
         "includes":          ["KGE000-0.ax", "GN000-0.ax"],
         "description": (
             "Offer (spatial, isPartOf, gn:Europe) against request (spatial, "
@@ -291,11 +298,14 @@ fof(res_france_within_europe, axiom,
 (or (and (kge_leq gn_europe gn_europe) (= gn_europe gn_france))
     (and (kge_leq gn_france gn_europe) (= gn_france gn_france)))""",
 
+        "summary": (
+            "BSB permits use by recipients in Europe. BnF's policy names a "
+            "recipient in France."),
         "certificate": {
             "kind": "Refutation",
-            "comment": "No model lacks a common use.  The gazetteer places "
-                       "France within Europe, so France itself is an "
-                       "admissible use in every model.",
+            "comment": (
+                "GeoNames places France within Europe, so a use in France "
+                "satisfies both policies in every structure."),
             "premises": [
                 ("fromResource", "gn:France lies within gn:Europe"),
             ],

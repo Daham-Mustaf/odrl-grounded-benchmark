@@ -53,6 +53,7 @@ drk:KGC300-report a vrep:OperandVerdictReport ;
     vrep:comparedConstraint kgc:KGC300-p2-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-language-bcp47> ;
     vrep:backgroundTheory <https://w3id.org/odrl-kb/bcp47/uniqueness> ;
-    rdfs:comment """No model admits a common use.  The two constraints require one concept to be both subtags, and the background theory holds them distinct."""@en ;
+    rdfs:comment """Both constraints can hold only if German and French are one language. The registry rule the parties adopt makes them distinct, so no use satisfies both policies."""@en ;
+    dcterms:description """BSB permits access to the manuscripts in German. BnF's policy commits to access in French."""@en ;
     vrep:compatibilityState vrep:Incompatible ;
     vrep:certificate <certificates/KGC300-1.tstp> .

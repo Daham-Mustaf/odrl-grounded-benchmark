@@ -3,7 +3,7 @@
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
 % Problem  : spatial, isPartOf loc:EU against eq loc:BQ, jurisdictional (witness condition negated)
 % Version  : 1.0
-% English  : A library permits use within the European Union; a researcher requests use in Bonaire, Sint Eustatius and Saba.
+% English  : A library permits use within the European Union. A researcher's policy commits to use in Bonaire, Sint Eustatius and Saba.
 %
 % Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark

@@ -42,6 +42,7 @@ from collections import defaultdict
 from pathlib import Path
 
 from rdflib import Graph, Namespace, RDF, URIRef, BNode
+from rdflib.namespace import RDFS, DCTERMS
 from rdflib.collection import Collection
 
 ODRL = Namespace("http://www.w3.org/ns/odrl/2/")
@@ -135,6 +136,20 @@ def check(path: Path, bindings, theories, errs, warns, twins, notes):
             if op not in SET_OPERATORS and (len(ros) != 1 or is_list):
                 e(f"{c}: {op} takes one value, has {len(ros)}"
                   + (" (a list)" if is_list else ""))
+
+    # Every report says what the policies ask (dcterms:description) and why
+    # the verdict is what it is (rdfs:comment), in words that do not suggest
+    # an ODRL evaluation request.
+    for rep in set(g.subjects(RDF.type, VREP.OperandVerdictReport)) | \
+            set(g.subjects(RDF.type, VREP.WellSortednessReport)):
+        for prop, label in ((DCTERMS.description, "dcterms:description"),
+                            (RDFS.comment, "rdfs:comment")):
+            vals = list(g.objects(rep, prop))
+            if len(vals) != 1:
+                e(f"report needs exactly one {label}, has {len(vals)}")
+            for v in vals:
+                if re.search(r"\b(offer|request)", str(v), re.I):
+                    warns.append(f"{path.name}: {label} says offer or request")
 
     for rep in g.subjects(RDF.type, VREP.WellSortednessReport):
         cs = list(g.objects(rep, VREP.constraint))

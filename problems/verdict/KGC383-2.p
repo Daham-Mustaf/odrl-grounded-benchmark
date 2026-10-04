@@ -3,7 +3,7 @@
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
 % Problem  : spatial, isPartOf loc:EU against eq loc:DE-NW, jurisdictional (witness condition negated)
 % Version  : 1.0
-% English  : Use within the European Union against use in North Rhine-Westphalia, jurisdictional reading: DE-NW within DE, DE a member of EU, one transitivity step. Compatible, and here the composed answer is true. Read with KGC380: same reading, same depth, same two relations; the reading is faithful, and composing two relations is what can fail.
+% English  : A library permits use within the European Union. A researcher's policy commits to use in North Rhine-Westphalia.
 %
 % Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark

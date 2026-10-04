@@ -3,7 +3,7 @@
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
 % Problem  : spatial, or(isPartOf loc:DE-NW, isPartOf loc:DE-BY) against eq loc:DE-NW (witness condition negated)
 % Version  : 1.0
-% English  : Use within North Rhine-Westphalia or within Bavaria against use in North Rhine-Westphalia. Compatible through the first disjunct, by reflexivity. The first verdict problem in the suite with a Logical Constraint; the refutation must cite the disjunct it used, which tests that attribution follows the branch.
+% English  : A library permits use within North Rhine-Westphalia or within Bavaria. A researcher's policy commits to use in North Rhine-Westphalia.
 %
 % Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark

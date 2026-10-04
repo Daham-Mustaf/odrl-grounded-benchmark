@@ -21,7 +21,7 @@ include('axioms/LOC-dpvloc-juris.ax').
 % --- constants, groundings and resource hooks ----------------------------
 % Background theory: empty.
 % Resource: the jurisdictional reading, containment together with union
-% membership.  Under the geographic reading loc:EU is not a concept and this
+% membership.  Under the territorial reading loc:EU is not a concept and this
 % problem does not arise.
 
 % --- witness condition negated -------------------------------------------

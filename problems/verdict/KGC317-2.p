@@ -3,7 +3,7 @@
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
 % Problem  : purpose, isNoneOf {dpv:Marketing} against eq dpv:Marketing (witness condition negated)
 % Version  : 1.0
-% English  : A library excludes marketing, while a researcher requests use for marketing.
+% English  : A library permits use for any purpose other than marketing. A researcher's policy commits to use for marketing.
 %
 % Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark

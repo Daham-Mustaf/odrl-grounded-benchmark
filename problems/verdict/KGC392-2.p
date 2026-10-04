@@ -3,9 +3,7 @@
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
 % Problem  : spatial, isNoneOf {loc:WF} against eq loc:WF-UV, ISO rule (witness condition negated)
 % Version  : 1.0
-% English  : Use anywhere except Wallis and Futuna, against use in Uvea, a commune the file places within Wallis and Futuna. isNoneOf excludes the named area by identity, Uvea is a different concept under the ISO rule, and the verdict is Compatible.
-%           : 
-%           : The verdict is faithful to ODRL's set-based operator and defeats what the drafter meant: 'not in Wallis and Futuna' is a claim about parthood, and no ODRL operator tests the complement of a down-set. The spatial twin of neq EU not meaning outside the EU.
+% English  : A library permits use anywhere except Wallis and Futuna. A researcher's policy commits to use in Uvea, a district of Wallis and Futuna.
 %
 % Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark

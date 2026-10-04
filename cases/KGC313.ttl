@@ -53,7 +53,8 @@ drk:KGC313-report a vrep:OperandVerdictReport ;
     vrep:comparedConstraint kgc:KGC313-p2-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-purpose> ;
     vrep:backgroundTheory <https://w3id.org/odrl-kb/dpv-purposes/empty> ;
-    rdfs:comment """DPV does not declare Marketing and ScientificResearch distinct, so open-world semantics cannot establish either compatibility or conflict."""@en ;
-    dcterms:description """A library permits use for marketing, while a researcher requests use for scientific research."""@en ;
+    vrep:readAgainst drk:KGC314-report ;
+    rdfs:comment """DPV does not declare marketing and scientific research distinct. One structure identifies them and one does not, so the verdict is Unknown."""@en ;
+    dcterms:description """A library permits use for marketing. A researcher's policy commits to use for scientific research."""@en ;
     vrep:compatibilityState vrep:Unknown ;
     vrep:unknownReason vrep:Epistemic .

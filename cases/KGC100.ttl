@@ -44,5 +44,6 @@ drk:KGC100-report a vrep:WellSortednessReport ;
     dcterms:identifier "KGC100" ;
     vrep:constraint kgc:KGC100-p1-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-spatial-geonames> ;
-    vrep:wellSorted false ;
-    rdfs:comment """isA requires subsumption; the operand is mer, whose resource supplies parthood"""@en .
+    dcterms:description """A library's policy constrains spatial with isA gn:Europe, and the binding reads spatial at sort mer."""@en ;
+    rdfs:comment """isA requires subsumption; the operand is mer, whose resource supplies parthood."""@en ;
+    vrep:wellSorted false .

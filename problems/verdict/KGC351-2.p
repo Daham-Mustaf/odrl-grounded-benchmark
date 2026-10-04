@@ -3,7 +3,7 @@
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
 % Problem  : legal basis, isAnyOf Article 6(1) against eq A6-1-a-explicit-consent (witness condition negated)
 % Version  : 1.0
-% English  : A controller permits processing under any of the seven Article 6(1) legal bases, while a processor requests processing on the basis of explicit consent under Article 6(1)(a).
+% English  : A controller permits processing on any of the seven Article 6(1) legal bases. A processor's policy relies on explicit consent under Article 6(1)(a).
 %
 % Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark

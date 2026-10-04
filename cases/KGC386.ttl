@@ -47,6 +47,7 @@ drk:KGC386-report a vrep:OperandVerdictReport ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-spatial-dpvloc-geo> ;
     vrep:backgroundTheory <https://w3id.org/odrl-kb/dpv-loc/empty> ;
     vrep:readAgainst drk:KGC387-report ;
-    rdfs:comment """A structure identifying Hamburg with Bavaria defeats the witness; nothing published forbids it."""@en ;
+    rdfs:comment """DPV does not state that Hamburg differs from Bavaria or Berlin. A structure that identifies Hamburg with one of them excludes the use, so the verdict is Unknown."""@en ;
+    dcterms:description """A library permits use anywhere except Bavaria and Berlin. A researcher's policy commits to use in Hamburg."""@en ;
     vrep:compatibilityState vrep:Unknown ;
     vrep:unknownReason vrep:Epistemic .

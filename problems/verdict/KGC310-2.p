@@ -3,7 +3,7 @@
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
 % Problem  : purpose, isA dpv:R&D against eq dpv:SR (witness condition negated)
 % Version  : 1.0
-% English  : A library permits use for research and development, and a researcher requests use for scientific research.
+% English  : A library permits use for research and development. A researcher's policy commits to use for scientific research.
 %
 % Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark

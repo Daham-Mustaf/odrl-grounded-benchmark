@@ -3,9 +3,7 @@
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
 % Problem  : spatial, hasPart loc:DE-NW against eq loc:DE (witness condition negated)
 % Version  : 1.0
-% English  : Use in an area that has North Rhine-Westphalia as a part, against use in Germany. Germany has NRW as a part, on the same assertion as KGC382 read upward. The only up-set operator in the table, and nothing else exercises it.
-%           : 
-%           : Coverage-motivated: a spatial hasPart clause is rare in practice.
+% English  : A library permits use in an area that contains North Rhine-Westphalia. A researcher's policy commits to use in Germany.
 %
 % Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark

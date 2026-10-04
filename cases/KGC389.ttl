@@ -53,6 +53,7 @@ drk:KGC389-report a vrep:OperandVerdictReport ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-spatial-dpvloc-geo> ;
     vrep:backgroundTheory <https://w3id.org/odrl-kb/dpv-loc/empty> ;
     vrep:readAgainst drk:KGC390-report ;
-    rdfs:comment """Identifying the two Laender makes both alternatives true and exactly-one false."""@en ;
+    rdfs:comment """DPV does not state that the two Laender are different. If they are identified, both alternatives hold and 'exactly one' fails, so the verdict is Unknown."""@en ;
+    dcterms:description """A library permits use in exactly one of North Rhine-Westphalia and Bavaria. A researcher's policy commits to use in North Rhine-Westphalia."""@en ;
     vrep:compatibilityState vrep:Unknown ;
     vrep:unknownReason vrep:Epistemic .

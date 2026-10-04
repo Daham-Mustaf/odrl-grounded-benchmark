@@ -1,4 +1,4 @@
-# DPV Locations, geographic reading: containment only.
+# DPV Locations, territorial reading: containment only.
 #
 # The file uses skos:broader for five relations.  This resource
 # reads the two that are containment, region within country and
