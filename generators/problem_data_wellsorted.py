@@ -29,7 +29,8 @@ VALUE = {
 
 PREFIX = {
     "spatial":  ("gn",      "@prefix gn:      <https://sws.geonames.org/> ."),
-    "purpose":  ("dpv",     "@prefix dpv:     <https://w3id.org/dpv#> ."),
+    "purpose":  ("dpv",     "@prefix dpv:     <https://w3id.org/dpv#> .\n"
+                            "@prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> ."),
     "language": ("odrlkb",  "@prefix odrlkb:  <https://w3id.org/odrl-kb/bcp47#> ."),
 }
 
@@ -42,6 +43,15 @@ RESOURCE = {
                  "https://w3id.org/odrl-kb/bcp47/uniqueness"),
 }
 
+# The left operand each problem writes.  Purposes are DPV concepts, so the
+# DPV-ODRL operand is used, as DPV-ODRL recommends; the GeoNames and BCP 47
+# values are not from DPV and keep the ODRL operands.
+LEFT = {
+    "spatial":  "odrl:spatial",
+    "purpose":  "dpv-odrl:Purpose",
+    "language": "odrl:language",
+}
+
 BINDING = {
     "spatial":  "https://w3id.org/odrl-kb/profile/b-spatial-geonames",
     "purpose":  "https://w3id.org/odrl-kb/profile/b-purpose-dpv",
@@ -50,6 +60,8 @@ BINDING = {
 
 def _ttl(pid: str, operand: str, operator: str, value: str) -> str:
     _, prefix_line = PREFIX[operand]
+    profile = ("\n    odrl:profile dpv-odrl: ;"
+               if LEFT[operand].startswith("dpv-odrl:") else "")
     return f"""\
 @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
@@ -64,7 +76,7 @@ drk:manuscripts a dcterms:Dataset ;
     dcterms:title "Digitised manuscripts, Bavarian State Library"@en .
 
 drk:policy-{pid[3:]}-1 a odrl:Set ;
-    odrl:uid drk:policy-{pid[3:]}-1 ;
+    odrl:uid drk:policy-{pid[3:]}-1 ;{profile}
     dcterms:title "BSB, {operand} constrained by {operator}"@en ;
     odrl:assigner drk:library ;
     odrl:permission kgc:{pid}-p1-r1 .
@@ -75,7 +87,7 @@ kgc:{pid}-p1-r1 a odrl:Permission ;
     odrl:constraint kgc:{pid}-p1-c1 .
 
 kgc:{pid}-p1-c1 a odrl:Constraint ;
-    odrl:leftOperand odrl:{operand} ;
+    odrl:leftOperand {LEFT[operand]} ;
     odrl:operator odrl:{operator} ;
     odrl:rightOperand {VALUE[value]} ."""
 

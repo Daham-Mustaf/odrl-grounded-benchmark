@@ -154,6 +154,7 @@ _TTL_HEAD = """\
 @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix loc:     <https://w3id.org/dpv/loc#> .
+@prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> .
 @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
 """
@@ -180,6 +181,7 @@ _TTL_HEAD = """\
 @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix loc:     <https://w3id.org/dpv/loc#> .
+@prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> .
 @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
 """
@@ -188,7 +190,7 @@ _TTL_HEAD = """\
 def _cnode(cid, op, vals):
     ro = _ro(op, [f"loc:{v}" for v in vals])
     return f"""kgc:{cid} a odrl:Constraint ;
-    odrl:leftOperand odrl:spatial ;
+    odrl:leftOperand dpv-odrl:Location ;
     odrl:operator odrl:{op} ;
     odrl:rightOperand {ro} .
 """
@@ -210,6 +212,7 @@ def _side(pid, k, title, party_line, constraints, connective=None):
               + " ) .\n")
     body = (f"drk:policy-{n}-{k} a odrl:Set ;\n"
             f"    odrl:uid drk:policy-{n}-{k} ;\n"
+            f"    odrl:profile dpv-odrl: ;\n"
             f'    dcterms:title "{title[:1].upper() + title[1:]}"@en ;\n'
             + (f"    {party_line}" if party_line else "")
             + f"    odrl:permission kgc:{pid}-{role}-r1 .\n"
@@ -238,6 +241,7 @@ def _ttl(pid, offer_title, offer_op, offer_val, req_title, req_val):
     return _TTL_HEAD + f"""
 drk:policy-{pid[3:]}-1 a odrl:Set ;
     odrl:uid drk:policy-{pid[3:]}-1 ;
+    odrl:profile dpv-odrl: ;
     dcterms:title "{offer_title[:1].upper() + offer_title[1:]}"@en ;
     odrl:assigner drk:library ;
     odrl:permission kgc:{pid}-p1-r1 .
@@ -248,12 +252,13 @@ kgc:{pid}-p1-r1 a odrl:Permission ;
     odrl:constraint kgc:{pid}-p1-c1 .
 
 kgc:{pid}-p1-c1 a odrl:Constraint ;
-    odrl:leftOperand odrl:spatial ;
+    odrl:leftOperand dpv-odrl:Location ;
     odrl:operator odrl:{offer_op} ;
     odrl:rightOperand loc:{offer_val} .
 
 drk:policy-{pid[3:]}-2 a odrl:Set ;
     odrl:uid drk:policy-{pid[3:]}-2 ;
+    odrl:profile dpv-odrl: ;
     dcterms:title "{req_title[:1].upper() + req_title[1:]}"@en ;
     odrl:permission kgc:{pid}-p2-r1 .
 
@@ -263,7 +268,7 @@ kgc:{pid}-p2-r1 a odrl:Permission ;
     odrl:constraint kgc:{pid}-p2-c1 .
 
 kgc:{pid}-p2-c1 a odrl:Constraint ;
-    odrl:leftOperand odrl:spatial ;
+    odrl:leftOperand dpv-odrl:Location ;
     odrl:operator odrl:eq ;
     odrl:rightOperand loc:{req_val} ."""
 

@@ -2,13 +2,16 @@
 #
 # The sort is the declaration: DPV's skos:broader is read as subsumption.
 # Nothing in the resource says so.
+#
+# The operand is dpv-odrl:Purpose, the DPV-ODRL left operand for purposes
+# drawn from DPV. DPV-ODRL places it below odrl:purpose.
 
-@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+@prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> .
 @prefix bind: <https://w3id.org/odrl-kb/binding#> .
 @prefix ex:   <https://w3id.org/odrl-kb/profile/> .
 
 ex:b-purpose a bind:OperandBinding ;
-    bind:leftOperand odrl:purpose ;
+    bind:leftOperand dpv-odrl:Purpose ;
     bind:sort bind:tax ;
     bind:resource <https://w3id.org/odrl-kb/dpv-purposes> ;
     bind:backgroundTheory <https://w3id.org/odrl-kb/dpv-purposes/empty> ;

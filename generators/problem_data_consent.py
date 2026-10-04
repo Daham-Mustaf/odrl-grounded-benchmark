@@ -309,8 +309,9 @@ PROBLEMS = [
     # The request keeps odrl:use: it says processing continues after
     # withdrawal, not that a different action is taken.
     # ------------------------------------------------------------------
-    {
+       {
         "id": "KGC342", "subdir": "verdict",
+         "twin": "KGC343",
         "name": "consent status, isA ValidForProcessing against eq "
                 "ConsentWithdrawn",
         "left_operand": "Status", "sort": "tax",
@@ -320,19 +321,22 @@ PROBLEMS = [
         "expected_verdict": "Unknown", "unknown_reason": "epistemic",
         "expected_q1": "Satisfiable", "expected_q2": "Satisfiable",
         "summary": (
-            "A controller permits use only while consent may justify "
-            "processing; a processor states that its processing continues "
+            "A controller permits use only while consent can justify "
+            "processing. A processor states that it continues processing "
             "after consent is withdrawn."),
-        "description": (
-            "DPV places consent withdrawn below the invalid branch and asserts "
-            "nothing that keeps the two branches apart, so a structure may "
-            "place the withdrawn state below both. Unknown is the right "
-            "answer to what the module publishes, even though its definitions "
-            "read otherwise."),
+  "description": (
+            "DPV places the withdrawn state below the invalid branch. It "
+            "does not state in RDF that the valid and invalid branches are "
+            "disjoint. So one structure that satisfies the published "
+            "assertions also places the withdrawn state below the valid "
+            "branch, and another does not. The verdict is therefore Unknown. "
+            "KGC343 adds the disjointness as a background theory."),
         "certificate": {"kind": "Models",
-            "comment": "Nothing published keeps the withdrawn state out of the "
-                       "valid branch, so one structure admits the use and one "
-                       "does not.",
+            "comment": (
+                "The published assertions do not exclude the withdrawn "
+                "state from the valid branch. One structure places it below "
+                "both branches, and both constraints can hold. Another does "
+                "not, and they cannot."),
             "premises": []},
         "provenance": PROV_POST,
         "ttl": _TTL_HEAD
@@ -342,41 +346,41 @@ PROBLEMS = [
     },
     {
         "id": "KGC343", "subdir": "verdict",
+        "twin": "KGC342",
         "name": "consent status, isA ValidForProcessing against eq "
                 "ConsentWithdrawn, branches disjoint",
         "left_operand": "Status", "sort": "tax",
         "resource": RESOURCE, "background_theory": DEFINITIONAL_BT,
-                "fof_decls": _DISJ[0],
+        "binding": BINDING, "includes": INCLUDES_DEFINITIONAL,
+        "fof_decls": _DISJ[0],
         "smt2_background": _DISJ[1],
         "extra_constants": [INVALID],
-        "binding": BINDING, "includes": INCLUDES_DEFINITIONAL,
         "tree": [C("isA", VALID), C("eq", WITHDRAWN, side="request")],
-                "fof_decls": _DISJ[0],
-        "smt2_background": _DISJ[1],
         "expected_verdict": "Incompatible",
         "expected_q1": "Unsatisfiable", "expected_q2": "Satisfiable",
         "summary": (
             "As KGC342, with the valid and invalid branches declared "
-            "disjoint on DPV's definitions."),
-        "description": (
-            "Nothing then lies below both branches; the withdrawn state lies "
-            "below the invalid one and so not below the valid one: "
-            "Incompatible. The controller's gate and the processor's practice "
-            "cannot hold of one use, which is the Art. 7(3) against Art. 17 "
-            "case where a separate legal basis would be needed. The "
-            "declaration is warranted by the module's definitions and "
-            "asserted by it nowhere, so the certificate marks it "
-            "withdrawable."),
-        "certificate": {"kind": "Refutation",
-            "comment": "The withdrawn state lies below the invalid branch, and "
-                       "the branches are declared to have nothing below both. "
-                       "The declaration follows DPV's definitions but is not "
-                       "asserted by DPV; withdrawing it reopens the verdict.",
-            "premises": [("fromResource",
-                          "dpv:ConsentWithdrawn is below "
-                          "dpv:ConsentStatusInvalidForProcessing"),
-                         ("fromBackgroundTheory",
-                          "the two branches have nothing below both")]},
+            "disjoint by the background theory."),
+ "description": (
+            "The background theory declares the valid and invalid branches "
+            "disjoint, meaning that nothing lies below both. The withdrawn "
+            "state lies below the invalid branch, so it cannot also lie "
+            "below the valid branch. No use satisfies both policies, and the "
+            "verdict is Incompatible. DPV's definitions support the "
+            "disjointness, but the DPV RDF does not assert it."),
+"certificate": {"kind": "Refutation",
+    "comment": (
+                "ConsentWithdrawn lies below the invalid branch, and the "
+                "background theory declares the two branches disjoint. So it "
+                "cannot also lie below the valid branch. Without that "
+                "background theory the verdict is Unknown, as in KGC342."),
+            "premises": [
+                ("fromResource",
+                 "dpv:ConsentWithdrawn is below "
+                 "dpv:ConsentStatusInvalidForProcessing"),
+                ("fromBackgroundTheory",
+                 "dpv:ConsentStatusValidForProcessing and "
+                 "dpv:ConsentStatusInvalidForProcessing are disjoint")]},
         "provenance": PROV_POST,
         "ttl": _TTL_HEAD
                + _offer_atomic("KGC343", OFFER_GATE, "isA",
