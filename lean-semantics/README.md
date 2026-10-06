@@ -19,9 +19,16 @@ Core Lean only, no Mathlib yet. Build from this folder:
 | OdrlGrounded/Factoring.lean | Operand independence, operand-wise factoring |
 | OdrlGrounded/Examples/Language.lean | Figure 1, language row |
 | OdrlGrounded/Examples/Grounding.lean | Language row with values, ungrounded alternative |
+| OdrlGrounded/Examples/Purpose.lean | Figure 1, purpose row: `Compatible`, with a model of the published assertion |
+| OdrlGrounded/Examples/Spatial.lean | Figure 1, place row: `Compatible`, with a model of the published assertion |
+| OdrlGrounded/Examples/Verdicts.lean | All three verdicts under consistent theories, an inconsistent theory, well-sortedness |
+| OdrlGrounded/Audit.lean | `#print axioms` for the main theorems and examples |
 
 Folder `crosscheck/` holds the brute-force Python checks of the same
 claims, with a table of which Lean theorem covers which check.
 
-Later steps add Collapse.lean and Checker.lean,
-and Examples/Purpose.lean and Examples/Spatial.lean.
+Axiom check:
+
+    lake build OdrlGrounded.Audit 2>&1 | grep -E "axioms|error|sorry"
+
+A later step adds Checker.lean.

@@ -11,3 +11,7 @@ import OdrlGrounded.VerdictProperties
 import OdrlGrounded.Decision
 import OdrlGrounded.Factoring
 import OdrlGrounded.Collapse
+import OdrlGrounded.Examples.Purpose
+import OdrlGrounded.Examples.Spatial
+import OdrlGrounded.Examples.Verdicts
+import OdrlGrounded.Audit
