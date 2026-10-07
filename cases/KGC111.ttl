@@ -18,7 +18,6 @@
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
 @prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix vrep:    <https://w3id.org/odrl-kb/verdict-report#> .
-@prefix bind:    <https://w3id.org/odrl-kb/binding#> .
 
 drk:manuscripts a dcterms:Dataset ;
     dcterms:title "Digitised manuscripts, Bavarian State Library"@en .

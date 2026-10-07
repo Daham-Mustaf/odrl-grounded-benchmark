@@ -3,7 +3,7 @@
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
 % Problem  : spatial, isPartOf loc:NL against eq loc:BQ (witness condition asserted)
 % Version  : 1.0
-% English  : A library permits use within the Netherlands; a researcher asks to use the material in Bonaire. DPV places Bonaire within the Netherlands.
+% English  : A library permits use within the Netherlands; a researcher's policy commits to use in Bonaire. DPV places Bonaire within the Netherlands.
 %
 % Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark

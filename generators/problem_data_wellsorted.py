@@ -28,7 +28,9 @@ VALUE = {
 }
 
 PREFIX = {
-    "spatial":  ("gn",      "@prefix gn:      <https://sws.geonames.org/> ."),
+    # GeoNames IRIs end in a slash, so they are written in full and need
+    # no prefix.
+    "spatial":  ("gn",      ""),
     "purpose":  ("dpv",     "@prefix dpv:     <https://w3id.org/dpv#> .\n"
                             "@prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> ."),
     "language": ("odrlkb",  "@prefix odrlkb:  <https://w3id.org/odrl-kb/bcp47#> ."),
@@ -62,15 +64,18 @@ def _ttl(pid: str, operand: str, operator: str, value: str) -> str:
     _, prefix_line = PREFIX[operand]
     profile = ("\n    odrl:profile dpv-odrl: ;"
                if LEFT[operand].startswith("dpv-odrl:") else "")
+    # Only the prefixes the file uses.
+    prefixes = "\n".join(line for line in (
+        "@prefix odrl:    <http://www.w3.org/ns/odrl/2/> .",
+        "@prefix dcterms: <http://purl.org/dc/terms/> .",
+        prefix_line,
+        "@prefix drk:     <https://w3id.org/odrl-kb/drk/> .",
+        "@prefix kgc:     <https://w3id.org/odrl-kb/problem/> .",
+        "@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .",
+        "@prefix vrep:    <https://w3id.org/odrl-kb/verdict-report#> .",
+    ) if line)
     return f"""\
-@prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
-@prefix dcterms: <http://purl.org/dc/terms/> .
-{prefix_line}
-@prefix drk:     <https://w3id.org/odrl-kb/drk/> .
-@prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
-@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix vrep:    <https://w3id.org/odrl-kb/verdict-report#> .
-@prefix bind:    <https://w3id.org/odrl-kb/binding#> .
+{prefixes}
 
 drk:manuscripts a dcterms:Dataset ;
     dcterms:title "Digitised manuscripts, Bavarian State Library"@en .

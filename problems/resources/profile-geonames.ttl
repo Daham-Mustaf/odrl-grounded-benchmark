@@ -1,5 +1,6 @@
 # Profile entry for odrl:spatial over the 15-feature GeoNames slice in
-# geonames.ttl, used by the motivating example (KGC302) and the
+# geonames.ttl, used by the running example (KGC302), the cases on
+# exactly one of two countries (KGC303 to KGC306) and the
 # well-sortedness cases KGC100 and KGC110.
 #
 # The sort is mer: gn:parentFeature is read as parthood.  GeoNames publishes

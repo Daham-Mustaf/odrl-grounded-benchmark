@@ -473,9 +473,27 @@ def write_case(p: dict, cases_dir: Path) -> Path:
     if missing:
         body = "\n".join(missing) + "\n" + body
 
-    path.write_text(GENERATED_HEADER + "\n" + body + "\n\n"
-                    + _report_block(p, body) + "\n", encoding="utf-8")
+    text = body + "\n\n" + _report_block(p, body) + "\n"
+    path.write_text(GENERATED_HEADER + "\n" + drop_unused_prefixes(text),
+                    encoding="utf-8")
     return path
+
+
+def drop_unused_prefixes(text: str) -> str:
+    """Remove the @prefix lines whose prefix the rest of the text never
+    uses.  Conservative: a prefix that occurs anywhere else, even inside a
+    literal or a comment, is kept, so removing a line cannot break the
+    Turtle."""
+    lines = text.split("\n")
+    keep = []
+    for i, line in enumerate(lines):
+        m = re.match(r"@prefix\s+([\w-]*):", line)
+        if m:
+            rest = "\n".join(lines[:i] + lines[i + 1:])
+            if not re.search(rf"(?<![\w-]){re.escape(m.group(1))}:", rest):
+                continue
+        keep.append(line)
+    return "\n".join(keep)
 
 
 # ---------------------------------------------------------------------------

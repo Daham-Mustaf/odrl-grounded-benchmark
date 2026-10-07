@@ -286,13 +286,14 @@ PROBLEMS = [
         "binding":           BINDING_GEO,
         "includes":          INCLUDES_GEO,
         "summary": (
-            "A library permits use within the Netherlands; a researcher "
-            "asks to use the material in Bonaire. DPV places Bonaire "
+            "A library permits use within the Netherlands; a researcher's "
+            "policy commits to use in Bonaire. DPV places Bonaire "
             "within the Netherlands."
         ),
         "description": (
             "A library permits use of its digitised manuscripts anywhere "
-            "within the Netherlands; a researcher asks to use them in "
+            "within the Netherlands; a researcher's policy commits to use "
+            "them in "
             "Bonaire, Sint Eustatius and Saba. DPV asserts BQ "
             "skos:broader NL, so the constraints are Compatible on that "
             "one published relation.\n\n"
@@ -361,8 +362,8 @@ PROBLEMS = [
         "binding":           BINDING_JURIS,
         "includes":          INCLUDES_JURIS,
         "summary": (
-            "A library permits use within the European Union; a researcher "
-            "asks to use the material in Germany. DPV places Germany in "
+            "A library permits use within the European Union; a researcher's "
+            "policy commits to use in Germany. DPV places Germany in "
             "the EU, and this binding reads membership as containment."
         ),
         "description": (
@@ -562,8 +563,8 @@ fof(bg_dist_loc_de_loc_fr, axiom,
             "parthood (BQ within NL) with union membership (NL in EU) into "
             "BQ within EU, which is false."),
         "description": (
-            "A library permits use within the European Union; a researcher "
-            "asks to use the material in Bonaire. Under the jurisdictional "
+            "A library permits use within the European Union; a researcher's "
+            "policy commits to use in Bonaire. Under the jurisdictional "
             "reading DPV places BQ within NL and NL within EU, transitivity "
             "closes the chain, and the verdict is Compatible.\n\n"
             "The world disagrees: the Caribbean Netherlands lie outside EU "

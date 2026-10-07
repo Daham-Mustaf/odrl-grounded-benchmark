@@ -238,8 +238,8 @@ PROBLEMS = [
         "includes":          INCLUDES_UNIQUENESS,
         "tree": [C("eq", DE), C("eq", FR, side="request")],
         "description": (
-            "A publisher distributes a dataset in German. A reuser asks "
-            "to distribute it in French. Both constraints are on "
+            "A publisher distributes a dataset in German. A reuser's policy "
+            "commits to distributing it in French. Both constraints are on "
             "odrl:language, which this profile binds to a fifteen-subtag "
             "slice of the IANA Language Subtag Registry at the nominal "
             "sort.\n\n"
@@ -348,8 +348,8 @@ PROBLEMS = [
         "includes":          INCLUDES_UNIQUENESS,
         "ungrounded":        "en-US",
         "description": (
-            "A publisher distributes in German. A reuser asks to "
-            "distribute in en-US.\n\n"
+            "A publisher distributes in German. A reuser's policy commits "
+            "to distributing in en-US.\n\n"
             "That is a well-formed language tag: RFC 5646 composes it "
             "from the registered primary subtag en and the registered "
             "region subtag US, and any conformant parser accepts it. It "

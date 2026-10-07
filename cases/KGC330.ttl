@@ -53,6 +53,6 @@ drk:KGC330-report a vrep:OperandVerdictReport ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-spatial-dpvloc-geo> ;
     vrep:backgroundTheory <https://w3id.org/odrl-kb/dpv-loc/empty> ;
     rdfs:comment """DPV places Bonaire within the Netherlands as a territory of the state, not as a subdivision. Read as containment, a use in Bonaire is a use within the Netherlands, and both policies can be satisfied. This holds constitutionally, not geographically."""@en ;
-    dcterms:description """A library permits use within the Netherlands; a researcher asks to use the material in Bonaire. DPV places Bonaire within the Netherlands."""@en ;
+    dcterms:description """A library permits use within the Netherlands; a researcher's policy commits to use in Bonaire. DPV places Bonaire within the Netherlands."""@en ;
     vrep:compatibilityState vrep:Compatible ;
     vrep:certificate <certificates/KGC330-2.tstp> .

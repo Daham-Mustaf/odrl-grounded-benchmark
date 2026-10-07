@@ -206,7 +206,7 @@ def resource_ttl(classes, labels, inside, meta) -> str:
     return "\n".join(head + body)
 
 def background_ttl(meta) -> str:
-        return """\
+    return f"""\
 # Background theory for the legal-basis resource: empty.
 #
 # Neither module asserts distinctness or disjointness between legal

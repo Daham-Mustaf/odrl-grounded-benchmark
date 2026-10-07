@@ -5,7 +5,7 @@
 # satisfiable together unless a party declares them apart, and the
 # certificate for such a verdict names the declaration.
 #
-# Source: {meta['source_iri']}
+# Source: https://w3id.org/dpv/2.3
 
 @prefix bt:      <https://w3id.org/odrl-kb/background#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
