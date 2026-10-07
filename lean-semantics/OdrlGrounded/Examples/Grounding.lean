@@ -4,7 +4,7 @@ import OdrlGrounded.Examples.Language
 set_option autoImplicit false
 
 /-!
-# Figure 1, language row, with values
+# Running example, language row, with values
 
 The policy names languages by value. The BCP 47 binding grounds `german` to
 `de` and `french` to `fr`. The value `klingon` names no concept of the binding.

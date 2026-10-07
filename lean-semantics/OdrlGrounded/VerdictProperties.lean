@@ -81,7 +81,7 @@ theorem verdict_incompatible_mono (hsub : ∀ a ∈ T, a ∈ T')
   exact (verdict_eq_incompatible_iff hT').mpr
     (incompatible_mono hsub ((verdict_eq_incompatible_iff hT).mp h))
 
-/-- Theorem (Soundness), Compatible case. `I` is the intended interpretation,
+/-- Theorem (Soundness), Compatible case. `I` is the intended structure,
 a model of the theory. -/
 theorem sound_compatible (I : Model C) (hI : Mod T I)
     (h : verdict T N t t' = Verdict.compatible) : I.admits N (t ++ t') :=

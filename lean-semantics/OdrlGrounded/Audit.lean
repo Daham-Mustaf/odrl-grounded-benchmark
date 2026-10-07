@@ -8,6 +8,8 @@ import OdrlGrounded.Examples.Purpose
 import OdrlGrounded.Examples.Spatial
 import OdrlGrounded.Examples.Verdicts
 
+set_option autoImplicit false
+
 /-!
 # Axiom audit
 

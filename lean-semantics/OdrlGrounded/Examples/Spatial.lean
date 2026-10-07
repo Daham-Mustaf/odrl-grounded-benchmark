@@ -3,7 +3,7 @@ import OdrlGrounded.VerdictProperties
 set_option autoImplicit false
 
 /-!
-# Figure 1, place row
+# Running example, place row
 
 The library policy permits `isPartOf Europe`. The researcher policy asks for `eq France`.
 The binding is GeoNames at the mereological sort, and the resource publishes

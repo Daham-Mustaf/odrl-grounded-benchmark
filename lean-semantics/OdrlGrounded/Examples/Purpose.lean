@@ -3,7 +3,7 @@ import OdrlGrounded.VerdictProperties
 set_option autoImplicit false
 
 /-!
-# Figure 1, purpose row
+# Running example, purpose row
 
 The library policy permits `isA R&D`. The researcher policy asks for `eq ScientificResearch`.
 The binding is the DPV purpose hierarchy, and the resource publishes

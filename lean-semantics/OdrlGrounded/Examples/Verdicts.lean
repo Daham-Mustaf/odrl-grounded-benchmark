@@ -7,7 +7,7 @@ set_option autoImplicit false
 /-!
 # The three verdicts, consistency, and the correctness precondition
 
-The rows of Figure 1 give all three verdicts: purpose is `Compatible`
+The rows of the running example give all three verdicts: purpose is `Compatible`
 (Purpose.lean), the language row is `Unknown` without the declaration and
 `Incompatible` with it (Language.lean). This file adds three things.
 

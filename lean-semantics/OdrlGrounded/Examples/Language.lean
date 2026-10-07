@@ -3,7 +3,7 @@ import OdrlGrounded.Verdict
 set_option autoImplicit false
 
 /-!
-# Figure 1, language row
+# Running example, language row
 
 Offer `eq de`, request `eq fr`, concepts from the BCP 47 binding.
 Published assertions: none. Without a declaration the verdict is `Unknown`.
