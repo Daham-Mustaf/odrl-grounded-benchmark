@@ -54,9 +54,13 @@ Axiom check:
 
 Hypotheses. `Consistent T` is needed for exclusivity, for the Incompatible
 direction of the decision form, and for the Incompatible case of monotonicity
-(on the larger theory). `xoneOk`, a consequence of well-sortedness, is needed by
-the witness decision. Without consistency both verdicts hold vacuously and
-`verdict` reports Compatible (`contradictory_verdict`).
+(on the larger theory). Without consistency both verdicts hold vacuously and
+`verdict` reports Compatible (`contradictory_verdict`). `xoneOk`, no `isAllOf`
+among the alternatives of an `xone`, is needed by the witness decision. The
+benchmark compiler does not need it: it rewrites a negated `isAllOf` to a
+disjunction of `neq`, and KGC307 uses that. The rewrite is checked by
+`crosscheck/` (T1, second line) and by `tests/test_witness.py`, not in Lean
+yet.
 
 Axioms. Every main theorem depends only on `propext`, `Classical.choice` and
 `Quot.sound`, or fewer. `Classical.choice` enters through `verdict`, which is a

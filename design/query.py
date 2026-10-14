@@ -112,21 +112,21 @@ class Literal:
     positive: bool = True
 
 
-def negate(c: Constraint) -> Literal:
-    """The negation of a constraint, as a literal.
+def negate(c: Constraint) -> tuple[Literal, ...]:
+    """The negation of a constraint, as a disjunction of literals.
 
     ``isAnyOf`` is the one meets-mode operator, so its negation is a subset
-    condition and rewrites to ``isNoneOf`` on the same values.  A negated
-    ``isAllOf`` cannot occur: the signature rejects it as a xone
-    alternative, which is the only place a negation arises.
+    condition and rewrites to ``isNoneOf`` on the same values.  ``isAllOf``
+    is the one superset-mode operator; a bound set fails it when some listed
+    value is missing, so its negation rewrites to the disjunction of ``neq``
+    over the listed values.  Every other negation stays a negative literal.
     """
     if c.operator == "isAnyOf":
-        return Literal(Constraint("isNoneOf", c.values, c.side))
+        return (Literal(Constraint("isNoneOf", c.values, c.side)),)
     if c.operator == "isAllOf":
-        raise ValueError(
-            "negated isAllOf: the signature should have rejected this "
-            "problem before a query was built")
-    return Literal(c, positive=False)
+        return tuple(Literal(Constraint("neq", (v,), c.side))
+                     for v in c.values)
+    return (Literal(c, positive=False),)
 
 
 def alternatives(item: Item) -> tuple[tuple[Literal, ...], ...]:
@@ -134,10 +134,12 @@ def alternatives(item: Item) -> tuple[tuple[Literal, ...], ...]:
         return ((Literal(item),),)
     if isinstance(item, Or):
         return tuple((Literal(c),) for c in item.alts)
-    return tuple(
-        (Literal(ci),) + tuple(negate(cj) for j, cj in enumerate(item.alts)
-                               if j != i)
-        for i, ci in enumerate(item.alts))
+    out = []
+    for i, ci in enumerate(item.alts):
+        negs = [negate(cj) for j, cj in enumerate(item.alts) if j != i]
+        for pick in product(*negs):
+            out.append((Literal(ci),) + pick)
+    return tuple(out)
 
 
 def disjuncts(tree: GroundedTree) -> list[tuple[Literal, ...]]:

@@ -23,7 +23,7 @@ Run from this folder:
 | `or`, `xone`, negation reduce to disjuncts | T1 | Disjuncts.lean, `admits_iff_exists_witness` |
 | `xone` counts by position | T2 | Disjuncts.lean, `exactlyOne_iff_index` |
 | `N = C` is wrong when `N` is smaller | "N-vs-C" line | `Model.cand`, first clause |
-| Negated `isAllOf` can be lifted, so the `xone` restriction is optional | T1, second line | not in Lean yet |
+| Negated `isAllOf` lifts to a disjunction of `neq`, so `isAllOf` may stand under `xone` (used by `generators/compile.py`) | T1, second line | not in Lean yet |
 | Structures with unnamed elements lose nothing against preorders | T3 | not in Lean yet (collapse) |
 | Verdict of two operands is the minimum | T4 | Factoring.lean, `factoring` |
 | Monotonicity at a fixed concept set | T5 | not in Lean yet |

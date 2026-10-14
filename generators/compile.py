@@ -98,52 +98,59 @@ class IllSorted(ValueError):
 
 
 def check_tree(items):
-    """The xone clause of Definition Signature, decided on operator names.
+    """Rejects a Logical Constraint with no alternatives.
 
-    Also rejects a Logical Constraint with no alternatives.  ODRL ranges the
-    operands of one over Constraint instances and an empty list is
-    malformed, but without the check the failure surfaces three calls away:
-    product over an empty alternatives tuple yields nothing, the disjunct
-    list is empty, and or_ is handed an empty sequence.  Naming the defect
-    here is worth the line, and it makes the empty case unreachable in the
-    syntax classes below.
+    ODRL ranges the operands of one over Constraint instances and an empty
+    list is malformed, but without the check the failure surfaces three
+    calls away: product over an empty alternatives tuple yields nothing, the
+    disjunct list is empty, and or_ is handed an empty sequence.  Naming the
+    defect here is worth the line, and it makes the empty case unreachable
+    in the syntax classes below.
     """
     for it in items:
         if isinstance(it, (Or, Xone)) and not it.alts:
             raise IllSorted("Logical Constraint with no alternatives")
-        if isinstance(it, Xone):
-            for c in it.alts:
-                if c.operator == "isAllOf":
-                    raise IllSorted("isAllOf as a xone alternative")
 
 
-def negate(c: Constraint) -> Lit:
-    """Literal negation for the xone expansion.
+def negate(c: Constraint) -> tuple:
+    """Literal negation for the xone expansion, as a disjunction of literals.
 
     isAnyOf is the one meets-mode operator, so its negation is a subset
     condition and rewrites to a positive isNoneOf on the same values.
+
+    isAllOf is the one superset-mode operator.  A bound set fails it when
+    some listed value is missing, so its negation is the disjunction of
+    neq v over the listed values, each a positive subset-mode literal.
+
     Every other negation is the failure of a subset condition and stays a
     negative literal; the witness gives it a meets requirement against the
-    complement.  A negated isAllOf cannot occur: check_tree rejected it.
+    complement.
     """
     if c.operator == "isAnyOf":
-        return Lit(Constraint("isNoneOf", c.values, c.side))
+        return (Lit(Constraint("isNoneOf", c.values, c.side)),)
     if c.operator == "isAllOf":
-        raise IllSorted("negated isAllOf")
-    return Lit(c, positive=False)
+        return tuple(Lit(Constraint("neq", (v,), c.side)) for v in c.values)
+    return (Lit(c, positive=False),)
 
 
 def alternatives(item):
-    """The literal sets an item contributes, one per alternative."""
+    """The literal sets an item contributes, one per alternative.
+
+    An xone alternative i is c_i together with the negation of every other
+    c_j.  A negated isAllOf is a disjunction, so alternative i contributes
+    one literal set per choice of disjunct from each negation.
+    """
     if isinstance(item, Constraint):
         return ((Lit(item),),)
     if isinstance(item, Or):
         return tuple((Lit(c),) for c in item.alts)
     if isinstance(item, Xone):
-        return tuple(
-            (Lit(ci),) + tuple(negate(cj)
-                               for j, cj in enumerate(item.alts) if j != i)
-            for i, ci in enumerate(item.alts))
+        out = []
+        for i, ci in enumerate(item.alts):
+            negs = [negate(cj) for j, cj in enumerate(item.alts) if j != i]
+            for pick in product(*negs):
+                out.append((Lit(ci),) + pick)
+        return tuple(out)
     raise TypeError(item)
 
 
@@ -249,8 +256,9 @@ def witness_condition(literals, concepts, sort, s):
     neg = [l.c for l in literals if not l.positive]
     # Not an assert: this guards the soundness of the formula rather than a
     # development invariant, and asserts are removed under python -O.  A
-    # negated isAllOf reaching here would compile to a witness condition
-    # that does not state Definition Witness.
+    # negated isAnyOf or isAllOf reaching here would compile to a witness
+    # condition that does not state Definition Witness; negate() rewrites
+    # both to positive literals.
     for c in neg:
         if MODE[c.operator] != SUBSET:
             raise IllSorted(f"negated {c.operator} is not a subset-mode "

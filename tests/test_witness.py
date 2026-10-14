@@ -347,9 +347,10 @@ def negative_battery(names):
     """Literal sets containing negations, as the xone expansion produces them.
 
     The four negations with no dual, and the two that could have been
-    rewritten and deliberately are not.  A negated isAnyOf is absent: the
-    compiler rewrites it to isNoneOf before it reaches the witness, and that
-    rewrite is tested separately.
+    rewritten and deliberately are not.  A negated isAnyOf or isAllOf is
+    absent: the compiler rewrites the first to isNoneOf and the second to a
+    disjunction of neq before either reaches the witness, and both rewrites
+    are tested separately.
     """
     a, b, c = names[0], names[1], names[2]
     return [
@@ -446,6 +447,31 @@ def tree_battery(names):
             [Xone((C("isAnyOf", a, b), C("eq", c)))]),
         ("plain conjunction",
             [C("isA", a), C("eq", b)]),
+        # isAllOf under xone: the negation of the isAllOf alternative is a
+        # disjunction of neq, distributed into the disjuncts.
+        ("xone(isAllOf a, eq b)",
+            [Xone((C("isAllOf", a), C("eq", b)))]),
+        ("xone(isAllOf a b, eq c)",
+            [Xone((C("isAllOf", a, b), C("eq", c)))]),
+        ("xone(isAllOf a b, isA c)",
+            [Xone((C("isAllOf", a, b), C("isA", c)))]),
+        ("xone(isAllOf a, isAllOf b)",
+            [Xone((C("isAllOf", a), C("isAllOf", b)))]),
+        ("xone(isAllOf a b, isAllOf b c)",
+            [Xone((C("isAllOf", a, b), C("isAllOf", b, c)))]),
+        ("xone(isAllOf a b, isAnyOf b c)",
+            [Xone((C("isAllOf", a, b), C("isAnyOf", b, c)))]),
+        ("xone(isAllOf a b, hasPart c)",
+            [Xone((C("isAllOf", a, b), C("hasPart", c)))]),
+        ("xone(isAllOf a b c, eq a, isA b)",
+            [Xone((C("isAllOf", a, b, c), C("eq", a), C("isA", b)))]),
+        ("xone(isAllOf a b, eq c), isA a",
+            [Xone((C("isAllOf", a, b), C("eq", c))), C("isA", a)]),
+        ("xone(isAllOf a b, eq c), or(isA a, eq b)",
+            [Xone((C("isAllOf", a, b), C("eq", c))),
+             Or((C("isA", a), C("eq", b)))]),
+        ("or(isAllOf a b, eq c)",
+            [Or((C("isAllOf", a, b), C("eq", c)))]),
     ]
 
 
@@ -498,17 +524,30 @@ def main() -> int:
               f"{checked:6} checks   {status}")
         total_failures += failures
 
-        # The rewrite the expansion depends on: a negated isAnyOf must become
-        # a positive isNoneOf, not a negative literal.  If a refactor removes
-        # it, the negation would emit a meets requirement against the
-        # complement, which is satisfiable whenever anything else is in D.
+        # The rewrites the expansion depends on.  negate() returns a
+        # disjunction of literals.  A negated isAnyOf must become one
+        # positive isNoneOf, not a negative literal: a negative literal would
+        # emit a meets requirement against the complement, which is
+        # satisfiable whenever anything else is in D.  A negated isAllOf
+        # must become one positive neq per listed value: the witness has no
+        # case for a negative superset-mode literal.
         from compile import negate
-        got = negate(C("isAnyOf", names[0], names[1]))
-        expect_ok = got.positive and got.c.operator == "isNoneOf"
+        a, b = names[0], names[1]
+        got = negate(C("isAnyOf", a, b))
+        expect_ok = (len(got) == 1 and got[0].positive
+                     and got[0].c == C("isNoneOf", a, b))
         print(f"{'negate(isAnyOf) rewrite':24} "
               f"{'ok' if expect_ok else 'WRONG: ' + repr(got)}")
         if not expect_ok:
             total_failures.append(("negate(isAnyOf)", None, None, None))
+
+        got = negate(C("isAllOf", a, b))
+        expect_ok = (len(got) == 2 and all(l.positive for l in got)
+                     and [l.c for l in got] == [C("neq", a), C("neq", b)])
+        print(f"{'negate(isAllOf) rewrite':24} "
+              f"{'ok' if expect_ok else 'WRONG: ' + repr(got)}")
+        if not expect_ok:
+            total_failures.append(("negate(isAllOf)", None, None, None))
     else:
         print(f"{'trees (or, xone)':24} not in compile.py yet")
 
