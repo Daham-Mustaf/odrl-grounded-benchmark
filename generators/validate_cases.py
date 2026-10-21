@@ -16,8 +16,10 @@ Errors (exit 1):
       operator with a list or with more than one value
     - an operand verdict report whose policies or constraints are not the
       ones in the file, or that lacks binding, background theory or
-      verdict; an Unknown without a reason, a reason without an Unknown,
-      a definite verdict without a certificate
+      verdict; a definite verdict without a certificate, or an Unknown
+      with one
+    - a grounding report whose constraint is not in the file, or that
+      lacks vrep:grounded, or whose ungrounded values do not match it
     - vrep:readAgainst pointing at a case that does not exist or does not
       point back
 
@@ -141,7 +143,8 @@ def check(path: Path, bindings, theories, errs, warns, twins, notes):
     # the verdict is what it is (rdfs:comment), in words that do not suggest
     # an ODRL evaluation request.
     for rep in set(g.subjects(RDF.type, VREP.OperandVerdictReport)) | \
-            set(g.subjects(RDF.type, VREP.WellSortednessReport)):
+            set(g.subjects(RDF.type, VREP.WellSortednessReport)) | \
+            set(g.subjects(RDF.type, VREP.GroundingReport)):
         for prop, label in ((DCTERMS.description, "dcterms:description"),
                             (RDFS.comment, "rdfs:comment")):
             vals = list(g.objects(rep, prop))
@@ -160,6 +163,41 @@ def check(path: Path, bindings, theories, errs, warns, twins, notes):
         for b in g.objects(rep, VREP.binding):
             if str(b) not in bindings:
                 warns.append(f"{path.name}: binding {b} is declared by no profile")
+
+    for rep in g.subjects(RDF.type, VREP.GroundingReport):
+        cs = list(g.objects(rep, VREP.constraint))
+        if len(cs) != 1 or (cs[0], RDF.type, ODRL.Constraint) not in g:
+            e("grounding report: vrep:constraint is not a constraint in the file")
+        gr = list(g.objects(rep, VREP.grounded))
+        vals = list(g.objects(rep, VREP.ungroundedValue))
+        if len(gr) != 1:
+            e("grounding report: needs exactly one vrep:grounded")
+        elif (gr[0].toPython() is False) != bool(vals):
+            e("grounding report: vrep:ungroundedValue present exactly when "
+              "vrep:grounded is false")
+        if cs:
+            ros = list(g.objects(cs[0], ODRL.rightOperand))
+            members = set()
+            for ro in ros:
+                members |= (set(Collection(g, ro))
+                            if (ro, RDF.first, None) in g else {ro})
+            for v in vals:
+                if v not in members:
+                    e(f"grounding report: {v} is not a value of {cs[0]}")
+        for prop in (VREP.compatibilityState, VREP.certificate,
+                     VREP.backgroundTheory):
+            if list(g.objects(rep, prop)):
+                e(f"grounding report carries {prop.fragment}; a rejected "
+                  f"constraint has no verdict")
+        for b in g.objects(rep, VREP.binding):
+            if str(b) not in bindings:
+                warns.append(f"{path.name}: binding {b} is declared by no profile")
+
+    for rep in set(g.subjects(RDF.type, VREP.OperandVerdictReport)) | \
+            set(g.subjects(RDF.type, VREP.WellSortednessReport)) | \
+            set(g.subjects(RDF.type, VREP.GroundingReport)):
+        for t in g.objects(rep, VREP.readAgainst):
+            twins[path.stem].add(str(t).rsplit("/", 1)[-1].replace("-report", ""))
 
     for rep in g.subjects(RDF.type, VREP.OperandVerdictReport):
         one = lambda p: list(g.objects(rep, p))
@@ -187,13 +225,9 @@ def check(path: Path, bindings, theories, errs, warns, twins, notes):
             e(f"compatibility state {st}")
             continue
         unknown = st[0] == VREP.Unknown
-        reason = one(VREP.unknownReason)
-        if unknown and (len(reason) != 1 or reason[0] not in (VREP.Epistemic, VREP.Ungrounded)):
-            e("Unknown without one vrep:unknownReason")
-        if not unknown and reason:
-            e("vrep:unknownReason on a definite verdict")
-        if bool(one(VREP.ungroundedValue)) != (reason == [VREP.Ungrounded]):
-            e("vrep:ungroundedValue present exactly when the reason is Ungrounded")
+        if one(VREP.ungroundedValue):
+            e("vrep:ungroundedValue on a verdict report; a value that does "
+              "not ground gets a grounding report")
         cert = one(VREP.certificate)
         if unknown and cert:
             e("certificate on an Unknown verdict")
@@ -201,8 +235,6 @@ def check(path: Path, bindings, theories, errs, warns, twins, notes):
             want = "-1.tstp" if st[0] == VREP.Incompatible else "-2.tstp"
             if len(cert) != 1 or not str(cert[0]).endswith(want):
                 e(f"definite verdict needs one certificate ending {want}")
-        for t in one(VREP.readAgainst):
-            twins[path.stem].add(str(t).rsplit("/", 1)[-1].replace("-report", ""))
 
 
 def main() -> int:

@@ -110,15 +110,14 @@ def suite_totals(cases_dir: Path, verdict_dir: Path) -> dict:
     """The counts the results paragraph needs."""
     files = [f for f in cases_dir.rglob("*.ttl")]
     states = Counter()
-    reasons = Counter()
+    ungrounded = 0
     for f in files:
         t = f.read_text(encoding="utf-8")
         m = re.search(r"vrep:compatibilityState\s+vrep:(\w+)\s*[;.]", t)
         if m:
             states[m.group(1)] += 1
-        m = re.search(r"vrep:unknownReason\s+vrep:(\w+)", t)
-        if m:
-            reasons[m.group(1)] += 1
+        if re.search(r"vrep:grounded\s+false", t):
+            ungrounded += 1
     queries = len(list(verdict_dir.glob("*-[12].p")))
     return {
         "files": len(files),
@@ -126,8 +125,10 @@ def suite_totals(cases_dir: Path, verdict_dir: Path) -> dict:
         "compatible": states.get("Compatible", 0),
         "incompatible": states.get("Incompatible", 0),
         "unknown": states.get("Unknown", 0),
-        "epistemic": reasons.get("Epistemic", 0),
-        "ungrounded": reasons.get("Ungrounded", 0),
+        # Every Unknown is epistemic now; the macro is kept for the paper.
+        "epistemic": states.get("Unknown", 0),
+        # Constraints rejected because a value does not ground.
+        "ungrounded": ungrounded,
     }
 
 

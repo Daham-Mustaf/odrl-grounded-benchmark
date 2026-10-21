@@ -111,7 +111,7 @@ def main() -> int:
             ok, why = is_well_sorted(c.operator, b.sort,
                                      arity_of(c.operator, c.values))
             if not ok:
-                print(f"  ill sorted: {c.operator} — {why}")
+                print(f"  ill sorted: {c.operator}: {why}")
                 verdicts[operand] = "IllSorted"
                 break
         if verdicts.get(operand) == "IllSorted":
@@ -127,8 +127,8 @@ def main() -> int:
         try:
             ground(constraints, res)
         except GroundingError as e:
-            print(f"  Unknown: value names no concept of the resource: {e}")
-            verdicts[operand] = "Unknown"
+            print(f"  rejected: value names no concept of the resource: {e}")
+            verdicts[operand] = "Ungrounded"
             continue
 
         # 3. the witness condition
@@ -181,6 +181,8 @@ def main() -> int:
         print()
         if "IllSorted" in verdicts.values():
             print("Overall: ill sorted; no verdict.")
+        elif "Ungrounded" in verdicts.values():
+            print("Overall: a value does not ground; no verdict.")
         elif "Incompatible" in verdicts.values():
             print("Overall: Incompatible")
         elif all(v == "Compatible" for v in verdicts.values()):

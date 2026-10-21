@@ -194,7 +194,7 @@ PROBLEMS = [
         "resource": RESOURCE, "background_theory": EMPTY_BT,
         "binding": BINDING, "includes": INCLUDES,
         "tree": EQ_TREE,
-        "expected_verdict": "Unknown", "unknown_reason": "epistemic",
+        "expected_verdict": "Unknown",
         "expected_q1": "Satisfiable", "expected_q2": "Satisfiable",
         "summary": (
             "A library permits use in exactly one of France and Germany. "
@@ -206,9 +206,11 @@ PROBLEMS = [
             "apart. The verdict is Unknown."),
         "certificate": {"kind": "Models",
             "comment": (
-                "GeoNames does not state that France and Germany are "
-                "different. If they are identified, both alternatives hold "
-                "and 'exactly one' fails, so the verdict is Unknown."),
+                "GeoNames does not state that France and Germany are different. "
+                "In a structure that keeps them apart, a use in France satisfies "
+                "exactly one alternative, so both policies hold. In a structure that "
+                "identifies them, both alternatives hold and 'exactly one' fails. So "
+                "the verdict is Unknown."),
             "premises": []},
         "provenance": PROVENANCE,
         "ttl": _ttl("KGC303", *EQ_ALTS, EQ_TITLE, FR_TITLE),
@@ -253,7 +255,7 @@ PROBLEMS = [
         "binding": BINDING, "includes": INCLUDES,
         "fof_decls": _DIST[0], "smt2_background": _DIST[1],
         "tree": PART_TREE,
-        "expected_verdict": "Unknown", "unknown_reason": "epistemic",
+        "expected_verdict": "Unknown",
         "expected_q1": "Satisfiable", "expected_q2": "Satisfiable",
         "summary": (
             "A library permits use within exactly one of France and "
@@ -267,9 +269,12 @@ PROBLEMS = [
             "settles KGC304."),
         "certificate": {"kind": "Models",
             "comment": (
-                "Distinct areas can still lie one within the other. A "
-                "structure that places France within Germany makes both "
-                "alternatives hold, so the verdict is Unknown."),
+                "France and Germany are declared distinct, but distinct areas can "
+                "still lie one within the other. In a structure where France does not "
+                "lie within Germany, a use in France satisfies exactly one "
+                "alternative, so both policies hold. In a structure that places France "
+                "within Germany, both alternatives hold and 'exactly one' fails. So "
+                "the verdict is Unknown."),
             "premises": []},
         "provenance": PROVENANCE,
         "ttl": _ttl("KGC305", *PART_ALTS, PART_TITLE, FR_TITLE),

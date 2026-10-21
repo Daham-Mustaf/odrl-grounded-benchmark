@@ -56,5 +56,4 @@ drk:KGC313-report a vrep:OperandVerdictReport ;
     vrep:readAgainst drk:KGC314-report ;
     rdfs:comment """DPV does not declare marketing and scientific research distinct. One structure identifies them and one does not, so the verdict is Unknown."""@en ;
     dcterms:description """A library permits use for marketing. A researcher's policy commits to use for scientific research."""@en ;
-    vrep:compatibilityState vrep:Unknown ;
-    vrep:unknownReason vrep:Epistemic .
+    vrep:compatibilityState vrep:Unknown .

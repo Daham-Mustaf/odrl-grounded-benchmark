@@ -379,7 +379,6 @@ kgc:KGC311-p2-c1 a odrl:Constraint ;
         "resource":          RESOURCE,
             "binding": BINDING,
         "background_theory": EMPTY_BT,
-        "unknown_reason": "epistemic",
         "summary": (
             "A library permits use for marketing. A researcher's policy "
             "commits to use for scientific research."),
@@ -696,7 +695,6 @@ kgc:KGC315-p2-c1 a odrl:Constraint ;
         "sort":              "tax",
         "resource":          RESOURCE,
         "background_theory": EMPTY_BT,
-                "unknown_reason": "epistemic",
         "includes":          INCLUDES,
         "binding": BINDING,
         "summary": (
@@ -743,10 +741,12 @@ kgc:KGC315-p2-c1 a odrl:Constraint ;
         "certificate": {
             "kind": "Models",
 "comment": (
-    "DPV places RecruitmentInterviewScheduling below Purpose, but does not "
-    "establish the reverse relation or that the two concepts are distinct. "
-    "The available knowledge therefore leaves the verdict Unknown."
-),
+                "DPV places recruitment interview scheduling below Purpose, and does "
+                "not state that the two are distinct. In a structure that identifies "
+                "them, a use for Purpose is a use for recruitment interview scheduling "
+                "and satisfies both policies. In a structure that keeps them apart, "
+                "Purpose does not lie below recruitment interview scheduling, and no "
+                "use satisfies both. So the verdict is Unknown."),
             "premises": [],
         },
         "ttl": f"""\
@@ -904,7 +904,7 @@ kgc:KGC317-p2-c1 a odrl:Constraint ;
         "resource": RESOURCE, "background_theory": EMPTY_BT,
         "binding": BINDING, "includes": INCLUDES,
         "tree": [C("isAnyOf", RND, MK), C("eq", SR, side="request")],
-        "expected_verdict": "Unknown", "unknown_reason": "epistemic",
+        "expected_verdict": "Unknown",
         "expected_q1": "Satisfiable", "expected_q2": "Satisfiable",
         "summary": (
             "A provider permits use for research and development or "

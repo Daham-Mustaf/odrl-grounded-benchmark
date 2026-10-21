@@ -54,7 +54,6 @@ drk:KGC363-report a vrep:OperandVerdictReport ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-tom> ;
     vrep:backgroundTheory <https://w3id.org/odrl-kb/dpv-tom/empty> ;
     vrep:readAgainst drk:KGC364-report ;
-    rdfs:comment """One structure identifies encryption with access control and admits the use; nothing published forbids it."""@en ;
+    rdfs:comment """In a structure that identifies encryption with access control, a use applying encryption applies both measures and satisfies both policies. In a structure that keeps them apart, the use lacks access control, and no use satisfies both. Nothing published decides between the two, so the verdict is Unknown."""@en ;
     dcterms:description """A provider requires both encryption and access control; a consumer commits to encryption only."""@en ;
-    vrep:compatibilityState vrep:Unknown ;
-    vrep:unknownReason vrep:Epistemic .
+    vrep:compatibilityState vrep:Unknown .

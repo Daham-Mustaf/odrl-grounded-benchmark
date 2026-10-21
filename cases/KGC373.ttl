@@ -27,7 +27,7 @@ kgc:KGC373-p1-c1 a odrl:Constraint ;
 drk:policy-373-2 a odrl:Set ;
     odrl:uid drk:policy-373-2 ;
     dcterms:title "Distribution in American English"@en ;
-    rdfs:comment """A well-formed BCP 47 language tag, composed by RFC 5646 from the registered primary subtag en and the registered region subtag US. It is not itself an entry of the registry and not a concept of the resource this operand is bound to, which holds primary subtags. Whether it resolves to one is the profile's grounding rule to decide, and the two problems using this request are read under rules that decide it differently."""@en ;
+    rdfs:comment """A well-formed BCP 47 language tag, composed by RFC 5646 from the registered primary subtag en and the registered region subtag US. It is not itself an entry of the registry and not a concept of the resource this operand is bound to, which holds primary subtags. Whether it resolves to one is the profile's grounding rule to decide, and the two problems using this value are read under rules that decide it differently."""@en ;
     odrl:assignee drk:reuser ;
     odrl:permission kgc:KGC373-p2-r1 .
 

@@ -52,5 +52,4 @@ drk:KGC342-report a vrep:OperandVerdictReport ;
     vrep:readAgainst drk:KGC343-report ;
     rdfs:comment """The published assertions do not exclude the withdrawn state from the valid branch. One structure places it below both branches, and both constraints can hold. Another does not, and they cannot."""@en ;
     dcterms:description """A controller permits use only while consent can justify processing. A processor states that it continues processing after consent is withdrawn."""@en ;
-    vrep:compatibilityState vrep:Unknown ;
-    vrep:unknownReason vrep:Epistemic .
+    vrep:compatibilityState vrep:Unknown .

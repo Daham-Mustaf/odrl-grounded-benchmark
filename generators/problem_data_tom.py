@@ -370,7 +370,7 @@ PROBLEMS = [
         "resource": RESOURCE, "background_theory": EMPTY_BT,
         "binding": BINDING, "includes": INCLUDES,
         "tree": [C("isAllOf", ENCRYPTION, ACCESS), C("eq", ENCRYPTION, side="request")],
-        "expected_verdict": "Unknown", "unknown_reason": "epistemic",
+        "expected_verdict": "Unknown",
         "expected_q1": "Satisfiable", "expected_q2": "Satisfiable",
         "summary": (
             "A provider requires both encryption and access control; a "
@@ -381,8 +381,12 @@ PROBLEMS = [
             "a structure that identifies the two measures satisfies both "
             "sides, and DPV separates them nowhere. Unknown as published."),
         "certificate": {"kind": "Models",
-            "comment": "One structure identifies encryption with access control "
-                       "and admits the use; nothing published forbids it.",
+            "comment": (
+                "In a structure that identifies encryption with access control, a use "
+                "applying encryption applies both measures and satisfies both "
+                "policies. In a structure that keeps them apart, the use lacks access "
+                "control, and no use satisfies both. Nothing published decides "
+                "between the two, so the verdict is Unknown."),
             "premises": []},
         "provenance": "As KGC362; the universal clause.",
         "ttl": _ttl("KGC363", TOM_LO, "both encryption and access control",

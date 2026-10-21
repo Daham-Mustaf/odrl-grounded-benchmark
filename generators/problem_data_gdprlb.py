@@ -264,7 +264,6 @@ PROBLEMS = [
         "resource":          RESOURCE,
         "background_theory": EMPTY_BT,
         "includes":          INCLUDES,
-        "unknown_reason": "epistemic",
         "tree": [C("isAnyOf", *SEVEN), C("eq", EXPLICIT, side="request")],
         "description": (
             "The same offer against a processor naming explicit consent "
@@ -286,9 +285,12 @@ PROBLEMS = [
         "certificate": {
             "kind": "Models",
  "comment": (
-     "Explicit consent is not one of the seven values listed by isAnyOf, and "
-     "DPV does not declare it distinct from consent. The verdict is therefore "
-     "Unknown."),
+                "Explicit consent is not one of the seven values that isAnyOf lists, "
+                "and DPV does not declare it distinct from them. In a structure that "
+                "identifies explicit consent with a listed value, such as consent, a "
+                "use relying on explicit consent satisfies both policies. In a "
+                "structure that keeps it apart from all seven, no use satisfies both. "
+                "So the verdict is Unknown."),
             "premises": [],
         },
         "ttl": _TTL_HEAD + _offer_isanyof("KGC351")

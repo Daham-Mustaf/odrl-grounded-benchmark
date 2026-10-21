@@ -14,18 +14,21 @@ definitions prescribe.
 
 ## What a problem is
 
-Two ODRL policies, an offer and a request, whose constraints share one
-left operand. A binding says which resource that operand is read
-against, at which sort, under which grounding rule, and with which
-background theory. From these the generator derives two satisfiability
-queries, and the verdict follows from the pair:
+Two ODRL policies whose constraints share one left operand. A binding
+says which resource that operand is read against, at which sort, under
+which grounding rule, and with which background theory. From these the
+generator derives two satisfiability queries, and the verdict follows
+from the pair:
 
 ```
 query 1 unsatisfiable, query 2 satisfiable    Incompatible
 query 1 satisfiable, query 2 unsatisfiable    Compatible
 both satisfiable                              Unknown
-a value that does not ground                  Unknown, no query built
 ```
+
+A constraint is rejected before any query is built when it is ill sorted
+or when one of its values does not ground. A rejected constraint has no
+verdict, and its case gets an input check report instead.
 
 Each completed query is written independently as TPTP and SMT-LIB and
 checked by Vampire and Z3. Where a verdict is definite, the two
@@ -203,12 +206,21 @@ vrep:backgroundTheory                       what the parties declared,
 vrep:compatibilityState                     vrep:Compatible,
                                             vrep:Incompatible or
                                             vrep:Unknown
-vrep:unknownReason                          vrep:Epistemic or
-                                            vrep:Ungrounded, on Unknown
-vrep:ungroundedValue                        the value, on Ungrounded
 vrep:certificate                            the refutation, on a
                                             definite verdict
 vrep:readAgainst                            the case this one pairs with
+```
+
+An input check report is about one constraint. It carries no verdict,
+background theory or certificate:
+
+```
+vrep:WellSortednessReport                   whether the operator and the
+  vrep:constraint, vrep:binding,            arity fit the binding's sort;
+  vrep:wellSorted                           false in KGC100 to KGC102
+vrep:GroundingReport                        whether every value names a
+  vrep:constraint, vrep:binding,            concept of the bound resource;
+  vrep:grounded, vrep:ungroundedValue       false in KGC372 and KGC381
 ```
 
 The case files are generated. `validate_cases.py` checks every file
@@ -232,10 +244,10 @@ Compatible     a refutation of query 2: no admissible structure lacks
 
 Unknown        both queries complete satisfiable; the case is open
                under what is published and declared
-
-ungrounded     the value that names no concept of the bound resource;
-               no query is built
 ```
+
+A grounding report needs no certificate. The value it names is the
+evidence, and applying the binding's grounding rule to it checks it.
 
 A refutation names the premises it uses, and the prefix says where each
 came from:

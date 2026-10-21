@@ -4,8 +4,8 @@ problem_data_bcp47.py
 Four problems over the BCP 47 language slice, at the nominal sort.
 
     KGC370  eq de  x  eq fr         uniqueness declared   Incompatible
-    KGC371  eq de  x  eq fr         declaration withdrawn Unknown, epistemic
-    KGC372  eq de  x  eq "en-US"    exact grounding       Unknown, ungrounded
+    KGC371  eq de  x  eq fr         declaration withdrawn Unknown
+    KGC372  eq de  x  eq "en-US"    exact grounding       rejected, does not ground
     KGC373  eq de  x  eq "en-US"    reducing grounding    Incompatible
 
 The operators are beside the point.  At nom the signature admits eq, neq,
@@ -16,13 +16,13 @@ verdict responds to.
 
     370 -> 371   one background theory withdrawn
     372 -> 373   one grounding rule widened
-    371 vs 372   two Unknowns with different repairs
+    371 vs 372   an Unknown and a rejection, repaired differently
 
 A note on reading these
 -----------------------
-The two policies in each problem are ordinary ODRL: an Offer permitting
-distribution in German, a Request asking to distribute in some other
-language.  Nothing in them is unusual, and a reader who knows ODRL and not
+The two policies in each problem are ordinary ODRL Set policies: one
+permits distribution in German, the other commits to distribution in some
+other language.  Nothing in them is unusual, and a reader who knows ODRL and not
 this paper can read the case files without further explanation.
 
 What the problems are about is the layer underneath: which vocabulary the
@@ -72,10 +72,10 @@ so "en-US" resolves to 'en'.
 
 KGC372 is read under the first and KGC373 under the second.  Same
 policies, same resource, same sort, same declared theory.  Under the exact
-rule the request cannot be interpreted at all, no query is built, and the
-verdict is Unknown with the value itself as the certificate.  Under the
-reducing rule it is interpreted as a request for English, and the pair
-gets an ordinary verdict.
+rule the second policy's value cannot be interpreted at all.  Its
+constraint is rejected, no query is built, and the value itself is the
+evidence.  Under the reducing rule the value is read as English, and the
+pair gets an ordinary verdict.
 
 Neither rule is the right one.  A party who cares which variety of English
 is distributed declines the reduction and would rather have an
@@ -83,23 +83,18 @@ uninterpretable policy than a wrong answer; a party who does not, adopts
 it.  What matters is that the choice is written down where a reader can
 find it, rather than being whatever the software happened to do.
 
-Two verdicts that read the same and are repaired differently
--------------------------------------------------------------
-KGC371 and KGC372 both report Unknown.
+An Unknown and a rejection
+--------------------------
+KGC371 is Unknown.  The resource admits structures that identify the two
+subtags and structures that separate them, and a declaration by either
+party decides which.  The question is open and someone can close it.
 
-KGC371's is epistemic.  The resource admits structures that identify the
-two subtags and structures that separate them, and a declaration by either
-party settles which.  The question is open and someone can close it.
-
-KGC372's is ungrounded.  Nothing has been left open: the policy names
+KGC372 has no verdict.  Nothing has been left open: the policy names
 something the binding cannot read at all.  A declaration does not help,
 because there is nothing to declare about a value that names no concept.
 Either the policy is corrected or the binding is widened, and KGC373 is
-the second of those.
-
-A report that gave only the verdict would leave a reader to guess which
-repair applies, which is why the reason is part of the answer and not a
-gloss on it.
+the second of those.  So the constraint is rejected, as an ill-sorted
+constraint is, and the case gets a grounding report instead of a verdict.
 
 Why the nominal sort is right here, and would not always be
 ------------------------------------------------------------
@@ -205,7 +200,7 @@ kgc:{pid}-p2-c1 a odrl:Constraint ;
 """
 
 
-# Attached to the request in KGC372 and KGC373, since the value is the
+# Attached to the second policy's constraint in KGC372 and KGC373, since the value is the
 # thing those two problems are about and a reader meeting it in a policy
 # file deserves to know why it is there.
 EN_US_NOTE = (
@@ -214,7 +209,7 @@ EN_US_NOTE = (
     "is not itself an entry of the registry and not a concept of the "
     "resource this operand is bound to, which holds primary subtags. "
     "Whether it resolves to one is the profile's grounding rule to decide, "
-    "and the two problems using this request are read under rules that "
+    "and the two problems using this value are read under rules that "
     "decide it differently."
 )
 
@@ -310,7 +305,6 @@ PROBLEMS = [
             "registry never asserted."
         ),
         "expected_verdict": "Unknown",
-        "unknown_reason":   "epistemic",
         "expected_q1": "Satisfiable",
         "expected_q2": "Satisfiable",
         "summary": (
@@ -329,8 +323,9 @@ PROBLEMS = [
 
     {
         # No queries are built for this problem. writers.py reads the
-        # ungrounded field and skips construction, so no expected_q1 or
-        # expected_q2 appears below, and no tree either: supplying one
+        # ungrounded field, skips construction and writes a grounding
+        # report, so no expected verdict, expected_q1 or expected_q2
+        # appears below, and no tree either: supplying one
         # would turn the unresolved value into a constant of the
         # signature, which is the collapse this problem exists to rule
         # out. A prover asked about such a constant would answer, and the
@@ -358,29 +353,28 @@ PROBLEMS = [
             "This problem is read under the profile's exact grounding "
             "rule, which resolves an IRI of the scheme or a literal "
             "matching a published notation, and nothing else. The "
-            "request's right operand matches neither, so the policy "
-            "cannot be interpreted against this resource at all: no query "
-            "is built, and the verdict is Unknown with the value itself "
-            "as the certificate.\n\n"
-            "The reason is ungrounded, not epistemic, and the difference "
-            "decides the repair. An epistemic Unknown is settled by a "
-            "declaration. This one is not: nothing has been left open, "
+            "second policy's right operand matches neither, so its "
+            "constraint cannot be interpreted against this resource at "
+            "all. The constraint is rejected, no query is built, and the "
+            "value itself is the evidence.\n\n"
+            "This is not an Unknown, and the difference decides the "
+            "repair. An Unknown is resolved by a declaration. A rejection "
+            "is not: nothing has been left open, "
             "and there is nothing to declare about a value that names no "
             "concept. Either the policy is corrected or the binding is "
             "widened, and KGC373 is the same pair read under a wider "
             "binding."
         ),
-        "expected_verdict": "Unknown",
-        "unknown_reason":   "ungrounded",
         "summary": (
             "A publisher distributes in German. A reuser's policy commits to "
             "American English (en-US), under the exact-match grounding rule."),
         "certificate": {
             "kind": "Ungrounded",
-            "comment": "The value en-US resolves to no concept of the "
-                       "resource under this binding's grounding rule. "
-                       "Checkable by applying that rule to the value and "
-                       "seeing that it yields nothing.",
+            "comment": "Under the exact-match rule, the value en-US "
+                       "resolves to no concept of the resource. The "
+                       "constraint is therefore rejected, and no verdict "
+                       "is computed. KGC373 reads the same value under the "
+                       "rule that reduces it to en.",
             "premises": [],
         },
         "ttl": _TTL_HEAD + _offer("KGC372")
@@ -413,7 +407,7 @@ PROBLEMS = [
             "The policies of KGC372, read under the profile's other "
             "grounding rule.\n\n"
             "That rule takes a well-formed language tag to its primary "
-            "subtag, so en-US resolves to en. The request becomes "
+            "subtag, so en-US resolves to en. The value becomes "
             "interpretable and the pair gets an ordinary verdict: German "
             "and English are declared distinct under the same "
             "registry-uniqueness rule as KGC370, so no use satisfies both "
@@ -473,7 +467,7 @@ PROBLEMS = [
             "but only because the parties' uniqueness rule separates the "
             "two subtags: in a structure interpreting de and fr as one "
             "language, a use in German is a use in French and the "
-            "request excludes it.\n\n"
+            "second policy excludes it.\n\n"
             "So this Compatible rests on a declared premise exactly as "
             "KGC370's Incompatible does. The refutation of the second "
             "query cites the witness condition and one background "
@@ -511,7 +505,6 @@ PROBLEMS = [
         "includes":          INCLUDES,
         "tree": [C("eq", DE), C("neq", FR, side="request")],
         "expected_verdict":  "Unknown",
-        "unknown_reason":    "epistemic",
         "expected_q1":       "Satisfiable",
         "expected_q2":       "Satisfiable",
         "summary": (
@@ -530,9 +523,11 @@ PROBLEMS = [
         "certificate": {
             "kind": "Models",
             "comment": (
-                "Nothing says that German and French are different languages. "
-                "One structure identifies them, and then a use in German is a "
-                "use in French, so the verdict is Unknown."),
+                "Nothing states that German and French are different languages. In a "
+                "structure that keeps them apart, a use in German satisfies both "
+                "policies. In a structure that identifies them, a use in German is a "
+                "use in French, and the second policy excludes it. So the verdict is "
+                "Unknown."),
             "premises": [],
         },
         "ttl": _TTL_HEAD + _offer("KGC375")

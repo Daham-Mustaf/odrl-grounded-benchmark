@@ -132,7 +132,6 @@ PROBLEMS = [
         "sort":              "nom",
         "resource":          RESOURCE,
         "background_theory": EMPTY_BT,
-         "unknown_reason": "epistemic",
         "includes":          INCLUDES,
         "summary": (
             "BSB permits PDF. BnF's policy commits to PDF/A-1a."),

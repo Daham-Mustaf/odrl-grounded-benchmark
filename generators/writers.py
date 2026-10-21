@@ -16,8 +16,11 @@ The harness derives it, and only from a pair that completed:
     q1 satisfiable,   q2 unsatisfiable    -> Compatible
     both satisfiable                      -> Unknown
     both unsatisfiable                    -> inconsistent theory, an error
-    grounding undefined (no query built)  -> Unknown
     any incomplete outcome                -> no verdict
+
+A value that does not ground is not in this table.  Its constraint is
+rejected before any query is built, like an ill-sorted constraint, and the
+case gets a grounding report instead of a verdict.
 
 The last line is the one worth stating: a timeout, a crash, or a prover
 that returned no status is not satisfiable, and reading it as one would
@@ -32,8 +35,6 @@ Problem dict keys:
     fof_witness       the witness condition W(K), as a FOF formula
     expected_q1       "Satisfiable" | "Unsatisfiable"
     expected_q2       "Satisfiable" | "Unsatisfiable"
-    unknown_reason    "epistemic" | "ungrounded"; required when the
-                      verdict is Unknown
     smt2_decls        SMT-LIB declarations
     smt2_resource     SMT-LIB assertions for R, named res_
     smt2_background   SMT-LIB assertions for B, named bt_
@@ -48,7 +49,9 @@ Problem dict keys:
     twin              optional; the id of the case to read this one with.
                       Reaches the report as vrep:readAgainst.
     ttl               the ODRL policy pair, Turtle
-    ungrounded        optional; if set, no query is built
+    ungrounded        optional; the value, as the policy writes it, that
+                      does not ground.  If set, no query is built and the
+                      report is a grounding report.
 """
 import re
 import sys
@@ -365,6 +368,76 @@ def _value_term(value: str) -> str:
     return f'"{value}"'
 
 
+def _constraint_with_value(body: str, value: str) -> str:
+    """The kgc: constraint whose right operand carries value.
+
+    value is written as the policy writes it: a prefixed name, an IRI, or
+    the lexical form of a literal.  Exactly one constraint must carry it.
+    """
+    from rdflib import Graph, Literal, URIRef
+    from rdflib.collection import Collection
+    from rdflib.namespace import RDF
+
+    g = Graph().parse(data=body, format="turtle")
+    nm = g.namespace_manager
+
+    def matches(node):
+        if isinstance(node, Literal):
+            return str(node) == value
+        if isinstance(node, URIRef):
+            return value in (str(node), nm.normalizeUri(node))
+        return False
+
+    found = []
+    for c, ro in g.subject_objects(URIRef(ODRL_NS + "rightOperand")):
+        members = (list(Collection(g, ro))
+                   if (ro, RDF.first, None) in g else [ro])
+        if any(matches(m) for m in members):
+            found.append(str(c))
+    if len(found) != 1:
+        raise ValueError(f"ungrounded value {value!r} is carried by "
+                         f"{len(found)} constraints, expected one")
+    if not found[0].startswith(KGC_NS):
+        raise ValueError(f"constraint {found[0]} is outside kgc:")
+    return "kgc:" + found[0][len(KGC_NS):]
+
+
+def _grounding_report_block(p: dict, body: str) -> str:
+    """The expected report of a case whose value does not ground.
+
+    The constraint is rejected before any query is built, so the report
+    names that constraint and the value, as a well-sortedness report names
+    an ill-sorted constraint.  It carries no verdict, no background theory
+    and no certificate.
+    """
+    pid = p["id"]
+    if not p.get("binding"):
+        raise ValueError(f"{pid}: no binding; grounding is relative to one")
+    for key in ("expected_verdict", "expected_q1", "expected_q2"):
+        if key in p:
+            raise ValueError(f"{pid}: ungrounded, so no {key}; the "
+                             f"constraint is rejected, not decided")
+    value = p["ungrounded"]
+    lines = [
+        "### Expected result " + "#" * 55,
+        "",
+        f"drk:{pid}-report a vrep:GroundingReport ;",
+        f'    dcterms:identifier "{pid}" ;',
+        f"    vrep:constraint {_constraint_with_value(body, value)} ;",
+        f"    vrep:binding <{p['binding']}> ;",
+    ]
+    if p.get("twin"):
+        lines.append(f"    vrep:readAgainst drk:{p['twin']}-report ;")
+    comment = p.get("certificate", {}).get("comment")
+    if comment:
+        lines.append(f'    rdfs:comment """{comment}"""@en ;')
+    if p.get("summary"):
+        lines.append(f'    dcterms:description """{p["summary"]}"""@en ;')
+    lines.append("    vrep:grounded false ;")
+    lines.append(f"    vrep:ungroundedValue {_value_term(value)} .")
+    return "\n".join(lines)
+
+
 def _report_block(p: dict, body: str) -> str:
     """The expected report, from the problem's own fields.
 
@@ -376,6 +449,9 @@ def _report_block(p: dict, body: str) -> str:
 
     The generic meaning of each term lives in vocab/verdict-report.ttl.
     """
+    if p.get("ungrounded"):
+        return _grounding_report_block(p, body)
+
     pid = p["id"]
     n = pid[3:]
     verdict = expected_verdict(p)
@@ -419,21 +495,6 @@ def _report_block(p: dict, body: str) -> str:
 
     lines.append(f"    vrep:compatibilityState "
                  f"{COMPATIBILITY_STATE[verdict]} ;")
-
-    if verdict == "Unknown":
-        reason = p.get("unknown_reason")
-        if reason not in ("epistemic", "ungrounded"):
-            raise ValueError(
-                f"{pid}: Unknown verdict needs unknown_reason epistemic or "
-                f"ungrounded, got {reason!r}. The two are repaired "
-                f"differently: the first by a further declaration, the "
-                f"second by correcting the policy or the binding.")
-        if (reason == "ungrounded") != bool(p.get("ungrounded")):
-            raise ValueError(f"{pid}: unknown_reason and ungrounded disagree")
-        lines.append(f"    vrep:unknownReason vrep:{reason.capitalize()} ;")
-        if p.get("ungrounded"):
-            lines.append(f"    vrep:ungroundedValue "
-                         f"{_value_term(p['ungrounded'])} ;")
 
     # Only a definite verdict has a refutation to point at.  Incompatible
     # is the witness refuted (query 1), Compatible its negation (query 2).
@@ -549,7 +610,10 @@ def expected_verdict(p: dict) -> str:
     is a problem whose author did not decide what it should return.
     """
     if p.get("ungrounded"):
-        return "Unknown"
+        # No verdict: the constraint is rejected before any query.  The
+        # generators print one line per problem, and this keeps them free
+        # of a branch.
+        return "rejected, does not ground"
     return verdict_of(_normalise(p["expected_q1"]),
                       _normalise(p["expected_q2"]))
 

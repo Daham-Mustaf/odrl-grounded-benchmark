@@ -424,7 +424,6 @@ PROBLEMS = [
         "sort":              "mer",
         "resource":          GEO_RESOURCE,
         "background_theory": EMPTY_BT,
-        "unknown_reason": "epistemic",
         "binding":           BINDING_GEO,
         "includes":          INCLUDES_GEO,
         "description": (
@@ -460,9 +459,10 @@ PROBLEMS = [
         "certificate": {
             "kind": "Models",
 "comment": (
-    "Neither the resource nor the parties assert that Germany and France "
-    "are distinct, so the compatibility cannot be determined."
-),
+                "Neither the resource nor the parties state that Germany and France "
+                "are distinct. In a structure that identifies them, a use in Germany "
+                "is a use in France and satisfies both policies. In a structure that "
+                "keeps them apart, no use satisfies both. So the verdict is Unknown."),
             "premises": [],
         },
         "ttl": _ttl("KGC333", "use in Germany", "eq", "DE",
@@ -594,7 +594,7 @@ fof(bg_dist_loc_de_loc_fr, axiom,
     },
     # -----------------------------------------------------------------
     # KGC381  KGC331 under the territorial binding: loc:EU is not a concept
-    # of that slice, so the offer's value does not ground.
+    # of that slice, so the first policy's value does not ground.
     # -----------------------------------------------------------------
     {
         "id": "KGC381", "subdir": "verdict",
@@ -610,20 +610,20 @@ fof(bg_dist_loc_de_loc_fr, axiom,
          "within the European Union, and a researcher's policy commits to use "
          "in Germany."),
     "tree": [C("isPartOf", "loc:EU"), C("eq", DE, side="request")],
-    "expected_verdict": "Unknown",
-    "unknown_reason": "ungrounded",
         "description": (
             "The policies of KGC331 under the territorial binding, which "
             "reads containment only. The union edges are membership and "
             "are not read, so loc:EU is not a concept of this slice and "
-            "the offer's value grounds to nothing. No query is built; the "
-            "verdict is Unknown with the value as its certificate. Same "
-            "policies, same file, different reading, no verdict."),
+            "the first policy's value grounds to nothing. The constraint "
+            "is rejected and no query is built. Same policies, same file, "
+            "different reading, no verdict."),
         "certificate": {"kind": "Ungrounded",
             "comment": (
                 "The territorial binding does not read union membership, so "
-                "loc:EU names no concept of its slice and the first policy's "
-                "value does not ground."),
+                "loc:EU names no concept of its slice. The constraint is "
+                "therefore rejected, and no verdict is computed. KGC331 "
+                "reads the same policies under the jurisdictional binding, "
+                "where loc:EU grounds and the verdict is Compatible."),
             "premises": []},
         "provenance": "The two-readings pair of KGC331.",
         "ttl": _ttl2("KGC381", "use within the European Union",
@@ -708,7 +708,7 @@ fof(bg_dist_loc_de_loc_fr, axiom,
         "resource": GEO_RESOURCE, "background_theory": EMPTY_BT,
         "binding": BINDING_GEO, "includes": INCLUDES_GEO,
         "tree": [C("eq", DE_NW), C("eq", DE_BY, side="request")],
-        "expected_verdict": "Unknown", "unknown_reason": "epistemic",
+        "expected_verdict": "Unknown",
         "expected_q1": "Satisfiable", "expected_q2": "Satisfiable",
         "description": (
             "Use in North Rhine-Westphalia against use in Bavaria. Both "
@@ -768,7 +768,7 @@ fof(bg_dist_loc_de_loc_fr, axiom,
         "resource": GEO_RESOURCE, "background_theory": EMPTY_BT,
         "binding": BINDING_GEO, "includes": INCLUDES_GEO,
         "tree": [C("isNoneOf", DE_BY, DE_BE), C("eq", DE_HH, side="request")],
-        "expected_verdict": "Unknown", "unknown_reason": "epistemic",
+        "expected_verdict": "Unknown",
         "expected_q1": "Satisfiable", "expected_q2": "Satisfiable",
         "description": (
             "Use anywhere except Bavaria and Berlin against use in "
@@ -779,9 +779,10 @@ fof(bg_dist_loc_de_loc_fr, axiom,
             "researcher's policy commits to use in Hamburg."),
         "certificate": {"kind": "Models",
             "comment": (
-                "DPV does not state that Hamburg differs from Bavaria or "
-                "Berlin. A structure that identifies Hamburg with one of them "
-                "excludes the use, so the verdict is Unknown."),
+                "DPV does not state that Hamburg differs from Bavaria or Berlin. In a "
+                "structure that keeps the three apart, a use in Hamburg satisfies both "
+                "policies. In a structure that identifies Hamburg with Bavaria or "
+                "Berlin, the first policy excludes it. So the verdict is Unknown."),
             "premises": []},
         "provenance": "Exclusion clauses in regional licensing.",
         "ttl": _ttl2("KGC386", "use anywhere except Bavaria and Berlin",
@@ -871,7 +872,7 @@ fof(bg_dist_loc_de_loc_fr, axiom,
         "binding": BINDING_GEO, "includes": INCLUDES_GEO,
         "tree": [Xone((C("eq", DE_NW), C("eq", DE_BY))),
                  C("eq", DE_NW, side="request")],
-        "expected_verdict": "Unknown", "unknown_reason": "epistemic",
+        "expected_verdict": "Unknown",
         "expected_q1": "Satisfiable", "expected_q2": "Satisfiable",
         "description": (
             "Exactly one of North Rhine-Westphalia and Bavaria, against "
@@ -886,9 +887,11 @@ fof(bg_dist_loc_de_loc_fr, axiom,
             "Rhine-Westphalia."),
         "certificate": {"kind": "Models",
             "comment": (
-                "DPV does not state that the two Laender are different. If "
-                "they are identified, both alternatives hold and 'exactly "
-                "one' fails, so the verdict is Unknown."),
+                "DPV does not state that the two Laender are different. In a structure "
+                "that keeps them apart, a use in North Rhine-Westphalia satisfies "
+                "exactly one alternative, so both policies hold. In a structure that "
+                "identifies them, both alternatives hold and 'exactly one' fails. So "
+                "the verdict is Unknown."),
             "premises": []},
         "provenance": "Construction; exclusivity clauses are the nearest "
                       "practice.",

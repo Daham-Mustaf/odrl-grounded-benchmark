@@ -33,7 +33,7 @@ bind:Sort a rdfs:Class, skos:Concept ;
 bind:GroundingProcedure a rdfs:Class, skos:Concept ;
     rdfs:isDefinedBy <https://w3id.org/odrl-kb/binding> ;
     rdfs:label "Grounding Procedure" ;
-    skos:definition "A declared rule mapping a right-operand value to a concept of the bound resource. Partial by nature: a value the rule does not resolve is ungrounded, and the verdict is Undetermined with that value as its certificate. Which rule a profile adopts is a decision about reading, and two profiles over one resource may adopt different ones."@en .
+    skos:definition "A declared rule mapping a right-operand value to a concept of the bound resource. Partial by nature: a value the rule does not resolve is ungrounded, and its constraint is rejected before any verdict is computed. Which rule a profile adopts is a decision about reading, and two profiles over one resource may adopt different ones."@en .
 
 
 # --- the three sorts --------------------------------------------------

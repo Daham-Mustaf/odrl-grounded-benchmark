@@ -157,7 +157,6 @@ kgc:KGC300-p2-c1 a odrl:Constraint ;
         "sort":              "tax",
         "resource":          "https://w3id.org/odrl-kb/dpv-purposes",
         "background_theory": "https://w3id.org/odrl-kb/dpv-purposes/empty",
-        "unknown_reason": "epistemic",
         "includes":          ["KGE000-0.ax", "DPV-dpv-purposes.ax"],
         "description": (
             "Offer (purpose, isA, dpv:NonCommercialPurpose) against request "

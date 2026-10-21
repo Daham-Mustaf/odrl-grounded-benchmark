@@ -27,7 +27,7 @@ kgc:KGC372-p1-c1 a odrl:Constraint ;
 drk:policy-372-2 a odrl:Set ;
     odrl:uid drk:policy-372-2 ;
     dcterms:title "Distribution in American English"@en ;
-    rdfs:comment """A well-formed BCP 47 language tag, composed by RFC 5646 from the registered primary subtag en and the registered region subtag US. It is not itself an entry of the registry and not a concept of the resource this operand is bound to, which holds primary subtags. Whether it resolves to one is the profile's grounding rule to decide, and the two problems using this request are read under rules that decide it differently."""@en ;
+    rdfs:comment """A well-formed BCP 47 language tag, composed by RFC 5646 from the registered primary subtag en and the registered region subtag US. It is not itself an entry of the registry and not a concept of the resource this operand is bound to, which holds primary subtags. Whether it resolves to one is the profile's grounding rule to decide, and the two problems using this value are read under rules that decide it differently."""@en ;
     odrl:assignee drk:reuser ;
     odrl:permission kgc:KGC372-p2-r1 .
 
@@ -43,17 +43,12 @@ kgc:KGC372-p2-c1 a odrl:Constraint ;
 
 ### Expected result #######################################################
 
-drk:KGC372-report a vrep:OperandVerdictReport ;
+drk:KGC372-report a vrep:GroundingReport ;
     dcterms:identifier "KGC372" ;
-    vrep:referencePolicy drk:policy-372-1 ;
-    vrep:comparedPolicy drk:policy-372-2 ;
-    vrep:referenceConstraint kgc:KGC372-p1-c1 ;
-    vrep:comparedConstraint kgc:KGC372-p2-c1 ;
+    vrep:constraint kgc:KGC372-p2-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-language-bcp47> ;
-    vrep:backgroundTheory <https://w3id.org/odrl-kb/bcp47/uniqueness> ;
     vrep:readAgainst drk:KGC373-report ;
-    rdfs:comment """The value en-US resolves to no concept of the resource under this binding's grounding rule. Checkable by applying that rule to the value and seeing that it yields nothing."""@en ;
+    rdfs:comment """Under the exact-match rule, the value en-US resolves to no concept of the resource. The constraint is therefore rejected, and no verdict is computed. KGC373 reads the same value under the rule that reduces it to en."""@en ;
     dcterms:description """A publisher distributes in German. A reuser's policy commits to American English (en-US), under the exact-match grounding rule."""@en ;
-    vrep:compatibilityState vrep:Unknown ;
-    vrep:unknownReason vrep:Ungrounded ;
+    vrep:grounded false ;
     vrep:ungroundedValue "en-US" .

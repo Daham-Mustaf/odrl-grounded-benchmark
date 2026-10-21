@@ -290,7 +290,7 @@ PROBLEMS = [
         "resource": RESOURCE, "background_theory": EMPTY_BT,
         "binding": BINDING, "includes": INCLUDES,
         "tree": [C("isA", VALID), C("eq", WITHDRAWN, side="request")],
-        "expected_verdict": "Unknown", "unknown_reason": "epistemic",
+        "expected_verdict": "Unknown",
         "expected_q1": "Satisfiable", "expected_q2": "Satisfiable",
         "summary": (
             "A controller permits use only while consent can justify "
