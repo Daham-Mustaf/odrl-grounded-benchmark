@@ -17,6 +17,9 @@
 (declare-sort Concept 0)
 (declare-fun loc_nl () Concept)
 (declare-fun loc_bq () Concept)
+(declare-fun loc_nl_bq1 () Concept)
+(declare-fun loc_nl_bq2 () Concept)
+(declare-fun loc_nl_bq3 () Concept)
 (declare-fun kge_leq (Concept Concept) Bool)
 ; Order axioms, quantified.  The same three as KGE000-0.ax, so the two
 ; encodings are the same theory.
@@ -25,11 +28,18 @@
     (=> (and (kge_leq x y) (kge_leq y x)) (= x y))) :named ax_leq_antisymmetric))
 (assert (! (forall ((x Concept) (y Concept) (z Concept))
     (=> (and (kge_leq x y) (kge_leq y z)) (kge_leq x z))) :named ax_leq_transitive))
-; Resource: the containment the extension publishes.
-(assert (! (kge_leq loc_bq loc_nl) :named res_kgc330_0))
+(assert (! (kge_leq loc_bq loc_nl) :named res_loc_bq_within_loc_nl))
+(assert (! (kge_leq loc_nl_bq1 loc_nl) :named res_loc_nl_bq1_within_loc_nl))
+(assert (! (kge_leq loc_nl_bq2 loc_nl) :named res_loc_nl_bq2_within_loc_nl))
+(assert (! (kge_leq loc_nl_bq3 loc_nl) :named res_loc_nl_bq3_within_loc_nl))
+(assert (! (kge_leq loc_bq loc_nl_bq1) :named res_loc_bq_same_loc_nl_bq1))
+(assert (! (kge_leq loc_nl_bq1 loc_bq) :named res_loc_nl_bq1_same_loc_bq))
+(assert (! (kge_leq loc_bq loc_nl_bq2) :named res_loc_bq_same_loc_nl_bq2))
+(assert (! (kge_leq loc_nl_bq2 loc_bq) :named res_loc_nl_bq2_same_loc_bq))
+(assert (! (kge_leq loc_bq loc_nl_bq3) :named res_loc_bq_same_loc_nl_bq3))
+(assert (! (kge_leq loc_nl_bq3 loc_bq) :named res_loc_nl_bq3_same_loc_bq))
 ; witness condition asserted
-(assert (! (or (and (kge_leq loc_nl loc_nl) (= loc_nl loc_bq))
-    (and (kge_leq loc_bq loc_nl) (= loc_bq loc_bq))) :named w_kgc330))
+(assert (! (or (and (kge_leq loc_nl loc_nl) (= loc_nl loc_bq)) (and (kge_leq loc_bq loc_nl) (= loc_bq loc_bq))) :named w_kgc330))
 (check-sat)
 (get-unsat-core)
 (get-model)

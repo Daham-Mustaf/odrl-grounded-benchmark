@@ -16,7 +16,6 @@
 (set-option :produce-models true)
 (declare-sort Concept 0)
 (declare-fun dpv_marketing () Concept)
-(declare-fun dpv_purpose () Concept)
 (declare-fun kge_leq (Concept Concept) Bool)
 ; Order axioms, quantified.  The same three as KGE000-0.ax, so the two
 ; encodings are the same theory.
@@ -25,8 +24,6 @@
     (=> (and (kge_leq x y) (kge_leq y x)) (= x y))) :named ax_leq_antisymmetric))
 (assert (! (forall ((x Concept) (y Concept) (z Concept))
     (=> (and (kge_leq x y) (kge_leq y z)) (kge_leq x z))) :named ax_leq_transitive))
-; Resource: marketing is a purpose.  The verdict does not use this.
-(assert (! (kge_leq dpv_marketing dpv_purpose) :named res_kgc317_0))
 ; witness condition negated
 (assert (! (not (and (not (= dpv_marketing dpv_marketing)) (= dpv_marketing dpv_marketing))) :named w_kgc317))
 (check-sat)

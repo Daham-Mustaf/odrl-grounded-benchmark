@@ -17,11 +17,20 @@
 (declare-sort Concept 0)
 (declare-fun bcp_de () Concept)
 (declare-fun bcp_fr () Concept)
-; Declarations: registry uniqueness, as distinctness.
-(assert (! (distinct bcp_de bcp_fr) :named bt_kgc300_0))
+(declare-fun kge_leq (Concept Concept) Bool)
+(declare-fun kge_concept (Concept) Bool)
+; Order axioms, quantified.  The same three as KGE000-0.ax, so the two
+; encodings are the same theory.
+(assert (! (forall ((x Concept)) (kge_leq x x)) :named ax_leq_reflexive))
+(assert (! (forall ((x Concept) (y Concept))
+    (=> (and (kge_leq x y) (kge_leq y x)) (= x y))) :named ax_leq_antisymmetric))
+(assert (! (forall ((x Concept) (y Concept) (z Concept))
+    (=> (and (kge_leq x y) (kge_leq y z)) (kge_leq x z))) :named ax_leq_transitive))
+(assert (! (kge_concept bcp_de) :named res_bcp47_de))
+(assert (! (kge_concept bcp_fr) :named res_bcp47_fr))
+(assert (! (not (= bcp_de bcp_fr)) :named bg_dist_bcp47_de_fr))
 ; witness condition asserted
-(assert (! (or (and (= bcp_de bcp_de) (= bcp_de bcp_fr))
-    (and (= bcp_fr bcp_de) (= bcp_fr bcp_fr))) :named w_kgc300))
+(assert (! (or (and (= bcp_de bcp_de) (= bcp_de bcp_fr)) (and (= bcp_fr bcp_de) (= bcp_fr bcp_fr))) :named w_kgc300))
 (check-sat)
 (get-unsat-core)
 (get-model)

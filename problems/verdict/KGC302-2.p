@@ -19,9 +19,7 @@ include('axioms/KGE000-0.ax').
 include('axioms/GN000-0.ax').
 
 % --- constants, groundings and resource hooks ----------------------------
-% Resource: the gazetteer places France within Europe.
-fof(res_france_within_europe, axiom,
-    kge_leq(gn_france, gn_europe)).
+
 
 % --- witness condition negated -------------------------------------------
 fof(w_kgc302, axiom,

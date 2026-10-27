@@ -17,11 +17,11 @@
 %--------------------------------------------------------------------------
 include('axioms/KGE000-0.ax').
 include('axioms/BCP47000-0.ax').
+include('axioms/BCP47001-0.ax').
 
 % --- constants, groundings and resource hooks ----------------------------
-% Declarations: the registry's uniqueness rule, as distinctness.
-fof(bg_disj_de_distinct_fr, axiom,
-    bcp_de != bcp_fr).
+% Declarations: the registry's uniqueness rule, BCP47001-0.ax.  The
+% pair de, fr is one of its 105 instances.
 
 % --- witness condition negated -------------------------------------------
 fof(w_kgc300, axiom,

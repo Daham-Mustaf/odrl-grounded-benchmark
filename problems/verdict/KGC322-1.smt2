@@ -17,10 +17,16 @@
 (declare-sort Concept 0)
 (declare-fun ft_pdf () Concept)
 (declare-fun ft_pdfa1a () Concept)
-; Resource: nothing.  The verdict does not need it.
+(declare-fun kge_leq (Concept Concept) Bool)
+; Order axioms, quantified.  The same three as KGE000-0.ax, so the two
+; encodings are the same theory.
+(assert (! (forall ((x Concept)) (kge_leq x x)) :named ax_leq_reflexive))
+(assert (! (forall ((x Concept) (y Concept))
+    (=> (and (kge_leq x y) (kge_leq y x)) (= x y))) :named ax_leq_antisymmetric))
+(assert (! (forall ((x Concept) (y Concept) (z Concept))
+    (=> (and (kge_leq x y) (kge_leq y z)) (kge_leq x z))) :named ax_leq_transitive))
 ; witness condition asserted
-(assert (! (or (and (or (= ft_pdf ft_pdf) (= ft_pdf ft_pdfa1a)) (= ft_pdf ft_pdfa1a))
-    (and (or (= ft_pdfa1a ft_pdf) (= ft_pdfa1a ft_pdfa1a)) (= ft_pdfa1a ft_pdfa1a))) :named w_kgc322))
+(assert (! (and (or (= ft_pdf ft_pdfa1a) (= ft_pdfa1a ft_pdfa1a)) (or (and (= ft_pdf ft_pdfa1a) (or (= ft_pdf ft_pdf) (= ft_pdf ft_pdfa1a))) (and (= ft_pdfa1a ft_pdfa1a) (or (= ft_pdfa1a ft_pdf) (= ft_pdfa1a ft_pdfa1a))))) :named w_kgc322))
 (check-sat)
 (get-unsat-core)
 (get-model)

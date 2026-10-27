@@ -25,13 +25,11 @@
     (=> (and (kge_leq x y) (kge_leq y x)) (= x y))) :named ax_leq_antisymmetric))
 (assert (! (forall ((x Concept) (y Concept) (z Concept))
     (=> (and (kge_leq x y) (kge_leq y z)) (kge_leq x z))) :named ax_leq_transitive))
-; Resource: unchanged from KGC333.
 ; The instance of the registry rule this problem adopts, named as the TPTP
 ; side names it so that a proof and an unsat core cite one statement.
 (assert (! (distinct loc_de loc_fr) :named bg_dist_loc_de_loc_fr))
 ; witness condition negated
-(assert (! (not (or (and (= loc_de loc_de) (= loc_de loc_fr))
-    (and (= loc_fr loc_de) (= loc_fr loc_fr)))) :named w_kgc334))
+(assert (! (not (or (and (= loc_de loc_de) (= loc_de loc_fr)) (and (= loc_fr loc_de) (= loc_fr loc_fr)))) :named w_kgc334))
 (check-sat)
 (get-unsat-core)
 (get-model)

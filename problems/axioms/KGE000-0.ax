@@ -16,9 +16,9 @@
 %
 % Comments : Included by every query file.  Includes nothing itself.
 %           : Formula names carry provenance: res_ for resource statements,
-%           : bt_ for declared statements, w_ for witness conjuncts,
+%           : bg_ for declared statements, w_ for witness conjuncts,
 %           : and ax_ for the axioms here.  A prover reports its premises by
-%           : name, so the prefix is what a checker reads.  Only bt_ premises
+%           : name, so the prefix is what a checker reads.  Only bg_ premises
 %           : are withdrawable by a party.
 %           : 3 axioms: 3 order axioms (reflexive, antisymmetric, transitive); no disjointness predicate, no operator denotations, no concept guard.
 %--------------------------------------------------------------------------
@@ -52,7 +52,7 @@ fof(ax_leq_transitive, axiom,
 % Disjointness has no predicate.  A disjointness statement is written where
 % it is declared, as the denial of a common lower bound:
 %
-%     fof(bt_a_disjoint_b, axiom, ~ ? [X] : (kge_leq(X, a) & kge_leq(X, b))).
+%     fof(bg_disj_a_b, axiom, ~ ? [X] : (kge_leq(X, a) & kge_leq(X, b))).
 %
 % Symmetry, the forcing of distinctness, and the impossibility of a concept
 % being disjoint from itself all follow from that shape.  A predicate with

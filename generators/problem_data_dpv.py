@@ -121,11 +121,6 @@ _D394 = _iso((SR, RND), (SR, MK))
 _D397 = _iso((ADV, MK))
 
 
-def _decls(*concepts):
-    lines = ["(declare-sort Concept 0)"]
-    lines += [f"(declare-fun {c} () Concept)" for c in concepts]
-    lines.append("(declare-fun kge_leq (Concept Concept) Bool)")
-    return "\n".join(lines)
 """
 Twelve problems over the DPV purposes slice.
 
@@ -174,6 +169,7 @@ PROBLEMS = [
         "background_theory": EMPTY_BT,
         "binding": BINDING,
         "includes":          INCLUDES,
+        "tree": [C("isA", RND), C("eq", SR, side="request")],
         "summary": (
             "A library permits use for research and development. A "
             "researcher's policy commits to use for scientific research."),
@@ -189,21 +185,11 @@ PROBLEMS = [
 % Declarations: empty.  The purposes module publishes no disjointness
 % and no distinctness, and the parties declare none.
 """,
-        "fof_witness": f"""\
-( ( kge_leq({RND}, {RND}) & {RND} = {SR} )
-| ( kge_leq({SR},  {RND}) & {SR}  = {SR}  ) )""",
 
         "expected_q1": "Satisfiable",
         "expected_q2": "Unsatisfiable",
 
         "smt2_logic": "UF",
-        "smt2_decls": _decls(RND, SR),
-        "smt2_asserts": f"""\
-; Resource: the containment DPV publishes.
-(assert (kge_leq {SR} {RND}))""",
-        "smt2_witness": f"""\
-(or (and (kge_leq {RND} {RND}) (= {RND} {SR}))
-    (and (kge_leq {SR}  {RND}) (= {SR}  {SR})))""",
 
         "certificate": {
             "kind": "Refutation",
@@ -272,6 +258,7 @@ kgc:KGC310-p2-c1 a odrl:Constraint ;
         "resource":          RESOURCE,
         "background_theory": EMPTY_BT,
         "includes":          INCLUDES,
+        "tree": [C("isA", PUR), C("eq", NCR, side="request")],
          "binding": BINDING,
         "summary": (
             "A library permits use for any DPV purpose. A researcher's policy "
@@ -289,22 +276,11 @@ kgc:KGC310-p2-c1 a odrl:Constraint ;
         "fof_decls": """\
 % Declarations: empty, as above.
 """,
-        "fof_witness": f"""\
-( ( kge_leq({PUR}, {PUR}) & {PUR} = {NCR} )
-| ( kge_leq({NCR}, {PUR}) & {NCR} = {NCR} ) )""",
 
         "expected_q1": "Satisfiable",
         "expected_q2": "Unsatisfiable",
 
         "smt2_logic": "UF",
-        "smt2_decls": _decls(PUR, NCR, NCP),
-        "smt2_asserts": f"""\
-; Resource: the two steps.  Neither asserts the chain.
-(assert (kge_leq {NCR} {NCP}))
-(assert (kge_leq {NCP} {PUR}))""",
-        "smt2_witness": f"""\
-(or (and (kge_leq {PUR} {PUR}) (= {PUR} {NCR}))
-    (and (kge_leq {NCR} {PUR}) (= {NCR} {NCR})))""",
  "certificate": {
             "kind": "Refutation",
             "comment": (
@@ -383,6 +359,7 @@ kgc:KGC311-p2-c1 a odrl:Constraint ;
             "A library permits use for marketing. A researcher's policy "
             "commits to use for scientific research."),
         "includes":          INCLUDES,
+        "tree": [C("eq", MK), C("eq", SR, side="request")],
         "description": (
             "Offer (purpose, eq, dpv:Marketing) against request (purpose, eq, "
             "dpv:ScientificResearch).  Both denote singletons, and the two "
@@ -397,24 +374,11 @@ kgc:KGC311-p2-c1 a odrl:Constraint ;
 % Declarations: empty.  Two names are not two concepts until something
 % says so, and the purposes module says nothing.
 """,
-        "fof_witness": f"""\
-( ( {MK} = {MK} & {MK} = {SR} )
-| ( {SR} = {MK} & {SR} = {SR} ) )""",
 
         "expected_q1": "Satisfiable",
         "expected_q2": "Satisfiable",
 
         "smt2_logic": "UF",
-        "smt2_decls": _decls(MK, SR, RND, PUR),
-        "smt2_asserts": f"""\
-; Resource: both are purposes, by different routes.  Neither route makes
-; them distinct.
-(assert (kge_leq {MK} {PUR}))
-(assert (kge_leq {SR} {RND}))
-(assert (kge_leq {RND} {PUR}))""",
-        "smt2_witness": f"""\
-(or (and (= {MK} {MK}) (= {MK} {SR}))
-    (and (= {SR} {MK}) (= {SR} {SR})))""",
 
         "certificate": {
             "kind": "Models",                   
@@ -485,6 +449,7 @@ kgc:KGC313-p2-c1 a odrl:Constraint ;
         "background_theory": DECLARED_BT,
         "binding": BINDING,
         "includes":          INCLUDES_DECLARED,
+        "tree": [C("eq", MK), C("eq", SR, side="request")],
         "summary": (
             "As KGC313, with marketing and scientific research declared "
             "distinct."),
@@ -498,24 +463,12 @@ kgc:KGC313-p2-c1 a odrl:Constraint ;
         ),
 
         "fof_decls": _iso((MK, SR))[0],
-        "fof_witness": f"""\
-( ( {MK} = {MK} & {MK} = {SR} )
-| ( {SR} = {MK} & {SR} = {SR} ) )""",
 
         "expected_q1": "Unsatisfiable",
         "expected_q2": "Satisfiable",
 
         "smt2_logic": "UF",
-        "smt2_decls": _decls(MK, SR, RND, PUR),
-        "smt2_resource": f"""\
-; Resource: unchanged from KGC313.
-(assert (kge_leq {MK} {PUR}))
-(assert (kge_leq {SR} {RND}))
-(assert (kge_leq {RND} {PUR}))""",
         "smt2_background": _iso((MK, SR))[1],
-        "smt2_witness": f"""\
-(or (and (= {MK} {MK}) (= {MK} {SR}))
-    (and (= {SR} {MK}) (= {SR} {SR})))""",
 
         "certificate": {
             "kind": "Refutation",
@@ -589,6 +542,7 @@ kgc:KGC314-p2-c1 a odrl:Constraint ;
         "background_theory": EMPTY_BT,
         "binding": BINDING,  
         "includes":          INCLUDES,
+        "tree": [C("isA", PUR), C("eq", RIS, side="request")],
         "summary": (
             "A library permits use for any DPV purpose. A researcher's policy "
             "commits to use for recruitment interview scheduling."),
@@ -604,27 +558,12 @@ kgc:KGC314-p2-c1 a odrl:Constraint ;
         "fof_decls": """\
 % Declarations: empty.
 """,
-        "fof_witness": f"""\
-( ( kge_leq({PUR}, {PUR}) & {PUR} = {RIS} )
-| ( kge_leq({RIS}, {PUR}) & {RIS} = {RIS} ) )""",
 
         "expected_q1": "Satisfiable",
         "expected_q2": "Unsatisfiable",
 
         "smt2_logic": "UF",
-        "smt2_decls": _decls(RIS, RIM, RM, PH, PM, HRM, PUR),
-        "smt2_resource": f"""\
-; Resource: the six steps.  None of them asserts the chain.
-(assert (kge_leq {RIS} {RIM}))
-(assert (kge_leq {RIM} {RM}))
-(assert (kge_leq {RM} {PH}))
-(assert (kge_leq {PH} {PM}))
-(assert (kge_leq {PM} {HRM}))
-(assert (kge_leq {HRM} {PUR}))""",
         "smt2_background": "",
-        "smt2_witness": f"""\
-(or (and (kge_leq {PUR} {PUR}) (= {PUR} {RIS}))
-    (and (kge_leq {RIS} {PUR}) (= {RIS} {RIS})))""",
 
         "certificate": {
             "kind": "Refutation",
@@ -696,6 +635,7 @@ kgc:KGC315-p2-c1 a odrl:Constraint ;
         "resource":          RESOURCE,
         "background_theory": EMPTY_BT,
         "includes":          INCLUDES,
+        "tree": [C("isA", RIS), C("eq", PUR, side="request")],
         "binding": BINDING,
         "summary": (
             "A library permits use for recruitment interview scheduling only. "
@@ -715,28 +655,12 @@ kgc:KGC315-p2-c1 a odrl:Constraint ;
         "fof_decls": """\
 % Declarations: empty.
 """,
-        "fof_witness": f"""\
-( ( kge_leq({RIS}, {RIS}) & {RIS} = {PUR} )
-| ( kge_leq({PUR}, {RIS}) & {PUR} = {PUR} ) )""",
 
         "expected_q1": "Satisfiable",
         "expected_q2": "Satisfiable",
 
         "smt2_logic": "UF",
-        "smt2_decls": _decls(RIS, RIM, RM, PH, PM, HRM, PUR),
-        "smt2_resource": f"""\
-; Resource: unchanged from KGC315.  What changed is the pair of
-; constraints, and with it the direction the witness asks about.
-(assert (kge_leq {RIS} {RIM}))
-(assert (kge_leq {RIM} {RM}))
-(assert (kge_leq {RM} {PH}))
-(assert (kge_leq {PH} {PM}))
-(assert (kge_leq {PM} {HRM}))
-(assert (kge_leq {HRM} {PUR}))""",
         "smt2_background": "",
-        "smt2_witness": f"""\
-(or (and (kge_leq {RIS} {RIS}) (= {RIS} {PUR}))
-    (and (kge_leq {PUR} {RIS}) (= {PUR} {PUR})))""",
 
         "certificate": {
             "kind": "Models",
@@ -807,6 +731,7 @@ kgc:KGC316-p2-c1 a odrl:Constraint ;
         "background_theory": EMPTY_BT,
         "binding": BINDING,
         "includes":          INCLUDES,
+        "tree": [C("isNoneOf", MK), C("eq", MK, side="request")],
         "summary": (
             "A library permits use for any purpose other than marketing. A "
             "researcher's policy commits to use for marketing."),
@@ -826,20 +751,12 @@ kgc:KGC316-p2-c1 a odrl:Constraint ;
 % is between the two constraints, not between a constraint and something a
 % party declared.
 """,
-        "fof_witness": f"""\
-( {MK} != {MK} & {MK} = {MK} )""",
 
         "expected_q1": "Unsatisfiable",
         "expected_q2": "Satisfiable",
 
         "smt2_logic": "UF",
-        "smt2_decls": _decls(MK, PUR),
-        "smt2_resource": f"""\
-; Resource: marketing is a purpose.  The verdict does not use this.
-(assert (kge_leq {MK} {PUR}))""",
         "smt2_background": "",
-        "smt2_witness": f"""\
-(and (not (= {MK} {MK})) (= {MK} {MK}))""",
 
         "certificate": {
             "kind": "Refutation",

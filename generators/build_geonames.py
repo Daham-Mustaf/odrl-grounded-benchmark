@@ -213,11 +213,11 @@ def axioms(levels, pairs, names) -> str:
         lines.append(f"fof(res_{cs}_within_{ps}, axiom,")
         lines.append(f"    kge_leq({cs}, {ps})).")
     lines += ["", "% Declarations: sibling disjointness, as the denial of",
-              "% a common lower bound.  bt_ names mark what a party may",
+              "% a common lower bound.  bg_ names mark what a party may",
               "% withdraw.", ""]
     for a, b in pairs:
         sa, sb = slug(a, names), slug(b, names)
-        lines.append(f"fof(bt_{sa}_disjoint_{sb}, axiom,")
+        lines.append(f"fof(bg_disj_{sa}_{sb}, axiom,")
         lines.append(f"    ~ ? [X] : (kge_leq(X, {sa}) & kge_leq(X, {sb}))).")
     return "\n".join(lines) + "\n"
 

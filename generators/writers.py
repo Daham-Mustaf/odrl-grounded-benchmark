@@ -37,8 +37,7 @@ Problem dict keys:
     expected_q2       "Satisfiable" | "Unsatisfiable"
     smt2_decls        SMT-LIB declarations
     smt2_resource     SMT-LIB assertions for R, named res_
-    smt2_background   SMT-LIB assertions for B, named bt_
-    smt2_asserts      the older single field; assumed to hold R only
+    smt2_background   SMT-LIB assertions for B, named bg_
     smt2_witness      the witness condition, as an SMT-LIB term
     summary           what the two policies ask, in the parties' terms.
                       Reaches the report as dcterms:description.
@@ -222,16 +221,11 @@ def write_smt2(p: dict, q: int, out_dir: Path) -> Path:
         parts.append(_name_asserts(SMT_ORDER_AXIOMS, "ax", p))
 
     # Resource and declarations are named apart, so that an unsat core
-    # attributes to the same place a TPTP proof does.  smt2_asserts is the
-    # older single field: a problem still using it is assumed to hold only
-    # resource statements, and one that does not should be split.
-    if "smt2_resource" in p or "smt2_background" in p:
-        if p.get("smt2_resource", "").strip():
-            parts.append(_name_asserts(p["smt2_resource"], "res", p))
-        if p.get("smt2_background", "").strip():
-            parts.append(_name_asserts(p["smt2_background"], "bt", p))
-    else:
-        parts.append(_name_asserts(p["smt2_asserts"], "res", p))
+    # attributes to the same place a TPTP proof does.
+    if p.get("smt2_resource", "").strip():
+        parts.append(_name_asserts(p["smt2_resource"], "res", p))
+    if p.get("smt2_background", "").strip():
+        parts.append(_name_asserts(p["smt2_background"], "bg", p))
 
     content = "\n".join(parts + [
         f"; {label}",
@@ -303,6 +297,9 @@ def write_problem(p: dict, out_dir: Path, cases_dir: Path,
     incrementally.
     """
     written = []
+    if not p.get("ungrounded") and not p.get("_derived"):
+        raise ValueError(f"{p.get('id', '?')}: not expanded from a tree. "
+                         f"Pass the entry through expand_tree first.")
     if not p.get("ungrounded"):
         for q in (1, 2):
             written.append(write_fof(p, q, out_dir))

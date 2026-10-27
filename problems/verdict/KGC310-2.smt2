@@ -25,11 +25,9 @@
     (=> (and (kge_leq x y) (kge_leq y x)) (= x y))) :named ax_leq_antisymmetric))
 (assert (! (forall ((x Concept) (y Concept) (z Concept))
     (=> (and (kge_leq x y) (kge_leq y z)) (kge_leq x z))) :named ax_leq_transitive))
-; Resource: the containment DPV publishes.
-(assert (! (kge_leq dpv_scientific_research dpv_research_and_development) :named res_kgc310_0))
+(assert (! (kge_leq dpv_scientific_research dpv_research_and_development) :named res_dpv_scientific_research_below_dpv_research_and_development))
 ; witness condition negated
-(assert (! (not (or (and (kge_leq dpv_research_and_development dpv_research_and_development) (= dpv_research_and_development dpv_scientific_research))
-    (and (kge_leq dpv_scientific_research  dpv_research_and_development) (= dpv_scientific_research  dpv_scientific_research)))) :named w_kgc310))
+(assert (! (not (or (and (kge_leq dpv_research_and_development dpv_research_and_development) (= dpv_research_and_development dpv_scientific_research)) (and (kge_leq dpv_scientific_research dpv_research_and_development) (= dpv_scientific_research dpv_scientific_research)))) :named w_kgc310))
 (check-sat)
 (get-unsat-core)
 (get-model)

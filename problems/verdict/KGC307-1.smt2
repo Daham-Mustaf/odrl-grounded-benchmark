@@ -18,6 +18,7 @@
 (declare-fun gn_france () Concept)
 (declare-fun gn_germany () Concept)
 (declare-fun kge_leq (Concept Concept) Bool)
+(declare-fun kge_concept (Concept) Bool)
 ; Order axioms, quantified.  The same three as KGE000-0.ax, so the two
 ; encodings are the same theory.
 (assert (! (forall ((x Concept)) (kge_leq x x)) :named ax_leq_reflexive))
@@ -25,6 +26,8 @@
     (=> (and (kge_leq x y) (kge_leq y x)) (= x y))) :named ax_leq_antisymmetric))
 (assert (! (forall ((x Concept) (y Concept) (z Concept))
     (=> (and (kge_leq x y) (kge_leq y z)) (kge_leq x z))) :named ax_leq_transitive))
+(assert (! (kge_concept gn_france) :named gn_france_concept))
+(assert (! (kge_concept gn_germany) :named gn_germany_concept))
 ; The same distinctness, named as the TPTP side names it.
 (assert (! (not (= gn_france gn_germany)) :named bg_dist_gn_france_gn_germany))
 ; witness condition asserted

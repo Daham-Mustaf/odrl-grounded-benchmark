@@ -17,6 +17,8 @@
 (declare-sort Concept 0)
 (declare-fun loc_eu () Concept)
 (declare-fun loc_de () Concept)
+(declare-fun loc_eu27 () Concept)
+(declare-fun loc_eu28 () Concept)
 (declare-fun kge_leq (Concept Concept) Bool)
 ; Order axioms, quantified.  The same three as KGE000-0.ax, so the two
 ; encodings are the same theory.
@@ -25,12 +27,13 @@
     (=> (and (kge_leq x y) (kge_leq y x)) (= x y))) :named ax_leq_antisymmetric))
 (assert (! (forall ((x Concept) (y Concept) (z Concept))
     (=> (and (kge_leq x y) (kge_leq y z)) (kge_leq x z))) :named ax_leq_transitive))
-; Resource: membership, read as the order by the jurisdictional profile and
-; not read at all by the territorial one.
-(assert (! (kge_leq loc_de loc_eu) :named res_kgc331_0))
+(assert (! (kge_leq loc_de loc_eu) :named res_loc_de_within_loc_eu))
+(assert (! (kge_leq loc_de loc_eu27) :named res_loc_de_within_loc_eu27))
+(assert (! (kge_leq loc_de loc_eu28) :named res_loc_de_within_loc_eu28))
+(assert (! (kge_leq loc_eu27 loc_eu) :named res_loc_eu27_within_loc_eu))
+(assert (! (kge_leq loc_eu28 loc_eu) :named res_loc_eu28_within_loc_eu))
 ; witness condition negated
-(assert (! (not (or (and (kge_leq loc_eu loc_eu) (= loc_eu loc_de))
-    (and (kge_leq loc_de loc_eu) (= loc_de loc_de)))) :named w_kgc331))
+(assert (! (not (or (and (kge_leq loc_eu loc_eu) (= loc_eu loc_de)) (and (kge_leq loc_de loc_eu) (= loc_de loc_de)))) :named w_kgc331))
 (check-sat)
 (get-unsat-core)
 (get-model)

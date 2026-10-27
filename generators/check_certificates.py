@@ -67,13 +67,13 @@ NON_ENTAILMENT_RULES = {
 
 PREMISE_CLASSES = [
     ("res_", "resource"),
+    ("gn_", "resource"),
     ("bg_dist", "declared distinctness"),
     ("bg_disj", "declared disjointness"),
     ("bg_", "declared"),
     ("ax_order", "order axiom"),
     ("ax_eq", "equality axiom"),
     ("ax_", "axiom"),
-    ("bt_", "declared statement"),
     ("wc_", "witness condition"),
     ("w_", "witness condition"),
 ]

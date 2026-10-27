@@ -36,7 +36,9 @@ verdict, and its case gets an input check report instead.
 Each completed query is written independently as TPTP and SMT-LIB and
 checked by Vampire and Z3. Where a verdict is definite, the two
 encodings are compared by the premises their proofs cite, not only by
-the status they return.
+the status they return. TPTP is the reference encoding and includes
+whole axiom files; SMT-LIB carries the slice the tree reaches;
+`full-run.sh` checks that both give the same status.
 
 ---
 
@@ -124,6 +126,9 @@ once the parties declare the concepts distinct.
 Vocabularies first, then problems, then the harnesses.
 
 ```bash
+# the framework axioms every query includes
+uv run generators/gen_primitives.py
+
 # resources, from the vendored files
 uv run generators/build_dpv.py \
   --purposes vocabularies/dpv-2.3/modules/purposes.ttl \

@@ -62,6 +62,8 @@ the concepts the grounding names.
           whether a value grounds at all.
 """
 
+from compile import Constraint
+
 PDF  = "ft_pdf"
 A1A  = "ft_pdfa1a"
 
@@ -71,6 +73,10 @@ DECLARED_BT = "https://w3id.org/odrl-kb/eu-file-type/declared"
 INCLUDES          = ["KGE000-0.ax", "EUFT-filetype.ax"]
 INCLUDES_DECLARED = INCLUDES + ["EUFT-filetype-declared.ax"]
 BINDING = "https://w3id.org/odrl-kb/profile/b-fileformat"
+
+def C(op, *vals, side="offer"):
+    return Constraint(op, tuple(vals), side)
+
 
 def _iso(*pairs):
     """Declared-distinctness instances, named bg_dist_ on both encodings.
@@ -90,21 +96,6 @@ def _iso(*pairs):
         fof.append(f"fof({n}, axiom,\n    {a} != {b}).")
         smt.append(f"(assert (! (not (= {a} {b})) :named {n}))")
     return "\n".join(fof) + "\n", "\n".join(smt)
-
-def _decls(*concepts):
-    """Declarations for a nominal problem.
-
-    No kge_leq: the resource declares no order, so the symbol has nothing to
-    interpret and the writer, which emits the order axioms only when the
-    declarations mention it, correctly emits none.  A nominal problem whose
-    file carried the three order axioms would be asserting a structure the
-    resource does not have.
-    """
-    lines = ["(declare-sort Concept 0)"]
-    lines += [f"(declare-fun {c} () Concept)" for c in concepts]
-    return "\n".join(lines)
-
-
 
 _TTL_HEAD = """\
 @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
@@ -133,6 +124,7 @@ PROBLEMS = [
         "resource":          RESOURCE,
         "background_theory": EMPTY_BT,
         "includes":          INCLUDES,
+        "tree": [C("eq", PDF), C("eq", A1A, side="request")],
         "summary": (
             "BSB permits PDF. BnF's policy commits to PDF/A-1a."),
         "description": (
@@ -147,21 +139,12 @@ PROBLEMS = [
 % Resource: no order statements.  The table publishes none.
 % Declarations: empty.  The table separates nothing either.
 """,
-        "fof_witness": f"""\
-( ( {PDF} = {PDF} & {PDF} = {A1A} )
-| ( {A1A} = {PDF} & {A1A} = {A1A} ) )""",
 
         "expected_q1": "Satisfiable",
         "expected_q2": "Satisfiable",
 
         "smt2_logic": "UF",
-        "smt2_decls": _decls(PDF, A1A),
-        "smt2_resource": """\
-; Resource: nothing.  228 concepts, no relations between any of them.""",
         "smt2_background": "",
-        "smt2_witness": f"""\
-(or (and (= {PDF} {PDF}) (= {PDF} {A1A}))
-    (and (= {A1A} {PDF}) (= {A1A} {A1A})))""",
 
         "certificate": {
             "kind": "Models",
@@ -223,6 +206,7 @@ kgc:KGC320-p2-c1 a odrl:Constraint ;
         "resource":          RESOURCE,
         "background_theory": DECLARED_BT,
         "includes":          INCLUDES_DECLARED,
+        "tree": [C("eq", PDF), C("eq", A1A, side="request")],
         "summary": (
             "As KGC320, with the two formats declared distinct."),
 "description": (
@@ -235,23 +219,11 @@ kgc:KGC320-p2-c1 a odrl:Constraint ;
 % Declarations: one declared distinctness, from
 % EUFT-filetype-declared.ax.  The table separates nothing itself.
 """,
-        "fof_witness": f"""\
-( ( {PDF} = {PDF} & {PDF} = {A1A} )
-| ( {A1A} = {PDF} & {A1A} = {A1A} ) )""",
 
         "expected_q1": "Unsatisfiable",
         "expected_q2": "Satisfiable",
 
         "smt2_logic": "UF",
-        "smt2_decls": _decls(PDF, A1A),
-        "smt2_resource": """\
-; Resource: nothing, as in KGC320.""",
-        "smt2_background": f"""\
-; Declarations: the declaration, and the only difference from KGC320.
-(assert (distinct {PDF} {A1A}))""",
-        "smt2_witness": f"""\
-(or (and (= {PDF} {PDF}) (= {PDF} {A1A}))
-    (and (= {A1A} {PDF}) (= {A1A} {A1A})))""",
 
         "certificate": {
             "kind": "Refutation",
@@ -312,6 +284,7 @@ kgc:KGC321-p2-c1 a odrl:Constraint ;
         "resource":          RESOURCE,
         "background_theory": EMPTY_BT,
         "includes":          INCLUDES,
+        "tree": [C("isAnyOf", PDF, A1A), C("eq", A1A, side="request")],
         "summary": (
             "BSB permits PDF or PDF/A-1a. BnF's policy commits to PDF/A-1a."),
         "description": (
@@ -330,21 +303,12 @@ kgc:KGC321-p2-c1 a odrl:Constraint ;
 % Declarations: empty.  Neither is needed: the verdict follows from
 % reflexivity of equality.
 """,
-        "fof_witness": f"""\
-( ( ( {PDF} = {PDF} | {PDF} = {A1A} ) & {PDF} = {A1A} )
-| ( ( {A1A} = {PDF} | {A1A} = {A1A} ) & {A1A} = {A1A} ) )""",
 
         "expected_q1": "Satisfiable",
         "expected_q2": "Unsatisfiable",
 
         "smt2_logic": "UF",
-        "smt2_decls": _decls(PDF, A1A),
-        "smt2_resource": """\
-; Resource: nothing.  The verdict does not need it.""",
         "smt2_background": "",
-        "smt2_witness": f"""\
-(or (and (or (= {PDF} {PDF}) (= {PDF} {A1A})) (= {PDF} {A1A}))
-    (and (or (= {A1A} {PDF}) (= {A1A} {A1A})) (= {A1A} {A1A})))""",
 
         "certificate": {
             "kind": "Refutation",
@@ -413,6 +377,7 @@ kgc:KGC322-p2-c1 a odrl:Constraint ;
     "background_theory": DECLARED_BT,
     "binding": BINDING,
     "includes": INCLUDES_DECLARED,
+    "tree": [C("neq", PDF), C("eq", A1A, side="request")],
 
     "description": (
         "The offer excludes ft:PDF, while the request requires "
@@ -430,29 +395,15 @@ kgc:KGC322-p2-c1 a odrl:Constraint ;
 % Declarations: ft:PDF and ft:PDFA1A are declared distinct.
 """,
 
-    "fof_witness": f"""\
-( ( {PDF} != {PDF} & {PDF} = {A1A} )
-| ( {A1A} != {PDF} & {A1A} = {A1A} ) )""",
 
     "expected_q1": "Satisfiable",
     "expected_q2": "Unsatisfiable",
 
     "smt2_logic": "UF",
 
-    "smt2_decls": _decls(PDF, A1A),
 
-    "smt2_resource": """\
-; Resource: no order relation between the file-type concepts.
-""",
 
-    "smt2_background": f"""\
-; Declarations: ft:PDF and ft:PDFA1A are declared distinct.
-(assert (distinct {PDF} {A1A}))
-""",
 
-    "smt2_witness": f"""\
-(or (and (not (= {PDF} {PDF})) (= {PDF} {A1A}))
-    (and (not (= {A1A} {PDF})) (= {A1A} {A1A})))""",
 
     "certificate": {
         "kind": "Refutation",

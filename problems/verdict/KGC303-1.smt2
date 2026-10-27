@@ -18,6 +18,7 @@
 (declare-fun gn_france () Concept)
 (declare-fun gn_germany () Concept)
 (declare-fun kge_leq (Concept Concept) Bool)
+(declare-fun kge_concept (Concept) Bool)
 ; Order axioms, quantified.  The same three as KGE000-0.ax, so the two
 ; encodings are the same theory.
 (assert (! (forall ((x Concept)) (kge_leq x x)) :named ax_leq_reflexive))
@@ -25,6 +26,8 @@
     (=> (and (kge_leq x y) (kge_leq y x)) (= x y))) :named ax_leq_antisymmetric))
 (assert (! (forall ((x Concept) (y Concept) (z Concept))
     (=> (and (kge_leq x y) (kge_leq y z)) (kge_leq x z))) :named ax_leq_transitive))
+(assert (! (kge_concept gn_france) :named gn_france_concept))
+(assert (! (kge_concept gn_germany) :named gn_germany_concept))
 ; witness condition asserted
 (assert (! (or (and (or (and (= gn_france gn_france) (= gn_france gn_france)) (and (= gn_germany gn_france) (= gn_germany gn_france))) (or (and (and (= gn_france gn_france) (= gn_france gn_france)) (not (= gn_france gn_germany))) (and (and (= gn_germany gn_france) (= gn_germany gn_france)) (not (= gn_germany gn_germany))))) (and (or (and (= gn_france gn_germany) (= gn_france gn_france)) (and (= gn_germany gn_germany) (= gn_germany gn_france))) (or (and (and (= gn_france gn_germany) (= gn_france gn_france)) (not (= gn_france gn_france))) (and (and (= gn_germany gn_germany) (= gn_germany gn_france)) (not (= gn_germany gn_france)))))) :named w_kgc303))
 (check-sat)

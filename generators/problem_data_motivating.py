@@ -37,6 +37,17 @@ We emit the unsimplified disjunction, since that is what Definition Witness
 prescribes and what a generator produces mechanically.
 """
 
+from compile import Constraint
+
+DE, FR = "bcp_de", "bcp_fr"
+NCP, SR = "dpv_non_commercial_purpose", "dpv_scientific_research"
+EUROPE, FRANCE = "gn_europe", "gn_france"
+
+
+def C(op, *vals, side="offer"):
+    return Constraint(op, tuple(vals), side)
+
+
 PROBLEMS = [
 
     # -----------------------------------------------------------------
@@ -52,7 +63,12 @@ PROBLEMS = [
         "sort":              "nom",
         "resource":          "https://w3id.org/odrl-kb/bcp47",
         "background_theory": "https://w3id.org/odrl-kb/bcp47/uniqueness",
-        "includes":          ["KGE000-0.ax", "BCP47000-0.ax"],
+        "includes":          ["KGE000-0.ax", "BCP47000-0.ax", "BCP47001-0.ax"],
+        "fof_decls": """\
+% Declarations: the registry's uniqueness rule, BCP47001-0.ax.  The
+% pair de, fr is one of its 105 instances.
+""",
+        "tree": [C("eq", DE), C("eq", FR, side="request")],
         "description": (
             "Offer (language, eq, bcp:de) against request (language, eq, "
             "bcp:fr).  The registry's uniqueness rule places the two subtags "
@@ -60,31 +76,12 @@ PROBLEMS = [
             "them and the witness condition fails in every model."
         ),
 
-        "fof_decls": """\
-% Declarations: the registry's uniqueness rule, as distinctness.
-fof(bg_disj_de_distinct_fr, axiom,
-    bcp_de != bcp_fr).
-""",
         # D != empty over the named concepts {de, fr}
-        "fof_witness": """\
-( ( bcp_de = bcp_de & bcp_de = bcp_fr )
-| ( bcp_fr = bcp_de & bcp_fr = bcp_fr ) )""",
 
         "expected_q1": "Unsatisfiable",   # no model admits a witness
         "expected_q2": "Satisfiable",
 
         "smt2_logic": "UF",
-        "smt2_decls": """\
-(declare-sort Concept 0)
-(declare-fun bcp_de () Concept)
-(declare-fun bcp_fr () Concept)""",
-        "smt2_resource": "",
-        "smt2_background": """\
-; Declarations: registry uniqueness, as distinctness.
-(assert (distinct bcp_de bcp_fr))""",
-        "smt2_witness": """\
-(or (and (= bcp_de bcp_de) (= bcp_de bcp_fr))
-    (and (= bcp_fr bcp_de) (= bcp_fr bcp_fr)))""",
 
         "summary": (
             "BSB permits access to the manuscripts in German. BnF's policy "
@@ -158,6 +155,7 @@ kgc:KGC300-p2-c1 a odrl:Constraint ;
         "resource":          "https://w3id.org/odrl-kb/dpv-purposes",
         "background_theory": "https://w3id.org/odrl-kb/dpv-purposes/empty",
         "includes":          ["KGE000-0.ax", "DPV-dpv-purposes.ax"],
+        "tree": [C("isA", NCP), C("eq", SR, side="request")],
         "description": (
             "Offer (purpose, isA, dpv:NonCommercialPurpose) against request "
             "(purpose, eq, dpv:ScientificResearch).  The vocabulary neither "
@@ -170,25 +168,11 @@ kgc:KGC300-p2-c1 a odrl:Constraint ;
 % asserting a negative would be the closed-world reading this paper rejects.
 """,
         # D != empty over the named concepts {ncp, sr}
-        "fof_witness": """\
-( ( kge_leq(dpv_non_commercial_purpose, dpv_non_commercial_purpose) & dpv_non_commercial_purpose = dpv_scientific_research )
-| ( kge_leq(dpv_scientific_research,  dpv_non_commercial_purpose) & dpv_scientific_research  = dpv_scientific_research  ) )""",
 
         "expected_q1": "Satisfiable",     # some model admits a witness
         "expected_q2": "Satisfiable",     # some model admits none
 
         "smt2_logic": "UF",
-        "smt2_decls": """\
-(declare-sort Concept 0)
-(declare-fun dpv_non_commercial_purpose () Concept)
-(declare-fun dpv_scientific_research  () Concept)
-(declare-fun kge_leq (Concept Concept) Bool)""",
-        "smt2_asserts": """\
-; The vocabulary says nothing about these two concepts.  No statement is
-; made here: the order axioms are emitted by the writer, in full.""",
-        "smt2_witness": """\
-(or (and (kge_leq dpv_non_commercial_purpose dpv_non_commercial_purpose) (= dpv_non_commercial_purpose dpv_scientific_research))
-    (and (kge_leq dpv_scientific_research  dpv_non_commercial_purpose) (= dpv_scientific_research  dpv_scientific_research)))""",
 
         "summary": (
             "BSB permits use for non-commercial research only. BnF's policy "
@@ -263,6 +247,10 @@ kgc:KGC301-p2-c1 a odrl:Constraint ;
         "resource":          "https://w3id.org/odrl-kb/geonames-europe",
         "background_theory": "https://w3id.org/odrl-kb/geonames-europe/empty",
         "includes":          ["KGE000-0.ax", "GN000-0.ax"],
+        "tree": [C("isPartOf", EUROPE), C("eq", FRANCE, side="request")],
+        # The gazetteer's labels (gn_...) are not parsed by the derivation, so
+        # the one resource statement this verdict needs is carried here, under
+        # the name the TPTP side gives it in fof_decls.
         "description": (
             "Offer (spatial, isPartOf, gn:Europe) against request (spatial, "
             "eq, gn:France).  The gazetteer places France within Europe, so "
@@ -270,32 +258,12 @@ kgc:KGC301-p2-c1 a odrl:Constraint ;
             "query is unsatisfiable."
         ),
 
-        "fof_decls": """\
-% Resource: the gazetteer places France within Europe.
-fof(res_france_within_europe, axiom,
-    kge_leq(gn_france, gn_europe)).
-""",
         # D != empty over the named concepts {europe, france}
-        "fof_witness": """\
-( ( kge_leq(gn_europe, gn_europe) & gn_europe = gn_france )
-| ( kge_leq(gn_france, gn_europe) & gn_france = gn_france ) )""",
 
         "expected_q1": "Satisfiable",
         "expected_q2": "Unsatisfiable",   # no model lacks a witness
 
         "smt2_logic": "UF",
-        "smt2_decls": """\
-(declare-sort Concept 0)
-(declare-fun gn_europe () Concept)
-(declare-fun gn_france () Concept)
-(declare-fun kge_leq (Concept Concept) Bool)""",
-        "smt2_asserts": """\
-; Resource: France is within Europe.  The order axioms are emitted by the
-; writer, in full and quantified, so this file states only the resource.
-(assert (kge_leq gn_france gn_europe))""",
-        "smt2_witness": """\
-(or (and (kge_leq gn_europe gn_europe) (= gn_europe gn_france))
-    (and (kge_leq gn_france gn_europe) (= gn_france gn_france)))""",
 
         "summary": (
             "BSB permits use by recipients in Europe. BnF's policy names a "

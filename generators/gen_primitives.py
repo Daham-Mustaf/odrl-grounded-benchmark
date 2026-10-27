@@ -94,9 +94,9 @@ def generate_kge000() -> str:
     note = (
         "Included by every query file.  Includes nothing itself.\n"
         "Formula names carry provenance: res_ for resource statements,\n"
-        "bt_ for declared statements, w_ for witness conjuncts,\n"
+        "bg_ for declared statements, w_ for witness conjuncts,\n"
         "and ax_ for the axioms here.  A prover reports its premises by\n"
-        "name, so the prefix is what a checker reads.  Only bt_ premises\n"
+        "name, so the prefix is what a checker reads.  Only bg_ premises\n"
         "are withdrawable by a party."
     )
     header = AXHeader(

@@ -26,7 +26,8 @@ correct at that level.
 Provenance by prefix
 --------------------
     res_    a statement of the resource                fromResource
-    bt_     a statement of the declarations            fromDeclarations
+    gn_     a statement of the GeoNames resource       fromResource
+    bg_     a statement of the declarations            fromDeclarations
     w_      a conjunct of the witness condition        fromConstraints
     ax_     an order axiom                             fromOrderAxiom
     eq_     an equality axiom                          fromEqualityAxiom
@@ -37,7 +38,7 @@ Vampire's proof of the language pair cites a demodulation step.  Whether
 those instances become legitimate premises, or the encoding replaces builtin
 equality with a predicate, is open, and it reaches into the paper.
 
-Only `bt_` statements are withdrawable.  The resource is the authority's, the
+Only `bg_` statements are withdrawable.  The resource is the authority's, the
 constraints are the parties' own, and the axioms are the framework's.
 
 Two provers, one provenance map
@@ -74,7 +75,7 @@ mode does not always propagate the flag to its children:
 Z3 needs named assertions and cores enabled:
 
     (set-option :produce-unsat-cores true)
-    (assert (! <formula> :named bt_de_distinct_fr))
+    (assert (! <formula> :named bg_dist_bcp47_de_fr))
     (check-sat)
     (get-unsat-core)
 """
@@ -113,7 +114,7 @@ def compare_models(m1: dict, m2: dict) -> list[str]:
 
 SOURCE = {
     "res": "fromResource",
-    "bt":  "fromDeclarations",
+    "gn":  "fromResource",
     "bg_dist": "fromDeclarations",
     "bg_disj": "fromDeclarations",
     "bg":  "fromDeclarations",
@@ -123,10 +124,10 @@ SOURCE = {
     "eq":  "fromEqualityAxiom",
 }
 
-# SOURCE maps several prefixes to one provenance class (bt, bg, bg_dist and
+# SOURCE maps several prefixes to one provenance class (bg, bg_dist and
 # bg_disj all mean the parties' declaration), so its values repeat.  Loops
 # over the classes must use this list: iterating SOURCE.values() visits
-# fromDeclarations four times and emits every such premise four times.
+# fromDeclarations three times and emits every such premise three times.
 CLASSES = list(dict.fromkeys(SOURCE.values()))
 WITHDRAWABLE = {"fromDeclarations"}
 

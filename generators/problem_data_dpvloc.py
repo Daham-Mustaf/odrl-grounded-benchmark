@@ -143,13 +143,6 @@ ISO_BT         = "https://w3id.org/odrl-kb/dpv-loc/iso"
 
 
 
-def _decls(*concepts):
-    lines = ["(declare-sort Concept 0)"]
-    lines += [f"(declare-fun {c} () Concept)" for c in concepts]
-    lines.append("(declare-fun kge_leq (Concept Concept) Bool)")
-    return "\n".join(lines)
-
-
 _TTL_HEAD = """\
 @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
@@ -285,6 +278,7 @@ PROBLEMS = [
         "background_theory": EMPTY_BT,
         "binding":           BINDING_GEO,
         "includes":          INCLUDES_GEO,
+        "tree": [C("isPartOf", NL), C("eq", BQ, side="request")],
         "summary": (
             "A library permits use within the Netherlands; a researcher's "
             "policy commits to use in Bonaire. DPV places Bonaire "
@@ -311,22 +305,12 @@ PROBLEMS = [
 % Declarations: empty.  The extension asserts no disjointness between
 % places and no distinctness between the codes it lists.
 """,
-        "fof_witness": f"""\
-( ( kge_leq({NL}, {NL}) & {NL} = {BQ} )
-| ( kge_leq({BQ}, {NL}) & {BQ} = {BQ} ) )""",
 
         "expected_q1": "Satisfiable",
         "expected_q2": "Unsatisfiable",
 
         "smt2_logic": "UF",
-        "smt2_decls": _decls(NL, BQ),
-        "smt2_resource": f"""\
-; Resource: the containment the extension publishes.
-(assert (kge_leq {BQ} {NL}))""",
         "smt2_background": "",
-        "smt2_witness": f"""\
-(or (and (kge_leq {NL} {NL}) (= {NL} {BQ}))
-    (and (kge_leq {BQ} {NL}) (= {BQ} {BQ})))""",
 
         "certificate": {
             "kind": "Refutation",
@@ -361,6 +345,7 @@ PROBLEMS = [
         "background_theory": EMPTY_BT,
         "binding":           BINDING_JURIS,
         "includes":          INCLUDES_JURIS,
+        "tree": [C("isPartOf", EU), C("eq", DE, side="request")],
         "summary": (
             "A library permits use within the European Union; a researcher's "
             "policy commits to use in Germany. DPV places Germany in "
@@ -382,21 +367,10 @@ PROBLEMS = [
 % membership.  Under the territorial reading loc:EU is not a concept and this
 % problem does not arise.
 """,
-        "fof_witness": f"""\
-( ( kge_leq({EU}, {EU}) & {EU} = {DE} )
-| ( kge_leq({DE}, {EU}) & {DE} = {DE} ) )""",
         "expected_q1": "Satisfiable",
         "expected_q2": "Unsatisfiable",
         "smt2_logic": "UF",
-        "smt2_decls": _decls(EU, DE),
-        "smt2_resource": f"""\
-; Resource: membership, read as the order by the jurisdictional profile and
-; not read at all by the territorial one.
-(assert (kge_leq {DE} {EU}))""",
         "smt2_background": "",
-        "smt2_witness": f"""\
-(or (and (kge_leq {EU} {EU}) (= {EU} {DE}))
-    (and (kge_leq {DE} {EU}) (= {DE} {DE})))""",
         "certificate": {
             "kind": "Refutation",
 "comment": "DPV states that Germany is in the European Union, and "
@@ -426,6 +400,7 @@ PROBLEMS = [
         "background_theory": EMPTY_BT,
         "binding":           BINDING_GEO,
         "includes":          INCLUDES_GEO,
+        "tree": [C("eq", DE), C("eq", FR, side="request")],
         "description": (
             "One side permits use in Germany, the other asks for France. "
             "Each names exactly one place, so both can be satisfied only "
@@ -443,19 +418,10 @@ PROBLEMS = [
 % Declarations: empty.  Two codes are not two places until something
 % says so, and the extension says nothing.
 """,
-        "fof_witness": f"""\
-( ( {DE} = {DE} & {DE} = {FR} )
-| ( {FR} = {DE} & {FR} = {FR} ) )""",
         "expected_q1": "Satisfiable",
         "expected_q2": "Satisfiable",
         "smt2_logic": "UF",
-        "smt2_decls": _decls(DE, FR),
-        "smt2_resource": """\
-; Resource: nothing about these two relates or separates them.""",
         "smt2_background": "",
-        "smt2_witness": f"""\
-(or (and (= {DE} {DE}) (= {DE} {FR}))
-    (and (= {FR} {DE}) (= {FR} {FR})))""",
         "certificate": {
             "kind": "Models",
 "comment": (
@@ -485,6 +451,7 @@ PROBLEMS = [
         "background_theory": ISO_BT,
         "binding":           BINDING_GEO,
         "includes":          INCLUDES_ISO,
+        "tree": [C("eq", DE), C("eq", FR, side="request")],
         "description": (
             "The same two constraints as KGC333, with one addition: the "
             "parties adopt ISO 3166's rule that a code names one area. "
@@ -508,22 +475,13 @@ PROBLEMS = [
 fof(bg_dist_loc_de_loc_fr, axiom,
     loc_de != loc_fr).
 """,
-        "fof_witness": f"""\
-( ( {DE} = {DE} & {DE} = {FR} )
-| ( {FR} = {DE} & {FR} = {FR} ) )""",
         "expected_q1": "Unsatisfiable",
         "expected_q2": "Satisfiable",
         "smt2_logic": "UF",
-        "smt2_decls": _decls(DE, FR),
-        "smt2_resource": """\
-; Resource: unchanged from KGC333.""",
         "smt2_background": """\
 ; The instance of the registry rule this problem adopts, named as the TPTP
 ; side names it so that a proof and an unsat core cite one statement.
 (assert (! (distinct loc_de loc_fr) :named bg_dist_loc_de_loc_fr))""",
-        "smt2_witness": f"""\
-(or (and (= {DE} {DE}) (= {DE} {FR}))
-    (and (= {FR} {DE}) (= {FR} {FR})))""",
         "certificate": {
             "kind": "Refutation",
   "comment": (

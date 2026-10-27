@@ -13,7 +13,7 @@ from pathlib import Path
 from compile import Constraint, Or, Xone, compile_operand
 
 _ASSERTION = re.compile(
-    r"fof\(\s*((?:res|bt|bg)_[a-z0-9_]+)\s*,\s*axiom,\s*"
+    r"fof\(\s*([a-z][a-z0-9_]*)\s*,\s*axiom,\s*"
     r"(?:kge_leq\(\s*([a-z0-9_]+)\s*,\s*([a-z0-9_]+)\s*\)"
     r"|kge_concept\(\s*([a-z0-9_]+)\s*\)"
     r"|([a-z0-9_]+)\s*!=\s*([a-z0-9_]+))\s*\)\s*\.",
@@ -22,6 +22,11 @@ _ASSERTION = re.compile(
 
 def _parse_assertions(text):
     """Yield (label, kind, args) for every matching statement, file order.
+
+    Any label is accepted: a resource names its statements as it likes
+    (res_ for most, gn_ for GeoNames).  Whether a statement is the
+    parties' or the authority's is decided by the label alone: bg_ is a
+    declaration, every other label is a resource statement.
 
     kind is one of leq, concept, dist.  Anything the pattern does not
     match (quantified disjointness, definitions) is left to the axiom
@@ -115,7 +120,7 @@ def assertions_for(constants, includes,
         else:
             body = f"(not (= {args[0]} {args[1]}))"
         line = f"(assert (! {body} :named {label}))"
-        (res if label.startswith("res_") else bg).append(line)
+        (bg if label.startswith("bg_") else res).append(line)
         for a in args:
             if a not in constants and a not in extras:
                 extras.append(a)
@@ -165,12 +170,65 @@ def _map_item(item, g: dict):
     return Or(alts) if isinstance(item, Or) else Xone(alts)
 
 
+# The formula fields a case used to carry by hand.  Every one of them is
+# derived from the tree, so an entry that still writes one is refused: two
+# sources for one query is how the TPTP and SMT-LIB sides drifted apart.
+# Declarations are the exception that stays: fof_decls and smt2_background.
+LEGACY_FIELDS = ("fof_witness", "smt2_witness", "smt2_asserts",
+                 "smt2_decls", "smt2_resource")
+
+
+def refuse_hand_written(p: dict) -> None:
+    pid = p.get("id", "?")
+    found = [k for k in LEGACY_FIELDS if k in p and not p.get("_derived")]
+    if found:
+        raise ValueError(
+            f"{pid}: hand-written {', '.join(found)}. A case is a tree; the "
+            f"compiler derives the witness, the declarations and the "
+            f"resource. Give {pid} a tree and remove the field(s).")
+    if "tree" not in p and not p.get("ungrounded"):
+        raise ValueError(f"{pid}: no tree. A verdict case is a constraint "
+                         f"tree, or it is marked ungrounded.")
+    refuse_non_declarations(p)
+
+
+def refuse_non_declarations(p: dict) -> None:
+    """fof_decls and smt2_background hold declarations, and only those.
+
+    A declaration is labelled bg_, on both sides, so that a proof and an
+    unsat core cite one statement.  A resource statement comes from the
+    axiom file the case includes, and the derivation writes it into the
+    SMT-LIB file under the same label.  A statement written here under any
+    other label, or an SMT-LIB statement with no label at all, is refused.
+    """
+    pid = p.get("id", "?")
+    fof = "\n".join(l for l in p.get("fof_decls", "").split("\n")
+                    if not l.lstrip().startswith("%"))
+    smt = "\n".join(l for l in p.get("smt2_background", "").split("\n")
+                    if not l.lstrip().startswith(";"))
+    labels = (re.findall(r"fof\(\s*([A-Za-z0-9_]+)\s*,", fof)
+              + re.findall(r":named\s+([A-Za-z0-9_]+)", smt))
+    bad = [l for l in labels if not l.startswith("bg_")]
+    if bad:
+        raise ValueError(
+            f"{pid}: {', '.join(bad)} in fof_decls or smt2_background does "
+            f"not start with bg_. Those fields hold declarations; a resource "
+            f"statement comes from the included axiom file.")
+    unnamed = len(re.findall(r"\(assert\b", smt)) - len(re.findall(r":named\b", smt))
+    if unnamed > 0:
+        raise ValueError(
+            f"{pid}: smt2_background has {unnamed} statement(s) with no "
+            f":named label. Give each the bg_ label the TPTP side uses.")
+
+
 def expand_tree(p: dict) -> dict:
     """Fill the witness, declaration, and declarations fields of a tree problem.
 
-    A problem without a tree is returned unchanged, so the two kinds sit in
-    one list and the generator does not branch.
+    An entry carrying a hand-written formula, or no tree, is refused with its
+    case ID.  An entry marked ungrounded builds no queries and is returned
+    as it is.
     """
+    refuse_hand_written(p)
     if "tree" not in p:
         return p
     # Ungrounded problems build no queries (requirement D16); the raw
@@ -226,6 +284,7 @@ def expand_tree(p: dict) -> dict:
         q["smt2_resource"] + q["smt2_background"])
     q["smt2_decls"] = smt_declarations(decl_constants, with_concept)
     q["smt2_witness"] = w["smt"]
+    q["_derived"] = True
     return q
 
 

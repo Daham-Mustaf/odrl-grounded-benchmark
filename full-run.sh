@@ -17,6 +17,11 @@ RETRIEVED=2026-08-19
 # --- 1. resources, from the vendored files -----------------------------
 hdr "1. builders"
 
+# The framework axioms every query includes.  Regenerated here so the file
+# cannot drift from its generator.
+uv run generators/gen_primitives.py >/dev/null || die gen_primitives
+echo "  framework axioms"
+
 uv run generators/build_dpvloc.py \
   --loc vocabularies/dpv-2.3/loc/loc.ttl \
   --retrieved "$RETRIEVED" --out problems >/dev/null || die build_dpvloc
@@ -66,6 +71,10 @@ uv run generators/validate_bindings.py --probes probes \
 # --- 6. verdicts -------------------------------------------------------
 hdr "6. verdicts"
 bash run_verdict.sh 2>/dev/null | tail -3
+
+# --- 6b. the two encodings agree ---------------------------------------
+hdr "6b. encodings: TPTP and SMT-LIB give the same status"
+uv run generators/check_encodings.py 2>&1 | tail -4
 
 # --- 7. provers agree --------------------------------------------------
 hdr "7. two provers, and what they cite"

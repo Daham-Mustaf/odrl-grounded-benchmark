@@ -18,6 +18,7 @@
 (declare-fun dpv_purpose () Concept)
 (declare-fun dpv_non_commercial_research () Concept)
 (declare-fun dpv_non_commercial_purpose () Concept)
+(declare-fun dpv_research_and_development () Concept)
 (declare-fun kge_leq (Concept Concept) Bool)
 ; Order axioms, quantified.  The same three as KGE000-0.ax, so the two
 ; encodings are the same theory.
@@ -26,12 +27,12 @@
     (=> (and (kge_leq x y) (kge_leq y x)) (= x y))) :named ax_leq_antisymmetric))
 (assert (! (forall ((x Concept) (y Concept) (z Concept))
     (=> (and (kge_leq x y) (kge_leq y z)) (kge_leq x z))) :named ax_leq_transitive))
-; Resource: the two steps.  Neither asserts the chain.
-(assert (! (kge_leq dpv_non_commercial_research dpv_non_commercial_purpose) :named res_kgc311_0))
-(assert (! (kge_leq dpv_non_commercial_purpose dpv_purpose) :named res_kgc311_1))
+(assert (! (kge_leq dpv_non_commercial_purpose dpv_purpose) :named res_dpv_non_commercial_purpose_below_dpv_purpose))
+(assert (! (kge_leq dpv_non_commercial_research dpv_non_commercial_purpose) :named res_dpv_non_commercial_research_below_dpv_non_commercial_purpose))
+(assert (! (kge_leq dpv_non_commercial_research dpv_research_and_development) :named res_dpv_non_commercial_research_below_dpv_research_and_development))
+(assert (! (kge_leq dpv_research_and_development dpv_purpose) :named res_dpv_research_and_development_below_dpv_purpose))
 ; witness condition asserted
-(assert (! (or (and (kge_leq dpv_purpose dpv_purpose) (= dpv_purpose dpv_non_commercial_research))
-    (and (kge_leq dpv_non_commercial_research dpv_purpose) (= dpv_non_commercial_research dpv_non_commercial_research))) :named w_kgc311))
+(assert (! (or (and (kge_leq dpv_purpose dpv_purpose) (= dpv_purpose dpv_non_commercial_research)) (and (kge_leq dpv_non_commercial_research dpv_purpose) (= dpv_non_commercial_research dpv_non_commercial_research))) :named w_kgc311))
 (check-sat)
 (get-unsat-core)
 (get-model)

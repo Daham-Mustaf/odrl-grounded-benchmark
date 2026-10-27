@@ -16,7 +16,7 @@
 (set-option :produce-models true)
 (declare-sort Concept 0)
 (declare-fun dpv_non_commercial_purpose () Concept)
-(declare-fun dpv_scientific_research  () Concept)
+(declare-fun dpv_scientific_research () Concept)
 (declare-fun kge_leq (Concept Concept) Bool)
 ; Order axioms, quantified.  The same three as KGE000-0.ax, so the two
 ; encodings are the same theory.
@@ -25,11 +25,8 @@
     (=> (and (kge_leq x y) (kge_leq y x)) (= x y))) :named ax_leq_antisymmetric))
 (assert (! (forall ((x Concept) (y Concept) (z Concept))
     (=> (and (kge_leq x y) (kge_leq y z)) (kge_leq x z))) :named ax_leq_transitive))
-; The vocabulary says nothing about these two concepts.  No statement is
-; made here: the order axioms are emitted by the writer, in full.
 ; witness condition negated
-(assert (! (not (or (and (kge_leq dpv_non_commercial_purpose dpv_non_commercial_purpose) (= dpv_non_commercial_purpose dpv_scientific_research))
-    (and (kge_leq dpv_scientific_research  dpv_non_commercial_purpose) (= dpv_scientific_research  dpv_scientific_research)))) :named w_kgc301))
+(assert (! (not (or (and (kge_leq dpv_non_commercial_purpose dpv_non_commercial_purpose) (= dpv_non_commercial_purpose dpv_scientific_research)) (and (kge_leq dpv_scientific_research dpv_non_commercial_purpose) (= dpv_scientific_research dpv_scientific_research)))) :named w_kgc301))
 (check-sat)
 (get-unsat-core)
 (get-model)

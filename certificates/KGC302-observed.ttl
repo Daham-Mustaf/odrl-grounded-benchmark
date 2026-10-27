@@ -3,8 +3,8 @@ kgc:KGC302-observed a vrep:Refutation ;
     vrep:proofArtefact <proofs/KGC302-2.tstp> ;
     vrep:attributedStatement [
         vrep:premiseSource vrep:fromResource ;
-        vrep:formulaName "res_france_within_europe" ;
-        rdfs:label "res_france_within_europe"@en ] ;
+        vrep:formulaName "gn_france_leq_europe" ;
+        rdfs:label "gn_france_leq_europe"@en ] ;
     vrep:attributedStatement [
         vrep:premiseSource vrep:fromConstraints ;
         vrep:formulaName "w_kgc302" ;

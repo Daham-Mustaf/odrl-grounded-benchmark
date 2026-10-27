@@ -2,27 +2,27 @@
 % Refutation found. Thanks to Tanya!
 % SZS status Unsatisfiable for KGC302-2
 % SZS output start Proof for KGC302-2
-fof(f33,axiom,(
+fof(f23,axiom,(
   kge_leq(gn_france,gn_europe)),
-  file('problems/verdict/KGC302-2.p',res_france_within_europe)).
-fof(f34,axiom,(
+  file('problems/verdict/KGC302-2.p',gn_france_leq_europe)).
+fof(f33,axiom,(
   ~((kge_leq(gn_europe,gn_europe) & gn_europe = gn_france) | (kge_leq(gn_france,gn_europe) & gn_france = gn_france))),
   file('problems/verdict/KGC302-2.p',w_kgc302)).
-fof(f54,plain,(
+fof(f53,plain,(
   (~kge_leq(gn_europe,gn_europe) | gn_europe != gn_france) & (~kge_leq(gn_france,gn_europe) | gn_france != gn_france)),
-  inference(ennf_transformation,[],[f34])).
-fof(f72,plain,(
+  inference(ennf_transformation,[],[f33])).
+fof(f61,plain,(
   kge_leq(gn_france,gn_europe)),
-  inference(cnf_transformation,[],[f33])).
-fof(f73,plain,(
+  inference(cnf_transformation,[],[f23])).
+fof(f71,plain,(
   ~kge_leq(gn_france,gn_europe) | gn_france != gn_france),
-  inference(cnf_transformation,[],[f54])).
-fof(f75,plain,(
+  inference(cnf_transformation,[],[f53])).
+fof(f73,plain,(
   ~kge_leq(gn_france,gn_europe)),
-  inference(trivial_inequality_removal,[],[f73])).
-fof(f85,plain,(
+  inference(trivial_inequality_removal,[],[f71])).
+fof(f83,plain,(
   $false),
-  inference(forward_subsumption_resolution,[],[f72,f75])).
+  inference(forward_subsumption_resolution,[],[f61,f73])).
 % SZS output end Proof for KGC302-2
 % ------------------------------
 % Version: Vampire 5.0.1 (Release build, commit 1b13eafde on 2026-01-18 12:14:50 +0000)

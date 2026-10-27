@@ -58,7 +58,7 @@ from pathlib import Path
 # tree_expand grows a shape, this grows it too, and the comment there
 # points here.
 _ASSERTION = re.compile(
-    r"fof\(\s*((?:res|bt|bg)_[a-z0-9_]+)\s*,\s*axiom,\s*"
+    r"fof\(\s*([a-z][a-z0-9_]*)\s*,\s*axiom,\s*"
     r"(?:kge_leq\(\s*([a-z0-9_]+)\s*,\s*([a-z0-9_]+)\s*\)"
     r"|kge_concept\(\s*([a-z0-9_]+)\s*\)"
     r"|([a-z0-9_]+)\s*!=\s*([a-z0-9_]+))\s*\)\s*\.",
