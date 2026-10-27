@@ -40,8 +40,10 @@ BINDINGS = [
     ("GDPR Article 6 bases",         "gdprlb",         "tax", "b-legalbasis"),
     ("DPV Locations, geographic",    "dpvloc-geo",     "mer", "b-spatial-dpvloc-geo"),
     ("DPV Locations, jurisdictional","dpvloc-juris",   "mer", "b-spatial-dpvloc-juris"),
+    ("GeoNames Europe slice",        "geonames",       "mer", "b-spatial-geonames"),
     ("EU file type table",           "filetype",       "nom", "b-fileformat"),
-    ("BCP 47 subtags",               "bcp47",          "nom", "b-language"),
+    ("BCP 47 subtags, exact",        "bcp47",          "nom", "b-language-bcp47"),
+    ("BCP 47 subtags, primary",      "bcp47",          "nom", "b-language-bcp47-primary"),
 ]
 
 # The axiom file each resource writes, since the naming is not uniform.
@@ -52,16 +54,22 @@ AXIOMS = {
     "gdprlb":         "DPV-gdprlb.ax",
     "dpvloc-geo":     "LOC-dpvloc-geo.ax",
     "dpvloc-juris":   "LOC-dpvloc-juris.ax",
+    "geonames":       "GN000-0.ax",
     "filetype":       "EUFT-filetype.ax",
     "bcp47":          "BCP47000-0.ax",
 }
 
 
 def count_order(ax_path: Path) -> int:
-    """kge_leq assertions in a resource axiom file."""
+    """kge_leq assertions in a resource axiom file.
+
+    Ground facts only: the label is the builder's and varies (res_ for
+    most resources, gn_ for GeoNames), and the first argument is a constant,
+    which keeps the quantified order axioms out of the count.
+    """
     if not ax_path.exists():
         return -1
-    return len(re.findall(r"^fof\(res_\S+,\s*axiom,\s*\n?\s*kge_leq",
+    return len(re.findall(r"^fof\(\S+,\s*axiom,\s*\n?\s*kge_leq\(\s*[a-z]",
                           ax_path.read_text(encoding="utf-8"), re.M))
 
 
@@ -71,11 +79,16 @@ def count_concepts(ttl_path: Path) -> int:
     Counted from the Turtle rather than from the axioms: a concept the
     resource lists and no assertion mentions is still a concept, and the
     nominal resources are exactly the ones where that matters.
+
+    The class is odrlkb: for the builders' own resources, skos:Concept for
+    the BCP 47 slice and gn:Feature for GeoNames.
     """
     if not ttl_path.exists():
         return -1
     text = ttl_path.read_text(encoding="utf-8")
-    return len(re.findall(r"^\S+\s+a\s+odrlkb:\w+\s*[;.]", text, re.M))
+    return len(re.findall(
+        r"^\S+\s+a\s+(?:odrlkb:\w+|skos:Concept|gn:Feature)\s*[;.]",
+        text, re.M))
 
 
 def profile_reads(profile_path: Path) -> str:
