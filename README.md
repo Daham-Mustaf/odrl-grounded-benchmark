@@ -102,7 +102,7 @@ KGC330-334   spatial, over DPV Locations
 KGC340-343   consent status, over the DPV consent module
 KGC350-353   legal basis, over DPV and its GDPR extension
 KGC360-364   technical and organisational measures
-KGC370-375   language, over a BCP 47 slice
+KGC370-379   language, over a BCP 47 slice
 KGC380-392   spatial: composition, subdivisions, exclusion
 KGC393-397   purpose: the set operators
 ```

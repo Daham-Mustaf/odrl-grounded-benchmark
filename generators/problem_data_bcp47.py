@@ -1,22 +1,33 @@
 """
 problem_data_bcp47.py
 =====================
-Four problems over the BCP 47 language slice, at the nominal sort.
+Ten problems over the BCP 47 language slice, at the nominal sort.
 
     KGC370  eq de  x  eq fr         uniqueness declared   Incompatible
     KGC371  eq de  x  eq fr         declaration withdrawn Unknown
     KGC372  eq de  x  eq "en-US"    exact grounding       rejected, does not ground
     KGC373  eq de  x  eq "en-US"    reducing grounding    Incompatible
+    KGC374  eq de  x  neq fr        uniqueness declared   Compatible
+    KGC375  eq de  x  neq fr        declaration withdrawn Unknown
+    KGC376  isAllOf {nl, fr}  x  eq nl      uniqueness declared   Incompatible
+    KGC377  isNoneOf {en, it} x  eq it      no declaration        Incompatible
+    KGC378  or(eq de, eq fr)  x  eq fr      no declaration        Compatible
+    KGC379  xone(eq de, eq fr) x eq de      no declaration        Unknown
 
-The operators are beside the point.  At nom the signature admits eq, neq,
-isAnyOf, isAllOf and isNoneOf, and every one is already exercised on
-another operand; all four problems below use eq.  Each pair changes one
-thing and holds everything else fixed, so that the change is what the
-verdict responds to.
+The first six use eq and neq on one pair of subtags.  Each pair among them
+changes one thing and holds everything else fixed, so that the change is
+what the verdict responds to.
 
     370 -> 371   one background theory withdrawn
     372 -> 373   one grounding rule widened
     371 vs 372   an Unknown and a rejection, repaired differently
+    374 -> 375   one background theory withdrawn
+
+KGC376 to KGC379 are not paired.  They take the set operators and the two
+connectives the first six leave out, each in a licensing scenario.  KGC377
+and KGC378 are the only definite verdicts here that no declaration can
+change: they hold with the registry rule and without it, which is why they
+declare nothing.
 
 A note on reading these
 -----------------------
@@ -115,12 +126,14 @@ on which concepts are taken.  This is the only place in the suite where
 that is visible.
 """
 
-from compile import Constraint
+from compile import Constraint, Or, Xone, right_operand
 
 # Concepts of the slice, as the constants the axiom files declare.
 DE = "bcp_de"
 FR = "bcp_fr"
 EN = "bcp_en"
+IT = "bcp_it"
+NL = "bcp_nl"
 
 # What the authority published, and what the parties declared on top of it.
 RESOURCE   = "https://w3id.org/odrl-kb/bcp47"
@@ -198,6 +211,47 @@ kgc:{pid}-p2-c1 a odrl:Constraint ;
     odrl:operator odrl:{operator} ;
     odrl:rightOperand {value} .
 """
+
+
+def _policy(pid, k, title, constraints, connective=None):
+    """Policy k (1 or 2) of a problem whose constraints are not a single eq.
+
+    constraints is a list of (operator, [constants]); two or more are
+    written as one Logical Constraint under the connective.  A set
+    operator's values are written as an RDF collection.
+    """
+    n, role = pid[3:], f"p{k}"
+    party = ("odrl:assigner drk:publisher" if k == 1
+             else "odrl:assignee drk:reuser")
+    cids = [f"{pid}-{role}-c{i + 1}" for i in range(len(constraints))]
+    if len(cids) == 1:
+        cref, lc = f"kgc:{cids[0]}", ""
+    else:
+        cref = f"kgc:{pid}-{role}-lc"
+        lc = (f"\nkgc:{pid}-{role}-lc a odrl:LogicalConstraint ;\n"
+              f"    odrl:{connective} ( "
+              + " ".join(f"kgc:{c}" for c in cids) + " ) .\n")
+    body = f"""
+drk:policy-{n}-{k} a odrl:Set ;
+    odrl:uid drk:policy-{n}-{k} ;
+    dcterms:title "{title}"@en ;
+    {party} ;
+    odrl:permission kgc:{pid}-{role}-r1 .
+
+kgc:{pid}-{role}-r1 a odrl:Permission ;
+    odrl:action odrl:distribute ;
+    odrl:target drk:dataset ;
+    odrl:constraint {cref} .
+""" + lc
+    for cid, (op, consts) in zip(cids, constraints):
+        ro = right_operand(op, [f"bcp47:{c[len('bcp_'):]}" for c in consts])
+        body += f"""
+kgc:{cid} a odrl:Constraint ;
+    odrl:leftOperand odrl:language ;
+    odrl:operator odrl:{op} ;
+    odrl:rightOperand {ro} .
+"""
+    return body
 
 
 # Attached to the second policy's constraint in KGC372 and KGC373, since the value is the
@@ -533,5 +587,205 @@ PROBLEMS = [
         "ttl": _TTL_HEAD + _offer("KGC375")
                + _request("KGC375", "Anything but French",
                           "bcp47:fr", operator="neq"),
+    },
+
+    {
+        "id":                "KGC376",
+        "subdir":            "verdict",
+        "name":              "language, isAllOf nl fr against eq nl, "
+                             "registry uniqueness declared",
+        "left_operand":      "language",
+        "sort":              "nom",
+        "resource":          RESOURCE,
+        "background_theory": UNIQUENESS,
+        "binding":           BINDING_EXACT,
+        "includes":          INCLUDES_UNIQUENESS,
+        "tree": [C("isAllOf", NL, FR), C("eq", NL, side="request")],
+        "expected_verdict":  "Incompatible",
+        "expected_q1":       "Unsatisfiable",
+        "expected_q2":       "Satisfiable",
+        "summary": (
+            "A Belgian federal publisher requires distribution in both "
+            "Dutch and French. The licensee distributes in Dutch only. The "
+            "parties adopt the registry rule that different primary "
+            "subtags name different languages."),
+        "description": (
+            "A Belgian federal publisher requires distribution in both "
+            "Dutch and French. The licensee's policy commits to Dutch "
+            "only. Both constraints are on odrl:language, bound to the "
+            "BCP 47 slice at the nominal sort.\n\n"
+            "isAllOf asks that the languages of the use include both "
+            "Dutch and French. eq asks that every language of the use is "
+            "Dutch. The two hold together only if Dutch and French are "
+            "one language. The parties have adopted the registry rule, "
+            "which makes the two subtags distinct languages, so no use "
+            "satisfies both policies and the verdict is Incompatible.\n\n"
+            "The refutation cites one premise, and it is the parties' "
+            "rather than the registry's. Without that rule the registry "
+            "separates the two subtags in some structures and not in "
+            "others, and the verdict is Unknown."
+        ),
+        "certificate": {
+            "kind": "Refutation",
+            "comment": (
+                "Dutch and French are declared distinct languages. A use "
+                "in both is not a use in Dutch only, so no use satisfies "
+                "both policies."),
+            "premises": [
+                ("fromBackgroundTheory",
+                 "bcp47:fr and bcp47:nl are declared distinct, on RFC "
+                 "5646's registry uniqueness"),
+            ],
+        },
+        "ttl": _TTL_HEAD
+               + _policy("KGC376", 1, "Distribution in both Dutch and French",
+                         [("isAllOf", [NL, FR])])
+               + _policy("KGC376", 2, "Distribution in Dutch only",
+                         [("eq", [NL])]),
+    },
+
+    {
+        "id":                "KGC377",
+        "subdir":            "verdict",
+        "name":              "language, isNoneOf en it against eq it, "
+                             "no declaration",
+        "left_operand":      "language",
+        "sort":              "nom",
+        "resource":          RESOURCE,
+        "background_theory": EMPTY_BT,
+        "binding":           BINDING_EXACT,
+        "includes":          INCLUDES,
+        "tree": [C("isNoneOf", EN, IT), C("eq", IT, side="request")],
+        "expected_verdict":  "Incompatible",
+        "expected_q1":       "Unsatisfiable",
+        "expected_q2":       "Satisfiable",
+        "summary": (
+            "English and Italian rights were sold separately, so a "
+            "publisher permits any language except English and Italian. "
+            "The licensee distributes in Italian."),
+        "description": (
+            "English and Italian rights were sold separately, so a "
+            "publisher permits distribution in any language except "
+            "English and Italian. The licensee's policy commits to "
+            "Italian.\n\n"
+            "isNoneOf excludes the listed subtags by identity. Italian is "
+            "listed, and the licensee's eq asks for Italian. No structure "
+            "admits a language that is Italian and is not Italian, so the "
+            "verdict is Incompatible.\n\n"
+            "The registry rule is not used. The verdict is the same with "
+            "it and without it, which is why this case declares no "
+            "theory. The definite verdicts of KGC370 to KGC375 all rest "
+            "on that rule."
+        ),
+        "certificate": {
+            "kind": "Refutation",
+            "comment": (
+                "The first policy excludes Italian and the second policy "
+                "requires it. This holds in every structure, so no "
+                "declaration is used."),
+            "premises": [],
+        },
+        "ttl": _TTL_HEAD
+               + _policy("KGC377", 1,
+                         "Distribution in any language except English and "
+                         "Italian",
+                         [("isNoneOf", [EN, IT])])
+               + _policy("KGC377", 2, "Distribution in Italian",
+                         [("eq", [IT])]),
+    },
+
+    {
+        "id":                "KGC378",
+        "subdir":            "verdict",
+        "name":              "language, or(eq de, eq fr) against eq fr, "
+                             "no declaration",
+        "left_operand":      "language",
+        "sort":              "nom",
+        "resource":          RESOURCE,
+        "background_theory": EMPTY_BT,
+        "binding":           BINDING_EXACT,
+        "includes":          INCLUDES,
+        "tree": [Or((C("eq", DE), C("eq", FR))),
+                 C("eq", FR, side="request")],
+        "expected_verdict":  "Compatible",
+        "expected_q1":       "Satisfiable",
+        "expected_q2":       "Unsatisfiable",
+        "summary": (
+            "A translation licence covers a German or a French edition. "
+            "The licensee publishes in French."),
+        "description": (
+            "A translation licence covers a German edition or a French "
+            "edition. The licensee's policy commits to French.\n\n"
+            "The second alternative of the or is French, which is the "
+            "licensee's language. A use in French satisfies both policies "
+            "in every structure, so the verdict is Compatible. The first "
+            "alternative matters only if German and French are one "
+            "language, and the verdict does not depend on that. No "
+            "declaration is used."
+        ),
+        "certificate": {
+            "kind": "Refutation",
+            "comment": (
+                "French is the second alternative of the licence and the "
+                "licensee's language, so a use in French satisfies both "
+                "policies in every structure."),
+            "premises": [],
+        },
+        "ttl": _TTL_HEAD
+               + _policy("KGC378", 1, "Licence for a German or a French "
+                         "edition",
+                         [("eq", [DE]), ("eq", [FR])], connective="or")
+               + _policy("KGC378", 2, "Publication of a French edition",
+                         [("eq", [FR])]),
+    },
+
+    {
+        "id":                "KGC379",
+        "subdir":            "verdict",
+        "name":              "language, xone(eq de, eq fr) against eq de, "
+                             "no declaration",
+        "left_operand":      "language",
+        "sort":              "nom",
+        "resource":          RESOURCE,
+        "background_theory": EMPTY_BT,
+        "binding":           BINDING_EXACT,
+        "includes":          INCLUDES,
+        "tree": [Xone((C("eq", DE), C("eq", FR))),
+                 C("eq", DE, side="request")],
+        "expected_verdict":  "Unknown",
+        "expected_q1":       "Satisfiable",
+        "expected_q2":       "Satisfiable",
+        "summary": (
+            "A licence for a single-language edition allows exactly one of "
+            "German and French. The licensee publishes in German."),
+        "description": (
+            "A licence for a single-language edition allows exactly one "
+            "of German and French. The licensee's policy commits to "
+            "German.\n\n"
+            "xone holds when one alternative holds and the other does not. "
+            "A German edition satisfies the first alternative. Whether it "
+            "fails the second depends on whether German and French are "
+            "one language, and the registry does not state that they are "
+            "different. So the verdict is Unknown.\n\n"
+            "A declaration by either party decides it. With the registry "
+            "rule in force the verdict is Compatible."
+        ),
+        "certificate": {
+            "kind": "Models",
+            "comment": (
+                "Nothing states that German and French are different "
+                "languages. In a structure that keeps them apart, a use in "
+                "German satisfies the first alternative only, so both "
+                "policies hold. In a structure that identifies them, a use "
+                "in German satisfies both alternatives, and exactly one "
+                "fails. So the verdict is Unknown."),
+            "premises": [],
+        },
+        "ttl": _TTL_HEAD
+               + _policy("KGC379", 1, "Licence for a single-language "
+                         "edition, German or French",
+                         [("eq", [DE]), ("eq", [FR])], connective="xone")
+               + _policy("KGC379", 2, "Publication of a German edition",
+                         [("eq", [DE])]),
     },
 ]

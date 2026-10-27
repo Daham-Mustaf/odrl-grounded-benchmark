@@ -1,0 +1,7 @@
+kgc:KGC378-observed a vrep:Refutation ;
+    vrep:producedBy "Vampire" ;
+    vrep:proofArtefact <proofs/KGC378-2.tstp> ;
+    vrep:attributedAssertion [
+        vrep:premiseSource vrep:fromConstraints ;
+        vrep:formulaName "w_kgc378" ;
+        rdfs:label "w_kgc378"@en ] .
