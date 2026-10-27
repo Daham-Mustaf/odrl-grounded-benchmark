@@ -3,18 +3,19 @@
 @prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix odrlkb:  <https://w3id.org/odrl-kb/bcp47#> .
+@prefix bcp47:   <https://w3id.org/odrl-kb/bcp47#> .
 @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
 @prefix vrep:    <https://w3id.org/odrl-kb/verdict-report#> .
+@prefix dcat:    <http://www.w3.org/ns/dcat#> .
 
-drk:manuscripts a dcterms:Dataset ;
-    dcterms:title "Digitised manuscripts, Bavarian State Library"@en .
+drk:manuscripts a dcat:Dataset ;
+    dcterms:title "Digitised manuscripts of a library"@en .
 
 drk:policy-300-1 a odrl:Set ;
     odrl:uid drk:policy-300-1 ;
-    dcterms:title "BSB: access in German"@en ;
-    odrl:assigner drk:library ;
+    dcterms:title "Use in German only"@en ;
+    odrl:assigner drk:german-library ;
     odrl:permission kgc:KGC300-p1-r1 .
 
 kgc:KGC300-p1-r1 a odrl:Permission ;
@@ -25,12 +26,12 @@ kgc:KGC300-p1-r1 a odrl:Permission ;
 kgc:KGC300-p1-c1 a odrl:Constraint ;
     odrl:leftOperand odrl:language ;
     odrl:operator odrl:eq ;
-    odrl:rightOperand odrlkb:de .
+    odrl:rightOperand bcp47:de .
 
 drk:policy-300-2 a odrl:Set ;
     odrl:uid drk:policy-300-2 ;
-    dcterms:title "BnF: access in French"@en ;
-    odrl:assignee drk:researcher ;
+    dcterms:title "Use in French only"@en ;
+    odrl:assignee drk:french-library ;
     odrl:permission kgc:KGC300-p2-r1 .
 
 kgc:KGC300-p2-r1 a odrl:Permission ;
@@ -41,7 +42,7 @@ kgc:KGC300-p2-r1 a odrl:Permission ;
 kgc:KGC300-p2-c1 a odrl:Constraint ;
     odrl:leftOperand odrl:language ;
     odrl:operator odrl:eq ;
-    odrl:rightOperand odrlkb:fr .
+    odrl:rightOperand bcp47:fr .
 
 ### Expected result #######################################################
 
@@ -54,6 +55,6 @@ drk:KGC300-report a vrep:OperandVerdictReport ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-language-bcp47> ;
     vrep:declarations <https://w3id.org/odrl-kb/bcp47/uniqueness> ;
     rdfs:comment """Both constraints can hold only if German and French are one language. The registry rule the parties adopt makes them distinct, so no use satisfies both policies."""@en ;
-    dcterms:description """BSB permits access to the manuscripts in German. BnF's policy commits to access in French."""@en ;
+    dcterms:description """A German library permits use of its manuscripts in German only. A French library's policy commits to use in French only."""@en ;
     vrep:compatibilityState vrep:Incompatible ;
     vrep:certificate <certificates/KGC300-1.tstp> .

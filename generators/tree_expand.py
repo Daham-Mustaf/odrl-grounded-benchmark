@@ -31,7 +31,7 @@ def _parse_assertions(text):
     kind is one of leq, concept, dist.  Anything the pattern does not
     match (quantified disjointness, definitions) is left to the axiom
     module includes on the TPTP side and to the writer's axiom template on
-    the SMT side; only ground resource and background facts are inlined.
+    the SMT side; only ground resource statements and declarations are inlined.
     """
     for m in _ASSERTION.finditer(text):
         label = m.group(1)
@@ -80,7 +80,7 @@ def assertions_for(constants, includes,
                    axioms_dir: Path = Path("problems/axioms")):
     """The included statements the SMT side needs, and the extra constants.
 
-    Returns (resource_block, background_block, extras): the two blocks as
+    Returns (resource_block, declarations_block, extras): the two blocks as
     strings of named asserts, either possibly empty, and the closure
     concepts that appear in them beyond the given constants, which the
     caller must declare.
@@ -260,7 +260,7 @@ def expand_tree(p: dict) -> dict:
             f"add it to the problem's grounding map, or mark the problem "
             f"ungrounded if the binding's rule does not resolve it.")
     w = compile_operand(p["tree"], constants, p["sort"])
-    # A background premise may name a concept neither constraint mentions:
+    # A declaration may name a concept neither constraint mentions:
     # the consent disjointness ranges over both branches while the
     # constraints name one. Those concepts go into the statement filter as
     # well as the declarations, or an edge to one of them is dropped as

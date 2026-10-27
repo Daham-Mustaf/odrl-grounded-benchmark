@@ -61,15 +61,6 @@ Composed offers are given as trees and compiled by expand_tree: expansion,
 distribution, and the disjunction of the disjuncts' witness conditions.
 The disjunction is inside both queries, not around them.  No xone
 alternative is an isAllOf constraint, as the signature requires.
-
-Open
-----
-consent-definitional.ttl uses bind:PublishedDefinition, bind:assertedByPublisher,
-bind:concept, bind:disjointFrom and bind:warrant, none defined by
-vocab/background.ttl; define them or stop writing them.  KGC343 can
-disagree between provers because Vampire refutes through the quantified
-disjointness pattern the SMT derivation does not inline; the fix is in
-tree_expand's statement parser, not here.
 """
 from compile import Constraint, Or
 
@@ -199,11 +190,11 @@ kgc:{pid}-p2-c1 a odrl:Constraint ;
 """
 
 
-OFFER_GATE = "Use is permitted while the consent on record may justify processing"
-OFFER_ENUM = "Use is permitted under given or renewed consent"
-REQ_GIVEN   = "Processing only under given consent"
-REQ_RENEWED = "Processing only under renewed consent"
-REQ_POST    = "Processing continues after consent is withdrawn"
+OFFER_GATE = "Use only while the consent on record may justify processing"
+OFFER_ENUM = "Use only under given or renewed consent"
+REQ_GIVEN   = "Use only under given consent"
+REQ_RENEWED = "Use only under renewed consent"
+REQ_POST    = "Use only after consent is withdrawn"
 
 PROBLEMS = [
     # ------------------------------------------------------------------
@@ -267,7 +258,7 @@ PROBLEMS = [
         "certificate": {"kind": "Refutation",
             "comment": (
                 "The required state is one the first policy names, so the "
-                "constraints settle the verdict without the resource."),
+                "constraints decide the verdict without the resource."),
             "premises": []},
         "provenance": PROV_ENUM,
         "ttl": _TTL_HEAD

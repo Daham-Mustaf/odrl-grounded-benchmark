@@ -100,7 +100,7 @@ def _side(pid, k, title, party, lo, constraints, connective=None):
             f"    odrl:permission kgc:{pid}-{role}-r1 .\n"
             f"kgc:{pid}-{role}-r1 a odrl:Permission ;\n"
             f"    odrl:action odrl:use ;\n"
-            f"    odrl:target drk:dataset ;\n"
+            f"    odrl:target drk:manuscripts ;\n"
             f"    odrl:constraint {cref} .\n" + lc)
     for cid, (op, vals) in zip(cids, constraints):
         body += _cnode(cid, lo, op, vals)
@@ -110,9 +110,9 @@ def _side(pid, k, title, party, lo, constraints, connective=None):
 def _ttl(pid, lo, offer_title, offer_cs, req_title, req_cs, connective=None):
     return (_HEAD
             + _side(pid, 1, offer_title,
-                    "odrl:assigner drk:provider ;", lo, offer_cs, connective)
+                    "odrl:assigner drk:library ;", lo, offer_cs, connective)
             + _side(pid, 2, req_title,
-                    "odrl:assignee drk:consumer ;", lo, req_cs))
+                    "odrl:assignee drk:researcher ;", lo, req_cs))
 
 
 PURPOSE = "dpv-odrl:Purpose"
@@ -212,7 +212,7 @@ PROBLEMS = [
 drk:policy-310-1 a odrl:Set ;
     odrl:uid drk:policy-310-1 ;
     odrl:profile dpv-odrl: ;
-    dcterms:title "Research and development purposes"@en ;
+    dcterms:title "Use for research and development purposes only"@en ;
     odrl:assigner drk:library ;
     odrl:permission kgc:KGC310-p1-r1 .
 
@@ -229,7 +229,7 @@ kgc:KGC310-p1-c1 a odrl:Constraint ;
 drk:policy-310-2 a odrl:Set ;
     odrl:uid drk:policy-310-2 ;
     odrl:profile dpv-odrl: ;
-    dcterms:title "Scientific research"@en ;
+    dcterms:title "Use for scientific research only"@en ;
     odrl:assignee drk:researcher ;
     odrl:permission kgc:KGC310-p2-r1 .
 
@@ -307,7 +307,7 @@ kgc:KGC310-p2-c1 a odrl:Constraint ;
 drk:policy-311-1 a odrl:Set ;
     odrl:uid drk:policy-311-1 ;
     odrl:profile dpv-odrl: ;
-    dcterms:title "Any declared purpose"@en ;
+    dcterms:title "Use for any DPV purpose"@en ;
     odrl:assigner drk:library ;
     odrl:permission kgc:KGC311-p1-r1 .
 
@@ -324,7 +324,7 @@ kgc:KGC311-p1-c1 a odrl:Constraint ;
 drk:policy-311-2 a odrl:Set ;
     odrl:uid drk:policy-311-2 ;
     odrl:profile dpv-odrl: ;
-    dcterms:title "Non-commercial research"@en ;
+    dcterms:title "Use for non-commercial research only"@en ;
     odrl:assignee drk:researcher ;
     odrl:permission kgc:KGC311-p2-r1 .
 
@@ -399,7 +399,7 @@ kgc:KGC311-p2-c1 a odrl:Constraint ;
 drk:policy-313-1 a odrl:Set ;
     odrl:uid drk:policy-313-1 ;
     odrl:profile dpv-odrl: ;
-    dcterms:title "Marketing"@en ;
+    dcterms:title "Use for marketing only"@en ;
     odrl:assigner drk:library ;
     odrl:permission kgc:KGC313-p1-r1 .
 
@@ -416,7 +416,7 @@ kgc:KGC313-p1-c1 a odrl:Constraint ;
 drk:policy-313-2 a odrl:Set ;
     odrl:uid drk:policy-313-2 ;
     odrl:profile dpv-odrl: ;
-    dcterms:title "Scientific research"@en ;
+    dcterms:title "Use for scientific research only"@en ;
     odrl:assignee drk:researcher ;
     odrl:permission kgc:KGC313-p2-r1 .
 
@@ -496,7 +496,7 @@ kgc:KGC313-p2-c1 a odrl:Constraint ;
 drk:policy-314-1 a odrl:Set ;
     odrl:uid drk:policy-314-1 ;
     odrl:profile dpv-odrl: ;
-    dcterms:title "Marketing"@en ;
+    dcterms:title "Use for marketing only"@en ;
     odrl:assigner drk:library ;
     odrl:permission kgc:KGC314-p1-r1 .
 
@@ -513,7 +513,7 @@ kgc:KGC314-p1-c1 a odrl:Constraint ;
 drk:policy-314-2 a odrl:Set ;
     odrl:uid drk:policy-314-2 ;
     odrl:profile dpv-odrl: ;
-    dcterms:title "Scientific research"@en ;
+    dcterms:title "Use for scientific research only"@en ;
     odrl:assignee drk:researcher ;
     odrl:permission kgc:KGC314-p2-r1 .
 
@@ -589,7 +589,7 @@ kgc:KGC314-p2-c1 a odrl:Constraint ;
 drk:policy-315-1 a odrl:Set ;
     odrl:uid drk:policy-315-1 ;
     odrl:profile dpv-odrl: ;
-    dcterms:title "Any declared purpose"@en ;
+    dcterms:title "Use for any DPV purpose"@en ;
     odrl:assigner drk:library ;
     odrl:permission kgc:KGC315-p1-r1 .
 
@@ -606,7 +606,7 @@ kgc:KGC315-p1-c1 a odrl:Constraint ;
 drk:policy-315-2 a odrl:Set ;
     odrl:uid drk:policy-315-2 ;
     odrl:profile dpv-odrl: ;
-    dcterms:title "Recruitment interview scheduling"@en ;
+    dcterms:title "Use for recruitment interview scheduling only"@en ;
     odrl:assignee drk:researcher ;
     odrl:permission kgc:KGC315-p2-r1 .
 
@@ -684,7 +684,7 @@ kgc:KGC315-p2-c1 a odrl:Constraint ;
 drk:policy-316-1 a odrl:Set ;
     odrl:uid drk:policy-316-1 ;
     odrl:profile dpv-odrl: ;
-    dcterms:title "Recruitment interview scheduling"@en ;
+    dcterms:title "Use for recruitment interview scheduling only"@en ;
     odrl:assigner drk:library ;
     odrl:permission kgc:KGC316-p1-r1 .
 
@@ -701,7 +701,7 @@ kgc:KGC316-p1-c1 a odrl:Constraint ;
 drk:policy-316-2 a odrl:Set ;
     odrl:uid drk:policy-316-2 ;
     odrl:profile dpv-odrl: ;
-    dcterms:title "Any declared purpose"@en ;
+    dcterms:title "Use for the general purpose only"@en ;
     odrl:assignee drk:researcher ;
     odrl:permission kgc:KGC316-p2-r1 .
 
@@ -762,8 +762,8 @@ kgc:KGC316-p2-c1 a odrl:Constraint ;
             "kind": "Refutation",
 "comment": (
     "The first policy excludes exactly the purpose the second requires, so "
-    "the verdict is Incompatible without any resource or background "
-    "statement."),
+    "the verdict is Incompatible without any resource statement or "
+    "declaration."),
             "premises": [
                 ("fromConstraints", "the witness condition"),
             ],
@@ -779,7 +779,7 @@ kgc:KGC316-p2-c1 a odrl:Constraint ;
 drk:policy-317-1 a odrl:Set ;
     odrl:uid drk:policy-317-1 ;
     odrl:profile dpv-odrl: ;
-    dcterms:title "Any purpose other than marketing"@en ;
+    dcterms:title "Use for any purpose except marketing"@en ;
     odrl:assigner drk:library ;
     odrl:permission kgc:KGC317-p1-r1 .
 
@@ -796,7 +796,7 @@ kgc:KGC317-p1-c1 a odrl:Constraint ;
 drk:policy-317-2 a odrl:Set ;
     odrl:uid drk:policy-317-2 ;
     odrl:profile dpv-odrl: ;
-    dcterms:title "Marketing"@en ;
+    dcterms:title "Use for marketing only"@en ;
     odrl:assignee drk:researcher ;
     odrl:permission kgc:KGC317-p2-r1 .
 
@@ -824,8 +824,8 @@ kgc:KGC317-p2-c1 a odrl:Constraint ;
         "expected_verdict": "Unknown",
         "expected_q1": "Satisfiable", "expected_q2": "Satisfiable",
         "summary": (
-            "A provider permits use for research and development or "
-            "marketing; a consumer commits to scientific research."),
+            "A library permits use for research and development or "
+            "marketing; a researcher commits to scientific research."),
         "description": (
             "The drafter expects the taxonomy to carry this: scientific "
             "research lies below research and development. isAnyOf does not "
@@ -841,9 +841,9 @@ kgc:KGC317-p2-c1 a odrl:Constraint ;
             "premises": []},
         "provenance": "Purpose limitation lists in data licences.",
         "ttl": _ttl("KGC393", PURPOSE,
-                    "use for research and development or marketing",
+                    "use for at least one of research and development and marketing",
                     [("isAnyOf", ["ResearchAndDevelopment", "Marketing"])],
-                    "scientific research", [("eq", ["ScientificResearch"])]),
+                    "use for scientific research only", [("eq", ["ScientificResearch"])]),
     },
     {
         "id": "KGC394", "subdir": "verdict",
@@ -875,9 +875,9 @@ kgc:KGC317-p2-c1 a odrl:Constraint ;
                          ("fromDeclarations", "SR distinct from Marketing")]},
         "provenance": "As KGC393; warrant DPV's definitions of distinct purposes.",
         "ttl": _ttl("KGC394", PURPOSE,
-                    "use for research and development or marketing",
+                    "use for at least one of research and development and marketing",
                     [("isAnyOf", ["ResearchAndDevelopment", "Marketing"])],
-                    "scientific research", [("eq", ["ScientificResearch"])]),
+                    "use for scientific research only", [("eq", ["ScientificResearch"])]),
     },
     {
         "id": "KGC395", "subdir": "verdict",
@@ -889,8 +889,8 @@ kgc:KGC317-p2-c1 a odrl:Constraint ;
         "expected_verdict": "Compatible",
         "expected_q1": "Satisfiable", "expected_q2": "Unsatisfiable",
         "summary": (
-            "A provider permits use for any purpose under research and "
-            "development or under marketing; a consumer commits to "
+            "A library permits use for any purpose under research and "
+            "development or under marketing; a researcher commits to "
             "scientific research."),
         "description": (
             "The taxonomic draft of KGC393's intent. The first disjunct reads "
@@ -901,13 +901,13 @@ kgc:KGC317-p2-c1 a odrl:Constraint ;
             "branch; KGC393's is fixed to two names."),
         "certificate": {"kind": "Refutation",
             "comment": "DPV places scientific research below research and "
-                       "development; the first disjunct settles it.",
+                       "development; the first disjunct decides it.",
             "premises": [("fromResource", "SR below RnD")]},
         "provenance": "As KGC393.",
         "ttl": _ttl("KGC395", PURPOSE,
-                    "use for research and development or marketing purposes",
+                    "use for research and development or marketing purposes only",
                     [("isA", ["ResearchAndDevelopment"]), ("isA", ["Marketing"])],
-                    "scientific research", [("eq", ["ScientificResearch"])],
+                    "use for scientific research only", [("eq", ["ScientificResearch"])],
                     connective="or"),
     },
     # -----------------------------------------------------------------
@@ -924,8 +924,8 @@ kgc:KGC317-p2-c1 a odrl:Constraint ;
         "expected_verdict": "Compatible",
         "expected_q1": "Satisfiable", "expected_q2": "Unsatisfiable",
         "summary": (
-            "A provider permits use for research and development or "
-            "marketing. A consumer's policy commits to both research and "
+            "A library permits use for research and development or "
+            "marketing. A researcher's policy commits to both research and "
             "development and service provision."),
         "description": (
             "The use carries two purposes. isAnyOf asks only that one of them "
@@ -946,9 +946,9 @@ kgc:KGC317-p2-c1 a odrl:Constraint ;
         "provenance": "Purpose limitation (GDPR Art. 5(1)(b)) against a "
                       "consumer declaring several purposes.",
         "ttl": _ttl("KGC396", PURPOSE,
-                    "use for research and development or marketing",
+                    "use for at least one of research and development and marketing",
                     [("isAnyOf", ["ResearchAndDevelopment", "Marketing"])],
-                    "research and development and service provision",
+                    "use for both research and development and service provision",
                     [("isAllOf", ["ResearchAndDevelopment", "ServiceProvision"])]),
     },
     # -----------------------------------------------------------------
@@ -966,8 +966,8 @@ kgc:KGC317-p2-c1 a odrl:Constraint ;
         "expected_verdict": "Compatible",
         "expected_q1": "Satisfiable", "expected_q2": "Unsatisfiable",
         "summary": (
-            "A provider permits use for any purpose except marketing; a "
-            "consumer commits to advertising."),
+            "A library permits use for any purpose except marketing; a "
+            "researcher commits to advertising."),
         "description": (
             "DPV places advertising below marketing. isNoneOf excludes the "
             "named concept by identity, advertising is declared a different "
@@ -985,7 +985,7 @@ kgc:KGC317-p2-c1 a odrl:Constraint ;
         "provenance": "Marketing exclusions in research-data licences; the "
                       "drafting error they invite.",
         "ttl": _ttl("KGC397", PURPOSE, "use for any purpose except marketing",
-                    [("isNoneOf", ["Marketing"])], "advertising",
+                    [("isNoneOf", ["Marketing"])], "use for advertising only",
                     [("eq", ["Advertising"])]),
     },
 ]

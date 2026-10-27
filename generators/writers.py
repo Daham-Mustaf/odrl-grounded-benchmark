@@ -58,6 +58,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 from header import Header, SMTHeader
+from targets import with_targets
 
 QUERIES = {
     1: ("witness condition asserted",  "fof_witness",  "smt2_witness",  False),
@@ -512,7 +513,7 @@ def write_case(p: dict, cases_dir: Path) -> Path:
     point of keeping them in one file.
     """
     path = cases_dir / f"{p['id']}.ttl"
-    body = p["ttl"].strip()
+    body = with_targets(p["ttl"].strip())
 
     # Prefixes the report block and the policy heads need that the policy
     # Turtle did not declare. Prepended once.

@@ -8,11 +8,15 @@
 @prefix dpv-odrl:    <https://w3id.org/dpv/mappings/odrl#> .
 @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+@prefix dcat:    <http://www.w3.org/ns/dcat#> .
+
+drk:dataset a dcat:Dataset ;
+    dcterms:title "Personal data held by a controller"@en .
 
 drk:policy-341-1 a odrl:Set ;
     odrl:uid drk:policy-341-1 ;
     odrl:profile dpv-odrl: ;
-    dcterms:title "Use is permitted under given or renewed consent"@en ;
+    dcterms:title "Use only under given or renewed consent"@en ;
     odrl:assigner drk:controller ;
     odrl:permission kgc:KGC341-p1-r1 .
 kgc:KGC341-p1-r1 a odrl:Permission ;
@@ -35,7 +39,7 @@ kgc:KGC341-p1-a2 a odrl:Constraint ;
 drk:policy-341-2 a odrl:Set ;
     odrl:uid drk:policy-341-2 ;
     odrl:profile dpv-odrl: ;
-    dcterms:title "Processing only under renewed consent"@en ;
+    dcterms:title "Use only under renewed consent"@en ;
     odrl:assignee drk:processor ;
     odrl:permission kgc:KGC341-p2-r1 .
 kgc:KGC341-p2-r1 a odrl:Permission ;
@@ -57,7 +61,7 @@ drk:KGC341-report a vrep:OperandVerdictReport ;
     vrep:comparedConstraint kgc:KGC341-p2-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-consent-status> ;
     vrep:declarations <https://w3id.org/odrl-kb/dpv-consent/empty> ;
-    rdfs:comment """The required state is one the first policy names, so the constraints settle the verdict without the resource."""@en ;
+    rdfs:comment """The required state is one the first policy names, so the constraints decide the verdict without the resource."""@en ;
     dcterms:description """A controller permits use under given or renewed consent. A processor's policy commits to processing only under renewed consent."""@en ;
     vrep:compatibilityState vrep:Compatible ;
     vrep:certificate <certificates/KGC341-2.tstp> .

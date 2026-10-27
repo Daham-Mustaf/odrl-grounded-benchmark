@@ -8,15 +8,18 @@
 @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
 
+drk:work a dcterms:BibliographicResource ;
+    dcterms:title "A work distributed by a publisher"@en .
+
 drk:policy-374-1 a odrl:Set ;
     odrl:uid drk:policy-374-1 ;
-    dcterms:title "Distribution in German"@en ;
+    dcterms:title "Distribute in German only"@en ;
     odrl:assigner drk:publisher ;
     odrl:permission kgc:KGC374-p1-r1 .
 
 kgc:KGC374-p1-r1 a odrl:Permission ;
     odrl:action odrl:distribute ;
-    odrl:target drk:dataset ;
+    odrl:target drk:work ;
     odrl:constraint kgc:KGC374-p1-c1 .
 
 kgc:KGC374-p1-c1 a odrl:Constraint ;
@@ -26,13 +29,13 @@ kgc:KGC374-p1-c1 a odrl:Constraint ;
 
 drk:policy-374-2 a odrl:Set ;
     odrl:uid drk:policy-374-2 ;
-    dcterms:title "Anything but French"@en ;
-    odrl:assignee drk:reuser ;
+    dcterms:title "Distribute in any language except French"@en ;
+    odrl:assignee drk:licensee ;
     odrl:permission kgc:KGC374-p2-r1 .
 
 kgc:KGC374-p2-r1 a odrl:Permission ;
     odrl:action odrl:distribute ;
-    odrl:target drk:dataset ;
+    odrl:target drk:work ;
     odrl:constraint kgc:KGC374-p2-c1 .
 
 kgc:KGC374-p2-c1 a odrl:Constraint ;
@@ -52,6 +55,6 @@ drk:KGC374-report a vrep:OperandVerdictReport ;
     vrep:declarations <https://w3id.org/odrl-kb/bcp47/uniqueness> ;
     vrep:readAgainst drk:KGC375-report ;
     rdfs:comment """The registry rule the parties adopt makes different primary subtags name different languages, so German is not French, and a use in German satisfies both policies."""@en ;
-    dcterms:description """A publisher distributes in German. A reuser's policy accepts any language except French."""@en ;
+    dcterms:description """A publisher distributes in German. A licensee's policy accepts any language except French."""@en ;
     vrep:compatibilityState vrep:Compatible ;
     vrep:certificate <certificates/KGC374-2.tstp> .

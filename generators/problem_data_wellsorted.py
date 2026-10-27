@@ -24,7 +24,7 @@ uses throughout, a gazetteer asked about kinds.
 VALUE = {
     "gn:Europe":  "<https://sws.geonames.org/6255148/>",
     "dpv:NCP":    "dpv:NonCommercialPurpose",
-    "bcp:de":     "odrlkb:de",
+    "bcp:de":     "bcp47:de",
 }
 
 PREFIX = {
@@ -33,7 +33,7 @@ PREFIX = {
     "spatial":  ("gn",      ""),
     "purpose":  ("dpv",     "@prefix dpv:     <https://w3id.org/dpv#> .\n"
                             "@prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> ."),
-    "language": ("odrlkb",  "@prefix odrlkb:  <https://w3id.org/odrl-kb/bcp47#> ."),
+    "language": ("bcp47",   "@prefix bcp47:   <https://w3id.org/odrl-kb/bcp47#> ."),
 }
 
 RESOURCE = {
@@ -60,6 +60,18 @@ BINDING = {
     "language": "https://w3id.org/odrl-kb/profile/b-language-bcp47",
 }
 
+# The policy title is the rule in plain words, starting with the action and
+# following the operator: only for isA, within for isPartOf.
+TITLE = {
+    "KGC100": "Use in a kind of Europe only",
+    "KGC101": "Use within non-commercial purposes",
+    "KGC102": "Use in a kind of German only",
+    "KGC110": "Use within Europe",
+    "KGC111": "Use for non-commercial purposes only",
+    "KGC112": "Use in German only",
+}
+
+
 def _ttl(pid: str, operand: str, operator: str, value: str) -> str:
     _, prefix_line = PREFIX[operand]
     profile = ("\n    odrl:profile dpv-odrl: ;"
@@ -77,13 +89,10 @@ def _ttl(pid: str, operand: str, operator: str, value: str) -> str:
     return f"""\
 {prefixes}
 
-drk:manuscripts a dcterms:Dataset ;
-    dcterms:title "Digitised manuscripts, Bavarian State Library"@en .
-
 drk:policy-{pid[3:]}-1 a odrl:Set ;
     odrl:uid drk:policy-{pid[3:]}-1 ;{profile}
-    dcterms:title "BSB, {operand} constrained by {operator}"@en ;
-    odrl:assigner drk:library ;
+    dcterms:title "{TITLE[pid]}"@en ;
+    odrl:assigner drk:german-library ;
     odrl:permission kgc:{pid}-p1-r1 .
 
 kgc:{pid}-p1-r1 a odrl:Permission ;

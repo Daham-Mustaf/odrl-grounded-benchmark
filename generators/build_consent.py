@@ -24,7 +24,8 @@ owl:disjointWith.  A verdict turning on the two being disjoint therefore
 rests on a declaration the parties make, and the certificate says so, even
 though the authority's own prose is what warrants it.
 
-That is a better warrant than any other set of declarations in the suite.  The
+The declared set separates two named states.  This set separates every state
+below one branch from every state below the other.  The
 ISO 3166 rule rests on a registry convention read from a standard's text; a
 bilateral distinctness declaration rests on the DPV definitions of the two states.
 Here the vocabulary states the intent in the definition and omits it from the

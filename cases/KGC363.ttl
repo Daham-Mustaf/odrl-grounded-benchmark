@@ -8,11 +8,15 @@
 @prefix dpv-odrl:    <https://w3id.org/dpv/mappings/odrl#> .
 @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+@prefix dcat:    <http://www.w3.org/ns/dcat#> .
+
+drk:dataset a dcat:Dataset ;
+    dcterms:title "Personal data held by a controller"@en .
 
 drk:policy-363-1 a odrl:Set ;
     odrl:uid drk:policy-363-1 ;
     odrl:profile dpv-odrl: ;
-    dcterms:title "Use is permitted with both encryption and access control in place"@en ;
+    dcterms:title "Use with both encryption and access control in place"@en ;
     odrl:assigner drk:controller ;
     odrl:permission kgc:KGC363-p1-r1 .
 
@@ -29,7 +33,7 @@ kgc:KGC363-p1-c1 a odrl:Constraint ;
 drk:policy-363-2 a odrl:Set ;
     odrl:uid drk:policy-363-2 ;
     odrl:profile dpv-odrl: ;
-    dcterms:title "Use with encryption in place"@en ;
+    dcterms:title "Use with encryption as the only measure"@en ;
     odrl:assignee drk:processor ;
     odrl:permission kgc:KGC363-p2-r1 .
 
@@ -55,5 +59,5 @@ drk:KGC363-report a vrep:OperandVerdictReport ;
     vrep:declarations <https://w3id.org/odrl-kb/dpv-tom/empty> ;
     vrep:readAgainst drk:KGC364-report ;
     rdfs:comment """In a structure that identifies encryption with access control, a use applying encryption applies both measures and satisfies both policies. In a structure that keeps them apart, the use lacks access control, and no use satisfies both. Nothing published decides between the two, so the verdict is Unknown."""@en ;
-    dcterms:description """A provider requires both encryption and access control; a consumer commits to encryption only."""@en ;
+    dcterms:description """A controller requires both encryption and access control; a processor commits to encryption only."""@en ;
     vrep:compatibilityState vrep:Unknown .

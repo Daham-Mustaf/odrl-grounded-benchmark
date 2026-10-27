@@ -14,8 +14,8 @@ The ODRL Regulatory Compliance Profile encodes Article 6(1) as a single
 constraint: the legal basis must be any of consent, contract, legal
 obligation, vital interest, public interest, official authority, or
 legitimate interest. That is the Article's list, and the profile's names
-are the Data Privacy Vocabulary's concepts. All four problems below use it
-verbatim as the offer, so the constraint under test is one a published
+are the Data Privacy Vocabulary's concepts. KGC350 to 352 use it, adapted
+as their case files note, as the offer, so the constraint under test is one a published
 profile wrote rather than one chosen to exercise an operator.
 
 What is taken from the profile is that constraint and nothing else. The
@@ -57,13 +57,13 @@ Article 6(1) provides.
 
 KGC353 is the same record against an offer that names the branch instead of
 enumerating it. The chain from explicit consent up to the legal-basis root
-is four statements of the vocabulary, and the verdict is Compatible in
+is three statements of the vocabulary, and the verdict is Compatible in
 every structure.
 
 The pair KGC352 and KGC353 is the point. Two ways to encode the same
 Article, the same record, opposite verdicts, and the difference is whether
 the offer defers to the vocabulary's order or fixes a list against it. The
-certificates say which: KGC353's cites four published statements and the
+certificates say which: KGC353's cites three published statements and the
 transitivity of the order, KGC352's cites a declaration the parties made.
 
 Sorting note
@@ -123,10 +123,11 @@ _SEVEN_TTL = """( dpv:Consent
 def _offer_isanyof(pid):
     """The Article 6(1) constraint of the Regulatory Compliance Profile.
 
-    Taken verbatim from Example 1 of the profile, at
-    https://ai.wu.ac.at/policies/orcp/regulatory-model.html, section 2.10.1.
-    What is taken is the predicateConstraint of the permission rule and
-    nothing else: the rule's deontic role is not modelled here.  The profile
+    Adapted from the Article 6 example of the profile, at
+    https://ai.wu.ac.at/policies/orcp/regulatory-model.html, section
+    "Article 6 Lawfulness of processing".  What is taken is the
+    predicateConstraint of the permission rule, written here as an
+    odrl:constraint, and nothing else: the rule's deontic role is not modelled here.  The profile
     also carries a prohibition, an obligation and a dispensation in the same
     policy, and those stand in deontic relations to one another that our
     verdict does not decide.  We decide whether two constraint sets admit a
@@ -138,21 +139,20 @@ def _offer_isanyof(pid):
     profile itself publishes no order between them.
     """
     return f"""
-# The constraint below is the predicateConstraint of the permission rule in
-# Example 1 of the ODRL Regulatory Compliance Profile, section 2.10.1, at
-# https://ai.wu.ac.at/policies/orcp/regulatory-model.html .  The rule's
-# deontic role is not modelled: the verdict decides whether two constraint
-# sets admit a common use, not which rule prevails where they do.
+# The rule's deontic role is not modelled: the verdict decides whether two
+# constraint sets admit a common use, not which rule prevails where they do.
 
 drk:policy-{pid[3:]}-1 a odrl:Set ;
     odrl:uid drk:policy-{pid[3:]}-1 ;
     odrl:profile dpv-odrl: ;
-    dcterms:title "Processing is lawful on any legal basis of Article 6(1)"@en ;
+    dcterms:title "Use on at least one of the legal bases of Article 6(1)"@en ;
     dcterms:source <https://ai.wu.ac.at/policies/orcp/regulatory-model.html> ;
-    rdfs:comment "The predicateConstraint of Example 1 of the ODRL \
-Regulatory Compliance Profile, section 2.10.1, with the profile's own \
-names for the seven bases of Article 6(1) read as concepts of the Data \
-Privacy Vocabulary."@en ;
+    rdfs:comment "Adapted from the Article 6 example of the ODRL Regulatory \
+Compliance Profile (ORCP), section 'Article 6 Lawfulness of processing': \
+odrl:predicateConstraint is written as odrl:constraint, orcp:legalBasis as \
+dpv-odrl:LegalBasis, and the seven values ORCP lists for Article 6(1) as DPV \
+concepts, with ExerciseOfOfficialAuthority read as \
+dpv:OfficialAuthorityOfController."@en ;
     odrl:assigner drk:controller ;
     odrl:permission kgc:{pid}-p1-r1 .
 
@@ -173,7 +173,7 @@ def _offer_isa(pid):
 drk:policy-{pid[3:]}-1 a odrl:Set ;
     odrl:uid drk:policy-{pid[3:]}-1 ;
     odrl:profile dpv-odrl: ;
-    dcterms:title "Processing is lawful on any legal basis"@en ;
+    dcterms:title "Use on any DPV legal basis"@en ;
     odrl:assigner drk:controller ;
     odrl:permission kgc:{pid}-p1-r1 .
 
@@ -195,7 +195,7 @@ drk:policy-{pid[3:]}-2 a odrl:Set ;
     odrl:uid drk:policy-{pid[3:]}-2 ;
     odrl:profile dpv-odrl: ;
     dcterms:title "{title}"@en ;
-    odrl:assignee drk:processor ;
+    odrl:assignee drk:recipient ;
     odrl:permission kgc:{pid}-p2-r1 .
 
 kgc:{pid}-p2-r1 a odrl:Permission ;
@@ -225,15 +225,16 @@ PROBLEMS = [
         "includes":          INCLUDES,
         "summary": (
             "A controller permits processing on any of the seven Article 6(1) "
-            "legal bases. A processor's policy relies on consent."),
+            "legal bases. A recipient's policy relies on consent."),
         "tree": [C("isAnyOf", *SEVEN), C("eq", CONSENT, side="request")],
         "description": (
             "The controller permits processing on any of the seven legal "
             "bases of Article 6(1), as the Regulatory Compliance Profile "
-            "encodes them, and the processor names consent. The offer names "
-            "the requested basis, so the verdict is Compatible and the "
-            "certificate cites no statement of the vocabulary: the "
-            "constraints settle it between themselves."
+            "encodes them. A recipient processes for its own purposes and so "
+            "needs a legal basis of its own; it names consent. Consent is one "
+            "of the seven, so the verdict is Compatible and the certificate "
+            "cites no statement of the vocabulary: the constraints decide it "
+            "between themselves."
         ),
         "expected_q1": "Satisfiable",
         "expected_q2": "Unsatisfiable",
@@ -242,13 +243,13 @@ PROBLEMS = [
             
 "comment": (
     "Consent is one of the seven values listed by isAnyOf, so the two "
-    "constraints are Compatible without any resource or background statement."
+    "constraints are Compatible without any resource statement or declaration."
 ),
             "premises": [],
         },
         "ttl": _TTL_HEAD + _offer_isanyof("KGC350")
                + _request("KGC350",
-                          "Processing is on the basis of consent",
+                          "Use on the basis of consent only",
                           "dpv:Consent"),
     },
 
@@ -266,7 +267,7 @@ PROBLEMS = [
         "includes":          INCLUDES,
         "tree": [C("isAnyOf", *SEVEN), C("eq", EXPLICIT, side="request")],
         "description": (
-            "The same offer against a processor naming explicit consent "
+            "The same policy against a recipient naming explicit consent "
             "under Article 6(1)(a). That is a legal basis the Article "
             "provides, and the extension places it below the Article "
             "6(1)(a) concept, below consent, below the legal-basis root. "
@@ -278,7 +279,7 @@ PROBLEMS = [
         ),
         "summary": (
             "A controller permits processing on any of the seven Article 6(1) "
-            "legal bases. A processor's policy relies on explicit consent "
+            "legal bases. A recipient's policy relies on explicit consent "
             "under Article 6(1)(a)."),
         "expected_q1": "Satisfiable",
         "expected_q2": "Satisfiable",
@@ -295,8 +296,7 @@ PROBLEMS = [
         },
         "ttl": _TTL_HEAD + _offer_isanyof("KGC351")
                + _request("KGC351",
-                          "Processing is on the basis of explicit consent "
-                          "under Article 6(1)(a)",
+                          "Use on the basis of explicit consent under Article 6(1)(a) only",
                           "eu-gdpr:A6-1-a-explicit-consent"),
     },
 
@@ -333,7 +333,7 @@ PROBLEMS = [
             "kind": "Refutation",
  "comment": (
      "The declarations declare explicit consent distinct from each of "
-     "the seven values listed by isAnyOf, so the basis the processor relies "
+     "the seven values listed by isAnyOf, so the basis the recipient relies "
      "on cannot satisfy the first policy."),
              "premises": [
         ("fromDeclarations",
@@ -354,8 +354,7 @@ PROBLEMS = [
         },
         "ttl": _TTL_HEAD + _offer_isanyof("KGC352")
                + _request("KGC352",
-                          "Processing is on the basis of explicit consent "
-                          "under Article 6(1)(a)",
+                          "Use on the basis of explicit consent under Article 6(1)(a) only",
                           "eu-gdpr:A6-1-a-explicit-consent"),
     },
 
@@ -373,7 +372,7 @@ PROBLEMS = [
         "tree": [C("isA", LB), C("eq", EXPLICIT, side="request")],
         "description": (
             "The record of KGC351 and KGC352 against an offer that names "
-            "the branch rather than enumerating its members. Four "
+            "the branch rather than enumerating its members. Three "
             "statements of the vocabulary carry explicit consent up to the "
             "legal-basis root, and with transitivity the verdict is "
             "Compatible in every structure. Read together with KGC352 this "
@@ -383,7 +382,7 @@ PROBLEMS = [
         ),
           "summary": (
               "A controller permits processing on any legal basis in the DPV "
-              "hierarchy. A processor's policy relies on explicit consent "
+              "hierarchy. A recipient's policy relies on explicit consent "
               "under Article 6(1)(a)."),
         "expected_q1": "Satisfiable",
         "expected_q2": "Unsatisfiable",
@@ -396,9 +395,7 @@ PROBLEMS = [
         ),
             "premises": [
                 ("fromResource",
-                 "eu-gdpr:A6-1-a-explicit-consent is below eu-gdpr:A6-1-a"),
-                ("fromResource",
-                 "eu-gdpr:A6-1-a is below eu-gdpr:Consent"),
+                 "eu-gdpr:A6-1-a-explicit-consent is below eu-gdpr:Consent"),
                 ("fromResource",
                  "eu-gdpr:Consent is below dpv:Consent"),
                 ("fromResource",
@@ -408,8 +405,7 @@ PROBLEMS = [
         },
         "ttl": _TTL_HEAD + _offer_isa("KGC353")
                + _request("KGC353",
-                          "Processing is on the basis of explicit consent "
-                          "under Article 6(1)(a)",
+                          "Use on the basis of explicit consent under Article 6(1)(a) only",
                           "eu-gdpr:A6-1-a-explicit-consent"),
     },
 ]

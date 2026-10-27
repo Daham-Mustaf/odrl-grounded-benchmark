@@ -6,14 +6,15 @@
 @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
 @prefix vrep:    <https://w3id.org/odrl-kb/verdict-report#> .
+@prefix dcat:    <http://www.w3.org/ns/dcat#> .
 
-drk:manuscripts a dcterms:Dataset ;
-    dcterms:title "Digitised manuscripts, Bavarian State Library"@en .
+drk:manuscripts a dcat:Dataset ;
+    dcterms:title "Digitised manuscripts of a library"@en .
 
 drk:policy-302-1 a odrl:Set ;
     odrl:uid drk:policy-302-1 ;
-    dcterms:title "BSB: recipients in Europe"@en ;
-    odrl:assigner drk:library ;
+    dcterms:title "Use within Europe"@en ;
+    odrl:assigner drk:german-library ;
     odrl:permission kgc:KGC302-p1-r1 .
 
 kgc:KGC302-p1-r1 a odrl:Permission ;
@@ -28,8 +29,8 @@ kgc:KGC302-p1-c1 a odrl:Constraint ;
 
 drk:policy-302-2 a odrl:Set ;
     odrl:uid drk:policy-302-2 ;
-    dcterms:title "BnF: recipient in France"@en ;
-    odrl:assignee drk:researcher ;
+    dcterms:title "Use in France only"@en ;
+    odrl:assignee drk:french-library ;
     odrl:permission kgc:KGC302-p2-r1 .
 
 kgc:KGC302-p2-r1 a odrl:Permission ;
@@ -53,6 +54,6 @@ drk:KGC302-report a vrep:OperandVerdictReport ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-spatial-geonames> ;
     vrep:declarations <https://w3id.org/odrl-kb/geonames-europe/empty> ;
     rdfs:comment """GeoNames places France within Europe, so a use in France satisfies both policies in every structure."""@en ;
-    dcterms:description """BSB permits use by recipients in Europe. BnF's policy names a recipient in France."""@en ;
+    dcterms:description """A German library permits use within Europe. A French library's policy commits to use in France only."""@en ;
     vrep:compatibilityState vrep:Compatible ;
     vrep:certificate <certificates/KGC302-2.tstp> .

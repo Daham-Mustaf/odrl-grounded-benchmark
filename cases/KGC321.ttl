@@ -7,11 +7,15 @@
 @prefix ft:      <http://publications.europa.eu/resource/authority/file-type/> .
 @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+@prefix dcat:    <http://www.w3.org/ns/dcat#> .
+
+drk:manuscripts a dcat:Dataset ;
+    dcterms:title "Digitised manuscripts of a library"@en .
 
 drk:policy-321-1 a odrl:Set ;
     odrl:uid drk:policy-321-1 ;
-    dcterms:title "BSB: PDF"@en ;
-    odrl:assigner drk:library ;
+    dcterms:title "Use in PDF only"@en ;
+    odrl:assigner drk:german-library ;
     odrl:permission kgc:KGC321-p1-r1 .
 
 kgc:KGC321-p1-r1 a odrl:Permission ;
@@ -26,8 +30,8 @@ kgc:KGC321-p1-c1 a odrl:Constraint ;
 
 drk:policy-321-2 a odrl:Set ;
     odrl:uid drk:policy-321-2 ;
-    dcterms:title "BnF: PDF/A-1a"@en ;
-    odrl:assignee drk:researcher ;
+    dcterms:title "Use in PDF/A-1a only"@en ;
+    odrl:assignee drk:french-library ;
     odrl:permission kgc:KGC321-p2-r1 .
 
 kgc:KGC321-p2-r1 a odrl:Permission ;
@@ -51,7 +55,7 @@ drk:KGC321-report a vrep:OperandVerdictReport ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-fileformat> ;
     vrep:declarations <https://w3id.org/odrl-kb/eu-file-type/declared> ;
     vrep:readAgainst drk:KGC320-report ;
-    rdfs:comment """The two constraints require ft:PDF and ft:PDFA1A to denote the same element, while the background statement requires them to denote different elements. The two conditions cannot both hold."""@en ;
+    rdfs:comment """The two constraints require ft:PDF and ft:PDFA1A to denote the same element, while the declaration requires them to denote different elements. The two conditions cannot both hold."""@en ;
     dcterms:description """As KGC320, with the two formats declared distinct."""@en ;
     vrep:compatibilityState vrep:Incompatible ;
     vrep:certificate <certificates/KGC321-1.tstp> .

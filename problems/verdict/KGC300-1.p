@@ -3,7 +3,7 @@
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
 % Problem  : language, eq bcp:de against eq bcp:fr (witness condition asserted)
 % Version  : 1.0
-% English  : BSB permits access to the manuscripts in German. BnF's policy commits to access in French.
+% English  : A German library permits use of its manuscripts in German only. A French library's policy commits to use in French only.
 %
 % Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark

@@ -15,7 +15,7 @@ semantics is correct relative to the resource and the reading
 But every concrete way a mapping goes wrong leaves a formal footprint: a
 swapped edge direction makes the wrong containment derivable, a mistyped
 constant makes a known concept absent, a build against the wrong slice
-makes a known-absent concept present, a dropped background file loses a
+makes a known-absent concept present, a dropped declarations file loses a
 distinctness.  A probe file records a handful of facts about the domain
 that the author would bet on, and this script checks the built files
 against them.  A failing probe localises the error to the binding, before
@@ -121,7 +121,7 @@ def run_probe(probe: dict, axioms_dir: Path):
     for a, b in probe.get("distinct", ()):
         ok = frozenset((a, b)) in distinct
         yield ok, (f"{a} != {b} declared" if ok else
-                   f"{a} != {b} NOT declared: background file missing "
+                   f"{a} != {b} NOT declared: declarations file missing "
                    f"from includes, or the pair outside the declarations' "
                    f"member set")
     for c in probe.get("present", ()):

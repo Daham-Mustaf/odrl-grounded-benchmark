@@ -6,10 +6,14 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+@prefix dcat:    <http://www.w3.org/ns/dcat#> .
+
+drk:manuscripts a dcat:Dataset ;
+    dcterms:title "Digitised manuscripts of a library"@en .
 
 drk:policy-307-1 a odrl:Set ;
     odrl:uid drk:policy-307-1 ;
-    dcterms:title "Use either in France alone or in both France and Germany"@en ;
+    dcterms:title "Use either in France only or in both France and Germany"@en ;
     odrl:assigner drk:library ;
     odrl:permission kgc:KGC307-p1-r1 .
 
@@ -33,7 +37,8 @@ kgc:KGC307-p1-c2 a odrl:Constraint ;
 
 drk:policy-307-2 a odrl:Set ;
     odrl:uid drk:policy-307-2 ;
-    dcterms:title "Use in France"@en ;
+    dcterms:title "Use in France only"@en ;
+    odrl:assignee drk:researcher ;
     odrl:permission kgc:KGC307-p2-r1 .
 
 kgc:KGC307-p2-r1 a odrl:Permission ;

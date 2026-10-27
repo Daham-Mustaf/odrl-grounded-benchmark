@@ -8,15 +8,18 @@
 @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
 
+drk:work a dcterms:BibliographicResource ;
+    dcterms:title "A work distributed by a publisher"@en .
+
 drk:policy-370-1 a odrl:Set ;
     odrl:uid drk:policy-370-1 ;
-    dcterms:title "Distribution in German"@en ;
+    dcterms:title "Distribute in German only"@en ;
     odrl:assigner drk:publisher ;
     odrl:permission kgc:KGC370-p1-r1 .
 
 kgc:KGC370-p1-r1 a odrl:Permission ;
     odrl:action odrl:distribute ;
-    odrl:target drk:dataset ;
+    odrl:target drk:work ;
     odrl:constraint kgc:KGC370-p1-c1 .
 
 kgc:KGC370-p1-c1 a odrl:Constraint ;
@@ -26,13 +29,13 @@ kgc:KGC370-p1-c1 a odrl:Constraint ;
 
 drk:policy-370-2 a odrl:Set ;
     odrl:uid drk:policy-370-2 ;
-    dcterms:title "Distribution in French"@en ;
-    odrl:assignee drk:reuser ;
+    dcterms:title "Distribute in French only"@en ;
+    odrl:assignee drk:licensee ;
     odrl:permission kgc:KGC370-p2-r1 .
 
 kgc:KGC370-p2-r1 a odrl:Permission ;
     odrl:action odrl:distribute ;
-    odrl:target drk:dataset ;
+    odrl:target drk:work ;
     odrl:constraint kgc:KGC370-p2-c1 .
 
 kgc:KGC370-p2-c1 a odrl:Constraint ;
@@ -52,6 +55,6 @@ drk:KGC370-report a vrep:OperandVerdictReport ;
     vrep:declarations <https://w3id.org/odrl-kb/bcp47/uniqueness> ;
     vrep:readAgainst drk:KGC371-report ;
     rdfs:comment """The two subtags are declared to name distinct languages, which is the parties' rule and not the registry's content. Withdrawing it returns the verdict to Unknown, which is KGC371."""@en ;
-    dcterms:description """A publisher distributes in German. A reuser's policy commits to French. The parties adopt the registry rule that different primary subtags name different languages."""@en ;
+    dcterms:description """A publisher distributes in German. A licensee's policy commits to French. The parties adopt the registry rule that different primary subtags name different languages."""@en ;
     vrep:compatibilityState vrep:Incompatible ;
     vrep:certificate <certificates/KGC370-1.tstp> .

@@ -8,10 +8,14 @@
 @prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> .
 @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+@prefix dcat:    <http://www.w3.org/ns/dcat#> .
+
+drk:manuscripts a dcat:Dataset ;
+    dcterms:title "Digitised manuscripts of a library"@en .
 drk:policy-385-1 a odrl:Set ;
     odrl:uid drk:policy-385-1 ;
     odrl:profile dpv-odrl: ;
-    dcterms:title "Use in North Rhine-Westphalia"@en ;
+    dcterms:title "Use in North Rhine-Westphalia only"@en ;
     odrl:assigner drk:library ;
     odrl:permission kgc:KGC385-p1-r1 .
 kgc:KGC385-p1-r1 a odrl:Permission ;
@@ -25,7 +29,8 @@ kgc:KGC385-p1-c1 a odrl:Constraint ;
 drk:policy-385-2 a odrl:Set ;
     odrl:uid drk:policy-385-2 ;
     odrl:profile dpv-odrl: ;
-    dcterms:title "Use in Bavaria"@en ;
+    dcterms:title "Use in Bavaria only"@en ;
+    odrl:assignee drk:researcher ;
     odrl:permission kgc:KGC385-p2-r1 .
 kgc:KGC385-p2-r1 a odrl:Permission ;
     odrl:action odrl:use ;

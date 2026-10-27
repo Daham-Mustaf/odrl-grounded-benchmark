@@ -113,7 +113,7 @@ def _offer(pid):
 drk:policy-{pid[3:]}-1 a odrl:Set ;
     odrl:uid drk:policy-{pid[3:]}-1 ;
     odrl:profile dpv-odrl: ;
-    dcterms:title "Use is permitted where encryption and access control are both in place"@en ;
+    dcterms:title "Use with both encryption and access control in place"@en ;
     rdfs:comment "The kind of clause the DPV-ODRL guidance describes for this operand: access to a dataset permitted only where stated measures are implemented. Both are required, not one of them, which is what distinguishes isAllOf from isAnyOf here."@en ;
     odrl:assigner drk:controller ;
     odrl:permission kgc:{pid}-p1-r1 .
@@ -201,10 +201,10 @@ def _ttl(pid, left_operand, offer_phrase, offer, request_phrase, request):
     """Full Turtle for one problem. The phrases fill the two titles."""
     return (_TTL_HEAD
             + _side(pid, 1,
-                    f"Use is permitted with {offer_phrase} in place",
+                    f"Use with {offer_phrase} in place",
                     left_operand, offer)
             + _side(pid, 2,
-                    f"Use with {request_phrase} in place",
+                    f"Use with {request_phrase}",
                     left_operand, request))
 
 
@@ -281,7 +281,7 @@ PROBLEMS = [
         },
         "ttl": _TTL_HEAD + _offer("KGC360")
                + _request("KGC360",
-                          "Use only with technical measures in place",
+                          "Use with technical measures only",
                           "isA", "dpv:TechnicalMeasure"),
     },
 
@@ -328,7 +328,7 @@ PROBLEMS = [
         },
         "ttl": _TTL_HEAD + _offer("KGC361")
                + _request("KGC361",
-                          "Use without access control",
+                          "Use with any measure except access control",
                           "isNoneOf", "( dpv:AccessControlMethod )"),
     },
 
@@ -345,8 +345,9 @@ PROBLEMS = [
         "expected_verdict": "Compatible",
         "expected_q1": "Satisfiable", "expected_q2": "Unsatisfiable",
         "summary": (
-            "A provider requires at least one of encryption and access "
-            "control. A consumer's policy commits to encryption."),
+            "A controller requires at least one of encryption and access "
+            "control. A processor's policy commits to encryption as the "
+            "only measure."),
         "description": (
             "Encryption is one of the two named safeguards, so the "
             "constraints are Compatible without consulting the "
@@ -360,7 +361,7 @@ PROBLEMS = [
         "provenance": "Safeguard clauses in data-sharing agreements.",
         "ttl": _ttl("KGC362", TOM_LO, "at least one of encryption and access control",
                     [("isAnyOf", ["Encryption", "AccessControlMethod"])],
-                    "encryption", [("eq", ["Encryption"])]),
+                    "encryption as the only measure", [("eq", ["Encryption"])]),
     },
     {
         "id": "KGC363", "subdir": "verdict",
@@ -373,8 +374,8 @@ PROBLEMS = [
         "expected_verdict": "Unknown",
         "expected_q1": "Satisfiable", "expected_q2": "Satisfiable",
         "summary": (
-            "A provider requires both encryption and access control; a "
-            "consumer commits to encryption only."),
+            "A controller requires both encryption and access control; a "
+            "processor commits to encryption only."),
         "description": (
             "The offer needs both safeguards among the use's measures and the "
             "request supplies one. The conflict looks immediate and is not: "
@@ -391,7 +392,7 @@ PROBLEMS = [
         "provenance": "As KGC362; the universal clause.",
         "ttl": _ttl("KGC363", TOM_LO, "both encryption and access control",
                     [("isAllOf", ["Encryption", "AccessControlMethod"])],
-                    "encryption", [("eq", ["Encryption"])]),
+                    "encryption as the only measure", [("eq", ["Encryption"])]),
     },
     {
         "id": "KGC364", "subdir": "verdict",
@@ -421,6 +422,6 @@ PROBLEMS = [
         "provenance": "As KGC362; warrant DPV's definitions.",
         "ttl": _ttl("KGC364", TOM_LO, "both encryption and access control",
                     [("isAllOf", ["Encryption", "AccessControlMethod"])],
-                    "encryption", [("eq", ["Encryption"])]),
+                    "encryption as the only measure", [("eq", ["Encryption"])]),
     },
 ]

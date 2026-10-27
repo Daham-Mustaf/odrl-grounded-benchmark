@@ -8,11 +8,15 @@
 @prefix dpv-odrl:    <https://w3id.org/dpv/mappings/odrl#> .
 @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+@prefix dcat:    <http://www.w3.org/ns/dcat#> .
+
+drk:dataset a dcat:Dataset ;
+    dcterms:title "Personal data held by a controller"@en .
 
 drk:policy-364-1 a odrl:Set ;
     odrl:uid drk:policy-364-1 ;
     odrl:profile dpv-odrl: ;
-    dcterms:title "Use is permitted with both encryption and access control in place"@en ;
+    dcterms:title "Use with both encryption and access control in place"@en ;
     odrl:assigner drk:controller ;
     odrl:permission kgc:KGC364-p1-r1 .
 
@@ -29,7 +33,7 @@ kgc:KGC364-p1-c1 a odrl:Constraint ;
 drk:policy-364-2 a odrl:Set ;
     odrl:uid drk:policy-364-2 ;
     odrl:profile dpv-odrl: ;
-    dcterms:title "Use with encryption in place"@en ;
+    dcterms:title "Use with encryption as the only measure"@en ;
     odrl:assignee drk:processor ;
     odrl:permission kgc:KGC364-p2-r1 .
 

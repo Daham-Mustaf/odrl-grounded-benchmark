@@ -3,7 +3,7 @@
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
 % Problem  : fileFormat, eq ft:PDF against eq ft:PDFA1A (witness condition asserted)
 % Version  : 1.0
-% English  : BSB permits PDF. BnF's policy commits to PDF/A-1a.
+% English  : A German library permits use in PDF only. A French library's policy commits to use in PDF/A-1a only.
 %
 % Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark

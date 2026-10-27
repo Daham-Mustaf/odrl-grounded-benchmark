@@ -151,6 +151,7 @@ kgc:{pid}-p1-c2 a odrl:Constraint ;
 drk:policy-{n}-2 a odrl:Set ;
     odrl:uid drk:policy-{n}-2 ;
     dcterms:title "{title2}"@en ;
+    odrl:assignee drk:researcher ;
     odrl:permission kgc:{pid}-p2-r1 .
 
 kgc:{pid}-p2-r1 a odrl:Permission ;
@@ -174,8 +175,8 @@ ALLOF_TREE = [Xone((C("eq", FRANCE), C("isAllOf", FRANCE, GERMANY))),
 
 EQ_TITLE = "Use in exactly one of France and Germany"
 PART_TITLE = "Use within exactly one of France and Germany"
-ALLOF_TITLE = "Use either in France alone or in both France and Germany"
-FR_TITLE = "Use in France"
+ALLOF_TITLE = "Use either in France only or in both France and Germany"
+FR_TITLE = "Use in France only"
 
 EQ_ALTS = (_alt("eq", FRANCE), _alt("eq", GERMANY))
 PART_ALTS = (_alt("isPartOf", FRANCE), _alt("isPartOf", GERMANY))

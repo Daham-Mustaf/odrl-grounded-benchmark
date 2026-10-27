@@ -84,8 +84,8 @@ PROBLEMS = [
         "smt2_logic": "UF",
 
         "summary": (
-            "BSB permits access to the manuscripts in German. BnF's policy "
-            "commits to access in French."),
+            "A German library permits use of its manuscripts in German only. "
+            "A French library's policy commits to use in French only."),
         "certificate": {
             "kind": "Refutation",
             "comment": (
@@ -100,18 +100,15 @@ PROBLEMS = [
         "ttl": """\
 @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix odrlkb:  <https://w3id.org/odrl-kb/bcp47#> .
+@prefix bcp47:   <https://w3id.org/odrl-kb/bcp47#> .
 @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
 @prefix vrep:    <https://w3id.org/odrl-kb/verdict-report#> .
 
-drk:manuscripts a dcterms:Dataset ;
-    dcterms:title "Digitised manuscripts, Bavarian State Library"@en .
-
 drk:policy-300-1 a odrl:Set ;
     odrl:uid drk:policy-300-1 ;
-    dcterms:title "BSB: access in German"@en ;
-    odrl:assigner drk:library ;
+    dcterms:title "Use in German only"@en ;
+    odrl:assigner drk:german-library ;
     odrl:permission kgc:KGC300-p1-r1 .
 
 kgc:KGC300-p1-r1 a odrl:Permission ;
@@ -122,12 +119,12 @@ kgc:KGC300-p1-r1 a odrl:Permission ;
 kgc:KGC300-p1-c1 a odrl:Constraint ;
     odrl:leftOperand odrl:language ;
     odrl:operator odrl:eq ;
-    odrl:rightOperand odrlkb:de .
+    odrl:rightOperand bcp47:de .
 
 drk:policy-300-2 a odrl:Set ;
     odrl:uid drk:policy-300-2 ;
-    dcterms:title "BnF: access in French"@en ;
-    odrl:assignee drk:researcher ;
+    dcterms:title "Use in French only"@en ;
+    odrl:assignee drk:french-library ;
     odrl:permission kgc:KGC300-p2-r1 .
 
 kgc:KGC300-p2-r1 a odrl:Permission ;
@@ -138,7 +135,7 @@ kgc:KGC300-p2-r1 a odrl:Permission ;
 kgc:KGC300-p2-c1 a odrl:Constraint ;
     odrl:leftOperand odrl:language ;
     odrl:operator odrl:eq ;
-    odrl:rightOperand odrlkb:fr .""",
+    odrl:rightOperand bcp47:fr .""",
     },
 
     # -----------------------------------------------------------------
@@ -175,12 +172,13 @@ kgc:KGC300-p2-c1 a odrl:Constraint ;
         "smt2_logic": "UF",
 
         "summary": (
-            "BSB permits use for non-commercial research only. BnF's policy "
-            "commits to use for scientific research."),
+            "A German library permits use for non-commercial purposes only. "
+            "A French library's policy commits to use for scientific "
+            "research only."),
         "certificate": {
             "kind": "Models",
             "comment": (
-                "DPV does not say whether scientific research is a "
+                "DPV does not state whether scientific research is a "
                 "non-commercial purpose. One structure places it below "
                 "non-commercial purposes and one does not, so the verdict is "
                 "Unknown."),
@@ -195,14 +193,11 @@ kgc:KGC300-p2-c1 a odrl:Constraint ;
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
 @prefix vrep:    <https://w3id.org/odrl-kb/verdict-report#> .
 
-drk:manuscripts a dcterms:Dataset ;
-    dcterms:title "Digitised manuscripts, Bavarian State Library"@en .
-
 drk:policy-301-1 a odrl:Set ;
     odrl:uid drk:policy-301-1 ;
     odrl:profile dpv-odrl: ;
-    dcterms:title "BSB: non-commercial research only"@en ;
-    odrl:assigner drk:library ;
+    dcterms:title "Use for non-commercial purposes only"@en ;
+    odrl:assigner drk:german-library ;
     odrl:permission kgc:KGC301-p1-r1 .
 
 kgc:KGC301-p1-r1 a odrl:Permission ;
@@ -218,8 +213,8 @@ kgc:KGC301-p1-c1 a odrl:Constraint ;
 drk:policy-301-2 a odrl:Set ;
     odrl:uid drk:policy-301-2 ;
     odrl:profile dpv-odrl: ;
-    dcterms:title "BnF: scientific research"@en ;
-    odrl:assignee drk:researcher ;
+    dcterms:title "Use for scientific research only"@en ;
+    odrl:assignee drk:french-library ;
     odrl:permission kgc:KGC301-p2-r1 .
 
 kgc:KGC301-p2-r1 a odrl:Permission ;
@@ -266,8 +261,8 @@ kgc:KGC301-p2-c1 a odrl:Constraint ;
         "smt2_logic": "UF",
 
         "summary": (
-            "BSB permits use by recipients in Europe. BnF's policy names a "
-            "recipient in France."),
+            "A German library permits use within Europe. A French library's "
+            "policy commits to use in France only."),
         "certificate": {
             "kind": "Refutation",
             "comment": (
@@ -286,13 +281,10 @@ kgc:KGC301-p2-c1 a odrl:Constraint ;
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
 @prefix vrep:    <https://w3id.org/odrl-kb/verdict-report#> .
 
-drk:manuscripts a dcterms:Dataset ;
-    dcterms:title "Digitised manuscripts, Bavarian State Library"@en .
-
 drk:policy-302-1 a odrl:Set ;
     odrl:uid drk:policy-302-1 ;
-    dcterms:title "BSB: recipients in Europe"@en ;
-    odrl:assigner drk:library ;
+    dcterms:title "Use within Europe"@en ;
+    odrl:assigner drk:german-library ;
     odrl:permission kgc:KGC302-p1-r1 .
 
 kgc:KGC302-p1-r1 a odrl:Permission ;
@@ -307,8 +299,8 @@ kgc:KGC302-p1-c1 a odrl:Constraint ;
 
 drk:policy-302-2 a odrl:Set ;
     odrl:uid drk:policy-302-2 ;
-    dcterms:title "BnF: recipient in France"@en ;
-    odrl:assignee drk:researcher ;
+    dcterms:title "Use in France only"@en ;
+    odrl:assignee drk:french-library ;
     odrl:permission kgc:KGC302-p2-r1 .
 
 kgc:KGC302-p2-r1 a odrl:Permission ;

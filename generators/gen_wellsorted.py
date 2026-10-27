@@ -23,6 +23,7 @@ sys.path.insert(0, str(Path(__file__).parent))
 
 from problem_data_wellsorted import PROBLEMS
 from signature import is_well_sorted
+from targets import with_targets
 from writers import GENERATED_HEADER
 
 DEFAULT_CASES = "cases"
@@ -58,7 +59,7 @@ def case_ttl(p: dict, accepted: bool, reason: str) -> str:
     lines = [
         GENERATED_HEADER,
         _HEADER,
-        p["ttl"],
+        with_targets(p["ttl"]),
         "",
         "### Expected result " + "#" * 55,
         "",
@@ -67,7 +68,7 @@ def case_ttl(p: dict, accepted: bool, reason: str) -> str:
         f"    vrep:constraint kgc:{pid}-p1-c1 ;",
         f"    vrep:binding <{p['binding']}> ;",
     ]
-    summary = (f"A library's policy constrains {p['left_operand']} with "
+    summary = (f"A German library's policy constrains {p['left_operand']} with "
                f"{p['operator']} {p['value']}, and the binding reads "
                f"{p['left_operand']} at sort {p['sort']}.")
     if accepted:

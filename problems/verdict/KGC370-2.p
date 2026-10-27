@@ -3,7 +3,7 @@
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
 % Problem  : language, eq de against eq fr, registry uniqueness declared (witness condition negated)
 % Version  : 1.0
-% English  : A publisher distributes in German. A reuser's policy commits to French. The parties adopt the registry rule that different primary subtags name different languages.
+% English  : A publisher distributes in German. A licensee's policy commits to French. The parties adopt the registry rule that different primary subtags name different languages.
 %
 % Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark

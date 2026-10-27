@@ -8,15 +8,18 @@
 @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
 
+drk:work a dcterms:BibliographicResource ;
+    dcterms:title "A work distributed by a publisher"@en .
+
 drk:policy-371-1 a odrl:Set ;
     odrl:uid drk:policy-371-1 ;
-    dcterms:title "Distribution in German"@en ;
+    dcterms:title "Distribute in German only"@en ;
     odrl:assigner drk:publisher ;
     odrl:permission kgc:KGC371-p1-r1 .
 
 kgc:KGC371-p1-r1 a odrl:Permission ;
     odrl:action odrl:distribute ;
-    odrl:target drk:dataset ;
+    odrl:target drk:work ;
     odrl:constraint kgc:KGC371-p1-c1 .
 
 kgc:KGC371-p1-c1 a odrl:Constraint ;
@@ -26,13 +29,13 @@ kgc:KGC371-p1-c1 a odrl:Constraint ;
 
 drk:policy-371-2 a odrl:Set ;
     odrl:uid drk:policy-371-2 ;
-    dcterms:title "Distribution in French"@en ;
-    odrl:assignee drk:reuser ;
+    dcterms:title "Distribute in French only"@en ;
+    odrl:assignee drk:licensee ;
     odrl:permission kgc:KGC371-p2-r1 .
 
 kgc:KGC371-p2-r1 a odrl:Permission ;
     odrl:action odrl:distribute ;
-    odrl:target drk:dataset ;
+    odrl:target drk:work ;
     odrl:constraint kgc:KGC371-p2-c1 .
 
 kgc:KGC371-p2-c1 a odrl:Constraint ;

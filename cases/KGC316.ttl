@@ -8,11 +8,15 @@
 @prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> .
 @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+@prefix dcat:    <http://www.w3.org/ns/dcat#> .
+
+drk:manuscripts a dcat:Dataset ;
+    dcterms:title "Digitised manuscripts of a library"@en .
 
 drk:policy-316-1 a odrl:Set ;
     odrl:uid drk:policy-316-1 ;
     odrl:profile dpv-odrl: ;
-    dcterms:title "Recruitment interview scheduling"@en ;
+    dcterms:title "Use for recruitment interview scheduling only"@en ;
     odrl:assigner drk:library ;
     odrl:permission kgc:KGC316-p1-r1 .
 
@@ -29,7 +33,7 @@ kgc:KGC316-p1-c1 a odrl:Constraint ;
 drk:policy-316-2 a odrl:Set ;
     odrl:uid drk:policy-316-2 ;
     odrl:profile dpv-odrl: ;
-    dcterms:title "Any declared purpose"@en ;
+    dcterms:title "Use for the general purpose only"@en ;
     odrl:assignee drk:researcher ;
     odrl:permission kgc:KGC316-p2-r1 .
 

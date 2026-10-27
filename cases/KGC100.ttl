@@ -16,14 +16,15 @@
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
 @prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix vrep:    <https://w3id.org/odrl-kb/verdict-report#> .
+@prefix dcat:    <http://www.w3.org/ns/dcat#> .
 
-drk:manuscripts a dcterms:Dataset ;
-    dcterms:title "Digitised manuscripts, Bavarian State Library"@en .
+drk:manuscripts a dcat:Dataset ;
+    dcterms:title "Digitised manuscripts of a library"@en .
 
 drk:policy-100-1 a odrl:Set ;
     odrl:uid drk:policy-100-1 ;
-    dcterms:title "BSB, spatial constrained by isA"@en ;
-    odrl:assigner drk:library ;
+    dcterms:title "Use in a kind of Europe only"@en ;
+    odrl:assigner drk:german-library ;
     odrl:permission kgc:KGC100-p1-r1 .
 
 kgc:KGC100-p1-r1 a odrl:Permission ;
@@ -42,6 +43,6 @@ drk:KGC100-report a vrep:WellSortednessReport ;
     dcterms:identifier "KGC100" ;
     vrep:constraint kgc:KGC100-p1-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-spatial-geonames> ;
-    dcterms:description """A library's policy constrains spatial with isA gn:Europe, and the binding reads spatial at sort mer."""@en ;
+    dcterms:description """A German library's policy constrains spatial with isA gn:Europe, and the binding reads spatial at sort mer."""@en ;
     rdfs:comment """isA requires subsumption; the operand is mer, whose resource supplies parthood."""@en ;
     vrep:wellSorted false .

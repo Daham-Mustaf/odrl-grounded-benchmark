@@ -8,15 +8,19 @@
 @prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> .
 @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+@prefix dcat:    <http://www.w3.org/ns/dcat#> .
+
+drk:manuscripts a dcat:Dataset ;
+    dcterms:title "Digitised manuscripts of a library"@en .
 drk:policy-396-1 a odrl:Set ;
     odrl:uid drk:policy-396-1 ;
     odrl:profile dpv-odrl: ;
-    dcterms:title "Use for research and development or marketing"@en ;
-    odrl:assigner drk:provider ;
+    dcterms:title "Use for at least one of research and development and marketing"@en ;
+    odrl:assigner drk:library ;
     odrl:permission kgc:KGC396-p1-r1 .
 kgc:KGC396-p1-r1 a odrl:Permission ;
     odrl:action odrl:use ;
-    odrl:target drk:dataset ;
+    odrl:target drk:manuscripts ;
     odrl:constraint kgc:KGC396-p1-c1 .
 kgc:KGC396-p1-c1 a odrl:Constraint ;
     odrl:leftOperand dpv-odrl:Purpose ;
@@ -25,12 +29,12 @@ kgc:KGC396-p1-c1 a odrl:Constraint ;
 drk:policy-396-2 a odrl:Set ;
     odrl:uid drk:policy-396-2 ;
     odrl:profile dpv-odrl: ;
-    dcterms:title "Research and development and service provision"@en ;
-    odrl:assignee drk:consumer ;
+    dcterms:title "Use for both research and development and service provision"@en ;
+    odrl:assignee drk:researcher ;
     odrl:permission kgc:KGC396-p2-r1 .
 kgc:KGC396-p2-r1 a odrl:Permission ;
     odrl:action odrl:use ;
-    odrl:target drk:dataset ;
+    odrl:target drk:manuscripts ;
     odrl:constraint kgc:KGC396-p2-c1 .
 kgc:KGC396-p2-c1 a odrl:Constraint ;
     odrl:leftOperand dpv-odrl:Purpose ;
@@ -48,6 +52,6 @@ drk:KGC396-report a vrep:OperandVerdictReport ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-purpose> ;
     vrep:declarations <https://w3id.org/odrl-kb/dpv-purposes/empty> ;
     rdfs:comment """Research and development is one of the values the first policy lists, and nothing in the first policy limits the use's other purposes."""@en ;
-    dcterms:description """A provider permits use for research and development or marketing. A consumer's policy commits to both research and development and service provision."""@en ;
+    dcterms:description """A library permits use for research and development or marketing. A researcher's policy commits to both research and development and service provision."""@en ;
     vrep:compatibilityState vrep:Compatible ;
     vrep:certificate <certificates/KGC396-2.tstp> .

@@ -8,11 +8,15 @@
 @prefix dpv-odrl:    <https://w3id.org/dpv/mappings/odrl#> .
 @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+@prefix dcat:    <http://www.w3.org/ns/dcat#> .
+
+drk:dataset a dcat:Dataset ;
+    dcterms:title "Personal data held by a controller"@en .
 
 drk:policy-340-1 a odrl:Set ;
     odrl:uid drk:policy-340-1 ;
     odrl:profile dpv-odrl: ;
-    dcterms:title "Use is permitted while the consent on record may justify processing"@en ;
+    dcterms:title "Use only while the consent on record may justify processing"@en ;
     odrl:assigner drk:controller ;
     odrl:permission kgc:KGC340-p1-r1 .
 kgc:KGC340-p1-r1 a odrl:Permission ;
@@ -27,7 +31,7 @@ kgc:KGC340-p1-c1 a odrl:Constraint ;
 drk:policy-340-2 a odrl:Set ;
     odrl:uid drk:policy-340-2 ;
     odrl:profile dpv-odrl: ;
-    dcterms:title "Processing only under given consent"@en ;
+    dcterms:title "Use only under given consent"@en ;
     odrl:assignee drk:processor ;
     odrl:permission kgc:KGC340-p2-r1 .
 kgc:KGC340-p2-r1 a odrl:Permission ;

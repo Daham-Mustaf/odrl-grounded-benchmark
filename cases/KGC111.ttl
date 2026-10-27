@@ -18,15 +18,16 @@
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
 @prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix vrep:    <https://w3id.org/odrl-kb/verdict-report#> .
+@prefix dcat:    <http://www.w3.org/ns/dcat#> .
 
-drk:manuscripts a dcterms:Dataset ;
-    dcterms:title "Digitised manuscripts, Bavarian State Library"@en .
+drk:manuscripts a dcat:Dataset ;
+    dcterms:title "Digitised manuscripts of a library"@en .
 
 drk:policy-111-1 a odrl:Set ;
     odrl:uid drk:policy-111-1 ;
     odrl:profile dpv-odrl: ;
-    dcterms:title "BSB, purpose constrained by isA"@en ;
-    odrl:assigner drk:library ;
+    dcterms:title "Use for non-commercial purposes only"@en ;
+    odrl:assigner drk:german-library ;
     odrl:permission kgc:KGC111-p1-r1 .
 
 kgc:KGC111-p1-r1 a odrl:Permission ;
@@ -45,6 +46,6 @@ drk:KGC111-report a vrep:WellSortednessReport ;
     dcterms:identifier "KGC111" ;
     vrep:constraint kgc:KGC111-p1-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-purpose> ;
-    dcterms:description """A library's policy constrains purpose with isA dpv:NCP, and the binding reads purpose at sort tax."""@en ;
+    dcterms:description """A German library's policy constrains purpose with isA dpv:NCP, and the binding reads purpose at sort tax."""@en ;
     rdfs:comment """isA is defined at sort tax, so the constraint is well sorted and goes on to the verdict."""@en ;
     vrep:wellSorted true .

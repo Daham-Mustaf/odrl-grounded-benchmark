@@ -18,7 +18,7 @@ Four problems over the EU File Type table, at nom.
 The four cases cover equality, distinctness, set-valued identity, and
 inequality at the nominal sort. The resource contributes no selected
 relation between the file-type concepts, so the cases isolate what follows
-from the constraints and from explicit background statements.
+from the constraints and from explicit declarations.
 
 The PDF family
 --------------
@@ -126,7 +126,8 @@ PROBLEMS = [
         "includes":          INCLUDES,
         "tree": [C("eq", PDF), C("eq", A1A, side="request")],
         "summary": (
-            "BSB permits PDF. BnF's policy commits to PDF/A-1a."),
+            "A German library permits use in PDF only. A French library's policy "
+            "commits to use in PDF/A-1a only."),
         "description": (
     "The EU File Type table lists both PDF and PDF/A-1a but publishes no "
     "selected relation between them. At the nominal sort, the formal "
@@ -151,15 +152,15 @@ PROBLEMS = [
 "comment": (
     "The two constraints can be satisfied both when ft:PDF and ft:PDFA1A "
     "denote the same element and when they denote different elements. No "
-    "resource or background statement selects between these possibilities."
+    "resource statement or declaration selects between these possibilities."
 ),
             "premises": [],
         },
         "ttl": _TTL_HEAD + """
 drk:policy-320-1 a odrl:Set ;
     odrl:uid drk:policy-320-1 ;
-    dcterms:title "BSB: PDF"@en ;
-    odrl:assigner drk:library ;
+    dcterms:title "Use in PDF only"@en ;
+    odrl:assigner drk:german-library ;
     odrl:permission kgc:KGC320-p1-r1 .
 
 kgc:KGC320-p1-r1 a odrl:Permission ;
@@ -174,8 +175,8 @@ kgc:KGC320-p1-c1 a odrl:Constraint ;
 
 drk:policy-320-2 a odrl:Set ;
     odrl:uid drk:policy-320-2 ;
-    dcterms:title "BnF: PDF/A-1a"@en ;
-    odrl:assignee drk:researcher ;
+    dcterms:title "Use in PDF/A-1a only"@en ;
+    odrl:assignee drk:french-library ;
     odrl:permission kgc:KGC320-p2-r1 .
 
 kgc:KGC320-p2-r1 a odrl:Permission ;
@@ -210,8 +211,8 @@ kgc:KGC320-p2-c1 a odrl:Constraint ;
         "summary": (
             "As KGC320, with the two formats declared distinct."),
 "description": (
-    "The case is the KGC320 pair with a background statement declaring "
-    "ft:PDF and ft:PDFA1A distinct. The resource contributes no relation "
+    "The case is the KGC320 pair with a declaration that "
+    "ft:PDF and ft:PDFA1A are distinct. The resource contributes no relation "
     "between the two concepts, so the declaration is the premise that "
     "changes the verdict from Unknown to Incompatible."
 ),
@@ -229,7 +230,7 @@ kgc:KGC320-p2-c1 a odrl:Constraint ;
             "kind": "Refutation",
    "comment": (
         "The two constraints require ft:PDF and ft:PDFA1A to denote the "
-        "same element, while the background statement requires them to "
+        "same element, while the declaration requires them to "
         "denote different elements. The two conditions cannot both hold."
     ),
             "premises": [
@@ -240,8 +241,8 @@ kgc:KGC320-p2-c1 a odrl:Constraint ;
         "ttl": _TTL_HEAD + """
 drk:policy-321-1 a odrl:Set ;
     odrl:uid drk:policy-321-1 ;
-    dcterms:title "BSB: PDF"@en ;
-    odrl:assigner drk:library ;
+    dcterms:title "Use in PDF only"@en ;
+    odrl:assigner drk:german-library ;
     odrl:permission kgc:KGC321-p1-r1 .
 
 kgc:KGC321-p1-r1 a odrl:Permission ;
@@ -256,8 +257,8 @@ kgc:KGC321-p1-c1 a odrl:Constraint ;
 
 drk:policy-321-2 a odrl:Set ;
     odrl:uid drk:policy-321-2 ;
-    dcterms:title "BnF: PDF/A-1a"@en ;
-    odrl:assignee drk:researcher ;
+    dcterms:title "Use in PDF/A-1a only"@en ;
+    odrl:assignee drk:french-library ;
     odrl:permission kgc:KGC321-p2-r1 .
 
 kgc:KGC321-p2-r1 a odrl:Permission ;
@@ -286,7 +287,8 @@ kgc:KGC321-p2-c1 a odrl:Constraint ;
         "includes":          INCLUDES,
         "tree": [C("isAnyOf", PDF, A1A), C("eq", A1A, side="request")],
         "summary": (
-            "BSB permits PDF or PDF/A-1a. BnF's policy commits to PDF/A-1a."),
+            "A German library permits use in at least one of PDF and PDF/A-1a. "
+            "A French library's policy commits to use in PDF/A-1a only."),
         "description": (
             "Offer (fileFormat, isAnyOf, {ft:PDF, ft:PDFA1A}) against "
             "request (fileFormat, eq, ft:PDFA1A).  The offer admits either "
@@ -315,15 +317,15 @@ kgc:KGC321-p2-c1 a odrl:Constraint ;
     "comment": (
         "The second policy requires PDF/A-1a, and the first lists it among "
         "the values isAnyOf accepts. The two constraints can be satisfied "
-        "together without any resource or background statement."),        "premises": [
+        "together without any resource statement or declaration."),        "premises": [
                 ("fromConstraints", "the witness condition"),
             ],
         },
         "ttl": _TTL_HEAD + """
 drk:policy-322-1 a odrl:Set ;
     odrl:uid drk:policy-322-1 ;
-    dcterms:title "BSB: PDF or PDF/A-1a"@en ;
-    odrl:assigner drk:library ;
+    dcterms:title "Use in at least one of PDF and PDF/A-1a"@en ;
+    odrl:assigner drk:german-library ;
     odrl:permission kgc:KGC322-p1-r1 .
 
 kgc:KGC322-p1-r1 a odrl:Permission ;
@@ -338,8 +340,8 @@ kgc:KGC322-p1-c1 a odrl:Constraint ;
 
 drk:policy-322-2 a odrl:Set ;
     odrl:uid drk:policy-322-2 ;
-    dcterms:title "BnF: PDF/A-1a"@en ;
-    odrl:assignee drk:researcher ;
+    dcterms:title "Use in PDF/A-1a only"@en ;
+    odrl:assignee drk:french-library ;
     odrl:permission kgc:KGC322-p2-r1 .
 
 kgc:KGC322-p2-r1 a odrl:Permission ;
@@ -368,7 +370,8 @@ kgc:KGC322-p2-c1 a odrl:Constraint ;
     ),
 
     "summary": (
-        "BSB permits any format except PDF. BnF's policy commits to PDF/A-1a. "
+        "A German library permits use in any format except PDF. A French "
+        "library's policy commits to use in PDF/A-1a only. "
         "The two formats are declared distinct."),
 
     "left_operand": "fileFormat",
@@ -426,8 +429,8 @@ kgc:KGC322-p2-c1 a odrl:Constraint ;
     "ttl": _TTL_HEAD + """
 drk:policy-323-1 a odrl:Set ;
     odrl:uid drk:policy-323-1 ;
-    dcterms:title "BSB: not PDF"@en ;
-    odrl:assigner drk:library ;
+    dcterms:title "Use in any format except PDF"@en ;
+    odrl:assigner drk:german-library ;
     odrl:permission kgc:KGC323-p1-r1 .
 
 kgc:KGC323-p1-r1 a odrl:Permission ;
@@ -442,8 +445,8 @@ kgc:KGC323-p1-c1 a odrl:Constraint ;
 
 drk:policy-323-2 a odrl:Set ;
     odrl:uid drk:policy-323-2 ;
-    dcterms:title "BnF: PDF/A-1a"@en ;
-    odrl:assignee drk:researcher ;
+    dcterms:title "Use in PDF/A-1a only"@en ;
+    odrl:assignee drk:french-library ;
     odrl:permission kgc:KGC323-p2-r1 .
 
 kgc:KGC323-p2-r1 a odrl:Permission ;

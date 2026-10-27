@@ -8,10 +8,14 @@
 @prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> .
 @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+@prefix dcat:    <http://www.w3.org/ns/dcat#> .
+
+drk:manuscripts a dcat:Dataset ;
+    dcterms:title "Digitised manuscripts of a library"@en .
 drk:policy-386-1 a odrl:Set ;
     odrl:uid drk:policy-386-1 ;
     odrl:profile dpv-odrl: ;
-    dcterms:title "Use anywhere except Bavaria and Berlin"@en ;
+    dcterms:title "Use in any area except Bavaria and Berlin"@en ;
     odrl:assigner drk:library ;
     odrl:permission kgc:KGC386-p1-r1 .
 kgc:KGC386-p1-r1 a odrl:Permission ;
@@ -25,7 +29,8 @@ kgc:KGC386-p1-c1 a odrl:Constraint ;
 drk:policy-386-2 a odrl:Set ;
     odrl:uid drk:policy-386-2 ;
     odrl:profile dpv-odrl: ;
-    dcterms:title "Use in Hamburg"@en ;
+    dcterms:title "Use in Hamburg only"@en ;
+    odrl:assignee drk:researcher ;
     odrl:permission kgc:KGC386-p2-r1 .
 kgc:KGC386-p2-r1 a odrl:Permission ;
     odrl:action odrl:use ;

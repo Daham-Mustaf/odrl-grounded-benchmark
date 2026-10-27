@@ -3,7 +3,7 @@
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
 % Problem  : purpose, or(isA RnD, isA Marketing) against eq ScientificResearch (witness condition negated)
 % Version  : 1.0
-% English  : A provider permits use for any purpose under research and development or under marketing; a consumer commits to scientific research.
+% English  : A library permits use for any purpose under research and development or under marketing; a researcher commits to scientific research.
 %
 % Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark

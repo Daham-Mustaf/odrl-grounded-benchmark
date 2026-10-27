@@ -3,7 +3,7 @@
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
 % Problem  : spatial, isPartOf gn:Europe against eq gn:France (witness condition asserted)
 % Version  : 1.0
-% English  : BSB permits use by recipients in Europe. BnF's policy names a recipient in France.
+% English  : A German library permits use within Europe. A French library's policy commits to use in France only.
 %
 % Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark

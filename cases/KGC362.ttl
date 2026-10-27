@@ -8,11 +8,15 @@
 @prefix dpv-odrl:    <https://w3id.org/dpv/mappings/odrl#> .
 @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+@prefix dcat:    <http://www.w3.org/ns/dcat#> .
+
+drk:dataset a dcat:Dataset ;
+    dcterms:title "Personal data held by a controller"@en .
 
 drk:policy-362-1 a odrl:Set ;
     odrl:uid drk:policy-362-1 ;
     odrl:profile dpv-odrl: ;
-    dcterms:title "Use is permitted with at least one of encryption and access control in place"@en ;
+    dcterms:title "Use with at least one of encryption and access control in place"@en ;
     odrl:assigner drk:controller ;
     odrl:permission kgc:KGC362-p1-r1 .
 
@@ -29,7 +33,7 @@ kgc:KGC362-p1-c1 a odrl:Constraint ;
 drk:policy-362-2 a odrl:Set ;
     odrl:uid drk:policy-362-2 ;
     odrl:profile dpv-odrl: ;
-    dcterms:title "Use with encryption in place"@en ;
+    dcterms:title "Use with encryption as the only measure"@en ;
     odrl:assignee drk:processor ;
     odrl:permission kgc:KGC362-p2-r1 .
 
@@ -54,6 +58,6 @@ drk:KGC362-report a vrep:OperandVerdictReport ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-tom> ;
     vrep:declarations <https://w3id.org/odrl-kb/dpv-tom/empty> ;
     rdfs:comment """Encryption is one of the values the first policy lists, so a use with encryption satisfies both policies."""@en ;
-    dcterms:description """A provider requires at least one of encryption and access control. A consumer's policy commits to encryption."""@en ;
+    dcterms:description """A controller requires at least one of encryption and access control. A processor's policy commits to encryption as the only measure."""@en ;
     vrep:compatibilityState vrep:Compatible ;
     vrep:certificate <certificates/KGC362-2.tstp> .

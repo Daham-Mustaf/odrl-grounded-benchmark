@@ -54,7 +54,7 @@ two languages.
 That is not an oversight.  A registry states what it has established, and
 whether two of its entries may be treated as apart is a question about the
 use being made of them.  So the parties adopt it as a rule, warranted by
-RFC 5646's uniqueness discipline, and it enters as declared background.
+RFC 5646's uniqueness discipline, and it enters as a declaration.
 
 KGC370 has that rule in force and KGC371 does not.  The policies are
 identical, the resource is identical, and the two problems differ in one
@@ -176,13 +176,13 @@ def _offer(pid):
     return f"""
 drk:policy-{pid[3:]}-1 a odrl:Set ;
     odrl:uid drk:policy-{pid[3:]}-1 ;
-    dcterms:title "Distribution in German"@en ;
+    dcterms:title "Distribute in German only"@en ;
     odrl:assigner drk:publisher ;
     odrl:permission kgc:{pid}-p1-r1 .
 
 kgc:{pid}-p1-r1 a odrl:Permission ;
     odrl:action odrl:distribute ;
-    odrl:target drk:dataset ;
+    odrl:target drk:work ;
     odrl:constraint kgc:{pid}-p1-c1 .
 
 kgc:{pid}-p1-c1 a odrl:Constraint ;
@@ -198,12 +198,12 @@ def _request(pid, title, value, comment="", operator="eq"):
 drk:policy-{pid[3:]}-2 a odrl:Set ;
     odrl:uid drk:policy-{pid[3:]}-2 ;
     dcterms:title "{title}"@en ;{note}
-    odrl:assignee drk:reuser ;
+    odrl:assignee drk:licensee ;
     odrl:permission kgc:{pid}-p2-r1 .
 
 kgc:{pid}-p2-r1 a odrl:Permission ;
     odrl:action odrl:distribute ;
-    odrl:target drk:dataset ;
+    odrl:target drk:work ;
     odrl:constraint kgc:{pid}-p2-c1 .
 
 kgc:{pid}-p2-c1 a odrl:Constraint ;
@@ -222,7 +222,7 @@ def _policy(pid, k, title, constraints, connective=None):
     """
     n, role = pid[3:], f"p{k}"
     party = ("odrl:assigner drk:publisher" if k == 1
-             else "odrl:assignee drk:reuser")
+             else "odrl:assignee drk:licensee")
     cids = [f"{pid}-{role}-c{i + 1}" for i in range(len(constraints))]
     if len(cids) == 1:
         cref, lc = f"kgc:{cids[0]}", ""
@@ -240,7 +240,7 @@ drk:policy-{n}-{k} a odrl:Set ;
 
 kgc:{pid}-{role}-r1 a odrl:Permission ;
     odrl:action odrl:distribute ;
-    odrl:target drk:dataset ;
+    odrl:target drk:work ;
     odrl:constraint {cref} .
 """ + lc
     for cid, (op, consts) in zip(cids, constraints):
@@ -287,7 +287,7 @@ PROBLEMS = [
         "includes":          INCLUDES_UNIQUENESS,
         "tree": [C("eq", DE), C("eq", FR, side="request")],
         "description": (
-            "A publisher distributes a dataset in German. A reuser's policy "
+            "A publisher distributes a work in German. A licensee's policy "
             "commits to distributing it in French. Both constraints are on "
             "odrl:language, which this profile binds to a fifteen-subtag "
             "slice of the IANA Language Subtag Registry at the nominal "
@@ -308,7 +308,7 @@ PROBLEMS = [
         "expected_q1": "Unsatisfiable",
         "expected_q2": "Satisfiable",
         "summary": (
-            "A publisher distributes in German. A reuser's policy commits to "
+            "A publisher distributes in German. A licensee's policy commits to "
             "French. The parties adopt the registry rule that different "
             "primary subtags name different languages."),
         "certificate": {
@@ -324,7 +324,7 @@ PROBLEMS = [
             ],
         },
         "ttl": _TTL_HEAD + _offer("KGC370")
-               + _request("KGC370", "Distribution in French", "bcp47:fr"),
+               + _request("KGC370", "Distribute in French only", "bcp47:fr"),
     },
 
     {
@@ -372,7 +372,7 @@ PROBLEMS = [
             "premises": [],
         },
         "ttl": _TTL_HEAD + _offer("KGC371")
-               + _request("KGC371", "Distribution in French", "bcp47:fr"),
+               + _request("KGC371", "Distribute in French only", "bcp47:fr"),
     },
 
     {
@@ -397,7 +397,7 @@ PROBLEMS = [
         "includes":          INCLUDES_UNIQUENESS,
         "ungrounded":        "en-US",
         "description": (
-            "A publisher distributes in German. A reuser's policy commits "
+            "A publisher distributes in German. A licensee's policy commits "
             "to distributing in en-US.\n\n"
             "That is a well-formed language tag: RFC 5646 composes it "
             "from the registered primary subtag en and the registered "
@@ -420,7 +420,7 @@ PROBLEMS = [
             "binding."
         ),
         "summary": (
-            "A publisher distributes in German. A reuser's policy commits to "
+            "A publisher distributes in German. A licensee's policy commits to "
             "American English (en-US), under the exact-match grounding rule."),
         "certificate": {
             "kind": "Ungrounded",
@@ -432,7 +432,7 @@ PROBLEMS = [
             "premises": [],
         },
         "ttl": _TTL_HEAD + _offer("KGC372")
-               + _request("KGC372", "Distribution in American English",
+               + _request("KGC372", "Distribute in American English only",
                           '"en-US"', EN_US_NOTE),
     },
 
@@ -447,7 +447,7 @@ PROBLEMS = [
         "resource":          RESOURCE,
         "background_theory": UNIQUENESS,
         "summary": (
-            "A publisher distributes in German. A reuser's policy commits to "
+            "A publisher distributes in German. A licensee's policy commits to "
             "American English (en-US), under the rule that reduces a tag to "
             "its primary subtag."),
         "smt2_background":
@@ -490,7 +490,7 @@ PROBLEMS = [
             ],
         },
         "ttl": _TTL_HEAD + _offer("KGC373")
-               + _request("KGC373", "Distribution in American English",
+               + _request("KGC373", "Distribute in American English only",
                           '"en-US"', EN_US_NOTE),
     },
         {
@@ -513,10 +513,10 @@ PROBLEMS = [
         "expected_q1":       "Satisfiable",
         "expected_q2":       "Unsatisfiable",
 "summary": (
-    "A publisher distributes in German. A reuser's policy accepts any "
+    "A publisher distributes in German. A licensee's policy accepts any "
     "language except French."),
         "description": (
-            "The publisher distributes in German; the reuser accepts "
+            "The publisher distributes in German; the licensee accepts "
             "anything that is not French. German itself is the witness, "
             "but only because the parties' uniqueness rule separates the "
             "two subtags: in a structure interpreting de and fr as one "
@@ -524,8 +524,8 @@ PROBLEMS = [
             "second policy excludes it.\n\n"
             "So this Compatible rests on a declared premise exactly as "
             "KGC370's Incompatible does. The refutation of the second "
-            "query cites the witness condition and one background "
-            "premise, and withdrawing that premise is KGC375. A definite "
+            "query cites the witness condition and one "
+            "declaration, and withdrawing that premise is KGC375. A definite "
             "verdict of either polarity can stand on the parties' "
             "declaration; polarity buys no exemption from provenance."
         ),
@@ -542,7 +542,7 @@ PROBLEMS = [
             ],
         },
         "ttl": _TTL_HEAD + _offer("KGC374")
-               + _request("KGC374", "Anything but French",
+               + _request("KGC374", "Distribute in any language except French",
                           "bcp47:fr", operator="neq"),
     },
     {
@@ -585,7 +585,7 @@ PROBLEMS = [
             "premises": [],
         },
         "ttl": _TTL_HEAD + _offer("KGC375")
-               + _request("KGC375", "Anything but French",
+               + _request("KGC375", "Distribute in any language except French",
                           "bcp47:fr", operator="neq"),
     },
 
@@ -638,9 +638,9 @@ PROBLEMS = [
             ],
         },
         "ttl": _TTL_HEAD
-               + _policy("KGC376", 1, "Distribution in both Dutch and French",
+               + _policy("KGC376", 1, "Distribute in both Dutch and French",
                          [("isAllOf", [NL, FR])])
-               + _policy("KGC376", 2, "Distribution in Dutch only",
+               + _policy("KGC376", 2, "Distribute in Dutch only",
                          [("eq", [NL])]),
     },
 
@@ -687,10 +687,9 @@ PROBLEMS = [
         },
         "ttl": _TTL_HEAD
                + _policy("KGC377", 1,
-                         "Distribution in any language except English and "
-                         "Italian",
+                         "Distribute in any language except English and Italian",
                          [("isNoneOf", [EN, IT])])
-               + _policy("KGC377", 2, "Distribution in Italian",
+               + _policy("KGC377", 2, "Distribute in Italian only",
                          [("eq", [IT])]),
     },
 
@@ -732,10 +731,9 @@ PROBLEMS = [
             "premises": [],
         },
         "ttl": _TTL_HEAD
-               + _policy("KGC378", 1, "Licence for a German or a French "
-                         "edition",
+               + _policy("KGC378", 1, "Distribute in German only or in French only",
                          [("eq", [DE]), ("eq", [FR])], connective="or")
-               + _policy("KGC378", 2, "Publication of a French edition",
+               + _policy("KGC378", 2, "Distribute in French only",
                          [("eq", [FR])]),
     },
 
@@ -782,10 +780,9 @@ PROBLEMS = [
             "premises": [],
         },
         "ttl": _TTL_HEAD
-               + _policy("KGC379", 1, "Licence for a single-language "
-                         "edition, German or French",
+               + _policy("KGC379", 1, "Distribute in exactly one language, German or French",
                          [("eq", [DE]), ("eq", [FR])], connective="xone")
-               + _policy("KGC379", 2, "Publication of a German edition",
+               + _policy("KGC379", 2, "Distribute in German only",
                          [("eq", [DE])]),
     },
 ]

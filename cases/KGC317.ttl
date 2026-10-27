@@ -8,11 +8,15 @@
 @prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> .
 @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+@prefix dcat:    <http://www.w3.org/ns/dcat#> .
+
+drk:manuscripts a dcat:Dataset ;
+    dcterms:title "Digitised manuscripts of a library"@en .
 
 drk:policy-317-1 a odrl:Set ;
     odrl:uid drk:policy-317-1 ;
     odrl:profile dpv-odrl: ;
-    dcterms:title "Any purpose other than marketing"@en ;
+    dcterms:title "Use for any purpose except marketing"@en ;
     odrl:assigner drk:library ;
     odrl:permission kgc:KGC317-p1-r1 .
 
@@ -29,7 +33,7 @@ kgc:KGC317-p1-c1 a odrl:Constraint ;
 drk:policy-317-2 a odrl:Set ;
     odrl:uid drk:policy-317-2 ;
     odrl:profile dpv-odrl: ;
-    dcterms:title "Marketing"@en ;
+    dcterms:title "Use for marketing only"@en ;
     odrl:assignee drk:researcher ;
     odrl:permission kgc:KGC317-p2-r1 .
 
@@ -53,7 +57,7 @@ drk:KGC317-report a vrep:OperandVerdictReport ;
     vrep:comparedConstraint kgc:KGC317-p2-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-purpose> ;
     vrep:declarations <https://w3id.org/odrl-kb/dpv-purposes/empty> ;
-    rdfs:comment """The first policy excludes exactly the purpose the second requires, so the verdict is Incompatible without any resource or background statement."""@en ;
+    rdfs:comment """The first policy excludes exactly the purpose the second requires, so the verdict is Incompatible without any resource statement or declaration."""@en ;
     dcterms:description """A library permits use for any purpose other than marketing. A researcher's policy commits to use for marketing."""@en ;
     vrep:compatibilityState vrep:Incompatible ;
     vrep:certificate <certificates/KGC317-1.tstp> .

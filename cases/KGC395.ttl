@@ -8,15 +8,19 @@
 @prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> .
 @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+@prefix dcat:    <http://www.w3.org/ns/dcat#> .
+
+drk:manuscripts a dcat:Dataset ;
+    dcterms:title "Digitised manuscripts of a library"@en .
 drk:policy-395-1 a odrl:Set ;
     odrl:uid drk:policy-395-1 ;
     odrl:profile dpv-odrl: ;
-    dcterms:title "Use for research and development or marketing purposes"@en ;
-    odrl:assigner drk:provider ;
+    dcterms:title "Use for research and development or marketing purposes only"@en ;
+    odrl:assigner drk:library ;
     odrl:permission kgc:KGC395-p1-r1 .
 kgc:KGC395-p1-r1 a odrl:Permission ;
     odrl:action odrl:use ;
-    odrl:target drk:dataset ;
+    odrl:target drk:manuscripts ;
     odrl:constraint kgc:KGC395-p1-lc .
 kgc:KGC395-p1-lc a odrl:LogicalConstraint ;
     odrl:or ( kgc:KGC395-p1-c1 kgc:KGC395-p1-c2 ) .
@@ -31,12 +35,12 @@ kgc:KGC395-p1-c2 a odrl:Constraint ;
 drk:policy-395-2 a odrl:Set ;
     odrl:uid drk:policy-395-2 ;
     odrl:profile dpv-odrl: ;
-    dcterms:title "Scientific research"@en ;
-    odrl:assignee drk:consumer ;
+    dcterms:title "Use for scientific research only"@en ;
+    odrl:assignee drk:researcher ;
     odrl:permission kgc:KGC395-p2-r1 .
 kgc:KGC395-p2-r1 a odrl:Permission ;
     odrl:action odrl:use ;
-    odrl:target drk:dataset ;
+    odrl:target drk:manuscripts ;
     odrl:constraint kgc:KGC395-p2-c1 .
 kgc:KGC395-p2-c1 a odrl:Constraint ;
     odrl:leftOperand dpv-odrl:Purpose ;
@@ -53,7 +57,7 @@ drk:KGC395-report a vrep:OperandVerdictReport ;
     vrep:comparedConstraint kgc:KGC395-p2-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-purpose> ;
     vrep:declarations <https://w3id.org/odrl-kb/dpv-purposes/empty> ;
-    rdfs:comment """DPV places scientific research below research and development; the first disjunct settles it."""@en ;
-    dcterms:description """A provider permits use for any purpose under research and development or under marketing; a consumer commits to scientific research."""@en ;
+    rdfs:comment """DPV places scientific research below research and development; the first disjunct decides it."""@en ;
+    dcterms:description """A library permits use for any purpose under research and development or under marketing; a researcher commits to scientific research."""@en ;
     vrep:compatibilityState vrep:Compatible ;
     vrep:certificate <certificates/KGC395-2.tstp> .

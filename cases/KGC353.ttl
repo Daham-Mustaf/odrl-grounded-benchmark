@@ -9,11 +9,15 @@
 @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
 @prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+@prefix dcat:    <http://www.w3.org/ns/dcat#> .
+
+drk:dataset a dcat:Dataset ;
+    dcterms:title "Personal data held by a controller"@en .
 
 drk:policy-353-1 a odrl:Set ;
     odrl:uid drk:policy-353-1 ;
     odrl:profile dpv-odrl: ;
-    dcterms:title "Processing is lawful on any legal basis"@en ;
+    dcterms:title "Use on any DPV legal basis"@en ;
     odrl:assigner drk:controller ;
     odrl:permission kgc:KGC353-p1-r1 .
 
@@ -30,8 +34,8 @@ kgc:KGC353-p1-c1 a odrl:Constraint ;
 drk:policy-353-2 a odrl:Set ;
     odrl:uid drk:policy-353-2 ;
     odrl:profile dpv-odrl: ;
-    dcterms:title "Processing is on the basis of explicit consent under Article 6(1)(a)"@en ;
-    odrl:assignee drk:processor ;
+    dcterms:title "Use on the basis of explicit consent under Article 6(1)(a) only"@en ;
+    odrl:assignee drk:recipient ;
     odrl:permission kgc:KGC353-p2-r1 .
 
 kgc:KGC353-p2-r1 a odrl:Permission ;
@@ -55,6 +59,6 @@ drk:KGC353-report a vrep:OperandVerdictReport ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-legalbasis> ;
     vrep:declarations <https://w3id.org/odrl-kb/dpv-gdpr-legal-basis/empty> ;
     rdfs:comment """The vocabulary places explicit consent below the legal-basis root through three published order statements. Transitivity of the order yields the relation used by isA."""@en ;
-    dcterms:description """A controller permits processing on any legal basis in the DPV hierarchy. A processor's policy relies on explicit consent under Article 6(1)(a)."""@en ;
+    dcterms:description """A controller permits processing on any legal basis in the DPV hierarchy. A recipient's policy relies on explicit consent under Article 6(1)(a)."""@en ;
     vrep:compatibilityState vrep:Compatible ;
     vrep:certificate <certificates/KGC353-2.tstp> .

@@ -3,7 +3,7 @@
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
 % Problem  : measures, isAllOf {Encryption, AccessControl} against eq Encryption (witness condition asserted)
 % Version  : 1.0
-% English  : A provider requires both encryption and access control; a consumer commits to encryption only.
+% English  : A controller requires both encryption and access control; a processor commits to encryption only.
 %
 % Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark

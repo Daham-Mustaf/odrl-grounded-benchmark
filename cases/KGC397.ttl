@@ -8,15 +8,19 @@
 @prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> .
 @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+@prefix dcat:    <http://www.w3.org/ns/dcat#> .
+
+drk:manuscripts a dcat:Dataset ;
+    dcterms:title "Digitised manuscripts of a library"@en .
 drk:policy-397-1 a odrl:Set ;
     odrl:uid drk:policy-397-1 ;
     odrl:profile dpv-odrl: ;
     dcterms:title "Use for any purpose except marketing"@en ;
-    odrl:assigner drk:provider ;
+    odrl:assigner drk:library ;
     odrl:permission kgc:KGC397-p1-r1 .
 kgc:KGC397-p1-r1 a odrl:Permission ;
     odrl:action odrl:use ;
-    odrl:target drk:dataset ;
+    odrl:target drk:manuscripts ;
     odrl:constraint kgc:KGC397-p1-c1 .
 kgc:KGC397-p1-c1 a odrl:Constraint ;
     odrl:leftOperand dpv-odrl:Purpose ;
@@ -25,12 +29,12 @@ kgc:KGC397-p1-c1 a odrl:Constraint ;
 drk:policy-397-2 a odrl:Set ;
     odrl:uid drk:policy-397-2 ;
     odrl:profile dpv-odrl: ;
-    dcterms:title "Advertising"@en ;
-    odrl:assignee drk:consumer ;
+    dcterms:title "Use for advertising only"@en ;
+    odrl:assignee drk:researcher ;
     odrl:permission kgc:KGC397-p2-r1 .
 kgc:KGC397-p2-r1 a odrl:Permission ;
     odrl:action odrl:use ;
-    odrl:target drk:dataset ;
+    odrl:target drk:manuscripts ;
     odrl:constraint kgc:KGC397-p2-c1 .
 kgc:KGC397-p2-c1 a odrl:Constraint ;
     odrl:leftOperand dpv-odrl:Purpose ;
@@ -48,6 +52,6 @@ drk:KGC397-report a vrep:OperandVerdictReport ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-purpose> ;
     vrep:declarations <https://w3id.org/odrl-kb/dpv-purposes/declared> ;
     rdfs:comment """Advertising is declared distinct from marketing, so it lies in the complement; that it lies below marketing is not consulted."""@en ;
-    dcterms:description """A provider permits use for any purpose except marketing; a consumer commits to advertising."""@en ;
+    dcterms:description """A library permits use for any purpose except marketing; a researcher commits to advertising."""@en ;
     vrep:compatibilityState vrep:Compatible ;
     vrep:certificate <certificates/KGC397-2.tstp> .

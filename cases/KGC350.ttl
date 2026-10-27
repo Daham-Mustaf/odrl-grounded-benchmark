@@ -8,19 +8,20 @@
 @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
 @prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
+@prefix dcat:    <http://www.w3.org/ns/dcat#> .
 
-# The constraint below is the predicateConstraint of the permission rule in
-# Example 1 of the ODRL Regulatory Compliance Profile, section 2.10.1, at
-# https://ai.wu.ac.at/policies/orcp/regulatory-model.html .  The rule's
-# deontic role is not modelled: the verdict decides whether two constraint
-# sets admit a common use, not which rule prevails where they do.
+drk:dataset a dcat:Dataset ;
+    dcterms:title "Personal data held by a controller"@en .
+
+# The rule's deontic role is not modelled: the verdict decides whether two
+# constraint sets admit a common use, not which rule prevails where they do.
 
 drk:policy-350-1 a odrl:Set ;
     odrl:uid drk:policy-350-1 ;
     odrl:profile dpv-odrl: ;
-    dcterms:title "Processing is lawful on any legal basis of Article 6(1)"@en ;
+    dcterms:title "Use on at least one of the legal bases of Article 6(1)"@en ;
     dcterms:source <https://ai.wu.ac.at/policies/orcp/regulatory-model.html> ;
-    rdfs:comment "The predicateConstraint of Example 1 of the ODRL Regulatory Compliance Profile, section 2.10.1, with the profile's own names for the seven bases of Article 6(1) read as concepts of the Data Privacy Vocabulary."@en ;
+    rdfs:comment "Adapted from the Article 6 example of the ODRL Regulatory Compliance Profile (ORCP), section 'Article 6 Lawfulness of processing': odrl:predicateConstraint is written as odrl:constraint, orcp:legalBasis as dpv-odrl:LegalBasis, and the seven values ORCP lists for Article 6(1) as DPV concepts, with ExerciseOfOfficialAuthority read as dpv:OfficialAuthorityOfController."@en ;
     odrl:assigner drk:controller ;
     odrl:permission kgc:KGC350-p1-r1 .
 
@@ -43,8 +44,8 @@ kgc:KGC350-p1-c1 a odrl:Constraint ;
 drk:policy-350-2 a odrl:Set ;
     odrl:uid drk:policy-350-2 ;
     odrl:profile dpv-odrl: ;
-    dcterms:title "Processing is on the basis of consent"@en ;
-    odrl:assignee drk:processor ;
+    dcterms:title "Use on the basis of consent only"@en ;
+    odrl:assignee drk:recipient ;
     odrl:permission kgc:KGC350-p2-r1 .
 
 kgc:KGC350-p2-r1 a odrl:Permission ;
@@ -67,7 +68,7 @@ drk:KGC350-report a vrep:OperandVerdictReport ;
     vrep:comparedConstraint kgc:KGC350-p2-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-legalbasis> ;
     vrep:declarations <https://w3id.org/odrl-kb/dpv-gdpr-legal-basis/empty> ;
-    rdfs:comment """Consent is one of the seven values listed by isAnyOf, so the two constraints are Compatible without any resource or background statement."""@en ;
-    dcterms:description """A controller permits processing on any of the seven Article 6(1) legal bases. A processor's policy relies on consent."""@en ;
+    rdfs:comment """Consent is one of the seven values listed by isAnyOf, so the two constraints are Compatible without any resource statement or declaration."""@en ;
+    dcterms:description """A controller permits processing on any of the seven Article 6(1) legal bases. A recipient's policy relies on consent."""@en ;
     vrep:compatibilityState vrep:Compatible ;
     vrep:certificate <certificates/KGC350-2.tstp> .

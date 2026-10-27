@@ -223,7 +223,7 @@ def _ttl2(pid, offer_title, offer_cs, req_title, req_cs, connective=None):
             + _side(pid, 1, offer_title,
                     "odrl:assigner drk:library ;\n", offer_cs, connective)
             + _side(pid, 2, req_title,
-                    "", req_cs))
+                    "odrl:assignee drk:researcher ;\n", req_cs))
  
  
 _ISO_385 = _iso((DE_NW, DE_BY))
@@ -253,6 +253,7 @@ drk:policy-{pid[3:]}-2 a odrl:Set ;
     odrl:uid drk:policy-{pid[3:]}-2 ;
     odrl:profile dpv-odrl: ;
     dcterms:title "{req_title[:1].upper() + req_title[1:]}"@en ;
+    odrl:assignee drk:researcher ;
     odrl:permission kgc:{pid}-p2-r1 .
 
 kgc:{pid}-p2-r1 a odrl:Permission ;
@@ -327,8 +328,8 @@ PROBLEMS = [
             ],
         },
 
-        "ttl": _ttl("KGC330", "use within the Netherlands", "isPartOf", "NL",
-                    "use in Bonaire, Sint Eustatius and Saba", "BQ"),
+        "ttl": _ttl("KGC330", "Use within the Netherlands", "isPartOf", "NL",
+                    "Use in Bonaire, Sint Eustatius and Saba only", "BQ"),
     },
     # -----------------------------------------------------------------
     # KGC331  The pair the resource exists for.  Compatible under the
@@ -382,8 +383,8 @@ PROBLEMS = [
                 ("fromResource", "loc:DE is a member of loc:EU"),
             ],
         },
-        "ttl": _ttl("KGC331", "use within the European Union", "isPartOf", "EU",
-                    "use in Germany", "DE"),
+        "ttl": _ttl("KGC331", "Use within the European Union", "isPartOf", "EU",
+                    "Use in Germany only", "DE"),
     },
     # -----------------------------------------------------------------
     # KGC333  Two country codes the extension never separates.  Unknown,
@@ -431,8 +432,8 @@ PROBLEMS = [
                 "keeps them apart, no use satisfies both. So the verdict is Unknown."),
             "premises": [],
         },
-        "ttl": _ttl("KGC333", "use in Germany", "eq", "DE",
-                    "use in France", "FR"),
+        "ttl": _ttl("KGC333", "Use in Germany only", "eq", "DE",
+                    "Use in France only", "FR"),
     },
     # -----------------------------------------------------------------
     # KGC334  KGC333 under the ISO rule.  Same resource, same constraints:
@@ -494,8 +495,8 @@ fof(bg_dist_loc_de_loc_fr, axiom,
                  "loc:DE and loc:FR are distinct areas under ISO 3166"),
             ],
         },
-        "ttl": _ttl("KGC334", "use in Germany", "eq", "DE",
-                    "use in France", "FR"),
+        "ttl": _ttl("KGC334", "Use in Germany only", "eq", "DE",
+                    "Use in France only", "FR"),
     },
     # -----------------------------------------------------------------
     # KGC380  The Bonaire problem: composition that is false.  The verdict
@@ -545,9 +546,9 @@ fof(bg_dist_loc_de_loc_fr, axiom,
                          ("fromOrderAxiom", "transitivity")]},
         "provenance": "EU-territory clauses (GDPR Chapter V pattern); "
                       "OCT status per Art. 355 TFEU.",
-        "ttl": _ttl2("KGC380", "use within the European Union",
+        "ttl": _ttl2("KGC380", "Use within the European Union",
                      [("isPartOf", ["EU"])],
-                     "use in Bonaire, Sint Eustatius and Saba",
+                     "Use in Bonaire, Sint Eustatius and Saba only",
                      [("eq", ["BQ"])]),
     },
     # -----------------------------------------------------------------
@@ -584,8 +585,8 @@ fof(bg_dist_loc_de_loc_fr, axiom,
                 "where loc:EU grounds and the verdict is Compatible."),
             "premises": []},
         "provenance": "The two-readings pair of KGC331.",
-        "ttl": _ttl2("KGC381", "use within the European Union",
-                     [("isPartOf", ["EU"])], "use in Germany",
+        "ttl": _ttl2("KGC381", "Use within the European Union",
+                     [("isPartOf", ["EU"])], "Use in Germany only",
                      [("eq", ["DE"])]),
     },
     # -----------------------------------------------------------------
@@ -614,8 +615,8 @@ fof(bg_dist_loc_de_loc_fr, axiom,
                 "case."),
             "premises": [("fromResource", "loc:DE-NW is within loc:DE")]},
         "provenance": "Territorial licensing by federal state.",
-        "ttl": _ttl2("KGC382", "use within Germany", [("isPartOf", ["DE"])],
-                     "use in North Rhine-Westphalia", [("eq", ["DE-NW"])]),
+        "ttl": _ttl2("KGC382", "Use within Germany", [("isPartOf", ["DE"])],
+                     "Use in North Rhine-Westphalia only", [("eq", ["DE-NW"])]),
     },
     # -----------------------------------------------------------------
     # KGC383  Two hops, two relations, and the composition is true.  The
@@ -650,8 +651,8 @@ fof(bg_dist_loc_de_loc_fr, axiom,
                          ("fromResource", "loc:DE is a member of loc:EU"),
                          ("fromOrderAxiom", "transitivity")]},
         "provenance": "EU-territory clause against a regional request.",
-        "ttl": _ttl2("KGC383", "use within the European Union",
-                     [("isPartOf", ["EU"])], "use in North Rhine-Westphalia",
+        "ttl": _ttl2("KGC383", "Use within the European Union",
+                     [("isPartOf", ["EU"])], "Use in North Rhine-Westphalia only",
                      [("eq", ["DE-NW"])]),
     },
     # -----------------------------------------------------------------
@@ -683,8 +684,8 @@ fof(bg_dist_loc_de_loc_fr, axiom,
                 "the verdict is Unknown."),
             "premises": []},
         "provenance": "Regional licences of two neighbouring states.",
-        "ttl": _ttl2("KGC384", "use in North Rhine-Westphalia",
-                     [("eq", ["DE-NW"])], "use in Bavaria", [("eq", ["DE-BY"])]),
+        "ttl": _ttl2("KGC384", "Use in North Rhine-Westphalia only",
+                     [("eq", ["DE-NW"])], "Use in Bavaria only", [("eq", ["DE-BY"])]),
     },
     {
         "id": "KGC385", "subdir": "verdict",
@@ -712,8 +713,8 @@ fof(bg_dist_loc_de_loc_fr, axiom,
             "premises": [("fromDeclarations",
                           "loc:DE-NW and loc:DE-BY are distinct areas")]},
         "provenance": "As KGC384; warrant ISO 3166-2.",
-        "ttl": _ttl2("KGC385", "use in North Rhine-Westphalia",
-                     [("eq", ["DE-NW"])], "use in Bavaria", [("eq", ["DE-BY"])]),
+        "ttl": _ttl2("KGC385", "Use in North Rhine-Westphalia only",
+                     [("eq", ["DE-NW"])], "Use in Bavaria only", [("eq", ["DE-BY"])]),
     },
     # -----------------------------------------------------------------
     # KGC386 / KGC387  A complement settled positively by declaration.
@@ -743,8 +744,8 @@ fof(bg_dist_loc_de_loc_fr, axiom,
                 "Berlin, the first policy excludes it. So the verdict is Unknown."),
             "premises": []},
         "provenance": "Exclusion clauses in regional licensing.",
-        "ttl": _ttl2("KGC386", "use anywhere except Bavaria and Berlin",
-                     [("isNoneOf", ["DE-BY", "DE-BE"])], "use in Hamburg",
+        "ttl": _ttl2("KGC386", "Use in any area except Bavaria and Berlin",
+                     [("isNoneOf", ["DE-BY", "DE-BE"])], "Use in Hamburg only",
                      [("eq", ["DE-HH"])]),
     },
     {
@@ -777,8 +778,8 @@ fof(bg_dist_loc_de_loc_fr, axiom,
                          ("fromDeclarations",
                           "loc:DE-HH distinct from loc:DE-BE")]},
         "provenance": "As KGC386; warrant ISO 3166-2.",
-        "ttl": _ttl2("KGC387", "use anywhere except Bavaria and Berlin",
-                     [("isNoneOf", ["DE-BY", "DE-BE"])], "use in Hamburg",
+        "ttl": _ttl2("KGC387", "Use in any area except Bavaria and Berlin",
+                     [("isNoneOf", ["DE-BY", "DE-BE"])], "Use in Hamburg only",
                      [("eq", ["DE-HH"])]),
     },
     # -----------------------------------------------------------------
@@ -812,9 +813,9 @@ fof(bg_dist_loc_de_loc_fr, axiom,
                 "itself. The second alternative does not need to be checked."),
             "premises": [("fromOrderAxiom", "reflexivity")]},
         "provenance": "A licence covering either of two regions.",
-        "ttl": _ttl2("KGC388", "use within North Rhine-Westphalia or Bavaria",
+        "ttl": _ttl2("KGC388", "Use within North Rhine-Westphalia or Bavaria",
                      [("isPartOf", ["DE-NW"]), ("isPartOf", ["DE-BY"])],
-                     "use in North Rhine-Westphalia", [("eq", ["DE-NW"])],
+                     "Use in North Rhine-Westphalia only", [("eq", ["DE-NW"])],
                      connective="or"),
     },
     # -----------------------------------------------------------------
@@ -853,10 +854,9 @@ fof(bg_dist_loc_de_loc_fr, axiom,
             "premises": []},
         "provenance": "Construction; exclusivity clauses are the nearest "
                       "practice.",
-        "ttl": _ttl2("KGC389", "use in exactly one of North Rhine-Westphalia "
-                     "and Bavaria",
+        "ttl": _ttl2("KGC389", "Use in exactly one of North Rhine-Westphalia and Bavaria",
                      [("eq", ["DE-NW"]), ("eq", ["DE-BY"])],
-                     "use in North Rhine-Westphalia", [("eq", ["DE-NW"])],
+                     "Use in North Rhine-Westphalia only", [("eq", ["DE-NW"])],
                      connective="xone"),
     },
     {
@@ -886,10 +886,9 @@ fof(bg_dist_loc_de_loc_fr, axiom,
             "premises": [("fromDeclarations",
                           "loc:DE-NW and loc:DE-BY are distinct areas")]},
         "provenance": "Construction, as KGC389.",
-        "ttl": _ttl2("KGC390", "use in exactly one of North Rhine-Westphalia "
-                     "and Bavaria",
+        "ttl": _ttl2("KGC390", "Use in exactly one of North Rhine-Westphalia and Bavaria",
                      [("eq", ["DE-NW"]), ("eq", ["DE-BY"])],
-                     "use in North Rhine-Westphalia", [("eq", ["DE-NW"])],
+                     "Use in North Rhine-Westphalia only", [("eq", ["DE-NW"])],
                      connective="xone"),
     },
     # -----------------------------------------------------------------
@@ -912,9 +911,9 @@ fof(bg_dist_loc_de_loc_fr, axiom,
             "Coverage-motivated: a spatial hasPart clause is rare in "
             "practice."),
         "summary": (
-            "A library permits use in an area that contains North "
-            "Rhine-Westphalia. A researcher's policy commits to use in "
-            "Germany."),
+            "A library's regional licence requires an area that covers "
+            "North Rhine-Westphalia. A researcher's policy commits to use "
+            "in Germany."),
         "certificate": {"kind": "Refutation",
             "comment": (
                 "DPV places North Rhine-Westphalia within Germany, so Germany "
@@ -923,9 +922,8 @@ fof(bg_dist_loc_de_loc_fr, axiom,
             "premises": [("fromResource", "loc:DE-NW is within loc:DE")]},
         "provenance": "Coverage; nearest practice is a national-scope "
                       "deployment that must include a region.",
-        "ttl": _ttl2("KGC391", "use in an area containing North "
-                     "Rhine-Westphalia", [("hasPart", ["DE-NW"])],
-                     "use in Germany", [("eq", ["DE"])]),
+        "ttl": _ttl2("KGC391", "Use in an area that covers North Rhine-Westphalia", [("hasPart", ["DE-NW"])],
+                     "Use in Germany only", [("eq", ["DE"])]),
     },
     # -----------------------------------------------------------------
     # KGC392  isNoneOf excludes areas by identity, not their parts.  The
@@ -966,8 +964,8 @@ fof(bg_dist_loc_de_loc_fr, axiom,
             "premises": [("fromDeclarations",
                           "loc:WF-UV distinct from loc:WF")]},
         "provenance": "Exclusion clauses; the drafting error they invite.",
-        "ttl": _ttl2("KGC392", "use anywhere except Wallis and Futuna",
-                     [("isNoneOf", ["WF"])], "use in Uvea",
+        "ttl": _ttl2("KGC392", "Use in any area except Wallis and Futuna",
+                     [("isNoneOf", ["WF"])], "Use in Uvea only",
                      [("eq", ["WF-UV"])]),
     },
 ]

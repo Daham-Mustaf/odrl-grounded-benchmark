@@ -8,15 +8,18 @@
 @prefix drk:     <https://w3id.org/odrl-kb/drk/> .
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
 
+drk:work a dcterms:BibliographicResource ;
+    dcterms:title "A work distributed by a publisher"@en .
+
 drk:policy-377-1 a odrl:Set ;
     odrl:uid drk:policy-377-1 ;
-    dcterms:title "Distribution in any language except English and Italian"@en ;
+    dcterms:title "Distribute in any language except English and Italian"@en ;
     odrl:assigner drk:publisher ;
     odrl:permission kgc:KGC377-p1-r1 .
 
 kgc:KGC377-p1-r1 a odrl:Permission ;
     odrl:action odrl:distribute ;
-    odrl:target drk:dataset ;
+    odrl:target drk:work ;
     odrl:constraint kgc:KGC377-p1-c1 .
 
 kgc:KGC377-p1-c1 a odrl:Constraint ;
@@ -26,13 +29,13 @@ kgc:KGC377-p1-c1 a odrl:Constraint ;
 
 drk:policy-377-2 a odrl:Set ;
     odrl:uid drk:policy-377-2 ;
-    dcterms:title "Distribution in Italian"@en ;
-    odrl:assignee drk:reuser ;
+    dcterms:title "Distribute in Italian only"@en ;
+    odrl:assignee drk:licensee ;
     odrl:permission kgc:KGC377-p2-r1 .
 
 kgc:KGC377-p2-r1 a odrl:Permission ;
     odrl:action odrl:distribute ;
-    odrl:target drk:dataset ;
+    odrl:target drk:work ;
     odrl:constraint kgc:KGC377-p2-c1 .
 
 kgc:KGC377-p2-c1 a odrl:Constraint ;
