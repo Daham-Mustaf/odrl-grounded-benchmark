@@ -18,7 +18,7 @@ Four problems over the EU File Type table, at nom.
 The four cases cover equality, distinctness, set-valued identity, and
 inequality at the nominal sort. The resource contributes no selected
 relation between the file-type concepts, so the cases isolate what follows
-from the constraints and from explicit background assertions.
+from the constraints and from explicit background statements.
 
 The PDF family
 --------------
@@ -46,7 +46,7 @@ the concepts the grounding names.
           nothing denies it, so a structure may identify the two formats
           and a structure may keep them apart: both queries satisfiable.
 
-  KGC321  The same W, under a theory asserting pdf != pdfa1a.  The witness
+  KGC321  The same W, under declarations asserting pdf != pdfa1a.  The witness
           then fails in every structure, so the first query is
           unsatisfiable and the verdict is Incompatible.  The premise is
           the parties', and withdrawing it returns the verdict to Unknown.
@@ -56,7 +56,7 @@ the concepts the grounding names.
             | ( (pdfa1a = pdf | pdfa1a = pdfa1a) & pdfa1a = pdfa1a )
           The second disjunct holds in every structure on reflexivity of
           equality alone.  Compatible, and the refutation cites the witness
-          and nothing else: no resource assertion, no declaration, no order
+          and nothing else: no resource statement, no declaration, no order
           axiom.  It is the cheapest certificate in the suite and the one
           that shows what nom leaves the resource doing, which is deciding
           whether a value grounds at all.
@@ -75,14 +75,14 @@ BINDING = "https://w3id.org/odrl-kb/profile/b-fileformat"
 def _iso(*pairs):
     """Declared-distinctness instances, named bg_dist_ on both encodings.
 
-    The declared theory states the rule and lists the purposes it ranges
+    The declarations state the rule and list the purposes it ranges
     over; a problem naming two of them carries the inequation between
     them, so a refutation cites the instance it used rather than one
     term standing for all of them. The name must match on both sides:
     an unsat core and a TPTP proof are compared by premise name.
     """
-    fof = ["% Background theory: declared distinctness instances, stated in",
-           "% the declared theory file and instantiated here.", ""]
+    fof = ["% Declarations: declared distinctness instances, stated in",
+           "% the declarations file and instantiated here.", ""]
     smt = ["; Declared distinctness this problem adopts, named as the TPTP",
            "; side names it."]
     for a, b in pairs:
@@ -119,7 +119,7 @@ PROBLEMS = [
 
     # -----------------------------------------------------------------
     # KGC320  Two formats the table lists and never relates.  Unknown,
-    # and structurally so: there is no assertion that could have settled
+    # and structurally so: there is no statement that could have settled
     # it and no sort under which the fragment could read one.
     # -----------------------------------------------------------------
     {
@@ -144,8 +144,8 @@ PROBLEMS = [
 ),
 
         "fof_decls": """\
-% Resource: no order assertions.  The table publishes none.
-% Background theory: empty.  The table separates nothing either.
+% Resource: no order statements.  The table publishes none.
+% Declarations: empty.  The table separates nothing either.
 """,
         "fof_witness": f"""\
 ( ( {PDF} = {PDF} & {PDF} = {A1A} )
@@ -168,7 +168,7 @@ PROBLEMS = [
 "comment": (
     "The two constraints can be satisfied both when ft:PDF and ft:PDFA1A "
     "denote the same element and when they denote different elements. No "
-    "resource or background assertion selects between these possibilities."
+    "resource or background statement selects between these possibilities."
 ),
             "premises": [],
         },
@@ -226,13 +226,13 @@ kgc:KGC320-p2-c1 a odrl:Constraint ;
         "summary": (
             "As KGC320, with the two formats declared distinct."),
 "description": (
-    "The case is the KGC320 pair with a background assertion declaring "
+    "The case is the KGC320 pair with a background statement declaring "
     "ft:PDF and ft:PDFA1A distinct. The resource contributes no relation "
     "between the two concepts, so the declaration is the premise that "
     "changes the verdict from Unknown to Incompatible."
 ),
         "fof_decls": """\
-% Background theory: one declared distinctness, from
+% Declarations: one declared distinctness, from
 % EUFT-filetype-declared.ax.  The table separates nothing itself.
 """,
         "fof_witness": f"""\
@@ -247,7 +247,7 @@ kgc:KGC320-p2-c1 a odrl:Constraint ;
         "smt2_resource": """\
 ; Resource: nothing, as in KGC320.""",
         "smt2_background": f"""\
-; Background theory: the declaration, and the only difference from KGC320.
+; Declarations: the declaration, and the only difference from KGC320.
 (assert (distinct {PDF} {A1A}))""",
         "smt2_witness": f"""\
 (or (and (= {PDF} {PDF}) (= {PDF} {A1A}))
@@ -257,11 +257,11 @@ kgc:KGC320-p2-c1 a odrl:Constraint ;
             "kind": "Refutation",
    "comment": (
         "The two constraints require ft:PDF and ft:PDFA1A to denote the "
-        "same element, while the background assertion requires them to "
+        "same element, while the background statement requires them to "
         "denote different elements. The two conditions cannot both hold."
     ),
             "premises": [
-                ("fromBackgroundTheory",
+                ("fromDeclarations",
                  "ft:PDF and ft:PDFA1A are declared distinct"),
             ],
         },
@@ -319,15 +319,15 @@ kgc:KGC321-p2-c1 a odrl:Constraint ;
             "request (fileFormat, eq, ft:PDFA1A).  The offer admits either "
             "format and the request requires one of them, so the two are "
             "satisfiable together whatever the table says.  Compatible, and "
-            "the refutation cites the witness alone: no resource assertion, "
+            "the refutation cites the witness alone: no resource statement, "
             "no declaration, no order axiom.  isAnyOf asks only whether "
             "concepts are the same, which is why it is admissible at nom "
             "where isA is not."
         ),
 
         "fof_decls": """\
-% Resource: no order assertions.
-% Background theory: empty.  Neither is needed: the verdict follows from
+% Resource: no order statements.
+% Declarations: empty.  Neither is needed: the verdict follows from
 % reflexivity of equality.
 """,
         "fof_witness": f"""\
@@ -351,7 +351,7 @@ kgc:KGC321-p2-c1 a odrl:Constraint ;
     "comment": (
         "The second policy requires PDF/A-1a, and the first lists it among "
         "the values isAnyOf accepts. The two constraints can be satisfied "
-        "together without any resource or background assertion."),        "premises": [
+        "together without any resource or background statement."),        "premises": [
                 ("fromConstraints", "the witness condition"),
             ],
         },
@@ -426,8 +426,8 @@ kgc:KGC322-p2-c1 a odrl:Constraint ;
     ),
 
     "fof_decls": """\
-% Resource: no order assertions.
-% Background theory: ft:PDF and ft:PDFA1A are declared distinct.
+% Resource: no order statements.
+% Declarations: ft:PDF and ft:PDFA1A are declared distinct.
 """,
 
     "fof_witness": f"""\
@@ -446,7 +446,7 @@ kgc:KGC322-p2-c1 a odrl:Constraint ;
 """,
 
     "smt2_background": f"""\
-; Background theory: ft:PDF and ft:PDFA1A are declared distinct.
+; Declarations: ft:PDF and ft:PDFA1A are declared distinct.
 (assert (distinct {PDF} {A1A}))
 """,
 
@@ -458,11 +458,11 @@ kgc:KGC322-p2-c1 a odrl:Constraint ;
         "kind": "Refutation",
         "comment": (
             "The first policy excludes PDF, and the second requires PDF/A-1a. "
-            "The background theory declares the two formats distinct, so the "
+            "The declarations declare the two formats distinct, so the "
             "required format is not excluded."),
         "premises": [
             (
-                "fromBackgroundTheory",
+                "fromDeclarations",
                 "ft:PDF and ft:PDFA1A are declared distinct"
             ),
             (

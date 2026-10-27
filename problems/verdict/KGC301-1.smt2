@@ -25,7 +25,7 @@
     (=> (and (kge_leq x y) (kge_leq y x)) (= x y))) :named ax_leq_antisymmetric))
 (assert (! (forall ((x Concept) (y Concept) (z Concept))
     (=> (and (kge_leq x y) (kge_leq y z)) (kge_leq x z))) :named ax_leq_transitive))
-; The vocabulary says nothing about these two concepts.  No assertion is
+; The vocabulary says nothing about these two concepts.  No statement is
 ; made here: the order axioms are emitted by the writer, in full.
 ; witness condition asserted
 (assert (! (or (and (kge_leq dpv_non_commercial_purpose dpv_non_commercial_purpose) (= dpv_non_commercial_purpose dpv_scientific_research))

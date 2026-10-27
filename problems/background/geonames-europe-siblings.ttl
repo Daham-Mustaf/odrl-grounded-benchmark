@@ -1,4 +1,4 @@
-# Background theory for the GeoNames slice: France and Germany declared
+# Declarations for the GeoNames slice: France and Germany declared
 # disjoint.
 #
 # GeoNames publishes no disjointness.  The parties declare that nothing
@@ -6,11 +6,14 @@
 # also settles containment: France lies within itself, so it cannot lie
 # within Germany (KGC306).
 
-@prefix bt:      <https://w3id.org/odrl-kb/background#> .
+@prefix bind:    <https://w3id.org/odrl-kb/binding#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 
-<https://w3id.org/odrl-kb/geonames-europe/siblings> a bt:BackgroundTheory ;
+<https://w3id.org/odrl-kb/geonames-europe/siblings> a bind:Declarations ;
     dcterms:title "France and Germany declared disjoint"@en ;
-    bt:generatedBy bt:PartyDeclaration ;
-    bt:appliesTo <https://w3id.org/odrl-kb/geonames-europe> ;
-    bt:pairCount 1 .
+    bind:generatedBy bind:PartyDeclaration ;
+    bind:origin bind:practiceRule ;
+    rdfs:comment "The origin rests on the GeoNames administrative hierarchy."@en ;
+    bind:appliesTo <https://w3id.org/odrl-kb/geonames-europe> ;
+    bind:pairCount 1 .

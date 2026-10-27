@@ -56,12 +56,12 @@ PROBLEMS = [
         "description": (
             "Offer (language, eq, bcp:de) against request (language, eq, "
             "bcp:fr).  The registry's uniqueness rule places the two subtags "
-            "in the background theory as distinct, so no model identifies "
+            "in the declarations as distinct, so no model identifies "
             "them and the witness condition fails in every model."
         ),
 
         "fof_decls": """\
-% Background theory: the registry's uniqueness rule, as distinctness.
+% Declarations: the registry's uniqueness rule, as distinctness.
 fof(bg_disj_de_distinct_fr, axiom,
     bcp_de != bcp_fr).
 """,
@@ -80,7 +80,7 @@ fof(bg_disj_de_distinct_fr, axiom,
 (declare-fun bcp_fr () Concept)""",
         "smt2_resource": "",
         "smt2_background": """\
-; Background theory: registry uniqueness, as distinctness.
+; Declarations: registry uniqueness, as distinctness.
 (assert (distinct bcp_de bcp_fr))""",
         "smt2_witness": """\
 (or (and (= bcp_de bcp_de) (= bcp_de bcp_fr))
@@ -96,7 +96,7 @@ fof(bg_disj_de_distinct_fr, axiom,
                 "language. The registry rule the parties adopt makes them "
                 "distinct, so no use satisfies both policies."),
             "premises": [
-                ("fromBackgroundTheory",
+                ("fromDeclarations",
                  "bcp:de and bcp:fr are distinct (registry uniqueness)"),
             ],
         },
@@ -184,7 +184,7 @@ kgc:KGC300-p2-c1 a odrl:Constraint ;
 (declare-fun dpv_scientific_research  () Concept)
 (declare-fun kge_leq (Concept Concept) Bool)""",
         "smt2_asserts": """\
-; The vocabulary says nothing about these two concepts.  No assertion is
+; The vocabulary says nothing about these two concepts.  No statement is
 ; made here: the order axioms are emitted by the writer, in full.""",
         "smt2_witness": """\
 (or (and (kge_leq dpv_non_commercial_purpose dpv_non_commercial_purpose) (= dpv_non_commercial_purpose dpv_scientific_research))

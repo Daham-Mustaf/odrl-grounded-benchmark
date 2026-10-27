@@ -34,7 +34,7 @@ either prover.  It was noticed because someone read the table.
 Known gaps
 ----------
 Some problems leave smt2_resource or smt2_background empty, so the SMT query
-carries fewer assertions than the TPTP one and the two legitimately differ.
+carries fewer statements than the TPTP one and the two legitimately differ.
 That is a defect in the problem data, not in the encodings, and it is listed
 below rather than silently tolerated: --allow-known lets the run pass while
 still printing them, so the list has to shrink deliberately.
@@ -111,7 +111,7 @@ def assertion_names(p_file: Path, smt_file: Path) -> tuple[set, set]:
     """
     fof_text = p_file.read_text(encoding="utf-8")
     fof = set(re.findall(r"fof\(\s*([a-z]+_[a-z0-9_]+)", fof_text))
-    # Included axiom files carry the resource and background assertions.
+    # Included axiom files carry the resource and background statements.
     for inc in re.findall(r"include\('([^']+)'\)", fof_text):
         ax = p_file.parent.parent / inc
         if ax.exists():
@@ -131,7 +131,7 @@ def main() -> int:
                     help="exit 0 despite the divergences listed in "
                          "KNOWN_GAPS; they are still printed")
     ap.add_argument("--names-only", action="store_true",
-                    help="compare the assertions each side carries and "
+                    help="compare the statements each side carries and "
                          "skip the provers")
     args = ap.parse_args()
 
@@ -141,7 +141,7 @@ def main() -> int:
         return 1
 
     diverged, gapped = [], []
-    print(f"{'problem':10} {'TPTP':>14} {'SMT-LIB':>14}   assertions")
+    print(f"{'problem':10} {'TPTP':>14} {'SMT-LIB':>14}   statements")
     for pid in ids:
         p1, p2 = args.dir / f"{pid}-1.p", args.dir / f"{pid}-2.p"
         s1, s2 = args.dir / f"{pid}-1.smt2", args.dir / f"{pid}-2.smt2"
@@ -156,7 +156,7 @@ def main() -> int:
         if args.names_only:
             print(f"{pid:10} {'':>14} {'':>14}   {note or 'same'}")
             if note:
-                diverged.append((pid, "assertion sets differ", note))
+                diverged.append((pid, "statement sets differ", note))
             continue
 
         f = verdict(run_fof(p1), run_fof(p2))

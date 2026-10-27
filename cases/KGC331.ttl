@@ -51,7 +51,7 @@ drk:KGC331-report a vrep:OperandVerdictReport ;
     vrep:referenceConstraint kgc:KGC331-p1-c1 ;
     vrep:comparedConstraint kgc:KGC331-p2-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-spatial-dpvloc-juris> ;
-    vrep:backgroundTheory <https://w3id.org/odrl-kb/dpv-loc/empty> ;
+    vrep:declarations <https://w3id.org/odrl-kb/dpv-loc/empty> ;
     vrep:readAgainst drk:KGC381-report ;
     rdfs:comment """DPV states that Germany is in the European Union, and the jurisdictional binding interprets this membership relation as containment, so the constraints are compatible. The territorial binding does not interpret membership as containment."""@en ;
     dcterms:description """A library permits use within the European Union; a researcher's policy commits to use in Germany. DPV places Germany in the EU, and this binding reads membership as containment."""@en ;

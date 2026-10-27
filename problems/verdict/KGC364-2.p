@@ -20,8 +20,8 @@ include('axioms/DPV-tom.ax').
 include('axioms/DPV-tom-declared.ax').
 
 % --- constants, groundings and resource hooks ----------------------------
-% Background theory: declared distinctness instances, stated in
-% the declared theory file and instantiated here.
+% Declarations: declared distinctness instances, stated in
+% the declarations file and instantiated here.
 
 fof(bg_dist_tm_encryption_tm_access_control_method, axiom,
     tm_encryption != tm_access_control_method).

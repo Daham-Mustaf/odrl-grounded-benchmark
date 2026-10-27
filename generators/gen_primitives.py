@@ -6,8 +6,8 @@ Generates KGE000-0.ax, the framework axioms.
 Three formulae: the order is reflexive, antisymmetric and transitive.
 
 These are not the only quantified formulae in a query.  A disjointness
-assertion of the background theory denies a common lower bound, so it is
-universally quantified too.  Resource assertions, distinctness assertions and
+statement of the declarations denies a common lower bound, so it is
+universally quantified too.  Resource statements, distinctness statements and
 the conjuncts of a witness condition are ground.  Bernays-Schoenfinkel
 membership follows from every quantifier being universal and the signature
 being function-free, not from groundness.
@@ -39,9 +39,9 @@ BODY = """\
 % to the sort the profile declares; the axioms are the same either way.
 %
 % Quantified content of a query: these three axioms, and the disjointness
-% assertions of the background theory, which deny a common lower bound and
-% are therefore universal as well.  Resource assertions, distinctness
-% assertions and witness conjuncts are ground.  All quantifiers are
+% statements of the declarations, which deny a common lower bound and
+% are therefore universal as well.  Resource statements, distinctness
+% statements and witness conjuncts are ground.  All quantifiers are
 % universal and there are no function symbols, which is what places the
 % queries in the Bernays-Schoenfinkel class.
 % ==========================================================================
@@ -60,7 +60,7 @@ fof(ax_leq_transitive, axiom,
 % ==========================================================================
 % Not here, and deliberately.
 %
-% Disjointness has no predicate.  A disjointness assertion is written where
+% Disjointness has no predicate.  A disjointness statement is written where
 % it is declared, as the denial of a common lower bound:
 %
 %     fof(bg_disj_a_b, axiom, ~ ? [X] : (kge_leq(X, a) & kge_leq(X, b))).
@@ -79,7 +79,7 @@ fof(ax_leq_transitive, axiom,
 %
 % Equality is the provers' builtin.  A refutation therefore uses equality
 % reasoning: closing the language pair needs symmetry of = over the
-% distinctness assertion, and Vampire's proof of it cites a demodulation
+% distinctness statement, and Vampire's proof of it cites a demodulation
 % step.  Demodulation is not propositionally valid over the atoms, so a
 % checker for these refutations must admit ground instances of the equality
 % axioms among its legitimate premises, or the encoding must replace =
@@ -93,8 +93,8 @@ fof(ax_leq_transitive, axiom,
 def generate_kge000() -> str:
     note = (
         "Included by every query file.  Includes nothing itself.\n"
-        "Formula names carry provenance: res_ for resource assertions,\n"
-        "bt_ for background-theory assertions, w_ for witness conjuncts,\n"
+        "Formula names carry provenance: res_ for resource statements,\n"
+        "bt_ for declared statements, w_ for witness conjuncts,\n"
         "and ax_ for the axioms here.  A prover reports its premises by\n"
         "name, so the prefix is what a checker reads.  Only bt_ premises\n"
         "are withdrawable by a party."
@@ -110,8 +110,8 @@ def generate_kge000() -> str:
             "axioms do not depend on that reading, so one file serves every "
             "sort and every profile.\n"
             "Quantified content of a query: these three axioms and the "
-            "disjointness assertions of the background theory.  Resource "
-            "assertions, distinctness assertions and witness conjuncts are "
+            "disjointness statements of the declarations.  Resource "
+            "statements, distinctness statements and witness conjuncts are "
             "ground.  All quantifiers are universal and the signature is "
             "function-free."
         ),

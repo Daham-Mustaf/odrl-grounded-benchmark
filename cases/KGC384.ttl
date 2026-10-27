@@ -45,7 +45,7 @@ drk:KGC384-report a vrep:OperandVerdictReport ;
     vrep:referenceConstraint kgc:KGC384-p1-c1 ;
     vrep:comparedConstraint kgc:KGC384-p2-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-spatial-dpvloc-geo> ;
-    vrep:backgroundTheory <https://w3id.org/odrl-kb/dpv-loc/empty> ;
+    vrep:declarations <https://w3id.org/odrl-kb/dpv-loc/empty> ;
     vrep:readAgainst drk:KGC385-report ;
     rdfs:comment """DPV does not state that the two Laender are different areas. One structure identifies them and one keeps them apart, so the verdict is Unknown."""@en ;
     dcterms:description """A library permits use in North Rhine-Westphalia. A researcher's policy commits to use in Bavaria."""@en ;

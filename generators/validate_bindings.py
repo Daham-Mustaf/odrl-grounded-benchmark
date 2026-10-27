@@ -53,7 +53,7 @@ import sys
 from collections import deque
 from pathlib import Path
 
-# The same assertion shapes tree_expand.py inlines; kept textually
+# The same statement shapes tree_expand.py inlines; kept textually
 # identical so the two parsers cannot drift apart silently.  If
 # tree_expand grows a shape, this grows it too, and the comment there
 # points here.
@@ -122,7 +122,7 @@ def run_probe(probe: dict, axioms_dir: Path):
         ok = frozenset((a, b)) in distinct
         yield ok, (f"{a} != {b} declared" if ok else
                    f"{a} != {b} NOT declared: background file missing "
-                   f"from includes, or the pair outside the theory's "
+                   f"from includes, or the pair outside the declarations' "
                    f"member set")
     for c in probe.get("present", ()):
         ok = c in constants

@@ -1,11 +1,11 @@
 kgc:KGC300-observed a vrep:Refutation ;
     vrep:producedBy "Vampire" ;
     vrep:proofArtefact <proofs/KGC300-1.tstp> ;
-    vrep:attributedAssertion [
-        vrep:premiseSource vrep:fromBackgroundTheory ;
+    vrep:attributedStatement [
+        vrep:premiseSource vrep:fromDeclarations ;
         vrep:formulaName "bg_disj_de_distinct_fr" ;
         rdfs:label "bg_disj_de_distinct_fr"@en ] ;
-    vrep:attributedAssertion [
+    vrep:attributedStatement [
         vrep:premiseSource vrep:fromConstraints ;
         vrep:formulaName "w_kgc300" ;
         rdfs:label "w_kgc300"@en ] .

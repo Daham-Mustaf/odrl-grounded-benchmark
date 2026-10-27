@@ -18,7 +18,7 @@
 # Licence  : W3C Document License 2023
 #
 # Concepts                    : 33
-# Order assertions, published : 43
+# Order statements, published : 43
 
 @prefix dpv:     <https://w3id.org/dpv#> .
 @prefix eu-gdpr: <https://w3id.org/dpv/legal/eu/gdpr#> .

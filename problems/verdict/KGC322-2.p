@@ -19,8 +19,8 @@ include('axioms/KGE000-0.ax').
 include('axioms/EUFT-filetype.ax').
 
 % --- constants, groundings and resource hooks ----------------------------
-% Resource: no order assertions.
-% Background theory: empty.  Neither is needed: the verdict follows from
+% Resource: no order statements.
+% Declarations: empty.  Neither is needed: the verdict follows from
 % reflexivity of equality.
 
 % --- witness condition negated -------------------------------------------

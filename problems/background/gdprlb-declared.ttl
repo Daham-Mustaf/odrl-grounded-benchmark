@@ -1,4 +1,4 @@
-# Background theory for the legal-basis resource: declared distinctness.
+# Declarations for the legal-basis resource: declared distinctness.
 #
 # The parties declare that no two of the listed names denote one legal
 # basis. Neither module asserts this, so the rule is the parties' and a
@@ -17,13 +17,16 @@
 # Pairs   : 528
 # Source  : https://w3id.org/dpv/2.3
 
-@prefix bt:      <https://w3id.org/odrl-kb/background#> .
+@prefix bind:    <https://w3id.org/odrl-kb/binding#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 
 <https://w3id.org/odrl-kb/dpv-gdpr-legal-basis/declared>
-        a bt:BackgroundTheory ;
+        a bind:Declarations ;
     dcterms:title "Pairwise distinctness of legal bases"@en ;
-    bt:appliesTo <https://w3id.org/odrl-kb/dpv-gdpr-legal-basis> ;
-    bt:generatedBy bt:PairwiseDistinctness ;
-    bt:scopeCondition "Distinctness between the listed bases, and not disjointness: the extension publishes concepts below two parents."@en ;
-    bt:pairCount 528 .
+    bind:appliesTo <https://w3id.org/odrl-kb/dpv-gdpr-legal-basis> ;
+    bind:generatedBy bind:PairwiseDistinctness ;
+    bind:origin bind:proseDefinition ;
+    rdfs:comment "The origin rests on GDPR Article 6(1), points (a) to (f)."@en ;
+    bind:scopeCondition "Distinctness between the listed bases, and not disjointness: the extension publishes concepts below two parents."@en ;
+    bind:pairCount 528 .

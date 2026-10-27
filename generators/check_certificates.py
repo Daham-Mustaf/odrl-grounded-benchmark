@@ -24,7 +24,7 @@ file(path, name) is checked for logical equivalence against the formula of
 that name parsed from the query file itself (includes resolved under
 --include), so a premise the prover renamed or altered is caught.  Premise
 names are classified by prefix so the report can say whether an
-Incompatible verdict rests on resource premises or on declared background.
+Incompatible verdict rests on resource premises or on declarations.
 
 Per problem the result is one of
   FULLY_CHECKED       every step verified, every leaf a legal premise
@@ -67,13 +67,13 @@ NON_ENTAILMENT_RULES = {
 
 PREMISE_CLASSES = [
     ("res_", "resource"),
-    ("bg_dist", "background distinctness"),
-    ("bg_disj", "background disjointness"),
-    ("bg_", "background"),
+    ("bg_dist", "declared distinctness"),
+    ("bg_disj", "declared disjointness"),
+    ("bg_", "declared"),
     ("ax_order", "order axiom"),
     ("ax_eq", "equality axiom"),
     ("ax_", "axiom"),
-    ("bt_", "background declaration"),
+    ("bt_", "declared statement"),
     ("wc_", "witness condition"),
     ("w_", "witness condition"),
 ]

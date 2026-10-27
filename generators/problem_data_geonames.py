@@ -37,7 +37,7 @@ Germany, and KGC306 is Compatible.
 
 The pair KGC304 and KGC305 is the point.  The same declaration settles the
 identity question and leaves the order question open, which is why
-distinctness and disjointness are separate background theories.
+distinctness and disjointness are separate declarations.
 
 KGC307 puts an isAllOf under xone.  The expansion negates each alternative
 other than the chosen one.  A bound set fails isAllOf when it misses one of
@@ -47,7 +47,7 @@ negation, and its second disjunct holds once the countries are distinct.
 A conjunction in its place (isNoneOf France Germany) would exclude France
 and give Incompatible, so the case pins the disjunction.
 
-The background theories
+The declarations
 -----------------------
     empty      geonames-europe-empty.ttl      nothing declared
     declared   geonames-europe-declared.ttl   France and Germany distinct
@@ -82,7 +82,7 @@ def C(op, *vals, side="offer"):
 def _dist(a, b):
     """Declared distinctness, ground, on both encodings."""
     n = f"bg_dist_{a}_{b}"
-    fof = ("% Background theory: the two countries declared distinct.\n"
+    fof = ("% Declarations: the two countries declared distinct.\n"
            f"fof({n}, axiom,\n    {a} != {b}).\n")
     smt = ("; The same distinctness, named as the TPTP side names it.\n"
            f"(assert (! (not (= {a} {b})) :named {n}))")
@@ -92,7 +92,7 @@ def _dist(a, b):
 def _disj(a, b):
     """Declared disjointness: nothing lies within both."""
     n = f"bg_disj_{a}_disjoint_{b}"
-    fof = ("% Background theory: the two countries declared disjoint.\n"
+    fof = ("% Declarations: the two countries declared disjoint.\n"
            f"fof({n}, axiom,\n"
            f"    ! [X] : ~ ( kge_leq(X, {a}) & kge_leq(X, {b}) )).\n")
     smt = ("; The same disjointness, named as the TPTP side names it.\n"
@@ -239,7 +239,7 @@ PROBLEMS = [
                 "France and Germany are declared distinct, so a use in "
                 "France satisfies only the first alternative, and 'exactly "
                 "one' holds."),
-            "premises": [("fromBackgroundTheory",
+            "premises": [("fromDeclarations",
                           "gn:France and gn:Germany are distinct")]},
         "provenance": PROVENANCE,
         "ttl": _ttl("KGC304", *EQ_ALTS, EQ_TITLE, FR_TITLE),
@@ -304,7 +304,7 @@ PROBLEMS = [
                 "France lies within itself, and nothing lies within both "
                 "France and Germany. So France does not lie within "
                 "Germany, and 'exactly one' holds."),
-            "premises": [("fromBackgroundTheory",
+            "premises": [("fromDeclarations",
                           "nothing lies within both gn:France and "
                           "gn:Germany")]},
         "provenance": PROVENANCE,
@@ -341,7 +341,7 @@ PROBLEMS = [
                 "France does not cover Germany. It satisfies the first "
                 "alternative and fails the second, and 'exactly one' "
                 "holds."),
-            "premises": [("fromBackgroundTheory",
+            "premises": [("fromDeclarations",
                           "gn:France and gn:Germany are distinct")]},
         "provenance": (
             "Data localisation: a provider keeps processing in one "

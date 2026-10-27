@@ -2,7 +2,7 @@
 build_dpvloc.py
 ===============
 Builds the DPV Locations resource: the concept set, the containment order,
-the identity assertions, the background theory, the TPTP axioms, and the
+the identity statements, the declarations, the TPTP axioms, and the
 profile entry.
 
     python build_dpvloc.py --loc vocabularies/dpv-loc-2.3/loc.ttl \\
@@ -21,9 +21,9 @@ as an argument.
 
 The two resources also have opposite shapes, and the certificates show it.
 DPV purposes runs six levels deep, so a Compatible there may cite six order
-assertions and an instance of transitivity.  LOC is two levels deep and
-nearly five thousand assertions wide: almost every verdict cites one
-assertion and no transitivity at all.  Depth and breadth are properties of
+statements and an instance of transitivity.  LOC is two levels deep and
+nearly five thousand statements wide: almost every verdict cites one
+statement and no transitivity at all.  Depth and breadth are properties of
 what an authority chose to publish, not of the semantics.
 
 One predicate, five relations
@@ -47,7 +47,7 @@ that takes containment only is called territorial rather than geographic.
 The last is counted from skos:narrower, which is how the file writes it:
 loc:non-IE skos:narrower loc:AD.  The other three are counted from
 skos:broader.  The extension also publishes 30 identity pairs, written as
-60 directed skos:sameAs assertions.
+60 directed skos:sameAs statements.
 
 A census over the same file reports 259 skos:broader edges leaving the
 namespace: the four beyond the typing count are the extension's own
@@ -79,7 +79,7 @@ is a resource that cannot express one.
 
 Identity
 --------
-The file publishes these as directed assertions in both directions,
+The file publishes these as directed statements in both directions,
 which the generator reads as unordered pairs; the count is measured on
 every run and printed, not stated here.  ISO 3166 assigns some places
 both a country code and a subdivision code, TF and FR-TF for the French
@@ -87,7 +87,7 @@ Southern Territories, and the extension records that these denote the same
 place.  This is the only resource in the suite whose identities come from
 the authority: BCP 47's are a registry rule the profile applies, and the EU
 table's isReplacedBy is supersession rather than identity.  Each pair is
-emitted as two order assertions in opposite directions, which antisymmetry
+emitted as two order statements in opposite directions, which antisymmetry
 collapses, so eq over either code is the same constraint.
 
 What the publisher says about the reading
@@ -126,7 +126,7 @@ except ImportError:
 DPV = Namespace("https://w3id.org/dpv#")
 LOC = Namespace("https://w3id.org/dpv/loc#")
 
-# LOC writes its identity assertions with skos:sameAs, which SKOS does not
+# LOC writes its identity statements with skos:sameAs, which SKOS does not
 # define; owl:sameAs is the term with that meaning.  Both are read, so the
 # generator keeps working when the vocabulary is corrected, and it reports
 # which one it found.
@@ -338,7 +338,7 @@ def resource_ttl(concepts, labels, kinds, order, ident, meta, mode, digest) -> s
             "#",
             "# The same file as the territorial reading, with the membership",
             "# edges to supranational unions read as containment as well.",
-            "# Germany within the EU is then an order assertion, and",
+            "# Germany within the EU is then an order statement, and",
             "# isPartOf EU has an answer.",
             "#",
             "# The two are not the same relation.  A union admits and expels",
@@ -356,7 +356,7 @@ def resource_ttl(concepts, labels, kinds, order, ident, meta, mode, digest) -> s
              else "DPV Locations, containment and union membership slice")
     head = reads + [
         "#",
-        "# The identity assertions use skos:sameAs, which SKOS does not",
+        "# The identity statements use skos:sameAs, which SKOS does not",
         "# define.  Section 1.1 of the specification states the intent: ISO",
         "# 3166 gives some places both a country code and a subdivision code,",
         "# and the two denote one place.  They are read as identity on that",
@@ -372,9 +372,9 @@ def resource_ttl(concepts, labels, kinds, order, ident, meta, mode, digest) -> s
         f"# Identity predicate   : {meta['identity_predicate']}",
         "#",
         f"# Concepts                     : {len(concepts)}",
-        f"# Order assertions, published  : {len(order)}",
+        f"# Order statements, published  : {len(order)}",
         f"# Identity pairs, published    : {len(ident)}",
-        f"# Order assertions, encoded    : {2 * len(ident)} (two per identity pair)",
+        f"# Order statements, encoded    : {2 * len(ident)} (two per identity pair)",
         "",
         "@prefix loc:     <https://w3id.org/dpv/loc#> .",
         "@prefix odrlkb:  <https://w3id.org/odrl-kb/dpv-loc#> .",
@@ -412,7 +412,7 @@ def resource_ttl(concepts, labels, kinds, order, ident, meta, mode, digest) -> s
         body.append(f"odrlkb:{bare(a)} odrlkb:within odrlkb:{bare(b)} .")
     body.append("")
     body.append("# Identity: one place, two ISO codes.  Not an order")
-    body.append("# assertion in the file; two of them in the encoding.")
+    body.append("# statement in the file; two of them in the encoding.")
     for a, b in ident:
         body.append(f"odrlkb:{bare(a)} odrlkb:sameAs odrlkb:{bare(b)} .")
 
@@ -421,7 +421,7 @@ def resource_ttl(concepts, labels, kinds, order, ident, meta, mode, digest) -> s
 
 def background_ttl(meta) -> str:
     return f"""\
-# Background theory for the DPV Locations resource: empty.
+# Declarations for the DPV Locations resource: empty.
 #
 # The extension asserts no disjointness between places and no distinctness
 # between the codes it lists.  Two constraints naming different countries
@@ -435,26 +435,26 @@ def background_ttl(meta) -> str:
 # distinct.  It does not: it says which concepts belong to a complement, and
 # a structure identifying two countries satisfies those memberships as well.
 #
-# Distinctness is available as a generated rule rather than as an assertion
-# in the file: see the iso theory, which the parties may adopt on the
+# Distinctness is available as a generated rule rather than as a statement
+# in the file: see the iso declarations, which the parties may adopt on the
 # strength of ISO 3166 assigning one code per area.  Adopting it is their
 # decision and the certificate records it as theirs.
 #
 # Source: {meta['source_iri']}
 
-@prefix bt:      <https://w3id.org/odrl-kb/background#> .
+@prefix bind:    <https://w3id.org/odrl-kb/binding#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 
-<https://w3id.org/odrl-kb/dpv-loc/empty> a bt:BackgroundTheory ;
+<https://w3id.org/odrl-kb/dpv-loc/empty> a bind:Declarations ;
     dcterms:title "No declared distinctness or disjointness"@en ;
-    bt:appliesTo <https://w3id.org/odrl-kb/dpv-loc-geo>,
+    bind:appliesTo <https://w3id.org/odrl-kb/dpv-loc-geo>,
                  <https://w3id.org/odrl-kb/dpv-loc-juris> ;
-    bt:pairCount 0 .
+    bind:pairCount 0 .
 """
 
 
 def iso_ttl(reps, multi, meta) -> str:
-    """Background theory generated from the ISO 3166 one-code-per-area rule.
+    """Declarations generated from the ISO 3166 one-code-per-area rule.
 
     ISO 3166 assigns one code to an area, so two country codes name two
     areas.  That licenses pairwise distinctness, and the rule is the
@@ -463,12 +463,12 @@ def iso_ttl(reps, multi, meta) -> str:
     The quotient matters.  The extension also records that some places carry
     two codes, TF and FR-TF, and those are one area with two names.
     Distinctness therefore separates equivalence classes under the identity
-    pairs and not codes, or the theory would contradict the identity
-    assertions and every verdict over it would be vacuous.
+    pairs and not codes, or the declarations would contradict the identity
+    statements and every verdict over it would be vacuous.
     """
     n = len(reps)
     return f"""\
-# Background theory for the DPV Locations resource: ISO distinctness.
+# Declarations for the DPV Locations resource: ISO distinctness.
 #
 # Generated from the rule that ISO 3166 assigns one code per area, so that
 # two areas listed by the extension are two places.  The extension asserts
@@ -484,41 +484,45 @@ def iso_ttl(reps, multi, meta) -> str:
 # Classes: {n}
 # Source : {meta['source_iri']}
 
-@prefix bt:      <https://w3id.org/odrl-kb/background#> .
+@prefix bind:    <https://w3id.org/odrl-kb/binding#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 
-<https://w3id.org/odrl-kb/dpv-loc/iso> a bt:BackgroundTheory ;
+<https://w3id.org/odrl-kb/dpv-loc/iso> a bind:Declarations ;
     dcterms:title "Pairwise distinctness of ISO 3166 areas"@en ;
-    bt:appliesTo <https://w3id.org/odrl-kb/dpv-loc-geo>,
+    bind:appliesTo <https://w3id.org/odrl-kb/dpv-loc-geo>,
                  <https://w3id.org/odrl-kb/dpv-loc-juris> ;
-    bt:generatedBy bt:RegistryUniquenessRule ;
-    bt:scopeCondition "Distinctness holds between equivalence classes under the extension's identity assertions, not between codes; codes the extension identifies name one area."@en .
+    bind:generatedBy bind:RegistryUniquenessRule ;
+    bind:origin bind:practiceRule ;
+    bind:scopeCondition "Distinctness holds between equivalence classes under the extension's identity statements, not between codes; codes the extension identifies name one area."@en .
 """
 
 
 def declared_ttl(pair, meta) -> str:
     a, b = pair
     return f"""\
-# Background theory for the DPV Locations resource: one distinctness.
+# Declarations for the DPV Locations resource: one distinctness.
 #
 # The parties declare that these two places are different.  The extension
 # does not: it lists both and separates them in no way.  A verdict resting
-# on this assertion is the parties' and can be reopened by withdrawing it.
+# on this statement is the parties' and can be reopened by withdrawing it.
 #
 # Source: {meta['source_iri']}
 
 @prefix loc:     <https://w3id.org/dpv/loc#> .
-@prefix bt:      <https://w3id.org/odrl-kb/background#> .
+@prefix bind:    <https://w3id.org/odrl-kb/binding#> .
 @prefix owl:     <http://www.w3.org/2002/07/owl#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 
-<https://w3id.org/odrl-kb/dpv-loc/declared> a bt:BackgroundTheory ;
+<https://w3id.org/odrl-kb/dpv-loc/declared> a bind:Declarations ;
     dcterms:title "One declared distinctness"@en ;
-    bt:appliesTo <https://w3id.org/odrl-kb/dpv-loc-geo>,
+    bind:appliesTo <https://w3id.org/odrl-kb/dpv-loc-geo>,
                  <https://w3id.org/odrl-kb/dpv-loc-juris> ;
-    bt:generatedBy bt:PartyDeclaration ;
-    bt:pairCount 1 ;
-    bt:asserts [
+    bind:generatedBy bind:PartyDeclaration ;
+    bind:origin bind:practiceRule ;
+    rdfs:comment "The origin rests on ISO 3166-1."@en ;
+    bind:pairCount 1 ;
+    bind:states [
         a owl:AllDifferent ;
         owl:members ( loc:{a} loc:{b} )
     ] .
@@ -537,15 +541,15 @@ def axioms(order, ident, meta, mode) -> str:
         "% The edges the reading does not take are named in the resource",
         "% header, with what each of them relates.",
         "%",
-        "% The identity assertions below are this encoding's, not the",
+        "% The identity statements below are this encoding's, not the",
         "% extension's: it publishes identity, and identity is written here",
-        "% as two order assertions which antisymmetry collapses.  They are",
+        "% as two order statements which antisymmetry collapses.  They are",
         "% named res_x_same_y so that a refutation citing one is visibly",
         "% resting on identity rather than on published containment.",
         "%",
-        f"% Order assertions, published : {len(order)}",
+        f"% Order statements, published : {len(order)}",
         f"% Identity pairs, published   : {len(ident)}",
-        f"% Order assertions, encoded   : {2 * len(ident)}",
+        f"% Order statements, encoded   : {2 * len(ident)}",
         f"% Source                      : {meta['source_iri']}",
         "",
     ]
@@ -571,7 +575,7 @@ def iso_axioms(reps) -> str:
 
     The rule licenses pairwise distinctness over 249 areas, which is 30876
     inequations.  Instantiating all of them in every problem would bury the
-    one assertion a refutation actually uses, and TPTP's $distinct is a
+    one statement a refutation actually uses, and TPTP's $distinct is a
     typed-language construct that a first-order prover reads as an ordinary
     predicate, constraining nothing.
 
@@ -586,7 +590,7 @@ def iso_axioms(reps) -> str:
     listing = "\n".join(
         "% " + ", ".join(reps[i:i + 12]) for i in range(0, len(reps), 12))
     return (
-        "% Background theory: the ISO 3166 uniqueness rule.\n"
+        "% Declarations: the ISO 3166 uniqueness rule.\n"
         "%\n"
         "% ISO 3166 assigns one code to an area, so two areas listed by the\n"
         "% extension are two places.  The extension asserts none of this: the\n"
@@ -601,7 +605,7 @@ def iso_axioms(reps) -> str:
         "%\n"
         "% The rule is stated here and instantiated by the problems.  A\n"
         "% problem naming two of the areas below carries the inequation\n"
-        "% between them as a bg_dist_ assertion, so that a refutation cites\n"
+        "% between them as a bg_dist_ statement, so that a refutation cites\n"
         "% the instance it used.\n"
         "%\n"
         f"% Areas: {len(reps)}\n"
@@ -619,7 +623,7 @@ def iso_instance(a: str, b: str) -> str:
 def declared_axioms(pair) -> str:
     a, b = pair
     return (
-        "% Background theory: one distinctness, declared by the parties.\n"
+        "% Declarations: one distinctness, declared by the parties.\n"
         "% The extension publishes nothing that separates these places.\n"
         "\n"
         f"fof(bg_dist_{slug(a)}_{slug(b)}, axiom,\n"
@@ -686,7 +690,7 @@ def main() -> int:
                          "membership, or emit both readings")
     ap.add_argument("--declare-distinct", nargs=2, metavar=("A", "B"),
                     default=None,
-                    help="also emit a background theory declaring two places "
+                    help="also emit a set of declarations declaring two places "
                          "distinct, for the stability pair")
     ap.add_argument("--retrieved", required=True,
                     help="the date this snapshot of loc.ttl was fetched, "
@@ -771,7 +775,7 @@ def main() -> int:
             axioms(order, ident, meta, mode), encoding="utf-8")
         (args.out / "resources" / f"profile-{tag}.ttl").write_text(
             profile_ttl(mode), encoding="utf-8")
-        print(f"{mode:6}  {len(order)} order assertions "
+        print(f"{mode:6}  {len(order)} order statements "
               f"({len(ident)} identity pairs, {2 * len(ident)} encoded)")
 
     (args.out / "background" / "dpvloc-empty.ttl").write_text(

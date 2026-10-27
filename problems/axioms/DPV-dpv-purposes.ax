@@ -1,7 +1,7 @@
 % Resource: subsumption as published by DPV.  res_ names mark
 % what the vocabulary asserts.
 %
-% Several concepts appear as the subject of two assertions: the
+% Several concepts appear as the subject of two statements: the
 % hierarchy is a directed acyclic graph, not a tree.  A refutation
 % may reach a common ancestor by either path.
 
@@ -268,7 +268,7 @@ fof(res_dpv_vendor_selection_assessment_below_dpv_vendor_management, axiom,
 fof(res_dpv_verification_below_dpv_enforce_security, axiom,
     kge_leq(dpv_verification, dpv_enforce_security)).
 
-% Background theory: none here.  DPV publishes no disjointness
+% Declarations: none here.  DPV publishes no disjointness
 % among purposes; what the parties declare lives in the
-% declared theory file.
+% declarations file.
 

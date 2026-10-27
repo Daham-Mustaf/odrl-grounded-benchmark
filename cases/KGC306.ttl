@@ -55,7 +55,7 @@ drk:KGC306-report a vrep:OperandVerdictReport ;
     vrep:referenceConstraint kgc:KGC306-p1-lc ;
     vrep:comparedConstraint kgc:KGC306-p2-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-spatial-geonames> ;
-    vrep:backgroundTheory <https://w3id.org/odrl-kb/geonames-europe/siblings> ;
+    vrep:declarations <https://w3id.org/odrl-kb/geonames-europe/siblings> ;
     vrep:readAgainst drk:KGC305-report ;
     rdfs:comment """France lies within itself, and nothing lies within both France and Germany. So France does not lie within Germany, and 'exactly one' holds."""@en ;
     dcterms:description """As KGC305, with France and Germany declared disjoint: nothing lies within both."""@en ;

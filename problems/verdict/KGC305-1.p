@@ -19,7 +19,7 @@ include('axioms/KGE000-0.ax').
 include('axioms/GN000-0.ax').
 
 % --- constants, groundings and resource hooks ----------------------------
-% Background theory: the two countries declared distinct.
+% Declarations: the two countries declared distinct.
 fof(bg_dist_gn_france_gn_germany, axiom,
     gn_france != gn_germany).
 

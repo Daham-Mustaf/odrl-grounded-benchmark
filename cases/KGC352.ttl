@@ -67,9 +67,9 @@ drk:KGC352-report a vrep:OperandVerdictReport ;
     vrep:referenceConstraint kgc:KGC352-p1-c1 ;
     vrep:comparedConstraint kgc:KGC352-p2-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-legalbasis> ;
-    vrep:backgroundTheory <https://w3id.org/odrl-kb/dpv-gdpr-legal-basis/declared> ;
+    vrep:declarations <https://w3id.org/odrl-kb/dpv-gdpr-legal-basis/declared> ;
     vrep:readAgainst drk:KGC351-report ;
-    rdfs:comment """The background theory declares explicit consent distinct from each of the seven values listed by isAnyOf, so the basis the processor relies on cannot satisfy the first policy."""@en ;
+    rdfs:comment """The declarations declare explicit consent distinct from each of the seven values listed by isAnyOf, so the basis the processor relies on cannot satisfy the first policy."""@en ;
     dcterms:description """As KGC351, with explicit consent declared distinct from each of the seven bases."""@en ;
     vrep:compatibilityState vrep:Incompatible ;
     vrep:certificate <certificates/KGC352-1.tstp> .

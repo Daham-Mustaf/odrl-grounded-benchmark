@@ -21,7 +21,7 @@ independently is the problem that proof-reconstruction projects exist to
 solve, and a checker that skipped those steps while calling itself complete
 would be worse than one that never claimed to be.
 
-The premises here are ground: order assertions are atoms, declared
+The premises here are ground: order statements are atoms, declared
 distinctness is a ground inequation, and the witness condition is
 quantifier-free.  Only the three order axioms and declared disjointness are
 quantified.  So the expectation is that most refutations are propositional

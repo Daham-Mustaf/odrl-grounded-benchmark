@@ -1,5 +1,5 @@
 # BCP 47 primary language subtags, fifteen-subtag slice
-# Resource file.  A resource is a set of order assertions; at the nominal
+# Resource file.  A resource is a set of order statements; at the nominal
 # sort that set is empty, so this file publishes the concept set and
 # nothing over it.
 #
@@ -9,7 +9,7 @@
 # Preferred-Value equivalences (identity) and Macrolanguage encompassment
 # (an order a profile may read at tax); the generator verifies that no
 # member of this slice carries either field or a Deprecated field, which
-# is also the scope condition of the background theory.
+# is also the scope condition of the declarations.
 
 # no Deprecated, no Preferred-Value, no Macrolanguage, no Scope on any of the fifteen.  the distinctness rule holds.
 
@@ -28,7 +28,7 @@
     dcterms:issued "GENERATOR_RETRIEVAL_DATE"^^xsd:date ;
     dcterms:identifier "sha256:GENERATOR_SHA256" ;
     dcterms:license <https://www.iana.org/help/licensing-terms> ;
-    dcterms:extent "15 concepts, no order assertions" ;
+    dcterms:extent "15 concepts, no order statements" ;
     skos:scopeNote "RFC 5646 section 2.2 reserves Tag for a complete language tag and Subtag for a component; the concepts of this scheme are subtags."@en .
 
 bcp47:bg a skos:Concept ; skos:inScheme <https://w3id.org/odrl-kb/bcp47> ;

@@ -20,8 +20,8 @@ KGC393-397   purpose: the set operators
 
 The policies can be read without the semantics. The binding IRI
 dereferences to a profile entry under `problems/resources/`, which names
-the resource, the sort, the grounding rule and the background theory.
+the resource, the sort, the grounding rule and the declarations.
 
-Start with KGC310, KGC313 and KGC314: one published assertion, then the
+Start with KGC310, KGC313 and KGC314: one published statement, then the
 same operand where the vocabulary settles nothing, then the same pair
 once the parties declare the concepts distinct.

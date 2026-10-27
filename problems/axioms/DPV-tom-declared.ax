@@ -1,4 +1,4 @@
-% Background theory: pairwise distinctness, declared by the parties.
+% Declarations: pairwise distinctness, declared by the parties.
 %
 % No two of the names below denote one measure.  Neither module
 % asserts this, so the rule is the parties' and a verdict resting
@@ -11,7 +11,7 @@
 %
 % The rule is stated here and instantiated by the problems.  A
 % problem naming two of the measures below carries the inequation
-% between them as a bg_dist_ assertion, so that a refutation cites
+% between them as a bg_dist_ statement, so that a refutation cites
 % the instance it used rather than one of 2701.
 %
 % Measures: 74

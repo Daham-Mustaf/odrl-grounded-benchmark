@@ -1,4 +1,4 @@
-% Background theory: one distinctness, declared by the parties.
+% Declarations: one distinctness, declared by the parties.
 % The module publishes nothing that separates these two states.
 
 fof(bg_dist_dpv_consent_given_distinct_dpv_consent_withdrawn, axiom,

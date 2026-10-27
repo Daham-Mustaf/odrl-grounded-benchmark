@@ -1,7 +1,7 @@
 """
 gen_bcp47.py
 ============
-Builds the BCP 47 language resource and its background theory.
+Builds the BCP 47 language resource and its declarations.
 
     uv run generators/gen_bcp47.py \
         --ttl        problems/resources/bcp47.ttl \
@@ -11,8 +11,8 @@ Builds the BCP 47 language resource and its background theory.
 
 Two files out, not one
 ----------------------
-    BCP47000-0.ax    the resource: concept membership, no order assertions
-    BCP47001-0.ax    the parties' theory: 105 inequations
+    BCP47000-0.ax    the resource: concept membership, no order statements
+    BCP47001-0.ax    the parties' declarations: 105 inequations
 
 The split is the point.  A resource is what an authority published; the
 IANA registry publishes a set of subtags and, over this slice, no relation
@@ -80,8 +80,8 @@ except ImportError:
 VERSION = "2.1"
 BCP47 = Namespace("https://w3id.org/odrl-kb/bcp47#")
 SCHEME = URIRef("https://w3id.org/odrl-kb/bcp47")
-BT = Namespace("https://w3id.org/odrl-kb/background#")
-THEORY = URIRef("https://w3id.org/odrl-kb/bcp47/uniqueness")
+BIND = Namespace("https://w3id.org/odrl-kb/binding#")
+DECLARATIONS = URIRef("https://w3id.org/odrl-kb/bcp47/uniqueness")
 
 
 def const(notation: str) -> str:
@@ -210,14 +210,14 @@ def read_slice(ttl: Path) -> tuple[Graph, list[tuple[str, str, list[str]]]]:
     return g, sorted(out)
 
 
-def read_theory(ttl: Path, slice_graph: Graph) -> tuple[list[str], str, int]:
+def read_declarations(ttl: Path, slice_graph: Graph) -> tuple[list[str], str, int]:
     """The members of the AllDifferent as notations, the warrant, and the
     declared count.
 
     Members are kept as IRIs and mapped to notations through the slice
     graph's skos:notation; local names are never parsed.  Both owl:members
     (OWL 2) and owl:distinctMembers (OWL 1) are accepted.  The warrant
-    (dcterms:source) and bt:pairCount are required: recording the warrant
+    (dcterms:source) and bind:pairCount are required: recording the warrant
     is the point of the split, and the declared count is the EXPECT.
     """
     g = Graph()
@@ -229,12 +229,12 @@ def read_theory(ttl: Path, slice_graph: Graph) -> tuple[list[str], str, int]:
                 lists.append(list(Collection(g, lst)))
     if not lists:
         raise ValueError(
-            f"{ttl}: no owl:AllDifferent with members; the theory declares "
+            f"{ttl}: no owl:AllDifferent with members; the declarations state "
             f"nothing and the file should say so or be removed")
     if len(lists) > 1:
         raise SystemExit(
-            f"{ttl}: {len(lists)} AllDifferent member lists; one theory "
-            f"file carries one assertion, split the file")
+            f"{ttl}: {len(lists)} AllDifferent member lists; one set of "
+            f"declarations carries one statement, split the file")
     members = []
     for iri in lists[0]:
         notation = next(
@@ -242,18 +242,18 @@ def read_theory(ttl: Path, slice_graph: Graph) -> tuple[list[str], str, int]:
         if notation is None:
             raise SystemExit(
                 f"{ttl}: member {iri} has no skos:notation in the slice; "
-                f"the theory speaks about a concept the resource does not "
+                f"the declarations speak about a concept the resource does not "
                 f"declare")
         members.append(notation)
-    source = next((str(o) for o in g.objects(THEORY, DCTERMS.source)), "")
+    source = next((str(o) for o in g.objects(DECLARATIONS, DCTERMS.source)), "")
     if not source:
         raise SystemExit(
-            f"{ttl}: the theory has no dcterms:source; the warrant is the "
+            f"{ttl}: the declarations have no dcterms:source; the warrant is the "
             f"point, record it")
-    declared = next((int(o) for o in g.objects(THEORY, BT.pairCount)), None)
+    declared = next((int(o) for o in g.objects(DECLARATIONS, BIND.pairCount)), None)
     if declared is None:
         raise SystemExit(
-            f"{ttl}: no bt:pairCount; the schema requires the declared "
+            f"{ttl}: no bind:pairCount; the schema requires the declared "
             f"count and the generator verifies against it")
     return sorted(members), source, declared
 
@@ -293,7 +293,7 @@ def resource_ax(concepts, file_date: str, digest: str,
         "% SPC      : FOF_SAT_RFN",
         "%",
         f"% Concepts : {n}",
-        "% Order assertions : 0",
+        "% Order statements : 0",
         f"% Macrolanguage fields in the whole snapshot: {macro_total};",
         "% in this slice: 0, generator-verified.",
         "%" + "-" * 73,
@@ -313,7 +313,7 @@ def resource_ax(concepts, file_date: str, digest: str,
             f"kge_concept({const(notation)})).")
     lines += [
         "",
-        "% No order assertions: the registry publishes none over this",
+        "% No order statements: the registry publishes none over this",
         "% slice, and the generator aborts if any member carries a",
         "% Macrolanguage field.",
         "",
@@ -348,7 +348,7 @@ def theory_ax(pairs, source: str, file_date: str) -> str:
         "%            denies that anything lies below both, which needs an",
         "%            order this sort does not have.",
         "%",
-        "%            A party withdraws this theory by omitting the",
+        "%            A party withdraws these declarations by omitting the",
         "%            include.  Any definite verdict resting on it",
         "%            reopens, Compatible as well as Incompatible.",
         "%",
@@ -374,7 +374,7 @@ def main() -> int:
     ap.add_argument("--ttl", required=True, type=Path,
                     help="the resource slice")
     ap.add_argument("--background", required=True, type=Path,
-                    help="the uniqueness theory")
+                    help="the uniqueness declarations")
     ap.add_argument("--registry", required=True, type=Path,
                     help="the IANA snapshot; the scope condition is checked "
                          "against it and the File-Date is read from it")
@@ -389,17 +389,17 @@ def main() -> int:
     notations = [n for n, _, _ in concepts]
     check_slice(notations, records)
 
-    members, source, declared = read_theory(args.background, slice_graph)
+    members, source, declared = read_declarations(args.background, slice_graph)
     if set(members) != set(notations):
         raise SystemExit(
-            f"the theory and the resource disagree about the slice:\n"
-            f"  in the theory only : {sorted(set(members) - set(notations))}\n"
-            f"  in the resource only: {sorted(set(notations) - set(members))}")
+            f"the declarations and the resource disagree about the slice:\n"
+            f"  in the declarations only : {sorted(set(members) - set(notations))}\n"
+            f"  in the resource only     : {sorted(set(notations) - set(members))}")
 
     pairs = list(combinations(notations, 2))
     if declared != len(pairs):
         raise SystemExit(
-            f"the theory declares bt:pairCount {declared} and the slice "
+            f"the declarations carry bind:pairCount {declared} and the slice "
             f"gives {len(pairs)}")
 
     # Labels are read from the registry rather than from the slice, so a
@@ -421,7 +421,7 @@ def main() -> int:
         theory_ax(pairs, source, file_date), encoding="utf-8")
 
     print(f"registry    : File-Date {file_date}, sha256:{digest[:16]}...")
-    print(f"concepts    : {len(concepts)}, order assertions 0")
+    print(f"concepts    : {len(concepts)}, order statements 0")
     print(f"distinctness: {len(pairs)} pairs, all members scope-checked")
     print(f"macrolanguage fields, whole snapshot: {macro_total}; "
           f"slice: 0")

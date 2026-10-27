@@ -1,5 +1,4 @@
 @prefix bind:    <https://w3id.org/odrl-kb/binding#> .
-@prefix bt:      <https://w3id.org/odrl-kb/background#> .
 @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
 @prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
@@ -7,13 +6,14 @@
 @prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix vann:    <http://purl.org/vocab/vann/> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
 
 <https://w3id.org/odrl-kb/binding> a owl:Ontology ;
     dcterms:title "Operand binding vocabulary"@en ;
     vann:preferredNamespacePrefix "bind" ;
     vann:preferredNamespaceUri "https://w3id.org/odrl-kb/binding#" ;
     dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
-    dcterms:description "A binding pairs an ODRL left operand with an external resource and declares the sort at which its published assertions are read. The sort is a property of the binding, not of the operand or of the resource."@en .
+    dcterms:description "A binding pairs an ODRL left operand with an external resource and declares the sort at which its published statements are read. The sort is a property of the binding, not of the operand or of the resource."@en .
 
 
 # --- classes ----------------------------------------------------------
@@ -21,12 +21,12 @@
 bind:OperandBinding a rdfs:Class, skos:Concept ;
     rdfs:isDefinedBy <https://w3id.org/odrl-kb/binding> ;
     rdfs:label "Operand Binding" ;
-    skos:definition "A profile's pairing of a left operand with a resource, declaring the sort and the grounding rule. Declaring the sort is the one judgment a profile makes about an operand. What the parties declare beyond the resource is not part of the binding: each verdict report names it with vrep:backgroundTheory."@en .
+    skos:definition "A profile's pairing of a left operand with a resource, declaring the sort and the grounding rule. Declaring the sort is the one judgment a profile makes about an operand. What the parties declare beyond the resource is not part of the binding: each verdict report names it with vrep:declarations."@en .
 
 bind:Sort a rdfs:Class, skos:Concept ;
     rdfs:isDefinedBy <https://w3id.org/odrl-kb/binding> ;
     rdfs:label "Sort" ;
-    skos:definition "The declared reading of the bound resource's published assertions. Three individuals exist and no others; the enumeration below makes that a theorem of this file rather than a hope of its prose."@en ;
+    skos:definition "The declared reading of the bound resource's published statements. Three individuals exist and no others; the enumeration below makes that a theorem of this file rather than a hope of its prose."@en ;
     owl:equivalentClass [ a owl:Class ;
         owl:oneOf ( bind:tax bind:mer bind:nom ) ] .
 
@@ -40,11 +40,11 @@ bind:GroundingProcedure a rdfs:Class, skos:Concept ;
 
 bind:tax a bind:Sort ;
     rdfs:label "taxonomy" ;
-    skos:definition "The published assertions are read as subsumption."@en .
+    skos:definition "The published statements are read as subsumption."@en .
 
 bind:mer a bind:Sort ;
     rdfs:label "meriology" ;
-    skos:definition "The published assertions are read as parthood."@en .
+    skos:definition "The published statements are read as parthood."@en .
 
 bind:nom a bind:Sort ;
     rdfs:label "nominal" ;
@@ -74,7 +74,7 @@ bind:sort a rdf:Property, skos:Concept ;
 bind:resource a rdf:Property, skos:Concept ;
     rdfs:isDefinedBy <https://w3id.org/odrl-kb/binding> ;
     rdfs:label "resource" ;
-    skos:definition "The external resource whose published assertions the binding reads: a versioned slice of a published vocabulary, with its provenance recorded."@en ;
+    skos:definition "The external resource whose published statements the binding reads: a versioned slice of a published vocabulary, with its provenance recorded."@en ;
     rdfs:domain bind:OperandBinding .
 
 
@@ -112,3 +112,140 @@ bind:reducesToPrimarySubtag a bind:GroundingProcedure ;
     rdfs:isDefinedBy <https://w3id.org/odrl-kb/binding> ;
     rdfs:label "reduces to primary subtag" ;
     skos:definition "A well-formed language tag names the concept for its primary subtag; en-US names en. Distinguishes this reading from one under which en-US names nothing."@en .
+
+
+# --- declarations -----------------------------------------------------
+#
+# What the parties declare beyond the resource.  A verdict report names the
+# set it was computed under with vrep:declarations.
+
+bind:Declarations a rdfs:Class, skos:Concept ;
+    rdfs:isDefinedBy <https://w3id.org/odrl-kb/binding> ;
+    rdfs:label "Declarations" ;
+    skos:definition "A declared, withdrawable set of statements in force for a binding, over and above what the resource publishes. Its warrant is its dcterms:source and its origin is recorded with bind:origin. The statements are the unit of withdrawal: withdrawing one reopens any definite verdict that rested on it. A set with no statements is the empty declarations of a resource, and has no origin."@en .
+
+bind:Origin a rdfs:Class, skos:Concept ;
+    rdfs:isDefinedBy <https://w3id.org/odrl-kb/binding> ;
+    rdfs:label "Origin" ;
+    skos:definition "Where the statements of a set of declarations come from. Two individuals exist and no others."@en ;
+    owl:equivalentClass [ a owl:Class ;
+        owl:oneOf ( bind:practiceRule bind:proseDefinition ) ] .
+
+bind:practiceRule a bind:Origin ;
+    rdfs:isDefinedBy <https://w3id.org/odrl-kb/binding> ;
+    rdfs:label "practice rule" ;
+    skos:definition "A rule of the resource's practice. The authority follows it when it issues or maintains entries, and the resource's RDF does not state it. Example: RFC 5646 registry uniqueness, by which distinct primary language subtag records name distinct languages."@en .
+
+bind:proseDefinition a bind:Origin ;
+    rdfs:isDefinedBy <https://w3id.org/odrl-kb/binding> ;
+    rdfs:label "prose definition" ;
+    skos:definition "A prose definition the resource's RDF does not state. The authority's text says it, for instance in a skos:definition, and its triples carry no matching statement."@en .
+
+bind:GenerationRule a rdfs:Class, skos:Concept ;
+    rdfs:isDefinedBy <https://w3id.org/odrl-kb/binding> ;
+    rdfs:label "Generation Rule" ;
+    skos:definition "A rule by which a generator expands a compact set of declarations into ground statements."@en .
+
+bind:PairwiseDistinctness a bind:GenerationRule ;
+    rdfs:isDefinedBy <https://w3id.org/odrl-kb/binding> ;
+    rdfs:label "Pairwise Distinctness" ;
+    skos:definition "Names the rule by which the generator expands an owl:AllDifferent member list of n concepts into n(n-1)/2 ground inequations, subject to the stated scope condition. The expansion is performed and verified by the generator; this individual records which rule was applied."@en .
+
+bind:RegistryUniquenessRule a bind:GenerationRule ;
+    rdfs:isDefinedBy <https://w3id.org/odrl-kb/binding> ;
+    rdfs:label "Registry Uniqueness Rule" ;
+    skos:definition "Names the rule by which distinct registry records, subject to the stated registry conditions, are treated as denoting distinct concepts. It is applied by the generator to produce ground inequations."@en .
+
+bind:PartyDeclaration a bind:GenerationRule ;
+    rdfs:isDefinedBy <https://w3id.org/odrl-kb/binding> ;
+    rdfs:label "Party Declaration" ;
+    skos:definition "Names a distinction or disjointness the parties declare for the benchmark case. The declaration may be withdrawn."@en .
+
+bind:SiblingDisjointness a bind:GenerationRule ;
+    rdfs:isDefinedBy <https://w3id.org/odrl-kb/binding> ;
+    rdfs:label "Sibling Disjointness" ;
+    skos:definition "Names the rule by which the generator separates administrative units that do not overlap, as ground disjointness statements, within the stated bind:scope."@en .
+
+bind:PublishedDefinition a bind:GenerationRule ;
+    rdfs:isDefinedBy <https://w3id.org/odrl-kb/binding> ;
+    rdfs:label "Published Definition" ;
+    skos:definition "Names a statement taken from a definition the authority publishes in prose. The quoted definitions are attached with bind:warrant."@en .
+
+bind:origin a rdf:Property, skos:Concept ;
+    rdfs:isDefinedBy <https://w3id.org/odrl-kb/binding> ;
+    rdfs:label "origin" ;
+    skos:definition "Where the statements of this set of declarations come from. Every set with at least one statement has exactly one origin. The empty set has none."@en ;
+    rdfs:domain bind:Declarations ;
+    rdfs:range bind:Origin .
+
+bind:appliesTo a rdf:Property, skos:Concept ;
+    rdfs:isDefinedBy <https://w3id.org/odrl-kb/binding> ;
+    rdfs:label "applies to" ;
+    skos:definition "The resource over whose concepts or statements the declarations speak."@en ;
+    rdfs:domain bind:Declarations .
+
+bind:generatedBy a rdf:Property, skos:Concept ;
+    rdfs:isDefinedBy <https://w3id.org/odrl-kb/binding> ;
+    rdfs:label "generated by" ;
+    skos:definition "The rule the generator applies to expand these declarations."@en ;
+    rdfs:domain bind:Declarations ;
+    rdfs:range bind:GenerationRule .
+
+bind:scopeCondition a rdf:Property, skos:Concept ;
+    rdfs:isDefinedBy <https://w3id.org/odrl-kb/binding> ;
+    rdfs:label "scope condition" ;
+    skos:definition "The condition every member must satisfy for the rule to apply, checked by the generator before expansion and failing loudly otherwise."@en ;
+    rdfs:domain bind:Declarations .
+
+bind:scope a rdf:Property, skos:Concept ;
+    rdfs:isDefinedBy <https://w3id.org/odrl-kb/binding> ;
+    rdfs:label "scope" ;
+    skos:definition "Which units a sibling rule separates: parent, for units sharing a parent, or depth, for all units at the same depth."@en ;
+    rdfs:domain bind:Declarations .
+
+bind:states a rdf:Property, skos:Concept ;
+    rdfs:isDefinedBy <https://w3id.org/odrl-kb/binding> ;
+    rdfs:label "states" ;
+    skos:definition "Attaches the declarations' statement, such as an owl:AllDifferent, to the declarations node. What bind:states links is what withdrawal removes."@en ;
+    rdfs:domain bind:Declarations .
+
+bind:pairCount a rdf:Property, skos:Concept ;
+    rdfs:isDefinedBy <https://w3id.org/odrl-kb/binding> ;
+    rdfs:label "pair count" ;
+    skos:definition "The expected number of generated ground statements; the generator verifies its expansion against this. Zero for the empty declarations."@en ;
+    rdfs:domain bind:Declarations ;
+    rdfs:range xsd:integer .
+
+bind:memberSourceFileDate a rdf:Property, skos:Concept ;
+    rdfs:isDefinedBy <https://w3id.org/odrl-kb/binding> ;
+    rdfs:label "member source file date" ;
+    skos:definition "The version stamp of the source snapshot from which the member list was taken, such as a registry File-Date."@en ;
+    rdfs:domain bind:Declarations ;
+    rdfs:range xsd:date .
+
+bind:warrant a rdf:Property, skos:Concept ;
+    rdfs:isDefinedBy <https://w3id.org/odrl-kb/binding> ;
+    rdfs:label "warrant" ;
+    skos:definition "A quotation from the authority's text that warrants the statements. Each warrant names its concept with bind:concept and quotes the definition with skos:definition."@en ;
+    rdfs:domain bind:Declarations .
+
+bind:concept a rdf:Property, skos:Concept ;
+    rdfs:isDefinedBy <https://w3id.org/odrl-kb/binding> ;
+    rdfs:label "concept" ;
+    skos:definition "The concept whose published definition a bind:warrant quotes."@en .
+
+bind:distinctFrom a rdf:Property, skos:Concept ;
+    rdfs:isDefinedBy <https://w3id.org/odrl-kb/binding> ;
+    rdfs:label "distinct from" ;
+    skos:definition "The declarations state that the two concepts are different elements."@en .
+
+bind:disjointFrom a rdf:Property, skos:Concept ;
+    rdfs:isDefinedBy <https://w3id.org/odrl-kb/binding> ;
+    rdfs:label "disjoint from" ;
+    skos:definition "The declarations state that nothing lies below both concepts."@en .
+
+bind:disjointWith a rdf:Property, skos:Concept ;
+    rdfs:isDefinedBy <https://w3id.org/odrl-kb/binding> ;
+    rdfs:label "disjoint with" ;
+    skos:definition "Same meaning as bind:disjointFrom. The sibling-disjointness files write this name."@en ;
+    owl:equivalentProperty bind:disjointFrom .

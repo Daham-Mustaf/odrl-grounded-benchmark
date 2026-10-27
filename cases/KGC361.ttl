@@ -53,7 +53,7 @@ drk:KGC361-report a vrep:OperandVerdictReport ;
     vrep:referenceConstraint kgc:KGC361-p1-c1 ;
     vrep:comparedConstraint kgc:KGC361-p2-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-tom> ;
-    vrep:backgroundTheory <https://w3id.org/odrl-kb/dpv-tom/empty> ;
+    vrep:declarations <https://w3id.org/odrl-kb/dpv-tom/empty> ;
     rdfs:comment """The first policy requires access control and the second excludes it. No premise of the vocabulary or of the parties is used."""@en ;
     dcterms:description """A controller requires encryption and access control. A processor's policy excludes access control."""@en ;
     vrep:compatibilityState vrep:Incompatible ;

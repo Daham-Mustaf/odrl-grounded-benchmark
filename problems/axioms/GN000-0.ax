@@ -23,14 +23,14 @@
 %
 % Comments : Generated from Resources/geonames.ttl by gen_geonames.py.
 %           : Depends on KGE000-0.ax (kge_leq + kge_concept signatures, kge_leq_transitive, kge_leq_antisymmetric, kge_leq_reflexive).
-%           : 15 kge_concept assertions + 14 direct gn:parentFeature edges over 15 features.
+%           : 15 kge_concept statements + 14 direct gn:parentFeature edges over 15 features.
 %           : Acyclicity is verified at generation time.
 %           : NO disjointness asserted (OWA).  Problem files emit:
 %           : include('Axioms/KGE000-0.ax').
 %           : include('Axioms/DENOT000-0.ax').
 %           : include('Axioms/GN000-0.ax').
 %           : No axiom file self-includes this file.
-%           : 29 axioms: 15 concept assertions + 14 direct gn:parentFeature edges (transitive closure via KGE000-0.ax).
+%           : 29 axioms: 15 concept statements + 14 direct gn:parentFeature edges (transitive closure via KGE000-0.ax).
 %--------------------------------------------------------------------------
 
 % ==========================================================================
@@ -65,7 +65,7 @@
 % on the spatial operand require the SDA (Sibling Disjointness
 % Assumption) profile, applied at evaluation time.
 %
-% Features: 15.  Concept assertions: 15.
+% Features: 15.  Concept statements: 15.
 % Direct gn:parentFeature edges: 14.
 % Acyclicity verified at generation time.
 % ==========================================================================

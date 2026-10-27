@@ -45,7 +45,7 @@ drk:KGC387-report a vrep:OperandVerdictReport ;
     vrep:referenceConstraint kgc:KGC387-p1-c1 ;
     vrep:comparedConstraint kgc:KGC387-p2-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-spatial-dpvloc-geo> ;
-    vrep:backgroundTheory <https://w3id.org/odrl-kb/dpv-loc/iso> ;
+    vrep:declarations <https://w3id.org/odrl-kb/dpv-loc/iso> ;
     vrep:readAgainst drk:KGC386-report ;
     rdfs:comment """The ISO rule makes Hamburg distinct from Bavaria and from Berlin, so a use in Hamburg is not excluded."""@en ;
     dcterms:description """As KGC386, with the ISO 3166-2 rule."""@en ;

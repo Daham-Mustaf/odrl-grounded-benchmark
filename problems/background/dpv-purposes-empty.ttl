@@ -1,4 +1,4 @@
-# Background theory for the DPV purposes slice: empty.
+# Declarations for the DPV purposes slice: empty.
 #
 # The purposes module publishes no disjointness and no distinctness: no
 # owl:disjointWith, no owl:AllDifferent, nothing.  This file records that
@@ -16,10 +16,10 @@
 #
 # Source: https://w3id.org/dpv/2.3
 
-@prefix bt:      <https://w3id.org/odrl-kb/background#> .
+@prefix bind:    <https://w3id.org/odrl-kb/binding#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 
-<https://w3id.org/odrl-kb/dpv-purposes/empty> a bt:BackgroundTheory ;
+<https://w3id.org/odrl-kb/dpv-purposes/empty> a bind:Declarations ;
     dcterms:title "No declared distinctness or disjointness"@en ;
-    bt:appliesTo <https://w3id.org/odrl-kb/dpv-purposes> ;
-    bt:pairCount 0 .
+    bind:appliesTo <https://w3id.org/odrl-kb/dpv-purposes> ;
+    bind:pairCount 0 .

@@ -1,4 +1,4 @@
-% Background theory: pairwise distinctness, declared by the parties.
+% Declarations: pairwise distinctness, declared by the parties.
 %
 % DPV publishes nothing that separates these purposes.  The rule is
 % the parties', on the ground that DPV defines each as a purpose in
@@ -12,7 +12,7 @@
 %
 % The rule is stated here and instantiated by the problems.  A
 % problem naming two of the purposes below carries the inequation
-% between them as a bg_dist_ assertion.
+% between them as a bg_dist_ statement.
 %
 % Purposes: 4
 % Pairs   : 6

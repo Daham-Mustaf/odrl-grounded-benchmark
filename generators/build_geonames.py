@@ -1,8 +1,8 @@
 """
 build_geonames.py
 =================
-Builds a GeoNames slice from the official dump: the resource, the background
-theory, the TPTP axioms, and the profile entry that binds them.
+Builds a GeoNames slice from the official dump: the resource, the declarations,
+the TPTP axioms, and the profile entry that binds them.
 
     python build_geonames.py --hierarchy hierarchy.txt \
         --country-info countryInfo.txt --depth 1 --out problems
@@ -19,7 +19,7 @@ gazetteer publishes; one of them puts Sudan under Europe.
 
 Sibling disjointness is generated, not published.  GeoNames asserts no
 disjointness at all.  Two administrative units under one parent do not
-overlap, so the parties declare it, and it belongs in the background theory.
+overlap, so the parties declare it, and it belongs in the declarations.
 Its scope is a choice the paper has to state:
 
     --siblings parent   units sharing a parent
@@ -118,8 +118,8 @@ def resource_ttl(root, levels, names, root_slug, tag) -> str:
         "# The dump also carries entries added through the user interface;",
         "# those are not the administrative hierarchy and are excluded.",
         "#",
-        "# Order assertions only.  GeoNames asserts no disjointness, so the",
-        "# sibling rule the parties adopt is in the background theory.",
+        "# Order statements only.  GeoNames asserts no disjointness, so the",
+        "# sibling rule the parties adopt is in the declarations.",
         "#",
         "# Source  : https://download.geonames.org/export/dump/",
         f"# Licence : {LICENCE}",
@@ -169,7 +169,7 @@ def sibling_pairs(levels, scope: str):
 
 def background_ttl(tag, pairs, names, scope) -> str:
     lines = [
-        "# Background theory for the GeoNames slice: sibling disjointness.",
+        "# Declarations for the GeoNames slice: sibling disjointness.",
         "#",
         "# GeoNames publishes no disjointness.  Administrative units that do",
         "# not overlap are separated here because the parties declare it, not",
@@ -183,21 +183,24 @@ def background_ttl(tag, pairs, names, scope) -> str:
             "transitivity."
             if scope == "parent" else
             "Every pair at the same depth is separated."),
-        f"# {len(pairs)} assertions.",
+        f"# {len(pairs)} statements.",
         "",
         "@prefix odrlkb:  <https://w3id.org/odrl-kb/geonames#> .",
-        "@prefix bt:      <https://w3id.org/odrl-kb/background#> .",
+        "@prefix bind:    <https://w3id.org/odrl-kb/binding#> .",
         "@prefix dcterms: <http://purl.org/dc/terms/> .",
+        "@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .",
         "",
-        f"<https://w3id.org/odrl-kb/geonames/{tag}/siblings> a bt:BackgroundTheory ;",
+        f"<https://w3id.org/odrl-kb/geonames/{tag}/siblings> a bind:Declarations ;",
         '    dcterms:title "Sibling disjointness for administrative units"@en ;',
-        f"    bt:generatedBy bt:SiblingDisjointness ;",
-        f'    bt:scope "{scope}" ;',
-        f"    bt:appliesTo <https://w3id.org/odrl-kb/geonames/{tag}> .",
+        f"    bind:generatedBy bind:SiblingDisjointness ;",
+        f"    bind:origin bind:practiceRule ;",
+        '    rdfs:comment "The origin rests on the GeoNames administrative hierarchy."@en ;',
+        f'    bind:scope "{scope}" ;',
+        f"    bind:appliesTo <https://w3id.org/odrl-kb/geonames/{tag}> .",
         "",
     ]
     for a, b in pairs:
-        lines.append(f"odrlkb:{slug(a,names)[3:]} bt:disjointWith "
+        lines.append(f"odrlkb:{slug(a,names)[3:]} bind:disjointWith "
                      f"odrlkb:{slug(b,names)[3:]} .")
     return "\n".join(lines) + "\n"
 
@@ -209,7 +212,7 @@ def axioms(levels, pairs, names) -> str:
         cs, ps = slug(child, names), slug(parent, names)
         lines.append(f"fof(res_{cs}_within_{ps}, axiom,")
         lines.append(f"    kge_leq({cs}, {ps})).")
-    lines += ["", "% Background theory: sibling disjointness, as the denial of",
+    lines += ["", "% Declarations: sibling disjointness, as the denial of",
               "% a common lower bound.  bt_ names mark what a party may",
               "% withdraw.", ""]
     for a, b in pairs:
@@ -235,7 +238,7 @@ ex:b-spatial a vrep:OperandBinding ;
     vrep:leftOperand odrl:spatial ;
     vrep:sort vrep:mer ;
     vrep:resource <https://w3id.org/odrl-kb/geonames/{tag}> ;
-    vrep:backgroundTheory <https://w3id.org/odrl-kb/geonames/{tag}/siblings> ;
+    vrep:declarations <https://w3id.org/odrl-kb/geonames/{tag}/siblings> ;
     vrep:grounding vrep:sliceMembership .
 """
 
@@ -283,8 +286,8 @@ def main() -> int:
     n = len(concepts)
     print(f"depth {len(levels)}: " +
           ", ".join(f"level {i+1}: {len(l)}" for i, l in enumerate(levels)))
-    print(f"{n} concepts, {len(edges)} order assertions, "
-          f"{len(pairs)} disjointness assertions ({args.siblings} scope)")
+    print(f"{n} concepts, {len(edges)} order statements, "
+          f"{len(pairs)} disjointness statements ({args.siblings} scope)")
     print(f"transitivity ground instances: {n**3:,}  "
           f"(the checker's cost; the prover instantiates lazily)")
     named = sum(1 for c in concepts if names.get(c))

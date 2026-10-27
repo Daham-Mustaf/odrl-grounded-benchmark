@@ -2,7 +2,7 @@
 build_consent.py
 ================
 Builds the DPV consent status resource: the concept set, the order, three
-background theories, the TPTP axioms, and the profile entry.
+declarations, the TPTP axioms, and the profile entry.
 
     python build_consent.py --module vocabularies/dpv-2.3/modules/consent_status.ttl \
                             --out problems
@@ -24,9 +24,9 @@ owl:disjointWith.  A verdict turning on the two being disjoint therefore
 rests on a declaration the parties make, and the certificate says so, even
 though the authority's own prose is what warrants it.
 
-That is a better warrant than any other background theory in the suite.  The
+That is a better warrant than any other set of declarations in the suite.  The
 ISO 3166 rule rests on a registry convention read from a standard's text; a
-bilateral distinctness declaration rests on nothing but the parties' say-so.
+bilateral distinctness declaration rests on the DPV definitions of the two states.
 Here the vocabulary states the intent in the definition and omits it from the
 file, and a party adopting it follows the publisher rather than adding to
 them.  The verdict is still withdrawable and the certificate still marks it:
@@ -34,7 +34,7 @@ what the definitions warrant, they do not assert.
 
 The module boundary
 -------------------
-The module publishes thirteen order assertions.  One, ConsentStatus below
+The module publishes thirteen order statements.  One, ConsentStatus below
 Status, leaves the module: Status belongs to the status module and is itself
 below Context in the DPV core.  It is dropped, and ConsentStatus becomes the
 root of the slice, which leaves twelve.
@@ -50,7 +50,7 @@ What the module does not publish
 ---------------------------------
 No disjointness, as above.  No distinctness: nothing separates any two of the
 thirteen, so two constraints naming different states are satisfiable together
-until a party says otherwise.  And no identity assertions.
+until a party says otherwise.  And no identity statements.
 
 Typing is present and is not read.  Every concept carries
 rdf:type dpv:ConsentStatus, including the two mid-level concepts, so the type
@@ -169,7 +169,7 @@ def resource_ttl(concepts, labels, definitions, order, crossing, meta) -> str:
         "# Thirteen states of consent under two mid-level concepts, one for",
         "# the states that may justify processing and one for the states that",
         "# may not.  The module asserts no disjointness between the two and no",
-        "# distinctness between any pair; see the background theories.",
+        "# distinctness between any pair; see the declarations.",
         "#",
         "# The module also types every concept dpv:ConsentStatus.  That is not",
         "# read here: typing relates an individual to a class, and a resource",
@@ -190,7 +190,7 @@ def resource_ttl(concepts, labels, definitions, order, crossing, meta) -> str:
         f"# NOTE      : {meta['licence_note']}",
         "#",
         f"# Concepts         : {len(concepts)}",
-        f"# Order assertions : {len(order)}",
+        f"# Order statements : {len(order)}",
         "",
         "@prefix dpv:     <https://w3id.org/dpv#> .",
         "@prefix odrlkb:  <https://w3id.org/odrl-kb/dpv-consent#> .",
@@ -224,7 +224,7 @@ def resource_ttl(concepts, labels, definitions, order, crossing, meta) -> str:
 
 def background_ttl(meta) -> str:
     return f"""\
-# Background theory for the DPV consent status resource: empty.
+# Declarations for the DPV consent status resource: empty.
 #
 # The module asserts no disjointness and no distinctness.  Two constraints
 # naming different states are therefore satisfiable together, and a verdict
@@ -233,25 +233,25 @@ def background_ttl(meta) -> str:
 # The absence is worth stating, because the definitions read as though they
 # supply it.  A state that may justify processing and a state that may not
 # cannot be the same state; the module says so in prose and asserts nothing.
-# See the definitional theory.
+# See the definitional declarations.
 #
 # Source: {meta['source_iri']}
 
-@prefix bt:      <https://w3id.org/odrl-kb/background#> .
+@prefix bind:    <https://w3id.org/odrl-kb/binding#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 
-<https://w3id.org/odrl-kb/dpv-consent/empty> a bt:BackgroundTheory ;
+<https://w3id.org/odrl-kb/dpv-consent/empty> a bind:Declarations ;
     dcterms:title "No declared distinctness or disjointness"@en ;
-    bt:appliesTo <https://w3id.org/odrl-kb/dpv-consent> ;
-    bt:pairCount 0 .
+    bind:appliesTo <https://w3id.org/odrl-kb/dpv-consent> ;
+    bind:pairCount 0 .
 """
 
 
 def definitional_ttl(definitions, meta) -> str:
     """The disjointness the module's definitions warrant.
 
-    The warrant is quoted rather than paraphrased.  A party adopting this
-    theory is claiming the publisher already said it, and a reader deciding
+    The warrant is quoted rather than paraphrased.  A party adopting these
+    declarations is claiming the publisher already said it, and a reader deciding
     whether to accept or withdraw the premise needs the publisher's words,
     not this generator's reading of them.  The definitions are taken from the
     module at build time, so the quotation cannot drift from the file.
@@ -261,11 +261,11 @@ def definitional_ttl(definitions, meta) -> str:
     d_withdrawn = definitions.get("ConsentWithdrawn", "")
 
     return f"""\
-# Background theory for the DPV consent status resource: the two branches are
+# Declarations for the DPV consent status resource: the two branches are
 # disjoint.
 #
 # Adopted on the strength of the module's own definitions, which are quoted
-# below as bt:warrant.  One branch is defined as the states of consent that
+# below as bind:warrant.  One branch is defined as the states of consent that
 # CAN be used as valid justifications for processing, the other as the states
 # that CANNOT.  Individual states say the same again: the withdrawn state is
 # defined as one that prevents consent from being further used as a valid
@@ -275,65 +275,68 @@ def definitional_ttl(definitions, meta) -> str:
 # stated three times in prose and carried nowhere in the file, and a consumer
 # reading the RDF alone cannot recover it.
 #
-# What follows is a decision, not a derivation.  A party adopting this theory
+# What follows is a decision, not a derivation.  A party adopting these declarations
 # is following what the publisher wrote; the certificate still marks the
 # premise withdrawable, because what the definitions warrant they do not
-# assert, and a party who reads them differently can withdraw the assertion
+# assert, and a party who reads them differently can withdraw the statement
 # and watch the verdict reopen as Unknown.
 #
 # Source: {meta['source_iri']}
 
 @prefix dpv:     <https://w3id.org/dpv#> .
-@prefix bt:      <https://w3id.org/odrl-kb/background#> .
+@prefix bind:    <https://w3id.org/odrl-kb/binding#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
 @prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 
-<https://w3id.org/odrl-kb/dpv-consent/definitional> a bt:BackgroundTheory ;
+<https://w3id.org/odrl-kb/dpv-consent/definitional> a bind:Declarations ;
     dcterms:title "The valid and invalid branches are disjoint"@en ;
-    bt:appliesTo <https://w3id.org/odrl-kb/dpv-consent> ;
-    bt:generatedBy bt:PublishedDefinition ;
-    bt:pairCount 1 ;
-    bt:warrant [
-        bt:concept dpv:{VALID} ;
+    bind:appliesTo <https://w3id.org/odrl-kb/dpv-consent> ;
+    bind:generatedBy bind:PublishedDefinition ;
+    bind:origin bind:proseDefinition ;
+    bind:pairCount 1 ;
+    bind:warrant [
+        bind:concept dpv:{VALID} ;
         skos:definition "{d_valid}"@en ] ,
       [
-        bt:concept dpv:{INVALID} ;
+        bind:concept dpv:{INVALID} ;
         skos:definition "{d_invalid}"@en ] ,
       [
-        bt:concept dpv:ConsentWithdrawn ;
+        bind:concept dpv:ConsentWithdrawn ;
         skos:definition "{d_withdrawn}"@en ] ;
-    bt:assertedByPublisher false ;
     rdfs:comment "The module defines one branch as the states that can \
 justify processing and the other as the states that cannot, and asserts no \
 disjointness between them."@en .
 
-dpv:{VALID} bt:disjointFrom dpv:{INVALID} .
+dpv:{VALID} bind:disjointFrom dpv:{INVALID} .
 """
 
 
 def declared_ttl(pair, meta) -> str:
     a, b = pair
     return f"""\
-# Background theory for the DPV consent status resource: one distinctness.
+# Declarations for the DPV consent status resource: one distinctness.
 #
 # The parties declare that these two states are different.  The module does
 # not: it lists both and separates them in no way.  A verdict resting on this
-# assertion is the parties' and can be reopened by withdrawing it.
+# statement is the parties' and can be reopened by withdrawing it.
 #
 # Source: {meta['source_iri']}
 
 @prefix dpv:     <https://w3id.org/dpv#> .
-@prefix bt:      <https://w3id.org/odrl-kb/background#> .
+@prefix bind:    <https://w3id.org/odrl-kb/binding#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 
-<https://w3id.org/odrl-kb/dpv-consent/declared> a bt:BackgroundTheory ;
+<https://w3id.org/odrl-kb/dpv-consent/declared> a bind:Declarations ;
     dcterms:title "One declared distinctness"@en ;
-    bt:appliesTo <https://w3id.org/odrl-kb/dpv-consent> ;
-    bt:generatedBy bt:PartyDeclaration ;
-    bt:pairCount 1 .
+    bind:appliesTo <https://w3id.org/odrl-kb/dpv-consent> ;
+    bind:generatedBy bind:PartyDeclaration ;
+    bind:origin bind:proseDefinition ;
+    rdfs:comment "The origin rests on the DPV definitions."@en ;
+    bind:pairCount 1 .
 
-dpv:{a} bt:distinctFrom dpv:{b} .
+dpv:{a} bind:distinctFrom dpv:{b} .
 """
 
 
@@ -351,7 +354,7 @@ def axioms(order, crossing, meta) -> str:
         lines += [f"%   {a} below {b}" for a, b in crossing]
         lines += ["%"]
     lines += [
-        f"% Order assertions : {len(order)}",
+        f"% Order statements : {len(order)}",
         f"% Source           : {meta['source_iri']}",
         "",
     ]
@@ -389,7 +392,7 @@ def definitional_axioms(definitions) -> str:
     """
     v, i = slug(VALID), slug(INVALID)
     lines = [
-        "% Background theory: the valid and invalid branches are disjoint.",
+        "% Declarations: the valid and invalid branches are disjoint.",
         "%",
         "% Adopted from the module's own definitions, quoted here:",
         "%",
@@ -421,7 +424,7 @@ def definitional_axioms(definitions) -> str:
 def declared_axioms(pair) -> str:
     a, b = pair
     return (
-        "% Background theory: one distinctness, declared by the parties.\n"
+        "% Declarations: one distinctness, declared by the parties.\n"
         "% The module publishes nothing that separates these two states.\n"
         "\n"
         f"fof(bg_dist_{slug(a)}_distinct_{slug(b)}, axiom,\n"
@@ -486,7 +489,7 @@ def main() -> int:
 
     for c in (VALID, INVALID):
         if c not in concepts:
-            print(f"{c} is not in the module; the definitional theory assumes "
+            print(f"{c} is not in the module; the definitional declarations assume "
                   f"both branches are present.", file=sys.stderr)
             return 1
 
@@ -532,7 +535,7 @@ def main() -> int:
             declared_axioms((a, b)), encoding="utf-8")
 
     hops, witness = depth(order)
-    print(f"{len(concepts)} concepts, {len(order)} order assertions")
+    print(f"{len(concepts)} concepts, {len(order)} order statements")
     print(f"roots: {', '.join(roots(concepts, order))}")
     print(f"longest chain: {hops} hops"
           + (f" ({' < '.join(witness)})" if witness else ""))

@@ -19,8 +19,8 @@ include('axioms/KGE000-0.ax').
 include('axioms/EUFT-filetype.ax').
 
 % --- constants, groundings and resource hooks ----------------------------
-% Resource: no order assertions.  The table publishes none.
-% Background theory: empty.  The table separates nothing either.
+% Resource: no order statements.  The table publishes none.
+% Declarations: empty.  The table separates nothing either.
 
 % --- witness condition asserted ------------------------------------------
 fof(w_kgc320, axiom,

@@ -19,7 +19,7 @@ include('axioms/KGE000-0.ax').
 include('axioms/DPV-dpv-purposes.ax').
 
 % --- constants, groundings and resource hooks ----------------------------
-% Background theory: empty, as above.
+% Declarations: empty, as above.
 
 % --- witness condition negated -------------------------------------------
 fof(w_kgc311, axiom,

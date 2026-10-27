@@ -53,8 +53,8 @@ drk:KGC353-report a vrep:OperandVerdictReport ;
     vrep:referenceConstraint kgc:KGC353-p1-c1 ;
     vrep:comparedConstraint kgc:KGC353-p2-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-legalbasis> ;
-    vrep:backgroundTheory <https://w3id.org/odrl-kb/dpv-gdpr-legal-basis/empty> ;
-    rdfs:comment """The vocabulary places explicit consent below the legal-basis root through three published order assertions. Transitivity of the order yields the relation used by isA."""@en ;
+    vrep:declarations <https://w3id.org/odrl-kb/dpv-gdpr-legal-basis/empty> ;
+    rdfs:comment """The vocabulary places explicit consent below the legal-basis root through three published order statements. Transitivity of the order yields the relation used by isA."""@en ;
     dcterms:description """A controller permits processing on any legal basis in the DPV hierarchy. A processor's policy relies on explicit consent under Article 6(1)(a)."""@en ;
     vrep:compatibilityState vrep:Compatible ;
     vrep:certificate <certificates/KGC353-2.tstp> .

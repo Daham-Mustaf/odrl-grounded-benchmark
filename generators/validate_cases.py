@@ -15,17 +15,19 @@ Errors (exit 1):
     - a set operator whose right operand is not an RDF list, or another
       operator with a list or with more than one value
     - an operand verdict report whose policies or constraints are not the
-      ones in the file, or that lacks binding, background theory or
+      ones in the file, or that lacks binding, declarations or
       verdict; a definite verdict without a certificate, or an Unknown
       with one
     - a grounding report whose constraint is not in the file, or that
       lacks vrep:grounded, or whose ungrounded values do not match it
     - vrep:readAgainst pointing at a case that does not exist or does not
       point back
+    - a set of declarations with statements and no bind:origin, with more
+      than one, or an empty set with one
 
 Warnings (reported, exit 0):
     - a binding IRI that no profile file under problems/resources declares
-    - a background theory IRI that no file under problems/background
+    - a set of declarations IRI that no file under problems/background
       declares
     - a constraint on a dpv-odrl left operand whose operator the operand's
       DPV-ODRL usage note does not allow
@@ -78,6 +80,35 @@ def declared(paths, pattern):
     return out
 
 
+def read_declarations(paths, bind):
+    """Each set of declarations: its file, its origins, its pair count."""
+    out = {}
+    for p in paths:
+        g = Graph().parse(p, format="turtle")
+        for s in g.subjects(RDF.type, bind.Declarations):
+            pairs = [int(o) for o in g.objects(s, bind.pairCount)]
+            out[str(s)] = {"file": p.name,
+                           "origins": [str(o) for o in g.objects(s, bind.origin)],
+                           "pairs": pairs[0] if pairs else None}
+    return out
+
+
+def check_origins(sets, bind, errs):
+    """Every set with statements records one origin; the empty set has none."""
+    allowed = {str(bind.practiceRule), str(bind.proseDefinition)}
+    for iri, d in sorted(sets.items()):
+        o, empty = d["origins"], d["pairs"] == 0
+        if len(o) > 1:
+            errs.append(f"{d['file']}: {iri} has {len(o)} bind:origin values; one")
+        elif o and o[0] not in allowed:
+            errs.append(f"{d['file']}: {iri} bind:origin {o[0]} is neither "
+                        f"bind:practiceRule nor bind:proseDefinition")
+        elif o and empty:
+            errs.append(f"{d['file']}: {iri} is empty and records an origin")
+        elif not o and not empty:
+            errs.append(f"{d['file']}: {iri} has statements and no bind:origin")
+
+
 def rules_constraints(g, policy):
     rules = [o for pred in (ODRL.permission, ODRL.prohibition, ODRL.obligation)
              for o in g.objects(policy, pred)]
@@ -94,7 +125,7 @@ def atomic(g, c):
     return out or [c]
 
 
-def check(path: Path, bindings, theories, errs, warns, twins, notes):
+def check(path: Path, bindings, declarations, errs, warns, twins, notes):
     text = path.read_text(encoding="utf-8")
     e = lambda msg: errs.append(f"{path.name}: {msg}")
     if not text.startswith(HEADER):
@@ -185,7 +216,7 @@ def check(path: Path, bindings, theories, errs, warns, twins, notes):
                 if v not in members:
                     e(f"grounding report: {v} is not a value of {cs[0]}")
         for prop in (VREP.compatibilityState, VREP.certificate,
-                     VREP.backgroundTheory):
+                     VREP.declarations):
             if list(g.objects(rep, prop)):
                 e(f"grounding report carries {prop.fragment}; a rejected "
                   f"constraint has no verdict")
@@ -211,15 +242,15 @@ def check(path: Path, bindings, theories, errs, warns, twins, notes):
                           (cmp_[0], VREP.comparedConstraint)):
             if set(one(prop)) != rules_constraints(g, pol):
                 e(f"{prop.fragment} is not the constraint of {pol}")
-        b, bt = one(VREP.binding), one(VREP.backgroundTheory)
+        b, decl = one(VREP.binding), one(VREP.declarations)
         if len(b) != 1:
             e("report needs exactly one vrep:binding")
         elif str(b[0]) not in bindings:
             warns.append(f"{path.name}: binding {b[0]} is declared by no profile")
-        if len(bt) != 1:
-            e("report needs exactly one vrep:backgroundTheory")
-        elif str(bt[0]) not in theories:
-            warns.append(f"{path.name}: background theory {bt[0]} is declared by no file")
+        if len(decl) != 1:
+            e("report needs exactly one vrep:declarations")
+        elif str(decl[0]) not in declarations:
+            warns.append(f"{path.name}: declarations {decl[0]} is declared by no file")
         st = one(VREP.compatibilityState)
         if len(st) != 1 or st[0] not in (VREP.Compatible, VREP.Incompatible, VREP.Unknown):
             e(f"compatibility state {st}")
@@ -247,16 +278,17 @@ def main() -> int:
     args = ap.parse_args()
 
     bind = Namespace("https://w3id.org/odrl-kb/binding#")
-    bt = Namespace("https://w3id.org/odrl-kb/background#")
     bindings = declared(sorted((args.problems / "resources").glob("profile-*.ttl")),
                         bind.OperandBinding)
-    theories = declared(sorted((args.problems / "background").glob("*.ttl")),
-                        bt.BackgroundTheory)
+    sets = read_declarations(sorted((args.problems / "background").glob("*.ttl")),
+                             bind)
+    declarations = set(sets)
 
     errs, warns, twins, notes = [], [], defaultdict(set), []
     files = sorted(args.cases.glob("*.ttl"))
     for f in files:
-        check(f, bindings, theories, errs, warns, twins, notes)
+        check(f, bindings, declarations, errs, warns, twins, notes)
+    check_origins(sets, bind, errs)
     names = {f.stem for f in files}
     for a, bs in twins.items():
         for b in bs:

@@ -52,7 +52,7 @@ drk:KGC316-report a vrep:OperandVerdictReport ;
     vrep:referenceConstraint kgc:KGC316-p1-c1 ;
     vrep:comparedConstraint kgc:KGC316-p2-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-purpose> ;
-    vrep:backgroundTheory <https://w3id.org/odrl-kb/dpv-purposes/empty> ;
+    vrep:declarations <https://w3id.org/odrl-kb/dpv-purposes/empty> ;
     rdfs:comment """DPV places recruitment interview scheduling below Purpose, and does not state that the two are distinct. In a structure that identifies them, a use for Purpose is a use for recruitment interview scheduling and satisfies both policies. In a structure that keeps them apart, Purpose does not lie below recruitment interview scheduling, and no use satisfies both. So the verdict is Unknown."""@en ;
     dcterms:description """A library permits use for recruitment interview scheduling only. A researcher's policy commits to use for the general concept Purpose."""@en ;
     vrep:compatibilityState vrep:Unknown .

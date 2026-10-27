@@ -19,7 +19,7 @@ include('axioms/KGE000-0.ax').
 include('axioms/LOC-dpvloc-geo.ax').
 
 % --- constants, groundings and resource hooks ----------------------------
-% Background theory: empty.  The extension asserts no disjointness between
+% Declarations: empty.  The extension asserts no disjointness between
 % places and no distinctness between the codes it lists.
 
 % --- witness condition negated -------------------------------------------

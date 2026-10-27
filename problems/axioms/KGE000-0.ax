@@ -4,7 +4,7 @@
 % Axioms   : Framework axioms: the order
 % Version  : 2.0
 % English  : The order is a partial order.  A profile declares how it is to be read, as subsumption at tax or as parthood at mer, but the axioms do not depend on that reading, so one file serves every sort and every profile.
-%           : Quantified content of a query: these three axioms and the disjointness assertions of the background theory.  Resource assertions, distinctness assertions and witness conjuncts are ground.  All quantifiers are universal and the signature is function-free.
+%           : Quantified content of a query: these three axioms and the disjointness statements of the declarations.  Resource statements, distinctness statements and witness conjuncts are ground.  All quantifiers are universal and the signature is function-free.
 %
 % Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark
@@ -15,8 +15,8 @@
 % SPC      : FOF_SAT_RFN
 %
 % Comments : Included by every query file.  Includes nothing itself.
-%           : Formula names carry provenance: res_ for resource assertions,
-%           : bt_ for background-theory assertions, w_ for witness conjuncts,
+%           : Formula names carry provenance: res_ for resource statements,
+%           : bt_ for declared statements, w_ for witness conjuncts,
 %           : and ax_ for the axioms here.  A prover reports its premises by
 %           : name, so the prefix is what a checker reads.  Only bt_ premises
 %           : are withdrawable by a party.
@@ -28,9 +28,9 @@
 % to the sort the profile declares; the axioms are the same either way.
 %
 % Quantified content of a query: these three axioms, and the disjointness
-% assertions of the background theory, which deny a common lower bound and
-% are therefore universal as well.  Resource assertions, distinctness
-% assertions and witness conjuncts are ground.  All quantifiers are
+% statements of the declarations, which deny a common lower bound and
+% are therefore universal as well.  Resource statements, distinctness
+% statements and witness conjuncts are ground.  All quantifiers are
 % universal and there are no function symbols, which is what places the
 % queries in the Bernays-Schoenfinkel class.
 % ==========================================================================
@@ -49,7 +49,7 @@ fof(ax_leq_transitive, axiom,
 % ==========================================================================
 % Not here, and deliberately.
 %
-% Disjointness has no predicate.  A disjointness assertion is written where
+% Disjointness has no predicate.  A disjointness statement is written where
 % it is declared, as the denial of a common lower bound:
 %
 %     fof(bt_a_disjoint_b, axiom, ~ ? [X] : (kge_leq(X, a) & kge_leq(X, b))).
@@ -68,7 +68,7 @@ fof(ax_leq_transitive, axiom,
 %
 % Equality is the provers' builtin.  A refutation therefore uses equality
 % reasoning: closing the language pair needs symmetry of = over the
-% distinctness assertion, and Vampire's proof of it cites a demodulation
+% distinctness statement, and Vampire's proof of it cites a demodulation
 % step.  Demodulation is not propositionally valid over the atoms, so a
 % checker for these refutations must admit ground instances of the equality
 % axioms among its legitimate premises, or the encoding must replace =

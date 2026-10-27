@@ -49,7 +49,7 @@ drk:KGC375-report a vrep:OperandVerdictReport ;
     vrep:referenceConstraint kgc:KGC375-p1-c1 ;
     vrep:comparedConstraint kgc:KGC375-p2-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-language-bcp47> ;
-    vrep:backgroundTheory <https://w3id.org/odrl-kb/bcp47/empty> ;
+    vrep:declarations <https://w3id.org/odrl-kb/bcp47/empty> ;
     vrep:readAgainst drk:KGC374-report ;
     rdfs:comment """Nothing states that German and French are different languages. In a structure that keeps them apart, a use in German satisfies both policies. In a structure that identifies them, a use in German is a use in French, and the second policy excludes it. So the verdict is Unknown."""@en ;
     dcterms:description """As KGC374, without the registry rule."""@en ;

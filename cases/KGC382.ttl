@@ -45,7 +45,7 @@ drk:KGC382-report a vrep:OperandVerdictReport ;
     vrep:referenceConstraint kgc:KGC382-p1-c1 ;
     vrep:comparedConstraint kgc:KGC382-p2-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-spatial-dpvloc-geo> ;
-    vrep:backgroundTheory <https://w3id.org/odrl-kb/dpv-loc/empty> ;
+    vrep:declarations <https://w3id.org/odrl-kb/dpv-loc/empty> ;
     rdfs:comment """DPV places North Rhine-Westphalia within Germany, so a use there satisfies both policies. Both bindings agree on this case."""@en ;
     dcterms:description """A library permits use within Germany. A researcher's policy commits to use in North Rhine-Westphalia."""@en ;
     vrep:compatibilityState vrep:Compatible ;

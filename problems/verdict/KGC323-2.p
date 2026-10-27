@@ -20,8 +20,8 @@ include('axioms/EUFT-filetype.ax').
 include('axioms/EUFT-filetype-declared.ax').
 
 % --- constants, groundings and resource hooks ----------------------------
-% Resource: no order assertions.
-% Background theory: ft:PDF and ft:PDFA1A are declared distinct.
+% Resource: no order statements.
+% Declarations: ft:PDF and ft:PDFA1A are declared distinct.
 
 % --- witness condition negated -------------------------------------------
 fof(w_kgc323, axiom,

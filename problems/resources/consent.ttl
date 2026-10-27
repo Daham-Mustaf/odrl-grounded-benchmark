@@ -3,7 +3,7 @@
 # Thirteen states of consent under two mid-level concepts, one for
 # the states that may justify processing and one for the states that
 # may not.  The module asserts no disjointness between the two and no
-# distinctness between any pair; see the background theories.
+# distinctness between any pair; see the declarations.
 #
 # The module also types every concept dpv:ConsentStatus.  That is not
 # read here: typing relates an individual to a class, and a resource
@@ -19,7 +19,7 @@
 # NOTE      : permits verbatim redistribution, not derivatives; this slice is a derivative and the licence is unresolved
 #
 # Concepts         : 13
-# Order assertions : 12
+# Order statements : 12
 
 @prefix dpv:     <https://w3id.org/dpv#> .
 @prefix odrlkb:  <https://w3id.org/odrl-kb/dpv-consent#> .

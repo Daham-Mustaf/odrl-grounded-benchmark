@@ -18,7 +18,7 @@
 (declare-fun ft_pdf () Concept)
 (declare-fun ft_pdfa1a () Concept)
 ; Resource: no order relation between the file-type concepts.
-; Background theory: ft:PDF and ft:PDFA1A are declared distinct.
+; Declarations: ft:PDF and ft:PDFA1A are declared distinct.
 (assert (! (distinct ft_pdf ft_pdfa1a) :named bt_kgc323_0))
 ; witness condition asserted
 (assert (! (or (and (not (= ft_pdf ft_pdf)) (= ft_pdf ft_pdfa1a))

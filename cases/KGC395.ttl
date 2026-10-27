@@ -52,7 +52,7 @@ drk:KGC395-report a vrep:OperandVerdictReport ;
     vrep:referenceConstraint kgc:KGC395-p1-lc ;
     vrep:comparedConstraint kgc:KGC395-p2-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-purpose> ;
-    vrep:backgroundTheory <https://w3id.org/odrl-kb/dpv-purposes/empty> ;
+    vrep:declarations <https://w3id.org/odrl-kb/dpv-purposes/empty> ;
     rdfs:comment """DPV places scientific research below research and development; the first disjunct settles it."""@en ;
     dcterms:description """A provider permits use for any purpose under research and development or under marketing; a consumer commits to scientific research."""@en ;
     vrep:compatibilityState vrep:Compatible ;

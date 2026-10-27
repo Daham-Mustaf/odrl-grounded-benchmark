@@ -46,7 +46,7 @@ drk:KGC396-report a vrep:OperandVerdictReport ;
     vrep:referenceConstraint kgc:KGC396-p1-c1 ;
     vrep:comparedConstraint kgc:KGC396-p2-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-purpose> ;
-    vrep:backgroundTheory <https://w3id.org/odrl-kb/dpv-purposes/empty> ;
+    vrep:declarations <https://w3id.org/odrl-kb/dpv-purposes/empty> ;
     rdfs:comment """Research and development is one of the values the first policy lists, and nothing in the first policy limits the use's other purposes."""@en ;
     dcterms:description """A provider permits use for research and development or marketing. A consumer's policy commits to both research and development and service provision."""@en ;
     vrep:compatibilityState vrep:Compatible ;

@@ -32,7 +32,7 @@ Two ways to say the same thing
 ------------------------------
 KGC340 and KGC341 accept the same two states and reach the same verdict by
 different routes.  KGC340 names the branch, `isA
-ConsentStatusValidForProcessing`; the verdict rests on an assertion DPV
+ConsentStatusValidForProcessing`; the verdict rests on a statement DPV
 published, and a state DPV adds to the branch tomorrow is covered without
 rewriting.  KGC341 enumerates, `or(eq ConsentGiven, eq RenewedConsentGiven)`;
 the verdict rests on the constraints alone, and the offer is fixed against
@@ -48,12 +48,12 @@ disjointness in prose and nowhere in the RDF, so the certificate marks the
 premise withdrawable even though the publisher's words warrant it.  What
 the definitions warrant, they do not assert.
 
-The background theories
+The declarations
 -----------------------
     empty          what the module publishes alone
     definitional   the two branches disjoint, on the module's definitions
 
-KGC342/343 isolate the definitional theory.
+KGC342/343 isolate the definitional declarations.
 
 Notes on the encoding
 ---------------------
@@ -64,12 +64,12 @@ alternative is an isAllOf constraint, as the signature requires.
 
 Open
 ----
-consent-definitional.ttl uses bt:PublishedDefinition, bt:assertedByPublisher,
-bt:concept, bt:disjointFrom and bt:warrant, none defined by
+consent-definitional.ttl uses bind:PublishedDefinition, bind:assertedByPublisher,
+bind:concept, bind:disjointFrom and bind:warrant, none defined by
 vocab/background.ttl; define them or stop writing them.  KGC343 can
 disagree between provers because Vampire refutes through the quantified
 disjointness pattern the SMT derivation does not inline; the fix is in
-tree_expand's assertion parser, not here.
+tree_expand's statement parser, not here.
 """
 from compile import Constraint, Or
 
@@ -108,7 +108,7 @@ def _disj(*pairs):
     DPV-consent-definitional.ax writes, or the two provers would cite
     different names for one premise.
     """
-    fof = ["% Background theory: the branches declared disjoint, warranted",
+    fof = ["% Declarations: the branches declared disjoint, warranted",
            "% by the module's definitions and asserted by it nowhere.", ""]
     smt = ["; The same disjointness, named as the TPTP side names it."]
     for a, b in pairs:
@@ -225,7 +225,7 @@ PROBLEMS = [
         "description": (
             "DPV places consent given below the branch of states valid for "
             "processing, so the verdict is Compatible on one published "
-            "assertion. The offer names the branch rather than the states, so "
+            "statement. The offer names the branch rather than the states, so "
             "a state DPV adds to that branch later is covered without the "
             "offer being rewritten."),
         "certificate": {"kind": "Refutation",
@@ -261,7 +261,7 @@ PROBLEMS = [
         "description": (
             "The same gate as KGC340, written by enumerating the two states "
             "rather than naming the branch. Compatible again, and the "
-            "certificate cites no resource assertion: the requested state is "
+            "certificate cites no resource statement: the requested state is "
             "one the offer names. The offer is fixed against the vocabulary as "
             "it stands, where KGC340's is not."),
         "certificate": {"kind": "Refutation",
@@ -300,12 +300,12 @@ PROBLEMS = [
             "DPV places the withdrawn state below the invalid branch. It "
             "does not state in RDF that the valid and invalid branches are "
             "disjoint. So one structure that satisfies the published "
-            "assertions also places the withdrawn state below the valid "
+            "statements also places the withdrawn state below the valid "
             "branch, and another does not. The verdict is therefore Unknown. "
-            "KGC343 adds the disjointness as a background theory."),
+            "KGC343 adds the disjointness as a set of declarations."),
         "certificate": {"kind": "Models",
             "comment": (
-                "The published assertions do not exclude the withdrawn "
+                "The published statements do not exclude the withdrawn "
                 "state from the valid branch. One structure places it below "
                 "both branches, and both constraints can hold. Another does "
                 "not, and they cannot."),
@@ -332,9 +332,9 @@ PROBLEMS = [
         "expected_q1": "Unsatisfiable", "expected_q2": "Satisfiable",
         "summary": (
             "As KGC342, with the valid and invalid branches declared "
-            "disjoint by the background theory."),
+            "disjoint by the declarations."),
  "description": (
-            "The background theory declares the valid and invalid branches "
+            "The declarations declare the valid and invalid branches "
             "disjoint, meaning that nothing lies below both. The withdrawn "
             "state lies below the invalid branch, so it cannot also lie "
             "below the valid branch. No use satisfies both policies, and the "
@@ -343,14 +343,14 @@ PROBLEMS = [
 "certificate": {"kind": "Refutation",
     "comment": (
                 "ConsentWithdrawn lies below the invalid branch, and the "
-                "background theory declares the two branches disjoint. So it "
-                "cannot also lie below the valid branch. Without that "
-                "background theory the verdict is Unknown, as in KGC342."),
+                "declarations declare the two branches disjoint. So it "
+                "cannot also lie below the valid branch. Without those "
+                "declarations the verdict is Unknown, as in KGC342."),
             "premises": [
                 ("fromResource",
                  "dpv:ConsentWithdrawn is below "
                  "dpv:ConsentStatusInvalidForProcessing"),
-                ("fromBackgroundTheory",
+                ("fromDeclarations",
                  "dpv:ConsentStatusValidForProcessing and "
                  "dpv:ConsentStatusInvalidForProcessing are disjoint")]},
         "provenance": PROV_POST,

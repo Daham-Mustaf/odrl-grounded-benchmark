@@ -39,7 +39,7 @@ What the four show
 ------------------
 KGC350 is the case the profile was written for. The record names one of
 the seven, the enumeration matches it, and the verdict rests on nothing but
-the constraints: the certificate cites no assertion of the vocabulary at
+the constraints: the certificate cites no statement of the vocabulary at
 all.
 
 KGC351 is the same offer against a record naming explicit consent under
@@ -57,13 +57,13 @@ Article 6(1) provides.
 
 KGC353 is the same record against an offer that names the branch instead of
 enumerating it. The chain from explicit consent up to the legal-basis root
-is four assertions of the vocabulary, and the verdict is Compatible in
+is four statements of the vocabulary, and the verdict is Compatible in
 every structure.
 
 The pair KGC352 and KGC353 is the point. Two ways to encode the same
 Article, the same record, opposite verdicts, and the difference is whether
 the offer defers to the vocabulary's order or fixes a list against it. The
-certificates say which: KGC353's cites four published assertions and the
+certificates say which: KGC353's cites four published statements and the
 transitivity of the order, KGC352's cites a declaration the parties made.
 
 Sorting note
@@ -232,7 +232,7 @@ PROBLEMS = [
             "bases of Article 6(1), as the Regulatory Compliance Profile "
             "encodes them, and the processor names consent. The offer names "
             "the requested basis, so the verdict is Compatible and the "
-            "certificate cites no assertion of the vocabulary: the "
+            "certificate cites no statement of the vocabulary: the "
             "constraints settle it between themselves."
         ),
         "expected_q1": "Satisfiable",
@@ -242,7 +242,7 @@ PROBLEMS = [
             
 "comment": (
     "Consent is one of the seven values listed by isAnyOf, so the two "
-    "constraints are Compatible without any resource or background assertion."
+    "constraints are Compatible without any resource or background statement."
 ),
             "premises": [],
         },
@@ -332,23 +332,23 @@ PROBLEMS = [
         "certificate": {
             "kind": "Refutation",
  "comment": (
-     "The background theory declares explicit consent distinct from each of "
+     "The declarations declare explicit consent distinct from each of "
      "the seven values listed by isAnyOf, so the basis the processor relies "
      "on cannot satisfy the first policy."),
              "premises": [
-        ("fromBackgroundTheory",
+        ("fromDeclarations",
          "dpv:Consent is distinct from explicit consent under Article 6(1)(a)"),
-        ("fromBackgroundTheory",
+        ("fromDeclarations",
          "dpv:Contract is distinct from explicit consent under Article 6(1)(a)"),
-        ("fromBackgroundTheory",
+        ("fromDeclarations",
          "dpv:LegalObligation is distinct from explicit consent under Article 6(1)(a)"),
-        ("fromBackgroundTheory",
+        ("fromDeclarations",
          "dpv:VitalInterest is distinct from explicit consent under Article 6(1)(a)"),
-        ("fromBackgroundTheory",
+        ("fromDeclarations",
          "dpv:PublicInterest is distinct from explicit consent under Article 6(1)(a)"),
-        ("fromBackgroundTheory",
+        ("fromDeclarations",
          "dpv:OfficialAuthorityOfController is distinct from explicit consent under Article 6(1)(a)"),
-        ("fromBackgroundTheory",
+        ("fromDeclarations",
          "dpv:LegitimateInterest is distinct from explicit consent under Article 6(1)(a)"),
     ],
         },
@@ -374,7 +374,7 @@ PROBLEMS = [
         "description": (
             "The record of KGC351 and KGC352 against an offer that names "
             "the branch rather than enumerating its members. Four "
-            "assertions of the vocabulary carry explicit consent up to the "
+            "statements of the vocabulary carry explicit consent up to the "
             "legal-basis root, and with transitivity the verdict is "
             "Compatible in every structure. Read together with KGC352 this "
             "is the cost of the enumeration: the same Article, the same "
@@ -391,7 +391,7 @@ PROBLEMS = [
             "kind": "Refutation",
   "comment": (
             "The vocabulary places explicit consent below the legal-basis "
-            "root through three published order assertions. Transitivity "
+            "root through three published order statements. Transitivity "
             "of the order yields the relation used by isA."
         ),
             "premises": [

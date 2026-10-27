@@ -20,7 +20,7 @@ include('axioms/LOC-dpvloc-geo.ax').
 include('axioms/LOC-dpvloc-iso.ax').
 
 % --- constants, groundings and resource hooks ----------------------------
-% Background theory: one instance of the ISO 3166 uniqueness rule.
+% Declarations: one instance of the ISO 3166 uniqueness rule.
 %
 % The rule is stated in LOC-dpvloc-iso.ax and ranges over 249 areas.  It is
 % instantiated here rather than expanded there: a refutation should cite the

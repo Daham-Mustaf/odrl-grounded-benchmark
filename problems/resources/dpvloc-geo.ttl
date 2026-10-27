@@ -11,7 +11,7 @@
 # of the reading and not a defect in the file, and the
 # jurisdictional reading below admits it.
 #
-# The identity assertions use skos:sameAs, which SKOS does not
+# The identity statements use skos:sameAs, which SKOS does not
 # define.  Section 1.1 of the specification states the intent: ISO
 # 3166 gives some places both a country code and a subdivision code,
 # and the two denote one place.  They are read as identity on that
@@ -27,9 +27,9 @@
 # Identity predicate   : http://www.w3.org/2004/02/skos/core#sameAs
 #
 # Concepts                     : 5009
-# Order assertions, published  : 4786
+# Order statements, published  : 4786
 # Identity pairs, published    : 30
-# Order assertions, encoded    : 60 (two per identity pair)
+# Order statements, encoded    : 60 (two per identity pair)
 
 @prefix loc:     <https://w3id.org/dpv/loc#> .
 @prefix odrlkb:  <https://w3id.org/odrl-kb/dpv-loc#> .
@@ -24871,7 +24871,7 @@ odrlkb:zw_mv odrlkb:within odrlkb:zw .
 odrlkb:zw_mw odrlkb:within odrlkb:zw .
 
 # Identity: one place, two ISO codes.  Not an order
-# assertion in the file; two of them in the encoding.
+# statement in the file; two of them in the encoding.
 odrlkb:as odrlkb:sameAs odrlkb:us_as .
 odrlkb:aw odrlkb:sameAs odrlkb:nl_aw .
 odrlkb:ax odrlkb:sameAs odrlkb:fi_01 .

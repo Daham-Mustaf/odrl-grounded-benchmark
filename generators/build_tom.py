@@ -4,7 +4,7 @@ build_tom.py
 
 Builds the technical and organisational measures resource for the operand
 dpvo:TechnicalOrganisationalMeasure at tax: the concept set, the order,
-the background theories, the TPTP axioms, and the profile entry.
+the declarations, the TPTP axioms, and the profile entry.
 
     uv run generators/build_tom.py \
         --tom      vocabularies/dpv-2.3/modules/TOM.ttl \
@@ -43,7 +43,7 @@ and not read.
 
 Distinctness, and why not disjointness
 --------------------------------------
-The declared theory states that no two of the listed names denote one
+The declarations state that no two of the listed names denote one
 measure.  That is admissible over any hierarchy: encryption lies below
 technical measure and is a different measure from it.
 
@@ -54,7 +54,7 @@ it vacuous.  The generator reports the pairs this affects.
 
 Neither module asserts distinctness anywhere, so the rule is the parties'
 and a verdict resting on an instance of it is withdrawable.  The rule is
-stated in the theory and instantiated by the problems, so that a refutation
+stated in the declarations and instantiated by the problems, so that a refutation
 cites the inequation it used rather than one term standing for thousands.
 """
 
@@ -130,7 +130,7 @@ def common_children(inside, classes):
     """Pairs with a concept below both, and that concept.
 
     Reported rather than acted on: such a pair admits a distinctness, which
-    is what the declared theory states, and refuses a disjointness, which
+    is what the declarations state, and refuses a disjointness, which
     nothing here writes.  A reader adding one later needs the list.
     """
     below = defaultdict(set)
@@ -154,7 +154,7 @@ def census(g, classes, labels, inside, dangling):
     memo = {}
     deepest = max(classes, key=lambda c: depth(c, parents, memo))
 
-    print(f"{len(classes)} concepts, {len(inside)} order assertions")
+    print(f"{len(classes)} concepts, {len(inside)} order statements")
     print(f"multi-parent: {multi} concepts, at most {mx} parents")
     print(f"roots: {', '.join(sorted(local(r) for r in roots))}")
     print(f"longest chain: {depth(deepest, parents, memo)} hops "
@@ -177,11 +177,11 @@ def census(g, classes, labels, inside, dangling):
         if len(shared) > 6:
             print(f"    ... and {len(shared) - 6} more")
         print("  Distinctness over them is admissible and is what the "
-              "declared theory states.")
+              "declarations state.")
 
     n_dis = sum(1 for p in g.predicates()
                 if "disjoint" in str(p).lower() or "sameAs" in str(p))
-    print(f"\ndisjointness or identity assertions in either module: {n_dis}")
+    print(f"\ndisjointness or identity statements in either module: {n_dis}")
     return parents
 
 
@@ -214,7 +214,7 @@ def resource_ttl(classes, labels, inside, meta) -> str:
         f"# Licence  : {meta['licence']}",
         "#",
         f"# Concepts                    : {len(classes)}",
-        f"# Order assertions, published : {len(inside)}",
+        f"# Order statements, published : {len(inside)}",
         "",
         "@prefix dpv:     <https://w3id.org/dpv#> .",
         "@prefix odrlkb:  <https://w3id.org/odrl-kb/dpv-tom#> .",
@@ -252,7 +252,7 @@ def resource_axioms(inside) -> str:
         "% Resource: the subsumption between technical and organisational",
         "% measures, as the Data Privacy Vocabulary publishes it.",
         "%",
-        "% Each assertion is one skos:broader triple.  Some measures appear",
+        "% Each statement is one skos:broader triple.  Some measures appear",
         "% as the subject of two: the hierarchy is a directed acyclic graph,",
         "% and a refutation may reach a common ancestor by either path.",
         "",
@@ -264,12 +264,12 @@ def resource_axioms(inside) -> str:
 
 
 # --------------------------------------------------------------------------
-# Background theories
+# Declarations
 # --------------------------------------------------------------------------
 
 def background_ttl(meta) -> str:
     return f"""\
-# Background theory for the measures resource: empty.
+# Declarations for the measures resource: empty.
 #
 # Neither module asserts disjointness or distinctness between measures.
 # Two constraints naming different measures are therefore satisfiable
@@ -278,13 +278,13 @@ def background_ttl(meta) -> str:
 #
 # Source: {meta['source_iri']}
 
-@prefix bt:      <https://w3id.org/odrl-kb/background#> .
+@prefix bind:    <https://w3id.org/odrl-kb/binding#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 
-<https://w3id.org/odrl-kb/dpv-tom/empty> a bt:BackgroundTheory ;
+<https://w3id.org/odrl-kb/dpv-tom/empty> a bind:Declarations ;
     dcterms:title "No declared distinctness or disjointness"@en ;
-    bt:appliesTo <https://w3id.org/odrl-kb/dpv-tom> ;
-    bt:pairCount 0 .
+    bind:appliesTo <https://w3id.org/odrl-kb/dpv-tom> ;
+    bind:pairCount 0 .
 """
 
 
@@ -298,7 +298,7 @@ def declared_ttl(names, meta) -> str:
     """
     n = len(names)
     return f"""\
-# Background theory for the measures resource: declared distinctness.
+# Declarations for the measures resource: declared distinctness.
 #
 # The parties declare that no two of the listed names denote one measure.
 # Neither module asserts this, so the rule is the parties' and a verdict
@@ -318,15 +318,18 @@ def declared_ttl(names, meta) -> str:
 # Pairs   : {n * (n - 1) // 2}
 # Source  : {meta['source_iri']}
 
-@prefix bt:      <https://w3id.org/odrl-kb/background#> .
+@prefix bind:    <https://w3id.org/odrl-kb/binding#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 
-<https://w3id.org/odrl-kb/dpv-tom/declared> a bt:BackgroundTheory ;
+<https://w3id.org/odrl-kb/dpv-tom/declared> a bind:Declarations ;
     dcterms:title "Pairwise distinctness of measures"@en ;
-    bt:appliesTo <https://w3id.org/odrl-kb/dpv-tom> ;
-    bt:generatedBy bt:PairwiseDistinctness ;
-    bt:scopeCondition "Distinctness between the measures the modules list, and not disjointness: the modules publish concepts below two parents, and a disjointness over such a pair would contradict the resource."@en ;
-    bt:pairCount {n * (n - 1) // 2} .
+    bind:appliesTo <https://w3id.org/odrl-kb/dpv-tom> ;
+    bind:generatedBy bind:PairwiseDistinctness ;
+    bind:origin bind:proseDefinition ;
+    rdfs:comment "The origin rests on the DPV definitions."@en ;
+    bind:scopeCondition "Distinctness between the measures the modules list, and not disjointness: the modules publish concepts below two parents, and a disjointness over such a pair would contradict the resource."@en ;
+    bind:pairCount {n * (n - 1) // 2} .
 """
 
 
@@ -334,14 +337,14 @@ def declared_axioms(names) -> str:
     """The rule, stated but not instantiated.
 
     As LOC-dpvloc-iso.ax does.  Instantiating every pair would bury the one
-    assertion a refutation actually uses: 74 measures give 2701 inequations,
+    statement a refutation actually uses: 74 measures give 2701 inequations,
     and an unsat core over them says nothing a reader can follow.
     """
     n = len(names)
     listing = "\n".join("% " + ", ".join(names[i:i + 6])
                         for i in range(0, len(names), 6))
     return (
-        "% Background theory: pairwise distinctness, declared by the "
+        "% Declarations: pairwise distinctness, declared by the "
         "parties.\n"
         "%\n"
         "% No two of the names below denote one measure.  Neither module\n"
@@ -355,7 +358,7 @@ def declared_axioms(names) -> str:
         "%\n"
         "% The rule is stated here and instantiated by the problems.  A\n"
         "% problem naming two of the measures below carries the inequation\n"
-        "% between them as a bg_dist_ assertion, so that a refutation cites\n"
+        "% between them as a bg_dist_ statement, so that a refutation cites\n"
         "% the instance it used rather than one of "
         f"{n * (n - 1) // 2}.\n"
         "%\n"

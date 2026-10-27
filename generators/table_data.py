@@ -7,16 +7,23 @@ Every figure the evaluation table needs, measured rather than recalled.
     uv run generators/table_data.py                 # readable
     uv run generators/table_data.py --tex > tab.tex # LaTeX rows
     uv run generators/table_data.py --macros        # \newcommand lines
+    uv run generators/table_data.py --suite-numbers # writes suite-numbers.tex
 
 Each row is one binding, not one resource: a file read under two
 profiles produces two rows, which is the table's point. Counts come from
 the generated artefacts, so a figure that moves when a builder changes
 moves here too.
 
+--suite-numbers writes suite-numbers.tex: ten macros and the bindings table,
+for the paper to include. It refuses to write when the numbers do not add up:
+the rows must sum to the case files, every case must fall in exactly one of
+definite, Unknown, rejected and accepted, and every binding a case cites must
+have a row. A file that is written is therefore one whose figures agree.
+
 What is counted, per row:
 
     concepts     subjects the resource file types as its concept class
-    order        kge_leq assertions in the resource's .ax file
+    order        kge_leq statements in the resource's .ax file
     cases        verdict problems whose binding is this one
     reads        the relation the profile's prose says the sort takes
 
@@ -61,7 +68,7 @@ AXIOMS = {
 
 
 def count_order(ax_path: Path) -> int:
-    """kge_leq assertions in a resource axiom file.
+    """kge_leq statements in a resource axiom file.
 
     Ground facts only: the label is the builder's and varies (res_ for
     most resources, gn_ for GeoNames), and the first argument is a constant,
@@ -77,7 +84,7 @@ def count_concepts(ttl_path: Path) -> int:
     """Subjects the resource types as its concept class.
 
     Counted from the Turtle rather than from the axioms: a concept the
-    resource lists and no assertion mentions is still a concept, and the
+    resource lists and no statement mentions is still a concept, and the
     nominal resources are exactly the ones where that matters.
 
     The class is odrlkb: for the builders' own resources, skos:Concept for
@@ -123,7 +130,8 @@ def suite_totals(cases_dir: Path, verdict_dir: Path) -> dict:
     """The counts the results paragraph needs."""
     files = [f for f in cases_dir.rglob("*.ttl")]
     states = Counter()
-    ungrounded = 0
+    ungrounded = ill_sorted = accepted = 0
+    cited = set()
     for f in files:
         t = f.read_text(encoding="utf-8")
         m = re.search(r"vrep:compatibilityState\s+vrep:(\w+)\s*[;.]", t)
@@ -131,6 +139,13 @@ def suite_totals(cases_dir: Path, verdict_dir: Path) -> dict:
             states[m.group(1)] += 1
         if re.search(r"vrep:grounded\s+false", t):
             ungrounded += 1
+        if re.search(r"vrep:wellSorted\s+false", t):
+            ill_sorted += 1
+        elif re.search(r"vrep:wellSorted\s+true", t):
+            accepted += 1
+        b = re.search(r"vrep:binding\s+<([^>]+)>", t)
+        if b:
+            cited.add(b.group(1).rsplit("/", 1)[-1])
     queries = len(list(verdict_dir.glob("*-[12].p")))
     return {
         "files": len(files),
@@ -142,6 +157,13 @@ def suite_totals(cases_dir: Path, verdict_dir: Path) -> dict:
         "epistemic": states.get("Unknown", 0),
         # Constraints rejected because a value does not ground.
         "ungrounded": ungrounded,
+        # Constraints rejected because the operator does not fit the sort.
+        "ill_sorted": ill_sorted,
+        "rejected": ill_sorted + ungrounded,
+        # Well-sorted controls: checked, accepted, no verdict asked for.
+        "accepted": accepted,
+        # The bindings the case files cite, by the last segment of the IRI.
+        "cited": sorted(cited),
     }
 
 
@@ -162,17 +184,106 @@ def rows(root: Path):
     return out
 
 
+def suite_problems(rs, totals) -> list:
+    """Why the figures do not add up, or an empty list when they do."""
+    out = []
+    n = sum(r["cases"] for r in rs)
+    if n != totals["files"]:
+        out.append(f"the rows sum to {n} cases but there are "
+                   f"{totals['files']} case files")
+    rowed = {r["binding"] for r in rs}
+    for b in sorted(set(totals["cited"]) - rowed):
+        out.append(f"cases cite {b}, which has no row in BINDINGS")
+    for b in sorted(rowed - set(totals["cited"])):
+        out.append(f"BINDINGS has a row for {b}, which no case cites")
+    classes = (totals["compatible"] + totals["incompatible"]
+               + totals["unknown"] + totals["rejected"] + totals["accepted"])
+    if classes != totals["files"]:
+        out.append(f"definite + Unknown + rejected + accepted is {classes}, "
+                   f"not {totals['files']}: some case is in no class or two")
+    for r in rs:
+        if r["concepts"] < 0 or r["order"] < 0:
+            out.append(f"{r['label']}: resource or axiom file not found")
+    return out
+
+
+def tex_escape(s: str) -> str:
+    for ch in "\\&%$#_{}":
+        s = s.replace(ch, "\\" + ch)
+    return s
+
+
+def suite_numbers_tex(rs, totals) -> str:
+    """suite-numbers.tex: ten macros and the bindings table."""
+    definite = totals["compatible"] + totals["incompatible"]
+    macros = [
+        ("suiteCases",        totals["files"]),
+        ("suiteQueries",      totals["queries"]),
+        ("suiteDefinite",     definite),
+        ("suiteCompatible",   totals["compatible"]),
+        ("suiteIncompatible", totals["incompatible"]),
+        ("suiteUnknown",      totals["unknown"]),
+        ("suiteRejected",     totals["rejected"]),
+        ("suiteIllSorted",    totals["ill_sorted"]),
+        ("suiteUngrounded",   totals["ungrounded"]),
+        ("suiteBindings",     len(rs)),
+    ]
+    lines = [
+        "% suite-numbers.tex",
+        "% Written by generators/table_data.py --suite-numbers. Do not edit.",
+        f"% {totals['files']} cases = {definite} definite"
+        f" + {totals['unknown']} Unknown + {totals['rejected']} rejected"
+        f" + {totals['accepted']} accepted controls.",
+        "% Rejected is ill sorted plus ungrounded.",
+    ]
+    lines += [f"\\newcommand{{\\{name}}}{{{value}}}" for name, value in macros]
+    lines += [
+        "\\newcommand{\\suiteBindingsTable}{%",
+        "\\begin{tabular}{llrrr}",
+        "\\hline",
+        "resource and binding & sort & concepts & order & cases \\\\",
+        "\\hline",
+    ]
+    for r in rs:
+        lines.append(f"{tex_escape(r['label'])} & {r['sort']} & {r['concepts']}"
+                     f" & {r['order']} & {r['cases']} \\\\")
+    lines += [
+        "\\hline",
+        f"total & & & & {sum(r['cases'] for r in rs)} \\\\",
+        "\\hline",
+        "\\end{tabular}%",
+        "}",
+    ]
+    return "\n".join(lines) + "\n"
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--root", default=".", type=Path)
     ap.add_argument("--tex", action="store_true", help="table rows only")
     ap.add_argument("--macros", action="store_true",
                     help="\\newcommand lines for the results paragraph")
+    ap.add_argument("--suite-numbers", nargs="?", const="suite-numbers.tex",
+                    metavar="FILE",
+                    help="write ten macros and the bindings table "
+                         "(default suite-numbers.tex, under --root)")
     args = ap.parse_args()
 
     rs = rows(args.root)
     totals = suite_totals(args.root / "cases",
                           args.root / "problems" / "verdict")
+
+    if args.suite_numbers:
+        problems = suite_problems(rs, totals)
+        if problems:
+            print("not written, the figures do not add up:", file=sys.stderr)
+            for pr in problems:
+                print(f"  {pr}", file=sys.stderr)
+            return 1
+        out = args.root / args.suite_numbers
+        out.write_text(suite_numbers_tex(rs, totals), encoding="utf-8")
+        print(f"wrote {out}: {totals['files']} cases, {len(rs)} bindings")
+        return 0
 
     if args.tex:
         for r in rs:

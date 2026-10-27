@@ -48,7 +48,7 @@ drk:KGC340-report a vrep:OperandVerdictReport ;
     vrep:referenceConstraint kgc:KGC340-p1-c1 ;
     vrep:comparedConstraint kgc:KGC340-p2-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-consent-status> ;
-    vrep:backgroundTheory <https://w3id.org/odrl-kb/dpv-consent/empty> ;
+    vrep:declarations <https://w3id.org/odrl-kb/dpv-consent/empty> ;
     rdfs:comment """DPV places consent given among the states valid for processing, so both sides can be satisfied."""@en ;
     dcterms:description """A controller permits use while the consent on record may justify processing; a processor commits to processing only under given consent."""@en ;
     vrep:compatibilityState vrep:Compatible ;

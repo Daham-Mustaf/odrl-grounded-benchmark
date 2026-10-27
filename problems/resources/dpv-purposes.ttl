@@ -1,7 +1,7 @@
 # DPV purposes: the subsumption the vocabulary publishes.
 #
 # skos:broader edges only.  rdf:type dpv:Purpose is a typing
-# assertion, not an order assertion, and is not read here.
+# statement, not an order statement, and is not read here.
 #
 # skos:broader is the only hierarchy predicate here, and SKOS
 # declines to fix its logical reading.  That the order is
@@ -42,7 +42,7 @@
     dcterms:license <https://www.w3.org/copyright/document-license-2023/> .
 
 # Concepts                    : 121
-# Order assertions, published : 131
+# Order statements, published : 131
 # Order predicate             : skos:broader
 
 odrlkb:academic_research a odrlkb:Purpose ;

@@ -75,5 +75,8 @@ uv run generators/run_certify.py 2>&1 | grep -E \
 hdr "8. proof checking"
 uv run generators/check_certificates.py 2>&1 | tail -12
 
+hdr "9. figures for the paper"
+uv run generators/table_data.py --suite-numbers 2>&1 | tail -6
+
 echo
 echo "=== done"

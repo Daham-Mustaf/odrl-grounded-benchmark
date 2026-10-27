@@ -41,7 +41,7 @@ KGC360 puts the requirement against a use whose measures are technical
 ones. Both required measures lie below dpv:TechnicalMeasure, which the
 resource asserts, so a use supplying exactly those two satisfies the
 offer and the request together. The verdict is Compatible, and the
-certificate cites the two assertions that carry it.
+certificate cites the two statements that carry it.
 
 KGC361 puts the same requirement against a processor that excludes access
 control. The requirement needs access control among the measures supplied
@@ -211,14 +211,14 @@ def _ttl(pid, left_operand, offer_phrase, offer, request_phrase, request):
 def _iso(*pairs):
     """Declared-distinctness instances, named bg_dist_ on both encodings.
 
-    The declared theory states the rule and lists the measures it ranges
+    The declarations state the rule and list the measures it ranges
     over; a problem naming two of them carries the inequation between
     them, so a refutation cites the instance it used rather than one of
     2701. The name must match on both sides: an unsat core and a TPTP
     proof are compared by premise name.
     """
-    fof = ["% Background theory: declared distinctness instances, stated in",
-           "% the declared theory file and instantiated here.", ""]
+    fof = ["% Declarations: declared distinctness instances, stated in",
+           "% the declarations file and instantiated here.", ""]
     smt = ["; Declared distinctness this problem adopts, named as the TPTP",
            "; side names it."]
     for a, b in pairs:
@@ -261,7 +261,7 @@ PROBLEMS = [
             "This is the superset mode carried by the order: isAllOf asks "
             "that its two values lie inside what the use supplies, the "
             "request bounds what the use may supply to the technical "
-            "measures, and the two published assertions place the values "
+            "measures, and the two published statements place the values "
             "within that bound."
         ),
         "expected_q1": "Satisfiable",
@@ -416,7 +416,7 @@ PROBLEMS = [
         "certificate": {"kind": "Refutation",
             "comment": "Encryption and access control are declared distinct, so "
                        "a use supplying only encryption lacks the second.",
-            "premises": [("fromBackgroundTheory",
+            "premises": [("fromDeclarations",
                           "Encryption distinct from AccessControlMethod")]},
         "provenance": "As KGC362; warrant DPV's definitions.",
         "ttl": _ttl("KGC364", TOM_LO, "both encryption and access control",

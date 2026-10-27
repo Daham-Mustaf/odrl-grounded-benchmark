@@ -20,8 +20,8 @@ include('axioms/DPV-dpv-purposes.ax').
 include('axioms/DPV-dpv-purposes-declared.ax').
 
 % --- constants, groundings and resource hooks ----------------------------
-% Background theory: declared distinctness instances, stated in
-% the declared theory file and instantiated here.
+% Declarations: declared distinctness instances, stated in
+% the declarations file and instantiated here.
 
 fof(bg_dist_dpv_marketing_dpv_scientific_research, axiom,
     dpv_marketing != dpv_scientific_research).

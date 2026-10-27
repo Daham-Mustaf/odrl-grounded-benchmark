@@ -1,7 +1,7 @@
 """
 build_filetype.py
 =================
-Builds the EU File type resource: the concept set, the background theory,
+Builds the EU File type resource: the concept set, the declarations,
 the TPTP axioms, and the profile entry.
 
     python build_filetype.py --table vocabularies/eu-file-type/filetypes-skos-ap-act.rdf \\
@@ -37,7 +37,7 @@ would require inventing a concept for each class, which is the fabrication
 this paper argues against: the authority had the option of publishing
 skos:broader and did not take it.
 
-Two dcterms:isReplacedBy assertions, FMX2 by FMX3 and FMX3 by FMX4.  This is
+Two dcterms:isReplacedBy statements, FMX2 by FMX3 and FMX3 by FMX4.  This is
 supersession between versions of Formex, not identity: the three are
 different formats and a document in one is not a document in another.
 Encoding them as a bidirectional pair, the way a genuine alias would be
@@ -150,7 +150,7 @@ def resource_ttl(concepts, labels, deprecated, meta) -> str:
         "# The table relates none of its concepts to any other.  Every one is",
         "# a top concept of the scheme; there is no skos:broader, narrower,",
         "# related, or mapping relation between them.  This file therefore",
-        "# has no order assertions, and that is a property of the table.",
+        "# has no order statements, and that is a property of the table.",
         "#",
         "# The table does classify its formats, through boolean attributes",
         "# such as euvoc:isDocumentFormat.  Those are not read here: a class",
@@ -159,7 +159,7 @@ def resource_ttl(concepts, labels, deprecated, meta) -> str:
         "#",
         "# Two formats are marked as replacing earlier ones (Formex 2, 3, 4).",
         "# Supersession between versions is not identity, so it is not read",
-        "# as an order assertion either.",
+        "# as an order statement either.",
         "#",
         f"# Source    : {meta['source']}",
         f"# Version   : {meta['version']}",
@@ -180,7 +180,7 @@ def resource_ttl(concepts, labels, deprecated, meta) -> str:
         '    dcterms:title "EU File type, concept set"@en ;',
         f"    dcterms:source <{meta['version_iri']}> ;",
         f'    dcterms:license <{meta["licence_uri"]}> ;',
-        "    odrlkb:orderAssertionCount 0 .",
+        "    odrlkb:orderStatementCount 0 .",
         "",
     ]
     body = []
@@ -197,14 +197,14 @@ def resource_ttl(concepts, labels, deprecated, meta) -> str:
 
 def background_ttl(meta) -> str:
     return f"""\
-# Background theory for the EU File type resource: empty.
+# Declarations for the EU File type resource: empty.
 #
 # The table asserts no disjointness and no distinctness between its formats.
 # It does not, for instance, say that a PDF/A-1a file is not a PDF, nor that
-# it is one.  With this theory in force, two constraints naming different
+# it is one.  With these declarations in force, two constraints naming different
 # formats are Unknown unless they name the same one.
 #
-# At nom the background theory carries more of a verdict than it does at the
+# At nom the declarations carry more of a verdict than it does at the
 # other sorts, because there is no order for the resource to contribute.
 # Whatever separates two formats here was declared by the parties, and the
 # certificate marks it withdrawable.  That is the honest position: the
@@ -212,36 +212,39 @@ def background_ttl(meta) -> str:
 #
 # Source: {meta['version_iri']}
 
-@prefix bt:      <https://w3id.org/odrl-kb/background#> .
+@prefix bind:    <https://w3id.org/odrl-kb/binding#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 
-<https://w3id.org/odrl-kb/eu-file-type/empty> a bt:BackgroundTheory ;
+<https://w3id.org/odrl-kb/eu-file-type/empty> a bind:Declarations ;
     dcterms:title "No declared distinctness or disjointness"@en ;
-    bt:appliesTo <https://w3id.org/odrl-kb/eu-file-type> ;
-    bt:pairCount 0 .
+    bind:appliesTo <https://w3id.org/odrl-kb/eu-file-type> ;
+    bind:pairCount 0 .
 """
 
 
 def declared_ttl(pair, meta) -> str:
     a, b = pair
     return f"""\
-# Background theory for the EU File type resource: one distinctness.
+# Declarations for the EU File type resource: one distinctness.
 #
 # The parties declare that these two formats are different.  The table does
 # not: it lists both and relates them in no way.  A verdict resting on this
-# assertion is the parties' and can be reopened by withdrawing it.
+# statement is the parties' and can be reopened by withdrawing it.
 #
 # Source: {meta['version_iri']}
 
 @prefix ft:      <http://publications.europa.eu/resource/authority/file-type/> .
-@prefix bt:      <https://w3id.org/odrl-kb/background#> .
+@prefix bind:    <https://w3id.org/odrl-kb/binding#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 
-<https://w3id.org/odrl-kb/eu-file-type/declared> a bt:BackgroundTheory ;
+<https://w3id.org/odrl-kb/eu-file-type/declared> a bind:Declarations ;
     dcterms:title "One declared distinctness"@en ;
-    bt:appliesTo <https://w3id.org/odrl-kb/eu-file-type> ;
-    bt:generatedBy bt:PartyDeclaration ;
-    bt:pairCount 1 .
+    bind:appliesTo <https://w3id.org/odrl-kb/eu-file-type> ;
+    bind:generatedBy bind:PartyDeclaration ;
+    bind:origin bind:practiceRule ;
+    rdfs:comment "The origin rests on the file-type authority's separate entries."@en ;
+    bind:pairCount 1 .
 
 """
 
@@ -255,7 +258,7 @@ def axioms(concepts) -> str:
     anything about any of them.
     """
     return (
-        "% EU File type: no order assertions.\n"
+        "% EU File type: no order statements.\n"
         "%\n"
         "% The authority publishes 228 formats and relates none of them.\n"
         "% This file is empty by construction, not by omission, and the\n"
@@ -263,15 +266,15 @@ def axioms(concepts) -> str:
         "% comes from the constraints and from what the parties declared.\n"
         "%\n"
         f"% Concepts in the resource: {len(concepts)}\n"
-        "% Order assertions: 0\n"
-        "% Disjointness assertions: 0\n"
+        "% Order statements: 0\n"
+        "% Disjointness statements: 0\n"
     )
 
 
 def declared_axioms(pair) -> str:
     a, b = pair
     return (
-        "% Background theory: one distinctness, declared by the parties.\n"
+        "% Declarations: one distinctness, declared by the parties.\n"
         "% The table publishes nothing that separates these two formats.\n"
         "\n"
         f"fof(bg_dist_{slug(a)}_distinct_{slug(b)}, axiom,\n"
@@ -315,7 +318,7 @@ def main() -> int:
                     help="the SKOS_AP_ACT distribution (it carries labels)")
     ap.add_argument("--declare-distinct", nargs=2, metavar=("A", "B"),
                     default=None,
-                    help="also emit a background theory declaring two "
+                    help="also emit a set of declarations declaring two "
                          "formats distinct, for the stability pair")
     ap.add_argument("--retrieved", default="2026-08-18")
     ap.add_argument("--tag", default="filetype")
@@ -377,15 +380,15 @@ def main() -> int:
         (args.out / "axioms" / f"EUFT-{tag}-declared.ax").write_text(
             declared_axioms((a, b)), encoding="utf-8")
 
-    print(f"{len(concepts)} concepts, 0 order assertions, "
-          f"0 disjointness assertions")
+    print(f"{len(concepts)} concepts, 0 order statements, "
+          f"0 disjointness statements")
     print(f"{len(labels)} English labels, {len(deprecated)} deprecated")
     print("\nchecked absent, which is what the nom binding rests on:")
     for k, v in order_predicates.items():
         print(f"  {k:18s} {v}")
 
     print("\npublished but not read, each for a reason in the header:")
-    print(f"  format flags       {sum(flags.values())} assertions "
+    print(f"  format flags       {sum(flags.values())} statements "
           f"across {len(flags)} attributes (classification without concepts)")
     for a, b in replaced_by:
         print(f"  isReplacedBy       {a} by {b} (supersession, not identity)")

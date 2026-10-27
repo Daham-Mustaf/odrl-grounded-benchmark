@@ -7,7 +7,7 @@
 % Dropped at the module boundary:
 %   ConsentStatus below Status
 %
-% Order assertions : 12
+% Order statements : 12
 % Source           : https://w3id.org/dpv/2.3
 
 fof(res_dpv_consent_expired_below_dpv_consent_status_invalid_for_processing, axiom,

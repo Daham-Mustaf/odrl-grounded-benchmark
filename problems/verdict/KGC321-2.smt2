@@ -18,7 +18,7 @@
 (declare-fun ft_pdf () Concept)
 (declare-fun ft_pdfa1a () Concept)
 ; Resource: nothing, as in KGC320.
-; Background theory: the declaration, and the only difference from KGC320.
+; Declarations: the declaration, and the only difference from KGC320.
 (assert (! (distinct ft_pdf ft_pdfa1a) :named bt_kgc321_0))
 ; witness condition negated
 (assert (! (not (or (and (= ft_pdf ft_pdf) (= ft_pdf ft_pdfa1a))

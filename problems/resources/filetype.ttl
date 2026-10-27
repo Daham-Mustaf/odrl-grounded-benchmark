@@ -3,7 +3,7 @@
 # The table relates none of its concepts to any other.  Every one is
 # a top concept of the scheme; there is no skos:broader, narrower,
 # related, or mapping relation between them.  This file therefore
-# has no order assertions, and that is a property of the table.
+# has no order statements, and that is a property of the table.
 #
 # The table does classify its formats, through boolean attributes
 # such as euvoc:isDocumentFormat.  Those are not read here: a class
@@ -12,7 +12,7 @@
 #
 # Two formats are marked as replacing earlier ones (Formex 2, 3, 4).
 # Supersession between versions is not identity, so it is not read
-# as an order assertion either.
+# as an order statement either.
 #
 # Source    : EU Vocabularies, File type authority table, SKOS_AP_ACT
 # Version   : 20260715-0
@@ -33,7 +33,7 @@
     dcterms:title "EU File type, concept set"@en ;
     dcterms:source <http://publications.europa.eu/resource/authority/file-type/20260715-0> ;
     dcterms:license <http://creativecommons.org/licenses/by/4.0/> ;
-    odrlkb:orderAssertionCount 0 .
+    odrlkb:orderStatementCount 0 .
 
 odrlkb:7z a odrlkb:FileType ;
     rdfs:label "7z"@en ;

@@ -1,23 +1,26 @@
-# Background theory for the DPV Locations resource: one distinctness.
+# Declarations for the DPV Locations resource: one distinctness.
 #
 # The parties declare that these two places are different.  The extension
 # does not: it lists both and separates them in no way.  A verdict resting
-# on this assertion is the parties' and can be reopened by withdrawing it.
+# on this statement is the parties' and can be reopened by withdrawing it.
 #
 # Source: https://w3id.org/dpv/2.3/loc
 
 @prefix loc:     <https://w3id.org/dpv/loc#> .
-@prefix bt:      <https://w3id.org/odrl-kb/background#> .
+@prefix bind:    <https://w3id.org/odrl-kb/binding#> .
 @prefix owl:     <http://www.w3.org/2002/07/owl#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 
-<https://w3id.org/odrl-kb/dpv-loc/declared> a bt:BackgroundTheory ;
+<https://w3id.org/odrl-kb/dpv-loc/declared> a bind:Declarations ;
     dcterms:title "One declared distinctness"@en ;
-    bt:appliesTo <https://w3id.org/odrl-kb/dpv-loc-geo>,
+    bind:appliesTo <https://w3id.org/odrl-kb/dpv-loc-geo>,
                  <https://w3id.org/odrl-kb/dpv-loc-juris> ;
-    bt:generatedBy bt:PartyDeclaration ;
-    bt:pairCount 1 ;
-    bt:asserts [
+    bind:generatedBy bind:PartyDeclaration ;
+    bind:origin bind:practiceRule ;
+    rdfs:comment "The origin rests on ISO 3166-1."@en ;
+    bind:pairCount 1 ;
+    bind:states [
         a owl:AllDifferent ;
         owl:members ( loc:DE loc:FR )
     ] .

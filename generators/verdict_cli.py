@@ -141,7 +141,7 @@ def main() -> int:
             bg = Path(backgrounds[operand]).read_text().splitlines()
             bg = [l for l in bg if l.strip().startswith("fof(")]
         if not bg:
-            print("  (no background theory: nothing is separated, so a "
+            print("  (no declarations: nothing is separated, so a "
                   "definite Incompatible is unreachable)")
 
         q1 = query_text(res.order, bg, w["fof"], negate=False)

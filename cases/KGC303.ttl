@@ -55,7 +55,7 @@ drk:KGC303-report a vrep:OperandVerdictReport ;
     vrep:referenceConstraint kgc:KGC303-p1-lc ;
     vrep:comparedConstraint kgc:KGC303-p2-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-spatial-geonames> ;
-    vrep:backgroundTheory <https://w3id.org/odrl-kb/geonames-europe/empty> ;
+    vrep:declarations <https://w3id.org/odrl-kb/geonames-europe/empty> ;
     vrep:readAgainst drk:KGC304-report ;
     rdfs:comment """GeoNames does not state that France and Germany are different. In a structure that keeps them apart, a use in France satisfies exactly one alternative, so both policies hold. In a structure that identifies them, both alternatives hold and 'exactly one' fails. So the verdict is Unknown."""@en ;
     dcterms:description """A library permits use in exactly one of France and Germany. A researcher's policy commits to use in France."""@en ;

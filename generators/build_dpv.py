@@ -2,7 +2,7 @@
 build_dpv.py
 ============
 
-Builds a DPV purposes slice: the resource, the background theory, the TPTP
+Builds a DPV purposes slice: the resource, the declarations, the TPTP
 axioms, and the profile entry.
 
     python build_dpv.py --purposes purposes.ttl --out problems
@@ -18,12 +18,12 @@ concepts by rdfs:subClassOf, it is the same decision made by the publisher,
 and worth citing.  Verify the predicate in 2.3/dpv/dpv-owl.ttl before
 relying on it.
 
-The default background theory is empty.  The purposes module carries no
+The default declarations are empty.  The purposes module carries no
 owl:disjointWith and no distinctness of any kind (grep: zero).
 
 Distinctness and disjointness are not interchangeable
 -----------------------------------------------------
---declare-distinct writes a theory in which the named purposes are
+--declare-distinct writes declarations in which the named purposes are
 pairwise distinct: no two of them are one concept.  That is admissible
 over any hierarchy, because one purpose may lie below another and still
 be a different purpose.
@@ -33,7 +33,7 @@ concepts in the module have two parents: NonCommercialResearch under
 NonCommercialPurpose and ResearchAndDevelopment, PersonalisedAdvertising
 under Advertising and Personalisation, and nine more.  Declaring such a
 pair to have nothing below both contradicts what DPV publishes, and a
-resource together with a theory that contradicts it has no model at all,
+resource together with declarations that contradict it has no model at all,
 so every verdict over the pair is vacuous.  A declaration is the parties'
 to adopt but not theirs to adopt in a form the authority contradicts.
 
@@ -82,7 +82,7 @@ def parse(path: Path):
     # dpv-odrl:Purpose, and a legal basis is a different left operand with its
     # own binding in the DPV-ODRL mapping.  Keeping the edge would put a
     # concept from one operand's vocabulary into another operand's
-    # resource, and a verdict could then rest on an order assertion the
+    # resource, and a verdict could then rest on an order statement the
     # profile never bound.  Where a module's boundary falls is a choice,
     # so the resource header states it.
     defined = {str(sub)[len(DPV):] for sub in g.subjects()
@@ -198,7 +198,7 @@ def resource_ttl(edges, labels, concepts, meta) -> str:
         "# DPV purposes: the subsumption the vocabulary publishes.",
         "#",
         "# skos:broader edges only.  rdf:type dpv:Purpose is a typing",
-        "# assertion, not an order assertion, and is not read here.",
+        "# statement, not an order statement, and is not read here.",
         "#",
         "# skos:broader is the only hierarchy predicate here, and SKOS",
         "# declines to fix its logical reading.  That the order is",
@@ -242,7 +242,7 @@ def resource_ttl(edges, labels, concepts, meta) -> str:
         "<https://www.w3.org/copyright/document-license-2023/> .",
         "",
         f"# Concepts                    : {len(concepts)}",
-        f"# Order assertions, published : {len(kept)}",
+        f"# Order statements, published : {len(kept)}",
         "# Order predicate             : skos:broader",
         "",
     ]
@@ -265,7 +265,7 @@ def resource_ttl(edges, labels, concepts, meta) -> str:
 
 def background_ttl(meta) -> str:
     return f"""\
-# Background theory for the DPV purposes slice: empty.
+# Declarations for the DPV purposes slice: empty.
 #
 # The purposes module publishes no disjointness and no distinctness: no
 # owl:disjointWith, no owl:AllDifferent, nothing.  This file records that
@@ -283,13 +283,13 @@ def background_ttl(meta) -> str:
 #
 # Source: {meta['version']}
 
-@prefix bt:      <https://w3id.org/odrl-kb/background#> .
+@prefix bind:    <https://w3id.org/odrl-kb/binding#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 
-<https://w3id.org/odrl-kb/dpv-purposes/empty> a bt:BackgroundTheory ;
+<https://w3id.org/odrl-kb/dpv-purposes/empty> a bind:Declarations ;
     dcterms:title "No declared distinctness or disjointness"@en ;
-    bt:appliesTo <https://w3id.org/odrl-kb/dpv-purposes> ;
-    bt:pairCount 0 .
+    bind:appliesTo <https://w3id.org/odrl-kb/dpv-purposes> ;
+    bind:pairCount 0 .
 """
 
 
@@ -305,7 +305,7 @@ def declared_ttl(names, meta) -> str:
     n = len(names)
     listing = "\n".join(f"# {n_}" for n_ in names)
     return f"""\
-# Background theory for the DPV purposes slice: declared distinctness.
+# Declarations for the DPV purposes slice: declared distinctness.
 #
 # The parties declare the purposes below pairwise distinct, on the ground
 # that DPV defines each of them as a purpose in its own right.  DPV
@@ -329,15 +329,16 @@ def declared_ttl(names, meta) -> str:
 #
 # Source: {meta['version']}
 
-@prefix bt:      <https://w3id.org/odrl-kb/background#> .
+@prefix bind:    <https://w3id.org/odrl-kb/binding#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 
-<https://w3id.org/odrl-kb/dpv-purposes/declared> a bt:BackgroundTheory ;
+<https://w3id.org/odrl-kb/dpv-purposes/declared> a bind:Declarations ;
     dcterms:title "Pairwise distinctness of declared purposes"@en ;
-    bt:appliesTo <https://w3id.org/odrl-kb/dpv-purposes> ;
-    bt:generatedBy bt:PairwiseDistinctness ;
-    bt:scopeCondition "Distinctness between the listed purposes, and not disjointness: DPV publishes concepts below two parents, and a disjointness over such a pair would contradict it."@en ;
-    bt:pairCount {n * (n - 1) // 2} .
+    bind:appliesTo <https://w3id.org/odrl-kb/dpv-purposes> ;
+    bind:generatedBy bind:PairwiseDistinctness ;
+    bind:origin bind:proseDefinition ;
+    bind:scopeCondition "Distinctness between the listed purposes, and not disjointness: DPV publishes concepts below two parents, and a disjointness over such a pair would contradict it."@en ;
+    bind:pairCount {n * (n - 1) // 2} .
 """
 
 
@@ -352,7 +353,7 @@ def declared_axioms(names) -> str:
     listing = "\n".join("% " + ", ".join(names[i:i + 8])
                         for i in range(0, len(names), 8))
     return (
-        "% Background theory: pairwise distinctness, declared by the "
+        "% Declarations: pairwise distinctness, declared by the "
         "parties.\n"
         "%\n"
         "% DPV publishes nothing that separates these purposes.  The rule is\n"
@@ -367,7 +368,7 @@ def declared_axioms(names) -> str:
         "%\n"
         "% The rule is stated here and instantiated by the problems.  A\n"
         "% problem naming two of the purposes below carries the inequation\n"
-        "% between them as a bg_dist_ assertion.\n"
+        "% between them as a bg_dist_ statement.\n"
         "%\n"
         f"% Purposes: {n}\n"
         f"% Pairs   : {n * (n - 1) // 2}\n"
@@ -393,7 +394,7 @@ def axioms(edges, concepts) -> str:
     lines = ["% Resource: subsumption as published by DPV.  res_ names mark",
              "% what the vocabulary asserts.",
              "%",
-             "% Several concepts appear as the subject of two assertions: the",
+             "% Several concepts appear as the subject of two statements: the",
              "% hierarchy is a directed acyclic graph, not a tree.  A"
              " refutation",
              "% may reach a common ancestor by either path.",
@@ -402,9 +403,9 @@ def axioms(edges, concepts) -> str:
         lines.append(f"fof(res_{slug(c)}_below_{slug(p)}, axiom,")
         lines.append(f"    kge_leq({slug(c)}, {slug(p)})).")
     lines += ["",
-              "% Background theory: none here.  DPV publishes no disjointness",
+              "% Declarations: none here.  DPV publishes no disjointness",
               "% among purposes; what the parties declare lives in the",
-              "% declared theory file.",
+              "% declarations file.",
               ""]
     return "\n".join(lines) + "\n"
 
@@ -441,7 +442,7 @@ def main() -> int:
     ap.add_argument("--declare-distinct", nargs="+", metavar="CONCEPT",
                     default=None,
                     help="concepts the parties declare pairwise distinct; "
-                         "the theory states the rule and the problems carry "
+                         "the declarations state the rule and the problems carry "
                          "the instances they use")
     ap.add_argument("--retrieved", default="2026-08-16")
     ap.add_argument("--out", default="problems", type=Path)
@@ -504,8 +505,8 @@ def main() -> int:
     kept = [(c, p) for c, p in edges if c in concepts and p in concepts]
     multi = sum(1 for c in concepts if sum(1 for x, _ in kept if x == c) > 1)
 
-    print(f"{len(concepts)} concepts, {len(kept)} order assertions, "
-          f"0 disjointness assertions")
+    print(f"{len(concepts)} concepts, {len(kept)} order statements, "
+          f"0 disjointness statements")
     for c, p in external:
         print(f"excluded: {c} below {p} "
               f"({p} is defined in another module and belongs to another "

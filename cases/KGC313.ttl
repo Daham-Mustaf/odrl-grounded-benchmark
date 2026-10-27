@@ -52,7 +52,7 @@ drk:KGC313-report a vrep:OperandVerdictReport ;
     vrep:referenceConstraint kgc:KGC313-p1-c1 ;
     vrep:comparedConstraint kgc:KGC313-p2-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-purpose> ;
-    vrep:backgroundTheory <https://w3id.org/odrl-kb/dpv-purposes/empty> ;
+    vrep:declarations <https://w3id.org/odrl-kb/dpv-purposes/empty> ;
     vrep:readAgainst drk:KGC314-report ;
     rdfs:comment """DPV does not declare marketing and scientific research distinct. One structure identifies them and one does not, so the verdict is Unknown."""@en ;
     dcterms:description """A library permits use for marketing. A researcher's policy commits to use for scientific research."""@en ;

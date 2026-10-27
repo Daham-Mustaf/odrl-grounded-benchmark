@@ -1,4 +1,4 @@
-% EU File type: no order assertions.
+% EU File type: no order statements.
 %
 % The authority publishes 228 formats and relates none of them.
 % This file is empty by construction, not by omission, and the
@@ -6,5 +6,5 @@
 % comes from the constraints and from what the parties declared.
 %
 % Concepts in the resource: 228
-% Order assertions: 0
-% Disjointness assertions: 0
+% Order statements: 0
+% Disjointness statements: 0

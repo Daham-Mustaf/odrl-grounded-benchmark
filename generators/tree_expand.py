@@ -21,7 +21,7 @@ _ASSERTION = re.compile(
 
 
 def _parse_assertions(text):
-    """Yield (label, kind, args) for every matching assertion, file order.
+    """Yield (label, kind, args) for every matching statement, file order.
 
     kind is one of leq, concept, dist.  Anything the pattern does not
     match (quantified disjointness, definitions) is left to the axiom
@@ -73,7 +73,7 @@ def _betweenness(constants, leq_edges):
 
 def assertions_for(constants, includes,
                    axioms_dir: Path = Path("problems/axioms")):
-    """The included assertions the SMT side needs, and the extra constants.
+    """The included statements the SMT side needs, and the extra constants.
 
     Returns (resource_block, background_block, extras): the two blocks as
     strings of named asserts, either possibly empty, and the closure
@@ -166,7 +166,7 @@ def _map_item(item, g: dict):
 
 
 def expand_tree(p: dict) -> dict:
-    """Fill the witness, declaration, and theory fields of a tree problem.
+    """Fill the witness, declaration, and declarations fields of a tree problem.
 
     A problem without a tree is returned unchanged, so the two kinds sit in
     one list and the generator does not branch.
@@ -204,7 +204,7 @@ def expand_tree(p: dict) -> dict:
     w = compile_operand(p["tree"], constants, p["sort"])
     # A background premise may name a concept neither constraint mentions:
     # the consent disjointness ranges over both branches while the
-    # constraints name one. Those concepts go into the assertion filter as
+    # constraints name one. Those concepts go into the statement filter as
     # well as the declarations, or an edge to one of them is dropped as
     # leading outside the problem.
     extra = [c for c in p.get("extra_constants", []) if c not in constants]

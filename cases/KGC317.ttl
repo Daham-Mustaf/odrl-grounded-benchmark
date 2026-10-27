@@ -52,8 +52,8 @@ drk:KGC317-report a vrep:OperandVerdictReport ;
     vrep:referenceConstraint kgc:KGC317-p1-c1 ;
     vrep:comparedConstraint kgc:KGC317-p2-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-purpose> ;
-    vrep:backgroundTheory <https://w3id.org/odrl-kb/dpv-purposes/empty> ;
-    rdfs:comment """The first policy excludes exactly the purpose the second requires, so the verdict is Incompatible without any resource or background assertion."""@en ;
+    vrep:declarations <https://w3id.org/odrl-kb/dpv-purposes/empty> ;
+    rdfs:comment """The first policy excludes exactly the purpose the second requires, so the verdict is Incompatible without any resource or background statement."""@en ;
     dcterms:description """A library permits use for any purpose other than marketing. A researcher's policy commits to use for marketing."""@en ;
     vrep:compatibilityState vrep:Incompatible ;
     vrep:certificate <certificates/KGC317-1.tstp> .

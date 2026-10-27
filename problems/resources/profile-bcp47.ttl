@@ -4,8 +4,8 @@
 # resolved to a concept.  
 # The sort is nom, and language is where that does visible work.  A
 # registry publishes a set of subtags and, over this slice, no relation
-# between them, so the resource file carries fifteen concept assertions
-# and no order assertion at all.  There is nothing for isA to read, and
+# between them, so the resource file carries fifteen concept statements
+# and no order statement at all.  There is nothing for isA to read, and
 # the signature rejects isA, isPartOf and hasPart on this operand before
 # the resource is opened.  Every other operand in the suite is tax or
 # mer.
@@ -76,7 +76,7 @@ ex:b-language-bcp47 a bind:OperandBinding ;
 
 ex:b-language-bcp47-primary a bind:OperandBinding ;
     dcterms:title "Language over BCP 47, composed tags reduced"@en ;
-    rdfs:comment """The same resource, the same sort, the same theory, read by a
+    rdfs:comment """The same resource, the same sort, the same declarations, read by a
          wider rule. A policy that the default binding cannot interpret
          may be interpretable here, and the two bindings can therefore
          return different verdicts on one pair of policies without

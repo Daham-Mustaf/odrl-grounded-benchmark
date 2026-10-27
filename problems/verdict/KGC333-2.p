@@ -19,7 +19,7 @@ include('axioms/KGE000-0.ax').
 include('axioms/LOC-dpvloc-geo.ax').
 
 % --- constants, groundings and resource hooks ----------------------------
-% Background theory: empty.  Two codes are not two places until something
+% Declarations: empty.  Two codes are not two places until something
 % says so, and the extension says nothing.
 
 % --- witness condition negated -------------------------------------------

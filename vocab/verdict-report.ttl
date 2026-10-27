@@ -1,6 +1,5 @@
 @prefix vrep:    <https://w3id.org/odrl-kb/verdict-report#> .
 @prefix bind:    <https://w3id.org/odrl-kb/binding#> .
-@prefix bt:      <https://w3id.org/odrl-kb/background#> .
 @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
 @prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
@@ -28,7 +27,7 @@ vrep:OperandVerdictReport a rdfs:Class ;
     rdfs:subClassOf vrep:Report ;
     rdfs:isDefinedBy <https://w3id.org/odrl-kb/verdict-report> ;
     rdfs:label "Operand Verdict Report"@en ;
-    skos:definition "The verdict for the constraints two policies place on one left operand, relative to a binding and a background theory: Compatible when every structure they admit has a use satisfying both constraints, Incompatible when none has, and Unknown otherwise."@en ;
+    skos:definition "The verdict for the constraints two policies place on one left operand, relative to a binding and its declarations: Compatible when every structure they admit has a use satisfying both constraints, Incompatible when none has, and Unknown otherwise."@en ;
     rdfs:comment "Only well-sorted constraints whose values all ground receive a verdict. Any other constraint is reported by an input check report."@en .
 
 vrep:InputCheckReport a rdfs:Class ;
@@ -63,18 +62,18 @@ vrep:CompatibilityState a rdfs:Class ;
 vrep:Compatible a vrep:CompatibilityState ;
     rdfs:isDefinedBy <https://w3id.org/odrl-kb/verdict-report> ;
     rdfs:label "Compatible"@en ;
-    skos:definition "Every structure the resource and the background theory admit has a use satisfying both constraints. Certified by a refutation of the negated witness condition."@en .
+    skos:definition "Every structure the resource and the declarations admit has a use satisfying both constraints. Certified by a refutation of the negated witness condition."@en .
 
 vrep:Incompatible a vrep:CompatibilityState ;
     rdfs:isDefinedBy <https://w3id.org/odrl-kb/verdict-report> ;
     rdfs:label "Incompatible"@en ;
-    skos:definition "No structure the resource and the background theory admit has a use satisfying both constraints. Certified by a refutation of the witness condition."@en .
+    skos:definition "No structure the resource and the declarations admit has a use satisfying both constraints. Certified by a refutation of the witness condition."@en .
 
 vrep:Unknown a vrep:CompatibilityState ;
     rdfs:isDefinedBy <https://w3id.org/odrl-kb/verdict-report> ;
     rdfs:label "Unknown"@en ;
-    skos:definition "Some structures the resource and the background theory admit have a use satisfying both constraints, and some do not. Both satisfiability queries are satisfiable."@en ;
-    rdfs:comment "A further declaration in the background theory can make the verdict definite."@en .
+    skos:definition "Some structures the resource and the declarations admit have a use satisfying both constraints, and some do not. Both satisfiability queries are satisfiable."@en ;
+    rdfs:comment "A further statement in the declarations can make the verdict definite."@en .
 
 vrep:Compatible owl:differentFrom vrep:Incompatible, vrep:Unknown .
 vrep:Incompatible owl:differentFrom vrep:Unknown .
@@ -114,12 +113,12 @@ vrep:binding a rdf:Property, owl:FunctionalProperty ;
     skos:definition "The binding that fixed the reading: which source supplies the concepts, at which sort, read how."@en ;
     rdfs:range bind:OperandBinding .
 
-vrep:backgroundTheory a rdf:Property, owl:FunctionalProperty ;
+vrep:declarations a rdf:Property, owl:FunctionalProperty ;
     rdfs:isDefinedBy <https://w3id.org/odrl-kb/verdict-report> ;
-    rdfs:label "background theory"@en ;
-    skos:definition "What the parties declared beyond the resource. Every report names one, the empty theory included, so a reader sees what the verdict rests on."@en ;
+    rdfs:label "declarations"@en ;
+    skos:definition "What the parties declared beyond the resource. Every report names one set, the empty declarations included, so a reader sees what the verdict rests on."@en ;
     rdfs:domain vrep:OperandVerdictReport ;
-    rdfs:range bt:BackgroundTheory .
+    rdfs:range bind:Declarations .
 
 vrep:compatibilityState a rdf:Property, owl:FunctionalProperty ;
     rdfs:isDefinedBy <https://w3id.org/odrl-kb/verdict-report> ;
@@ -132,14 +131,14 @@ vrep:compatibilityState a rdf:Property, owl:FunctionalProperty ;
 vrep:certificate a rdf:Property ;
     rdfs:isDefinedBy <https://w3id.org/odrl-kb/verdict-report> ;
     rdfs:label "certificate"@en ;
-    skos:definition "The evidence for a definite verdict, checkable without trusting the procedure: a refutation naming the resource, background and axiom premises it uses."@en ;
+    skos:definition "The evidence for a definite verdict, checkable without trusting the procedure: a refutation naming the resource, declared and axiom premises it uses."@en ;
     rdfs:comment "Referenced, not reified. An Unknown verdict has no refutation to point at."@en ;
     rdfs:domain vrep:OperandVerdictReport .
 
 vrep:readAgainst a rdf:Property, owl:SymmetricProperty ;
     rdfs:isDefinedBy <https://w3id.org/odrl-kb/verdict-report> ;
     rdfs:label "read against"@en ;
-    skos:definition "Another case this one should be read with, because the two differ in one thing: the binding, the background theory, or one value."@en ;
+    skos:definition "Another case this one should be read with, because the two differ in one thing: the binding, the declarations, or one value."@en ;
     rdfs:domain vrep:Report ;
     rdfs:range vrep:Report .
 

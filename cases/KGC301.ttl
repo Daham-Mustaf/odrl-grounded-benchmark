@@ -55,7 +55,7 @@ drk:KGC301-report a vrep:OperandVerdictReport ;
     vrep:referenceConstraint kgc:KGC301-p1-c1 ;
     vrep:comparedConstraint kgc:KGC301-p2-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-purpose> ;
-    vrep:backgroundTheory <https://w3id.org/odrl-kb/dpv-purposes/empty> ;
+    vrep:declarations <https://w3id.org/odrl-kb/dpv-purposes/empty> ;
     rdfs:comment """DPV does not say whether scientific research is a non-commercial purpose. One structure places it below non-commercial purposes and one does not, so the verdict is Unknown."""@en ;
     dcterms:description """BSB permits use for non-commercial research only. BnF's policy commits to use for scientific research."""@en ;
     vrep:compatibilityState vrep:Unknown .

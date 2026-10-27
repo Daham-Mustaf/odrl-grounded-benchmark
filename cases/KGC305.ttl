@@ -55,7 +55,7 @@ drk:KGC305-report a vrep:OperandVerdictReport ;
     vrep:referenceConstraint kgc:KGC305-p1-lc ;
     vrep:comparedConstraint kgc:KGC305-p2-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-spatial-geonames> ;
-    vrep:backgroundTheory <https://w3id.org/odrl-kb/geonames-europe/declared> ;
+    vrep:declarations <https://w3id.org/odrl-kb/geonames-europe/declared> ;
     vrep:readAgainst drk:KGC306-report ;
     rdfs:comment """France and Germany are declared distinct, but distinct areas can still lie one within the other. In a structure where France does not lie within Germany, a use in France satisfies exactly one alternative, so both policies hold. In a structure that places France within Germany, both alternatives hold and 'exactly one' fails. So the verdict is Unknown."""@en ;
     dcterms:description """A library permits use within exactly one of France and Germany. A researcher's policy commits to use in France. France and Germany are declared distinct."""@en ;

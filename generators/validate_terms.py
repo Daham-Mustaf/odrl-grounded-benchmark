@@ -11,7 +11,7 @@ namespace's schema.
 
 Why this exists
 ---------------
-Four namespaces are ours: bind:, bt:, vrep: and odrlkb:. Their schemas
+Three namespaces are ours: bind:, vrep: and odrlkb:. Their schemas
 live in vocab/. Instance files are written by builders and generators,
 at different times, by hand and by template, and nothing until now
 checked that a term written into a file is a term the schema defines.
@@ -20,8 +20,11 @@ The result was predictable. vrep:Refutation, vrep:premise,
 vrep:premiseSource, vrep:clashingConstraint, vrep:witness and
 vrep:ungroundedValue were written into every case file for months; none
 is in vocab/verdict-report.ttl. bt:assertionCount and bt:distinctFrom
-were written into a background theory; neither is in
-vocab/background.ttl.
+were written into a set of declarations; neither was in the schema of the
+time.
+
+The bt: namespace is retired. Its terms live in bind: (vocab/binding.ttl),
+and a bt: term left in any file is reported as a failure.
 
 An undefined term is not a typo. It is a claim in a controlled namespace
 that no schema backs, so a consumer resolving it gets nothing, and the
@@ -44,10 +47,13 @@ from pathlib import Path
 # each. A prefix not listed here is somebody else's and is skipped.
 OURS = {
     "bind":   "binding.ttl",
-    "bt":     "background.ttl",
     "vrep":   "verdict-report.ttl",
     "odrlkb": None,     # minted per resource by the builders; see below
 }
+
+# Namespaces that no longer exist. A term in one is a failure, whether or
+# not any schema defines it.
+RETIRED = {"bt": "bind:"}
 
 # odrlkb: terms are minted by the resource builders (odrlkb:within,
 # odrlkb:sameAs, odrlkb:Place and the like) and have no schema file yet.
@@ -157,6 +163,20 @@ def main() -> int:
                 for f in files[:10]:
                     print(f"      {f}")
 
+    for prefix, moved_to in sorted(RETIRED.items()):
+        names = sorted(used.get(prefix, {}))
+        if not names:
+            continue
+        failures += len(names)
+        print()
+        print(f"{prefix}: retired namespace, its terms moved to {moved_to}; "
+              f"still written:")
+        for name in names:
+            files = sorted(used[prefix][name])
+            where = f"  ({len(files)} files)" if len(files) > 3 \
+                else "  " + ", ".join(Path(f).name for f in files)
+            print(f"  {prefix}:{name}{where}")
+
     # A term defined and never used is not an error, but a schema that has
     # drifted ahead of what anything writes is worth seeing.
     print()
@@ -171,8 +191,8 @@ def main() -> int:
 
     print()
     if failures:
-        print(f"{failures} undefined terms. Either define them in the "
-              f"schema or stop writing them.")
+        print(f"{failures} undefined or retired terms. Either define them "
+              f"in the schema or stop writing them.")
         return 1
     print("every term in a controlled namespace is defined by its schema.")
     return 0

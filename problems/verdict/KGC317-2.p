@@ -19,7 +19,7 @@ include('axioms/KGE000-0.ax').
 include('axioms/DPV-dpv-purposes.ax').
 
 % --- constants, groundings and resource hooks ----------------------------
-% Background theory: empty, and it stays empty.  The incompatibility here
+% Declarations: empty, and it stays empty.  The incompatibility here
 % is between the two constraints, not between a constraint and something a
 % party declared.
 

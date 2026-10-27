@@ -5,39 +5,39 @@ Maps prover output onto the certificate vocabulary.
 
 Attribution, not verification
 -----------------------------
-This module records *which assertions a refutation used*.  It does not
+This module records *which statements a refutation used*.  It does not
 produce a checkable derivation.  A prover's proof uses unification,
 demodulation and superposition; the certificate proposition asks for
 propositionally valid steps over ground instances.  Turning one into the
 other is a normalisation step that does not exist yet.
 
 The distinction has a consequence for the vocabulary.  A quantified
-assertion the prover reports, an order axiom or a disjointness assertion of
-the background theory, is not itself a legitimate premise for the checker;
+statement the prover reports, an order axiom or a disjointness statement of
+the declarations, is not itself a legitimate premise for the checker;
 its ground instances are, and only the ones the refutation used.  So the
-names harvested here are written as `vrep:attributedAssertion`, not as
+names harvested here are written as `vrep:attributedStatement`, not as
 `vrep:premise`.  `vrep:premise` is reserved for the checker-level ground
 instances a normaliser would produce.
 
 Attribution is nonetheless the half a party needs: they withdraw an
-assertion, not an instance of one, so naming the quantified formula is
+statement, not an instance of one, so naming the quantified formula is
 correct at that level.
 
 Provenance by prefix
 --------------------
-    res_    an assertion of the resource               fromResource
-    bt_     an assertion of the background theory      fromBackgroundTheory
+    res_    a statement of the resource                fromResource
+    bt_     a statement of the declarations            fromDeclarations
     w_      a conjunct of the witness condition        fromConstraints
     ax_     an order axiom                             fromOrderAxiom
     eq_     an equality axiom                          fromEqualityAxiom
 
 The last is reserved and nothing emits it yet.  A refutation closing an
-identity literal against a distinctness assertion uses equality reasoning:
+identity literal against a distinctness statement uses equality reasoning:
 Vampire's proof of the language pair cites a demodulation step.  Whether
 those instances become legitimate premises, or the encoding replaces builtin
 equality with a predicate, is open, and it reaches into the paper.
 
-Only `bt_` assertions are withdrawable.  The resource is the authority's, the
+Only `bt_` statements are withdrawable.  The resource is the authority's, the
 constraints are the parties' own, and the axioms are the framework's.
 
 Two provers, one provenance map
@@ -113,10 +113,10 @@ def compare_models(m1: dict, m2: dict) -> list[str]:
 
 SOURCE = {
     "res": "fromResource",
-    "bt":  "fromBackgroundTheory",
-    "bg_dist": "fromBackgroundTheory",
-    "bg_disj": "fromBackgroundTheory",
-    "bg":  "fromBackgroundTheory",
+    "bt":  "fromDeclarations",
+    "bg_dist": "fromDeclarations",
+    "bg_disj": "fromDeclarations",
+    "bg":  "fromDeclarations",
     "w":   "fromConstraints",
     "wc":  "fromConstraints",
     "ax":  "fromOrderAxiom",
@@ -126,9 +126,9 @@ SOURCE = {
 # SOURCE maps several prefixes to one provenance class (bt, bg, bg_dist and
 # bg_disj all mean the parties' declaration), so its values repeat.  Loops
 # over the classes must use this list: iterating SOURCE.values() visits
-# fromBackgroundTheory four times and emits every such premise four times.
+# fromDeclarations four times and emits every such premise four times.
 CLASSES = list(dict.fromkeys(SOURCE.values()))
-WITHDRAWABLE = {"fromBackgroundTheory"}
+WITHDRAWABLE = {"fromDeclarations"}
 
 # Vampire delimits its proof; anything outside is echoed input or diagnostics.
 _PROOF_BLOCK = re.compile(
@@ -188,8 +188,8 @@ def premises_from_z3(output: str) -> tuple[str, list[str]]:
 def classify(names: list[str]) -> dict:
     """Split names by provenance prefix.
 
-    Deduplicated: a proof may use one assertion at several steps, but it is
-    one assertion, and a party withdrawing it withdraws it once. The order
+    Deduplicated: a proof may use one statement at several steps, but it is
+    one statement, and a party withdrawing it withdraws it once. The order
     of first appearance is kept.
     """
     out = {v: [] for v in SOURCE.values()}
@@ -209,8 +209,8 @@ def to_turtle(problem_id: str, kind: str, classified: dict,
               artefact: str | None = None, prover: str | None = None) -> str:
     """The observed certificate.
 
-    Writes `vrep:attributedAssertion`, not `vrep:premise`: these are the
-    assertions the refutation used, not the ground instances a checker would
+    Writes `vrep:attributedStatement`, not `vrep:premise`: these are the
+    statements the refutation used, not the ground instances a checker would
     replay.  `artefact` points at the raw proof, as provenance rather than as
     a checked object.
     """
@@ -227,13 +227,13 @@ def to_turtle(problem_id: str, kind: str, classified: dict,
     for source in CLASSES:
         for n in classified[source]:
             entries.append(
-                f"    vrep:attributedAssertion [\n"
+                f"    vrep:attributedStatement [\n"
                 f"        vrep:premiseSource vrep:{source} ;\n"
                 f'        vrep:formulaName "{n}" ;\n'
                 f'        rdfs:label "{labels.get(n, n)}"@en ]')
     for n in classified["unclassified"]:
         entries.append(
-            f"    vrep:attributedAssertion [\n"
+            f"    vrep:attributedStatement [\n"
             f"        vrep:premiseSource vrep:unclassified ;\n"
             f'        vrep:formulaName "{n}" ]')
 

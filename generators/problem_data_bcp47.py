@@ -18,10 +18,10 @@ The first six use eq and neq on one pair of subtags.  Each pair among them
 changes one thing and holds everything else fixed, so that the change is
 what the verdict responds to.
 
-    370 -> 371   one background theory withdrawn
+    370 -> 371   one set of declarations withdrawn
     372 -> 373   one grounding rule widened
     371 vs 372   an Unknown and a rejection, repaired differently
-    374 -> 375   one background theory withdrawn
+    374 -> 375   one set of declarations withdrawn
 
 KGC376 to KGC379 are not paired.  They take the set operators and the two
 connectives the first six leave out, each in a licensing scenario.  KGC377
@@ -82,7 +82,7 @@ reducing rule additionally takes a well-formed tag to its primary subtag,
 so "en-US" resolves to 'en'.
 
 KGC372 is read under the first and KGC373 under the second.  Same
-policies, same resource, same sort, same declared theory.  Under the exact
+policies, same resource, same sort, same declarations.  Under the exact
 rule the second policy's value cannot be interpreted at all.  Its
 constraint is rejected, no query is built, and the value itself is the
 evidence.  Under the reducing rule the value is read as English, and the
@@ -110,7 +110,7 @@ constraint is, and the case gets a grounding report instead of a verdict.
 Why the nominal sort is right here, and would not always be
 ------------------------------------------------------------
 The registry publishes Macrolanguage relations over its language subtags,
-each of them an order assertion between two subtags.  How many is measured
+each of them an order statement between two subtags.  How many is measured
 from the snapshot by the builder and written into the resource header
 rather than typed here.
 
@@ -318,7 +318,7 @@ PROBLEMS = [
                        "registry's content. Withdrawing it returns the "
                        "verdict to Unknown, which is KGC371.",
             "premises": [
-                ("fromBackgroundTheory",
+                ("fromDeclarations",
                  "bcp47:de and bcp47:fr are declared distinct, on RFC "
                  "5646's registry uniqueness"),
             ],
@@ -336,7 +336,7 @@ PROBLEMS = [
         "left_operand":      "language",
         "sort":              "nom",
         "resource":          RESOURCE,
-        # No background theory: withdrawal is the absence of a declaration,
+        # No declarations: withdrawal is the absence of a declaration,
         # not the presence of an empty one.
         "background_theory": EMPTY_BT,
         "binding":           BINDING_EXACT,
@@ -484,7 +484,7 @@ PROBLEMS = [
                "en-US reduces to English, which the registry rule makes "
                "distinct from German."),
             "premises": [
-                ("fromBackgroundTheory",
+                ("fromDeclarations",
                  "bcp47:de and bcp47:en are declared distinct, on RFC "
                  "5646's registry uniqueness"),
             ],
@@ -536,7 +536,7 @@ PROBLEMS = [
                 "subtags name different languages, so German is not French, "
                 "and a use in German satisfies both policies."),
             "premises": [
-                ("fromBackgroundTheory",
+                ("fromDeclarations",
                  "bcp47:de and bcp47:fr are declared distinct, on RFC "
                  "5646's registry uniqueness"),
             ],
@@ -632,7 +632,7 @@ PROBLEMS = [
                 "in both is not a use in Dutch only, so no use satisfies "
                 "both policies."),
             "premises": [
-                ("fromBackgroundTheory",
+                ("fromDeclarations",
                  "bcp47:fr and bcp47:nl are declared distinct, on RFC "
                  "5646's registry uniqueness"),
             ],
@@ -673,8 +673,8 @@ PROBLEMS = [
             "admits a language that is Italian and is not Italian, so the "
             "verdict is Incompatible.\n\n"
             "The registry rule is not used. The verdict is the same with "
-            "it and without it, which is why this case declares no "
-            "theory. The definite verdicts of KGC370 to KGC375 all rest "
+            "it and without it, which is why this case declares "
+            "nothing. The definite verdicts of KGC370 to KGC375 all rest "
             "on that rule."
         ),
         "certificate": {

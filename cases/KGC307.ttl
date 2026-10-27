@@ -55,7 +55,7 @@ drk:KGC307-report a vrep:OperandVerdictReport ;
     vrep:referenceConstraint kgc:KGC307-p1-lc ;
     vrep:comparedConstraint kgc:KGC307-p2-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-spatial-geonames> ;
-    vrep:backgroundTheory <https://w3id.org/odrl-kb/geonames-europe/declared> ;
+    vrep:declarations <https://w3id.org/odrl-kb/geonames-europe/declared> ;
     rdfs:comment """France and Germany are declared distinct, so a use in France does not cover Germany. It satisfies the first alternative and fails the second, and 'exactly one' holds."""@en ;
     dcterms:description """A library permits use in exactly one of two ways: in France alone, or in both France and Germany. A researcher's policy commits to use in France. France and Germany are declared distinct."""@en ;
     vrep:compatibilityState vrep:Compatible ;

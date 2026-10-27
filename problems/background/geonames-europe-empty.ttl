@@ -1,13 +1,13 @@
-# Background theory for the 15-feature GeoNames slice: empty.
+# Declarations for the 15-feature GeoNames slice: empty.
 #
 # GeoNames asserts no disjointness between sibling features, and the parties
 # declare none here.  Two constraints naming different regions are therefore
 # satisfiable together unless a party declares them apart.
 
-@prefix bt:      <https://w3id.org/odrl-kb/background#> .
+@prefix bind:    <https://w3id.org/odrl-kb/binding#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 
-<https://w3id.org/odrl-kb/geonames-europe/empty> a bt:BackgroundTheory ;
+<https://w3id.org/odrl-kb/geonames-europe/empty> a bind:Declarations ;
     dcterms:title "No declared disjointness"@en ;
-    bt:appliesTo <https://w3id.org/odrl-kb/geonames-europe> ;
-    bt:pairCount 0 .
+    bind:appliesTo <https://w3id.org/odrl-kb/geonames-europe> ;
+    bind:pairCount 0 .

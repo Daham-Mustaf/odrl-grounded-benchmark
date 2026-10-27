@@ -1,4 +1,4 @@
-# Background theory for the measures resource: declared distinctness.
+# Declarations for the measures resource: declared distinctness.
 #
 # The parties declare that no two of the listed names denote one measure.
 # Neither module asserts this, so the rule is the parties' and a verdict
@@ -18,12 +18,15 @@
 # Pairs   : 2701
 # Source  : https://w3id.org/dpv/2.3
 
-@prefix bt:      <https://w3id.org/odrl-kb/background#> .
+@prefix bind:    <https://w3id.org/odrl-kb/binding#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 
-<https://w3id.org/odrl-kb/dpv-tom/declared> a bt:BackgroundTheory ;
+<https://w3id.org/odrl-kb/dpv-tom/declared> a bind:Declarations ;
     dcterms:title "Pairwise distinctness of measures"@en ;
-    bt:appliesTo <https://w3id.org/odrl-kb/dpv-tom> ;
-    bt:generatedBy bt:PairwiseDistinctness ;
-    bt:scopeCondition "Distinctness between the measures the modules list, and not disjointness: the modules publish concepts below two parents, and a disjointness over such a pair would contradict the resource."@en ;
-    bt:pairCount 2701 .
+    bind:appliesTo <https://w3id.org/odrl-kb/dpv-tom> ;
+    bind:generatedBy bind:PairwiseDistinctness ;
+    bind:origin bind:proseDefinition ;
+    rdfs:comment "The origin rests on the DPV definitions."@en ;
+    bind:scopeCondition "Distinctness between the measures the modules list, and not disjointness: the modules publish concepts below two parents, and a disjointness over such a pair would contradict the resource."@en ;
+    bind:pairCount 2701 .

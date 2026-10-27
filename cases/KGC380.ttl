@@ -45,7 +45,7 @@ drk:KGC380-report a vrep:OperandVerdictReport ;
     vrep:referenceConstraint kgc:KGC380-p1-c1 ;
     vrep:comparedConstraint kgc:KGC380-p2-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-spatial-dpvloc-juris> ;
-    vrep:backgroundTheory <https://w3id.org/odrl-kb/dpv-loc/empty> ;
+    vrep:declarations <https://w3id.org/odrl-kb/dpv-loc/empty> ;
     vrep:readAgainst drk:KGC383-report ;
     rdfs:comment """The jurisdictional binding reads union membership as containment. It composes loc:BQ below loc:NL with loc:NL below loc:EU, so a use in Bonaire, Sint Eustatius and Saba satisfies isPartOf loc:EU, and the verdict is Compatible. In law this does not hold: the islands are overseas countries and territories under Art. 355(2) TFEU, outside the ordinary territorial scope of EU law. The verdict follows from the binding, not from the law. KGC383 shows the same reading giving a correct answer for a German region."""@en ;
     dcterms:description """A library permits use within the European Union. A researcher's policy commits to use in Bonaire, Sint Eustatius and Saba."""@en ;

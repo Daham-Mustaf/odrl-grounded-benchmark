@@ -17,7 +17,7 @@
 (declare-sort Concept 0)
 (declare-fun bcp_de () Concept)
 (declare-fun bcp_fr () Concept)
-; Background theory: registry uniqueness, as distinctness.
+; Declarations: registry uniqueness, as distinctness.
 (assert (! (distinct bcp_de bcp_fr) :named bt_kgc300_0))
 ; witness condition asserted
 (assert (! (or (and (= bcp_de bcp_de) (= bcp_de bcp_fr))

@@ -1,18 +1,21 @@
-# Background theory for the EU File type resource: one distinctness.
+# Declarations for the EU File type resource: one distinctness.
 #
 # The parties declare that these two formats are different.  The table does
 # not: it lists both and relates them in no way.  A verdict resting on this
-# assertion is the parties' and can be reopened by withdrawing it.
+# statement is the parties' and can be reopened by withdrawing it.
 #
 # Source: http://publications.europa.eu/resource/authority/file-type/20260715-0
 
 @prefix ft:      <http://publications.europa.eu/resource/authority/file-type/> .
-@prefix bt:      <https://w3id.org/odrl-kb/background#> .
+@prefix bind:    <https://w3id.org/odrl-kb/binding#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 
-<https://w3id.org/odrl-kb/eu-file-type/declared> a bt:BackgroundTheory ;
+<https://w3id.org/odrl-kb/eu-file-type/declared> a bind:Declarations ;
     dcterms:title "One declared distinctness"@en ;
-    bt:appliesTo <https://w3id.org/odrl-kb/eu-file-type> ;
-    bt:generatedBy bt:PartyDeclaration ;
-    bt:pairCount 1 .
+    bind:appliesTo <https://w3id.org/odrl-kb/eu-file-type> ;
+    bind:generatedBy bind:PartyDeclaration ;
+    bind:origin bind:practiceRule ;
+    rdfs:comment "The origin rests on the file-type authority's separate entries."@en ;
+    bind:pairCount 1 .
 

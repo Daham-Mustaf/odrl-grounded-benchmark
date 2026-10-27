@@ -27,7 +27,7 @@
 % SPC      : FOF_SAT_RFN
 %
 % Concepts : 15
-% Order assertions : 0
+% Order statements : 0
 % Macrolanguage fields in the whole snapshot: 453;
 % in this slice: 0, generator-verified.
 %-------------------------------------------------------------------------
@@ -69,6 +69,6 @@ fof(res_bcp47_pt, axiom, kge_concept(bcp_pt)).
 % sv     Swedish
 fof(res_bcp47_sv, axiom, kge_concept(bcp_sv)).
 
-% No order assertions: the registry publishes none over this
+% No order statements: the registry publishes none over this
 % slice, and the generator aborts if any member carries a
 % Macrolanguage field.

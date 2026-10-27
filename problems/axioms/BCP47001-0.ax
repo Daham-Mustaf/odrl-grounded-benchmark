@@ -23,7 +23,7 @@
 %            denies that anything lies below both, which needs an
 %            order this sort does not have.
 %
-%            A party withdraws this theory by omitting the
+%            A party withdraws these declarations by omitting the
 %            include.  Any definite verdict resting on it
 %            reopens, Compatible as well as Incompatible.
 %

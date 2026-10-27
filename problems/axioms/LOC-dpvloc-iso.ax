@@ -1,4 +1,4 @@
-% Background theory: the ISO 3166 uniqueness rule.
+% Declarations: the ISO 3166 uniqueness rule.
 %
 % ISO 3166 assigns one code to an area, so two areas listed by the
 % extension are two places.  The extension asserts none of this: the
@@ -13,7 +13,7 @@
 %
 % The rule is stated here and instantiated by the problems.  A
 % problem naming two of the areas below carries the inequation
-% between them as a bg_dist_ assertion, so that a refutation cites
+% between them as a bg_dist_ statement, so that a refutation cites
 % the instance it used.
 %
 % Areas: 249

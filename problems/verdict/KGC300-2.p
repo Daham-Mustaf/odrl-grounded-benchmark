@@ -19,7 +19,7 @@ include('axioms/KGE000-0.ax').
 include('axioms/BCP47000-0.ax').
 
 % --- constants, groundings and resource hooks ----------------------------
-% Background theory: the registry's uniqueness rule, as distinctness.
+% Declarations: the registry's uniqueness rule, as distinctness.
 fof(bg_disj_de_distinct_fr, axiom,
     bcp_de != bcp_fr).
 

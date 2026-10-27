@@ -20,7 +20,7 @@ include('axioms/EUFT-filetype.ax').
 include('axioms/EUFT-filetype-declared.ax').
 
 % --- constants, groundings and resource hooks ----------------------------
-% Background theory: one declared distinctness, from
+% Declarations: one declared distinctness, from
 % EUFT-filetype-declared.ax.  The table separates nothing itself.
 
 % --- witness condition asserted ------------------------------------------

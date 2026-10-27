@@ -44,14 +44,14 @@ def C(op, *vals, side="offer"):
 def _iso(*pairs):
     """Declared-distinctness instances, named bg_dist_ on both encodings.
 
-    The declared theory states the rule and lists the purposes it ranges
+    The declarations state the rule and list the purposes it ranges
     over; a problem naming two of them carries the inequation between
     them, so a refutation cites the instance it used rather than one
     term standing for all of them. The name must match on both sides:
     an unsat core and a TPTP proof are compared by premise name.
     """
-    fof = ["% Background theory: declared distinctness instances, stated in",
-           "% the declared theory file and instantiated here.", ""]
+    fof = ["% Declarations: declared distinctness instances, stated in",
+           "% the declarations file and instantiated here.", ""]
     smt = ["; Declared distinctness this problem adopts, named as the TPTP",
            "; side names it."]
     for a, b in pairs:
@@ -134,7 +134,7 @@ The order-based seven, one per thing that can go wrong:
     KGC310  isA R&D      x eq SR    -> Compatible    one resource premise
     KGC311  isA Purpose  x eq NCR   -> Compatible    two premises + transitivity
     KGC313  eq Marketing x eq SR    -> Unknown       nothing declares them apart
-    KGC314  the same pair under a theory that does   -> Incompatible
+    KGC314  the same pair under declarations that do -> Incompatible
     KGC315  isA Purpose  x eq RIS   -> Compatible    six premises + transitivity
     KGC316  isA RIS      x eq Purpose -> Unknown     the order runs one way
     KGC317  isNoneOf {Mk} x eq Mk   -> Incompatible  from the constraints alone
@@ -158,9 +158,9 @@ Declarations over this resource
 The module publishes concepts below two parents: NonCommercialResearch
 lies below both NonCommercialPurpose and ResearchAndDevelopment, and ten
 other concepts have two parents. Those pairs may be declared distinct,
-which is what the declared theory states, and may not be declared
-disjoint: the resource publishes a concept below both, so the theory and
-the resource would share no model.
+which is what the declarations state, and may not be declared
+disjoint: the resource publishes a concept below both, so the declarations
+and the resource would share no model.
 """
 PROBLEMS = [
 
@@ -186,7 +186,7 @@ PROBLEMS = [
         ),
 
         "fof_decls": """\
-% Background theory: empty.  The purposes module publishes no disjointness
+% Declarations: empty.  The purposes module publishes no disjointness
 % and no distinctness, and the parties declare none.
 """,
         "fof_witness": f"""\
@@ -287,7 +287,7 @@ kgc:KGC310-p2-c1 a odrl:Constraint ;
         ),
 
         "fof_decls": """\
-% Background theory: empty, as above.
+% Declarations: empty, as above.
 """,
         "fof_witness": f"""\
 ( ( kge_leq({PUR}, {PUR}) & {PUR} = {NCR} )
@@ -365,8 +365,8 @@ kgc:KGC311-p2-c1 a odrl:Constraint ;
 
     # -----------------------------------------------------------------
     # KGC313  Unknown for the other reason: two names the resource never
-    # relates and the background theory never separates.  Pair this with
-    # a background theory declaring them distinct and the verdict moves
+    # relates and the declarations never separate.  Pair this with
+    # a set of declarations declaring them distinct and the verdict moves
     # to Incompatible; that is the stability demonstration.
     # -----------------------------------------------------------------
     {
@@ -388,13 +388,13 @@ kgc:KGC311-p2-c1 a odrl:Constraint ;
             "dpv:ScientificResearch).  Both denote singletons, and the two "
             "constraints are satisfiable together only if the two concepts "
             "are the same.  DPV publishes no distinctness, so a model may "
-            "identify them: Unknown.  The same pair under a background "
-            "theory declaring the two purposes distinct is Incompatible, "
+            "identify them: Unknown.  The same pair under "
+            "declarations that declare the two purposes distinct is Incompatible, "
             "which is what makes the declaration visible in the verdict."
         ),
 
         "fof_decls": """\
-% Background theory: empty.  Two names are not two concepts until something
+% Declarations: empty.  Two names are not two concepts until something
 % says so, and the purposes module says nothing.
 """,
         "fof_witness": f"""\
@@ -468,10 +468,10 @@ kgc:KGC313-p2-c1 a odrl:Constraint ;
     },
 
     # -----------------------------------------------------------------
-    # KGC314  KGC313 again, under a background theory that separates the
+    # KGC314  KGC313 again, under a set of declarations that separates the
     # two purposes.  Same resource, same constraints, same witness: only
     # the declaration differs, and the verdict moves.  The refutation is
-    # attributable to an assertion a party can withdraw.
+    # attributable to a statement a party can withdraw.
     # -----------------------------------------------------------------
     {
         "id":                "KGC314",
@@ -489,8 +489,8 @@ kgc:KGC313-p2-c1 a odrl:Constraint ;
             "As KGC313, with marketing and scientific research declared "
             "distinct."),
         "description": (
-            "The constraints of KGC313, over the same resource, under a "
-            "background theory in which the parties declare the two purposes "
+            "The constraints of KGC313, over the same resource, under "
+            "declarations in which the parties declare the two purposes "
             "distinct.  No model then identifies them, the witness fails "
             "everywhere, and the verdict is Incompatible.  DPV publishes no "
             "such distinctness: the verdict rests on the declaration, and "
@@ -520,14 +520,14 @@ kgc:KGC313-p2-c1 a odrl:Constraint ;
         "certificate": {
             "kind": "Refutation",
    "comment": (
-        "The background theory declares Marketing and ScientificResearch "
+        "The declarations declare Marketing and ScientificResearch "
         "distinct, so the two constraints cannot be satisfied by the same "
         "purpose. This declaration changes the verdict from Unknown to "
         "Incompatible; withdrawing the declaration would return the verdict "
         "to Unknown."
     ),
             "premises": [
-                ("fromBackgroundTheory",
+                ("fromDeclarations",
                  "dpv:Marketing and dpv:ScientificResearch are declared "
                  "distinct"),
             ],
@@ -577,7 +577,7 @@ kgc:KGC314-p2-c1 a odrl:Constraint ;
 
     # -----------------------------------------------------------------
     # KGC315  The longest chain in the module, taken in the direction the
-    # order runs.  Six resource assertions and transitivity.
+    # order runs.  Six resource statements and transitivity.
     # -----------------------------------------------------------------
     {
         "id":                "KGC315",
@@ -602,7 +602,7 @@ kgc:KGC314-p2-c1 a odrl:Constraint ;
         ),
 
         "fof_decls": """\
-% Background theory: empty.
+% Declarations: empty.
 """,
         "fof_witness": f"""\
 ( ( kge_leq({PUR}, {PUR}) & {PUR} = {RIS} )
@@ -635,7 +635,7 @@ kgc:KGC314-p2-c1 a odrl:Constraint ;
     "All six relations are published by DPV."
 ),
             "premises": [
-                ("fromResource", "the six order assertions of the chain"),
+                ("fromResource", "the six order statements of the chain"),
                 ("fromOrderAxiom", "transitivity"),
             ],
         },
@@ -713,7 +713,7 @@ kgc:KGC315-p2-c1 a odrl:Constraint ;
         ),
 
         "fof_decls": """\
-% Background theory: empty.
+% Declarations: empty.
 """,
         "fof_witness": f"""\
 ( ( kge_leq({RIS}, {RIS}) & {RIS} = {PUR} )
@@ -813,16 +813,16 @@ kgc:KGC316-p2-c1 a odrl:Constraint ;
         "description": (
             "Offer (purpose, isNoneOf, {dpv:Marketing}) against request "
             "(purpose, eq, dpv:Marketing).  The offer excludes exactly the "
-            "purpose the request requires.  No order assertion and no "
+            "purpose the request requires.  No order statement and no "
             "declaration takes part: the witness asks for a concept both "
             "distinct from and identical to marketing, which no structure "
             "provides.  Incompatible, and the certificate has nothing "
             "withdrawable in it, so unlike KGC300 and KGC314 no party can "
-            "reopen the verdict by retracting an assertion."
+            "reopen the verdict by retracting a statement."
         ),
 
         "fof_decls": """\
-% Background theory: empty, and it stays empty.  The incompatibility here
+% Declarations: empty, and it stays empty.  The incompatibility here
 % is between the two constraints, not between a constraint and something a
 % party declared.
 """,
@@ -846,7 +846,7 @@ kgc:KGC316-p2-c1 a odrl:Constraint ;
 "comment": (
     "The first policy excludes exactly the purpose the second requires, so "
     "the verdict is Incompatible without any resource or background "
-    "assertion."),
+    "statement."),
             "premises": [
                 ("fromConstraints", "the witness condition"),
             ],
@@ -954,8 +954,8 @@ kgc:KGC317-p2-c1 a odrl:Constraint ;
                 "Scientific research is declared distinct from research and "
                 "development and from marketing, so it is neither value the "
                 "first policy lists."),
-            "premises": [("fromBackgroundTheory", "SR distinct from RnD"),
-                         ("fromBackgroundTheory", "SR distinct from Marketing")]},
+            "premises": [("fromDeclarations", "SR distinct from RnD"),
+                         ("fromDeclarations", "SR distinct from Marketing")]},
         "provenance": "As KGC393; warrant DPV's definitions of distinct purposes.",
         "ttl": _ttl("KGC394", PURPOSE,
                     "use for research and development or marketing",
@@ -979,7 +979,7 @@ kgc:KGC317-p2-c1 a odrl:Constraint ;
             "The taxonomic draft of KGC393's intent. The first disjunct reads "
             "the order, DPV places scientific research below research and "
             "development, and the verdict is Compatible on one published "
-            "assertion. Same intent as KGC393, opposite behaviour: this draft "
+            "statement. Same intent as KGC393, opposite behaviour: this draft "
             "defers to the authority and covers purposes DPV adds below the "
             "branch; KGC393's is fixed to two names."),
         "certificate": {"kind": "Refutation",
@@ -1063,7 +1063,7 @@ kgc:KGC317-p2-c1 a odrl:Constraint ;
             "comment": "Advertising is declared distinct from marketing, so it "
                        "lies in the complement; that it lies below marketing "
                        "is not consulted.",
-            "premises": [("fromBackgroundTheory",
+            "premises": [("fromDeclarations",
                           "Advertising distinct from Marketing")]},
         "provenance": "Marketing exclusions in research-data licences; the "
                       "drafting error they invite.",

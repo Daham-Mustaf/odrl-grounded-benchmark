@@ -49,7 +49,7 @@ drk:KGC377-report a vrep:OperandVerdictReport ;
     vrep:referenceConstraint kgc:KGC377-p1-c1 ;
     vrep:comparedConstraint kgc:KGC377-p2-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-language-bcp47> ;
-    vrep:backgroundTheory <https://w3id.org/odrl-kb/bcp47/empty> ;
+    vrep:declarations <https://w3id.org/odrl-kb/bcp47/empty> ;
     rdfs:comment """The first policy excludes Italian and the second policy requires it. This holds in every structure, so no declaration is used."""@en ;
     dcterms:description """English and Italian rights were sold separately, so a publisher permits any language except English and Italian. The licensee distributes in Italian."""@en ;
     vrep:compatibilityState vrep:Incompatible ;

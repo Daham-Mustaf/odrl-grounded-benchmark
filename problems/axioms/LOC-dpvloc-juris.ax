@@ -4,15 +4,15 @@
 % The edges the reading does not take are named in the resource
 % header, with what each of them relates.
 %
-% The identity assertions below are this encoding's, not the
+% The identity statements below are this encoding's, not the
 % extension's: it publishes identity, and identity is written here
-% as two order assertions which antisymmetry collapses.  They are
+% as two order statements which antisymmetry collapses.  They are
 % named res_x_same_y so that a refutation citing one is visibly
 % resting on identity rather than on published containment.
 %
-% Order assertions, published : 4963
+% Order statements, published : 4963
 % Identity pairs, published   : 30
-% Order assertions, encoded   : 60
+% Order statements, encoded   : 60
 % Source                      : https://w3id.org/dpv/2.3/loc
 
 fof(res_loc_ad_02_within_loc_ad, axiom,

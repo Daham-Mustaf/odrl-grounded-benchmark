@@ -9,7 +9,7 @@ well-sortedness cannot be checked: defaulting to nom would silently accept
 some constraints and reject others with no basis.  A missing profile entry is
 an error, not a default.
 
-The background theory may be empty.  That is a legitimate state of the world,
+The declarations may be empty.  That is a legitimate state of the world,
 not a failure: with no distinctness or disjointness declared, nothing is
 Incompatible except where an operator meets its own complement, because a
 structure may identify any two concepts the resource has not separated.
@@ -87,7 +87,7 @@ def read_profile(path) -> dict[str, Binding]:
         operand = _local(g.value(b, V.leftOperand))
         sort = _local(g.value(b, V.sort))
         resource = str(g.value(b, V.resource))
-        background = g.value(b, V.backgroundTheory)
+        background = g.value(b, V.declarations)
         out[operand] = Binding(operand, sort, resource,
                                str(background) if background else None)
     return out
@@ -110,7 +110,7 @@ def read_policy(path, side: str) -> list[Constraint]:
 
 
 def read_resource(path, iri: str) -> Resource:
-    """Concepts and order assertions.  Nothing else is read."""
+    """Concepts and order statements.  Nothing else is read."""
     g = Graph().parse(path, format="turtle")
     r = Resource(iri)
     SKOS = Namespace("http://www.w3.org/2004/02/skos/core#")

@@ -44,7 +44,7 @@ verdict on the certificate's authority, which is backwards: the certificate
 is what gives the verdict its authority.
 
 The separation also makes the withdrawability claim legible.  A verdict
-resting on a background theory reopens when a party withdraws the
+resting on a set of declarations reopens when a party withdraws the
 declaration.  Saying so belongs with the premises, not with the answer, and a
 reader deciding whether to contest a verdict reads the certificate.
 """
@@ -67,7 +67,7 @@ VERDICT_IRI = {
 
 SOURCE_IRI = {
     "fromResource":         "vrep:fromResource",
-    "fromBackgroundTheory": "vrep:fromBackgroundTheory",
+    "fromDeclarations": "vrep:fromDeclarations",
     "fromConstraints":      "vrep:fromConstraints",
     "fromOrderAxiom":       "vrep:fromOrderAxiom",
     "fromEqualityAxiom":    "vrep:fromEqualityAxiom",
@@ -122,7 +122,7 @@ def write_report(pid, verdict, statuses, problem, path,
     if problem.get("resource"):
         lines.append(f"    vrep:resource <{problem['resource']}> ;")
     if problem.get("background_theory"):
-        lines.append(f"    vrep:backgroundTheory <{problem['background_theory']}> ;")
+        lines.append(f"    vrep:declarations <{problem['background_theory']}> ;")
 
     lines.append(f"    vrep:proversAgree {'true' if agree else 'false'} ;")
 
@@ -172,7 +172,7 @@ def write_certificate(pid, verdict, kind, path, today=None,
     if kind == "Refutation":
         head += [
             "# A refutation of one of the two queries, with the premises it",
-            "# used.  Each premise is attributed: an assertion the authority",
+            "# used.  Each premise is attributed: a statement the authority",
             "# published, a declaration the parties made, the constraints",
             "# themselves, or an instance of an axiom of the order.",
             "#",
@@ -185,7 +185,7 @@ def write_certificate(pid, verdict, kind, path, today=None,
         head += [
             "# Two models, one for each query, and the concepts they disagree",
             "# about.  Both queries were satisfiable, so the resource and the",
-            "# background theory leave the question open, and the difference",
+            "# declarations leave the question open, and the difference",
             "# below is what a declaration would have to settle.",
         ]
     head += ["", PREFIXES]
@@ -216,7 +216,7 @@ def write_certificate(pid, verdict, kind, path, today=None,
                 f"{'true' if name in withdrawable else 'false'} ]",
             ]
             blocks.append("\n".join(entry))
-        lines.append("    vrep:attributedAssertion\n" + " ,\n".join(blocks) + " ;")
+        lines.append("    vrep:attributedStatement\n" + " ,\n".join(blocks) + " ;")
         lines.append(
             f"    vrep:withdrawablePremiseCount {len(withdrawable)} .")
 
@@ -233,7 +233,7 @@ def write_certificate(pid, verdict, kind, path, today=None,
                 "# No premise of this refutation is a party declaration.  The",
                 "# verdict rests on the constraints and on what the authority",
                 "# published, and no party can reopen it by withdrawing an",
-                "# assertion of their own.",
+                "# statement of their own.",
             ]
     else:
         for i, m in enumerate(models, start=1):

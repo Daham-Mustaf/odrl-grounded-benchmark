@@ -90,12 +90,12 @@ _AX_NAMES = ["ax_leq_reflexive", "ax_leq_antisymmetric", "ax_leq_transitive"]
 def _name_asserts(block: str, default_prefix: str, p: dict) -> str:
     """Wrap each bare (assert ...) as (assert (! ... :named <n>)).
 
-    Comments and blank lines pass through.  An assertion already carrying a
+    Comments and blank lines pass through.  A statement already carrying a
     name is left alone.  Order axioms take their TPTP names; everything else
     is numbered under the given prefix and the problem id.
 
     The prefix is the caller's to supply, and it must be right: a core is
-    classified by prefix, so naming a background-theory assertion res_ makes
+    classified by prefix, so naming a declared statement res_ makes
     Z3 report it as the authority's when it is the parties'.  That is not a
     cosmetic error.  It is the distinction the whole certificate rests on,
     and it showed up as a spurious disagreement between the two provers on
@@ -206,7 +206,7 @@ def write_smt2(p: dict, q: int, out_dir: Path) -> Path:
     # not (a purely nominal operand, where no constraint mentions the order)
     # would reference an undeclared symbol, so it gets none.
     #
-    # Every assertion is named, with the same prefixes the TPTP side uses, so
+    # Every statement is named, with the same prefixes the TPTP side uses, so
     # that an unsat core from Z3 and a proof from Vampire classify through one
     # provenance map.  Two provers naming the same premises is worth more than
     # either naming them alone.
@@ -221,10 +221,10 @@ def write_smt2(p: dict, q: int, out_dir: Path) -> Path:
     if "kge_leq" in decls:
         parts.append(_name_asserts(SMT_ORDER_AXIOMS, "ax", p))
 
-    # Resource and background theory are named apart, so that an unsat core
+    # Resource and declarations are named apart, so that an unsat core
     # attributes to the same place a TPTP proof does.  smt2_asserts is the
     # older single field: a problem still using it is assumed to hold only
-    # resource assertions, and one that does not should be split.
+    # resource statements, and one that does not should be split.
     if "smt2_resource" in p or "smt2_background" in p:
         if p.get("smt2_resource", "").strip():
             parts.append(_name_asserts(p["smt2_resource"], "res", p))
@@ -255,7 +255,7 @@ def write_expected_certificate(p: dict, cert_dir: Path) -> Path:
 
     NOT YET ENABLED. The five vrep: terms this writes are not in
     vocab/verdict-report.ttl: Certificate, fromResource,
-    fromBackgroundTheory, fromConstraints, fromOrderAxiom. Define them
+    fromDeclarations, fromConstraints, fromOrderAxiom. Define them
     there before any caller passes cert_dir, or this writes a file whose
     every term is invented.
 
@@ -407,7 +407,7 @@ def _grounding_report_block(p: dict, body: str) -> str:
 
     The constraint is rejected before any query is built, so the report
     names that constraint and the value, as a well-sortedness report names
-    an ill-sorted constraint.  It carries no verdict, no background theory
+    an ill-sorted constraint.  It carries no verdict, no declarations
     and no certificate.
     """
     pid = p["id"]
@@ -442,7 +442,7 @@ def _report_block(p: dict, body: str) -> str:
     """The expected report, from the problem's own fields.
 
     The report carries the verdict, the two policies and the constraints it
-    is about, the binding and the background theory that fixed the reading,
+    is about, the binding and the declarations that fixed the reading,
     one sentence saying why the verdict is what it is, and a reference to
     the evidence.  The verdict is symmetric: reference and compared name
     the two policies in the order the problem lists them, nothing more.
@@ -459,8 +459,8 @@ def _report_block(p: dict, body: str) -> str:
     if not p.get("binding"):
         raise ValueError(f"{pid}: no binding; a verdict is relative to one")
     if not p.get("background_theory"):
-        raise ValueError(f"{pid}: no background theory; name the empty "
-                         f"theory of the resource when the parties declare "
+        raise ValueError(f"{pid}: no declarations; name the empty "
+                         f"declarations of the resource when the parties declare "
                          f"nothing")
 
     c1 = ", ".join(top_constraints(body, f"policy-{n}-1"))
@@ -476,12 +476,12 @@ def _report_block(p: dict, body: str) -> str:
         f"    vrep:referenceConstraint {c1} ;",
         f"    vrep:comparedConstraint {c2} ;",
         f"    vrep:binding <{p['binding']}> ;",
-        f"    vrep:backgroundTheory <{p['background_theory']}> ;",
+        f"    vrep:declarations <{p['background_theory']}> ;",
     ]
 
     # The case this one is meant to be read with: the same policies under
     # a different binding, or the same constraints with and without a
-    # declared theory.
+    # declarations.
     if p.get("twin"):
         lines.append(f"    vrep:readAgainst drk:{p['twin']}-report ;")
 
@@ -586,7 +586,7 @@ def verdict_of(q1: str, q2: str) -> str:
     returning Unknown, because Unknown is an answer about the vocabulary
     and this is a failure to compute.
 
-    Both unsatisfiable means the resource and the background theory share
+    Both unsatisfiable means the resource and the declarations share
     no model. Every verdict is then vacuously true of the empty set of
     admissible structures, so none is reported.
     """

@@ -1,7 +1,7 @@
 % Resource: the legal bases of GDPR Article 6, as the Data Privacy
 % Vocabulary and its GDPR extension publish them.
 %
-% Each assertion is one skos:broader triple.  The extension places
+% Each statement is one skos:broader triple.  The extension places
 % each Article 6 concept both under the article it refines and
 % under the DPV category it belongs to, so a concept may appear
 % below more than one other.

@@ -18,7 +18,7 @@
 # Licence  : W3C Document License 2023
 #
 # Concepts                    : 74
-# Order assertions, published : 75
+# Order statements, published : 75
 
 @prefix dpv:     <https://w3id.org/dpv#> .
 @prefix odrlkb:  <https://w3id.org/odrl-kb/dpv-tom#> .

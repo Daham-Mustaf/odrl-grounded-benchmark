@@ -19,7 +19,7 @@ include('axioms/KGE000-0.ax').
 include('axioms/DPV-dpv-purposes.ax').
 
 % --- constants, groundings and resource hooks ----------------------------
-% Background theory: empty.  The purposes module publishes no disjointness
+% Declarations: empty.  The purposes module publishes no disjointness
 % and no distinctness, and the parties declare none.
 
 % --- witness condition negated -------------------------------------------

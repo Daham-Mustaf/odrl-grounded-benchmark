@@ -111,13 +111,13 @@ INVERSE = {
     XKOS + "generalizes": XKOS + "specializes",
 }
 
-# Identity between concepts.  The background theory reads these; the
+# Identity between concepts.  The declarations read these; the
 # resource does not.
 IDENTITY = {
     str(OWL.sameAs), str(SKOS.exactMatch),
     "http://www.w3.org/2004/02/skos/core#sameAs",  # not a SKOS term; DPV uses it
 }
-# Assertions that two concepts are apart.  No resource in the suite has
+# Statements that two concepts are apart.  No resource in the suite has
 # ever had one; the count is printed because its absence is a finding.
 SEPARATION = {
     str(OWL.disjointWith), str(OWL.differentFrom),
@@ -556,7 +556,7 @@ def survey(path: Path, verbose: bool, home_override, closure_cap):
                 parent[ra] = rb
         clusters = Counter(find(n) for n in nodes)
         print(f"\n  identity structure: {len(ident_edges)} directional "
-              f"assertions, {len(ident_pairs)} unordered pairs, "
+              f"statements, {len(ident_pairs)} unordered pairs, "
               f"{len(clusters)} clusters, largest "
               f"{max(clusters.values())}")
 
@@ -566,13 +566,13 @@ def survey(path: Path, verbose: bool, home_override, closure_cap):
     print("\n  summary")
     if stats:
         for p, st in stats.items():
-            print(f"    {st['edges']:6}  order assertions via {short(p, g)}"
+            print(f"    {st['edges']:6}  order statements via {short(p, g)}"
                   f", depth {st['depth']}, roots {st['roots']}, "
                   f"multi-parent {st['multi']}, cycles {st['cycles']}")
     else:
         print("           no order candidate between concepts of this file")
     print(f"    {len(ident_pairs) if ident_edges else 0:6}  identity pairs")
-    print(f"    {sep:6}  separation assertions "
+    print(f"    {sep:6}  separation statements "
           f"{'' if sep else '(none: distinctness is the parties to declare)'}")
     print(f"    {len(retired):6}  retired concepts")
     lic = list(g.objects(None, DCTERMS.license))

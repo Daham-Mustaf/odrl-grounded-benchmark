@@ -21,7 +21,7 @@ The territorial profile reads containment, and the European Union is not in
 its concept set: the union edges are membership, which that profile does not
 take, so dpv-loc:EU grounds to nothing and the constraint has no denotation.
 The jurisdictional profile reads containment together with membership, and
-the same constraint is Compatible on one assertion.
+the same constraint is Compatible on one statement.
 
 Neither profile is the correct reading of the file.  They are two readings,
 both faithful to what the extension publishes, differing in which published
@@ -51,7 +51,7 @@ and FR-TF is within FR, so nothing is reachable only by way of an identity.
 A problem built to need one would be answered by the containment before the
 identity was consulted.
 
-The assertions are in the resource because the slice is faithful to what the
+The statements are in the resource because the slice is faithful to what the
 extension publishes, not because a verdict rests on them.  A resource whose
 identities did carry a verdict would be worth having; this one does not, and
 saying so is better than constructing a problem that appears to need it.
@@ -64,7 +64,7 @@ over the concepts the grounding names.
   KGC330  D = {x | x <= nl} and {bq},  named {nl, bq}
           W = (nl <= nl & nl = bq) | (bq <= nl & bq = bq)
           The extension places Bonaire under the Netherlands, so the second
-          disjunct holds in every model.  Compatible on one assertion, and
+          disjunct holds in every model.  Compatible on one statement, and
           the certificate needs no transitivity: the territorial order is two
           levels deep and this is one step of it.
 
@@ -84,27 +84,27 @@ over the concepts the grounding names.
   KGC334  The same W under one instance of the ISO rule, that Germany and
           France are distinct areas.  No model then identifies them, the
           witness fails everywhere, and the verdict is Incompatible.  The
-          premise is a rule the parties adopted, not an assertion the
+          premise is a rule the parties adopted, not a statement the
           extension makes, and the certificate marks it withdrawable.
           The rule ranges over 249 areas and is stated in the axiom file
           rather than expanded there: instantiating it would add thirty
           thousand inequations to every problem, and a refutation should
           cite the one it used.
 
-On the ISO rule and the identity assertions
+On the ISO rule and the identity statements
 --------------------------------------------
 The rule is that ISO 3166 assigns one code to an area, so two codes name two
 areas.  Applied to the codes directly it would contradict the extension,
 which records thirty pairs of codes denoting one area.  It is therefore
 applied to the areas: distinctness holds between the equivalence classes the
-identity assertions induce, and TF and FR-TF are one class represented by
+identity statements induce, and TF and FR-TF are one class represented by
 its country code.
 
-This is the only background theory in the suite constrained by something the
+This is the only set of declarations in the suite constrained by something the
 resource publishes.  A generated rule is the parties' to adopt, but not
 theirs to adopt in a form the authority contradicts.
 
-It is also the reason the identity assertions are worth keeping even though
+It is also the reason the identity statements are worth keeping even though
 no verdict rests on them: they are not load-bearing for reachability, and
 they are load-bearing for what the rule may say.
 """
@@ -166,7 +166,7 @@ def C(op, *vals, side="offer"):
 def _iso(*pairs):
     """Explicit ISO rule instances, one fof per pair, named bg_dist_ as
     KGC334 names its one instance, plus the matching :named SMT lines."""
-    fof = ["% Background theory: instances of the ISO 3166 uniqueness rule,",
+    fof = ["% Declarations: instances of the ISO 3166 uniqueness rule,",
            "% stated in LOC-dpvloc-iso.ax and instantiated here.", ""]
     smt = ["; Instances of the registry rule this problem adopts, named as",
            "; the TPTP side names them."]
@@ -301,14 +301,14 @@ PROBLEMS = [
             "transitivity, nothing declared by the parties. It is also "
             "the control for KGC380, which puts the same request against "
             "an offer naming the European Union. There the verdict is "
-            "Compatible as well, by composing this assertion with the "
+            "Compatible as well, by composing this statement with the "
             "one placing the Netherlands in the EU, and Bonaire lies "
             "outside EU territory. The two problems differ in one edge "
             "of the offer and in the binding."
         ),
 
         "fof_decls": """\
-% Background theory: empty.  The extension asserts no disjointness between
+% Declarations: empty.  The extension asserts no disjointness between
 % places and no distinctness between the codes it lists.
 """,
         "fof_witness": f"""\
@@ -370,14 +370,14 @@ PROBLEMS = [
             "Offer (spatial, isPartOf, loc:EU) against request (spatial, eq, "
             "loc:DE), under the jurisdictional reading.  Germany is a member "
             "of the European Union, the reading takes membership as the "
-            "order, and the verdict is Compatible on one assertion.  Under "
+            "order, and the verdict is Compatible on one statement.  Under "
             "the territorial reading the same constraints are well sorted and "
             "have no verdict: that reading takes only containment, loc:EU is "
             "not among its concepts, and the offer's right operand grounds "
             "to nothing.  The difference is the profile and nothing else."
         ),
         "fof_decls": """\
-% Background theory: empty.
+% Declarations: empty.
 % Resource: the jurisdictional reading, containment together with union
 % membership.  Under the territorial reading loc:EU is not a concept and this
 % problem does not arise.
@@ -440,7 +440,7 @@ PROBLEMS = [
     "A library permits use in Germany. A researcher's policy commits to use "
     "in France."),
         "fof_decls": """\
-% Background theory: empty.  Two codes are not two places until something
+% Declarations: empty.  Two codes are not two places until something
 % says so, and the extension says nothing.
 """,
         "fof_witness": f"""\
@@ -500,7 +500,7 @@ PROBLEMS = [
             "As KGC333, with the ISO 3166 rule that different country codes "
             "name different countries."),
         "fof_decls": """\
-% Background theory: one instance of the ISO 3166 uniqueness rule.
+% Declarations: one instance of the ISO 3166 uniqueness rule.
 %
 % The rule is stated in LOC-dpvloc-iso.ax and ranges over 249 areas.  It is
 % instantiated here rather than expanded there: a refutation should cite the
@@ -519,7 +519,7 @@ fof(bg_dist_loc_de_loc_fr, axiom,
 ; Resource: unchanged from KGC333.""",
         "smt2_background": """\
 ; The instance of the registry rule this problem adopts, named as the TPTP
-; side names it so that a proof and an unsat core cite one assertion.
+; side names it so that a proof and an unsat core cite one statement.
 (assert (! (distinct loc_de loc_fr) :named bg_dist_loc_de_loc_fr))""",
         "smt2_witness": f"""\
 (or (and (= {DE} {DE}) (= {DE} {FR}))
@@ -532,7 +532,7 @@ fof(bg_dist_loc_de_loc_fr, axiom,
         "distinct, so the constraints cannot both be satisfied."
     ),
             "premises": [
-                ("fromBackgroundTheory",
+                ("fromDeclarations",
                  "loc:DE and loc:FR are distinct areas under ISO 3166"),
             ],
         },
@@ -644,7 +644,7 @@ fof(bg_dist_loc_de_loc_fr, axiom,
         "expected_q1": "Satisfiable", "expected_q2": "Unsatisfiable",
         "description": (
             "Use within Germany against use in North Rhine-Westphalia. "
-            "DPV places DE-NW within DE; one published assertion, both "
+            "DPV places DE-NW within DE; one published statement, both "
             "readings agree. The baseline for subdivisions."),
         "summary": (
             "A library permits use within Germany. A researcher's policy "
@@ -751,7 +751,7 @@ fof(bg_dist_loc_de_loc_fr, axiom,
             "comment": (
                 "The ISO rule makes North Rhine-Westphalia and Bavaria "
                 "distinct, so no use satisfies both policies."),
-            "premises": [("fromBackgroundTheory",
+            "premises": [("fromDeclarations",
                           "loc:DE-NW and loc:DE-BY are distinct areas")]},
         "provenance": "As KGC384; warrant ISO 3166-2.",
         "ttl": _ttl2("KGC385", "use in North Rhine-Westphalia",
@@ -814,9 +814,9 @@ fof(bg_dist_loc_de_loc_fr, axiom,
             "comment": (
                 "The ISO rule makes Hamburg distinct from Bavaria and from "
                 "Berlin, so a use in Hamburg is not excluded."),
-            "premises": [("fromBackgroundTheory",
+            "premises": [("fromDeclarations",
                           "loc:DE-HH distinct from loc:DE-BY"),
-                         ("fromBackgroundTheory",
+                         ("fromDeclarations",
                           "loc:DE-HH distinct from loc:DE-BE")]},
         "provenance": "As KGC386; warrant ISO 3166-2.",
         "ttl": _ttl2("KGC387", "use anywhere except Bavaria and Berlin",
@@ -925,7 +925,7 @@ fof(bg_dist_loc_de_loc_fr, axiom,
             "comment": (
                 "The ISO rule makes the two Laender distinct, so only the "
                 "first alternative holds and 'exactly one' is satisfied."),
-            "premises": [("fromBackgroundTheory",
+            "premises": [("fromDeclarations",
                           "loc:DE-NW and loc:DE-BY are distinct areas")]},
         "provenance": "Construction, as KGC389.",
         "ttl": _ttl2("KGC390", "use in exactly one of North Rhine-Westphalia "
@@ -949,7 +949,7 @@ fof(bg_dist_loc_de_loc_fr, axiom,
         "description": (
             "Use in an area that has North Rhine-Westphalia as a part, "
             "against use in Germany. Germany has NRW as a part, on the "
-            "same assertion as KGC382 read upward. The only up-set "
+            "same statement as KGC382 read upward. The only up-set "
             "operator in the table, and nothing else exercises it.\n\n"
             "Coverage-motivated: a spatial hasPart clause is rare in "
             "practice."),
@@ -1005,7 +1005,7 @@ fof(bg_dist_loc_de_loc_fr, axiom,
                 "ISO rule makes Uvea distinct from Wallis and Futuna, so the "
                 "use is not excluded, although Uvea lies within Wallis and "
                 "Futuna."),
-            "premises": [("fromBackgroundTheory",
+            "premises": [("fromDeclarations",
                           "loc:WF-UV distinct from loc:WF")]},
         "provenance": "Exclusion clauses; the drafting error they invite.",
         "ttl": _ttl2("KGC392", "use anywhere except Wallis and Futuna",

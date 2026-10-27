@@ -10,13 +10,16 @@ semantics can be instantiated on vocabularies as their publishers write
 them, and whether the implementation produces the verdicts the
 definitions prescribe.
 
+The terms used below are defined in [GLOSSARY.md](GLOSSARY.md), each
+with the name it replaced or still carries inside the code.
+
 ---
 
 ## What a problem is
 
 Two ODRL policies whose constraints share one left operand. A binding
 says which resource that operand is read against, at which sort, under
-which grounding rule, and with which background theory. From these the
+which grounding rule, and with which declarations. From these the
 generator derives two satisfiability queries, and the verdict follows
 from the pair:
 
@@ -75,16 +78,19 @@ generators/       builders (vocabulary to resource) and generators
                   (problem data to queries and cases)
 problems/
   resources/      one slice per resource, plus its profile entry
-  background/     what the parties declared, as Turtle
+  background/     the declarations: what the parties declared, as Turtle
   axioms/         the same, as TPTP
   verdict/        the queries, .p and .smt2
 cases/            one file per problem: the two policies and the
                   expected report
 certificates/     what the provers produced, and what they cited
 vocab/            the schemas for the terms this project mints
-probes/           assertions each binding must and must not entail
+probes/           statements each binding must and must not entail
 design/           modules written against the definitions and not yet
                   wired into the pipeline
+GLOSSARY.md       one definition per term, with its former or internal names
+suite-numbers.tex the figures and the bindings table the paper includes,
+                  written by generators/table_data.py --suite-numbers
 ```
 
 ---
@@ -107,7 +113,7 @@ KGC380-392   spatial: composition, subdivisions, exclusion
 KGC393-397   purpose: the set operators
 ```
 
-Start with KGC310, KGC313 and KGC314: one published assertion, then the
+Start with KGC310, KGC313 and KGC314: one published statement, then the
 same operand where the vocabulary settles nothing, then the same pair
 once the parties declare the concepts distinct.
 
@@ -160,6 +166,9 @@ done
 bash run_verdict.sh
 uv run generators/run_certify.py
 uv run generators/check_certificates.py
+
+# the figures and the bindings table for the paper
+uv run generators/table_data.py --suite-numbers
 ```
 
 Needs `vampire` and `z3` on the path, and `uv` for the Python.
@@ -201,8 +210,8 @@ vrep:referenceConstraint,                   the constraint on each rule
 vrep:comparedConstraint
 vrep:binding                                the reading the verdict is
                                             relative to
-vrep:backgroundTheory                       what the parties declared,
-                                            the empty theory included
+vrep:declarations                           what the parties declared,
+                                            the empty declarations included
 vrep:compatibilityState                     vrep:Compatible,
                                             vrep:Incompatible or
                                             vrep:Unknown
@@ -211,8 +220,16 @@ vrep:certificate                            the refutation, on a
 vrep:readAgainst                            the case this one pairs with
 ```
 
+What the parties declared is a set of declarations, typed
+`bind:Declarations`, one file per set under `problems/background/`. A
+set with statements records where they come from with `bind:origin`,
+which takes one of two values: `bind:practiceRule`, a rule of the
+resource's practice, such as RFC 5646 registry uniqueness; or
+`bind:proseDefinition`, a prose definition the resource's RDF does not
+state. The empty set records none. `validate_cases.py` checks this.
+
 An input check report is about one constraint. It carries no verdict,
-background theory or certificate:
+declarations or certificate:
 
 ```
 vrep:WellSortednessReport                   whether the operator and the
@@ -260,7 +277,7 @@ w_        the witness condition, generated from the two constraints
 ```
 
 So a certificate records what a verdict rests on. KGC310 rests on a
-published assertion. KGC314 rests on a party declaration, and
+published statement. KGC314 rests on a party declaration, and
 withdrawing that declaration returns the pair to Unknown, which is
 KGC313.
 

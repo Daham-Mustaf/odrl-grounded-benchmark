@@ -1,4 +1,4 @@
-# Background theory for the DPV Locations resource: ISO distinctness.
+# Declarations for the DPV Locations resource: ISO distinctness.
 #
 # Generated from the rule that ISO 3166 assigns one code per area, so that
 # two areas listed by the extension are two places.  The extension asserts
@@ -14,12 +14,13 @@
 # Classes: 249
 # Source : https://w3id.org/dpv/2.3/loc
 
-@prefix bt:      <https://w3id.org/odrl-kb/background#> .
+@prefix bind:    <https://w3id.org/odrl-kb/binding#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 
-<https://w3id.org/odrl-kb/dpv-loc/iso> a bt:BackgroundTheory ;
+<https://w3id.org/odrl-kb/dpv-loc/iso> a bind:Declarations ;
     dcterms:title "Pairwise distinctness of ISO 3166 areas"@en ;
-    bt:appliesTo <https://w3id.org/odrl-kb/dpv-loc-geo>,
+    bind:appliesTo <https://w3id.org/odrl-kb/dpv-loc-geo>,
                  <https://w3id.org/odrl-kb/dpv-loc-juris> ;
-    bt:generatedBy bt:RegistryUniquenessRule ;
-    bt:scopeCondition "Distinctness holds between equivalence classes under the extension's identity assertions, not between codes; codes the extension identifies name one area."@en .
+    bind:generatedBy bind:RegistryUniquenessRule ;
+    bind:origin bind:practiceRule ;
+    bind:scopeCondition "Distinctness holds between equivalence classes under the extension's identity statements, not between codes; codes the extension identifies name one area."@en .

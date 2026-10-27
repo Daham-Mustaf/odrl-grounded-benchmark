@@ -91,7 +91,7 @@ UNKNOWN_BRANCH = '''
                     differing=diff,
                     comment=("Both queries are satisfiable.  The models differ "
                              "on the concepts listed, which is what neither "
-                             "the resource nor the background theory settles."
+                             "the resource nor the declarations settle."
                              if diff else
                              "Both queries are satisfiable.  The models agree "
                              "on the constants, so the difference lies in the "
@@ -149,7 +149,7 @@ REFUTATION_BRANCH = '''
 # ---------------------------------------------------------------------------
 #
 # `problem`   the dict from problem_data_*.py for this pid, for the operand,
-#             the sort, the resource and the background theory.  If the loop
+#             the sort, the resource and the declarations.  If the loop
 #             does not already carry it, pass {} and the report omits those
 #             fields rather than guessing them.
 #

@@ -19,7 +19,7 @@ include('axioms/KGE000-0.ax').
 include('axioms/GN000-0.ax').
 
 % --- constants, groundings and resource hooks ----------------------------
-% Background theory: the two countries declared disjoint.
+% Declarations: the two countries declared disjoint.
 fof(bg_disj_gn_france_disjoint_gn_germany, axiom,
     ! [X] : ~ ( kge_leq(X, gn_france) & kge_leq(X, gn_germany) )).
 
