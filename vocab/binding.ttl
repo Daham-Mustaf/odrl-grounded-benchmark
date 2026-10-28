@@ -134,7 +134,7 @@ bind:Origin a rdfs:Class, skos:Concept ;
 bind:practiceRule a bind:Origin ;
     rdfs:isDefinedBy <https://w3id.org/odrl-kb/binding> ;
     rdfs:label "practice rule" ;
-    skos:definition "A rule of the resource's practice. The authority follows it when it issues or maintains entries, and the resource's RDF does not state it. Example: RFC 5646 registry uniqueness, by which distinct primary language subtag records name distinct languages."@en .
+    skos:definition "A rule of the resource's practice. The authority follows it when it issues or maintains entries, and the resource's RDF does not state it. Example: the BCP 47 distinctness rule, by which distinct primary language subtag records name distinct languages."@en .
 
 bind:proseDefinition a bind:Origin ;
     rdfs:isDefinedBy <https://w3id.org/odrl-kb/binding> ;
@@ -149,12 +149,7 @@ bind:GenerationRule a rdfs:Class, skos:Concept ;
 bind:PairwiseDistinctness a bind:GenerationRule ;
     rdfs:isDefinedBy <https://w3id.org/odrl-kb/binding> ;
     rdfs:label "Pairwise Distinctness" ;
-    skos:definition "Names the rule by which the generator expands an owl:AllDifferent member list of n concepts into n(n-1)/2 ground inequations, subject to the stated scope condition. The expansion is performed and verified by the generator; this individual records which rule was applied."@en .
-
-bind:RegistryUniquenessRule a bind:GenerationRule ;
-    rdfs:isDefinedBy <https://w3id.org/odrl-kb/binding> ;
-    rdfs:label "Registry Uniqueness Rule" ;
-    skos:definition "Names the rule by which distinct registry records, subject to the stated registry conditions, are treated as denoting distinct concepts. It is applied by the generator to produce ground inequations."@en .
+    skos:definition "Names the rule by which two concepts of a stated set are treated as distinct, subject to the stated scope condition. For a list of n concepts the generator expands an owl:AllDifferent member list into n(n-1)/2 ground inequations. For a registry rule over a large set, such as the ISO 3166 areas, the rule is stated in the axiom file and each problem instantiates the pairs it names. The expansion is performed and verified by the generator; this individual records which rule was applied. Where the statements come from is recorded separately, with bind:origin."@en .
 
 bind:PartyDeclaration a bind:GenerationRule ;
     rdfs:isDefinedBy <https://w3id.org/odrl-kb/binding> ;

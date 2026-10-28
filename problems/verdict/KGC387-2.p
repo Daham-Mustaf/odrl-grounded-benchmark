@@ -20,7 +20,7 @@ include('axioms/LOC-dpvloc-geo.ax').
 include('axioms/LOC-dpvloc-iso.ax').
 
 % --- constants, groundings and resource hooks ----------------------------
-% Declarations: instances of the ISO 3166 uniqueness rule,
+% Declarations: instances of the ISO 3166 distinctness rule,
 % stated in LOC-dpvloc-iso.ax and instantiated here.
 
 fof(bg_dist_loc_de_hh_loc_de_by, axiom,

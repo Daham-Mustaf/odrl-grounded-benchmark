@@ -260,7 +260,7 @@ What the parties declared is a set of declarations, typed
 `bind:Declarations`, one file per set under `problems/background/`. A
 set with statements records where they come from with `bind:origin`,
 which takes one of two values: `bind:practiceRule`, a rule of the
-resource's practice, such as RFC 5646 registry uniqueness; or
+resource's practice, such as the BCP 47 distinctness rule; or
 `bind:proseDefinition`, a prose definition the resource's RDF does not
 state. The empty set records none. `validate_cases.py` checks this.
 

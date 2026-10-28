@@ -3,7 +3,7 @@
 # The parties declare nothing beyond the registry. The registry publishes
 # no distinctness between primary subtags, so two constraints naming
 # different languages are satisfiable together unless the parties adopt
-# the uniqueness rule (bcp47-uniqueness.ttl).
+# the distinctness rule (bcp47-distinct.ttl).
 #
 # Source: https://www.iana.org/assignments/language-subtag-registry
 

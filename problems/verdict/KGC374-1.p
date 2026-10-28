@@ -1,7 +1,7 @@
 %--------------------------------------------------------------------------
 % File     : KGC374-1.p
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
-% Problem  : language, eq de against neq fr, registry uniqueness declared (witness condition asserted)
+% Problem  : language, eq de against neq fr, distinctness rule declared (witness condition asserted)
 % Version  : 1.0
 % English  : A publisher distributes in German. A licensee's policy accepts any language except French.
 %

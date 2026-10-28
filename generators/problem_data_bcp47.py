@@ -3,13 +3,13 @@ problem_data_bcp47.py
 =====================
 Ten problems over the BCP 47 language slice, at the nominal sort.
 
-    KGC370  eq de  x  eq fr         uniqueness declared   Incompatible
+    KGC370  eq de  x  eq fr         distinctness declared Incompatible
     KGC371  eq de  x  eq fr         declaration withdrawn Unknown
     KGC372  eq de  x  eq "en-US"    exact grounding       rejected, does not ground
     KGC373  eq de  x  eq "en-US"    reducing grounding    Incompatible
-    KGC374  eq de  x  neq fr        uniqueness declared   Compatible
+    KGC374  eq de  x  neq fr        distinctness declared Compatible
     KGC375  eq de  x  neq fr        declaration withdrawn Unknown
-    KGC376  isAllOf {nl, fr}  x  eq nl      uniqueness declared   Incompatible
+    KGC376  isAllOf {nl, fr}  x  eq nl      distinctness declared Incompatible
     KGC377  isNoneOf {en, it} x  eq it      no declaration        Incompatible
     KGC378  or(eq de, eq fr)  x  eq fr      no declaration        Compatible
     KGC379  xone(eq de, eq fr) x eq de      no declaration        Unknown
@@ -54,7 +54,8 @@ two languages.
 That is not an oversight.  A registry states what it has established, and
 whether two of its entries may be treated as apart is a question about the
 use being made of them.  So the parties adopt it as a rule, warranted by
-RFC 5646's uniqueness discipline, and it enters as a declaration.
+RFC 5646's requirement that Description fields be unique, and it enters
+as a declaration.
 
 KGC370 has that rule in force and KGC371 does not.  The policies are
 identical, the resource is identical, and the two problems differ in one
@@ -137,7 +138,7 @@ NL = "bcp_nl"
 
 # What the authority published, and what the parties declared on top of it.
 RESOURCE   = "https://w3id.org/odrl-kb/bcp47"
-UNIQUENESS = "https://w3id.org/odrl-kb/bcp47/uniqueness"
+DISTINCT = "https://w3id.org/odrl-kb/bcp47/distinct"
 EMPTY_BT   = "https://w3id.org/odrl-kb/bcp47/empty"
 
 # The two profile entries.  They differ in the grounding rule and in
@@ -149,7 +150,7 @@ BINDING_PRIMARY = ("https://w3id.org/odrl-kb/profile/"
 # The resource alone, and the resource with the parties' rule.  The
 # withdrawal pair is exactly the difference between these two lists.
 INCLUDES            = ["KGE000-0.ax", "BCP47000-0.ax"]
-INCLUDES_UNIQUENESS = INCLUDES + ["BCP47001-0.ax"]
+INCLUDES_DISTINCT = INCLUDES + ["BCP47001-0.ax"]
 
 
 def C(op, *vals, side="offer"):
@@ -275,16 +276,16 @@ PROBLEMS = [
         "twin":              "KGC371",
         "subdir":            "verdict",
         "name":              "language, eq de against eq fr, "
-                             "registry uniqueness declared",
+                             "distinctness rule declared",
         "left_operand":      "language",
         "sort":              "nom",
         "resource":          RESOURCE,
-        "background_theory": UNIQUENESS,
+        "background_theory": DISTINCT,
          "smt2_background":
         "(assert (! (not (= bcp_de bcp_fr)) "
         ":named bg_dist_bcp47_de_fr))",
         "binding":           BINDING_EXACT,
-        "includes":          INCLUDES_UNIQUENESS,
+        "includes":          INCLUDES_DISTINCT,
         "tree": [C("eq", DE), C("eq", FR, side="request")],
         "description": (
             "A publisher distributes a work in German. A licensee's policy "
@@ -292,7 +293,7 @@ PROBLEMS = [
             "odrl:language, which this profile binds to a fifteen-subtag "
             "slice of the IANA Language Subtag Registry at the nominal "
             "sort.\n\n"
-            "The parties have adopted the registry-uniqueness rule: "
+            "The parties have adopted the distinctness rule: "
             "distinct primary subtag records, neither deprecated and with "
             "no Preferred-Value link between them, name distinct "
             "languages. With that rule in force no structure interprets "
@@ -319,8 +320,8 @@ PROBLEMS = [
                        "verdict to Unknown, which is KGC371.",
             "premises": [
                 ("fromDeclarations",
-                 "bcp47:de and bcp47:fr are declared distinct, on RFC "
-                 "5646's registry uniqueness"),
+                 "bcp47:de and bcp47:fr are declared distinct, by the "
+                 "distinctness rule"),
             ],
         },
         "ttl": _TTL_HEAD + _offer("KGC370")
@@ -344,7 +345,7 @@ PROBLEMS = [
         "tree": [C("eq", DE), C("eq", FR, side="request")],
         "description": (
             "The policies of KGC370, over the same resource, with the "
-            "registry-uniqueness rule withdrawn.\n\n"
+            "distinctness rule withdrawn.\n\n"
             "The registry still lists both subtags and still asserts "
             "nothing that separates them. So some structures admitted by "
             "the resource interpret de and fr as one language and others "
@@ -392,9 +393,9 @@ PROBLEMS = [
         "left_operand":      "language",
         "sort":              "nom",
         "resource":          RESOURCE,
-        "background_theory": UNIQUENESS,
+        "background_theory": DISTINCT,
         "binding":           BINDING_EXACT,
-        "includes":          INCLUDES_UNIQUENESS,
+        "includes":          INCLUDES_DISTINCT,
         "ungrounded":        "en-US",
         "description": (
             "A publisher distributes in German. A licensee's policy commits "
@@ -445,7 +446,7 @@ PROBLEMS = [
         "left_operand":      "language",
         "sort":              "nom",
         "resource":          RESOURCE,
-        "background_theory": UNIQUENESS,
+        "background_theory": DISTINCT,
         "summary": (
             "A publisher distributes in German. A licensee's policy commits to "
             "American English (en-US), under the rule that reduces a tag to "
@@ -454,7 +455,7 @@ PROBLEMS = [
             "(assert (! (not (= bcp_de bcp_en)) "
             ":named bg_dist_bcp47_de_en))",
         "binding":           BINDING_PRIMARY,
-        "includes":          INCLUDES_UNIQUENESS,
+        "includes":          INCLUDES_DISTINCT,
         "grounding": {"en-US": "bcp_en"},
         "tree": [C("eq", DE), C("eq", "en-US", side="request")],
         "description": (
@@ -464,7 +465,7 @@ PROBLEMS = [
             "subtag, so en-US resolves to en. The value becomes "
             "interpretable and the pair gets an ordinary verdict: German "
             "and English are declared distinct under the same "
-            "registry-uniqueness rule as KGC370, so no use satisfies both "
+            "distinctness rule as KGC370, so no use satisfies both "
             "constraints and the verdict is Incompatible.\n\n"
             "Neither rule is the correct one. A party who cares which "
             "variety of English is distributed declines the reduction and "
@@ -485,8 +486,8 @@ PROBLEMS = [
                "distinct from German."),
             "premises": [
                 ("fromDeclarations",
-                 "bcp47:de and bcp47:en are declared distinct, on RFC "
-                 "5646's registry uniqueness"),
+                 "bcp47:de and bcp47:en are declared distinct, by the "
+                 "distinctness rule"),
             ],
         },
         "ttl": _TTL_HEAD + _offer("KGC373")
@@ -498,16 +499,16 @@ PROBLEMS = [
         "twin":              "KGC375",
         "subdir":            "verdict",
         "name":              "language, eq de against neq fr, "
-                             "registry uniqueness declared",
+                             "distinctness rule declared",
         "left_operand":      "language",
         "sort":              "nom",
         "resource":          RESOURCE,
-        "background_theory": UNIQUENESS,
+        "background_theory": DISTINCT,
          "smt2_background":
         "(assert (! (not (= bcp_de bcp_fr)) "
         ":named bg_dist_bcp47_de_fr))",
         "binding":           BINDING_EXACT,
-        "includes":          INCLUDES_UNIQUENESS,
+        "includes":          INCLUDES_DISTINCT,
         "tree": [C("eq", DE), C("neq", FR, side="request")],
         "expected_verdict":  "Compatible",
         "expected_q1":       "Satisfiable",
@@ -518,7 +519,7 @@ PROBLEMS = [
         "description": (
             "The publisher distributes in German; the licensee accepts "
             "anything that is not French. German itself is the witness, "
-            "but only because the parties' uniqueness rule separates the "
+            "but only because the parties' distinctness rule separates the "
             "two subtags: in a structure interpreting de and fr as one "
             "language, a use in German is a use in French and the "
             "second policy excludes it.\n\n"
@@ -537,8 +538,8 @@ PROBLEMS = [
                 "and a use in German satisfies both policies."),
             "premises": [
                 ("fromDeclarations",
-                 "bcp47:de and bcp47:fr are declared distinct, on RFC "
-                 "5646's registry uniqueness"),
+                 "bcp47:de and bcp47:fr are declared distinct, by the "
+                 "distinctness rule"),
             ],
         },
         "ttl": _TTL_HEAD + _offer("KGC374")
@@ -564,7 +565,7 @@ PROBLEMS = [
         "summary": (
             "As KGC374, without the registry rule."),
         "description": (
-            "KGC374 with the uniqueness rule withdrawn. A structure "
+            "KGC374 with the distinctness rule withdrawn. A structure "
             "separating de and fr admits the witness; a structure "
             "identifying them admits none, because a use in German is "
             "then a use in French. The registry decides neither, so the "
@@ -593,13 +594,13 @@ PROBLEMS = [
         "id":                "KGC376",
         "subdir":            "verdict",
         "name":              "language, isAllOf nl fr against eq nl, "
-                             "registry uniqueness declared",
+                             "distinctness rule declared",
         "left_operand":      "language",
         "sort":              "nom",
         "resource":          RESOURCE,
-        "background_theory": UNIQUENESS,
+        "background_theory": DISTINCT,
         "binding":           BINDING_EXACT,
-        "includes":          INCLUDES_UNIQUENESS,
+        "includes":          INCLUDES_DISTINCT,
         "tree": [C("isAllOf", NL, FR), C("eq", NL, side="request")],
         "expected_verdict":  "Incompatible",
         "expected_q1":       "Unsatisfiable",
@@ -633,8 +634,8 @@ PROBLEMS = [
                 "both policies."),
             "premises": [
                 ("fromDeclarations",
-                 "bcp47:fr and bcp47:nl are declared distinct, on RFC "
-                 "5646's registry uniqueness"),
+                 "bcp47:fr and bcp47:nl are declared distinct, by the "
+                 "distinctness rule"),
             ],
         },
         "ttl": _TTL_HEAD

@@ -162,7 +162,7 @@ def C(op, *vals, side="offer"):
 def _iso(*pairs):
     """Explicit ISO rule instances, one fof per pair, named bg_dist_ as
     KGC334 names its one instance, plus the matching :named SMT lines."""
-    fof = ["% Declarations: instances of the ISO 3166 uniqueness rule,",
+    fof = ["% Declarations: instances of the ISO 3166 distinctness rule,",
            "% stated in LOC-dpvloc-iso.ax and instantiated here.", ""]
     smt = ["; Instances of the registry rule this problem adopts, named as",
            "; the TPTP side names them."]
@@ -447,7 +447,7 @@ PROBLEMS = [
         "id":                "KGC334",
         "subdir":            "verdict",
         "name":              "spatial, eq loc:DE against eq loc:FR, under the "
-                             "ISO 3166 uniqueness rule",
+                             "ISO 3166 distinctness rule",
         "left_operand":      "spatial",
         "sort":              "mer",
         "resource":          GEO_RESOURCE,
@@ -471,7 +471,7 @@ PROBLEMS = [
             "As KGC333, with the ISO 3166 rule that different country codes "
             "name different countries."),
         "fof_decls": """\
-% Declarations: one instance of the ISO 3166 uniqueness rule.
+% Declarations: one instance of the ISO 3166 distinctness rule.
 %
 % The rule is stated in LOC-dpvloc-iso.ax and ranges over 249 areas.  It is
 % instantiated here rather than expanded there: a refutation should cite the

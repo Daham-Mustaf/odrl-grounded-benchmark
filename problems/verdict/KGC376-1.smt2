@@ -1,7 +1,7 @@
 ; -------------------------------------------------------------------------
 ; File     : KGC376-1.smt2
 ; Domain   : ODRL Policy / Knowledge-Grounded Fragment
-; Problem  : language, isAllOf nl fr against eq nl, registry uniqueness declared (witness condition asserted)
+; Problem  : language, isAllOf nl fr against eq nl, distinctness rule declared (witness condition asserted)
 ; Version  : 1.0
 ; Refs     : odrl-grounded-benchmark. https://github.com/Daham-Mustaf/odrl-grounded-benchmark
 ; Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark

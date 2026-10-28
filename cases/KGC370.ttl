@@ -52,7 +52,7 @@ drk:KGC370-report a vrep:OperandVerdictReport ;
     vrep:referenceConstraint kgc:KGC370-p1-c1 ;
     vrep:comparedConstraint kgc:KGC370-p2-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-language-bcp47> ;
-    vrep:declarations <https://w3id.org/odrl-kb/bcp47/uniqueness> ;
+    vrep:declarations <https://w3id.org/odrl-kb/bcp47/distinct> ;
     vrep:readAgainst drk:KGC371-report ;
     rdfs:comment """The two subtags are declared to name distinct languages, which is the parties' rule and not the registry's content. Withdrawing it returns the verdict to Unknown, which is KGC371."""@en ;
     dcterms:description """A publisher distributes in German. A licensee's policy commits to French. The parties adopt the registry rule that different primary subtags name different languages."""@en ;

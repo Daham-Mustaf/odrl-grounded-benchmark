@@ -1,7 +1,7 @@
 %-------------------------------------------------------------------------
 % File     : BCP47001-0.ax
 % Domain   : ODRL policy, knowledge-grounded constraints
-% Axioms   : Registry uniqueness for BCP 47 primary subtags
+% Axioms   : Distinctness rule for BCP 47 primary subtags
 % Version  : 2.1
 % English  : The parties' rule that distinct primary language
 %            subtag records, neither deprecated and with no

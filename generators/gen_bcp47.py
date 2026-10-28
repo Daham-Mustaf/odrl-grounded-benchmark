@@ -5,7 +5,7 @@ Builds the BCP 47 language resource and its declarations.
 
     uv run generators/gen_bcp47.py \
         --ttl        problems/resources/bcp47.ttl \
-        --background problems/background/bcp47-uniqueness.ttl \
+        --background problems/background/bcp47-distinct.ttl \
         --registry   vocabularies/bcp47-20260826/language-subtag-registry.txt \
         --out        problems/axioms
 
@@ -26,7 +26,7 @@ if the encodings ever relativise to one, and they are marked
 measured-unused until that check is made.  Dropping them is a decision to
 take explicitly after the measurement, not inside this generator.
 
-Registry uniqueness is a rule the parties adopt.  Keeping it in its own
+The distinctness rule is one the parties adopt.  Keeping it in its own
 file is what lets a refutation say which of its premises a party may
 withdraw, and it makes the withdrawal test one include line: the same
 problem with and without this file is Incompatible and Unknown.
@@ -81,7 +81,7 @@ VERSION = "2.1"
 BCP47 = Namespace("https://w3id.org/odrl-kb/bcp47#")
 SCHEME = URIRef("https://w3id.org/odrl-kb/bcp47")
 BIND = Namespace("https://w3id.org/odrl-kb/binding#")
-DECLARATIONS = URIRef("https://w3id.org/odrl-kb/bcp47/uniqueness")
+DECLARATIONS = URIRef("https://w3id.org/odrl-kb/bcp47/distinct")
 
 
 def const(notation: str) -> str:
@@ -139,7 +139,7 @@ def read_registry(path: Path) -> tuple[str, dict[str, dict]]:
 
 
 def check_slice(notations: list[str], records: dict[str, dict]) -> None:
-    """The scope condition of the uniqueness rule, enforced.
+    """The scope condition of the distinctness rule, enforced.
 
     Aborts rather than warns.  A member failing any of these makes the
     generated distinctness false, and a false premise that a prover then
@@ -173,7 +173,7 @@ def check_slice(notations: list[str], records: dict[str, dict]) -> None:
                 f"could bind this slice at tax")
     if problems:
         raise SystemExit(
-            "the slice does not satisfy the uniqueness rule's scope "
+            "the slice does not satisfy the distinctness rule's scope "
             "condition:\n  " + "\n  ".join(problems) +
             "\n\nEither remove the member or narrow the rule; generating "
             "distinctness over these would assert something the registry "
@@ -278,7 +278,7 @@ def resource_ax(concepts, file_date: str, digest: str,
         "%            read, and the signature rejects isA on this operand",
         "%            before the file is opened.",
         "%",
-        "%            Registry uniqueness, which makes the subtags",
+        "%            The distinctness rule, which makes the subtags",
         "%            pairwise distinct, is the parties' rule and lives in",
         "%            BCP47001-0.ax.  A problem including this file and",
         "%            not that one gets Unknown where the declaration",
@@ -326,7 +326,7 @@ def theory_ax(pairs, source: str, file_date: str) -> str:
         "%" + "-" * 73,
         "% File     : BCP47001-0.ax",
         "% Domain   : ODRL policy, knowledge-grounded constraints",
-        "% Axioms   : Registry uniqueness for BCP 47 primary subtags",
+        "% Axioms   : Distinctness rule for BCP 47 primary subtags",
         f"% Version  : {VERSION}",
         "% English  : The parties' rule that distinct primary language",
         "%            subtag records, neither deprecated and with no",
@@ -374,7 +374,7 @@ def main() -> int:
     ap.add_argument("--ttl", required=True, type=Path,
                     help="the resource slice")
     ap.add_argument("--background", required=True, type=Path,
-                    help="the uniqueness declarations")
+                    help="the distinctness declarations")
     ap.add_argument("--registry", required=True, type=Path,
                     help="the IANA snapshot; the scope condition is checked "
                          "against it and the File-Date is read from it")

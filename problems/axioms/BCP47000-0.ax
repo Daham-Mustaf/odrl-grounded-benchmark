@@ -12,7 +12,7 @@
 %            read, and the signature rejects isA on this operand
 %            before the file is opened.
 %
-%            Registry uniqueness, which makes the subtags
+%            The distinctness rule, which makes the subtags
 %            pairwise distinct, is the parties' rule and lives in
 %            BCP47001-0.ax.  A problem including this file and
 %            not that one gets Unknown where the declaration

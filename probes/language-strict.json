@@ -1,6 +1,6 @@
 {
   "binding": "language-strict",
-  "note": "BCP 47 at nom. The registry publishes a set of subtags and no relation over this slice, so the resource must carry no order at all: that emptiness is what makes isA unanswerable rather than false. Distinctness comes from the parties' uniqueness rule and lives in a separate file, so a dropped include shows up here rather than as a verdict flip.",
+  "note": "BCP 47 at nom. The registry publishes a set of subtags and no relation over this slice, so the resource must carry no order at all: that emptiness is what makes isA unanswerable rather than false. Distinctness comes from the parties' distinctness rule and lives in a separate file, so a dropped include shows up here rather than as a verdict flip.",
   "includes": [
     "BCP47000-0.ax",
     "BCP47001-0.ax"

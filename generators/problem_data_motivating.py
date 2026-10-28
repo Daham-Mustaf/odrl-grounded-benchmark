@@ -62,16 +62,16 @@ PROBLEMS = [
         "left_operand":      "language",
         "sort":              "nom",
         "resource":          "https://w3id.org/odrl-kb/bcp47",
-        "background_theory": "https://w3id.org/odrl-kb/bcp47/uniqueness",
+        "background_theory": "https://w3id.org/odrl-kb/bcp47/distinct",
         "includes":          ["KGE000-0.ax", "BCP47000-0.ax", "BCP47001-0.ax"],
         "fof_decls": """\
-% Declarations: the registry's uniqueness rule, BCP47001-0.ax.  The
+% Declarations: the distinctness rule, BCP47001-0.ax.  The
 % pair de, fr is one of its 105 instances.
 """,
         "tree": [C("eq", DE), C("eq", FR, side="request")],
         "description": (
             "Offer (language, eq, bcp:de) against request (language, eq, "
-            "bcp:fr).  The registry's uniqueness rule places the two subtags "
+            "bcp:fr).  The distinctness rule places the two subtags "
             "in the declarations as distinct, so no model identifies "
             "them and the witness condition fails in every model."
         ),
@@ -94,7 +94,7 @@ PROBLEMS = [
                 "distinct, so no use satisfies both policies."),
             "premises": [
                 ("fromDeclarations",
-                 "bcp:de and bcp:fr are distinct (registry uniqueness)"),
+                 "bcp:de and bcp:fr are distinct (distinctness rule)"),
             ],
         },
         "ttl": """\

@@ -1,7 +1,7 @@
 ; -------------------------------------------------------------------------
 ; File     : KGC370-2.smt2
 ; Domain   : ODRL Policy / Knowledge-Grounded Fragment
-; Problem  : language, eq de against eq fr, registry uniqueness declared (witness condition negated)
+; Problem  : language, eq de against eq fr, distinctness rule declared (witness condition negated)
 ; Version  : 1.0
 ; Refs     : odrl-grounded-benchmark. https://github.com/Daham-Mustaf/odrl-grounded-benchmark
 ; Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark

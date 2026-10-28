@@ -1,4 +1,4 @@
-% Declarations: the ISO 3166 uniqueness rule.
+% Declarations: the ISO 3166 distinctness rule.
 %
 % ISO 3166 assigns one code to an area, so two areas listed by the
 % extension are two places.  The extension asserts none of this: the

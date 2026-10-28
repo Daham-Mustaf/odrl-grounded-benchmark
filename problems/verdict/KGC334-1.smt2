@@ -1,7 +1,7 @@
 ; -------------------------------------------------------------------------
 ; File     : KGC334-1.smt2
 ; Domain   : ODRL Policy / Knowledge-Grounded Fragment
-; Problem  : spatial, eq loc:DE against eq loc:FR, under the ISO 3166 uniqueness rule (witness condition asserted)
+; Problem  : spatial, eq loc:DE against eq loc:FR, under the ISO 3166 distinctness rule (witness condition asserted)
 ; Version  : 1.0
 ; Refs     : odrl-grounded-benchmark. https://github.com/Daham-Mustaf/odrl-grounded-benchmark
 ; Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark

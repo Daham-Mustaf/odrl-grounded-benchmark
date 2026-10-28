@@ -1,7 +1,7 @@
 %--------------------------------------------------------------------------
 % File     : KGC370-2.p
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
-% Problem  : language, eq de against eq fr, registry uniqueness declared (witness condition negated)
+% Problem  : language, eq de against eq fr, distinctness rule declared (witness condition negated)
 % Version  : 1.0
 % English  : A publisher distributes in German. A licensee's policy commits to French. The parties adopt the registry rule that different primary subtags name different languages.
 %

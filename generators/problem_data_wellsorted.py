@@ -42,7 +42,7 @@ RESOURCE = {
     "purpose":  ("https://w3id.org/odrl-kb/dpv-purposes",
                  "https://w3id.org/odrl-kb/dpv-purposes/empty"),
     "language": ("https://w3id.org/odrl-kb/bcp47",
-                 "https://w3id.org/odrl-kb/bcp47/uniqueness"),
+                 "https://w3id.org/odrl-kb/bcp47/distinct"),
 }
 
 # The left operand each problem writes.  Purposes are DPV concepts, so the

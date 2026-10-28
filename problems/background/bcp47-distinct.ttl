@@ -23,8 +23,8 @@
 @prefix owl:     <http://www.w3.org/2002/07/owl#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
-<https://w3id.org/odrl-kb/bcp47/uniqueness> a bind:Declarations ;
-    dcterms:title "Registry uniqueness for BCP 47 primary subtags"@en ;
+<https://w3id.org/odrl-kb/bcp47/distinct> a bind:Declarations ;
+    dcterms:title "Distinct primary subtags name distinct languages"@en ;
     dcterms:source <https://www.rfc-editor.org/rfc/rfc5646#section-3.1> ;
     dcterms:description "Distinct primary language subtag records, neither deprecated and with no Preferred-Value link between them, name distinct languages. Warranted by RFC 5646 sections 3.1 and 3.1.5; scope condition per the 'he'/'iw' equivalence of section 3.1.5."@en ;
     bind:generatedBy bind:PairwiseDistinctness ;

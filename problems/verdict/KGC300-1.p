@@ -20,7 +20,7 @@ include('axioms/BCP47000-0.ax').
 include('axioms/BCP47001-0.ax').
 
 % --- constants, groundings and resource hooks ----------------------------
-% Declarations: the registry's uniqueness rule, BCP47001-0.ax.  The
+% Declarations: the distinctness rule, BCP47001-0.ax.  The
 % pair de, fr is one of its 105 instances.
 
 % --- witness condition asserted ------------------------------------------

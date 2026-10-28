@@ -1,7 +1,7 @@
 %--------------------------------------------------------------------------
 % File     : KGC376-1.p
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
-% Problem  : language, isAllOf nl fr against eq nl, registry uniqueness declared (witness condition asserted)
+% Problem  : language, isAllOf nl fr against eq nl, distinctness rule declared (witness condition asserted)
 % Version  : 1.0
 % English  : A Belgian federal publisher requires distribution in both Dutch and French. The licensee distributes in Dutch only. The parties adopt the registry rule that different primary subtags name different languages.
 %

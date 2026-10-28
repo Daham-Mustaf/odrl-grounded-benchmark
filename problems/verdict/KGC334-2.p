@@ -1,7 +1,7 @@
 %--------------------------------------------------------------------------
 % File     : KGC334-2.p
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
-% Problem  : spatial, eq loc:DE against eq loc:FR, under the ISO 3166 uniqueness rule (witness condition negated)
+% Problem  : spatial, eq loc:DE against eq loc:FR, under the ISO 3166 distinctness rule (witness condition negated)
 % Version  : 1.0
 % English  : As KGC333, with the ISO 3166 rule that different country codes name different countries.
 %
@@ -20,7 +20,7 @@ include('axioms/LOC-dpvloc-geo.ax').
 include('axioms/LOC-dpvloc-iso.ax').
 
 % --- constants, groundings and resource hooks ----------------------------
-% Declarations: one instance of the ISO 3166 uniqueness rule.
+% Declarations: one instance of the ISO 3166 distinctness rule.
 %
 % The rule is stated in LOC-dpvloc-iso.ax and ranges over 249 areas.  It is
 % instantiated here rather than expanded there: a refutation should cite the

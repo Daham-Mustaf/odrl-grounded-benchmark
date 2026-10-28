@@ -10,7 +10,7 @@
 # the resource is opened.  Every other operand in the suite is tax or
 # mer.
 #
-# Registry uniqueness is the parties' rule and lives in its own file.  A
+# The distinctness rule is the parties' rule and lives in its own file.  A
 # problem citing a binding below without also including BCP47001-0.ax
 # gets Unknown where the declaration would have given a definite verdict:
 # the registry lists both subtags and says nothing that separates them.

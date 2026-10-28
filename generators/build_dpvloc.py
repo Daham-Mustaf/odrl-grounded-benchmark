@@ -491,7 +491,7 @@ def iso_ttl(reps, multi, meta) -> str:
     dcterms:title "Pairwise distinctness of ISO 3166 areas"@en ;
     bind:appliesTo <https://w3id.org/odrl-kb/dpv-loc-geo>,
                  <https://w3id.org/odrl-kb/dpv-loc-juris> ;
-    bind:generatedBy bind:RegistryUniquenessRule ;
+    bind:generatedBy bind:PairwiseDistinctness ;
     bind:origin bind:practiceRule ;
     bind:scopeCondition "Distinctness holds between equivalence classes under the extension's identity statements, not between codes; codes the extension identifies name one area."@en .
 """
@@ -590,7 +590,7 @@ def iso_axioms(reps) -> str:
     listing = "\n".join(
         "% " + ", ".join(reps[i:i + 12]) for i in range(0, len(reps), 12))
     return (
-        "% Declarations: the ISO 3166 uniqueness rule.\n"
+        "% Declarations: the ISO 3166 distinctness rule.\n"
         "%\n"
         "% ISO 3166 assigns one code to an area, so two areas listed by the\n"
         "% extension are two places.  The extension asserts none of this: the\n"
