@@ -5,7 +5,7 @@
 % Version  : 1.0
 % English  : A library permits use for any DPV purpose. A researcher's policy commits to use for non-commercial research.
 %
-% Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
+% Refs     : odrl-grounded-benchmark. https://github.com/Daham-Mustaf/odrl-grounded-benchmark
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark
 % Authors  : Daham Mustafa
 % Names    : KGC311-1.p

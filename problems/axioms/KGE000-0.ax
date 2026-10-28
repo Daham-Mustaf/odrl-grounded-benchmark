@@ -6,7 +6,7 @@
 % English  : The order is a partial order.  A profile declares how it is to be read, as subsumption at tax or as parthood at mer, but the axioms do not depend on that reading, so one file serves every sort and every profile.
 %           : Quantified content of a query: these three axioms and the disjointness statements of the declarations.  Resource statements, distinctness statements and witness conjuncts are ground.  All quantifiers are universal and the signature is function-free.
 %
-% Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
+% Refs     : odrl-grounded-benchmark. https://github.com/Daham-Mustaf/odrl-grounded-benchmark
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark
 % Authors  : Daham Mustafa
 % Names    : KGE000-0.ax

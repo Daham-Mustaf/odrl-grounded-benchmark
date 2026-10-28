@@ -5,7 +5,7 @@
 % Version  : 1.0
 % English  : A controller requires at least one of encryption and access control. A processor's policy commits to encryption as the only measure.
 %
-% Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
+% Refs     : odrl-grounded-benchmark. https://github.com/Daham-Mustaf/odrl-grounded-benchmark
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark
 % Authors  : Daham Mustafa
 % Names    : KGC362-1.p

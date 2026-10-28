@@ -3,7 +3,7 @@
 ; Domain   : ODRL Policy / Knowledge-Grounded Fragment
 ; Problem  : purpose, isNoneOf {Marketing} against eq Advertising, declared distinct (witness condition asserted)
 ; Version  : 1.0
-; Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
+; Refs     : odrl-grounded-benchmark. https://github.com/Daham-Mustaf/odrl-grounded-benchmark
 ; Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark
 ; Authors  : Daham Mustafa
 ; Names    : KGC397-1.smt2

@@ -5,7 +5,7 @@
 % Version  : 1.0
 % English  : A controller permits processing on any of the seven Article 6(1) legal bases. A recipient's policy relies on consent.
 %
-% Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
+% Refs     : odrl-grounded-benchmark. https://github.com/Daham-Mustaf/odrl-grounded-benchmark
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark
 % Authors  : Daham Mustafa
 % Names    : KGC350-2.p

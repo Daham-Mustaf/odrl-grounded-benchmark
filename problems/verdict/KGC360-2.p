@@ -5,7 +5,7 @@
 % Version  : 1.0
 % English  : A controller permits use where encryption and access control are both in place. A processor's policy commits to technical measures.
 %
-% Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
+% Refs     : odrl-grounded-benchmark. https://github.com/Daham-Mustaf/odrl-grounded-benchmark
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark
 % Authors  : Daham Mustafa
 % Names    : KGC360-2.p

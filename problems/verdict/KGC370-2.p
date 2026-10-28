@@ -5,7 +5,7 @@
 % Version  : 1.0
 % English  : A publisher distributes in German. A licensee's policy commits to French. The parties adopt the registry rule that different primary subtags name different languages.
 %
-% Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
+% Refs     : odrl-grounded-benchmark. https://github.com/Daham-Mustaf/odrl-grounded-benchmark
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark
 % Authors  : Daham Mustafa
 % Names    : KGC370-2.p

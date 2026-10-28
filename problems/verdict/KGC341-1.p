@@ -5,7 +5,7 @@
 % Version  : 1.0
 % English  : A controller permits use under given or renewed consent. A processor's policy commits to processing only under renewed consent.
 %
-% Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
+% Refs     : odrl-grounded-benchmark. https://github.com/Daham-Mustaf/odrl-grounded-benchmark
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark
 % Authors  : Daham Mustafa
 % Names    : KGC341-1.p

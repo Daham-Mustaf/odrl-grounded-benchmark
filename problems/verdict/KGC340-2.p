@@ -5,7 +5,7 @@
 % Version  : 1.0
 % English  : A controller permits use while the consent on record may justify processing; a processor commits to processing only under given consent.
 %
-% Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
+% Refs     : odrl-grounded-benchmark. https://github.com/Daham-Mustaf/odrl-grounded-benchmark
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark
 % Authors  : Daham Mustafa
 % Names    : KGC340-2.p

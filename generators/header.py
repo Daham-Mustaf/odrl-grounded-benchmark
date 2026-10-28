@@ -23,15 +23,15 @@ ANONYMOUS = os.environ.get("ODRL_ANON", "") == "1"
 _REAL = {
     "authors": "Daham Mustafa",
     "source":  "https://github.com/Daham-Mustaf/odrl-grounded-benchmark",
-    "ref":     "TODO. A Sorted Semantics for the Knowledge-Grounded "
-               "Fragment of ODRL.",
+    "ref":     "odrl-grounded-benchmark. "
+               "https://github.com/Daham-Mustaf/odrl-grounded-benchmark",
 }
 
 _ANON = {
     "authors": "Anonymous",
     "source":  "Anonymous artefact",
     "ref":     "Anonymous. A Sorted Semantics for the Knowledge-Grounded "
-               "Fragment of ODRL. Under submission.",
+               "Fragment of ODRL.",
 }
 
 

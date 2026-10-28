@@ -5,7 +5,7 @@
 % Version  : 1.0
 % English  : A library permits use within the European Union; a researcher's policy commits to use in Germany. DPV places Germany in the EU, and this binding reads membership as containment.
 %
-% Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
+% Refs     : odrl-grounded-benchmark. https://github.com/Daham-Mustaf/odrl-grounded-benchmark
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark
 % Authors  : Daham Mustafa
 % Names    : KGC331-2.p

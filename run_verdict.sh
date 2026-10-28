@@ -5,7 +5,7 @@ set -u
 ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
 # Vampire resolves include('axioms/...') against --include, or against the
 # working directory when it is not given.  Passing it explicitly means the
-# harness runs from anywhere, and so does a reviewer reproducing by hand:
+# harness runs from anywhere, and so does anyone reproducing by hand:
 #   vampire --include "$ROOT/problems" problems/verdict/KGC311-2.p
 INC="$ROOT/problems"
 cd "$INC" 2>/dev/null || cd .

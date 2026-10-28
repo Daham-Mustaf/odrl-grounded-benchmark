@@ -5,7 +5,7 @@
 % Version  : 1.0
 % English  : A library permits use for exactly one of research and development and marketing. A researcher's policy commits to use for scientific research.
 %
-% Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
+% Refs     : odrl-grounded-benchmark. https://github.com/Daham-Mustaf/odrl-grounded-benchmark
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark
 % Authors  : Daham Mustafa
 % Names    : KGC319-1.p

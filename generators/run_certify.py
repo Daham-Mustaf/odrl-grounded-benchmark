@@ -23,7 +23,7 @@ from certificate import (premises_from_vampire, premises_from_z3, classify,
 # --mode vampire rather than casc: the schedule mode does not always
 # propagate --output_axiom_names to its child strategies, and without names
 # no premise can be attributed.  --include makes the run independent of the
-# working directory, so a reviewer can reproduce it from anywhere.
+# working directory, so anyone can reproduce it from anywhere.
 VAMPIRE = ["vampire", "--mode", "vampire", "--proof", "tptp",
            "--output_axiom_names", "on"]
 Z3 = ["z3"]

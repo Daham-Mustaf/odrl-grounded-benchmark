@@ -5,7 +5,7 @@
 % Version  : 1.0
 % English  : A library permits use anywhere except Wallis and Futuna. A researcher's policy commits to use in Uvea, a district of Wallis and Futuna.
 %
-% Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
+% Refs     : odrl-grounded-benchmark. https://github.com/Daham-Mustaf/odrl-grounded-benchmark
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark
 % Authors  : Daham Mustafa
 % Names    : KGC392-1.p

@@ -5,7 +5,7 @@
 % Version  : 1.0
 % English  : English and Italian rights were sold separately, so a publisher permits any language except English and Italian. The licensee distributes in Italian.
 %
-% Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
+% Refs     : odrl-grounded-benchmark. https://github.com/Daham-Mustaf/odrl-grounded-benchmark
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark
 % Authors  : Daham Mustafa
 % Names    : KGC377-2.p
