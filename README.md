@@ -121,6 +121,37 @@ once the parties declare the concepts distinct.
 
 ---
 
+## Release v1.0
+
+The suite is frozen. The numbers are those of `suite-numbers.tex`, which
+`generators/table_data.py --suite-numbers` writes:
+
+```
+cases                70
+queries              124
+definite verdicts    46   (30 Compatible, 16 Incompatible)
+Unknown              16
+rejected             5   (3 ill sorted, 2 ungrounded)
+accepted controls    3
+bindings             10
+```
+
+Retired: KGC307, KGC384, KGC385, KGC389 and KGC390. A retired ID is never
+reused, and the list stays in `cases/cases-README.md`.
+
+Two tags keep earlier states of the repository:
+
+- `pre-glossary` (7687a17) is the state before the terminology change. It
+  keeps the former names (assertion, background theory, the `bt:`
+  vocabulary) and the three larger GeoNames slices (`d1-55`, `d2-1157` and
+  `d3-13050`), with their resources, declarations, axioms and profiles.
+- `pre-retire` (609e9ef) is the state before the final case set. It keeps
+  the five retired cases with their queries and certificates, and the first
+  KGC316, which asked isA recruitment interview scheduling against eq
+  Purpose. The ID now holds a different case.
+
+---
+
 ## Running it
 
 Vocabularies first, then problems, then the harnesses.

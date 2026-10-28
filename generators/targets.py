@@ -38,8 +38,9 @@ def with_targets(ttl: str) -> str:
     """Add a typed, titled node for each target the policies name.
 
     The nodes go straight after the prefix block, so a comment written
-    above a policy stays with that policy.  A target already described in
-    the text is left alone, so the helper can be applied twice.
+    above a policy stays with that policy, and a blank line separates them
+    from whatever follows.  A target already described in the text is left
+    alone, so the helper can be applied twice.
     """
     named = []
     for iri in re.findall(r"odrl:target\s+(drk:[\w-]+)", ttl):
@@ -53,4 +54,7 @@ def with_targets(ttl: str) -> str:
     prefix = ""
     if "dcat:" in "".join(nodes) and not re.search(r"^@prefix dcat:", ttl, re.M):
         prefix = "\n" + DCAT_PREFIX
-    return ttl[:end] + prefix + "\n\n" + "\n\n".join(nodes) + ttl[end:]
+    rest = ttl[end:]
+    if not rest.startswith("\n\n"):
+        rest = "\n" + rest
+    return ttl[:end] + prefix + "\n\n" + "\n\n".join(nodes) + rest

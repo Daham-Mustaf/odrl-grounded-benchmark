@@ -12,6 +12,7 @@
 
 drk:manuscripts a dcat:Dataset ;
     dcterms:title "Digitised manuscripts of a library"@en .
+
 drk:policy-394-1 a odrl:Set ;
     odrl:uid drk:policy-394-1 ;
     odrl:profile dpv-odrl: ;
