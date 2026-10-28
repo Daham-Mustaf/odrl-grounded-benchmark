@@ -152,7 +152,10 @@ PROBLEMS = [
 "comment": (
     "The two constraints can be satisfied both when ft:PDF and ft:PDFA1A "
     "denote the same element and when they denote different elements. No "
-    "resource statement or declaration selects between these possibilities."
+    "resource statement or declaration selects between these possibilities. "
+    "PDF/A-1a is a restricted form of PDF, but the table publishes no "
+    "relation between the two, so under this binding a use in PDF/A-1a is "
+    "not a use in PDF."
 ),
             "premises": [],
         },
@@ -231,7 +234,10 @@ kgc:KGC320-p2-c1 a odrl:Constraint ;
    "comment": (
         "The two constraints require ft:PDF and ft:PDFA1A to denote the "
         "same element, while the declaration requires them to "
-        "denote different elements. The two conditions cannot both hold."
+        "denote different elements. The two conditions cannot both hold. "
+        "PDF/A-1a is a restricted form of PDF, but the table publishes no "
+        "relation between the two, so under this binding a use in PDF/A-1a "
+        "is not a use in PDF."
     ),
             "premises": [
                 ("fromDeclarations",
@@ -317,7 +323,10 @@ kgc:KGC321-p2-c1 a odrl:Constraint ;
     "comment": (
         "The second policy requires PDF/A-1a, and the first lists it among "
         "the values isAnyOf accepts. The two constraints can be satisfied "
-        "together without any resource statement or declaration."),        "premises": [
+        "together without any resource statement or declaration. Listing "
+        "both formats is how a policy author makes PDF/A-1a acceptable "
+        "under a flat table."),
+            "premises": [
                 ("fromConstraints", "the witness condition"),
             ],
         },
@@ -413,7 +422,8 @@ kgc:KGC322-p2-c1 a odrl:Constraint ;
         "comment": (
             "The first policy excludes PDF, and the second requires PDF/A-1a. "
             "The declarations declare the two formats distinct, so the "
-            "required format is not excluded."),
+            "required format is not excluded. The exclusion of PDF does not "
+            "exclude PDF/A-1a, because the table does not relate them."),
         "premises": [
             (
                 "fromDeclarations",

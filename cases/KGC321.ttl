@@ -55,7 +55,7 @@ drk:KGC321-report a vrep:OperandVerdictReport ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-fileformat> ;
     vrep:declarations <https://w3id.org/odrl-kb/eu-file-type/declared> ;
     vrep:readAgainst drk:KGC320-report ;
-    rdfs:comment """The two constraints require ft:PDF and ft:PDFA1A to denote the same element, while the declaration requires them to denote different elements. The two conditions cannot both hold."""@en ;
+    rdfs:comment """The two constraints require ft:PDF and ft:PDFA1A to denote the same element, while the declaration requires them to denote different elements. The two conditions cannot both hold. PDF/A-1a is a restricted form of PDF, but the table publishes no relation between the two, so under this binding a use in PDF/A-1a is not a use in PDF."""@en ;
     dcterms:description """As KGC320, with the two formats declared distinct."""@en ;
     vrep:compatibilityState vrep:Incompatible ;
     vrep:certificate <certificates/KGC321-1.tstp> .
