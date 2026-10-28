@@ -154,8 +154,7 @@ PROBLEMS = [
     "denote the same element and when they denote different elements. No "
     "resource statement or declaration selects between these possibilities. "
     "PDF/A-1a is a restricted form of PDF, but the table publishes no "
-    "relation between the two, so under this binding a use in PDF/A-1a is "
-    "not a use in PDF."
+    "relation between the two, so this binding cannot use that relation."
 ),
             "premises": [],
         },

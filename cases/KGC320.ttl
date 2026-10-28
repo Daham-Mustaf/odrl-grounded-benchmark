@@ -55,6 +55,6 @@ drk:KGC320-report a vrep:OperandVerdictReport ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-fileformat> ;
     vrep:declarations <https://w3id.org/odrl-kb/eu-file-type/empty> ;
     vrep:readAgainst drk:KGC321-report ;
-    rdfs:comment """The two constraints can be satisfied both when ft:PDF and ft:PDFA1A denote the same element and when they denote different elements. No resource statement or declaration selects between these possibilities. PDF/A-1a is a restricted form of PDF, but the table publishes no relation between the two, so under this binding a use in PDF/A-1a is not a use in PDF."""@en ;
+    rdfs:comment """The two constraints can be satisfied both when ft:PDF and ft:PDFA1A denote the same element and when they denote different elements. No resource statement or declaration selects between these possibilities. PDF/A-1a is a restricted form of PDF, but the table publishes no relation between the two, so this binding cannot use that relation."""@en ;
     dcterms:description """A German library permits use in PDF only. A French library's policy commits to use in PDF/A-1a only."""@en ;
     vrep:compatibilityState vrep:Unknown .
