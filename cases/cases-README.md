@@ -16,6 +16,7 @@ KGC360-364   technical and organisational measures
 KGC370-379   language, over a BCP 47 slice
 KGC380-392   spatial: composition, subdivisions, exclusion
 KGC393-397   purpose: the set operators
+KGC398       language: isAnyOf against isAllOf
 ```
 
 The policies can be read without the semantics. The binding IRI

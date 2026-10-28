@@ -1,13 +1,46 @@
 #
-# What the registry publishes and what the parties add.  RFC 5646
-# section 3.1 guarantees that subtag meanings are unambiguous and stable,
-# and section 3.1.5 enforces this by requiring Description fields to be
-# unique within a record type.  The registry publishes identity
-# (Preferred-Value equivalences, section 3.1.7) and order (Macrolanguage,
-# section 3.1.10) but never distinctness.  The parties therefore adopt the
-# following rule as a declaration: distinct primary language subtag
-# records, neither deprecated and with no Preferred-Value link between
-# them, name distinct languages.
+# What the registry publishes and what the parties add.  The registry
+# publishes identity and order but never distinctness.  The parties
+# therefore adopt the following rule as a declaration: distinct primary
+# language subtag records, neither deprecated and with no Preferred-Value
+# link between them, name distinct languages.
+#
+# The rule rests on these sentences of RFC 5646 (September 2009), quoted
+# as published.
+#
+# Section 3, first paragraph:
+#   "In addition, the meaning of the various subtags will be
+#   unambiguous and stable over time."
+#
+# Section 3.1.5, Description Field:
+#   "To help ensure that users do not become confused about which
+#   subtag to use, 'Description' fields assigned to a record of any
+#   specific type ('language', 'extlang', 'script', and so on) MUST be
+#   unique within that given record type with the following exception:
+#   if a particular 'Description' field occurs in multiple records of
+#   a given type, then at most one of the records can omit the
+#   'Deprecated' field.  All deprecated records that share a
+#   'Description' MUST have the same 'Preferred-Value', and all
+#   non-deprecated records MUST be that 'Preferred-Value'.  This means
+#   that two records of the same type that share a 'Description' are
+#   also semantically equivalent and no more than one record with a
+#   given 'Description' is preferred for that meaning."
+#
+# Section 3.1.5, the same field, an example of the permitted overlap:
+#   "By contrast, the subtags 'he' and 'iw' share a 'Description' value
+#   of "Hebrew"; this is permitted because 'iw' is deprecated and its
+#   'Preferred-Value' is 'he'."
+#
+# Section 3.1.10, Macrolanguage Field:
+#   "This field indicates a language that encompasses this subtag's
+#   language according to assignments made by ISO 639-3."
+#
+# The first two are what the rule is warranted by.  The third is the
+# scope condition: a deprecated subtag may share a language with its
+# Preferred-Value.  The fourth is the order the registry does publish; the
+# generator checks that no member of the slice carries it, so that the
+# resource can claim to hold no order.  None of them says that two subtags
+# name two languages.  That is the parties' rule.
 #
 #
 # Distinctness, not disjointness.  Distinctness denies that two concepts
@@ -25,13 +58,13 @@
 @prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
 <https://w3id.org/odrl-kb/bcp47/distinct> a bind:Declarations ;
     dcterms:title "Distinct primary subtags name distinct languages"@en ;
-    dcterms:source <https://www.rfc-editor.org/rfc/rfc5646#section-3.1> ;
-    dcterms:description "Distinct primary language subtag records, neither deprecated and with no Preferred-Value link between them, name distinct languages. Warranted by RFC 5646 sections 3.1 and 3.1.5; scope condition per the 'he'/'iw' equivalence of section 3.1.5."@en ;
+    dcterms:source <https://www.rfc-editor.org/rfc/rfc5646#section-3.1.5> ;
+    dcterms:description "Distinct primary language subtag records, neither deprecated and with no Preferred-Value link between them, name distinct languages. Warranted by RFC 5646 sections 3 and 3.1.5; scope condition per the 'he'/'iw' example of section 3.1.5."@en ;
     bind:generatedBy bind:PairwiseDistinctness ;
     bind:origin bind:practiceRule ;
     bind:scopeCondition "Type: language; Deprecated: absent; no Preferred-Value link within the member set"@en ;
     bind:appliesTo <https://w3id.org/odrl-kb/bcp47> ;
-    bind:memberSourceFileDate "GENERATOR_FILE_DATE"^^xsd:date ;
+    bind:memberSourceFileDate "2026-08-08"^^xsd:date ;
     bind:pairCount 105 ;
     bind:states [
         a owl:AllDifferent ;

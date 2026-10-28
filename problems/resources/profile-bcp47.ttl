@@ -7,8 +7,8 @@
 # between them, so the resource file carries fifteen concept statements
 # and no order statement at all.  There is nothing for isA to read, and
 # the signature rejects isA, isPartOf and hasPart on this operand before
-# the resource is opened.  Every other operand in the suite is tax or
-# mer.
+# the resource is opened.  The only other nominal operand in the suite is
+# fileFormat; every other operand is tax or mer.
 #
 # The distinctness rule is the parties' rule and lives in its own file.  A
 # problem citing a binding below without also including BCP47001-0.ax
@@ -66,9 +66,9 @@ ex:g-bcp47-primary a bind:GroundingProcedure ;
 ex:b-language-bcp47 a bind:OperandBinding ;
     dcterms:title "Language over BCP 47, exact subtags"@en ;
     rdfs:comment """The default binding. A policy naming a subtag of the slice is
-         interpretable; one naming anything else is not, and the verdict
-         is Unknown with that value as its certificate rather than a
-         guess at what was meant."""@en ;
+         interpretable; one naming anything else is not, and the case is
+         rejected as ungrounded, with that value named in the report,
+         rather than a guess at what was meant."""@en ;
     bind:leftOperand      odrl:language ;
     bind:sort             bind:nom ;
     bind:resource         <https://w3id.org/odrl-kb/bcp47> ;

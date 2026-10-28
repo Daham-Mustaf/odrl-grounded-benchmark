@@ -100,7 +100,7 @@ suite-numbers.tex the figures and the bindings table the paper includes,
 ## The problems
 
 ```
-KGC100-112   well-sortedness: six constraints, three rejected at
+KGC100-112   well-sortedness: eight constraints, five rejected at
              drafting time by the signature alone
 KGC300-302   the motivating example, one per sort
 KGC303-306   spatial: exactly one of two alternatives, over GeoNames
@@ -113,6 +113,7 @@ KGC360-364   technical and organisational measures
 KGC370-379   language, over a BCP 47 slice
 KGC380-392   spatial: composition, subdivisions, exclusion
 KGC393-397   purpose: the set operators
+KGC398       language: isAnyOf against isAllOf
 ```
 
 Start with KGC310, KGC313 and KGC314: one published statement, then the
@@ -123,8 +124,9 @@ once the parties declare the concepts distinct.
 
 ## Release v1.0
 
-The suite is frozen. The numbers are those of `suite-numbers.tex`, which
-`generators/table_data.py --suite-numbers` writes:
+The suite was frozen at the tag `v1.0` with these numbers, those of
+`suite-numbers.tex` at that tag (`generators/table_data.py --suite-numbers`
+writes the file):
 
 ```
 cases                70

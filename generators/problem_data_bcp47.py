@@ -1,7 +1,7 @@
 """
 problem_data_bcp47.py
 =====================
-Ten problems over the BCP 47 language slice, at the nominal sort.
+Eleven problems over the BCP 47 language slice, at the nominal sort.
 
     KGC370  eq de  x  eq fr         distinctness declared Incompatible
     KGC371  eq de  x  eq fr         declaration withdrawn Unknown
@@ -13,6 +13,7 @@ Ten problems over the BCP 47 language slice, at the nominal sort.
     KGC377  isNoneOf {en, it} x  eq it      no declaration        Incompatible
     KGC378  or(eq de, eq fr)  x  eq fr      no declaration        Compatible
     KGC379  xone(eq de, eq fr) x eq de      no declaration        Unknown
+    KGC398  isAnyOf {de, fr} x isAllOf {nl, fr}  no declaration   Compatible
 
 The first six use eq and neq on one pair of subtags.  Each pair among them
 changes one thing and holds everything else fixed, so that the change is
@@ -785,5 +786,53 @@ PROBLEMS = [
                          [("eq", [DE]), ("eq", [FR])], connective="xone")
                + _policy("KGC379", 2, "Distribute in German only",
                          [("eq", [DE])]),
+    },
+    {
+        "id":                "KGC398",
+        "subdir":            "verdict",
+        "name":              "language, isAnyOf {de, fr} against isAllOf "
+                             "{nl, fr}, no declaration",
+        "left_operand":      "language",
+        "sort":              "nom",
+        "resource":          RESOURCE,
+        "background_theory": EMPTY_BT,
+        "binding":           BINDING_EXACT,
+        "includes":          INCLUDES,
+        "tree": [C("isAnyOf", DE, FR),
+                 C("isAllOf", NL, FR, side="request")],
+        "expected_verdict":  "Compatible",
+        "expected_q1":       "Satisfiable",
+        "expected_q2":       "Unsatisfiable",
+        "summary": (
+            "A translation licence covers at least one of a German and a "
+            "French edition. The licensee publishes in both Dutch and "
+            "French."),
+        "description": (
+            "A translation licence covers a German edition, a French "
+            "edition, or both. The licensee's policy commits to a Dutch and "
+            "a French edition together.\n\n"
+            "isAnyOf asks that the languages of the use include at least "
+            "one of German and French. isAllOf asks that they include both "
+            "Dutch and French. A use in Dutch and French together "
+            "satisfies both policies: French is on the licence's list and "
+            "in the licensee's pair. French is the same concept as itself "
+            "in every structure, so the verdict is Compatible whether or "
+            "not Dutch and French differ, and no declaration is used. "
+            "KGC376 puts the same isAllOf on the other side, against Dutch "
+            "only, and there the verdict does need the distinctness rule."
+        ),
+        "certificate": {
+            "kind": "Refutation",
+            "comment": (
+                "French is on the licence's list and in the licensee's "
+                "pair, so a use in Dutch and French satisfies both "
+                "policies in every structure."),
+            "premises": [],
+        },
+        "ttl": _TTL_HEAD
+               + _policy("KGC398", 1, "Distribute in at least one of German and French",
+                         [("isAnyOf", [DE, FR])])
+               + _policy("KGC398", 2, "Distribute in both Dutch and French",
+                         [("isAllOf", [NL, FR])]),
     },
 ]

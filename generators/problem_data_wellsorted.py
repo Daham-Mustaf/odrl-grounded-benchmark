@@ -1,8 +1,9 @@
 """
 problem_data_wellsorted.py
 ==========================
-The drafting-time check.  Six problems: one ill-sorted constraint per sort
-and one well-sorted control per sort.
+The drafting-time check.  Eight problems: ill-sorted constraints, one per
+sort and the two parthood operators at nom, and one well-sorted control per
+sort.
 
 These build no queries.  Well-sortedness is decided by the signature alone,
 before any resource is opened, so a rejected constraint never reaches a
@@ -12,11 +13,13 @@ for it.
     KGC100  spatial  isA        gn:Europe    mer   rejected
     KGC101  purpose  isPartOf   dpv:NCP      tax   rejected
     KGC102  language isA        bcp:de       nom   rejected
+    KGC103  language isPartOf   bcp:de       nom   rejected
+    KGC104  language hasPart    bcp:de       nom   rejected
     KGC110  spatial  isPartOf   gn:Europe    mer   accepted
     KGC111  purpose  isA        dpv:NCP      tax   accepted
     KGC112  language eq         bcp:de       nom   accepted
 
-The three rejections are the same error in three settings: an operator put to
+The five rejections are the same error in three settings: an operator put to
 a resource that supplies a different relation.  KGC100 is the case the paper
 uses throughout, a gazetteer asked about kinds.
 """
@@ -66,6 +69,8 @@ TITLE = {
     "KGC100": "Use in a kind of Europe only",
     "KGC101": "Use within non-commercial purposes",
     "KGC102": "Use in a kind of German only",
+    "KGC103": "Use within German",
+    "KGC104": "Use in a language that includes German",
     "KGC110": "Use within Europe",
     "KGC111": "Use for non-commercial purposes only",
     "KGC112": "Use in German only",
@@ -142,6 +147,16 @@ PROBLEMS = [
     _problem("KGC102", "language", "isA", "bcp:de", "nom", False,
              "The operand is grounded in a registry, which supplies identity "
              "and no order.  isA requires subsumption.  The constraint is "
+             "rejected before the registry is opened."),
+
+    _problem("KGC103", "language", "isPartOf", "bcp:de", "nom", False,
+             "The operand is grounded in a registry, which supplies identity "
+             "and no order.  isPartOf requires parthood.  The constraint is "
+             "rejected before the registry is opened."),
+
+    _problem("KGC104", "language", "hasPart", "bcp:de", "nom", False,
+             "The operand is grounded in a registry, which supplies identity "
+             "and no order.  hasPart requires parthood.  The constraint is "
              "rejected before the registry is opened."),
 
     _problem("KGC110", "spatial", "isPartOf", "gn:Europe", "mer", True,

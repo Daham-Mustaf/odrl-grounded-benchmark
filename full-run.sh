@@ -64,6 +64,12 @@ uv run generators/validate_terms.py --schemas vocab \
 hdr "4b. case files: the agreed shape"
 uv run generators/validate_cases.py 2>&1 | tail -40
 
+hdr "4c. no placeholders left in generated files"
+if grep -rIn -E 'GENERATOR_|TODO' cases problems certificates; then
+  die "GENERATOR_ or TODO left in a generated file (listed above)"
+fi
+echo "  none"
+
 hdr "5. bindings: do the probes hold"
 uv run generators/validate_bindings.py --probes probes \
   --axioms problems/axioms 2>&1 | tail -5
