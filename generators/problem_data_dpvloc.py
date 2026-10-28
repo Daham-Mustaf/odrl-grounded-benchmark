@@ -1,7 +1,7 @@
 """
 problem_data_dpvloc.py
 ======================
-Five problems over the DPV Locations resource, at mer.
+Seven problems over the DPV Locations resource, at mer.
 
     KGC330  isPartOf NL x eq BQ   -> Compatible    one containment premise
     KGC331  isPartOf EU x eq DE   -> Compatible    under the jurisdictional
@@ -9,6 +9,9 @@ Five problems over the DPV Locations resource, at mer.
                                                    all under the territorial
     KGC333  eq DE       x eq FR   -> Unknown       nothing separates them
     KGC334  the same pair under the ISO rule       -> Incompatible
+    KGC335  neq DE      x eq FR   -> Compatible    under the ISO rule
+    KGC336  isAnyOf {DE, FR} x eq DE-BY -> Incompatible  identity, not containment
+    KGC337  isAllOf {DE, FR} x eq DE    -> Incompatible  under the ISO rule
 
 One resource, two readings
 ---------------------------
@@ -226,9 +229,9 @@ def _ttl2(pid, offer_title, offer_cs, req_title, req_cs, connective=None):
                     "odrl:assignee drk:researcher ;\n", req_cs))
  
  
-_ISO_385 = _iso((DE_NW, DE_BY))
 _ISO_387 = _iso((DE_HH, DE_BY), (DE_HH, DE_BE))
-_ISO_390 = _iso((DE_NW, DE_BY))
+_ISO_DE_FR = _iso((DE, FR))
+_ISO_336 = _iso((DE_BY, DE), (DE_BY, FR))
 
 def _ttl(pid, offer_title, offer_op, offer_val, req_title, req_val):
     return _TTL_HEAD + f"""
@@ -499,6 +502,133 @@ fof(bg_dist_loc_de_loc_fr, axiom,
                     "Use in France only", "FR"),
     },
     # -----------------------------------------------------------------
+    # KGC335  neq over places: the complement of one country, against a
+    # country the ISO rule keeps apart from it.
+    # -----------------------------------------------------------------
+    {
+        "id": "KGC335", "subdir": "verdict",
+        "name": "spatial, neq loc:DE against eq loc:FR, ISO rule",
+        "left_operand": "spatial", "sort": "mer",
+        "resource": GEO_RESOURCE, "background_theory": ISO_BT,
+        "binding": BINDING_GEO, "includes": INCLUDES_ISO,
+        "tree": [C("neq", DE), C("eq", FR, side="request")],
+        "fof_decls": _ISO_DE_FR[0], "smt2_background": _ISO_DE_FR[1],
+        "expected_verdict": "Compatible",
+        "expected_q1": "Satisfiable", "expected_q2": "Unsatisfiable",
+        "summary": (
+            "A library permits use anywhere except Germany. A researcher's "
+            "policy commits to use in France. The ISO 3166 rule makes the two "
+            "countries different places."),
+        "description": (
+            "Use anywhere except Germany, against use in France. neq "
+            "excludes Germany by identity. The ISO 3166 rule makes France a "
+            "different place from Germany, so a use in France satisfies both "
+            "policies in every structure that keeps the rule and the "
+            "verdict is Compatible. Without the rule a structure may "
+            "identify the two countries and the verdict is Unknown, as in "
+            "KGC333. KGC334 is the same pair under eq."),
+        "certificate": {"kind": "Refutation",
+            "comment": (
+                "The ISO 3166 rule makes Germany and France different "
+                "countries, so a use in France is a use outside Germany and "
+                "satisfies both policies."),
+            "premises": [("fromDeclarations",
+                          "loc:DE and loc:FR are distinct areas under "
+                          "ISO 3166")]},
+        "provenance": "Exclusion clauses in data licences.",
+        "ttl": _ttl2("KGC335", "Use anywhere except Germany",
+                     [("neq", ["DE"])], "Use in France only",
+                     [("eq", ["FR"])]),
+    },
+    # -----------------------------------------------------------------
+    # KGC336  isAnyOf over places is identity: a part of a listed country
+    # is not a listed country.
+    # -----------------------------------------------------------------
+    {
+        "id": "KGC336", "subdir": "verdict",
+        "name": "spatial, isAnyOf {loc:DE, loc:FR} against eq loc:DE-BY, "
+                "ISO rule",
+        "left_operand": "spatial", "sort": "mer",
+        "resource": GEO_RESOURCE, "background_theory": ISO_BT,
+        "binding": BINDING_GEO, "includes": INCLUDES_ISO,
+        "tree": [C("isAnyOf", DE, FR), C("eq", DE_BY, side="request")],
+        "fof_decls": _ISO_336[0], "smt2_background": _ISO_336[1],
+        "expected_verdict": "Incompatible",
+        "expected_q1": "Unsatisfiable", "expected_q2": "Satisfiable",
+        "summary": (
+            "A library permits use in at least one of Germany and France. A "
+            "researcher's policy commits to use in Bavaria. The ISO 3166 rule "
+            "makes Bavaria a different place from both countries."),
+        "description": (
+            "Use in at least one of Germany and France, against use in "
+            "Bavaria. Bavaria lies within Germany, but isAnyOf compares by "
+            "identity and not by containment, and Bavaria is not Germany. "
+            "The ISO 3166 rule keeps Bavaria apart from Germany and from "
+            "France, so no use satisfies both policies and the verdict is "
+            "Incompatible. A drafter who meant Germany and its parts needs "
+            "isPartOf, as in KGC330. Without the rule a structure may "
+            "identify Bavaria with Germany and the verdict is Unknown."),
+        "certificate": {"kind": "Refutation",
+            "comment": (
+                "The ISO 3166 rule makes Bavaria distinct from Germany and "
+                "from France, so it is neither value the first policy "
+                "lists."),
+            "premises": [("fromDeclarations",
+                          "loc:DE-BY distinct from loc:DE"),
+                         ("fromDeclarations",
+                          "loc:DE-BY distinct from loc:FR")]},
+        "provenance": "Territory lists in data licences.",
+        "ttl": _ttl2("KGC336", "Use in at least one of Germany and France",
+                     [("isAnyOf", ["DE", "FR"])], "Use in Bavaria only",
+                     [("eq", ["DE-BY"])]),
+    },
+    # -----------------------------------------------------------------
+    # KGC337  isAllOf over places, resting on the ISO rule as KGC376
+    # rests on the BCP 47 rule.
+    # -----------------------------------------------------------------
+    {
+        "id": "KGC337", "subdir": "verdict",
+        "name": "spatial, isAllOf {loc:DE, loc:FR} against eq loc:DE, "
+                "ISO rule",
+        "left_operand": "spatial", "sort": "mer",
+        "resource": GEO_RESOURCE, "background_theory": ISO_BT,
+        "binding": BINDING_GEO, "includes": INCLUDES_ISO,
+        "tree": [C("isAllOf", DE, FR), C("eq", DE, side="request")],
+        "fof_decls": _ISO_DE_FR[0], "smt2_background": _ISO_DE_FR[1],
+        "expected_verdict": "Incompatible",
+        "expected_q1": "Unsatisfiable", "expected_q2": "Satisfiable",
+        "summary": (
+            "A library requires use in both Germany and France. A "
+            "researcher's policy commits to use in Germany only. The ISO "
+            "3166 rule makes the two countries different places."),
+        "description": (
+            "Use in both Germany and France, against use in Germany only. "
+            "isAllOf asks that the areas of the use include both countries. "
+            "eq asks that the use is Germany. The two hold together only if "
+            "Germany and France are one place. The parties adopt the ISO "
+            "3166 rule, which makes them different places, so no use "
+            "satisfies both policies and the verdict is Incompatible.\n\n"
+            "The refutation cites one premise, and it is the parties' "
+            "rather than the extension's. DPV Locations publishes no "
+            "distinctness between the two countries. Without the rule a "
+            "structure may identify them and the verdict is Unknown, as in "
+            "KGC333. KGC376 is the same case over languages."),
+        "certificate": {"kind": "Refutation",
+            "comment": (
+                "Germany and France are different places under the ISO 3166 "
+                "rule. A use in both is not a use in Germany only, so no "
+                "use satisfies both policies. The verdict rests on that "
+                "rule: without it a structure that identifies the two "
+                "countries admits the use."),
+            "premises": [("fromDeclarations",
+                          "loc:DE and loc:FR are distinct areas under "
+                          "ISO 3166")]},
+        "provenance": "Territory clauses that require several countries.",
+        "ttl": _ttl2("KGC337", "Use in both Germany and France",
+                     [("isAllOf", ["DE", "FR"])], "Use in Germany only",
+                     [("eq", ["DE"])]),
+    },
+    # -----------------------------------------------------------------
     # KGC380  The Bonaire problem: composition that is false.  The verdict
     # is correct relative to the resource and wrong relative to the world.
     # -----------------------------------------------------------------
@@ -656,67 +786,6 @@ fof(bg_dist_loc_de_loc_fr, axiom,
                      [("eq", ["DE-NW"])]),
     },
     # -----------------------------------------------------------------
-    # KGC384 / KGC385  Two Laender, nothing between them; then the ISO
-    # rule over subdivision codes.
-    # -----------------------------------------------------------------
-    {
-        "id": "KGC384", "subdir": "verdict",
-        "twin": "KGC385",
-        "name": "spatial, eq loc:DE-NW against eq loc:DE-BY",
-        "left_operand": "spatial", "sort": "mer",
-        "resource": GEO_RESOURCE, "background_theory": EMPTY_BT,
-        "binding": BINDING_GEO, "includes": INCLUDES_GEO,
-        "tree": [C("eq", DE_NW), C("eq", DE_BY, side="request")],
-        "expected_verdict": "Unknown",
-        "expected_q1": "Satisfiable", "expected_q2": "Satisfiable",
-        "description": (
-            "Use in North Rhine-Westphalia against use in Bavaria. Both "
-            "sides name one Land, and both can be satisfied only if the "
-            "two are one place. The file relates the Laender to DE and to "
-            "nothing sideways, and separates nothing: Unknown."),
-        "summary": (
-            "A library permits use in North Rhine-Westphalia. A researcher's "
-            "policy commits to use in Bavaria."),
-        "certificate": {"kind": "Models",
-            "comment": (
-                "DPV does not state that the two Laender are different areas. "
-                "One structure identifies them and one keeps them apart, so "
-                "the verdict is Unknown."),
-            "premises": []},
-        "provenance": "Regional licences of two neighbouring states.",
-        "ttl": _ttl2("KGC384", "Use in North Rhine-Westphalia only",
-                     [("eq", ["DE-NW"])], "Use in Bavaria only", [("eq", ["DE-BY"])]),
-    },
-    {
-        "id": "KGC385", "subdir": "verdict",
-        "twin": "KGC384",
-        "name": "spatial, eq loc:DE-NW against eq loc:DE-BY, ISO rule",
-        "left_operand": "spatial", "sort": "mer",
-        "resource": GEO_RESOURCE, "background_theory": ISO_BT,
-        "binding": BINDING_GEO, "includes": INCLUDES_ISO,
-        "tree": [C("eq", DE_NW), C("eq", DE_BY, side="request")],
-        "fof_decls": _ISO_385[0], "smt2_background": _ISO_385[1],
-        "expected_verdict": "Incompatible",
-        "expected_q1": "Unsatisfiable", "expected_q2": "Satisfiable",
-        "description": (
-            "KGC384 under the ISO 3166-2 rule, one code per subdivision "
-            "within a country. The two Laender are then distinct areas, no "
-            "use satisfies both sides, and the verdict is Incompatible on "
-            "the parties' rule, withdrawable by dropping it."),
-        "summary": (
-            "As KGC384, with the ISO 3166-2 rule that different subdivision "
-            "codes name different areas."),
-        "certificate": {"kind": "Refutation",
-            "comment": (
-                "The ISO rule makes North Rhine-Westphalia and Bavaria "
-                "distinct, so no use satisfies both policies."),
-            "premises": [("fromDeclarations",
-                          "loc:DE-NW and loc:DE-BY are distinct areas")]},
-        "provenance": "As KGC384; warrant ISO 3166-2.",
-        "ttl": _ttl2("KGC385", "Use in North Rhine-Westphalia only",
-                     [("eq", ["DE-NW"])], "Use in Bavaria only", [("eq", ["DE-BY"])]),
-    },
-    # -----------------------------------------------------------------
     # KGC386 / KGC387  A complement settled positively by declaration.
     # -----------------------------------------------------------------
     {
@@ -817,79 +886,6 @@ fof(bg_dist_loc_de_loc_fr, axiom,
                      [("isPartOf", ["DE-NW"]), ("isPartOf", ["DE-BY"])],
                      "Use in North Rhine-Westphalia only", [("eq", ["DE-NW"])],
                      connective="or"),
-    },
-    # -----------------------------------------------------------------
-    # KGC389 / KGC390  xone: a declaration making a positive verdict
-    # through a negated literal.  A construction, and says so.
-    # -----------------------------------------------------------------
-    {
-        "id": "KGC389", "subdir": "verdict",
-        "twin": "KGC390",
-        "name": "spatial, xone(eq loc:DE-NW, eq loc:DE-BY) against eq loc:DE-NW",
-        "left_operand": "spatial", "sort": "mer",
-        "resource": GEO_RESOURCE, "background_theory": EMPTY_BT,
-        "binding": BINDING_GEO, "includes": INCLUDES_GEO,
-        "tree": [Xone((C("eq", DE_NW), C("eq", DE_BY))),
-                 C("eq", DE_NW, side="request")],
-        "expected_verdict": "Unknown",
-        "expected_q1": "Satisfiable", "expected_q2": "Satisfiable",
-        "description": (
-            "Exactly one of North Rhine-Westphalia and Bavaria, against "
-            "North Rhine-Westphalia. Expanded, the live alternative is NRW "
-            "and not Bavaria, which needs the two to differ; the file does "
-            "not say so: Unknown as published.\n\nA construction: rights "
-            "managers rarely write exactly-one-region; the case exists to "
-            "exercise the negated literal of the xone expansion."),
-        "summary": (
-            "A library permits use in exactly one of North Rhine-Westphalia "
-            "and Bavaria. A researcher's policy commits to use in North "
-            "Rhine-Westphalia."),
-        "certificate": {"kind": "Models",
-            "comment": (
-                "DPV does not state that the two Laender are different. In a structure "
-                "that keeps them apart, a use in North Rhine-Westphalia satisfies "
-                "exactly one alternative, so both policies hold. In a structure that "
-                "identifies them, both alternatives hold and 'exactly one' fails. So "
-                "the verdict is Unknown."),
-            "premises": []},
-        "provenance": "Construction; exclusivity clauses are the nearest "
-                      "practice.",
-        "ttl": _ttl2("KGC389", "Use in exactly one of North Rhine-Westphalia and Bavaria",
-                     [("eq", ["DE-NW"]), ("eq", ["DE-BY"])],
-                     "Use in North Rhine-Westphalia only", [("eq", ["DE-NW"])],
-                     connective="xone"),
-    },
-    {
-        "id": "KGC390", "subdir": "verdict",
-        "twin": "KGC389",
-        "name": "spatial, xone(eq loc:DE-NW, eq loc:DE-BY) against eq loc:DE-NW, "
-                "ISO rule",
-        "left_operand": "spatial", "sort": "mer",
-        "resource": GEO_RESOURCE, "background_theory": ISO_BT,
-        "binding": BINDING_GEO, "includes": INCLUDES_ISO,
-        "tree": [Xone((C("eq", DE_NW), C("eq", DE_BY))),
-                 C("eq", DE_NW, side="request")],
-        "fof_decls": _ISO_390[0], "smt2_background": _ISO_390[1],
-        "expected_verdict": "Compatible",
-        "expected_q1": "Satisfiable", "expected_q2": "Unsatisfiable",
-        "description": (
-            "KGC389 under the ISO rule: the two Laender differ, the "
-            "negated literal holds, and the verdict is Compatible. The "
-            "only place in the suite where a declaration yields a positive "
-            "verdict through a negated literal."),
-        "summary": (
-            "As KGC389, with the ISO 3166-2 rule."),
-        "certificate": {"kind": "Refutation",
-            "comment": (
-                "The ISO rule makes the two Laender distinct, so only the "
-                "first alternative holds and 'exactly one' is satisfied."),
-            "premises": [("fromDeclarations",
-                          "loc:DE-NW and loc:DE-BY are distinct areas")]},
-        "provenance": "Construction, as KGC389.",
-        "ttl": _ttl2("KGC390", "Use in exactly one of North Rhine-Westphalia and Bavaria",
-                     [("eq", ["DE-NW"]), ("eq", ["DE-BY"])],
-                     "Use in North Rhine-Westphalia only", [("eq", ["DE-NW"])],
-                     connective="xone"),
     },
     # -----------------------------------------------------------------
     # KGC391  hasPart: the only up-set denotation.  Coverage-motivated.

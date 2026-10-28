@@ -1,7 +1,7 @@
 """
 problem_data_geonames.py
 ========================
-Five problems over the GeoNames slice in geonames.ttl, at mer, all composed
+Four problems over the GeoNames slice in geonames.ttl, at mer, all composed
 under xone.
 
     KGC303  xone(eq France, eq Germany)             x eq France  -> Unknown
@@ -9,8 +9,6 @@ under xone.
     KGC305  xone(isPartOf France, isPartOf Germany) x eq France,
             France and Germany distinct                          -> Unknown
     KGC306  the same, France and Germany disjoint                -> Compatible
-    KGC307  xone(eq France, isAllOf (France Germany)) x eq France,
-            France and Germany distinct                          -> Compatible
 
 They replace the consent problems KGC344 to KGC347, which tested the same
 expansion but permitted use under an invalid consent state.  "Use in
@@ -38,14 +36,6 @@ Germany, and KGC306 is Compatible.
 The pair KGC304 and KGC305 is the point.  The same declaration settles the
 identity question and leaves the order question open, which is why
 distinctness and disjointness are separate declarations.
-
-KGC307 puts an isAllOf under xone.  The expansion negates each alternative
-other than the chosen one.  A bound set fails isAllOf when it misses one of
-the listed values, so the negated isAllOf is a disjunction: neq France or
-neq Germany.  For a use in France the first alternative needs that
-negation, and its second disjunct holds once the countries are distinct.
-A conjunction in its place (isNoneOf France Germany) would exclude France
-and give Incompatible, so the case pins the disjunction.
 
 The declarations
 -----------------------
@@ -170,17 +160,13 @@ EQ_TREE = [Xone((C("eq", FRANCE), C("eq", GERMANY))),
            C("eq", FRANCE, side="request")]
 PART_TREE = [Xone((C("isPartOf", FRANCE), C("isPartOf", GERMANY))),
              C("eq", FRANCE, side="request")]
-ALLOF_TREE = [Xone((C("eq", FRANCE), C("isAllOf", FRANCE, GERMANY))),
-              C("eq", FRANCE, side="request")]
 
 EQ_TITLE = "Use in exactly one of France and Germany"
 PART_TITLE = "Use within exactly one of France and Germany"
-ALLOF_TITLE = "Use either in France only or in both France and Germany"
 FR_TITLE = "Use in France only"
 
 EQ_ALTS = (_alt("eq", FRANCE), _alt("eq", GERMANY))
 PART_ALTS = (_alt("isPartOf", FRANCE), _alt("isPartOf", GERMANY))
-ALLOF_ALTS = (_alt("eq", FRANCE), _alt("isAllOf", FRANCE, GERMANY))
 
 PROVENANCE = ("Data localisation: a provider keeps processing inside one "
               "jurisdiction and accepts either of two.")
@@ -310,43 +296,5 @@ PROBLEMS = [
                           "gn:Germany")]},
         "provenance": PROVENANCE,
         "ttl": _ttl("KGC306", *PART_ALTS, PART_TITLE, FR_TITLE),
-    },
-
-    {
-        "id": "KGC307", "subdir": "verdict",
-        "name": "spatial, xone(eq France, isAllOf (France Germany)) against "
-                "eq France, countries distinct",
-        "left_operand": "spatial", "sort": "mer",
-        "resource": RESOURCE, "background_theory": DECLARED_BT,
-        "binding": BINDING, "includes": INCLUDES,
-        "fof_decls": _DIST[0], "smt2_background": _DIST[1],
-        "tree": ALLOF_TREE,
-        "expected_verdict": "Compatible",
-        "expected_q1": "Satisfiable", "expected_q2": "Unsatisfiable",
-        "summary": (
-            "A library permits use in exactly one of two ways: in France "
-            "alone, or in both France and Germany. A researcher's policy "
-            "commits to use in France. France and Germany are declared "
-            "distinct."),
-        "description": (
-            "The second alternative is an isAllOf. A use fails it when the "
-            "use misses France or misses Germany. A use in France misses "
-            "Germany, since the two countries are declared distinct. So "
-            "only the first alternative holds, and the verdict is "
-            "Compatible. Without the declaration, a structure may identify "
-            "the two countries. Both alternatives then hold, and the "
-            "verdict is Unknown, as in KGC303."),
-        "certificate": {"kind": "Refutation",
-            "comment": (
-                "France and Germany are declared distinct, so a use in "
-                "France does not cover Germany. It satisfies the first "
-                "alternative and fails the second, and 'exactly one' "
-                "holds."),
-            "premises": [("fromDeclarations",
-                          "gn:France and gn:Germany are distinct")]},
-        "provenance": (
-            "Data localisation: a provider keeps processing in one "
-            "jurisdiction, or mirrors it across two."),
-        "ttl": _ttl("KGC307", *ALLOF_ALTS, ALLOF_TITLE, FR_TITLE),
     },
 ]

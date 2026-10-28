@@ -58,9 +58,9 @@ direction of the decision form, and for the Incompatible case of monotonicity
 `verdict` reports Compatible (`contradictory_verdict`). `xoneOk`, no `isAllOf`
 among the alternatives of an `xone`, is needed by the witness decision. The
 benchmark compiler does not need it: it rewrites a negated `isAllOf` to a
-disjunction of `neq`, and KGC307 uses that. The rewrite is checked by
-`crosscheck/` (T1, second line) and by `tests/test_witness.py`, not in Lean
-yet.
+disjunction of `neq`; no case puts an `isAllOf` under an `xone` since KGC307
+was retired. The rewrite is checked by `crosscheck/` (T1, second line) and by
+`tests/test_witness.py`, not in Lean yet.
 
 Axioms. Every main theorem depends only on `propext`, `Classical.choice` and
 `Quot.sound`, or fewer. `Classical.choice` enters through `verdict`, which is a

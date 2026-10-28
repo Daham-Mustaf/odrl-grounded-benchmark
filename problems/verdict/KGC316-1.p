@@ -1,9 +1,9 @@
 %--------------------------------------------------------------------------
 % File     : KGC316-1.p
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
-% Problem  : purpose, isA dpv:RIS against eq dpv:Purpose (witness condition asserted)
+% Problem  : purpose, isA dpv:SR against eq dpv:R&D (witness condition asserted)
 % Version  : 1.0
-% English  : A library permits use for recruitment interview scheduling only. A researcher's policy commits to use for the general concept Purpose.
+% English  : A library permits use for scientific research. A researcher's policy commits to use for research and development.
 %
 % Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark
@@ -19,10 +19,11 @@ include('axioms/KGE000-0.ax').
 include('axioms/DPV-dpv-purposes.ax').
 
 % --- constants, groundings and resource hooks ----------------------------
-% Declarations: empty.
+% Declarations: empty.  The purposes module publishes no disjointness
+% and no distinctness, and the parties declare none.
 
 % --- witness condition asserted ------------------------------------------
 fof(w_kgc316, axiom,
-    ( ( kge_leq(dpv_recruitment_interview_scheduling, dpv_recruitment_interview_scheduling) & dpv_recruitment_interview_scheduling = dpv_purpose )
-| ( kge_leq(dpv_purpose, dpv_recruitment_interview_scheduling) & dpv_purpose = dpv_purpose ) )).
+    ( ( kge_leq(dpv_scientific_research, dpv_scientific_research) & dpv_scientific_research = dpv_research_and_development )
+| ( kge_leq(dpv_research_and_development, dpv_scientific_research) & dpv_research_and_development = dpv_research_and_development ) )).
 %--------------------------------------------------------------------------

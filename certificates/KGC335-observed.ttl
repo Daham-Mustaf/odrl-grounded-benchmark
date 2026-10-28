@@ -1,0 +1,11 @@
+kgc:KGC335-observed a vrep:Refutation ;
+    vrep:producedBy "Vampire" ;
+    vrep:proofArtefact <proofs/KGC335-2.tstp> ;
+    vrep:attributedStatement [
+        vrep:premiseSource vrep:fromDeclarations ;
+        vrep:formulaName "bg_dist_loc_de_loc_fr" ;
+        rdfs:label "bg_dist_loc_de_loc_fr"@en ] ;
+    vrep:attributedStatement [
+        vrep:premiseSource vrep:fromConstraints ;
+        vrep:formulaName "w_kgc335" ;
+        rdfs:label "w_kgc335"@en ] .

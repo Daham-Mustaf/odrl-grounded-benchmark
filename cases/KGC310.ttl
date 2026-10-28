@@ -57,6 +57,7 @@ drk:KGC310-report a vrep:OperandVerdictReport ;
     vrep:comparedConstraint kgc:KGC310-p2-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-purpose> ;
     vrep:declarations <https://w3id.org/odrl-kb/dpv-purposes/empty> ;
+    vrep:readAgainst drk:KGC316-report ;
     rdfs:comment """DPV places scientific research directly below research and development, so a use for scientific research satisfies both policies."""@en ;
     dcterms:description """A library permits use for research and development. A researcher's policy commits to use for scientific research."""@en ;
     vrep:compatibilityState vrep:Compatible ;

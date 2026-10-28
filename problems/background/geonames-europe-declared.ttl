@@ -3,7 +3,7 @@
 #
 # GeoNames publishes no distinctness.  The parties declare that the two
 # country features name different countries.  This settles identity
-# questions (KGC304, KGC307) but not containment: two distinct areas can
+# questions (KGC304) but not containment: two distinct areas can
 # still lie one within the other (KGC305).
 
 @prefix bind:    <https://w3id.org/odrl-kb/binding#> .

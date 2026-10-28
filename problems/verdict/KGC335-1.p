@@ -1,0 +1,33 @@
+%--------------------------------------------------------------------------
+% File     : KGC335-1.p
+% Domain   : ODRL Policy / Knowledge-Grounded Fragment
+% Problem  : spatial, neq loc:DE against eq loc:FR, ISO rule (witness condition asserted)
+% Version  : 1.0
+% English  : A library permits use anywhere except Germany. A researcher's policy commits to use in France. The ISO 3166 rule makes the two countries different places.
+%
+% Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
+% Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark
+% Authors  : Daham Mustafa
+% Names    : KGC335-1.p
+%
+% Status   : Satisfiable
+% SPC      : FOF_SAT_RFN
+%
+% Comments : Query 1 of 2.  Verdict is derived from both queries.
+%--------------------------------------------------------------------------
+include('axioms/KGE000-0.ax').
+include('axioms/LOC-dpvloc-geo.ax').
+include('axioms/LOC-dpvloc-iso.ax').
+
+% --- constants, groundings and resource hooks ----------------------------
+% Declarations: instances of the ISO 3166 uniqueness rule,
+% stated in LOC-dpvloc-iso.ax and instantiated here.
+
+fof(bg_dist_loc_de_loc_fr, axiom,
+    loc_de != loc_fr).
+
+% --- witness condition asserted ------------------------------------------
+fof(w_kgc335, axiom,
+    ( ( loc_de != loc_de & loc_de = loc_fr )
+| ( loc_fr != loc_de & loc_fr = loc_fr ) )).
+%--------------------------------------------------------------------------

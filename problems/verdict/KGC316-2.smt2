@@ -1,7 +1,7 @@
 ; -------------------------------------------------------------------------
 ; File     : KGC316-2.smt2
 ; Domain   : ODRL Policy / Knowledge-Grounded Fragment
-; Problem  : purpose, isA dpv:RIS against eq dpv:Purpose (witness condition negated)
+; Problem  : purpose, isA dpv:SR against eq dpv:R&D (witness condition negated)
 ; Version  : 1.0
 ; Refs     : TODO. A Sorted Semantics for the Knowledge-Grounded Fragment of ODRL.
 ; Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark
@@ -15,13 +15,8 @@
 (set-option :produce-unsat-cores true)
 (set-option :produce-models true)
 (declare-sort Concept 0)
-(declare-fun dpv_recruitment_interview_scheduling () Concept)
-(declare-fun dpv_purpose () Concept)
-(declare-fun dpv_human_resource_management () Concept)
-(declare-fun dpv_personnel_hiring () Concept)
-(declare-fun dpv_personnel_management () Concept)
-(declare-fun dpv_recruitment_interview_management () Concept)
-(declare-fun dpv_recruitment_management () Concept)
+(declare-fun dpv_scientific_research () Concept)
+(declare-fun dpv_research_and_development () Concept)
 (declare-fun kge_leq (Concept Concept) Bool)
 ; Order axioms, quantified.  The same three as KGE000-0.ax, so the two
 ; encodings are the same theory.
@@ -30,14 +25,9 @@
     (=> (and (kge_leq x y) (kge_leq y x)) (= x y))) :named ax_leq_antisymmetric))
 (assert (! (forall ((x Concept) (y Concept) (z Concept))
     (=> (and (kge_leq x y) (kge_leq y z)) (kge_leq x z))) :named ax_leq_transitive))
-(assert (! (kge_leq dpv_human_resource_management dpv_purpose) :named res_dpv_human_resource_management_below_dpv_purpose))
-(assert (! (kge_leq dpv_personnel_hiring dpv_personnel_management) :named res_dpv_personnel_hiring_below_dpv_personnel_management))
-(assert (! (kge_leq dpv_personnel_management dpv_human_resource_management) :named res_dpv_personnel_management_below_dpv_human_resource_management))
-(assert (! (kge_leq dpv_recruitment_interview_management dpv_recruitment_management) :named res_dpv_recruitment_interview_management_below_dpv_recruitment_management))
-(assert (! (kge_leq dpv_recruitment_interview_scheduling dpv_recruitment_interview_management) :named res_dpv_recruitment_interview_scheduling_below_dpv_recruitment_interview_management))
-(assert (! (kge_leq dpv_recruitment_management dpv_personnel_hiring) :named res_dpv_recruitment_management_below_dpv_personnel_hiring))
+(assert (! (kge_leq dpv_scientific_research dpv_research_and_development) :named res_dpv_scientific_research_below_dpv_research_and_development))
 ; witness condition negated
-(assert (! (not (or (and (kge_leq dpv_recruitment_interview_scheduling dpv_recruitment_interview_scheduling) (= dpv_recruitment_interview_scheduling dpv_purpose)) (and (kge_leq dpv_purpose dpv_recruitment_interview_scheduling) (= dpv_purpose dpv_purpose)))) :named w_kgc316))
+(assert (! (not (or (and (kge_leq dpv_scientific_research dpv_scientific_research) (= dpv_scientific_research dpv_research_and_development)) (and (kge_leq dpv_research_and_development dpv_scientific_research) (= dpv_research_and_development dpv_research_and_development)))) :named w_kgc316))
 (check-sat)
 (get-unsat-core)
 (get-model)

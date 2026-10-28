@@ -1,13 +1,13 @@
 # =====================================================================
 # problem_data_dpv.py: three blocks to replace
-# Twelve problems over the DPV purposes slice.
+# Fourteen problems over the DPV purposes slice.
 # Nothing else in the file changes. The duplicates were being
 # overwritten by Python, so the verdicts do not move; what changes is
 # that the file stops carrying another resource's constants.
 # =====================================================================
 
 
-from compile import right_operand as _ro, Constraint, Or
+from compile import right_operand as _ro, Constraint, Or, Xone
 
 SR   = "dpv_scientific_research"
 RND  = "dpv_research_and_development"
@@ -119,20 +119,23 @@ PURPOSE = "dpv-odrl:Purpose"
 
 _D394 = _iso((SR, RND), (SR, MK))
 _D397 = _iso((ADV, MK))
+_D318 = _iso((SR, MK))
 
 
 """
-Twelve problems over the DPV purposes slice.
+Fourteen problems over the DPV purposes slice.
 
-The order-based seven, one per thing that can go wrong:
+The order-based nine, one per thing that can go wrong:
 
     KGC310  isA R&D      x eq SR    -> Compatible    one resource premise
     KGC311  isA Purpose  x eq NCR   -> Compatible    two premises + transitivity
     KGC313  eq Marketing x eq SR    -> Unknown       nothing declares them apart
     KGC314  the same pair under declarations that do -> Incompatible
     KGC315  isA Purpose  x eq RIS   -> Compatible    six premises + transitivity
-    KGC316  isA RIS      x eq Purpose -> Unknown     the order runs one way
+    KGC316  isA SR       x eq R&D   -> Unknown     the order runs one way, twin of KGC310
     KGC317  isNoneOf {Mk} x eq Mk   -> Incompatible  from the constraints alone
+    KGC318  neq Mk       x eq SR    -> Compatible    under declared distinctness
+    KGC319  xone(isA R&D, isA Mk) x eq SR -> Unknown the branches are not disjoint
 
 And five on the set operators, which read identity and not the order:
 
@@ -161,6 +164,7 @@ PROBLEMS = [
 
     {
         "id":                "KGC310",
+        "twin":              "KGC316",
         "subdir":            "verdict",
         "name":              "purpose, isA dpv:R&D against eq dpv:SR",
         "left_operand":      "purpose",
@@ -622,98 +626,71 @@ kgc:KGC315-p2-c1 a odrl:Constraint ;
     },
 
     # -----------------------------------------------------------------
-    # KGC316  The same two concepts, the other way round.  The order
-    # relates them downward and not upward, so the verdict changes even
-    # though nothing about the resource has.
+    # KGC316  KGC310 read the other way.  The published edge runs from
+    # scientific research up to research and development.  The converse
+    # edge would make antisymmetry identify the two, so the verdict is
+    # open where KGC310's is closed.
     # -----------------------------------------------------------------
     {
         "id":                "KGC316",
+        "twin":              "KGC310",
         "subdir":            "verdict",
-        "name":              "purpose, isA dpv:RIS against eq dpv:Purpose",
+        "name":              "purpose, isA dpv:SR against eq dpv:R&D",
         "left_operand":      "purpose",
         "sort":              "tax",
         "resource":          RESOURCE,
         "background_theory": EMPTY_BT,
-        "includes":          INCLUDES,
-        "tree": [C("isA", RIS), C("eq", PUR, side="request")],
         "binding": BINDING,
+        "includes":          INCLUDES,
+        "tree": [C("isA", SR), C("eq", RND, side="request")],
+        "expected_verdict":  "Unknown",
         "summary": (
-            "A library permits use for recruitment interview scheduling only. "
-            "A researcher's policy commits to use for the general concept "
-            "Purpose."),
+            "A library permits use for scientific research. A researcher's "
+            "policy commits to use for research and development."),
         "description": (
-            "KGC315 reversed: offer (purpose, isA, "
-            "dpv:RecruitmentInterviewScheduling) against request (purpose, "
-            "eq, dpv:Purpose).  The resource places the narrow concept below "
-            "the broad one and says nothing the other way, so the verdict is "
-            "Unknown.  The pair shows that isA reads the order in one "
-            "direction: swapping the operands is not a symmetry of the "
-            "semantics, and a reader who expects Compatible here has "
-            "confused subsumption with identity."
+            "KGC310 the other way round: the first policy takes scientific "
+            "research and what lies below it, and the second names research "
+            "and development. DPV places scientific research directly below "
+            "research and development and publishes no edge back. A use for "
+            "research and development satisfies both policies only if it "
+            "lies below scientific research, and with the published edge "
+            "antisymmetry then makes the two purposes one. A structure that "
+            "identifies them admits the use. A structure that keeps them "
+            "apart has no edge from research and development down to "
+            "scientific research, and no use satisfies both. The verdict is "
+            "Unknown where KGC310 is Compatible. The pair shows that isA "
+            "reads the order in one direction: swapping the operands is not "
+            "a symmetry of the semantics."
         ),
 
         "fof_decls": """\
-% Declarations: empty.
+% Declarations: empty.  The purposes module publishes no disjointness
+% and no distinctness, and the parties declare none.
 """,
 
         "expected_q1": "Satisfiable",
         "expected_q2": "Satisfiable",
 
         "smt2_logic": "UF",
-        "smt2_background": "",
 
         "certificate": {
             "kind": "Models",
-"comment": (
-                "DPV places recruitment interview scheduling below Purpose, and does "
-                "not state that the two are distinct. In a structure that identifies "
-                "them, a use for Purpose is a use for recruitment interview scheduling "
-                "and satisfies both policies. In a structure that keeps them apart, "
-                "Purpose does not lie below recruitment interview scheduling, and no "
-                "use satisfies both. So the verdict is Unknown."),
+            "comment": (
+                "DPV places scientific research below research and "
+                "development and publishes no edge back. In a structure "
+                "that identifies the two purposes, a use for research and "
+                "development is a use for scientific research and satisfies "
+                "both policies. In a structure that keeps them apart, "
+                "antisymmetry with the published edge forbids the converse "
+                "edge, and no use satisfies both. So the verdict is "
+                "Unknown."),
             "premises": [],
         },
-        "ttl": f"""\
-@prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
-@prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix dpv:     <https://w3id.org/dpv#> .
-@prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> .
-@prefix drk:     <https://w3id.org/odrl-kb/drk/> .
-@prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
-
-drk:policy-316-1 a odrl:Set ;
-    odrl:uid drk:policy-316-1 ;
-    odrl:profile dpv-odrl: ;
-    dcterms:title "Use for recruitment interview scheduling only"@en ;
-    odrl:assigner drk:library ;
-    odrl:permission kgc:KGC316-p1-r1 .
-
-kgc:KGC316-p1-r1 a odrl:Permission ;
-    odrl:action odrl:use ;
-    odrl:target drk:manuscripts ;
-    odrl:constraint kgc:KGC316-p1-c1 .
-
-kgc:KGC316-p1-c1 a odrl:Constraint ;
-    odrl:leftOperand dpv-odrl:Purpose ;
-    odrl:operator odrl:isA ;
-    odrl:rightOperand dpv:RecruitmentInterviewScheduling .
-
-drk:policy-316-2 a odrl:Set ;
-    odrl:uid drk:policy-316-2 ;
-    odrl:profile dpv-odrl: ;
-    dcterms:title "Use for the general purpose only"@en ;
-    odrl:assignee drk:researcher ;
-    odrl:permission kgc:KGC316-p2-r1 .
-
-kgc:KGC316-p2-r1 a odrl:Permission ;
-    odrl:action odrl:use ;
-    odrl:target drk:manuscripts ;
-    odrl:constraint kgc:KGC316-p2-c1 .
-
-kgc:KGC316-p2-c1 a odrl:Constraint ;
-    odrl:leftOperand dpv-odrl:Purpose ;
-    odrl:operator odrl:eq ;
-    odrl:rightOperand dpv:Purpose .""",
+        "ttl": _ttl("KGC316", PURPOSE,
+                    "use for scientific research purposes only",
+                    [("isA", ["ScientificResearch"])],
+                    "use for research and development only",
+                    [("eq", ["ResearchAndDevelopment"])]),
     },
 
     # -----------------------------------------------------------------
@@ -809,6 +786,96 @@ kgc:KGC317-p2-c1 a odrl:Constraint ;
     odrl:leftOperand dpv-odrl:Purpose ;
     odrl:operator odrl:eq ;
     odrl:rightOperand dpv:Marketing .""",
+    },
+    # -----------------------------------------------------------------
+    # KGC318  neq over the taxonomy: the complement of one concept,
+    # against a purpose the parties declare apart from it.
+    # -----------------------------------------------------------------
+    {
+        "id": "KGC318", "subdir": "verdict",
+        "name": "purpose, neq dpv:Marketing against eq dpv:ScientificResearch, "
+                "declared distinct",
+        "left_operand": "purpose", "sort": "tax",
+        "resource": RESOURCE, "background_theory": DECLARED_BT,
+        "binding": BINDING, "includes": INCLUDES_DECLARED,
+        "tree": [C("neq", MK), C("eq", SR, side="request")],
+        "fof_decls": _D318[0], "smt2_background": _D318[1],
+        "expected_verdict": "Compatible",
+        "expected_q1": "Satisfiable", "expected_q2": "Unsatisfiable",
+        "summary": (
+            "A library permits use for any purpose other than marketing. A "
+            "researcher's policy commits to use for scientific research. "
+            "Scientific research is declared distinct from marketing."),
+        "description": (
+            "Use for any purpose except marketing, against use for "
+            "scientific research. neq excludes marketing by identity. "
+            "Scientific research is declared distinct from marketing, so a "
+            "use for scientific research satisfies both policies in every "
+            "structure and the verdict is Compatible. Without the "
+            "declaration a structure may identify the two purposes, and the "
+            "verdict is Unknown, as in KGC313. KGC323 and KGC374 show the "
+            "same step over file types and languages."),
+        "certificate": {"kind": "Refutation",
+            "comment": (
+                "Scientific research is declared distinct from marketing, so "
+                "a use for scientific research is a use for a purpose other "
+                "than marketing and satisfies both policies."),
+            "premises": [("fromDeclarations",
+                          "dpv:ScientificResearch is distinct from "
+                          "dpv:Marketing")]},
+        "provenance": "Purpose limitation: an exclusion list.",
+        "ttl": _ttl("KGC318", PURPOSE,
+                    "use for any purpose except marketing",
+                    [("neq", ["Marketing"])],
+                    "use for scientific research only",
+                    [("eq", ["ScientificResearch"])]),
+    },
+    # -----------------------------------------------------------------
+    # KGC319  xone over the taxonomy: the second branch has to fail, and
+    # it fails only if the two branches are disjoint.
+    # -----------------------------------------------------------------
+    {
+        "id": "KGC319", "subdir": "verdict",
+        "name": "purpose, xone(isA RnD, isA Marketing) against eq "
+                "ScientificResearch",
+        "left_operand": "purpose", "sort": "tax",
+        "resource": RESOURCE, "background_theory": EMPTY_BT,
+        "binding": BINDING, "includes": INCLUDES,
+        "tree": [Xone((C("isA", RND), C("isA", MK))),
+                 C("eq", SR, side="request")],
+        "expected_verdict": "Unknown",
+        "expected_q1": "Satisfiable", "expected_q2": "Satisfiable",
+        "summary": (
+            "A library permits use for exactly one of research and "
+            "development and marketing. A researcher's policy commits to use "
+            "for scientific research."),
+        "description": (
+            "DPV places scientific research below research and development, "
+            "so the first branch holds. Exactly one branch may hold, so "
+            "scientific research must not also lie below marketing. DPV "
+            "states no disjointness between research and development and "
+            "marketing, and the declarations here add none. A structure that "
+            "keeps scientific research out of marketing admits the use. A "
+            "structure that adds the edge makes both branches hold and "
+            "refuses it. The verdict is Unknown. KGC395 joins the same two "
+            "branches with or and is Compatible on the first branch alone."),
+        "certificate": {"kind": "Models",
+            "comment": (
+                "In a structure that keeps scientific research out of "
+                "marketing, a use for scientific research satisfies both "
+                "policies. In a structure that also places scientific "
+                "research below marketing, both branches hold, exactly one "
+                "fails, and no use satisfies both. DPV states no "
+                "disjointness between the two branches, so the verdict is "
+                "Unknown."),
+            "premises": []},
+        "provenance": "Purpose limitation lists in data licences.",
+        "ttl": _ttl("KGC319", PURPOSE,
+                    "use for exactly one of research and development and marketing",
+                    [("isA", ["ResearchAndDevelopment"]), ("isA", ["Marketing"])],
+                    "use for scientific research only",
+                    [("eq", ["ScientificResearch"])],
+                    connective="xone"),
     },
    # -----------------------------------------------------------------
     # KGC393 / 394 / 395  One intent, three drafts: isAnyOf is identity.
