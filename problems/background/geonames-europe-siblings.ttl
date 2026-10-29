@@ -1,21 +1,48 @@
-# Declarations for the GeoNames slice: France and Germany declared
+# Declarations for the GeoNames slice: features with the same parent declared
 # disjoint.
 #
-# GeoNames publishes no disjointness.  The parties declare that nothing
-# lies within both countries.  Disjointness implies distinctness, and it
-# also settles containment: France lies within itself, so it cannot lie
-# within Germany (KGC306).
+# GeoNames publishes no disjointness.  Every pair of features that share a
+# parent in the administrative hierarchy is declared disjoint: nothing lies
+# within both.  Disjointness implies distinctness, and it also settles
+# containment: France lies within itself, so it cannot lie within Germany
+# (KGC306, KGC309).
+#
+# Pairs: 19, among the 2 children of Europe, the 6 of France and the 3 of
+# Germany.  The other parents have one child each.
 
 @prefix bind:    <https://w3id.org/odrl-kb/binding#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 
 <https://w3id.org/odrl-kb/geonames-europe/siblings> a bind:Declarations ;
-    dcterms:title "France and Germany declared disjoint"@en ;
+    dcterms:title "Features with the same parent declared disjoint"@en ;
     bind:generatedBy bind:PairwiseDisjointness ;
     bind:origin bind:practiceRule ;
     rdfs:comment "The origin rests on the GeoNames administrative hierarchy."@en ;
     bind:appliesTo <https://w3id.org/odrl-kb/geonames-europe> ;
-    bind:pairCount 1 .
+    bind:pairCount 19 .
 
+# Children of Europe
 <https://sws.geonames.org/3017382/> bind:disjointFrom <https://sws.geonames.org/2921044/> .
+
+# Children of France
+<https://sws.geonames.org/3012874/> bind:disjointFrom <https://sws.geonames.org/11071622/> .
+<https://sws.geonames.org/3012874/> bind:disjointFrom <https://sws.geonames.org/2985244/> .
+<https://sws.geonames.org/3012874/> bind:disjointFrom <https://sws.geonames.org/11071623/> .
+<https://sws.geonames.org/3012874/> bind:disjointFrom <https://sws.geonames.org/11071625/> .
+<https://sws.geonames.org/3012874/> bind:disjointFrom <https://sws.geonames.org/11071620/> .
+<https://sws.geonames.org/11071622/> bind:disjointFrom <https://sws.geonames.org/2985244/> .
+<https://sws.geonames.org/11071622/> bind:disjointFrom <https://sws.geonames.org/11071623/> .
+<https://sws.geonames.org/11071622/> bind:disjointFrom <https://sws.geonames.org/11071625/> .
+<https://sws.geonames.org/11071622/> bind:disjointFrom <https://sws.geonames.org/11071620/> .
+<https://sws.geonames.org/2985244/> bind:disjointFrom <https://sws.geonames.org/11071623/> .
+<https://sws.geonames.org/2985244/> bind:disjointFrom <https://sws.geonames.org/11071625/> .
+<https://sws.geonames.org/2985244/> bind:disjointFrom <https://sws.geonames.org/11071620/> .
+<https://sws.geonames.org/11071623/> bind:disjointFrom <https://sws.geonames.org/11071625/> .
+<https://sws.geonames.org/11071623/> bind:disjointFrom <https://sws.geonames.org/11071620/> .
+<https://sws.geonames.org/11071625/> bind:disjointFrom <https://sws.geonames.org/11071620/> .
+
+# Children of Germany
+<https://sws.geonames.org/2951839/> bind:disjointFrom <https://sws.geonames.org/2950157/> .
+<https://sws.geonames.org/2951839/> bind:disjointFrom <https://sws.geonames.org/2953481/> .
+<https://sws.geonames.org/2950157/> bind:disjointFrom <https://sws.geonames.org/2953481/> .

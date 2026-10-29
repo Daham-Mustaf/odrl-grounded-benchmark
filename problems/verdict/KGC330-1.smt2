@@ -1,7 +1,7 @@
 ; -------------------------------------------------------------------------
 ; File     : KGC330-1.smt2
 ; Domain   : ODRL Policy / Knowledge-Grounded Fragment
-; Problem  : spatial, isPartOf loc:NL against eq loc:BQ (witness condition asserted)
+; Problem  : spatial, isPartOf loc:NL against eq loc:NL-BQ1 (witness condition asserted)
 ; Version  : 1.0
 ; Refs     : odrl-grounded-benchmark. https://github.com/Daham-Mustaf/odrl-grounded-benchmark
 ; Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark
@@ -16,8 +16,8 @@
 (set-option :produce-models true)
 (declare-sort Concept 0)
 (declare-fun loc_nl () Concept)
-(declare-fun loc_bq () Concept)
 (declare-fun loc_nl_bq1 () Concept)
+(declare-fun loc_bq () Concept)
 (declare-fun loc_nl_bq2 () Concept)
 (declare-fun loc_nl_bq3 () Concept)
 (declare-fun kge_leq (Concept Concept) Bool)
@@ -39,7 +39,7 @@
 (assert (! (kge_leq loc_bq loc_nl_bq3) :named res_loc_bq_same_loc_nl_bq3))
 (assert (! (kge_leq loc_nl_bq3 loc_bq) :named res_loc_nl_bq3_same_loc_bq))
 ; witness condition asserted
-(assert (! (or (and (kge_leq loc_nl loc_nl) (= loc_nl loc_bq)) (and (kge_leq loc_bq loc_nl) (= loc_bq loc_bq))) :named w_kgc330))
+(assert (! (or (and (kge_leq loc_nl loc_nl) (= loc_nl loc_nl_bq1)) (and (kge_leq loc_nl_bq1 loc_nl) (= loc_nl_bq1 loc_nl_bq1))) :named w_kgc330))
 (check-sat)
 (get-unsat-core)
 (get-model)

@@ -52,7 +52,6 @@ SETS = {
     "consent-definitional":     dict(ax="DPV-consent-definitional.ax", form="expanded"),
     "dpv-purposes-declared":    dict(ax="DPV-dpv-purposes-declared.ax", form="rule",
                                      noun="Purposes", token="local"),
-    "dpvloc-declared":          dict(ax="LOC-dpvloc-declared.ax", form="expanded"),
     "dpvloc-iso":               dict(ax="LOC-dpvloc-iso.ax", form="rule",
                                      noun="Areas", token="local"),
     "filetype-declared":        dict(ax="EUFT-filetype-declared.ax", form="expanded",
@@ -63,7 +62,8 @@ SETS = {
                                      noun="Measures", token="constant"),
 }
 # Sets whose members are the whole resource, less what the set names as left out.
-WHOLE = {"consent-declared", "dpv-purposes-declared", "tom-declared"}
+WHOLE = {"consent-declared", "dpv-purposes-declared", "tom-declared",
+         "geonames-europe-declared"}
 RULES = {"PairwiseDistinctness", "PairwiseDisjointness", "PublishedDefinition"}
 
 fails = []
@@ -213,9 +213,24 @@ def main() -> int:
                 fail(n, f"{m} is not a concept of {d.applies_to[0]}")
         if n in WHOLE:
             missing = sorted(i for i in ids if i.startswith("http") and i not in set(d.members)
-                             and any(i.startswith(s) for s in ("https://w3id.org/dpv",)))
+                             and any(i.startswith(s) for s in ("https://w3id.org/dpv",
+                                                               "https://sws.geonames.org/")))
             if missing:
                 fail(n, f"the set ranges over the whole resource and omits {len(missing)} concepts, e.g. {missing[:2]}")
+
+        # 2b. GeoNames: the siblings are every pair with the same parent
+        if n == "geonames-europe-siblings":
+            _, gg = resource(d.applies_to[0])
+            parent_of = {str(f): str(p) for f, p in
+                         gg.subject_objects(URIRef("https://www.geonames.org/ontology#parentFeature"))}
+            kin = {}
+            for f, p in parent_of.items():
+                kin.setdefault(p, []).append(f)
+            sib = {frozenset((a, b)) for fs in kin.values() for i, a in enumerate(fs) for b in fs[i + 1:]}
+            got = {frozenset(p) for p in d.disjoint}
+            if got != sib:
+                fail(n, f"states {len(got)} pairs and the slice has {len(sib)} pairs of features "
+                        f"with the same parent; {len(got - sib)} only in the RDF, {len(sib - got)} only in the slice")
 
         # 3. the axioms
         axstate = "-"

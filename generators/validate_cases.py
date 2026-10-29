@@ -51,25 +51,10 @@ from rdflib.collection import Collection
 
 ODRL = Namespace("http://www.w3.org/ns/odrl/2/")
 VREP = Namespace("https://w3id.org/odrl-kb/verdict-report#")
-DPVODRL = "https://w3id.org/dpv/mappings/odrl#"
 CRM = "https://w3id.org/force/compliance-report#"
 SET_OPERATORS = {"isAnyOf", "isAllOf", "isNoneOf"}
 
-# The skos:note of each DPV-ODRL left operand: "Only the ... operators MUST
-# be used."  Read again from mappings/odrl/dpv-odrl.ttl on the dev branch of
-# https://github.com/w3c-cg/dpv (commit 6d20265, 26 October 2026); the
-# notes of these operands are the ones the August copy (commit 8a50545,
-# 6 August 2026) had.  The measure operands all carry the same note as
-# TechnicalOrganisationalMeasure.
-_FIVE = {"isA", "eq", "neq", "isAnyOf", "isNoneOf"}
-OPERATOR_NOTES = {
-    "Purpose": _FIVE,
-    "Location": {"eq", "neq", "isAnyOf", "isNoneOf"},
-    "Status": _FIVE,
-    "TechnicalOrganisationalMeasure": _FIVE,
-    "TechnicalMeasure": _FIVE,
-    "OrganisationalMeasure": _FIVE,
-}
+from operator_notes import DPVODRL, beyond
 from writers import GENERATED_HEADER as HEADER
 
 
@@ -157,9 +142,8 @@ def check(path: Path, bindings, declarations, errs, warns, twins, notes):
         for c in cons:
             op = str(next(g.objects(c, ODRL.operator), "")).rsplit("/", 1)[-1]
             for lo in g.objects(c, ODRL.leftOperand):
-                name = str(lo)[len(DPVODRL):] if str(lo).startswith(DPVODRL) else None
-                allowed = OPERATOR_NOTES.get(name)
-                if allowed is not None and op not in allowed:
+                name = beyond(lo, op)
+                if name:
                     notes.append(f"{path.stem}: dpv-odrl:{name} with {op}"
                                  + (" (ill-sorted by design)" if rejected else ""))
             ros = list(g.objects(c, ODRL.rightOperand))

@@ -7,6 +7,7 @@ reading, and the report the semantics produces for them.
 KGC100-112   well-sortedness, rejected at drafting time
 KGC300-302   the motivating example, one per sort
 KGC303-306   spatial: exactly one of two alternatives, over GeoNames
+KGC308-309   spatial: one country within another, over GeoNames
 KGC310-319   purpose, over DPV purposes
 KGC320-323   fileFormat, over the EU file type table
 KGC330-337   spatial, over DPV Locations

@@ -643,15 +643,12 @@ def iso_instance(a: str, b: str) -> str:
             f"    {slug(a)} != {slug(b)}).")
 
 
-def declared_axioms(pair) -> str:
-    a, b = pair
-    return (
-        "% Declarations: one distinctness, declared by the parties.\n"
-        "% The extension publishes nothing that separates these places.\n"
-        "\n"
-        f"fof(bg_dist_{slug(a)}_{slug(b)}, axiom,\n"
-        f"    {slug(a)} != {slug(b)}).\n"
-    )
+IDENTITY_NOTE = (
+    "# DPV writes identity with skos:sameAs, which is not a SKOS term (see\n"
+    "# https://github.com/w3c-cg/dpv/issues/485).  skos:sameAs and owl:sameAs\n"
+    "# are both read as identity.  DPV links BQ and SJ to several islands, BQ\n"
+    "# to NL-BQ1, NL-BQ2 and NL-BQ3 and SJ to NO-21 and NO-22, so this binding\n"
+    "# identifies those islands with one another.  No case relies on it.")
 
 
 def profile_ttl(mode) -> str:
@@ -690,6 +687,8 @@ def profile_ttl(mode) -> str:
 # meaning to belong to the binding rather than to the operand.
 #
 {note}
+#
+{IDENTITY_NOTE}
 
 @prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> .
 @prefix bind: <https://w3id.org/odrl-kb/binding#> .
@@ -818,23 +817,6 @@ def main() -> int:
     areas = [local(m) for m in declarations.load(iso).members]
     (args.out / "axioms" / "LOC-dpvloc-iso.ax").write_text(
         iso_axioms(areas, excluded), encoding="utf-8")
-
-    # The declarations are RDF a person wrote; the axioms follow from it.
-    declared = args.out / "background" / "dpvloc-declared.ttl"
-    if declared.exists():
-        decl = declarations.load(declared)
-        if len(decl.members) != 2:
-            print(f"{declared}: one distinctness is a list of two members",
-                  file=sys.stderr)
-            return 1
-        a, b = (local(m) for m in decl.members)
-        missing = [x for x in (a, b) if x not in concepts]
-        if missing:
-            print(f"not in the locations scheme: {', '.join(missing)}",
-                  file=sys.stderr)
-            return 1
-        (args.out / "axioms" / "LOC-dpvloc-declared.ax").write_text(
-            declared_axioms((a, b)), encoding="utf-8")
 
     hops, witness = depth(containment)
     hops_j, witness_j = depth(sorted(containment + membership))

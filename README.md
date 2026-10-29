@@ -104,6 +104,7 @@ KGC100-112   well-sortedness: nine constraints, six rejected at
              drafting time by the signature alone
 KGC300-302   the motivating example, one per sort
 KGC303-306   spatial: exactly one of two alternatives, over GeoNames
+KGC308-309   spatial: one country within another, over GeoNames
 KGC310-319   purpose, over DPV purposes, in a mobility data space
 KGC320-323   fileFormat, over the EU file type table
 KGC330-337   spatial, over DPV Locations

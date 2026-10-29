@@ -1,0 +1,15 @@
+kgc:KGC309-observed a vrep:Refutation ;
+    vrep:producedBy "Vampire" ;
+    vrep:proofArtefact <proofs/KGC309-1.tstp> ;
+    vrep:attributedStatement [
+        vrep:premiseSource vrep:fromDeclarations ;
+        vrep:formulaName "bg_disj_gn_france_disjoint_gn_germany" ;
+        rdfs:label "bg_disj_gn_france_disjoint_gn_germany"@en ] ;
+    vrep:attributedStatement [
+        vrep:premiseSource vrep:fromConstraints ;
+        vrep:formulaName "w_kgc309" ;
+        rdfs:label "w_kgc309"@en ] ;
+    vrep:attributedStatement [
+        vrep:premiseSource vrep:fromOrderAxiom ;
+        vrep:formulaName "ax_leq_reflexive" ;
+        rdfs:label "ax_leq_reflexive"@en ] .

@@ -1,10 +1,14 @@
-# Declarations for the GeoNames slice: France and Germany declared
-# distinct.
+# Declarations for the GeoNames slice: every feature declared distinct from
+# every other.
 #
-# GeoNames publishes no distinctness.  The parties declare that the two
-# country features name different countries.  This settles identity
-# questions (KGC304) but not containment: two distinct areas can
-# still lie one within the other (KGC305).
+# GeoNames publishes no distinctness.  Each feature has a place of its own in
+# the administrative hierarchy, and the 15 features of the slice are
+# declared distinct from one another.  This settles identity questions
+# (KGC304) but not containment: two distinct areas can still lie one within
+# the other (KGC305, KGC308).
+#
+# Features: 15
+# Pairs   : 105
 
 @prefix bind:    <https://w3id.org/odrl-kb/binding#> .
 @prefix owl:     <http://www.w3.org/2002/07/owl#> .
@@ -12,13 +16,29 @@
 @prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 
 <https://w3id.org/odrl-kb/geonames-europe/declared> a bind:Declarations ;
-    dcterms:title "France and Germany declared distinct"@en ;
+    dcterms:title "Pairwise distinctness of the features of the slice"@en ;
     bind:generatedBy bind:PairwiseDistinctness ;
     bind:origin bind:practiceRule ;
     rdfs:comment "The origin rests on the GeoNames administrative hierarchy."@en ;
     bind:appliesTo <https://w3id.org/odrl-kb/geonames-europe> ;
-    bind:pairCount 1 ;
+    bind:pairCount 105 ;
     bind:states [
         a owl:AllDifferent ;
-        owl:members ( <https://sws.geonames.org/3017382/> <https://sws.geonames.org/2921044/> )
+        owl:members (
+            <https://sws.geonames.org/6255148/>
+            <https://sws.geonames.org/3017382/>
+            <https://sws.geonames.org/2921044/>
+            <https://sws.geonames.org/3012874/>
+            <https://sws.geonames.org/11071622/>
+            <https://sws.geonames.org/2985244/>
+            <https://sws.geonames.org/11071623/>
+            <https://sws.geonames.org/11071625/>
+            <https://sws.geonames.org/11071620/>
+            <https://sws.geonames.org/2951839/>
+            <https://sws.geonames.org/2950157/>
+            <https://sws.geonames.org/2953481/>
+            <https://sws.geonames.org/2988507/>
+            <https://sws.geonames.org/2973783/>
+            <https://sws.geonames.org/2867714/>
+        )
     ] .

@@ -1,9 +1,9 @@
 %--------------------------------------------------------------------------
 % File     : KGC380-1.p
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
-% Problem  : spatial, isPartOf loc:EU against eq loc:BQ, jurisdictional (witness condition asserted)
+% Problem  : spatial, isPartOf loc:EU against eq loc:NL-BQ1, jurisdictional (witness condition asserted)
 % Version  : 1.0
-% English  : A library permits use within the European Union. A researcher's policy commits to use in Bonaire, Sint Eustatius and Saba.
+% English  : A library permits use within the European Union. A researcher's policy commits to use in Bonaire.
 %
 % Refs     : odrl-grounded-benchmark. https://github.com/Daham-Mustaf/odrl-grounded-benchmark
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark
@@ -23,6 +23,6 @@ include('axioms/LOC-dpvloc-juris.ax').
 
 % --- witness condition asserted ------------------------------------------
 fof(w_kgc380, axiom,
-    ( ( kge_leq(loc_eu, loc_eu) & loc_eu = loc_bq )
-| ( kge_leq(loc_bq, loc_eu) & loc_bq = loc_bq ) )).
+    ( ( kge_leq(loc_eu, loc_eu) & loc_eu = loc_nl_bq1 )
+| ( kge_leq(loc_nl_bq1, loc_eu) & loc_nl_bq1 = loc_nl_bq1 ) )).
 %--------------------------------------------------------------------------

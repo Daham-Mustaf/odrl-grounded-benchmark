@@ -33,7 +33,7 @@ kgc:KGC330-p1-c1 a odrl:Constraint ;
 drk:policy-330-2 a odrl:Set ;
     odrl:uid drk:policy-330-2 ;
     odrl:profile dpv-odrl: ;
-    dcterms:title "Use in Bonaire, Sint Eustatius and Saba only"@en ;
+    dcterms:title "Use in Bonaire only"@en ;
     odrl:assignee drk:researcher ;
     odrl:permission kgc:KGC330-p2-r1 .
 
@@ -45,7 +45,7 @@ kgc:KGC330-p2-r1 a odrl:Permission ;
 kgc:KGC330-p2-c1 a odrl:Constraint ;
     odrl:leftOperand dpv-odrl:Location ;
     odrl:operator odrl:eq ;
-    odrl:rightOperand loc:BQ .
+    odrl:rightOperand loc:NL-BQ1 .
 
 ### Expected result #######################################################
 
@@ -57,7 +57,7 @@ drk:KGC330-report a vrep:OperandVerdictReport ;
     vrep:comparedConstraint kgc:KGC330-p2-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-spatial-dpvloc-geo> ;
     vrep:declarations <https://w3id.org/odrl-kb/dpv-loc/empty> ;
-    rdfs:comment """DPV places Bonaire within the Netherlands as a territory of the state, not as a subdivision. Read as containment, a use in Bonaire is a use within the Netherlands, and both policies can be satisfied. This holds constitutionally, not geographically."""@en ;
+    rdfs:comment """DPV places Bonaire within the Netherlands by a direct edge, as a territory of the state and not as a subdivision. Read as containment, a use in Bonaire is a use within the Netherlands, and both policies can be satisfied. The containment is constitutional, not geographic. This policy goes beyond the DPV-ODRL usage note for Location, which does not list isPartOf."""@en ;
     dcterms:description """A library permits use within the Netherlands; a researcher's policy commits to use in Bonaire. DPV places Bonaire within the Netherlands."""@en ;
     vrep:compatibilityState vrep:Compatible ;
     vrep:certificate <certificates/KGC330-2.tstp> .

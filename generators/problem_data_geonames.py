@@ -1,14 +1,16 @@
 """
 problem_data_geonames.py
 ========================
-Four problems over the GeoNames slice in geonames.ttl, at mer, all composed
-under xone.
+Six problems over the GeoNames slice in geonames.ttl, at mer.  Four are
+composed under xone.
 
     KGC303  xone(eq France, eq Germany)             x eq France  -> Unknown
     KGC304  the same, France and Germany distinct                -> Compatible
     KGC305  xone(isPartOf France, isPartOf Germany) x eq France,
             France and Germany distinct                          -> Unknown
     KGC306  the same, France and Germany disjoint                -> Compatible
+    KGC308  isPartOf Germany                        x eq France  -> Unknown
+    KGC309  the same, France and Germany disjoint                -> Incompatible
 
 They replace the consent problems KGC344 to KGC347, which tested the same
 expansion but permitted use under an invalid consent state.  "Use in
@@ -37,11 +39,20 @@ The pair KGC304 and KGC305 is the point.  The same declaration settles the
 identity question and leaves the order question open, which is why
 distinctness and disjointness are separate declarations.
 
+KGC308 and KGC309 put the point without xone.  "Use within Germany" against
+"Use in France only" asks whether France lies within Germany.  Nothing
+published says it does not, so KGC308 is Unknown.  Declared disjoint, France
+and Germany have no common part, and France lies within itself, so it cannot
+lie within Germany: KGC309 is Incompatible.  Declared only distinct, the
+pair would stay Unknown, as KGC348 shows for consent.
+
 The declarations
 -----------------------
     empty      geonames-europe-empty.ttl      nothing declared
-    declared   geonames-europe-declared.ttl   France and Germany distinct
-    siblings   geonames-europe-siblings.ttl   France and Germany disjoint
+    declared   geonames-europe-declared.ttl   every feature distinct from
+                                              every other (105 pairs)
+    siblings   geonames-europe-siblings.ttl   features with the same parent
+                                              disjoint (19 pairs)
 
 Both declarations are written into the problems that use them, named as
 the TPTP side names them, so the two provers cite one premise by one name.
@@ -157,6 +168,44 @@ kgc:{pid}-p2-c1 a odrl:Constraint ;
 """
 
 
+def _ttl_within(pid, title1, op1, value1, title2):
+    """Policy 1: one constraint on a country.  Policy 2: use in France."""
+    n = pid[3:]
+    return _TTL_HEAD + f"""
+drk:policy-{n}-1 a odrl:Set ;
+    odrl:uid drk:policy-{n}-1 ;
+    dcterms:title "{title1}"@en ;
+    odrl:assigner drk:library ;
+    odrl:permission kgc:{pid}-p1-r1 .
+
+kgc:{pid}-p1-r1 a odrl:Permission ;
+    odrl:action odrl:use ;
+    odrl:target drk:manuscripts ;
+    odrl:constraint kgc:{pid}-p1-c1 .
+
+kgc:{pid}-p1-c1 a odrl:Constraint ;
+    odrl:leftOperand odrl:spatial ;
+    odrl:operator odrl:{op1} ;
+    odrl:rightOperand {IRI[value1]} .
+
+drk:policy-{n}-2 a odrl:Set ;
+    odrl:uid drk:policy-{n}-2 ;
+    dcterms:title "{title2}"@en ;
+    odrl:assignee drk:researcher ;
+    odrl:permission kgc:{pid}-p2-r1 .
+
+kgc:{pid}-p2-r1 a odrl:Permission ;
+    odrl:action odrl:use ;
+    odrl:target drk:manuscripts ;
+    odrl:constraint kgc:{pid}-p2-c1 .
+
+kgc:{pid}-p2-c1 a odrl:Constraint ;
+    odrl:leftOperand odrl:spatial ;
+    odrl:operator odrl:eq ;
+    odrl:rightOperand {IRI[FRANCE]} .
+"""
+
+
 EQ_TREE = [Xone((C("eq", FRANCE), C("eq", GERMANY))),
            C("eq", FRANCE, side="request")]
 PART_TREE = [Xone((C("isPartOf", FRANCE), C("isPartOf", GERMANY))),
@@ -165,6 +214,8 @@ PART_TREE = [Xone((C("isPartOf", FRANCE), C("isPartOf", GERMANY))),
 EQ_TITLE = "Use in exactly one of France and Germany"
 PART_TITLE = "Use within exactly one of France and Germany"
 FR_TITLE = "Use in France only"
+DE_TITLE = "Use within Germany"
+WITHIN_TREE = [C("isPartOf", GERMANY), C("eq", FRANCE, side="request")]
 
 EQ_ALTS = (_alt("eq", FRANCE), _alt("eq", GERMANY))
 PART_ALTS = (_alt("isPartOf", FRANCE), _alt("isPartOf", GERMANY))
@@ -298,4 +349,79 @@ PROBLEMS = [
         "provenance": PROVENANCE,
         "ttl": _ttl("KGC306", *PART_ALTS, PART_TITLE, FR_TITLE),
     },
+    # -----------------------------------------------------------------
+    # KGC308 / KGC309  Does France lie within Germany?  Nothing published
+    # says it does not; the siblings declaration does.
+    # -----------------------------------------------------------------
+    {
+        "id": "KGC308", "subdir": "verdict",
+        "twin": "KGC309",
+        "name": "spatial, isPartOf Germany against eq France",
+        "left_operand": "spatial", "sort": "mer",
+        "resource": RESOURCE, "background_theory": EMPTY_BT,
+        "binding": BINDING, "includes": INCLUDES,
+        "tree": WITHIN_TREE,
+        "expected_verdict": "Unknown",
+        "expected_q1": "Satisfiable", "expected_q2": "Satisfiable",
+        "summary": (
+            "A library permits use within Germany. A researcher's policy "
+            "commits to use in France."),
+        "description": (
+            "A use in France satisfies both policies only if France lies "
+            "within Germany. GeoNames places both countries within Europe "
+            "and publishes nothing that keeps France out of Germany. A "
+            "structure that places France within Germany admits the use, "
+            "and one that does not, admits none. The verdict is Unknown. "
+            "KGC309 adds the declarations that decide it."),
+        "certificate": {"kind": "Models",
+            "comment": (
+                "GeoNames places France and Germany within Europe and "
+                "nothing more. A structure that places France within "
+                "Germany admits a use in France under both policies. A "
+                "structure that does not, admits none. Nothing published "
+                "places France outside Germany, so the verdict is "
+                "Unknown."),
+            "premises": []},
+        "provenance": "Data localisation: a provider keeps processing "
+                      "inside one jurisdiction.",
+        "ttl": _ttl_within("KGC308", DE_TITLE, "isPartOf", GERMANY,
+                           FR_TITLE),
+    },
+    {
+        "id": "KGC309", "subdir": "verdict",
+        "twin": "KGC308",
+        "name": "spatial, isPartOf Germany against eq France, countries "
+                "disjoint",
+        "left_operand": "spatial", "sort": "mer",
+        "resource": RESOURCE, "background_theory": SIBLINGS_BT,
+        "binding": BINDING, "includes": INCLUDES,
+        "fof_decls": _DISJ[0], "smt2_background": _DISJ[1],
+        "tree": WITHIN_TREE,
+        "expected_verdict": "Incompatible",
+        "expected_q1": "Unsatisfiable", "expected_q2": "Satisfiable",
+        "summary": (
+            "As KGC308, with the features that share a parent declared "
+            "disjoint: nothing lies within both."),
+        "description": (
+            "France and Germany share a parent, Europe, and are declared "
+            "disjoint. France lies within itself, so it cannot also lie "
+            "within Germany, and no use satisfies both policies. The "
+            "verdict is Incompatible. Declared only distinct, the two "
+            "countries would leave it Unknown, because distinct areas can "
+            "still lie one within the other."),
+        "certificate": {"kind": "Refutation",
+            "comment": (
+                "France and Germany share a parent and are declared "
+                "disjoint, so they have no common part. France lies within "
+                "itself, so it cannot lie within Germany, and no use "
+                "satisfies both policies. Distinctness alone would leave "
+                "the verdict Unknown, as KGC348 shows for consent."),
+            "premises": [("fromDeclarations",
+                          "nothing lies within both gn:France and "
+                          "gn:Germany")]},
+        "provenance": "As KGC308.",
+        "ttl": _ttl_within("KGC309", DE_TITLE, "isPartOf", GERMANY,
+                           FR_TITLE),
+    },
+
 ]

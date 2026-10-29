@@ -58,7 +58,7 @@ drk:KGC388-report a vrep:OperandVerdictReport ;
     vrep:comparedConstraint kgc:KGC388-p2-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-spatial-dpvloc-geo> ;
     vrep:declarations <https://w3id.org/odrl-kb/dpv-loc/empty> ;
-    rdfs:comment """The first alternative holds, because every area lies within itself. The second alternative does not need to be checked."""@en ;
+    rdfs:comment """The first alternative holds, because every area lies within itself. The second alternative does not need to be checked. This policy goes beyond the DPV-ODRL usage note for Location, which does not list isPartOf."""@en ;
     dcterms:description """A library permits use within North Rhine-Westphalia or within Bavaria. A researcher's policy commits to use in North Rhine-Westphalia."""@en ;
     vrep:compatibilityState vrep:Compatible ;
     vrep:certificate <certificates/KGC388-2.tstp> .

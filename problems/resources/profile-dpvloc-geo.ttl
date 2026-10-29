@@ -11,6 +11,12 @@
 # operand is a supranational union does not ground under this
 # profile: the union edges are membership, and this reading does
 # not take them as containment.
+#
+# DPV writes identity with skos:sameAs, which is not a SKOS term (see
+# https://github.com/w3c-cg/dpv/issues/485).  skos:sameAs and owl:sameAs
+# are both read as identity.  DPV links BQ and SJ to several islands, BQ
+# to NL-BQ1, NL-BQ2 and NL-BQ3 and SJ to NO-21 and NO-22, so this binding
+# identifies those islands with one another.  No case relies on it.
 
 @prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> .
 @prefix bind: <https://w3id.org/odrl-kb/binding#> .

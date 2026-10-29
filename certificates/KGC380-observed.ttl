@@ -3,12 +3,12 @@ kgc:KGC380-observed a vrep:Refutation ;
     vrep:proofArtefact <proofs/KGC380-2.tstp> ;
     vrep:attributedStatement [
         vrep:premiseSource vrep:fromResource ;
-        vrep:formulaName "res_loc_bq_within_loc_nl" ;
-        rdfs:label "res_loc_bq_within_loc_nl"@en ] ;
-    vrep:attributedStatement [
-        vrep:premiseSource vrep:fromResource ;
         vrep:formulaName "res_loc_nl_within_loc_eu" ;
         rdfs:label "res_loc_nl_within_loc_eu"@en ] ;
+    vrep:attributedStatement [
+        vrep:premiseSource vrep:fromResource ;
+        vrep:formulaName "res_loc_nl_bq1_within_loc_nl" ;
+        rdfs:label "res_loc_nl_bq1_within_loc_nl"@en ] ;
     vrep:attributedStatement [
         vrep:premiseSource vrep:fromConstraints ;
         vrep:formulaName "w_kgc380" ;

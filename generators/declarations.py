@@ -125,9 +125,21 @@ def load_all(directory=BACKGROUND) -> dict:
 # One function per resource, and it is the builder's own: a constant has one
 # spelling, and the builder that writes the resource's axioms spells it.
 
+_GN_NAMES = {}
+
+
 def _geonames(iri):
-    return {"https://sws.geonames.org/3017382/": "gn_france",
-            "https://sws.geonames.org/2921044/": "gn_germany"}[str(iri)]
+    """The constant of a GeoNames feature: gn_ and its name, lower case, with
+    every run of other characters one underscore.  Read from the slice, so
+    every feature of it has one."""
+    if not _GN_NAMES:
+        g = Graph().parse(Path(__file__).resolve().parent.parent
+                          / "problems" / "resources" / "geonames.ttl")
+        name = URIRef("https://www.geonames.org/ontology#name")
+        _GN_NAMES.update(
+            (str(f), "gn_" + re.sub(r"[^a-z0-9]+", "_", str(n).lower()).strip("_"))
+            for f, n in g.subject_objects(name))
+    return _GN_NAMES[str(iri)]
 
 
 def constant_for(resource: str):

@@ -3,7 +3,7 @@ problem_data_dpvloc.py
 ======================
 Seven problems over the DPV Locations resource, at mer.
 
-    KGC330  isPartOf NL x eq BQ   -> Compatible    one containment premise
+    KGC330  isPartOf NL x eq NL-BQ1 -> Compatible  one containment premise
     KGC331  isPartOf EU x eq DE   -> Compatible    under the jurisdictional
                                                    reading; not grounded at
                                                    all under the territorial
@@ -121,7 +121,6 @@ _DECL = declarations.load(
  
 EU    = "loc_eu"
 DE    = "loc_de"
-BQ    = "loc_bq"
 DE_NW = "loc_de_nw"
 DE_BY = "loc_de_by"
 DE_BE = "loc_de_be"
@@ -129,7 +128,7 @@ DE_HH = "loc_de_hh"
 WF    = "loc_wf"
 WF_UV = "loc_wf_uv"
 NL   = "loc_nl"
-BQ   = "loc_bq"
+NL_BQ1 = "loc_nl_bq1"
 EU   = "loc_eu"
 DE   = "loc_de"
 FR   = "loc_fr"
@@ -290,14 +289,14 @@ PROBLEMS = [
  {
         "id":                "KGC330",
         "subdir":            "verdict",
-        "name":              "spatial, isPartOf loc:NL against eq loc:BQ",
+        "name":              "spatial, isPartOf loc:NL against eq loc:NL-BQ1",
         "left_operand":      "spatial",
         "sort":              "mer",
         "resource":          GEO_RESOURCE,
         "background_theory": EMPTY_BT,
         "binding":           BINDING_GEO,
         "includes":          INCLUDES_GEO,
-        "tree": [C("isPartOf", NL), C("eq", BQ, side="request")],
+        "tree": [C("isPartOf", NL), C("eq", NL_BQ1, side="request")],
         "summary": (
             "A library permits use within the Netherlands; a researcher's "
             "policy commits to use in Bonaire. DPV places Bonaire "
@@ -307,11 +306,12 @@ PROBLEMS = [
             "A library permits use of its digitised manuscripts anywhere "
             "within the Netherlands; a researcher's policy commits to use "
             "them in "
-            "Bonaire, Sint Eustatius and Saba. DPV asserts BQ "
-            "skos:broader NL, so the constraints are Compatible on that "
-            "one published relation.\n\n"
+            "Bonaire. DPV asserts NL-BQ1 skos:broader NL, a direct edge, "
+            "so the constraints are Compatible on that one published "
+            "relation. The containment is constitutional, not "
+            "geographic.\n\n"
             "This is the baseline for the resource: one hop, no "
-            "transitivity, nothing declared by the parties. It is also "
+            "transitivity, nothing declared. It is also "
             "the control for KGC380, which puts the same request against "
             "an offer naming the European Union. There the verdict is "
             "Compatible as well, by composing this statement with the "
@@ -336,18 +336,19 @@ PROBLEMS = [
             # What the resource publishes, and what follows. Becomes the
             # report's rdfs:comment.
             "comment": (
-                "DPV places Bonaire within the Netherlands as a territory "
-                "of the state, not as a subdivision. Read as containment, "
-                "a use in Bonaire is a use within the Netherlands, and both "
-                "policies can be satisfied. This holds constitutionally, "
-                "not geographically."),
+                "DPV places Bonaire within the Netherlands by a direct "
+                "edge, as a territory of the state and not as a "
+                "subdivision. Read as containment, a use in Bonaire is a "
+                "use within the Netherlands, and both policies can be "
+                "satisfied. The containment is constitutional, not "
+                "geographic."),
             "premises": [
-                ("fromResource", "loc:BQ is within loc:NL"),
+                ("fromResource", "loc:NL-BQ1 is within loc:NL"),
             ],
         },
 
         "ttl": _ttl("KGC330", "Use within the Netherlands", "isPartOf", "NL",
-                    "Use in Bonaire, Sint Eustatius and Saba only", "BQ"),
+                    "Use in Bonaire only", "NL-BQ1"),
     },
     # -----------------------------------------------------------------
     # KGC331  The pair the resource exists for.  Compatible under the
@@ -639,51 +640,51 @@ PROBLEMS = [
     {
         "id": "KGC380", "subdir": "verdict",
         "twin": "KGC383",
-        "name": "spatial, isPartOf loc:EU against eq loc:BQ, jurisdictional",
+        "name": "spatial, isPartOf loc:EU against eq loc:NL-BQ1, jurisdictional",
         "left_operand": "spatial", "sort": "mer",
         "resource": JURIS_RESOURCE, "background_theory": EMPTY_BT,
         "summary": (
             "A library permits use within the European Union. A researcher's "
-            "policy commits to use in Bonaire, Sint Eustatius and Saba."),
+            "policy commits to use in Bonaire."),
         "binding": BINDING_JURIS, "includes": INCLUDES_JURIS,
-        "tree": [C("isPartOf", EU), C("eq", BQ, side="request")],
+        "tree": [C("isPartOf", EU), C("eq", NL_BQ1, side="request")],
         "expected_verdict": "Compatible",
         "expected_q1": "Satisfiable", "expected_q2": "Unsatisfiable",
         "reading_caveat": (
-            "Bonaire, Sint Eustatius and Saba are overseas countries and "
-            "territories (Art. 355 TFEU); EU law and the GDPR do not apply "
-            "there. The jurisdictional reading composes territorial "
-            "parthood (BQ within NL) with union membership (NL in EU) into "
-            "BQ within EU, which is false."),
+            "Bonaire is an overseas country and territory (Art. 355(2) "
+            "TFEU); EU law and the GDPR do not apply there. The "
+            "jurisdictional reading composes territorial parthood (NL-BQ1 "
+            "within NL) with union membership (NL in EU) into NL-BQ1 "
+            "within EU, which is false."),
         "description": (
             "A library permits use within the European Union; a researcher's "
             "policy commits to use in Bonaire. Under the jurisdictional "
-            "reading DPV places BQ within NL and NL within EU, transitivity "
-            "closes the chain, and the verdict is Compatible.\n\n"
-            "The world disagrees: the Caribbean Netherlands lie outside EU "
-            "territory. Nothing the semantics did is wrong; the reading "
+            "reading DPV places NL-BQ1 within NL and NL within EU, "
+            "transitivity closes the chain, and the verdict is "
+            "Compatible.\n\n"
+            "The world disagrees: Bonaire lies outside EU territory. Nothing the semantics did is wrong; the reading "
             "that composes two relations is. KGC383 is the control, same "
             "reading, same depth, where the composition is true."),
         "certificate": {"kind": "Refutation",
 "comment": (
     "The jurisdictional binding reads union membership as containment. "
-    "It composes loc:BQ below loc:NL with loc:NL below loc:EU, so a use "
-    "in Bonaire, Sint Eustatius and Saba satisfies isPartOf loc:EU, and "
-    "the verdict is Compatible. In law this does not hold: the islands "
-    "are overseas countries and territories under Art. 355(2) TFEU, "
-    "outside the ordinary territorial scope of EU law. The verdict "
+    "It composes loc:NL-BQ1 below loc:NL with loc:NL below loc:EU, so a "
+    "use in Bonaire satisfies isPartOf loc:EU, and the verdict is "
+    "Compatible. In law this does not hold: Bonaire is an overseas "
+    "country and territory under Art. 355(2) TFEU, outside the ordinary "
+    "territorial scope of EU law. The verdict "
     "follows from the binding, not from the law. KGC383 shows the same "
     "reading giving a correct answer for a German region."
 ),
-            "premises": [("fromResource", "loc:BQ is within loc:NL"),
+            "premises": [("fromResource", "loc:NL-BQ1 is within loc:NL"),
                          ("fromResource", "loc:NL is a member of loc:EU"),
                          ("fromOrderAxiom", "transitivity")]},
         "provenance": "EU-territory clauses (GDPR Chapter V pattern); "
                       "OCT status per Art. 355 TFEU.",
         "ttl": _ttl2("KGC380", "Use within the European Union",
                      [("isPartOf", ["EU"])],
-                     "Use in Bonaire, Sint Eustatius and Saba only",
-                     [("eq", ["BQ"])]),
+                     "Use in Bonaire only",
+                     [("eq", ["NL-BQ1"])]),
     },
     # -----------------------------------------------------------------
     # KGC381  KGC331 under the territorial binding: loc:EU is not a concept

@@ -1125,9 +1125,7 @@ kgc:KGC317-p2-c1 a odrl:Constraint ;
                 "note for data altruism asks that it be combined with "
                 "other purposes: it \"should be combined with other "
                 "purposes to indicate their altruistic interpretation or "
-                "application\". The second policy does that. This policy "
-                "goes beyond the DPV-ODRL usage note for Purpose, which "
-                "does not list isAllOf."),
+                "application\". The second policy does that."),
             "premises": [("fromResource", "DataAltruism below PublicBenefit"),
                          ("fromResource", "ITM below PublicBenefit")]},
         "provenance": "Altruistic data sharing combined with a concrete "

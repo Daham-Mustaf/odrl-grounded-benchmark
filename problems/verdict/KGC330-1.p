@@ -1,7 +1,7 @@
 %--------------------------------------------------------------------------
 % File     : KGC330-1.p
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
-% Problem  : spatial, isPartOf loc:NL against eq loc:BQ (witness condition asserted)
+% Problem  : spatial, isPartOf loc:NL against eq loc:NL-BQ1 (witness condition asserted)
 % Version  : 1.0
 % English  : A library permits use within the Netherlands; a researcher's policy commits to use in Bonaire. DPV places Bonaire within the Netherlands.
 %
@@ -24,6 +24,6 @@ include('axioms/LOC-dpvloc-geo.ax').
 
 % --- witness condition asserted ------------------------------------------
 fof(w_kgc330, axiom,
-    ( ( kge_leq(loc_nl, loc_nl) & loc_nl = loc_bq )
-| ( kge_leq(loc_bq, loc_nl) & loc_bq = loc_bq ) )).
+    ( ( kge_leq(loc_nl, loc_nl) & loc_nl = loc_nl_bq1 )
+| ( kge_leq(loc_nl_bq1, loc_nl) & loc_nl_bq1 = loc_nl_bq1 ) )).
 %--------------------------------------------------------------------------

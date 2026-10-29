@@ -52,7 +52,7 @@ drk:KGC337-report a vrep:OperandVerdictReport ;
     vrep:comparedConstraint kgc:KGC337-p2-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-spatial-dpvloc-geo> ;
     vrep:declarations <https://w3id.org/odrl-kb/dpv-loc/iso> ;
-    rdfs:comment """Germany and France are different places under the ISO 3166 rule. A use in both is not a use in Germany only, so no use satisfies both policies. The verdict rests on that rule: without it a structure that identifies the two countries admits the use."""@en ;
+    rdfs:comment """Germany and France are different places under the ISO 3166 rule. A use in both is not a use in Germany only, so no use satisfies both policies. The verdict rests on that rule: without it a structure that identifies the two countries admits the use. This policy goes beyond the DPV-ODRL usage note for Location, which does not list isAllOf."""@en ;
     dcterms:description """A library requires use in both Germany and France. A researcher's policy commits to use in Germany only. The ISO 3166 rule makes the two countries different places."""@en ;
     vrep:compatibilityState vrep:Incompatible ;
     vrep:certificate <certificates/KGC337-1.tstp> .
