@@ -21,7 +21,7 @@ drk:manuscripts a dcat:Dataset ;
 
 drk:policy-100-1 a odrl:Set ;
     odrl:uid drk:policy-100-1 ;
-    dcterms:title "Use in a kind of Europe only"@en ;
+    dcterms:title "Use in places that are a kind of Europe only"@en ;
     odrl:assigner drk:german-library ;
     odrl:permission kgc:KGC100-p1-r1 .
 

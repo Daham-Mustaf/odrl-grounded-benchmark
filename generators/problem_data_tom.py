@@ -264,8 +264,9 @@ PROBLEMS = [
                  C("isA", TECHNICAL, side="request")],
         "binding": BINDING,
 "summary": (
-    "A controller permits use where encryption and access control are both in "
-    "place. A processor's policy commits to technical measures."),
+    "A controller permits use where encryption and access control are both "
+    "in place. A processor states that it applies technical measures only, "
+    "no organisational ones."),
 
         "description": (
             "The controller requires encryption and access control to be in "
@@ -292,7 +293,7 @@ PROBLEMS = [
         },
         "ttl": _TTL_HEAD + _offer("KGC360")
                + _request("KGC360",
-                          "Use with technical measures only",
+                          "Applies technical measures only, no organisational ones",
                           "isA", "dpv:TechnicalMeasure"),
     },
 
@@ -315,8 +316,11 @@ PROBLEMS = [
             "only measure."),
         "description": (
             "Encryption is one of the two named safeguards, so the "
-            "constraints are Compatible without consulting the "
-            "vocabulary. Read with KGC363, which changes only the "
+            "constraints are Compatible without consulting the vocabulary. "
+            "Real processors usually list the measures they apply, and two "
+            "such lists never conflict (KGC365); what could conflict is the "
+            "processor's \"only\", and here encryption alone is on the first "
+            "policy's list. Read with KGC363, which changes only the "
             "operator: at least one against both."),
         "certificate": {"kind": "Refutation",
             "comment": (
@@ -343,10 +347,13 @@ PROBLEMS = [
             "processor commits to encryption only."),
         "description": (
             "The first policy needs both safeguards among the use's "
-            "measures and the second supplies one. The conflict looks "
-            "immediate and is not: if encryption and access control are the "
-            "same measure, a use meets both policies, and DPV separates "
-            "them nowhere. Unknown as published."),
+            "measures and the second supplies one. Real processors usually "
+            "list the measures they apply, and two such lists never "
+            "conflict (KGC365); the conflict here comes from the processor "
+            "stating \"only\". It looks immediate and is not: if encryption "
+            "and access control are the same measure, a use meets both "
+            "policies, and DPV separates them nowhere. Unknown as "
+            "published."),
         "certificate": {"kind": "Models",
             "comment": (
                 "If encryption and access control are the same measure, a "
@@ -378,9 +385,11 @@ PROBLEMS = [
         "description": (
             "KGC363 with every pair of measures declared distinct. "
             "Encryption and access control are then two measures, the "
-            "processor supplies one, and no use satisfies both. Compare "
-            "KGC362 (at least one of the two, no declarations), which is "
-            "Compatible."),
+            "processor supplies one, and no use satisfies both. Real "
+            "processors usually list the measures they apply, and two such "
+            "lists never conflict (KGC365); the conflict here comes from "
+            "the processor stating \"only\". Compare KGC362 (at least one of "
+            "the two, no declarations), which is Compatible."),
         "certificate": {"kind": "Refutation",
             "comment": (
                 "Encryption and access control are declared distinct, since "
@@ -460,13 +469,16 @@ PROBLEMS = [
             "isAnyOf matches by name. DPV places encryption at rest below "
             "encryption, but encryption at rest is neither encryption nor "
             "access control by name, and the processor's use has no other "
-            "measure. As published it might be the same measure as one of "
-            "the two, and the verdict would be Unknown; no case of the "
-            "suite shows that variant. With the measures declared distinct "
-            "no use meets both policies, and the verdict is Incompatible. "
-            "ODRL has no operator for \"includes some kind of encryption\". "
-            "Read with KGC362, where the processor's measure is encryption "
-            "itself and the verdict is Compatible."),
+            "measure. Real processors usually list the measures they apply, "
+            "and two such lists never conflict (KGC365); the conflict here "
+            "comes from the processor stating \"only\". As published it might "
+            "be the same measure as one of the two, and the verdict would "
+            "be Unknown; no case of the suite shows that variant. With the "
+            "measures declared distinct no use meets both policies, and the "
+            "verdict is Incompatible. ODRL has no operator for \"includes "
+            "some kind of encryption\". Read with KGC362, where the "
+            "processor's measure is encryption itself and the verdict is "
+            "Compatible."),
         "certificate": {"kind": "Refutation",
             "comment": (
                 "isAnyOf matches by name. DPV places encryption at rest "

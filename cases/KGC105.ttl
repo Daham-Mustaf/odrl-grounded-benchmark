@@ -24,7 +24,7 @@ drk:manuscripts a dcat:Dataset ;
 drk:policy-105-1 a odrl:Set ;
     odrl:uid drk:policy-105-1 ;
     odrl:profile dpv-odrl: ;
-    dcterms:title "Use for a purpose that includes non-commercial purposes"@en ;
+    dcterms:title "Use for a purpose that includes non-commercial research"@en ;
     odrl:assigner drk:german-library ;
     odrl:permission kgc:KGC105-p1-r1 .
 
@@ -36,7 +36,7 @@ kgc:KGC105-p1-r1 a odrl:Permission ;
 kgc:KGC105-p1-c1 a odrl:Constraint ;
     odrl:leftOperand dpv-odrl:Purpose ;
     odrl:operator odrl:hasPart ;
-    odrl:rightOperand dpv:NonCommercialPurpose .
+    odrl:rightOperand dpv:NonCommercialResearch .
 
 ### Expected result #######################################################
 
@@ -44,6 +44,6 @@ drk:KGC105-report a vrep:WellSortednessReport ;
     dcterms:identifier "KGC105" ;
     vrep:constraint kgc:KGC105-p1-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-purpose> ;
-    dcterms:description """A German library's policy uses hasPart with non-commercial purposes, a purpose in DPV."""@en ;
+    dcterms:description """A German library's policy uses hasPart with non-commercial research, a purpose in DPV."""@en ;
     rdfs:comment """hasPart asks whether one value has another as a part.  DPV only states which purpose is a kind of which, so the operator does not apply to this kind of value."""@en ;
     vrep:wellSorted false .

@@ -228,10 +228,12 @@ PROBLEMS = [
             "A library permits use in exactly one of France and Germany. "
             "A researcher's policy commits to use in France."),
         "description": (
-            "GeoNames publishes no distinctness. If France and Germany are "
-            "the same country, both alternatives hold and 'exactly one' "
-            "fails; if they are different, it does not. The verdict is "
-            "Unknown."),
+            "A licence for one country of the licensee's choice: the "
+            "library permits use in exactly one of France and Germany, and "
+            "the researcher commits to use in France. GeoNames publishes no "
+            "distinctness. If France and Germany are the same country, both "
+            "alternatives hold and 'exactly one' fails; if they are "
+            "different, it does not. The verdict is Unknown."),
         "certificate": {"kind": "Models",
             "comment": (
                 "GeoNames does not state that France and Germany are "
@@ -258,10 +260,10 @@ PROBLEMS = [
         "expected_q1": "Satisfiable", "expected_q2": "Unsatisfiable",
         "summary": "As KGC303, with France and Germany declared distinct.",
         "description": (
-            "The declaration makes France and Germany different "
-            "countries. For a use in France only the first alternative "
-            "holds, so 'exactly one' is satisfied and the verdict is "
-            "Compatible."),
+            "The same licence for one country of the licensee's choice, "
+            "with France and Germany declared different countries. For a "
+            "use in France only the first alternative holds, so 'exactly "
+            "one' is satisfied and the verdict is Compatible."),
         "certificate": {"kind": "Refutation",
             "comment": (
                 "The declarations for GeoNames state that France and "

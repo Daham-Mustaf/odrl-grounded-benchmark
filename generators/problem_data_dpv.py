@@ -291,9 +291,10 @@ kgc:KGC310-p2-c1 a odrl:Constraint ;
                 "DPV places non-commercial research below research and "
                 "development and below non-commercial purpose, and both "
                 "below Purpose, so a use for non-commercial research is a "
-                "use for a DPV purpose by either route. A policy for any "
-                "DPV purpose restricts nothing, and a real party would "
-                "leave the constraint out; it is here to show the route."),
+                "use for a DPV purpose by either route. The first policy is "
+                "an open licence that restricts nothing: it allows any DPV "
+                "purpose, and a real party would leave the constraint out. "
+                "It is here to show the route."),
             "maintainer_note": (
                 "The refutation uses the ResearchAndDevelopment path or the "
                 "NonCommercialPurpose path, plus transitivity. Both parents "
@@ -582,11 +583,11 @@ kgc:KGC314-p2-c1 a odrl:Constraint ;
             "DPV places delivery of goods four steps below Purpose, through "
             "RequestedServiceProvision, ServiceProvision and "
             "ServiceManagement. All four statements are published, so a use "
-            "for delivery of goods is a use for a DPV purpose. A policy for "
-            "any DPV purpose restricts nothing, and a real party would "
-            "leave the constraint out; it is here to show that the answer "
-            "does not change with depth. Compare KGC310, one step, which "
-            "has the same verdict."),
+            "for delivery of goods is a use for a DPV purpose. The first "
+            "policy is an open licence that restricts nothing: it allows "
+            "any DPV purpose, and a real party would leave the constraint "
+            "out. It is here to show that the answer does not change with "
+            "depth. Compare KGC310, one step, which has the same verdict."),
         "maintainer_note": (
             "Four steps, so the refutation chains four statements and "
             "transitivity; what grows with depth is the proof, not the "

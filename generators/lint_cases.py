@@ -67,6 +67,9 @@ JARGON = re.compile(
     r"nominal sort|singletons?|withdrawable|order axioms?|polarity|provenance|"
     r"converse edge|disjuncts?|negated|epistemic)\b", re.I)
 TRIPLE = re.compile(r"\(\s*[A-Za-z]+,\s*(?:eq|neq|isA|isPartOf|hasPart|isAnyOf|isAllOf|isNoneOf)\b")
+# A processor's policy about measures states what it applies, so its title may
+# start with "Applies" instead of the action.  No other family does.
+LEADS = {"technical measures": ("applies",)}
 NEED = {  # operator -> substrings, any one suffices
     "eq": ["only"], "isA": ["only"], "isPartOf": ["within"],
     "hasPart": ["includes", "covers"],
@@ -166,7 +169,7 @@ if __name__ == "__main__":
             n_titles += 1
             rules = [r for pr in (ODRL.permission,) for r in g.objects(pol, pr)]
             action = local(next(g.objects(rules[0], ODRL.action)))
-            if not title.lower().startswith(action):
+            if not title.lower().startswith((action,) + LEADS.get(FAMILY.get(cid), ())):
                 fail(cid, f"title {title!r} does not start with action {action!r}")
             cons = [c for r in rules for c in g.objects(r, ODRL.constraint)]
             conn, ops = constraint_ops(g, cons[0])

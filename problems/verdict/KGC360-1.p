@@ -3,7 +3,7 @@
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
 % Problem  : measures, isAllOf(Encryption, AccessControlMethod) against isA TechnicalMeasure (witness condition asserted)
 % Version  : 1.0
-% English  : A controller permits use where encryption and access control are both in place. A processor's policy commits to technical measures.
+% English  : A controller permits use where encryption and access control are both in place. A processor states that it applies technical measures only, no organisational ones.
 %
 % Refs     : odrl-grounded-benchmark. https://github.com/Daham-Mustaf/odrl-grounded-benchmark
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark

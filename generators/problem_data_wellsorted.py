@@ -28,6 +28,7 @@ uses throughout, a gazetteer asked about kinds.
 VALUE = {
     "gn:Europe":  "<https://sws.geonames.org/6255148/>",
     "dpv:NCP":    "dpv:NonCommercialPurpose",
+    "dpv:NCR":    "dpv:NonCommercialResearch",
     "bcp:de":     "bcp47:de",
 }
 
@@ -67,9 +68,9 @@ BINDING = {
 # The policy title is the rule in plain words, starting with the action and
 # following the operator: only for isA, within for isPartOf.
 TITLE = {
-    "KGC100": "Use in a kind of Europe only",
+    "KGC100": "Use in places that are a kind of Europe only",
     "KGC101": "Use within non-commercial purposes",
-    "KGC105": "Use for a purpose that includes non-commercial purposes",
+    "KGC105": "Use for a purpose that includes non-commercial research",
     "KGC102": "Use in a kind of German only",
     "KGC103": "Use within German",
     "KGC104": "Use in a language that includes German",
@@ -164,13 +165,13 @@ PROBLEMS = [
              "states which purpose is a kind of which, so the operator does not "
              "apply to this kind of value."),
 
-    _problem("KGC105", "purpose", "hasPart", "dpv:NCP", "tax", False,
+    _problem("KGC105", "purpose", "hasPart", "dpv:NCR", "tax", False,
              "A policy that gives a purpose relies on DPV, which arranges "
              "purposes as kinds.  hasPart asks whether one value has another "
              "as a part.  The operator does not apply to this kind of value, "
              "and the policy is rejected before DPV is opened.",
              "A German library's policy uses hasPart with non-commercial "
-             "purposes, a purpose in DPV.",
+             "research, a purpose in DPV.",
              "hasPart asks whether one value has another as a part.  DPV "
              "only states which purpose is a kind of which, so the operator "
              "does not apply to this kind of value."),
