@@ -301,11 +301,11 @@ PROBLEMS = [
             "Germany. A researcher's policy commits to use in France. "
             "France and Germany are declared distinct."),
         "description": (
-            "Distinctness says France is not Germany. It does not say "
-            "that France does not lie within Germany. A structure that "
+            "Distinctness states that France is not Germany. It does not "
+            "state that France does not lie within Germany. A structure that "
             "places France within Germany makes both alternatives hold. "
             "The verdict is Unknown, with the same declaration that "
-            "settles KGC304."),
+            "decides KGC304."),
         "certificate": {"kind": "Models",
             "comment": (
                 "France and Germany are declared distinct, but distinct areas can "

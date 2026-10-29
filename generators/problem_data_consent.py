@@ -271,9 +271,9 @@ PROBLEMS = [
         "description": (
             "DPV places consent given below the branch of states valid for "
             "processing, so the verdict is Compatible on one published "
-            "statement. The offer names the branch rather than the states, so "
+            "statement. The first policy names the branch rather than the states, so "
             "a state DPV adds to that branch later is covered without the "
-            "offer being rewritten."),
+            "policy being rewritten."),
         "certificate": {"kind": "Refutation",
             "comment": "DPV places consent given among the states valid for "
                        "processing, so both sides can be satisfied.",
@@ -307,8 +307,8 @@ PROBLEMS = [
         "description": (
             "The same gate as KGC340, written by enumerating the two states "
             "rather than naming the branch. Compatible again, and the "
-            "certificate cites no resource statement: the requested state is "
-            "one the offer names. The offer is fixed against the vocabulary as "
+            "certificate cites no resource statement: the required state is "
+            "one the first policy names. The first policy is fixed against the vocabulary as "
             "it stands, where KGC340's is not."),
         "certificate": {"kind": "Refutation",
             "comment": (

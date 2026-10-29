@@ -28,8 +28,47 @@ dereferences to a profile entry under `problems/resources/`, which names
 the resource, the sort, the grounding rule and the declarations.
 
 Start with KGC310, KGC313 and KGC314: one published statement, then the
-same operand where the vocabulary settles nothing, then the same pair
-once the parties declare the concepts distinct.
+same operand where the vocabulary decides nothing, then the same pair
+once the concepts are declared distinct.
+
+`catalogue.html` lists every case with its two policies in plain words, the
+binding and the declarations in force with their origin, and then the
+lesson, the verdict and the reason. `catalogue-blind.html` is the same page
+without those three. Both are written by `generators/catalogue.py`.
+
+## What makes a case meaningful
+
+A case earns its place when a reader can say what it teaches and why its
+verdict is what it is. The first three points are about the policies, the
+rest about the case.
+
+- Each policy is one a real party could publish. A policy that no use can
+  satisfy is not one, and `check_policies.py` fails it by case ID.
+- Both policies share action and target. Two policies that act on different
+  things have no verdict worth reading, and `check_policies.py` checks this
+  too.
+- Values are concrete. A root concept appears only where the policy means
+  "any", and then the title says "any" and not "only".
+- Each case states one lesson. Within a family no two cases teach the same
+  thing; a twin differs from its partner in one declared thing, and says
+  which.
+- The reason for the verdict is given in plain words. A definite verdict
+  says what it rests on, and one that rests on a declaration says so. An
+  Unknown names both structures: one where both policies hold, one where
+  they do not.
+- Every declaration set has an origin and covers its whole slice. Where a
+  set ranges over a resource, it lists all of it, and `check_declarations.py`
+  fails a set that leaves a concept out.
+- Case IDs are never reused. An ID that appears anywhere in the git history,
+  in any earlier layout, is taken: `git log --all --oneline --
+  cases/KGC<id>.ttl` must be empty and `git log --all -p | grep -c KGC<id>`
+  must be 0.
+
+The checks run in `full-run.sh`. `lint_cases.py` holds the title wording, the
+parties and target of each family, and the text rules. `check_coverage.py`
+holds the grid: each of the 24 cells of operator by sort has a verdict case
+where the sort admits the operator and a rejection where it does not, and
+`or` and `xone` each appear at every sort.
 
 Retired (IDs never reused, recoverable from tags pre-retire and pre-purpose)
 

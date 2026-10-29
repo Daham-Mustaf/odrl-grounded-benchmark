@@ -276,10 +276,10 @@ kgc:KGC321-p2-c1 a odrl:Constraint ;
             "A German library permits use in at least one of PDF and PDF/A-1a. "
             "A French library's policy commits to use in PDF/A-1a only."),
         "description": (
-            "Offer (fileFormat, isAnyOf, {ft:PDF, ft:PDFA1A}) against "
-            "request (fileFormat, eq, ft:PDFA1A).  The offer admits either "
-            "format and the request requires one of them, so the two are "
-            "satisfiable together whatever the table says.  Compatible, and "
+            "First policy (fileFormat, isAnyOf, {ft:PDF, ft:PDFA1A}) against "
+            "second policy (fileFormat, eq, ft:PDFA1A).  The first policy admits either "
+            "format and the second requires one of them, so the two are "
+            "satisfiable together whatever the table states.  Compatible, and "
             "the refutation cites the witness alone: no resource statement, "
             "no declaration, no order axiom.  isAnyOf asks only whether "
             "concepts are the same, which is why it is admissible at nom "
@@ -372,7 +372,7 @@ kgc:KGC322-p2-c1 a odrl:Constraint ;
     "tree": [C("neq", PDF), C("eq", A1A, side="request")],
 
     "description": (
-        "The offer excludes ft:PDF, while the request requires "
+        "The first policy excludes ft:PDF, while the second requires "
         "ft:PDFA1A. The two concepts are declared distinct, so the "
         "constraints are Compatible. At the nominal sort, exclusion by "
         "identity is the applicable reading: the resource publishes no "

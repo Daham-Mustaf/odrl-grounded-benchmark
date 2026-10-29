@@ -19,7 +19,7 @@
 %           : bg_ for declared statements, w_ for witness conjuncts,
 %           : and ax_ for the axioms here.  A prover reports its premises by
 %           : name, so the prefix is what a checker reads.  Only bg_ premises
-%           : are withdrawable by a party.
+%           : can be withdrawn.
 %           : 3 axioms: 3 order axioms (reflexive, antisymmetric, transitive); no disjointness predicate, no operator denotations, no concept guard.
 %--------------------------------------------------------------------------
 

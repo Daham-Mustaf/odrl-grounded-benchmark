@@ -1,13 +1,14 @@
 # Declarations for the EU File type resource: empty.
 #
-# The table asserts no disjointness and no distinctness between its formats.
+# This set states nothing; only the resource's statements apply.  The table
+# asserts no disjointness and no distinctness between its formats.
 # It does not, for instance, say that a PDF/A-1a file is not a PDF, nor that
 # it is one.  With these declarations in force, two constraints naming different
 # formats are Unknown unless they name the same one.
 #
 # At nom the declarations carry more of a verdict than it does at the
 # other sorts, because there is no order for the resource to contribute.
-# Whatever separates two formats here was declared by the parties, and the
+# Whatever separates two formats here is a declaration, and the
 # certificate marks it withdrawable.  That is the honest position: the
 # authority lists formats and says nothing about how they relate.
 #

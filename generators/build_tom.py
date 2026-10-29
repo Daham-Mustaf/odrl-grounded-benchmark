@@ -268,10 +268,11 @@ def background_ttl(meta) -> str:
     return f"""\
 # Declarations for the measures resource: empty.
 #
-# Neither module asserts disjointness or distinctness between measures.
-# Two constraints naming different measures are therefore satisfiable
-# together unless a party declares them apart, and the certificate for such
-# a verdict names the declaration.
+# This set states nothing; only the resource's statements apply.  Neither
+# module asserts disjointness or distinctness between measures.  Two
+# constraints naming different measures are therefore satisfiable together
+# unless a declaration separates them, and the certificate for such a verdict
+# names the declaration.
 #
 # Source: {meta['source_iri']}
 

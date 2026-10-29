@@ -277,7 +277,7 @@ PROBLEMS = [
             "Compatible.\n\n"
             "This is the superset mode carried by the order: isAllOf asks "
             "that its two values lie inside what the use supplies, the "
-            "request bounds what the use may supply to the technical "
+            "second policy bounds what the use may supply to the technical "
             "measures, and the two published statements place the values "
             "within that bound."
         ),
@@ -348,8 +348,8 @@ PROBLEMS = [
             "A controller requires both encryption and access control; a "
             "processor commits to encryption only."),
         "description": (
-            "The offer needs both safeguards among the use's measures and the "
-            "request supplies one. The conflict looks immediate and is not: "
+            "The first policy needs both safeguards among the use's measures and "
+            "the second supplies one. The conflict looks immediate and is not: "
             "a structure that identifies the two measures satisfies both "
             "sides, and DPV separates them nowhere. Unknown as published."),
         "certificate": {"kind": "Models",
@@ -381,7 +381,7 @@ PROBLEMS = [
             "As KGC363, with encryption and access control declared "
             "distinct."),
         "description": (
-            "The two measures are then two, the request supplies one, and no "
+            "The two measures are then two, the second policy supplies one, and no "
             "use satisfies both sides: Incompatible. Read with KGC362: same "
             "values, one operator changed, opposite verdicts; and the "
             "obvious conflict still rested on a declared premise."),

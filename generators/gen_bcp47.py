@@ -12,7 +12,7 @@ Builds the BCP 47 language resource and its declarations.
 Two files out, not one
 ----------------------
     BCP47000-0.ax    the resource: concept membership, no order statements
-    BCP47001-0.ax    the parties' declarations: 105 inequations
+    BCP47001-0.ax    the declarations: 105 inequations
 
 The split is the point.  A resource is what an authority published; the
 IANA registry publishes a set of subtags and, over this slice, no relation
@@ -26,9 +26,9 @@ if the encodings ever relativise to one, and they are marked
 measured-unused until that check is made.  Dropping them is a decision to
 take explicitly after the measurement, not inside this generator.
 
-The distinctness rule is one the parties adopt.  Keeping it in its own
-file is what lets a refutation say which of its premises a party may
-withdraw, and it makes the withdrawal test one include line: the same
+The distinctness rule is a declaration, not the registry's.  Keeping it in
+its own file is what lets a refutation say which of its premises can be
+withdrawn, and it makes the withdrawal test one include line: the same
 problem with and without this file is Incompatible and Unknown.
 
 Distinctness, not disjointness
@@ -279,7 +279,7 @@ def resource_ax(concepts, file_date: str, digest: str,
         "%            before the file is opened.",
         "%",
         "%            The distinctness rule, which makes the subtags",
-        "%            pairwise distinct, is the parties' rule and lives in",
+        "%            pairwise distinct, is a declaration and lives in",
         "%            BCP47001-0.ax.  A problem including this file and",
         "%            not that one gets Unknown where the declaration",
         "%            would have given a definite verdict.",
@@ -328,7 +328,7 @@ def theory_ax(pairs, source: str, file_date: str) -> str:
         "% Domain   : ODRL policy, knowledge-grounded constraints",
         "% Axioms   : Distinctness rule for BCP 47 primary subtags",
         f"% Version  : {VERSION}",
-        "% English  : The parties' rule that distinct primary language",
+        "% English  : The rule that distinct primary language",
         "%            subtag records, neither deprecated and with no",
         "%            Preferred-Value link between them, name distinct",
         "%            languages.",
@@ -348,7 +348,7 @@ def theory_ax(pairs, source: str, file_date: str) -> str:
         "%            denies that anything lies below both, which needs an",
         "%            order this sort does not have.",
         "%",
-        "%            A party withdraws these declarations by omitting the",
+        "%            These declarations are withdrawn by omitting the",
         "%            include.  Any definite verdict resting on it",
         "%            reopens, Compatible as well as Incompatible.",
         "%",

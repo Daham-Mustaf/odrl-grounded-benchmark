@@ -201,14 +201,15 @@ def background_ttl(meta) -> str:
     return f"""\
 # Declarations for the EU File type resource: empty.
 #
-# The table asserts no disjointness and no distinctness between its formats.
+# This set states nothing; only the resource's statements apply.  The table
+# asserts no disjointness and no distinctness between its formats.
 # It does not, for instance, say that a PDF/A-1a file is not a PDF, nor that
 # it is one.  With these declarations in force, two constraints naming different
 # formats are Unknown unless they name the same one.
 #
 # At nom the declarations carry more of a verdict than it does at the
 # other sorts, because there is no order for the resource to contribute.
-# Whatever separates two formats here was declared by the parties, and the
+# Whatever separates two formats here is a declaration, and the
 # certificate marks it withdrawable.  That is the honest position: the
 # authority lists formats and says nothing about how they relate.
 #
@@ -238,7 +239,7 @@ def axioms(concepts) -> str:
         "% The authority publishes 228 formats and relates none of them.\n"
         "% This file is empty by construction, not by omission, and the\n"
         "% problems that include it rest on that emptiness: at nom a verdict\n"
-        "% comes from the constraints and from what the parties declared.\n"
+        "% comes from the constraints and from the declarations.\n"
         "%\n"
         f"% Concepts in the resource: {len(concepts)}\n"
         "% Order statements: 0\n"
@@ -249,7 +250,7 @@ def axioms(concepts) -> str:
 def declared_axioms(pair) -> str:
     a, b = pair
     return (
-        "% Declarations: one distinctness, declared by the parties.\n"
+        "% Declarations: one distinctness.\n"
         "% The table publishes nothing that separates these two formats.\n"
         "\n"
         f"fof(bg_dist_{slug(a)}_distinct_{slug(b)}, axiom,\n"

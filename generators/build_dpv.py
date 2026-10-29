@@ -36,8 +36,8 @@ NonCommercialPurpose and ResearchAndDevelopment, PersonalisedAdvertising
 under Advertising and Personalisation, and nine more.  Declaring such a
 pair to have nothing below both contradicts what DPV publishes, and a
 resource together with declarations that contradict it has no model at all,
-so every verdict over the pair is vacuous.  A declaration is the parties'
-to adopt but not theirs to adopt in a form the authority contradicts.
+so every verdict over the pair is vacuous.  A declaration may be adopted,
+but not in a form the authority contradicts.
 
 The silence between ScientificResearch and NonCommercialPurpose is
 deliberate.  DPV has NonCommercialResearch under both parents, so the
@@ -271,17 +271,17 @@ def background_ttl(meta) -> str:
     return f"""\
 # Declarations for the DPV purposes slice: empty.
 #
-# The purposes module publishes no disjointness and no distinctness: no
-# owl:disjointWith, no owl:AllDifferent, nothing.  This file records that
-# the parties declared nothing either, so every verdict over it rests on
-# what DPV published and on the constraints alone.
+# This set states nothing; only the resource's statements apply.  The
+# purposes module publishes no disjointness and no distinctness: no
+# owl:disjointWith, no owl:AllDifferent, nothing.  Every verdict over it
+# rests on what DPV published and on the constraints alone.
 #
 # A generated sibling rule would be wrong here, not merely costly.
 # NonCommercialResearch is published under both NonCommercialPurpose and
 # ResearchAndDevelopment, so concepts sharing a parent routinely overlap.
 # Separating them would close gaps the publisher left open.
 #
-# The party-declared distinctness used by the stability problems lives in
+# The declared distinctness used by the stability problems lives in
 # its own file, so that the verdicts obtained with and without it can be
 # compared.
 #
@@ -298,7 +298,7 @@ def background_ttl(meta) -> str:
 
 
 def declared_ttl(members, meta) -> str:
-    """The parties declare every purpose of the slice pairwise distinct.
+    """Every purpose of the slice declared distinct from every other.
 
     Stated as a rule rather than as instances, for the reason the ISO rule
     in build_dpvloc.py is stated that way: n concepts give n(n-1)/2
@@ -315,11 +315,11 @@ def declared_ttl(members, meta) -> str:
     return f"""\
 # Declarations for the DPV purposes slice: declared distinctness.
 #
-# The parties declare the purposes of the slice pairwise distinct, on the
-# ground that DPV defines each of them as a purpose in its own right.  DPV
-# publishes no distinctness anywhere in this module, so the rule is the
-# parties' and a verdict resting on an instance of it is withdrawable by
-# abandoning the rule.
+# Every purpose of the slice is declared distinct from every other.  DPV
+# defines each of them as a purpose in its own right, and these definitions
+# are what the declarations rest on.  DPV publishes no distinctness anywhere
+# in this module, so a verdict resting on an instance of the declarations is
+# withdrawable by abandoning them.
 #
 # Distinctness only.  Nothing here says two purposes have nothing below
 # both: that is disjointness, and this module publishes concepts below
@@ -367,13 +367,11 @@ def declared_axioms(names) -> str:
     listing = "\n".join("% " + ", ".join(names[i:i + 8])
                         for i in range(0, len(names), 8))
     return (
-        "% Declarations: pairwise distinctness, declared by the "
-        "parties.\n"
+        "% Declarations: pairwise distinctness of the purposes.\n"
         "%\n"
-        "% DPV publishes nothing that separates these purposes.  The rule is\n"
-        "% the parties', on the ground that DPV defines each as a purpose in\n"
-        "% its own right, and a verdict resting on an instance of it is\n"
-        "% withdrawable by abandoning the rule.\n"
+        "% DPV publishes nothing that separates these purposes.  It defines\n"
+        "% each as a purpose in its own right, and a verdict resting on an\n"
+        "% instance of the declarations is withdrawable by abandoning them.\n"
         "%\n"
         "% Distinctness, not disjointness: one purpose may lie below another\n"
         "% and still be a different purpose.  Disjointness over a pair with a\n"
@@ -418,7 +416,7 @@ def axioms(edges, concepts) -> str:
         lines.append(f"    kge_leq({slug(c)}, {slug(p)})).")
     lines += ["",
               "% Declarations: none here.  DPV publishes no disjointness",
-              "% among purposes; what the parties declare lives in the",
+              "% among purposes; what is declared lives in the",
               "% declarations file.",
               ""]
     return "\n".join(lines) + "\n"

@@ -1,10 +1,10 @@
 # Declarations for the DPV purposes slice: declared distinctness.
 #
-# The parties declare the purposes of the slice pairwise distinct, on the
-# ground that DPV defines each of them as a purpose in its own right.  DPV
-# publishes no distinctness anywhere in this module, so the rule is the
-# parties' and a verdict resting on an instance of it is withdrawable by
-# abandoning the rule.
+# Every purpose of the slice is declared distinct from every other.  DPV
+# defines each of them as a purpose in its own right, and these definitions
+# are what the declarations rest on.  DPV publishes no distinctness anywhere
+# in this module, so a verdict resting on an instance of the declarations is
+# withdrawable by abandoning them.
 #
 # Distinctness only.  Nothing here says two purposes have nothing below
 # both: that is disjointness, and this module publishes concepts below

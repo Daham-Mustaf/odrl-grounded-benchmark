@@ -21,7 +21,7 @@ used as valid justifications for processing data, and
 ConsentStatusInvalidForProcessing as the states that cannot.  Can and cannot:
 the two are disjoint by the definitions, and the module publishes no
 owl:disjointWith.  A verdict turning on the two being disjoint therefore
-rests on a declaration the parties make, and the certificate says so, even
+rests on a declaration, and the certificate says so, even
 though the authority's own prose is what warrants it.
 
 The declared set separates every state of the slice from every other.  It
@@ -52,7 +52,7 @@ What the module does not publish
 ---------------------------------
 No disjointness, as above.  No distinctness: nothing separates any two of the
 thirteen, so two constraints naming different states are satisfiable together
-until a party says otherwise.  And no identity statements.
+until a declaration separates them.  And no identity statements.
 
 Typing is present and is not read.  Every concept carries
 rdf:type dpv:ConsentStatus, including the two mid-level concepts, so the type
@@ -60,9 +60,9 @@ names the nearest ancestor carrying rdfs:subClassOf rather than the immediate
 parent.  Nothing is typed dpv:ConsentStatusValidForProcessing at all.  A
 reading of isA that follows rdf:type therefore cannot satisfy the constraint
 this resource exists for, whatever the state; a reading that follows the
-order can.  Section 7 reports that comparison.  The typing is outside
-Definition 4 either way: it relates an individual to a class, and a resource
-relates concepts to concepts.
+order can.  The typing is outside the definition of a resource either way:
+it relates an individual to a class, and a resource relates concepts to
+concepts.
 
 Source
 ------
@@ -96,7 +96,7 @@ VALID = "ConsentStatusValidForProcessing"
 INVALID = "ConsentStatusInvalidForProcessing"
 
 # What the module has once the boundary is applied.  Checked on every run:
-# these numbers are in the resource header and in the paper.
+# these numbers are in the resource header.
 EXPECT = {"concepts": 13, "order": 12, "crossing": 1}
 
 
@@ -230,9 +230,10 @@ def background_ttl(meta) -> str:
     return f"""\
 # Declarations for the DPV consent status resource: empty.
 #
-# The module asserts no disjointness and no distinctness.  Two constraints
-# naming different states are therefore satisfiable together, and a verdict
-# separating them rests on something the parties supply.
+# This set states nothing; only the resource's statements apply.  The module
+# asserts no disjointness and no distinctness.  Two constraints naming
+# different states are therefore satisfiable together, and a verdict
+# separating them rests on a declaration.
 #
 # The absence is worth stating, because the definitions read as though they
 # supply it.  A state that may justify processing and a state that may not
@@ -254,8 +255,8 @@ def background_ttl(meta) -> str:
 def definitional_ttl(definitions, meta) -> str:
     """The disjointness the module's definitions warrant.
 
-    The warrant is quoted rather than paraphrased.  A party adopting these
-    declarations is claiming the publisher already said it, and a reader deciding
+    The warrant is quoted rather than paraphrased.  Adopting these
+    declarations claims the publisher already said it, and a reader deciding
     whether to accept or withdraw the premise needs the publisher's words,
     not this generator's reading of them.  The definitions are taken from the
     module at build time, so the quotation cannot drift from the file.
@@ -279,11 +280,11 @@ def definitional_ttl(definitions, meta) -> str:
 # stated three times in prose and carried nowhere in the file, and a consumer
 # reading the RDF alone cannot recover it.
 #
-# What follows is a decision, not a derivation.  A party adopting these declarations
-# is following what the publisher wrote; the certificate still marks the
-# premise withdrawable, because what the definitions warrant they do not
-# assert, and a party who reads them differently can withdraw the statement
-# and watch the verdict reopen as Unknown.
+# What follows is a decision, not a derivation.  These declarations follow
+# what the publisher wrote; the certificate still marks the premise
+# withdrawable, because what the definitions warrant they do not assert, and
+# a different reading can withdraw the statement and watch the verdict reopen
+# as Unknown.
 #
 # Source: {meta['source_iri']}
 
@@ -358,7 +359,7 @@ def _wrap(text: str, width: int = 72) -> list:
 def definitional_axioms(definitions) -> str:
     """Disjointness of the two branches, on the module's own definitions.
 
-    The order clause of Definition 4: nothing lies below both.  Not an
+    The order clause: nothing lies below both.  Not an
     inequation, which would separate the two mid-level concepts and leave
     their subtrees free to overlap.
 
@@ -384,8 +385,8 @@ def definitional_axioms(definitions) -> str:
         "%",
         "% Can and cannot: nothing lies below both branches if the",
         "% definitions hold.  The module asserts no owl:disjointWith, so a",
-        "% verdict resting on this axiom rests on a reading the parties",
-        "% adopted, and the certificate marks it withdrawable.",
+        "% verdict resting on this axiom rests on a reading of the",
+        "% definitions, and the certificate marks it withdrawable.",
         "%",
         "% Disjointness rather than distinctness: nothing below both, so no",
         "% state of consent is at once valid and invalid for processing.",
@@ -535,7 +536,7 @@ def main() -> int:
                   file=sys.stderr)
             for k, got, want in drift:
                 print(f"  {k}: {got}, expected {want}", file=sys.stderr)
-            print("re-read the module, update EXPECT and the paper, or pass "
+            print("re-read the module, update EXPECT, or pass "
                   "--allow-count-change.", file=sys.stderr)
             return 1
 

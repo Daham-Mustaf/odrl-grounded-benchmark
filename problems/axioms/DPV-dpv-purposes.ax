@@ -269,6 +269,6 @@ fof(res_dpv_verification_below_dpv_enforce_security, axiom,
     kge_leq(dpv_verification, dpv_enforce_security)).
 
 % Declarations: none here.  DPV publishes no disjointness
-% among purposes; what the parties declare lives in the
+% among purposes; what is declared lives in the
 % declarations file.
 

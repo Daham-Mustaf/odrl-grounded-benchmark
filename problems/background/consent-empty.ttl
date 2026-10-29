@@ -1,8 +1,9 @@
 # Declarations for the DPV consent status resource: empty.
 #
-# The module asserts no disjointness and no distinctness.  Two constraints
-# naming different states are therefore satisfiable together, and a verdict
-# separating them rests on something the parties supply.
+# This set states nothing; only the resource's statements apply.  The module
+# asserts no disjointness and no distinctness.  Two constraints naming
+# different states are therefore satisfiable together, and a verdict
+# separating them rests on a declaration.
 #
 # The absence is worth stating, because the definitions read as though they
 # supply it.  A state that may justify processing and a state that may not

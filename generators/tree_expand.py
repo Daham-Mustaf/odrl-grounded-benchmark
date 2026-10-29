@@ -259,7 +259,14 @@ def expand_tree(p: dict) -> dict:
             f"value reached the signature without being grounded; either "
             f"add it to the problem's grounding map, or mark the problem "
             f"ungrounded if the binding's rule does not resolve it.")
-    w = compile_operand(p["tree"], constants, p["sort"])
+    # A pair query takes its candidate concepts from the constraints of both
+    # policies: what one excludes, the other usually names.  A check on one
+    # policy alone has no second policy, and "anywhere except Bavaria" is
+    # met by some other concept of the resource that no constraint names, so
+    # the caller may add candidates.  The real queries add none.
+    candidates = [c for c in p.get("witness_candidates", [])
+                  if c not in constants]
+    w = compile_operand(p["tree"], constants + candidates, p["sort"])
     # A declaration may name a concept neither constraint mentions:
     # the consent disjointness ranges over both branches while the
     # constraints name one. Those concepts go into the statement filter as

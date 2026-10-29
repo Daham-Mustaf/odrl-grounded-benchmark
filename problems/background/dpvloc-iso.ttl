@@ -2,7 +2,7 @@
 #
 # Generated from the rule that ISO 3166 assigns one code per area, so that
 # two areas listed by the extension are two places.  The extension asserts
-# none of this; the rule is the parties', and a verdict resting on it is
+# none of this; the rule is a declaration, and a verdict resting on it is
 # withdrawable by abandoning the rule.
 #
 # The distinctness is between areas, not between codes.  The extension

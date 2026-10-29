@@ -3,7 +3,7 @@
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
 % Problem  : language, isAllOf nl fr against eq nl, distinctness rule declared (witness condition negated)
 % Version  : 1.0
-% English  : A Belgian federal publisher requires distribution in both Dutch and French. The licensee distributes in Dutch only. The parties adopt the registry rule that different primary subtags name different languages.
+% English  : A Belgian federal publisher requires distribution in both Dutch and French. The licensee distributes in Dutch only. The registry rule that different primary subtags name different languages is adopted.
 %
 % Refs     : odrl-grounded-benchmark. https://github.com/Daham-Mustaf/odrl-grounded-benchmark
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark

@@ -1,8 +1,9 @@
 # Declarations for the 15-feature GeoNames slice: empty.
 #
-# GeoNames asserts no disjointness between sibling features, and the parties
-# declare none here.  Two constraints naming different regions are therefore
-# satisfiable together unless a party declares them apart.
+# This set states nothing; only the resource's statements apply.  GeoNames
+# asserts no disjointness between sibling features, so two constraints naming
+# different regions are satisfiable together unless a declaration separates
+# them.
 
 @prefix bind:    <https://w3id.org/odrl-kb/binding#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .

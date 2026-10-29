@@ -276,7 +276,13 @@ vrep:GroundingReport                        whether every value names a
 
 The case files are generated. `validate_cases.py` checks every file
 against this shape, and `validate_terms.py` fails any file using a
-`vrep:` term the schema does not define.
+`vrep:` term the schema does not define. `lint_cases.py` checks the wording
+and the parties of each family, `check_policies.py` that each policy alone
+admits a use and that both policies share action and target, and
+`check_coverage.py` that every cell of the operator-by-sort grid has a case.
+`generators/catalogue.py` writes `cases/catalogue.html`, one entry per case,
+and `cases/catalogue-blind.html` without the lesson, the verdict and the
+reason. What makes a case worth keeping is in `cases/cases-README.md`.
 
 ---
 

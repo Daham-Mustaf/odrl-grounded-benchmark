@@ -1,9 +1,9 @@
 # Declarations for the BCP 47 resource: empty.
 #
-# The parties declare nothing beyond the registry. The registry publishes
-# no distinctness between primary subtags, so two constraints naming
-# different languages are satisfiable together unless the parties adopt
-# the distinctness rule (bcp47-distinct.ttl).
+# This set states nothing; only the resource's statements apply. The registry
+# publishes no distinctness between primary subtags, so two constraints
+# naming different languages are satisfiable together unless the
+# distinctness rule is adopted (bcp47-distinct.ttl).
 #
 # Source: https://www.iana.org/assignments/language-subtag-registry
 

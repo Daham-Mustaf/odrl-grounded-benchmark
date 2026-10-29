@@ -13,7 +13,7 @@
 %            before the file is opened.
 %
 %            The distinctness rule, which makes the subtags
-%            pairwise distinct, is the parties' rule and lives in
+%            pairwise distinct, is a declaration and lives in
 %            BCP47001-0.ax.  A problem including this file and
 %            not that one gets Unknown where the declaration
 %            would have given a definite verdict.

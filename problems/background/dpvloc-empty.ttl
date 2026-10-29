@@ -1,9 +1,10 @@
 # Declarations for the DPV Locations resource: empty.
 #
-# The extension asserts no disjointness between places and no distinctness
+# This set states nothing; only the resource's statements apply.  The
+# extension asserts no disjointness between places and no distinctness
 # between the codes it lists.  Two constraints naming different countries
-# are therefore satisfiable together unless a party declares them apart, and
-# the certificate for such a verdict names the declaration.
+# are therefore satisfiable together unless a declaration separates them,
+# and the certificate for such a verdict names the declaration.
 #
 # The absence is worth stating plainly, because the file looks as though it
 # supplies distinctness and does not.  Every country has an inverse
@@ -13,9 +14,9 @@
 # a structure identifying two countries satisfies those memberships as well.
 #
 # Distinctness is available as a generated rule rather than as a statement
-# in the file: see the iso declarations, which the parties may adopt on the
-# strength of ISO 3166 assigning one code per area.  Adopting it is their
-# decision and the certificate records it as theirs.
+# in the file: see the iso declarations, which can be adopted on the
+# strength of ISO 3166 assigning one code per area.  Adopting it is a
+# decision and the certificate records it as one.
 #
 # Source: https://w3id.org/dpv/2.3/loc
 

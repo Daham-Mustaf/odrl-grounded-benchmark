@@ -1,8 +1,8 @@
 # Declarations for the EU File type resource: one distinctness.
 #
-# The parties declare that these two formats are different.  The table does
-# not: it lists both and relates them in no way.  A verdict resting on this
-# statement is the parties' and can be reopened by withdrawing it.
+# These two formats are declared different.  The table does not: it lists
+# both and relates them in no way.  A verdict resting on this statement can
+# be reopened by withdrawing it.
 #
 # Source: http://publications.europa.eu/resource/authority/file-type/20260715-0
 

@@ -12,11 +12,11 @@
 # stated three times in prose and carried nowhere in the file, and a consumer
 # reading the RDF alone cannot recover it.
 #
-# What follows is a decision, not a derivation.  A party adopting these declarations
-# is following what the publisher wrote; the certificate still marks the
-# premise withdrawable, because what the definitions warrant they do not
-# assert, and a party who reads them differently can withdraw the statement
-# and watch the verdict reopen as Unknown.
+# What follows is a decision, not a derivation.  These declarations follow
+# what the publisher wrote; the certificate still marks the premise
+# withdrawable, because what the definitions warrant they do not assert, and
+# a different reading can withdraw the statement and watch the verdict reopen
+# as Unknown.
 #
 # Source: https://w3id.org/dpv/2.3
 

@@ -11,7 +11,7 @@
 # read as jurisdictional containment.  isPartOf EU has an answer
 # here and does not under the territorial profile.  Neither is
 # the correct reading of the file: they are two readings, and
-# the profile is where a party says which one it means.
+# the profile is where the reading is stated.
 #
 # DPV writes identity with skos:sameAs, which is not a SKOS term (see
 # https://github.com/w3c-cg/dpv/issues/485).  skos:sameAs and owl:sameAs

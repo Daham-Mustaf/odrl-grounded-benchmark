@@ -202,9 +202,9 @@ PROBLEMS = [
             "development. A university commits to use for scientific "
             "research."),
         "description": (
-            "Offer (purpose, isA, dpv:ResearchAndDevelopment) against request "
-            "(purpose, eq, dpv:ScientificResearch).  The vocabulary places "
-            "the requested purpose under the offered one directly, so the "
+            "First policy (purpose, isA, dpv:ResearchAndDevelopment) against second "
+            "policy (purpose, eq, dpv:ScientificResearch).  The vocabulary places "
+            "the second policy's purpose under the first policy's directly, so the "
             "witness holds in every model and the verdict is Compatible.  "
             "The refutation should cite one resource premise."
         ),
@@ -293,8 +293,8 @@ kgc:KGC310-p2-c1 a odrl:Constraint ;
             "purpose. A university commits to use for non-commercial "
             "research."),
             "description": (
-            "Offer (purpose, isA, dpv:Purpose) against request (purpose, eq, "
-            "dpv:NonCommercialResearch).  The resource places "
+            "First policy (purpose, isA, dpv:Purpose) against second policy "
+            "(purpose, eq, dpv:NonCommercialResearch).  The resource places "
             "NonCommercialResearch below two parents, including "
             "dpv:ResearchAndDevelopment, which is below dpv:Purpose.  The "
             "refutation uses that ResearchAndDevelopment path and transitivity. "
@@ -390,8 +390,8 @@ kgc:KGC311-p2-c1 a odrl:Constraint ;
         "includes":          INCLUDES,
         "tree": [C("eq", MK), C("eq", SR, side="request")],
         "description": (
-            "Offer (purpose, eq, dpv:Marketing) against request (purpose, eq, "
-            "dpv:ScientificResearch).  Both denote singletons, and the two "
+            "First policy (purpose, eq, dpv:Marketing) against second policy "
+            "(purpose, eq, dpv:ScientificResearch).  Both denote singletons, and the two "
             "constraints are satisfiable together only if the two concepts "
             "are the same.  DPV publishes no distinctness, so a model may "
             "identify them: Unknown.  The same pair under "
@@ -484,7 +484,7 @@ kgc:KGC313-p2-c1 a odrl:Constraint ;
             "distinct."),
         "description": (
             "The constraints of KGC313, over the same resource, under "
-            "declarations in which the parties declare the two purposes "
+            "declarations in which the two purposes are declared "
             "distinct.  No model then identifies them, the witness fails "
             "everywhere, and the verdict is Incompatible.  DPV publishes no "
             "such distinctness: the verdict rests on the declaration, and "
@@ -577,8 +577,8 @@ kgc:KGC314-p2-c1 a odrl:Constraint ;
             "purpose. A company commits to use for recruitment interview "
             "scheduling."),
         "description": (
-            "Offer (purpose, isA, dpv:Purpose) against request (purpose, eq, "
-            "dpv:RecruitmentInterviewScheduling), the deepest concept in the "
+            "First policy (purpose, isA, dpv:Purpose) against second policy "
+            "(purpose, eq, dpv:RecruitmentInterviewScheduling), the deepest concept in the "
             "module.  The resource relates them only through six steps, so "
             "the refutation must chain all six.  Compatible.  The verdict is "
             "the same as KGC310's; what grows with the depth is the "
@@ -790,9 +790,9 @@ kgc:KGC315-p2-c1 a odrl:Constraint ;
             "A city's traffic data platform permits use for any purpose "
             "other than marketing. A company commits to use for marketing."),
         "description": (
-            "Offer (purpose, isNoneOf, {dpv:Marketing}) against request "
-            "(purpose, eq, dpv:Marketing).  The offer excludes exactly the "
-            "purpose the request requires.  No order statement and no "
+            "First policy (purpose, isNoneOf, {dpv:Marketing}) against second "
+            "policy (purpose, eq, dpv:Marketing).  The first policy excludes exactly the "
+            "purpose the second requires.  No order statement and no "
             "declaration takes part: the witness asks for a concept both "
             "distinct from and identical to marketing, which no structure "
             "provides.  Incompatible, and the certificate has nothing "
@@ -1203,7 +1203,7 @@ kgc:KGC317-p2-c1 a odrl:Constraint ;
             "holds, and no use satisfies both policies. A structure that "
             "also places it below public benefit or below non-commercial "
             "research admits the use. The verdict is Unknown, where "
-            "KGC395, with a request under the first branch, is "
+            "KGC395, with a second policy under the first branch, is "
             "Compatible."),
         "certificate": {"kind": "Models",
             "comment": (

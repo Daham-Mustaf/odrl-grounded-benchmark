@@ -3,7 +3,7 @@
 % Domain   : ODRL policy, knowledge-grounded constraints
 % Axioms   : Distinctness rule for BCP 47 primary subtags
 % Version  : 2.1
-% English  : The parties' rule that distinct primary language
+% English  : The rule that distinct primary language
 %            subtag records, neither deprecated and with no
 %            Preferred-Value link between them, name distinct
 %            languages.
@@ -23,7 +23,7 @@
 %            denies that anything lies below both, which needs an
 %            order this sort does not have.
 %
-%            A party withdraws these declarations by omitting the
+%            These declarations are withdrawn by omitting the
 %            include.  Any definite verdict resting on it
 %            reopens, Compatible as well as Incompatible.
 %

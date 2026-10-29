@@ -309,16 +309,16 @@ PROBLEMS = [
             "odrl:language, which this profile binds to a fifteen-subtag "
             "slice of the IANA Language Subtag Registry at the nominal "
             "sort.\n\n"
-            "The parties have adopted the distinctness rule: "
+            "The distinctness rule is adopted: "
             "distinct primary subtag records, neither deprecated and with "
             "no Preferred-Value link between them, name distinct "
             "languages. With that rule in force no structure interprets "
             "de and fr as one language, so no single use satisfies both "
             "constraints, and the verdict is Incompatible.\n\n"
-            "The refutation cites one premise, and it is the parties' "
+            "The refutation cites one premise, and it is a declaration "
             "rather than the registry's. IANA lists both subtags and "
             "asserts nothing that separates them; what makes this verdict "
-            "definite is a declaration, and a party who withdraws it "
+            "definite is a declaration, and withdrawing it "
             "reopens the case. KGC371 is that withdrawal."
         ),
         "expected_verdict": "Incompatible",
@@ -326,12 +326,12 @@ PROBLEMS = [
         "expected_q2": "Satisfiable",
         "summary": (
             "A publisher distributes in German. A licensee's policy commits to "
-            "French. The parties adopt the registry rule that different "
-            "primary subtags name different languages."),
+            "French. The registry rule that different primary subtags "
+            "name different languages is adopted."),
         "certificate": {
             "kind": "Refutation",
             "comment": "The two subtags are declared to name distinct "
-                       "languages, which is the parties' rule and not the "
+                       "languages, which is a declaration and not the "
                        "registry's content. Withdrawing it returns the "
                        "verdict to Unknown, which is KGC371.",
             "premises": [
@@ -367,13 +367,12 @@ PROBLEMS = [
             "the resource interpret de and fr as one language and others "
             "keep them apart, and whether a single use can satisfy both "
             "constraints depends on which. The verdict is Unknown, and "
-            "the reason is epistemic: a declaration by either party "
-            "settles it.\n\n"
+            "the reason is epistemic: a declaration decides it.\n\n"
             "Read against KGC370 this is what a withdrawable premise "
             "means. Two identical policies over one vocabulary, one "
             "include line apart, and the verdict moves from definite to "
-            "open because a party stopped asserting something the "
-            "registry never asserted."
+            "open because something the registry never asserted is no "
+            "longer asserted."
         ),
         "expected_verdict": "Unknown",
         "expected_q1": "Satisfiable",
@@ -481,14 +480,13 @@ PROBLEMS = [
             "and English are declared distinct under the same "
             "distinctness rule as KGC370, so no use satisfies both "
             "constraints and the verdict is Incompatible.\n\n"
-            "Neither rule is the correct one. A party who cares which "
-            "variety of English is distributed declines the reduction and "
-            "would rather have an uninterpretable policy than a wrong "
-            "answer; a party who does not, adopts it. The two problems "
-            "return different verdicts on identical policies over an "
-            "identical vocabulary, and the parties disagree about no "
-            "concept: what differs is a reading rule, which the profile "
-            "records and a report cites."
+            "Neither rule is the correct one. Where the variety of English "
+            "matters, the reduction is declined, and an uninterpretable "
+            "policy is preferred to a wrong answer; where it does not, the "
+            "reduction is adopted. The two problems return different "
+            "verdicts on identical policies over an identical vocabulary, "
+            "and no concept is disputed: what differs is a reading rule, "
+            "which the profile records and a report cites."
         ),
         "expected_verdict": "Incompatible",
         "expected_q1": "Unsatisfiable",
@@ -531,7 +529,7 @@ PROBLEMS = [
         "description": (
             "The publisher distributes in German; the licensee accepts "
             "anything that is not French. German itself is the witness, "
-            "but only because the parties' distinctness rule separates the "
+            "but only because the distinctness rule separates the "
             "two subtags: in a structure interpreting de and fr as one "
             "language, a use in German is a use in French and the "
             "second policy excludes it.\n\n"
@@ -539,14 +537,14 @@ PROBLEMS = [
             "KGC370's Incompatible does. The refutation of the second "
             "query cites the witness condition and one "
             "declaration, and withdrawing that premise is KGC375. A definite "
-            "verdict of either polarity can stand on the parties' "
+            "verdict of either polarity can stand on a "
             "declaration; polarity buys no exemption from provenance."
         ),
         "certificate": {
             "kind": "Refutation",
             "comment": (
-                "The registry rule the parties adopt makes different primary "
-                "subtags name different languages, so German is not French, "
+                "The declared registry rule makes different primary subtags "
+                "name different languages, so German is not French, "
                 "and a use in German satisfies both policies."),
             "premises": [
                 ("fromDeclarations",
@@ -620,8 +618,8 @@ PROBLEMS = [
         "summary": (
             "A Belgian federal publisher requires distribution in both "
             "Dutch and French. The licensee distributes in Dutch only. The "
-            "parties adopt the registry rule that different primary "
-            "subtags name different languages."),
+            "registry rule that different primary subtags name different "
+            "languages is adopted."),
         "description": (
             "A Belgian federal publisher requires distribution in both "
             "Dutch and French. The licensee's policy commits to Dutch "
@@ -630,10 +628,10 @@ PROBLEMS = [
             "isAllOf asks that the languages of the use include both "
             "Dutch and French. eq asks that every language of the use is "
             "Dutch. The two hold together only if Dutch and French are "
-            "one language. The parties have adopted the registry rule, "
-            "which makes the two subtags distinct languages, so no use "
+            "one language. The registry rule is adopted: "
+            "it makes the two subtags distinct languages, so no use "
             "satisfies both policies and the verdict is Incompatible.\n\n"
-            "The refutation cites one premise, and it is the parties' "
+            "The refutation cites one premise, and it is a declaration "
             "rather than the registry's. Without that rule the registry "
             "separates the two subtags in some structures and not in "
             "others, and the verdict is Unknown."

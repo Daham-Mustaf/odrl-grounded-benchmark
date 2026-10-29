@@ -1,16 +1,16 @@
 # Declarations for the DPV purposes slice: empty.
 #
-# The purposes module publishes no disjointness and no distinctness: no
-# owl:disjointWith, no owl:AllDifferent, nothing.  This file records that
-# the parties declared nothing either, so every verdict over it rests on
-# what DPV published and on the constraints alone.
+# This set states nothing; only the resource's statements apply.  The
+# purposes module publishes no disjointness and no distinctness: no
+# owl:disjointWith, no owl:AllDifferent, nothing.  Every verdict over it
+# rests on what DPV published and on the constraints alone.
 #
 # A generated sibling rule would be wrong here, not merely costly.
 # NonCommercialResearch is published under both NonCommercialPurpose and
 # ResearchAndDevelopment, so concepts sharing a parent routinely overlap.
 # Separating them would close gaps the publisher left open.
 #
-# The party-declared distinctness used by the stability problems lives in
+# The declared distinctness used by the stability problems lives in
 # its own file, so that the verdicts obtained with and without it can be
 # compared.
 #

@@ -10,7 +10,7 @@
 # the resource is opened.  The only other nominal operand in the suite is
 # fileFormat; every other operand is tax or mer.
 #
-# The distinctness rule is the parties' rule and lives in its own file.  A
+# The distinctness rule is a declaration and lives in its own file.  A
 # problem citing a binding below without also including BCP47001-0.ax
 # gets Unknown where the declaration would have given a definite verdict:
 # the registry lists both subtags and says nothing that separates them.
@@ -26,7 +26,7 @@
 #
 # Named, so that a binding cites one and a report says which was applied.
 # A rule is a statement about how values are read, not about what the
-# registry contains, and two parties reading one registry by different
+# registry contains, and two readings of one registry by different
 # rules disagree about which policies are interpretable rather than about
 # what the languages are.
 
@@ -50,12 +50,11 @@ ex:g-bcp47-primary a bind:GroundingProcedure ;
          defines the primary subtag as the first component, so en-US
          resolves to en and de-DE to de.
 
-         This is a decision about reading, not about meaning. A party
-         adopting it treats a request for American English as a request
-         for English, which is right for some purposes and wrong for
-         others; a party who cares about the region declines the rule and
-         gets an ungrounded value instead of a wrong answer. The profile
-         is where that choice is recorded."""@en ;
+         This is a decision about reading, not about meaning. Adopting it
+         treats a value for American English as a value for English, which
+         is right for some purposes and wrong for others; declining the
+         rule for the sake of the region gets an ungrounded value instead
+         of a wrong answer. The profile is where that choice is recorded."""@en ;
     bind:matchesProperty skos:notation ;
     bind:acceptsIRI true ;
     bind:reducesToPrimarySubtag true ;

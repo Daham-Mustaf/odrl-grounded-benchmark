@@ -70,8 +70,8 @@ PROBLEMS = [
 """,
         "tree": [C("eq", DE), C("eq", FR, side="request")],
         "description": (
-            "Offer (language, eq, bcp:de) against request (language, eq, "
-            "bcp:fr).  The distinctness rule places the two subtags "
+            "First policy (language, eq, bcp:de) against second policy (language, "
+            "eq, bcp:fr).  The distinctness rule places the two subtags "
             "in the declarations as distinct, so no model identifies "
             "them and the witness condition fails in every model."
         ),
@@ -90,8 +90,8 @@ PROBLEMS = [
             "kind": "Refutation",
             "comment": (
                 "Both constraints can hold only if German and French are one "
-                "language. The registry rule the parties adopt makes them "
-                "distinct, so no use satisfies both policies."),
+                "language. The declared registry rule makes them distinct, so no "
+                "use satisfies both policies."),
             "premises": [
                 ("fromDeclarations",
                  "bcp:de and bcp:fr are distinct (distinctness rule)"),
@@ -154,8 +154,8 @@ kgc:KGC300-p2-c1 a odrl:Constraint ;
         "includes":          ["KGE000-0.ax", "DPV-dpv-purposes.ax"],
         "tree": [C("isA", NCP), C("eq", SR, side="request")],
         "description": (
-            "Offer (purpose, isA, dpv:NonCommercialPurpose) against request "
-            "(purpose, eq, dpv:ScientificResearch).  The vocabulary neither "
+            "First policy (purpose, isA, dpv:NonCommercialPurpose) against second "
+            "policy (purpose, eq, dpv:ScientificResearch).  The vocabulary neither "
             "places one under the other nor separates them, so both queries "
             "are satisfiable and the verdict is Unknown."
         ),
@@ -247,8 +247,8 @@ kgc:KGC301-p2-c1 a odrl:Constraint ;
         # the one resource statement this verdict needs is carried here, under
         # the name the TPTP side gives it in fof_decls.
         "description": (
-            "Offer (spatial, isPartOf, gn:Europe) against request (spatial, "
-            "eq, gn:France).  The gazetteer places France within Europe, so "
+            "First policy (spatial, isPartOf, gn:Europe) against second policy "
+            "(spatial, eq, gn:France).  The gazetteer places France within Europe, so "
             "the witness condition holds in every model and the negated "
             "query is unsatisfiable."
         ),

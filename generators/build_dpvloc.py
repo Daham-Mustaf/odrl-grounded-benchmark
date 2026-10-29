@@ -16,8 +16,7 @@ twice, under two readings of the same file: containment only, and
 containment with union membership.  Same operand, same file, different
 binding, and KGC331 and KGC381 get different verdicts.  What the operand
 means is therefore not a property of the operand: it is what the binding
-says, which is the claim of Section 4.1 stated as two profiles rather than
-as an argument.
+says, which two profiles show rather than argue.
 
 The two resources also have opposite shapes, and the certificates show it.
 DPV purposes runs six levels deep, so a Compatible there may cite six order
@@ -427,10 +426,11 @@ def background_ttl(meta) -> str:
     return f"""\
 # Declarations for the DPV Locations resource: empty.
 #
-# The extension asserts no disjointness between places and no distinctness
+# This set states nothing; only the resource's statements apply.  The
+# extension asserts no disjointness between places and no distinctness
 # between the codes it lists.  Two constraints naming different countries
-# are therefore satisfiable together unless a party declares them apart, and
-# the certificate for such a verdict names the declaration.
+# are therefore satisfiable together unless a declaration separates them,
+# and the certificate for such a verdict names the declaration.
 #
 # The absence is worth stating plainly, because the file looks as though it
 # supplies distinctness and does not.  Every country has an inverse
@@ -440,9 +440,9 @@ def background_ttl(meta) -> str:
 # a structure identifying two countries satisfies those memberships as well.
 #
 # Distinctness is available as a generated rule rather than as a statement
-# in the file: see the iso declarations, which the parties may adopt on the
-# strength of ISO 3166 assigning one code per area.  Adopting it is their
-# decision and the certificate records it as theirs.
+# in the file: see the iso declarations, which can be adopted on the
+# strength of ISO 3166 assigning one code per area.  Adopting it is a
+# decision and the certificate records it as one.
 #
 # Source: {meta['source_iri']}
 
@@ -473,7 +473,7 @@ def iso_ttl(reps, excluded, multi, meta) -> str:
 
     ISO 3166 assigns one code to an area, so two codes name two areas.  That
     licenses pairwise distinctness over the areas the extension lists,
-    countries and subdivisions alike, and the rule is the parties', not the
+    countries and subdivisions alike, and the rule is a declaration, not the
     extension's: the file states no distinctness anywhere.
 
     The quotient matters.  The extension also records that some places carry
@@ -506,7 +506,7 @@ def iso_ttl(reps, excluded, multi, meta) -> str:
 #
 # Generated from the rule that ISO 3166 assigns one code per area, so that
 # two areas listed by the extension are two places.  The extension asserts
-# none of this; the rule is the parties', and a verdict resting on it is
+# none of this; the rule is a declaration, and a verdict resting on it is
 # withdrawable by abandoning the rule.
 #
 # The distinctness is between areas, not between codes.  The extension
@@ -614,7 +614,7 @@ def iso_axioms(reps, excluded) -> str:
         "%\n"
         "% ISO 3166 assigns one code to an area, so two areas listed by the\n"
         "% extension are two places.  The extension asserts none of this: the\n"
-        "% rule is the parties', and a verdict resting on an instance of it is\n"
+        "% rule is a declaration, and a verdict resting on an instance of it is\n"
         "% withdrawable by abandoning the rule.\n"
         "%\n"
         "% Distinctness is between areas rather than codes.  Where the\n"
@@ -672,7 +672,7 @@ def profile_ttl(mode) -> str:
             "# read as jurisdictional containment.  isPartOf EU has an answer\n"
             "# here and does not under the territorial profile.  Neither is\n"
             "# the correct reading of the file: they are two readings, and\n"
-            "# the profile is where a party says which one it means.",
+            "# the profile is where the reading is stated.",
         ),
     }[mode]
     tag, title, note = body

@@ -312,12 +312,12 @@ PROBLEMS = [
             "geographic.\n\n"
             "This is the baseline for the resource: one hop, no "
             "transitivity, nothing declared. It is also "
-            "the control for KGC380, which puts the same request against "
-            "an offer naming the European Union. There the verdict is "
+            "the control for KGC380, which puts the same second policy against "
+            "a first policy naming the European Union. There the verdict is "
             "Compatible as well, by composing this statement with the "
             "one placing the Netherlands in the EU, and Bonaire lies "
             "outside EU territory. The two problems differ in one edge "
-            "of the offer and in the binding."
+            "of the first policy and in the binding."
         ),
 
         "fof_decls": """\
@@ -337,11 +337,11 @@ PROBLEMS = [
             # report's rdfs:comment.
             "comment": (
                 "DPV places Bonaire within the Netherlands by a direct "
-                "edge, as a territory of the state and not as a "
-                "subdivision. Read as containment, a use in Bonaire is a "
-                "use within the Netherlands, and both policies can be "
-                "satisfied. The containment is constitutional, not "
-                "geographic."),
+                "edge, as ISO 3166-2 lists it among the Netherlands' "
+                "subdivisions. Bonaire lies in the Caribbean, so the "
+                "containment is constitutional, not geographic. Read as "
+                "containment, a use in Bonaire is a use within the "
+                "Netherlands, and both policies can be satisfied."),
             "premises": [
                 ("fromResource", "loc:NL-BQ1 is within loc:NL"),
             ],
@@ -372,14 +372,14 @@ PROBLEMS = [
             "the EU, and this binding reads membership as containment."
         ),
         "description": (
-            "Offer (spatial, isPartOf, loc:EU) against request (spatial, eq, "
-            "loc:DE), under the jurisdictional reading.  Germany is a member "
+            "First policy (spatial, isPartOf, loc:EU) against second policy "
+            "(spatial, eq, loc:DE), under the jurisdictional reading.  Germany is a member "
             "of the European Union, the reading takes membership as the "
             "order, and the verdict is Compatible on one statement.  Under "
             "the territorial reading the same constraints are well sorted and "
             "have no verdict: that reading takes only containment, loc:EU is "
-            "not among its concepts, and the offer's right operand grounds "
-            "to nothing.  The difference is the profile and nothing else."
+            "not among its concepts, and the first policy's right operand "
+            "grounds to nothing.  The difference is the profile and nothing else."
         ),
         "fof_decls": """\
 % Declarations: empty.
@@ -424,11 +424,11 @@ PROBLEMS = [
         "description": (
             "One side permits use in Germany, the other asks for France. "
             "Each names exactly one place, so both can be satisfied only "
-            "if Germany and France are the same place. DPV never says "
+            "if Germany and France are the same place. DPV never states "
             "they are different, so we cannot rule that out.\n\n"
-            "The file looks as though it settles this and does not. "
+            "The file looks as though it decides this and does not. "
             "Every country has an inverse concept, and non-DE is listed "
-            "under France. But that says which countries belong to a "
+            "under France. But that states which countries belong to a "
             "complement, not that the two countries differ."
         ),
 "summary": (
@@ -445,8 +445,8 @@ PROBLEMS = [
         "certificate": {
             "kind": "Models",
 "comment": (
-                "Neither the resource nor the parties state that Germany and France "
-                "are distinct. In a structure that identifies them, a use in Germany "
+                "Neither the resource nor any declaration states that Germany and "
+                "France are distinct. In a structure that identifies them, a use in Germany "
                 "is a use in France and satisfies both policies. In a structure that "
                 "keeps them apart, no use satisfies both. So the verdict is Unknown."),
             "premises": [],
@@ -473,13 +473,13 @@ PROBLEMS = [
         "includes":          INCLUDES_ISO,
         "tree": [C("eq", DE), C("eq", FR, side="request")],
         "description": (
-            "The same two constraints as KGC333, with one addition: the "
-            "parties adopt ISO 3166's rule that a code names one area. "
+            "The same two constraints as KGC333, with one addition: ISO 3166's "
+            "rule that a code names one area is adopted. "
             "Germany and France are then different places, so no use can "
             "satisfy both sides, and the answer is definite.\n\n"
-            "DPV itself says nothing of the kind. The rule is the "
-            "parties', and the report records it as something they can "
-            "withdraw. Note that the rule separates areas, not codes: "
+            "DPV itself states nothing of the kind. The rule is a "
+            "declaration, and the report records it as something that can be "
+            "withdrawn. Note that the rule separates areas, not codes: "
             "DPV records thirty pairs of codes naming one area, and a "
             "rule applied to codes would contradict it."
         ),
@@ -610,10 +610,10 @@ PROBLEMS = [
             "Use in both Germany and France, against use in Germany only. "
             "isAllOf asks that the areas of the use include both countries. "
             "eq asks that the use is Germany. The two hold together only if "
-            "Germany and France are one place. The parties adopt the ISO "
-            "3166 rule, which makes them different places, so no use "
+            "Germany and France are one place. The ISO 3166 rule is adopted: "
+            "it makes them different places, so no use "
             "satisfies both policies and the verdict is Incompatible.\n\n"
-            "The refutation cites one premise, and it is the parties' "
+            "The refutation cites one premise, and it is a declaration "
             "rather than the extension's. DPV Locations publishes no "
             "distinctness between the two countries. Without the rule a "
             "structure may identify them and the verdict is Unknown, as in "
@@ -838,7 +838,7 @@ PROBLEMS = [
             "KGC386 under the ISO rule: Hamburg is distinct from Bavaria "
             "and from Berlin, so it lies in the complement in every "
             "structure and the verdict is Compatible. The only case in "
-            "the suite where a declaration settles a complement "
+            "the suite where a declaration decides a complement "
             "positively; KGC317's isNoneOf is Incompatible on the "
             "constraints alone."),
         "summary": (

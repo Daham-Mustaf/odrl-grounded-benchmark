@@ -17,8 +17,8 @@
 %
 % Can and cannot: nothing lies below both branches if the
 % definitions hold.  The module asserts no owl:disjointWith, so a
-% verdict resting on this axiom rests on a reading the parties
-% adopted, and the certificate marks it withdrawable.
+% verdict resting on this axiom rests on a reading of the
+% definitions, and the certificate marks it withdrawable.
 %
 % Disjointness rather than distinctness: nothing below both, so no
 % state of consent is at once valid and invalid for processing.

@@ -58,6 +58,6 @@ drk:KGC333-report a vrep:OperandVerdictReport ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-spatial-dpvloc-geo> ;
     vrep:declarations <https://w3id.org/odrl-kb/dpv-loc/empty> ;
     vrep:readAgainst drk:KGC334-report ;
-    rdfs:comment """Neither the resource nor the parties state that Germany and France are distinct. In a structure that identifies them, a use in Germany is a use in France and satisfies both policies. In a structure that keeps them apart, no use satisfies both. So the verdict is Unknown."""@en ;
+    rdfs:comment """Neither the resource nor any declaration states that Germany and France are distinct. In a structure that identifies them, a use in Germany is a use in France and satisfies both policies. In a structure that keeps them apart, no use satisfies both. So the verdict is Unknown."""@en ;
     dcterms:description """A library permits use in Germany. A researcher's policy commits to use in France."""@en ;
     vrep:compatibilityState vrep:Unknown .

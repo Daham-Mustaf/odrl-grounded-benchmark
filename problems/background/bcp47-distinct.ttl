@@ -1,7 +1,7 @@
 #
-# What the registry publishes and what the parties add.  The registry
-# publishes identity and order but never distinctness.  The parties
-# therefore adopt the following rule as a declaration: distinct primary
+# What the registry publishes and what the declarations add.  The registry
+# publishes identity and order but never distinctness.  The declarations
+# therefore state the following rule: distinct primary
 # language subtag records, neither deprecated and with no Preferred-Value
 # link between them, name distinct languages.
 #
@@ -40,7 +40,7 @@
 # Preferred-Value.  The fourth is the order the registry does publish; the
 # generator checks that no member of the slice carries it, so that the
 # resource can claim to hold no order.  None of them says that two subtags
-# name two languages.  That is the parties' rule.
+# name two languages.  The rule is a declaration.
 #
 #
 # Distinctness, not disjointness.  Distinctness denies that two concepts
@@ -48,7 +48,7 @@
 # lies below both.  A registry publishes no order over this slice, so only
 # distinctness is available and only distinctness is needed.
 #
-# A party may withdraw these declarations by omitting the include.  Doing so
+# These declarations can be withdrawn by omitting the include.  Doing so
 # reopens any definite verdict that rested on it, Compatible as well as
 # Incompatible, without disputing the registry itself.
 @prefix bcp47:   <https://w3id.org/odrl-kb/bcp47#> .
