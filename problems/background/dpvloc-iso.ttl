@@ -17,6 +17,15 @@
 # statement, so listing both codes would declare one area distinct from
 # itself.
 #
+# DPV identifies BQ with each of NL-BQ1, NL-BQ2 and NL-BQ3, and SJ with
+# NO-21 and NO-22, so each group falls into one identity class and the ISO
+# rule cannot separate Bonaire, Saba and Sint Eustatius from one another,
+# or Svalbard from Jan Mayen. This is DPV's published data, to be reported
+# upstream.
+#
+# Greenland (DK-GL) and Jersey (GB-JSY) are left out for the reason stated
+# above.
+#
 # Classes: 4977
 # Pairs  : 12382776
 # Source : https://w3id.org/dpv/2.3/loc

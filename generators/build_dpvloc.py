@@ -492,6 +492,15 @@ def iso_ttl(reps, excluded, multi, meta) -> str:
         for i in range(0, n, 6))
     note = excluded_text(excluded)
     note_comment = "\n".join("# " + l for l in textwrap.wrap(note, 72))
+    merged = ("DPV identifies BQ with each of NL-BQ1, NL-BQ2 and NL-BQ3, and "
+              "SJ with NO-21 and NO-22, so each group falls into one identity "
+              "class and the ISO rule cannot separate Bonaire, Saba and Sint "
+              "Eustatius from one another, or Svalbard from Jan Mayen. This is "
+              "DPV's published data, to be reported upstream.")
+    merged_comment = "\n".join("# " + l for l in textwrap.wrap(merged, 72))
+    left = ("Greenland (DK-GL) and Jersey (GB-JSY) are left out for the reason "
+            "stated above.")
+    left_comment = "\n".join("# " + l for l in textwrap.wrap(left, 72))
     return f"""\
 # Declarations for the DPV Locations resource: ISO distinctness.
 #
@@ -508,6 +517,10 @@ def iso_ttl(reps, excluded, multi, meta) -> str:
 # country code where it has one.
 #
 {note_comment}
+#
+{merged_comment}
+#
+{left_comment}
 #
 # Classes: {n}
 # Pairs  : {n * (n - 1) // 2}
