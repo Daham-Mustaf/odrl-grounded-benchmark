@@ -57,7 +57,7 @@ drk:KGC317-report a vrep:OperandVerdictReport ;
     vrep:comparedConstraint kgc:KGC317-p2-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-purpose> ;
     vrep:declarations <https://w3id.org/odrl-kb/dpv-purposes/empty> ;
-    rdfs:comment """The first policy excludes exactly the purpose the second requires, so the verdict is Incompatible without any resource statement or declaration."""@en ;
+    rdfs:comment """The first policy excludes exactly the purpose the second requires, so the verdict is Incompatible without any DPV statement or declaration."""@en ;
     dcterms:description """A city's traffic data platform permits use for any purpose other than marketing. A company commits to use for marketing."""@en ;
     vrep:compatibilityState vrep:Incompatible ;
     vrep:certificate <certificates/KGC317-1.tstp> .

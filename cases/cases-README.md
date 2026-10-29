@@ -23,10 +23,10 @@ KGC403-404   purpose: the declared twin of KGC316, and a category against a
              category
 ```
 
-The policies can be read without the semantics. The IRI that names the
-reading dereferences to a profile entry under `problems/resources/`, which
-names the vocabulary, the kind of value, the rule for matching values to
-entries and the declarations.
+The policies can be read without the semantics. The name of the reading,
+which the catalogue shows in plain words, leads to a profile entry under
+`problems/`, which names the vocabulary, the kind of value, the rule for
+matching values to entries and the declarations.
 
 Start with KGC310, KGC313 and KGC314: one published statement, then the
 same operand where the vocabulary decides nothing, then the same pair
@@ -56,13 +56,13 @@ rest about the case.
 - The reason for the verdict is given in plain words. A definite verdict
   names what it rests on, and one that rests on a declaration names the
   declaration. Every domain fact in it names its source: a DPV edge or
-  definition, ISO 3166, RFC 5646, the EU file type table, GeoNames or the
-  TFEU. An Unknown names both situations in plain words: one where a use
-  meets both policies, one where none does.
+  definition, ISO 3166, RFC 5646, the EU file type table, GeoNames, the
+  TFEU or the TEU. An Unknown names both situations in plain words: one
+  where a use meets both policies, one where none does.
 - Titles, lessons, reasons and the catalogue use the words of the domain,
   and none of the words of logic or of the machinery that checks the cases.
   `lint_cases.py` holds the list, and it and `catalogue.py` fail a text that
-  uses one. Triple notation like (purpose, isA, X) is out as well. What a
+  uses one. A formula such as (purpose, isA, X) is out as well. What a
   prover is expected to cite goes in the problem's maintainer note, which
   the catalogue does not show.
 - Every declaration set has an origin and covers the whole part of the

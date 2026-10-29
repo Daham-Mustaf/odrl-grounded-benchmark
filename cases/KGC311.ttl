@@ -57,7 +57,7 @@ drk:KGC311-report a vrep:OperandVerdictReport ;
     vrep:comparedConstraint kgc:KGC311-p2-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-purpose> ;
     vrep:declarations <https://w3id.org/odrl-kb/dpv-purposes/empty> ;
-    rdfs:comment """NonCommercialResearch is below ResearchAndDevelopment and below NonCommercialPurpose, and both are below Purpose, so a use for non-commercial research is a use for a DPV purpose by either route."""@en ;
+    rdfs:comment """DPV places non-commercial research below research and development and below non-commercial purpose, and places both below Purpose, so a use for non-commercial research is a use for a DPV purpose by either route."""@en ;
     dcterms:description """A city's traffic data platform permits use for any DPV purpose. A university commits to use for non-commercial research."""@en ;
     vrep:compatibilityState vrep:Compatible ;
     vrep:certificate <certificates/KGC311-2.tstp> .

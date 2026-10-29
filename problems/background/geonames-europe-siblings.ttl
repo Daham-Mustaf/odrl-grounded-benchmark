@@ -18,7 +18,7 @@
     dcterms:title "Features with the same parent declared disjoint"@en ;
     bind:generatedBy bind:PairwiseDisjointness ;
     bind:origin bind:practiceRule ;
-    rdfs:comment "A modelling choice, not a GeoNames statement: the administrative divisions of one parent do not overlap, so features with the same parent are taken to be disjoint."@en ;
+    rdfs:comment "A modelling choice, not a GeoNames statement: places that GeoNames puts directly under one parent, countries under a continent or regions under a country, do not overlap, so features with the same parent are taken to be disjoint."@en ;
     bind:scopeCondition "Disjointness between features with the same parent, and not between a feature and its ancestors or descendants."@en ;
     bind:appliesTo <https://w3id.org/odrl-kb/geonames-europe> ;
     bind:pairCount 19 .

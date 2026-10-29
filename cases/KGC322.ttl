@@ -54,7 +54,7 @@ drk:KGC322-report a vrep:OperandVerdictReport ;
     vrep:comparedConstraint kgc:KGC322-p2-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-fileformat> ;
     vrep:declarations <https://w3id.org/odrl-kb/eu-file-type/empty> ;
-    rdfs:comment """The second policy requires PDF/A-1a, and the first lists it among the formats isAnyOf accepts, so a use in PDF/A-1a meets both policies. The EU file type table relates no formats, so listing both is how a policy author makes PDF/A-1a acceptable."""@en ;
+    rdfs:comment """The second policy requires PDF/A-1a, and the first lists it among the formats isAnyOf accepts, so a use in PDF/A-1a meets both policies. The EU file type table links no two formats by any relation, so listing both is how a policy author makes PDF/A-1a acceptable."""@en ;
     dcterms:description """A German library permits use in at least one of PDF and PDF/A-1a. A French library's policy commits to use in PDF/A-1a only."""@en ;
     vrep:compatibilityState vrep:Compatible ;
     vrep:certificate <certificates/KGC322-2.tstp> .

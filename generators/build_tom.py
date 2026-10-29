@@ -330,7 +330,7 @@ def declared_ttl(members, meta) -> str:
     bind:generatedBy bind:PairwiseDistinctness ;
     bind:origin bind:proseDefinition ;
     rdfs:comment "The origin rests on DPV's separate definition of each measure."@en ;
-    bind:scopeCondition "Distinctness between the measures the modules list, and not disjointness: the modules publish concepts below two parents, and a disjointness over such a pair would contradict the resource."@en ;
+    bind:scopeCondition "Distinctness between the measures the modules list, and not disjointness: the modules publish concepts below two parents, and a disjointness over such a pair would contradict what DPV publishes."@en ;
     bind:pairCount {n * (n - 1) // 2} ;
     bind:states [
         a owl:AllDifferent ;
@@ -411,9 +411,11 @@ def profile_ttl() -> str:
 
 @prefix dpvo: <https://w3id.org/dpv/mappings/odrl#> .
 @prefix bind: <https://w3id.org/odrl-kb/binding#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix ex:   <https://w3id.org/odrl-kb/profile/> .
 
 ex:b-tom a bind:OperandBinding ;
+    rdfs:label "DPV measures, read as kinds"@en ;
     bind:leftOperand dpvo:TechnicalOrganisationalMeasure ;
     bind:sort bind:tax ;
     bind:resource <https://w3id.org/odrl-kb/dpv-tom> ;

@@ -54,6 +54,6 @@ drk:KGC393-report a vrep:OperandVerdictReport ;
     vrep:declarations <https://w3id.org/odrl-kb/dpv-purposes/empty> ;
     vrep:readAgainst drk:KGC394-report ;
     vrep:readAgainst drk:KGC395-report ;
-    rdfs:comment """If improving transport mobility is the same purpose as public benefit or as non-commercial research, the use meets both policies; if it is a different purpose, it does not, because isAnyOf compares names and does not read DPV's order, which places improving transport mobility below public benefit. So the verdict is Unknown."""@en ;
+    rdfs:comment """If improving transport mobility is the same purpose as public benefit or as non-commercial research, a use for it meets both policies; if it is a different purpose from both, no use does. isAnyOf asks only whether the use's purpose is the same as a listed one and does not look below the listed purposes, so DPV's statement that improving transport mobility lies below public benefit does not help. So the verdict is Unknown."""@en ;
     dcterms:description """A city's traffic data platform permits use for at least one of public benefit and non-commercial research. A city transport authority commits to improving transport mobility."""@en ;
     vrep:compatibilityState vrep:Unknown .

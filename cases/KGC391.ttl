@@ -54,6 +54,6 @@ drk:KGC391-report a vrep:OperandVerdictReport ;
     vrep:declarations <https://w3id.org/odrl-kb/dpv-loc/empty> ;
     rdfs:comment """DPV places North Rhine-Westphalia within Germany, so Germany is an area that contains it, and a use in Germany satisfies both policies."""@en ;
     vrep:profileNote """This policy goes beyond the DPV-ODRL usage note for Location, which does not list hasPart."""@en ;
-    dcterms:description """A library's regional licence requires that the service area cover all of North Rhine-Westphalia. A researcher's policy commits to use in Germany."""@en ;
+    dcterms:description """A library, bound by a digitisation grant from North Rhine-Westphalia, permits use only in an area that covers all of the state. A researcher's policy commits to use in Germany, which covers the state."""@en ;
     vrep:compatibilityState vrep:Compatible ;
     vrep:certificate <certificates/KGC391-2.tstp> .

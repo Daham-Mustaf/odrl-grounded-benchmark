@@ -63,7 +63,8 @@ JARGON = re.compile(
     r"\b(structures?|models?|witness(es)?|quer(y|ies)|(un)?satisfiab\w*|"
     r"entail\w*|refut\w*|certificat\w*|premises?|axioms?|antisymmetr\w*|"
     r"transitiv\w*|reflexiv\w*|down-?sets?|up-?sets?|sort(s|ed)?|nom|tax|mer|"
-    r"slices?|ground(s|ed|ing)?|bindings?|"
+    r"slices?|ground(s|ed|ing)?|bindings?|RDF|IRIs?|resources?|suite|literals?|"
+    r"scheme|notation|equivalence classes?|"
     r"nominal sort|singletons?|withdrawable|order axioms?|polarity|provenance|"
     r"converse edge|disjuncts?|negated|epistemic)\b", re.I)
 TRIPLE = re.compile(r"\(\s*[A-Za-z]+,\s*(?:eq|neq|isA|isPartOf|hasPart|isAnyOf|isAllOf|isNoneOf)\b")

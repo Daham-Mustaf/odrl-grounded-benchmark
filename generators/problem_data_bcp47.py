@@ -407,12 +407,11 @@ PROBLEMS = [
             "the registered primary subtag en and the registered region "
             "subtag US. It is not an entry of the vocabulary this operand "
             "reads, which holds primary subtags.\n\n"
-            "This case is read under the profile's exact-match rule, which "
-            "accepts an IRI of the scheme or a literal matching a published "
-            "notation, and nothing else. The second policy's value matches "
-            "neither, so its constraint cannot be read against this "
-            "vocabulary at all. It is rejected, no verdict is computed, and "
-            "the value itself is the evidence.\n\n"
+            "This case is read under the reading's exact-match rule, which "
+            "accepts only a value that is exactly one of the fifteen "
+            "subtags. The second policy's value is not, so its constraint "
+            "cannot be read against this vocabulary at all. It is rejected, "
+            "no verdict is computed, and the value itself is the evidence.\n\n"
             "This is not an Unknown, and the difference decides the repair. "
             "An Unknown is resolved by a declaration. A rejection is not: "
             "there is nothing to declare about a value that names no entry "
@@ -558,7 +557,7 @@ PROBLEMS = [
             "policies; if they are the same language, no use does, because "
             "a use in German is then a use in French. The registry decides "
             "neither, so the verdict is Unknown.\n\n"
-            "Read with KGC370 and KGC371 this completes the symmetry: the "
+            "Read with KGC370 and KGC371 this completes the pattern: the "
             "same withdrawal takes an Incompatible to Unknown there and a "
             "Compatible to Unknown here. What the declaration buys is a "
             "definite verdict, not a direction."),
@@ -656,8 +655,8 @@ PROBLEMS = [
             "Italian and is not Italian, so the verdict is Incompatible.\n\n"
             "The registry rule is not used. The verdict is the same with it "
             "and without it, which is why this case declares nothing. The "
-            "definite verdicts of KGC370, KGC373 and KGC374 rest on that "
-            "rule."),
+            "definite verdicts of KGC370, KGC373, KGC374 and KGC376 rest on "
+            "that rule."),
         "certificate": {
             "kind": "Refutation",
             "comment": (
@@ -757,7 +756,7 @@ PROBLEMS = [
             "premises": [],
         },
         "ttl": _TTL_HEAD
-               + _policy("KGC379", 1, "Distribute in exactly one language, German or French",
+               + _policy("KGC379", 1, "Distribute in exactly one of German only and French only",
                          [("eq", [DE]), ("eq", [FR])], connective="xone")
                + _policy("KGC379", 2, "Distribute in German only",
                          [("eq", [DE])]),
@@ -787,7 +786,8 @@ PROBLEMS = [
             "only that at least one language of the use be German or "
             "French. It does not limit the others, so a Dutch and French "
             "edition satisfies the licence. A publisher who means German or "
-            "French editions only writes or(eq de, eq fr), as in KGC378.\n\n"
+            "French editions only writes 'German only, or French only', as "
+            "in KGC378.\n\n"
             "A use in Dutch and French together meets both policies: French "
             "is on the licence's list and in the licensee's pair. French is "
             "French whatever the registry leaves open, so the verdict is "

@@ -418,12 +418,11 @@ PROBLEMS = [
             "both can be met only if Germany and France are the same place. "
             "DPV never states they are different, so that cannot be ruled "
             "out.\n\n"
-            "The file looks as though it decides this, and does not. DPV "
-            "lists France under loc:non-DE, which its definition describes "
-            "as the jurisdictions not in Germany. The territorial reading "
-            "does not use those edges, and no RDF statement makes non-DE "
-            "the complement of Germany; only its prose definition does. So "
-            "nothing the reading uses separates the two countries."),
+            "DPV does list France among the places its definition calls "
+            "'not in Germany'. The territorial reading does not use that "
+            "list, and only the prose definition states that the list "
+            "leaves Germany out. So nothing the reading uses separates the "
+            "two countries."),
 "summary": (
     "A library permits use in Germany. A researcher's policy commits to use "
     "in France."),
@@ -465,18 +464,20 @@ PROBLEMS = [
         "includes":          INCLUDES_ISO,
         "tree": [C("eq", DE), C("eq", FR, side="request")],
         "description": (
-            "The same two constraints as KGC333, with one addition: ISO "
-            "3166's rule that a code names one area is adopted. Germany and "
-            "France are then different places, so no use can satisfy both "
-            "policies, and the verdict is Incompatible.\n\n"
-            "DPV itself states nothing of the kind. The rule is a "
-            "declaration, and the report records it as something that can "
-            "be withdrawn. The rule separates areas, not codes: DPV records "
-            "thirty identity pairs between codes, and a rule applied to "
-            "codes would contradict them. Three of the thirty pair the "
-            "group BQ with each of the islands Bonaire, Saba and Sint "
-            "Eustatius, which are not identities in fact; the rule does not "
-            "depend on them."),
+            "The same two constraints as KGC333, with one addition: the ISO "
+            "3166 rule that different codes name different areas is "
+            "adopted. Germany and France are then different places, so no "
+            "use can meet both policies, and the verdict is Incompatible.\n\n"
+            "DPV itself states nothing of the kind: the verdict rests on "
+            "the declared rule, and without it the verdict is Unknown "
+            "(KGC333)."),
+        "maintainer_note": (
+            "DPV records thirty identity pairs between codes, and the rule "
+            "separates areas, not codes. Five of the thirty pair a group "
+            "with a part of it and are not two names for one place: BQ with "
+            "each of NL-BQ1, NL-BQ2 and NL-BQ3 (Bonaire, Saba and Sint "
+            "Eustatius), and SJ with NO-21 and NO-22 (Svalbard and Jan "
+            "Mayen). The rule does not depend on them."),
         "summary": (
             "As KGC333, with the ISO 3166 rule that different country codes "
             "name different countries."),
@@ -489,9 +490,9 @@ PROBLEMS = [
             "kind": "Refutation",
   "comment": (
       "Both policies can be met only if Germany and France are the same "
-      "place. ISO 3166 gives each its own code and the adopted rule takes "
-      "one code to name one area, so they are different places and no use "
-      "meets both policies."),
+      "place. The declared ISO 3166 rule, that different codes name "
+      "different areas, makes them different places, so no use meets both "
+      "policies."),
             "premises": [
                 ("fromDeclarations",
                  "loc:DE and loc:FR are distinct areas under ISO 3166"),
@@ -774,13 +775,9 @@ PROBLEMS = [
             "Use within the European Union against use in North "
             "Rhine-Westphalia, jurisdictional reading: North "
             "Rhine-Westphalia within Germany, Germany a member of the EU, "
-            "one chaining step. Compatible, and here the answer is true.\n\n"
-            "The jurisdictional reading takes a country's EU membership as "
-            "if all its territory were EU territory. For North "
-            "Rhine-Westphalia this gives the true answer; for Bonaire, an "
-            "overseas territory outside the EU, it gives a false one "
-            "(KGC380). The error lies in the reading's choice, not in the "
-            "reasoning."),
+            "one chaining step. Compatible, and here the answer is true. "
+            "KGC380 is the case where the same reading gives a false "
+            "answer."),
         "summary": (
             "A library permits use within the European Union. A researcher's "
             "policy commits to use in North Rhine-Westphalia."),
@@ -854,9 +851,9 @@ PROBLEMS = [
             "As KGC386, with the ISO 3166-2 rule."),
         "certificate": {"kind": "Refutation",
             "comment": (
-                "The ISO 3166 rule, one code for one area, makes Hamburg "
-                "distinct from Bavaria and from Berlin, so a use in Hamburg "
-                "is not excluded."),
+                "The declared ISO 3166 rule, that different codes name "
+                "different areas, makes Hamburg different from Bavaria and "
+                "from Berlin, so a use in Hamburg is not excluded."),
             "premises": [("fromDeclarations",
                           "loc:DE-HH distinct from loc:DE-BY"),
                          ("fromDeclarations",
@@ -916,16 +913,19 @@ PROBLEMS = [
         "expected_verdict": "Compatible",
         "expected_q1": "Satisfiable", "expected_q2": "Unsatisfiable",
         "description": (
-            "A regional licence requires that the service area cover all of "
-            "North Rhine-Westphalia. hasPart asks that the area of the use "
-            "contain North Rhine-Westphalia. Germany has North "
+            "A digitisation grant from North Rhine-Westphalia requires that "
+            "the digitised manuscripts be made available across the whole "
+            "state, so the library permits use only in an area that covers "
+            "all of North Rhine-Westphalia. hasPart asks that the area of "
+            "the use contain North Rhine-Westphalia. Germany has North "
             "Rhine-Westphalia as a part, on the same statement as KGC382 "
-            "read upward, so a use in Germany satisfies both policies and "
-            "the verdict is Compatible."),
+            "read upward, so a use in Germany meets both policies and the "
+            "verdict is Compatible."),
         "summary": (
-            "A library's regional licence requires that the service area "
-            "cover all of North Rhine-Westphalia. A researcher's policy "
-            "commits to use in Germany."),
+            "A library, bound by a digitisation grant from North "
+            "Rhine-Westphalia, permits use only in an area that covers all "
+            "of the state. A researcher's policy commits to use in Germany, "
+            "which covers the state."),
         "certificate": {"kind": "Refutation",
             "comment": (
                 "DPV places North Rhine-Westphalia within Germany, so Germany "
@@ -956,14 +956,15 @@ PROBLEMS = [
         "expected_q1": "Satisfiable", "expected_q2": "Unsatisfiable",
         "description": (
             "Use anywhere except Germany, against use in Bavaria only. "
-            "isNoneOf excludes the named area by identity, Bavaria is a "
+            "isNoneOf excludes the named area itself, Bavaria is a "
             "different area from Germany under the ISO rule, and the "
             "verdict is Compatible, although Bavaria lies within Germany.\n\n"
             "The verdict is faithful to ODRL's operator and defeats what "
             "the drafter meant: 'not in Germany' is a claim about parts, "
-            "and isNoneOf only compares names. A drafter who means Germany "
-            "and all its parts writes a prohibition with isPartOf Germany. "
-            "The purpose twin is KGC397."),
+            "and isNoneOf only asks whether the place is Germany itself. A "
+            "drafter who means Germany and all its parts writes a "
+            "prohibition with isPartOf Germany. The same pitfall over "
+            "purposes is KGC397."),
         "summary": (
             "A library permits use anywhere except Germany. A researcher's "
             "policy commits to use in Bavaria, a state of Germany."),

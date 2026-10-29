@@ -55,7 +55,7 @@ drk:KGC343-report a vrep:OperandVerdictReport ;
     vrep:declarations <https://w3id.org/odrl-kb/dpv-consent/definitional> ;
     vrep:readAgainst drk:KGC342-report ;
     vrep:readAgainst drk:KGC348-report ;
-    rdfs:comment """DPV places ConsentWithdrawn below the invalid branch, and the declarations state that the valid and invalid branches are disjoint, which DPV's definitions imply: states that can justify processing and states that cannot. So withdrawn consent cannot also lie below the valid branch. Without those declarations the verdict is Unknown, as in KGC342."""@en ;
+    rdfs:comment """DPV places withdrawn consent below the invalid branch, and the declarations state that the valid and invalid branches are disjoint, which DPV's definitions imply: states that can justify processing and states that cannot. So withdrawn consent cannot also lie below the valid branch. Without those declarations the verdict is Unknown, as in KGC342."""@en ;
     dcterms:description """As KGC342, with the valid and invalid branches declared disjoint."""@en ;
     vrep:compatibilityState vrep:Incompatible ;
     vrep:certificate <certificates/KGC343-1.tstp> .

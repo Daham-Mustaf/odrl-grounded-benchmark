@@ -43,5 +43,5 @@ drk:KGC103-report a vrep:WellSortednessReport ;
     vrep:constraint kgc:KGC103-p1-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-language-bcp47> ;
     dcterms:description """A German library's policy uses isPartOf with German, a language in the IANA registry."""@en ;
-    rdfs:comment """isPartOf asks whether one value is part of another.  The IANA language registry (RFC 5646) only names languages and arranges them in no order, so the operator does not apply to this kind of value."""@en ;
+    rdfs:comment """isPartOf asks whether one value is part of another.  This reading takes languages as names only: none of the fifteen languages used here belongs to a larger language in the IANA registry (RFC 5646), and the reading takes no order from the registry, so the operator does not apply to this kind of value."""@en ;
     vrep:wellSorted false .

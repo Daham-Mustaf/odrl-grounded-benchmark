@@ -57,7 +57,7 @@ drk:KGC315-report a vrep:OperandVerdictReport ;
     vrep:comparedConstraint kgc:KGC315-p2-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-purpose> ;
     vrep:declarations <https://w3id.org/odrl-kb/dpv-purposes/empty> ;
-    rdfs:comment """DeliveryOfGoods lies below Purpose through four published statements, one for each step up the hierarchy, so a use for delivery of goods is a use for a DPV purpose."""@en ;
+    rdfs:comment """DPV places delivery of goods below Purpose in four steps, so a use for delivery of goods is a use for a DPV purpose."""@en ;
     dcterms:description """A city's traffic data platform permits use for any DPV purpose. A logistics company commits to use for delivery of goods."""@en ;
     vrep:compatibilityState vrep:Compatible ;
     vrep:certificate <certificates/KGC315-2.tstp> .

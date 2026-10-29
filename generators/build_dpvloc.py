@@ -357,6 +357,8 @@ def resource_ttl(concepts, labels, kinds, order, ident, meta, mode, digest) -> s
 
     title = ("DPV Locations, containment slice" if mode == "geo"
              else "DPV Locations, containment and union membership slice")
+    n_unions = (len({b for _, b in order} - set(concepts))
+                if mode == "juris" else 0)
     head = reads + [
         "#",
         "# The identity statements use skos:sameAs, which SKOS does not",
@@ -374,7 +376,8 @@ def resource_ttl(concepts, labels, kinds, order, ident, meta, mode, digest) -> s
         "#",
         f"# Identity predicate   : {meta['identity_predicate']}",
         "#",
-        f"# Concepts                     : {len(concepts)}",
+        f"# Concepts                     : {len(concepts) + n_unions}"
+        + (f" ({len(concepts)} places and {n_unions} unions)" if n_unions else ""),
         f"# Order statements, published  : {len(order)}",
         f"# Identity pairs, published    : {len(ident)}",
         f"# Order statements, encoded    : {2 * len(ident)} (two per identity pair)",
@@ -463,9 +466,9 @@ def excluded_text(excluded) -> str:
     pairs = ", ".join(f"{cc} and {c}" for cc, cs in sorted(excluded.items())
                       for c in cs)
     names = (", ".join(subs[:-1]) + " and " + subs[-1]) if len(subs) > 1 else subs[0]
-    return (f"Not listed: {names}. DPV Locations lists each of these areas "
-            f"under two codes ({pairs}) with no identity statement, so "
-            f"listing both codes would declare one area distinct from itself.")
+    return (f"Not listed: {names}, because DPV lists Greenland and Jersey "
+            f"under two codes each ({pairs}) without saying they are the same "
+            f"place.")
 
 
 def iso_ttl(reps, excluded, multi, meta) -> str:
@@ -539,8 +542,8 @@ def iso_ttl(reps, excluded, multi, meta) -> str:
                  <https://w3id.org/odrl-kb/dpv-loc-juris> ;
     bind:generatedBy bind:PairwiseDistinctness ;
     bind:origin bind:practiceRule ;
-    rdfs:comment "The origin rests on the ISO 3166 rule that a code names one area. The part of DPV Locations used here has {len(reps) + n_left:,} identity classes and the set lists {len(reps):,} of them; the scope names the {n_left} left out and why."@en ;
-    bind:scopeCondition "Distinctness holds between equivalence classes under the extension's identity statements, not between codes; codes the extension identifies name one area. {note}"@en ;
+    rdfs:comment "The origin rests on the ISO 3166 rule that different codes name different areas, except where DPV records that two codes name the same area. The set lists {len(reps):,} areas; the scope names the {n_left} left out and why."@en ;
+    bind:scopeCondition "Where DPV records that two codes name the same place, they count as one place. {note}"@en ;
     bind:pairCount {n * (n - 1) // 2} ;
     bind:states [
         a owl:AllDifferent ;
@@ -646,6 +649,11 @@ def iso_instance(a: str, b: str) -> str:
             f"    {slug(a)} != {slug(b)}).")
 
 
+BINDING_LABEL = {
+    "geo": "DPV Locations, territorial reading: places and their parts",
+    "juris": "DPV Locations, jurisdictional reading: places and their parts",
+}
+
 IDENTITY_NOTE = (
     "# DPV writes identity with skos:sameAs, which is not a SKOS term (see\n"
     "# https://github.com/w3c-cg/dpv/issues/485).  skos:sameAs and owl:sameAs\n"
@@ -695,9 +703,11 @@ def profile_ttl(mode) -> str:
 
 @prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> .
 @prefix bind: <https://w3id.org/odrl-kb/binding#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix ex:   <https://w3id.org/odrl-kb/profile/> .
 
 ex:b-spatial-dpvloc-{tag} a bind:OperandBinding ;
+    rdfs:label "{BINDING_LABEL[tag]}"@en ;
     bind:leftOperand dpv-odrl:Location ;
     bind:sort bind:mer ;
     bind:resource <https://w3id.org/odrl-kb/dpv-loc-{tag}> ;

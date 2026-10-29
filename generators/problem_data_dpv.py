@@ -292,9 +292,9 @@ kgc:KGC310-p2-c1 a odrl:Constraint ;
                 "development and below non-commercial purpose, and both "
                 "below Purpose, so a use for non-commercial research is a "
                 "use for a DPV purpose by either route. The first policy is "
-                "an open licence that restricts nothing: it allows any DPV "
-                "purpose, and a real party would leave the constraint out. "
-                "It is here to show the route."),
+                "an open licence: an open-data platform states, as open "
+                "licences do, that the data may be used for any purpose, "
+                "and it restricts nothing."),
             "maintainer_note": (
                 "The refutation uses the ResearchAndDevelopment path or the "
                 "NonCommercialPurpose path, plus transitivity. Both parents "
@@ -312,10 +312,10 @@ kgc:KGC310-p2-c1 a odrl:Constraint ;
  "certificate": {
             "kind": "Refutation",
             "comment": (
-                "NonCommercialResearch is below ResearchAndDevelopment and "
-                "below NonCommercialPurpose, and both are below Purpose, so "
-                "a use for non-commercial research is a use for a DPV "
-                "purpose by either route."),
+                "DPV places non-commercial research below research and "
+                "development and below non-commercial purpose, and places "
+                "both below Purpose, so a use for non-commercial research "
+                "is a use for a DPV purpose by either route."),
             "premises": [
                 ("fromResource",
                  "dpv:NonCommercialResearch is below "
@@ -584,10 +584,11 @@ kgc:KGC314-p2-c1 a odrl:Constraint ;
             "RequestedServiceProvision, ServiceProvision and "
             "ServiceManagement. All four statements are published, so a use "
             "for delivery of goods is a use for a DPV purpose. The first "
-            "policy is an open licence that restricts nothing: it allows "
-            "any DPV purpose, and a real party would leave the constraint "
-            "out. It is here to show that the answer does not change with "
-            "depth. Compare KGC310, one step, which has the same verdict."),
+            "policy is an open licence: an open-data platform states, as "
+            "open licences do, that the data may be used for any purpose, "
+            "and it restricts nothing. The case shows that the answer does "
+            "not change with depth. Compare KGC311, which reaches Purpose "
+            "by two routes and has the same verdict."),
         "maintainer_note": (
             "Four steps, so the refutation chains four statements and "
             "transitivity; what grows with depth is the proof, not the "
@@ -609,9 +610,8 @@ kgc:KGC314-p2-c1 a odrl:Constraint ;
         "certificate": {
             "kind": "Refutation",
 "comment": (
-    "DeliveryOfGoods lies below Purpose through four published statements, "
-    "one for each step up the hierarchy, so a use for delivery of goods is "
-    "a use for a DPV purpose."),
+    "DPV places delivery of goods below Purpose in four steps, so a use for "
+    "delivery of goods is a use for a DPV purpose."),
             "premises": [
                 ("fromResource", "the four order statements of the chain"),
                 ("fromOrderAxiom", "transitivity"),
@@ -692,8 +692,8 @@ kgc:KGC315-p2-c1 a odrl:Constraint ;
             "two purposes are one. If they are the same purpose, the use "
             "meets both policies; if they are different, none does. The "
             "verdict is Unknown where KGC310 is Compatible. The pair shows "
-            "that isA reads the order in one direction: swapping the "
-            "policies is not a symmetry."),
+            "that isA reads the order in one direction: swapping the two "
+            "policies can change the verdict."),
 
         "fof_decls": """\
 % Declarations: empty.  The purposes module publishes no disjointness
@@ -817,8 +817,7 @@ kgc:KGC315-p2-c1 a odrl:Constraint ;
             "kind": "Refutation",
 "comment": (
     "The first policy excludes exactly the purpose the second requires, so "
-    "the verdict is Incompatible without any resource statement or "
-    "declaration."),
+    "the verdict is Incompatible without any DPV statement or declaration."),
             "premises": [
                 ("fromConstraints", "the witness condition"),
             ],
@@ -1002,11 +1001,13 @@ kgc:KGC317-p2-c1 a odrl:Constraint ;
         "certificate": {"kind": "Models",
             "comment": (
                 "If improving transport mobility is the same purpose as "
-                "public benefit or as non-commercial research, the use "
-                "meets both policies; if it is a different purpose, it does "
-                "not, because isAnyOf compares names and does not read "
-                "DPV's order, which places improving transport mobility "
-                "below public benefit. So the verdict is Unknown."),
+                "public benefit or as non-commercial research, a use for it "
+                "meets both policies; if it is a different purpose from "
+                "both, no use does. isAnyOf asks only whether the use's "
+                "purpose is the same as a listed one and does not look "
+                "below the listed purposes, so DPV's statement that "
+                "improving transport mobility lies below public benefit "
+                "does not help. So the verdict is Unknown."),
             "premises": []},
         "provenance": "Purpose limitation lists in data-sharing "
                       "agreements.",
@@ -1081,7 +1082,8 @@ kgc:KGC317-p2-c1 a odrl:Constraint ;
         "certificate": {"kind": "Refutation",
             "comment": (
                 "DPV places improving transport mobility below public "
-                "benefit; the first alternative decides it."),
+                "benefit, so the first alternative holds for a use for "
+                "improving transport mobility."),
             "premises": [("fromResource", "ITM below PublicBenefit")]},
         "provenance": "As KGC393.",
         "ttl": _ttl("KGC395", PURPOSE,
@@ -1158,9 +1160,9 @@ kgc:KGC317-p2-c1 a odrl:Constraint ;
             "The drafter meant to exclude marketing and every kind of "
             "marketing. isNoneOf excludes only the named purpose, so "
             "advertising, which DPV places below marketing, passes. No ODRL "
-            "2.2 operator excludes a purpose together with the purposes "
-            "below it; a prohibition with isA Marketing does. The purpose "
-            "twin of the spatial case KGC392."),
+            "2.2 operator in a permission excludes a purpose together with "
+            "the purposes below it; a prohibition with isA Marketing does "
+            "that. The same pitfall over places is KGC392."),
         "certificate": {"kind": "Refutation",
             "comment": (
                 "Advertising is declared distinct from marketing, because "
@@ -1199,23 +1201,24 @@ kgc:KGC317-p2-c1 a odrl:Constraint ;
             "commits to use for commercial research."),
         "description": (
             "Commercial research lies below commercial purpose and below "
-            "research and development. It lies below neither alternative of "
-            "the first policy, and DPV publishes nothing that keeps it out "
-            "of them. If it lies outside both, no alternative holds and no "
-            "use meets both policies. If it also lies below public benefit "
-            "or below non-commercial research, the use is admitted. The "
-            "verdict is Unknown, where KGC395, with a second policy under "
-            "the first alternative, is Compatible."),
+            "research and development. DPV does not place it below public "
+            "benefit or below non-commercial research, and it publishes "
+            "nothing that keeps it out of them. If it lies outside both, no "
+            "alternative holds and no use meets both policies. If it also "
+            "lies below public benefit or below non-commercial research, "
+            "the use is admitted. The verdict is Unknown, where KGC395, "
+            "with a second policy under the first alternative, is "
+            "Compatible."),
         "certificate": {"kind": "Models",
             "comment": (
                 "DPV places commercial research below commercial purpose "
-                "and below research and development, and below neither "
-                "public benefit nor non-commercial research. It publishes "
-                "nothing that keeps it out of them. If commercial research "
-                "lies outside both, no alternative holds and no use meets "
-                "both policies; if it lies below public benefit or below "
-                "non-commercial research, a use for it meets both. So the "
-                "verdict is Unknown."),
+                "and below research and development. It does not place it "
+                "below public benefit or below non-commercial research, and "
+                "it publishes nothing that keeps it out of them. If "
+                "commercial research lies outside both, no alternative "
+                "holds and no use meets both policies; if it lies below "
+                "public benefit or below non-commercial research, a use for "
+                "it meets both. So the verdict is Unknown."),
             "premises": []},
         "provenance": "As KGC393.",
         "ttl": _ttl("KGC399", PURPOSE,

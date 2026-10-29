@@ -63,6 +63,7 @@ ex:g-bcp47-primary a bind:GroundingProcedure ;
 # --- the bindings -----------------------------------------------------
 
 ex:b-language-bcp47 a bind:OperandBinding ;
+    rdfs:label "IANA language registry, read as names only (exact subtags)"@en ;
     dcterms:title "Language over BCP 47, exact subtags"@en ;
     rdfs:comment """The default binding. A policy naming a subtag of the slice is
          interpretable; one naming anything else is not, and the case is
@@ -74,6 +75,7 @@ ex:b-language-bcp47 a bind:OperandBinding ;
     bind:grounding        ex:g-bcp47-exact .
 
 ex:b-language-bcp47-primary a bind:OperandBinding ;
+    rdfs:label "IANA language registry, read as names only (tags reduced to their primary subtag)"@en ;
     dcterms:title "Language over BCP 47, composed tags reduced"@en ;
     rdfs:comment """The same resource, the same sort, the same declarations, read by a
          wider rule. A policy that the default binding cannot interpret

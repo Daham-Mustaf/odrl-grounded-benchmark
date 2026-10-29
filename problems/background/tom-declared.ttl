@@ -31,7 +31,7 @@
     bind:generatedBy bind:PairwiseDistinctness ;
     bind:origin bind:proseDefinition ;
     rdfs:comment "The origin rests on DPV's separate definition of each measure."@en ;
-    bind:scopeCondition "Distinctness between the measures the modules list, and not disjointness: the modules publish concepts below two parents, and a disjointness over such a pair would contradict the resource."@en ;
+    bind:scopeCondition "Distinctness between the measures the modules list, and not disjointness: the modules publish concepts below two parents, and a disjointness over such a pair would contradict what DPV publishes."@en ;
     bind:pairCount 2701 ;
     bind:states [
         a owl:AllDifferent ;

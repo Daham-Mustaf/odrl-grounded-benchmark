@@ -65,9 +65,6 @@ MEANING = {
 }
 VERDICT = {name: (name.lower(), text) for name, text in MEANING.items() if name != "Rejected"}
 
-# What a resource supplies, as a reader would say it, by the sort of the binding.
-READ_AS = {"nom": "names only", "tax": "kinds", "mer": "places and their parts"}
-
 
 # The text rules the case files obey (lint_cases.py) hold for the lesson too,
 # since the catalogue shows it; and nobody declares, adopts or withdraws as a
@@ -148,7 +145,7 @@ def sorts(resources: Path) -> dict:
         g = Graph().parse(f, format="turtle")
         for b in g.subjects(RDF.type, BIND.OperandBinding):
             out[str(b)] = (local(b), local(next(g.objects(b, BIND.sort), "")),
-                           local(next(g.objects(b, BIND.leftOperand), "")))
+                           str(next(g.objects(b, RDFS.label), local(b))))
     return out
 
 
@@ -292,15 +289,17 @@ def entry(c: dict, lesson: str, blind: bool) -> str:
             f'<dt>Constraint</dt><dd><ul>{cons}</ul></dd></dl></section>')
     out.append("</div><dl>")
     if c["binding"]:
-        b, sort, _ = c["binding"]
-        out.append(f'<dt>How the vocabulary is read</dt><dd>{html.escape(READ_AS.get(sort, sort))} '
-                   f'<small class="ref">{html.escape(b)}</small></dd>')
+        b, sort, label = c["binding"]
+        # The technical name stays in the markup as a tooltip, for anyone who
+        # wants to find the profile entry; the page shows the plain name.
+        out.append(f'<dt>How the vocabulary is read</dt>'
+                   f'<dd><span title="{html.escape(b)}">{html.escape(label)}</span></dd>')
     d = c["declarations"]
     if d is None:
         out.append("<dt>Declarations</dt><dd>none cited</dd>")
     elif d["pairs"] == 0:
         out.append(f'<dt>Declarations</dt><dd>{html.escape(d["title"] or "empty")}. '
-                   f'This set states nothing; only the resource’s statements apply.</dd>')
+                   f'No declaration. Only what the vocabulary itself states applies.</dd>')
     else:
         label, _ = c["_origins"].get(str(d["origin"]), (local(d["origin"]), ""))
         rows = [f'{html.escape(d["title"])}: {d["pairs"]} '

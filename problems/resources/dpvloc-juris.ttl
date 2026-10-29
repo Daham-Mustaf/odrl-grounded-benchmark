@@ -30,7 +30,7 @@
 #
 # Identity predicate   : http://www.w3.org/2004/02/skos/core#sameAs
 #
-# Concepts                     : 5009
+# Concepts                     : 5015 (5009 places and 6 unions)
 # Order statements, published  : 4963
 # Identity pairs, published    : 30
 # Order statements, encoded    : 60 (two per identity pair)

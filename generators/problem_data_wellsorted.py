@@ -177,45 +177,34 @@ PROBLEMS = [
              "does not apply to this kind of value."),
 
     _problem("KGC102", "language", "isA", "bcp:de", "nom", False,
-             "A policy that gives a language relies on the IANA registry, "
-             "which names languages and arranges them in no order.  isA asks "
-             "whether one value is a kind of another.  The operator does not "
-             "apply to this kind of value, and the policy is rejected before "
+             "A policy that gives a language relies on the IANA registry.  "
+             "For the fifteen languages used here the registry states no "
+             "order, and this reading takes languages as names only.  isA asks whether one value is a kind of another.  "
+             "The operator does not apply, and the policy is rejected before "
              "the registry is opened.",
              "A German library's policy uses isA with German, a language in "
              "the IANA registry.",
-             "isA asks whether one value is a kind of another.  The IANA "
-             "language registry (RFC 5646) only names languages and arranges "
-             "them in no order, so the operator does not apply to this kind "
-             "of value."),
+             "isA asks whether one value is a kind of another.  This reading takes languages as names only: none of the fifteen languages used here belongs to a larger language in the IANA registry (RFC 5646), and the reading takes no order from the registry, so the operator does not apply to this kind of value."),
 
     _problem("KGC103", "language", "isPartOf", "bcp:de", "nom", False,
-             "A policy that gives a language relies on the IANA registry, "
-             "which names languages and arranges them in no order.  isPartOf "
-             "asks whether one value is part of another.  The operator does "
-             "not apply to this kind of value, and the policy is rejected "
-             "before the registry is opened.",
-             "A German library's policy uses isPartOf with German, a "
-             "language in the IANA registry.",
-             "isPartOf asks whether one value is part of another.  The IANA "
-             "language registry (RFC 5646) only names languages and arranges "
-             "them in no order, so the operator does not apply to this kind "
-             "of value."),
+             "A policy that gives a language relies on the IANA registry.  "
+             "For the fifteen languages used here the registry states no "
+             "order, and this reading takes languages as names only.  isPartOf asks whether one value is part of another.  "
+             "The operator does not apply, and the policy is rejected before "
+             "the registry is opened.",
+             "A German library's policy uses isPartOf with German, a language in "
+             "the IANA registry.",
+             "isPartOf asks whether one value is part of another.  This reading takes languages as names only: none of the fifteen languages used here belongs to a larger language in the IANA registry (RFC 5646), and the reading takes no order from the registry, so the operator does not apply to this kind of value."),
 
     _problem("KGC104", "language", "hasPart", "bcp:de", "nom", False,
-             "A policy that gives a language relies on the IANA registry, "
-             "which names languages and arranges them in no order.  hasPart "
-             "asks whether one value has another as a part.  The operator "
-             "does not apply to this kind of value, and the policy is "
-             "rejected before the registry is opened.  A drafter who means a "
-             "language that includes German among the languages of the use "
-             "writes isAllOf with the single value German.",
-             "A German library's policy uses hasPart with German, a language "
-             "in the IANA registry.",
-             "hasPart asks whether one value has another as a part.  The "
-             "IANA language registry (RFC 5646) only names languages and "
-             "arranges them in no order, so the operator does not apply to "
-             "this kind of value."),
+             "A policy that gives a language relies on the IANA registry.  "
+             "For the fifteen languages used here the registry states no "
+             "order, and this reading takes languages as names only.  hasPart asks whether one value has another as a part.  "
+             "The operator does not apply, and the policy is rejected before "
+             "the registry is opened.  A drafter who means a language that includes German among the languages of the use writes isAllOf with the single value German.",
+             "A German library's policy uses hasPart with German, a language in "
+             "the IANA registry.",
+             "hasPart asks whether one value has another as a part.  This reading takes languages as names only: none of the fifteen languages used here belongs to a larger language in the IANA registry (RFC 5646), and the reading takes no order from the registry, so the operator does not apply to this kind of value."),
 
     _problem("KGC110", "spatial", "isPartOf", "gn:Europe", "mer", True,
              "Control.  isPartOf asks whether one value is part of another, "
@@ -238,12 +227,13 @@ PROBLEMS = [
              "this kind of value and the policy goes on to a verdict."),
 
     _problem("KGC112", "language", "eq", "bcp:de", "nom", True,
-             "Control.  eq asks only whether two values are the same, which "
-             "any vocabulary can answer, so the operator applies to every "
-             "kind of value.",
+             "Control.  eq asks only whether two values are the same, a "
+             "question that makes sense for every kind of value, so the "
+             "operator applies to every kind of value.",
              "A German library's policy uses eq with German, a language in "
              "the IANA registry.",
-             "eq asks only whether two values are the same, which the IANA "
-             "language registry can answer, so the operator applies and the "
-             "policy goes on to a verdict."),
+             "eq asks only whether two values are the same, a question that "
+             "makes sense for languages, so the operator applies and the "
+             "policy goes on to a verdict.  Whether the registry decides that "
+             "question is a separate matter (KGC371)."),
 ]

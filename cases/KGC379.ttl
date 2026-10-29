@@ -13,7 +13,7 @@ drk:work a dcterms:BibliographicResource ;
 
 drk:policy-379-1 a odrl:Set ;
     odrl:uid drk:policy-379-1 ;
-    dcterms:title "Distribute in exactly one language, German or French"@en ;
+    dcterms:title "Distribute in exactly one of German only and French only"@en ;
     odrl:assigner drk:publisher ;
     odrl:permission kgc:KGC379-p1-r1 .
 

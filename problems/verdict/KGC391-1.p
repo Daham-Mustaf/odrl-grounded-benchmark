@@ -3,7 +3,7 @@
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
 % Problem  : spatial, hasPart loc:DE-NW against eq loc:DE (witness condition asserted)
 % Version  : 1.0
-% English  : A library's regional licence requires that the service area cover all of North Rhine-Westphalia. A researcher's policy commits to use in Germany.
+% English  : A library, bound by a digitisation grant from North Rhine-Westphalia, permits use only in an area that covers all of the state. A researcher's policy commits to use in Germany, which covers the state.
 %
 % Refs     : odrl-grounded-benchmark. https://github.com/Daham-Mustaf/odrl-grounded-benchmark
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark

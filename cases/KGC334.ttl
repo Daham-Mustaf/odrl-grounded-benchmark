@@ -58,7 +58,7 @@ drk:KGC334-report a vrep:OperandVerdictReport ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-spatial-dpvloc-geo> ;
     vrep:declarations <https://w3id.org/odrl-kb/dpv-loc/iso> ;
     vrep:readAgainst drk:KGC333-report ;
-    rdfs:comment """Both policies can be met only if Germany and France are the same place. ISO 3166 gives each its own code and the adopted rule takes one code to name one area, so they are different places and no use meets both policies."""@en ;
+    rdfs:comment """Both policies can be met only if Germany and France are the same place. The declared ISO 3166 rule, that different codes name different areas, makes them different places, so no use meets both policies."""@en ;
     dcterms:description """As KGC333, with the ISO 3166 rule that different country codes name different countries."""@en ;
     vrep:compatibilityState vrep:Incompatible ;
     vrep:certificate <certificates/KGC334-1.tstp> .

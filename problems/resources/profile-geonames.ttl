@@ -9,9 +9,11 @@
 
 @prefix odrl: <http://www.w3.org/ns/odrl/2/> .
 @prefix bind: <https://w3id.org/odrl-kb/binding#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix ex:   <https://w3id.org/odrl-kb/profile/> .
 
 ex:b-spatial-geonames a bind:OperandBinding ;
+    rdfs:label "GeoNames, read as places and their parts"@en ;
     bind:leftOperand odrl:spatial ;
     bind:sort bind:mer ;
     bind:resource <https://w3id.org/odrl-kb/geonames-europe> ;

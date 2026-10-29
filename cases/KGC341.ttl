@@ -61,7 +61,7 @@ drk:KGC341-report a vrep:OperandVerdictReport ;
     vrep:comparedConstraint kgc:KGC341-p2-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-consent-status> ;
     vrep:declarations <https://w3id.org/odrl-kb/dpv-consent/empty> ;
-    rdfs:comment """The required state is one the first policy names, so the constraints decide the verdict without the resource."""@en ;
+    rdfs:comment """The required state is one the first policy names, so the constraints decide the verdict without any DPV statement."""@en ;
     dcterms:description """A controller permits use under given or renewed consent. A processor's policy commits to processing only under renewed consent."""@en ;
     vrep:compatibilityState vrep:Compatible ;
     vrep:certificate <certificates/KGC341-2.tstp> .

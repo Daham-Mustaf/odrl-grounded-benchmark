@@ -11,10 +11,9 @@
 % code; a rule applied to the codes would contradict the identity
 % the extension publishes.
 %
-% Not listed: DK-GL and GB-JSY. DPV Locations lists each of these
-% areas under two codes (GL and DK-GL, JE and GB-JSY) with no
-% identity statement, so listing both codes would declare one area
-% distinct from itself.
+% Not listed: DK-GL and GB-JSY, because DPV lists Greenland and
+% Jersey under two codes each (GL and DK-GL, JE and GB-JSY) without
+% saying they are the same place.
 %
 % The rule is stated here and instantiated by the problems.  A
 % problem naming two of the areas below carries the inequation

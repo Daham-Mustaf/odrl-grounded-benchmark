@@ -8,9 +8,11 @@
 
 @prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> .
 @prefix bind: <https://w3id.org/odrl-kb/binding#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix ex:   <https://w3id.org/odrl-kb/profile/> .
 
 ex:b-purpose a bind:OperandBinding ;
+    rdfs:label "DPV purposes, read as kinds"@en ;
     bind:leftOperand dpv-odrl:Purpose ;
     bind:sort bind:tax ;
     bind:resource <https://w3id.org/odrl-kb/dpv-purposes> ;

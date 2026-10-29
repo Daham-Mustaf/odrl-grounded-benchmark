@@ -21,9 +21,11 @@
 
 @prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> .
 @prefix bind: <https://w3id.org/odrl-kb/binding#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix ex:   <https://w3id.org/odrl-kb/profile/> .
 
 ex:b-spatial-dpvloc-juris a bind:OperandBinding ;
+    rdfs:label "DPV Locations, jurisdictional reading: places and their parts"@en ;
     bind:leftOperand dpv-odrl:Location ;
     bind:sort bind:mer ;
     bind:resource <https://w3id.org/odrl-kb/dpv-loc-juris> ;

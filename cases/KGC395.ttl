@@ -60,7 +60,7 @@ drk:KGC395-report a vrep:OperandVerdictReport ;
     vrep:declarations <https://w3id.org/odrl-kb/dpv-purposes/empty> ;
     vrep:readAgainst drk:KGC399-report ;
     vrep:readAgainst drk:KGC393-report ;
-    rdfs:comment """DPV places improving transport mobility below public benefit; the first alternative decides it."""@en ;
+    rdfs:comment """DPV places improving transport mobility below public benefit, so the first alternative holds for a use for improving transport mobility."""@en ;
     dcterms:description """A city's traffic data platform permits use for public benefit or non-commercial research, or any narrower purpose. A city transport authority commits to improving transport mobility."""@en ;
     vrep:compatibilityState vrep:Compatible ;
     vrep:certificate <certificates/KGC395-2.tstp> .

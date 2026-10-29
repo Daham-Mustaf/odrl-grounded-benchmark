@@ -55,6 +55,6 @@ drk:KGC320-report a vrep:OperandVerdictReport ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-fileformat> ;
     vrep:declarations <https://w3id.org/odrl-kb/eu-file-type/empty> ;
     vrep:readAgainst drk:KGC321-report ;
-    rdfs:comment """If ft:PDF and ft:PDFA1A are the same format, a use in one is a use in the other and both policies are met; if they are different formats, no use meets both. The EU file type table lists both and relates them in no way. PDF/A-1a is a restricted form of PDF, but the table does not state so, and the media type application/pdf that both carry is a notation this reading does not use."""@en ;
+    rdfs:comment """If PDF and PDF/A-1a are the same format, a use in one is a use in the other and both policies are met; if they are different formats, no use meets both. The EU file type table lists them as two entries and links them by no relation. Its PDF/A-1a entry states in prose that PDF/A-1 is part of the PDF standard (ISO 19005-1), but this reading tells formats apart by name only and uses neither that prose nor the media type application/pdf that both entries carry."""@en ;
     dcterms:description """A German library permits use in PDF only. A French library's policy commits to use in PDF/A-1a only."""@en ;
     vrep:compatibilityState vrep:Unknown .

@@ -59,6 +59,6 @@ drk:KGC399-report a vrep:OperandVerdictReport ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-purpose> ;
     vrep:declarations <https://w3id.org/odrl-kb/dpv-purposes/empty> ;
     vrep:readAgainst drk:KGC395-report ;
-    rdfs:comment """DPV places commercial research below commercial purpose and below research and development, and below neither public benefit nor non-commercial research. It publishes nothing that keeps it out of them. If commercial research lies outside both, no alternative holds and no use meets both policies; if it lies below public benefit or below non-commercial research, a use for it meets both. So the verdict is Unknown."""@en ;
+    rdfs:comment """DPV places commercial research below commercial purpose and below research and development. It does not place it below public benefit or below non-commercial research, and it publishes nothing that keeps it out of them. If commercial research lies outside both, no alternative holds and no use meets both policies; if it lies below public benefit or below non-commercial research, a use for it meets both. So the verdict is Unknown."""@en ;
     dcterms:description """A city's traffic data platform permits use for public benefit or non-commercial research, or any narrower purpose. A company commits to use for commercial research."""@en ;
     vrep:compatibilityState vrep:Unknown .

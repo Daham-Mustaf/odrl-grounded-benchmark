@@ -64,7 +64,7 @@
     bind:generatedBy bind:PairwiseDistinctness ;
     bind:origin bind:practiceRule ;
     rdfs:comment "The origin rests on the registry's own rules for its records, RFC 5646 sections 3 and 3.1.5, and not on a statement in its data."@en ;
-    bind:scopeCondition "Type: language; Deprecated: absent; no Preferred-Value link within the member set"@en ;
+    bind:scopeCondition "Covers the fifteen languages used here; none is deprecated or points to a preferred replacement."@en ;
     bind:appliesTo <https://w3id.org/odrl-kb/bcp47> ;
     bind:memberSourceFileDate "2026-08-08"^^xsd:date ;
     bind:pairCount 105 ;

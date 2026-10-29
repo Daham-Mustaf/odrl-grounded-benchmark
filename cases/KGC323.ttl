@@ -54,7 +54,7 @@ drk:KGC323-report a vrep:OperandVerdictReport ;
     vrep:comparedConstraint kgc:KGC323-p2-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-fileformat> ;
     vrep:declarations <https://w3id.org/odrl-kb/eu-file-type/declared> ;
-    rdfs:comment """The first policy excludes PDF, and the second requires PDF/A-1a. The declarations state that the two formats are different, since the EU file type table lists them as separate entries, so the required format is not excluded. Excluding PDF does not exclude PDF/A-1a, because the table does not relate them."""@en ;
+    rdfs:comment """The first policy excludes PDF, and the second requires PDF/A-1a. The declarations state that the two formats are different, since the EU file type table lists them as separate entries, so the required format is not excluded. Excluding PDF does not exclude PDF/A-1a, because the table links the two entries by no relation."""@en ;
     dcterms:description """A German library permits use in any format except PDF. A French library's policy commits to use in PDF/A-1a only. The two formats are declared distinct."""@en ;
     vrep:compatibilityState vrep:Compatible ;
     vrep:certificate <certificates/KGC323-2.tstp> .

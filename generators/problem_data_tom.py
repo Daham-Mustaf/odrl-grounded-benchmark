@@ -282,8 +282,10 @@ PROBLEMS = [
             "kind": "Refutation",
             "comment": (
                 "Both required measures are technical measures in DPV, so a "
-                "use with encryption and access control satisfies both "
-                "policies."),
+                "use with encryption and access control meets both "
+                "policies. The processor's policy covers technical "
+                "safeguards only; organisational measures are agreed "
+                "separately in the processing contract."),
             "premises": [
                 ("fromResource",
                  "dpv:Encryption is below dpv:TechnicalMeasure"),
@@ -431,10 +433,9 @@ PROBLEMS = [
             "comment": (
                 "isAllOf states a minimum. A use with encryption, access "
                 "control and pseudonymisation has the two measures the "
-                "first policy requires, so it satisfies both policies and "
-                "no resource statement or declaration is used. Two minimums "
-                "never conflict: a use with both sets of measures satisfies "
-                "both."),
+                "first policy requires, so it meets both policies and no "
+                "DPV statement or declaration is used. Two minimums never "
+                "conflict: a use with both sets of measures meets both."),
             "premises": []},
         "provenance": "Safeguard clauses in data-sharing agreements.",
         "ttl": _ttl("KGC365", TOM_LO, "both encryption and access control",
@@ -466,30 +467,30 @@ PROBLEMS = [
             "control. A processor's policy commits to encryption at rest as "
             "the only measure."),
         "description": (
-            "isAnyOf matches by name. DPV places encryption at rest below "
-            "encryption, but encryption at rest is neither encryption nor "
-            "access control by name, and the processor's use has no other "
-            "measure. Real processors usually list the measures they apply, "
-            "and two such lists never conflict (KGC365); the conflict here "
-            "comes from the processor stating \"only\". As published it might "
-            "be the same measure as one of the two, and the verdict would "
-            "be Unknown; no case of the suite shows that variant. With the "
-            "measures declared distinct no use meets both policies, and the "
-            "verdict is Incompatible. ODRL has no operator for \"includes "
-            "some kind of encryption\". Read with KGC362, where the "
-            "processor's measure is encryption itself and the verdict is "
-            "Compatible."),
+            "isAnyOf asks whether a measure in use is the same as a listed "
+            "one; it does not look below the listed measures. DPV places "
+            "encryption at rest below encryption, but encryption at rest is "
+            "neither encryption nor access control, and the processor's use "
+            "has no other measure. Real processors usually list the "
+            "measures they apply, and two such lists never conflict "
+            "(KGC365); the conflict here comes from the processor stating "
+            "\"only\". As published it might be the same measure as one of "
+            "the two, and the verdict would be Unknown. With the measures "
+            "declared distinct no use meets both policies, and the verdict "
+            "is Incompatible. ODRL has no operator for \"includes some kind "
+            "of encryption\". Read with KGC362, where the processor's "
+            "measure is encryption itself and the verdict is Compatible."),
         "certificate": {"kind": "Refutation",
             "comment": (
-                "isAnyOf matches by name. DPV places encryption at rest "
-                "below encryption, yet it is neither encryption nor access "
-                "control by name. With the measures declared distinct, "
-                "since DPV defines each separately, a use whose only "
-                "measure is encryption at rest has neither measure the "
-                "first policy lists, and no use meets both policies. ODRL "
-                "has no operator for \"includes some kind of encryption\". "
-                "Without the declarations the verdict would be Unknown, but "
-                "no case of the suite shows it."),
+                "isAnyOf asks whether a measure in use is the same as a "
+                "listed one. DPV places encryption at rest below "
+                "encryption, yet it is neither encryption nor access "
+                "control. With the measures declared distinct, since DPV "
+                "defines each separately, a use whose only measure is "
+                "encryption at rest has neither measure the first policy "
+                "lists, and no use meets both policies. ODRL has no "
+                "operator for \"includes some kind of encryption\". Without "
+                "the declarations the verdict would be Unknown."),
             "premises": [("fromDeclarations",
                           "Encryption distinct from EncryptionAtRest"),
                          ("fromDeclarations",

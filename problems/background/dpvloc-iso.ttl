@@ -12,10 +12,9 @@
 # identities induce, and the members below name one class each, by its
 # country code where it has one.
 #
-# Not listed: DK-GL and GB-JSY. DPV Locations lists each of these areas
-# under two codes (GL and DK-GL, JE and GB-JSY) with no identity
-# statement, so listing both codes would declare one area distinct from
-# itself.
+# Not listed: DK-GL and GB-JSY, because DPV lists Greenland and Jersey
+# under two codes each (GL and DK-GL, JE and GB-JSY) without saying they
+# are the same place.
 #
 # DPV identifies BQ with each of NL-BQ1, NL-BQ2 and NL-BQ3, and SJ with
 # NO-21 and NO-22, so each group falls into one identity class and the ISO
@@ -42,8 +41,8 @@
                  <https://w3id.org/odrl-kb/dpv-loc-juris> ;
     bind:generatedBy bind:PairwiseDistinctness ;
     bind:origin bind:practiceRule ;
-    rdfs:comment "The origin rests on the ISO 3166 rule that a code names one area. The part of DPV Locations used here has 4,979 identity classes and the set lists 4,977 of them; the scope names the 2 left out and why."@en ;
-    bind:scopeCondition "Distinctness holds between equivalence classes under the extension's identity statements, not between codes; codes the extension identifies name one area. Not listed: DK-GL and GB-JSY. DPV Locations lists each of these areas under two codes (GL and DK-GL, JE and GB-JSY) with no identity statement, so listing both codes would declare one area distinct from itself."@en ;
+    rdfs:comment "The origin rests on the ISO 3166 rule that different codes name different areas, except where DPV records that two codes name the same area. The set lists 4,977 areas; the scope names the 2 left out and why."@en ;
+    bind:scopeCondition "Where DPV records that two codes name the same place, they count as one place. Not listed: DK-GL and GB-JSY, because DPV lists Greenland and Jersey under two codes each (GL and DK-GL, JE and GB-JSY) without saying they are the same place."@en ;
     bind:pairCount 12382776 ;
     bind:states [
         a owl:AllDifferent ;

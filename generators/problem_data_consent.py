@@ -305,15 +305,18 @@ PROBLEMS = [
             "processor's policy commits to processing only under renewed "
             "consent."),
         "description": (
-            "The same gate as KGC340, written by enumerating the two states "
-            "rather than naming the branch. Compatible again, and no "
-            "resource statement is needed: the required state is one the "
-            "first policy names. The first policy is fixed against the "
-            "vocabulary as it stands, where KGC340's is not."),
+            "The controller lists the two valid states instead of naming "
+            "the branch. A use under renewed consent meets the second "
+            "alternative, so the verdict is Compatible without any DPV "
+            "statement. The list is narrower than KGC340's branch in two "
+            "ways: it does not cover a valid state that DPV adds later, and "
+            "a dataset that mixes given and renewed consent meets neither "
+            "alternative, because each requires every record to have the "
+            "same state."),
         "certificate": {"kind": "Refutation",
             "comment": (
                 "The required state is one the first policy names, so the "
-                "constraints decide the verdict without the resource."),
+                "constraints decide the verdict without any DPV statement."),
             "premises": []},
         "provenance": PROV_ENUM,
         "ttl": _TTL_HEAD
@@ -346,7 +349,7 @@ PROBLEMS = [
   "description": (
       "The processor audits erasure, so it looks only at records whose "
       "consent was withdrawn. DPV places the withdrawn state below the "
-      "invalid branch. It does not state in RDF that the valid and invalid "
+      "invalid branch. DPV does not state that the valid and invalid "
       "branches are disjoint. If withdrawn consent also lies below the "
       "valid branch, a use meets both policies; if it does not, none does. "
       "The verdict is therefore Unknown. KGC343 adds the disjointness as a "
@@ -355,10 +358,10 @@ PROBLEMS = [
             "comment": (
                 "DPV places the withdrawn state below the invalid branch, "
                 "which it defines as the states that cannot justify "
-                "processing, but does not state in RDF that the valid and "
-                "invalid branches are disjoint. If withdrawn consent also "
-                "lies below the valid branch, a use meets both policies; if "
-                "it does not, no use does. So the verdict is Unknown."),
+                "processing, but does not state that the valid and invalid "
+                "branches are disjoint. If withdrawn consent also lies "
+                "below the valid branch, a use meets both policies; if it "
+                "does not, no use does. So the verdict is Unknown."),
             "premises": []},
         "provenance": PROV_POST,
         "ttl": _TTL_HEAD
@@ -384,15 +387,14 @@ PROBLEMS = [
             "As KGC342, with the valid and invalid branches declared "
             "disjoint."),
  "description": (
-            "The declarations declare the valid and invalid branches "
-            "disjoint, meaning that nothing lies below both. The withdrawn "
-            "state lies below the invalid branch, so it cannot also lie "
-            "below the valid branch. No use satisfies both policies, and the "
-            "verdict is Incompatible. DPV's definitions support the "
-            "disjointness, but the DPV RDF does not assert it."),
+     "The declarations make the valid and invalid branches disjoint, "
+     "meaning that nothing lies below both. The withdrawn state lies below "
+     "the invalid branch, so it cannot also lie below the valid branch. No "
+     "use satisfies both policies, and the verdict is Incompatible. DPV's "
+     "definitions support the disjointness, but DPV does not state it."),
 "certificate": {"kind": "Refutation",
     "comment": (
-        "DPV places ConsentWithdrawn below the invalid branch, and the "
+        "DPV places withdrawn consent below the invalid branch, and the "
         "declarations state that the valid and invalid branches are "
         "disjoint, which DPV's definitions imply: states that can justify "
         "processing and states that cannot. So withdrawn consent cannot "
@@ -433,19 +435,19 @@ PROBLEMS = [
             "another."),
         "description": (
             "KGC342 with every consent state declared distinct from every "
-            "other. Distinctness cannot keep withdrawn consent out of the "
-            "valid branch, because a state below a branch is already a "
-            "different concept from that branch. Only the disjointness of "
-            "KGC343 does. The verdict stays Unknown."),
+            "other, since DPV defines each separately. Distinctness only "
+            "means that withdrawn consent is not the valid branch itself; "
+            "it does not stop withdrawn consent from lying below that "
+            "branch. Only the disjointness of KGC343 does. The verdict "
+            "stays Unknown."),
         "certificate": {"kind": "Models",
             "comment": (
                 "The states are declared distinct, since DPV defines each "
-                "separately, yet withdrawn consent may still lie below the "
-                "valid branch. If it does, a use meets both policies; if it "
-                "does not, no use does. Distinctness cannot keep it out of "
-                "the valid branch, because a state below a branch is "
-                "already a different concept from that branch. Only the "
-                "disjointness of KGC343 does."),
+                "separately. Distinctness only means that withdrawn consent "
+                "is not the valid branch itself; it does not stop withdrawn "
+                "consent from lying below that branch. If it does, a use "
+                "meets both policies; if it does not, no use does. Only the "
+                "disjointness of KGC343 rules it out."),
             "premises": []},
         "provenance": PROV_POST,
         "ttl": _TTL_HEAD
@@ -478,15 +480,16 @@ PROBLEMS = [
             "whose consent has expired, in a consent-renewal campaign."),
         "description": (
             "The controller's list is a drafting error: it also lets "
-            "through refused, deferred and unknown consent, and consent "
-            "that is only asked for, which no controller means to permit. "
-            "isNoneOf excludes the named states by identity. Expired "
-            "consent is declared a different state from withdrawn and from "
-            "revoked consent, so the list lets it through and the verdict "
-            "is Compatible. A policy written over the valid branch (isA, as "
-            "in KGC343) would have refused it once the branches are "
-            "declared disjoint, because expired consent lies below the "
-            "invalid branch."),
+            "through refused, deferred, invalidated and unknown consent, "
+            "and consent that is only asked for, which no controller means "
+            "to permit. isNoneOf excludes the named states by identity. "
+            "Expired consent is declared a different state from withdrawn "
+            "and from revoked consent, so the list lets it through and the "
+            "verdict is Compatible. A policy written over the valid branch "
+            "(isA, as in KGC343) would have refused it once the branches "
+            "are declared disjoint, because expired consent lies below the "
+            "invalid branch. The processor runs the renewal campaign and "
+            "contacts only people whose consent has expired."),
         "certificate": {"kind": "Refutation",
             "comment": (
                 "Expired consent is declared distinct from withdrawn and "
