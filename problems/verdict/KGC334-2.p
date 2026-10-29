@@ -22,9 +22,10 @@ include('axioms/LOC-dpvloc-iso.ax').
 % --- constants, groundings and resource hooks ----------------------------
 % Declarations: one instance of the ISO 3166 distinctness rule.
 %
-% The rule is stated in LOC-dpvloc-iso.ax and ranges over 249 areas.  It is
-% instantiated here rather than expanded there: a refutation should cite the
-% inequation it used, not one term standing for thirty thousand.
+% The rule is stated in LOC-dpvloc-iso.ax and ranges over 4,977 identity
+% classes, which is 12,382,776 pairs.  It is instantiated here rather than
+% expanded there: a refutation should cite the inequation it used, not one
+% term standing for twelve million.
 fof(bg_dist_loc_de_loc_fr, axiom,
     loc_de != loc_fr).
 

@@ -89,10 +89,10 @@ over the concepts the grounding names.
           witness fails everywhere, and the verdict is Incompatible.  The
           premise is a rule the parties adopted, not a statement the
           extension makes, and the certificate marks it withdrawable.
-          The rule ranges over 249 areas and is stated in the axiom file
-          rather than expanded there: instantiating it would add thirty
-          thousand inequations to every problem, and a refutation should
-          cite the one it used.
+          The rule ranges over 4,977 identity classes, which is 12,382,776
+          pairs, and is stated in the axiom file rather than expanded
+          there: instantiating it would add twelve million inequations to
+          every problem, and a refutation should cite the one it used.
 
 On the ISO rule and the identity statements
 --------------------------------------------
@@ -238,9 +238,10 @@ _D334 = declarations.instances(
     _DECL, [(DE, FR)],
     ["% Declarations: one instance of the ISO 3166 distinctness rule.",
      "%",
-     "% The rule is stated in LOC-dpvloc-iso.ax and ranges over 249 areas.  It is",
-     "% instantiated here rather than expanded there: a refutation should cite the",
-     "% inequation it used, not one term standing for thirty thousand."],
+     "% The rule is stated in LOC-dpvloc-iso.ax and ranges over 4,977 identity",
+     "% classes, which is 12,382,776 pairs.  It is instantiated here rather than",
+     "% expanded there: a refutation should cite the inequation it used, not one",
+     "% term standing for twelve million."],
     ["; The instance of the registry rule this problem adopts, named as the TPTP",
      "; side names it so that a proof and an unsat core cite one statement."])
 _ISO_387 = _iso((DE_HH, DE_BY), (DE_HH, DE_BE))
