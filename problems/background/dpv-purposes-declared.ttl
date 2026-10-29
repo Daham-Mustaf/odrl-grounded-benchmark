@@ -1,7 +1,7 @@
 # Declarations for the DPV purposes slice: declared distinctness.
 #
-# The parties declare the purposes below pairwise distinct, on the ground
-# that DPV defines each of them as a purpose in its own right.  DPV
+# The parties declare the purposes of the slice pairwise distinct, on the
+# ground that DPV defines each of them as a purpose in its own right.  DPV
 # publishes no distinctness anywhere in this module, so the rule is the
 # parties' and a verdict resting on an instance of it is withdrawable by
 # abandoning the rule.
@@ -16,16 +16,11 @@
 # that a refutation cites the instance it used rather than a term
 # standing for all of them.
 #
-# Purposes: 4
-# Pairs   : 6
-# Advertising
-# Marketing
-# ResearchAndDevelopment
-# ScientificResearch
+# Purposes: 121
+# Pairs   : 7260
 #
 # Source: https://w3id.org/dpv/2.3
 
-@prefix dpv:     <https://w3id.org/dpv#> .
 @prefix bind:    <https://w3id.org/odrl-kb/binding#> .
 @prefix owl:     <http://www.w3.org/2002/07/owl#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
@@ -36,8 +31,130 @@
     bind:generatedBy bind:PairwiseDistinctness ;
     bind:origin bind:proseDefinition ;
     bind:scopeCondition "Distinctness between the listed purposes, and not disjointness: DPV publishes concepts below two parents, and a disjointness over such a pair would contradict it."@en ;
-    bind:pairCount 6 ;
+    bind:pairCount 7260 ;
     bind:states [
         a owl:AllDifferent ;
-        owl:members ( dpv:Advertising dpv:Marketing dpv:ResearchAndDevelopment dpv:ScientificResearch )
+        owl:members (
+            <https://w3id.org/dpv#AcademicResearch>
+            <https://w3id.org/dpv#AccountManagement>
+            <https://w3id.org/dpv#Advertising>
+            <https://w3id.org/dpv#AgeVerification>
+            <https://w3id.org/dpv#CombatClimateChange>
+            <https://w3id.org/dpv#CommercialPurpose>
+            <https://w3id.org/dpv#CommercialResearch>
+            <https://w3id.org/dpv#CommunicationForCustomerCare>
+            <https://w3id.org/dpv#CommunicationManagement>
+            <https://w3id.org/dpv#CounterMoneyLaundering>
+            <https://w3id.org/dpv#Counterterrorism>
+            <https://w3id.org/dpv#CustomerCare>
+            <https://w3id.org/dpv#CustomerClaimsManagement>
+            <https://w3id.org/dpv#CustomerManagement>
+            <https://w3id.org/dpv#CustomerOrderManagement>
+            <https://w3id.org/dpv#CustomerRelationshipManagement>
+            <https://w3id.org/dpv#CustomerSolvencyMonitoring>
+            <https://w3id.org/dpv#DataAltruism>
+            <https://w3id.org/dpv#DeliveryOfGoods>
+            <https://w3id.org/dpv#DirectMarketing>
+            <https://w3id.org/dpv#DisputeManagement>
+            <https://w3id.org/dpv#EnforceAccessControl>
+            <https://w3id.org/dpv#EnforceSecurity>
+            <https://w3id.org/dpv#EstablishContractualAgreement>
+            <https://w3id.org/dpv#FraudPreventionAndDetection>
+            <https://w3id.org/dpv#FulfilmentOfContractualObligation>
+            <https://w3id.org/dpv#FulfilmentOfObligation>
+            <https://w3id.org/dpv#HumanResourceManagement>
+            <https://w3id.org/dpv#IdentityAuthentication>
+            <https://w3id.org/dpv#IdentityVerification>
+            <https://w3id.org/dpv#ImproveExistingProductsAndServices>
+            <https://w3id.org/dpv#ImproveHealthcare>
+            <https://w3id.org/dpv#ImproveInternalCRMProcesses>
+            <https://w3id.org/dpv#ImprovePublicServices>
+            <https://w3id.org/dpv#ImproveTransportMobility>
+            <https://w3id.org/dpv#IncreaseServiceRobustness>
+            <https://w3id.org/dpv#InternalResourceOptimisation>
+            <https://w3id.org/dpv#LegalCompliance>
+            <https://w3id.org/dpv#MaintainFraudDatabase>
+            <https://w3id.org/dpv#Marketing>
+            <https://w3id.org/dpv#MemberPartnerManagement>
+            <https://w3id.org/dpv#MisusePreventionAndDetection>
+            <https://w3id.org/dpv#NonCommercialPurpose>
+            <https://w3id.org/dpv#NonCommercialResearch>
+            <https://w3id.org/dpv#OptimisationForConsumer>
+            <https://w3id.org/dpv#OptimisationForController>
+            <https://w3id.org/dpv#OptimiseUserInterface>
+            <https://w3id.org/dpv#OrganisationComplianceManagement>
+            <https://w3id.org/dpv#OrganisationGovernance>
+            <https://w3id.org/dpv#OrganisationRiskManagement>
+            <https://w3id.org/dpv#PaymentManagement>
+            <https://w3id.org/dpv#Personalisation>
+            <https://w3id.org/dpv#PersonalisedAdvertising>
+            <https://w3id.org/dpv#PersonalisedBenefits>
+            <https://w3id.org/dpv#PersonnelBehaviourMonitoring>
+            <https://w3id.org/dpv#PersonnelHiring>
+            <https://w3id.org/dpv#PersonnelManagement>
+            <https://w3id.org/dpv#PersonnelMonitoring>
+            <https://w3id.org/dpv#PersonnelOffboarding>
+            <https://w3id.org/dpv#PersonnelOnboarding>
+            <https://w3id.org/dpv#PersonnelPayment>
+            <https://w3id.org/dpv#PersonnelPerformanceEvaluation>
+            <https://w3id.org/dpv#PersonnelPerformanceManagement>
+            <https://w3id.org/dpv#PersonnelPerformanceMonitoring>
+            <https://w3id.org/dpv#PersonnelPerformancePrediction>
+            <https://w3id.org/dpv#PersonnelPromotionManagement>
+            <https://w3id.org/dpv#PersonnelTerminationManagement>
+            <https://w3id.org/dpv#PersonnelWorkloadManagement>
+            <https://w3id.org/dpv#PoliticalCampaign>
+            <https://w3id.org/dpv#ProtectionOfIPR>
+            <https://w3id.org/dpv#ProtectionOfNationalSecurity>
+            <https://w3id.org/dpv#ProtectionOfPublicSecurity>
+            <https://w3id.org/dpv#ProvideEventRecommendations>
+            <https://w3id.org/dpv#ProvideOfficialStatistics>
+            <https://w3id.org/dpv#ProvidePersonalisedRecommendations>
+            <https://w3id.org/dpv#ProvideProductRecommendations>
+            <https://w3id.org/dpv#PublicBenefit>
+            <https://w3id.org/dpv#PublicPolicyMaking>
+            <https://w3id.org/dpv#PublicRelations>
+            <https://w3id.org/dpv#Purpose>
+            <https://w3id.org/dpv#RecordManagement>
+            <https://w3id.org/dpv#RecruitmentAdvertising>
+            <https://w3id.org/dpv#RecruitmentApplicantBackgroundCheck>
+            <https://w3id.org/dpv#RecruitmentApplicantCriminalBackgroundCheck>
+            <https://w3id.org/dpv#RecruitmentApplicantInformationAuthentication>
+            <https://w3id.org/dpv#RecruitmentApplicantSelection>
+            <https://w3id.org/dpv#RecruitmentApplicationAnalysis>
+            <https://w3id.org/dpv#RecruitmentApplicationManagement>
+            <https://w3id.org/dpv#RecruitmentApplicationScreening>
+            <https://w3id.org/dpv#RecruitmentInterviewAnalysis>
+            <https://w3id.org/dpv#RecruitmentInterviewAssessment>
+            <https://w3id.org/dpv#RecruitmentInterviewManagement>
+            <https://w3id.org/dpv#RecruitmentInterviewScheduling>
+            <https://w3id.org/dpv#RecruitmentManagement>
+            <https://w3id.org/dpv#RecruitmentTargetedAdvertising>
+            <https://w3id.org/dpv#RepairImpairments>
+            <https://w3id.org/dpv#RequestedServiceProvision>
+            <https://w3id.org/dpv#ResearchAndDevelopment>
+            <https://w3id.org/dpv#ScientificResearch>
+            <https://w3id.org/dpv#SearchFunctionalities>
+            <https://w3id.org/dpv#SellDataToThirdParties>
+            <https://w3id.org/dpv#SellInsightsFromData>
+            <https://w3id.org/dpv#SellProducts>
+            <https://w3id.org/dpv#SellProductsToDataSubject>
+            <https://w3id.org/dpv#ServiceAccessDetermination>
+            <https://w3id.org/dpv#ServiceManagement>
+            <https://w3id.org/dpv#ServiceMonitoring>
+            <https://w3id.org/dpv#ServiceOptimisation>
+            <https://w3id.org/dpv#ServicePersonalisation>
+            <https://w3id.org/dpv#ServiceProvision>
+            <https://w3id.org/dpv#ServiceRegistration>
+            <https://w3id.org/dpv#ServiceUsageAnalytics>
+            <https://w3id.org/dpv#SocialMediaMarketing>
+            <https://w3id.org/dpv#TargetedAdvertising>
+            <https://w3id.org/dpv#TechnicalServiceProvision>
+            <https://w3id.org/dpv#UserInterfacePersonalisation>
+            <https://w3id.org/dpv#VendorManagement>
+            <https://w3id.org/dpv#VendorPayment>
+            <https://w3id.org/dpv#VendorRecordsManagement>
+            <https://w3id.org/dpv#VendorSelectionAssessment>
+            <https://w3id.org/dpv#Verification>
+        )
     ] .

@@ -12,7 +12,7 @@ import sys
 
 MODULES = [
     "problem_data_bcp47", "problem_data_consent", "problem_data_dpv",
-    "problem_data_dpvloc", "problem_data_filetype", "problem_data_gdprlb",
+    "problem_data_dpvloc", "problem_data_filetype",
     "problem_data_motivating", "problem_data_tom", "problem_data_wellsorted",
 ]
 

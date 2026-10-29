@@ -44,26 +44,26 @@ whole axiom files; SMT-LIB carries the slice the tree reaches;
 
 ## The files for one problem
 
-Take KGC350. Six files, in three directories.
+Take KGC310. Six files, in three directories.
 
 ```
-cases/KGC350.ttl                 the two policies, and the verdict
+cases/KGC310.ttl                 the two policies, and the verdict
                                  the semantics predicts for them
 
-problems/verdict/KGC350-1.p      query 1, TPTP
-problems/verdict/KGC350-1.smt2   query 1, SMT-LIB
-problems/verdict/KGC350-2.p      query 2, TPTP
-problems/verdict/KGC350-2.smt2   query 2, SMT-LIB
+problems/verdict/KGC310-1.p      query 1, TPTP
+problems/verdict/KGC310-1.smt2   query 1, SMT-LIB
+problems/verdict/KGC310-2.p      query 2, TPTP
+problems/verdict/KGC310-2.smt2   query 2, SMT-LIB
 
-certificates/KGC350-2.tstp       Vampire's proof
-certificates/KGC350-2.core       Z3's named unsat core
+certificates/KGC310-2.tstp       Vampire's proof
+certificates/KGC310-2.core       Z3's named unsat core
 ```
 
 Query 1 asserts the witness condition, the claim that some use
 satisfies both constraints. Query 2 negates it.
 
 Only the refuted query has a certificate, and the suffix says which.
-KGC350's certificate is for query 2, so query 2 was unsatisfiable and
+KGC310's certificate is for query 2, so query 2 was unsatisfiable and
 the verdict is Compatible. An Unknown problem has no certificate: both
 queries were satisfiable, so neither was refuted.
 
@@ -100,20 +100,22 @@ suite-numbers.tex the figures and the bindings table the paper includes,
 ## The problems
 
 ```
-KGC100-112   well-sortedness: eight constraints, five rejected at
+KGC100-112   well-sortedness: nine constraints, six rejected at
              drafting time by the signature alone
 KGC300-302   the motivating example, one per sort
 KGC303-306   spatial: exactly one of two alternatives, over GeoNames
-KGC310-319   purpose, over DPV purposes
+KGC310-319   purpose, over DPV purposes, in a mobility data space
 KGC320-323   fileFormat, over the EU file type table
 KGC330-337   spatial, over DPV Locations
 KGC340-343   consent status, over the DPV consent module
-KGC350-353   legal basis, over DPV and its GDPR extension
 KGC360-364   technical and organisational measures
 KGC370-379   language, over a BCP 47 slice
 KGC380-392   spatial: composition, subdivisions, exclusion
 KGC393-397   purpose: the set operators
 KGC398       language: isAnyOf against isAllOf
+KGC399       purpose: or against a purpose under neither branch
+KGC403-404   purpose: the declared twin of KGC316, and a category against a
+             category
 ```
 
 Start with KGC310, KGC313 and KGC314: one published statement, then the
@@ -182,18 +184,13 @@ uv run generators/build_tom.py \
   --measures vocabularies/dpv-2.3/modules/technical_measures.ttl \
   --out problems
 
-uv run generators/build_gdprlb.py \
-  --core vocabularies/dpv-2.3/modules/legal_basis.ttl \
-  --gdpr vocabularies/dpv-2.3/legal/eu/gdpr/modules/legal_basis.ttl \
-  --retrieved 2026-08-19 --out problems
-
 uv run generators/build_filetype.py \
   --table vocabularies/eu-file-type-20260715/filetypes-skos-ap-act.rdf \
   --retrieved 2026-08-18 --out problems
 
 # problems
 for g in gen_motivating gen_geonames gen_dpv gen_dpvloc gen_filetype \
-         gen_consent gen_gdprlb gen_tom gen_bcp47_problems gen_wellsorted; do
+         gen_consent gen_tom gen_bcp47_problems gen_wellsorted; do
   uv run generators/$g.py || echo "FAILED $g"
 done
 

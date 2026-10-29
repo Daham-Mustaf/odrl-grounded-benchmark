@@ -10,37 +10,37 @@
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
 @prefix dcat:    <http://www.w3.org/ns/dcat#> .
 
-drk:manuscripts a dcat:Dataset ;
-    dcterms:title "Digitised manuscripts of a library"@en .
+drk:traffic-data a dcat:Dataset ;
+    dcterms:title "Traffic sensor data of a city"@en .
 
 drk:policy-394-1 a odrl:Set ;
     odrl:uid drk:policy-394-1 ;
     odrl:profile dpv-odrl: ;
-    dcterms:title "Use for at least one of research and development and marketing"@en ;
-    odrl:assigner drk:library ;
+    dcterms:title "Use for at least one of public benefit and non-commercial research"@en ;
+    odrl:assigner drk:data-platform ;
     odrl:permission kgc:KGC394-p1-r1 .
 kgc:KGC394-p1-r1 a odrl:Permission ;
     odrl:action odrl:use ;
-    odrl:target drk:manuscripts ;
+    odrl:target drk:traffic-data ;
     odrl:constraint kgc:KGC394-p1-c1 .
 kgc:KGC394-p1-c1 a odrl:Constraint ;
     odrl:leftOperand dpv-odrl:Purpose ;
     odrl:operator odrl:isAnyOf ;
-    odrl:rightOperand ( dpv:ResearchAndDevelopment dpv:Marketing ) .
+    odrl:rightOperand ( dpv:PublicBenefit dpv:NonCommercialResearch ) .
 drk:policy-394-2 a odrl:Set ;
     odrl:uid drk:policy-394-2 ;
     odrl:profile dpv-odrl: ;
-    dcterms:title "Use for scientific research only"@en ;
-    odrl:assignee drk:researcher ;
+    dcterms:title "Use for improving transport mobility only"@en ;
+    odrl:assignee drk:data-user ;
     odrl:permission kgc:KGC394-p2-r1 .
 kgc:KGC394-p2-r1 a odrl:Permission ;
     odrl:action odrl:use ;
-    odrl:target drk:manuscripts ;
+    odrl:target drk:traffic-data ;
     odrl:constraint kgc:KGC394-p2-c1 .
 kgc:KGC394-p2-c1 a odrl:Constraint ;
     odrl:leftOperand dpv-odrl:Purpose ;
     odrl:operator odrl:eq ;
-    odrl:rightOperand dpv:ScientificResearch .
+    odrl:rightOperand dpv:ImproveTransportMobility .
 
 ### Expected result #######################################################
 
@@ -53,7 +53,7 @@ drk:KGC394-report a vrep:OperandVerdictReport ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-purpose> ;
     vrep:declarations <https://w3id.org/odrl-kb/dpv-purposes/declared> ;
     vrep:readAgainst drk:KGC393-report ;
-    rdfs:comment """Scientific research is declared distinct from research and development and from marketing, so it is neither value the first policy lists."""@en ;
-    dcterms:description """As KGC393, with scientific research declared distinct from both purposes the first policy names."""@en ;
+    rdfs:comment """Improving transport mobility is declared distinct from public benefit and from non-commercial research, so it is neither value the first policy lists."""@en ;
+    dcterms:description """As KGC393, with improving transport mobility declared distinct from both purposes the first policy names."""@en ;
     vrep:compatibilityState vrep:Incompatible ;
     vrep:certificate <certificates/KGC394-1.tstp> .

@@ -10,18 +10,18 @@
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
 @prefix dcat:    <http://www.w3.org/ns/dcat#> .
 
-drk:manuscripts a dcat:Dataset ;
-    dcterms:title "Digitised manuscripts of a library"@en .
+drk:traffic-data a dcat:Dataset ;
+    dcterms:title "Traffic sensor data of a city"@en .
 
 drk:policy-316-1 a odrl:Set ;
     odrl:uid drk:policy-316-1 ;
     odrl:profile dpv-odrl: ;
     dcterms:title "Use for scientific research purposes only"@en ;
-    odrl:assigner drk:library ;
+    odrl:assigner drk:data-platform ;
     odrl:permission kgc:KGC316-p1-r1 .
 kgc:KGC316-p1-r1 a odrl:Permission ;
     odrl:action odrl:use ;
-    odrl:target drk:manuscripts ;
+    odrl:target drk:traffic-data ;
     odrl:constraint kgc:KGC316-p1-c1 .
 kgc:KGC316-p1-c1 a odrl:Constraint ;
     odrl:leftOperand dpv-odrl:Purpose ;
@@ -31,11 +31,11 @@ drk:policy-316-2 a odrl:Set ;
     odrl:uid drk:policy-316-2 ;
     odrl:profile dpv-odrl: ;
     dcterms:title "Use for research and development only"@en ;
-    odrl:assignee drk:researcher ;
+    odrl:assignee drk:data-user ;
     odrl:permission kgc:KGC316-p2-r1 .
 kgc:KGC316-p2-r1 a odrl:Permission ;
     odrl:action odrl:use ;
-    odrl:target drk:manuscripts ;
+    odrl:target drk:traffic-data ;
     odrl:constraint kgc:KGC316-p2-c1 .
 kgc:KGC316-p2-c1 a odrl:Constraint ;
     odrl:leftOperand dpv-odrl:Purpose ;
@@ -53,6 +53,7 @@ drk:KGC316-report a vrep:OperandVerdictReport ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-purpose> ;
     vrep:declarations <https://w3id.org/odrl-kb/dpv-purposes/empty> ;
     vrep:readAgainst drk:KGC310-report ;
+    vrep:readAgainst drk:KGC403-report ;
     rdfs:comment """DPV places scientific research below research and development and publishes no edge back. In a structure that identifies the two purposes, a use for research and development is a use for scientific research and satisfies both policies. In a structure that keeps them apart, antisymmetry with the published edge forbids the converse edge, and no use satisfies both. So the verdict is Unknown."""@en ;
-    dcterms:description """A library permits use for scientific research. A researcher's policy commits to use for research and development."""@en ;
+    dcterms:description """A city's traffic data platform permits use for scientific research. A company commits to use for research and development."""@en ;
     vrep:compatibilityState vrep:Unknown .

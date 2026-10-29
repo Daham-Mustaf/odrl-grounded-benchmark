@@ -3,12 +3,12 @@ kgc:KGC394-observed a vrep:Refutation ;
     vrep:proofArtefact <proofs/KGC394-1.tstp> ;
     vrep:attributedStatement [
         vrep:premiseSource vrep:fromDeclarations ;
-        vrep:formulaName "bg_dist_dpv_scientific_research_dpv_research_and_development" ;
-        rdfs:label "bg_dist_dpv_scientific_research_dpv_research_and_development"@en ] ;
+        vrep:formulaName "bg_dist_dpv_improve_transport_mobility_dpv_public_benefit" ;
+        rdfs:label "bg_dist_dpv_improve_transport_mobility_dpv_public_benefit"@en ] ;
     vrep:attributedStatement [
         vrep:premiseSource vrep:fromDeclarations ;
-        vrep:formulaName "bg_dist_dpv_scientific_research_dpv_marketing" ;
-        rdfs:label "bg_dist_dpv_scientific_research_dpv_marketing"@en ] ;
+        vrep:formulaName "bg_dist_dpv_improve_transport_mobility_dpv_non_commercial_research" ;
+        rdfs:label "bg_dist_dpv_improve_transport_mobility_dpv_non_commercial_research"@en ] ;
     vrep:attributedStatement [
         vrep:premiseSource vrep:fromConstraints ;
         vrep:formulaName "w_kgc394" ;

@@ -10,19 +10,19 @@
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
 @prefix dcat:    <http://www.w3.org/ns/dcat#> .
 
-drk:manuscripts a dcat:Dataset ;
-    dcterms:title "Digitised manuscripts of a library"@en .
+drk:traffic-data a dcat:Dataset ;
+    dcterms:title "Traffic sensor data of a city"@en .
 
 drk:policy-311-1 a odrl:Set ;
     odrl:uid drk:policy-311-1 ;
     odrl:profile dpv-odrl: ;
     dcterms:title "Use for any DPV purpose"@en ;
-    odrl:assigner drk:library ;
+    odrl:assigner drk:data-platform ;
     odrl:permission kgc:KGC311-p1-r1 .
 
 kgc:KGC311-p1-r1 a odrl:Permission ;
     odrl:action odrl:use ;
-    odrl:target drk:manuscripts ;
+    odrl:target drk:traffic-data ;
     odrl:constraint kgc:KGC311-p1-c1 .
 
 kgc:KGC311-p1-c1 a odrl:Constraint ;
@@ -34,12 +34,12 @@ drk:policy-311-2 a odrl:Set ;
     odrl:uid drk:policy-311-2 ;
     odrl:profile dpv-odrl: ;
     dcterms:title "Use for non-commercial research only"@en ;
-    odrl:assignee drk:researcher ;
+    odrl:assignee drk:data-user ;
     odrl:permission kgc:KGC311-p2-r1 .
 
 kgc:KGC311-p2-r1 a odrl:Permission ;
     odrl:action odrl:use ;
-    odrl:target drk:manuscripts ;
+    odrl:target drk:traffic-data ;
     odrl:constraint kgc:KGC311-p2-c1 .
 
 kgc:KGC311-p2-c1 a odrl:Constraint ;
@@ -58,6 +58,6 @@ drk:KGC311-report a vrep:OperandVerdictReport ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-purpose> ;
     vrep:declarations <https://w3id.org/odrl-kb/dpv-purposes/empty> ;
     rdfs:comment """NonCommercialResearch is below ResearchAndDevelopment, which is below Purpose; the certificate uses this two-step path."""@en ;
-    dcterms:description """A library permits use for any DPV purpose. A researcher's policy commits to use for non-commercial research."""@en ;
+    dcterms:description """A city's traffic data platform permits use for any DPV purpose. A university commits to use for non-commercial research."""@en ;
     vrep:compatibilityState vrep:Compatible ;
     vrep:certificate <certificates/KGC311-2.tstp> .

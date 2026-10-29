@@ -1,14 +1,14 @@
 %--------------------------------------------------------------------------
-% File     : KGC353-2.p
+% File     : KGC404-2.p
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
-% Problem  : legal basis, isA dpv:LegalBasis against eq A6-1-a-explicit-consent (witness condition negated)
+% Problem  : purpose, isA dpv:R&D against isA dpv:SR (witness condition negated)
 % Version  : 1.0
-% English  : A controller permits processing on any legal basis in the DPV hierarchy. A recipient's policy relies on explicit consent under Article 6(1)(a).
+% English  : A city's traffic data platform permits use for research and development purposes. A university commits to use for scientific research purposes.
 %
 % Refs     : odrl-grounded-benchmark. https://github.com/Daham-Mustaf/odrl-grounded-benchmark
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark
 % Authors  : Daham Mustafa
-% Names    : KGC353-2.p
+% Names    : KGC404-2.p
 %
 % Status   : Unsatisfiable
 % SPC      : FOF_UNS_RFN
@@ -16,13 +16,13 @@
 % Comments : Query 2 of 2.  Verdict is derived from both queries.
 %--------------------------------------------------------------------------
 include('axioms/KGE000-0.ax').
-include('axioms/DPV-gdprlb.ax').
+include('axioms/DPV-dpv-purposes.ax').
 
 % --- constants, groundings and resource hooks ----------------------------
 
 
 % --- witness condition negated -------------------------------------------
-fof(w_kgc353, axiom,
-    ~ ( ( ( kge_leq(lb_dpv_legal_basis, lb_dpv_legal_basis) & lb_dpv_legal_basis = lb_gdpr_a6_1_a_explicit_consent )
-| ( kge_leq(lb_gdpr_a6_1_a_explicit_consent, lb_dpv_legal_basis) & lb_gdpr_a6_1_a_explicit_consent = lb_gdpr_a6_1_a_explicit_consent ) ) )).
+fof(w_kgc404, axiom,
+    ~ ( ( ( kge_leq(dpv_research_and_development, dpv_research_and_development) & kge_leq(dpv_research_and_development, dpv_scientific_research) )
+| ( kge_leq(dpv_scientific_research, dpv_research_and_development) & kge_leq(dpv_scientific_research, dpv_scientific_research) ) ) )).
 %--------------------------------------------------------------------------

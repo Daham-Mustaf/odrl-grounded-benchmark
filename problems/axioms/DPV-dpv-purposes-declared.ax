@@ -14,7 +14,22 @@
 % problem naming two of the purposes below carries the inequation
 % between them as a bg_dist_ statement.
 %
-% Purposes: 4
-% Pairs   : 6
+% Purposes: 121
+% Pairs   : 7260
 %
-% Advertising, Marketing, ResearchAndDevelopment, ScientificResearch
+% AcademicResearch, AccountManagement, Advertising, AgeVerification, CombatClimateChange, CommercialPurpose, CommercialResearch, CommunicationForCustomerCare
+% CommunicationManagement, CounterMoneyLaundering, Counterterrorism, CustomerCare, CustomerClaimsManagement, CustomerManagement, CustomerOrderManagement, CustomerRelationshipManagement
+% CustomerSolvencyMonitoring, DataAltruism, DeliveryOfGoods, DirectMarketing, DisputeManagement, EnforceAccessControl, EnforceSecurity, EstablishContractualAgreement
+% FraudPreventionAndDetection, FulfilmentOfContractualObligation, FulfilmentOfObligation, HumanResourceManagement, IdentityAuthentication, IdentityVerification, ImproveExistingProductsAndServices, ImproveHealthcare
+% ImproveInternalCRMProcesses, ImprovePublicServices, ImproveTransportMobility, IncreaseServiceRobustness, InternalResourceOptimisation, LegalCompliance, MaintainFraudDatabase, Marketing
+% MemberPartnerManagement, MisusePreventionAndDetection, NonCommercialPurpose, NonCommercialResearch, OptimisationForConsumer, OptimisationForController, OptimiseUserInterface, OrganisationComplianceManagement
+% OrganisationGovernance, OrganisationRiskManagement, PaymentManagement, Personalisation, PersonalisedAdvertising, PersonalisedBenefits, PersonnelBehaviourMonitoring, PersonnelHiring
+% PersonnelManagement, PersonnelMonitoring, PersonnelOffboarding, PersonnelOnboarding, PersonnelPayment, PersonnelPerformanceEvaluation, PersonnelPerformanceManagement, PersonnelPerformanceMonitoring
+% PersonnelPerformancePrediction, PersonnelPromotionManagement, PersonnelTerminationManagement, PersonnelWorkloadManagement, PoliticalCampaign, ProtectionOfIPR, ProtectionOfNationalSecurity, ProtectionOfPublicSecurity
+% ProvideEventRecommendations, ProvideOfficialStatistics, ProvidePersonalisedRecommendations, ProvideProductRecommendations, PublicBenefit, PublicPolicyMaking, PublicRelations, Purpose
+% RecordManagement, RecruitmentAdvertising, RecruitmentApplicantBackgroundCheck, RecruitmentApplicantCriminalBackgroundCheck, RecruitmentApplicantInformationAuthentication, RecruitmentApplicantSelection, RecruitmentApplicationAnalysis, RecruitmentApplicationManagement
+% RecruitmentApplicationScreening, RecruitmentInterviewAnalysis, RecruitmentInterviewAssessment, RecruitmentInterviewManagement, RecruitmentInterviewScheduling, RecruitmentManagement, RecruitmentTargetedAdvertising, RepairImpairments
+% RequestedServiceProvision, ResearchAndDevelopment, ScientificResearch, SearchFunctionalities, SellDataToThirdParties, SellInsightsFromData, SellProducts, SellProductsToDataSubject
+% ServiceAccessDetermination, ServiceManagement, ServiceMonitoring, ServiceOptimisation, ServicePersonalisation, ServiceProvision, ServiceRegistration, ServiceUsageAnalytics
+% SocialMediaMarketing, TargetedAdvertising, TechnicalServiceProvision, UserInterfacePersonalisation, VendorManagement, VendorPayment, VendorRecordsManagement, VendorSelectionAssessment
+% Verification

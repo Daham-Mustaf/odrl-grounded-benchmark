@@ -10,18 +10,18 @@
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
 @prefix dcat:    <http://www.w3.org/ns/dcat#> .
 
-drk:manuscripts a dcat:Dataset ;
-    dcterms:title "Digitised manuscripts of a library"@en .
+drk:traffic-data a dcat:Dataset ;
+    dcterms:title "Traffic sensor data of a city"@en .
 
 drk:policy-318-1 a odrl:Set ;
     odrl:uid drk:policy-318-1 ;
     odrl:profile dpv-odrl: ;
     dcterms:title "Use for any purpose except marketing"@en ;
-    odrl:assigner drk:library ;
+    odrl:assigner drk:data-platform ;
     odrl:permission kgc:KGC318-p1-r1 .
 kgc:KGC318-p1-r1 a odrl:Permission ;
     odrl:action odrl:use ;
-    odrl:target drk:manuscripts ;
+    odrl:target drk:traffic-data ;
     odrl:constraint kgc:KGC318-p1-c1 .
 kgc:KGC318-p1-c1 a odrl:Constraint ;
     odrl:leftOperand dpv-odrl:Purpose ;
@@ -31,11 +31,11 @@ drk:policy-318-2 a odrl:Set ;
     odrl:uid drk:policy-318-2 ;
     odrl:profile dpv-odrl: ;
     dcterms:title "Use for scientific research only"@en ;
-    odrl:assignee drk:researcher ;
+    odrl:assignee drk:data-user ;
     odrl:permission kgc:KGC318-p2-r1 .
 kgc:KGC318-p2-r1 a odrl:Permission ;
     odrl:action odrl:use ;
-    odrl:target drk:manuscripts ;
+    odrl:target drk:traffic-data ;
     odrl:constraint kgc:KGC318-p2-c1 .
 kgc:KGC318-p2-c1 a odrl:Constraint ;
     odrl:leftOperand dpv-odrl:Purpose ;
@@ -53,6 +53,6 @@ drk:KGC318-report a vrep:OperandVerdictReport ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-purpose> ;
     vrep:declarations <https://w3id.org/odrl-kb/dpv-purposes/declared> ;
     rdfs:comment """Scientific research is declared distinct from marketing, so a use for scientific research is a use for a purpose other than marketing and satisfies both policies."""@en ;
-    dcterms:description """A library permits use for any purpose other than marketing. A researcher's policy commits to use for scientific research. Scientific research is declared distinct from marketing."""@en ;
+    dcterms:description """A city's traffic data platform permits use for any purpose other than marketing. A university commits to use for scientific research. Scientific research is declared distinct from marketing."""@en ;
     vrep:compatibilityState vrep:Compatible ;
     vrep:certificate <certificates/KGC318-2.tstp> .

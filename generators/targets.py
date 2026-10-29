@@ -9,9 +9,10 @@ differently.
 
     drk:manuscripts   digitised manuscripts a library holds
     drk:dataset       personal data a controller holds
+    drk:traffic-data  traffic sensor data a city's data platform holds
     drk:work          a work a publisher distributes
 
-The two data collections are dcat:Dataset.  The work is
+The data collections are dcat:Dataset.  The work is
 dcterms:BibliographicResource.  The case writers call `with_targets` on
 the policy Turtle, so a generator never writes a target node by hand.
 """
@@ -24,6 +25,7 @@ DCAT_PREFIX = "@prefix dcat:    <http://www.w3.org/ns/dcat#> ."
 TARGETS = {
     "drk:manuscripts": ("dcat:Dataset", "Digitised manuscripts of a library"),
     "drk:dataset":     ("dcat:Dataset", "Personal data held by a controller"),
+    "drk:traffic-data": ("dcat:Dataset", "Traffic sensor data of a city"),
     "drk:work":        ("dcterms:BibliographicResource",
                         "A work distributed by a publisher"),
 }

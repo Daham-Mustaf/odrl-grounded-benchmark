@@ -10,37 +10,37 @@
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
 @prefix dcat:    <http://www.w3.org/ns/dcat#> .
 
-drk:manuscripts a dcat:Dataset ;
-    dcterms:title "Digitised manuscripts of a library"@en .
+drk:traffic-data a dcat:Dataset ;
+    dcterms:title "Traffic sensor data of a city"@en .
 
 drk:policy-396-1 a odrl:Set ;
     odrl:uid drk:policy-396-1 ;
     odrl:profile dpv-odrl: ;
-    dcterms:title "Use for at least one of research and development and marketing"@en ;
-    odrl:assigner drk:library ;
+    dcterms:title "Use for public benefit purposes only"@en ;
+    odrl:assigner drk:data-platform ;
     odrl:permission kgc:KGC396-p1-r1 .
 kgc:KGC396-p1-r1 a odrl:Permission ;
     odrl:action odrl:use ;
-    odrl:target drk:manuscripts ;
+    odrl:target drk:traffic-data ;
     odrl:constraint kgc:KGC396-p1-c1 .
 kgc:KGC396-p1-c1 a odrl:Constraint ;
     odrl:leftOperand dpv-odrl:Purpose ;
-    odrl:operator odrl:isAnyOf ;
-    odrl:rightOperand ( dpv:ResearchAndDevelopment dpv:Marketing ) .
+    odrl:operator odrl:isA ;
+    odrl:rightOperand dpv:PublicBenefit .
 drk:policy-396-2 a odrl:Set ;
     odrl:uid drk:policy-396-2 ;
     odrl:profile dpv-odrl: ;
-    dcterms:title "Use for both research and development and service provision"@en ;
-    odrl:assignee drk:researcher ;
+    dcterms:title "Use for both data altruism and improving transport mobility"@en ;
+    odrl:assignee drk:data-user ;
     odrl:permission kgc:KGC396-p2-r1 .
 kgc:KGC396-p2-r1 a odrl:Permission ;
     odrl:action odrl:use ;
-    odrl:target drk:manuscripts ;
+    odrl:target drk:traffic-data ;
     odrl:constraint kgc:KGC396-p2-c1 .
 kgc:KGC396-p2-c1 a odrl:Constraint ;
     odrl:leftOperand dpv-odrl:Purpose ;
     odrl:operator odrl:isAllOf ;
-    odrl:rightOperand ( dpv:ResearchAndDevelopment dpv:ServiceProvision ) .
+    odrl:rightOperand ( dpv:DataAltruism dpv:ImproveTransportMobility ) .
 
 ### Expected result #######################################################
 
@@ -52,7 +52,7 @@ drk:KGC396-report a vrep:OperandVerdictReport ;
     vrep:comparedConstraint kgc:KGC396-p2-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-purpose> ;
     vrep:declarations <https://w3id.org/odrl-kb/dpv-purposes/empty> ;
-    rdfs:comment """Research and development is one of the values the first policy lists, and nothing in the first policy limits the use's other purposes."""@en ;
-    dcterms:description """A library permits use for research and development or marketing. A researcher's policy commits to both research and development and service provision."""@en ;
+    rdfs:comment """DPV places data altruism and improving transport mobility directly below public benefit, so a use for both lies under the category the first policy names. DPV's scope note for data altruism asks that it be combined with other purposes: it "should be combined with other purposes to indicate their altruistic interpretation or application". The second policy does that. This policy goes beyond the DPV-ODRL usage note for Purpose, which does not list isAllOf."""@en ;
+    dcterms:description """A city's traffic data platform permits use for public benefit purposes. A city transport authority commits to data altruism and improving transport mobility together."""@en ;
     vrep:compatibilityState vrep:Compatible ;
     vrep:certificate <certificates/KGC396-2.tstp> .

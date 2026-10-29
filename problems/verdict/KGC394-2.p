@@ -1,9 +1,9 @@
 %--------------------------------------------------------------------------
 % File     : KGC394-2.p
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
-% Problem  : purpose, isAnyOf {RnD, Marketing} against eq ScientificResearch, declared distinct (witness condition negated)
+% Problem  : purpose, isAnyOf {PublicBenefit, NonCommercialResearch} against eq ImproveTransportMobility, declared distinct (witness condition negated)
 % Version  : 1.0
-% English  : As KGC393, with scientific research declared distinct from both purposes the first policy names.
+% English  : As KGC393, with improving transport mobility declared distinct from both purposes the first policy names.
 %
 % Refs     : odrl-grounded-benchmark. https://github.com/Daham-Mustaf/odrl-grounded-benchmark
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark
@@ -23,19 +23,19 @@ include('axioms/DPV-dpv-purposes-declared.ax').
 % Declarations: declared distinctness instances, stated in
 % the declarations file and instantiated here.
 
-fof(bg_dist_dpv_scientific_research_dpv_research_and_development, axiom,
-    dpv_scientific_research != dpv_research_and_development).
-fof(bg_dist_dpv_scientific_research_dpv_marketing, axiom,
-    dpv_scientific_research != dpv_marketing).
+fof(bg_dist_dpv_improve_transport_mobility_dpv_public_benefit, axiom,
+    dpv_improve_transport_mobility != dpv_public_benefit).
+fof(bg_dist_dpv_improve_transport_mobility_dpv_non_commercial_research, axiom,
+    dpv_improve_transport_mobility != dpv_non_commercial_research).
 
 % --- witness condition negated -------------------------------------------
 fof(w_kgc394, axiom,
-    ~ ( ( ( dpv_research_and_development = dpv_scientific_research
-| dpv_marketing = dpv_scientific_research
-| dpv_scientific_research = dpv_scientific_research ) & ( ( dpv_research_and_development = dpv_scientific_research & ( dpv_research_and_development = dpv_research_and_development
-| dpv_research_and_development = dpv_marketing ) )
-| ( dpv_marketing = dpv_scientific_research & ( dpv_marketing = dpv_research_and_development
-| dpv_marketing = dpv_marketing ) )
-| ( dpv_scientific_research = dpv_scientific_research & ( dpv_scientific_research = dpv_research_and_development
-| dpv_scientific_research = dpv_marketing ) ) ) ) )).
+    ~ ( ( ( dpv_public_benefit = dpv_improve_transport_mobility
+| dpv_non_commercial_research = dpv_improve_transport_mobility
+| dpv_improve_transport_mobility = dpv_improve_transport_mobility ) & ( ( dpv_public_benefit = dpv_improve_transport_mobility & ( dpv_public_benefit = dpv_public_benefit
+| dpv_public_benefit = dpv_non_commercial_research ) )
+| ( dpv_non_commercial_research = dpv_improve_transport_mobility & ( dpv_non_commercial_research = dpv_public_benefit
+| dpv_non_commercial_research = dpv_non_commercial_research ) )
+| ( dpv_improve_transport_mobility = dpv_improve_transport_mobility & ( dpv_improve_transport_mobility = dpv_public_benefit
+| dpv_improve_transport_mobility = dpv_non_commercial_research ) ) ) ) )).
 %--------------------------------------------------------------------------

@@ -1,0 +1,19 @@
+kgc:KGC403-observed a vrep:Refutation ;
+    vrep:producedBy "Vampire" ;
+    vrep:proofArtefact <proofs/KGC403-1.tstp> ;
+    vrep:attributedStatement [
+        vrep:premiseSource vrep:fromResource ;
+        vrep:formulaName "res_dpv_scientific_research_below_dpv_research_and_development" ;
+        rdfs:label "res_dpv_scientific_research_below_dpv_research_and_development"@en ] ;
+    vrep:attributedStatement [
+        vrep:premiseSource vrep:fromDeclarations ;
+        vrep:formulaName "bg_dist_dpv_scientific_research_dpv_research_and_development" ;
+        rdfs:label "bg_dist_dpv_scientific_research_dpv_research_and_development"@en ] ;
+    vrep:attributedStatement [
+        vrep:premiseSource vrep:fromConstraints ;
+        vrep:formulaName "w_kgc403" ;
+        rdfs:label "w_kgc403"@en ] ;
+    vrep:attributedStatement [
+        vrep:premiseSource vrep:fromOrderAxiom ;
+        vrep:formulaName "ax_leq_antisymmetric" ;
+        rdfs:label "ax_leq_antisymmetric"@en ] .

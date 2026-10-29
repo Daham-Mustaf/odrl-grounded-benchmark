@@ -1,7 +1,7 @@
 ; -------------------------------------------------------------------------
 ; File     : KGC393-1.smt2
 ; Domain   : ODRL Policy / Knowledge-Grounded Fragment
-; Problem  : purpose, isAnyOf {RnD, Marketing} against eq ScientificResearch (witness condition asserted)
+; Problem  : purpose, isAnyOf {PublicBenefit, NonCommercialResearch} against eq ImproveTransportMobility (witness condition asserted)
 ; Version  : 1.0
 ; Refs     : odrl-grounded-benchmark. https://github.com/Daham-Mustaf/odrl-grounded-benchmark
 ; Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark
@@ -15,9 +15,9 @@
 (set-option :produce-unsat-cores true)
 (set-option :produce-models true)
 (declare-sort Concept 0)
-(declare-fun dpv_research_and_development () Concept)
-(declare-fun dpv_marketing () Concept)
-(declare-fun dpv_scientific_research () Concept)
+(declare-fun dpv_public_benefit () Concept)
+(declare-fun dpv_non_commercial_research () Concept)
+(declare-fun dpv_improve_transport_mobility () Concept)
 (declare-fun kge_leq (Concept Concept) Bool)
 ; Order axioms, quantified.  The same three as KGE000-0.ax, so the two
 ; encodings are the same theory.
@@ -26,9 +26,9 @@
     (=> (and (kge_leq x y) (kge_leq y x)) (= x y))) :named ax_leq_antisymmetric))
 (assert (! (forall ((x Concept) (y Concept) (z Concept))
     (=> (and (kge_leq x y) (kge_leq y z)) (kge_leq x z))) :named ax_leq_transitive))
-(assert (! (kge_leq dpv_scientific_research dpv_research_and_development) :named res_dpv_scientific_research_below_dpv_research_and_development))
+(assert (! (kge_leq dpv_improve_transport_mobility dpv_public_benefit) :named res_dpv_improve_transport_mobility_below_dpv_public_benefit))
 ; witness condition asserted
-(assert (! (and (or (= dpv_research_and_development dpv_scientific_research) (= dpv_marketing dpv_scientific_research) (= dpv_scientific_research dpv_scientific_research)) (or (and (= dpv_research_and_development dpv_scientific_research) (or (= dpv_research_and_development dpv_research_and_development) (= dpv_research_and_development dpv_marketing))) (and (= dpv_marketing dpv_scientific_research) (or (= dpv_marketing dpv_research_and_development) (= dpv_marketing dpv_marketing))) (and (= dpv_scientific_research dpv_scientific_research) (or (= dpv_scientific_research dpv_research_and_development) (= dpv_scientific_research dpv_marketing))))) :named w_kgc393))
+(assert (! (and (or (= dpv_public_benefit dpv_improve_transport_mobility) (= dpv_non_commercial_research dpv_improve_transport_mobility) (= dpv_improve_transport_mobility dpv_improve_transport_mobility)) (or (and (= dpv_public_benefit dpv_improve_transport_mobility) (or (= dpv_public_benefit dpv_public_benefit) (= dpv_public_benefit dpv_non_commercial_research))) (and (= dpv_non_commercial_research dpv_improve_transport_mobility) (or (= dpv_non_commercial_research dpv_public_benefit) (= dpv_non_commercial_research dpv_non_commercial_research))) (and (= dpv_improve_transport_mobility dpv_improve_transport_mobility) (or (= dpv_improve_transport_mobility dpv_public_benefit) (= dpv_improve_transport_mobility dpv_non_commercial_research))))) :named w_kgc393))
 (check-sat)
 (get-unsat-core)
 (get-model)

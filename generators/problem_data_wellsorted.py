@@ -1,9 +1,9 @@
 """
 problem_data_wellsorted.py
 ==========================
-The drafting-time check.  Eight problems: ill-sorted constraints, one per
-sort and the two parthood operators at nom, and one well-sorted control per
-sort.
+The drafting-time check.  Nine problems: ill-sorted constraints, one per
+sort, the two parthood operators at nom and hasPart at tax, and one
+well-sorted control per sort.
 
 These build no queries.  Well-sortedness is decided by the signature alone,
 before any resource is opened, so a rejected constraint never reaches a
@@ -12,6 +12,7 @@ for it.
 
     KGC100  spatial  isA        gn:Europe    mer   rejected
     KGC101  purpose  isPartOf   dpv:NCP      tax   rejected
+    KGC105  purpose  hasPart    dpv:NCP      tax   rejected
     KGC102  language isA        bcp:de       nom   rejected
     KGC103  language isPartOf   bcp:de       nom   rejected
     KGC104  language hasPart    bcp:de       nom   rejected
@@ -19,7 +20,7 @@ for it.
     KGC111  purpose  isA        dpv:NCP      tax   accepted
     KGC112  language eq         bcp:de       nom   accepted
 
-The five rejections are the same error in three settings: an operator put to
+The six rejections are the same error in three settings: an operator put to
 a resource that supplies a different relation.  KGC100 is the case the paper
 uses throughout, a gazetteer asked about kinds.
 """
@@ -68,6 +69,7 @@ BINDING = {
 TITLE = {
     "KGC100": "Use in a kind of Europe only",
     "KGC101": "Use within non-commercial purposes",
+    "KGC105": "Use for a purpose that includes non-commercial purposes",
     "KGC102": "Use in a kind of German only",
     "KGC103": "Use within German",
     "KGC104": "Use in a language that includes German",
@@ -142,6 +144,11 @@ PROBLEMS = [
     _problem("KGC101", "purpose", "isPartOf", "dpv:NCP", "tax", False,
              "The operand is grounded in a purpose taxonomy, which supplies "
              "subsumption.  isPartOf requires parthood.  The constraint is "
+             "rejected before the vocabulary is opened."),
+
+    _problem("KGC105", "purpose", "hasPart", "dpv:NCP", "tax", False,
+             "The operand is grounded in a purpose taxonomy, which supplies "
+             "subsumption.  hasPart requires parthood.  The constraint is "
              "rejected before the vocabulary is opened."),
 
     _problem("KGC102", "language", "isA", "bcp:de", "nom", False,

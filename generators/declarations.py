@@ -134,7 +134,7 @@ def constant_for(resource: str):
     """The function from a concept IRI to the constant of the encodings,
     for the resource a set applies to."""
     import build_consent, build_dpv, build_dpvloc, build_filetype
-    import build_gdprlb, build_tom
+    import build_tom
     table = {
         "https://w3id.org/odrl-kb/dpv-purposes":
             lambda i: build_dpv.slug(_local(i)),
@@ -143,7 +143,6 @@ def constant_for(resource: str):
         "https://w3id.org/odrl-kb/dpv-consent":
             lambda i: build_consent.slug(_local(i)),
         "https://w3id.org/odrl-kb/dpv-tom": build_tom.slug,
-        "https://w3id.org/odrl-kb/dpv-gdpr-legal-basis": build_gdprlb.slug,
         "https://w3id.org/odrl-kb/dpv-loc-geo":
             lambda i: build_dpvloc.slug(_local(i)),
         "https://w3id.org/odrl-kb/dpv-loc-juris":

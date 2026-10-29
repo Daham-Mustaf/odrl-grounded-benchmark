@@ -10,37 +10,37 @@
 @prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
 @prefix dcat:    <http://www.w3.org/ns/dcat#> .
 
-drk:manuscripts a dcat:Dataset ;
-    dcterms:title "Digitised manuscripts of a library"@en .
+drk:traffic-data a dcat:Dataset ;
+    dcterms:title "Traffic sensor data of a city"@en .
 
 drk:policy-393-1 a odrl:Set ;
     odrl:uid drk:policy-393-1 ;
     odrl:profile dpv-odrl: ;
-    dcterms:title "Use for at least one of research and development and marketing"@en ;
-    odrl:assigner drk:library ;
+    dcterms:title "Use for at least one of public benefit and non-commercial research"@en ;
+    odrl:assigner drk:data-platform ;
     odrl:permission kgc:KGC393-p1-r1 .
 kgc:KGC393-p1-r1 a odrl:Permission ;
     odrl:action odrl:use ;
-    odrl:target drk:manuscripts ;
+    odrl:target drk:traffic-data ;
     odrl:constraint kgc:KGC393-p1-c1 .
 kgc:KGC393-p1-c1 a odrl:Constraint ;
     odrl:leftOperand dpv-odrl:Purpose ;
     odrl:operator odrl:isAnyOf ;
-    odrl:rightOperand ( dpv:ResearchAndDevelopment dpv:Marketing ) .
+    odrl:rightOperand ( dpv:PublicBenefit dpv:NonCommercialResearch ) .
 drk:policy-393-2 a odrl:Set ;
     odrl:uid drk:policy-393-2 ;
     odrl:profile dpv-odrl: ;
-    dcterms:title "Use for scientific research only"@en ;
-    odrl:assignee drk:researcher ;
+    dcterms:title "Use for improving transport mobility only"@en ;
+    odrl:assignee drk:data-user ;
     odrl:permission kgc:KGC393-p2-r1 .
 kgc:KGC393-p2-r1 a odrl:Permission ;
     odrl:action odrl:use ;
-    odrl:target drk:manuscripts ;
+    odrl:target drk:traffic-data ;
     odrl:constraint kgc:KGC393-p2-c1 .
 kgc:KGC393-p2-c1 a odrl:Constraint ;
     odrl:leftOperand dpv-odrl:Purpose ;
     odrl:operator odrl:eq ;
-    odrl:rightOperand dpv:ScientificResearch .
+    odrl:rightOperand dpv:ImproveTransportMobility .
 
 ### Expected result #######################################################
 
@@ -53,6 +53,6 @@ drk:KGC393-report a vrep:OperandVerdictReport ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-purpose> ;
     vrep:declarations <https://w3id.org/odrl-kb/dpv-purposes/empty> ;
     vrep:readAgainst drk:KGC394-report ;
-    rdfs:comment """One structure identifies scientific research with research and development and admits the use; one keeps them apart and does not. The published order is not consulted by isAnyOf."""@en ;
-    dcterms:description """A library permits use for research and development or marketing; a researcher commits to scientific research."""@en ;
+    rdfs:comment """One structure identifies improving transport mobility with one of the two purposes and admits the use; one keeps them apart and does not. The published order is not consulted by isAnyOf."""@en ;
+    dcterms:description """A city's traffic data platform permits use for at least one of public benefit and non-commercial research. A city transport authority commits to improving transport mobility."""@en ;
     vrep:compatibilityState vrep:Unknown .

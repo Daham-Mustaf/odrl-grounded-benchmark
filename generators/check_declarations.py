@@ -57,14 +57,13 @@ SETS = {
                                      noun="Areas", token="local"),
     "filetype-declared":        dict(ax="EUFT-filetype-declared.ax", form="expanded",
                                      label="const-distinct"),
-    "gdprlb-declared":          dict(ax="DPV-gdprlb-declared.ax", form="expanded"),
     "geonames-europe-declared": dict(ax=None, form="inline"),
     "geonames-europe-siblings": dict(ax=None, form="inline"),
     "tom-declared":             dict(ax="DPV-tom-declared.ax", form="rule",
                                      noun="Measures", token="constant"),
 }
 # Sets whose members are the whole resource, less what the set names as left out.
-WHOLE = {"gdprlb-declared", "tom-declared"}
+WHOLE = {"dpv-purposes-declared", "tom-declared"}
 RULES = {"PairwiseDistinctness", "PairwiseDisjointness", "PublishedDefinition"}
 
 fails = []

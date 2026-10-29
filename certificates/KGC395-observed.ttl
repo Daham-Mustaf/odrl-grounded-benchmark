@@ -3,8 +3,8 @@ kgc:KGC395-observed a vrep:Refutation ;
     vrep:proofArtefact <proofs/KGC395-2.tstp> ;
     vrep:attributedStatement [
         vrep:premiseSource vrep:fromResource ;
-        vrep:formulaName "res_dpv_scientific_research_below_dpv_research_and_development" ;
-        rdfs:label "res_dpv_scientific_research_below_dpv_research_and_development"@en ] ;
+        vrep:formulaName "res_dpv_improve_transport_mobility_below_dpv_public_benefit" ;
+        rdfs:label "res_dpv_improve_transport_mobility_below_dpv_public_benefit"@en ] ;
     vrep:attributedStatement [
         vrep:premiseSource vrep:fromConstraints ;
         vrep:formulaName "w_kgc395" ;

@@ -3,7 +3,7 @@
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
 % Problem  : purpose, isNoneOf {Marketing} against eq Advertising, declared distinct (witness condition negated)
 % Version  : 1.0
-% English  : A library permits use for any purpose except marketing; a researcher commits to advertising.
+% English  : A city's traffic data platform permits use for any purpose except marketing. A company commits to advertising.
 %
 % Refs     : odrl-grounded-benchmark. https://github.com/Daham-Mustaf/odrl-grounded-benchmark
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark

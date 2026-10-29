@@ -3,7 +3,7 @@
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
 % Problem  : purpose, neq dpv:Marketing against eq dpv:ScientificResearch, declared distinct (witness condition asserted)
 % Version  : 1.0
-% English  : A library permits use for any purpose other than marketing. A researcher's policy commits to use for scientific research. Scientific research is declared distinct from marketing.
+% English  : A city's traffic data platform permits use for any purpose other than marketing. A university commits to use for scientific research. Scientific research is declared distinct from marketing.
 %
 % Refs     : odrl-grounded-benchmark. https://github.com/Daham-Mustaf/odrl-grounded-benchmark
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark

@@ -3,7 +3,7 @@
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
 % Problem  : purpose, isNoneOf {dpv:Marketing} against eq dpv:Marketing (witness condition asserted)
 % Version  : 1.0
-% English  : A library permits use for any purpose other than marketing. A researcher's policy commits to use for marketing.
+% English  : A city's traffic data platform permits use for any purpose other than marketing. A company commits to use for marketing.
 %
 % Refs     : odrl-grounded-benchmark. https://github.com/Daham-Mustaf/odrl-grounded-benchmark
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark

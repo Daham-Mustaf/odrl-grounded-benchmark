@@ -34,11 +34,6 @@ uv run generators/build_tom.py \
   --measures $V/dpv-2.3/modules/technical_measures.ttl \
   --out problems >/dev/null && echo "  measures"
 
-uv run generators/build_gdprlb.py \
-  --core $V/dpv-2.3/modules/legal_basis.ttl \
-  --gdpr $V/dpv-2.3/legal/eu/gdpr/modules/legal_basis.ttl \
-  --retrieved 2026-08-19 --out problems >/dev/null && echo "  legal basis"
-
 uv run generators/build_filetype.py \
   --table $V/eu-file-type-20260715/filetypes-skos-ap-act.rdf \
   --retrieved 2026-08-18 --out problems >/dev/null && echo "  file type"
@@ -46,7 +41,7 @@ uv run generators/build_filetype.py \
 echo
 echo "=== 2. problems"
 for g in gen_motivating gen_dpv gen_dpvloc gen_filetype gen_consent \
-         gen_gdprlb gen_tom gen_bcp47_problems gen_wellsorted; do
+         gen_tom gen_bcp47_problems gen_wellsorted; do
   if uv run "generators/$g.py" >/dev/null 2>&1; then
     echo "  ok     $g"
   else

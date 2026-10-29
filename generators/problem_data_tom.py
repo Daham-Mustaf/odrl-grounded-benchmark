@@ -48,8 +48,8 @@ control. The requirement needs access control among the measures supplied
 and the exclusion keeps it out, so no structure admits a common use: the
 verdict is Incompatible, and it holds without any declaration by the
 parties. The certificate cites the constraints and nothing else. That is
-worth contrasting with the legal-basis problems, where a definite
-Incompatible needed the parties to declare concepts distinct: here the two
+worth contrasting with KGC314, where a definite Incompatible needed the
+parties to declare concepts distinct: here the two
 constraints contradict each other over the same named concept, and the
 vocabulary is not consulted at all.
 
@@ -313,7 +313,7 @@ PROBLEMS = [
             "out, so no structure admits a common use and the verdict is "
             "Incompatible.\n\n"
             "It is definite without any declaration by the parties, which "
-            "is unlike the legal-basis problems: there an Incompatible "
+            "is unlike KGC314: there an Incompatible "
             "verdict needed the parties to declare two concepts distinct, "
             "because the question was whether two names denote one thing. "
             "Here the two constraints name the same concept and pull "

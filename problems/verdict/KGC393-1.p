@@ -1,9 +1,9 @@
 %--------------------------------------------------------------------------
 % File     : KGC393-1.p
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
-% Problem  : purpose, isAnyOf {RnD, Marketing} against eq ScientificResearch (witness condition asserted)
+% Problem  : purpose, isAnyOf {PublicBenefit, NonCommercialResearch} against eq ImproveTransportMobility (witness condition asserted)
 % Version  : 1.0
-% English  : A library permits use for research and development or marketing; a researcher commits to scientific research.
+% English  : A city's traffic data platform permits use for at least one of public benefit and non-commercial research. A city transport authority commits to improving transport mobility.
 %
 % Refs     : odrl-grounded-benchmark. https://github.com/Daham-Mustaf/odrl-grounded-benchmark
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark
@@ -23,12 +23,12 @@ include('axioms/DPV-dpv-purposes.ax').
 
 % --- witness condition asserted ------------------------------------------
 fof(w_kgc393, axiom,
-    ( ( dpv_research_and_development = dpv_scientific_research
-| dpv_marketing = dpv_scientific_research
-| dpv_scientific_research = dpv_scientific_research ) & ( ( dpv_research_and_development = dpv_scientific_research & ( dpv_research_and_development = dpv_research_and_development
-| dpv_research_and_development = dpv_marketing ) )
-| ( dpv_marketing = dpv_scientific_research & ( dpv_marketing = dpv_research_and_development
-| dpv_marketing = dpv_marketing ) )
-| ( dpv_scientific_research = dpv_scientific_research & ( dpv_scientific_research = dpv_research_and_development
-| dpv_scientific_research = dpv_marketing ) ) ) )).
+    ( ( dpv_public_benefit = dpv_improve_transport_mobility
+| dpv_non_commercial_research = dpv_improve_transport_mobility
+| dpv_improve_transport_mobility = dpv_improve_transport_mobility ) & ( ( dpv_public_benefit = dpv_improve_transport_mobility & ( dpv_public_benefit = dpv_public_benefit
+| dpv_public_benefit = dpv_non_commercial_research ) )
+| ( dpv_non_commercial_research = dpv_improve_transport_mobility & ( dpv_non_commercial_research = dpv_public_benefit
+| dpv_non_commercial_research = dpv_non_commercial_research ) )
+| ( dpv_improve_transport_mobility = dpv_improve_transport_mobility & ( dpv_improve_transport_mobility = dpv_public_benefit
+| dpv_improve_transport_mobility = dpv_non_commercial_research ) ) ) )).
 %--------------------------------------------------------------------------

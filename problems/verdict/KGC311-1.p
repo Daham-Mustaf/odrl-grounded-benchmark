@@ -3,7 +3,7 @@
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
 % Problem  : purpose, isA dpv:Purpose against eq dpv:NCR (witness condition asserted)
 % Version  : 1.0
-% English  : A library permits use for any DPV purpose. A researcher's policy commits to use for non-commercial research.
+% English  : A city's traffic data platform permits use for any DPV purpose. A university commits to use for non-commercial research.
 %
 % Refs     : odrl-grounded-benchmark. https://github.com/Daham-Mustaf/odrl-grounded-benchmark
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark

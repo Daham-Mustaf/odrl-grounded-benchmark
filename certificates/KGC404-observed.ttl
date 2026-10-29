@@ -1,0 +1,15 @@
+kgc:KGC404-observed a vrep:Refutation ;
+    vrep:producedBy "Vampire" ;
+    vrep:proofArtefact <proofs/KGC404-2.tstp> ;
+    vrep:attributedStatement [
+        vrep:premiseSource vrep:fromResource ;
+        vrep:formulaName "res_dpv_scientific_research_below_dpv_research_and_development" ;
+        rdfs:label "res_dpv_scientific_research_below_dpv_research_and_development"@en ] ;
+    vrep:attributedStatement [
+        vrep:premiseSource vrep:fromConstraints ;
+        vrep:formulaName "w_kgc404" ;
+        rdfs:label "w_kgc404"@en ] ;
+    vrep:attributedStatement [
+        vrep:premiseSource vrep:fromOrderAxiom ;
+        vrep:formulaName "ax_leq_reflexive" ;
+        rdfs:label "ax_leq_reflexive"@en ] .

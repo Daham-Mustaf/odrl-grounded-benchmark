@@ -45,8 +45,8 @@ Problem dict keys:
                       what the verdict rests on and reaches the report as
                       rdfs:comment; the premises stay in the proof
                       artefact, which is where a refutation names them.
-    twin              optional; the id of the case to read this one with.
-                      Reaches the report as vrep:readAgainst.
+    twin              optional; the id of the case to read this one with, or
+                      a list of ids.  Reaches the report as vrep:readAgainst.
     ttl               the ODRL policy pair, Turtle
     ungrounded        optional; the value, as the policy writes it, that
                       does not ground.  If set, no query is built and the
@@ -59,6 +59,13 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 from header import Header, SMTHeader
 from targets import with_targets
+
+
+def _twins(p) -> list:
+    """The ids of the cases a case is read with: none, one, or several."""
+    t = p.get("twin")
+    return [t] if isinstance(t, str) else list(t or [])
+
 
 QUERIES = {
     1: ("witness condition asserted",  "fof_witness",  "smt2_witness",  False),
@@ -424,8 +431,8 @@ def _grounding_report_block(p: dict, body: str) -> str:
         f"    vrep:constraint {_constraint_with_value(body, value)} ;",
         f"    vrep:binding <{p['binding']}> ;",
     ]
-    if p.get("twin"):
-        lines.append(f"    vrep:readAgainst drk:{p['twin']}-report ;")
+    for t in _twins(p):
+        lines.append(f"    vrep:readAgainst drk:{t}-report ;")
     comment = p.get("certificate", {}).get("comment")
     if comment:
         lines.append(f'    rdfs:comment """{comment}"""@en ;')
@@ -480,8 +487,8 @@ def _report_block(p: dict, body: str) -> str:
     # The case this one is meant to be read with: the same policies under
     # a different binding, or the same constraints with and without a
     # declarations.
-    if p.get("twin"):
-        lines.append(f"    vrep:readAgainst drk:{p['twin']}-report ;")
+    for t in _twins(p):
+        lines.append(f"    vrep:readAgainst drk:{t}-report ;")
 
     # One sentence: what the resource publishes about these concepts, and
     # what follows. Not how the procedure found it.

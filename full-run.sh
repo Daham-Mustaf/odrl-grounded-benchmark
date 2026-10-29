@@ -34,7 +34,7 @@ echo "  dpv purposes"
 
 # The remaining builders take different arguments; run them by hand the
 # first time and paste the working invocation here.
-for b in build_consent build_gdprlb build_tom build_filetype build_bcp47; do
+for b in build_consent build_tom build_filetype build_bcp47; do
   if [ -f "generators/$b.py" ]; then
     echo "  $b: not invoked here, add its arguments once known"
   fi
@@ -43,7 +43,7 @@ done
 # --- 2. problems -------------------------------------------------------
 hdr "2. generators"
 for g in gen_motivating gen_geonames gen_dpv gen_dpvloc gen_filetype \
-         gen_consent gen_gdprlb gen_tom gen_bcp47_problems gen_wellsorted; do
+         gen_consent gen_tom gen_bcp47_problems gen_wellsorted; do
   if uv run "generators/$g.py" >/dev/null 2>&1; then
     echo "  ok     $g"
   else

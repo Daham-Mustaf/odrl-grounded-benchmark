@@ -24,10 +24,11 @@ owl:disjointWith and no distinctness of any kind (grep: zero).
 Distinctness and disjointness are not interchangeable
 -----------------------------------------------------
 The declarations in problems/background/dpv-purposes-declared.ttl state
-that the purposes they list are pairwise distinct: no two of them are one
-concept.  That is admissible over any hierarchy, because one purpose may
-lie below another and still be a different purpose.  This generator reads
-that file and writes the axioms from it.
+that every purpose of the slice is distinct from every other: no two of
+them are one concept.  That is admissible over any hierarchy, because one
+purpose may lie below another and still be a different purpose.  This
+generator writes the file and then writes the axioms from what it reads
+back.
 
 Disjointness would not be, and this generator does not offer it.  Eleven
 concepts in the module have two parents: NonCommercialResearch under
@@ -296,6 +297,65 @@ def background_ttl(meta) -> str:
 """
 
 
+def declared_ttl(members, meta) -> str:
+    """The parties declare every purpose of the slice pairwise distinct.
+
+    Stated as a rule rather than as instances, for the reason the ISO rule
+    in build_dpvloc.py is stated that way: n concepts give n(n-1)/2
+    inequations, and a refutation should cite the one it used rather than
+    one term standing for all of them.  A problem naming two of the
+    concepts carries the inequation between them.
+
+    The members are all the concepts of the slice, so a problem may name
+    any two.  They are written as an owl:AllDifferent, and the axioms are
+    written from what is read back.
+    """
+    n = len(members)
+    listing = "\n".join(f"            <{m}>" for m in members)
+    return f"""\
+# Declarations for the DPV purposes slice: declared distinctness.
+#
+# The parties declare the purposes of the slice pairwise distinct, on the
+# ground that DPV defines each of them as a purpose in its own right.  DPV
+# publishes no distinctness anywhere in this module, so the rule is the
+# parties' and a verdict resting on an instance of it is withdrawable by
+# abandoning the rule.
+#
+# Distinctness only.  Nothing here says two purposes have nothing below
+# both: that is disjointness, and this module publishes concepts below
+# two parents, so a disjointness over such a pair would contradict what
+# DPV asserts and leave the slice with no model.
+#
+# The rule is stated here and instantiated by the problems: a problem
+# naming two of these purposes carries the inequation between them, so
+# that a refutation cites the instance it used rather than a term
+# standing for all of them.
+#
+# Purposes: {n}
+# Pairs   : {n * (n - 1) // 2}
+#
+# Source: {meta['version']}
+
+@prefix bind:    <https://w3id.org/odrl-kb/binding#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+<https://w3id.org/odrl-kb/dpv-purposes/declared> a bind:Declarations ;
+    dcterms:title "Pairwise distinctness of declared purposes"@en ;
+    bind:appliesTo <https://w3id.org/odrl-kb/dpv-purposes> ;
+    bind:generatedBy bind:PairwiseDistinctness ;
+    bind:origin bind:proseDefinition ;
+    bind:scopeCondition "Distinctness between the listed purposes, and not disjointness: DPV publishes concepts below two parents, and a disjointness over such a pair would contradict it."@en ;
+    bind:pairCount {n * (n - 1) // 2} ;
+    bind:states [
+        a owl:AllDifferent ;
+        owl:members (
+{listing}
+        )
+    ] .
+"""
+
+
 def declared_axioms(names) -> str:
     """The rule, stated but not instantiated.
 
@@ -436,22 +496,16 @@ def main() -> int:
     (args.out / "resources" / f"profile-{tag}.ttl").write_text(
         profile_ttl(), encoding="utf-8")
 
-    # The declarations are RDF a person wrote; the axioms follow from it.
+    # The declarations cover every purpose of the slice and are written as
+    # RDF; the axioms are written from what is read back.
     declared = args.out / "background" / f"{tag}-declared.ttl"
-    names = None
-    if declared.exists():
-        decl = declarations.load(declared)
-        names = sorted(str(m).rsplit("#", 1)[-1] for m in decl.members)
-        if len(names) < 2:
-            print(f"{declared}: needs at least two distinct concepts",
-                  file=sys.stderr)
-            return 1
-        missing = [x for x in names if x not in concepts]
-        if missing:
-            print(f"not in the slice: {', '.join(missing)}", file=sys.stderr)
-            return 1
-        (args.out / "axioms" / f"DPV-{tag}-declared.ax").write_text(
-            declared_axioms(names), encoding="utf-8")
+    declared.write_text(
+        declared_ttl([f"https://w3id.org/dpv#{c}" for c in sorted(concepts)],
+                     meta), encoding="utf-8")
+    names = sorted(str(m).rsplit("#", 1)[-1]
+                   for m in declarations.load(declared).members)
+    (args.out / "axioms" / f"DPV-{tag}-declared.ax").write_text(
+        declared_axioms(names), encoding="utf-8")
 
     kept = [(c, p) for c, p in edges if c in concepts and p in concepts]
     multi = sum(1 for c in concepts if sum(1 for x, _ in kept if x == c) > 1)

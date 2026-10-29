@@ -1,9 +1,9 @@
 %--------------------------------------------------------------------------
 % File     : KGC396-2.p
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
-% Problem  : purpose, isAnyOf {RnD, Marketing} against isAllOf {RnD, ServiceProvision} (witness condition negated)
+% Problem  : purpose, isA PublicBenefit against isAllOf {DataAltruism, ImproveTransportMobility} (witness condition negated)
 % Version  : 1.0
-% English  : A library permits use for research and development or marketing. A researcher's policy commits to both research and development and service provision.
+% English  : A city's traffic data platform permits use for public benefit purposes. A city transport authority commits to data altruism and improving transport mobility together.
 %
 % Refs     : odrl-grounded-benchmark. https://github.com/Daham-Mustaf/odrl-grounded-benchmark
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark
@@ -23,10 +23,7 @@ include('axioms/DPV-dpv-purposes.ax').
 
 % --- witness condition negated -------------------------------------------
 fof(w_kgc396, axiom,
-    ~ ( ( $true & $true & ( ( $true & ( dpv_research_and_development = dpv_research_and_development
-| dpv_research_and_development = dpv_marketing ) )
-| ( $true & ( dpv_marketing = dpv_research_and_development
-| dpv_marketing = dpv_marketing ) )
-| ( $true & ( dpv_service_provision = dpv_research_and_development
-| dpv_service_provision = dpv_marketing ) ) ) ) )).
+    ~ ( ( kge_leq(dpv_data_altruism, dpv_public_benefit) & kge_leq(dpv_improve_transport_mobility, dpv_public_benefit) & ( kge_leq(dpv_public_benefit, dpv_public_benefit)
+| kge_leq(dpv_data_altruism, dpv_public_benefit)
+| kge_leq(dpv_improve_transport_mobility, dpv_public_benefit) ) ) )).
 %--------------------------------------------------------------------------

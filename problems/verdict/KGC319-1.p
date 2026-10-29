@@ -1,9 +1,9 @@
 %--------------------------------------------------------------------------
 % File     : KGC319-1.p
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
-% Problem  : purpose, xone(isA RnD, isA Marketing) against eq ScientificResearch (witness condition asserted)
+% Problem  : purpose, xone(isA CommercialPurpose, isA NonCommercialPurpose) against eq NonCommercialResearch (witness condition asserted)
 % Version  : 1.0
-% English  : A library permits use for exactly one of research and development and marketing. A researcher's policy commits to use for scientific research.
+% English  : A city's traffic data platform permits use for exactly one of commercial and non-commercial purposes. A university research group commits to use for non-commercial research.
 %
 % Refs     : odrl-grounded-benchmark. https://github.com/Daham-Mustaf/odrl-grounded-benchmark
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark
@@ -23,14 +23,14 @@ include('axioms/DPV-dpv-purposes.ax').
 
 % --- witness condition asserted ------------------------------------------
 fof(w_kgc319, axiom,
-    ( ( ( ( kge_leq(dpv_research_and_development, dpv_research_and_development) & dpv_research_and_development = dpv_scientific_research )
-| ( kge_leq(dpv_marketing, dpv_research_and_development) & dpv_marketing = dpv_scientific_research )
-| ( kge_leq(dpv_scientific_research, dpv_research_and_development) & dpv_scientific_research = dpv_scientific_research ) ) & ( ( ( kge_leq(dpv_research_and_development, dpv_research_and_development) & dpv_research_and_development = dpv_scientific_research ) & ~ ( kge_leq(dpv_research_and_development, dpv_marketing) ) )
-| ( ( kge_leq(dpv_marketing, dpv_research_and_development) & dpv_marketing = dpv_scientific_research ) & ~ ( kge_leq(dpv_marketing, dpv_marketing) ) )
-| ( ( kge_leq(dpv_scientific_research, dpv_research_and_development) & dpv_scientific_research = dpv_scientific_research ) & ~ ( kge_leq(dpv_scientific_research, dpv_marketing) ) ) ) )
-| ( ( ( kge_leq(dpv_research_and_development, dpv_marketing) & dpv_research_and_development = dpv_scientific_research )
-| ( kge_leq(dpv_marketing, dpv_marketing) & dpv_marketing = dpv_scientific_research )
-| ( kge_leq(dpv_scientific_research, dpv_marketing) & dpv_scientific_research = dpv_scientific_research ) ) & ( ( ( kge_leq(dpv_research_and_development, dpv_marketing) & dpv_research_and_development = dpv_scientific_research ) & ~ ( kge_leq(dpv_research_and_development, dpv_research_and_development) ) )
-| ( ( kge_leq(dpv_marketing, dpv_marketing) & dpv_marketing = dpv_scientific_research ) & ~ ( kge_leq(dpv_marketing, dpv_research_and_development) ) )
-| ( ( kge_leq(dpv_scientific_research, dpv_marketing) & dpv_scientific_research = dpv_scientific_research ) & ~ ( kge_leq(dpv_scientific_research, dpv_research_and_development) ) ) ) ) )).
+    ( ( ( ( kge_leq(dpv_commercial_purpose, dpv_commercial_purpose) & dpv_commercial_purpose = dpv_non_commercial_research )
+| ( kge_leq(dpv_non_commercial_purpose, dpv_commercial_purpose) & dpv_non_commercial_purpose = dpv_non_commercial_research )
+| ( kge_leq(dpv_non_commercial_research, dpv_commercial_purpose) & dpv_non_commercial_research = dpv_non_commercial_research ) ) & ( ( ( kge_leq(dpv_commercial_purpose, dpv_commercial_purpose) & dpv_commercial_purpose = dpv_non_commercial_research ) & ~ ( kge_leq(dpv_commercial_purpose, dpv_non_commercial_purpose) ) )
+| ( ( kge_leq(dpv_non_commercial_purpose, dpv_commercial_purpose) & dpv_non_commercial_purpose = dpv_non_commercial_research ) & ~ ( kge_leq(dpv_non_commercial_purpose, dpv_non_commercial_purpose) ) )
+| ( ( kge_leq(dpv_non_commercial_research, dpv_commercial_purpose) & dpv_non_commercial_research = dpv_non_commercial_research ) & ~ ( kge_leq(dpv_non_commercial_research, dpv_non_commercial_purpose) ) ) ) )
+| ( ( ( kge_leq(dpv_commercial_purpose, dpv_non_commercial_purpose) & dpv_commercial_purpose = dpv_non_commercial_research )
+| ( kge_leq(dpv_non_commercial_purpose, dpv_non_commercial_purpose) & dpv_non_commercial_purpose = dpv_non_commercial_research )
+| ( kge_leq(dpv_non_commercial_research, dpv_non_commercial_purpose) & dpv_non_commercial_research = dpv_non_commercial_research ) ) & ( ( ( kge_leq(dpv_commercial_purpose, dpv_non_commercial_purpose) & dpv_commercial_purpose = dpv_non_commercial_research ) & ~ ( kge_leq(dpv_commercial_purpose, dpv_commercial_purpose) ) )
+| ( ( kge_leq(dpv_non_commercial_purpose, dpv_non_commercial_purpose) & dpv_non_commercial_purpose = dpv_non_commercial_research ) & ~ ( kge_leq(dpv_non_commercial_purpose, dpv_commercial_purpose) ) )
+| ( ( kge_leq(dpv_non_commercial_research, dpv_non_commercial_purpose) & dpv_non_commercial_research = dpv_non_commercial_research ) & ~ ( kge_leq(dpv_non_commercial_research, dpv_commercial_purpose) ) ) ) ) )).
 %--------------------------------------------------------------------------

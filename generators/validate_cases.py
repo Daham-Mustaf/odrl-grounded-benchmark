@@ -56,12 +56,13 @@ CRM = "https://w3id.org/force/compliance-report#"
 SET_OPERATORS = {"isAnyOf", "isAllOf", "isNoneOf"}
 
 # The skos:note of each DPV-ODRL left operand: "Only the ... operators MUST
-# be used."  Copied from mappings/odrl/dpv-odrl.ttl on the dev branch of
-# https://github.com/w3c-cg/dpv (commit 8a50545, 6 August 2026).  The
-# measure operands all carry the same note as TechnicalOrganisationalMeasure.
+# be used."  Read again from mappings/odrl/dpv-odrl.ttl on the dev branch of
+# https://github.com/w3c-cg/dpv (commit 6d20265, 26 October 2026); the
+# notes of these operands are the ones the August copy (commit 8a50545,
+# 6 August 2026) had.  The measure operands all carry the same note as
+# TechnicalOrganisationalMeasure.
 _FIVE = {"isA", "eq", "neq", "isAnyOf", "isNoneOf"}
 OPERATOR_NOTES = {
-    "LegalBasis": {"isA", "eq", "neq"},
     "Purpose": _FIVE,
     "Location": {"eq", "neq", "isAnyOf", "isNoneOf"},
     "Status": _FIVE,

@@ -2,6 +2,14 @@ kgc:KGC396-observed a vrep:Refutation ;
     vrep:producedBy "Vampire" ;
     vrep:proofArtefact <proofs/KGC396-2.tstp> ;
     vrep:attributedStatement [
+        vrep:premiseSource vrep:fromResource ;
+        vrep:formulaName "res_dpv_data_altruism_below_dpv_public_benefit" ;
+        rdfs:label "res_dpv_data_altruism_below_dpv_public_benefit"@en ] ;
+    vrep:attributedStatement [
+        vrep:premiseSource vrep:fromResource ;
+        vrep:formulaName "res_dpv_improve_transport_mobility_below_dpv_public_benefit" ;
+        rdfs:label "res_dpv_improve_transport_mobility_below_dpv_public_benefit"@en ] ;
+    vrep:attributedStatement [
         vrep:premiseSource vrep:fromConstraints ;
         vrep:formulaName "w_kgc396" ;
         rdfs:label "w_kgc396"@en ] .
