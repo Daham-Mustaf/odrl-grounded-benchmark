@@ -53,7 +53,7 @@ drk:KGC398-report a vrep:OperandVerdictReport ;
     vrep:comparedConstraint kgc:KGC398-p2-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-language-bcp47> ;
     vrep:declarations <https://w3id.org/odrl-kb/bcp47/empty> ;
-    rdfs:comment """French is on the licence's list and in the licensee's pair, so a use in Dutch and French satisfies both policies in every structure."""@en ;
+    rdfs:comment """French is on the licence's list and in the licensee's pair, so a use in Dutch and French meets both policies whatever the IANA registry leaves open."""@en ;
     dcterms:description """A translation licence covers at least one of a German and a French edition. The licensee publishes in both Dutch and French."""@en ;
     vrep:compatibilityState vrep:Compatible ;
     vrep:certificate <certificates/KGC398-2.tstp> .

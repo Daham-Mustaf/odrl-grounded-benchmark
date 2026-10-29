@@ -41,15 +41,13 @@ SORT_TERM = {
 # Two sentences at the head of every case file.  A reader opening one of
 # these should not have to know the generator to see what the file is.
 _HEADER = """\
-# A drafting-time check: whether this constraint can be evaluated at all
-# under the sort its operand is bound at.  The answer comes from the
-# signature and from nothing else, so no resource was opened and no prover
-# was run to produce it.
+# A check made while a policy is drafted: whether the operator applies to the
+# kind of value the policy gives.  The answer comes from the operator and the
+# kind of value alone, so no vocabulary was opened and no prover was run.
 #
-# A rejected constraint is not false.  It is a question the bound resource
-# cannot be asked: isA over a resource that publishes no subsumption has
-# nothing to test, and an evaluator that returned true or false would be
-# inventing an answer.
+# A rejected policy is not false.  It asks a question the vocabulary cannot
+# answer: isA over a vocabulary that arranges nothing in kinds has nothing to
+# test, and an evaluator that answered yes or no would be inventing an answer.
 """
 
 
@@ -68,14 +66,11 @@ def case_ttl(p: dict, accepted: bool, reason: str) -> str:
         f"    vrep:constraint kgc:{pid}-p1-c1 ;",
         f"    vrep:binding <{p['binding']}> ;",
     ]
-    summary = (f"A German library's policy constrains {p['left_operand']} with "
-               f"{p['operator']} {p['value']}, and the binding reads "
-               f"{p['left_operand']} at sort {p['sort']}.")
-    if accepted:
-        comment = (f"{p['operator']} is defined at sort {p['sort']}, so the "
-                   f"constraint is well sorted and goes on to the verdict.")
-    else:
-        comment = reason if reason.endswith(".") else reason + "."
+    # What a reader sees is the problem's own wording; the signature only
+    # decides whether the operator applies, and main() checks that against
+    # the problem's expectation.
+    summary = p["summary"]
+    comment = p["reason"]
     lines.append(f'    dcterms:description """{summary}"""@en ;')
     lines.append(f'    rdfs:comment """{comment}"""@en ;')
     lines.append(f"    vrep:wellSorted {'true' if accepted else 'false'} .")

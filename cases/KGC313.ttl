@@ -58,6 +58,6 @@ drk:KGC313-report a vrep:OperandVerdictReport ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-purpose> ;
     vrep:declarations <https://w3id.org/odrl-kb/dpv-purposes/empty> ;
     vrep:readAgainst drk:KGC314-report ;
-    rdfs:comment """DPV does not declare marketing and scientific research distinct. In a structure that identifies them, a use for marketing is a use for scientific research and satisfies both policies. In a structure that keeps them apart, no use does. So the verdict is Unknown."""@en ;
+    rdfs:comment """DPV does not state that marketing and scientific research are different purposes. If they are the same purpose, a use for marketing meets both policies; if they are different, no use does. So the verdict is Unknown."""@en ;
     dcterms:description """A city's traffic data platform permits use for scientific research only. A company commits to use for marketing."""@en ;
     vrep:compatibilityState vrep:Unknown .

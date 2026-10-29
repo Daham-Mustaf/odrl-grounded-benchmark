@@ -112,12 +112,11 @@ PROBLEMS = [
         "description": (
             "The EU file type table lists both PDF and PDF/A-1a but relates "
             "the two concepts to each other in no way. The media type "
-            "application/pdf, which both carry, is a notation this binding "
-            "does not read. At the nom sort, where values are told apart by "
-            "name only, nothing therefore decides whether the two formats "
-            "are one. The case also shows that this binding does not read "
-            "conformance to a file-format profile as identity, kind or "
-            "part."),
+            "application/pdf, which both carry, is a notation this reading "
+            "does not use. Where values are told apart by name only, "
+            "nothing therefore decides whether the two formats are one. The "
+            "case also shows that conformance to a file-format profile is "
+            "not read as being the same, a kind or a part."),
 
         "fof_decls": """\
 % Resource: no order statements.  The table publishes none.
@@ -133,12 +132,12 @@ PROBLEMS = [
         "certificate": {
             "kind": "Models",
 "comment": (
-    "The two constraints can be satisfied both when ft:PDF and ft:PDFA1A "
-    "denote the same element and when they denote different elements. No "
-    "resource statement or declaration selects between these possibilities. "
-    "PDF/A-1a is a restricted form of PDF, but the table publishes no "
-    "relation between the two concepts, and the media type application/pdf "
-    "that both carry is a notation the binding does not read."),
+    "If ft:PDF and ft:PDFA1A are the same format, a use in one is a use in "
+    "the other and both policies are met; if they are different formats, no "
+    "use meets both. The EU file type table lists both and relates them in "
+    "no way. PDF/A-1a is a restricted form of PDF, but the table does not "
+    "state so, and the media type application/pdf that both carry is a "
+    "notation this reading does not use."),
             "premises": [],
         },
         "ttl": _TTL_HEAD + """
@@ -197,8 +196,9 @@ kgc:KGC320-p2-c1 a odrl:Constraint ;
             "As KGC320, with the two formats declared distinct."),
 "description": (
     "KGC320 with a declaration that ft:PDF and ft:PDFA1A are distinct. The "
-    "resource contributes no relation between the two concepts, so the "
-    "declaration is what changes the verdict from Unknown to Incompatible."),
+    "EU file type table contributes no relation between the two concepts, "
+    "so the declaration is what changes the verdict from Unknown to "
+    "Incompatible."),
         "fof_decls": """\
 % Declarations: one declared distinctness, from
 % EUFT-filetype-declared.ax.  The table separates nothing itself.
@@ -212,13 +212,13 @@ kgc:KGC320-p2-c1 a odrl:Constraint ;
         "certificate": {
             "kind": "Refutation",
    "comment": (
-       "The two constraints require ft:PDF and ft:PDFA1A to denote the same "
-       "element, while the declaration requires them to denote different "
-       "elements. The two conditions cannot both hold. PDF/A-1a is a "
-       "restricted form of PDF, but the table publishes no relation between "
-       "the two concepts, and the media type application/pdf that both "
-       "carry is a notation the binding does not read, so under this "
-       "binding a use in PDF/A-1a is not a use in PDF."),
+       "The policies need a use in PDF and in PDF/A-1a only, which is "
+       "possible only if the two are the same format; the declaration "
+       "states they are different formats, since the EU file type table "
+       "lists them as separate entries. PDF/A-1a is a restricted form of "
+       "PDF, but the table does not relate the two concepts, and the media "
+       "type application/pdf that both carry is a notation this reading "
+       "does not use. So no use meets both policies."),
             "premises": [
                 ("fromDeclarations",
                  "ft:PDF and ft:PDFA1A are declared distinct"),
@@ -278,11 +278,11 @@ kgc:KGC321-p2-c1 a odrl:Constraint ;
         "description": (
             "A policy that lists both PDF and PDF/A-1a with isAnyOf, "
             "against a commitment to PDF/A-1a. PDF/A-1a is on the list, so "
-            "a use in PDF/A-1a satisfies both policies whatever the table "
+            "a use in PDF/A-1a meets both policies whatever the table "
             "states, and the verdict is Compatible. isAnyOf asks only "
             "whether a value is one of the listed names, which is why it "
-            "works at the nom sort, where isA does not. It also admits "
-            "PDF/A-1a together with any other format."),
+            "works where values are told apart by name only and isA does "
+            "not. It also admits PDF/A-1a together with any other format."),
         "maintainer_note": (
             "The refutation cites the witness alone: no resource statement, "
             "no declaration, no order axiom."),
@@ -303,10 +303,9 @@ kgc:KGC321-p2-c1 a odrl:Constraint ;
             "kind": "Refutation",
     "comment": (
         "The second policy requires PDF/A-1a, and the first lists it among "
-        "the values isAnyOf accepts. The two constraints can be satisfied "
-        "together without any resource statement or declaration. Listing "
-        "both formats is how a policy author makes PDF/A-1a acceptable "
-        "under a flat table."),
+        "the formats isAnyOf accepts, so a use in PDF/A-1a meets both "
+        "policies. The EU file type table relates no formats, so listing "
+        "both is how a policy author makes PDF/A-1a acceptable."),
             "premises": [
                 ("fromConstraints", "the witness condition"),
             ],
@@ -374,9 +373,10 @@ kgc:KGC322-p2-c1 a odrl:Constraint ;
 
     "description": (
         "As in KGC392 and KGC397, the exclusion works by name. PDF/A-1a is "
-        "a restricted form of PDF, but the table does not relate the two, "
-        "so excluding PDF does not exclude PDF/A-1a. At this sort the only "
-        "way to exclude both is to list both (isNoneOf PDF, PDF/A-1a)."),
+        "a restricted form of PDF, but the EU file type table does not "
+        "relate the two, so excluding PDF does not exclude PDF/A-1a. Where "
+        "values are told apart by name only, the only way to exclude both "
+        "is to list both (isNoneOf PDF, PDF/A-1a)."),
 
     "fof_decls": """\
 % Resource: no order statements.
@@ -396,10 +396,12 @@ kgc:KGC322-p2-c1 a odrl:Constraint ;
     "certificate": {
         "kind": "Refutation",
         "comment": (
-            "The first policy excludes PDF, and the second requires PDF/A-1a. "
-            "The declarations declare the two formats distinct, so the "
-            "required format is not excluded. The exclusion of PDF does not "
-            "exclude PDF/A-1a, because the table does not relate them."),
+            "The first policy excludes PDF, and the second requires "
+            "PDF/A-1a. The declarations state that the two formats are "
+            "different, since the EU file type table lists them as separate "
+            "entries, so the required format is not excluded. Excluding PDF "
+            "does not exclude PDF/A-1a, because the table does not relate "
+            "them."),
         "premises": [
             (
                 "fromDeclarations",

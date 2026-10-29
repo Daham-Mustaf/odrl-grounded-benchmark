@@ -53,7 +53,7 @@ drk:KGC403-report a vrep:OperandVerdictReport ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-purpose> ;
     vrep:declarations <https://w3id.org/odrl-kb/dpv-purposes/declared> ;
     vrep:readAgainst drk:KGC316-report ;
-    rdfs:comment """DPV places scientific research below research and development. A use for research and development meets the first policy only if research and development also lies below scientific research, and then the two are one purpose. They are declared distinct, so no use satisfies both policies."""@en ;
+    rdfs:comment """DPV places scientific research below research and development. A use for research and development meets the first policy only if research and development also lies below scientific research, and then the two are one purpose. They are declared distinct, because DPV defines each as a purpose of its own, so no use meets both policies."""@en ;
     dcterms:description """As KGC316, with scientific research and research and development declared distinct."""@en ;
     vrep:compatibilityState vrep:Incompatible ;
     vrep:certificate <certificates/KGC403-1.tstp> .

@@ -61,6 +61,6 @@ drk:KGC379-report a vrep:OperandVerdictReport ;
     vrep:comparedConstraint kgc:KGC379-p2-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-language-bcp47> ;
     vrep:declarations <https://w3id.org/odrl-kb/bcp47/empty> ;
-    rdfs:comment """Nothing states that German and French are different languages. In a structure that keeps them apart, a use in German satisfies the first alternative only, so both policies hold. In a structure that identifies them, a use in German satisfies both alternatives, and exactly one fails. So the verdict is Unknown."""@en ;
+    rdfs:comment """The IANA registry (RFC 5646) does not state that German and French are different languages. If they are different, a use in German meets the first alternative only, so both policies hold; if they are the same language, a use in German meets both alternatives and 'exactly one' fails. So the verdict is Unknown."""@en ;
     dcterms:description """A licence for a single-language edition allows exactly one of German and French. The licensee publishes in German."""@en ;
     vrep:compatibilityState vrep:Unknown .

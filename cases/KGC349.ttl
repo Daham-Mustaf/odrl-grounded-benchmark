@@ -53,7 +53,7 @@ drk:KGC349-report a vrep:OperandVerdictReport ;
     vrep:comparedConstraint kgc:KGC349-p2-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-consent-status> ;
     vrep:declarations <https://w3id.org/odrl-kb/dpv-consent/declared> ;
-    rdfs:comment """Expired consent is declared distinct from withdrawn and from revoked consent, so the exclusion list does not exclude it."""@en ;
+    rdfs:comment """Expired consent is declared distinct from withdrawn and from revoked consent, since DPV defines each state separately, so the exclusion list does not exclude it."""@en ;
     dcterms:description """A controller permits use under any consent status except withdrawn and revoked. A processor commits to use only records whose consent has expired, in a consent-renewal campaign."""@en ;
     vrep:compatibilityState vrep:Compatible ;
     vrep:certificate <certificates/KGC349-2.tstp> .

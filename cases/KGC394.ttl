@@ -53,7 +53,7 @@ drk:KGC394-report a vrep:OperandVerdictReport ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-purpose> ;
     vrep:declarations <https://w3id.org/odrl-kb/dpv-purposes/declared> ;
     vrep:readAgainst drk:KGC393-report ;
-    rdfs:comment """Improving transport mobility is declared distinct from public benefit and from non-commercial research, so it is neither value the first policy lists."""@en ;
+    rdfs:comment """Improving transport mobility is declared distinct from public benefit and from non-commercial research, because DPV defines each as a purpose of its own, so it is neither value the first policy lists."""@en ;
     dcterms:description """As KGC393, with improving transport mobility declared distinct from both purposes the first policy names."""@en ;
     vrep:compatibilityState vrep:Incompatible ;
     vrep:certificate <certificates/KGC394-1.tstp> .

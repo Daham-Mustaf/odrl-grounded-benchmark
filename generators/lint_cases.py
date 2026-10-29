@@ -16,6 +16,7 @@ import argparse
 import glob
 import re
 import sys
+from pathlib import Path
 from collections import defaultdict
 
 from rdflib import Graph, Namespace, RDF, URIRef
@@ -52,14 +53,19 @@ DASH = re.compile("[–—]")
 OLD_WORDING = re.compile(r"\b(background|assertions?)\b", re.I)
 INSTITUTION = re.compile(r"\b(BSB|BnF)\b|Bavarian State|Biblioth", re.I)
 STALE_ROLE = re.compile(r"\b(provider|consumer|reuser)\b", re.I)
-# Words of the machinery.  A reader of a case is not told what a witness, a
-# refutation or a down-set is, so none of them appears in a title, a summary,
-# a reason or a lesson; neither does triple notation like (purpose, isA, X).
+# Words of logic and of the machinery.  A reader of a case is not told what a
+# witness, a structure or a refutation is, and the cases are about places,
+# purposes, languages and consent, so none of these words appears in a title, a
+# summary, a reason, a lesson or the catalogue; neither does triple notation
+# like (purpose, isA, X).  The maintainer note, Turtle property names and IRIs
+# are exempt: they are not text a reader sees.
 JARGON = re.compile(
-    r"\b(witness(es)?|refut\w*|certificat\w*|quer(y|ies)|models?|premises?|"
-    r"antisymmetr\w*|down-?sets?|up-?sets?|nominal sort|satisfiab\w*|singletons?|"
-    r"withdrawable|order axioms?|polarity|provenance|converse edge|disjuncts?|"
-    r"negated|epistemic)\b", re.I)
+    r"\b(structures?|models?|witness(es)?|quer(y|ies)|(un)?satisfiab\w*|"
+    r"entail\w*|refut\w*|certificat\w*|premises?|axioms?|antisymmetr\w*|"
+    r"transitiv\w*|reflexiv\w*|down-?sets?|up-?sets?|sort(s|ed)?|nom|tax|mer|"
+    r"slices?|ground(s|ed|ing)?|bindings?|"
+    r"nominal sort|singletons?|withdrawable|order axioms?|polarity|provenance|"
+    r"converse edge|disjuncts?|negated|epistemic)\b", re.I)
 TRIPLE = re.compile(r"\(\s*[A-Za-z]+,\s*(?:eq|neq|isA|isPartOf|hasPart|isAnyOf|isAllOf|isNoneOf)\b")
 NEED = {  # operator -> substrings, any one suffices
     "eq": ["only"], "isA": ["only"], "isPartOf": ["within"],
@@ -125,7 +131,7 @@ if __name__ == "__main__":
         raw = open(f, encoding="utf-8").read()
         g = Graph().parse(f, format="turtle")
         # --- text rules over everything a reader sees: literals and # comments ---
-        texts = [str(o) for p in (DCTERMS.title, DCTERMS.description, RDFS.comment) for o in g.objects(None, p)]
+        texts = [str(o) for p in (DCTERMS.title, DCTERMS.description, RDFS.comment, VREP.profileNote) for o in g.objects(None, p)]
         texts += [l for l in raw.split("\n") if l.lstrip().startswith("#")]
         for t in texts:
             if DASH.search(t): fail(cid, f"dash in {t[:70]!r}")
@@ -210,6 +216,21 @@ if __name__ == "__main__":
             named -= {"library"} if re.search(r"\b(german|french) library\b", s) else set()
             if named - parties:
                 fail(cid, f"summary names {sorted(named - parties)} but the parties are {sorted(parties)}")
+
+    # --- the criteria in cases-README.md are text a reader sees, too ----------
+    readme = Path(ARGS.cases) / "cases-README.md"
+    if readme.exists():
+        fenced = False
+        for n, line in enumerate(readme.read_text(encoding="utf-8").splitlines(), 1):
+            if line.startswith("```"):
+                fenced = not fenced
+                continue
+            if fenced or line.startswith("KGC"):
+                continue
+            for rx, what in ((BAD_WORDS, "banned word"), (JARGON, "jargon")):
+                m = rx.search(line)
+                if m:
+                    fail("cases-README", f"line {n}: {what} {m.group(0)!r}")
 
     # --- one party pair and one target per family -----------------------------
     fam_choice = defaultdict(set)

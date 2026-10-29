@@ -49,7 +49,7 @@ drk:KGC381-report a vrep:GroundingReport ;
     vrep:constraint kgc:KGC381-p1-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-spatial-dpvloc-geo> ;
     vrep:readAgainst drk:KGC331-report ;
-    rdfs:comment """The territorial binding does not read union membership, so loc:EU names no concept of its slice. The constraint is therefore rejected, and no verdict is computed. KGC331 reads the same policies under the jurisdictional binding, where loc:EU grounds and the verdict is Compatible."""@en ;
-    dcterms:description """As KGC331, under the territorial binding. A library permits use within the European Union, and a researcher's policy commits to use in Germany."""@en ;
+    rdfs:comment """The territorial reading does not use union membership, so the European Union names no entry of the part of DPV used here. The policy is therefore rejected, and no verdict is computed. KGC331 reads the same policies under the jurisdictional reading, where the Union is an entry and the verdict is Compatible."""@en ;
+    dcterms:description """As KGC331, under the territorial reading. A library permits use within the European Union, and a researcher's policy commits to use in Germany."""@en ;
     vrep:grounded false ;
     vrep:ungroundedValue loc:EU .

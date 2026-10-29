@@ -93,9 +93,11 @@ PROBLEMS = [
         "certificate": {
             "kind": "Refutation",
             "comment": (
-                "Both constraints can hold only if German and French are one "
-                "language. The declared registry rule makes them distinct, so no "
-                "use satisfies both policies."),
+                "Both policies can hold together only if German and French "
+                "are one language. The declared rule that different primary "
+                "language subtags name different languages, warranted by "
+                "RFC 5646 sections 3 and 3.1.5, makes them two, so no use "
+                "meets both policies."),
             "premises": [
                 ("fromDeclarations",
                  "bcp:de and bcp:fr are distinct (distinctness rule)"),
@@ -161,9 +163,8 @@ kgc:KGC300-p2-c1 a odrl:Constraint ;
             "A policy for non-commercial purposes and everything below "
             "them, against a commitment to scientific research. DPV neither "
             "places scientific research below non-commercial purpose nor "
-            "keeps it out. A structure that places it there admits a use "
-            "that satisfies both policies; a structure that does not admits "
-            "none. So the verdict is Unknown."),
+            "keeps it out. If it lies there, a use meets both policies; if "
+            "not, none does. So the verdict is Unknown."),
         "maintainer_note": "Both queries are satisfiable.",
 
         "fof_decls": """\
@@ -185,10 +186,9 @@ kgc:KGC300-p2-c1 a odrl:Constraint ;
             "kind": "Models",
             "comment": (
                 "DPV does not state whether scientific research is a "
-                "non-commercial purpose. In a structure that places it "
-                "below non-commercial purpose, a use for scientific "
-                "research satisfies both policies. In a structure that does "
-                "not, no use does. So the verdict is Unknown."),
+                "non-commercial purpose. If it is, a use for scientific "
+                "research meets both policies; if it is not, no use does. "
+                "So the verdict is Unknown."),
             "premises": [],
         },
         "ttl": """\
@@ -256,8 +256,7 @@ kgc:KGC301-p2-c1 a odrl:Constraint ;
         "description": (
             "A German library permits use within Europe, and a French "
             "library commits to use in France only. GeoNames places France "
-            "within Europe, so a use in France satisfies both policies in "
-            "every structure."),
+            "within Europe, so a use in France meets both policies."),
         "maintainer_note": (
             "The witness condition holds in every structure, and the "
             "negated query is unsatisfiable."),
@@ -276,7 +275,7 @@ kgc:KGC301-p2-c1 a odrl:Constraint ;
             "kind": "Refutation",
             "comment": (
                 "GeoNames places France within Europe, so a use in France "
-                "satisfies both policies in every structure."),
+                "meets both policies."),
             "premises": [
                 ("fromResource", "gn:France lies within gn:Europe"),
             ],

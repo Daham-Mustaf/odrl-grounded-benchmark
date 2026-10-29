@@ -54,7 +54,7 @@ drk:KGC300-report a vrep:OperandVerdictReport ;
     vrep:comparedConstraint kgc:KGC300-p2-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-language-bcp47> ;
     vrep:declarations <https://w3id.org/odrl-kb/bcp47/distinct> ;
-    rdfs:comment """Both constraints can hold only if German and French are one language. The declared registry rule makes them distinct, so no use satisfies both policies."""@en ;
+    rdfs:comment """Both policies can hold together only if German and French are one language. The declared rule that different primary language subtags name different languages, warranted by RFC 5646 sections 3 and 3.1.5, makes them two, so no use meets both policies."""@en ;
     dcterms:description """A German library permits use of its manuscripts in German only. A French library's policy commits to use in French only."""@en ;
     vrep:compatibilityState vrep:Incompatible ;
     vrep:certificate <certificates/KGC300-1.tstp> .

@@ -274,7 +274,7 @@ PROBLEMS = [
             "among those in use; the processor's isA asks that every "
             "measure in use be a technical one. DPV places both measures "
             "below technical measure, so a use with just those two meets "
-            "both policies, in every structure. Verdict: Compatible."),
+            "both policies. Verdict: Compatible."),
         "expected_q1": "Satisfiable",
         "expected_q2": "Unsatisfiable",
         "certificate": {
@@ -342,17 +342,18 @@ PROBLEMS = [
             "A controller requires both encryption and access control; a "
             "processor commits to encryption only."),
         "description": (
-            "The first policy needs both safeguards among the use's measures and "
-            "the second supplies one. The conflict looks immediate and is not: "
-            "a structure that identifies the two measures satisfies both "
-            "sides, and DPV separates them nowhere. Unknown as published."),
+            "The first policy needs both safeguards among the use's "
+            "measures and the second supplies one. The conflict looks "
+            "immediate and is not: if encryption and access control are the "
+            "same measure, a use meets both policies, and DPV separates "
+            "them nowhere. Unknown as published."),
         "certificate": {"kind": "Models",
             "comment": (
-                "In a structure that identifies encryption with access control, a use "
-                "applying encryption applies both measures and satisfies both "
-                "policies. In a structure that keeps them apart, the use lacks access "
-                "control, and no use satisfies both. Nothing published decides "
-                "between the two, so the verdict is Unknown."),
+                "If encryption and access control are the same measure, a "
+                "use applying encryption applies both and meets both "
+                "policies; if they are different measures, the use lacks "
+                "access control and no use meets both. DPV separates them "
+                "nowhere, so the verdict is Unknown."),
             "premises": []},
         "provenance": "As KGC362; the universal clause.",
         "ttl": _ttl("KGC363", TOM_LO, "both encryption and access control",
@@ -381,8 +382,10 @@ PROBLEMS = [
             "KGC362 (at least one of the two, no declarations), which is "
             "Compatible."),
         "certificate": {"kind": "Refutation",
-            "comment": "Encryption and access control are declared distinct, so "
-                       "a use supplying only encryption lacks the second.",
+            "comment": (
+                "Encryption and access control are declared distinct, since "
+                "DPV defines each measure separately, so a use supplying "
+                "only encryption lacks the second."),
             "premises": [("fromDeclarations",
                           "Encryption distinct from AccessControlMethod")]},
         "provenance": "As KGC362; warrant DPV's definitions.",
@@ -411,11 +414,10 @@ PROBLEMS = [
             "pseudonymisation together."),
         "description": (
             "isAllOf states a minimum. The controller needs encryption and "
-            "access control among the measures in use and does not "
-            "exclude others. A use that also applies pseudonymisation has "
-            "both required measures, so it satisfies the two policies in "
-            "every structure and the verdict is Compatible on the "
-            "constraints alone."),
+            "access control among the measures in use and does not exclude "
+            "others. A use that also applies pseudonymisation has both "
+            "required measures, so it meets both policies and the verdict "
+            "is Compatible on the constraints alone."),
         "certificate": {"kind": "Refutation",
             "comment": (
                 "isAllOf states a minimum. A use with encryption, access "
@@ -458,23 +460,24 @@ PROBLEMS = [
             "isAnyOf matches by name. DPV places encryption at rest below "
             "encryption, but encryption at rest is neither encryption nor "
             "access control by name, and the processor's use has no other "
-            "measure. As published a structure may identify it with one of "
-            "the two names, and the verdict would be Unknown; no case of "
-            "the suite shows that variant. With the measures declared "
-            "distinct no use satisfies both policies, and the verdict is "
-            "Incompatible. ODRL has no operator for \"includes some kind of "
-            "encryption\". Read with KGC362, where the processor's measure "
-            "is encryption itself and the verdict is Compatible."),
+            "measure. As published it might be the same measure as one of "
+            "the two, and the verdict would be Unknown; no case of the "
+            "suite shows that variant. With the measures declared distinct "
+            "no use meets both policies, and the verdict is Incompatible. "
+            "ODRL has no operator for \"includes some kind of encryption\". "
+            "Read with KGC362, where the processor's measure is encryption "
+            "itself and the verdict is Compatible."),
         "certificate": {"kind": "Refutation",
             "comment": (
-                "isAnyOf matches by name. Encryption at rest is a kind of "
-                "encryption, yet it is neither encryption nor access "
-                "control by name. With the measures declared distinct, a "
-                "use whose only measure is encryption at rest has neither "
-                "measure the first policy lists, and no use satisfies both "
-                "policies. ODRL has no operator for \"includes some kind of "
-                "encryption\". Without the declarations the verdict would be "
-                "Unknown, but no case of the suite shows it."),
+                "isAnyOf matches by name. DPV places encryption at rest "
+                "below encryption, yet it is neither encryption nor access "
+                "control by name. With the measures declared distinct, "
+                "since DPV defines each separately, a use whose only "
+                "measure is encryption at rest has neither measure the "
+                "first policy lists, and no use meets both policies. ODRL "
+                "has no operator for \"includes some kind of encryption\". "
+                "Without the declarations the verdict would be Unknown, but "
+                "no case of the suite shows it."),
             "premises": [("fromDeclarations",
                           "Encryption distinct from EncryptionAtRest"),
                          ("fromDeclarations",

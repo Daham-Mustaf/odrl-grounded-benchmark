@@ -52,7 +52,7 @@ drk:KGC392-report a vrep:OperandVerdictReport ;
     vrep:comparedConstraint kgc:KGC392-p2-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-spatial-dpvloc-geo> ;
     vrep:declarations <https://w3id.org/odrl-kb/dpv-loc/iso> ;
-    rdfs:comment """isNoneOf excludes the named area itself, not its parts. The ISO rule makes Bavaria distinct from Germany, so the use is not excluded, although Bavaria lies within Germany."""@en ;
+    rdfs:comment """isNoneOf excludes the named area itself, not its parts. The ISO 3166 rule makes Bavaria distinct from Germany, so the use is not excluded, although DPV places Bavaria within Germany."""@en ;
     dcterms:description """A library permits use anywhere except Germany. A researcher's policy commits to use in Bavaria, a state of Germany."""@en ;
     vrep:compatibilityState vrep:Compatible ;
     vrep:certificate <certificates/KGC392-2.tstp> .

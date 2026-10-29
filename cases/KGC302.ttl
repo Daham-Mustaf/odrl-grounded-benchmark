@@ -53,7 +53,7 @@ drk:KGC302-report a vrep:OperandVerdictReport ;
     vrep:comparedConstraint kgc:KGC302-p2-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-spatial-geonames> ;
     vrep:declarations <https://w3id.org/odrl-kb/geonames-europe/empty> ;
-    rdfs:comment """GeoNames places France within Europe, so a use in France satisfies both policies in every structure."""@en ;
+    rdfs:comment """GeoNames places France within Europe, so a use in France meets both policies."""@en ;
     dcterms:description """A German library permits use within Europe. A French library's policy commits to use in France only."""@en ;
     vrep:compatibilityState vrep:Compatible ;
     vrep:certificate <certificates/KGC302-2.tstp> .

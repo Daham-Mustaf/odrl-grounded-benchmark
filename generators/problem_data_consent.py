@@ -347,16 +347,18 @@ PROBLEMS = [
       "The processor audits erasure, so it looks only at records whose "
       "consent was withdrawn. DPV places the withdrawn state below the "
       "invalid branch. It does not state in RDF that the valid and invalid "
-      "branches are disjoint. So one structure that satisfies the published "
-      "statements also places the withdrawn state below the valid branch, "
-      "and another does not. The verdict is therefore Unknown. KGC343 adds "
-      "the disjointness as a declaration."),
+      "branches are disjoint. If withdrawn consent also lies below the "
+      "valid branch, a use meets both policies; if it does not, none does. "
+      "The verdict is therefore Unknown. KGC343 adds the disjointness as a "
+      "declaration."),
         "certificate": {"kind": "Models",
             "comment": (
-                "The published statements do not exclude the withdrawn "
-                "state from the valid branch. One structure places it below "
-                "both branches, and both constraints can hold. Another does "
-                "not, and they cannot."),
+                "DPV places the withdrawn state below the invalid branch, "
+                "which it defines as the states that cannot justify "
+                "processing, but does not state in RDF that the valid and "
+                "invalid branches are disjoint. If withdrawn consent also "
+                "lies below the valid branch, a use meets both policies; if "
+                "it does not, no use does. So the verdict is Unknown."),
             "premises": []},
         "provenance": PROV_POST,
         "ttl": _TTL_HEAD
@@ -390,10 +392,12 @@ PROBLEMS = [
             "disjointness, but the DPV RDF does not assert it."),
 "certificate": {"kind": "Refutation",
     "comment": (
-                "ConsentWithdrawn lies below the invalid branch, and the "
-                "declarations declare the two branches disjoint. So it "
-                "cannot also lie below the valid branch. Without those "
-                "declarations the verdict is Unknown, as in KGC342."),
+        "DPV places ConsentWithdrawn below the invalid branch, and the "
+        "declarations state that the valid and invalid branches are "
+        "disjoint, which DPV's definitions imply: states that can justify "
+        "processing and states that cannot. So withdrawn consent cannot "
+        "also lie below the valid branch. Without those declarations the "
+        "verdict is Unknown, as in KGC342."),
             "premises": [
                 ("fromResource",
                  "dpv:ConsentWithdrawn is below "
@@ -435,13 +439,13 @@ PROBLEMS = [
             "KGC343 does. The verdict stays Unknown."),
         "certificate": {"kind": "Models",
             "comment": (
-                "The states are declared distinct, yet withdrawn consent "
-                "may still lie below the valid branch. One structure places "
-                "it below both branches, and both constraints can hold. "
-                "Another does not, and they cannot. Distinctness cannot "
-                "keep it out of the valid branch, because a state below a "
-                "branch is already a different concept from that branch. "
-                "Only the disjointness of KGC343 does."),
+                "The states are declared distinct, since DPV defines each "
+                "separately, yet withdrawn consent may still lie below the "
+                "valid branch. If it does, a use meets both policies; if it "
+                "does not, no use does. Distinctness cannot keep it out of "
+                "the valid branch, because a state below a branch is "
+                "already a different concept from that branch. Only the "
+                "disjointness of KGC343 does."),
             "premises": []},
         "provenance": PROV_POST,
         "ttl": _TTL_HEAD
@@ -486,8 +490,8 @@ PROBLEMS = [
         "certificate": {"kind": "Refutation",
             "comment": (
                 "Expired consent is declared distinct from withdrawn and "
-                "from revoked consent, so the exclusion list does not "
-                "exclude it."),
+                "from revoked consent, since DPV defines each state "
+                "separately, so the exclusion list does not exclude it."),
             "premises": [("fromDeclarations",
                           "dpv:ConsentExpired distinct from "
                           "dpv:ConsentWithdrawn"),

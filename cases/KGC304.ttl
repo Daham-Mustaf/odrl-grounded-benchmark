@@ -62,7 +62,7 @@ drk:KGC304-report a vrep:OperandVerdictReport ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-spatial-geonames> ;
     vrep:declarations <https://w3id.org/odrl-kb/geonames-europe/declared> ;
     vrep:readAgainst drk:KGC303-report ;
-    rdfs:comment """France and Germany are declared distinct, so a use in France satisfies only the first alternative, and 'exactly one' holds."""@en ;
+    rdfs:comment """The declarations for GeoNames state that France and Germany are different countries, which GeoNames itself does not. A use in France then meets only the first alternative, and 'exactly one' holds."""@en ;
     dcterms:description """As KGC303, with France and Germany declared distinct."""@en ;
     vrep:compatibilityState vrep:Compatible ;
     vrep:certificate <certificates/KGC304-2.tstp> .

@@ -30,7 +30,7 @@ kgc:KGC373-p1-c1 a odrl:Constraint ;
 drk:policy-373-2 a odrl:Set ;
     odrl:uid drk:policy-373-2 ;
     dcterms:title "Distribute in American English only"@en ;
-    rdfs:comment """A well-formed BCP 47 language tag, composed by RFC 5646 from the registered primary subtag en and the registered region subtag US. It is not itself an entry of the registry and not a concept of the resource this operand is bound to, which holds primary subtags. Whether it resolves to one is the profile's grounding rule to decide, and the two problems using this value are read under rules that decide it differently."""@en ;
+    rdfs:comment """A well-formed BCP 47 language tag, composed by RFC 5646 from the registered primary subtag en and the registered region subtag US. It is not itself an entry of the registry and not an entry of the vocabulary this operand reads, which holds primary subtags. Whether it can be read is the profile's matching rule to decide, and the two cases using this value are read under rules that decide it differently."""@en ;
     odrl:assignee drk:licensee ;
     odrl:permission kgc:KGC373-p2-r1 .
 
@@ -55,7 +55,7 @@ drk:KGC373-report a vrep:OperandVerdictReport ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-language-bcp47-primary> ;
     vrep:declarations <https://w3id.org/odrl-kb/bcp47/distinct> ;
     vrep:readAgainst drk:KGC372-report ;
-    rdfs:comment """en-US reduces to English, which the declared registry rule makes distinct from German."""@en ;
+    rdfs:comment """en-US reduces to English, because RFC 5646 builds it from the primary subtag en, and the declared registry rule makes English distinct from German."""@en ;
     dcterms:description """A publisher distributes in German. A licensee's policy commits to American English (en-US), under the rule that reduces a tag to its primary subtag."""@en ;
     vrep:compatibilityState vrep:Incompatible ;
     vrep:certificate <certificates/KGC373-1.tstp> .

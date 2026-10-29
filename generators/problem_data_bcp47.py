@@ -279,10 +279,10 @@ kgc:{cid} a odrl:Constraint ;
 EN_US_NOTE = (
     "A well-formed BCP 47 language tag, composed by RFC 5646 from the "
     "registered primary subtag en and the registered region subtag US. It "
-    "is not itself an entry of the registry and not a concept of the "
-    "resource this operand is bound to, which holds primary subtags. "
-    "Whether it resolves to one is the profile's grounding rule to decide, "
-    "and the two problems using this value are read under rules that "
+    "is not itself an entry of the registry and not an entry of the "
+    "vocabulary this operand reads, which holds primary subtags. "
+    "Whether it can be read is the profile's matching rule to decide, "
+    "and the two cases using this value are read under rules that "
     "decide it differently."
 )
 
@@ -306,14 +306,13 @@ PROBLEMS = [
         "description": (
             "A publisher distributes a work in German, and a licensee's "
             "policy commits to French. Both constraints are on language, "
-            "bound to a fifteen-subtag slice of the IANA Language Subtag "
-            "Registry at the nom sort. The registry lists both subtags and "
+            "and the vocabulary is the fifteen subtags of the IANA Language "
+            "Subtag Registry used here. The registry lists both subtags and "
             "states nothing that separates them. The declared rule that "
             "different primary subtags name different languages does: with "
-            "it, no structure treats German and French as one language, so "
-            "no use satisfies both policies and the verdict is "
-            "Incompatible. Without the rule the verdict is Unknown "
-            "(KGC371)."),
+            "it, German and French are two languages, so no use meets both "
+            "policies and the verdict is Incompatible. Without the rule the "
+            "verdict is Unknown (KGC371)."),
         "expected_verdict": "Incompatible",
         "expected_q1": "Unsatisfiable",
         "expected_q2": "Satisfiable",
@@ -324,12 +323,12 @@ PROBLEMS = [
         "certificate": {
             "kind": "Refutation",
             "comment": (
-                "The two subtags are declared to name distinct languages, "
-                "which is a declaration and not the registry's content. "
-                "Both policies require a use in one language, so they can "
-                "hold together only if German and French are one. "
-                "Withdrawing the declaration returns the verdict to "
-                "Unknown, which is KGC371."),
+                "The two subtags are declared to name distinct languages: "
+                "RFC 5646 sections 3 and 3.1.5 warrant the rule, but the "
+                "registry does not state it. Both policies require a use in "
+                "one language, so they can hold together only if German and "
+                "French are one. Withdrawing the declaration returns the "
+                "verdict to Unknown, which is KGC371."),
             "premises": [
                 ("fromDeclarations",
                  "bcp47:de and bcp47:fr are declared distinct, by the "
@@ -369,11 +368,11 @@ PROBLEMS = [
         "certificate": {
             "kind": "Models",
             "comment": (
-                "Nothing states that German and French are different "
-                "languages. In a structure that identifies them, a use in "
-                "German is a use in French and satisfies both policies. In "
-                "a structure that keeps them apart, no use satisfies both. "
-                "So the verdict is Unknown."),
+                "The IANA registry (RFC 5646) does not state that German "
+                "and French are different languages. If they are the same "
+                "language, a use in German is a use in French and meets "
+                "both policies; if they are different languages, no use "
+                "does. So the verdict is Unknown."),
             "premises": [],
         },
         "ttl": _TTL_HEAD + _offer("KGC371")
@@ -406,29 +405,32 @@ PROBLEMS = [
             "to en-US.\n\n"
             "That is a well-formed language tag: RFC 5646 composes it from "
             "the registered primary subtag en and the registered region "
-            "subtag US. It is not a concept of the resource this operand is "
-            "bound to, which holds primary subtags.\n\n"
-            "This case is read under the profile's exact grounding rule, "
-            "which resolves an IRI of the scheme or a literal matching a "
-            "published notation, and nothing else. The second policy's "
-            "value matches neither, so its constraint cannot be interpreted "
-            "against this resource at all. It is rejected, no verdict is "
-            "computed, and the value itself is the evidence.\n\n"
+            "subtag US. It is not an entry of the vocabulary this operand "
+            "reads, which holds primary subtags.\n\n"
+            "This case is read under the profile's exact-match rule, which "
+            "accepts an IRI of the scheme or a literal matching a published "
+            "notation, and nothing else. The second policy's value matches "
+            "neither, so its constraint cannot be read against this "
+            "vocabulary at all. It is rejected, no verdict is computed, and "
+            "the value itself is the evidence.\n\n"
             "This is not an Unknown, and the difference decides the repair. "
             "An Unknown is resolved by a declaration. A rejection is not: "
-            "there is nothing to declare about a value that names no "
-            "concept. Either the policy is corrected or the binding is "
-            "widened, and KGC373 reads the same pair under a wider binding."),
+            "there is nothing to declare about a value that names no entry "
+            "of the vocabulary. Either the policy is corrected or the "
+            "reading is widened, and KGC373 reads the same pair under a "
+            "wider reading."),
         "summary": (
-            "A publisher distributes in German. A licensee's policy commits to "
-            "American English (en-US), under the exact-match grounding rule."),
+            "A publisher distributes in German. A licensee's policy commits "
+            "to American English (en-US), under the exact-match rule."),
         "certificate": {
             "kind": "Ungrounded",
-            "comment": "Under the exact-match rule, the value en-US "
-                       "resolves to no concept of the resource. The "
-                       "constraint is therefore rejected, and no verdict "
-                       "is computed. KGC373 reads the same value under the "
-                       "rule that reduces it to en.",
+            "comment": (
+                "Under the exact-match rule, the value en-US names no entry "
+                "of the vocabulary, which lists primary subtags only: RFC "
+                "5646 builds en-US from the primary subtag en and the "
+                "region subtag US. The policy is therefore rejected, and no "
+                "verdict is computed. KGC373 reads the same value under the "
+                "rule that reduces it to en."),
             "premises": [],
         },
         "ttl": _TTL_HEAD + _offer("KGC372")
@@ -447,21 +449,20 @@ PROBLEMS = [
         "resource":          RESOURCE,
         "background_theory": DISTINCT,
         "summary": (
-            "A publisher distributes in German. A licensee's policy commits to "
-            "American English (en-US), under the rule that reduces a tag to "
-            "its primary subtag."),
+            "A publisher distributes in German. A licensee's policy commits "
+            "to American English (en-US), under the rule that reduces a tag "
+            "to its primary subtag."),
         "smt2_background": _smt_dist((DE, EN)),
         "binding":           BINDING_PRIMARY,
         "includes":          INCLUDES_DISTINCT,
         "grounding": {"en-US": "bcp_en"},
         "tree": [C("eq", DE), C("eq", "en-US", side="request")],
         "description": (
-            "KGC372 read under the profile's other grounding rule, which "
-            "takes a well-formed language tag to its primary subtag, so "
-            "en-US resolves to en. The value becomes interpretable, and the "
-            "declared registry rule makes German and English distinct, so "
-            "no use satisfies both policies and the verdict is "
-            "Incompatible.\n\n"
+            "KGC372 read under the profile's other rule, which takes a "
+            "well-formed language tag to its primary subtag, so en-US "
+            "becomes en. The value can now be read, and the declared "
+            "registry rule makes German and English distinct, so no use "
+            "meets both policies and the verdict is Incompatible.\n\n"
             "Neither rule is the correct one. The two cases return "
             "different verdicts on identical policies because they read the "
             "value differently, and no concept is disputed."),
@@ -471,8 +472,9 @@ PROBLEMS = [
         "certificate": {
             "kind": "Refutation",
            "comment": (
-               "en-US reduces to English, which the declared registry rule "
-               "makes distinct from German."),
+               "en-US reduces to English, because RFC 5646 builds it from "
+               "the primary subtag en, and the declared registry rule makes "
+               "English distinct from German."),
             "premises": [
                 ("fromDeclarations",
                  "bcp47:de and bcp47:en are declared distinct, by the "
@@ -506,10 +508,9 @@ PROBLEMS = [
         "description": (
             "The publisher distributes in German; the licensee accepts "
             "anything that is not French. German itself fits, but only "
-            "because the declared rule separates the two subtags: in a "
-            "structure that treats German and French as one language, a use "
-            "in German is a use in French and the licensee's policy "
-            "excludes it.\n\n"
+            "because the declared rule separates the two subtags: if German "
+            "and French were one language, a use in German would be a use "
+            "in French and the licensee's policy would exclude it.\n\n"
             "So this Compatible rests on a declaration, as KGC370's "
             "Incompatible does; withdrawing it gives KGC375. A definite "
             "verdict of either kind can rest on a declaration."),
@@ -519,9 +520,10 @@ PROBLEMS = [
         "certificate": {
             "kind": "Refutation",
             "comment": (
-                "The declared registry rule makes different primary subtags "
-                "name different languages, so German is not French, "
-                "and a use in German satisfies both policies."),
+                "The declared registry rule (RFC 5646 sections 3 and 3.1.5) "
+                "makes different primary subtags name different languages, "
+                "so German is not French, and a use in German meets both "
+                "policies."),
             "premises": [
                 ("fromDeclarations",
                  "bcp47:de and bcp47:fr are declared distinct, by the "
@@ -551,11 +553,11 @@ PROBLEMS = [
         "summary": (
             "As KGC374, without the registry rule."),
         "description": (
-            "KGC374 with the distinctness rule withdrawn. A structure that "
-            "separates German and French admits a use in German; a "
-            "structure that identifies them admits none, because a use in "
-            "German is then a use in French. The registry decides neither, "
-            "so the verdict is Unknown.\n\n"
+            "KGC374 with the distinctness rule withdrawn. If German and "
+            "French are different languages, a use in German meets both "
+            "policies; if they are the same language, no use does, because "
+            "a use in German is then a use in French. The registry decides "
+            "neither, so the verdict is Unknown.\n\n"
             "Read with KGC370 and KGC371 this completes the symmetry: the "
             "same withdrawal takes an Incompatible to Unknown there and a "
             "Compatible to Unknown here. What the declaration buys is a "
@@ -563,11 +565,11 @@ PROBLEMS = [
         "certificate": {
             "kind": "Models",
             "comment": (
-                "Nothing states that German and French are different languages. In a "
-                "structure that keeps them apart, a use in German satisfies both "
-                "policies. In a structure that identifies them, a use in German is a "
-                "use in French, and the second policy excludes it. So the verdict is "
-                "Unknown."),
+                "The IANA registry (RFC 5646) does not state that German "
+                "and French are different languages. If they are different, "
+                "a use in German meets both policies; if they are the same "
+                "language, a use in German is a use in French, and the "
+                "second policy excludes it. So the verdict is Unknown."),
             "premises": [],
         },
         "ttl": _TTL_HEAD + _offer("KGC375")
@@ -602,17 +604,17 @@ PROBLEMS = [
             "Dutch and French, and eq asks that every language of the use "
             "is Dutch. The two hold together only if Dutch and French are "
             "one language. The registry rule is declared: it makes the two "
-            "subtags distinct languages, so no use satisfies both policies "
-            "and the verdict is Incompatible.\n\n"
+            "subtags distinct languages, so no use meets both policies and "
+            "the verdict is Incompatible.\n\n"
             "The verdict rests on that one declaration. Without it the "
-            "registry separates the two subtags in some structures and not "
-            "in others, and the verdict is Unknown."),
+            "registry leaves open whether Dutch and French are one "
+            "language, and the verdict is Unknown."),
         "certificate": {
             "kind": "Refutation",
             "comment": (
-                "Dutch and French are declared distinct languages. A use "
-                "in both is not a use in Dutch only, so no use satisfies "
-                "both policies."),
+                "Dutch and French are declared distinct languages (RFC 5646 "
+                "sections 3 and 3.1.5). A use in both is not a use in Dutch "
+                "only, so no use meets both policies."),
             "premises": [
                 ("fromDeclarations",
                  "bcp47:fr and bcp47:nl are declared distinct, by the "
@@ -650,9 +652,8 @@ PROBLEMS = [
             "publisher permits distribution in any language except English "
             "and Italian. The licensee's policy commits to Italian.\n\n"
             "isNoneOf excludes the listed subtags by identity. Italian is "
-            "listed, and the licensee's eq asks for Italian. No structure "
-            "admits a language that is Italian and is not Italian, so the "
-            "verdict is Incompatible.\n\n"
+            "listed, and the licensee's eq asks for Italian. No language is "
+            "Italian and is not Italian, so the verdict is Incompatible.\n\n"
             "The registry rule is not used. The verdict is the same with it "
             "and without it, which is why this case declares nothing. The "
             "definite verdicts of KGC370, KGC373 and KGC374 rest on that "
@@ -661,8 +662,8 @@ PROBLEMS = [
             "kind": "Refutation",
             "comment": (
                 "The first policy excludes Italian and the second policy "
-                "requires it. This holds in every structure, so no "
-                "declaration is used."),
+                "requires it. This holds whatever the IANA registry leaves "
+                "open, so no declaration is used."),
             "premises": [],
         },
         "ttl": _TTL_HEAD
@@ -696,18 +697,16 @@ PROBLEMS = [
             "A translation licence covers a German edition or a French "
             "edition. The licensee's policy commits to French.\n\n"
             "The second alternative of the or is French, which is the "
-            "licensee's language. A use in French satisfies both policies "
-            "in every structure, so the verdict is Compatible. The first "
-            "alternative matters only if German and French are one "
-            "language, and the verdict does not depend on that. No "
-            "declaration is used."
-        ),
+            "licensee's language. A use in French meets both policies, so "
+            "the verdict is Compatible. The first alternative matters only "
+            "if German and French are one language, and the verdict does "
+            "not depend on that. No declaration is used."),
         "certificate": {
             "kind": "Refutation",
             "comment": (
                 "French is the second alternative of the licence and the "
-                "licensee's language, so a use in French satisfies both "
-                "policies in every structure."),
+                "licensee's language, so a use in French meets both "
+                "policies whatever the IANA registry leaves open."),
             "premises": [],
         },
         "ttl": _TTL_HEAD
@@ -749,12 +748,12 @@ PROBLEMS = [
         "certificate": {
             "kind": "Models",
             "comment": (
-                "Nothing states that German and French are different "
-                "languages. In a structure that keeps them apart, a use in "
-                "German satisfies the first alternative only, so both "
-                "policies hold. In a structure that identifies them, a use "
-                "in German satisfies both alternatives, and exactly one "
-                "fails. So the verdict is Unknown."),
+                "The IANA registry (RFC 5646) does not state that German "
+                "and French are different languages. If they are different, "
+                "a use in German meets the first alternative only, so both "
+                "policies hold; if they are the same language, a use in "
+                "German meets both alternatives and 'exactly one' fails. So "
+                "the verdict is Unknown."),
             "premises": [],
         },
         "ttl": _TTL_HEAD
@@ -789,19 +788,19 @@ PROBLEMS = [
             "French. It does not limit the others, so a Dutch and French "
             "edition satisfies the licence. A publisher who means German or "
             "French editions only writes or(eq de, eq fr), as in KGC378.\n\n"
-            "A use in Dutch and French together satisfies both policies: "
-            "French is on the licence's list and in the licensee's pair. "
-            "French is the same concept as itself in every structure, so "
-            "the verdict is Compatible whether or not Dutch and French "
-            "differ, and no declaration is used. KGC376 puts the same "
-            "isAllOf on the other side, against Dutch only, and there the "
-            "verdict does need the distinctness rule."),
+            "A use in Dutch and French together meets both policies: French "
+            "is on the licence's list and in the licensee's pair. French is "
+            "French whatever the registry leaves open, so the verdict is "
+            "Compatible whether or not Dutch and French differ, and no "
+            "declaration is used. KGC376 puts the same isAllOf on the other "
+            "side, against Dutch only, and there the verdict does need the "
+            "distinctness rule."),
         "certificate": {
             "kind": "Refutation",
             "comment": (
                 "French is on the licence's list and in the licensee's "
-                "pair, so a use in Dutch and French satisfies both "
-                "policies in every structure."),
+                "pair, so a use in Dutch and French meets both policies "
+                "whatever the IANA registry leaves open."),
             "premises": [],
         },
         "ttl": _TTL_HEAD

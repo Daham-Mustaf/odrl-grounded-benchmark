@@ -54,6 +54,6 @@ drk:KGC316-report a vrep:OperandVerdictReport ;
     vrep:declarations <https://w3id.org/odrl-kb/dpv-purposes/empty> ;
     vrep:readAgainst drk:KGC310-report ;
     vrep:readAgainst drk:KGC403-report ;
-    rdfs:comment """DPV places scientific research below research and development. A use for research and development meets the first policy only if research and development also lies below scientific research, and then the two are one purpose. In a structure that identifies them, the use satisfies both policies; in one that keeps them apart, no use does. So the verdict is Unknown."""@en ;
+    rdfs:comment """DPV places scientific research below research and development and publishes no edge back. A use for research and development meets the first policy only if research and development also lies below scientific research, and then the two are one purpose. If they are the same purpose, the use meets both policies; if they are different, no use does. So the verdict is Unknown."""@en ;
     dcterms:description """A city's traffic data platform permits use for scientific research or any narrower purpose. A company commits to use for research and development."""@en ;
     vrep:compatibilityState vrep:Unknown .

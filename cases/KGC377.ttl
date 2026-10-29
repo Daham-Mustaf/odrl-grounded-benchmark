@@ -53,7 +53,7 @@ drk:KGC377-report a vrep:OperandVerdictReport ;
     vrep:comparedConstraint kgc:KGC377-p2-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-language-bcp47> ;
     vrep:declarations <https://w3id.org/odrl-kb/bcp47/empty> ;
-    rdfs:comment """The first policy excludes Italian and the second policy requires it. This holds in every structure, so no declaration is used."""@en ;
+    rdfs:comment """The first policy excludes Italian and the second policy requires it. This holds whatever the IANA registry leaves open, so no declaration is used."""@en ;
     dcterms:description """English and Italian rights were sold separately, so a publisher permits any language except English and Italian. The licensee distributes in Italian."""@en ;
     vrep:compatibilityState vrep:Incompatible ;
     vrep:certificate <certificates/KGC377-1.tstp> .

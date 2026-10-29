@@ -58,7 +58,7 @@ drk:KGC366-report a vrep:OperandVerdictReport ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-tom> ;
     vrep:declarations <https://w3id.org/odrl-kb/dpv-tom/declared> ;
     vrep:readAgainst drk:KGC362-report ;
-    rdfs:comment """isAnyOf matches by name. Encryption at rest is a kind of encryption, yet it is neither encryption nor access control by name. With the measures declared distinct, a use whose only measure is encryption at rest has neither measure the first policy lists, and no use satisfies both policies. ODRL has no operator for "includes some kind of encryption". Without the declarations the verdict would be Unknown, but no case of the suite shows it."""@en ;
+    rdfs:comment """isAnyOf matches by name. DPV places encryption at rest below encryption, yet it is neither encryption nor access control by name. With the measures declared distinct, since DPV defines each separately, a use whose only measure is encryption at rest has neither measure the first policy lists, and no use meets both policies. ODRL has no operator for "includes some kind of encryption". Without the declarations the verdict would be Unknown, but no case of the suite shows it."""@en ;
     dcterms:description """A controller requires at least one of encryption and access control. A processor's policy commits to encryption at rest as the only measure."""@en ;
     vrep:compatibilityState vrep:Incompatible ;
     vrep:certificate <certificates/KGC366-1.tstp> .

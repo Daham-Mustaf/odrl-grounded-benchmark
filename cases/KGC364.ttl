@@ -59,7 +59,7 @@ drk:KGC364-report a vrep:OperandVerdictReport ;
     vrep:declarations <https://w3id.org/odrl-kb/dpv-tom/declared> ;
     vrep:readAgainst drk:KGC363-report ;
     vrep:readAgainst drk:KGC362-report ;
-    rdfs:comment """Encryption and access control are declared distinct, so a use supplying only encryption lacks the second."""@en ;
+    rdfs:comment """Encryption and access control are declared distinct, since DPV defines each measure separately, so a use supplying only encryption lacks the second."""@en ;
     vrep:profileNote """This policy goes beyond the DPV-ODRL usage note for TechnicalOrganisationalMeasure, which does not list isAllOf."""@en ;
     dcterms:description """As KGC363, with encryption and access control declared distinct."""@en ;
     vrep:compatibilityState vrep:Incompatible ;

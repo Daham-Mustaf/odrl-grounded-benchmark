@@ -55,6 +55,6 @@ drk:KGC342-report a vrep:OperandVerdictReport ;
     vrep:declarations <https://w3id.org/odrl-kb/dpv-consent/empty> ;
     vrep:readAgainst drk:KGC343-report ;
     vrep:readAgainst drk:KGC348-report ;
-    rdfs:comment """The published statements do not exclude the withdrawn state from the valid branch. One structure places it below both branches, and both constraints can hold. Another does not, and they cannot."""@en ;
+    rdfs:comment """DPV places the withdrawn state below the invalid branch, which it defines as the states that cannot justify processing, but does not state in RDF that the valid and invalid branches are disjoint. If withdrawn consent also lies below the valid branch, a use meets both policies; if it does not, no use does. So the verdict is Unknown."""@en ;
     dcterms:description """A controller permits use only while the consent on record may justify processing. A processor commits to use only records whose consent was withdrawn, in an erasure audit for the controller."""@en ;
     vrep:compatibilityState vrep:Unknown .

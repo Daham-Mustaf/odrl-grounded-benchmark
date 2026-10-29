@@ -113,7 +113,11 @@ kgc:{pid}-p1-c1 a odrl:Constraint ;
     odrl:rightOperand {VALUE[value]} ."""
 
 
-def _problem(pid, operand, operator, value, sort, accepted, description):
+def _problem(pid, operand, operator, value, sort, accepted, description,
+             summary, reason):
+    """summary and reason are what a reader sees.  The signature decides
+    whether the constraint is accepted; gen_wellsorted checks that against
+    `accepted` and never uses its message as text."""
     resource, background = RESOURCE[operand]
     return {
         "id":                pid,
@@ -128,6 +132,8 @@ def _problem(pid, operand, operator, value, sort, accepted, description):
         "background_theory": background,
         "accepted":          accepted,
         "description":       description,
+        "summary":           summary,
+        "reason":            reason,
         "ttl":               _ttl(pid, operand, operator, value),
         "binding":           BINDING[operand],
     }
@@ -136,48 +142,107 @@ def _problem(pid, operand, operator, value, sort, accepted, description):
 PROBLEMS = [
 
     _problem("KGC100", "spatial", "isA", "gn:Europe", "mer", False,
-             "The operand is grounded in a gazetteer, which supplies "
-             "parthood.  isA requires subsumption.  The constraint asks "
-             "whether a region is a kind of Europe rather than a part of it, "
-             "and is rejected before GeoNames is opened."),
+             "A policy that gives a place relies on a gazetteer, which states "
+             "which place is part of which.  isA asks whether one value is a "
+             "kind of another, and a place is not a kind of Europe; it is a "
+             "part of it.  The operator does not apply to this kind of "
+             "value, and the policy is rejected before GeoNames is opened.",
+             "A German library's policy uses isA with Europe, a place in "
+             "GeoNames.",
+             "isA asks whether one value is a kind of another.  GeoNames "
+             "only states which place is part of which, so the operator does "
+             "not apply to this kind of value."),
 
     _problem("KGC101", "purpose", "isPartOf", "dpv:NCP", "tax", False,
-             "The operand is grounded in a purpose taxonomy, which supplies "
-             "subsumption.  isPartOf requires parthood.  The constraint is "
-             "rejected before the vocabulary is opened."),
+             "A policy that gives a purpose relies on DPV, which arranges "
+             "purposes as kinds.  isPartOf asks whether one value is part of "
+             "another.  The operator does not apply to this kind of value, "
+             "and the policy is rejected before DPV is opened.",
+             "A German library's policy uses isPartOf with non-commercial "
+             "purposes, a purpose in DPV.",
+             "isPartOf asks whether one value is part of another.  DPV only "
+             "states which purpose is a kind of which, so the operator does not "
+             "apply to this kind of value."),
 
     _problem("KGC105", "purpose", "hasPart", "dpv:NCP", "tax", False,
-             "The operand is grounded in a purpose taxonomy, which supplies "
-             "subsumption.  hasPart requires parthood.  The constraint is "
-             "rejected before the vocabulary is opened."),
+             "A policy that gives a purpose relies on DPV, which arranges "
+             "purposes as kinds.  hasPart asks whether one value has another "
+             "as a part.  The operator does not apply to this kind of value, "
+             "and the policy is rejected before DPV is opened.",
+             "A German library's policy uses hasPart with non-commercial "
+             "purposes, a purpose in DPV.",
+             "hasPart asks whether one value has another as a part.  DPV "
+             "only states which purpose is a kind of which, so the operator "
+             "does not apply to this kind of value."),
 
     _problem("KGC102", "language", "isA", "bcp:de", "nom", False,
-             "The operand is grounded in a registry, which supplies identity "
-             "and no order.  isA requires subsumption.  The constraint is "
-             "rejected before the registry is opened."),
+             "A policy that gives a language relies on the IANA registry, "
+             "which names languages and arranges them in no order.  isA asks "
+             "whether one value is a kind of another.  The operator does not "
+             "apply to this kind of value, and the policy is rejected before "
+             "the registry is opened.",
+             "A German library's policy uses isA with German, a language in "
+             "the IANA registry.",
+             "isA asks whether one value is a kind of another.  The IANA "
+             "language registry (RFC 5646) only names languages and arranges "
+             "them in no order, so the operator does not apply to this kind "
+             "of value."),
 
     _problem("KGC103", "language", "isPartOf", "bcp:de", "nom", False,
-             "The operand is grounded in a registry, which supplies identity "
-             "and no order.  isPartOf requires parthood.  The constraint is "
-             "rejected before the registry is opened."),
+             "A policy that gives a language relies on the IANA registry, "
+             "which names languages and arranges them in no order.  isPartOf "
+             "asks whether one value is part of another.  The operator does "
+             "not apply to this kind of value, and the policy is rejected "
+             "before the registry is opened.",
+             "A German library's policy uses isPartOf with German, a "
+             "language in the IANA registry.",
+             "isPartOf asks whether one value is part of another.  The IANA "
+             "language registry (RFC 5646) only names languages and arranges "
+             "them in no order, so the operator does not apply to this kind "
+             "of value."),
 
     _problem("KGC104", "language", "hasPart", "bcp:de", "nom", False,
-             "The operand is grounded in a registry, which supplies identity "
-             "and no order.  hasPart requires parthood.  The constraint is "
+             "A policy that gives a language relies on the IANA registry, "
+             "which names languages and arranges them in no order.  hasPart "
+             "asks whether one value has another as a part.  The operator "
+             "does not apply to this kind of value, and the policy is "
              "rejected before the registry is opened.  A drafter who means a "
              "language that includes German among the languages of the use "
-             "writes isAllOf with the single value German."),
+             "writes isAllOf with the single value German.",
+             "A German library's policy uses hasPart with German, a language "
+             "in the IANA registry.",
+             "hasPart asks whether one value has another as a part.  The "
+             "IANA language registry (RFC 5646) only names languages and "
+             "arranges them in no order, so the operator does not apply to "
+             "this kind of value."),
 
     _problem("KGC110", "spatial", "isPartOf", "gn:Europe", "mer", True,
-             "Control.  isPartOf requires parthood and the gazetteer supplies "
-             "it, so the constraint is well sorted and proceeds to the "
+             "Control.  isPartOf asks whether one value is part of another, "
+             "and a gazetteer states which place is part of which, so the "
+             "operator applies and the policy goes on to a verdict.",
+             "A German library's policy uses isPartOf with Europe, a place "
+             "in GeoNames.",
+             "isPartOf asks whether one value is part of another, and "
+             "GeoNames states which place is part of which, so the operator "
+             "applies to this kind of value and the policy goes on to a "
              "verdict."),
 
     _problem("KGC111", "purpose", "isA", "dpv:NCP", "tax", True,
-             "Control.  isA requires subsumption and the taxonomy supplies "
-             "it."),
+             "Control.  isA asks whether one value is a kind of another, and "
+             "DPV arranges purposes as kinds, so the operator applies.",
+             "A German library's policy uses isA with non-commercial "
+             "purposes, a purpose in DPV.",
+             "isA asks whether one value is a kind of another, and DPV states "
+             "which purpose is a kind of which, so the operator applies to "
+             "this kind of value and the policy goes on to a verdict."),
 
     _problem("KGC112", "language", "eq", "bcp:de", "nom", True,
-             "Control.  eq requires only identity, which every resource "
-             "supplies, so it is well sorted at every sort."),
+             "Control.  eq asks only whether two values are the same, which "
+             "any vocabulary can answer, so the operator applies to every "
+             "kind of value.",
+             "A German library's policy uses eq with German, a language in "
+             "the IANA registry.",
+             "eq asks only whether two values are the same, which the IANA "
+             "language registry can answer, so the operator applies and the "
+             "policy goes on to a verdict."),
 ]

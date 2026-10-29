@@ -1,7 +1,7 @@
 # Case files
 
-One file per problem: the two ODRL policies, the binding that fixed the
-reading, and the report the semantics produces for them.
+One file per problem: the two ODRL policies, the reading of the vocabulary
+that fixed the answer, and the report the semantics produces for them.
 
 ```
 KGC100-112   well-sortedness, rejected at drafting time
@@ -23,22 +23,23 @@ KGC403-404   purpose: the declared twin of KGC316, and a category against a
              category
 ```
 
-The policies can be read without the semantics. The binding IRI
-dereferences to a profile entry under `problems/resources/`, which names
-the resource, the sort, the grounding rule and the declarations.
+The policies can be read without the semantics. The IRI that names the
+reading dereferences to a profile entry under `problems/resources/`, which
+names the vocabulary, the kind of value, the rule for matching values to
+entries and the declarations.
 
 Start with KGC310, KGC313 and KGC314: one published statement, then the
 same operand where the vocabulary decides nothing, then the same pair
 once the concepts are declared distinct.
 
-`catalogue.html` lists every case with its two policies in plain words, the
-binding and the declarations in force with their origin, and then the
-lesson, the verdict and the reason. `catalogue-blind.html` is the same page
+`catalogue.html` lists every case with its two policies in plain words, how
+the vocabulary is read and the declarations in force with their origin, and
+then the lesson, the verdict and the reason. `catalogue-blind.html` is the same page
 without those three. Both are written by `generators/catalogue.py`.
 
 ## What makes a case meaningful
 
-A case earns its place when a reader can say what it teaches and why its
+A case earns its place when a reader can state what it teaches and why its
 verdict is what it is. The first three points are about the policies, the
 rest about the case.
 
@@ -48,22 +49,26 @@ rest about the case.
   things have no verdict worth reading, and `check_policies.py` checks this
   too.
 - Values are concrete. A root concept appears only where the policy means
-  "any", and then the title says "any" and not "only".
+  "any", and then the title reads "any" and not "only".
 - Each case states one lesson. Within a family no two cases teach the same
-  thing; a twin differs from its partner in one declared thing, and says
+  thing; a twin differs from its partner in one declared thing, and names
   which.
 - The reason for the verdict is given in plain words. A definite verdict
-  says what it rests on, and one that rests on a declaration says so. An
-  Unknown names both structures: one where both policies hold, one where
-  they do not.
-- Lessons and reasons are in plain words. None of them uses witness,
-  refutation, certificate, query, model, premise, antisymmetry, down-set or
-  nominal sort, or triple notation like (purpose, isA, X); `lint_cases.py`
-  and `catalogue.py` fail a text that does. What a prover is expected to cite
-  goes in the problem's maintainer note, which the catalogue does not show.
-- Every declaration set has an origin and covers its whole slice. Where a
-  set ranges over a resource, it lists all of it, and `check_declarations.py`
-  fails a set that leaves a concept out.
+  names what it rests on, and one that rests on a declaration names the
+  declaration. Every domain fact in it names its source: a DPV edge or
+  definition, ISO 3166, RFC 5646, the EU file type table, GeoNames or the
+  TFEU. An Unknown names both situations in plain words: one where a use
+  meets both policies, one where none does.
+- Titles, lessons, reasons and the catalogue use the words of the domain,
+  and none of the words of logic or of the machinery that checks the cases.
+  `lint_cases.py` holds the list, and it and `catalogue.py` fail a text that
+  uses one. Triple notation like (purpose, isA, X) is out as well. What a
+  prover is expected to cite goes in the problem's maintainer note, which
+  the catalogue does not show.
+- Every declaration set has an origin and covers the whole part of the
+  vocabulary it applies to. Where a set ranges over a vocabulary, it lists
+  all of it, and `check_declarations.py` fails a set that leaves a concept
+  out.
 - Case IDs are never reused. An ID that appears anywhere in the git history,
   in any earlier layout, is taken: `git log --all --oneline --
   cases/KGC<id>.ttl` must be empty and `git log --all -p | grep -c KGC<id>`
@@ -71,9 +76,9 @@ rest about the case.
 
 The checks run in `full-run.sh`. `lint_cases.py` holds the title wording, the
 parties and target of each family, and the text rules. `check_coverage.py`
-holds the grid: each of the 24 cells of operator by sort has a verdict case
-where the sort admits the operator and a rejection where it does not, and
-`or` and `xone` each appear at every sort.
+holds the grid: each of the 24 cells of operator by kind of value has a
+verdict case where that kind of value admits the operator and a rejection
+where it does not, and `or` and `xone` each appear for every kind of value.
 
 Retired (IDs never reused, recoverable from tags pre-retire, pre-purpose and pre-review)
 

@@ -54,7 +54,7 @@ drk:KGC370-report a vrep:OperandVerdictReport ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-language-bcp47> ;
     vrep:declarations <https://w3id.org/odrl-kb/bcp47/distinct> ;
     vrep:readAgainst drk:KGC371-report ;
-    rdfs:comment """The two subtags are declared to name distinct languages, which is a declaration and not the registry's content. Both policies require a use in one language, so they can hold together only if German and French are one. Withdrawing the declaration returns the verdict to Unknown, which is KGC371."""@en ;
+    rdfs:comment """The two subtags are declared to name distinct languages: RFC 5646 sections 3 and 3.1.5 warrant the rule, but the registry does not state it. Both policies require a use in one language, so they can hold together only if German and French are one. Withdrawing the declaration returns the verdict to Unknown, which is KGC371."""@en ;
     dcterms:description """A publisher distributes in German. A licensee's policy commits to French. The registry rule that different primary subtags name different languages is adopted."""@en ;
     vrep:compatibilityState vrep:Incompatible ;
     vrep:certificate <certificates/KGC370-1.tstp> .

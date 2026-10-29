@@ -53,7 +53,7 @@ drk:KGC376-report a vrep:OperandVerdictReport ;
     vrep:comparedConstraint kgc:KGC376-p2-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-language-bcp47> ;
     vrep:declarations <https://w3id.org/odrl-kb/bcp47/distinct> ;
-    rdfs:comment """Dutch and French are declared distinct languages. A use in both is not a use in Dutch only, so no use satisfies both policies."""@en ;
+    rdfs:comment """Dutch and French are declared distinct languages (RFC 5646 sections 3 and 3.1.5). A use in both is not a use in Dutch only, so no use meets both policies."""@en ;
     dcterms:description """A Belgian federal publisher requires distribution in both Dutch and French. The licensee distributes in Dutch only. The registry rule that different primary subtags name different languages is adopted."""@en ;
     vrep:compatibilityState vrep:Incompatible ;
     vrep:certificate <certificates/KGC376-1.tstp> .

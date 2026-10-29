@@ -199,9 +199,9 @@ PROBLEMS = [
             "A policy for research and development and everything below it, "
             "against a commitment to scientific research. DPV places "
             "scientific research directly below research and development, "
-            "so a use for scientific research satisfies both policies in "
-            "every structure. The verdict is Compatible on one published "
-            "statement."),
+            "so a use for scientific research meets both policies, whatever "
+            "else DPV leaves open. The verdict is Compatible on one "
+            "published statement."),
         "maintainer_note": "The refutation should cite one resource premise.",
 
         "fof_decls": """\
@@ -392,11 +392,11 @@ kgc:KGC311-p2-c1 a odrl:Constraint ;
         "description": (
             "A platform that allows scientific research only, and a data "
             "user that commits to marketing. Each policy names exactly one "
-            "purpose, so both can be satisfied only if the two purposes are "
-            "one. DPV publishes no distinctness, so a structure may "
-            "identify them. The verdict is Unknown. The same pair with the "
-            "purposes declared distinct is Incompatible (KGC314), which is "
-            "what makes the declaration visible in the verdict."),
+            "purpose, so both can be met only if the two purposes are one. "
+            "DPV publishes no distinctness, so they may be one. The verdict "
+            "is Unknown. The same pair with the purposes declared distinct "
+            "is Incompatible (KGC314), which is what makes the declaration "
+            "visible in the verdict."),
         "maintainer_note": "Both constraints denote singletons.",
 
         "fof_decls": """\
@@ -412,12 +412,11 @@ kgc:KGC311-p2-c1 a odrl:Constraint ;
         "certificate": {
             "kind": "Models",                   
                        "comment": (
-                           "DPV does not declare marketing and scientific "
-                           "research distinct. In a structure that "
-                           "identifies them, a use for marketing is a use "
-                           "for scientific research and satisfies both "
-                           "policies. In a structure that keeps them apart, "
-                           "no use does. So the verdict is Unknown."),
+                           "DPV does not state that marketing and "
+                           "scientific research are different purposes. If "
+                           "they are the same purpose, a use for marketing "
+                           "meets both policies; if they are different, no "
+                           "use does. So the verdict is Unknown."),
             "premises": [],
         },
         "ttl": f"""\
@@ -506,10 +505,10 @@ kgc:KGC313-p2-c1 a odrl:Constraint ;
         "certificate": {
             "kind": "Refutation",
    "comment": (
-       "Scientific research and marketing are declared distinct, so no "
-       "purpose satisfies both policies. This declaration changes the "
-       "verdict from Unknown to Incompatible; without it the verdict is "
-       "Unknown, as in KGC313."),
+       "The declarations state that scientific research and marketing are "
+       "different purposes, because DPV defines each as a purpose of its "
+       "own. No use is both, so no use meets both policies. Without the "
+       "declaration the verdict is Unknown, as in KGC313."),
             "premises": [
                 ("fromDeclarations",
                  "dpv:Marketing and dpv:ScientificResearch are declared "
@@ -689,8 +688,8 @@ kgc:KGC315-p2-c1 a odrl:Constraint ;
             "and development. DPV places scientific research below research "
             "and development and publishes no edge back, so a use for "
             "research and development meets the first policy only if the "
-            "two purposes are one. A structure that identifies them admits "
-            "the use; a structure that keeps them apart does not. The "
+            "two purposes are one. If they are the same purpose, the use "
+            "meets both policies; if they are different, none does. The "
             "verdict is Unknown where KGC310 is Compatible. The pair shows "
             "that isA reads the order in one direction: swapping the "
             "policies is not a symmetry."),
@@ -709,12 +708,12 @@ kgc:KGC315-p2-c1 a odrl:Constraint ;
             "kind": "Models",
             "comment": (
                 "DPV places scientific research below research and "
-                "development. A use for research and development meets the "
-                "first policy only if research and development also lies "
-                "below scientific research, and then the two are one "
-                "purpose. In a structure that identifies them, the use "
-                "satisfies both policies; in one that keeps them apart, no "
-                "use does. So the verdict is Unknown."),
+                "development and publishes no edge back. A use for research "
+                "and development meets the first policy only if research "
+                "and development also lies below scientific research, and "
+                "then the two are one purpose. If they are the same "
+                "purpose, the use meets both policies; if they are "
+                "different, no use does. So the verdict is Unknown."),
             "premises": [],
         },
         "ttl": _ttl("KGC316", PURPOSE,
@@ -748,7 +747,7 @@ kgc:KGC315-p2-c1 a odrl:Constraint ;
             "places scientific research below research and development, so "
             "a use for research and development meets the first policy only "
             "if the two purposes are one. They are declared distinct, so no "
-            "structure admits the use and the verdict is Incompatible. "
+            "use meets both policies and the verdict is Incompatible. "
             "KGC316 leaves the question open and is Unknown."),
         "certificate": {"kind": "Refutation",
             "comment": (
@@ -756,8 +755,9 @@ kgc:KGC315-p2-c1 a odrl:Constraint ;
                 "development. A use for research and development meets the "
                 "first policy only if research and development also lies "
                 "below scientific research, and then the two are one "
-                "purpose. They are declared distinct, so no use satisfies "
-                "both policies."),
+                "purpose. They are declared distinct, because DPV defines "
+                "each as a purpose of its own, so no use meets both "
+                "policies."),
             "premises": [("fromResource", "SR below RnD"),
                          ("fromOrderAxiom", "antisymmetry"),
                          ("fromDeclarations", "SR distinct from RnD")]},
@@ -791,11 +791,10 @@ kgc:KGC315-p2-c1 a odrl:Constraint ;
         "description": (
             "A policy for any purpose except marketing, against a "
             "commitment to marketing. The first policy excludes exactly the "
-            "purpose the second requires, so no structure admits a use that "
-            "satisfies both, and the verdict is Incompatible. No order "
-            "statement and no declaration takes part, so nobody can reopen "
-            "the verdict by withdrawing a statement, unlike KGC300 and "
-            "KGC314."),
+            "purpose the second requires, so no use can meet both, and the "
+            "verdict is Incompatible. No order statement and no declaration "
+            "takes part, so nobody can reopen the verdict by withdrawing a "
+            "statement, unlike KGC300 and KGC314."),
         "maintainer_note": (
             "The witness asks for a concept both distinct from and "
             "identical to marketing, which no structure provides. The "
@@ -889,15 +888,17 @@ kgc:KGC317-p2-c1 a odrl:Constraint ;
             "Use for any purpose except marketing, against use for "
             "scientific research. neq excludes marketing by identity. "
             "Scientific research is declared distinct from marketing, so a "
-            "use for scientific research satisfies both policies in every "
-            "structure and the verdict is Compatible. The same pair without "
-            "the declaration would be Unknown. KGC323 and KGC374 show the "
-            "same step over file types and languages."),
+            "use for scientific research meets both policies and the "
+            "verdict is Compatible. The same pair without the declaration "
+            "would be Unknown, because scientific research might be the "
+            "same purpose as marketing. KGC323 and KGC374 show the same "
+            "step over file types and languages."),
         "certificate": {"kind": "Refutation",
             "comment": (
-                "Scientific research is declared distinct from marketing, so "
-                "a use for scientific research is a use for a purpose other "
-                "than marketing and satisfies both policies."),
+                "Scientific research is declared distinct from marketing, "
+                "because DPV defines each as a purpose of its own, so a use "
+                "for scientific research is a use for a purpose other than "
+                "marketing and meets both policies."),
             "premises": [("fromDeclarations",
                           "dpv:ScientificResearch is distinct from "
                           "dpv:Marketing")]},
@@ -940,27 +941,23 @@ kgc:KGC317-p2-c1 a odrl:Constraint ;
             "defines a commercial purpose by a commercial setting or an "
             "intention to commercialise, and a non-commercial purpose by a "
             "non-commercial setting or the lack of that intention, and one "
-            "purpose can meet both. A structure that keeps non-commercial "
-            "research out of commercial purpose admits the use. A structure "
-            "that adds the edge makes both tiers apply and refuses it. The "
-            "verdict is Unknown."),
+            "purpose can meet both. If non-commercial research is not also "
+            "a commercial purpose, the use is admitted. If it is, both "
+            "tiers apply and the use is refused. The verdict is Unknown."),
         "certificate": {"kind": "Models",
             "comment": (
                 "DPV places non-commercial research below non-commercial "
-                "purpose, so the second branch holds. DPV defines a "
+                "purpose, so the non-commercial tier applies. DPV defines a "
                 "commercial purpose as one performed in \"a commercial "
                 "setting or with intention to commercialise\" and a "
                 "non-commercial purpose as one performed in \"a "
                 "non-commercial setting or without intention to "
-                "commercialise\". One purpose can meet both, so no "
-                "disjointness between the two is warranted, and none is "
-                "declared. In a structure that keeps non-commercial "
-                "research out of commercial purpose, a use for it "
-                "satisfies both policies. In a structure that also places "
-                "it below commercial purpose, both branches hold, so "
-                "'exactly one' fails, and no use satisfies both. So the "
-                "verdict is "
-                "Unknown."),
+                "commercialise\". One purpose can meet both, so DPV warrants "
+                "no disjointness between the two, and none is declared. If "
+                "non-commercial research is not also a commercial purpose, "
+                "a use for it meets both policies. If it is, both tiers "
+                "apply, 'exactly one' fails, and no use meets both. So the "
+                "verdict is Unknown."),
             "premises": []},
         "provenance": "Data-sharing agreements that split commercial from "
                       "non-commercial use.",
@@ -995,17 +992,20 @@ kgc:KGC317-p2-c1 a odrl:Constraint ;
             "mobility."),
         "description": (
             "The drafter expects the taxonomy to carry this: improving "
-            "transport mobility lies below public benefit. isAnyOf does "
-            "not read the order; it asks whether the use's purpose is one "
-            "of the two named concepts. As published nothing separates "
-            "improving transport mobility from either, so a structure may "
-            "identify them and the verdict is Unknown. KGC395 is the "
-            "draft the drafter meant."),
+            "transport mobility lies below public benefit. isAnyOf does not "
+            "read the order; it asks whether the use's purpose is one of "
+            "the two named purposes. As published nothing separates "
+            "improving transport mobility from either, so it may be the "
+            "same purpose as one of them or a different one, and the "
+            "verdict is Unknown. KGC395 is the draft the drafter meant."),
         "certificate": {"kind": "Models",
-            "comment": "One structure identifies improving transport "
-                       "mobility with one of the two purposes and admits "
-                       "the use; one keeps them apart and does not. The "
-                       "published order is not consulted by isAnyOf.",
+            "comment": (
+                "If improving transport mobility is the same purpose as "
+                "public benefit or as non-commercial research, the use "
+                "meets both policies; if it is a different purpose, it does "
+                "not, because isAnyOf compares names and does not read "
+                "DPV's order, which places improving transport mobility "
+                "below public benefit. So the verdict is Unknown."),
             "premises": []},
         "provenance": "Purpose limitation lists in data-sharing "
                       "agreements.",
@@ -1041,8 +1041,9 @@ kgc:KGC317-p2-c1 a odrl:Constraint ;
         "certificate": {"kind": "Refutation",
             "comment": (
                 "Improving transport mobility is declared distinct from "
-                "public benefit and from non-commercial research, so it "
-                "is neither value the first policy lists."),
+                "public benefit and from non-commercial research, because "
+                "DPV defines each as a purpose of its own, so it is neither "
+                "value the first policy lists."),
             "premises": [("fromDeclarations", "ITM distinct from PublicBenefit"),
                          ("fromDeclarations", "ITM distinct from NonCommercialResearch")]},
         "provenance": "As KGC393; warrant DPV's definitions of distinct "
@@ -1161,9 +1162,10 @@ kgc:KGC317-p2-c1 a odrl:Constraint ;
             "twin of the spatial case KGC392."),
         "certificate": {"kind": "Refutation",
             "comment": (
-                "Advertising is declared distinct from marketing, so the "
-                "exclusion of marketing does not cover it; that advertising "
-                "lies below marketing is not consulted."),
+                "Advertising is declared distinct from marketing, because "
+                "DPV defines each as a purpose of its own, so the exclusion "
+                "of marketing does not cover it; that DPV places "
+                "advertising below marketing is not consulted."),
             "premises": [("fromDeclarations",
                           "Advertising distinct from Marketing")]},
         "provenance": "Marketing exclusions in research-data licences; the "
@@ -1198,23 +1200,21 @@ kgc:KGC317-p2-c1 a odrl:Constraint ;
             "Commercial research lies below commercial purpose and below "
             "research and development. It lies below neither alternative of "
             "the first policy, and DPV publishes nothing that keeps it out "
-            "of them. A structure that keeps it out has no alternative that "
-            "holds, and no use satisfies both policies. A structure that "
-            "also places it below public benefit or below non-commercial "
-            "research admits the use. The verdict is Unknown, where KGC395, "
-            "with a second policy under the first alternative, is "
-            "Compatible."),
+            "of them. If it lies outside both, no alternative holds and no "
+            "use meets both policies. If it also lies below public benefit "
+            "or below non-commercial research, the use is admitted. The "
+            "verdict is Unknown, where KGC395, with a second policy under "
+            "the first alternative, is Compatible."),
         "certificate": {"kind": "Models",
             "comment": (
                 "DPV places commercial research below commercial purpose "
                 "and below research and development, and below neither "
                 "public benefit nor non-commercial research. It publishes "
-                "nothing that keeps it out of them. In a structure that "
-                "keeps it out, no alternative holds and no use satisfies "
-                "both policies. In a structure that also places it below "
-                "public benefit or below non-commercial research, a use for "
-                "commercial research satisfies both. So the verdict is "
-                "Unknown."),
+                "nothing that keeps it out of them. If commercial research "
+                "lies outside both, no alternative holds and no use meets "
+                "both policies; if it lies below public benefit or below "
+                "non-commercial research, a use for it meets both. So the "
+                "verdict is Unknown."),
             "premises": []},
         "provenance": "As KGC393.",
         "ttl": _ttl("KGC399", PURPOSE,
@@ -1248,7 +1248,7 @@ kgc:KGC317-p2-c1 a odrl:Constraint ;
             "narrower category is that purpose: DPV places scientific "
             "research directly below research and development, so a use for "
             "scientific research lies under both categories, on one "
-            "published statement and reflexivity."),
+            "published statement."),
         "certificate": {"kind": "Refutation",
             "comment": (
                 "DPV places scientific research below research and "

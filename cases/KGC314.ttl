@@ -58,7 +58,7 @@ drk:KGC314-report a vrep:OperandVerdictReport ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-purpose> ;
     vrep:declarations <https://w3id.org/odrl-kb/dpv-purposes/declared> ;
     vrep:readAgainst drk:KGC313-report ;
-    rdfs:comment """Scientific research and marketing are declared distinct, so no purpose satisfies both policies. This declaration changes the verdict from Unknown to Incompatible; without it the verdict is Unknown, as in KGC313."""@en ;
+    rdfs:comment """The declarations state that scientific research and marketing are different purposes, because DPV defines each as a purpose of its own. No use is both, so no use meets both policies. Without the declaration the verdict is Unknown, as in KGC313."""@en ;
     dcterms:description """As KGC313, with scientific research and marketing declared distinct."""@en ;
     vrep:compatibilityState vrep:Incompatible ;
     vrep:certificate <certificates/KGC314-1.tstp> .

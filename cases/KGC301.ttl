@@ -57,6 +57,6 @@ drk:KGC301-report a vrep:OperandVerdictReport ;
     vrep:comparedConstraint kgc:KGC301-p2-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-purpose> ;
     vrep:declarations <https://w3id.org/odrl-kb/dpv-purposes/empty> ;
-    rdfs:comment """DPV does not state whether scientific research is a non-commercial purpose. In a structure that places it below non-commercial purpose, a use for scientific research satisfies both policies. In a structure that does not, no use does. So the verdict is Unknown."""@en ;
+    rdfs:comment """DPV does not state whether scientific research is a non-commercial purpose. If it is, a use for scientific research meets both policies; if it is not, no use does. So the verdict is Unknown."""@en ;
     dcterms:description """A German library permits use for non-commercial purposes or any narrower purpose. A French library's policy commits to use for scientific research only."""@en ;
     vrep:compatibilityState vrep:Unknown .

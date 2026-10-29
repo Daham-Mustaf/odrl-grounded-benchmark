@@ -55,6 +55,6 @@ drk:KGC348-report a vrep:OperandVerdictReport ;
     vrep:declarations <https://w3id.org/odrl-kb/dpv-consent/declared> ;
     vrep:readAgainst drk:KGC342-report ;
     vrep:readAgainst drk:KGC343-report ;
-    rdfs:comment """The states are declared distinct, yet withdrawn consent may still lie below the valid branch. One structure places it below both branches, and both constraints can hold. Another does not, and they cannot. Distinctness cannot keep it out of the valid branch, because a state below a branch is already a different concept from that branch. Only the disjointness of KGC343 does."""@en ;
+    rdfs:comment """The states are declared distinct, since DPV defines each separately, yet withdrawn consent may still lie below the valid branch. If it does, a use meets both policies; if it does not, no use does. Distinctness cannot keep it out of the valid branch, because a state below a branch is already a different concept from that branch. Only the disjointness of KGC343 does."""@en ;
     dcterms:description """As KGC342, with the consent states declared distinct from one another."""@en ;
     vrep:compatibilityState vrep:Unknown .

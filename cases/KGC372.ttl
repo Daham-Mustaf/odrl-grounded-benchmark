@@ -30,7 +30,7 @@ kgc:KGC372-p1-c1 a odrl:Constraint ;
 drk:policy-372-2 a odrl:Set ;
     odrl:uid drk:policy-372-2 ;
     dcterms:title "Distribute in American English only"@en ;
-    rdfs:comment """A well-formed BCP 47 language tag, composed by RFC 5646 from the registered primary subtag en and the registered region subtag US. It is not itself an entry of the registry and not a concept of the resource this operand is bound to, which holds primary subtags. Whether it resolves to one is the profile's grounding rule to decide, and the two problems using this value are read under rules that decide it differently."""@en ;
+    rdfs:comment """A well-formed BCP 47 language tag, composed by RFC 5646 from the registered primary subtag en and the registered region subtag US. It is not itself an entry of the registry and not an entry of the vocabulary this operand reads, which holds primary subtags. Whether it can be read is the profile's matching rule to decide, and the two cases using this value are read under rules that decide it differently."""@en ;
     odrl:assignee drk:licensee ;
     odrl:permission kgc:KGC372-p2-r1 .
 
@@ -51,7 +51,7 @@ drk:KGC372-report a vrep:GroundingReport ;
     vrep:constraint kgc:KGC372-p2-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-language-bcp47> ;
     vrep:readAgainst drk:KGC373-report ;
-    rdfs:comment """Under the exact-match rule, the value en-US resolves to no concept of the resource. The constraint is therefore rejected, and no verdict is computed. KGC373 reads the same value under the rule that reduces it to en."""@en ;
-    dcterms:description """A publisher distributes in German. A licensee's policy commits to American English (en-US), under the exact-match grounding rule."""@en ;
+    rdfs:comment """Under the exact-match rule, the value en-US names no entry of the vocabulary, which lists primary subtags only: RFC 5646 builds en-US from the primary subtag en and the region subtag US. The policy is therefore rejected, and no verdict is computed. KGC373 reads the same value under the rule that reduces it to en."""@en ;
+    dcterms:description """A publisher distributes in German. A licensee's policy commits to American English (en-US), under the exact-match rule."""@en ;
     vrep:grounded false ;
     vrep:ungroundedValue "en-US" .

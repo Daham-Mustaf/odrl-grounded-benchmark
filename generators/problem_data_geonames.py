@@ -228,17 +228,17 @@ PROBLEMS = [
             "A library permits use in exactly one of France and Germany. "
             "A researcher's policy commits to use in France."),
         "description": (
-            "GeoNames publishes no distinctness. A structure that "
-            "identifies France with Germany makes both alternatives hold, "
-            "so 'exactly one' fails there. Another structure keeps them "
-            "apart. The verdict is Unknown."),
+            "GeoNames publishes no distinctness. If France and Germany are "
+            "the same country, both alternatives hold and 'exactly one' "
+            "fails; if they are different, it does not. The verdict is "
+            "Unknown."),
         "certificate": {"kind": "Models",
             "comment": (
-                "GeoNames does not state that France and Germany are different. "
-                "In a structure that keeps them apart, a use in France satisfies "
-                "exactly one alternative, so both policies hold. In a structure that "
-                "identifies them, both alternatives hold and 'exactly one' fails. So "
-                "the verdict is Unknown."),
+                "GeoNames does not state that France and Germany are "
+                "different countries. If they are different, a use in "
+                "France meets exactly one alternative, so both policies "
+                "hold; if they are the same country, both alternatives hold "
+                "and 'exactly one' fails. So the verdict is Unknown."),
             "premises": []},
         "provenance": PROVENANCE,
         "ttl": _ttl("KGC303", *EQ_ALTS, EQ_TITLE, FR_TITLE),
@@ -264,9 +264,10 @@ PROBLEMS = [
             "Compatible."),
         "certificate": {"kind": "Refutation",
             "comment": (
-                "France and Germany are declared distinct, so a use in "
-                "France satisfies only the first alternative, and 'exactly "
-                "one' holds."),
+                "The declarations for GeoNames state that France and "
+                "Germany are different countries, which GeoNames itself "
+                "does not. A use in France then meets only the first "
+                "alternative, and 'exactly one' holds."),
             "premises": [("fromDeclarations",
                           "gn:France and gn:Germany are distinct")]},
         "provenance": PROVENANCE,
@@ -295,22 +296,22 @@ PROBLEMS = [
             "commits to use in France. France and Germany are declared "
             "distinct."),
         "description": (
-            "A use in France satisfies both policies only if France lies "
-            "within Germany. GeoNames places both countries within Europe "
-            "and publishes nothing that keeps France out of Germany. France "
-            "and Germany are declared distinct, but distinct areas can "
-            "still lie one within the other. A structure that places France "
-            "within Germany admits the use, and one that does not admits "
-            "none. The verdict is Unknown. KGC309 adds the declaration that "
-            "decides it."),
+            "A use in France meets both policies only if France lies within "
+            "Germany. GeoNames places both countries within Europe and "
+            "publishes nothing that keeps France out of Germany. France and "
+            "Germany are declared distinct, but distinct areas can still "
+            "lie one within the other. If France lay within Germany, a use "
+            "in France would meet both policies; if not, none would. The "
+            "verdict is Unknown. KGC309 adds the declaration that decides "
+            "it."),
         "certificate": {"kind": "Models",
             "comment": (
-                "France and Germany are declared distinct, but distinct "
-                "areas can still lie one within the other. A structure that "
-                "places France within Germany admits a use in France under "
-                "both policies. A structure that does not admits none. "
-                "Nothing published or declared places France outside "
-                "Germany, so the verdict is Unknown."),
+                "GeoNames places France and Germany within Europe, and the "
+                "declarations state that they are different countries, but "
+                "different areas can still lie one within the other. If "
+                "France lay within Germany, a use in France would meet both "
+                "policies; if it does not, no use does. Nothing in GeoNames "
+                "or the declarations decides it, so the verdict is Unknown."),
             "premises": []},
         "provenance": "Data localisation: a provider keeps processing "
                       "inside one jurisdiction.",
@@ -340,11 +341,12 @@ PROBLEMS = [
             "satisfies both policies. The verdict is Incompatible."),
         "certificate": {"kind": "Refutation",
             "comment": (
-                "France and Germany share a parent and are declared "
-                "disjoint, so they have no common part. France lies within "
-                "itself, so it cannot lie within Germany, and no use "
-                "satisfies both policies. Distinctness alone would leave "
-                "the verdict Unknown, as KGC308 shows."),
+                "GeoNames gives France and Germany the same parent, Europe, "
+                "and the declarations state that features with one parent "
+                "have nothing in common. France lies within itself, so it "
+                "cannot lie within Germany, and no use meets both policies. "
+                "Different countries alone would leave the verdict Unknown, "
+                "as KGC308 shows."),
             "premises": [("fromDeclarations",
                           "nothing lies within both gn:France and "
                           "gn:Germany")]},

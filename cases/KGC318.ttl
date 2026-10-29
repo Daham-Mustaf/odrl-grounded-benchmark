@@ -52,7 +52,7 @@ drk:KGC318-report a vrep:OperandVerdictReport ;
     vrep:comparedConstraint kgc:KGC318-p2-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-purpose> ;
     vrep:declarations <https://w3id.org/odrl-kb/dpv-purposes/declared> ;
-    rdfs:comment """Scientific research is declared distinct from marketing, so a use for scientific research is a use for a purpose other than marketing and satisfies both policies."""@en ;
+    rdfs:comment """Scientific research is declared distinct from marketing, because DPV defines each as a purpose of its own, so a use for scientific research is a use for a purpose other than marketing and meets both policies."""@en ;
     dcterms:description """A city's traffic data platform permits use for any purpose other than marketing. A university commits to use for scientific research. Scientific research is declared distinct from marketing."""@en ;
     vrep:compatibilityState vrep:Compatible ;
     vrep:certificate <certificates/KGC318-2.tstp> .

@@ -16,7 +16,7 @@
 @prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 
 <https://w3id.org/odrl-kb/geonames-europe/declared> a bind:Declarations ;
-    dcterms:title "Pairwise distinctness of the features of the slice"@en ;
+    dcterms:title "Pairwise distinctness of the GeoNames features used here"@en ;
     bind:generatedBy bind:PairwiseDistinctness ;
     bind:origin bind:practiceRule ;
     rdfs:comment "The origin rests on the GeoNames administrative hierarchy, in which every feature is a place of its own."@en ;

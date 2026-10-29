@@ -61,7 +61,7 @@ drk:KGC378-report a vrep:OperandVerdictReport ;
     vrep:comparedConstraint kgc:KGC378-p2-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-language-bcp47> ;
     vrep:declarations <https://w3id.org/odrl-kb/bcp47/empty> ;
-    rdfs:comment """French is the second alternative of the licence and the licensee's language, so a use in French satisfies both policies in every structure."""@en ;
+    rdfs:comment """French is the second alternative of the licence and the licensee's language, so a use in French meets both policies whatever the IANA registry leaves open."""@en ;
     dcterms:description """A translation licence covers a German or a French edition. The licensee publishes in French."""@en ;
     vrep:compatibilityState vrep:Compatible ;
     vrep:certificate <certificates/KGC378-2.tstp> .

@@ -54,6 +54,6 @@ drk:KGC371-report a vrep:OperandVerdictReport ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-language-bcp47> ;
     vrep:declarations <https://w3id.org/odrl-kb/bcp47/empty> ;
     vrep:readAgainst drk:KGC370-report ;
-    rdfs:comment """Nothing states that German and French are different languages. In a structure that identifies them, a use in German is a use in French and satisfies both policies. In a structure that keeps them apart, no use satisfies both. So the verdict is Unknown."""@en ;
+    rdfs:comment """The IANA registry (RFC 5646) does not state that German and French are different languages. If they are the same language, a use in German is a use in French and meets both policies; if they are different languages, no use does. So the verdict is Unknown."""@en ;
     dcterms:description """As KGC370, without the registry rule."""@en ;
     vrep:compatibilityState vrep:Unknown .

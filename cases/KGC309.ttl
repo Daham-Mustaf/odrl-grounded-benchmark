@@ -54,7 +54,7 @@ drk:KGC309-report a vrep:OperandVerdictReport ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-spatial-geonames> ;
     vrep:declarations <https://w3id.org/odrl-kb/geonames-europe/siblings> ;
     vrep:readAgainst drk:KGC308-report ;
-    rdfs:comment """France and Germany share a parent and are declared disjoint, so they have no common part. France lies within itself, so it cannot lie within Germany, and no use satisfies both policies. Distinctness alone would leave the verdict Unknown, as KGC308 shows."""@en ;
+    rdfs:comment """GeoNames gives France and Germany the same parent, Europe, and the declarations state that features with one parent have nothing in common. France lies within itself, so it cannot lie within Germany, and no use meets both policies. Different countries alone would leave the verdict Unknown, as KGC308 shows."""@en ;
     dcterms:description """As KGC308, with the features that share a parent declared disjoint: nothing lies within both."""@en ;
     vrep:compatibilityState vrep:Incompatible ;
     vrep:certificate <certificates/KGC309-1.tstp> .
