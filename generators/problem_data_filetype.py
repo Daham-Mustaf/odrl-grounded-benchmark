@@ -110,12 +110,14 @@ PROBLEMS = [
             "A German library permits use in PDF only. A French library's policy "
             "commits to use in PDF/A-1a only."),
         "description": (
-    "The EU File Type table lists both PDF and PDF/A-1a but publishes no "
-    "selected relation between them. At the nominal sort, the formal "
-    "semantics therefore leaves their identity open. The case also shows "
-    "that the fragment does not interpret conformance to a file-format "
-    "profile as identity, subsumption, or parthood."
-),
+            "The EU file type table lists both PDF and PDF/A-1a but relates "
+            "the two concepts to each other in no way. The media type "
+            "application/pdf, which both carry, is a notation this binding "
+            "does not read. At the nom sort, where values are told apart by "
+            "name only, nothing therefore decides whether the two formats "
+            "are one. The case also shows that this binding does not read "
+            "conformance to a file-format profile as identity, kind or "
+            "part."),
 
         "fof_decls": """\
 % Resource: no order statements.  The table publishes none.
@@ -135,8 +137,8 @@ PROBLEMS = [
     "denote the same element and when they denote different elements. No "
     "resource statement or declaration selects between these possibilities. "
     "PDF/A-1a is a restricted form of PDF, but the table publishes no "
-    "relation between the two, so this binding cannot use that relation."
-),
+    "relation between the two concepts, and the media type application/pdf "
+    "that both carry is a notation the binding does not read."),
             "premises": [],
         },
         "ttl": _TTL_HEAD + """
@@ -194,11 +196,9 @@ kgc:KGC320-p2-c1 a odrl:Constraint ;
         "summary": (
             "As KGC320, with the two formats declared distinct."),
 "description": (
-    "The case is the KGC320 pair with a declaration that "
-    "ft:PDF and ft:PDFA1A are distinct. The resource contributes no relation "
-    "between the two concepts, so the declaration is the premise that "
-    "changes the verdict from Unknown to Incompatible."
-),
+    "KGC320 with a declaration that ft:PDF and ft:PDFA1A are distinct. The "
+    "resource contributes no relation between the two concepts, so the "
+    "declaration is what changes the verdict from Unknown to Incompatible."),
         "fof_decls": """\
 % Declarations: one declared distinctness, from
 % EUFT-filetype-declared.ax.  The table separates nothing itself.
@@ -212,13 +212,13 @@ kgc:KGC320-p2-c1 a odrl:Constraint ;
         "certificate": {
             "kind": "Refutation",
    "comment": (
-        "The two constraints require ft:PDF and ft:PDFA1A to denote the "
-        "same element, while the declaration requires them to "
-        "denote different elements. The two conditions cannot both hold. "
-        "PDF/A-1a is a restricted form of PDF, but the table publishes no "
-        "relation between the two, so under this binding a use in PDF/A-1a "
-        "is not a use in PDF."
-    ),
+       "The two constraints require ft:PDF and ft:PDFA1A to denote the same "
+       "element, while the declaration requires them to denote different "
+       "elements. The two conditions cannot both hold. PDF/A-1a is a "
+       "restricted form of PDF, but the table publishes no relation between "
+       "the two concepts, and the media type application/pdf that both "
+       "carry is a notation the binding does not read, so under this "
+       "binding a use in PDF/A-1a is not a use in PDF."),
             "premises": [
                 ("fromDeclarations",
                  "ft:PDF and ft:PDFA1A are declared distinct"),
@@ -276,15 +276,16 @@ kgc:KGC321-p2-c1 a odrl:Constraint ;
             "A German library permits use in at least one of PDF and PDF/A-1a. "
             "A French library's policy commits to use in PDF/A-1a only."),
         "description": (
-            "First policy (fileFormat, isAnyOf, {ft:PDF, ft:PDFA1A}) against "
-            "second policy (fileFormat, eq, ft:PDFA1A).  The first policy admits either "
-            "format and the second requires one of them, so the two are "
-            "satisfiable together whatever the table states.  Compatible, and "
-            "the refutation cites the witness alone: no resource statement, "
-            "no declaration, no order axiom.  isAnyOf asks only whether "
-            "concepts are the same, which is why it is admissible at nom "
-            "where isA is not."
-        ),
+            "A policy that lists both PDF and PDF/A-1a with isAnyOf, "
+            "against a commitment to PDF/A-1a. PDF/A-1a is on the list, so "
+            "a use in PDF/A-1a satisfies both policies whatever the table "
+            "states, and the verdict is Compatible. isAnyOf asks only "
+            "whether a value is one of the listed names, which is why it "
+            "works at the nom sort, where isA does not. It also admits "
+            "PDF/A-1a together with any other format."),
+        "maintainer_note": (
+            "The refutation cites the witness alone: no resource statement, "
+            "no declaration, no order axiom."),
 
         "fof_decls": """\
 % Resource: no order statements.
@@ -372,15 +373,10 @@ kgc:KGC322-p2-c1 a odrl:Constraint ;
     "tree": [C("neq", PDF), C("eq", A1A, side="request")],
 
     "description": (
-        "The first policy excludes ft:PDF, while the second requires "
-        "ft:PDFA1A. The two concepts are declared distinct, so the "
-        "constraints are Compatible. At the nominal sort, exclusion by "
-        "identity is the applicable reading: the resource publishes no "
-        "order relation for file formats. This case therefore provides "
-        "a control for cases such as KGC392 and KGC397, where the same "
-        "identity-based exclusion is insufficient for an order-based "
-        "interpretation."
-    ),
+        "As in KGC392 and KGC397, the exclusion works by name. PDF/A-1a is "
+        "a restricted form of PDF, but the table does not relate the two, "
+        "so excluding PDF does not exclude PDF/A-1a. At this sort the only "
+        "way to exclude both is to list both (isNoneOf PDF, PDF/A-1a)."),
 
     "fof_decls": """\
 % Resource: no order statements.

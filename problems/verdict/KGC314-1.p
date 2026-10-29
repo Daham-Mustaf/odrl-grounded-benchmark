@@ -1,9 +1,9 @@
 %--------------------------------------------------------------------------
 % File     : KGC314-1.p
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
-% Problem  : purpose, eq dpv:Marketing against eq dpv:SR, under a declared distinctness (witness condition asserted)
+% Problem  : purpose, eq dpv:ScientificResearch against eq dpv:Marketing, under a declared distinctness (witness condition asserted)
 % Version  : 1.0
-% English  : As KGC313, with marketing and scientific research declared distinct.
+% English  : As KGC313, with scientific research and marketing declared distinct.
 %
 % Refs     : odrl-grounded-benchmark. https://github.com/Daham-Mustaf/odrl-grounded-benchmark
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark
@@ -28,6 +28,6 @@ fof(bg_dist_dpv_marketing_dpv_scientific_research, axiom,
 
 % --- witness condition asserted ------------------------------------------
 fof(w_kgc314, axiom,
-    ( ( dpv_marketing = dpv_marketing & dpv_marketing = dpv_scientific_research )
-| ( dpv_scientific_research = dpv_marketing & dpv_scientific_research = dpv_scientific_research ) )).
+    ( ( dpv_scientific_research = dpv_scientific_research & dpv_scientific_research = dpv_marketing )
+| ( dpv_marketing = dpv_scientific_research & dpv_marketing = dpv_marketing ) )).
 %--------------------------------------------------------------------------

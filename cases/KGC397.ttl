@@ -52,7 +52,7 @@ drk:KGC397-report a vrep:OperandVerdictReport ;
     vrep:comparedConstraint kgc:KGC397-p2-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-purpose> ;
     vrep:declarations <https://w3id.org/odrl-kb/dpv-purposes/declared> ;
-    rdfs:comment """Advertising is declared distinct from marketing, so it lies in the complement; that it lies below marketing is not consulted."""@en ;
+    rdfs:comment """Advertising is declared distinct from marketing, so the exclusion of marketing does not cover it; that advertising lies below marketing is not consulted."""@en ;
     dcterms:description """A city's traffic data platform permits use for any purpose except marketing. A company commits to advertising."""@en ;
     vrep:compatibilityState vrep:Compatible ;
     vrep:certificate <certificates/KGC397-2.tstp> .

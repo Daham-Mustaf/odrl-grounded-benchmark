@@ -54,5 +54,5 @@ drk:KGC386-report a vrep:OperandVerdictReport ;
     vrep:declarations <https://w3id.org/odrl-kb/dpv-loc/empty> ;
     vrep:readAgainst drk:KGC387-report ;
     rdfs:comment """DPV does not state that Hamburg differs from Bavaria or Berlin. In a structure that keeps the three apart, a use in Hamburg satisfies both policies. In a structure that identifies Hamburg with Bavaria or Berlin, the first policy excludes it. So the verdict is Unknown."""@en ;
-    dcterms:description """A library permits use anywhere except Bavaria and Berlin. A researcher's policy commits to use in Hamburg."""@en ;
+    dcterms:description """A library permits use anywhere except Bavaria and Berlin, where exclusive licences are already granted to other libraries. A researcher's policy commits to use in Hamburg."""@en ;
     vrep:compatibilityState vrep:Unknown .

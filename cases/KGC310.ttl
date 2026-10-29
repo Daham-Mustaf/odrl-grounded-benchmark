@@ -16,7 +16,7 @@ drk:traffic-data a dcat:Dataset ;
 drk:policy-310-1 a odrl:Set ;
     odrl:uid drk:policy-310-1 ;
     odrl:profile dpv-odrl: ;
-    dcterms:title "Use for research and development purposes only"@en ;
+    dcterms:title "Use for research and development or any narrower purpose"@en ;
     odrl:assigner drk:data-platform ;
     odrl:permission kgc:KGC310-p1-r1 .
 
@@ -59,6 +59,6 @@ drk:KGC310-report a vrep:OperandVerdictReport ;
     vrep:declarations <https://w3id.org/odrl-kb/dpv-purposes/empty> ;
     vrep:readAgainst drk:KGC316-report ;
     rdfs:comment """DPV places scientific research directly below research and development, so a use for scientific research satisfies both policies."""@en ;
-    dcterms:description """A city's traffic data platform permits use for research and development. A university commits to use for scientific research."""@en ;
+    dcterms:description """A city's traffic data platform permits use for research and development or any narrower purpose. A university commits to use for scientific research."""@en ;
     vrep:compatibilityState vrep:Compatible ;
     vrep:certificate <certificates/KGC310-2.tstp> .

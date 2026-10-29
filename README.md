@@ -75,7 +75,9 @@ link from the verdict to the evidence.
 ## Layout
 
 ```
-vocabularies/     the published files, vendored at a stated version
+vocabularies/     the published files, vendored at a stated version; the DPV-ODRL
+                  mapping is there too, at a fixed commit, because the usage-note
+                  remark in a case's profile note is checked against it
 generators/       builders (vocabulary to resource) and generators
                   (problem data to queries and cases)
 problems/
@@ -103,7 +105,7 @@ suite-numbers.tex the figures and the bindings table the paper includes,
 KGC100-112   well-sortedness: nine constraints, six rejected at
              drafting time by the signature alone
 KGC300-302   the motivating example, one per sort
-KGC303-306   spatial: exactly one of two alternatives, over GeoNames
+KGC303-304   spatial: exactly one of two alternatives, over GeoNames
 KGC308-309   spatial: one country within another, over GeoNames
 KGC310-319   purpose, over DPV purposes, in a mobility data space
 KGC320-323   fileFormat, over the EU file type table
@@ -179,7 +181,7 @@ uv run generators/build_dpvloc.py \
 
 uv run generators/build_consent.py \
   --module vocabularies/dpv-2.3/modules/consent_status.ttl \
-  --retrieved 2026-08-19 --out problems
+  --retrieved 2026-10-29 --out problems
 
 uv run generators/build_tom.py \
   --tom vocabularies/dpv-2.3/modules/TOM.ttl \

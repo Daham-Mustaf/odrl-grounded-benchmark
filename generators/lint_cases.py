@@ -52,6 +52,15 @@ DASH = re.compile("[–—]")
 OLD_WORDING = re.compile(r"\b(background|assertions?)\b", re.I)
 INSTITUTION = re.compile(r"\b(BSB|BnF)\b|Bavarian State|Biblioth", re.I)
 STALE_ROLE = re.compile(r"\b(provider|consumer|reuser)\b", re.I)
+# Words of the machinery.  A reader of a case is not told what a witness, a
+# refutation or a down-set is, so none of them appears in a title, a summary,
+# a reason or a lesson; neither does triple notation like (purpose, isA, X).
+JARGON = re.compile(
+    r"\b(witness(es)?|refut\w*|certificat\w*|quer(y|ies)|models?|premises?|"
+    r"antisymmetr\w*|down-?sets?|up-?sets?|nominal sort|satisfiab\w*|singletons?|"
+    r"withdrawable|order axioms?|polarity|provenance|converse edge|disjuncts?|"
+    r"negated|epistemic)\b", re.I)
+TRIPLE = re.compile(r"\(\s*[A-Za-z]+,\s*(?:eq|neq|isA|isPartOf|hasPart|isAnyOf|isAllOf|isNoneOf)\b")
 NEED = {  # operator -> substrings, any one suffices
     "eq": ["only"], "isA": ["only"], "isPartOf": ["within"],
     "hasPart": ["includes", "covers"],
@@ -69,6 +78,14 @@ shape = defaultdict(set)
 
 def fail(cid, msg):
     fails.append(f"{cid}: {msg}")
+
+
+def leaf_constraints(g, c):
+    """The atomic constraints under c, through any connective."""
+    for conn in ("or", "xone", "and"):
+        for lst in g.objects(c, ODRL[conn]):
+            return [x for m in Collection(g, lst) for x in leaf_constraints(g, m)]
+    return [c]
 
 
 def constraint_ops(g, c):
@@ -116,6 +133,8 @@ if __name__ == "__main__":
             if INSTITUTION.search(t): fail(cid, f"institution name in {t[:70]!r}")
             if OLD_WORDING.search(t): fail(cid, f"old wording {OLD_WORDING.search(t).group(0)!r} in {t[:70]!r}")
             if STALE_ROLE.search(t): fail(cid, f"stale role word {STALE_ROLE.search(t).group(0)!r} in {t[:70]!r}")
+            if JARGON.search(t): fail(cid, f"jargon {JARGON.search(t).group(0)!r} in {t[:70]!r}")
+            if TRIPLE.search(t): fail(cid, f"triple notation in {t[:70]!r}")
         # --- every target is typed and titled, once, the same way in every case ---
         for iri, (kind, ttl_title) in TARGET_EXPECT.items():
             node = URIRef(DRK + iri)
@@ -162,6 +181,15 @@ if __name__ == "__main__":
                 need = []
             else:
                 need = need
+                # isA on a purpose reads the order, so the title says so: "X or
+                # any narrower purpose", never "X only", which is what eq says.
+                isa_purpose = [x for x in leaf_constraints(g, cons[0])
+                               if local(next(g.objects(x, ODRL.operator), "")) == "isA"
+                               and local(next(g.objects(x, ODRL.leftOperand), "")).lower() == "purpose"]
+                if isa_purpose and conn in (None, "or"):
+                    if "narrower" not in tl or "only" in tl.split():
+                        fail(cid, f"isA on a purpose must read 'X or any narrower purpose': {title!r}")
+                    need = [o for o in need if o != "isA"]
             for o in set(need):
                 if not any(s in tl for s in NEED[o]):
                     fail(cid, f"{o} title {title!r} lacks one of {NEED[o]}")

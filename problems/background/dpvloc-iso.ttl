@@ -34,6 +34,7 @@
 @prefix bind:    <https://w3id.org/odrl-kb/binding#> .
 @prefix owl:     <http://www.w3.org/2002/07/owl#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 
 <https://w3id.org/odrl-kb/dpv-loc/iso> a bind:Declarations ;
     dcterms:title "Pairwise distinctness of ISO 3166 areas"@en ;
@@ -41,6 +42,7 @@
                  <https://w3id.org/odrl-kb/dpv-loc-juris> ;
     bind:generatedBy bind:PairwiseDistinctness ;
     bind:origin bind:practiceRule ;
+    rdfs:comment "The origin rests on the ISO 3166 rule that a code names one area. The slice has 4,979 identity classes and the set lists 4,977 of them; the scope says which 2 are left out and why."@en ;
     bind:scopeCondition "Distinctness holds between equivalence classes under the extension's identity statements, not between codes; codes the extension identifies name one area. Not listed: DK-GL and GB-JSY. DPV Locations lists each of these areas under two codes (GL and DK-GL, JE and GB-JSY) with no identity statement, so listing both codes would declare one area distinct from itself."@en ;
     bind:pairCount 12382776 ;
     bind:states [

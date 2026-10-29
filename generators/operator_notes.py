@@ -5,35 +5,46 @@ The DPV-ODRL usage notes, as the checker and the writer both read them.
 
 Each dpv-odrl left operand carries a skos:note saying which operators MUST be
 used with it.  A policy that uses another operator goes beyond the note.
-validate_cases.py lists those policies, and the case writer adds a sentence
-to the comment of each verdict case that has one, so the sentence and the
-list cannot disagree.
+validate_cases.py lists those policies, and the case writer gives each verdict
+case that has one a profile note, so the note and the list cannot disagree.
+
+The table is read from the vendored mapping, vocabularies/dpv-odrl/dpv-odrl.ttl
+(DPV dev at a fixed commit, see the README beside it), so the claim can be
+checked against the source and nothing here is typed by hand.
 
     OPERATOR_NOTES   operand name -> the operators its note lists
     beyond           the operand's name when an operator is outside its note
-    sentences        the sentence for every such pair in a case's Turtle
+    sentences        the profile note for every such pair in a case's Turtle
 """
 
+import re
+from pathlib import Path
+
 from rdflib import Graph, Namespace, RDF
+from rdflib.namespace import SKOS
 
 ODRL = Namespace("http://www.w3.org/ns/odrl/2/")
 DPVODRL = "https://w3id.org/dpv/mappings/odrl#"
+VENDORED = (Path(__file__).resolve().parent.parent
+            / "vocabularies" / "dpv-odrl" / "dpv-odrl.ttl")
 
-# The skos:note of each DPV-ODRL left operand: "Only the ... operators MUST
-# be used."  Read again from mappings/odrl/dpv-odrl.ttl on the dev branch of
-# https://github.com/w3c-cg/dpv (commit 6d20265, 26 October 2026); the
-# notes of these operands are the ones the August copy (commit 8a50545,
-# 6 August 2026) had.  The measure operands all carry the same note as
-# TechnicalOrganisationalMeasure.
-_FIVE = {"isA", "eq", "neq", "isAnyOf", "isNoneOf"}
-OPERATOR_NOTES = {
-    "Purpose": _FIVE,
-    "Location": {"eq", "neq", "isAnyOf", "isNoneOf"},
-    "Status": _FIVE,
-    "TechnicalOrganisationalMeasure": _FIVE,
-    "TechnicalMeasure": _FIVE,
-    "OrganisationalMeasure": _FIVE,
-}
+
+def read_notes(path=VENDORED) -> dict:
+    """Operand name -> the odrl: operators its note lists.  A note counts when
+    it starts "Only the" and names operators, as the usage notes do."""
+    g = Graph().parse(path, format="turtle")
+    out = {}
+    for s, note in g.subject_objects(SKOS.note):
+        if not str(s).startswith(DPVODRL):
+            continue
+        text = str(note).strip()
+        ops = set(re.findall(r"odrl:(\w+)", text))
+        if text.startswith("Only the") and ops:
+            out[str(s)[len(DPVODRL):]] = ops
+    return out
+
+
+OPERATOR_NOTES = read_notes()
 
 
 def beyond(operand_iri, operator) -> str | None:

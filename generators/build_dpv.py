@@ -339,12 +339,14 @@ def declared_ttl(members, meta) -> str:
 @prefix bind:    <https://w3id.org/odrl-kb/binding#> .
 @prefix owl:     <http://www.w3.org/2002/07/owl#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 
 <https://w3id.org/odrl-kb/dpv-purposes/declared> a bind:Declarations ;
     dcterms:title "Pairwise distinctness of declared purposes"@en ;
     bind:appliesTo <https://w3id.org/odrl-kb/dpv-purposes> ;
     bind:generatedBy bind:PairwiseDistinctness ;
     bind:origin bind:proseDefinition ;
+    rdfs:comment "The origin rests on DPV's separate definition of each purpose."@en ;
     bind:scopeCondition "Distinctness between the listed purposes, and not disjointness: DPV publishes concepts below two parents, and a disjointness over such a pair would contradict it."@en ;
     bind:pairCount {n * (n - 1) // 2} ;
     bind:states [

@@ -26,7 +26,7 @@ drk:manuscripts a dcat:Dataset ;
 drk:policy-111-1 a odrl:Set ;
     odrl:uid drk:policy-111-1 ;
     odrl:profile dpv-odrl: ;
-    dcterms:title "Use for non-commercial purposes only"@en ;
+    dcterms:title "Use for non-commercial purposes or any narrower purpose"@en ;
     odrl:assigner drk:german-library ;
     odrl:permission kgc:KGC111-p1-r1 .
 

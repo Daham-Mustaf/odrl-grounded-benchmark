@@ -116,7 +116,7 @@ vrep:binding a rdf:Property, owl:FunctionalProperty ;
 vrep:declarations a rdf:Property, owl:FunctionalProperty ;
     rdfs:isDefinedBy <https://w3id.org/odrl-kb/verdict-report> ;
     rdfs:label "declarations"@en ;
-    skos:definition "What the parties declared beyond the resource. Every report names one set, the empty declarations included, so a reader sees what the verdict rests on."@en ;
+    skos:definition "What is declared beyond the resource. Every report names one set, the empty declarations included, so a reader sees what the verdict rests on."@en ;
     rdfs:domain vrep:OperandVerdictReport ;
     rdfs:range bind:Declarations .
 
@@ -127,6 +127,12 @@ vrep:compatibilityState a rdf:Property, owl:FunctionalProperty ;
     rdfs:domain vrep:OperandVerdictReport ;
     rdfs:range vrep:CompatibilityState .
 
+
+vrep:profileNote a rdf:Property ;
+    rdfs:isDefinedBy <https://w3id.org/odrl-kb/verdict-report> ;
+    rdfs:label "profile note"@en ;
+    skos:definition "A remark about how a policy sits with the DPV-ODRL usage note of its operand, for example that it uses an operator the note does not list. It is no part of why the verdict holds, so it is kept apart from the comment."@en ;
+    rdfs:domain vrep:OperandVerdictReport .
 
 vrep:certificate a rdf:Property ;
     rdfs:isDefinedBy <https://w3id.org/odrl-kb/verdict-report> ;

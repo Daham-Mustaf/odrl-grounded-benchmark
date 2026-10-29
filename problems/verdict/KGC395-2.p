@@ -3,7 +3,7 @@
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
 % Problem  : purpose, or(isA PublicBenefit, isA NonCommercialResearch) against eq ImproveTransportMobility (witness condition negated)
 % Version  : 1.0
-% English  : A city's traffic data platform permits use for any purpose under public benefit or under non-commercial research. A city transport authority commits to improving transport mobility.
+% English  : A city's traffic data platform permits use for public benefit or non-commercial research, or any narrower purpose. A city transport authority commits to improving transport mobility.
 %
 % Refs     : odrl-grounded-benchmark. https://github.com/Daham-Mustaf/odrl-grounded-benchmark
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark

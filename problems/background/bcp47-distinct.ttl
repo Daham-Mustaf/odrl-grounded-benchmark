@@ -56,12 +56,14 @@
 @prefix owl:     <http://www.w3.org/2002/07/owl#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 <https://w3id.org/odrl-kb/bcp47/distinct> a bind:Declarations ;
     dcterms:title "Distinct primary subtags name distinct languages"@en ;
     dcterms:source <https://www.rfc-editor.org/rfc/rfc5646#section-3.1.5> ;
     dcterms:description "Distinct primary language subtag records, neither deprecated and with no Preferred-Value link between them, name distinct languages. Warranted by RFC 5646 sections 3 and 3.1.5; scope condition per the 'he'/'iw' example of section 3.1.5."@en ;
     bind:generatedBy bind:PairwiseDistinctness ;
     bind:origin bind:practiceRule ;
+    rdfs:comment "The origin rests on the registry's own rules for its records, RFC 5646 sections 3 and 3.1.5, and not on a statement in its data."@en ;
     bind:scopeCondition "Type: language; Deprecated: absent; no Preferred-Value link within the member set"@en ;
     bind:appliesTo <https://w3id.org/odrl-kb/bcp47> ;
     bind:memberSourceFileDate "2026-08-08"^^xsd:date ;

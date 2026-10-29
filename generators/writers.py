@@ -494,14 +494,15 @@ def _report_block(p: dict, body: str) -> str:
     # One sentence: what the resource publishes about these concepts, and
     # what follows. Not how the procedure found it.
     comment = p.get("certificate", {}).get("comment")
-    # A policy that uses an operator outside its operand's DPV-ODRL usage
-    # note says so, in words the writer owns, so that the sentence and the
-    # list validate_cases prints come from one table.
-    note = usage_note_sentences(body)
-    if note:
-        comment = f"{comment} {note}" if comment else note
     if comment:
         lines.append(f'    rdfs:comment """{comment}"""@en ;')
+    # A policy that uses an operator outside its operand's DPV-ODRL usage
+    # note says so, in words the writer owns, in a field of its own: it is no
+    # part of why the verdict holds.  The sentence and the list validate_cases
+    # prints come from one table, read from the vendored mapping.
+    note = usage_note_sentences(body)
+    if note:
+        lines.append(f'    vrep:profileNote """{note}"""@en ;')
     if p.get("summary"):
         lines.append(f'    dcterms:description """{p["summary"]}"""@en ;')
 

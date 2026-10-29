@@ -33,7 +33,7 @@ kgc:KGC315-p1-c1 a odrl:Constraint ;
 drk:policy-315-2 a odrl:Set ;
     odrl:uid drk:policy-315-2 ;
     odrl:profile dpv-odrl: ;
-    dcterms:title "Use for recruitment interview scheduling only"@en ;
+    dcterms:title "Use for delivery of goods only"@en ;
     odrl:assignee drk:data-user ;
     odrl:permission kgc:KGC315-p2-r1 .
 
@@ -45,7 +45,7 @@ kgc:KGC315-p2-r1 a odrl:Permission ;
 kgc:KGC315-p2-c1 a odrl:Constraint ;
     odrl:leftOperand dpv-odrl:Purpose ;
     odrl:operator odrl:eq ;
-    odrl:rightOperand dpv:RecruitmentInterviewScheduling .
+    odrl:rightOperand dpv:DeliveryOfGoods .
 
 ### Expected result #######################################################
 
@@ -57,7 +57,7 @@ drk:KGC315-report a vrep:OperandVerdictReport ;
     vrep:comparedConstraint kgc:KGC315-p2-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-purpose> ;
     vrep:declarations <https://w3id.org/odrl-kb/dpv-purposes/empty> ;
-    rdfs:comment """RecruitmentInterviewScheduling lies below Purpose through a six-step hierarchy: RecruitmentInterviewManagement, RecruitmentManagement, PersonnelHiring, PersonnelManagement, and HumanResourceManagement. All six relations are published by DPV. The depth is the point: this is the longest chain in the module, and no purpose that fits traffic data lies deeper than two steps, so the case keeps the deepest chain and not a mobility purpose. It is the counterpart of row D6 in baseline/solidlab, where a policy engine is asked the same question at one, two and six steps."""@en ;
-    dcterms:description """A city's traffic data platform permits use for any DPV purpose. A company commits to use for recruitment interview scheduling."""@en ;
+    rdfs:comment """DeliveryOfGoods lies below Purpose through four published statements, one for each step up the hierarchy, so a use for delivery of goods is a use for a DPV purpose."""@en ;
+    dcterms:description """A city's traffic data platform permits use for any DPV purpose. A logistics company commits to use for delivery of goods."""@en ;
     vrep:compatibilityState vrep:Compatible ;
     vrep:certificate <certificates/KGC315-2.tstp> .

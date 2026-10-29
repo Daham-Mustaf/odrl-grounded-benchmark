@@ -5,7 +5,7 @@
 # the administrative hierarchy, and the 15 features of the slice are
 # declared distinct from one another.  This settles identity questions
 # (KGC304) but not containment: two distinct areas can still lie one within
-# the other (KGC305, KGC308).
+# the other (KGC308).
 #
 # Features: 15
 # Pairs   : 105
@@ -19,7 +19,7 @@
     dcterms:title "Pairwise distinctness of the features of the slice"@en ;
     bind:generatedBy bind:PairwiseDistinctness ;
     bind:origin bind:practiceRule ;
-    rdfs:comment "The origin rests on the GeoNames administrative hierarchy."@en ;
+    rdfs:comment "The origin rests on the GeoNames administrative hierarchy, in which every feature is a place of its own."@en ;
     bind:appliesTo <https://w3id.org/odrl-kb/geonames-europe> ;
     bind:pairCount 105 ;
     bind:states [

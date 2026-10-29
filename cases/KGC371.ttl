@@ -54,6 +54,6 @@ drk:KGC371-report a vrep:OperandVerdictReport ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-language-bcp47> ;
     vrep:declarations <https://w3id.org/odrl-kb/bcp47/empty> ;
     vrep:readAgainst drk:KGC370-report ;
-    rdfs:comment """Both queries are satisfiable. One certifying structure interprets bcp47:de and bcp47:fr as one concept and the other keeps them apart; the registry decides neither."""@en ;
+    rdfs:comment """Nothing states that German and French are different languages. In a structure that identifies them, a use in German is a use in French and satisfies both policies. In a structure that keeps them apart, no use satisfies both. So the verdict is Unknown."""@en ;
     dcterms:description """As KGC370, without the registry rule."""@en ;
     vrep:compatibilityState vrep:Unknown .

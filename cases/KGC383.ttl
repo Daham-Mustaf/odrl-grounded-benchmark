@@ -53,7 +53,8 @@ drk:KGC383-report a vrep:OperandVerdictReport ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-spatial-dpvloc-juris> ;
     vrep:declarations <https://w3id.org/odrl-kb/dpv-loc/empty> ;
     vrep:readAgainst drk:KGC380-report ;
-    rdfs:comment """The jurisdictional binding composes North Rhine-Westphalia within Germany with Germany's membership of the EU. Here the composition is also true in law. This policy goes beyond the DPV-ODRL usage note for Location, which does not list isPartOf."""@en ;
+    rdfs:comment """The jurisdictional binding composes North Rhine-Westphalia within Germany with Germany's membership of the EU. Here the composition is also true in law."""@en ;
+    vrep:profileNote """This policy goes beyond the DPV-ODRL usage note for Location, which does not list isPartOf."""@en ;
     dcterms:description """A library permits use within the European Union. A researcher's policy commits to use in North Rhine-Westphalia."""@en ;
     vrep:compatibilityState vrep:Compatible ;
     vrep:certificate <certificates/KGC383-2.tstp> .

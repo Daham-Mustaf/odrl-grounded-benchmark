@@ -57,7 +57,8 @@ drk:KGC365-report a vrep:OperandVerdictReport ;
     vrep:comparedConstraint kgc:KGC365-p2-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-tom> ;
     vrep:declarations <https://w3id.org/odrl-kb/dpv-tom/empty> ;
-    rdfs:comment """isAllOf states a minimum. A use with encryption, access control and pseudonymisation has the two measures the first policy requires, so it satisfies both policies and no resource statement or declaration is used. Two minimums never conflict: a use with both sets of measures satisfies both. This policy goes beyond the DPV-ODRL usage note for TechnicalOrganisationalMeasure, which does not list isAllOf."""@en ;
+    rdfs:comment """isAllOf states a minimum. A use with encryption, access control and pseudonymisation has the two measures the first policy requires, so it satisfies both policies and no resource statement or declaration is used. Two minimums never conflict: a use with both sets of measures satisfies both."""@en ;
+    vrep:profileNote """This policy goes beyond the DPV-ODRL usage note for TechnicalOrganisationalMeasure, which does not list isAllOf."""@en ;
     dcterms:description """A controller requires both encryption and access control. A processor commits to encryption, access control and pseudonymisation together."""@en ;
     vrep:compatibilityState vrep:Compatible ;
     vrep:certificate <certificates/KGC365-2.tstp> .

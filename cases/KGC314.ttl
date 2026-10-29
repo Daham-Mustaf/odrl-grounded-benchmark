@@ -16,7 +16,7 @@ drk:traffic-data a dcat:Dataset ;
 drk:policy-314-1 a odrl:Set ;
     odrl:uid drk:policy-314-1 ;
     odrl:profile dpv-odrl: ;
-    dcterms:title "Use for marketing only"@en ;
+    dcterms:title "Use for scientific research only"@en ;
     odrl:assigner drk:data-platform ;
     odrl:permission kgc:KGC314-p1-r1 .
 
@@ -28,12 +28,12 @@ kgc:KGC314-p1-r1 a odrl:Permission ;
 kgc:KGC314-p1-c1 a odrl:Constraint ;
     odrl:leftOperand dpv-odrl:Purpose ;
     odrl:operator odrl:eq ;
-    odrl:rightOperand dpv:Marketing .
+    odrl:rightOperand dpv:ScientificResearch .
 
 drk:policy-314-2 a odrl:Set ;
     odrl:uid drk:policy-314-2 ;
     odrl:profile dpv-odrl: ;
-    dcterms:title "Use for scientific research only"@en ;
+    dcterms:title "Use for marketing only"@en ;
     odrl:assignee drk:data-user ;
     odrl:permission kgc:KGC314-p2-r1 .
 
@@ -45,7 +45,7 @@ kgc:KGC314-p2-r1 a odrl:Permission ;
 kgc:KGC314-p2-c1 a odrl:Constraint ;
     odrl:leftOperand dpv-odrl:Purpose ;
     odrl:operator odrl:eq ;
-    odrl:rightOperand dpv:ScientificResearch .
+    odrl:rightOperand dpv:Marketing .
 
 ### Expected result #######################################################
 
@@ -58,7 +58,7 @@ drk:KGC314-report a vrep:OperandVerdictReport ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-purpose> ;
     vrep:declarations <https://w3id.org/odrl-kb/dpv-purposes/declared> ;
     vrep:readAgainst drk:KGC313-report ;
-    rdfs:comment """The declarations declare Marketing and ScientificResearch distinct, so the two constraints cannot be satisfied by the same purpose. This declaration changes the verdict from Unknown to Incompatible; withdrawing the declaration would return the verdict to Unknown."""@en ;
-    dcterms:description """As KGC313, with marketing and scientific research declared distinct."""@en ;
+    rdfs:comment """Scientific research and marketing are declared distinct, so no purpose satisfies both policies. This declaration changes the verdict from Unknown to Incompatible; without it the verdict is Unknown, as in KGC313."""@en ;
+    dcterms:description """As KGC313, with scientific research and marketing declared distinct."""@en ;
     vrep:compatibilityState vrep:Incompatible ;
     vrep:certificate <certificates/KGC314-1.tstp> .

@@ -3,7 +3,7 @@
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
 % Problem  : purpose, isA PublicBenefit against isAllOf {DataAltruism, ImproveTransportMobility} (witness condition asserted)
 % Version  : 1.0
-% English  : A city's traffic data platform permits use for public benefit purposes. A city transport authority commits to data altruism and improving transport mobility together.
+% English  : A city's traffic data platform permits use for public benefit or any narrower purpose. A city transport authority commits to data altruism and improving transport mobility together.
 %
 % Refs     : odrl-grounded-benchmark. https://github.com/Daham-Mustaf/odrl-grounded-benchmark
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark

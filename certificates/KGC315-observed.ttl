@@ -3,28 +3,20 @@ kgc:KGC315-observed a vrep:Refutation ;
     vrep:proofArtefact <proofs/KGC315-2.tstp> ;
     vrep:attributedStatement [
         vrep:premiseSource vrep:fromResource ;
-        vrep:formulaName "res_dpv_human_resource_management_below_dpv_purpose" ;
-        rdfs:label "res_dpv_human_resource_management_below_dpv_purpose"@en ] ;
+        vrep:formulaName "res_dpv_delivery_of_goods_below_dpv_requested_service_provision" ;
+        rdfs:label "res_dpv_delivery_of_goods_below_dpv_requested_service_provision"@en ] ;
     vrep:attributedStatement [
         vrep:premiseSource vrep:fromResource ;
-        vrep:formulaName "res_dpv_personnel_hiring_below_dpv_personnel_management" ;
-        rdfs:label "res_dpv_personnel_hiring_below_dpv_personnel_management"@en ] ;
+        vrep:formulaName "res_dpv_requested_service_provision_below_dpv_service_provision" ;
+        rdfs:label "res_dpv_requested_service_provision_below_dpv_service_provision"@en ] ;
     vrep:attributedStatement [
         vrep:premiseSource vrep:fromResource ;
-        vrep:formulaName "res_dpv_personnel_management_below_dpv_human_resource_management" ;
-        rdfs:label "res_dpv_personnel_management_below_dpv_human_resource_management"@en ] ;
+        vrep:formulaName "res_dpv_service_management_below_dpv_purpose" ;
+        rdfs:label "res_dpv_service_management_below_dpv_purpose"@en ] ;
     vrep:attributedStatement [
         vrep:premiseSource vrep:fromResource ;
-        vrep:formulaName "res_dpv_recruitment_interview_management_below_dpv_recruitment_management" ;
-        rdfs:label "res_dpv_recruitment_interview_management_below_dpv_recruitment_management"@en ] ;
-    vrep:attributedStatement [
-        vrep:premiseSource vrep:fromResource ;
-        vrep:formulaName "res_dpv_recruitment_interview_scheduling_below_dpv_recruitment_interview_management" ;
-        rdfs:label "res_dpv_recruitment_interview_scheduling_below_dpv_recruitment_interview_management"@en ] ;
-    vrep:attributedStatement [
-        vrep:premiseSource vrep:fromResource ;
-        vrep:formulaName "res_dpv_recruitment_management_below_dpv_personnel_hiring" ;
-        rdfs:label "res_dpv_recruitment_management_below_dpv_personnel_hiring"@en ] ;
+        vrep:formulaName "res_dpv_service_provision_below_dpv_service_management" ;
+        rdfs:label "res_dpv_service_provision_below_dpv_service_management"@en ] ;
     vrep:attributedStatement [
         vrep:premiseSource vrep:fromConstraints ;
         vrep:formulaName "w_kgc315" ;

@@ -52,8 +52,8 @@ drk:KGC308-report a vrep:OperandVerdictReport ;
     vrep:referenceConstraint kgc:KGC308-p1-c1 ;
     vrep:comparedConstraint kgc:KGC308-p2-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-spatial-geonames> ;
-    vrep:declarations <https://w3id.org/odrl-kb/geonames-europe/empty> ;
+    vrep:declarations <https://w3id.org/odrl-kb/geonames-europe/declared> ;
     vrep:readAgainst drk:KGC309-report ;
-    rdfs:comment """GeoNames places France and Germany within Europe and nothing more. A structure that places France within Germany admits a use in France under both policies. A structure that does not, admits none. Nothing published places France outside Germany, so the verdict is Unknown."""@en ;
-    dcterms:description """A library permits use within Germany. A researcher's policy commits to use in France."""@en ;
+    rdfs:comment """France and Germany are declared distinct, but distinct areas can still lie one within the other. A structure that places France within Germany admits a use in France under both policies. A structure that does not admits none. Nothing published or declared places France outside Germany, so the verdict is Unknown."""@en ;
+    dcterms:description """A library permits use within Germany. A researcher's policy commits to use in France. France and Germany are declared distinct."""@en ;
     vrep:compatibilityState vrep:Unknown .

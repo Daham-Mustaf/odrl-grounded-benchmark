@@ -53,7 +53,8 @@ drk:KGC380-report a vrep:OperandVerdictReport ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-spatial-dpvloc-juris> ;
     vrep:declarations <https://w3id.org/odrl-kb/dpv-loc/empty> ;
     vrep:readAgainst drk:KGC383-report ;
-    rdfs:comment """The jurisdictional binding reads union membership as containment. It composes loc:NL-BQ1 below loc:NL with loc:NL below loc:EU, so a use in Bonaire satisfies isPartOf loc:EU, and the verdict is Compatible. In law this does not hold: Bonaire is an overseas country and territory under Art. 355(2) TFEU, outside the ordinary territorial scope of EU law. The verdict follows from the binding, not from the law. KGC383 shows the same reading giving a correct answer for a German region. This policy goes beyond the DPV-ODRL usage note for Location, which does not list isPartOf."""@en ;
+    rdfs:comment """The jurisdictional binding reads union membership as containment. It composes loc:NL-BQ1 below loc:NL with loc:NL below loc:EU, so a use in Bonaire satisfies isPartOf loc:EU, and the verdict is Compatible. In law this does not hold: Bonaire is an overseas country and territory under Art. 355(2) TFEU, outside the ordinary territorial scope of EU law. The verdict follows from the binding, not from the law. KGC383 shows the same reading giving a correct answer for a German region."""@en ;
+    vrep:profileNote """This policy goes beyond the DPV-ODRL usage note for Location, which does not list isPartOf."""@en ;
     dcterms:description """A library permits use within the European Union. A researcher's policy commits to use in Bonaire."""@en ;
     vrep:compatibilityState vrep:Compatible ;
     vrep:certificate <certificates/KGC380-2.tstp> .

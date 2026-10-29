@@ -268,19 +268,13 @@ PROBLEMS = [
     "place. A processor's policy commits to technical measures."),
 
         "description": (
-            "The controller requires encryption and access control to be "
-            "in place together; the processor states that the measures it "
-            "applies are technical ones. Both required measures lie below "
-            "dpv:TechnicalMeasure in the resource, so a use supplying just "
-            "those two satisfies the requirement and the statement at "
-            "once, and it does so in every structure. Verdict: "
-            "Compatible.\n\n"
-            "This is the superset mode carried by the order: isAllOf asks "
-            "that its two values lie inside what the use supplies, the "
-            "second policy bounds what the use may supply to the technical "
-            "measures, and the two published statements place the values "
-            "within that bound."
-        ),
+            "The controller requires encryption and access control to be in "
+            "place together; the processor states that the measures it "
+            "applies are technical ones. isAllOf asks that both measures be "
+            "among those in use; the processor's isA asks that every "
+            "measure in use be a technical one. DPV places both measures "
+            "below technical measure, so a use with just those two meets "
+            "both policies, in every structure. Verdict: Compatible."),
         "expected_q1": "Satisfiable",
         "expected_q2": "Unsatisfiable",
         "certificate": {
@@ -307,7 +301,7 @@ PROBLEMS = [
     # -----------------------------------------------------------------
     {
         "id": "KGC362", "subdir": "verdict",
-        "twin":              "KGC366",
+        "twin": ["KGC363", "KGC364", "KGC366"],
         "name": "measures, isAnyOf {Encryption, AccessControl} against eq Encryption",
         "left_operand": "TechnicalOrganisationalMeasure", "sort": "tax",
         "resource": RESOURCE, "background_theory": EMPTY_BT,
@@ -336,7 +330,7 @@ PROBLEMS = [
     },
     {
         "id": "KGC363", "subdir": "verdict",
-        "twin":              "KGC364",
+        "twin": ["KGC364", "KGC362"],
         "name": "measures, isAllOf {Encryption, AccessControl} against eq Encryption",
         "left_operand": "TechnicalOrganisationalMeasure", "sort": "tax",
         "resource": RESOURCE, "background_theory": EMPTY_BT,
@@ -367,7 +361,7 @@ PROBLEMS = [
     },
     {
         "id": "KGC364", "subdir": "verdict",
-        "twin":              "KGC363",
+        "twin": ["KGC363", "KGC362"],
         "name": "measures, isAllOf {Encryption, AccessControl} against eq "
                 "Encryption, declared distinct",
         "left_operand": "TechnicalOrganisationalMeasure", "sort": "tax",
@@ -381,10 +375,11 @@ PROBLEMS = [
             "As KGC363, with encryption and access control declared "
             "distinct."),
         "description": (
-            "The two measures are then two, the second policy supplies one, and no "
-            "use satisfies both sides: Incompatible. Read with KGC362: same "
-            "values, one operator changed, opposite verdicts; and the "
-            "obvious conflict still rested on a declared premise."),
+            "KGC363 with every pair of measures declared distinct. "
+            "Encryption and access control are then two measures, the "
+            "processor supplies one, and no use satisfies both. Compare "
+            "KGC362 (at least one of the two, no declarations), which is "
+            "Compatible."),
         "certificate": {"kind": "Refutation",
             "comment": "Encryption and access control are declared distinct, so "
                        "a use supplying only encryption lacks the second.",
@@ -464,12 +459,12 @@ PROBLEMS = [
             "encryption, but encryption at rest is neither encryption nor "
             "access control by name, and the processor's use has no other "
             "measure. As published a structure may identify it with one of "
-            "the two names, and the verdict is Unknown. With the measures "
-            "declared distinct no use satisfies both policies, and the "
-            "verdict is Incompatible. ODRL has no operator for \"includes "
-            "some kind of encryption\". Read with KGC362, where the "
-            "processor's measure is encryption itself and the verdict is "
-            "Compatible."),
+            "the two names, and the verdict would be Unknown; no case of "
+            "the suite shows that variant. With the measures declared "
+            "distinct no use satisfies both policies, and the verdict is "
+            "Incompatible. ODRL has no operator for \"includes some kind of "
+            "encryption\". Read with KGC362, where the processor's measure "
+            "is encryption itself and the verdict is Compatible."),
         "certificate": {"kind": "Refutation",
             "comment": (
                 "isAnyOf matches by name. Encryption at rest is a kind of "
@@ -477,9 +472,9 @@ PROBLEMS = [
                 "control by name. With the measures declared distinct, a "
                 "use whose only measure is encryption at rest has neither "
                 "measure the first policy lists, and no use satisfies both "
-                "policies. ODRL has no operator for \"includes some kind "
-                "of encryption\". Without the declarations the verdict "
-                "would be Unknown."),
+                "policies. ODRL has no operator for \"includes some kind of "
+                "encryption\". Without the declarations the verdict would be "
+                "Unknown, but no case of the suite shows it."),
             "premises": [("fromDeclarations",
                           "Encryption distinct from EncryptionAtRest"),
                          ("fromDeclarations",

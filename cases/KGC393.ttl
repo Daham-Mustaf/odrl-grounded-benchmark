@@ -53,6 +53,7 @@ drk:KGC393-report a vrep:OperandVerdictReport ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-purpose> ;
     vrep:declarations <https://w3id.org/odrl-kb/dpv-purposes/empty> ;
     vrep:readAgainst drk:KGC394-report ;
+    vrep:readAgainst drk:KGC395-report ;
     rdfs:comment """One structure identifies improving transport mobility with one of the two purposes and admits the use; one keeps them apart and does not. The published order is not consulted by isAnyOf."""@en ;
     dcterms:description """A city's traffic data platform permits use for at least one of public benefit and non-commercial research. A city transport authority commits to improving transport mobility."""@en ;
     vrep:compatibilityState vrep:Unknown .

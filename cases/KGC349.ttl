@@ -31,7 +31,7 @@ kgc:KGC349-p1-c1 a odrl:Constraint ;
 drk:policy-349-2 a odrl:Set ;
     odrl:uid drk:policy-349-2 ;
     odrl:profile dpv-odrl: ;
-    dcterms:title "Use only while the consent on record has expired"@en ;
+    dcterms:title "Use only records whose consent has expired"@en ;
     odrl:assignee drk:processor ;
     odrl:permission kgc:KGC349-p2-r1 .
 kgc:KGC349-p2-r1 a odrl:Permission ;
@@ -53,7 +53,7 @@ drk:KGC349-report a vrep:OperandVerdictReport ;
     vrep:comparedConstraint kgc:KGC349-p2-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-consent-status> ;
     vrep:declarations <https://w3id.org/odrl-kb/dpv-consent/declared> ;
-    rdfs:comment """Expired consent is declared distinct from withdrawn and from revoked consent, so the exclusion list lets it through. A policy written over the valid branch, isA as in KGC343, would have refused it once the branches are declared disjoint, because expired consent lies below the invalid branch."""@en ;
-    dcterms:description """A controller permits use under any consent status except withdrawn and revoked. A processor states that it uses the data while the consent on record has expired."""@en ;
+    rdfs:comment """Expired consent is declared distinct from withdrawn and from revoked consent, so the exclusion list does not exclude it."""@en ;
+    dcterms:description """A controller permits use under any consent status except withdrawn and revoked. A processor commits to use only records whose consent has expired, in a consent-renewal campaign."""@en ;
     vrep:compatibilityState vrep:Compatible ;
     vrep:certificate <certificates/KGC349-2.tstp> .

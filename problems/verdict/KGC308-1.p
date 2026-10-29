@@ -1,9 +1,9 @@
 %--------------------------------------------------------------------------
 % File     : KGC308-1.p
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
-% Problem  : spatial, isPartOf Germany against eq France (witness condition asserted)
+% Problem  : spatial, isPartOf Germany against eq France, countries distinct (witness condition asserted)
 % Version  : 1.0
-% English  : A library permits use within Germany. A researcher's policy commits to use in France.
+% English  : A library permits use within Germany. A researcher's policy commits to use in France. France and Germany are declared distinct.
 %
 % Refs     : odrl-grounded-benchmark. https://github.com/Daham-Mustaf/odrl-grounded-benchmark
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark
@@ -19,7 +19,9 @@ include('axioms/KGE000-0.ax').
 include('axioms/GN000-0.ax').
 
 % --- constants, groundings and resource hooks ----------------------------
-
+% Declarations: the two countries declared distinct.
+fof(bg_dist_gn_france_gn_germany, axiom,
+    gn_france != gn_germany).
 
 % --- witness condition asserted ------------------------------------------
 fof(w_kgc308, axiom,

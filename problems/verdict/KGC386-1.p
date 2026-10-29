@@ -3,7 +3,7 @@
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
 % Problem  : spatial, isNoneOf {loc:DE-BY, loc:DE-BE} against eq loc:DE-HH (witness condition asserted)
 % Version  : 1.0
-% English  : A library permits use anywhere except Bavaria and Berlin. A researcher's policy commits to use in Hamburg.
+% English  : A library permits use anywhere except Bavaria and Berlin, where exclusive licences are already granted to other libraries. A researcher's policy commits to use in Hamburg.
 %
 % Refs     : odrl-grounded-benchmark. https://github.com/Daham-Mustaf/odrl-grounded-benchmark
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark

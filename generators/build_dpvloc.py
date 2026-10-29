@@ -498,6 +498,7 @@ def iso_ttl(reps, excluded, multi, meta) -> str:
               "Eustatius from one another, or Svalbard from Jan Mayen. This is "
               "DPV's published data, to be reported upstream.")
     merged_comment = "\n".join("# " + l for l in textwrap.wrap(merged, 72))
+    n_left = len({c for cs in excluded.values() for c in cs})
     left = ("Greenland (DK-GL) and Jersey (GB-JSY) are left out for the reason "
             "stated above.")
     left_comment = "\n".join("# " + l for l in textwrap.wrap(left, 72))
@@ -530,6 +531,7 @@ def iso_ttl(reps, excluded, multi, meta) -> str:
 @prefix bind:    <https://w3id.org/odrl-kb/binding#> .
 @prefix owl:     <http://www.w3.org/2002/07/owl#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 
 <https://w3id.org/odrl-kb/dpv-loc/iso> a bind:Declarations ;
     dcterms:title "Pairwise distinctness of ISO 3166 areas"@en ;
@@ -537,6 +539,7 @@ def iso_ttl(reps, excluded, multi, meta) -> str:
                  <https://w3id.org/odrl-kb/dpv-loc-juris> ;
     bind:generatedBy bind:PairwiseDistinctness ;
     bind:origin bind:practiceRule ;
+    rdfs:comment "The origin rests on the ISO 3166 rule that a code names one area. The slice has {len(reps) + n_left:,} identity classes and the set lists {len(reps):,} of them; the scope says which {n_left} are left out and why."@en ;
     bind:scopeCondition "Distinctness holds between equivalence classes under the extension's identity statements, not between codes; codes the extension identifies name one area. {note}"@en ;
     bind:pairCount {n * (n - 1) // 2} ;
     bind:states [

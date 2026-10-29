@@ -1,7 +1,7 @@
 ; -------------------------------------------------------------------------
 ; File     : KGC308-1.smt2
 ; Domain   : ODRL Policy / Knowledge-Grounded Fragment
-; Problem  : spatial, isPartOf Germany against eq France (witness condition asserted)
+; Problem  : spatial, isPartOf Germany against eq France, countries distinct (witness condition asserted)
 ; Version  : 1.0
 ; Refs     : odrl-grounded-benchmark. https://github.com/Daham-Mustaf/odrl-grounded-benchmark
 ; Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark
@@ -28,6 +28,8 @@
     (=> (and (kge_leq x y) (kge_leq y z)) (kge_leq x z))) :named ax_leq_transitive))
 (assert (! (kge_concept gn_france) :named gn_france_concept))
 (assert (! (kge_concept gn_germany) :named gn_germany_concept))
+; The same distinctness, named as the TPTP side names it.
+(assert (! (not (= gn_france gn_germany)) :named bg_dist_gn_france_gn_germany))
 ; witness condition asserted
 (assert (! (or (and (kge_leq gn_germany gn_germany) (= gn_germany gn_france)) (and (kge_leq gn_france gn_germany) (= gn_france gn_france))) :named w_kgc308))
 (check-sat)

@@ -3,7 +3,7 @@
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
 % Problem  : consent status, isNoneOf {ConsentWithdrawn, ConsentRevoked} against eq ConsentExpired, states declared distinct (witness condition asserted)
 % Version  : 1.0
-% English  : A controller permits use under any consent status except withdrawn and revoked. A processor states that it uses the data while the consent on record has expired.
+% English  : A controller permits use under any consent status except withdrawn and revoked. A processor commits to use only records whose consent has expired, in a consent-renewal campaign.
 %
 % Refs     : odrl-grounded-benchmark. https://github.com/Daham-Mustaf/odrl-grounded-benchmark
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark

@@ -16,7 +16,7 @@ drk:traffic-data a dcat:Dataset ;
 drk:policy-399-1 a odrl:Set ;
     odrl:uid drk:policy-399-1 ;
     odrl:profile dpv-odrl: ;
-    dcterms:title "Use for public benefit or non-commercial research purposes only"@en ;
+    dcterms:title "Use for public benefit or non-commercial research, or any narrower purpose"@en ;
     odrl:assigner drk:data-platform ;
     odrl:permission kgc:KGC399-p1-r1 .
 kgc:KGC399-p1-r1 a odrl:Permission ;
@@ -59,6 +59,6 @@ drk:KGC399-report a vrep:OperandVerdictReport ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-purpose> ;
     vrep:declarations <https://w3id.org/odrl-kb/dpv-purposes/empty> ;
     vrep:readAgainst drk:KGC395-report ;
-    rdfs:comment """DPV places commercial research below commercial purpose and below research and development, and below neither public benefit nor non-commercial research. It publishes nothing that keeps it out of them. In a structure that keeps it out, no disjunct holds and no use satisfies both policies. In a structure that also places it below public benefit or below non-commercial research, a use for commercial research satisfies both. So the verdict is Unknown."""@en ;
-    dcterms:description """A city's traffic data platform permits use for any purpose under public benefit or under non-commercial research. A company commits to use for commercial research."""@en ;
+    rdfs:comment """DPV places commercial research below commercial purpose and below research and development, and below neither public benefit nor non-commercial research. It publishes nothing that keeps it out of them. In a structure that keeps it out, no alternative holds and no use satisfies both policies. In a structure that also places it below public benefit or below non-commercial research, a use for commercial research satisfies both. So the verdict is Unknown."""@en ;
+    dcterms:description """A city's traffic data platform permits use for public benefit or non-commercial research, or any narrower purpose. A company commits to use for commercial research."""@en ;
     vrep:compatibilityState vrep:Unknown .

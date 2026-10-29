@@ -1,9 +1,9 @@
 %--------------------------------------------------------------------------
 % File     : KGC315-1.p
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
-% Problem  : purpose, isA dpv:Purpose against eq dpv:RIS (witness condition asserted)
+% Problem  : purpose, isA dpv:Purpose against eq dpv:DeliveryOfGoods (witness condition asserted)
 % Version  : 1.0
-% English  : A city's traffic data platform permits use for any DPV purpose. A company commits to use for recruitment interview scheduling.
+% English  : A city's traffic data platform permits use for any DPV purpose. A logistics company commits to use for delivery of goods.
 %
 % Refs     : odrl-grounded-benchmark. https://github.com/Daham-Mustaf/odrl-grounded-benchmark
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark
@@ -23,6 +23,6 @@ include('axioms/DPV-dpv-purposes.ax').
 
 % --- witness condition asserted ------------------------------------------
 fof(w_kgc315, axiom,
-    ( ( kge_leq(dpv_purpose, dpv_purpose) & dpv_purpose = dpv_recruitment_interview_scheduling )
-| ( kge_leq(dpv_recruitment_interview_scheduling, dpv_purpose) & dpv_recruitment_interview_scheduling = dpv_recruitment_interview_scheduling ) )).
+    ( ( kge_leq(dpv_purpose, dpv_purpose) & dpv_purpose = dpv_delivery_of_goods )
+| ( kge_leq(dpv_delivery_of_goods, dpv_purpose) & dpv_delivery_of_goods = dpv_delivery_of_goods ) )).
 %--------------------------------------------------------------------------

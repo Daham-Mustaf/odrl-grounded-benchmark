@@ -1,50 +1,43 @@
 """
 problem_data_geonames.py
 ========================
-Six problems over the GeoNames slice in geonames.ttl, at mer.  Four are
+Four problems over the GeoNames slice in geonames.ttl, at mer.  Two are
 composed under xone.
 
-    KGC303  xone(eq France, eq Germany)             x eq France  -> Unknown
-    KGC304  the same, France and Germany distinct                -> Compatible
-    KGC305  xone(isPartOf France, isPartOf Germany) x eq France,
-            France and Germany distinct                          -> Unknown
-    KGC306  the same, France and Germany disjoint                -> Compatible
-    KGC308  isPartOf Germany                        x eq France  -> Unknown
-    KGC309  the same, France and Germany disjoint                -> Incompatible
+    KGC303  xone(eq France, eq Germany)   x eq France        -> Unknown
+    KGC304  the same, France and Germany distinct            -> Compatible
+    KGC308  isPartOf Germany              x eq France,
+            France and Germany distinct                      -> Unknown
+    KGC309  the same, features with one parent disjoint      -> Incompatible
 
-They replace the consent problems KGC344 to KGC347, which tested the same
-expansion but permitted use under an invalid consent state.  "Use in
-exactly one of two countries" is a clause a data provider writes, for
-example to keep processing inside one jurisdiction.
+KGC305 and KGC306, the same pair of declarations over an xone of isPartOf,
+are retired.  They taught what KGC308 and KGC309 teach, that distinctness
+does not decide containment and disjointness does, and xone at the mer sort
+is already covered by KGC303 and KGC304.  The first two problems replace the
+consent problems KGC344 to KGC347, which tested the same expansion but
+permitted use under an invalid consent state.  "Use in exactly one of two
+countries" is a clause a data provider writes, for example to keep
+processing inside one jurisdiction.
 
-What the four show
-------------------
+What KGC303 and KGC304 show
+---------------------------
 Expanded, xone(A, B) is (A and not B) or (B and not A).  For a use in
 France the first alternative holds, so the verdict turns on the negated
-second alternative.
+second alternative.  With eq, that literal says France is not Germany.
+GeoNames publishes no distinctness, so a structure may identify the two,
+and then both alternatives hold and "exactly one" fails: KGC303 is Unknown.
+Declaring the two countries distinct decides it: KGC304 is Compatible.
 
-With eq, that literal says France is not Germany.  GeoNames publishes no
-distinctness, so a structure may identify the two, and then both
-alternatives hold and "exactly one" fails: KGC303 is Unknown.  Declaring
-the two countries distinct settles it: KGC304 is Compatible.
-
-With isPartOf, the literal says France does not lie within Germany.
-Distinctness does not settle that: two different areas can still lie one
-within the other.  So KGC305, with the same declaration as KGC304, stays
-Unknown.  Declaring the countries disjoint, meaning nothing lies within
-both, settles it: France lies within itself, so it cannot also lie within
-Germany, and KGC306 is Compatible.
-
-The pair KGC304 and KGC305 is the point.  The same declaration settles the
-identity question and leaves the order question open, which is why
-distinctness and disjointness are separate declarations.
-
-KGC308 and KGC309 put the point without xone.  "Use within Germany" against
-"Use in France only" asks whether France lies within Germany.  Nothing
-published says it does not, so KGC308 is Unknown.  Declared disjoint, France
-and Germany have no common part, and France lies within itself, so it cannot
-lie within Germany: KGC309 is Incompatible.  Declared only distinct, the
-pair would stay Unknown, as KGC348 shows for consent.
+What KGC308 and KGC309 show
+---------------------------
+"Use within Germany" against "Use in France only" asks whether France lies
+within Germany.  Nothing GeoNames publishes says it does not, and declaring
+France and Germany distinct does not either: two different areas can still
+lie one within the other.  So KGC308 is Unknown.  Declare instead that
+features with the same parent are disjoint, meaning nothing lies within
+both, and the question closes: France lies within itself, so it cannot lie
+within Germany, and KGC309 is Incompatible.  The pair differs in one
+declaration, which is why distinctness and disjointness are separate.
 
 The declarations
 -----------------------
@@ -208,17 +201,13 @@ kgc:{pid}-p2-c1 a odrl:Constraint ;
 
 EQ_TREE = [Xone((C("eq", FRANCE), C("eq", GERMANY))),
            C("eq", FRANCE, side="request")]
-PART_TREE = [Xone((C("isPartOf", FRANCE), C("isPartOf", GERMANY))),
-             C("eq", FRANCE, side="request")]
 
 EQ_TITLE = "Use in exactly one of France and Germany"
-PART_TITLE = "Use within exactly one of France and Germany"
 FR_TITLE = "Use in France only"
 DE_TITLE = "Use within Germany"
 WITHIN_TREE = [C("isPartOf", GERMANY), C("eq", FRANCE, side="request")]
 
 EQ_ALTS = (_alt("eq", FRANCE), _alt("eq", GERMANY))
-PART_ALTS = (_alt("isPartOf", FRANCE), _alt("isPartOf", GERMANY))
 
 PROVENANCE = ("Data localisation: a provider keeps processing inside one "
               "jurisdiction and accepts either of two.")
@@ -284,71 +273,6 @@ PROBLEMS = [
         "ttl": _ttl("KGC304", *EQ_ALTS, EQ_TITLE, FR_TITLE),
     },
 
-    {
-        "id": "KGC305", "subdir": "verdict",
-        "twin": "KGC306",
-        "name": "spatial, xone(isPartOf France, isPartOf Germany) against "
-                "eq France, countries distinct",
-        "left_operand": "spatial", "sort": "mer",
-        "resource": RESOURCE, "background_theory": DECLARED_BT,
-        "binding": BINDING, "includes": INCLUDES,
-        "fof_decls": _DIST[0], "smt2_background": _DIST[1],
-        "tree": PART_TREE,
-        "expected_verdict": "Unknown",
-        "expected_q1": "Satisfiable", "expected_q2": "Satisfiable",
-        "summary": (
-            "A library permits use within exactly one of France and "
-            "Germany. A researcher's policy commits to use in France. "
-            "France and Germany are declared distinct."),
-        "description": (
-            "Distinctness states that France is not Germany. It does not "
-            "state that France does not lie within Germany. A structure that "
-            "places France within Germany makes both alternatives hold. "
-            "The verdict is Unknown, with the same declaration that "
-            "decides KGC304."),
-        "certificate": {"kind": "Models",
-            "comment": (
-                "France and Germany are declared distinct, but distinct areas can "
-                "still lie one within the other. In a structure where France does not "
-                "lie within Germany, a use in France satisfies exactly one "
-                "alternative, so both policies hold. In a structure that places France "
-                "within Germany, both alternatives hold and 'exactly one' fails. So "
-                "the verdict is Unknown."),
-            "premises": []},
-        "provenance": PROVENANCE,
-        "ttl": _ttl("KGC305", *PART_ALTS, PART_TITLE, FR_TITLE),
-    },
-
-    {
-        "id": "KGC306", "subdir": "verdict",
-        "twin": "KGC305",
-        "name": "spatial, xone(isPartOf France, isPartOf Germany) against "
-                "eq France, countries disjoint",
-        "left_operand": "spatial", "sort": "mer",
-        "resource": RESOURCE, "background_theory": SIBLINGS_BT,
-        "binding": BINDING, "includes": INCLUDES,
-        "fof_decls": _DISJ[0], "smt2_background": _DISJ[1],
-        "tree": PART_TREE,
-        "expected_verdict": "Compatible",
-        "expected_q1": "Satisfiable", "expected_q2": "Unsatisfiable",
-        "summary": (
-            "As KGC305, with France and Germany declared disjoint: nothing "
-            "lies within both."),
-        "description": (
-            "France lies within itself. Since nothing lies within both "
-            "countries, France does not lie within Germany, only the first "
-            "alternative holds, and the verdict is Compatible."),
-        "certificate": {"kind": "Refutation",
-            "comment": (
-                "France lies within itself, and nothing lies within both "
-                "France and Germany. So France does not lie within "
-                "Germany, and 'exactly one' holds."),
-            "premises": [("fromDeclarations",
-                          "nothing lies within both gn:France and "
-                          "gn:Germany")]},
-        "provenance": PROVENANCE,
-        "ttl": _ttl("KGC306", *PART_ALTS, PART_TITLE, FR_TITLE),
-    },
     # -----------------------------------------------------------------
     # KGC308 / KGC309  Does France lie within Germany?  Nothing published
     # says it does not; the siblings declaration does.
@@ -356,31 +280,37 @@ PROBLEMS = [
     {
         "id": "KGC308", "subdir": "verdict",
         "twin": "KGC309",
-        "name": "spatial, isPartOf Germany against eq France",
+        "name": (
+            "spatial, isPartOf Germany against eq France, countries "
+            "distinct"),
         "left_operand": "spatial", "sort": "mer",
-        "resource": RESOURCE, "background_theory": EMPTY_BT,
+        "resource": RESOURCE, "background_theory": DECLARED_BT,
         "binding": BINDING, "includes": INCLUDES,
+        "fof_decls": _DIST[0], "smt2_background": _DIST[1],
         "tree": WITHIN_TREE,
         "expected_verdict": "Unknown",
         "expected_q1": "Satisfiable", "expected_q2": "Satisfiable",
         "summary": (
             "A library permits use within Germany. A researcher's policy "
-            "commits to use in France."),
+            "commits to use in France. France and Germany are declared "
+            "distinct."),
         "description": (
             "A use in France satisfies both policies only if France lies "
             "within Germany. GeoNames places both countries within Europe "
-            "and publishes nothing that keeps France out of Germany. A "
-            "structure that places France within Germany admits the use, "
-            "and one that does not, admits none. The verdict is Unknown. "
-            "KGC309 adds the declarations that decide it."),
+            "and publishes nothing that keeps France out of Germany. France "
+            "and Germany are declared distinct, but distinct areas can "
+            "still lie one within the other. A structure that places France "
+            "within Germany admits the use, and one that does not admits "
+            "none. The verdict is Unknown. KGC309 adds the declaration that "
+            "decides it."),
         "certificate": {"kind": "Models",
             "comment": (
-                "GeoNames places France and Germany within Europe and "
-                "nothing more. A structure that places France within "
-                "Germany admits a use in France under both policies. A "
-                "structure that does not, admits none. Nothing published "
-                "places France outside Germany, so the verdict is "
-                "Unknown."),
+                "France and Germany are declared distinct, but distinct "
+                "areas can still lie one within the other. A structure that "
+                "places France within Germany admits a use in France under "
+                "both policies. A structure that does not admits none. "
+                "Nothing published or declared places France outside "
+                "Germany, so the verdict is Unknown."),
             "premises": []},
         "provenance": "Data localisation: a provider keeps processing "
                       "inside one jurisdiction.",
@@ -403,19 +333,18 @@ PROBLEMS = [
             "As KGC308, with the features that share a parent declared "
             "disjoint: nothing lies within both."),
         "description": (
-            "France and Germany share a parent, Europe, and are declared "
-            "disjoint. France lies within itself, so it cannot also lie "
-            "within Germany, and no use satisfies both policies. The "
-            "verdict is Incompatible. Declared only distinct, the two "
-            "countries would leave it Unknown, because distinct areas can "
-            "still lie one within the other."),
+            "KGC308 with the features that share a parent declared disjoint "
+            "instead of only distinct. France and Germany share a parent, "
+            "Europe, so nothing lies within both. France lies within "
+            "itself, so it cannot also lie within Germany, and no use "
+            "satisfies both policies. The verdict is Incompatible."),
         "certificate": {"kind": "Refutation",
             "comment": (
                 "France and Germany share a parent and are declared "
                 "disjoint, so they have no common part. France lies within "
                 "itself, so it cannot lie within Germany, and no use "
                 "satisfies both policies. Distinctness alone would leave "
-                "the verdict Unknown, as KGC348 shows for consent."),
+                "the verdict Unknown, as KGC308 shows."),
             "premises": [("fromDeclarations",
                           "nothing lies within both gn:France and "
                           "gn:Germany")]},

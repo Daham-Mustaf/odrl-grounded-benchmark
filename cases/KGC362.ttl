@@ -57,6 +57,8 @@ drk:KGC362-report a vrep:OperandVerdictReport ;
     vrep:comparedConstraint kgc:KGC362-p2-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-tom> ;
     vrep:declarations <https://w3id.org/odrl-kb/dpv-tom/empty> ;
+    vrep:readAgainst drk:KGC363-report ;
+    vrep:readAgainst drk:KGC364-report ;
     vrep:readAgainst drk:KGC366-report ;
     rdfs:comment """Encryption is one of the values the first policy lists, so a use with encryption satisfies both policies."""@en ;
     dcterms:description """A controller requires at least one of encryption and access control. A processor's policy commits to encryption as the only measure."""@en ;

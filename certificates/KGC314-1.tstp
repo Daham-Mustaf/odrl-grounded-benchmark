@@ -6,7 +6,7 @@ fof(f135,axiom,(
   dpv_marketing != dpv_scientific_research),
   file('problems/verdict/KGC314-1.p',bg_dist_dpv_marketing_dpv_scientific_research)).
 fof(f136,axiom,(
-  (dpv_marketing = dpv_marketing & dpv_marketing = dpv_scientific_research) | (dpv_scientific_research = dpv_marketing & dpv_scientific_research = dpv_scientific_research)),
+  (dpv_scientific_research = dpv_scientific_research & dpv_scientific_research = dpv_marketing) | (dpv_marketing = dpv_scientific_research & dpv_marketing = dpv_marketing)),
   file('problems/verdict/KGC314-1.p',w_kgc314)).
 fof(f275,plain,(
   dpv_marketing != dpv_scientific_research),

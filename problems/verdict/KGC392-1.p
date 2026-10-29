@@ -1,9 +1,9 @@
 %--------------------------------------------------------------------------
 % File     : KGC392-1.p
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
-% Problem  : spatial, isNoneOf {loc:WF} against eq loc:WF-UV, ISO rule (witness condition asserted)
+% Problem  : spatial, isNoneOf {loc:DE} against eq loc:DE-BY, ISO rule (witness condition asserted)
 % Version  : 1.0
-% English  : A library permits use anywhere except Wallis and Futuna. A researcher's policy commits to use in Uvea, a district of Wallis and Futuna.
+% English  : A library permits use anywhere except Germany. A researcher's policy commits to use in Bavaria, a state of Germany.
 %
 % Refs     : odrl-grounded-benchmark. https://github.com/Daham-Mustaf/odrl-grounded-benchmark
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark
@@ -23,11 +23,11 @@ include('axioms/LOC-dpvloc-iso.ax').
 % Declarations: instances of the ISO 3166 distinctness rule,
 % stated in LOC-dpvloc-iso.ax and instantiated here.
 
-fof(bg_dist_loc_wf_uv_loc_wf, axiom,
-    loc_wf_uv != loc_wf).
+fof(bg_dist_loc_de_by_loc_de, axiom,
+    loc_de_by != loc_de).
 
 % --- witness condition asserted ------------------------------------------
 fof(w_kgc392, axiom,
-    ( ( loc_wf != loc_wf & loc_wf = loc_wf_uv )
-| ( loc_wf_uv != loc_wf & loc_wf_uv = loc_wf_uv ) )).
+    ( ( loc_de != loc_de & loc_de = loc_de_by )
+| ( loc_de_by != loc_de & loc_de_by = loc_de_by ) )).
 %--------------------------------------------------------------------------

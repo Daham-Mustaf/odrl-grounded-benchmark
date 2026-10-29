@@ -13,8 +13,8 @@
 #   ConsentStatus below Status, which belongs to another module
 #
 # Source    : Data Privacy Vocabulary, consent status module
-# Version   : 2.0 (as the file states)
-# Retrieved : 2026-08-19
+# Version   : 2.3 (as the file states)
+# Retrieved : 2026-10-29
 # Licence   : W3C Document License 2023
 # NOTE      : permits verbatim redistribution, not derivatives; this slice is a derivative and the licence is unresolved
 #

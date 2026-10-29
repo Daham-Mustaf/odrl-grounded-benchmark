@@ -16,7 +16,7 @@ drk:manuscripts a dcat:Dataset ;
 drk:policy-392-1 a odrl:Set ;
     odrl:uid drk:policy-392-1 ;
     odrl:profile dpv-odrl: ;
-    dcterms:title "Use in any area except Wallis and Futuna"@en ;
+    dcterms:title "Use in any area except Germany"@en ;
     odrl:assigner drk:library ;
     odrl:permission kgc:KGC392-p1-r1 .
 kgc:KGC392-p1-r1 a odrl:Permission ;
@@ -26,11 +26,11 @@ kgc:KGC392-p1-r1 a odrl:Permission ;
 kgc:KGC392-p1-c1 a odrl:Constraint ;
     odrl:leftOperand dpv-odrl:Location ;
     odrl:operator odrl:isNoneOf ;
-    odrl:rightOperand ( loc:WF ) .
+    odrl:rightOperand ( loc:DE ) .
 drk:policy-392-2 a odrl:Set ;
     odrl:uid drk:policy-392-2 ;
     odrl:profile dpv-odrl: ;
-    dcterms:title "Use in Uvea only"@en ;
+    dcterms:title "Use in Bavaria only"@en ;
     odrl:assignee drk:researcher ;
     odrl:permission kgc:KGC392-p2-r1 .
 kgc:KGC392-p2-r1 a odrl:Permission ;
@@ -40,7 +40,7 @@ kgc:KGC392-p2-r1 a odrl:Permission ;
 kgc:KGC392-p2-c1 a odrl:Constraint ;
     odrl:leftOperand dpv-odrl:Location ;
     odrl:operator odrl:eq ;
-    odrl:rightOperand loc:WF-UV .
+    odrl:rightOperand loc:DE-BY .
 
 ### Expected result #######################################################
 
@@ -52,7 +52,7 @@ drk:KGC392-report a vrep:OperandVerdictReport ;
     vrep:comparedConstraint kgc:KGC392-p2-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-spatial-dpvloc-geo> ;
     vrep:declarations <https://w3id.org/odrl-kb/dpv-loc/iso> ;
-    rdfs:comment """isNoneOf excludes the named area itself, not its parts. The ISO rule makes Uvea distinct from Wallis and Futuna, so the use is not excluded, although Uvea lies within Wallis and Futuna."""@en ;
-    dcterms:description """A library permits use anywhere except Wallis and Futuna. A researcher's policy commits to use in Uvea, a district of Wallis and Futuna."""@en ;
+    rdfs:comment """isNoneOf excludes the named area itself, not its parts. The ISO rule makes Bavaria distinct from Germany, so the use is not excluded, although Bavaria lies within Germany."""@en ;
+    dcterms:description """A library permits use anywhere except Germany. A researcher's policy commits to use in Bavaria, a state of Germany."""@en ;
     vrep:compatibilityState vrep:Compatible ;
     vrep:certificate <certificates/KGC392-2.tstp> .

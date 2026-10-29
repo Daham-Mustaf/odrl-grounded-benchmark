@@ -16,7 +16,7 @@ drk:traffic-data a dcat:Dataset ;
 drk:policy-395-1 a odrl:Set ;
     odrl:uid drk:policy-395-1 ;
     odrl:profile dpv-odrl: ;
-    dcterms:title "Use for public benefit or non-commercial research purposes only"@en ;
+    dcterms:title "Use for public benefit or non-commercial research, or any narrower purpose"@en ;
     odrl:assigner drk:data-platform ;
     odrl:permission kgc:KGC395-p1-r1 .
 kgc:KGC395-p1-r1 a odrl:Permission ;
@@ -59,7 +59,8 @@ drk:KGC395-report a vrep:OperandVerdictReport ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-purpose> ;
     vrep:declarations <https://w3id.org/odrl-kb/dpv-purposes/empty> ;
     vrep:readAgainst drk:KGC399-report ;
-    rdfs:comment """DPV places improving transport mobility below public benefit; the first disjunct decides it."""@en ;
-    dcterms:description """A city's traffic data platform permits use for any purpose under public benefit or under non-commercial research. A city transport authority commits to improving transport mobility."""@en ;
+    vrep:readAgainst drk:KGC393-report ;
+    rdfs:comment """DPV places improving transport mobility below public benefit; the first alternative decides it."""@en ;
+    dcterms:description """A city's traffic data platform permits use for public benefit or non-commercial research, or any narrower purpose. A city transport authority commits to improving transport mobility."""@en ;
     vrep:compatibilityState vrep:Compatible ;
     vrep:certificate <certificates/KGC395-2.tstp> .

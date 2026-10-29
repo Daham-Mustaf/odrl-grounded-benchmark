@@ -3,7 +3,7 @@
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
 % Problem  : purpose, xone(isA CommercialPurpose, isA NonCommercialPurpose) against eq NonCommercialResearch (witness condition negated)
 % Version  : 1.0
-% English  : A city's traffic data platform permits use for exactly one of commercial and non-commercial purposes. A university research group commits to use for non-commercial research.
+% English  : A city's traffic data platform prices its data in two tiers, commercial and non-commercial, and each use must fall under exactly one tier. A university research group commits to use for non-commercial research.
 %
 % Refs     : odrl-grounded-benchmark. https://github.com/Daham-Mustaf/odrl-grounded-benchmark
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark

@@ -6,7 +6,7 @@ reading, and the report the semantics produces for them.
 ```
 KGC100-112   well-sortedness, rejected at drafting time
 KGC300-302   the motivating example, one per sort
-KGC303-306   spatial: exactly one of two alternatives, over GeoNames
+KGC303-304   spatial: exactly one of two alternatives, over GeoNames
 KGC308-309   spatial: one country within another, over GeoNames
 KGC310-319   purpose, over DPV purposes
 KGC320-323   fileFormat, over the EU file type table
@@ -56,6 +56,11 @@ rest about the case.
   says what it rests on, and one that rests on a declaration says so. An
   Unknown names both structures: one where both policies hold, one where
   they do not.
+- Lessons and reasons are in plain words. None of them uses witness,
+  refutation, certificate, query, model, premise, antisymmetry, down-set or
+  nominal sort, or triple notation like (purpose, isA, X); `lint_cases.py`
+  and `catalogue.py` fail a text that does. What a prover is expected to cite
+  goes in the problem's maintainer note, which the catalogue does not show.
 - Every declaration set has an origin and covers its whole slice. Where a
   set ranges over a resource, it lists all of it, and `check_declarations.py`
   fails a set that leaves a concept out.
@@ -70,9 +75,11 @@ holds the grid: each of the 24 cells of operator by sort has a verdict case
 where the sort admits the operator and a rejection where it does not, and
 `or` and `xone` each appear at every sort.
 
-Retired (IDs never reused, recoverable from tags pre-retire and pre-purpose)
+Retired (IDs never reused, recoverable from tags pre-retire, pre-purpose and pre-review)
 
 ```
+KGC305   spatial: xone(isPartOf France, isPartOf Germany) against eq France, countries distinct
+KGC306   the same, France and Germany declared disjoint
 KGC307   spatial: xone(eq France, isAllOf (France Germany)) against eq France
 KGC350   legal basis: isAnyOf the seven Article 6(1) bases against eq consent
 KGC351   the same against eq explicit consent under Article 6(1)(a)

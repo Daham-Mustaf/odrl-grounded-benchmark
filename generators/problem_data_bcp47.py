@@ -304,23 +304,16 @@ PROBLEMS = [
         "includes":          INCLUDES_DISTINCT,
         "tree": [C("eq", DE), C("eq", FR, side="request")],
         "description": (
-            "A publisher distributes a work in German. A licensee's policy "
-            "commits to distributing it in French. Both constraints are on "
-            "odrl:language, which this profile binds to a fifteen-subtag "
-            "slice of the IANA Language Subtag Registry at the nominal "
-            "sort.\n\n"
-            "The distinctness rule is adopted: "
-            "distinct primary subtag records, neither deprecated and with "
-            "no Preferred-Value link between them, name distinct "
-            "languages. With that rule in force no structure interprets "
-            "de and fr as one language, so no single use satisfies both "
-            "constraints, and the verdict is Incompatible.\n\n"
-            "The refutation cites one premise, and it is a declaration "
-            "rather than the registry's. IANA lists both subtags and "
-            "asserts nothing that separates them; what makes this verdict "
-            "definite is a declaration, and withdrawing it "
-            "reopens the case. KGC371 is that withdrawal."
-        ),
+            "A publisher distributes a work in German, and a licensee's "
+            "policy commits to French. Both constraints are on language, "
+            "bound to a fifteen-subtag slice of the IANA Language Subtag "
+            "Registry at the nom sort. The registry lists both subtags and "
+            "states nothing that separates them. The declared rule that "
+            "different primary subtags name different languages does: with "
+            "it, no structure treats German and French as one language, so "
+            "no use satisfies both policies and the verdict is "
+            "Incompatible. Without the rule the verdict is Unknown "
+            "(KGC371)."),
         "expected_verdict": "Incompatible",
         "expected_q1": "Unsatisfiable",
         "expected_q2": "Satisfiable",
@@ -330,10 +323,13 @@ PROBLEMS = [
             "name different languages is adopted."),
         "certificate": {
             "kind": "Refutation",
-            "comment": "The two subtags are declared to name distinct "
-                       "languages, which is a declaration and not the "
-                       "registry's content. Withdrawing it returns the "
-                       "verdict to Unknown, which is KGC371.",
+            "comment": (
+                "The two subtags are declared to name distinct languages, "
+                "which is a declaration and not the registry's content. "
+                "Both policies require a use in one language, so they can "
+                "hold together only if German and French are one. "
+                "Withdrawing the declaration returns the verdict to "
+                "Unknown, which is KGC371."),
             "premises": [
                 ("fromDeclarations",
                  "bcp47:de and bcp47:fr are declared distinct, by the "
@@ -360,20 +356,11 @@ PROBLEMS = [
         "includes":          INCLUDES,
         "tree": [C("eq", DE), C("eq", FR, side="request")],
         "description": (
-            "The policies of KGC370, over the same resource, with the "
-            "distinctness rule withdrawn.\n\n"
-            "The registry still lists both subtags and still asserts "
-            "nothing that separates them. So some structures admitted by "
-            "the resource interpret de and fr as one language and others "
-            "keep them apart, and whether a single use can satisfy both "
-            "constraints depends on which. The verdict is Unknown, and "
-            "the reason is epistemic: a declaration decides it.\n\n"
-            "Read against KGC370 this is what a withdrawable premise "
-            "means. Two identical policies over one vocabulary, one "
-            "include line apart, and the verdict moves from definite to "
-            "open because something the registry never asserted is no "
-            "longer asserted."
-        ),
+            "KGC370 without the distinctness rule. The registry still lists "
+            "both subtags and states nothing that separates them, so "
+            "whether one use can satisfy both policies depends on whether "
+            "German and French are one language. The verdict is Unknown. "
+            "The only difference from KGC370 is the declaration."),
         "expected_verdict": "Unknown",
         "expected_q1": "Satisfiable",
         "expected_q2": "Satisfiable",
@@ -381,10 +368,12 @@ PROBLEMS = [
             "As KGC370, without the registry rule."),
         "certificate": {
             "kind": "Models",
-            "comment": "Both queries are satisfiable. One certifying "
-                       "structure interprets bcp47:de and bcp47:fr as one "
-                       "concept and the other keeps them apart; the "
-                       "registry decides neither.",
+            "comment": (
+                "Nothing states that German and French are different "
+                "languages. In a structure that identifies them, a use in "
+                "German is a use in French and satisfies both policies. In "
+                "a structure that keeps them apart, no use satisfies both. "
+                "So the verdict is Unknown."),
             "premises": [],
         },
         "ttl": _TTL_HEAD + _offer("KGC371")
@@ -414,27 +403,22 @@ PROBLEMS = [
         "ungrounded":        "en-US",
         "description": (
             "A publisher distributes in German. A licensee's policy commits "
-            "to distributing in en-US.\n\n"
-            "That is a well-formed language tag: RFC 5646 composes it "
-            "from the registered primary subtag en and the registered "
-            "region subtag US, and any conformant parser accepts it. It "
-            "is not a concept of the resource this operand is bound to, "
-            "which holds primary subtags.\n\n"
-            "This problem is read under the profile's exact grounding "
-            "rule, which resolves an IRI of the scheme or a literal "
-            "matching a published notation, and nothing else. The "
-            "second policy's right operand matches neither, so its "
-            "constraint cannot be interpreted against this resource at "
-            "all. The constraint is rejected, no query is built, and the "
-            "value itself is the evidence.\n\n"
-            "This is not an Unknown, and the difference decides the "
-            "repair. An Unknown is resolved by a declaration. A rejection "
-            "is not: nothing has been left open, "
-            "and there is nothing to declare about a value that names no "
+            "to en-US.\n\n"
+            "That is a well-formed language tag: RFC 5646 composes it from "
+            "the registered primary subtag en and the registered region "
+            "subtag US. It is not a concept of the resource this operand is "
+            "bound to, which holds primary subtags.\n\n"
+            "This case is read under the profile's exact grounding rule, "
+            "which resolves an IRI of the scheme or a literal matching a "
+            "published notation, and nothing else. The second policy's "
+            "value matches neither, so its constraint cannot be interpreted "
+            "against this resource at all. It is rejected, no verdict is "
+            "computed, and the value itself is the evidence.\n\n"
+            "This is not an Unknown, and the difference decides the repair. "
+            "An Unknown is resolved by a declaration. A rejection is not: "
+            "there is nothing to declare about a value that names no "
             "concept. Either the policy is corrected or the binding is "
-            "widened, and KGC373 is the same pair read under a wider "
-            "binding."
-        ),
+            "widened, and KGC373 reads the same pair under a wider binding."),
         "summary": (
             "A publisher distributes in German. A licensee's policy commits to "
             "American English (en-US), under the exact-match grounding rule."),
@@ -472,30 +456,23 @@ PROBLEMS = [
         "grounding": {"en-US": "bcp_en"},
         "tree": [C("eq", DE), C("eq", "en-US", side="request")],
         "description": (
-            "The policies of KGC372, read under the profile's other "
-            "grounding rule.\n\n"
-            "That rule takes a well-formed language tag to its primary "
-            "subtag, so en-US resolves to en. The value becomes "
-            "interpretable and the pair gets an ordinary verdict: German "
-            "and English are declared distinct under the same "
-            "distinctness rule as KGC370, so no use satisfies both "
-            "constraints and the verdict is Incompatible.\n\n"
-            "Neither rule is the correct one. Where the variety of English "
-            "matters, the reduction is declined, and an uninterpretable "
-            "policy is preferred to a wrong answer; where it does not, the "
-            "reduction is adopted. The two problems return different "
-            "verdicts on identical policies over an identical vocabulary, "
-            "and no concept is disputed: what differs is a reading rule, "
-            "which the profile records and a report cites."
-        ),
+            "KGC372 read under the profile's other grounding rule, which "
+            "takes a well-formed language tag to its primary subtag, so "
+            "en-US resolves to en. The value becomes interpretable, and the "
+            "declared registry rule makes German and English distinct, so "
+            "no use satisfies both policies and the verdict is "
+            "Incompatible.\n\n"
+            "Neither rule is the correct one. The two cases return "
+            "different verdicts on identical policies because they read the "
+            "value differently, and no concept is disputed."),
         "expected_verdict": "Incompatible",
         "expected_q1": "Unsatisfiable",
         "expected_q2": "Satisfiable",
         "certificate": {
             "kind": "Refutation",
            "comment": (
-               "en-US reduces to English, which the registry rule makes "
-               "distinct from German."),
+               "en-US reduces to English, which the declared registry rule "
+               "makes distinct from German."),
             "premises": [
                 ("fromDeclarations",
                  "bcp47:de and bcp47:en are declared distinct, by the "
@@ -528,18 +505,17 @@ PROBLEMS = [
     "language except French."),
         "description": (
             "The publisher distributes in German; the licensee accepts "
-            "anything that is not French. German itself is the witness, "
-            "but only because the distinctness rule separates the "
-            "two subtags: in a structure interpreting de and fr as one "
-            "language, a use in German is a use in French and the "
-            "second policy excludes it.\n\n"
-            "So this Compatible rests on a declared premise exactly as "
-            "KGC370's Incompatible does. The refutation of the second "
-            "query cites the witness condition and one "
-            "declaration, and withdrawing that premise is KGC375. A definite "
-            "verdict of either polarity can stand on a "
-            "declaration; polarity buys no exemption from provenance."
-        ),
+            "anything that is not French. German itself fits, but only "
+            "because the declared rule separates the two subtags: in a "
+            "structure that treats German and French as one language, a use "
+            "in German is a use in French and the licensee's policy "
+            "excludes it.\n\n"
+            "So this Compatible rests on a declaration, as KGC370's "
+            "Incompatible does; withdrawing it gives KGC375. A definite "
+            "verdict of either kind can rest on a declaration."),
+        "maintainer_note": (
+            "The refutation of the second query cites the witness condition "
+            "and one declaration."),
         "certificate": {
             "kind": "Refutation",
             "comment": (
@@ -575,16 +551,15 @@ PROBLEMS = [
         "summary": (
             "As KGC374, without the registry rule."),
         "description": (
-            "KGC374 with the distinctness rule withdrawn. A structure "
-            "separating de and fr admits the witness; a structure "
-            "identifying them admits none, because a use in German is "
-            "then a use in French. The registry decides neither, so the "
-            "verdict is Unknown.\n\n"
-            "Read with KGC370 and KGC371 this completes the symmetry: "
-            "the same withdrawal takes an Incompatible to Unknown there "
-            "and a Compatible to Unknown here. What the declaration "
-            "buys is definiteness, not a direction."
-        ),
+            "KGC374 with the distinctness rule withdrawn. A structure that "
+            "separates German and French admits a use in German; a "
+            "structure that identifies them admits none, because a use in "
+            "German is then a use in French. The registry decides neither, "
+            "so the verdict is Unknown.\n\n"
+            "Read with KGC370 and KGC371 this completes the symmetry: the "
+            "same withdrawal takes an Incompatible to Unknown there and a "
+            "Compatible to Unknown here. What the declaration buys is a "
+            "definite verdict, not a direction."),
         "certificate": {
             "kind": "Models",
             "comment": (
@@ -622,20 +597,16 @@ PROBLEMS = [
             "languages is adopted."),
         "description": (
             "A Belgian federal publisher requires distribution in both "
-            "Dutch and French. The licensee's policy commits to Dutch "
-            "only. Both constraints are on odrl:language, bound to the "
-            "BCP 47 slice at the nominal sort.\n\n"
-            "isAllOf asks that the languages of the use include both "
-            "Dutch and French. eq asks that every language of the use is "
-            "Dutch. The two hold together only if Dutch and French are "
-            "one language. The registry rule is adopted: "
-            "it makes the two subtags distinct languages, so no use "
-            "satisfies both policies and the verdict is Incompatible.\n\n"
-            "The refutation cites one premise, and it is a declaration "
-            "rather than the registry's. Without that rule the registry "
-            "separates the two subtags in some structures and not in "
-            "others, and the verdict is Unknown."
-        ),
+            "Dutch and French, and the licensee's policy commits to Dutch "
+            "only. isAllOf asks that the languages of the use include both "
+            "Dutch and French, and eq asks that every language of the use "
+            "is Dutch. The two hold together only if Dutch and French are "
+            "one language. The registry rule is declared: it makes the two "
+            "subtags distinct languages, so no use satisfies both policies "
+            "and the verdict is Incompatible.\n\n"
+            "The verdict rests on that one declaration. Without it the "
+            "registry separates the two subtags in some structures and not "
+            "in others, and the verdict is Unknown."),
         "certificate": {
             "kind": "Refutation",
             "comment": (
@@ -676,18 +647,16 @@ PROBLEMS = [
             "The licensee distributes in Italian."),
         "description": (
             "English and Italian rights were sold separately, so a "
-            "publisher permits distribution in any language except "
-            "English and Italian. The licensee's policy commits to "
-            "Italian.\n\n"
+            "publisher permits distribution in any language except English "
+            "and Italian. The licensee's policy commits to Italian.\n\n"
             "isNoneOf excludes the listed subtags by identity. Italian is "
             "listed, and the licensee's eq asks for Italian. No structure "
             "admits a language that is Italian and is not Italian, so the "
             "verdict is Incompatible.\n\n"
-            "The registry rule is not used. The verdict is the same with "
-            "it and without it, which is why this case declares "
-            "nothing. The definite verdicts of KGC370 to KGC375 all rest "
-            "on that rule."
-        ),
+            "The registry rule is not used. The verdict is the same with it "
+            "and without it, which is why this case declares nothing. The "
+            "definite verdicts of KGC370, KGC373 and KGC374 rest on that "
+            "rule."),
         "certificate": {
             "kind": "Refutation",
             "comment": (
@@ -768,17 +737,15 @@ PROBLEMS = [
             "A licence for a single-language edition allows exactly one of "
             "German and French. The licensee publishes in German."),
         "description": (
-            "A licence for a single-language edition allows exactly one "
-            "of German and French. The licensee's policy commits to "
-            "German.\n\n"
+            "A licence for a single-language edition allows exactly one of "
+            "German and French. The licensee's policy commits to German.\n\n"
             "xone holds when one alternative holds and the other does not. "
             "A German edition satisfies the first alternative. Whether it "
-            "fails the second depends on whether German and French are "
-            "one language, and the registry does not state that they are "
+            "fails the second depends on whether German and French are one "
+            "language, and the registry does not state that they are "
             "different. So the verdict is Unknown.\n\n"
-            "A declaration by either party decides it. With the registry "
-            "rule in force the verdict is Compatible."
-        ),
+            "The registry rule decides it: with the rule the verdict is "
+            "Compatible."),
         "certificate": {
             "kind": "Models",
             "comment": (
@@ -817,19 +784,18 @@ PROBLEMS = [
             "French edition. The licensee publishes in both Dutch and "
             "French."),
         "description": (
-            "A translation licence covers a German edition, a French "
-            "edition, or both. The licensee's policy commits to a Dutch and "
-            "a French edition together.\n\n"
-            "isAnyOf asks that the languages of the use include at least "
-            "one of German and French. isAllOf asks that they include both "
-            "Dutch and French. A use in Dutch and French together "
-            "satisfies both policies: French is on the licence's list and "
-            "in the licensee's pair. French is the same concept as itself "
-            "in every structure, so the verdict is Compatible whether or "
-            "not Dutch and French differ, and no declaration is used. "
-            "KGC376 puts the same isAllOf on the other side, against Dutch "
-            "only, and there the verdict does need the distinctness rule."
-        ),
+            "A translation licence lists German and French. isAnyOf asks "
+            "only that at least one language of the use be German or "
+            "French. It does not limit the others, so a Dutch and French "
+            "edition satisfies the licence. A publisher who means German or "
+            "French editions only writes or(eq de, eq fr), as in KGC378.\n\n"
+            "A use in Dutch and French together satisfies both policies: "
+            "French is on the licence's list and in the licensee's pair. "
+            "French is the same concept as itself in every structure, so "
+            "the verdict is Compatible whether or not Dutch and French "
+            "differ, and no declaration is used. KGC376 puts the same "
+            "isAllOf on the other side, against Dutch only, and there the "
+            "verdict does need the distinctness rule."),
         "certificate": {
             "kind": "Refutation",
             "comment": (

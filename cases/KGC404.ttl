@@ -16,7 +16,7 @@ drk:traffic-data a dcat:Dataset ;
 drk:policy-404-1 a odrl:Set ;
     odrl:uid drk:policy-404-1 ;
     odrl:profile dpv-odrl: ;
-    dcterms:title "Use for research and development purposes only"@en ;
+    dcterms:title "Use for research and development or any narrower purpose"@en ;
     odrl:assigner drk:data-platform ;
     odrl:permission kgc:KGC404-p1-r1 .
 kgc:KGC404-p1-r1 a odrl:Permission ;
@@ -30,7 +30,7 @@ kgc:KGC404-p1-c1 a odrl:Constraint ;
 drk:policy-404-2 a odrl:Set ;
     odrl:uid drk:policy-404-2 ;
     odrl:profile dpv-odrl: ;
-    dcterms:title "Use for scientific research purposes only"@en ;
+    dcterms:title "Use for scientific research or any narrower purpose"@en ;
     odrl:assignee drk:data-user ;
     odrl:permission kgc:KGC404-p2-r1 .
 kgc:KGC404-p2-r1 a odrl:Permission ;
@@ -53,6 +53,6 @@ drk:KGC404-report a vrep:OperandVerdictReport ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-purpose> ;
     vrep:declarations <https://w3id.org/odrl-kb/dpv-purposes/empty> ;
     rdfs:comment """DPV places scientific research below research and development, so a use for scientific research lies under the category of each policy."""@en ;
-    dcterms:description """A city's traffic data platform permits use for research and development purposes. A university commits to use for scientific research purposes."""@en ;
+    dcterms:description """A city's traffic data platform permits use for research and development or any narrower purpose. A university commits to use for scientific research or any narrower purpose."""@en ;
     vrep:compatibilityState vrep:Compatible ;
     vrep:certificate <certificates/KGC404-2.tstp> .

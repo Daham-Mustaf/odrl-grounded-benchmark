@@ -26,7 +26,10 @@
  *       < HumanResourceManagement
  *       < Purpose
  *
- * six edges, each with a single parent, and the longest chain in the module.
+ * six edges, each with a single parent.  It is one of five purposes at that
+ * depth, the greatest in the module.  The D6 row was recorded against tag
+ * pre-review, where KGC315 used this purpose; KGC315 now uses
+ * dpv:DeliveryOfGoods, four edges, and this row has not been re-run.
  *
  * The corresponding verdicts on our side are KGC310 at one hop, KGC311 at
  * two, and KGC315 at six.  All three are Compatible, and what grows with the
@@ -146,12 +149,13 @@ const cases = [
     {
         id: "D6",
         hops: 6,
-        ours: "Compatible, six premises and transitivity (KGC315)",
+        ours: "Compatible, six premises and transitivity (KGC315 at tag pre-review)",
         offered: "dpv:Purpose",
         requested: "dpv:RecruitmentInterviewScheduling",
-        note: "The longest chain in the purposes module.  If the answer here " +
-              "is the same as at one hop, the divergence does not depend on " +
-              "distance.",
+        note: "One of five purposes at the greatest depth in the purposes " +
+              "module, six hops.  Recorded against tag pre-review.  If the " +
+              "answer here is the same as at one hop, the divergence does " +
+              "not depend on distance.",
     },
 ];
 

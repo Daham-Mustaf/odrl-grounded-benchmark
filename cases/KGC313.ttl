@@ -16,7 +16,7 @@ drk:traffic-data a dcat:Dataset ;
 drk:policy-313-1 a odrl:Set ;
     odrl:uid drk:policy-313-1 ;
     odrl:profile dpv-odrl: ;
-    dcterms:title "Use for marketing only"@en ;
+    dcterms:title "Use for scientific research only"@en ;
     odrl:assigner drk:data-platform ;
     odrl:permission kgc:KGC313-p1-r1 .
 
@@ -28,12 +28,12 @@ kgc:KGC313-p1-r1 a odrl:Permission ;
 kgc:KGC313-p1-c1 a odrl:Constraint ;
     odrl:leftOperand dpv-odrl:Purpose ;
     odrl:operator odrl:eq ;
-    odrl:rightOperand dpv:Marketing .
+    odrl:rightOperand dpv:ScientificResearch .
 
 drk:policy-313-2 a odrl:Set ;
     odrl:uid drk:policy-313-2 ;
     odrl:profile dpv-odrl: ;
-    dcterms:title "Use for scientific research only"@en ;
+    dcterms:title "Use for marketing only"@en ;
     odrl:assignee drk:data-user ;
     odrl:permission kgc:KGC313-p2-r1 .
 
@@ -45,7 +45,7 @@ kgc:KGC313-p2-r1 a odrl:Permission ;
 kgc:KGC313-p2-c1 a odrl:Constraint ;
     odrl:leftOperand dpv-odrl:Purpose ;
     odrl:operator odrl:eq ;
-    odrl:rightOperand dpv:ScientificResearch .
+    odrl:rightOperand dpv:Marketing .
 
 ### Expected result #######################################################
 
@@ -58,6 +58,6 @@ drk:KGC313-report a vrep:OperandVerdictReport ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-purpose> ;
     vrep:declarations <https://w3id.org/odrl-kb/dpv-purposes/empty> ;
     vrep:readAgainst drk:KGC314-report ;
-    rdfs:comment """DPV does not declare marketing and scientific research distinct. One structure identifies them and one does not, so the verdict is Unknown."""@en ;
-    dcterms:description """A city's traffic data platform permits use for marketing. A university commits to use for scientific research."""@en ;
+    rdfs:comment """DPV does not declare marketing and scientific research distinct. In a structure that identifies them, a use for marketing is a use for scientific research and satisfies both policies. In a structure that keeps them apart, no use does. So the verdict is Unknown."""@en ;
+    dcterms:description """A city's traffic data platform permits use for scientific research only. A company commits to use for marketing."""@en ;
     vrep:compatibilityState vrep:Unknown .

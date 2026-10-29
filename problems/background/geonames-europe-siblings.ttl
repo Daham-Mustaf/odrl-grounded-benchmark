@@ -5,7 +5,7 @@
 # parent in the administrative hierarchy is declared disjoint: nothing lies
 # within both.  Disjointness implies distinctness, and it also settles
 # containment: France lies within itself, so it cannot lie within Germany
-# (KGC306, KGC309).
+# (KGC309).
 #
 # Pairs: 19, among the 2 children of Europe, the 6 of France and the 3 of
 # Germany.  The other parents have one child each.
@@ -18,7 +18,8 @@
     dcterms:title "Features with the same parent declared disjoint"@en ;
     bind:generatedBy bind:PairwiseDisjointness ;
     bind:origin bind:practiceRule ;
-    rdfs:comment "The origin rests on the GeoNames administrative hierarchy."@en ;
+    rdfs:comment "A modelling choice, not a GeoNames statement: the administrative divisions of one parent do not overlap, so features with the same parent are taken to be disjoint."@en ;
+    bind:scopeCondition "Disjointness between features with the same parent, and not between a feature and its ancestors or descendants."@en ;
     bind:appliesTo <https://w3id.org/odrl-kb/geonames-europe> ;
     bind:pairCount 19 .
 

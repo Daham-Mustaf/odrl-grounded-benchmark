@@ -16,7 +16,7 @@ drk:traffic-data a dcat:Dataset ;
 drk:policy-403-1 a odrl:Set ;
     odrl:uid drk:policy-403-1 ;
     odrl:profile dpv-odrl: ;
-    dcterms:title "Use for scientific research purposes only"@en ;
+    dcterms:title "Use for scientific research or any narrower purpose"@en ;
     odrl:assigner drk:data-platform ;
     odrl:permission kgc:KGC403-p1-r1 .
 kgc:KGC403-p1-r1 a odrl:Permission ;
@@ -53,7 +53,7 @@ drk:KGC403-report a vrep:OperandVerdictReport ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-purpose> ;
     vrep:declarations <https://w3id.org/odrl-kb/dpv-purposes/declared> ;
     vrep:readAgainst drk:KGC316-report ;
-    rdfs:comment """DPV places scientific research below research and development. A use for research and development under scientific research would need the converse edge, and antisymmetry would then make the two purposes one. They are declared distinct, so no use satisfies both policies."""@en ;
+    rdfs:comment """DPV places scientific research below research and development. A use for research and development meets the first policy only if research and development also lies below scientific research, and then the two are one purpose. They are declared distinct, so no use satisfies both policies."""@en ;
     dcterms:description """As KGC316, with scientific research and research and development declared distinct."""@en ;
     vrep:compatibilityState vrep:Incompatible ;
     vrep:certificate <certificates/KGC403-1.tstp> .

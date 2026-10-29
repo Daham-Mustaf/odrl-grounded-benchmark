@@ -70,11 +70,15 @@ PROBLEMS = [
 """,
         "tree": [C("eq", DE), C("eq", FR, side="request")],
         "description": (
-            "First policy (language, eq, bcp:de) against second policy (language, "
-            "eq, bcp:fr).  The distinctness rule places the two subtags "
-            "in the declarations as distinct, so no model identifies "
-            "them and the witness condition fails in every model."
-        ),
+            "A German library permits use in German only, and a French "
+            "library commits to use in French only. The two policies can "
+            "hold together only if German and French are one language. The "
+            "declared registry rule, that different primary language "
+            "subtags name different languages, makes them two, so no use "
+            "satisfies both."),
+        "maintainer_note": (
+            "The refutation cites the one distinctness instance. The "
+            "witness fails in every structure."),
 
         # D != empty over the named concepts {de, fr}
 
@@ -154,11 +158,13 @@ kgc:KGC300-p2-c1 a odrl:Constraint ;
         "includes":          ["KGE000-0.ax", "DPV-dpv-purposes.ax"],
         "tree": [C("isA", NCP), C("eq", SR, side="request")],
         "description": (
-            "First policy (purpose, isA, dpv:NonCommercialPurpose) against second "
-            "policy (purpose, eq, dpv:ScientificResearch).  The vocabulary neither "
-            "places one under the other nor separates them, so both queries "
-            "are satisfiable and the verdict is Unknown."
-        ),
+            "A policy for non-commercial purposes and everything below "
+            "them, against a commitment to scientific research. DPV neither "
+            "places scientific research below non-commercial purpose nor "
+            "keeps it out. A structure that places it there admits a use "
+            "that satisfies both policies; a structure that does not admits "
+            "none. So the verdict is Unknown."),
+        "maintainer_note": "Both queries are satisfiable.",
 
         "fof_decls": """\
 % The vocabulary is silent on the two concepts.  Nothing is asserted here:
@@ -172,16 +178,17 @@ kgc:KGC300-p2-c1 a odrl:Constraint ;
         "smt2_logic": "UF",
 
         "summary": (
-            "A German library permits use for non-commercial purposes only. "
-            "A French library's policy commits to use for scientific "
-            "research only."),
+            "A German library permits use for non-commercial purposes or "
+            "any narrower purpose. A French library's policy commits to use "
+            "for scientific research only."),
         "certificate": {
             "kind": "Models",
             "comment": (
                 "DPV does not state whether scientific research is a "
-                "non-commercial purpose. One structure places it below "
-                "non-commercial purposes and one does not, so the verdict is "
-                "Unknown."),
+                "non-commercial purpose. In a structure that places it "
+                "below non-commercial purpose, a use for scientific "
+                "research satisfies both policies. In a structure that does "
+                "not, no use does. So the verdict is Unknown."),
             "premises": [],
         },
         "ttl": """\
@@ -196,7 +203,7 @@ kgc:KGC300-p2-c1 a odrl:Constraint ;
 drk:policy-301-1 a odrl:Set ;
     odrl:uid drk:policy-301-1 ;
     odrl:profile dpv-odrl: ;
-    dcterms:title "Use for non-commercial purposes only"@en ;
+    dcterms:title "Use for non-commercial purposes or any narrower purpose"@en ;
     odrl:assigner drk:german-library ;
     odrl:permission kgc:KGC301-p1-r1 .
 
@@ -247,11 +254,13 @@ kgc:KGC301-p2-c1 a odrl:Constraint ;
         # the one resource statement this verdict needs is carried here, under
         # the name the TPTP side gives it in fof_decls.
         "description": (
-            "First policy (spatial, isPartOf, gn:Europe) against second policy "
-            "(spatial, eq, gn:France).  The gazetteer places France within Europe, so "
-            "the witness condition holds in every model and the negated "
-            "query is unsatisfiable."
-        ),
+            "A German library permits use within Europe, and a French "
+            "library commits to use in France only. GeoNames places France "
+            "within Europe, so a use in France satisfies both policies in "
+            "every structure."),
+        "maintainer_note": (
+            "The witness condition holds in every structure, and the "
+            "negated query is unsatisfiable."),
 
         # D != empty over the named concepts {europe, france}
 

@@ -3,7 +3,7 @@
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
 % Problem  : purpose, isA dpv:R&D against eq dpv:SR (witness condition asserted)
 % Version  : 1.0
-% English  : A city's traffic data platform permits use for research and development. A university commits to use for scientific research.
+% English  : A city's traffic data platform permits use for research and development or any narrower purpose. A university commits to use for scientific research.
 %
 % Refs     : odrl-grounded-benchmark. https://github.com/Daham-Mustaf/odrl-grounded-benchmark
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark

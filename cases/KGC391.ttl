@@ -16,7 +16,7 @@ drk:manuscripts a dcat:Dataset ;
 drk:policy-391-1 a odrl:Set ;
     odrl:uid drk:policy-391-1 ;
     odrl:profile dpv-odrl: ;
-    dcterms:title "Use in an area that covers North Rhine-Westphalia"@en ;
+    dcterms:title "Use in an area that covers all of North Rhine-Westphalia"@en ;
     odrl:assigner drk:library ;
     odrl:permission kgc:KGC391-p1-r1 .
 kgc:KGC391-p1-r1 a odrl:Permission ;
@@ -52,7 +52,8 @@ drk:KGC391-report a vrep:OperandVerdictReport ;
     vrep:comparedConstraint kgc:KGC391-p2-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-spatial-dpvloc-geo> ;
     vrep:declarations <https://w3id.org/odrl-kb/dpv-loc/empty> ;
-    rdfs:comment """DPV places North Rhine-Westphalia within Germany, so Germany is an area that contains it, and a use in Germany satisfies both policies. This policy goes beyond the DPV-ODRL usage note for Location, which does not list hasPart."""@en ;
-    dcterms:description """A library's regional licence requires an area that covers North Rhine-Westphalia. A researcher's policy commits to use in Germany."""@en ;
+    rdfs:comment """DPV places North Rhine-Westphalia within Germany, so Germany is an area that contains it, and a use in Germany satisfies both policies."""@en ;
+    vrep:profileNote """This policy goes beyond the DPV-ODRL usage note for Location, which does not list hasPart."""@en ;
+    dcterms:description """A library's regional licence requires that the service area cover all of North Rhine-Westphalia. A researcher's policy commits to use in Germany."""@en ;
     vrep:compatibilityState vrep:Compatible ;
     vrep:certificate <certificates/KGC391-2.tstp> .

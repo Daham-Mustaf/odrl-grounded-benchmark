@@ -57,7 +57,8 @@ drk:KGC330-report a vrep:OperandVerdictReport ;
     vrep:comparedConstraint kgc:KGC330-p2-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-spatial-dpvloc-geo> ;
     vrep:declarations <https://w3id.org/odrl-kb/dpv-loc/empty> ;
-    rdfs:comment """DPV places Bonaire within the Netherlands by a direct edge, as ISO 3166-2 lists it among the Netherlands' subdivisions. Bonaire lies in the Caribbean, so the containment is constitutional, not geographic. Read as containment, a use in Bonaire is a use within the Netherlands, and both policies can be satisfied. This policy goes beyond the DPV-ODRL usage note for Location, which does not list isPartOf."""@en ;
+    rdfs:comment """DPV places Bonaire within the Netherlands by one published edge, and ISO 3166-2 lists it among the Netherlands' subdivisions. Bonaire is Dutch territory, though it lies in the Caribbean, not in Europe. A use in Bonaire is a use within the Netherlands, so both policies can be satisfied."""@en ;
+    vrep:profileNote """This policy goes beyond the DPV-ODRL usage note for Location, which does not list isPartOf."""@en ;
     dcterms:description """A library permits use within the Netherlands; a researcher's policy commits to use in Bonaire. DPV places Bonaire within the Netherlands."""@en ;
     vrep:compatibilityState vrep:Compatible ;
     vrep:certificate <certificates/KGC330-2.tstp> .

@@ -3,7 +3,7 @@
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
 % Problem  : consent status, isA ValidForProcessing against eq ConsentWithdrawn (witness condition negated)
 % Version  : 1.0
-% English  : A controller permits use only while consent can justify processing. A processor states that it continues processing after consent is withdrawn.
+% English  : A controller permits use only while the consent on record may justify processing. A processor commits to use only records whose consent was withdrawn, in an erasure audit for the controller.
 %
 % Refs     : odrl-grounded-benchmark. https://github.com/Daham-Mustaf/odrl-grounded-benchmark
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark

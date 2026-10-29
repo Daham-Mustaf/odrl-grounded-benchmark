@@ -14,7 +14,7 @@ constraints under `or`.
 
 The four xone problems that were here (KGC344 to KGC347) permitted use
 under an invalid consent state, which no lawful policy does.  The xone
-tests moved to the GeoNames problems KGC303 to KGC306, where "exactly one
+tests moved to the GeoNames problems KGC303 and KGC304, where "exactly one
 region" is a clause someone writes.
 
 The policies these express
@@ -247,9 +247,9 @@ OFFER_GATE = "Use only while the consent on record may justify processing"
 OFFER_ENUM = "Use only under given or renewed consent"
 REQ_GIVEN   = "Use only under given consent"
 REQ_RENEWED = "Use only under renewed consent"
-REQ_POST    = "Use only after consent is withdrawn"
+REQ_POST    = "Use only records whose consent was withdrawn"
 OFFER_EXCEPT = "Use under any consent status except withdrawn and revoked"
-REQ_EXPIRED  = "Use only while the consent on record has expired"
+REQ_EXPIRED  = "Use only records whose consent has expired"
 
 PROBLEMS = [
     # ------------------------------------------------------------------
@@ -306,10 +306,10 @@ PROBLEMS = [
             "consent."),
         "description": (
             "The same gate as KGC340, written by enumerating the two states "
-            "rather than naming the branch. Compatible again, and the "
-            "certificate cites no resource statement: the required state is "
-            "one the first policy names. The first policy is fixed against the vocabulary as "
-            "it stands, where KGC340's is not."),
+            "rather than naming the branch. Compatible again, and no "
+            "resource statement is needed: the required state is one the "
+            "first policy names. The first policy is fixed against the "
+            "vocabulary as it stands, where KGC340's is not."),
         "certificate": {"kind": "Refutation",
             "comment": (
                 "The required state is one the first policy names, so the "
@@ -339,16 +339,18 @@ PROBLEMS = [
         "expected_verdict": "Unknown",
         "expected_q1": "Satisfiable", "expected_q2": "Satisfiable",
         "summary": (
-            "A controller permits use only while consent can justify "
-            "processing. A processor states that it continues processing "
-            "after consent is withdrawn."),
+            "A controller permits use only while the consent on record may "
+            "justify processing. A processor commits to use only records "
+            "whose consent was withdrawn, in an erasure audit for the "
+            "controller."),
   "description": (
-            "DPV places the withdrawn state below the invalid branch. It "
-            "does not state in RDF that the valid and invalid branches are "
-            "disjoint. So one structure that satisfies the published "
-            "statements also places the withdrawn state below the valid "
-            "branch, and another does not. The verdict is therefore Unknown. "
-            "KGC343 adds the disjointness as a set of declarations."),
+      "The processor audits erasure, so it looks only at records whose "
+      "consent was withdrawn. DPV places the withdrawn state below the "
+      "invalid branch. It does not state in RDF that the valid and invalid "
+      "branches are disjoint. So one structure that satisfies the published "
+      "statements also places the withdrawn state below the valid branch, "
+      "and another does not. The verdict is therefore Unknown. KGC343 adds "
+      "the disjointness as a declaration."),
         "certificate": {"kind": "Models",
             "comment": (
                 "The published statements do not exclude the withdrawn "
@@ -378,7 +380,7 @@ PROBLEMS = [
         "expected_q1": "Unsatisfiable", "expected_q2": "Satisfiable",
         "summary": (
             "As KGC342, with the valid and invalid branches declared "
-            "disjoint by the declarations."),
+            "disjoint."),
  "description": (
             "The declarations declare the valid and invalid branches "
             "disjoint, meaning that nothing lies below both. The withdrawn "
@@ -426,19 +428,20 @@ PROBLEMS = [
             "As KGC342, with the consent states declared distinct from one "
             "another."),
         "description": (
-            "The declarations separate every state from every other, so "
-            "the withdrawn state is not the valid branch. It may still lie "
-            "below it: one concept below another is a different concept, "
-            "and nothing published or declared keeps the withdrawn state "
-            "out of the valid branch. The verdict is Unknown, as in "
-            "KGC342. Only disjointness decides isA, and KGC343 adds it."),
+            "KGC342 with every consent state declared distinct from every "
+            "other. Distinctness cannot keep withdrawn consent out of the "
+            "valid branch, because a state below a branch is already a "
+            "different concept from that branch. Only the disjointness of "
+            "KGC343 does. The verdict stays Unknown."),
         "certificate": {"kind": "Models",
             "comment": (
                 "The states are declared distinct, yet withdrawn consent "
-                "may still lie below the valid branch. One structure "
-                "places it below both branches, and both constraints can "
-                "hold. Another does not, and they cannot. Distinctness "
-                "never decides isA; only disjointness does, as in KGC343."),
+                "may still lie below the valid branch. One structure places "
+                "it below both branches, and both constraints can hold. "
+                "Another does not, and they cannot. Distinctness cannot "
+                "keep it out of the valid branch, because a state below a "
+                "branch is already a different concept from that branch. "
+                "Only the disjointness of KGC343 does."),
             "premises": []},
         "provenance": PROV_POST,
         "ttl": _TTL_HEAD
@@ -467,24 +470,24 @@ PROBLEMS = [
         "expected_q1": "Satisfiable", "expected_q2": "Unsatisfiable",
         "summary": (
             "A controller permits use under any consent status except "
-            "withdrawn and revoked. A processor states that it uses the "
-            "data while the consent on record has expired."),
+            "withdrawn and revoked. A processor commits to use only records "
+            "whose consent has expired, in a consent-renewal campaign."),
         "description": (
+            "The controller's list is a drafting error: it also lets "
+            "through refused, deferred and unknown consent, and consent "
+            "that is only asked for, which no controller means to permit. "
             "isNoneOf excludes the named states by identity. Expired "
             "consent is declared a different state from withdrawn and from "
             "revoked consent, so the list lets it through and the verdict "
-            "is Compatible. A policy written over the valid branch, isA as "
-            "in KGC343, would refuse it once the branches are declared "
-            "disjoint, because expired consent lies below the invalid "
-            "branch."),
+            "is Compatible. A policy written over the valid branch (isA, as "
+            "in KGC343) would have refused it once the branches are "
+            "declared disjoint, because expired consent lies below the "
+            "invalid branch."),
         "certificate": {"kind": "Refutation",
             "comment": (
                 "Expired consent is declared distinct from withdrawn and "
-                "from revoked consent, so the exclusion list lets it "
-                "through. A policy written over the valid branch, isA as "
-                "in KGC343, would have refused it once the branches are "
-                "declared disjoint, because expired consent lies below the "
-                "invalid branch."),
+                "from revoked consent, so the exclusion list does not "
+                "exclude it."),
             "premises": [("fromDeclarations",
                           "dpv:ConsentExpired distinct from "
                           "dpv:ConsentWithdrawn"),

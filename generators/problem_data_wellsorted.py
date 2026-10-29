@@ -74,7 +74,7 @@ TITLE = {
     "KGC103": "Use within German",
     "KGC104": "Use in a language that includes German",
     "KGC110": "Use within Europe",
-    "KGC111": "Use for non-commercial purposes only",
+    "KGC111": "Use for non-commercial purposes or any narrower purpose",
     "KGC112": "Use in German only",
 }
 
@@ -164,7 +164,9 @@ PROBLEMS = [
     _problem("KGC104", "language", "hasPart", "bcp:de", "nom", False,
              "The operand is grounded in a registry, which supplies identity "
              "and no order.  hasPart requires parthood.  The constraint is "
-             "rejected before the registry is opened."),
+             "rejected before the registry is opened.  A drafter who means a "
+             "language that includes German among the languages of the use "
+             "writes isAllOf with the single value German."),
 
     _problem("KGC110", "spatial", "isPartOf", "gn:Europe", "mer", True,
              "Control.  isPartOf requires parthood and the gazetteer supplies "

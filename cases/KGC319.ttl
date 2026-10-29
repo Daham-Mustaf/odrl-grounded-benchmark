@@ -16,7 +16,7 @@ drk:traffic-data a dcat:Dataset ;
 drk:policy-319-1 a odrl:Set ;
     odrl:uid drk:policy-319-1 ;
     odrl:profile dpv-odrl: ;
-    dcterms:title "Use for exactly one of commercial and non-commercial purposes"@en ;
+    dcterms:title "Use under exactly one of the commercial and non-commercial tiers"@en ;
     odrl:assigner drk:data-platform ;
     odrl:permission kgc:KGC319-p1-r1 .
 kgc:KGC319-p1-r1 a odrl:Permission ;
@@ -59,5 +59,5 @@ drk:KGC319-report a vrep:OperandVerdictReport ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-purpose> ;
     vrep:declarations <https://w3id.org/odrl-kb/dpv-purposes/empty> ;
     rdfs:comment """DPV places non-commercial research below non-commercial purpose, so the second branch holds. DPV defines a commercial purpose as one performed in "a commercial setting or with intention to commercialise" and a non-commercial purpose as one performed in "a non-commercial setting or without intention to commercialise". One purpose can meet both, so no disjointness between the two is warranted, and none is declared. In a structure that keeps non-commercial research out of commercial purpose, a use for it satisfies both policies. In a structure that also places it below commercial purpose, both branches hold, so 'exactly one' fails, and no use satisfies both. So the verdict is Unknown."""@en ;
-    dcterms:description """A city's traffic data platform permits use for exactly one of commercial and non-commercial purposes. A university research group commits to use for non-commercial research."""@en ;
+    dcterms:description """A city's traffic data platform prices its data in two tiers, commercial and non-commercial, and each use must fall under exactly one tier. A university research group commits to use for non-commercial research."""@en ;
     vrep:compatibilityState vrep:Unknown .

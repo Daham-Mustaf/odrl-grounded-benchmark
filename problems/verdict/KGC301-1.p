@@ -3,7 +3,7 @@
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
 % Problem  : purpose, isA dpv:NCP against eq dpv:SR (witness condition asserted)
 % Version  : 1.0
-% English  : A German library permits use for non-commercial purposes only. A French library's policy commits to use for scientific research only.
+% English  : A German library permits use for non-commercial purposes or any narrower purpose. A French library's policy commits to use for scientific research only.
 %
 % Refs     : odrl-grounded-benchmark. https://github.com/Daham-Mustaf/odrl-grounded-benchmark
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark

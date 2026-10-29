@@ -1,7 +1,7 @@
 ; -------------------------------------------------------------------------
 ; File     : KGC314-2.smt2
 ; Domain   : ODRL Policy / Knowledge-Grounded Fragment
-; Problem  : purpose, eq dpv:Marketing against eq dpv:SR, under a declared distinctness (witness condition negated)
+; Problem  : purpose, eq dpv:ScientificResearch against eq dpv:Marketing, under a declared distinctness (witness condition negated)
 ; Version  : 1.0
 ; Refs     : odrl-grounded-benchmark. https://github.com/Daham-Mustaf/odrl-grounded-benchmark
 ; Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark
@@ -15,8 +15,8 @@
 (set-option :produce-unsat-cores true)
 (set-option :produce-models true)
 (declare-sort Concept 0)
-(declare-fun dpv_marketing () Concept)
 (declare-fun dpv_scientific_research () Concept)
+(declare-fun dpv_marketing () Concept)
 (declare-fun kge_leq (Concept Concept) Bool)
 ; Order axioms, quantified.  The same three as KGE000-0.ax, so the two
 ; encodings are the same theory.
@@ -29,7 +29,7 @@
 ; side names it.
 (assert (! (not (= dpv_marketing dpv_scientific_research)) :named bg_dist_dpv_marketing_dpv_scientific_research))
 ; witness condition negated
-(assert (! (not (or (and (= dpv_marketing dpv_marketing) (= dpv_marketing dpv_scientific_research)) (and (= dpv_scientific_research dpv_marketing) (= dpv_scientific_research dpv_scientific_research)))) :named w_kgc314))
+(assert (! (not (or (and (= dpv_scientific_research dpv_scientific_research) (= dpv_scientific_research dpv_marketing)) (and (= dpv_marketing dpv_scientific_research) (= dpv_marketing dpv_marketing)))) :named w_kgc314))
 (check-sat)
 (get-unsat-core)
 (get-model)

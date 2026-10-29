@@ -1,9 +1,9 @@
 %--------------------------------------------------------------------------
 % File     : KGC313-2.p
 % Domain   : ODRL Policy / Knowledge-Grounded Fragment
-% Problem  : purpose, eq dpv:Marketing against eq dpv:SR (witness condition negated)
+% Problem  : purpose, eq dpv:ScientificResearch against eq dpv:Marketing (witness condition negated)
 % Version  : 1.0
-% English  : A city's traffic data platform permits use for marketing. A university commits to use for scientific research.
+% English  : A city's traffic data platform permits use for scientific research only. A company commits to use for marketing.
 %
 % Refs     : odrl-grounded-benchmark. https://github.com/Daham-Mustaf/odrl-grounded-benchmark
 % Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark
@@ -24,6 +24,6 @@ include('axioms/DPV-dpv-purposes.ax').
 
 % --- witness condition negated -------------------------------------------
 fof(w_kgc313, axiom,
-    ~ ( ( ( dpv_marketing = dpv_marketing & dpv_marketing = dpv_scientific_research )
-| ( dpv_scientific_research = dpv_marketing & dpv_scientific_research = dpv_scientific_research ) ) )).
+    ~ ( ( ( dpv_scientific_research = dpv_scientific_research & dpv_scientific_research = dpv_marketing )
+| ( dpv_marketing = dpv_scientific_research & dpv_marketing = dpv_marketing ) ) )).
 %--------------------------------------------------------------------------
