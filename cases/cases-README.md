@@ -12,7 +12,7 @@ KGC320-323   fileFormat, over the EU file type table
 KGC330-337   spatial, over DPV Locations
 KGC340-343   consent status, over the DPV consent module
 KGC348-349   consent status, under declared distinctness
-KGC360-364   technical and organisational measures
+KGC360-366   technical and organisational measures
 KGC370-379   language, over a BCP 47 slice
 KGC380-392   spatial: composition, subdivisions, exclusion
 KGC393-397   purpose: the set operators
@@ -38,6 +38,7 @@ KGC350   legal basis: isAnyOf the seven Article 6(1) bases against eq consent
 KGC351   the same against eq explicit consent under Article 6(1)(a)
 KGC352   the same with explicit consent declared distinct from the seven
 KGC353   legal basis: isA the legal-basis root against eq explicit consent
+KGC361   measures: isAllOf(encryption, access control) against isNoneOf(access control)
 KGC384   spatial: eq NRW against eq Bavaria, Laender not separated
 KGC385   the same pair under the ISO 3166-2 rule
 KGC389   spatial: xone(eq NRW, eq Bavaria) against eq NRW

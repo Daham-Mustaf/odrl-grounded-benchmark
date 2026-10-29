@@ -1,8 +1,10 @@
 # Declarations for the measures resource: declared distinctness.
 #
-# The parties declare that no two of the listed names denote one measure.
-# Neither module asserts this, so the rule is the parties' and a verdict
-# resting on an instance of it is withdrawable by abandoning the rule.
+# Every measure of the slice is declared distinct from every other.  The
+# modules define each measure separately, in a definition of its own, and
+# these definitions are what the declarations rest on.  The modules do not
+# state the distinctness in RDF, so a verdict resting on an instance of it
+# is withdrawable by abandoning the declarations.
 #
 # Distinctness only.  Nothing here says two measures have nothing below
 # both: that is disjointness, and the modules publish concepts below two
@@ -10,9 +12,9 @@
 # and leave it with no model.  A use employing both encryption and access
 # control is not thereby claiming the two are one measure.
 #
-# The rule is stated here and instantiated by the problems: a problem naming
-# two measures carries the inequation between them, so that a refutation
-# cites the instance it used.
+# The declarations are stated here and instantiated by the problems: a
+# problem naming two measures carries the inequation between them, so that a
+# refutation cites the instance it used.
 #
 # Concepts: 74
 # Pairs   : 2701
@@ -28,7 +30,7 @@
     bind:appliesTo <https://w3id.org/odrl-kb/dpv-tom> ;
     bind:generatedBy bind:PairwiseDistinctness ;
     bind:origin bind:proseDefinition ;
-    rdfs:comment "The origin rests on the DPV definitions."@en ;
+    rdfs:comment "The origin rests on DPV's separate definition of each measure."@en ;
     bind:scopeCondition "Distinctness between the measures the modules list, and not disjointness: the modules publish concepts below two parents, and a disjointness over such a pair would contradict the resource."@en ;
     bind:pairCount 2701 ;
     bind:states [

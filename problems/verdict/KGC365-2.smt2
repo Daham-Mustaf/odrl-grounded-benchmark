@@ -1,14 +1,14 @@
 ; -------------------------------------------------------------------------
-; File     : KGC361-1.smt2
+; File     : KGC365-2.smt2
 ; Domain   : ODRL Policy / Knowledge-Grounded Fragment
-; Problem  : measures, isAllOf(Encryption, AccessControlMethod) against isNoneOf(AccessControlMethod) (witness condition asserted)
+; Problem  : measures, isAllOf {Encryption, AccessControl} against isAllOf {Encryption, AccessControl, Pseudonymisation} (witness condition negated)
 ; Version  : 1.0
 ; Refs     : odrl-grounded-benchmark. https://github.com/Daham-Mustaf/odrl-grounded-benchmark
 ; Source   : https://github.com/Daham-Mustaf/odrl-grounded-benchmark
 ; Authors  : Daham Mustafa
-; Names    : KGC361-1.smt2
+; Names    : KGC365-2.smt2
 ; Status   : unsat
-; Comments : Query 1 of 2.  Verdict is derived from both queries.
+; Comments : Query 2 of 2.  Verdict is derived from both queries.
 ; -------------------------------------------------------------------------
 
 (set-logic UF)
@@ -17,6 +17,7 @@
 (declare-sort Concept 0)
 (declare-fun tm_encryption () Concept)
 (declare-fun tm_access_control_method () Concept)
+(declare-fun tm_pseudonymisation () Concept)
 (declare-fun kge_leq (Concept Concept) Bool)
 ; Order axioms, quantified.  The same three as KGE000-0.ax, so the two
 ; encodings are the same theory.
@@ -25,8 +26,8 @@
     (=> (and (kge_leq x y) (kge_leq y x)) (= x y))) :named ax_leq_antisymmetric))
 (assert (! (forall ((x Concept) (y Concept) (z Concept))
     (=> (and (kge_leq x y) (kge_leq y z)) (kge_leq x z))) :named ax_leq_transitive))
-; witness condition asserted
-(assert (! (and (not (= tm_encryption tm_access_control_method)) (not (= tm_access_control_method tm_access_control_method)) (or (not (= tm_encryption tm_access_control_method)) (not (= tm_access_control_method tm_access_control_method)))) :named w_kgc361))
+; witness condition negated
+(assert (! (not (and true true true true true)) :named w_kgc365))
 (check-sat)
 (get-unsat-core)
 (get-model)

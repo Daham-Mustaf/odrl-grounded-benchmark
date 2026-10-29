@@ -1,72 +1,82 @@
 """
 problem_data_tom.py
 ===================
-Five problems over the technical and organisational measures resource, at
-tax. Every isAllOf problem in the suite is here.
+Six problems over the technical and organisational measures resource, at
+tax.  Four use isAllOf.
 
     KGC360  isAllOf(encryption, access control) x isA TechnicalMeasure
                                                         -> Compatible
-    KGC361  isAllOf(encryption, access control) x isNoneOf(access control)
-                                                        -> Incompatible
     KGC362  isAnyOf(encryption, access control) x eq encryption
                                                         -> Compatible
     KGC363  isAllOf(encryption, access control) x eq encryption
                                                         -> Unknown
     KGC364  as KGC363, with the two measures declared distinct
                                                         -> Incompatible
+    KGC365  isAllOf(encryption, access control) x
+            isAllOf(encryption, access control, pseudonymisation)
+                                                        -> Compatible
+    KGC366  isAnyOf(encryption, access control) x eq encryption at rest,
+            the measures declared distinct              -> Incompatible
 
-Why isAllOf needs this operand and no other
---------------------------------------------
-A valuation binds a finite set of concepts to an operand, and for every
-other operand of the suite that set has one element: a processing operation
-has one purpose in the sense the constraint asks about, a consent record is
-in one state, a transfer rests on one legal basis. Measures are different.
+KGC361, which set the same requirement against a policy that excludes
+access control, is retired.  The contradiction it showed is in KGC317 and
+KGC377.
+
+Why isAllOf reads naturally here
+--------------------------------
 A controller has encryption in place and access control and
 pseudonymisation, together, and a clause requiring safeguards requires them
-together rather than requiring one of them.
+together rather than requiring one of them.  In the semantics every
+operand takes a set of values, so isAllOf is not special to this resource:
+it appears on purposes, language and locations as well.
 
-isAllOf is the operator for that, and it is the only one whose satisfaction
-condition runs the other way: the constraint's denotation must lie inside
-what the use supplies, where every other operator asks that the use lie
-inside the denotation. On a single-valued use the operator cannot show
-this. Over one value it says what eq says. Over two it holds only if the
-two names denote one concept, so the verdict turns on distinctness, not on
-the operator. KGC363 and KGC364 make that point. The superset condition
-does its own work only on a use that supplies several concepts, which is
-why the operator went unexercised until this resource was built.
+isAllOf is the operator whose satisfaction condition runs the other way:
+the constraint's denotation must lie inside what the use supplies, where
+every other operator asks that the use lie inside the denotation.  Over one
+supplied value it says what eq says.  Over two it holds only if the two
+names denote one concept, so the verdict turns on distinctness, not on the
+operator.  KGC363 and KGC364 make that point.
 
-What KGC360 and KGC361 show
----------------------------
+What KGC360 shows
+-----------------
 KGC360 puts the requirement against a use whose measures are technical
-ones. Both required measures lie below dpv:TechnicalMeasure, which the
+ones.  Both required measures lie below dpv:TechnicalMeasure, which the
 resource asserts, so a use supplying exactly those two satisfies the
-offer and the request together. The verdict is Compatible, and the
-certificate cites the two statements that carry it.
-
-KGC361 puts the same requirement against a processor that excludes access
-control. The requirement needs access control among the measures supplied
-and the exclusion keeps it out, so no structure admits a common use: the
-verdict is Incompatible, and it holds without any declaration by the
-parties. The certificate cites the constraints and nothing else. That is
-worth contrasting with KGC314, where a definite Incompatible needed the
-parties to declare concepts distinct: here the two
-constraints contradict each other over the same named concept, and the
-vocabulary is not consulted at all.
-
-Together they exercise both directions of the superset mode: the case
-where the required set is carried by the order, and the case where it is
-kept out by a complement.
+controller's policy and the processor's together.  The verdict is
+Compatible, and the certificate cites the two statements that carry it.
 
 What KGC362 to KGC364 show
 --------------------------
-The three keep the values fixed and change one thing at a time. KGC362
-asks for at least one of the two measures. A use supplying encryption
-meets it on the constraints alone, so the verdict is Compatible. KGC363
-changes isAnyOf to isAllOf. The conflict looks immediate but is not
-definite. A structure may identify the two measures, and DPV separates
-them nowhere, so the verdict is Unknown as published. KGC364 adds the
-parties' declaration that the two are distinct, and the verdict becomes
-Incompatible. Even the obvious conflict rested on a declared premise.
+The three keep the values fixed and change one thing at a time.  KGC362
+asks for at least one of the two measures.  A use supplying encryption
+meets it on the constraints alone, so the verdict is Compatible.  KGC363
+changes isAnyOf to isAllOf.  The conflict looks immediate but is not
+definite.  A structure may identify the two measures, and DPV separates
+them nowhere, so the verdict is Unknown as published.  KGC364 adds the
+declaration that the two are distinct, and the verdict becomes
+Incompatible.  Even the obvious conflict rested on a declared premise.
+
+What KGC365 shows
+-----------------
+isAllOf states a minimum.  The controller's policy needs encryption and
+access control among the measures in use and says nothing against others.
+A use that also applies pseudonymisation has both, so it satisfies the
+processor's policy and the controller's, in every structure.  The verdict
+is Compatible on the constraints alone, and the resource is not consulted.
+Two minimums never conflict: a use with both sets of measures satisfies
+both.
+
+What KGC366 shows
+-----------------
+isAnyOf matches by name.  DPV places encryption at rest below encryption,
+but a use whose only measure is encryption at rest has neither of the two
+names the controller lists.  As published a structure may identify the
+measure with one of them, so the verdict is Unknown.  With the measures
+declared distinct no use satisfies both, and the verdict is Incompatible.
+ODRL has no operator for "includes some kind of encryption": isAnyOf and
+isAllOf compare names, and a drafter who wants the kinds of encryption
+has to list them.  Read with KGC362, where the processor's measure is
+encryption itself and the verdict is Compatible.
 """
 
 from compile import right_operand as _ro, Constraint
@@ -82,6 +92,8 @@ TOM        = "tm_technical_organisational_measure"
 TECHNICAL  = "tm_technical_measure"
 ENCRYPTION = "tm_encryption"
 ACCESS     = "tm_access_control_method"
+PSEUDO     = "tm_pseudonymisation"
+EAR        = "tm_encryption_at_rest"
 
 # The left operand as the Turtle writes it. Not a slug.
 TOM_LO     = "dpv-odrl:TechnicalOrganisationalMeasure"
@@ -111,7 +123,7 @@ _TTL_HEAD = """\
 
 
 # ---------------------------------------------------------------------
-# Turtle for KGC360 and KGC361. The offer is fixed, the request varies.
+# Turtle for KGC360. The offer is fixed, the request varies.
 # ---------------------------------------------------------------------
 
 def _offer(pid):
@@ -233,6 +245,7 @@ def _iso(*pairs):
 
 
 _D364 = _iso((ENCRYPTION, ACCESS))
+_D366 = _iso((ENCRYPTION, EAR), (ACCESS, EAR))
 
 PROBLEMS = [
 
@@ -289,58 +302,12 @@ PROBLEMS = [
                           "isA", "dpv:TechnicalMeasure"),
     },
 
-    {
-        "id":                "KGC361",
-        "subdir":            "verdict",
-        "name":              "measures, isAllOf(Encryption, "
-                             "AccessControlMethod) against "
-                             "isNoneOf(AccessControlMethod)",
-        "left_operand":      "TechnicalOrganisationalMeasure",
-        "sort":              "tax",
-        "resource":          RESOURCE,
-        "background_theory": EMPTY_BT,
-        "includes":          INCLUDES,
-        "binding": BINDING,
-"summary": (
-    "A controller requires encryption and access control. A processor's "
-    "policy excludes access control."),
-        "tree": [C("isAllOf", ENCRYPTION, ACCESS),
-                 C("isNoneOf", ACCESS, side="request")],
-        "description": (
-            "The same requirement against a processor that does not apply "
-            "access control. The requirement needs access control among "
-            "the measures the use supplies and the exclusion keeps it "
-            "out, so no structure admits a common use and the verdict is "
-            "Incompatible.\n\n"
-            "It is definite without any declaration by the parties, which "
-            "is unlike KGC314: there an Incompatible "
-            "verdict needed the parties to declare two concepts distinct, "
-            "because the question was whether two names denote one thing. "
-            "Here the two constraints name the same concept and pull "
-            "against each other over it, so the vocabulary is not "
-            "consulted and the certificate cites the constraints alone."
-        ),
-        "expected_q1": "Unsatisfiable",
-        "expected_q2": "Satisfiable",
-        "certificate": {
-            "kind": "Refutation",
-            "comment": (
-                "The first policy requires access control and the second "
-                "excludes it. No premise of the vocabulary or of the parties "
-                "is used."),
-            "premises": [],
-        },
-        "ttl": _TTL_HEAD + _offer("KGC361")
-               + _request("KGC361",
-                          "Use with any measure except access control",
-                          "isNoneOf", "( dpv:AccessControlMethod )"),
-    },
-
     # -----------------------------------------------------------------
     # KGC362 / 363 / 364  The paired benchmark: same values, one operator.
     # -----------------------------------------------------------------
     {
         "id": "KGC362", "subdir": "verdict",
+        "twin":              "KGC366",
         "name": "measures, isAnyOf {Encryption, AccessControl} against eq Encryption",
         "left_operand": "TechnicalOrganisationalMeasure", "sort": "tax",
         "resource": RESOURCE, "background_theory": EMPTY_BT,
@@ -428,4 +395,102 @@ PROBLEMS = [
                     [("isAllOf", ["Encryption", "AccessControlMethod"])],
                     "encryption as the only measure", [("eq", ["Encryption"])]),
     },
+    # -----------------------------------------------------------------
+    # KGC365  isAllOf states a minimum: a use with more measures still has
+    # the two the controller requires.
+    # -----------------------------------------------------------------
+    {
+        "id": "KGC365", "subdir": "verdict",
+        "name": "measures, isAllOf {Encryption, AccessControl} against "
+                "isAllOf {Encryption, AccessControl, Pseudonymisation}",
+        "left_operand": "TechnicalOrganisationalMeasure", "sort": "tax",
+        "resource": RESOURCE, "background_theory": EMPTY_BT,
+        "binding": BINDING, "includes": INCLUDES,
+        "tree": [C("isAllOf", ENCRYPTION, ACCESS),
+                 C("isAllOf", ENCRYPTION, ACCESS, PSEUDO, side="request")],
+        "expected_verdict": "Compatible",
+        "expected_q1": "Satisfiable", "expected_q2": "Unsatisfiable",
+        "summary": (
+            "A controller requires both encryption and access control. A "
+            "processor commits to encryption, access control and "
+            "pseudonymisation together."),
+        "description": (
+            "isAllOf states a minimum. The controller needs encryption and "
+            "access control among the measures in use and does not "
+            "exclude others. A use that also applies pseudonymisation has "
+            "both required measures, so it satisfies the two policies in "
+            "every structure and the verdict is Compatible on the "
+            "constraints alone."),
+        "certificate": {"kind": "Refutation",
+            "comment": (
+                "isAllOf states a minimum. A use with encryption, access "
+                "control and pseudonymisation has the two measures the "
+                "first policy requires, so it satisfies both policies and "
+                "no resource statement or declaration is used. Two minimums "
+                "never conflict: a use with both sets of measures satisfies "
+                "both."),
+            "premises": []},
+        "provenance": "Safeguard clauses in data-sharing agreements.",
+        "ttl": _ttl("KGC365", TOM_LO, "both encryption and access control",
+                    [("isAllOf", ["Encryption", "AccessControlMethod"])],
+                    "all of encryption, access control and pseudonymisation",
+                    [("isAllOf", ["Encryption", "AccessControlMethod",
+                                  "Pseudonymisation"])]),
+    },
+
+    # -----------------------------------------------------------------
+    # KGC366  isAnyOf matches by name.  Encryption at rest is a kind of
+    # encryption and is neither of the two names the controller lists.
+    # -----------------------------------------------------------------
+    {
+        "id": "KGC366", "subdir": "verdict",
+        "twin":              "KGC362",
+        "name": "measures, isAnyOf {Encryption, AccessControl} against eq "
+                "EncryptionAtRest, declared distinct",
+        "left_operand": "TechnicalOrganisationalMeasure", "sort": "tax",
+        "resource": RESOURCE, "background_theory": DECLARED_BT,
+        "binding": BINDING, "includes": INCLUDES_DECLARED,
+        "tree": [C("isAnyOf", ENCRYPTION, ACCESS),
+                 C("eq", EAR, side="request")],
+        "fof_decls": _D366[0], "smt2_background": _D366[1],
+        "expected_verdict": "Incompatible",
+        "expected_q1": "Unsatisfiable", "expected_q2": "Satisfiable",
+        "summary": (
+            "A controller requires at least one of encryption and access "
+            "control. A processor's policy commits to encryption at rest as "
+            "the only measure."),
+        "description": (
+            "isAnyOf matches by name. DPV places encryption at rest below "
+            "encryption, but encryption at rest is neither encryption nor "
+            "access control by name, and the processor's use has no other "
+            "measure. As published a structure may identify it with one of "
+            "the two names, and the verdict is Unknown. With the measures "
+            "declared distinct no use satisfies both policies, and the "
+            "verdict is Incompatible. ODRL has no operator for \"includes "
+            "some kind of encryption\". Read with KGC362, where the "
+            "processor's measure is encryption itself and the verdict is "
+            "Compatible."),
+        "certificate": {"kind": "Refutation",
+            "comment": (
+                "isAnyOf matches by name. Encryption at rest is a kind of "
+                "encryption, yet it is neither encryption nor access "
+                "control by name. With the measures declared distinct, a "
+                "use whose only measure is encryption at rest has neither "
+                "measure the first policy lists, and no use satisfies both "
+                "policies. ODRL has no operator for \"includes some kind "
+                "of encryption\". Without the declarations the verdict "
+                "would be Unknown."),
+            "premises": [("fromDeclarations",
+                          "Encryption distinct from EncryptionAtRest"),
+                         ("fromDeclarations",
+                          "AccessControlMethod distinct from "
+                          "EncryptionAtRest")]},
+        "provenance": "As KGC362; warrant DPV's definitions.",
+        "ttl": _ttl("KGC366", TOM_LO,
+                    "at least one of encryption and access control",
+                    [("isAnyOf", ["Encryption", "AccessControlMethod"])],
+                    "encryption at rest as the only measure",
+                    [("eq", ["EncryptionAtRest"])]),
+    },
+
 ]

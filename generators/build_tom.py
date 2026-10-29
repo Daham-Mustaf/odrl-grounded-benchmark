@@ -11,25 +11,19 @@ the declarations, the TPTP axioms, and the profile entry.
         --measures vocabularies/dpv-2.3/modules/technical_measures.ttl \
         --out      problems
 
-Why this operand
-----------------
-Every other operand in the suite is single-valued: a processing operation
-has one purpose in the sense the constraint asks about, a consent record is
-in one state, a transfer has one legal basis.  Measures are not like that.
+Why isAllOf reads naturally here
+--------------------------------
 A controller has encryption in place and access control and
 pseudonymisation, all at once, and a clause requiring safeguards requires
 them together.
 
 That is what isAllOf is for, and it is the only operator of the fragment
 whose satisfaction condition puts the constraint's denotation inside what
-the use supplies rather than the other way round.  Without a set-valued
-operand it cannot be exercised: on a use binding one concept, isAllOf over
-one value says what eq says, and over two it is false whatever the
-vocabulary publishes.
-
-How many values an operand takes is not something a binding can currently
-declare.  This resource is set-valued and the others are not, and nothing
-in the profile records the difference; the paper discusses the gap.
+the use supplies rather than the other way round.  In the semantics every
+operand takes a set of values, so the operator is not special to this
+resource: it appears on purposes, language and locations as well.  On a use
+supplying one concept, isAllOf over one value says what eq says, and over
+two it is false unless the two names denote one concept.
 
 The two modules
 ---------------
@@ -52,9 +46,10 @@ modules publish concepts below two parents; declaring such a pair disjoint
 contradicts the resource, leaving it with no model and every verdict over
 it vacuous.  The generator reports the pairs this affects.
 
-Neither module asserts distinctness anywhere, so the rule is the parties'
-and a verdict resting on an instance of it is withdrawable.  The rule is
-stated in the declarations and instantiated by the problems, so that a refutation
+Neither module asserts distinctness anywhere.  The declarations rest on
+DPV's definition of each measure, and a verdict resting on an instance of
+them is withdrawable by abandoning the declarations.  The rule is stated in
+the declarations and instantiated by the problems, so that a refutation
 cites the inequation it used rather than one term standing for thousands.
 """
 
@@ -291,7 +286,7 @@ def background_ttl(meta) -> str:
 
 
 def declared_ttl(members, meta) -> str:
-    """The parties declare the measures pairwise distinct.
+    """Every measure of the slice declared distinct from every other.
 
     Stated as a rule rather than as instances, for the reason the ISO rule
     over DPV Locations is: n concepts give n(n-1)/2 inequations, and a
@@ -303,9 +298,11 @@ def declared_ttl(members, meta) -> str:
     return f"""\
 # Declarations for the measures resource: declared distinctness.
 #
-# The parties declare that no two of the listed names denote one measure.
-# Neither module asserts this, so the rule is the parties' and a verdict
-# resting on an instance of it is withdrawable by abandoning the rule.
+# Every measure of the slice is declared distinct from every other.  The
+# modules define each measure separately, in a definition of its own, and
+# these definitions are what the declarations rest on.  The modules do not
+# state the distinctness in RDF, so a verdict resting on an instance of it
+# is withdrawable by abandoning the declarations.
 #
 # Distinctness only.  Nothing here says two measures have nothing below
 # both: that is disjointness, and the modules publish concepts below two
@@ -313,9 +310,9 @@ def declared_ttl(members, meta) -> str:
 # and leave it with no model.  A use employing both encryption and access
 # control is not thereby claiming the two are one measure.
 #
-# The rule is stated here and instantiated by the problems: a problem naming
-# two measures carries the inequation between them, so that a refutation
-# cites the instance it used.
+# The declarations are stated here and instantiated by the problems: a
+# problem naming two measures carries the inequation between them, so that a
+# refutation cites the instance it used.
 #
 # Concepts: {n}
 # Pairs   : {n * (n - 1) // 2}
@@ -331,7 +328,7 @@ def declared_ttl(members, meta) -> str:
     bind:appliesTo <https://w3id.org/odrl-kb/dpv-tom> ;
     bind:generatedBy bind:PairwiseDistinctness ;
     bind:origin bind:proseDefinition ;
-    rdfs:comment "The origin rests on the DPV definitions."@en ;
+    rdfs:comment "The origin rests on DPV's separate definition of each measure."@en ;
     bind:scopeCondition "Distinctness between the measures the modules list, and not disjointness: the modules publish concepts below two parents, and a disjointness over such a pair would contradict the resource."@en ;
     bind:pairCount {n * (n - 1) // 2} ;
     bind:states [
@@ -354,19 +351,19 @@ def declared_axioms(names) -> str:
     listing = "\n".join("% " + ", ".join(names[i:i + 6])
                         for i in range(0, len(names), 6))
     return (
-        "% Declarations: pairwise distinctness, declared by the "
-        "parties.\n"
+        "% Declarations: pairwise distinctness of the measures.\n"
         "%\n"
-        "% No two of the names below denote one measure.  Neither module\n"
-        "% asserts this, so the rule is the parties' and a verdict resting\n"
-        "% on an instance of it is withdrawable by abandoning the rule.\n"
+        "% No two of the names below denote one measure.  The modules\n"
+        "% define each measure separately and do not state this in RDF,\n"
+        "% so a verdict resting on an instance of it is withdrawable by\n"
+        "% abandoning the declarations.\n"
         "%\n"
         "% Distinctness, not disjointness: a measure may lie below another\n"
         "% and still be a different measure, and a use employing two of\n"
         "% them is not claiming they are one.  Disjointness over a pair\n"
         "% with a common child would contradict the resource.\n"
         "%\n"
-        "% The rule is stated here and instantiated by the problems.  A\n"
+        "% The declarations are stated here and instantiated by the problems.  A\n"
         "% problem naming two of the measures below carries the inequation\n"
         "% between them as a bg_dist_ statement, so that a refutation cites\n"
         "% the instance it used rather than one of "
@@ -406,11 +403,10 @@ def profile_ttl() -> str:
 # term for a security measure, and the mapping mints one; a policy using it
 # declares conformance to that profile.
 #
-# This is the suite's only set-valued operand: a use carries several
-# measures at once, which is what isAllOf is for and what makes it
-# exercisable here and nowhere else.  How many values an operand takes is
-# not something this binding can declare, and that is a limitation of the
-# framework rather than of the vocabulary.
+# A use carries several measures at once, which is what isAllOf is for.  In
+# the semantics every operand takes a set of values, so isAllOf is not
+# special to this binding: it appears on purposes, language and locations
+# as well.
 
 @prefix dpvo: <https://w3id.org/dpv/mappings/odrl#> .
 @prefix bind: <https://w3id.org/odrl-kb/binding#> .

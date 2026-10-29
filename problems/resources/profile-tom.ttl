@@ -9,11 +9,10 @@
 # term for a security measure, and the mapping mints one; a policy using it
 # declares conformance to that profile.
 #
-# This is the suite's only set-valued operand: a use carries several
-# measures at once, which is what isAllOf is for and what makes it
-# exercisable here and nowhere else.  How many values an operand takes is
-# not something this binding can declare, and that is a limitation of the
-# framework rather than of the vocabulary.
+# A use carries several measures at once, which is what isAllOf is for.  In
+# the semantics every operand takes a set of values, so isAllOf is not
+# special to this binding: it appears on purposes, language and locations
+# as well.
 
 @prefix dpvo: <https://w3id.org/dpv/mappings/odrl#> .
 @prefix bind: <https://w3id.org/odrl-kb/binding#> .

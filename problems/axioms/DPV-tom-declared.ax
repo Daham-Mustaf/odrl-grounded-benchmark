@@ -1,15 +1,16 @@
-% Declarations: pairwise distinctness, declared by the parties.
+% Declarations: pairwise distinctness of the measures.
 %
-% No two of the names below denote one measure.  Neither module
-% asserts this, so the rule is the parties' and a verdict resting
-% on an instance of it is withdrawable by abandoning the rule.
+% No two of the names below denote one measure.  The modules
+% define each measure separately and do not state this in RDF,
+% so a verdict resting on an instance of it is withdrawable by
+% abandoning the declarations.
 %
 % Distinctness, not disjointness: a measure may lie below another
 % and still be a different measure, and a use employing two of
 % them is not claiming they are one.  Disjointness over a pair
 % with a common child would contradict the resource.
 %
-% The rule is stated here and instantiated by the problems.  A
+% The declarations are stated here and instantiated by the problems.  A
 % problem naming two of the measures below carries the inequation
 % between them as a bg_dist_ statement, so that a refutation cites
 % the instance it used rather than one of 2701.
