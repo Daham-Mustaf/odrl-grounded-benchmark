@@ -78,25 +78,6 @@ def C(op, *vals, side="offer"):
     return Constraint(op, tuple(vals), side)
 
 
-def _iso(*pairs):
-    """Declared-distinctness instances, named bg_dist_ on both encodings.
-
-    The declarations state the rule and list the purposes it ranges
-    over; a problem naming two of them carries the inequation between
-    them, so a refutation cites the instance it used rather than one
-    term standing for all of them. The name must match on both sides:
-    an unsat core and a TPTP proof are compared by premise name.
-    """
-    fof = ["% Declarations: declared distinctness instances, stated in",
-           "% the declarations file and instantiated here.", ""]
-    smt = ["; Declared distinctness this problem adopts, named as the TPTP",
-           "; side names it."]
-    for a, b in pairs:
-        n = f"bg_dist_{a}_{b}"
-        fof.append(f"fof({n}, axiom,\n    {a} != {b}).")
-        smt.append(f"(assert (! (not (= {a} {b})) :named {n}))")
-    return "\n".join(fof) + "\n", "\n".join(smt)
-
 _TTL_HEAD = """\
 @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .

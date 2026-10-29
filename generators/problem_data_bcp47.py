@@ -128,6 +128,9 @@ on which concepts are taken.  This is the only place in the suite where
 that is visible.
 """
 
+from pathlib import Path
+
+import declarations
 from compile import Constraint, Or, Xone, right_operand
 
 # Concepts of the slice, as the constants the axiom files declare.
@@ -156,6 +159,20 @@ INCLUDES_DISTINCT = INCLUDES + ["BCP47001-0.ax"]
 
 def C(op, *vals, side="offer"):
     return Constraint(op, tuple(vals), side)
+
+
+_DECL = declarations.load(
+    Path(__file__).resolve().parent.parent / "problems" / "background"
+    / "bcp47-distinct.ttl")
+
+
+def _smt_dist(*pairs):
+    """The SMT-LIB side of the distinctness a problem adopts.  The TPTP
+    side takes the same statements from BCP47001-0.ax, by include.  The
+    labels name the notations: bg_dist_bcp47_de_fr."""
+    return declarations.instances(
+        _DECL, pairs, [], [],
+        label=lambda a, b: f"bg_dist_bcp47_{a[4:]}_{b[4:]}")[1]
 
 
 # The case file holds the two policies and nothing else.  Which profile
@@ -282,9 +299,7 @@ PROBLEMS = [
         "sort":              "nom",
         "resource":          RESOURCE,
         "background_theory": DISTINCT,
-         "smt2_background":
-        "(assert (! (not (= bcp_de bcp_fr)) "
-        ":named bg_dist_bcp47_de_fr))",
+         "smt2_background": _smt_dist((DE, FR)),
         "binding":           BINDING_EXACT,
         "includes":          INCLUDES_DISTINCT,
         "tree": [C("eq", DE), C("eq", FR, side="request")],
@@ -452,9 +467,7 @@ PROBLEMS = [
             "A publisher distributes in German. A licensee's policy commits to "
             "American English (en-US), under the rule that reduces a tag to "
             "its primary subtag."),
-        "smt2_background":
-            "(assert (! (not (= bcp_de bcp_en)) "
-            ":named bg_dist_bcp47_de_en))",
+        "smt2_background": _smt_dist((DE, EN)),
         "binding":           BINDING_PRIMARY,
         "includes":          INCLUDES_DISTINCT,
         "grounding": {"en-US": "bcp_en"},
@@ -505,9 +518,7 @@ PROBLEMS = [
         "sort":              "nom",
         "resource":          RESOURCE,
         "background_theory": DISTINCT,
-         "smt2_background":
-        "(assert (! (not (= bcp_de bcp_fr)) "
-        ":named bg_dist_bcp47_de_fr))",
+         "smt2_background": _smt_dist((DE, FR)),
         "binding":           BINDING_EXACT,
         "includes":          INCLUDES_DISTINCT,
         "tree": [C("eq", DE), C("neq", FR, side="request")],

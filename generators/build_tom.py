@@ -64,6 +64,8 @@ from collections import defaultdict
 from itertools import combinations
 from pathlib import Path
 
+import declarations
+
 try:
     from rdflib import Graph, Namespace, RDFS, SKOS
 except ImportError:
@@ -288,7 +290,7 @@ def background_ttl(meta) -> str:
 """
 
 
-def declared_ttl(names, meta) -> str:
+def declared_ttl(members, meta) -> str:
     """The parties declare the measures pairwise distinct.
 
     Stated as a rule rather than as instances, for the reason the ISO rule
@@ -296,7 +298,8 @@ def declared_ttl(names, meta) -> str:
     refutation should cite the one it used rather than one term standing for
     all of them.
     """
-    n = len(names)
+    n = len(members)
+    listing = "\n".join(f"            <{m}>" for m in members)
     return f"""\
 # Declarations for the measures resource: declared distinctness.
 #
@@ -319,6 +322,7 @@ def declared_ttl(names, meta) -> str:
 # Source  : {meta['source_iri']}
 
 @prefix bind:    <https://w3id.org/odrl-kb/binding#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 
@@ -329,7 +333,13 @@ def declared_ttl(names, meta) -> str:
     bind:origin bind:proseDefinition ;
     rdfs:comment "The origin rests on the DPV definitions."@en ;
     bind:scopeCondition "Distinctness between the measures the modules list, and not disjointness: the modules publish concepts below two parents, and a disjointness over such a pair would contradict the resource."@en ;
-    bind:pairCount {n * (n - 1) // 2} .
+    bind:pairCount {n * (n - 1) // 2} ;
+    bind:states [
+        a owl:AllDifferent ;
+        owl:members (
+{listing}
+        )
+    ] .
 """
 
 
@@ -455,9 +465,13 @@ def main() -> int:
     (args.out / "axioms" / f"DPV-{tag}.ax").write_text(
         resource_axioms(inside), encoding="utf-8")
 
-    names = sorted(slug(c) for c in classes)
-    (args.out / "background" / f"{tag}-declared.ttl").write_text(
-        declared_ttl(names, meta), encoding="utf-8")
+    # The member list is the rule's reach, the concepts of the resource, and
+    # it is written as RDF.  The axioms are written from what is read back.
+    declared = args.out / "background" / f"{tag}-declared.ttl"
+    declared.write_text(
+        declared_ttl(sorted((str(c) for c in classes), key=slug), meta),
+        encoding="utf-8")
+    names = [slug(m) for m in declarations.load(declared).members]
     (args.out / "axioms" / f"DPV-{tag}-declared.ax").write_text(
         declared_axioms(names), encoding="utf-8")
 

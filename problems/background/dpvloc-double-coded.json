@@ -1,0 +1,21 @@
+{
+  "comment": "Areas that ISO 3166 codes twice: a country code (3166-1) and a subdivision code of another country (3166-2). DPV Locations 2.3 lists both codes as concepts. same_area: the extension identifies them, so they sit in one identity class. excluded: the extension lists both and identifies nothing, so listing both under the ISO distinctness rule would declare one area distinct from itself; the subdivision code is left out of dpvloc-iso and the scope condition names it. different_areas: a country and a subdivision of another country that share a name and are two areas. check_declarations.py fails on a pair of that kind that appears in none of the three.",
+  "same_area": {
+    "AS": ["US-AS"], "AW": ["NL-AW"], "AX": ["FI-01"], "BL": ["FR-BL"],
+    "BQ": ["NL-BQ1", "NL-BQ2", "NL-BQ3"], "CW": ["NL-CW"], "GF": ["FR-973"],
+    "GP": ["FR-971"], "GU": ["US-GU"], "HK": ["CN-HK"], "MF": ["FR-MF"],
+    "MO": ["CN-MO"], "MP": ["US-MP"], "MQ": ["FR-972"], "NC": ["FR-NC"],
+    "PF": ["FR-PF"], "PM": ["FR-PM"], "PR": ["US-PR"], "RE": ["FR-974"],
+    "SJ": ["NO-21", "NO-22"], "SX": ["NL-SX"], "TF": ["FR-TF"],
+    "TW": ["CN-TW"], "UM": ["US-UM"], "VI": ["US-VI"], "WF": ["FR-WF"],
+    "YT": ["FR-976"]
+  },
+  "excluded": {
+    "GL": ["DK-GL"],
+    "JE": ["GB-JSY"]
+  },
+  "different_areas": [
+    ["GE", "US-GA"],
+    ["LU", "BE-WLX"]
+  ]
+}

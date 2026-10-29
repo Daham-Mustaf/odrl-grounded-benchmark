@@ -63,6 +63,12 @@ The disjunction is inside both queries, not around them.  No xone
 alternative is an isAllOf constraint, as the signature requires.
 """
 from compile import Constraint, Or
+from pathlib import Path
+
+import declarations
+
+_DECL = declarations.load(
+    Path(__file__).resolve().parent.parent / "problems" / "background" / "consent-definitional.ttl")
 
 VALID     = "dpv_consent_status_valid_for_processing"
 INVALID   = "dpv_consent_status_invalid_for_processing"
@@ -94,22 +100,18 @@ def C(op, *vals, side="offer"):
 def _disj(*pairs):
     """Declared disjointness: nothing lies below both branches.
 
-    Quantified where _iso's distinctness is ground, so the SMT side
-    needs an explicit forall. The name matches what
-    DPV-consent-definitional.ax writes, or the two provers would cite
-    different names for one premise.
+    Quantified where distinctness is ground, so the SMT side needs an
+    explicit forall. The name matches what DPV-consent-definitional.ax
+    writes, or the two provers would cite different names for one
+    premise.  The statements come from declarations.py, which refuses a
+    pair the set does not state.
     """
-    fof = ["% Declarations: the branches declared disjoint, warranted",
-           "% by the module's definitions and asserted by it nowhere.", ""]
-    smt = ["; The same disjointness, named as the TPTP side names it."]
-    for a, b in pairs:
-        n = f"bg_disj_{a}_disjoint_{b}"
-        fof.append(f"fof({n}, axiom,\n"
-                   f"    ! [X] : ~ ( kge_leq(X, {a}) & kge_leq(X, {b}) )).")
-        smt.append(f"(assert (! (forall ((x Concept))\n"
-                   f"    (not (and (kge_leq x {a}) (kge_leq x {b}))))\n"
-                   f"  :named {n}))")
-    return "\n".join(fof) + "\n", "\n".join(smt)
+    return declarations.instances(
+        _DECL, pairs,
+        ["% Declarations: the branches declared disjoint, warranted",
+         "% by the module's definitions and asserted by it nowhere.", ""],
+        ["; The same disjointness, named as the TPTP side names it."],
+        kind="disjoint")
 
 
 _DISJ = _disj((VALID, INVALID))

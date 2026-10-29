@@ -7,7 +7,6 @@ dpv-odrl:LegalBasis at tax.
     uv run generators/build_gdprlb.py \
         --core   vocabularies/dpv-2.3/modules/legal_basis.ttl \
         --gdpr   vocabularies/dpv-2.3/legal/eu/gdpr/modules/legal_basis.ttl \
-        --declare-distinct-from-seven \
         --out    problems
 
 Two modules, and why
@@ -60,6 +59,8 @@ why the declarations are offered separately rather than folded into the resource
 import argparse, sys
 from collections import defaultdict
 from pathlib import Path
+
+import declarations
 from rdflib import Graph, Namespace, RDFS
 
 SKOS = Namespace("http://www.w3.org/2004/02/skos/core#")
@@ -225,8 +226,9 @@ def background_ttl(meta) -> str:
     bind:appliesTo <https://w3id.org/odrl-kb/dpv-gdpr-legal-basis> ;
     bind:pairCount 0 .
 """
-def declared_ttl(names, meta) -> str:
-    n = len(names)
+def declared_ttl(members, meta) -> str:
+    n = len(members)
+    listing = "\n".join(f"            <{m}>" for m in members)
     return f"""\
 # Declarations for the legal-basis resource: declared distinctness.
 #
@@ -248,6 +250,7 @@ def declared_ttl(names, meta) -> str:
 # Source  : {meta['source_iri']}
 
 @prefix bind:    <https://w3id.org/odrl-kb/binding#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 
@@ -259,7 +262,13 @@ def declared_ttl(names, meta) -> str:
     bind:origin bind:proseDefinition ;
     rdfs:comment "The origin rests on GDPR Article 6(1), points (a) to (f)."@en ;
     bind:scopeCondition "Distinctness between the listed bases, and not disjointness: the extension publishes concepts below two parents."@en ;
-    bind:pairCount {n * (n - 1) // 2} .
+    bind:pairCount {n * (n - 1) // 2} ;
+    bind:states [
+        a owl:AllDifferent ;
+        owl:members (
+{listing}
+        )
+    ] .
 """
 
 def profile_ttl() -> str:
@@ -374,17 +383,20 @@ def main() -> int:
 
     (args.out / "axioms" / "DPV-gdprlb.ax").write_text(
         resource_axioms(inside), encoding="utf-8")
-    (args.out / "axioms" / "DPV-gdprlb-declared.ax").write_text(
-        declared_axioms(classes), encoding="utf-8")
     (args.out / "resources" / "gdprlb.ttl").write_text(
         resource_ttl(classes, labels, inside, meta), encoding="utf-8")
     (args.out / "resources" / "profile-gdprlb.ttl").write_text(
         profile_ttl(), encoding="utf-8")
     (args.out / "background" / "gdprlb-empty.ttl").write_text(
         background_ttl(meta), encoding="utf-8")
-    (args.out / "background" / "gdprlb-declared.ttl").write_text(
-        declared_ttl(sorted(slug(c) for c in classes), meta),
+    # The member list is the rule's reach, the concepts of the resource, and
+    # it is written as RDF.  The axioms are written from what is read back.
+    declared = args.out / "background" / "gdprlb-declared.ttl"
+    declared.write_text(
+        declared_ttl(sorted((str(c) for c in classes)), meta),
         encoding="utf-8")
+    (args.out / "axioms" / "DPV-gdprlb-declared.ax").write_text(
+        declared_axioms(declarations.load(declared).members), encoding="utf-8")
 
     for p in sorted(args.out.rglob("*gdprlb*")):
         print(f"  {p}")

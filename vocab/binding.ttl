@@ -151,15 +151,10 @@ bind:PairwiseDistinctness a bind:GenerationRule ;
     rdfs:label "Pairwise Distinctness" ;
     skos:definition "Names the rule by which two concepts of a stated set are treated as distinct, subject to the stated scope condition. For a list of n concepts the generator expands an owl:AllDifferent member list into n(n-1)/2 ground inequations. For a registry rule over a large set, such as the ISO 3166 areas, the rule is stated in the axiom file and each problem instantiates the pairs it names. The expansion is performed and verified by the generator; this individual records which rule was applied. Where the statements come from is recorded separately, with bind:origin."@en .
 
-bind:PartyDeclaration a bind:GenerationRule ;
+bind:PairwiseDisjointness a bind:GenerationRule ;
     rdfs:isDefinedBy <https://w3id.org/odrl-kb/binding> ;
-    rdfs:label "Party Declaration" ;
-    skos:definition "Names a distinction or disjointness the parties declare for the benchmark case. The declaration may be withdrawn."@en .
-
-bind:SiblingDisjointness a bind:GenerationRule ;
-    rdfs:isDefinedBy <https://w3id.org/odrl-kb/binding> ;
-    rdfs:label "Sibling Disjointness" ;
-    skos:definition "Names the rule by which the generator separates administrative units that do not overlap, as ground disjointness statements, within the stated bind:scope."@en .
+    rdfs:label "Pairwise Disjointness" ;
+    skos:definition "Names the rule by which each pair of concepts stated with bind:disjointFrom is treated as having nothing below both in the binding's order. The generator writes one ground statement for each pair. Where the statements come from is recorded separately, with bind:origin."@en .
 
 bind:PublishedDefinition a bind:GenerationRule ;
     rdfs:isDefinedBy <https://w3id.org/odrl-kb/binding> ;
@@ -192,16 +187,10 @@ bind:scopeCondition a rdf:Property, skos:Concept ;
     skos:definition "The condition every member must satisfy for the rule to apply, checked by the generator before expansion and failing loudly otherwise."@en ;
     rdfs:domain bind:Declarations .
 
-bind:scope a rdf:Property, skos:Concept ;
-    rdfs:isDefinedBy <https://w3id.org/odrl-kb/binding> ;
-    rdfs:label "scope" ;
-    skos:definition "Which units a sibling rule separates: parent, for units sharing a parent, or depth, for all units at the same depth."@en ;
-    rdfs:domain bind:Declarations .
-
 bind:states a rdf:Property, skos:Concept ;
     rdfs:isDefinedBy <https://w3id.org/odrl-kb/binding> ;
     rdfs:label "states" ;
-    skos:definition "Attaches the declarations' statement, such as an owl:AllDifferent, to the declarations node. What bind:states links is what withdrawal removes."@en ;
+    skos:definition "Attaches the declarations' statement of distinctness, an owl:AllDifferent whose owl:members are the concepts, to the declarations node. A list of two is one pair. What bind:states links is what withdrawal removes. Disjointness is stated by bind:disjointFrom triples in the same file, and a file holds one set."@en ;
     rdfs:domain bind:Declarations .
 
 bind:pairCount a rdf:Property, skos:Concept ;
@@ -229,18 +218,7 @@ bind:concept a rdf:Property, skos:Concept ;
     rdfs:label "concept" ;
     skos:definition "The concept whose published definition a bind:warrant quotes."@en .
 
-bind:distinctFrom a rdf:Property, skos:Concept ;
-    rdfs:isDefinedBy <https://w3id.org/odrl-kb/binding> ;
-    rdfs:label "distinct from" ;
-    skos:definition "The declarations state that the two concepts are different elements."@en .
-
 bind:disjointFrom a rdf:Property, skos:Concept ;
     rdfs:isDefinedBy <https://w3id.org/odrl-kb/binding> ;
     rdfs:label "disjoint from" ;
-    skos:definition "The declarations state that nothing lies below both concepts."@en .
-
-bind:disjointWith a rdf:Property, skos:Concept ;
-    rdfs:isDefinedBy <https://w3id.org/odrl-kb/binding> ;
-    rdfs:label "disjoint with" ;
-    skos:definition "Same meaning as bind:disjointFrom. The sibling-disjointness files write this name."@en ;
-    owl:equivalentProperty bind:disjointFrom .
+    skos:definition "The declarations state that nothing lies below both concepts in the binding's order. Not owl:disjointWith, which is class semantics, and not a spatial predicate: France and Germany touch, and nothing lies within both."@en .

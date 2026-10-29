@@ -8,15 +8,18 @@
 
 @prefix dpv:     <https://w3id.org/dpv#> .
 @prefix bind:    <https://w3id.org/odrl-kb/binding#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 
 <https://w3id.org/odrl-kb/dpv-consent/declared> a bind:Declarations ;
     dcterms:title "One declared distinctness"@en ;
     bind:appliesTo <https://w3id.org/odrl-kb/dpv-consent> ;
-    bind:generatedBy bind:PartyDeclaration ;
+    bind:generatedBy bind:PairwiseDistinctness ;
     bind:origin bind:proseDefinition ;
     rdfs:comment "The origin rests on the DPV definitions."@en ;
-    bind:pairCount 1 .
-
-dpv:ConsentGiven bind:distinctFrom dpv:ConsentWithdrawn .
+    bind:pairCount 1 ;
+    bind:states [
+        a owl:AllDifferent ;
+        owl:members ( dpv:ConsentGiven dpv:ConsentWithdrawn )
+    ] .

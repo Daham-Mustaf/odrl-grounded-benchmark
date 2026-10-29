@@ -48,6 +48,13 @@ the TPTP side names them, so the two provers cite one premise by one name.
 """
 
 from compile import Constraint, Xone, right_operand
+from pathlib import Path
+
+import declarations
+
+_BG = Path(__file__).resolve().parent.parent / "problems" / "background"
+_DECLARED = declarations.load(_BG / "geonames-europe-declared.ttl")
+_SIBLINGS = declarations.load(_BG / "geonames-europe-siblings.ttl")
 
 FRANCE = "gn_france"
 GERMANY = "gn_germany"
@@ -71,25 +78,19 @@ def C(op, *vals, side="offer"):
 
 def _dist(a, b):
     """Declared distinctness, ground, on both encodings."""
-    n = f"bg_dist_{a}_{b}"
-    fof = ("% Declarations: the two countries declared distinct.\n"
-           f"fof({n}, axiom,\n    {a} != {b}).\n")
-    smt = ("; The same distinctness, named as the TPTP side names it.\n"
-           f"(assert (! (not (= {a} {b})) :named {n}))")
-    return fof, smt
+    return declarations.instances(
+        _DECLARED, [(a, b)],
+        ["% Declarations: the two countries declared distinct."],
+        ["; The same distinctness, named as the TPTP side names it."])
 
 
 def _disj(a, b):
     """Declared disjointness: nothing lies within both."""
-    n = f"bg_disj_{a}_disjoint_{b}"
-    fof = ("% Declarations: the two countries declared disjoint.\n"
-           f"fof({n}, axiom,\n"
-           f"    ! [X] : ~ ( kge_leq(X, {a}) & kge_leq(X, {b}) )).\n")
-    smt = ("; The same disjointness, named as the TPTP side names it.\n"
-           f"(assert (! (forall ((x Concept))\n"
-           f"    (not (and (kge_leq x {a}) (kge_leq x {b}))))\n"
-           f"  :named {n}))")
-    return fof, smt
+    return declarations.instances(
+        _SIBLINGS, [(a, b)],
+        ["% Declarations: the two countries declared disjoint."],
+        ["; The same disjointness, named as the TPTP side names it."],
+        kind="disjoint")
 
 
 _DIST = _dist(FRANCE, GERMANY)

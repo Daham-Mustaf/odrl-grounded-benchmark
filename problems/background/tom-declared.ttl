@@ -19,6 +19,7 @@
 # Source  : https://w3id.org/dpv/2.3
 
 @prefix bind:    <https://w3id.org/odrl-kb/binding#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 
@@ -29,4 +30,83 @@
     bind:origin bind:proseDefinition ;
     rdfs:comment "The origin rests on the DPV definitions."@en ;
     bind:scopeCondition "Distinctness between the measures the modules list, and not disjointness: the modules publish concepts below two parents, and a disjointness over such a pair would contradict the resource."@en ;
-    bind:pairCount 2701 .
+    bind:pairCount 2701 ;
+    bind:states [
+        a owl:AllDifferent ;
+        owl:members (
+            <https://w3id.org/dpv#AccessControlMethod>
+            <https://w3id.org/dpv#ActivityMonitoring>
+            <https://w3id.org/dpv#Anonymisation>
+            <https://w3id.org/dpv#AsymmetricCryptography>
+            <https://w3id.org/dpv#AsymmetricEncryption>
+            <https://w3id.org/dpv#Authentication-ABC>
+            <https://w3id.org/dpv#Authentication-PABC>
+            <https://w3id.org/dpv#AuthenticationProtocols>
+            <https://w3id.org/dpv#AuthorisationProtocols>
+            <https://w3id.org/dpv#BiometricAuthentication>
+            <https://w3id.org/dpv#CryptographicAuthentication>
+            <https://w3id.org/dpv#CryptographicKeyManagement>
+            <https://w3id.org/dpv#CryptographicMethods>
+            <https://w3id.org/dpv#DataBackupProtocols>
+            <https://w3id.org/dpv#DataRedaction>
+            <https://w3id.org/dpv#DataSanitisationTechnique>
+            <https://w3id.org/dpv#Deidentification>
+            <https://w3id.org/dpv#DeterministicPseudonymisation>
+            <https://w3id.org/dpv#DifferentialPrivacy>
+            <https://w3id.org/dpv#DigitalRightsManagement>
+            <https://w3id.org/dpv#DigitalSignatures>
+            <https://w3id.org/dpv#DistributedSystemSecurity>
+            <https://w3id.org/dpv#DocumentRandomisedPseudonymisation>
+            <https://w3id.org/dpv#DocumentSecurity>
+            <https://w3id.org/dpv#Encryption>
+            <https://w3id.org/dpv#EncryptionAtRest>
+            <https://w3id.org/dpv#EncryptionInTransfer>
+            <https://w3id.org/dpv#EncryptionInUse>
+            <https://w3id.org/dpv#EndToEndEncryption>
+            <https://w3id.org/dpv#FailSafeProtocols>
+            <https://w3id.org/dpv#FileSystemSecurity>
+            <https://w3id.org/dpv#FullyRandomisedPseudonymisation>
+            <https://w3id.org/dpv#HardwareSecurityProtocols>
+            <https://w3id.org/dpv#HashFunctions>
+            <https://w3id.org/dpv#HashMessageAuthenticationCode>
+            <https://w3id.org/dpv#HomomorphicEncryption>
+            <https://w3id.org/dpv#InformationFlowControl>
+            <https://w3id.org/dpv#IntrusionDetectionSystem>
+            <https://w3id.org/dpv#LegalMeasure>
+            <https://w3id.org/dpv#MessageAuthenticationCodes>
+            <https://w3id.org/dpv#MobilePlatformSecurity>
+            <https://w3id.org/dpv#MonotonicCounterPseudonymisation>
+            <https://w3id.org/dpv#MultiFactorAuthentication>
+            <https://w3id.org/dpv#NetworkProxyRouting>
+            <https://w3id.org/dpv#NetworkSecurityProtocols>
+            <https://w3id.org/dpv#OperatingSystemSecurity>
+            <https://w3id.org/dpv#OrganisationalMeasure>
+            <https://w3id.org/dpv#PasswordAuthentication>
+            <https://w3id.org/dpv#PenetrationTestingMethods>
+            <https://w3id.org/dpv#PhysicalMeasure>
+            <https://w3id.org/dpv#PostQuantumCryptography>
+            <https://w3id.org/dpv#PrivacyPreservingProtocol>
+            <https://w3id.org/dpv#PrivateInformationRetrieval>
+            <https://w3id.org/dpv#Pseudonymisation>
+            <https://w3id.org/dpv#QuantumCryptography>
+            <https://w3id.org/dpv#RNGPseudonymisation>
+            <https://w3id.org/dpv#SecretSharingSchemes>
+            <https://w3id.org/dpv#SecureMultiPartyComputation>
+            <https://w3id.org/dpv#SecurityMethod>
+            <https://w3id.org/dpv#SingleSignOn>
+            <https://w3id.org/dpv#SymmetricCryptography>
+            <https://w3id.org/dpv#SymmetricEncryption>
+            <https://w3id.org/dpv#TechnicalMeasure>
+            <https://w3id.org/dpv#TechnicalOrganisationalMeasure>
+            <https://w3id.org/dpv#TrustedComputing>
+            <https://w3id.org/dpv#TrustedExecutionEnvironment>
+            <https://w3id.org/dpv#UsageControl>
+            <https://w3id.org/dpv#UseSyntheticData>
+            <https://w3id.org/dpv#VirtualisationSecurity>
+            <https://w3id.org/dpv#VulnerabilityTestingMethods>
+            <https://w3id.org/dpv#WebBrowserSecurity>
+            <https://w3id.org/dpv#WebSecurityProtocols>
+            <https://w3id.org/dpv#WirelessSecurityProtocols>
+            <https://w3id.org/dpv#ZeroKnowledgeAuthentication>
+        )
+    ] .

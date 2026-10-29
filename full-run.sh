@@ -70,6 +70,9 @@ if grep -rIn -E 'GENERATOR_|TODO' cases problems certificates; then
 fi
 echo "  none"
 
+hdr "4d. declarations: the RDF of each set, its axioms and the queries that carry it"
+uv run generators/check_declarations.py || die "a set of declarations disagrees with its axioms or queries"
+
 hdr "5. bindings: do the probes hold"
 uv run generators/validate_bindings.py --probes probes \
   --axioms problems/axioms 2>&1 | tail -5

@@ -23,10 +23,11 @@ owl:disjointWith and no distinctness of any kind (grep: zero).
 
 Distinctness and disjointness are not interchangeable
 -----------------------------------------------------
---declare-distinct writes declarations in which the named purposes are
-pairwise distinct: no two of them are one concept.  That is admissible
-over any hierarchy, because one purpose may lie below another and still
-be a different purpose.
+The declarations in problems/background/dpv-purposes-declared.ttl state
+that the purposes they list are pairwise distinct: no two of them are one
+concept.  That is admissible over any hierarchy, because one purpose may
+lie below another and still be a different purpose.  This generator reads
+that file and writes the axioms from it.
 
 Disjointness would not be, and this generator does not offer it.  Eleven
 concepts in the module have two parents: NonCommercialResearch under
@@ -49,6 +50,8 @@ import re
 import sys
 from collections import defaultdict
 from pathlib import Path
+
+import declarations
 
 try:
     from rdflib import Graph, Namespace, RDFS, SKOS
@@ -293,55 +296,6 @@ def background_ttl(meta) -> str:
 """
 
 
-def declared_ttl(names, meta) -> str:
-    """The parties declare these purposes pairwise distinct.
-
-    Stated as a rule rather than as instances, for the reason the ISO
-    rule in build_dpvloc.py is stated that way: n concepts give n(n-1)/2
-    inequations, and a refutation should cite the one it used rather than
-    one term standing for all of them.  A problem naming two of the
-    concepts carries the inequation between them.
-    """
-    n = len(names)
-    listing = "\n".join(f"# {n_}" for n_ in names)
-    return f"""\
-# Declarations for the DPV purposes slice: declared distinctness.
-#
-# The parties declare the purposes below pairwise distinct, on the ground
-# that DPV defines each of them as a purpose in its own right.  DPV
-# publishes no distinctness anywhere in this module, so the rule is the
-# parties' and a verdict resting on an instance of it is withdrawable by
-# abandoning the rule.
-#
-# Distinctness only.  Nothing here says two purposes have nothing below
-# both: that is disjointness, and this module publishes concepts below
-# two parents, so a disjointness over such a pair would contradict what
-# DPV asserts and leave the slice with no model.
-#
-# The rule is stated here and instantiated by the problems: a problem
-# naming two of these purposes carries the inequation between them, so
-# that a refutation cites the instance it used rather than a term
-# standing for all of them.
-#
-# Purposes: {n}
-# Pairs   : {n * (n - 1) // 2}
-{listing}
-#
-# Source: {meta['version']}
-
-@prefix bind:    <https://w3id.org/odrl-kb/binding#> .
-@prefix dcterms: <http://purl.org/dc/terms/> .
-
-<https://w3id.org/odrl-kb/dpv-purposes/declared> a bind:Declarations ;
-    dcterms:title "Pairwise distinctness of declared purposes"@en ;
-    bind:appliesTo <https://w3id.org/odrl-kb/dpv-purposes> ;
-    bind:generatedBy bind:PairwiseDistinctness ;
-    bind:origin bind:proseDefinition ;
-    bind:scopeCondition "Distinctness between the listed purposes, and not disjointness: DPV publishes concepts below two parents, and a disjointness over such a pair would contradict it."@en ;
-    bind:pairCount {n * (n - 1) // 2} .
-"""
-
-
 def declared_axioms(names) -> str:
     """The rule, stated but not instantiated.
 
@@ -439,11 +393,6 @@ def main() -> int:
                     help="local names to close upward from; default: all")
     ap.add_argument("--tag", default=None,
                     help="output name; defaults to the seed set")
-    ap.add_argument("--declare-distinct", nargs="+", metavar="CONCEPT",
-                    default=None,
-                    help="concepts the parties declare pairwise distinct; "
-                         "the declarations state the rule and the problems carry "
-                         "the instances they use")
     ap.add_argument("--retrieved", default="2026-08-16")
     ap.add_argument("--out", default="problems", type=Path)
     args = ap.parse_args()
@@ -487,18 +436,20 @@ def main() -> int:
     (args.out / "resources" / f"profile-{tag}.ttl").write_text(
         profile_ttl(), encoding="utf-8")
 
-    if args.declare_distinct:
-        names = sorted(set(args.declare_distinct))
+    # The declarations are RDF a person wrote; the axioms follow from it.
+    declared = args.out / "background" / f"{tag}-declared.ttl"
+    names = None
+    if declared.exists():
+        decl = declarations.load(declared)
+        names = sorted(str(m).rsplit("#", 1)[-1] for m in decl.members)
         if len(names) < 2:
-            print("--declare-distinct needs at least two distinct concepts",
+            print(f"{declared}: needs at least two distinct concepts",
                   file=sys.stderr)
             return 1
         missing = [x for x in names if x not in concepts]
         if missing:
             print(f"not in the slice: {', '.join(missing)}", file=sys.stderr)
             return 1
-        (args.out / "background" / f"{tag}-declared.ttl").write_text(
-            declared_ttl(names, meta), encoding="utf-8")
         (args.out / "axioms" / f"DPV-{tag}-declared.ax").write_text(
             declared_axioms(names), encoding="utf-8")
 
@@ -516,8 +467,7 @@ def main() -> int:
     # The pairs a disjointness declaration would contradict.  Reported
     # whether or not a distinctness was asked for, since the constraint is
     # a property of the resource and not of this run.
-    if args.declare_distinct:
-        names = sorted(set(args.declare_distinct))
+    if names:
         shared = common_children(edges, concepts, names)
         if shared:
             print("\namong the declared concepts, these pairs have a concept "

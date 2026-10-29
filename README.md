@@ -162,22 +162,20 @@ Vocabularies first, then problems, then the harnesses.
 # the framework axioms every query includes
 uv run generators/gen_primitives.py
 
-# resources, from the vendored files
+# resources, from the vendored files.  The declarations are not options:
+# each set is a file in problems/background, and the builders write the
+# axioms from it.
 uv run generators/build_dpv.py \
   --purposes vocabularies/dpv-2.3/modules/purposes.ttl \
-  --retrieved 2026-08-19 --out problems \
-  --declare-distinct Marketing ScientificResearch \
-                     ResearchAndDevelopment Advertising
+  --retrieved 2026-08-19 --out problems
 
 uv run generators/build_dpvloc.py \
   --loc vocabularies/dpv-2.3/loc/loc.ttl \
-  --retrieved 2026-08-19 --out problems \
-  --declare-distinct DE FR
+  --retrieved 2026-08-19 --out problems
 
 uv run generators/build_consent.py \
   --module vocabularies/dpv-2.3/modules/consent_status.ttl \
-  --retrieved 2026-08-19 --out problems \
-  --declare-distinct ConsentGiven ConsentWithdrawn
+  --retrieved 2026-08-19 --out problems
 
 uv run generators/build_tom.py \
   --tom vocabularies/dpv-2.3/modules/TOM.ttl \
@@ -191,8 +189,7 @@ uv run generators/build_gdprlb.py \
 
 uv run generators/build_filetype.py \
   --table vocabularies/eu-file-type-20260715/filetypes-skos-ap-act.rdf \
-  --retrieved 2026-08-18 --out problems \
-  --declare-distinct PDF PDFA1A
+  --retrieved 2026-08-18 --out problems
 
 # problems
 for g in gen_motivating gen_geonames gen_dpv gen_dpvloc gen_filetype \

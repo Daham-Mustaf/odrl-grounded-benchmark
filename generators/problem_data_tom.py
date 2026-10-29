@@ -70,6 +70,12 @@ Incompatible. Even the obvious conflict rested on a declared premise.
 """
 
 from compile import right_operand as _ro, Constraint
+from pathlib import Path
+
+import declarations
+
+_DECL = declarations.load(
+    Path(__file__).resolve().parent.parent / "problems" / "background" / "tom-declared.ttl")
 
 # Concept slugs, as the TPTP and SMT-LIB encodings name them.
 TOM        = "tm_technical_organisational_measure"
@@ -215,17 +221,15 @@ def _iso(*pairs):
     over; a problem naming two of them carries the inequation between
     them, so a refutation cites the instance it used rather than one of
     2701. The name must match on both sides: an unsat core and a TPTP
-    proof are compared by premise name.
+    proof are compared by premise name.  The statements come from
+    declarations.py, which refuses a pair the set does not state.
     """
-    fof = ["% Declarations: declared distinctness instances, stated in",
-           "% the declarations file and instantiated here.", ""]
-    smt = ["; Declared distinctness this problem adopts, named as the TPTP",
-           "; side names it."]
-    for a, b in pairs:
-        n = f"bg_dist_{a}_{b}"
-        fof.append(f"fof({n}, axiom,\n    {a} != {b}).")
-        smt.append(f"(assert (! (not (= {a} {b})) :named {n}))")
-    return "\n".join(fof) + "\n", "\n".join(smt)
+    return declarations.instances(
+        _DECL, pairs,
+        ["% Declarations: declared distinctness instances, stated in",
+         "% the declarations file and instantiated here.", ""],
+        ["; Declared distinctness this problem adopts, named as the TPTP",
+         "; side names it."])
 
 
 _D364 = _iso((ENCRYPTION, ACCESS))

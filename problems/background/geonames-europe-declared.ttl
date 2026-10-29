@@ -7,13 +7,18 @@
 # still lie one within the other (KGC305).
 
 @prefix bind:    <https://w3id.org/odrl-kb/binding#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 
 <https://w3id.org/odrl-kb/geonames-europe/declared> a bind:Declarations ;
     dcterms:title "France and Germany declared distinct"@en ;
-    bind:generatedBy bind:PartyDeclaration ;
+    bind:generatedBy bind:PairwiseDistinctness ;
     bind:origin bind:practiceRule ;
     rdfs:comment "The origin rests on the GeoNames administrative hierarchy."@en ;
     bind:appliesTo <https://w3id.org/odrl-kb/geonames-europe> ;
-    bind:pairCount 1 .
+    bind:pairCount 1 ;
+    bind:states [
+        a owl:AllDifferent ;
+        owl:members ( <https://sws.geonames.org/3017382/> <https://sws.geonames.org/2921044/> )
+    ] .

@@ -16,7 +16,7 @@
     dcterms:title "One declared distinctness"@en ;
     bind:appliesTo <https://w3id.org/odrl-kb/dpv-loc-geo>,
                  <https://w3id.org/odrl-kb/dpv-loc-juris> ;
-    bind:generatedBy bind:PartyDeclaration ;
+    bind:generatedBy bind:PairwiseDistinctness ;
     bind:origin bind:practiceRule ;
     rdfs:comment "The origin rests on ISO 3166-1."@en ;
     bind:pairCount 1 ;

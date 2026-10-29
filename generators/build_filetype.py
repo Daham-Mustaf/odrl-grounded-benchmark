@@ -63,6 +63,8 @@ import re
 import sys
 from pathlib import Path
 
+import declarations
+
 try:
     from rdflib import Graph, Namespace, URIRef, RDF, OWL, SKOS
 except ImportError:
@@ -222,33 +224,6 @@ def background_ttl(meta) -> str:
 """
 
 
-def declared_ttl(pair, meta) -> str:
-    a, b = pair
-    return f"""\
-# Declarations for the EU File type resource: one distinctness.
-#
-# The parties declare that these two formats are different.  The table does
-# not: it lists both and relates them in no way.  A verdict resting on this
-# statement is the parties' and can be reopened by withdrawing it.
-#
-# Source: {meta['version_iri']}
-
-@prefix ft:      <http://publications.europa.eu/resource/authority/file-type/> .
-@prefix bind:    <https://w3id.org/odrl-kb/binding#> .
-@prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
-
-<https://w3id.org/odrl-kb/eu-file-type/declared> a bind:Declarations ;
-    dcterms:title "One declared distinctness"@en ;
-    bind:appliesTo <https://w3id.org/odrl-kb/eu-file-type> ;
-    bind:generatedBy bind:PartyDeclaration ;
-    bind:origin bind:practiceRule ;
-    rdfs:comment "The origin rests on the file-type authority's separate entries."@en ;
-    bind:pairCount 1 .
-
-"""
-
-
 def axioms(concepts) -> str:
     """The resource contributes no formulae.
 
@@ -316,10 +291,6 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--table", required=True, type=Path,
                     help="the SKOS_AP_ACT distribution (it carries labels)")
-    ap.add_argument("--declare-distinct", nargs=2, metavar=("A", "B"),
-                    default=None,
-                    help="also emit a set of declarations declaring two "
-                         "formats distinct, for the stability pair")
     ap.add_argument("--retrieved", default="2026-08-18")
     ap.add_argument("--tag", default="filetype")
     ap.add_argument("--out", default="problems", type=Path)
@@ -369,14 +340,19 @@ def main() -> int:
     (args.out / "resources" / f"profile-{tag}.ttl").write_text(
         profile_ttl(), encoding="utf-8")
 
-    if args.declare_distinct:
-        a, b = args.declare_distinct
+    # The declarations are RDF a person wrote; the axioms follow from it.
+    declared = args.out / "background" / f"{tag}-declared.ttl"
+    if declared.exists():
+        decl = declarations.load(declared)
+        if len(decl.members) != 2:
+            print(f"{declared}: one distinctness is a list of two members",
+                  file=sys.stderr)
+            return 1
+        a, b = (local(m) for m in decl.members)
         missing = [x for x in (a, b) if x not in concepts]
         if missing:
             print(f"not in the table: {', '.join(missing)}", file=sys.stderr)
             return 1
-        (args.out / "background" / f"{tag}-declared.ttl").write_text(
-            declared_ttl((a, b), meta), encoding="utf-8")
         (args.out / "axioms" / f"EUFT-{tag}-declared.ax").write_text(
             declared_axioms((a, b)), encoding="utf-8")
 

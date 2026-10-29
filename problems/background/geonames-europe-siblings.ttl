@@ -12,8 +12,10 @@
 
 <https://w3id.org/odrl-kb/geonames-europe/siblings> a bind:Declarations ;
     dcterms:title "France and Germany declared disjoint"@en ;
-    bind:generatedBy bind:PartyDeclaration ;
+    bind:generatedBy bind:PairwiseDisjointness ;
     bind:origin bind:practiceRule ;
     rdfs:comment "The origin rests on the GeoNames administrative hierarchy."@en ;
     bind:appliesTo <https://w3id.org/odrl-kb/geonames-europe> ;
     bind:pairCount 1 .
+
+<https://sws.geonames.org/3017382/> bind:disjointFrom <https://sws.geonames.org/2921044/> .

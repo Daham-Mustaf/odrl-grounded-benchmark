@@ -25,7 +25,9 @@
 #
 # Source: https://w3id.org/dpv/2.3
 
+@prefix dpv:     <https://w3id.org/dpv#> .
 @prefix bind:    <https://w3id.org/odrl-kb/binding#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 
 <https://w3id.org/odrl-kb/dpv-purposes/declared> a bind:Declarations ;
@@ -34,4 +36,8 @@
     bind:generatedBy bind:PairwiseDistinctness ;
     bind:origin bind:proseDefinition ;
     bind:scopeCondition "Distinctness between the listed purposes, and not disjointness: DPV publishes concepts below two parents, and a disjointness over such a pair would contradict it."@en ;
-    bind:pairCount 6 .
+    bind:pairCount 6 ;
+    bind:states [
+        a owl:AllDifferent ;
+        owl:members ( dpv:Advertising dpv:Marketing dpv:ResearchAndDevelopment dpv:ScientificResearch )
+    ] .

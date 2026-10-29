@@ -80,6 +80,8 @@ import argparse
 import sys
 from pathlib import Path
 
+import declarations
+
 try:
     from rdflib import Graph, Namespace, URIRef, OWL, SKOS
 except ImportError:
@@ -202,7 +204,7 @@ def resource_ttl(concepts, labels, definitions, order, crossing, meta) -> str:
         "",
         "<https://w3id.org/odrl-kb/dpv-consent> a dcat:Dataset ;",
         '    dcterms:title "DPV consent status, module slice"@en ;',
-        f"    dcterms:source <{meta['source_iri']}> ;",
+        f"    dcterms:source <{meta['source_iri']}> .",
         "",
     ]
 
@@ -310,34 +312,6 @@ justify processing and the other as the states that cannot, and asserts no \
 disjointness between them."@en .
 
 dpv:{VALID} bind:disjointFrom dpv:{INVALID} .
-"""
-
-
-def declared_ttl(pair, meta) -> str:
-    a, b = pair
-    return f"""\
-# Declarations for the DPV consent status resource: one distinctness.
-#
-# The parties declare that these two states are different.  The module does
-# not: it lists both and separates them in no way.  A verdict resting on this
-# statement is the parties' and can be reopened by withdrawing it.
-#
-# Source: {meta['source_iri']}
-
-@prefix dpv:     <https://w3id.org/dpv#> .
-@prefix bind:    <https://w3id.org/odrl-kb/binding#> .
-@prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
-
-<https://w3id.org/odrl-kb/dpv-consent/declared> a bind:Declarations ;
-    dcterms:title "One declared distinctness"@en ;
-    bind:appliesTo <https://w3id.org/odrl-kb/dpv-consent> ;
-    bind:generatedBy bind:PartyDeclaration ;
-    bind:origin bind:proseDefinition ;
-    rdfs:comment "The origin rests on the DPV definitions."@en ;
-    bind:pairCount 1 .
-
-dpv:{a} bind:distinctFrom dpv:{b} .
 """
 
 
@@ -461,8 +435,6 @@ ex:b-consent-status a bind:OperandBinding ;
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--module", required=True, type=Path)
-    ap.add_argument("--declare-distinct", nargs=2, metavar=("A", "B"),
-                    default=None)
     ap.add_argument("--retrieved", default="2026-08-19")
     ap.add_argument("--tag", default="consent")
     ap.add_argument("--out", default="problems", type=Path)
@@ -524,14 +496,19 @@ def main() -> int:
     (args.out / "resources" / f"profile-{tag}.ttl").write_text(
         profile_ttl(), encoding="utf-8")
 
-    if args.declare_distinct:
-        a, b = args.declare_distinct
+    # The declarations are RDF a person wrote; the axioms follow from it.
+    declared = args.out / "background" / f"{tag}-declared.ttl"
+    if declared.exists():
+        decl = declarations.load(declared)
+        if len(decl.members) != 2:
+            print(f"{declared}: one distinctness is a list of two members",
+                  file=sys.stderr)
+            return 1
+        a, b = (local(m) for m in decl.members)
         missing = [x for x in (a, b) if x not in concepts]
         if missing:
             print(f"not in the module: {', '.join(missing)}", file=sys.stderr)
             return 1
-        (args.out / "background" / f"{tag}-declared.ttl").write_text(
-            declared_ttl((a, b), meta), encoding="utf-8")
         (args.out / "axioms" / f"DPV-{tag}-declared.ax").write_text(
             declared_axioms((a, b)), encoding="utf-8")
 

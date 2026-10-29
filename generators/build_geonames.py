@@ -1,8 +1,9 @@
 """
 build_geonames.py
 =================
-Builds a GeoNames slice from the official dump: the resource, the declarations,
-the TPTP axioms, and the profile entry that binds them.
+Builds a GeoNames slice from the official dump: the resource, the TPTP axioms,
+and the profile entry that binds them.  The declarations are not built here:
+a set of declarations is RDF a person writes (see declarations.py).
 
     python build_geonames.py --hierarchy hierarchy.txt \
         --country-info countryInfo.txt --depth 1 --out problems
@@ -16,25 +17,6 @@ Widening to other continents adds nothing the depth series does not show.
 Only ADM-typed edges are followed.  The dump also carries entries added
 through the user interface, which are not the administrative hierarchy the
 gazetteer publishes; one of them puts Sudan under Europe.
-
-Sibling disjointness is generated, not published.  GeoNames asserts no
-disjointness at all.  Two administrative units under one parent do not
-overlap, so the parties declare it, and it belongs in the declarations.
-Its scope is a choice the paper has to state:
-
-    --siblings parent   units sharing a parent
-    --siblings depth    all units at the same depth, quadratic
-
-The two are not semantically distinct below the first level.  Take Bavaria
-within Germany and Tyrol within Austria, with Germany and Austria separated
-as siblings under Europe.  Anything below both Bavaria and Tyrol is below
-both countries by transitivity, contradicting their disjointness, so the
-parent rule already separates them in every model.  What `depth` adds at the
-second level is therefore derivable, at quadratic cost.  It differs only at
-the first level, where the root's children are the level.
-
-Only pairs whose separation depends on an unseparated intermediate ancestor
-come out Unknown under `parent`.
 """
 
 import argparse
@@ -118,8 +100,7 @@ def resource_ttl(root, levels, names, root_slug, tag) -> str:
         "# The dump also carries entries added through the user interface;",
         "# those are not the administrative hierarchy and are excluded.",
         "#",
-        "# Order statements only.  GeoNames asserts no disjointness, so the",
-        "# sibling rule the parties adopt is in the declarations.",
+        "# Order statements only.  GeoNames asserts no disjointness.",
         "#",
         "# Source  : https://download.geonames.org/export/dump/",
         f"# Licence : {LICENCE}",
@@ -151,74 +132,13 @@ def resource_ttl(root, levels, names, root_slug, tag) -> str:
     return "\n".join(head + body)
 
 
-def sibling_pairs(levels, scope: str):
-    """Pairs the sibling rule separates."""
-    pairs = []
-    for lvl in levels:
-        if scope == "parent":
-            groups = defaultdict(list)
-            for parent, child in lvl:
-                groups[parent].append(child)
-            for g in groups.values():
-                pairs += [(a, b) for i, a in enumerate(g) for b in g[i + 1:]]
-        else:                                    # depth
-            g = [c for _, c in lvl]
-            pairs += [(a, b) for i, a in enumerate(g) for b in g[i + 1:]]
-    return pairs
-
-
-def background_ttl(tag, pairs, names, scope) -> str:
-    lines = [
-        "# Declarations for the GeoNames slice: sibling disjointness.",
-        "#",
-        "# GeoNames publishes no disjointness.  Administrative units that do",
-        "# not overlap are separated here because the parties declare it, not",
-        "# because the authority asserted it.  A party may withdraw this",
-        "# rule, and any Incompatible verdict resting on it reopens.",
-        "#",
-        f"# Scope: {scope}.  " + (
-            "Units sharing a parent are separated.  Units under different "
-            "parents are separated too where their ancestors are, since "
-            "anything below both would be below both ancestors by "
-            "transitivity."
-            if scope == "parent" else
-            "Every pair at the same depth is separated."),
-        f"# {len(pairs)} statements.",
-        "",
-        "@prefix odrlkb:  <https://w3id.org/odrl-kb/geonames#> .",
-        "@prefix bind:    <https://w3id.org/odrl-kb/binding#> .",
-        "@prefix dcterms: <http://purl.org/dc/terms/> .",
-        "@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .",
-        "",
-        f"<https://w3id.org/odrl-kb/geonames/{tag}/siblings> a bind:Declarations ;",
-        '    dcterms:title "Sibling disjointness for administrative units"@en ;',
-        f"    bind:generatedBy bind:SiblingDisjointness ;",
-        f"    bind:origin bind:practiceRule ;",
-        '    rdfs:comment "The origin rests on the GeoNames administrative hierarchy."@en ;',
-        f'    bind:scope "{scope}" ;',
-        f"    bind:appliesTo <https://w3id.org/odrl-kb/geonames/{tag}> .",
-        "",
-    ]
-    for a, b in pairs:
-        lines.append(f"odrlkb:{slug(a,names)[3:]} bind:disjointWith "
-                     f"odrlkb:{slug(b,names)[3:]} .")
-    return "\n".join(lines) + "\n"
-
-
-def axioms(levels, pairs, names) -> str:
+def axioms(levels, names) -> str:
     lines = ["% Resource: administrative containment.  res_ names mark what",
              "% the authority published.", ""]
     for parent, child in [e for lvl in levels for e in lvl]:
         cs, ps = slug(child, names), slug(parent, names)
         lines.append(f"fof(res_{cs}_within_{ps}, axiom,")
         lines.append(f"    kge_leq({cs}, {ps})).")
-    lines += ["", "% Declarations: sibling disjointness, as the denial of",
-              "% a common lower bound.  bg_ names mark what a party may",
-              "% withdraw.", ""]
-    for a, b in pairs:
-        sa, sb = slug(a, names), slug(b, names)
-        lines.append(f"fof(bg_disj_{sa}_{sb}, axiom,")
-        lines.append(f"    ~ ? [X] : (kge_leq(X, {sa}) & kge_leq(X, {sb}))).")
     return "\n".join(lines) + "\n"
 
 
@@ -238,7 +158,6 @@ ex:b-spatial a vrep:OperandBinding ;
     vrep:leftOperand odrl:spatial ;
     vrep:sort vrep:mer ;
     vrep:resource <https://w3id.org/odrl-kb/geonames/{tag}> ;
-    vrep:declarations <https://w3id.org/odrl-kb/geonames/{tag}/siblings> ;
     vrep:grounding vrep:sliceMembership .
 """
 
@@ -253,7 +172,6 @@ def main() -> int:
     ap.add_argument("--limit", type=int, default=None,
                     help="children per parent; applied after sorting, so a "
                          "series of slices is nested")
-    ap.add_argument("--siblings", choices=("parent", "depth"), default="parent")
     ap.add_argument("--out", default="problems", type=Path)
     args = ap.parse_args()
 
@@ -267,27 +185,23 @@ def main() -> int:
 
     edges = [e for lvl in levels for e in lvl]
     concepts = {args.root} | {c for _, c in edges}
-    pairs = sibling_pairs(levels, args.siblings)
     root_slug = f"gn_{args.root_name}"
     tag = f"{args.root_name}-d{len(levels)}-{len(concepts)}"
 
-    for d in ("resources", "background", "axioms"):
+    for d in ("resources", "axioms"):
         (args.out / d).mkdir(parents=True, exist_ok=True)
 
     (args.out / "resources" / f"geonames-{tag}.ttl").write_text(
         resource_ttl(args.root, levels, names, root_slug, tag), "utf-8")
-    (args.out / "background" / f"geonames-{tag}.ttl").write_text(
-        background_ttl(tag, pairs, names, args.siblings), "utf-8")
     (args.out / "axioms" / f"GN-{tag}.ax").write_text(
-        axioms(levels, pairs, names), encoding="utf-8")
+        axioms(levels, names), encoding="utf-8")
     (args.out / "resources" / f"profile-{tag}.ttl").write_text(
         profile_ttl(tag), encoding="utf-8")
 
     n = len(concepts)
     print(f"depth {len(levels)}: " +
           ", ".join(f"level {i+1}: {len(l)}" for i, l in enumerate(levels)))
-    print(f"{n} concepts, {len(edges)} order statements, "
-          f"{len(pairs)} disjointness statements ({args.siblings} scope)")
+    print(f"{n} concepts, {len(edges)} order statements")
     print(f"transitivity ground instances: {n**3:,}  "
           f"(the checker's cost; the prover instantiates lazily)")
     named = sum(1 for c in concepts if names.get(c))

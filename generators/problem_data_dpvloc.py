@@ -112,6 +112,12 @@ no verdict rests on them: they are not load-bearing for reachability, and
 they are load-bearing for what the rule may say.
 """
 from compile import right_operand as _ro, Constraint, Or, Xone
+from pathlib import Path
+
+import declarations
+
+_DECL = declarations.load(
+    Path(__file__).resolve().parent.parent / "problems" / "background" / "dpvloc-iso.ttl")
  
 EU    = "loc_eu"
 DE    = "loc_de"
@@ -159,20 +165,6 @@ def C(op, *vals, side="offer"):
     return Constraint(op, tuple(vals), side)
  
  
-def _iso(*pairs):
-    """Explicit ISO rule instances, one fof per pair, named bg_dist_ as
-    KGC334 names its one instance, plus the matching :named SMT lines."""
-    fof = ["% Declarations: instances of the ISO 3166 distinctness rule,",
-           "% stated in LOC-dpvloc-iso.ax and instantiated here.", ""]
-    smt = ["; Instances of the registry rule this problem adopts, named as",
-           "; the TPTP side names them."]
-    for a, b in pairs:
-        n = f"bg_dist_{a}_{b}"
-        fof.append(f"fof({n}, axiom,\n    {a} != {b}).")
-        smt.append(f"(assert (! (not (= {a} {b})) :named {n}))")
-    return "\n".join(fof) + "\n", "\n".join(smt)
- 
- 
 _TTL_HEAD = """\
 @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
@@ -183,6 +175,19 @@ _TTL_HEAD = """\
 """
  
  
+def _iso(*pairs):
+    """Explicit ISO rule instances, one fof per pair, named bg_dist_ as
+    KGC334 names its one instance, plus the matching :named SMT lines.
+    The statements come from declarations.py, which refuses a pair the set
+    does not state."""
+    return declarations.instances(
+        _DECL, pairs,
+        ["% Declarations: instances of the ISO 3166 distinctness rule,",
+         "% stated in LOC-dpvloc-iso.ax and instantiated here.", ""],
+        ["; Instances of the registry rule this problem adopts, named as",
+         "; the TPTP side names them."])
+
+
 def _cnode(cid, op, vals):
     ro = _ro(op, [f"loc:{v}" for v in vals])
     return f"""kgc:{cid} a odrl:Constraint ;
@@ -229,6 +234,15 @@ def _ttl2(pid, offer_title, offer_cs, req_title, req_cs, connective=None):
                     "odrl:assignee drk:researcher ;\n", req_cs))
  
  
+_D334 = declarations.instances(
+    _DECL, [(DE, FR)],
+    ["% Declarations: one instance of the ISO 3166 distinctness rule.",
+     "%",
+     "% The rule is stated in LOC-dpvloc-iso.ax and ranges over 249 areas.  It is",
+     "% instantiated here rather than expanded there: a refutation should cite the",
+     "% inequation it used, not one term standing for thirty thousand."],
+    ["; The instance of the registry rule this problem adopts, named as the TPTP",
+     "; side names it so that a proof and an unsat core cite one statement."])
 _ISO_387 = _iso((DE_HH, DE_BY), (DE_HH, DE_BE))
 _ISO_DE_FR = _iso((DE, FR))
 _ISO_336 = _iso((DE_BY, DE), (DE_BY, FR))
@@ -470,22 +484,11 @@ PROBLEMS = [
         "summary": (
             "As KGC333, with the ISO 3166 rule that different country codes "
             "name different countries."),
-        "fof_decls": """\
-% Declarations: one instance of the ISO 3166 distinctness rule.
-%
-% The rule is stated in LOC-dpvloc-iso.ax and ranges over 249 areas.  It is
-% instantiated here rather than expanded there: a refutation should cite the
-% inequation it used, not one term standing for thirty thousand.
-fof(bg_dist_loc_de_loc_fr, axiom,
-    loc_de != loc_fr).
-""",
+        "fof_decls": _D334[0],
         "expected_q1": "Unsatisfiable",
         "expected_q2": "Satisfiable",
         "smt2_logic": "UF",
-        "smt2_background": """\
-; The instance of the registry rule this problem adopts, named as the TPTP
-; side names it so that a proof and an unsat core cite one statement.
-(assert (! (distinct loc_de loc_fr) :named bg_dist_loc_de_loc_fr))""",
+        "smt2_background": _D334[1],
         "certificate": {
             "kind": "Refutation",
   "comment": (

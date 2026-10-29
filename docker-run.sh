@@ -17,20 +17,16 @@ V=vocabularies
 
 uv run generators/build_dpv.py \
   --purposes $V/dpv-2.3/modules/purposes.ttl \
-  --retrieved 2026-08-19 --out problems \
-  --declare-distinct Marketing ScientificResearch \
-                     ResearchAndDevelopment Advertising >/dev/null \
+  --retrieved 2026-08-19 --out problems >/dev/null \
   && echo "  purposes"
 
 uv run generators/build_dpvloc.py \
   --loc $V/dpv-2.3/loc/loc.ttl \
-  --retrieved 2026-08-19 --out problems \
-  --declare-distinct DE FR >/dev/null && echo "  locations"
+  --retrieved 2026-08-19 --out problems >/dev/null && echo "  locations"
 
 uv run generators/build_consent.py \
   --module $V/dpv-2.3/modules/consent_status.ttl \
-  --retrieved 2026-08-19 --out problems \
-  --declare-distinct ConsentGiven ConsentWithdrawn >/dev/null \
+  --retrieved 2026-08-19 --out problems >/dev/null \
   && echo "  consent"
 
 uv run generators/build_tom.py \
@@ -45,8 +41,7 @@ uv run generators/build_gdprlb.py \
 
 uv run generators/build_filetype.py \
   --table $V/eu-file-type-20260715/filetypes-skos-ap-act.rdf \
-  --retrieved 2026-08-18 --out problems \
-  --declare-distinct PDF PDFA1A >/dev/null && echo "  file type"
+  --retrieved 2026-08-18 --out problems >/dev/null && echo "  file type"
 
 echo
 echo "=== 2. problems"

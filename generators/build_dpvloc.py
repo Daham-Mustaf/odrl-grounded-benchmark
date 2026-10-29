@@ -114,8 +114,12 @@ suite.  Resolve this before publishing the artefact.
 
 import argparse
 import hashlib
+import json
 import sys
+import textwrap
 from pathlib import Path
+
+import declarations
 
 try:
     from rdflib import Graph, Namespace, URIRef, RDF, OWL, SKOS
@@ -453,20 +457,41 @@ def background_ttl(meta) -> str:
 """
 
 
-def iso_ttl(reps, multi, meta) -> str:
+def excluded_text(excluded) -> str:
+    """The sentence that names the second codes left out of the ISO set."""
+    subs = sorted(c for cs in excluded.values() for c in cs)
+    pairs = ", ".join(f"{cc} and {c}" for cc, cs in sorted(excluded.items())
+                      for c in cs)
+    names = (", ".join(subs[:-1]) + " and " + subs[-1]) if len(subs) > 1 else subs[0]
+    return (f"Not listed: {names}. DPV Locations lists each of these areas "
+            f"under two codes ({pairs}) with no identity statement, so "
+            f"listing both codes would declare one area distinct from itself.")
+
+
+def iso_ttl(reps, excluded, multi, meta) -> str:
     """Declarations generated from the ISO 3166 one-code-per-area rule.
 
-    ISO 3166 assigns one code to an area, so two country codes name two
-    areas.  That licenses pairwise distinctness, and the rule is the
-    parties', not the extension's: the file states no distinctness anywhere.
+    ISO 3166 assigns one code to an area, so two codes name two areas.  That
+    licenses pairwise distinctness over the areas the extension lists,
+    countries and subdivisions alike, and the rule is the parties', not the
+    extension's: the file states no distinctness anywhere.
 
     The quotient matters.  The extension also records that some places carry
     two codes, TF and FR-TF, and those are one area with two names.
     Distinctness therefore separates equivalence classes under the identity
     pairs and not codes, or the declarations would contradict the identity
     statements and every verdict over it would be vacuous.
+
+    Two areas the extension lists under two codes without identifying them
+    are left out, by their subdivision code.  The members are written as an
+    owl:AllDifferent, and the axioms are written from what is read back.
     """
     n = len(reps)
+    listing = "\n".join(
+        "            " + " ".join(f"loc:{r}" for r in reps[i:i + 6])
+        for i in range(0, n, 6))
+    note = excluded_text(excluded)
+    note_comment = "\n".join("# " + l for l in textwrap.wrap(note, 72))
     return f"""\
 # Declarations for the DPV Locations resource: ISO distinctness.
 #
@@ -479,12 +504,18 @@ def iso_ttl(reps, multi, meta) -> str:
 # records {multi} places under two codes, a country code and a
 # subdivision code for the same area, and those pairs are identified rather
 # than separated.  Distinctness is asserted between the classes those
-# identities induce.
+# identities induce, and the members below name one class each, by its
+# country code where it has one.
+#
+{note_comment}
 #
 # Classes: {n}
+# Pairs  : {n * (n - 1) // 2}
 # Source : {meta['source_iri']}
 
+@prefix loc:     <https://w3id.org/dpv/loc#> .
 @prefix bind:    <https://w3id.org/odrl-kb/binding#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 
 <https://w3id.org/odrl-kb/dpv-loc/iso> a bind:Declarations ;
@@ -493,38 +524,13 @@ def iso_ttl(reps, multi, meta) -> str:
                  <https://w3id.org/odrl-kb/dpv-loc-juris> ;
     bind:generatedBy bind:PairwiseDistinctness ;
     bind:origin bind:practiceRule ;
-    bind:scopeCondition "Distinctness holds between equivalence classes under the extension's identity statements, not between codes; codes the extension identifies name one area."@en .
-"""
-
-
-def declared_ttl(pair, meta) -> str:
-    a, b = pair
-    return f"""\
-# Declarations for the DPV Locations resource: one distinctness.
-#
-# The parties declare that these two places are different.  The extension
-# does not: it lists both and separates them in no way.  A verdict resting
-# on this statement is the parties' and can be reopened by withdrawing it.
-#
-# Source: {meta['source_iri']}
-
-@prefix loc:     <https://w3id.org/dpv/loc#> .
-@prefix bind:    <https://w3id.org/odrl-kb/binding#> .
-@prefix owl:     <http://www.w3.org/2002/07/owl#> .
-@prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
-
-<https://w3id.org/odrl-kb/dpv-loc/declared> a bind:Declarations ;
-    dcterms:title "One declared distinctness"@en ;
-    bind:appliesTo <https://w3id.org/odrl-kb/dpv-loc-geo>,
-                 <https://w3id.org/odrl-kb/dpv-loc-juris> ;
-    bind:generatedBy bind:PartyDeclaration ;
-    bind:origin bind:practiceRule ;
-    rdfs:comment "The origin rests on ISO 3166-1."@en ;
-    bind:pairCount 1 ;
+    bind:scopeCondition "Distinctness holds between equivalence classes under the extension's identity statements, not between codes; codes the extension identifies name one area. {note}"@en ;
+    bind:pairCount {n * (n - 1) // 2} ;
     bind:states [
         a owl:AllDifferent ;
-        owl:members ( loc:{a} loc:{b} )
+        owl:members (
+{listing}
+        )
     ] .
 """
 
@@ -570,14 +576,14 @@ def axioms(order, ident, meta, mode) -> str:
     return "\n".join(lines)
 
 
-def iso_axioms(reps) -> str:
+def iso_axioms(reps, excluded) -> str:
     """The registry rule, stated but not instantiated.
 
-    The rule licenses pairwise distinctness over 249 areas, which is 30876
-    inequations.  Instantiating all of them in every problem would bury the
-    one statement a refutation actually uses, and TPTP's $distinct is a
-    typed-language construct that a first-order prover reads as an ordinary
-    predicate, constraining nothing.
+    The rule licenses pairwise distinctness over every area, which is
+    millions of inequations.  Instantiating all of them in every problem
+    would bury the one statement a refutation actually uses, and TPTP's
+    $distinct is a typed-language construct that a first-order prover reads
+    as an ordinary predicate, constraining nothing.
 
     So the file states the rule, lists the areas it ranges over, and leaves
     the instances to the problems.  A problem naming two areas carries the
@@ -589,6 +595,7 @@ def iso_axioms(reps) -> str:
     """
     listing = "\n".join(
         "% " + ", ".join(reps[i:i + 12]) for i in range(0, len(reps), 12))
+    note = "\n".join("% " + l for l in textwrap.wrap(excluded_text(excluded), 66))
     return (
         "% Declarations: the ISO 3166 distinctness rule.\n"
         "%\n"
@@ -603,12 +610,15 @@ def iso_axioms(reps) -> str:
         "% code; a rule applied to the codes would contradict the identity\n"
         "% the extension publishes.\n"
         "%\n"
+        f"{note}\n"
+        "%\n"
         "% The rule is stated here and instantiated by the problems.  A\n"
         "% problem naming two of the areas below carries the inequation\n"
         "% between them as a bg_dist_ statement, so that a refutation cites\n"
         "% the instance it used.\n"
         "%\n"
         f"% Areas: {len(reps)}\n"
+        f"% Pairs: {len(reps) * (len(reps) - 1) // 2}\n"
         "%\n"
         f"{listing}\n"
     )
@@ -688,10 +698,6 @@ def main() -> int:
                     help="which published relations the resource reads: "
                          "containment only, containment with union "
                          "membership, or emit both readings")
-    ap.add_argument("--declare-distinct", nargs=2, metavar=("A", "B"),
-                    default=None,
-                    help="also emit a set of declarations declaring two places "
-                         "distinct, for the stability pair")
     ap.add_argument("--retrieved", required=True,
                     help="the date this snapshot of loc.ttl was fetched, "
                          "ISO 8601; recorded in the resource and not "
@@ -785,22 +791,35 @@ def main() -> int:
     # identifies name one area, so the rule is applied to the quotient.
     cls = classes(concepts, ident, kinds)
     multi = sum(1 for v in cls.values() if len(v) > 1)
-    reps = sorted(k for k, v in cls.items()
-                  if any(kinds.get(c) == "Country" for c in v))
-    (args.out / "background" / "dpvloc-iso.ttl").write_text(
-        iso_ttl(reps, multi, meta), encoding="utf-8")
+    # Every class is an area: the countries and the subdivisions.  The
+    # second codes DPV Locations lists without an identity statement are
+    # named in dpvloc-double-coded.json and left out by their subdivision code.
+    double = json.loads((args.out / "background" / "dpvloc-double-coded.json")
+                        .read_text(encoding="utf-8"))
+    excluded = double["excluded"]
+    left_out = {c for cs in excluded.values() for c in cs}
+    reps = sorted(k for k in cls if k not in left_out)
+    iso = args.out / "background" / "dpvloc-iso.ttl"
+    iso.write_text(iso_ttl(reps, excluded, multi, meta), encoding="utf-8")
+    # The axioms are written from the RDF that was just written.
+    areas = [local(m) for m in declarations.load(iso).members]
     (args.out / "axioms" / "LOC-dpvloc-iso.ax").write_text(
-        iso_axioms(reps), encoding="utf-8")
+        iso_axioms(areas, excluded), encoding="utf-8")
 
-    if args.declare_distinct:
-        a, b = args.declare_distinct
+    # The declarations are RDF a person wrote; the axioms follow from it.
+    declared = args.out / "background" / "dpvloc-declared.ttl"
+    if declared.exists():
+        decl = declarations.load(declared)
+        if len(decl.members) != 2:
+            print(f"{declared}: one distinctness is a list of two members",
+                  file=sys.stderr)
+            return 1
+        a, b = (local(m) for m in decl.members)
         missing = [x for x in (a, b) if x not in concepts]
         if missing:
             print(f"not in the locations scheme: {', '.join(missing)}",
                   file=sys.stderr)
             return 1
-        (args.out / "background" / "dpvloc-declared.ttl").write_text(
-            declared_ttl((a, b), meta), encoding="utf-8")
         (args.out / "axioms" / "LOC-dpvloc-declared.ax").write_text(
             declared_axioms((a, b)), encoding="utf-8")
 
@@ -812,8 +831,8 @@ def main() -> int:
     print(f"longest chain, with unions  : {hops_j} hops"
           + (f" ({' < '.join(witness_j)})" if witness_j else ""))
     print(f"identity predicate          : {meta['identity_predicate']}")
-    print(f"ISO areas (identity classes): {len(reps)} of "
-          f"{sum(1 for c in concepts if kinds.get(c) == 'Country')} country codes")
+    print(f"ISO areas (identity classes): {len(reps)} of {len(cls)}, "
+          f"{len(left_out)} second codes left out")
 
     print("\nskos:broader, partitioned by what the object is:")
     print(f"  {len(containment):6}  containment   read by both readings")

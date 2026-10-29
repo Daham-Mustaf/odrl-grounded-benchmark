@@ -8,14 +8,19 @@
 
 @prefix ft:      <http://publications.europa.eu/resource/authority/file-type/> .
 @prefix bind:    <https://w3id.org/odrl-kb/binding#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 
 <https://w3id.org/odrl-kb/eu-file-type/declared> a bind:Declarations ;
     dcterms:title "One declared distinctness"@en ;
     bind:appliesTo <https://w3id.org/odrl-kb/eu-file-type> ;
-    bind:generatedBy bind:PartyDeclaration ;
+    bind:generatedBy bind:PairwiseDistinctness ;
     bind:origin bind:practiceRule ;
     rdfs:comment "The origin rests on the file-type authority's separate entries."@en ;
-    bind:pairCount 1 .
+    bind:pairCount 1 ;
+    bind:states [
+        a owl:AllDifferent ;
+        owl:members ( ft:PDF ft:PDFA1A )
+    ] .
 
