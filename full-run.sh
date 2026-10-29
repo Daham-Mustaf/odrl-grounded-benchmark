@@ -97,6 +97,7 @@ fi
 hdr "5. bindings: do the probes hold"
 uv run generators/validate_bindings.py --probes probes \
   --axioms problems/axioms 2>&1 | tail -5
+[ "${PIPESTATUS[0]}" -eq 0 ] || { echo "FAILED: a binding probe does not hold" >&2; FAILED=1; }
 
 # --- 6. verdicts -------------------------------------------------------
 hdr "6. verdicts"

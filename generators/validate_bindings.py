@@ -65,6 +65,11 @@ _ASSERTION = re.compile(
     re.S)
 
 
+# A set of declarations stated as a rule lists its members after the line
+# "% Pairs : N"; the problems that adopt it carry the statements.
+_RULE_LISTING = re.compile(r"^% Pairs\s*: \d+$", re.M)
+
+
 def load_axioms(includes, axioms_dir: Path):
     """Edges, distinct pairs, and every constant of the included files."""
     edges, distinct, constants = [], set(), set()
@@ -72,7 +77,13 @@ def load_axioms(includes, axioms_dir: Path):
         path = axioms_dir / name
         if not path.exists():
             raise SystemExit(f"included axiom file missing: {path}")
-        for m in _ASSERTION.finditer(path.read_text(encoding="utf-8")):
+        text = path.read_text(encoding="utf-8")
+        rule = _RULE_LISTING.search(text)
+        if rule:
+            constants.update(t.strip() for line in text[rule.end():].splitlines()
+                             if line.startswith("% ")
+                             for t in line[2:].split(",") if t.strip())
+        for m in _ASSERTION.finditer(text):
             if m.group(2):
                 edges.append((m.group(2), m.group(3)))
                 constants.update((m.group(2), m.group(3)))
@@ -124,6 +135,11 @@ def run_probe(probe: dict, axioms_dir: Path):
                    f"{a} != {b} NOT declared: declarations file missing "
                    f"from includes, or the pair outside the declarations' "
                    f"member set")
+    for a, b in probe.get("not_distinct", ()):
+        ok = frozenset((a, b)) not in distinct
+        yield ok, (f"{a} != {b} not stated, as intended" if ok else
+                   f"{a} != {b} IS stated: the rule has been expanded in "
+                   f"the included files")
     for c in probe.get("present", ()):
         ok = c in constants
         yield ok, (f"{c} present" if ok else

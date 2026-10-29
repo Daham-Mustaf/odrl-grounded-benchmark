@@ -20,8 +20,11 @@ include('axioms/EUFT-filetype.ax').
 include('axioms/EUFT-filetype-declared.ax').
 
 % --- constants, groundings and resource hooks ----------------------------
-% Declarations: one declared distinctness, from
-% EUFT-filetype-declared.ax.  The table separates nothing itself.
+% Declarations: declared distinctness instances, stated in
+% the declarations file and instantiated here.
+
+fof(bg_dist_ft_pdf_distinct_ft_pdfa1a, axiom,
+    ft_pdf != ft_pdfa1a).
 
 % --- witness condition asserted ------------------------------------------
 fof(w_kgc321, axiom,

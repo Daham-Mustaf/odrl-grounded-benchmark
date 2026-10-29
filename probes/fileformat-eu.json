@@ -1,6 +1,6 @@
 {
   "binding": "fileformat-eu",
-  "note": "The EU file type table at nom. The authority publishes 228 formats and relates none of them, so the resource file has no statements at all and every constant is unrelated to every other. This probe is what makes that measurable: a build that started reading dcterms:isReplacedBy as an order would fail on the not_leq lines.",
+  "note": "The EU file type table at nom. The authority publishes 228 formats and relates none of them, so the resource file has no statements at all and every constant is unrelated to every other. This probe is what makes that measurable: a build that started reading dcterms:isReplacedBy as an order would fail on the not_leq lines. The declared distinctness is stated as a rule in its axiom file, which lists the formats it covers, and is instantiated by the problems that adopt it, so no inequation between two formats appears in the included files.",
   "includes": [
     "EUFT-filetype.ax",
     "EUFT-filetype-declared.ax"
@@ -9,7 +9,7 @@
     "ft_pdf",
     "ft_pdfa1a"
   ],
-  "distinct": [
+  "not_distinct": [
     [
       "ft_pdf",
       "ft_pdfa1a"

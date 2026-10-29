@@ -3,7 +3,7 @@ check_certificates.py
 =====================
 Independently verify Vampire refutations for the suite, step by step.
 
-    uv run generators/check_certificates.py --problem KGC330
+    uv run generators/check_certificates.py --problem KGC331
     uv run generators/check_certificates.py
     uv run generators/check_certificates.py --no-avatar --json report.json
 

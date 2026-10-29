@@ -10,7 +10,7 @@ KGC303-304   spatial: exactly one of two alternatives, over GeoNames
 KGC308-309   spatial: one country within another, over GeoNames
 KGC310-319   purpose, over DPV purposes
 KGC320-323   fileFormat, over the EU file type table
-KGC330-337   spatial, over DPV Locations
+KGC331-337   spatial, over DPV Locations
 KGC340-343   consent status, over the DPV consent module
 KGC348-349   consent status, under declared distinctness
 KGC360-366   technical and organisational measures
@@ -67,8 +67,8 @@ rest about the case.
   the catalogue does not show.
 - Every declaration set has an origin and covers the whole part of the
   vocabulary it applies to. Where a set ranges over a vocabulary, it lists
-  all of it, and `check_declarations.py` fails a set that leaves a concept
-  out.
+  all of it, less what the set names as left out, and
+  `check_declarations.py` fails a set that leaves a concept out.
 - Case IDs are never reused. An ID that appears anywhere in the git history,
   in any earlier layout, is taken: `git log --all --oneline --
   cases/KGC<id>.ttl` must be empty and `git log --all -p | grep -c KGC<id>`
@@ -80,12 +80,14 @@ holds the grid: each of the 24 cells of operator by kind of value has a
 verdict case where that kind of value admits the operator and a rejection
 where it does not, and `or` and `xone` each appear for every kind of value.
 
-Retired (IDs never reused, recoverable from tags pre-retire, pre-purpose and pre-review)
+Retired (IDs never reused, recoverable from tags pre-retire, pre-purpose, pre-review and pre-final)
 
 ```
 KGC305   spatial: xone(isPartOf France, isPartOf Germany) against eq France, countries distinct
 KGC306   the same, France and Germany declared disjoint
 KGC307   spatial: xone(eq France, isAllOf (France Germany)) against eq France
+KGC311   purpose: isA Purpose against eq NonCommercialResearch
+KGC330   spatial: isPartOf Netherlands against eq Bonaire
 KGC350   legal basis: isAnyOf the seven Article 6(1) bases against eq consent
 KGC351   the same against eq explicit consent under Article 6(1)(a)
 KGC352   the same with explicit consent declared distinct from the seven
@@ -93,6 +95,8 @@ KGC353   legal basis: isA the legal-basis root against eq explicit consent
 KGC361   measures: isAllOf(encryption, access control) against isNoneOf(access control)
 KGC384   spatial: eq NRW against eq Bavaria, Laender not separated
 KGC385   the same pair under the ISO 3166-2 rule
+KGC386   spatial: isNoneOf {Bavaria, Berlin} against eq Hamburg, Laender not separated
+KGC387   the same pair under the ISO 3166-2 rule
 KGC389   spatial: xone(eq NRW, eq Bavaria) against eq NRW
 KGC390   the same pair under the ISO 3166-2 rule
 ```

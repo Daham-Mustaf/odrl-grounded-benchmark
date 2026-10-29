@@ -4,7 +4,7 @@ survey_proofs.py
 Which inference rules the suite's refutations actually use.
 
     uv run generators/survey_proofs.py
-    uv run generators/survey_proofs.py --problem KGC330 --show
+    uv run generators/survey_proofs.py --problem KGC331 --show
 
 Why measure before building
 ---------------------------

@@ -62,8 +62,18 @@ MEANING = {
     "Unknown": "It depends on something the vocabulary leaves open, and the reason names it.",
     "Rejected": "The policy uses an operator that does not apply to this kind of value, "
                 "or a value that names no entry of the vocabulary.",
+    "Accepted": "A control. The condition fits this kind of value, and the policy goes "
+                "on to a verdict.",
 }
-VERDICT = {name: (name.lower(), text) for name, text in MEANING.items() if name != "Rejected"}
+VERDICT = {name: (name.lower(), text) for name, text in MEANING.items()
+           if name not in ("Rejected", "Accepted")}
+# How the cases are read, whatever the verdict.
+READING = (
+    "Every use has at least one value for each condition, for example at least one language.",
+    "If each of two values lies below the other, they are the same value.",
+    "For places, 'Use in France only' means the place given for the use is France itself, "
+    "not a place within France.",
+)
 
 
 # The text rules the case files obey (lint_cases.py) hold for the lesson too,
@@ -354,8 +364,11 @@ def page(cases: dict, lesson: dict, blind: bool) -> tuple:
              '<p class="note">A verdict is relative to how the vocabulary is read and to the '
              'declarations in force.</p>',
              "<ul class=\"note\">"
-             + "".join(f"<li><b>{name}</b>: {text[:1].lower() + text[1:] if name == 'Rejected' else text}</li>"
+             + "".join(f"<li><b>{name}</b>: {text[:1].lower() + text[1:] if name in ('Rejected', 'Accepted') else text}</li>"
                        for name, text in MEANING.items())
+             + "</ul>",
+             "<ul class=\"note\">"
+             + "".join(f"<li>{html.escape(text, quote=False)}</li>" for text in READING)
              + "</ul>",
              "<nav><ul>"]
     for f in families:

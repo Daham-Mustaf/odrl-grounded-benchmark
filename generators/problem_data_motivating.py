@@ -75,7 +75,9 @@ PROBLEMS = [
             "hold together only if German and French are one language. The "
             "declared registry rule, that different primary language "
             "subtags name different languages, makes them two, so no use "
-            "satisfies both."),
+            "satisfies both. The language of a use is the language of what "
+            "the user publishes from the manuscripts, such as "
+            "transcriptions or translations."),
         "maintainer_note": (
             "The refutation cites the one distinctness instance. The "
             "witness fails in every structure."),

@@ -158,7 +158,9 @@ PROBLEMS = [
              "A policy that gives a purpose relies on DPV, which arranges "
              "purposes as kinds.  isPartOf asks whether one value is part of "
              "another.  The operator does not apply to this kind of value, "
-             "and the policy is rejected before DPV is opened.",
+             "and the policy is rejected before DPV is opened.  A drafter who "
+             "means non-commercial purposes or any narrower purpose writes isA "
+             "with non-commercial purpose.",
              "A German library's policy uses isPartOf with non-commercial "
              "purposes, a purpose in DPV.",
              "isPartOf asks whether one value is part of another.  DPV only "
@@ -169,7 +171,10 @@ PROBLEMS = [
              "A policy that gives a purpose relies on DPV, which arranges "
              "purposes as kinds.  hasPart asks whether one value has another "
              "as a part.  The operator does not apply to this kind of value, "
-             "and the policy is rejected before DPV is opened.",
+             "and the policy is rejected before DPV is opened.  A drafter who "
+             "means a purpose that includes non-commercial research among the "
+             "purposes of the use writes isAllOf with the single value "
+             "non-commercial research.",
              "A German library's policy uses hasPart with non-commercial "
              "research, a purpose in DPV.",
              "hasPart asks whether one value has another as a part.  DPV "
@@ -181,7 +186,8 @@ PROBLEMS = [
              "For the fifteen languages used here the registry states no "
              "order, and this reading takes languages as names only.  isA asks whether one value is a kind of another.  "
              "The operator does not apply, and the policy is rejected before "
-             "the registry is opened.",
+             "the registry is opened.  A drafter who means German writes eq "
+             "German.",
              "A German library's policy uses isA with German, a language in "
              "the IANA registry.",
              "isA asks whether one value is a kind of another.  This reading takes languages as names only: none of the fifteen languages used here belongs to a larger language in the IANA registry (RFC 5646), and the reading takes no order from the registry, so the operator does not apply to this kind of value."),
@@ -191,7 +197,8 @@ PROBLEMS = [
              "For the fifteen languages used here the registry states no "
              "order, and this reading takes languages as names only.  isPartOf asks whether one value is part of another.  "
              "The operator does not apply, and the policy is rejected before "
-             "the registry is opened.",
+             "the registry is opened.  A drafter who means German writes eq "
+             "German.",
              "A German library's policy uses isPartOf with German, a language in "
              "the IANA registry.",
              "isPartOf asks whether one value is part of another.  This reading takes languages as names only: none of the fifteen languages used here belongs to a larger language in the IANA registry (RFC 5646), and the reading takes no order from the registry, so the operator does not apply to this kind of value."),

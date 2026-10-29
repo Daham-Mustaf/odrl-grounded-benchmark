@@ -12,9 +12,9 @@ D1  1 hop(s):  isA ResearchAndDevelopment  against  ScientificResearch
   One edge.  DPV places scientific research directly below research and development.
 ==============================================================================
 D2  2 hop(s):  isA Purpose  against  NonCommercialResearch
-  ours   : Compatible, two premises and transitivity (KGC311)
+  ours   : Compatible, two premises and transitivity (KGC311 at tag pre-final)
   theirs : Unsatisfied
-  Two edges, through non-commercial purpose.  The first case whose refutation on our side needs the transitivity axiom.
+  Two edges, through non-commercial purpose.  The first case whose refutation on our side needs the transitivity axiom.  Recorded against tag pre-final; KGC311 is retired.
 ==============================================================================
 D6  6 hop(s):  isA Purpose  against  RecruitmentInterviewScheduling
   ours   : Compatible, six premises and transitivity (KGC315 at tag pre-review)

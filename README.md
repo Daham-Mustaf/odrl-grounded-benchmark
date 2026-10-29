@@ -109,7 +109,7 @@ KGC303-304   spatial: exactly one of two alternatives, over GeoNames
 KGC308-309   spatial: one country within another, over GeoNames
 KGC310-319   purpose, over DPV purposes, in a mobility data space
 KGC320-323   fileFormat, over the EU file type table
-KGC330-337   spatial, over DPV Locations
+KGC331-337   spatial, over DPV Locations
 KGC340-343   consent status, over the DPV consent module
 KGC348-349   consent status, under declared distinctness
 KGC360-366   technical and organisational measures

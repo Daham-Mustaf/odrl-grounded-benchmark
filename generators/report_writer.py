@@ -12,10 +12,10 @@ A problem produces three things, and they answer three different questions.
 Keeping them in three files with one identifier is what lets a reader follow
 the chain without reading the pipeline.
 
-    cases/KGC330.ttl                     what was compared
-    reports/KGC330-report.ttl            what the answer is
-    certificates/KGC330-certificate.ttl  why the answer holds
-    certificates/KGC330-2.tstp           the prover's own output
+    cases/KGC331.ttl                     what was compared
+    reports/KGC331-report.ttl            what the answer is
+    certificates/KGC331-certificate.ttl  why the answer holds
+    certificates/KGC331-2.tstp           the prover's own output
 
 The case is the input: an offer, a request, and the profile binding the
 operand.  It is written by the problem generator and is not this module's

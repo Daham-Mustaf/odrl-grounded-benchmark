@@ -6,7 +6,7 @@ compares what the two refutations rest on, and writes the observed
 certificate beside the expected one.
 
     uv run generators/run_certify.py
-    uv run generators/run_certify.py --problem KGC311
+    uv run generators/run_certify.py --problem KGC310
     uv run generators/run_certify.py --prover vampire     # one only
 """
 import argparse

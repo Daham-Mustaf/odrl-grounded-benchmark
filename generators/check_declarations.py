@@ -34,7 +34,7 @@ import unicodedata
 from pathlib import Path
 
 from rdflib import Graph, RDF, RDFS, URIRef
-from rdflib.namespace import DCTERMS
+from rdflib.namespace import DCTERMS, OWL
 
 sys.path.insert(0, str(Path(__file__).parent))
 import declarations as D
@@ -54,7 +54,8 @@ SETS = {
                                      noun="Purposes", token="local"),
     "dpvloc-iso":               dict(ax="LOC-dpvloc-iso.ax", form="rule",
                                      noun="Areas", token="local"),
-    "filetype-declared":        dict(ax="EUFT-filetype-declared.ax", form="expanded",
+    "filetype-declared":        dict(ax="EUFT-filetype-declared.ax", form="rule",
+                                     noun="Formats", token="constant",
                                      label="const-distinct"),
     "geonames-europe-declared": dict(ax=None, form="inline"),
     "geonames-europe-siblings": dict(ax=None, form="inline"),
@@ -63,7 +64,7 @@ SETS = {
 }
 # Sets whose members are the whole resource, less what the set names as left out.
 WHOLE = {"consent-declared", "dpv-purposes-declared", "tom-declared",
-         "geonames-europe-declared"}
+         "geonames-europe-declared", "filetype-declared"}
 RULES = {"PairwiseDistinctness", "PairwiseDisjointness", "PublishedDefinition"}
 
 fails = []
@@ -207,16 +208,29 @@ def main() -> int:
             fail(n, "states disjointness and names a distinctness rule")
 
         # 2. the resource
-        ids, _ = resource(d.applies_to[0])
+        ids, rg = resource(d.applies_to[0])
         for m in d.members + [x for p in d.disjoint for x in p]:
             if m not in ids:
                 fail(n, f"{m} is not a concept of {d.applies_to[0]}")
         if n in WHOLE:
+            # What the resource marks as deprecated is left out, and the scope
+            # condition has to say so.
+            left_out = {str(i) for s in rg.subjects(OWL.deprecated, None)
+                        if str(next(rg.objects(s, OWL.deprecated))).lower() == "true"
+                        for i in rg.objects(s, DCTERMS.identifier)}
             missing = sorted(i for i in ids if i.startswith("http") and i not in set(d.members)
+                             and i not in left_out
                              and any(i.startswith(s) for s in ("https://w3id.org/dpv",
-                                                               "https://sws.geonames.org/")))
+                                                               "https://sws.geonames.org/",
+                                                               "http://publications.europa.eu/resource/authority/file-type/")))
             if missing:
                 fail(n, f"the set ranges over the whole resource and omits {len(missing)} concepts, e.g. {missing[:2]}")
+            if n == "filetype-declared":
+                for i in sorted(left_out & set(d.members)):
+                    fail(n, f"{i} is deprecated in the resource and is a member")
+                for i in sorted(left_out):
+                    if D._local(i) in {D._local(x) for x in ids} and D._local(i) not in d.scope:
+                        fail(n, f"the scope condition does not name {D._local(i)}, which is left out")
 
         # 2b. GeoNames: the siblings are every pair with the same parent
         if n == "geonames-europe-siblings":

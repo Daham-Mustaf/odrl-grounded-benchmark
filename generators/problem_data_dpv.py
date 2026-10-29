@@ -136,7 +136,6 @@ transport authority, a company or a university research group.
 The order-based eleven, one per thing that can go wrong:
 
     KGC310  isA R&D      x eq SR    -> Compatible    one resource premise
-    KGC311  isA Purpose  x eq NCR   -> Compatible    two premises + transitivity
     KGC313  eq Marketing x eq SR    -> Unknown       nothing declares them apart
     KGC314  the same pair under declarations that do -> Incompatible
     KGC315  isA Purpose  x eq RIS   -> Compatible    six premises + transitivity
@@ -265,107 +264,6 @@ kgc:KGC310-p2-c1 a odrl:Constraint ;
     odrl:leftOperand dpv-odrl:Purpose ;
     odrl:operator odrl:eq ;
     odrl:rightOperand dpv:ScientificResearch .""",
-    },
-
-    # -----------------------------------------------------------------
-    # KGC311  Two hops.  The first problem in the suite whose refutation
-    # needs transitivity: the resource asserts neither ncr <= purpose nor
-    # anything equivalent, only the two steps.
-    # -----------------------------------------------------------------
-    {
-        "id":                "KGC311",
-        "subdir":            "verdict",
-        "name":              "purpose, isA dpv:Purpose against eq dpv:NCR",
-        "left_operand":      "purpose",
-        "sort":              "tax",
-        "resource":          RESOURCE,
-        "background_theory": EMPTY_BT,
-        "includes":          INCLUDES,
-        "tree": [C("isA", PUR), C("eq", NCR, side="request")],
-         "binding": BINDING,
-        "summary": (
-            "A city's traffic data platform permits use for any DPV "
-            "purpose. A university commits to use for non-commercial "
-            "research."),
-            "description": (
-                "DPV places non-commercial research below research and "
-                "development and below non-commercial purpose, and both "
-                "below Purpose, so a use for non-commercial research is a "
-                "use for a DPV purpose by either route. The first policy is "
-                "an open licence: an open-data platform states, as open "
-                "licences do, that the data may be used for any purpose, "
-                "and it restricts nothing."),
-            "maintainer_note": (
-                "The refutation uses the ResearchAndDevelopment path or the "
-                "NonCommercialPurpose path, plus transitivity. Both parents "
-                "lie one step below Purpose; which path the prover takes is "
-                "its own affair."),
-
-        "fof_decls": """\
-% Declarations: empty, as above.
-""",
-
-        "expected_q1": "Satisfiable",
-        "expected_q2": "Unsatisfiable",
-
-        "smt2_logic": "UF",
- "certificate": {
-            "kind": "Refutation",
-            "comment": (
-                "DPV places non-commercial research below research and "
-                "development and below non-commercial purpose, and places "
-                "both below Purpose, so a use for non-commercial research "
-                "is a use for a DPV purpose by either route."),
-            "premises": [
-                ("fromResource",
-                 "dpv:NonCommercialResearch is below "
-                 "dpv:ResearchAndDevelopment"),
-                ("fromResource",
-                 "dpv:ResearchAndDevelopment is below dpv:Purpose"),
-                ("fromOrderAxiom", "transitivity"),
-            ],
-        },
-        "ttl": f"""\
-@prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
-@prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix dpv:     <https://w3id.org/dpv#> .
-@prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> .
-@prefix drk:     <https://w3id.org/odrl-kb/drk/> .
-@prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
-
-drk:policy-311-1 a odrl:Set ;
-    odrl:uid drk:policy-311-1 ;
-    odrl:profile dpv-odrl: ;
-    dcterms:title "Use for any DPV purpose"@en ;
-    odrl:assigner drk:data-platform ;
-    odrl:permission kgc:KGC311-p1-r1 .
-
-kgc:KGC311-p1-r1 a odrl:Permission ;
-    odrl:action odrl:use ;
-    odrl:target drk:traffic-data ;
-    odrl:constraint kgc:KGC311-p1-c1 .
-
-kgc:KGC311-p1-c1 a odrl:Constraint ;
-    odrl:leftOperand dpv-odrl:Purpose ;
-    odrl:operator odrl:isA ;
-    odrl:rightOperand dpv:Purpose .
-
-drk:policy-311-2 a odrl:Set ;
-    odrl:uid drk:policy-311-2 ;
-    odrl:profile dpv-odrl: ;
-    dcterms:title "Use for non-commercial research only"@en ;
-    odrl:assignee drk:data-user ;
-    odrl:permission kgc:KGC311-p2-r1 .
-
-kgc:KGC311-p2-r1 a odrl:Permission ;
-    odrl:action odrl:use ;
-    odrl:target drk:traffic-data ;
-    odrl:constraint kgc:KGC311-p2-c1 .
-
-kgc:KGC311-p2-c1 a odrl:Constraint ;
-    odrl:leftOperand dpv-odrl:Purpose ;
-    odrl:operator odrl:eq ;
-    odrl:rightOperand dpv:NonCommercialResearch .""",
     },
 
     # -----------------------------------------------------------------
@@ -583,12 +481,10 @@ kgc:KGC314-p2-c1 a odrl:Constraint ;
             "DPV places delivery of goods four steps below Purpose, through "
             "RequestedServiceProvision, ServiceProvision and "
             "ServiceManagement. All four statements are published, so a use "
-            "for delivery of goods is a use for a DPV purpose. The first "
-            "policy is an open licence: an open-data platform states, as "
-            "open licences do, that the data may be used for any purpose, "
-            "and it restricts nothing. The case shows that the answer does "
-            "not change with depth. Compare KGC311, which reaches Purpose "
-            "by two routes and has the same verdict."),
+            "for delivery of goods is a use for a DPV purpose. An open-data "
+            "platform states, as open licences do, that the data may be "
+            "used for any purpose. The case shows that the answer does not "
+            "change with depth."),
         "maintainer_note": (
             "Four steps, so the refutation chains four statements and "
             "transitivity; what grows with depth is the proof, not the "
@@ -933,7 +829,8 @@ kgc:KGC317-p2-c1 a odrl:Constraint ;
             "for non-commercial research."),
         "description": (
             "Each use must fall under exactly one tier, commercial or "
-            "non-commercial. DPV places non-commercial research below "
+            "non-commercial, and each tier covers the purpose it names and "
+            "every narrower one. DPV places non-commercial research below "
             "non-commercial purpose, so the non-commercial tier applies. "
             "Exactly one tier may apply, so non-commercial research must "
             "not also lie below commercial purpose. DPV states no "
@@ -1078,7 +975,8 @@ kgc:KGC317-p2-c1 a odrl:Constraint ;
             "public benefit, and the verdict is Compatible on one published "
             "statement. Same intent as KGC393, opposite behaviour: this "
             "draft defers to the authority and covers purposes DPV adds "
-            "below the branch; KGC393's is fixed to two names."),
+            "below the branch; KGC393's is fixed to two names. In ODRL, or "
+            "does not admit a use that mixes both alternatives."),
         "certificate": {"kind": "Refutation",
             "comment": (
                 "DPV places improving transport mobility below public "

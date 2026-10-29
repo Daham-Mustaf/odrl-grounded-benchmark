@@ -34,7 +34,9 @@
  * The corresponding verdicts on our side are KGC310 at one hop, KGC311 at
  * two, and KGC315 at six.  All three are Compatible, and what grows with the
  * distance is the certificate: KGC310 cites one resource assertion, KGC311
- * two and an instance of transitivity, KGC315 six and transitivity.  If the
+ * two and an instance of transitivity, KGC315 six and transitivity.  KGC311
+ * has since been retired and the D2 row was recorded against it, at tag
+ * pre-final, where it still exists.  If the
  * evaluator refuses all of them alike, the two accounts differ in kind and
  * not in reach, and the certificates are the only thing that varies with
  * depth.
@@ -140,11 +142,12 @@ const cases = [
     {
         id: "D2",
         hops: 2,
-        ours: "Compatible, two premises and transitivity (KGC311)",
+        ours: "Compatible, two premises and transitivity (KGC311 at tag pre-final)",
         offered: "dpv:Purpose",
         requested: "dpv:NonCommercialResearch",
         note: "Two edges, through non-commercial purpose.  The first case " +
-              "whose refutation on our side needs the transitivity axiom.",
+              "whose refutation on our side needs the transitivity axiom.  " +
+              "Recorded against tag pre-final; KGC311 is retired.",
     },
     {
         id: "D6",

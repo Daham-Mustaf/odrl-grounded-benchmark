@@ -1,9 +1,8 @@
 """
 problem_data_dpvloc.py
 ======================
-Seven problems over the DPV Locations resource, at mer.
+Six problems over the DPV Locations resource, at mer.
 
-    KGC330  isPartOf NL x eq NL-BQ1 -> Compatible  one containment premise
     KGC331  isPartOf EU x eq DE   -> Compatible    under the jurisdictional
                                                    reading; not grounded at
                                                    all under the territorial
@@ -63,13 +62,6 @@ The witness condition
 ---------------------
 Every pair uses subset-mode operators, so W(K) is the finite disjunction
 over the concepts the grounding names.
-
-  KGC330  D = {x | x <= nl} and {bq},  named {nl, bq}
-          W = (nl <= nl & nl = bq) | (bq <= nl & bq = bq)
-          The extension places Bonaire under the Netherlands, so the second
-          disjunct holds in every model.  Compatible on one statement, and
-          the certificate needs no transitivity: the territorial order is two
-          levels deep and this is one step of it.
 
   KGC331  D = {x | x <= eu} and {de},  named {eu, de}
           W = (eu <= eu & eu = de) | (de <= eu & de = de)
@@ -243,7 +235,6 @@ _D334 = declarations.instances(
      "% term standing for twelve million."],
     ["; The instance of the registry rule this problem adopts, named as the TPTP",
      "; side names it so that a proof and an unsat core cite one statement."])
-_ISO_387 = _iso((DE_HH, DE_BY), (DE_HH, DE_BE))
 _ISO_DE_FR = _iso((DE, FR))
 _ISO_336 = _iso((DE_BY, DE), (DE_BY, FR))
 
@@ -286,59 +277,6 @@ kgc:{pid}-p2-c1 a odrl:Constraint ;
 
 PROBLEMS = [
 
- {
-        "id":                "KGC330",
-        "subdir":            "verdict",
-        "name":              "spatial, isPartOf loc:NL against eq loc:NL-BQ1",
-        "left_operand":      "spatial",
-        "sort":              "mer",
-        "resource":          GEO_RESOURCE,
-        "background_theory": EMPTY_BT,
-        "binding":           BINDING_GEO,
-        "includes":          INCLUDES_GEO,
-        "tree": [C("isPartOf", NL), C("eq", NL_BQ1, side="request")],
-        "summary": (
-            "A library permits use within the Netherlands; a researcher's "
-            "policy commits to use in Bonaire. DPV places Bonaire "
-            "within the Netherlands."
-        ),
-        "description": (
-            "A library permits use of its digitised manuscripts anywhere "
-            "within the Netherlands; a researcher's policy commits to use "
-            "them in Bonaire. The territorial reading places Bonaire, a "
-            "Caribbean special municipality, within the Netherlands by one "
-            "published edge. That is correct: Bonaire is Dutch territory, "
-            "though not in Europe and not EU territory (see KGC380)."),
-
-        "fof_decls": """\
-% Declarations: empty.  The extension asserts no disjointness between
-% places and no distinctness between the codes it lists.
-""",
-
-        "expected_q1": "Satisfiable",
-        "expected_q2": "Unsatisfiable",
-
-        "smt2_logic": "UF",
-        "smt2_background": "",
-
-        "certificate": {
-            "kind": "Refutation",
-            # What the resource publishes, and what follows. Becomes the
-            # report's rdfs:comment.
-            "comment": (
-                "DPV places Bonaire within the Netherlands by one published "
-                "edge, and ISO 3166-2 lists it among the Netherlands' "
-                "subdivisions. Bonaire is Dutch territory, though it lies "
-                "in the Caribbean, not in Europe. A use in Bonaire is a use "
-                "within the Netherlands, so both policies can be satisfied."),
-            "premises": [
-                ("fromResource", "loc:NL-BQ1 is within loc:NL"),
-            ],
-        },
-
-        "ttl": _ttl("KGC330", "Use within the Netherlands", "isPartOf", "NL",
-                    "Use in Bonaire only", "NL-BQ1"),
-    },
     # -----------------------------------------------------------------
     # KGC331  The pair the resource exists for.  Compatible under the
     # jurisdictional reading; not grounded at all under the territorial.
@@ -565,7 +503,8 @@ PROBLEMS = [
             "The ISO 3166 rule keeps Bavaria apart from Germany and from "
             "France, so no use meets both policies and the verdict is "
             "Incompatible. A drafter who meant Germany and its parts needs "
-            "isPartOf, as in KGC382. Without the rule Bavaria might be the "
+            "isPartOf, as in KGC382. The same pitfall in an exclusion is "
+            "KGC392. Without the rule Bavaria might be the "
             "same area as Germany, and the verdict would be Unknown."),
         "certificate": {"kind": "Refutation",
             "comment": (
@@ -666,7 +605,10 @@ PROBLEMS = [
             "North Rhine-Westphalia this gives the true answer; for "
             "Bonaire, an overseas territory outside the EU, it gives a "
             "false one. The error lies in the reading's choice, not in the "
-            "reasoning. KGC383 is the case where the same reading gives the "
+            "reasoning. The territorial reading places Bonaire within the "
+            "Netherlands, which is right (ISO 3166-2 lists Bonaire among the "
+            "Netherlands' subdivisions). KGC383 is the case where the same "
+            "reading gives the "
             "true answer."),
         "certificate": {"kind": "Refutation",
 "comment": (
@@ -797,73 +739,6 @@ PROBLEMS = [
                      [("eq", ["DE-NW"])]),
     },
     # -----------------------------------------------------------------
-    # KGC386 / KGC387  A complement settled positively by declaration.
-    # -----------------------------------------------------------------
-    {
-        "id": "KGC386", "subdir": "verdict",
-        "twin": "KGC387",
-        "name": "spatial, isNoneOf {loc:DE-BY, loc:DE-BE} against eq loc:DE-HH",
-        "left_operand": "spatial", "sort": "mer",
-        "resource": GEO_RESOURCE, "background_theory": EMPTY_BT,
-        "binding": BINDING_GEO, "includes": INCLUDES_GEO,
-        "tree": [C("isNoneOf", DE_BY, DE_BE), C("eq", DE_HH, side="request")],
-        "expected_verdict": "Unknown",
-        "expected_q1": "Satisfiable", "expected_q2": "Satisfiable",
-        "description": (
-            "Use anywhere except Bavaria and Berlin, against use in "
-            "Hamburg. Hamburg is outside both only if it differs from both, "
-            "and the file publishes no distinctness: Hamburg might be the "
-            "same area as Bavaria or Berlin. The verdict is Unknown."),
-        "summary": (
-            "A library permits use anywhere except Bavaria and Berlin, "
-            "where exclusive licences are already granted to other "
-            "libraries. A researcher's policy commits to use in Hamburg."),
-        "certificate": {"kind": "Models",
-            "comment": (
-                "DPV does not state that Hamburg differs from Bavaria or "
-                "Berlin. If it is a different area from both, a use in "
-                "Hamburg meets both policies; if it is the same area as one "
-                "of them, the first policy excludes it. So the verdict is "
-                "Unknown."),
-            "premises": []},
-        "provenance": "Exclusion clauses in regional licensing.",
-        "ttl": _ttl2("KGC386", "Use in any area except Bavaria and Berlin",
-                     [("isNoneOf", ["DE-BY", "DE-BE"])], "Use in Hamburg only",
-                     [("eq", ["DE-HH"])]),
-    },
-    {
-        "id": "KGC387", "subdir": "verdict",
-        "twin": "KGC386",
-        "name": "spatial, isNoneOf {loc:DE-BY, loc:DE-BE} against eq loc:DE-HH, "
-                "ISO rule",
-        "left_operand": "spatial", "sort": "mer",
-        "resource": GEO_RESOURCE, "background_theory": ISO_BT,
-        "binding": BINDING_GEO, "includes": INCLUDES_ISO,
-        "tree": [C("isNoneOf", DE_BY, DE_BE), C("eq", DE_HH, side="request")],
-        "fof_decls": _ISO_387[0], "smt2_background": _ISO_387[1],
-        "expected_verdict": "Compatible",
-        "expected_q1": "Satisfiable", "expected_q2": "Unsatisfiable",
-        "description": (
-            "KGC386 under the ISO rule: Hamburg is distinct from Bavaria "
-            "and from Berlin, so it is outside both and the verdict is "
-            "Compatible."),
-        "summary": (
-            "As KGC386, with the ISO 3166-2 rule."),
-        "certificate": {"kind": "Refutation",
-            "comment": (
-                "The declared ISO 3166 rule, that different codes name "
-                "different areas, makes Hamburg different from Bavaria and "
-                "from Berlin, so a use in Hamburg is not excluded."),
-            "premises": [("fromDeclarations",
-                          "loc:DE-HH distinct from loc:DE-BY"),
-                         ("fromDeclarations",
-                          "loc:DE-HH distinct from loc:DE-BE")]},
-        "provenance": "As KGC386; warrant ISO 3166-2.",
-        "ttl": _ttl2("KGC387", "Use in any area except Bavaria and Berlin",
-                     [("isNoneOf", ["DE-BY", "DE-BE"])], "Use in Hamburg only",
-                     [("eq", ["DE-HH"])]),
-    },
-    # -----------------------------------------------------------------
     # KGC388  or across two Laender: attribution must follow the branch.
     # -----------------------------------------------------------------
     {
@@ -881,7 +756,8 @@ PROBLEMS = [
             "Use within North Rhine-Westphalia or Bavaria, against use in "
             "North Rhine-Westphalia. The first alternative holds because "
             "every area lies within itself, so the verdict is Compatible "
-            "without any DPV statement."),
+            "without any DPV statement. In ODRL, or does not admit a use that "
+            "mixes both alternatives."),
         "maintainer_note": (
             "The refutation must cite the alternative it used, which tests "
             "that attribution follows the branch."),
@@ -964,7 +840,7 @@ PROBLEMS = [
             "and isNoneOf only asks whether the place is Germany itself. A "
             "drafter who means Germany and all its parts writes a "
             "prohibition with isPartOf Germany. The same pitfall over "
-            "purposes is KGC397."),
+            "a list of places is KGC336, and over purposes KGC397."),
         "summary": (
             "A library permits use anywhere except Germany. A researcher's "
             "policy commits to use in Bavaria, a state of Germany."),

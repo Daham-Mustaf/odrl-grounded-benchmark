@@ -225,6 +225,102 @@ def background_ttl(meta) -> str:
 """
 
 
+def declared_members(concepts, deprecated, replaced_by):
+    """The entries the declarations range over, and those they leave out.
+
+    As the language declarations leave out deprecated subtags and those with
+    a Preferred-Value link, the file type declarations leave out the entries
+    the table marks as deprecated and those it marks as replaced.
+    """
+    out = set(deprecated) | {a for a, _ in replaced_by}
+    return ([c for c in concepts if c not in out],
+            [c for c in concepts if c in out])
+
+
+def declared_ttl(members, left_out, meta) -> str:
+    """Every entry of the table declared different from every other, less
+    those left out.  Stated as a rule, for the reason the measures are:
+    n entries give n(n-1)/2 inequations, and a refutation should cite the
+    one it used."""
+    n = len(members)
+    pairs = n * (n - 1) // 2
+    listing = "\n".join(f"            <{FT}{m}>" for m in members)
+    names = ", ".join(left_out[:-1]) + f" and {left_out[-1]}"
+    return f"""\
+# Declarations for the EU File type resource: declared distinctness.
+#
+# Every entry of the table is declared different from every other, less the
+# {len(left_out)} the table marks as deprecated or replaced ({names}),
+# which the declarations leave out as the language declarations leave out
+# deprecated subtags.  The table lists each format as an entry of its own
+# and relates none to another, and it does not say that two entries are
+# different formats.  A verdict resting on an instance of this can be
+# reopened by withdrawing the declarations.
+#
+# Distinctness only.  Nothing here says two formats have nothing in common:
+# a PDF/A-1a file is also a PDF file, and the declarations say only that the
+# two entries are two.
+#
+# The declarations are stated here and instantiated by the problems: a
+# problem naming two formats carries the inequation between them, so that a
+# refutation cites the instance it used.
+#
+# Entries: {n}
+# Pairs  : {pairs}
+# Source : {meta['version_iri']}
+
+@prefix bind:    <https://w3id.org/odrl-kb/binding#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+
+<https://w3id.org/odrl-kb/eu-file-type/declared> a bind:Declarations ;
+    dcterms:title "Pairwise distinctness of file types"@en ;
+    bind:appliesTo <https://w3id.org/odrl-kb/eu-file-type> ;
+    bind:generatedBy bind:PairwiseDistinctness ;
+    bind:origin bind:practiceRule ;
+    rdfs:comment "The origin rests on the file-type authority's separate entries."@en ;
+    bind:scopeCondition "Distinctness between the entries of the table, and not disjointness. Not listed: {names}, which the table marks as deprecated or replaced; the language declarations leave out deprecated subtags in the same way."@en ;
+    bind:pairCount {pairs} ;
+    bind:states [
+        a owl:AllDifferent ;
+        owl:members (
+{listing}
+        )
+    ] .
+"""
+
+
+def declared_axioms(names) -> str:
+    """The rule, stated but not instantiated, as DPV-tom-declared.ax does."""
+    n = len(names)
+    pairs = n * (n - 1) // 2
+    listing = "\n".join("% " + ", ".join(names[i:i + 6])
+                        for i in range(0, len(names), 6))
+    return (
+        "% Declarations: pairwise distinctness of the file types.\n"
+        "%\n"
+        "% No two of the names below denote one file type.  The table\n"
+        "% lists each as an entry of its own and does not say in RDF that\n"
+        "% two entries are different, so a verdict resting on an instance\n"
+        "% of this is withdrawable by abandoning the declarations.\n"
+        "%\n"
+        "% Distinctness, not disjointness.  The entries deprecated or\n"
+        "% replaced in the table are not listed.\n"
+        "%\n"
+        "% The declarations are stated here and instantiated by the\n"
+        "% problems.  A problem naming two of the file types below carries\n"
+        "% the inequation between them as a bg_dist_ statement, so that a\n"
+        "% refutation cites the instance it used rather than one of "
+        f"{pairs}.\n"
+        "%\n"
+        f"% Formats: {n}\n"
+        f"% Pairs  : {pairs}\n"
+        "%\n"
+        f"{listing}\n"
+    )
+
+
 def axioms(concepts) -> str:
     """The resource contributes no formulae.
 
@@ -244,17 +340,6 @@ def axioms(concepts) -> str:
         f"% Concepts in the resource: {len(concepts)}\n"
         "% Order statements: 0\n"
         "% Disjointness statements: 0\n"
-    )
-
-
-def declared_axioms(pair) -> str:
-    a, b = pair
-    return (
-        "% Declarations: one distinctness.\n"
-        "% The table publishes nothing that separates these two formats.\n"
-        "\n"
-        f"fof(bg_dist_{slug(a)}_distinct_{slug(b)}, axiom,\n"
-        f"    {slug(a)} != {slug(b)}).\n"
     )
 
 
@@ -343,21 +428,16 @@ def main() -> int:
     (args.out / "resources" / f"profile-{tag}.ttl").write_text(
         profile_ttl(), encoding="utf-8")
 
-    # The declarations are RDF a person wrote; the axioms follow from it.
+    # The member list is the rule's reach, the entries of the table less
+    # those it marks as deprecated or replaced, and it is written as RDF.
+    # The axioms are written from what is read back.
+    members, left_out = declared_members(concepts, deprecated, replaced_by)
     declared = args.out / "background" / f"{tag}-declared.ttl"
-    if declared.exists():
-        decl = declarations.load(declared)
-        if len(decl.members) != 2:
-            print(f"{declared}: one distinctness is a list of two members",
-                  file=sys.stderr)
-            return 1
-        a, b = (local(m) for m in decl.members)
-        missing = [x for x in (a, b) if x not in concepts]
-        if missing:
-            print(f"not in the table: {', '.join(missing)}", file=sys.stderr)
-            return 1
-        (args.out / "axioms" / f"EUFT-{tag}-declared.ax").write_text(
-            declared_axioms((a, b)), encoding="utf-8")
+    declared.write_text(declared_ttl(members, left_out, meta),
+                        encoding="utf-8")
+    names = [slug(local(m)) for m in declarations.load(declared).members]
+    (args.out / "axioms" / f"EUFT-{tag}-declared.ax").write_text(
+        declared_axioms(names), encoding="utf-8")
 
     print(f"{len(concepts)} concepts, 0 order statements, "
           f"0 disjointness statements")

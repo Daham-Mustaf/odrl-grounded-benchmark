@@ -1,5 +1,56 @@
-% Declarations: one distinctness.
-% The table publishes nothing that separates these two formats.
-
-fof(bg_dist_ft_pdf_distinct_ft_pdfa1a, axiom,
-    ft_pdf != ft_pdfa1a).
+% Declarations: pairwise distinctness of the file types.
+%
+% No two of the names below denote one file type.  The table
+% lists each as an entry of its own and does not say in RDF that
+% two entries are different, so a verdict resting on an instance
+% of this is withdrawable by abandoning the declarations.
+%
+% Distinctness, not disjointness.  The entries deprecated or
+% replaced in the table are not listed.
+%
+% The declarations are stated here and instantiated by the
+% problems.  A problem naming two of the file types below carries
+% the inequation between them as a bg_dist_ statement, so that a
+% refutation cites the instance it used rather than one of 24976.
+%
+% Formats: 224
+% Pairs  : 24976
+%
+% ft_7z, ft_aab, ft_aac, ft_akn4eu, ft_akn4eu_leg, ft_apk
+% ft_appx, ft_arc, ft_arcinfo_cov, ft_arc_gz, ft_arff, ft_arj
+% ft_arrow_file, ft_arrow_stream, ft_atom, ft_azw, ft_bin, ft_bits
+% ft_bmp, ft_bwf, ft_bzip2, ft_css, ft_csv, ft_dapk
+% ft_dbf, ft_dcr, ft_deb, ft_dgn, ft_dmg, ft_dmp
+% ft_doc, ft_docx, ft_dtd_sgml, ft_dtd_xml, ft_dwca, ft_dwg
+% ft_dxf, ft_e00, ft_ear, ft_ecw, ft_eforms_xml, ft_eps
+% ft_epub, ft_etsi_tsl, ft_etsi_xml, ft_exe, ft_fmx4, ft_fmx4_zip
+% ft_gdb, ft_geojson, ft_geotiff, ft_gif, ft_gml, ft_gmz
+% ft_gpkg, ft_gpx, ft_grid, ft_grid_ascii, ft_gtfs, ft_gzip
+% ft_hdf, ft_hdt, ft_html, ft_html5, ft_html_simpl, ft_ics
+% ft_immc_xml, ft_indd, ft_ipa, ft_iso, ft_iso_zip, ft_jar
+% ft_jats, ft_jpeg, ft_jpeg2000, ft_js, ft_json, ft_json_ld
+% ft_kml, ft_kmz, ft_las, ft_laz, ft_legalhtml, ft_lha
+% ft_lpk, ft_lzip, ft_lzma, ft_lzo, ft_map_prvw, ft_map_srvc
+% ft_markdown, ft_mathml, ft_matlab_mat, ft_mbox, ft_mdb, ft_mets
+% ft_mets_zip, ft_mhtml, ft_mif_mid, ft_mobi, ft_mop, ft_mov
+% ft_mp3, ft_mpeg2, ft_mpeg4, ft_mpeg4_avc, ft_mrsid, ft_msg_http
+% ft_msi, ft_mxd, ft_n3, ft_netcdf, ft_oapk, ft_octet
+% ft_odb, ft_odc, ft_odf, ft_odg, ft_odp, ft_ods
+% ft_odt, ft_ogcfeat, ft_op_datpro, ft_ovf, ft_owl, ft_parquet
+% ft_pdf, ft_pdf1x, ft_pdfa1a, ft_pdfa1b, ft_pdfa2a, ft_pdfa2b
+% ft_pdfa3, ft_pdfa3a, ft_pdfa3b, ft_pdfa3u, ft_pdfua, ft_pdfx
+% ft_pdfx1a, ft_pdfx2a, ft_pdfx4, ft_pl, ft_png, ft_pps
+% ft_ppsx, ft_ppt, ft_pptx, ft_ps, ft_psd, ft_pwp
+% ft_qgs, ft_rar, ft_rdata, ft_rdf, ft_rdfa, ft_rdf_n_quads
+% ft_rdf_n_triples, ft_rdf_thrift, ft_rdf_trig, ft_rdf_trix, ft_rdf_turtle, ft_rdf_xml
+% ft_rest, ft_rpm, ft_rss, ft_rtf, ft_sas, ft_sb3
+% ft_sch, ft_schema_xml, ft_sdmx, ft_sgml, ft_shp, ft_skos_xml
+% ft_sparqlq, ft_sparqlqres, ft_spss_sav, ft_sql, ft_stata_dta, ft_stl
+% ft_svg, ft_swm, ft_tab, ft_tab_rstr, ft_tar, ft_tar_gz
+% ft_tar_xz, ft_thrift_binary, ft_thrift_compact, ft_thrift_json, ft_tiff, ft_tiff_fx
+% ft_tmx, ft_tsv, ft_txt, ft_ungen, ft_vcf, ft_war
+% ft_warc, ft_warc_gz, ft_wav, ft_wcs_srvc, ft_webp, ft_wfs_srvc
+% ft_wim, ft_wms_srvc, ft_wmts_srvc, ft_world, ft_xhtml, ft_xhtml5
+% ft_xhtml_simpl, ft_xliff, ft_xls, ft_xlsb, ft_xlsm, ft_xlsx
+% ft_xml, ft_xslfo, ft_xslt, ft_xyz, ft_xz, ft_yaml
+% ft_z, ft_zip
