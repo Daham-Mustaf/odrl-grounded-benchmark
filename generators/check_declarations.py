@@ -47,8 +47,8 @@ BG, AX, VERDICT = Path("problems/background"), Path("problems/axioms"), Path("pr
 # the encodings spell the name of a distinctness.
 SETS = {
     "bcp47-distinct":           dict(ax="BCP47001-0.ax", form="expanded", label="bcp47"),
-    "consent-declared":         dict(ax="DPV-consent-declared.ax", form="expanded",
-                                     label="const-distinct"),
+    "consent-declared":         dict(ax="DPV-consent-declared.ax", form="rule",
+                                     noun="States", token="local"),
     "consent-definitional":     dict(ax="DPV-consent-definitional.ax", form="expanded"),
     "dpv-purposes-declared":    dict(ax="DPV-dpv-purposes-declared.ax", form="rule",
                                      noun="Purposes", token="local"),
@@ -63,7 +63,7 @@ SETS = {
                                      noun="Measures", token="constant"),
 }
 # Sets whose members are the whole resource, less what the set names as left out.
-WHOLE = {"dpv-purposes-declared", "tom-declared"}
+WHOLE = {"consent-declared", "dpv-purposes-declared", "tom-declared"}
 RULES = {"PairwiseDistinctness", "PairwiseDisjointness", "PublishedDefinition"}
 
 fails = []

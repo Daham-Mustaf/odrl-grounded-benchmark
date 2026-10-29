@@ -1,25 +1,53 @@
-# Declarations for the DPV consent status resource: one distinctness.
+# Declarations for the DPV consent status resource: declared distinctness.
 #
-# The parties declare that these two states are different.  The module does
-# not: it lists both and separates them in no way.  A verdict resting on this
-# statement is the parties' and can be reopened by withdrawing it.
+# Every state of the slice is declared distinct from every other.  The
+# module defines each state separately, in a definition of its own, and
+# these definitions are what the declarations rest on.  The module does
+# not state the distinctness in RDF, so a verdict resting on an instance of
+# it is withdrawable by abandoning the declarations.
+#
+# Distinctness only.  One state may lie below another and still be a
+# different state; whether nothing lies below two of them is disjointness,
+# which is a different declaration (consent-definitional.ttl).
+#
+# The declarations are stated here and instantiated by the problems: a
+# problem naming two states carries the inequation between them, so that a
+# refutation cites the instance it used rather than a term standing for all
+# of them.
+#
+# States: 13
+# Pairs : 78
 #
 # Source: https://w3id.org/dpv/2.3
 
-@prefix dpv:     <https://w3id.org/dpv#> .
 @prefix bind:    <https://w3id.org/odrl-kb/binding#> .
 @prefix owl:     <http://www.w3.org/2002/07/owl#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 
 <https://w3id.org/odrl-kb/dpv-consent/declared> a bind:Declarations ;
-    dcterms:title "One declared distinctness"@en ;
+    dcterms:title "Pairwise distinctness of consent states"@en ;
     bind:appliesTo <https://w3id.org/odrl-kb/dpv-consent> ;
     bind:generatedBy bind:PairwiseDistinctness ;
     bind:origin bind:proseDefinition ;
-    rdfs:comment "The origin rests on the DPV definitions."@en ;
-    bind:pairCount 1 ;
+    rdfs:comment "The origin rests on DPV's separate definition of each state."@en ;
+    bind:scopeCondition "Distinctness between the listed states, and not disjointness: one state may lie below another and still be a different state."@en ;
+    bind:pairCount 78 ;
     bind:states [
         a owl:AllDifferent ;
-        owl:members ( dpv:ConsentGiven dpv:ConsentWithdrawn )
+        owl:members (
+            <https://w3id.org/dpv#ConsentExpired>
+            <https://w3id.org/dpv#ConsentGiven>
+            <https://w3id.org/dpv#ConsentInvalidated>
+            <https://w3id.org/dpv#ConsentRefused>
+            <https://w3id.org/dpv#ConsentRequestDeferred>
+            <https://w3id.org/dpv#ConsentRequested>
+            <https://w3id.org/dpv#ConsentRevoked>
+            <https://w3id.org/dpv#ConsentStatus>
+            <https://w3id.org/dpv#ConsentStatusInvalidForProcessing>
+            <https://w3id.org/dpv#ConsentStatusValidForProcessing>
+            <https://w3id.org/dpv#ConsentUnknown>
+            <https://w3id.org/dpv#ConsentWithdrawn>
+            <https://w3id.org/dpv#RenewedConsentGiven>
+        )
     ] .

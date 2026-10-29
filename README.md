@@ -108,6 +108,7 @@ KGC310-319   purpose, over DPV purposes, in a mobility data space
 KGC320-323   fileFormat, over the EU file type table
 KGC330-337   spatial, over DPV Locations
 KGC340-343   consent status, over the DPV consent module
+KGC348-349   consent status, under declared distinctness
 KGC360-364   technical and organisational measures
 KGC370-379   language, over a BCP 47 slice
 KGC380-392   spatial: composition, subdivisions, exclusion

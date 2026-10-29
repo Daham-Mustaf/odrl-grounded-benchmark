@@ -54,6 +54,7 @@ drk:KGC343-report a vrep:OperandVerdictReport ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-consent-status> ;
     vrep:declarations <https://w3id.org/odrl-kb/dpv-consent/definitional> ;
     vrep:readAgainst drk:KGC342-report ;
+    vrep:readAgainst drk:KGC348-report ;
     rdfs:comment """ConsentWithdrawn lies below the invalid branch, and the declarations declare the two branches disjoint. So it cannot also lie below the valid branch. Without those declarations the verdict is Unknown, as in KGC342."""@en ;
     dcterms:description """As KGC342, with the valid and invalid branches declared disjoint by the declarations."""@en ;
     vrep:compatibilityState vrep:Incompatible ;

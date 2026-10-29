@@ -1,5 +1,21 @@
-% Declarations: one distinctness, declared by the parties.
-% The module publishes nothing that separates these two states.
-
-fof(bg_dist_dpv_consent_given_distinct_dpv_consent_withdrawn, axiom,
-    dpv_consent_given != dpv_consent_withdrawn).
+% Declarations: pairwise distinctness of the consent states.
+%
+% DPV defines each state separately, in a definition of its own, and
+% does not say in RDF that the states are distinct.  The declarations
+% rest on the definitions, and a verdict resting on an instance of
+% them is withdrawable by abandoning the declarations.
+%
+% Distinctness, not disjointness: one state may lie below another and
+% still be a different state.  Disjointness is a different
+% declaration, DPV-consent-definitional.ax.
+%
+% The declarations are stated here and instantiated by the problems.
+% A problem naming two of the states below carries the inequation
+% between them as a bg_dist_ statement.
+%
+% States: 13
+% Pairs : 78
+%
+% ConsentExpired, ConsentGiven, ConsentInvalidated, ConsentRefused, ConsentRequestDeferred, ConsentRequested
+% ConsentRevoked, ConsentStatus, ConsentStatusInvalidForProcessing, ConsentStatusValidForProcessing, ConsentUnknown, ConsentWithdrawn
+% RenewedConsentGiven

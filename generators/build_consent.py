@@ -24,14 +24,15 @@ owl:disjointWith.  A verdict turning on the two being disjoint therefore
 rests on a declaration the parties make, and the certificate says so, even
 though the authority's own prose is what warrants it.
 
-The declared set separates two named states.  This set separates every state
-below one branch from every state below the other.  The
-ISO 3166 rule rests on a registry convention read from a standard's text; a
-bilateral distinctness declaration rests on the DPV definitions of the two states.
+The declared set separates every state of the slice from every other.  It
+rests on the DPV definitions: the module defines each state separately, in
+a definition of its own, and does not say in RDF that the states are
+distinct.  The definitional set separates every state below one branch from
+every state below the other, and rests on the definitions of the branches.
 Here the vocabulary states the intent in the definition and omits it from the
-file, and a party adopting it follows the publisher rather than adding to
-them.  The verdict is still withdrawable and the certificate still marks it:
-what the definitions warrant, they do not assert.
+file, and adopting it follows the publisher rather than adding to it.  The
+verdict is still withdrawable and the certificate still marks it: what the
+definitions warrant, they do not assert.
 
 The module boundary
 -------------------
@@ -396,14 +397,93 @@ def definitional_axioms(definitions) -> str:
     return "\n".join(lines)
 
 
-def declared_axioms(pair) -> str:
-    a, b = pair
+def declared_ttl(members, meta) -> str:
+    """Every state of the slice declared distinct from every other.
+
+    Distinctness only.  One state may lie below another and still be a
+    different state, so nothing here says that two states have nothing
+    below both: that is disjointness, and the definitional set carries it
+    for the two branches.  The members are all the concepts of the slice,
+    written as an owl:AllDifferent, and the axioms are written from what is
+    read back.
+    """
+    n = len(members)
+    listing = "\n".join(f"            <{m}>" for m in members)
+    return f"""\
+# Declarations for the DPV consent status resource: declared distinctness.
+#
+# Every state of the slice is declared distinct from every other.  The
+# module defines each state separately, in a definition of its own, and
+# these definitions are what the declarations rest on.  The module does
+# not state the distinctness in RDF, so a verdict resting on an instance of
+# it is withdrawable by abandoning the declarations.
+#
+# Distinctness only.  One state may lie below another and still be a
+# different state; whether nothing lies below two of them is disjointness,
+# which is a different declaration (consent-definitional.ttl).
+#
+# The declarations are stated here and instantiated by the problems: a
+# problem naming two states carries the inequation between them, so that a
+# refutation cites the instance it used rather than a term standing for all
+# of them.
+#
+# States: {n}
+# Pairs : {n * (n - 1) // 2}
+#
+# Source: {meta['source_iri']}
+
+@prefix bind:    <https://w3id.org/odrl-kb/binding#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+
+<https://w3id.org/odrl-kb/dpv-consent/declared> a bind:Declarations ;
+    dcterms:title "Pairwise distinctness of consent states"@en ;
+    bind:appliesTo <https://w3id.org/odrl-kb/dpv-consent> ;
+    bind:generatedBy bind:PairwiseDistinctness ;
+    bind:origin bind:proseDefinition ;
+    rdfs:comment "The origin rests on DPV's separate definition of each state."@en ;
+    bind:scopeCondition "Distinctness between the listed states, and not disjointness: one state may lie below another and still be a different state."@en ;
+    bind:pairCount {n * (n - 1) // 2} ;
+    bind:states [
+        a owl:AllDifferent ;
+        owl:members (
+{listing}
+        )
+    ] .
+"""
+
+
+def declared_axioms(names) -> str:
+    """The declarations, stated but not instantiated.
+
+    As DPV-dpv-purposes-declared.ax does: the file lists what the
+    declarations range over and leaves the instances to the problems, so a
+    refutation cites the inequation it used.
+    """
+    n = len(names)
+    listing = "\n".join("% " + ", ".join(names[i:i + 6])
+                        for i in range(0, n, 6))
     return (
-        "% Declarations: one distinctness, declared by the parties.\n"
-        "% The module publishes nothing that separates these two states.\n"
-        "\n"
-        f"fof(bg_dist_{slug(a)}_distinct_{slug(b)}, axiom,\n"
-        f"    {slug(a)} != {slug(b)}).\n"
+        "% Declarations: pairwise distinctness of the consent states.\n"
+        "%\n"
+        "% DPV defines each state separately, in a definition of its own, and\n"
+        "% does not say in RDF that the states are distinct.  The declarations\n"
+        "% rest on the definitions, and a verdict resting on an instance of\n"
+        "% them is withdrawable by abandoning the declarations.\n"
+        "%\n"
+        "% Distinctness, not disjointness: one state may lie below another and\n"
+        "% still be a different state.  Disjointness is a different\n"
+        "% declaration, DPV-consent-definitional.ax.\n"
+        "%\n"
+        "% The declarations are stated here and instantiated by the problems.\n"
+        "% A problem naming two of the states below carries the inequation\n"
+        "% between them as a bg_dist_ statement.\n"
+        "%\n"
+        f"% States: {n}\n"
+        f"% Pairs : {n * (n - 1) // 2}\n"
+        "%\n"
+        f"{listing}\n"
     )
 
 
@@ -414,11 +494,10 @@ def profile_ttl() -> str:
 # The sort is tax.  The module publishes a hierarchy of states, and the
 # constraint a controller writes, that the status be one which may justify
 # processing, is a question about that hierarchy: which states lie below the
-# concept the offer names.
+# concept the controller's policy names.
 #
 # The module also types its concepts, and a profile binding this operand to
 # the typing rather than to the order would answer a different question.
-# Section 7 reports what that reading returns.
 
 @prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> .
 @prefix bind: <https://w3id.org/odrl-kb/binding#> .
@@ -496,21 +575,15 @@ def main() -> int:
     (args.out / "resources" / f"profile-{tag}.ttl").write_text(
         profile_ttl(), encoding="utf-8")
 
-    # The declarations are RDF a person wrote; the axioms follow from it.
+    # The declarations cover every state of the slice and are written as
+    # RDF; the axioms are written from what is read back.
     declared = args.out / "background" / f"{tag}-declared.ttl"
-    if declared.exists():
-        decl = declarations.load(declared)
-        if len(decl.members) != 2:
-            print(f"{declared}: one distinctness is a list of two members",
-                  file=sys.stderr)
-            return 1
-        a, b = (local(m) for m in decl.members)
-        missing = [x for x in (a, b) if x not in concepts]
-        if missing:
-            print(f"not in the module: {', '.join(missing)}", file=sys.stderr)
-            return 1
-        (args.out / "axioms" / f"DPV-{tag}-declared.ax").write_text(
-            declared_axioms((a, b)), encoding="utf-8")
+    declared.write_text(
+        declared_ttl([f"https://w3id.org/dpv#{c}" for c in sorted(concepts)],
+                     meta), encoding="utf-8")
+    names = sorted(local(m) for m in declarations.load(declared).members)
+    (args.out / "axioms" / f"DPV-{tag}-declared.ax").write_text(
+        declared_axioms(names), encoding="utf-8")
 
     hops, witness = depth(order)
     print(f"{len(concepts)} concepts, {len(order)} order statements")
