@@ -14,11 +14,18 @@ profiles produces two rows, which is the table's point. Counts come from
 the generated artefacts, so a figure that moves when a builder changes
 moves here too.
 
---suite-numbers writes suite-numbers.tex: ten macros and the bindings table,
-for the paper to include. It refuses to write when the numbers do not add up:
-the rows must sum to the case files, every case must fall in exactly one of
-definite, Unknown, rejected and accepted, and every binding a case cites must
-have a row. A file that is written is therefore one whose figures agree.
+--suite-numbers writes suite-numbers.tex: ten macros of counts, six from the
+timing pass and the bindings table, for the paper to include. It refuses to
+write when the numbers do not add up: the rows must sum to the case files,
+every case must fall in exactly one of definite, Unknown, rejected and
+accepted, and every binding a case cites must have a row. A file that is
+written is therefore one whose figures agree.
+
+The six time macros come from results/timings.csv, which
+generators/time_queries.py writes: the seconds of all runs together, the
+slowest query, the limit, the machine, and the two prover versions. The file
+must time every current query under its prover and nothing else, or
+suite-numbers.tex is not written.
 
 What is counted, per row:
 
@@ -33,6 +40,7 @@ bind:sort and bind:resource, and which published relation that sort is
 taken from is a claim the header makes in prose.
 """
 import argparse
+import csv
 import re
 import sys
 from collections import Counter
@@ -205,14 +213,81 @@ def suite_problems(rs, totals) -> list:
     return out
 
 
+TIMINGS = Path("results") / "timings.csv"
+PROVER = {"vampire": "Vampire", "z3": "Z3"}
+
+
+def read_timings(path: Path):
+    """(header, rows) of the timing pass, or None when there is no file."""
+    if not path.exists():
+        return None
+    header, body = {}, []
+    for line in path.read_text(encoding="utf-8").splitlines():
+        if line.startswith("#"):
+            key, sep, value = line[1:].strip().partition(": ")
+            if sep:
+                header[key] = value
+        elif line.strip():
+            body.append(line)
+    return header, list(csv.DictReader(body))
+
+
+def timing_problems(timings, verdict_dir: Path) -> list:
+    """Why the timing file does not fit the suite, or an empty list."""
+    if timings is None:
+        return [f"{TIMINGS} not found: run generators/time_queries.py"]
+    header, rows = timings
+    out = [f"{TIMINGS} has no {k} line in its header"
+           for k in ("vampire", "z3", "cpu", "ram", "date", "limit")
+           if k not in header]
+    want = {(q.stem, "vampire") for q in verdict_dir.glob("*-[12].p")} \
+        | {(q.stem, "z3") for q in verdict_dir.glob("*-[12].smt2")}
+    have = [(r["query"], r["prover"]) for r in rows]
+    if len(have) != len(set(have)):
+        out.append(f"{TIMINGS} times a query twice")
+    for what, runs in (("has no time for", want - set(have)),
+                       ("times what is not a query of the suite:", set(have) - want)):
+        if runs:
+            shown = ", ".join(f"{q} under {PROVER.get(p, p)}" for q, p in sorted(runs)[:4])
+            more = f" and {len(runs) - 4} more" if len(runs) > 4 else ""
+            out.append(f"{TIMINGS} {what} {shown}{more}: "
+                       f"run generators/time_queries.py")
+    return out
+
+
+def time_macros(timings) -> list:
+    """The six macros of the timing pass."""
+    header, rows = timings
+    total = sum(float(r["seconds"]) for r in rows)
+    slow = max(rows, key=lambda r: float(r["seconds"]))
+    # "Intel(R) Core(TM) Ultra 7 165U, 14 logical cores" -> "Intel Core Ultra 7 165U"
+    cpu = header["cpu"].split(", ")[0]
+    cpu = re.sub(r"\((R|TM)\)|\bCPU\b|\bProcessor\b|@.*", "", cpu)
+    cpu = " ".join(cpu.split())
+
+    def version(line, pattern):
+        m = re.search(pattern, line)
+        return m.group(1) if m else line
+
+    return [
+        ("suiteTime",     f"{total:.1f}"),
+        ("suiteSlowest",  f"{slow['query']} ({PROVER[slow['prover']]}, "
+                          f"{float(slow['seconds']):.1f} s)"),
+        ("suiteLimit",    header["limit"]),
+        ("suiteHardware", f"{cpu}, {header['ram']} RAM"),
+        ("suiteVampire",  version(header["vampire"], r"Vampire (\S+)")),
+        ("suiteZthree",   version(header["z3"], r"version (\S+)")),
+    ]
+
+
 def tex_escape(s: str) -> str:
     for ch in "\\&%$#_{}":
         s = s.replace(ch, "\\" + ch)
     return s
 
 
-def suite_numbers_tex(rs, totals) -> str:
-    """suite-numbers.tex: ten macros and the bindings table."""
+def suite_numbers_tex(rs, totals, timings) -> str:
+    """suite-numbers.tex: the macros and the bindings table."""
     definite = totals["compatible"] + totals["incompatible"]
     macros = [
         ("suiteCases",        totals["files"]),
@@ -233,8 +308,12 @@ def suite_numbers_tex(rs, totals) -> str:
         f" + {totals['unknown']} Unknown + {totals['rejected']} rejected"
         f" + {totals['accepted']} accepted controls.",
         "% Rejected is ill sorted plus ungrounded.",
+        f"% Times: {TIMINGS}, {timings[0]['date']}, each query alone,"
+        f" one at a time, at most {timings[0]['limit']} s.",
     ]
     lines += [f"\\newcommand{{\\{name}}}{{{value}}}" for name, value in macros]
+    lines += [f"\\newcommand{{\\{name}}}{{{tex_escape(value)}}}"
+              for name, value in time_macros(timings)]
     lines += [
         "\\newcommand{\\suiteBindingsTable}{%",
         "\\begin{tabular}{llrrr}",
@@ -263,7 +342,7 @@ def main() -> int:
                     help="\\newcommand lines for the results paragraph")
     ap.add_argument("--suite-numbers", nargs="?", const="suite-numbers.tex",
                     metavar="FILE",
-                    help="write ten macros and the bindings table "
+                    help="write the macros and the bindings table "
                          "(default suite-numbers.tex, under --root)")
     args = ap.parse_args()
 
@@ -272,14 +351,16 @@ def main() -> int:
                           args.root / "problems" / "verdict")
 
     if args.suite_numbers:
-        problems = suite_problems(rs, totals)
+        timings = read_timings(args.root / TIMINGS)
+        problems = suite_problems(rs, totals) + timing_problems(
+            timings, args.root / "problems" / "verdict")
         if problems:
             print("not written, the figures do not add up:", file=sys.stderr)
             for pr in problems:
                 print(f"  {pr}", file=sys.stderr)
             return 1
         out = args.root / args.suite_numbers
-        out.write_text(suite_numbers_tex(rs, totals), encoding="utf-8")
+        out.write_text(suite_numbers_tex(rs, totals, timings), encoding="utf-8")
         print(f"wrote {out}: {totals['files']} cases, {len(rs)} bindings")
         return 0
 

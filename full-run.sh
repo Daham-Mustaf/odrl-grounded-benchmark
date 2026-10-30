@@ -2,6 +2,7 @@
 # Rebuild everything from the vendored vocabularies and check it.
 #
 #     bash full-run.sh 2>&1 | tee /tmp/run.log
+#     TIMINGS=1 bash full-run.sh     # and rewrite results/timings.csv
 #
 # Stops at the first builder or generator that fails, since everything
 # after it would be checking stale files.
@@ -137,8 +138,19 @@ if grep -E "^  other " "$cert_out" | grep -qE "NO-STATUS|TIMEOUT|PARSE"; then
 fi
 rm -f "$cert_out"
 
+# --- 8b. timing pass, when asked -------------------------------------
+# TIMINGS=1 rewrites results/timings.csv: each query alone, one at a time,
+# at PROVER_LIMIT.  Without it stage 9 reads the committed file, and refuses
+# it when it does not time the current queries.
+if [ "${TIMINGS:-0}" = 1 ]; then
+  hdr "8b. timing pass: each query alone"
+  uv run generators/time_queries.py --limit "$PROVER_LIMIT" \
+    || { echo "FAILED: a query got no status in the timing pass" >&2; FAILED=1; }
+fi
+
 hdr "9. figures for the paper"
 uv run generators/table_data.py --suite-numbers 2>&1 | tail -6
+[ "${PIPESTATUS[0]}" -eq 0 ] || { echo "FAILED: suite-numbers.tex was not written" >&2; FAILED=1; }
 
 hdr "10. catalogue of the cases"
 uv run generators/catalogue.py || FAILED=1
