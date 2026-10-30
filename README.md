@@ -226,6 +226,8 @@ This rebuilds every resource from the vendored vocabularies,
 regenerates the problems, and runs both provers over all of them. The
 image records the prover versions it holds in `/benchmark/ENVIRONMENT`.
 
+The image has not yet been built and run.
+
 ---
 
 ## Verdict reports

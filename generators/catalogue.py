@@ -308,8 +308,8 @@ def entry(c: dict, lesson: str, blind: bool) -> str:
     if d is None:
         out.append("<dt>Declarations</dt><dd>none cited</dd>")
     elif d["pairs"] == 0:
-        out.append(f'<dt>Declarations</dt><dd>{html.escape(d["title"] or "empty")}. '
-                   f'No declaration. Only what the vocabulary itself states applies.</dd>')
+        out.append('<dt>Declarations</dt><dd>No declaration. Only what the '
+                   'vocabulary itself states applies.</dd>')
     else:
         label, _ = c["_origins"].get(str(d["origin"]), (local(d["origin"]), ""))
         rows = [f'{html.escape(d["title"])}: {d["pairs"]} '
