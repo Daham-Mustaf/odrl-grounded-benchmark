@@ -23,7 +23,5 @@ include('axioms/DPV-dpv-purposes.ax').
 
 % --- witness condition asserted ------------------------------------------
 fof(w_kgc396, axiom,
-    ( kge_leq(dpv_data_altruism, dpv_public_benefit) & kge_leq(dpv_improve_transport_mobility, dpv_public_benefit) & ( kge_leq(dpv_public_benefit, dpv_public_benefit)
-| kge_leq(dpv_data_altruism, dpv_public_benefit)
-| kge_leq(dpv_improve_transport_mobility, dpv_public_benefit) ) )).
+    ( kge_leq(dpv_data_altruism, dpv_public_benefit) & kge_leq(dpv_improve_transport_mobility, dpv_public_benefit) )).
 %--------------------------------------------------------------------------

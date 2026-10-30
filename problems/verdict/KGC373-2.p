@@ -20,10 +20,13 @@ include('axioms/BCP47000-0.ax').
 include('axioms/BCP47001-0.ax').
 
 % --- constants, groundings and resource hooks ----------------------------
+% Declarations: https://w3id.org/odrl-kb/bcp47/distinct, over every pair of the
+% witness's candidates it states (1).
 
+fof(bg_dist_bcp47_de_en, axiom,
+    bcp_de != bcp_en).
 
 % --- witness condition negated -------------------------------------------
 fof(w_kgc373, axiom,
-    ~ ( ( ( bcp_de = bcp_de & bcp_de = bcp_en )
-| ( bcp_en = bcp_de & bcp_en = bcp_en ) ) )).
+    ~ ( bcp_de = bcp_en )).
 %--------------------------------------------------------------------------

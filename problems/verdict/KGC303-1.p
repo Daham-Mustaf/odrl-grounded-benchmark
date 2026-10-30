@@ -23,10 +23,5 @@ include('axioms/GN000-0.ax').
 
 % --- witness condition asserted ------------------------------------------
 fof(w_kgc303, axiom,
-    ( ( ( ( gn_france = gn_france & gn_france = gn_france )
-| ( gn_germany = gn_france & gn_germany = gn_france ) ) & ( ( ( gn_france = gn_france & gn_france = gn_france ) & ~ ( gn_france = gn_germany ) )
-| ( ( gn_germany = gn_france & gn_germany = gn_france ) & ~ ( gn_germany = gn_germany ) ) ) )
-| ( ( ( gn_france = gn_germany & gn_france = gn_france )
-| ( gn_germany = gn_germany & gn_germany = gn_france ) ) & ( ( ( gn_france = gn_germany & gn_france = gn_france ) & ~ ( gn_france = gn_france ) )
-| ( ( gn_germany = gn_germany & gn_germany = gn_france ) & ~ ( gn_germany = gn_france ) ) ) ) )).
+    gn_france != gn_germany).
 %--------------------------------------------------------------------------

@@ -3,14 +3,14 @@
 % SZS status Unsatisfiable for KGC317-1
 % SZS output start Proof for KGC317-1
 fof(f135,axiom,(
-  dpv_marketing != dpv_marketing & dpv_marketing = dpv_marketing),
+  ~$true),
   file('problems/verdict/KGC317-1.p',w_kgc317)).
-fof(f275,plain,(
-  dpv_marketing != dpv_marketing),
-  inference(cnf_transformation,[],[f135])).
-fof(f276,plain,(
+fof(f136,plain,(
   $false),
-  inference(trivial_inequality_removal,[],[f275])).
+  inference(true_and_false_elimination,[],[f135])).
+fof(f275,plain,(
+  $false),
+  inference(cnf_transformation,[],[f136])).
 % SZS output end Proof for KGC317-1
 % ------------------------------
 % Version: Vampire 5.0.1 (Release build, commit 1b13eafde on 2026-01-18 12:14:50 +0000)

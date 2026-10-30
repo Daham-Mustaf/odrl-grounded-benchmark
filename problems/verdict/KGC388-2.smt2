@@ -26,7 +26,7 @@
 (assert (! (forall ((x Concept) (y Concept) (z Concept))
     (=> (and (kge_leq x y) (kge_leq y z)) (kge_leq x z))) :named ax_leq_transitive))
 ; witness condition negated
-(assert (! (not (or (or (and (kge_leq loc_de_nw loc_de_nw) (= loc_de_nw loc_de_nw)) (and (kge_leq loc_de_by loc_de_nw) (= loc_de_by loc_de_nw))) (or (and (kge_leq loc_de_nw loc_de_by) (= loc_de_nw loc_de_nw)) (and (kge_leq loc_de_by loc_de_by) (= loc_de_by loc_de_nw))))) :named w_kgc388))
+(assert (! (not (or (kge_leq loc_de_nw loc_de_nw) (kge_leq loc_de_nw loc_de_by))) :named w_kgc388))
 (check-sat)
 (get-unsat-core)
 (get-model)

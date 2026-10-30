@@ -3,20 +3,14 @@
 % SZS status Unsatisfiable for KGC322-2
 % SZS output start Proof for KGC322-2
 fof(f4,axiom,(
-  ~((ft_pdf = ft_pdfa1a | ft_pdfa1a = ft_pdfa1a) & ((ft_pdf = ft_pdfa1a & (ft_pdf = ft_pdf | ft_pdf = ft_pdfa1a)) | (ft_pdfa1a = ft_pdfa1a & (ft_pdfa1a = ft_pdf | ft_pdfa1a = ft_pdfa1a))))),
+  ~$true),
   file('problems/verdict/KGC322-2.p',w_kgc322)).
-fof(f9,plain,(
-  (ft_pdf != ft_pdfa1a & ft_pdfa1a != ft_pdfa1a) | ((ft_pdf != ft_pdfa1a | (ft_pdf != ft_pdf & ft_pdf != ft_pdfa1a)) & (ft_pdfa1a != ft_pdfa1a | (ft_pdf != ft_pdfa1a & ft_pdfa1a != ft_pdfa1a)))),
-  inference(ennf_transformation,[],[f4])).
-fof(f13,plain,(
-  ft_pdfa1a != ft_pdfa1a | ft_pdfa1a != ft_pdfa1a | ft_pdfa1a != ft_pdfa1a),
-  inference(cnf_transformation,[],[f9])).
-fof(f21,plain,(
-  ft_pdfa1a != ft_pdfa1a),
-  inference(duplicate_literal_removal,[],[f13])).
-fof(f22,plain,(
+fof(f5,plain,(
   $false),
-  inference(trivial_inequality_removal,[],[f21])).
+  inference(true_and_false_elimination,[],[f4])).
+fof(f13,plain,(
+  $false),
+  inference(cnf_transformation,[],[f5])).
 % SZS output end Proof for KGC322-2
 % ------------------------------
 % Version: Vampire 5.0.1 (Release build, commit 1b13eafde on 2026-01-18 12:14:50 +0000)

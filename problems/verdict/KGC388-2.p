@@ -23,8 +23,6 @@ include('axioms/LOC-dpvloc-geo.ax').
 
 % --- witness condition negated -------------------------------------------
 fof(w_kgc388, axiom,
-    ~ ( ( ( ( kge_leq(loc_de_nw, loc_de_nw) & loc_de_nw = loc_de_nw )
-| ( kge_leq(loc_de_by, loc_de_nw) & loc_de_by = loc_de_nw ) )
-| ( ( kge_leq(loc_de_nw, loc_de_by) & loc_de_nw = loc_de_nw )
-| ( kge_leq(loc_de_by, loc_de_by) & loc_de_by = loc_de_nw ) ) ) )).
+    ~ ( ( kge_leq(loc_de_nw, loc_de_nw)
+| kge_leq(loc_de_nw, loc_de_by) ) )).
 %--------------------------------------------------------------------------

@@ -25,9 +25,5 @@ include('axioms/EUFT-filetype.ax').
 
 % --- witness condition negated -------------------------------------------
 fof(w_kgc322, axiom,
-    ~ ( ( ( ft_pdf = ft_pdfa1a
-| ft_pdfa1a = ft_pdfa1a ) & ( ( ft_pdf = ft_pdfa1a & ( ft_pdf = ft_pdf
-| ft_pdf = ft_pdfa1a ) )
-| ( ft_pdfa1a = ft_pdfa1a & ( ft_pdfa1a = ft_pdf
-| ft_pdfa1a = ft_pdfa1a ) ) ) ) )).
+    ~ ( $true )).
 %--------------------------------------------------------------------------

@@ -26,6 +26,5 @@ include('axioms/LOC-dpvloc-juris.ax').
 
 % --- witness condition negated -------------------------------------------
 fof(w_kgc331, axiom,
-    ~ ( ( ( kge_leq(loc_eu, loc_eu) & loc_eu = loc_de )
-| ( kge_leq(loc_de, loc_eu) & loc_de = loc_de ) ) )).
+    ~ ( kge_leq(loc_de, loc_eu) )).
 %--------------------------------------------------------------------------

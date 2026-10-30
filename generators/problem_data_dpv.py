@@ -8,12 +8,7 @@
 
 
 from compile import right_operand as _ro, Constraint, Or, Xone
-from pathlib import Path
 
-import declarations
-
-_DECL = declarations.load(
-    Path(__file__).resolve().parent.parent / "problems" / "background" / "dpv-purposes-declared.ttl")
 
 SR   = "dpv_scientific_research"
 RND  = "dpv_research_and_development"
@@ -44,25 +39,6 @@ INCLUDES_DECLARED = INCLUDES + ["DPV-dpv-purposes-declared.ax"]
 
 def C(op, *vals, side="offer"):
     return Constraint(op, tuple(vals), side)
-
-
-def _iso(*pairs):
-    """Declared-distinctness instances, named bg_dist_ on both encodings.
-
-    The declarations state the rule and list the purposes it ranges
-    over; a problem naming two of them carries the inequation between
-    them, so a refutation cites the instance it used rather than one
-    term standing for all of them. The name must match on both sides:
-    an unsat core and a TPTP proof are compared by premise name.  The
-    statements come from declarations.py, which refuses a pair the set
-    does not state.
-    """
-    return declarations.instances(
-        _DECL, pairs,
-        ["% Declarations: declared distinctness instances, stated in",
-         "% the declarations file and instantiated here.", ""],
-        ["; Declared distinctness this problem adopts, named as the TPTP",
-         "; side names it."])
 
 
 _HEAD = """\
@@ -121,11 +97,6 @@ def _ttl(pid, lo, offer_title, offer_cs, req_title, req_cs, connective=None):
 
 PURPOSE = "dpv-odrl:Purpose"
 
-_D394 = _iso((ITM, PB), (ITM, NCR))
-_D403 = _iso((SR, RND))
-_D397 = _iso((ADV, MK))
-_D318 = _iso((SR, MK))
-
 
 """
 Seventeen problems over the DPV purposes slice, in a mobility data space: a
@@ -146,8 +117,8 @@ The order-based eleven, one per thing that can go wrong:
     KGC319  xone(isA CP, isA NCP) x eq NCR -> Unknown the branches are not
                                                      disjoint
     KGC403  isA SR       x eq R&D, declared distinct -> Incompatible
-    KGC404  isA R&D      x isA SR   -> Compatible    a category against a
-                                                     category
+    KGC404  isA R&D      x isA NCP  -> Compatible    two categories, neither
+                                                     inside the other
 
 And six on the set operators and the connectives, which read identity and
 not the order unless a branch names a category:
@@ -393,13 +364,11 @@ kgc:KGC313-p2-c1 a odrl:Constraint ;
             "Unknown."),
         "maintainer_note": "The certificate marks the declaration as withdrawable.",
 
-        "fof_decls": _iso((MK, SR))[0],
 
         "expected_q1": "Unsatisfiable",
         "expected_q2": "Satisfiable",
 
         "smt2_logic": "UF",
-        "smt2_background": _iso((MK, SR))[1],
 
         "certificate": {
             "kind": "Refutation",
@@ -633,7 +602,6 @@ kgc:KGC315-p2-c1 a odrl:Constraint ;
         "resource": RESOURCE, "background_theory": DECLARED_BT,
         "binding": BINDING, "includes": INCLUDES_DECLARED,
         "tree": [C("isA", SR), C("eq", RND, side="request")],
-        "fof_decls": _D403[0], "smt2_background": _D403[1],
         "expected_verdict": "Incompatible",
         "expected_q1": "Unsatisfiable", "expected_q2": "Satisfiable",
         "summary": (
@@ -772,7 +740,6 @@ kgc:KGC317-p2-c1 a odrl:Constraint ;
         "resource": RESOURCE, "background_theory": DECLARED_BT,
         "binding": BINDING, "includes": INCLUDES_DECLARED,
         "tree": [C("neq", MK), C("eq", SR, side="request")],
-        "fof_decls": _D318[0], "smt2_background": _D318[1],
         "expected_verdict": "Compatible",
         "expected_q1": "Satisfiable", "expected_q2": "Unsatisfiable",
         "summary": (
@@ -923,7 +890,6 @@ kgc:KGC317-p2-c1 a odrl:Constraint ;
         "resource": RESOURCE, "background_theory": DECLARED_BT,
         "binding": BINDING, "includes": INCLUDES_DECLARED,
         "tree": [C("isAnyOf", PB, NCR), C("eq", ITM, side="request")],
-        "fof_decls": _D394[0], "smt2_background": _D394[1],
         "expected_verdict": "Incompatible",
         "expected_q1": "Unsatisfiable", "expected_q2": "Satisfiable",
         "summary": (
@@ -1048,7 +1014,6 @@ kgc:KGC317-p2-c1 a odrl:Constraint ;
         "resource": RESOURCE, "background_theory": DECLARED_BT,
         "binding": BINDING, "includes": INCLUDES_DECLARED,
         "tree": [C("isNoneOf", MK), C("eq", ADV, side="request")],
-        "fof_decls": _D397[0], "smt2_background": _D397[1],
         "expected_verdict": "Compatible",
         "expected_q1": "Satisfiable", "expected_q2": "Unsatisfiable",
         "summary": (
@@ -1128,42 +1093,42 @@ kgc:KGC317-p2-c1 a odrl:Constraint ;
                     connective="or"),
     },
     # -----------------------------------------------------------------
-    # KGC404  A category against a category.  Both lie above scientific
-    # research, so a use for it is under both.
+    # KGC404  Two categories, neither inside the other.  Both lie above
+    # non-commercial research, so a use for it is under both.
     # -----------------------------------------------------------------
     {
         "id": "KGC404", "subdir": "verdict",
-        "name": "purpose, isA dpv:R&D against isA dpv:SR",
+        "name": "purpose, isA dpv:R&D against isA dpv:NonCommercialPurpose",
         "left_operand": "purpose", "sort": "tax",
         "resource": RESOURCE, "background_theory": EMPTY_BT,
         "binding": BINDING, "includes": INCLUDES,
-        "tree": [C("isA", RND), C("isA", SR, side="request")],
+        "tree": [C("isA", RND), C("isA", NCP, side="request")],
         "expected_verdict": "Compatible",
         "expected_q1": "Satisfiable", "expected_q2": "Unsatisfiable",
         "summary": (
             "A city's traffic data platform permits use for research and "
             "development or any narrower purpose. A university commits to "
-            "use for scientific research or any narrower purpose."),
+            "use for non-commercial purposes or any narrower purpose."),
         "description": (
-            "Each policy names a category. Two category policies are "
-            "compatible when some purpose lies under both, and here the "
-            "narrower category is that purpose: DPV places scientific "
-            "research directly below research and development, so a use for "
-            "scientific research lies under both categories, on one "
-            "published statement."),
+            "Two category policies, neither inside the other. DPV places "
+            "non-commercial research below research and development and "
+            "below non-commercial purpose, so a use for non-commercial "
+            "research lies under both categories, and the verdict is "
+            "Compatible on two published statements. Read against KGC310."),
         "certificate": {"kind": "Refutation",
             "comment": (
-                "DPV places scientific research below research and "
-                "development, so a use for scientific research lies under "
-                "the category of each policy."),
-            "premises": [("fromResource", "SR below RnD"),
-                         ("fromOrderAxiom", "reflexivity")]},
+                "DPV places non-commercial research below research and "
+                "development and below non-commercial purpose, so a use for "
+                "non-commercial research lies under the category of each "
+                "policy."),
+            "premises": [("fromResource", "NCR below RnD"),
+                         ("fromResource", "NCR below NCP")]},
         "provenance": "Category clauses on both sides of a data-sharing "
                       "agreement.",
         "ttl": _ttl("KGC404", PURPOSE,
                     "use for research and development or any narrower purpose",
                     [("isA", ["ResearchAndDevelopment"])],
-                    "use for scientific research or any narrower purpose",
-                    [("isA", ["ScientificResearch"])]),
+                    "use for non-commercial purposes or any narrower purpose",
+                    [("isA", ["NonCommercialPurpose"])]),
     },
 ]

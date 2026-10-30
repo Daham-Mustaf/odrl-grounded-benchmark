@@ -27,7 +27,7 @@
     (=> (and (kge_leq x y) (kge_leq y z)) (kge_leq x z))) :named ax_leq_transitive))
 (assert (! (kge_leq loc_de_nw loc_de) :named res_loc_de_nw_within_loc_de))
 ; witness condition asserted
-(assert (! (or (and (kge_leq loc_de_nw loc_de_nw) (= loc_de_nw loc_de)) (and (kge_leq loc_de_nw loc_de) (= loc_de loc_de))) :named w_kgc391))
+(assert (! (kge_leq loc_de_nw loc_de) :named w_kgc391))
 (check-sat)
 (get-unsat-core)
 (get-model)

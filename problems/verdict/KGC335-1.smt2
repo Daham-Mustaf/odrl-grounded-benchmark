@@ -25,11 +25,10 @@
     (=> (and (kge_leq x y) (kge_leq y x)) (= x y))) :named ax_leq_antisymmetric))
 (assert (! (forall ((x Concept) (y Concept) (z Concept))
     (=> (and (kge_leq x y) (kge_leq y z)) (kge_leq x z))) :named ax_leq_transitive))
-; Instances of the registry rule this problem adopts, named as
-; the TPTP side names them.
+; Declarations: https://w3id.org/odrl-kb/dpv-loc/iso
 (assert (! (not (= loc_de loc_fr)) :named bg_dist_loc_de_loc_fr))
 ; witness condition asserted
-(assert (! (or (and (not (= loc_de loc_de)) (= loc_de loc_fr)) (and (not (= loc_fr loc_de)) (= loc_fr loc_fr))) :named w_kgc335))
+(assert (! (not (= loc_fr loc_de)) :named w_kgc335))
 (check-sat)
 (get-unsat-core)
 (get-model)

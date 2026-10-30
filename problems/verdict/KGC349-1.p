@@ -20,17 +20,19 @@ include('axioms/DPV-consent.ax').
 include('axioms/DPV-consent-declared.ax').
 
 % --- constants, groundings and resource hooks ----------------------------
-% Declarations: declared distinctness instances, stated in
-% the declarations file and instantiated here.
+% Declarations: https://w3id.org/odrl-kb/dpv-consent/declared, over every pair of the
+% witness's candidates it states (3).
 
-fof(bg_dist_dpv_consent_expired_dpv_consent_withdrawn, axiom,
-    dpv_consent_expired != dpv_consent_withdrawn).
-fof(bg_dist_dpv_consent_expired_dpv_consent_revoked, axiom,
-    dpv_consent_expired != dpv_consent_revoked).
+fof(bg_dist_dpv_consent_withdrawn_dpv_consent_revoked, axiom,
+    dpv_consent_withdrawn != dpv_consent_revoked).
+
+fof(bg_dist_dpv_consent_withdrawn_dpv_consent_expired, axiom,
+    dpv_consent_withdrawn != dpv_consent_expired).
+
+fof(bg_dist_dpv_consent_revoked_dpv_consent_expired, axiom,
+    dpv_consent_revoked != dpv_consent_expired).
 
 % --- witness condition asserted ------------------------------------------
 fof(w_kgc349, axiom,
-    ( ( ( dpv_consent_withdrawn != dpv_consent_withdrawn & dpv_consent_withdrawn != dpv_consent_revoked ) & dpv_consent_withdrawn = dpv_consent_expired )
-| ( ( dpv_consent_revoked != dpv_consent_withdrawn & dpv_consent_revoked != dpv_consent_revoked ) & dpv_consent_revoked = dpv_consent_expired )
-| ( ( dpv_consent_expired != dpv_consent_withdrawn & dpv_consent_expired != dpv_consent_revoked ) & dpv_consent_expired = dpv_consent_expired ) )).
+    ( dpv_consent_expired != dpv_consent_withdrawn & dpv_consent_expired != dpv_consent_revoked )).
 %--------------------------------------------------------------------------

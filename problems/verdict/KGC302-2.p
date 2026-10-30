@@ -23,6 +23,5 @@ include('axioms/GN000-0.ax').
 
 % --- witness condition negated -------------------------------------------
 fof(w_kgc302, axiom,
-    ~ ( ( ( kge_leq(gn_europe, gn_europe) & gn_europe = gn_france )
-| ( kge_leq(gn_france, gn_europe) & gn_france = gn_france ) ) )).
+    ~ ( kge_leq(gn_france, gn_europe) )).
 %--------------------------------------------------------------------------

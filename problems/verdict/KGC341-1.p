@@ -23,8 +23,5 @@ include('axioms/DPV-consent.ax').
 
 % --- witness condition asserted ------------------------------------------
 fof(w_kgc341, axiom,
-    ( ( ( dpv_consent_given = dpv_consent_given & dpv_consent_given = dpv_renewed_consent_given )
-| ( dpv_renewed_consent_given = dpv_consent_given & dpv_renewed_consent_given = dpv_renewed_consent_given ) )
-| ( ( dpv_consent_given = dpv_renewed_consent_given & dpv_consent_given = dpv_renewed_consent_given )
-| ( dpv_renewed_consent_given = dpv_renewed_consent_given & dpv_renewed_consent_given = dpv_renewed_consent_given ) ) )).
+    $true).
 %--------------------------------------------------------------------------

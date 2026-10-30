@@ -22,6 +22,13 @@ The statements the provers see are written here and nowhere else:
 
     fof_dist, smt_dist      a ground inequation, TPTP and SMT-LIB
     fof_disj, smt_disj      a disjointness, TPTP and SMT-LIB
+    statements(set, cs)     what a query carries: the set instantiated over
+                            every pair of the candidates cs the witness uses
+
+A query does not choose its pairs.  set_for finds the set a problem names
+by IRI, and statements() instantiates it over the pairs of concepts the
+query keeps: each inequation and each disjointness the set states, written
+pairwise and under one label in both encodings.
 
 Both encodings take the pair as the caller writes it.  The label follows
 the order of the arguments, so the same two concepts named in the other
@@ -67,7 +74,10 @@ class Decl:
         """'distinct' or 'disjoint' when the set states the pair, in either
         order, else None.  a and b are constants; constant maps an IRI to
         the constant the encodings use for it."""
-        names = {constant(m) for m in self.members}
+        cache = self.__dict__.setdefault("_names", {})
+        if constant not in cache:
+            cache[constant] = {constant(m) for m in self.members}
+        names = cache[constant]
         if a != b and a in names and b in names:
             return "distinct"
         for x, y in self.disjoint:
@@ -115,6 +125,43 @@ def load(path) -> Decl:
         members=members, disjoint=disjoint)
 
 
+# Sets found by IRI.  Those under problems/background are read on first use;
+# register() adds a set read from elsewhere, as the end-to-end test does.
+_SETS: dict = {}
+_SETS_READ = False
+
+
+def _read_sets() -> None:
+    global _SETS_READ
+    if not _SETS_READ:
+        for p in sorted(BACKGROUND.glob("*.ttl")):
+            d = load(p)
+            _SETS.setdefault(d.iri, d)
+        _SETS_READ = True
+
+
+def set_for(iri: str | None) -> "Decl | None":
+    """The set of declarations a problem's background_theory names."""
+    if not iri:
+        return None
+    if iri not in _SETS:
+        _read_sets()
+    if iri not in _SETS:
+        raise ValueError(f"no set of declarations {iri} under {BACKGROUND}")
+    return _SETS[iri]
+
+
+def register(decl: "Decl") -> None:
+    _SETS[decl.iri] = decl
+
+
+def has_disjointness(resource: str | None) -> bool:
+    """Whether some set of declarations over the resource states that
+    nothing lies below both of two concepts."""
+    _read_sets()
+    return any(d.disjoint and resource in d.applies_to for d in _SETS.values())
+
+
 def load_all(directory=BACKGROUND) -> dict:
     return {d.iri: d for d in (load(p) for p in sorted(Path(directory).glob("*.ttl")))
             if d.pair_count}
@@ -142,9 +189,19 @@ def _geonames(iri):
     return _GN_NAMES[str(iri)]
 
 
+# Vocabularies built outside problems/, as the end-to-end test builds them.
+_CONSTANTS: dict = {}
+
+
+def register_resource(resource: str, constant) -> None:
+    _CONSTANTS[resource] = constant
+
+
 def constant_for(resource: str):
     """The function from a concept IRI to the constant of the encodings,
     for the resource a set applies to."""
+    if resource in _CONSTANTS:
+        return _CONSTANTS[resource]
     import build_consent, build_dpv, build_dpvloc, build_filetype
     import build_tom
     table = {
@@ -196,6 +253,46 @@ def smt_disj(a, b) -> str:
     return (f"(assert (! (forall ((x Concept))\n"
             f"    (not (and (kge_leq x {a}) (kge_leq x {b}))))\n"
             f"  :named {n}))")
+
+
+# How a set names a pairwise inequation, where it is not bg_dist_<a>_<b>: the
+# labels the language and file type sets have always had.
+LABEL = {
+    "bcp47-distinct": lambda a, b: f"bg_dist_bcp47_{a[4:]}_{b[4:]}",
+    "filetype-declared": lambda a, b: dist_label(a, b, "distinct"),
+}
+
+
+def statements(decl: Decl | None, candidates, disjoint_over=None) -> tuple:
+    """(fof, smt, pairs): the set instantiated over the candidates.
+
+    Every pair of candidates both of which the set lists as members is
+    declared distinct, by one inequation, the same on both encodings.  Every
+    stated disjointness between two of disjoint_over (the candidates, if not
+    given) is carried in both.  pairs counts the inequations and
+    disjointnesses.
+    """
+    if decl is None:
+        return "", "", 0
+    constant = constant_for(decl.applies_to[0])
+    cands = list(dict.fromkeys(candidates))
+    wide = set(cands if disjoint_over is None else disjoint_over)
+    members = {constant(m) for m in decl.members}
+    inside = [c for c in cands if c in members]
+    label = LABEL.get(decl.path.stem, dist_label)
+    fof, smt, n = [], [], 0
+    for i, a in enumerate(inside):
+        for b in inside[i + 1:]:
+            fof.append(fof_dist(a, b, label(a, b)))
+            smt.append(smt_dist(a, b, label(a, b)))
+            n += 1
+    for x, y in decl.disjoint:
+        a, b = constant(x), constant(y)
+        if a in wide and b in wide:
+            fof.append(fof_disj(a, b))
+            smt.append(smt_disj(a, b))
+            n += 1
+    return "\n\n".join(fof), "\n".join(smt), n
 
 
 def instances(decl: Decl, pairs, fof_head, smt_head, kind="distinct",

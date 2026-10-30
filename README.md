@@ -207,12 +207,15 @@ uv run generators/check_certificates.py
 uv run generators/table_data.py --suite-numbers
 ```
 
-Needs `vampire` and `z3` on the path, and `uv` for the Python.
+Needs `vampire` and `z3` on the path, and `uv` for the Python. The
+suite was run with Vampire 5.0.1 (commit 1b13eafde) and Z3 4.8.12;
+`full-run.sh` prints the versions it finds.
 
 ### In a container
 
 Vampire has no package in most distributions, so the artefact ships a
-Dockerfile that pins both provers:
+Dockerfile that pins both provers: the Vampire 5.0.1 release binary,
+checked against its hash, and Debian bookworm's Z3 4.8.12.
 
 ```bash
 docker build -t odrl-benchmark .

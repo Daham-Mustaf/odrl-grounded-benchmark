@@ -27,7 +27,7 @@
     (=> (and (kge_leq x y) (kge_leq y z)) (kge_leq x z))) :named ax_leq_transitive))
 (assert (! (kge_leq dpv_scientific_research dpv_research_and_development) :named res_dpv_scientific_research_below_dpv_research_and_development))
 ; witness condition asserted
-(assert (! (or (and (kge_leq dpv_scientific_research dpv_scientific_research) (= dpv_scientific_research dpv_research_and_development)) (and (kge_leq dpv_research_and_development dpv_scientific_research) (= dpv_research_and_development dpv_research_and_development))) :named w_kgc316))
+(assert (! (kge_leq dpv_research_and_development dpv_scientific_research) :named w_kgc316))
 (check-sat)
 (get-unsat-core)
 (get-model)

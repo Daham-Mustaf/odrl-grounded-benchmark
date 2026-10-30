@@ -33,7 +33,7 @@
 (assert (! (kge_leq loc_eu27 loc_eu) :named res_loc_eu27_within_loc_eu))
 (assert (! (kge_leq loc_eu28 loc_eu) :named res_loc_eu28_within_loc_eu))
 ; witness condition asserted
-(assert (! (or (and (kge_leq loc_eu loc_eu) (= loc_eu loc_de)) (and (kge_leq loc_de loc_eu) (= loc_de loc_de))) :named w_kgc331))
+(assert (! (kge_leq loc_de loc_eu) :named w_kgc331))
 (check-sat)
 (get-unsat-core)
 (get-model)

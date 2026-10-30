@@ -671,7 +671,11 @@ def validate_problem_constants(p: dict, vocabulary: set[str]) -> None:
     """
     if p.get("ungrounded"):
         return
-    text = _terms_only(p["fof_decls"] + p.get("fof_witness", ""))
+    # The witness ranges over every concept of the vocabulary, which come from
+    # the resource and cannot be mistyped; what a problem names is checked.
+    named = " ".join(p["named_constants"]) if "named_constants" in p \
+        else p.get("fof_witness", "")
+    text = _terms_only(p["fof_decls"] + " " + named)
     unknown = sorted(set(_CONST.findall(text)) - vocabulary)
     if unknown:
         raise ValueError(

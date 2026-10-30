@@ -80,12 +80,7 @@ encryption itself and the verdict is Compatible.
 """
 
 from compile import right_operand as _ro, Constraint
-from pathlib import Path
 
-import declarations
-
-_DECL = declarations.load(
-    Path(__file__).resolve().parent.parent / "problems" / "background" / "tom-declared.ttl")
 
 # Concept slugs, as the TPTP and SMT-LIB encodings name them.
 TOM        = "tm_technical_organisational_measure"
@@ -226,27 +221,6 @@ def _ttl(pid, left_operand, offer_phrase, offer, request_phrase, request):
                     left_operand, request))
 
 
-def _iso(*pairs):
-    """Declared-distinctness instances, named bg_dist_ on both encodings.
-
-    The declarations state the rule and list the measures it ranges
-    over; a problem naming two of them carries the inequation between
-    them, so a refutation cites the instance it used rather than one of
-    2701. The name must match on both sides: an unsat core and a TPTP
-    proof are compared by premise name.  The statements come from
-    declarations.py, which refuses a pair the set does not state.
-    """
-    return declarations.instances(
-        _DECL, pairs,
-        ["% Declarations: declared distinctness instances, stated in",
-         "% the declarations file and instantiated here.", ""],
-        ["; Declared distinctness this problem adopts, named as the TPTP",
-         "; side names it."])
-
-
-_D364 = _iso((ENCRYPTION, ACCESS))
-_D366 = _iso((ENCRYPTION, EAR), (ACCESS, EAR))
-
 PROBLEMS = [
 
     {
@@ -378,7 +352,6 @@ PROBLEMS = [
         "resource": RESOURCE, "background_theory": DECLARED_BT,
         "binding": BINDING, "includes": INCLUDES_DECLARED,
         "tree": [C("isAllOf", ENCRYPTION, ACCESS), C("eq", ENCRYPTION, side="request")],
-        "fof_decls": _D364[0], "smt2_background": _D364[1],
         "expected_verdict": "Incompatible",
         "expected_q1": "Unsatisfiable", "expected_q2": "Satisfiable",
         "summary": (
@@ -459,7 +432,6 @@ PROBLEMS = [
         "binding": BINDING, "includes": INCLUDES_DECLARED,
         "tree": [C("isAnyOf", ENCRYPTION, ACCESS),
                  C("eq", EAR, side="request")],
-        "fof_decls": _D366[0], "smt2_background": _D366[1],
         "expected_verdict": "Incompatible",
         "expected_q1": "Unsatisfiable", "expected_q2": "Satisfiable",
         "summary": (

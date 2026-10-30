@@ -24,6 +24,5 @@ include('axioms/DPV-dpv-purposes.ax').
 
 % --- witness condition asserted ------------------------------------------
 fof(w_kgc310, axiom,
-    ( ( kge_leq(dpv_research_and_development, dpv_research_and_development) & dpv_research_and_development = dpv_scientific_research )
-| ( kge_leq(dpv_scientific_research, dpv_research_and_development) & dpv_scientific_research = dpv_scientific_research ) )).
+    kge_leq(dpv_scientific_research, dpv_research_and_development)).
 %--------------------------------------------------------------------------

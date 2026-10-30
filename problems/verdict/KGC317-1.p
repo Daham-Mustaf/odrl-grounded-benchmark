@@ -25,5 +25,5 @@ include('axioms/DPV-dpv-purposes.ax').
 
 % --- witness condition asserted ------------------------------------------
 fof(w_kgc317, axiom,
-    ( dpv_marketing != dpv_marketing & dpv_marketing = dpv_marketing )).
+    ~ ( $true )).
 %--------------------------------------------------------------------------

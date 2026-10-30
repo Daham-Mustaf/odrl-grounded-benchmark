@@ -25,11 +25,10 @@
     (=> (and (kge_leq x y) (kge_leq y x)) (= x y))) :named ax_leq_antisymmetric))
 (assert (! (forall ((x Concept) (y Concept) (z Concept))
     (=> (and (kge_leq x y) (kge_leq y z)) (kge_leq x z))) :named ax_leq_transitive))
-; Declared distinctness this problem adopts, named as the TPTP
-; side names it.
+; Declarations: https://w3id.org/odrl-kb/eu-file-type/declared
 (assert (! (not (= ft_pdf ft_pdfa1a)) :named bg_dist_ft_pdf_distinct_ft_pdfa1a))
 ; witness condition asserted
-(assert (! (or (and (= ft_pdf ft_pdf) (= ft_pdf ft_pdfa1a)) (and (= ft_pdfa1a ft_pdf) (= ft_pdfa1a ft_pdfa1a))) :named w_kgc321))
+(assert (! (= ft_pdf ft_pdfa1a) :named w_kgc321))
 (check-sat)
 (get-unsat-core)
 (get-model)

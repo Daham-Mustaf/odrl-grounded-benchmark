@@ -3,8 +3,8 @@ kgc:KGC376-observed a vrep:Refutation ;
     vrep:proofArtefact <proofs/KGC376-1.tstp> ;
     vrep:attributedStatement [
         vrep:premiseSource vrep:fromDeclarations ;
-        vrep:formulaName "bg_dist_bcp47_fr_nl" ;
-        rdfs:label "bg_dist_bcp47_fr_nl"@en ] ;
+        vrep:formulaName "bg_dist_bcp47_nl_fr" ;
+        rdfs:label "bg_dist_bcp47_nl_fr"@en ] ;
     vrep:attributedStatement [
         vrep:premiseSource vrep:fromConstraints ;
         vrep:formulaName "w_kgc376" ;

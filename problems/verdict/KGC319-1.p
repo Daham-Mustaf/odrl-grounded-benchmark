@@ -23,14 +23,6 @@ include('axioms/DPV-dpv-purposes.ax').
 
 % --- witness condition asserted ------------------------------------------
 fof(w_kgc319, axiom,
-    ( ( ( ( kge_leq(dpv_commercial_purpose, dpv_commercial_purpose) & dpv_commercial_purpose = dpv_non_commercial_research )
-| ( kge_leq(dpv_non_commercial_purpose, dpv_commercial_purpose) & dpv_non_commercial_purpose = dpv_non_commercial_research )
-| ( kge_leq(dpv_non_commercial_research, dpv_commercial_purpose) & dpv_non_commercial_research = dpv_non_commercial_research ) ) & ( ( ( kge_leq(dpv_commercial_purpose, dpv_commercial_purpose) & dpv_commercial_purpose = dpv_non_commercial_research ) & ~ ( kge_leq(dpv_commercial_purpose, dpv_non_commercial_purpose) ) )
-| ( ( kge_leq(dpv_non_commercial_purpose, dpv_commercial_purpose) & dpv_non_commercial_purpose = dpv_non_commercial_research ) & ~ ( kge_leq(dpv_non_commercial_purpose, dpv_non_commercial_purpose) ) )
-| ( ( kge_leq(dpv_non_commercial_research, dpv_commercial_purpose) & dpv_non_commercial_research = dpv_non_commercial_research ) & ~ ( kge_leq(dpv_non_commercial_research, dpv_non_commercial_purpose) ) ) ) )
-| ( ( ( kge_leq(dpv_commercial_purpose, dpv_non_commercial_purpose) & dpv_commercial_purpose = dpv_non_commercial_research )
-| ( kge_leq(dpv_non_commercial_purpose, dpv_non_commercial_purpose) & dpv_non_commercial_purpose = dpv_non_commercial_research )
-| ( kge_leq(dpv_non_commercial_research, dpv_non_commercial_purpose) & dpv_non_commercial_research = dpv_non_commercial_research ) ) & ( ( ( kge_leq(dpv_commercial_purpose, dpv_non_commercial_purpose) & dpv_commercial_purpose = dpv_non_commercial_research ) & ~ ( kge_leq(dpv_commercial_purpose, dpv_commercial_purpose) ) )
-| ( ( kge_leq(dpv_non_commercial_purpose, dpv_non_commercial_purpose) & dpv_non_commercial_purpose = dpv_non_commercial_research ) & ~ ( kge_leq(dpv_non_commercial_purpose, dpv_commercial_purpose) ) )
-| ( ( kge_leq(dpv_non_commercial_research, dpv_non_commercial_purpose) & dpv_non_commercial_research = dpv_non_commercial_research ) & ~ ( kge_leq(dpv_non_commercial_research, dpv_commercial_purpose) ) ) ) ) )).
+    ( ( kge_leq(dpv_non_commercial_research, dpv_commercial_purpose) & ~ ( kge_leq(dpv_non_commercial_research, dpv_non_commercial_purpose) ) )
+| ( kge_leq(dpv_non_commercial_research, dpv_non_commercial_purpose) & ~ ( kge_leq(dpv_non_commercial_research, dpv_commercial_purpose) ) ) )).
 %--------------------------------------------------------------------------

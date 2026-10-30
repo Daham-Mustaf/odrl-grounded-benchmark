@@ -15,7 +15,6 @@
 (set-option :produce-unsat-cores true)
 (set-option :produce-models true)
 (declare-sort Concept 0)
-(declare-fun dpv_marketing () Concept)
 (declare-fun kge_leq (Concept Concept) Bool)
 ; Order axioms, quantified.  The same three as KGE000-0.ax, so the two
 ; encodings are the same theory.
@@ -25,7 +24,7 @@
 (assert (! (forall ((x Concept) (y Concept) (z Concept))
     (=> (and (kge_leq x y) (kge_leq y z)) (kge_leq x z))) :named ax_leq_transitive))
 ; witness condition negated
-(assert (! (not (and (not (= dpv_marketing dpv_marketing)) (= dpv_marketing dpv_marketing))) :named w_kgc317))
+(assert (! (not (not true)) :named w_kgc317))
 (check-sat)
 (get-unsat-core)
 (get-model)

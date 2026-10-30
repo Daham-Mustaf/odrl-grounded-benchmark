@@ -20,14 +20,13 @@ include('axioms/DPV-consent.ax').
 include('axioms/DPV-consent-definitional.ax').
 
 % --- constants, groundings and resource hooks ----------------------------
-% Declarations: the branches declared disjoint, warranted
-% by the module's definitions and asserted by it nowhere.
+% Declarations: https://w3id.org/odrl-kb/dpv-consent/definitional, over every pair of the
+% witness's candidates it states (1).
 
 fof(bg_disj_dpv_consent_status_valid_for_processing_disjoint_dpv_consent_status_invalid_for_processing, axiom,
     ! [X] : ~ ( kge_leq(X, dpv_consent_status_valid_for_processing) & kge_leq(X, dpv_consent_status_invalid_for_processing) )).
 
 % --- witness condition asserted ------------------------------------------
 fof(w_kgc343, axiom,
-    ( ( kge_leq(dpv_consent_status_valid_for_processing, dpv_consent_status_valid_for_processing) & dpv_consent_status_valid_for_processing = dpv_consent_withdrawn )
-| ( kge_leq(dpv_consent_withdrawn, dpv_consent_status_valid_for_processing) & dpv_consent_withdrawn = dpv_consent_withdrawn ) )).
+    kge_leq(dpv_consent_withdrawn, dpv_consent_status_valid_for_processing)).
 %--------------------------------------------------------------------------

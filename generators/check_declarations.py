@@ -46,10 +46,11 @@ BG, AX, VERDICT = Path("problems/background"), Path("problems/axioms"), Path("pr
 # problems), inline (no .ax; the problems carry the statements).  label: how
 # the encodings spell the name of a distinctness.
 SETS = {
-    "bcp47-distinct":           dict(ax="BCP47001-0.ax", form="expanded", label="bcp47"),
+    "bcp47-distinct":           dict(ax="BCP47001-0.ax", form="rule", noun="Languages",
+                                     token="constant", label="bcp47"),
     "consent-declared":         dict(ax="DPV-consent-declared.ax", form="rule",
                                      noun="States", token="local"),
-    "consent-definitional":     dict(ax="DPV-consent-definitional.ax", form="expanded"),
+    "consent-definitional":     dict(ax="DPV-consent-definitional.ax", form="rule"),
     "dpv-purposes-declared":    dict(ax="DPV-dpv-purposes-declared.ax", form="rule",
                                      noun="Purposes", token="local"),
     "dpvloc-iso":               dict(ax="LOC-dpvloc-iso.ax", form="rule",
@@ -261,6 +262,18 @@ def main() -> int:
                 if lab != label_of(spec.get("label"), kind, a, b):
                     fail(n, f"{spec['ax']}: label {lab} for {a} and {b}")
             axstate = f"{len(found)} formulas"
+        elif spec["form"] == "rule" and not d.members:
+            # a rule of disjointness: the pairs, one per line, "a disjoint b"
+            text = (AX / spec["ax"]).read_text(encoding="utf-8")
+            pm = re.search(r"^% Pairs\s*: (\d+)$", text, re.M)
+            if not pm or int(pm[1]) != d.n_pairs():
+                fail(n, f"{spec['ax']} says {pm and pm[1]} pairs, the RDF states {d.n_pairs()}")
+            listed = {frozenset(m) for m in re.findall(r"^% (\w+) disjoint (\w+)$", text, re.M)}
+            if listed != {frozenset(p) for p in jpairs}:
+                fail(n, f"{spec['ax']} lists {len(listed)} disjoint pairs and they are not the RDF's {len(jpairs)}")
+            if re.search(r"^fof\(", text, re.M):
+                fail(n, f"{spec['ax']} states the rule and carries formulas")
+            axstate = f"rule, {len(listed)} pairs"
         elif spec["form"] == "rule":
             text = (AX / spec["ax"]).read_text(encoding="utf-8")
             nm = re.search(rf"^% {spec['noun']}\s*: (\d+)$", text, re.M)
@@ -289,9 +302,10 @@ def main() -> int:
                 if odd:
                     fail(q.name, f"{odd} bg_ statements in a form the writer does not produce")
                 for kind, lab, a, b in found:
+                    want = label_of(spec.get("label"), kind, a, b)
                     if d.has(a, b, const) != kind:
                         fail(q.name, f"{lab}: the set does not state {kind} for {a} and {b}")
-                    elif lab != label_of(spec.get("label"), kind, a, b):
+                    elif lab != want:
                         fail(q.name, f"label {lab} for {a} and {b}")
                     used.add(frozenset((a, b)))
         for c, s in cases_set.items():

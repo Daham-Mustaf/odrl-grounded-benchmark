@@ -2,50 +2,47 @@
 % Refutation found. Thanks to Tanya!
 % SZS status Unsatisfiable for KGC349-2
 % SZS output start Proof for KGC349-2
-fof(f16,axiom,(
-  dpv_consent_expired != dpv_consent_withdrawn),
-  file('problems/verdict/KGC349-2.p',bg_dist_dpv_consent_expired_dpv_consent_withdrawn)).
 fof(f17,axiom,(
-  dpv_consent_expired != dpv_consent_revoked),
-  file('problems/verdict/KGC349-2.p',bg_dist_dpv_consent_expired_dpv_consent_revoked)).
+  dpv_consent_withdrawn != dpv_consent_expired),
+  file('problems/verdict/KGC349-2.p',bg_dist_dpv_consent_withdrawn_dpv_consent_expired)).
 fof(f18,axiom,(
-  ~((dpv_consent_withdrawn != dpv_consent_withdrawn & dpv_consent_withdrawn != dpv_consent_revoked & dpv_consent_withdrawn = dpv_consent_expired) | (dpv_consent_revoked != dpv_consent_withdrawn & dpv_consent_revoked != dpv_consent_revoked & dpv_consent_revoked = dpv_consent_expired) | (dpv_consent_expired != dpv_consent_withdrawn & dpv_consent_expired != dpv_consent_revoked & dpv_consent_expired = dpv_consent_expired))),
+  dpv_consent_revoked != dpv_consent_expired),
+  file('problems/verdict/KGC349-2.p',bg_dist_dpv_consent_revoked_dpv_consent_expired)).
+fof(f19,axiom,(
+  ~(dpv_consent_expired != dpv_consent_withdrawn & dpv_consent_expired != dpv_consent_revoked)),
   file('problems/verdict/KGC349-2.p',w_kgc349)).
-fof(f23,plain,(
-  (dpv_consent_withdrawn = dpv_consent_withdrawn | dpv_consent_revoked = dpv_consent_withdrawn | dpv_consent_expired != dpv_consent_withdrawn) & (dpv_consent_revoked = dpv_consent_withdrawn | dpv_consent_revoked = dpv_consent_revoked | dpv_consent_expired != dpv_consent_revoked) & (dpv_consent_expired = dpv_consent_withdrawn | dpv_consent_expired = dpv_consent_revoked | dpv_consent_expired != dpv_consent_expired)),
-  inference(ennf_transformation,[],[f18])).
-fof(f39,plain,(
-  dpv_consent_expired != dpv_consent_withdrawn),
-  inference(cnf_transformation,[],[f16])).
-fof(f40,plain,(
-  dpv_consent_expired != dpv_consent_revoked),
-  inference(cnf_transformation,[],[f17])).
-fof(f41,plain,(
-  dpv_consent_expired = dpv_consent_withdrawn | dpv_consent_expired = dpv_consent_revoked | dpv_consent_expired != dpv_consent_expired),
-  inference(cnf_transformation,[],[f23])).
-fof(f44,plain,(
+fof(f24,plain,(
   dpv_consent_expired = dpv_consent_withdrawn | dpv_consent_expired = dpv_consent_revoked),
-  inference(trivial_inequality_removal,[],[f41])).
-fof(f46,definition,(
+  inference(ennf_transformation,[],[f19])).
+fof(f41,plain,(
+  dpv_consent_expired != dpv_consent_withdrawn),
+  inference(cnf_transformation,[],[f17])).
+fof(f42,plain,(
+  dpv_consent_expired != dpv_consent_revoked),
+  inference(cnf_transformation,[],[f18])).
+fof(f43,plain,(
+  dpv_consent_expired = dpv_consent_withdrawn | dpv_consent_expired = dpv_consent_revoked),
+  inference(cnf_transformation,[],[f24])).
+fof(f45,definition,(
   spl0_1 <=> dpv_consent_expired = dpv_consent_revoked),
   introduced(definition,[new_symbols(naming,[spl0_1])],[avatar_definition])).
-fof(f50,definition,(
+fof(f49,definition,(
   spl0_2 <=> dpv_consent_expired = dpv_consent_withdrawn),
   introduced(definition,[new_symbols(naming,[spl0_2])],[avatar_definition])).
-fof(f53,plain,(
+fof(f52,plain,(
   spl0_1 | spl0_2),
-  inference(avatar_split_clause,[],[f44,f50,f46])).
-fof(f54,plain,(
+  inference(avatar_split_clause,[],[f43,f49,f45])).
+fof(f53,plain,(
   ~spl0_1),
-  inference(avatar_split_clause,[],[f40,f46])).
-fof(f55,plain,(
+  inference(avatar_split_clause,[],[f42,f45])).
+fof(f54,plain,(
   ~spl0_2),
-  inference(avatar_split_clause,[],[f39,f50])).
-cnf(s1, plain, spl0_1 | spl0_2, inference(sat_conversion,[],[f53])).
-cnf(s2, plain, ~spl0_1, inference(sat_conversion,[],[f54])).
-cnf(s3, plain, ~spl0_2, inference(sat_conversion,[],[f55])).
+  inference(avatar_split_clause,[],[f41,f49])).
+cnf(s1, plain, spl0_1 | spl0_2, inference(sat_conversion,[],[f52])).
+cnf(s2, plain, ~spl0_1, inference(sat_conversion,[],[f53])).
+cnf(s3, plain, ~spl0_2, inference(sat_conversion,[],[f54])).
 cnf(s4, plain, $false, inference(rat,[],[s1,s3,s2])).
-fof(f56,plain,(
+fof(f55,plain,(
   $false),
   inference(avatar_sat_refutation,[],[s4])).
 % SZS output end Proof for KGC349-2

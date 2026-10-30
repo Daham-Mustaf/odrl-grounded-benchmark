@@ -6,29 +6,23 @@ fof(f23,axiom,(
   kge_leq(gn_france,gn_europe)),
   file('problems/verdict/KGC302-2.p',gn_france_leq_europe)).
 fof(f33,axiom,(
-  ~((kge_leq(gn_europe,gn_europe) & gn_europe = gn_france) | (kge_leq(gn_france,gn_europe) & gn_france = gn_france))),
+  ~kge_leq(gn_france,gn_europe)),
   file('problems/verdict/KGC302-2.p',w_kgc302)).
-fof(f53,plain,(
-  (~kge_leq(gn_europe,gn_europe) | gn_europe != gn_france) & (~kge_leq(gn_france,gn_europe) | gn_france != gn_france)),
-  inference(ennf_transformation,[],[f33])).
-fof(f61,plain,(
+fof(f60,plain,(
   kge_leq(gn_france,gn_europe)),
   inference(cnf_transformation,[],[f23])).
-fof(f71,plain,(
-  ~kge_leq(gn_france,gn_europe) | gn_france != gn_france),
-  inference(cnf_transformation,[],[f53])).
-fof(f73,plain,(
+fof(f70,plain,(
   ~kge_leq(gn_france,gn_europe)),
-  inference(trivial_inequality_removal,[],[f71])).
-fof(f83,plain,(
+  inference(cnf_transformation,[],[f33])).
+fof(f71,plain,(
   $false),
-  inference(forward_subsumption_resolution,[],[f61,f73])).
+  inference(forward_subsumption_resolution,[],[f60,f70])).
 % SZS output end Proof for KGC302-2
 % ------------------------------
 % Version: Vampire 5.0.1 (Release build, commit 1b13eafde on 2026-01-18 12:14:50 +0000)
 % CaDiCaL version: 2.1.3
 % Termination reason: Refutation
-% Time elapsed: 0.001 s
+% Time elapsed: 0.0000 s
 % Peak memory usage: 16 MB
 % ------------------------------
 % ------------------------------

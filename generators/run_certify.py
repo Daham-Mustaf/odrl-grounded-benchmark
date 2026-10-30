@@ -28,6 +28,15 @@ VAMPIRE = ["vampire", "--mode", "vampire", "--proof", "tptp",
            "--output_axiom_names", "on"]
 Z3 = ["z3"]
 
+# Problems where the two provers cite different kinds of statements for a
+# reason that is understood, with the reason.  The difference is still
+# counted, and the reason is printed with it; no prover option changes.
+EXPLAINED = {
+    "KGC309": "Z3's unsat cores are not minimal, and the GeoNames binding "
+              "keeps every statement, so Z3's core also cites an order "
+              "statement Vampire's proof does not use",
+}
+
 
 def run_vampire(path: Path, timeout: int, root: Path) -> tuple[str, str]:
     """Returns (normalised status, raw output)."""
@@ -139,6 +148,7 @@ def main() -> int:
     use_v = args.prover in ("both", "vampire")
     use_z = args.prover in ("both", "z3")
     agree = disagree = matched = mismatched = 0
+    explained = []
 
     for q1path in problems:
         pid = q1path.name[:-4]
@@ -257,10 +267,15 @@ def main() -> int:
                 print(f"    both provers: {shape}")
             else:
                 disagree += 1
-                print(f"    PROVERS DIFFER  vampire={a}  z3={b}")
+                print(f"    PROVERS DIFFER  {pid}  vampire={a}  z3={b}")
+                if pid in EXPLAINED:
+                    explained.append(pid)
+                    print(f"    PROVERS DIFFER  {pid}  explained: "
+                          f"{EXPLAINED[pid]}")
 
     if use_v and use_z:
-        print(f"\nprovenance agreement: {agree} agree, {disagree} differ")
+        print(f"\nprovenance agreement: {agree} agree, {disagree} differ"
+              + (f" (explained: {', '.join(explained)})" if explained else ""))
     if use_v:
         print(f"certificate agreement: {matched} match, "
               f"{mismatched} differ from the problem's declaration")

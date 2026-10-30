@@ -23,10 +23,5 @@ include('axioms/BCP47000-0.ax').
 
 % --- witness condition asserted ------------------------------------------
 fof(w_kgc398, axiom,
-    ( $true & $true & ( ( $true & ( bcp_de = bcp_de
-| bcp_de = bcp_fr ) )
-| ( $true & ( bcp_fr = bcp_de
-| bcp_fr = bcp_fr ) )
-| ( $true & ( bcp_nl = bcp_de
-| bcp_nl = bcp_fr ) ) ) )).
+    $true).
 %--------------------------------------------------------------------------

@@ -80,12 +80,8 @@ The disjunction is inside both queries, not around them.  No xone
 alternative is an isAllOf constraint, as the signature requires.
 """
 from compile import Constraint, Or, right_operand as _ro
-from pathlib import Path
 
-import declarations
 
-_DECL = declarations.load(
-    Path(__file__).resolve().parent.parent / "problems" / "background" / "consent-definitional.ttl")
 
 VALID     = "dpv_consent_status_valid_for_processing"
 INVALID   = "dpv_consent_status_invalid_for_processing"
@@ -118,49 +114,6 @@ PROV_POST = ("Processing after withdrawal, the Art. 7(3) against Art. 17 "
 def C(op, *vals, side="offer"):
     return Constraint(op, tuple(vals), side)
 
-def _disj(*pairs):
-    """Declared disjointness: nothing lies below both branches.
-
-    Quantified where distinctness is ground, so the SMT side needs an
-    explicit forall. The name matches what DPV-consent-definitional.ax
-    writes, or the two provers would cite different names for one
-    premise.  The statements come from declarations.py, which refuses a
-    pair the set does not state.
-    """
-    return declarations.instances(
-        _DECL, pairs,
-        ["% Declarations: the branches declared disjoint, warranted",
-         "% by the module's definitions and asserted by it nowhere.", ""],
-        ["; The same disjointness, named as the TPTP side names it."],
-        kind="disjoint")
-
-
-_DISJ = _disj((VALID, INVALID))
-
-_DECLARED = declarations.load(
-    Path(__file__).resolve().parent.parent / "problems" / "background" / "consent-declared.ttl")
-
-
-def _iso(*pairs):
-    """Declared-distinctness instances, named bg_dist_ on both encodings.
-
-    The declarations list every state of the slice; a problem naming two of
-    them carries the inequation between them, so a refutation cites the
-    instance it used rather than one of 78.  The name must match on both
-    sides: an unsat core and a TPTP proof are compared by premise name.  The
-    statements come from declarations.py, which refuses a pair the set does
-    not state.
-    """
-    return declarations.instances(
-        _DECLARED, pairs,
-        ["% Declarations: declared distinctness instances, stated in",
-         "% the declarations file and instantiated here.", ""],
-        ["; Declared distinctness this problem adopts, named as the TPTP",
-         "; side names it."])
-
-
-_D348 = _iso((VALID, WITHDRAWN))
-_D349 = _iso((EXPIRED, WITHDRAWN), (EXPIRED, REVOKED))
 
 _TTL_HEAD = """\
 @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
@@ -377,9 +330,6 @@ PROBLEMS = [
         "left_operand": "Status", "sort": "tax",
         "resource": RESOURCE, "background_theory": DEFINITIONAL_BT,
         "binding": BINDING, "includes": INCLUDES_DEFINITIONAL,
-        "fof_decls": _DISJ[0],
-        "smt2_background": _DISJ[1],
-        "extra_constants": [INVALID],
         "tree": [C("isA", VALID), C("eq", WITHDRAWN, side="request")],
         "expected_verdict": "Incompatible",
         "expected_q1": "Unsatisfiable", "expected_q2": "Satisfiable",
@@ -426,7 +376,6 @@ PROBLEMS = [
         "left_operand": "Status", "sort": "tax",
         "resource": RESOURCE, "background_theory": DECLARED_BT,
         "binding": BINDING, "includes": INCLUDES_DECLARED,
-        "fof_decls": _D348[0], "smt2_background": _D348[1],
         "tree": [C("isA", VALID), C("eq", WITHDRAWN, side="request")],
         "expected_verdict": "Unknown",
         "expected_q1": "Satisfiable", "expected_q2": "Satisfiable",
@@ -469,7 +418,6 @@ PROBLEMS = [
         "left_operand": "Status", "sort": "tax",
         "resource": RESOURCE, "background_theory": DECLARED_BT,
         "binding": BINDING, "includes": INCLUDES_DECLARED,
-        "fof_decls": _D349[0], "smt2_background": _D349[1],
         "tree": [C("isNoneOf", WITHDRAWN, REVOKED),
                  C("eq", EXPIRED, side="request")],
         "expected_verdict": "Compatible",

@@ -28,9 +28,10 @@
     (=> (and (kge_leq x y) (kge_leq y z)) (kge_leq x z))) :named ax_leq_transitive))
 (assert (! (kge_concept bcp_de) :named res_bcp47_de))
 (assert (! (kge_concept bcp_fr) :named res_bcp47_fr))
+; Declarations: https://w3id.org/odrl-kb/bcp47/distinct
 (assert (! (not (= bcp_de bcp_fr)) :named bg_dist_bcp47_de_fr))
 ; witness condition asserted
-(assert (! (or (and (= bcp_de bcp_de) (= bcp_de bcp_fr)) (and (= bcp_fr bcp_de) (= bcp_fr bcp_fr))) :named w_kgc300))
+(assert (! (= bcp_de bcp_fr) :named w_kgc300))
 (check-sat)
 (get-unsat-core)
 (get-model)

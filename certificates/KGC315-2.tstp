@@ -18,7 +18,7 @@ fof(f123,axiom,(
   kge_leq(dpv_service_provision,dpv_service_management)),
   file('problems/verdict/KGC315-2.p',res_dpv_service_provision_below_dpv_service_management)).
 fof(f135,axiom,(
-  ~((kge_leq(dpv_purpose,dpv_purpose) & dpv_purpose = dpv_delivery_of_goods) | (kge_leq(dpv_delivery_of_goods,dpv_purpose) & dpv_delivery_of_goods = dpv_delivery_of_goods))),
+  ~kge_leq(dpv_delivery_of_goods,dpv_purpose)),
   file('problems/verdict/KGC315-2.p',w_kgc315)).
 fof(f138,plain,(
   ! [X0,X1,X2] : (kge_leq(X0,X2) | (~kge_leq(X0,X1) | ~kge_leq(X1,X2)))),
@@ -26,57 +26,51 @@ fof(f138,plain,(
 fof(f139,plain,(
   ! [X0,X1,X2] : (kge_leq(X0,X2) | ~kge_leq(X0,X1) | ~kge_leq(X1,X2))),
   inference(flattening,[],[f138])).
-fof(f140,plain,(
-  (~kge_leq(dpv_purpose,dpv_purpose) | dpv_purpose != dpv_delivery_of_goods) & (~kge_leq(dpv_delivery_of_goods,dpv_purpose) | dpv_delivery_of_goods != dpv_delivery_of_goods)),
-  inference(ennf_transformation,[],[f135])).
-fof(f143,plain,(
+fof(f142,plain,(
   ( ! [X2,X0,X1] : (~kge_leq(X1,X2) | ~kge_leq(X0,X1) | kge_leq(X0,X2)) )),
   inference(cnf_transformation,[],[f139])).
-fof(f164,plain,(
+fof(f163,plain,(
   kge_leq(dpv_delivery_of_goods,dpv_requested_service_provision)),
   inference(cnf_transformation,[],[f24])).
-fof(f249,plain,(
+fof(f248,plain,(
   kge_leq(dpv_requested_service_provision,dpv_service_provision)),
   inference(cnf_transformation,[],[f109])).
-fof(f258,plain,(
+fof(f257,plain,(
   kge_leq(dpv_service_management,dpv_purpose)),
   inference(cnf_transformation,[],[f118])).
-fof(f263,plain,(
+fof(f262,plain,(
   kge_leq(dpv_service_provision,dpv_service_management)),
   inference(cnf_transformation,[],[f123])).
-fof(f275,plain,(
-  ~kge_leq(dpv_delivery_of_goods,dpv_purpose) | dpv_delivery_of_goods != dpv_delivery_of_goods),
-  inference(cnf_transformation,[],[f140])).
-fof(f277,plain,(
+fof(f274,plain,(
   ~kge_leq(dpv_delivery_of_goods,dpv_purpose)),
-  inference(trivial_inequality_removal,[],[f275])).
-fof(f1625,plain,(
+  inference(cnf_transformation,[],[f135])).
+fof(f1613,plain,(
   ( ! [X0] : (~kge_leq(X0,dpv_requested_service_provision) | kge_leq(X0,dpv_service_provision)) )),
-  inference(resolution,[],[f143,f249])).
-fof(f1659,plain,(
+  inference(resolution,[],[f142,f248])).
+fof(f1647,plain,(
   ( ! [X0] : (~kge_leq(X0,dpv_service_management) | kge_leq(X0,dpv_purpose)) )),
-  inference(resolution,[],[f143,f258])).
-fof(f1712,plain,(
+  inference(resolution,[],[f142,f257])).
+fof(f1700,plain,(
   ( ! [X0] : (~kge_leq(X0,dpv_service_provision) | kge_leq(X0,dpv_service_management)) )),
-  inference(resolution,[],[f143,f263])).
+  inference(resolution,[],[f142,f262])).
 fof(f2058,plain,(
   kge_leq(dpv_delivery_of_goods,dpv_service_provision)),
-  inference(resolution,[],[f1625,f164])).
-fof(f3171,plain,(
+  inference(resolution,[],[f1613,f163])).
+fof(f3170,plain,(
   kge_leq(dpv_delivery_of_goods,dpv_service_management)),
-  inference(resolution,[],[f1712,f2058])).
-fof(f3934,plain,(
+  inference(resolution,[],[f1700,f2058])).
+fof(f3922,plain,(
   kge_leq(dpv_delivery_of_goods,dpv_purpose)),
-  inference(resolution,[],[f3171,f1659])).
-fof(f3946,plain,(
+  inference(resolution,[],[f3170,f1647])).
+fof(f3934,plain,(
   $false),
-  inference(forward_subsumption_resolution,[],[f3934,f277])).
+  inference(forward_subsumption_resolution,[],[f3922,f274])).
 % SZS output end Proof for KGC315-2
 % ------------------------------
 % Version: Vampire 5.0.1 (Release build, commit 1b13eafde on 2026-01-18 12:14:50 +0000)
 % CaDiCaL version: 2.1.3
 % Termination reason: Refutation
-% Time elapsed: 0.010 s
+% Time elapsed: 0.009 s
 % Peak memory usage: 16 MB
 % ------------------------------
 % ------------------------------

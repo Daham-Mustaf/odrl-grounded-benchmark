@@ -16,13 +16,19 @@ die() { echo "FAILED: $1" >&2; exit 1; }
 # failure; the exit status at the end says whether there was one.
 FAILED=0
 
-# Seconds a prover may take on one query, for the verdict run (stage 6) and
-# the proof checker (stage 8) alike.  The checker runs Vampire in a mode that
-# is slower on satisfiable queries than the one stage 6 uses; KGC331-1 takes
-# about 35 seconds there.  Set PROVER_LIMIT to change it.
+# Seconds a prover may take on one query, for the verdict run (stage 6), the
+# encodings check (6b), the two provers (7) and the proof checker (8) alike.
+# The checker runs Vampire in a mode that is slower on satisfiable queries
+# than the one stage 6 uses; KGC331-1 takes about 35 seconds there.  Set
+# PROVER_LIMIT to change it.
 PROVER_LIMIT="${PROVER_LIMIT:-60}"
 
 RETRIEVED=2026-08-19
+
+# The provers, as they ran.  Their versions and modes are not changed here.
+hdr "0. provers"
+echo "  $(vampire --version 2>&1 | head -1)"
+echo "  $(z3 --version 2>&1 | head -1)"
 
 # --- 1. resources, from the vendored files -----------------------------
 hdr "1. builders"
@@ -94,6 +100,9 @@ if [ "$cases_ok" != 0 ]; then
   FAILED=1
 fi
 
+hdr "4f. regression tests: the witness ranges over the whole vocabulary"
+uv run tests/test_candidates.py || { echo "FAILED: a regression test did not pass" >&2; FAILED=1; }
+
 hdr "5. bindings: do the probes hold"
 uv run generators/validate_bindings.py --probes probes \
   --axioms problems/axioms 2>&1 | tail -5
@@ -105,11 +114,11 @@ TIMEOUT="$PROVER_LIMIT" bash run_verdict.sh 2>/dev/null | tail -3
 
 # --- 6b. the two encodings agree ---------------------------------------
 hdr "6b. encodings: TPTP and SMT-LIB give the same status"
-uv run generators/check_encodings.py 2>&1 | tail -4
+uv run generators/check_encodings.py --limit "$PROVER_LIMIT" 2>&1 | tail -4
 
 # --- 7. provers agree --------------------------------------------------
 hdr "7. two provers, and what they cite"
-uv run generators/run_certify.py 2>&1 | grep -E \
+uv run generators/run_certify.py --timeout "$PROVER_LIMIT" 2>&1 | grep -E \
   "STATUS DISAGREEMENT|STATUS INCONCLUSIVE|PROVERS DIFFER|provenance agreement" | tail -10
 
 hdr "8. proof checking"

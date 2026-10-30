@@ -29,7 +29,7 @@
 (assert (! (kge_concept bcp_de) :named res_bcp47_de))
 (assert (! (kge_concept bcp_fr) :named res_bcp47_fr))
 ; witness condition asserted
-(assert (! (or (and (= bcp_de bcp_de) (not (= bcp_de bcp_fr))) (and (= bcp_fr bcp_de) (not (= bcp_fr bcp_fr)))) :named w_kgc375))
+(assert (! (not (= bcp_de bcp_fr)) :named w_kgc375))
 (check-sat)
 (get-unsat-core)
 (get-model)

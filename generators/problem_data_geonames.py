@@ -52,13 +52,7 @@ the TPTP side names them, so the two provers cite one premise by one name.
 """
 
 from compile import Constraint, Xone, right_operand
-from pathlib import Path
 
-import declarations
-
-_BG = Path(__file__).resolve().parent.parent / "problems" / "background"
-_DECLARED = declarations.load(_BG / "geonames-europe-declared.ttl")
-_SIBLINGS = declarations.load(_BG / "geonames-europe-siblings.ttl")
 
 FRANCE = "gn_france"
 GERMANY = "gn_germany"
@@ -79,26 +73,6 @@ INCLUDES = ["KGE000-0.ax", "GN000-0.ax"]
 def C(op, *vals, side="offer"):
     return Constraint(op, tuple(vals), side)
 
-
-def _dist(a, b):
-    """Declared distinctness, ground, on both encodings."""
-    return declarations.instances(
-        _DECLARED, [(a, b)],
-        ["% Declarations: the two countries declared distinct."],
-        ["; The same distinctness, named as the TPTP side names it."])
-
-
-def _disj(a, b):
-    """Declared disjointness: nothing lies within both."""
-    return declarations.instances(
-        _SIBLINGS, [(a, b)],
-        ["% Declarations: the two countries declared disjoint."],
-        ["; The same disjointness, named as the TPTP side names it."],
-        kind="disjoint")
-
-
-_DIST = _dist(FRANCE, GERMANY)
-_DISJ = _disj(FRANCE, GERMANY)
 
 _TTL_HEAD = """\
 @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
@@ -254,7 +228,6 @@ PROBLEMS = [
         "left_operand": "spatial", "sort": "mer",
         "resource": RESOURCE, "background_theory": DECLARED_BT,
         "binding": BINDING, "includes": INCLUDES,
-        "fof_decls": _DIST[0], "smt2_background": _DIST[1],
         "tree": EQ_TREE,
         "expected_verdict": "Compatible",
         "expected_q1": "Satisfiable", "expected_q2": "Unsatisfiable",
@@ -289,7 +262,6 @@ PROBLEMS = [
         "left_operand": "spatial", "sort": "mer",
         "resource": RESOURCE, "background_theory": DECLARED_BT,
         "binding": BINDING, "includes": INCLUDES,
-        "fof_decls": _DIST[0], "smt2_background": _DIST[1],
         "tree": WITHIN_TREE,
         "expected_verdict": "Unknown",
         "expected_q1": "Satisfiable", "expected_q2": "Satisfiable",
@@ -328,7 +300,6 @@ PROBLEMS = [
         "left_operand": "spatial", "sort": "mer",
         "resource": RESOURCE, "background_theory": SIBLINGS_BT,
         "binding": BINDING, "includes": INCLUDES,
-        "fof_decls": _DISJ[0], "smt2_background": _DISJ[1],
         "tree": WITHIN_TREE,
         "expected_verdict": "Incompatible",
         "expected_q1": "Unsatisfiable", "expected_q2": "Satisfiable",

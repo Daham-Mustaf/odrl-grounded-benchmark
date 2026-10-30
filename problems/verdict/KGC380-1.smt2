@@ -47,7 +47,7 @@
 (assert (! (kge_leq loc_bq loc_nl_bq3) :named res_loc_bq_same_loc_nl_bq3))
 (assert (! (kge_leq loc_nl_bq3 loc_bq) :named res_loc_nl_bq3_same_loc_bq))
 ; witness condition asserted
-(assert (! (or (and (kge_leq loc_eu loc_eu) (= loc_eu loc_nl_bq1)) (and (kge_leq loc_nl_bq1 loc_eu) (= loc_nl_bq1 loc_nl_bq1))) :named w_kgc380))
+(assert (! (kge_leq loc_nl_bq1 loc_eu) :named w_kgc380))
 (check-sat)
 (get-unsat-core)
 (get-model)

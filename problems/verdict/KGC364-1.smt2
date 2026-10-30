@@ -25,11 +25,10 @@
     (=> (and (kge_leq x y) (kge_leq y x)) (= x y))) :named ax_leq_antisymmetric))
 (assert (! (forall ((x Concept) (y Concept) (z Concept))
     (=> (and (kge_leq x y) (kge_leq y z)) (kge_leq x z))) :named ax_leq_transitive))
-; Declared distinctness this problem adopts, named as the TPTP
-; side names it.
+; Declarations: https://w3id.org/odrl-kb/dpv-tom/declared
 (assert (! (not (= tm_encryption tm_access_control_method)) :named bg_dist_tm_encryption_tm_access_control_method))
 ; witness condition asserted
-(assert (! (and (= tm_encryption tm_encryption) (= tm_access_control_method tm_encryption) (or (= tm_encryption tm_encryption) (= tm_access_control_method tm_encryption))) :named w_kgc364))
+(assert (! (= tm_access_control_method tm_encryption) :named w_kgc364))
 (check-sat)
 (get-unsat-core)
 (get-model)

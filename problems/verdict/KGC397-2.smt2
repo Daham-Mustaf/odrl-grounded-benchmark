@@ -26,11 +26,10 @@
 (assert (! (forall ((x Concept) (y Concept) (z Concept))
     (=> (and (kge_leq x y) (kge_leq y z)) (kge_leq x z))) :named ax_leq_transitive))
 (assert (! (kge_leq dpv_advertising dpv_marketing) :named res_dpv_advertising_below_dpv_marketing))
-; Declared distinctness this problem adopts, named as the TPTP
-; side names it.
-(assert (! (not (= dpv_advertising dpv_marketing)) :named bg_dist_dpv_advertising_dpv_marketing))
+; Declarations: https://w3id.org/odrl-kb/dpv-purposes/declared
+(assert (! (not (= dpv_marketing dpv_advertising)) :named bg_dist_dpv_marketing_dpv_advertising))
 ; witness condition negated
-(assert (! (not (or (and (not (= dpv_marketing dpv_marketing)) (= dpv_marketing dpv_advertising)) (and (not (= dpv_advertising dpv_marketing)) (= dpv_advertising dpv_advertising)))) :named w_kgc397))
+(assert (! (not (not (= dpv_advertising dpv_marketing))) :named w_kgc397))
 (check-sat)
 (get-unsat-core)
 (get-model)

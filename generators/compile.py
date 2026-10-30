@@ -244,14 +244,107 @@ def admits(c: Constraint, x: str, sort: str, s):
     raise ValueError(f"no denotation for {c.operator}")
 
 
-def witness_condition(literals, concepts, sort, s):
-    """W(K) for one disjunct, over the concepts the grounding names.
+# The witness condition is built as data first, so that it can be cleaned
+# before either encoding prints it.  The cleaning is syntactic only: c = c is
+# true, x and not x in one conjunction is false, a repeated literal and a
+# constant part go.  It never assumes two constants distinct.
+TRUE, FALSE = ("true",), ("false",)
+
+
+class Term:
+    """A syntax whose operations build the formula as nested tuples."""
+    def leq(self, a, b):     return ("leq", a, b)
+    def eq(self, a, b):      return ("eq", a, b)
+    def neq(self, a, b):     return ("not", ("eq", a, b))
+    def and_(self, xs):      return ("and", tuple(xs))
+    def or_(self, xs):       return ("or", tuple(xs))
+    def not_(self, x):       return ("not", x)
+    def wrap(self, x):       return x
+    def true_(self):         return TRUE
+
+
+def clean(t):
+    kind = t[0]
+    if kind == "eq":
+        return TRUE if t[1] == t[2] else t
+    if kind == "not":
+        x = clean(t[1])
+        return FALSE if x == TRUE else TRUE if x == FALSE else ("not", x)
+    if kind in ("and", "or"):
+        unit, zero = (TRUE, FALSE) if kind == "and" else (FALSE, TRUE)
+        out = {}
+        for x in map(clean, t[1]):
+            if x == zero:
+                return zero
+            if x == unit:
+                continue
+            for y in (x[1] if x[0] == kind else (x,)):
+                out.setdefault(y, None)
+        if kind == "and" and any(("not", y) in out for y in out):
+            return FALSE
+        out = list(out)
+        return unit if not out else out[0] if len(out) == 1 else (kind, tuple(out))
+    return t
+
+
+def render(t, s):
+    kind = t[0]
+    if kind == "true":
+        return s.true_()
+    if kind == "false":
+        return s.not_(s.true_())
+    if kind == "eq":
+        return s.eq(t[1], t[2])
+    if kind == "leq":
+        return s.leq(t[1], t[2])
+    if kind == "not":
+        x = t[1]
+        return s.neq(x[1], x[2]) if x[0] == "eq" else s.not_(render(x, s))
+    return (s.and_ if kind == "and" else s.or_)([render(x, s) for x in t[1]])
+
+
+def constants_in(t, out=None) -> list:
+    """The constants a cleaned formula names, in order of appearance."""
+    out = {} if out is None else out
+    if t[0] in ("eq", "leq"):
+        out.setdefault(t[1], None)
+        out.setdefault(t[2], None)
+    elif t[0] == "not":
+        constants_in(t[1], out)
+    elif t[0] in ("and", "or"):
+        for x in t[1]:
+            constants_in(x, out)
+    return list(out)
+
+
+def witness_term(literals, concepts, sort, full=False):
+    """W(K) for one disjunct, as data, before cleaning.
 
         F subset D  and  D non-empty  and  D meets each T in M
 
     where M is the isAnyOf denotations together with one complement per
     negative literal.  Definition Witness as restated; quantifier-free.
+
+    D is the set of the concepts every subset-mode literal admits, and a
+    part of W asks whether some concept is in it.  Where a literal fixes
+    which concepts can be, the part tries only those (full=False):
+
+      F subset D        each value the isAllOf lists; no enumeration.
+      D meets isAnyOf   only that list's values.
+      D non-empty       if K has an eq literal, only its value; else, if K
+                        has isAnyOf or isAllOf, the part is implied and
+                        goes; else every concept.
+      D meets the complement of a negated literal
+                        if K has an eq literal, only its value; else every
+                        concept.
+
+    An element of D equals the eq value, and so satisfies what the value
+    satisfies; an isAnyOf is met only by its values; a value an isAllOf
+    lists is in D.  So each part is the same condition as the part over
+    every concept.  full=True tries every concept in every part, which the
+    rule is checked against.
     """
+    s = Term()
     pos = [l.c for l in literals if l.positive]
     neg = [l.c for l in literals if not l.positive]
     # Not an assert: this guards the soundness of the formula rather than a
@@ -267,10 +360,14 @@ def witness_condition(literals, concepts, sort, s):
     subset = [c for c in pos if MODE[c.operator] == SUBSET]
     allof  = [c for c in pos if MODE[c.operator] == SUPERSET]
     anyof  = [c for c in pos if MODE[c.operator] == MEETS]
+    pinned = [c.values[0] for c in pos if c.operator == "eq"]
 
     def in_D(x):
         return s.and_([admits(c, x, sort, s) for c in subset]) \
             if subset else s.true_()
+
+    def some(xs, f):
+        return s.or_([f(x) for x in xs])
 
     conjuncts = []
 
@@ -283,38 +380,53 @@ def witness_condition(literals, concepts, sort, s):
     # concept set is non-empty, so the conjunct is omitted rather than
     # emitted as a tautology.
     if subset:
-        conjuncts.append(s.or_([in_D(x) for x in concepts]))
+        if full:
+            conjuncts.append(some(concepts, in_D))
+        elif pinned:
+            conjuncts.append(in_D(pinned[0]))
+        elif not (anyof or allof):
+            conjuncts.append(some(concepts, in_D))
 
     # D meets each isAnyOf denotation.
     for c in anyof:
-        conjuncts.append(s.or_(
-            [s.and_([in_D(x), admits(c, x, sort, s)]) for x in concepts]))
+        xs = concepts if full else c.values
+        conjuncts.append(some(xs, lambda x, c=c: s.and_([in_D(x), admits(c, x, sort, s)])))
 
     # D meets the complement of each negated denotation.
     for c in neg:
-        conjuncts.append(s.or_(
-            [s.and_([in_D(x), s.not_(admits(c, x, sort, s))])
-             for x in concepts]))
+        xs = concepts if full or not pinned else pinned[:1]
+        conjuncts.append(some(xs, lambda x, c=c: s.and_(
+            [in_D(x), s.not_(admits(c, x, sort, s))])))
 
-    if not conjuncts:
-        return s.true_()
-    return s.and_(conjuncts)
+    return s.and_(conjuncts) if conjuncts else TRUE
 
 
-def witness_of_tree(items, concepts, sort, s):
-    ws = [witness_condition(k, concepts, sort, s) for k in disjuncts(items)]
-    return s.or_(ws)
+def witness_condition(literals, concepts, sort, s, full=False):
+    """W(K) for one disjunct, cleaned and printed in the syntax s."""
+    return render(clean(witness_term(literals, concepts, sort, full)), s)
 
 
-def compile_operand(items, concepts, sort):
-    """Both encodings for one operand.
+def tree_term(items, concepts, sort, full=False):
+    return clean(("or", tuple(witness_term(k, concepts, sort, full)
+                              for k in disjuncts(items))))
+
+
+def witness_of_tree(items, concepts, sort, s, full=False):
+    return render(tree_term(items, concepts, sort, full), s)
+
+
+def compile_operand(items, concepts, sort, full=False):
+    """Both encodings for one operand, and the constants the witness uses.
 
     `items` is the conjunction of Constraints, Or nodes and Xone nodes for
     that operand, offer and request concatenated.  A flat list of
     Constraints is the previous interface and takes the identical path:
     one all-positive disjunct, returned unwrapped.
     """
+    t = tree_term(items, concepts, sort, full)
+    used = set(constants_in(t))
     return {
-        "fof": witness_of_tree(items, concepts, sort, FOF()),
-        "smt": witness_of_tree(items, concepts, sort, SMT()),
+        "fof": render(t, FOF()),
+        "smt": render(t, SMT()),
+        "constants": [c for c in concepts if c in used],
     }

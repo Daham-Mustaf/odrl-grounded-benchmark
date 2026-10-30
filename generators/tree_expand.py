@@ -10,6 +10,8 @@ import re
 from collections import deque
 from pathlib import Path
 
+import declarations
+import vocabulary
 from compile import Constraint, Or, Xone, compile_operand
 
 _ASSERTION = re.compile(
@@ -43,60 +45,50 @@ def _parse_assertions(text):
             yield label, "dist", (m.group(5), m.group(6))
 
 
-def _betweenness(constants, leq_edges):
-    """Constants plus every concept on a directed path between two of them.
-
-    Edges are (below, above).  A concept m is kept when it is above some
-    constant a and below some constant b: the chain a <= m <= b is then a
-    derivation the query can make, and dropping m drops it.
-    """
-    up: dict = {}
-    down: dict = {}
-    for a, b in leq_edges:
-        up.setdefault(a, set()).add(b)
-        down.setdefault(b, set()).add(a)
-
-    def reach(start, adj):
-        seen = {start}
-        queue = deque([start])
-        while queue:
-            for nxt in adj.get(queue.popleft(), ()):
-                if nxt not in seen:
-                    seen.add(nxt)
-                    queue.append(nxt)
-        return seen
-
-    ups = {c: reach(c, up) for c in constants}
-    downs = {c: reach(c, down) for c in constants}
-    keep = set(constants)
-    for a in constants:
-        for b in constants:
-            if a is not b:
-                keep |= ups[a] & downs[b]
-    return keep
-
-
-def assertions_for(constants, includes,
+def assertions_for(kept, includes, keep_all=False,
                    axioms_dir: Path = Path("problems/axioms")):
-    """The included statements the SMT side needs, and the extra constants.
+    """The statements of the included resource files the SMT side carries.
 
-    Returns (resource_block, declarations_block, extras): the two blocks as
-    strings of named asserts, either possibly empty, and the closure
-    concepts that appear in them beyond the given constants, which the
-    caller must declare.
+    Returns (block, constants): the named asserts, in file order, and the
+    constants they name, which the caller declares.  The TPTP side includes
+    the files whole; the SMT side carries every statement among the kept
+    concepts, the candidates the witness uses together with every concept on
+    a path of statements between two of them, under the same labels.
 
-    Duplicate premise names across the included files abort: :named must
-    be unique in one SMT query, and two files defining one name is a build
-    bug the TPTP side would also mislabel.
+    That is exact when the binding's declarations are distinctness only.  A
+    concept outside the kept set can be a fresh element of its own, placed
+    by its statements, and the order among the kept concepts does not change:
+    a published path through it that joined two kept concepts would make it
+    lie between them, and it would be kept.  The distinctness the query
+    carries is over the kept concepts too (declarations.statements), and a
+    fresh element is distinct from every other.  So a model of the kept
+    statements extends to one of all of them, and the query's status is the
+    same.
+
+    It is not exact where a declaration says that nothing lies below both of
+    two concepts: a concept below one of them, outside the kept set, can make
+    the other its equal impossible.  A binding with a disjointness among its
+    declarations (consent, GeoNames, both small) keeps every statement:
+    keep_all.
+
+    A declaration (bg_) in an included file is refused: a query's
+    declarations come from the set the problem names.  Duplicate premise
+    names across the included files abort: :named must be unique in one SMT
+    query, and two files defining one name is a build bug the TPTP side
+    would also mislabel.
     """
-    entries = []
-    seen: dict = {}
+    kept = set(kept)
+    lines, constants, seen = [], [], {}
     for name in includes:
         path = axioms_dir / name
         if not path.exists() or name.startswith("KGE"):
             continue
         for label, kind, args in _parse_assertions(
                 path.read_text(encoding="utf-8")):
+            if label.startswith("bg_"):
+                raise ValueError(
+                    f"{name}: {label} is a declaration in an included file; "
+                    f"declarations come from the set the problem names")
             if label in seen:
                 if seen[label] != (kind, args):
                     raise ValueError(
@@ -104,27 +96,30 @@ def assertions_for(constants, includes,
                         f"content across {includes}")
                 continue
             seen[label] = (kind, args)
-            entries.append((label, kind, args))
+            if not keep_all and any(a not in kept for a in args):
+                continue
+            if kind == "leq":
+                body = f"(kge_leq {args[0]} {args[1]})"
+            elif kind == "concept":
+                body = f"(kge_concept {args[0]})"
+            else:
+                body = f"(not (= {args[0]} {args[1]}))"
+            lines.append(f"(assert (! {body} :named {label}))")
+            constants.extend(args)
+    return "\n".join(lines), list(dict.fromkeys(constants))
 
-    leq_edges = [args for _, kind, args in entries if kind == "leq"]
-    keep = _betweenness(list(constants), leq_edges)
 
-    res, bg, extras = [], [], []
-    for label, kind, args in entries:
-        if any(a not in keep for a in args):
+def included_edges(includes, axioms_dir: Path = Path("problems/axioms")):
+    """The order statements of the included files, as (below, above)."""
+    edges = []
+    for name in includes:
+        path = axioms_dir / name
+        if not path.exists() or name.startswith("KGE"):
             continue
-        if kind == "leq":
-            body = f"(kge_leq {args[0]} {args[1]})"
-        elif kind == "concept":
-            body = f"(kge_concept {args[0]})"
-        else:
-            body = f"(not (= {args[0]} {args[1]}))"
-        line = f"(assert (! {body} :named {label}))"
-        (bg if label.startswith("bg_") else res).append(line)
-        for a in args:
-            if a not in constants and a not in extras:
-                extras.append(a)
-    return "\n".join(res), "\n".join(bg), sorted(extras)
+        edges += [args for _, kind, args in
+                  _parse_assertions(path.read_text(encoding="utf-8"))
+                  if kind == "leq"]
+    return edges
 
 
 def constants_of_tree(items) -> list:
@@ -193,32 +188,24 @@ def refuse_hand_written(p: dict) -> None:
 
 
 def refuse_non_declarations(p: dict) -> None:
-    """fof_decls and smt2_background hold declarations, and only those.
+    """fof_decls and smt2_background hold no statements a problem writes.
 
-    A declaration is labelled bg_, on both sides, so that a proof and an
-    unsat core cite one statement.  A resource statement comes from the
-    axiom file the case includes, and the derivation writes it into the
-    SMT-LIB file under the same label.  A statement written here under any
-    other label, or an SMT-LIB statement with no label at all, is refused.
+    The declarations of a query are the set the problem names
+    (background_theory), instantiated by declarations.statements over every
+    pair of the witness's candidates, and a resource statement comes from
+    the axiom file the case includes.  A problem may put comments in
+    fof_decls; a statement there, or in smt2_background, is refused.
     """
     pid = p.get("id", "?")
     fof = "\n".join(l for l in p.get("fof_decls", "").split("\n")
                     if not l.lstrip().startswith("%"))
     smt = "\n".join(l for l in p.get("smt2_background", "").split("\n")
                     if not l.lstrip().startswith(";"))
-    labels = (re.findall(r"fof\(\s*([A-Za-z0-9_]+)\s*,", fof)
-              + re.findall(r":named\s+([A-Za-z0-9_]+)", smt))
-    bad = [l for l in labels if not l.startswith("bg_")]
-    if bad:
+    if re.search(r"\bfof\s*\(", fof) or re.search(r"\(assert\b", smt):
         raise ValueError(
-            f"{pid}: {', '.join(bad)} in fof_decls or smt2_background does "
-            f"not start with bg_. Those fields hold declarations; a resource "
-            f"statement comes from the included axiom file.")
-    unnamed = len(re.findall(r"\(assert\b", smt)) - len(re.findall(r":named\b", smt))
-    if unnamed > 0:
-        raise ValueError(
-            f"{pid}: smt2_background has {unnamed} statement(s) with no "
-            f":named label. Give each the bg_ label the TPTP side uses.")
+            f"{pid}: fof_decls or smt2_background carries a statement. The "
+            f"declarations come from the set background_theory names, and "
+            f"the resource statements from the included axiom files.")
 
 
 def expand_tree(p: dict) -> dict:
@@ -259,38 +246,60 @@ def expand_tree(p: dict) -> dict:
             f"value reached the signature without being grounded; either "
             f"add it to the problem's grounding map, or mark the problem "
             f"ungrounded if the binding's rule does not resolve it.")
-    # A pair query takes its candidate concepts from the constraints of both
-    # policies: what one excludes, the other usually names.  A check on one
-    # policy alone has no second policy, and "anywhere except Bavaria" is
-    # met by some other concept of the resource that no constraint names, so
-    # the caller may add candidates.  The real queries add none.
-    candidates = [c for c in p.get("witness_candidates", [])
-                  if c not in constants]
-    w = compile_operand(p["tree"], constants + candidates, p["sort"])
-    # A declaration may name a concept neither constraint mentions:
-    # the consent disjointness ranges over both branches while the
-    # constraints name one. Those concepts go into the statement filter as
-    # well as the declarations, or an edge to one of them is dropped as
-    # leading outside the problem.
-    extra = [c for c in p.get("extra_constants", []) if c not in constants]
-    derived_res, derived_bg, extras = assertions_for(
-        constants + extra, p.get("includes", []))
+    # The value of a use can be any concept of the operand's vocabulary
+    # (Definition Witness), so the witness ranges over every concept of the
+    # vocabulary the binding reads, for every vocabulary alike.  A caller may
+    # pass fewer candidates: a use found among fewer is a use among all,
+    # which is what check_policies relies on for a policy alone.  The real
+    # queries pass none.
+    if p.get("candidates"):
+        candidates = list(constants) + [c for c in p["candidates"]
+                                        if c not in constants]
+    elif p.get("resource"):
+        candidates = vocabulary.candidates(p["resource"], constants)
+    else:
+        raise ValueError(f"{p['id']}: no resource, so no concepts for the "
+                         f"witness to range over")
+    w = compile_operand(p["tree"], candidates, p["sort"])
+    # The kept concepts: the candidates the witness uses and every concept on
+    # a path of published statements between two of them.  The SMT side
+    # carries the statements among them (assertions_for, which says why that
+    # is exact), and the declared distinctness among them, in both encodings:
+    # cc <= cb <= ca published and cb declared distinct from cc keeps cc from
+    # being ca, though the witness names only ca and cc.  A disjointness can
+    # matter through any connected concept, ca <= cc published and ca
+    # disjoint from cb keeping cb from being cc, so it is carried for every
+    # pair connected to the witness's candidates, and a binding with a
+    # disjointness among its declarations keeps every statement.
+    edges = included_edges(p.get("includes", []))
+    kept = vocabulary.between(w["constants"], edges)
+    reach = vocabulary.connected(w["constants"], edges)
+    keep_all = declarations.has_disjointness(p.get("resource"))
+    resource, named_by_resource = assertions_for(
+        kept, p.get("includes", []), keep_all)
+    decl = declarations.set_for(p.get("background_theory"))
+    fof_d, smt_d, n = declarations.statements(
+        decl, [c for c in candidates if c in kept],
+        [c for c in candidates if c in reach])
+    if n:
+        fof_d = (f"% Declarations: {decl.iri}, over every pair of the\n"
+                 f"% witness's candidates it states ({n}).\n\n" + fof_d)
+        smt_d = f"; Declarations: {decl.iri}\n" + smt_d
     q = dict(p)
-    q.setdefault("fof_decls", "")
+    head = p.get("fof_decls", "").rstrip()
+    q["fof_decls"] = "\n\n".join(x for x in (head, fof_d) if x) + "\n"
     q["fof_witness"] = w["fof"]
     q.setdefault("smt2_logic", "UF")
-    # An explicit field wins; the derivation fills only what is absent.
-    q.setdefault("smt2_resource", derived_res)
-    q.setdefault("smt2_background", derived_bg)
-    used_derived = (q["smt2_resource"] == derived_res
-                    or q["smt2_background"] == derived_bg)
-    extra = [c for c in p.get("extra_constants", [])
-             if c not in constants]
-    decl_constants = constants + extra + (extras if used_derived else [])
-    with_concept = used_derived and "(kge_concept " in (
-        q["smt2_resource"] + q["smt2_background"])
-    q["smt2_decls"] = smt_declarations(decl_constants, with_concept)
+    q["smt2_resource"] = resource
+    q["smt2_background"] = smt_d
+    declared = set(w["constants"]) | kept | set(named_by_resource) | \
+        (reach if decl is not None and decl.disjoint else set())
+    q["smt2_decls"] = smt_declarations(
+        [c for c in candidates if c in declared]
+        + [c for c in named_by_resource if c not in candidates],
+        "(kge_concept " in resource)
     q["smt2_witness"] = w["smt"]
+    q["named_constants"] = constants
     q["_derived"] = True
     return q
 

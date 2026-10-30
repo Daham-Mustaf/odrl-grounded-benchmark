@@ -26,7 +26,7 @@
 (assert (! (forall ((x Concept) (y Concept) (z Concept))
     (=> (and (kge_leq x y) (kge_leq y z)) (kge_leq x z))) :named ax_leq_transitive))
 ; witness condition asserted
-(assert (! (or (and (= ft_pdf ft_pdf) (= ft_pdf ft_pdfa1a)) (and (= ft_pdfa1a ft_pdf) (= ft_pdfa1a ft_pdfa1a))) :named w_kgc320))
+(assert (! (= ft_pdf ft_pdfa1a) :named w_kgc320))
 (check-sat)
 (get-unsat-core)
 (get-model)

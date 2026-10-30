@@ -9,10 +9,10 @@ fof(f41,axiom,(
   kge_leq(dpv_improve_transport_mobility,dpv_public_benefit)),
   file('problems/verdict/KGC396-2.p',res_dpv_improve_transport_mobility_below_dpv_public_benefit)).
 fof(f135,axiom,(
-  ~(kge_leq(dpv_data_altruism,dpv_public_benefit) & kge_leq(dpv_improve_transport_mobility,dpv_public_benefit) & (kge_leq(dpv_public_benefit,dpv_public_benefit) | kge_leq(dpv_data_altruism,dpv_public_benefit) | kge_leq(dpv_improve_transport_mobility,dpv_public_benefit)))),
+  ~(kge_leq(dpv_data_altruism,dpv_public_benefit) & kge_leq(dpv_improve_transport_mobility,dpv_public_benefit))),
   file('problems/verdict/KGC396-2.p',w_kgc396)).
 fof(f140,plain,(
-  ~kge_leq(dpv_data_altruism,dpv_public_benefit) | ~kge_leq(dpv_improve_transport_mobility,dpv_public_benefit) | (~kge_leq(dpv_public_benefit,dpv_public_benefit) & ~kge_leq(dpv_data_altruism,dpv_public_benefit) & ~kge_leq(dpv_improve_transport_mobility,dpv_public_benefit))),
+  ~kge_leq(dpv_data_altruism,dpv_public_benefit) | ~kge_leq(dpv_improve_transport_mobility,dpv_public_benefit)),
   inference(ennf_transformation,[],[f135])).
 fof(f163,plain,(
   kge_leq(dpv_data_altruism,dpv_public_benefit)),
@@ -20,40 +20,37 @@ fof(f163,plain,(
 fof(f181,plain,(
   kge_leq(dpv_improve_transport_mobility,dpv_public_benefit)),
   inference(cnf_transformation,[],[f41])).
-fof(f276,plain,(
-  ~kge_leq(dpv_data_altruism,dpv_public_benefit) | ~kge_leq(dpv_improve_transport_mobility,dpv_public_benefit) | ~kge_leq(dpv_data_altruism,dpv_public_benefit)),
-  inference(cnf_transformation,[],[f140])).
-fof(f279,plain,(
+fof(f275,plain,(
   ~kge_leq(dpv_data_altruism,dpv_public_benefit) | ~kge_leq(dpv_improve_transport_mobility,dpv_public_benefit)),
-  inference(duplicate_literal_removal,[],[f276])).
-fof(f281,definition,(
+  inference(cnf_transformation,[],[f140])).
+fof(f277,definition,(
   spl0_1 <=> kge_leq(dpv_improve_transport_mobility,dpv_public_benefit)),
   introduced(definition,[new_symbols(naming,[spl0_1])],[avatar_definition])).
-fof(f285,definition,(
+fof(f281,definition,(
   spl0_2 <=> kge_leq(dpv_data_altruism,dpv_public_benefit)),
   introduced(definition,[new_symbols(naming,[spl0_2])],[avatar_definition])).
-fof(f289,plain,(
+fof(f284,plain,(
   ~spl0_1 | ~spl0_2),
-  inference(avatar_split_clause,[],[f279,f285,f281])).
-fof(f295,plain,(
+  inference(avatar_split_clause,[],[f275,f281,f277])).
+fof(f285,plain,(
   spl0_1),
-  inference(avatar_split_clause,[],[f181,f281])).
-fof(f296,plain,(
+  inference(avatar_split_clause,[],[f181,f277])).
+fof(f286,plain,(
   spl0_2),
-  inference(avatar_split_clause,[],[f163,f285])).
-cnf(s2, plain, ~spl0_2 | ~spl0_1, inference(sat_conversion,[],[f289])).
-cnf(s4, plain, spl0_1, inference(sat_conversion,[],[f295])).
-cnf(s5, plain, spl0_2, inference(sat_conversion,[],[f296])).
-cnf(s7, plain, $false, inference(rat,[],[s2,s4,s5])).
-fof(f297,plain,(
+  inference(avatar_split_clause,[],[f163,f281])).
+cnf(s1, plain, ~spl0_2 | ~spl0_1, inference(sat_conversion,[],[f284])).
+cnf(s2, plain, spl0_1, inference(sat_conversion,[],[f285])).
+cnf(s3, plain, spl0_2, inference(sat_conversion,[],[f286])).
+cnf(s4, plain, $false, inference(rat,[],[s1,s2,s3])).
+fof(f287,plain,(
   $false),
-  inference(avatar_sat_refutation,[],[s7])).
+  inference(avatar_sat_refutation,[],[s4])).
 % SZS output end Proof for KGC396-2
 % ------------------------------
 % Version: Vampire 5.0.1 (Release build, commit 1b13eafde on 2026-01-18 12:14:50 +0000)
 % CaDiCaL version: 2.1.3
 % Termination reason: Refutation
-% Time elapsed: 0.001 s
-% Peak memory usage: 16 MB
+% Time elapsed: 0.002 s
+% Peak memory usage: 32 MB
 % ------------------------------
 % ------------------------------

@@ -20,22 +20,20 @@ include('axioms/LOC-dpvloc-geo.ax').
 include('axioms/LOC-dpvloc-iso.ax').
 
 % --- constants, groundings and resource hooks ----------------------------
-% Declarations: instances of the ISO 3166 distinctness rule,
-% stated in LOC-dpvloc-iso.ax and instantiated here.
+% Declarations: https://w3id.org/odrl-kb/dpv-loc/iso, over every pair of the
+% witness's candidates it states (3).
 
-fof(bg_dist_loc_de_by_loc_de, axiom,
-    loc_de_by != loc_de).
-fof(bg_dist_loc_de_by_loc_fr, axiom,
-    loc_de_by != loc_fr).
+fof(bg_dist_loc_de_loc_fr, axiom,
+    loc_de != loc_fr).
+
+fof(bg_dist_loc_de_loc_de_by, axiom,
+    loc_de != loc_de_by).
+
+fof(bg_dist_loc_fr_loc_de_by, axiom,
+    loc_fr != loc_de_by).
 
 % --- witness condition negated -------------------------------------------
 fof(w_kgc336, axiom,
-    ~ ( ( ( loc_de = loc_de_by
-| loc_fr = loc_de_by
-| loc_de_by = loc_de_by ) & ( ( loc_de = loc_de_by & ( loc_de = loc_de
-| loc_de = loc_fr ) )
-| ( loc_fr = loc_de_by & ( loc_fr = loc_de
-| loc_fr = loc_fr ) )
-| ( loc_de_by = loc_de_by & ( loc_de_by = loc_de
-| loc_de_by = loc_fr ) ) ) ) )).
+    ~ ( ( loc_de = loc_de_by
+| loc_fr = loc_de_by ) )).
 %--------------------------------------------------------------------------

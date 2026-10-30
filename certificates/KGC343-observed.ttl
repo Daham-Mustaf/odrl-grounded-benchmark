@@ -12,8 +12,4 @@ kgc:KGC343-observed a vrep:Refutation ;
     vrep:attributedStatement [
         vrep:premiseSource vrep:fromConstraints ;
         vrep:formulaName "w_kgc343" ;
-        rdfs:label "w_kgc343"@en ] ;
-    vrep:attributedStatement [
-        vrep:premiseSource vrep:fromOrderAxiom ;
-        vrep:formulaName "ax_leq_reflexive" ;
-        rdfs:label "ax_leq_reflexive"@en ] .
+        rdfs:label "w_kgc343"@en ] .

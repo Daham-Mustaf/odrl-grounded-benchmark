@@ -33,7 +33,7 @@
 (assert (! (kge_leq dpv_service_management dpv_purpose) :named res_dpv_service_management_below_dpv_purpose))
 (assert (! (kge_leq dpv_service_provision dpv_service_management) :named res_dpv_service_provision_below_dpv_service_management))
 ; witness condition asserted
-(assert (! (or (and (kge_leq dpv_purpose dpv_purpose) (= dpv_purpose dpv_delivery_of_goods)) (and (kge_leq dpv_delivery_of_goods dpv_purpose) (= dpv_delivery_of_goods dpv_delivery_of_goods))) :named w_kgc315))
+(assert (! (kge_leq dpv_delivery_of_goods dpv_purpose) :named w_kgc315))
 (check-sat)
 (get-unsat-core)
 (get-model)

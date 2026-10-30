@@ -23,6 +23,5 @@ include('axioms/DPV-dpv-purposes.ax').
 
 % --- witness condition negated -------------------------------------------
 fof(w_kgc315, axiom,
-    ~ ( ( ( kge_leq(dpv_purpose, dpv_purpose) & dpv_purpose = dpv_delivery_of_goods )
-| ( kge_leq(dpv_delivery_of_goods, dpv_purpose) & dpv_delivery_of_goods = dpv_delivery_of_goods ) ) )).
+    ~ ( kge_leq(dpv_delivery_of_goods, dpv_purpose) )).
 %--------------------------------------------------------------------------

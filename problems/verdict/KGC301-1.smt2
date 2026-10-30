@@ -26,7 +26,7 @@
 (assert (! (forall ((x Concept) (y Concept) (z Concept))
     (=> (and (kge_leq x y) (kge_leq y z)) (kge_leq x z))) :named ax_leq_transitive))
 ; witness condition asserted
-(assert (! (or (and (kge_leq dpv_non_commercial_purpose dpv_non_commercial_purpose) (= dpv_non_commercial_purpose dpv_scientific_research)) (and (kge_leq dpv_scientific_research dpv_non_commercial_purpose) (= dpv_scientific_research dpv_scientific_research))) :named w_kgc301))
+(assert (! (kge_leq dpv_scientific_research dpv_non_commercial_purpose) :named w_kgc301))
 (check-sat)
 (get-unsat-core)
 (get-model)

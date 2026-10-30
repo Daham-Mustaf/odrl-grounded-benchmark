@@ -6,23 +6,17 @@ fof(f111,axiom,(
   kge_leq(dpv_scientific_research,dpv_research_and_development)),
   file('problems/verdict/KGC310-2.p',res_dpv_scientific_research_below_dpv_research_and_development)).
 fof(f135,axiom,(
-  ~((kge_leq(dpv_research_and_development,dpv_research_and_development) & dpv_research_and_development = dpv_scientific_research) | (kge_leq(dpv_scientific_research,dpv_research_and_development) & dpv_scientific_research = dpv_scientific_research))),
+  ~kge_leq(dpv_scientific_research,dpv_research_and_development)),
   file('problems/verdict/KGC310-2.p',w_kgc310)).
-fof(f140,plain,(
-  (~kge_leq(dpv_research_and_development,dpv_research_and_development) | dpv_research_and_development != dpv_scientific_research) & (~kge_leq(dpv_scientific_research,dpv_research_and_development) | dpv_scientific_research != dpv_scientific_research)),
-  inference(ennf_transformation,[],[f135])).
-fof(f251,plain,(
+fof(f250,plain,(
   kge_leq(dpv_scientific_research,dpv_research_and_development)),
   inference(cnf_transformation,[],[f111])).
-fof(f275,plain,(
-  ~kge_leq(dpv_scientific_research,dpv_research_and_development) | dpv_scientific_research != dpv_scientific_research),
-  inference(cnf_transformation,[],[f140])).
-fof(f277,plain,(
+fof(f274,plain,(
   ~kge_leq(dpv_scientific_research,dpv_research_and_development)),
-  inference(trivial_inequality_removal,[],[f275])).
-fof(f287,plain,(
+  inference(cnf_transformation,[],[f135])).
+fof(f275,plain,(
   $false),
-  inference(forward_subsumption_resolution,[],[f251,f277])).
+  inference(forward_subsumption_resolution,[],[f250,f274])).
 % SZS output end Proof for KGC310-2
 % ------------------------------
 % Version: Vampire 5.0.1 (Release build, commit 1b13eafde on 2026-01-18 12:14:50 +0000)

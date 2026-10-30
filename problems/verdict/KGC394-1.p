@@ -20,22 +20,20 @@ include('axioms/DPV-dpv-purposes.ax').
 include('axioms/DPV-dpv-purposes-declared.ax').
 
 % --- constants, groundings and resource hooks ----------------------------
-% Declarations: declared distinctness instances, stated in
-% the declarations file and instantiated here.
+% Declarations: https://w3id.org/odrl-kb/dpv-purposes/declared, over every pair of the
+% witness's candidates it states (3).
 
-fof(bg_dist_dpv_improve_transport_mobility_dpv_public_benefit, axiom,
-    dpv_improve_transport_mobility != dpv_public_benefit).
-fof(bg_dist_dpv_improve_transport_mobility_dpv_non_commercial_research, axiom,
-    dpv_improve_transport_mobility != dpv_non_commercial_research).
+fof(bg_dist_dpv_public_benefit_dpv_non_commercial_research, axiom,
+    dpv_public_benefit != dpv_non_commercial_research).
+
+fof(bg_dist_dpv_public_benefit_dpv_improve_transport_mobility, axiom,
+    dpv_public_benefit != dpv_improve_transport_mobility).
+
+fof(bg_dist_dpv_non_commercial_research_dpv_improve_transport_mobility, axiom,
+    dpv_non_commercial_research != dpv_improve_transport_mobility).
 
 % --- witness condition asserted ------------------------------------------
 fof(w_kgc394, axiom,
-    ( ( dpv_public_benefit = dpv_improve_transport_mobility
-| dpv_non_commercial_research = dpv_improve_transport_mobility
-| dpv_improve_transport_mobility = dpv_improve_transport_mobility ) & ( ( dpv_public_benefit = dpv_improve_transport_mobility & ( dpv_public_benefit = dpv_public_benefit
-| dpv_public_benefit = dpv_non_commercial_research ) )
-| ( dpv_non_commercial_research = dpv_improve_transport_mobility & ( dpv_non_commercial_research = dpv_public_benefit
-| dpv_non_commercial_research = dpv_non_commercial_research ) )
-| ( dpv_improve_transport_mobility = dpv_improve_transport_mobility & ( dpv_improve_transport_mobility = dpv_public_benefit
-| dpv_improve_transport_mobility = dpv_non_commercial_research ) ) ) )).
+    ( dpv_public_benefit = dpv_improve_transport_mobility
+| dpv_non_commercial_research = dpv_improve_transport_mobility )).
 %--------------------------------------------------------------------------

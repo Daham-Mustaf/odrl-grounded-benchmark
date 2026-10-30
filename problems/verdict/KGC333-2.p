@@ -24,6 +24,5 @@ include('axioms/LOC-dpvloc-geo.ax').
 
 % --- witness condition negated -------------------------------------------
 fof(w_kgc333, axiom,
-    ~ ( ( ( loc_de = loc_de & loc_de = loc_fr )
-| ( loc_fr = loc_de & loc_fr = loc_fr ) ) )).
+    ~ ( loc_de = loc_fr )).
 %--------------------------------------------------------------------------

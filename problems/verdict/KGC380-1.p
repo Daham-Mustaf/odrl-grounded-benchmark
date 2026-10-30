@@ -23,6 +23,5 @@ include('axioms/LOC-dpvloc-juris.ax').
 
 % --- witness condition asserted ------------------------------------------
 fof(w_kgc380, axiom,
-    ( ( kge_leq(loc_eu, loc_eu) & loc_eu = loc_nl_bq1 )
-| ( kge_leq(loc_nl_bq1, loc_eu) & loc_nl_bq1 = loc_nl_bq1 ) )).
+    kge_leq(loc_nl_bq1, loc_eu)).
 %--------------------------------------------------------------------------

@@ -20,22 +20,20 @@ include('axioms/DPV-tom.ax').
 include('axioms/DPV-tom-declared.ax').
 
 % --- constants, groundings and resource hooks ----------------------------
-% Declarations: declared distinctness instances, stated in
-% the declarations file and instantiated here.
+% Declarations: https://w3id.org/odrl-kb/dpv-tom/declared, over every pair of the
+% witness's candidates it states (3).
+
+fof(bg_dist_tm_encryption_tm_access_control_method, axiom,
+    tm_encryption != tm_access_control_method).
 
 fof(bg_dist_tm_encryption_tm_encryption_at_rest, axiom,
     tm_encryption != tm_encryption_at_rest).
+
 fof(bg_dist_tm_access_control_method_tm_encryption_at_rest, axiom,
     tm_access_control_method != tm_encryption_at_rest).
 
 % --- witness condition negated -------------------------------------------
 fof(w_kgc366, axiom,
-    ~ ( ( ( tm_encryption = tm_encryption_at_rest
-| tm_access_control_method = tm_encryption_at_rest
-| tm_encryption_at_rest = tm_encryption_at_rest ) & ( ( tm_encryption = tm_encryption_at_rest & ( tm_encryption = tm_encryption
-| tm_encryption = tm_access_control_method ) )
-| ( tm_access_control_method = tm_encryption_at_rest & ( tm_access_control_method = tm_encryption
-| tm_access_control_method = tm_access_control_method ) )
-| ( tm_encryption_at_rest = tm_encryption_at_rest & ( tm_encryption_at_rest = tm_encryption
-| tm_encryption_at_rest = tm_access_control_method ) ) ) ) )).
+    ~ ( ( tm_encryption = tm_encryption_at_rest
+| tm_access_control_method = tm_encryption_at_rest ) )).
 %--------------------------------------------------------------------------

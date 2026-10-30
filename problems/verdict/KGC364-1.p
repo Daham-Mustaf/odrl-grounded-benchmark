@@ -20,14 +20,13 @@ include('axioms/DPV-tom.ax').
 include('axioms/DPV-tom-declared.ax').
 
 % --- constants, groundings and resource hooks ----------------------------
-% Declarations: declared distinctness instances, stated in
-% the declarations file and instantiated here.
+% Declarations: https://w3id.org/odrl-kb/dpv-tom/declared, over every pair of the
+% witness's candidates it states (1).
 
 fof(bg_dist_tm_encryption_tm_access_control_method, axiom,
     tm_encryption != tm_access_control_method).
 
 % --- witness condition asserted ------------------------------------------
 fof(w_kgc364, axiom,
-    ( tm_encryption = tm_encryption & tm_access_control_method = tm_encryption & ( tm_encryption = tm_encryption
-| tm_access_control_method = tm_encryption ) )).
+    tm_access_control_method = tm_encryption).
 %--------------------------------------------------------------------------

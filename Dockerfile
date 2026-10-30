@@ -13,26 +13,34 @@
 # produced them, and an unpinned image would report neither
 # reproducibly.
 
-FROM python:3.13-slim
+# Bookworm, because its z3 package is 4.8.12, the version the suite ran;
+# trixie, which the plain python:3.13-slim tag now names, has 4.13.3.
+FROM python:3.13-slim-bookworm
 
 # z3 from Debian; vampire from a release binary, since it has no
 # package and building it needs a C++ toolchain we would then ship.
 RUN apt-get update && apt-get install -y --no-install-recommends \
-        z3 \
+        z3=4.8.12-3.1 \
         wget \
         ca-certificates \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* \
+    && z3 --version | grep -q "version 4.8.12 "
 
-# Pin the Vampire release. Check the tag against what you ran locally:
-# the suite's certificates record which prover produced them, and a
-# different version may find a different proof of the same verdict.
-ARG VAMPIRE_TAG=v4.9casc2024
-ARG VAMPIRE_ASSET=vampire
+# Pin the Vampire release the suite ran: 5.0.1, commit 1b13eafde, the
+# version full-run.sh prints. The suite's certificates record which
+# prover produced them, and a different version may find a different
+# proof of the same verdict.
+ARG VAMPIRE_TAG=v5.0.1
+ARG VAMPIRE_ASSET=vampire-Linux-X64.zip
+ARG VAMPIRE_SHA256=6ff2f42ea7fb9753ee104efc3e623d5e39443190f7c82a63e1e1517bf9d2cde3
 RUN wget -q --show-progress \
       "https://github.com/vprover/vampire/releases/download/${VAMPIRE_TAG}/${VAMPIRE_ASSET}" \
-      -O /usr/local/bin/vampire \
+      -O /tmp/vampire.zip \
+    && echo "${VAMPIRE_SHA256}  /tmp/vampire.zip" | sha256sum -c - \
+    && python -m zipfile -e /tmp/vampire.zip /usr/local/bin \
+    && rm /tmp/vampire.zip \
     && chmod +x /usr/local/bin/vampire \
-    && vampire --version
+    && vampire --version | grep -q "^Vampire 5.0.1 "
 
 RUN pip install --no-cache-dir uv
 

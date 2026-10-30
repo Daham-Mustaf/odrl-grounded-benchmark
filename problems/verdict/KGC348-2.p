@@ -20,14 +20,13 @@ include('axioms/DPV-consent.ax').
 include('axioms/DPV-consent-declared.ax').
 
 % --- constants, groundings and resource hooks ----------------------------
-% Declarations: declared distinctness instances, stated in
-% the declarations file and instantiated here.
+% Declarations: https://w3id.org/odrl-kb/dpv-consent/declared, over every pair of the
+% witness's candidates it states (1).
 
 fof(bg_dist_dpv_consent_status_valid_for_processing_dpv_consent_withdrawn, axiom,
     dpv_consent_status_valid_for_processing != dpv_consent_withdrawn).
 
 % --- witness condition negated -------------------------------------------
 fof(w_kgc348, axiom,
-    ~ ( ( ( kge_leq(dpv_consent_status_valid_for_processing, dpv_consent_status_valid_for_processing) & dpv_consent_status_valid_for_processing = dpv_consent_withdrawn )
-| ( kge_leq(dpv_consent_withdrawn, dpv_consent_status_valid_for_processing) & dpv_consent_withdrawn = dpv_consent_withdrawn ) ) )).
+    ~ ( kge_leq(dpv_consent_withdrawn, dpv_consent_status_valid_for_processing) )).
 %--------------------------------------------------------------------------

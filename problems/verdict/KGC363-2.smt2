@@ -26,7 +26,7 @@
 (assert (! (forall ((x Concept) (y Concept) (z Concept))
     (=> (and (kge_leq x y) (kge_leq y z)) (kge_leq x z))) :named ax_leq_transitive))
 ; witness condition negated
-(assert (! (not (and (= tm_encryption tm_encryption) (= tm_access_control_method tm_encryption) (or (= tm_encryption tm_encryption) (= tm_access_control_method tm_encryption)))) :named w_kgc363))
+(assert (! (not (= tm_access_control_method tm_encryption)) :named w_kgc363))
 (check-sat)
 (get-unsat-core)
 (get-model)

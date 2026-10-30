@@ -15,8 +15,6 @@
 (set-option :produce-unsat-cores true)
 (set-option :produce-models true)
 (declare-sort Concept 0)
-(declare-fun tm_encryption () Concept)
-(declare-fun tm_access_control_method () Concept)
 (declare-fun kge_leq (Concept Concept) Bool)
 ; Order axioms, quantified.  The same three as KGE000-0.ax, so the two
 ; encodings are the same theory.
@@ -26,7 +24,7 @@
 (assert (! (forall ((x Concept) (y Concept) (z Concept))
     (=> (and (kge_leq x y) (kge_leq y z)) (kge_leq x z))) :named ax_leq_transitive))
 ; witness condition negated
-(assert (! (not (and (or (= tm_encryption tm_encryption) (= tm_access_control_method tm_encryption)) (or (and (= tm_encryption tm_encryption) (or (= tm_encryption tm_encryption) (= tm_encryption tm_access_control_method))) (and (= tm_access_control_method tm_encryption) (or (= tm_access_control_method tm_encryption) (= tm_access_control_method tm_access_control_method)))))) :named w_kgc362))
+(assert (! (not true) :named w_kgc362))
 (check-sat)
 (get-unsat-core)
 (get-model)

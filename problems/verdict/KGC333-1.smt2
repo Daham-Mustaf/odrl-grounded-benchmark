@@ -26,7 +26,7 @@
 (assert (! (forall ((x Concept) (y Concept) (z Concept))
     (=> (and (kge_leq x y) (kge_leq y z)) (kge_leq x z))) :named ax_leq_transitive))
 ; witness condition asserted
-(assert (! (or (and (= loc_de loc_de) (= loc_de loc_fr)) (and (= loc_fr loc_de) (= loc_fr loc_fr))) :named w_kgc333))
+(assert (! (= loc_de loc_fr) :named w_kgc333))
 (check-sat)
 (get-unsat-core)
 (get-model)

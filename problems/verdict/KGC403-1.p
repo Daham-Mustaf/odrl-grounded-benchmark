@@ -20,14 +20,13 @@ include('axioms/DPV-dpv-purposes.ax').
 include('axioms/DPV-dpv-purposes-declared.ax').
 
 % --- constants, groundings and resource hooks ----------------------------
-% Declarations: declared distinctness instances, stated in
-% the declarations file and instantiated here.
+% Declarations: https://w3id.org/odrl-kb/dpv-purposes/declared, over every pair of the
+% witness's candidates it states (1).
 
 fof(bg_dist_dpv_scientific_research_dpv_research_and_development, axiom,
     dpv_scientific_research != dpv_research_and_development).
 
 % --- witness condition asserted ------------------------------------------
 fof(w_kgc403, axiom,
-    ( ( kge_leq(dpv_scientific_research, dpv_scientific_research) & dpv_scientific_research = dpv_research_and_development )
-| ( kge_leq(dpv_research_and_development, dpv_scientific_research) & dpv_research_and_development = dpv_research_and_development ) )).
+    kge_leq(dpv_research_and_development, dpv_scientific_research)).
 %--------------------------------------------------------------------------

@@ -27,12 +27,12 @@
 (assert (! (forall ((x Concept) (y Concept) (z Concept))
     (=> (and (kge_leq x y) (kge_leq y z)) (kge_leq x z))) :named ax_leq_transitive))
 (assert (! (kge_leq loc_de_by loc_de) :named res_loc_de_by_within_loc_de))
-; Instances of the registry rule this problem adopts, named as
-; the TPTP side names them.
-(assert (! (not (= loc_de_by loc_de)) :named bg_dist_loc_de_by_loc_de))
-(assert (! (not (= loc_de_by loc_fr)) :named bg_dist_loc_de_by_loc_fr))
+; Declarations: https://w3id.org/odrl-kb/dpv-loc/iso
+(assert (! (not (= loc_de loc_fr)) :named bg_dist_loc_de_loc_fr))
+(assert (! (not (= loc_de loc_de_by)) :named bg_dist_loc_de_loc_de_by))
+(assert (! (not (= loc_fr loc_de_by)) :named bg_dist_loc_fr_loc_de_by))
 ; witness condition negated
-(assert (! (not (and (or (= loc_de loc_de_by) (= loc_fr loc_de_by) (= loc_de_by loc_de_by)) (or (and (= loc_de loc_de_by) (or (= loc_de loc_de) (= loc_de loc_fr))) (and (= loc_fr loc_de_by) (or (= loc_fr loc_de) (= loc_fr loc_fr))) (and (= loc_de_by loc_de_by) (or (= loc_de_by loc_de) (= loc_de_by loc_fr)))))) :named w_kgc336))
+(assert (! (not (or (= loc_de loc_de_by) (= loc_fr loc_de_by))) :named w_kgc336))
 (check-sat)
 (get-unsat-core)
 (get-model)

@@ -67,19 +67,22 @@ KNOWN_GAPS: dict = {}
 
 # casc, as run_verdict.sh runs it: a status is all this check needs, and the
 # schedule mode answers the large Location queries in a fraction of the time.
-VAMPIRE = ["vampire", "--mode", "casc", "--time_limit", "30"]
-Z3 = ["z3", "-T:30"]
+# The seconds per query are given with --limit; full-run.sh passes the
+# PROVER_LIMIT that stages 6 to 8 use.
+VAMPIRE = ["vampire", "--mode", "casc", "--time_limit"]
+Z3 = ["z3"]
 
 _SZS = re.compile(r"SZS status (\w+)")
 
 
 # --- the statuses ----------------------------------------------------------
 
-def run_fof(path: Path, include: Path) -> str:
+def run_fof(path: Path, include: Path, limit: int) -> str:
     try:
-        out = subprocess.run(VAMPIRE + ["--include", str(include), str(path)],
+        out = subprocess.run(VAMPIRE + [str(limit), "--include", str(include),
+                                        str(path)],
                              capture_output=True, text=True,
-                             timeout=60).stdout
+                             timeout=limit + 30).stdout
     except subprocess.TimeoutExpired:
         return "timeout"
     m = _SZS.search(out)
@@ -90,10 +93,10 @@ def run_fof(path: Path, include: Path) -> str:
             "countersatisfiable": "sat"}.get(s, s)
 
 
-def run_smt(path: Path) -> str:
+def run_smt(path: Path, limit: int) -> str:
     try:
-        out = subprocess.run(Z3 + [str(path)], capture_output=True,
-                             text=True, timeout=60).stdout
+        out = subprocess.run(Z3 + [f"-T:{limit}", str(path)], capture_output=True,
+                             text=True, timeout=limit + 30).stdout
     except subprocess.TimeoutExpired:
         return "timeout"
     for line in out.splitlines():
@@ -383,6 +386,8 @@ def main() -> int:
                          "KNOWN_GAPS; they are still printed")
     ap.add_argument("--names-only", action="store_true",
                     help="check (i) and (ii) and skip the provers")
+    ap.add_argument("--limit", type=int, default=60,
+                    help="seconds a prover may take on one query")
     args = ap.parse_args()
 
     ids = sorted({p.stem.rsplit("-", 1)[0] for p in args.dir.glob("*-1.p")})
@@ -405,8 +410,10 @@ def main() -> int:
 
         f = s = ""
         if not args.names_only:
-            ft = [run_fof(args.dir / f"{pid}-{q}.p", root) for q in (1, 2)]
-            sm = [run_smt(args.dir / f"{pid}-{q}.smt2") for q in (1, 2)]
+            ft = [run_fof(args.dir / f"{pid}-{q}.p", root, args.limit)
+                  for q in (1, 2)]
+            sm = [run_smt(args.dir / f"{pid}-{q}.smt2", args.limit)
+                  for q in (1, 2)]
             f, s = verdict(*ft), verdict(*sm)
             if ft != sm:
                 problems.append(("iii", f"statuses differ  TPTP {ft}  SMT-LIB {sm}"))

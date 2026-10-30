@@ -62,9 +62,7 @@ the concepts the grounding names.
           whether a value grounds at all.
 """
 
-from pathlib import Path
 
-import declarations
 from compile import Constraint
 
 PDF  = "ft_pdf"
@@ -77,30 +75,6 @@ INCLUDES          = ["KGE000-0.ax", "EUFT-filetype.ax"]
 INCLUDES_DECLARED = INCLUDES + ["EUFT-filetype-declared.ax"]
 BINDING = "https://w3id.org/odrl-kb/profile/b-fileformat"
 
-_DECLARED = declarations.load(
-    Path(__file__).resolve().parent.parent / "problems" / "background" / "filetype-declared.ttl")
-
-
-def _iso(*pairs):
-    """Declared-distinctness instances, named bg_dist_ on both encodings.
-
-    The declarations list every entry of the table but the four left out; a
-    problem naming two of them carries the inequation between them, so a
-    refutation cites the instance it used rather than one of 24976.  The name
-    must match on both sides: an unsat core and a TPTP proof are compared by
-    premise name.  The statements come from declarations.py, which refuses a
-    pair the set does not state.
-    """
-    return declarations.instances(
-        _DECLARED, pairs,
-        ["% Declarations: declared distinctness instances, stated in",
-         "% the declarations file and instantiated here.", ""],
-        ["; Declared distinctness this problem adopts, named as the TPTP",
-         "; side names it."],
-        label=lambda a, b: declarations.dist_label(a, b, "distinct"))
-
-
-_D321 = _iso((PDF, A1A))
 
 def C(op, *vals, side="offer"):
     return Constraint(op, tuple(vals), side)
@@ -231,7 +205,6 @@ kgc:KGC320-p2-c1 a odrl:Constraint ;
     "also a PDF file (ISO 19005-1), so a library that supplies PDF/A-1a "
     "keeps both promises. The case shows what reading file types by name "
     "costs, as KGC380 does for the jurisdictional reading of places."),
-        "fof_decls": _D321[0], "smt2_background": _D321[1],
 
         "expected_q1": "Unsatisfiable",
         "expected_q2": "Satisfiable",
@@ -412,16 +385,11 @@ kgc:KGC322-p2-c1 a odrl:Constraint ;
         "values are told apart by name only, the way to exclude both is to "
         "list both: any format except PDF and PDF/A-1a."),
 
-    "fof_decls": _D321[0], "smt2_background": _D321[1],
-
 
     "expected_q1": "Satisfiable",
     "expected_q2": "Unsatisfiable",
 
     "smt2_logic": "UF",
-
-
-
 
 
     "certificate": {

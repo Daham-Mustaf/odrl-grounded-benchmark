@@ -27,12 +27,12 @@
 (assert (! (forall ((x Concept) (y Concept) (z Concept))
     (=> (and (kge_leq x y) (kge_leq y z)) (kge_leq x z))) :named ax_leq_transitive))
 (assert (! (kge_leq tm_encryption_at_rest tm_encryption) :named res_tm_encryption_at_rest_below_tm_encryption))
-; Declared distinctness this problem adopts, named as the TPTP
-; side names it.
+; Declarations: https://w3id.org/odrl-kb/dpv-tom/declared
+(assert (! (not (= tm_encryption tm_access_control_method)) :named bg_dist_tm_encryption_tm_access_control_method))
 (assert (! (not (= tm_encryption tm_encryption_at_rest)) :named bg_dist_tm_encryption_tm_encryption_at_rest))
 (assert (! (not (= tm_access_control_method tm_encryption_at_rest)) :named bg_dist_tm_access_control_method_tm_encryption_at_rest))
 ; witness condition negated
-(assert (! (not (and (or (= tm_encryption tm_encryption_at_rest) (= tm_access_control_method tm_encryption_at_rest) (= tm_encryption_at_rest tm_encryption_at_rest)) (or (and (= tm_encryption tm_encryption_at_rest) (or (= tm_encryption tm_encryption) (= tm_encryption tm_access_control_method))) (and (= tm_access_control_method tm_encryption_at_rest) (or (= tm_access_control_method tm_encryption) (= tm_access_control_method tm_access_control_method))) (and (= tm_encryption_at_rest tm_encryption_at_rest) (or (= tm_encryption_at_rest tm_encryption) (= tm_encryption_at_rest tm_access_control_method)))))) :named w_kgc366))
+(assert (! (not (or (= tm_encryption tm_encryption_at_rest) (= tm_access_control_method tm_encryption_at_rest))) :named w_kgc366))
 (check-sat)
 (get-unsat-core)
 (get-model)

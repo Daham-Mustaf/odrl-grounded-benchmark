@@ -104,12 +104,8 @@ no verdict rests on them: they are not load-bearing for reachability, and
 they are load-bearing for what the rule may say.
 """
 from compile import right_operand as _ro, Constraint, Or, Xone
-from pathlib import Path
 
-import declarations
 
-_DECL = declarations.load(
-    Path(__file__).resolve().parent.parent / "problems" / "background" / "dpvloc-iso.ttl")
  
 EU    = "loc_eu"
 DE    = "loc_de"
@@ -142,7 +138,6 @@ EMPTY_BT       = "https://w3id.org/odrl-kb/dpv-loc/empty"
 ISO_BT         = "https://w3id.org/odrl-kb/dpv-loc/iso"
 
 
-
 _TTL_HEAD = """\
 @prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
@@ -166,17 +161,6 @@ _TTL_HEAD = """\
 """
  
  
-def _iso(*pairs):
-    """Explicit ISO rule instances, one fof per pair, named bg_dist_ as
-    KGC334 names its one instance, plus the matching :named SMT lines.
-    The statements come from declarations.py, which refuses a pair the set
-    does not state."""
-    return declarations.instances(
-        _DECL, pairs,
-        ["% Declarations: instances of the ISO 3166 distinctness rule,",
-         "% stated in LOC-dpvloc-iso.ax and instantiated here.", ""],
-        ["; Instances of the registry rule this problem adopts, named as",
-         "; the TPTP side names them."])
 
 
 def _cnode(cid, op, vals):
@@ -225,18 +209,6 @@ def _ttl2(pid, offer_title, offer_cs, req_title, req_cs, connective=None):
                     "odrl:assignee drk:researcher ;\n", req_cs))
  
  
-_D334 = declarations.instances(
-    _DECL, [(DE, FR)],
-    ["% Declarations: one instance of the ISO 3166 distinctness rule.",
-     "%",
-     "% The rule is stated in LOC-dpvloc-iso.ax and ranges over 4,977 identity",
-     "% classes, which is 12,382,776 pairs.  It is instantiated here rather than",
-     "% expanded there: a refutation should cite the inequation it used, not one",
-     "% term standing for twelve million."],
-    ["; The instance of the registry rule this problem adopts, named as the TPTP",
-     "; side names it so that a proof and an unsat core cite one statement."])
-_ISO_DE_FR = _iso((DE, FR))
-_ISO_336 = _iso((DE_BY, DE), (DE_BY, FR))
 
 def _ttl(pid, offer_title, offer_op, offer_val, req_title, req_val):
     return _TTL_HEAD + f"""
@@ -419,11 +391,9 @@ PROBLEMS = [
         "summary": (
             "As KGC333, with the ISO 3166 rule that different country codes "
             "name different countries."),
-        "fof_decls": _D334[0],
         "expected_q1": "Unsatisfiable",
         "expected_q2": "Satisfiable",
         "smt2_logic": "UF",
-        "smt2_background": _D334[1],
         "certificate": {
             "kind": "Refutation",
   "comment": (
@@ -450,7 +420,6 @@ PROBLEMS = [
         "resource": GEO_RESOURCE, "background_theory": ISO_BT,
         "binding": BINDING_GEO, "includes": INCLUDES_ISO,
         "tree": [C("neq", DE), C("eq", FR, side="request")],
-        "fof_decls": _ISO_DE_FR[0], "smt2_background": _ISO_DE_FR[1],
         "expected_verdict": "Compatible",
         "expected_q1": "Satisfiable", "expected_q2": "Unsatisfiable",
         "summary": (
@@ -489,7 +458,6 @@ PROBLEMS = [
         "resource": GEO_RESOURCE, "background_theory": ISO_BT,
         "binding": BINDING_GEO, "includes": INCLUDES_ISO,
         "tree": [C("isAnyOf", DE, FR), C("eq", DE_BY, side="request")],
-        "fof_decls": _ISO_336[0], "smt2_background": _ISO_336[1],
         "expected_verdict": "Incompatible",
         "expected_q1": "Unsatisfiable", "expected_q2": "Satisfiable",
         "summary": (
@@ -532,7 +500,6 @@ PROBLEMS = [
         "resource": GEO_RESOURCE, "background_theory": ISO_BT,
         "binding": BINDING_GEO, "includes": INCLUDES_ISO,
         "tree": [C("isAllOf", DE, FR), C("eq", DE, side="request")],
-        "fof_decls": _ISO_DE_FR[0], "smt2_background": _ISO_DE_FR[1],
         "expected_verdict": "Incompatible",
         "expected_q1": "Unsatisfiable", "expected_q2": "Satisfiable",
         "summary": (
@@ -826,8 +793,6 @@ PROBLEMS = [
         "resource": GEO_RESOURCE, "background_theory": ISO_BT,
         "binding": BINDING_GEO, "includes": INCLUDES_ISO,
         "tree": [C("isNoneOf", DE), C("eq", DE_BY, side="request")],
-        "fof_decls": _iso((DE_BY, DE))[0],
-        "smt2_background": _iso((DE_BY, DE))[1],
         "expected_verdict": "Compatible",
         "expected_q1": "Satisfiable", "expected_q2": "Unsatisfiable",
         "description": (

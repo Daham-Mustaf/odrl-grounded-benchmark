@@ -12,7 +12,7 @@ Builds the BCP 47 language resource and its declarations.
 Two files out, not one
 ----------------------
     BCP47000-0.ax    the resource: concept membership, no order statements
-    BCP47001-0.ax    the declarations: 105 inequations
+    BCP47001-0.ax    the declarations, stated as a rule over 105 pairs
 
 The split is the point.  A resource is what an authority published; the
 IANA registry publishes a set of subtags and, over this slice, no relation
@@ -348,23 +348,23 @@ def theory_ax(pairs, source: str, file_date: str) -> str:
         "%            denies that anything lies below both, which needs an",
         "%            order this sort does not have.",
         "%",
-        "%            These declarations are withdrawn by omitting the",
-        "%            include.  Any definite verdict resting on it",
-        "%            reopens, Compatible as well as Incompatible.",
+        "%            The rule is stated here and instantiated by the",
+        "%            problems: a query carries the inequation between",
+        "%            every two of its candidates the rule covers, named",
+        "%            bg_dist_bcp47_<a>_<b>.  Withdrawing the declarations",
+        "%            reopens any definite verdict resting on them,",
+        "%            Compatible as well as Incompatible.",
         "%",
         f"% Source   : {source}",
         f"% Slice    : File-Date {file_date}",
+        "%" + "-" * 73,
+        "%",
+        f"% Languages: {len({x for p in pairs for x in p})}",
         f"% Pairs    : {len(pairs)}",
         "%",
-        "% Status   : Satisfiable",
-        "% SPC      : FOF_SAT_EPR",
-        "%" + "-" * 73,
-        "",
     ]
-    for a, b in pairs:
-        lines.append(
-            f"fof(bg_dist_bcp47_{name_part(a)}_{name_part(b)}, axiom, "
-            f"{const(a)} != {const(b)}).")
+    names = sorted({const(x) for p in pairs for x in p})
+    lines += ["% " + ", ".join(names[i:i + 6]) for i in range(0, len(names), 6)]
     lines.append("")
     return "\n".join(lines)
 

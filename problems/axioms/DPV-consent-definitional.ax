@@ -17,11 +17,15 @@
 %
 % Can and cannot: nothing lies below both branches if the
 % definitions hold.  The module asserts no owl:disjointWith, so a
-% verdict resting on this axiom rests on a reading of the
+% verdict resting on this statement rests on a reading of the
 % definitions, and the certificate marks it withdrawable.
 %
 % Disjointness rather than distinctness: nothing below both, so no
 % state of consent is at once valid and invalid for processing.
-
-fof(bg_disj_dpv_consent_status_valid_for_processing_disjoint_dpv_consent_status_invalid_for_processing, axiom,
-    ! [X] : ~ ( kge_leq(X, dpv_consent_status_valid_for_processing) & kge_leq(X, dpv_consent_status_invalid_for_processing) )).
+%
+% The declaration is stated here and instantiated by the problems:
+% a query naming both branches carries bg_disj_dpv_consent_status_valid_for_processing_disjoint_dpv_consent_status_invalid_for_processing.
+%
+% Pairs : 1
+%
+% dpv_consent_status_valid_for_processing disjoint dpv_consent_status_invalid_for_processing

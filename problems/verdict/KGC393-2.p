@@ -23,12 +23,6 @@ include('axioms/DPV-dpv-purposes.ax').
 
 % --- witness condition negated -------------------------------------------
 fof(w_kgc393, axiom,
-    ~ ( ( ( dpv_public_benefit = dpv_improve_transport_mobility
-| dpv_non_commercial_research = dpv_improve_transport_mobility
-| dpv_improve_transport_mobility = dpv_improve_transport_mobility ) & ( ( dpv_public_benefit = dpv_improve_transport_mobility & ( dpv_public_benefit = dpv_public_benefit
-| dpv_public_benefit = dpv_non_commercial_research ) )
-| ( dpv_non_commercial_research = dpv_improve_transport_mobility & ( dpv_non_commercial_research = dpv_public_benefit
-| dpv_non_commercial_research = dpv_non_commercial_research ) )
-| ( dpv_improve_transport_mobility = dpv_improve_transport_mobility & ( dpv_improve_transport_mobility = dpv_public_benefit
-| dpv_improve_transport_mobility = dpv_non_commercial_research ) ) ) ) )).
+    ~ ( ( dpv_public_benefit = dpv_improve_transport_mobility
+| dpv_non_commercial_research = dpv_improve_transport_mobility ) )).
 %--------------------------------------------------------------------------

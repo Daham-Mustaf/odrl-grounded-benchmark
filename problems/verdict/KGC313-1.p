@@ -24,6 +24,5 @@ include('axioms/DPV-dpv-purposes.ax').
 
 % --- witness condition asserted ------------------------------------------
 fof(w_kgc313, axiom,
-    ( ( dpv_scientific_research = dpv_scientific_research & dpv_scientific_research = dpv_marketing )
-| ( dpv_marketing = dpv_scientific_research & dpv_marketing = dpv_marketing ) )).
+    dpv_scientific_research = dpv_marketing).
 %--------------------------------------------------------------------------

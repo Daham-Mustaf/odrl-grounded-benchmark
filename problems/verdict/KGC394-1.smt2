@@ -27,12 +27,12 @@
 (assert (! (forall ((x Concept) (y Concept) (z Concept))
     (=> (and (kge_leq x y) (kge_leq y z)) (kge_leq x z))) :named ax_leq_transitive))
 (assert (! (kge_leq dpv_improve_transport_mobility dpv_public_benefit) :named res_dpv_improve_transport_mobility_below_dpv_public_benefit))
-; Declared distinctness this problem adopts, named as the TPTP
-; side names it.
-(assert (! (not (= dpv_improve_transport_mobility dpv_public_benefit)) :named bg_dist_dpv_improve_transport_mobility_dpv_public_benefit))
-(assert (! (not (= dpv_improve_transport_mobility dpv_non_commercial_research)) :named bg_dist_dpv_improve_transport_mobility_dpv_non_commercial_research))
+; Declarations: https://w3id.org/odrl-kb/dpv-purposes/declared
+(assert (! (not (= dpv_public_benefit dpv_non_commercial_research)) :named bg_dist_dpv_public_benefit_dpv_non_commercial_research))
+(assert (! (not (= dpv_public_benefit dpv_improve_transport_mobility)) :named bg_dist_dpv_public_benefit_dpv_improve_transport_mobility))
+(assert (! (not (= dpv_non_commercial_research dpv_improve_transport_mobility)) :named bg_dist_dpv_non_commercial_research_dpv_improve_transport_mobility))
 ; witness condition asserted
-(assert (! (and (or (= dpv_public_benefit dpv_improve_transport_mobility) (= dpv_non_commercial_research dpv_improve_transport_mobility) (= dpv_improve_transport_mobility dpv_improve_transport_mobility)) (or (and (= dpv_public_benefit dpv_improve_transport_mobility) (or (= dpv_public_benefit dpv_public_benefit) (= dpv_public_benefit dpv_non_commercial_research))) (and (= dpv_non_commercial_research dpv_improve_transport_mobility) (or (= dpv_non_commercial_research dpv_public_benefit) (= dpv_non_commercial_research dpv_non_commercial_research))) (and (= dpv_improve_transport_mobility dpv_improve_transport_mobility) (or (= dpv_improve_transport_mobility dpv_public_benefit) (= dpv_improve_transport_mobility dpv_non_commercial_research))))) :named w_kgc394))
+(assert (! (or (= dpv_public_benefit dpv_improve_transport_mobility) (= dpv_non_commercial_research dpv_improve_transport_mobility)) :named w_kgc394))
 (check-sat)
 (get-unsat-core)
 (get-model)

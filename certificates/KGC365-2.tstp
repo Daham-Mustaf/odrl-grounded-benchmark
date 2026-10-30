@@ -3,7 +3,7 @@
 % SZS status Unsatisfiable for KGC365-2
 % SZS output start Proof for KGC365-2
 fof(f79,axiom,(
-  ~($true & $true & $true & $true & $true)),
+  ~$true),
   file('problems/verdict/KGC365-2.p',w_kgc365)).
 fof(f80,plain,(
   $false),

@@ -28,7 +28,7 @@
     (=> (and (kge_leq x y) (kge_leq y z)) (kge_leq x z))) :named ax_leq_transitive))
 (assert (! (kge_leq dpv_improve_transport_mobility dpv_public_benefit) :named res_dpv_improve_transport_mobility_below_dpv_public_benefit))
 ; witness condition asserted
-(assert (! (or (or (and (kge_leq dpv_public_benefit dpv_public_benefit) (= dpv_public_benefit dpv_improve_transport_mobility)) (and (kge_leq dpv_non_commercial_research dpv_public_benefit) (= dpv_non_commercial_research dpv_improve_transport_mobility)) (and (kge_leq dpv_improve_transport_mobility dpv_public_benefit) (= dpv_improve_transport_mobility dpv_improve_transport_mobility))) (or (and (kge_leq dpv_public_benefit dpv_non_commercial_research) (= dpv_public_benefit dpv_improve_transport_mobility)) (and (kge_leq dpv_non_commercial_research dpv_non_commercial_research) (= dpv_non_commercial_research dpv_improve_transport_mobility)) (and (kge_leq dpv_improve_transport_mobility dpv_non_commercial_research) (= dpv_improve_transport_mobility dpv_improve_transport_mobility)))) :named w_kgc395))
+(assert (! (or (kge_leq dpv_improve_transport_mobility dpv_public_benefit) (kge_leq dpv_improve_transport_mobility dpv_non_commercial_research)) :named w_kgc395))
 (check-sat)
 (get-unsat-core)
 (get-model)

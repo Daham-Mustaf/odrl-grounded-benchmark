@@ -29,7 +29,7 @@
 (assert (! (kge_leq dpv_data_altruism dpv_public_benefit) :named res_dpv_data_altruism_below_dpv_public_benefit))
 (assert (! (kge_leq dpv_improve_transport_mobility dpv_public_benefit) :named res_dpv_improve_transport_mobility_below_dpv_public_benefit))
 ; witness condition negated
-(assert (! (not (and (kge_leq dpv_data_altruism dpv_public_benefit) (kge_leq dpv_improve_transport_mobility dpv_public_benefit) (or (kge_leq dpv_public_benefit dpv_public_benefit) (kge_leq dpv_data_altruism dpv_public_benefit) (kge_leq dpv_improve_transport_mobility dpv_public_benefit)))) :named w_kgc396))
+(assert (! (not (and (kge_leq dpv_data_altruism dpv_public_benefit) (kge_leq dpv_improve_transport_mobility dpv_public_benefit))) :named w_kgc396))
 (check-sat)
 (get-unsat-core)
 (get-model)

@@ -30,7 +30,7 @@ kgc:KGC404-p1-c1 a odrl:Constraint ;
 drk:policy-404-2 a odrl:Set ;
     odrl:uid drk:policy-404-2 ;
     odrl:profile dpv-odrl: ;
-    dcterms:title "Use for scientific research or any narrower purpose"@en ;
+    dcterms:title "Use for non-commercial purposes or any narrower purpose"@en ;
     odrl:assignee drk:data-user ;
     odrl:permission kgc:KGC404-p2-r1 .
 kgc:KGC404-p2-r1 a odrl:Permission ;
@@ -40,7 +40,7 @@ kgc:KGC404-p2-r1 a odrl:Permission ;
 kgc:KGC404-p2-c1 a odrl:Constraint ;
     odrl:leftOperand dpv-odrl:Purpose ;
     odrl:operator odrl:isA ;
-    odrl:rightOperand dpv:ScientificResearch .
+    odrl:rightOperand dpv:NonCommercialPurpose .
 
 ### Expected result #######################################################
 
@@ -52,7 +52,7 @@ drk:KGC404-report a vrep:OperandVerdictReport ;
     vrep:comparedConstraint kgc:KGC404-p2-c1 ;
     vrep:binding <https://w3id.org/odrl-kb/profile/b-purpose> ;
     vrep:declarations <https://w3id.org/odrl-kb/dpv-purposes/empty> ;
-    rdfs:comment """DPV places scientific research below research and development, so a use for scientific research lies under the category of each policy."""@en ;
-    dcterms:description """A city's traffic data platform permits use for research and development or any narrower purpose. A university commits to use for scientific research or any narrower purpose."""@en ;
+    rdfs:comment """DPV places non-commercial research below research and development and below non-commercial purpose, so a use for non-commercial research lies under the category of each policy."""@en ;
+    dcterms:description """A city's traffic data platform permits use for research and development or any narrower purpose. A university commits to use for non-commercial purposes or any narrower purpose."""@en ;
     vrep:compatibilityState vrep:Compatible ;
     vrep:certificate <certificates/KGC404-2.tstp> .

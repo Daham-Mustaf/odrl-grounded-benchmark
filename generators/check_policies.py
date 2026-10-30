@@ -11,6 +11,24 @@ Two checks on what the policies of a case ask, reported by case ID.
      queries are: the same tree, cut to one policy, through expand_tree and
      write_smt2.
 
+     The check only asks whether some use exists, so it searches fewer
+     candidates than the real queries: the concepts the policy names, their
+     direct published neighbours (one statement up or down), and one other
+     concept of the vocabulary, the first in order that is not among them.
+     The statements and declarations are built as in the real queries:
+     every statement among the kept concepts (the candidates the witness
+     uses and the concepts between them), and the declared pairs among
+     those, pairwise.
+
+     A use found among fewer candidates is a use for the whole vocabulary.
+     Each part of the witness condition asks for some candidate, so the
+     condition over fewer candidates implies the one over all; and the kept
+     statements and declarations give the query the same status as all of
+     them would (tree_expand.assertions_for says why).  So a pass is sound.
+     A fail says only that no use was found among those candidates, and is
+     reported as a finding: there is no fallback to more candidates and no
+     higher limit.
+
   b. Both policies of a case have the same action and the same target.  A
      comparison of two policies that act on different things says nothing.
 
@@ -36,7 +54,8 @@ from rdflib import Graph, Namespace, RDF
 from rdflib.namespace import DCTERMS
 
 from compile import Constraint
-from tree_expand import expand_tree, constants_of_tree, _map_item
+from tree_expand import expand_tree, constants_of_tree, _map_item, included_edges
+from vocabulary import concepts
 from writers import write_smt2
 
 ODRL = Namespace("http://www.w3.org/ns/odrl/2/")
@@ -47,36 +66,34 @@ MODULES = ["problem_data_motivating", "problem_data_geonames",
            "problem_data_tom", "problem_data_bcp47"]
 
 
-# One concept of the resource that no constraint names.  A policy that
-# excludes (neq, isNoneOf) is met by it; the resource has more concepts than
-# any case names, and says nothing about this one, so nothing is assumed.
-OTHER = "other_concept"
-
-
 def side_of(item) -> str:
     c = item if isinstance(item, Constraint) else item.alts[0]
     return c.side
 
 
-def alone(p: dict, side: str) -> dict:
-    """The problem with only one policy's constraints.
+def near(named: list, edges, every: list) -> list:
+    """The named concepts, their direct published neighbours, and the first
+    concept of the vocabulary that is neither."""
+    out = list(named)
+    for a, b in edges:
+        for x, y in ((a, b), (b, a)):
+            if x in named and y not in out:
+                out.append(y)
+    other = next((c for c in every if c not in out), None)
+    return out + ([other] if other else [])
 
-    The constants of the other policy stay declared and stay in the
-    statement filter, because the declarations the case carries may name
-    them.  The witness also gets OTHER as a candidate, which a pair query
-    gets from the second policy.
-    """
+
+def alone(p: dict, side: str) -> dict:
+    """The problem with only one policy's constraints, and its candidates
+    for 5a (see the docstring)."""
     grounding = p.get("grounding")
-    mapped = (lambda items: [_map_item(i, grounding) for i in items]) \
-        if grounding else (lambda items: list(items))
     mine = [i for i in p["tree"] if side_of(i) == side]
-    kept = constants_of_tree(mapped(mine))
-    every = constants_of_tree(mapped(p["tree"]))
+    named = constants_of_tree([_map_item(i, grounding) for i in mine]
+                              if grounding else mine)
     q = dict(p)
     q["tree"] = mine
-    q["witness_candidates"] = [OTHER]
-    q["extra_constants"] = [c for c in every if c not in kept] \
-        + [c for c in p.get("extra_constants", []) if c not in kept] + [OTHER]
+    q["candidates"] = near(named, included_edges(p.get("includes", [])),
+                           concepts(p["resource"]))
     return q
 
 
@@ -156,7 +173,8 @@ def main() -> int:
         for cid, side, status in checked:
             print(f"      {cid} {side:8} {status}")
     for cid, side, status in bad_a:
-        print(f"    FAIL {cid}: the {side} policy alone is {status}")
+        print(f"    FAIL {cid}: the {side} policy alone is {status} over its "
+              f"named concepts, their neighbours and one other")
 
     compared, bad_b = acts_alike(args.cases)
     print(f"5b  both policies share action and target: {compared} cases compared")

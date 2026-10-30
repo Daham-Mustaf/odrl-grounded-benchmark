@@ -23,5 +23,5 @@ include('axioms/DPV-tom.ax').
 
 % --- witness condition negated -------------------------------------------
 fof(w_kgc365, axiom,
-    ~ ( ( $true & $true & $true & $true & $true ) )).
+    ~ ( $true )).
 %--------------------------------------------------------------------------

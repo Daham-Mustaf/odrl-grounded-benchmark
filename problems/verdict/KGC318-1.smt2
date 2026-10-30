@@ -25,11 +25,10 @@
     (=> (and (kge_leq x y) (kge_leq y x)) (= x y))) :named ax_leq_antisymmetric))
 (assert (! (forall ((x Concept) (y Concept) (z Concept))
     (=> (and (kge_leq x y) (kge_leq y z)) (kge_leq x z))) :named ax_leq_transitive))
-; Declared distinctness this problem adopts, named as the TPTP
-; side names it.
-(assert (! (not (= dpv_scientific_research dpv_marketing)) :named bg_dist_dpv_scientific_research_dpv_marketing))
+; Declarations: https://w3id.org/odrl-kb/dpv-purposes/declared
+(assert (! (not (= dpv_marketing dpv_scientific_research)) :named bg_dist_dpv_marketing_dpv_scientific_research))
 ; witness condition asserted
-(assert (! (or (and (not (= dpv_marketing dpv_marketing)) (= dpv_marketing dpv_scientific_research)) (and (not (= dpv_scientific_research dpv_marketing)) (= dpv_scientific_research dpv_scientific_research))) :named w_kgc318))
+(assert (! (not (= dpv_scientific_research dpv_marketing)) :named w_kgc318))
 (check-sat)
 (get-unsat-core)
 (get-model)

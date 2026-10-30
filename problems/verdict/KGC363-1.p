@@ -23,6 +23,5 @@ include('axioms/DPV-tom.ax').
 
 % --- witness condition asserted ------------------------------------------
 fof(w_kgc363, axiom,
-    ( tm_encryption = tm_encryption & tm_access_control_method = tm_encryption & ( tm_encryption = tm_encryption
-| tm_access_control_method = tm_encryption ) )).
+    tm_access_control_method = tm_encryption).
 %--------------------------------------------------------------------------
