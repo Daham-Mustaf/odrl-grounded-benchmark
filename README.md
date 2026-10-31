@@ -226,11 +226,9 @@ docker build -t odrl-benchmark .
 docker run --rm odrl-benchmark
 ```
 
-This rebuilds every resource from the vendored vocabularies,
-regenerates the problems, and runs both provers over all of them. The
-image records the prover versions it holds in `/benchmark/ENVIRONMENT`.
-
-The image has not yet been built and run.
+This prints the prover versions the image holds, recorded in
+`/benchmark/ENVIRONMENT`, and runs `full-run.sh`, so the container
+checks exactly what a local run checks and exits with its status.
 
 ---
 
