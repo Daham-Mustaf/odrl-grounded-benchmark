@@ -276,7 +276,9 @@ def concepts_and_labels(g):
     """Places in the locations scheme, with their English labels.
 
     The inverse-jurisdiction concepts are in their own scheme and are not
-    collected: they are not places, and nothing below reads them.
+    collected: they are not places, and nothing below reads them.  The
+    labels also cover the unions, which are not in the locations scheme
+    but which the jurisdictional reading names.
     """
     concepts, labels, kinds = set(), {}, {}
     for s in g.subjects(SKOS.inScheme, LOCATIONS_SCHEME):
@@ -291,6 +293,9 @@ def concepts_and_labels(g):
             if (s, RDF.type, DPV[cls]) in g:
                 kinds[code] = cls
                 break
+    for s, o in g.subject_objects(SKOS.prefLabel):
+        if str(s).startswith(str(LOC)) and getattr(o, "language", None) == "en":
+            labels.setdefault(local(s), str(o))
     return sorted(concepts), labels, kinds
 
 
@@ -411,6 +416,8 @@ def resource_ttl(concepts, labels, kinds, order, ident, meta, mode, digest) -> s
         body.append("")
         for u in sorted({b for _, b in order} - set(concepts)):
             body.append(f"odrlkb:{bare(u)} a odrlkb:Union ;")
+            if labels.get(u):
+                body.append(f'    rdfs:label "{labels[u]}"@en ;')
             body.append(f"    dcterms:identifier loc:{u} .")
             body.append("")
     body.append("# The order, as the extension publishes it.")

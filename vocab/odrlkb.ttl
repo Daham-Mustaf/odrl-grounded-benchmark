@@ -1,0 +1,83 @@
+# odrlkb.ttl
+# The classes the resource builders type their concepts with, and the
+# properties they state their order, identity and counts with.
+#
+# Every resource file writes the terms its builder mints with the prefix
+# odrlkb:, but the prefix names the resource's own namespace,
+# https://w3id.org/odrl-kb/<resource>#, so odrlkb:Purpose and
+# odrlkb:Country are terms of two namespaces.  Each class and property is
+# defined here under the namespace of the resource that uses it.  The
+# concepts are defined by the resource files themselves, which type and
+# label each one.
+
+@prefix rdf:          <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:         <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:          <http://www.w3.org/2002/07/owl#> .
+@prefix dcterms:      <http://purl.org/dc/terms/> .
+@prefix vann:         <http://purl.org/vocab/vann/> .
+@prefix dpv-consent:  <https://w3id.org/odrl-kb/dpv-consent#> .
+@prefix dpv-loc:      <https://w3id.org/odrl-kb/dpv-loc#> .
+@prefix dpv-purposes: <https://w3id.org/odrl-kb/dpv-purposes#> .
+@prefix dpv-tom:      <https://w3id.org/odrl-kb/dpv-tom#> .
+@prefix eu-file-type: <https://w3id.org/odrl-kb/eu-file-type#> .
+
+<https://w3id.org/odrl-kb/odrlkb> a owl:Ontology ;
+    dcterms:title "Classes and properties of the odrl-kb resources"@en ;
+    vann:preferredNamespacePrefix "odrlkb" ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+    dcterms:description "The classes the resource builders type the concepts of each resource with, and the properties the resource files state their order, identity and counts with. A concept of a resource is defined by the resource file, which types and labels it."@en .
+
+dpv-consent:ConsentState a rdfs:Class ;
+    rdfs:isDefinedBy <https://w3id.org/odrl-kb/odrlkb> ;
+    rdfs:label "Consent State"@en ;
+    rdfs:comment "A consent status the DPV consent status module publishes."@en .
+
+dpv-loc:Country a rdfs:Class ;
+    rdfs:isDefinedBy <https://w3id.org/odrl-kb/odrlkb> ;
+    rdfs:label "Country"@en ;
+    rdfs:comment "A country of the DPV Locations extension."@en .
+
+dpv-loc:Region a rdfs:Class ;
+    rdfs:isDefinedBy <https://w3id.org/odrl-kb/odrlkb> ;
+    rdfs:label "Region"@en ;
+    rdfs:comment "A region of the DPV Locations extension."@en .
+
+dpv-loc:Union a rdfs:Class ;
+    rdfs:isDefinedBy <https://w3id.org/odrl-kb/odrlkb> ;
+    rdfs:label "Union"@en ;
+    rdfs:comment "A supranational or economic union of the DPV Locations extension, read as a container of its member states under the jurisdictional reading only."@en .
+
+dpv-purposes:Purpose a rdfs:Class ;
+    rdfs:isDefinedBy <https://w3id.org/odrl-kb/odrlkb> ;
+    rdfs:label "Purpose"@en ;
+    rdfs:comment "A purpose of the DPV purposes module."@en .
+
+dpv-tom:Measure a rdfs:Class ;
+    rdfs:isDefinedBy <https://w3id.org/odrl-kb/odrlkb> ;
+    rdfs:label "Measure"@en ;
+    rdfs:comment "A technical or organisational measure of DPV."@en .
+
+eu-file-type:FileType a rdfs:Class ;
+    rdfs:isDefinedBy <https://w3id.org/odrl-kb/odrlkb> ;
+    rdfs:label "File Type"@en ;
+    rdfs:comment "A file type of the EU file type table."@en .
+
+dpv-consent:below a rdf:Property ;
+    rdfs:isDefinedBy <https://w3id.org/odrl-kb/odrlkb> ;
+    rdfs:label "below"@en ;
+    rdfs:comment "One consent status lies below another: an order statement of the DPV consent status module."@en .
+
+dpv-loc:within a rdf:Property ;
+    rdfs:isDefinedBy <https://w3id.org/odrl-kb/odrlkb> ;
+    rdfs:label "within"@en ;
+    rdfs:comment "One place lies within another: an order statement of the DPV Locations extension."@en .
+
+dpv-loc:sameAs a rdf:Property ;
+    rdfs:isDefinedBy <https://w3id.org/odrl-kb/odrlkb> ;
+    rdfs:label "same as"@en ;
+    rdfs:comment "Two ISO codes name one place: an identity the DPV Locations extension publishes, not an order statement."@en .
+
+eu-file-type:orderStatementCount a rdf:Property ;
+    rdfs:isDefinedBy <https://w3id.org/odrl-kb/odrlkb> ;
+    rdfs:label "order statement count"@en ;
+    rdfs:comment "The number of order statements a resource publishes; the EU file type table publishes none."@en .

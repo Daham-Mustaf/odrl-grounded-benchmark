@@ -20089,21 +20089,27 @@ odrlkb:zw_mw a odrlkb:Region ;
 # Unions, read as containers under this reading only.
 
 odrlkb:eea a odrlkb:Union ;
+    rdfs:label "European Economic Area (EEA)"@en ;
     dcterms:identifier loc:EEA .
 
 odrlkb:eea30 a odrlkb:Union ;
+    rdfs:label "EEA 30 Member States"@en ;
     dcterms:identifier loc:EEA30 .
 
 odrlkb:eea31 a odrlkb:Union ;
+    rdfs:label "EEA 31 Member States"@en ;
     dcterms:identifier loc:EEA31 .
 
 odrlkb:eu a odrlkb:Union ;
+    rdfs:label "European Union (EU)"@en ;
     dcterms:identifier loc:EU .
 
 odrlkb:eu27 a odrlkb:Union ;
+    rdfs:label "EU 27 Member States"@en ;
     dcterms:identifier loc:EU27 .
 
 odrlkb:eu28 a odrlkb:Union ;
+    rdfs:label "EU 28 Member States"@en ;
     dcterms:identifier loc:EU28 .
 
 # The order, as the extension publishes it.

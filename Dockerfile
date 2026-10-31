@@ -7,7 +7,7 @@
 # The default command prints the environment and runs full-run.sh, and
 # exits with its status: every resource rebuilt from the vendored files,
 # the problems regenerated, and every check full-run.sh makes. It takes
-# about a minute, most of it prover time.
+# about 6 minutes (measured 6 min 14 s), most of it prover time.
 #
 # Both prover versions are pinned. A verdict is a property of the
 # problem, but a timing and a proof are properties of the prover that

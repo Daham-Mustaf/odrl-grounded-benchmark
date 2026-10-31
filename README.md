@@ -192,6 +192,14 @@ uv run generators/build_filetype.py \
   --table vocabularies/eu-file-type-20260715/filetypes-skos-ap-act.rdf \
   --retrieved 2026-08-18 --out problems
 
+# the BCP 47 slice, checked against the vendored registry; writes its
+# two axiom files
+uv run generators/gen_bcp47.py \
+  --ttl problems/resources/bcp47.ttl \
+  --background problems/background/bcp47-distinct.ttl \
+  --registry vocabularies/bcp47-20260826/language-subtag-registry.txt \
+  --out problems/axioms
+
 # problems
 for g in gen_motivating gen_geonames gen_dpv gen_dpvloc gen_filetype \
          gen_consent gen_tom gen_bcp47_problems gen_wellsorted; do
@@ -214,6 +222,13 @@ Needs `vampire` and `z3` on the path, and `uv` for the Python. The
 suite was run with the Vampire 5.0.1 release binary (commit 1b13eafde)
 and Z3 4.8.12; `full-run.sh` prints the versions it finds, and
 `results/timings.csv` records them with the machine the times come from.
+
+Every resource is rebuilt from a vendored vocabulary except two slices.
+The GeoNames slice, `problems/resources/geonames.ttl`, is hand-trimmed
+and committed: the GeoNames dump it was cut from is not vendored. The
+BCP 47 slice, `problems/resources/bcp47.ttl`, is committed and checked:
+`gen_bcp47.py` reads every member against the vendored IANA registry in
+`vocabularies/bcp47-20260826` and stops if one fails the scope condition.
 
 ### In a container
 

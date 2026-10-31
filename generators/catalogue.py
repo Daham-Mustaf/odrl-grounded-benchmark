@@ -167,6 +167,10 @@ def value_text(g, node, names) -> str:
         return f"“{node}”"
     key = str(node)
     name = names.get(key) or names.get(local(node))
+    # A label that already ends in the code, "European Union (EU)", is shown
+    # without it: EU (European Union).
+    if name:
+        name = re.sub(rf"\s*\({re.escape(local(node))}\)$", "", name)
     return f"{local(node)} ({name})" if name and name != local(node) else local(node)
 
 

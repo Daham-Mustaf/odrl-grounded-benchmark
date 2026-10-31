@@ -49,13 +49,32 @@ uv run generators/build_dpv.py \
   --retrieved "$RETRIEVED" --out problems >/dev/null || die build_dpv
 echo "  dpv purposes"
 
-# The remaining builders take different arguments; run them by hand the
-# first time and paste the working invocation here.
-for b in build_consent build_tom build_filetype build_bcp47; do
-  if [ -f "generators/$b.py" ]; then
-    echo "  $b: not invoked here, add its arguments once known"
-  fi
-done
+uv run generators/build_consent.py \
+  --module vocabularies/dpv-2.3/modules/consent_status.ttl \
+  --retrieved 2026-10-29 --out problems >/dev/null || die build_consent
+echo "  consent"
+
+uv run generators/build_tom.py \
+  --tom vocabularies/dpv-2.3/modules/TOM.ttl \
+  --measures vocabularies/dpv-2.3/modules/technical_measures.ttl \
+  --out problems >/dev/null || die build_tom
+echo "  measures"
+
+uv run generators/build_filetype.py \
+  --table vocabularies/eu-file-type-20260715/filetypes-skos-ap-act.rdf \
+  --retrieved 2026-08-18 --out problems >/dev/null || die build_filetype
+echo "  file type"
+
+# The BCP 47 slice is a committed file.  This checks every member against
+# the vendored registry, stops if one fails the scope condition, and writes
+# the slice's two axiom files.  The GeoNames slice is hand-trimmed and
+# committed; the dump it was cut from is not vendored, so it is not rebuilt.
+uv run generators/gen_bcp47.py \
+  --ttl problems/resources/bcp47.ttl \
+  --background problems/background/bcp47-distinct.ttl \
+  --registry vocabularies/bcp47-20260826/language-subtag-registry.txt \
+  --out problems/axioms >/dev/null || die gen_bcp47
+echo "  bcp47, checked against the registry"
 
 # --- 2. problems -------------------------------------------------------
 hdr "2. generators"
@@ -77,6 +96,7 @@ uv run generators/survey_constraints.py 2>/dev/null | tail -25
 hdr "4. terms: every controlled namespace against its schema"
 uv run generators/validate_terms.py --schemas vocab \
   --instances problems cases probes 2>&1 | tail -30
+[ "${PIPESTATUS[0]}" -eq 0 ] || { echo "FAILED: a term in a controlled namespace is not defined" >&2; FAILED=1; }
 
 hdr "4b. case files: the agreed shape"
 uv run generators/validate_cases.py 2>&1 | tail -40
