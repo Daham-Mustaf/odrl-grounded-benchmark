@@ -128,6 +128,42 @@ once the parties declare the concepts distinct.
 
 ---
 
+## Release v1.1
+
+The numbers are those of `suite-numbers.tex`:
+
+```
+cases                72
+queries              122
+definite verdicts    45   (28 Compatible, 17 Incompatible)
+Unknown              16
+rejected             8    (6 ill sorted, 2 ungrounded)
+accepted controls    3
+bindings             9
+```
+
+What changed since v1.0:
+
+- 72 cases. The review covered 76; four were retired after it, KGC311,
+  KGC330, KGC386 and KGC387. Their cases and queries are kept at the tag
+  `pre-final` (4d01069), and their IDs are never reused.
+- The witness ranges over the whole vocabulary, as the paper defines it:
+  the value of a use can be any concept, not only one the two policies
+  name. Trying only the named concepts was a defect. The end-to-end test
+  (`tests/test_end_to_end.py`) decides 2,004 random problems from the
+  definitions and through the generator; it found 107 disagreements at
+  commit c8cdcdf and finds none now.
+- File types are declared distinct over the whole table: every pair of its
+  224 current entries, with the four deprecated or replaced ones left out.
+- KGC404 now sets research and development against non-commercial
+  purposes.
+- Every vendored file is checked byte for byte against
+  `vocabularies/MANIFEST`, in stage 0b of `full-run.sh`.
+- The provers are pinned: the Vampire 5.0.1 release binary and Z3 4.8.12.
+  The Docker image builds and runs `full-run.sh`, in about 6 minutes.
+- The query times are in `results/timings.csv`, and the figures for the
+  paper in `suite-numbers.tex`.
+
 ## Release v1.0
 
 The suite was frozen at the tag `v1.0` with these numbers, those of
