@@ -44,7 +44,7 @@ bcp47:el a skos:Concept ; skos:inScheme <https://w3id.org/odrl-kb/bcp47> ;
 bcp47:en a skos:Concept ; skos:inScheme <https://w3id.org/odrl-kb/bcp47> ;
     skos:notation "en" ; skos:prefLabel "English"@en .
 bcp47:es a skos:Concept ; skos:inScheme <https://w3id.org/odrl-kb/bcp47> ;
-    skos:notation "es" ; skos:prefLabel "Spanish and Castilian"@en .
+    skos:notation "es" ; skos:prefLabel "Spanish"@en ; skos:altLabel "Castilian"@en .
 bcp47:fi a skos:Concept ; skos:inScheme <https://w3id.org/odrl-kb/bcp47> ;
     skos:notation "fi" ; skos:prefLabel "Finnish"@en .
 bcp47:fr a skos:Concept ; skos:inScheme <https://w3id.org/odrl-kb/bcp47> ;
@@ -54,7 +54,7 @@ bcp47:hu a skos:Concept ; skos:inScheme <https://w3id.org/odrl-kb/bcp47> ;
 bcp47:it a skos:Concept ; skos:inScheme <https://w3id.org/odrl-kb/bcp47> ;
     skos:notation "it" ; skos:prefLabel "Italian"@en .
 bcp47:nl a skos:Concept ; skos:inScheme <https://w3id.org/odrl-kb/bcp47> ;
-    skos:notation "nl" ; skos:prefLabel "Dutch and Flemish"@en .
+    skos:notation "nl" ; skos:prefLabel "Dutch"@en ; skos:altLabel "Flemish"@en .
 bcp47:pl a skos:Concept ; skos:inScheme <https://w3id.org/odrl-kb/bcp47> ;
     skos:notation "pl" ; skos:prefLabel "Polish"@en .
 bcp47:pt a skos:Concept ; skos:inScheme <https://w3id.org/odrl-kb/bcp47> ;

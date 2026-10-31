@@ -230,6 +230,12 @@ BCP 47 slice, `problems/resources/bcp47.ttl`, is committed and checked:
 `gen_bcp47.py` reads every member against the vendored IANA registry in
 `vocabularies/bcp47-20260826` and stops if one fails the scope condition.
 
+Every vendored file is kept byte for byte as its source publishes it.
+`vocabularies/MANIFEST` records each one's source URL, upstream commit or
+retrieval date, and sha256; stage 0b of `full-run.sh` checks every sha256
+and stops the run on any difference, and `.gitattributes` keeps git from
+normalising the files.
+
 ### In a container
 
 Vampire has no package in most distributions, so the artefact ships a

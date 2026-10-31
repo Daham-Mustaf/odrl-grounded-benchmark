@@ -403,13 +403,17 @@ def main() -> int:
             f"gives {len(pairs)}")
 
     # Labels are read from the registry rather than from the slice, so a
-    # hand-typed label cannot drift from what IANA publishes.
+    # hand-typed label cannot drift from what IANA publishes.  The slice uses
+    # the descriptions as published: the first is the label, any further
+    # ones are alternative labels.
     checked = []
     for notation, pref, alts in concepts:
         descs = records[notation].get("Description", [])
-        if descs and pref and descs[0] != pref:
+        if descs and pref and (descs[0] != pref or sorted(descs[1:]) != alts):
             print(f"  label differs from the registry: {notation} has "
-                  f"{pref!r}, the registry says {descs[0]!r}",
+                  f"{pref!r}" + (f", alt {alts}" if alts else "")
+                  + f"; the registry says {descs[0]!r}"
+                  + (f", alt {descs[1:]}" if descs[1:] else ""),
                   file=sys.stderr)
         checked.append((notation, descs[0] if descs else pref, descs[1:]))
 

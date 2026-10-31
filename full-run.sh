@@ -31,6 +31,11 @@ hdr "0. provers"
 echo "  $(vampire --version 2>&1 | head -1)"
 echo "  $(z3 --version 2>&1 | head -1)"
 
+# Every builder reads a vendored file; each must be byte for byte the file
+# its source publishes, as vocabularies/MANIFEST records it.
+hdr "0b. vendored files: every sha256 in vocabularies/MANIFEST"
+uv run generators/check_vendored.py || die "a vendored file differs from vocabularies/MANIFEST"
+
 # --- 1. resources, from the vendored files -----------------------------
 hdr "1. builders"
 

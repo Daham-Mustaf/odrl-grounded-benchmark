@@ -1,0 +1,90 @@
+# vocabularies/MANIFEST
+#
+# Every vendored file under vocabularies/, byte for byte as its source
+# publishes it.  One entry per file: its sha256 and path, relative to this
+# folder, then the URL it was taken from and the upstream commit or, for a
+# source without commits, the release and the date it was retrieved.
+#
+# full-run.sh stage 0b checks every sha256, and that every file in this
+# folder is listed here, and stops the run on any difference.  The README.md
+# files are this project's notes, not vendored, and are not listed.
+#
+# Checked against the sources on 2026-10-31.  The DPV 2.3 files, the
+# DPV-ODRL mapping and the EU file type table are identical to what the
+# source URL serves.  The IANA registry and IPTC Media Topic now serve later
+# releases (File-Date 2026-09-17; release 2026-09-30), so for those two the
+# entry records the release that was vendored.  Four DPV files had lost
+# their final blank line (loc.ttl, loc-owl.ttl, status.ttl, status-owl.ttl)
+# and were restored from the source.
+
+addd4623924167845015f29b38dc9dcd57e68f2ced5dc13cb78eb5b18a29f7f2  IPTC/Media/medtop.ttl
+    source    https://cv.iptc.org/newscodes/mediatopic/?format=rdfttl
+    upstream  IPTC NewsCodes Media Topic, release 2026-07-02 (the file's ikos:dateReleased), retrieved 2026-08-26
+
+be21e91b6851f750a7b1a687f11209d46ad5a8471d6b10a1efc8d1dac4c8a926  bcp47-20260826/language-subtag-registry.txt
+    source    https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry
+    upstream  IANA Language Subtag Registry, File-Date 2026-08-08, retrieved 2026-08-26
+
+9c4e1e3a0988adc50ac323af2acba1d81f0a20ff20150aaf5136257cdd35722c  dpv-2.3/legal/eu/gdpr/modules/legal_basis-owl.ttl
+    source    https://raw.githubusercontent.com/w3c/dpv/5af893701677a4a54a28ad617e350bb98cf4d3b8/2.3/legal/eu/gdpr/modules/legal_basis-owl.ttl
+    upstream  w3c/dpv, branch master, commit 5af893701677a4a54a28ad617e350bb98cf4d3b8 (2026-02-20), the last to change 2.3/legal/eu/gdpr/modules/legal_basis-owl.ttl
+
+a2de247ceaa089c7e15cbddceef5ee6e09d8cb61656b405c6276e59ab4aa5bbf  dpv-2.3/legal/eu/gdpr/modules/legal_basis.ttl
+    source    https://raw.githubusercontent.com/w3c/dpv/5af893701677a4a54a28ad617e350bb98cf4d3b8/2.3/legal/eu/gdpr/modules/legal_basis.ttl
+    upstream  w3c/dpv, branch master, commit 5af893701677a4a54a28ad617e350bb98cf4d3b8 (2026-02-20), the last to change 2.3/legal/eu/gdpr/modules/legal_basis.ttl
+
+e6f21ea50ff55f068ccce14ec59e9141147eb666e3758352929db7c33cde8e2d  dpv-2.3/legal/eu/legal-eu-owl.ttl
+    source    https://raw.githubusercontent.com/w3c/dpv/5af893701677a4a54a28ad617e350bb98cf4d3b8/2.3/legal/eu/legal-eu-owl.ttl
+    upstream  w3c/dpv, branch master, commit 5af893701677a4a54a28ad617e350bb98cf4d3b8 (2026-02-20), the last to change 2.3/legal/eu/legal-eu-owl.ttl
+
+33d96abcba7724d1758863b5797b86866e3ac44ee80971e02b31777f333d6f72  dpv-2.3/legal/eu/legal-eu.ttl
+    source    https://raw.githubusercontent.com/w3c/dpv/5af893701677a4a54a28ad617e350bb98cf4d3b8/2.3/legal/eu/legal-eu.ttl
+    upstream  w3c/dpv, branch master, commit 5af893701677a4a54a28ad617e350bb98cf4d3b8 (2026-02-20), the last to change 2.3/legal/eu/legal-eu.ttl
+
+3abf298bd4cab701333d69a564545959cf6364f8641623f47be7054aa8120902  dpv-2.3/loc/loc-owl.ttl
+    source    https://raw.githubusercontent.com/w3c/dpv/5af893701677a4a54a28ad617e350bb98cf4d3b8/2.3/loc/loc-owl.ttl
+    upstream  w3c/dpv, branch master, commit 5af893701677a4a54a28ad617e350bb98cf4d3b8 (2026-02-20), the last to change 2.3/loc/loc-owl.ttl
+
+2da355c31eafb323c3a99da79f8314b8f3b1a827c56268523e19f00c446dbe1a  dpv-2.3/loc/loc.ttl
+    source    https://raw.githubusercontent.com/w3c/dpv/5af893701677a4a54a28ad617e350bb98cf4d3b8/2.3/loc/loc.ttl
+    upstream  w3c/dpv, branch master, commit 5af893701677a4a54a28ad617e350bb98cf4d3b8 (2026-02-20), the last to change 2.3/loc/loc.ttl
+
+e3f3e5ed688a0ff0dee0617e3199735585e4d884c09b3a821e1746dcdfa3cc96  dpv-2.3/modules/TOM.ttl
+    source    https://raw.githubusercontent.com/w3c/dpv/5af893701677a4a54a28ad617e350bb98cf4d3b8/2.3/dpv/modules/TOM.ttl
+    upstream  w3c/dpv, branch master, commit 5af893701677a4a54a28ad617e350bb98cf4d3b8 (2026-02-20), the last to change 2.3/dpv/modules/TOM.ttl
+
+efd21b46c7feded86404abdf83b7fb120450f46195efabaf94d2dcb7099a4e53  dpv-2.3/modules/consent_status.ttl
+    source    https://raw.githubusercontent.com/w3c/dpv/5af893701677a4a54a28ad617e350bb98cf4d3b8/2.3/dpv/modules/consent_status.ttl
+    upstream  w3c/dpv, branch master, commit 5af893701677a4a54a28ad617e350bb98cf4d3b8 (2026-02-20), the last to change 2.3/dpv/modules/consent_status.ttl
+
+ba9bd39e060172c37dddb491e14ae2fff2b8fe61a9aed6d944460c2ad2bc5d64  dpv-2.3/modules/legal_basis.ttl
+    source    https://raw.githubusercontent.com/w3c/dpv/5af893701677a4a54a28ad617e350bb98cf4d3b8/2.3/dpv/modules/legal_basis.ttl
+    upstream  w3c/dpv, branch master, commit 5af893701677a4a54a28ad617e350bb98cf4d3b8 (2026-02-20), the last to change 2.3/dpv/modules/legal_basis.ttl
+
+2a0e7ffa69198a905b32a89e394b4c58dc7171ceacc5a0c589f9d6e23d97255b  dpv-2.3/modules/purposes.ttl
+    source    https://raw.githubusercontent.com/w3c/dpv/5af893701677a4a54a28ad617e350bb98cf4d3b8/2.3/dpv/modules/purposes.ttl
+    upstream  w3c/dpv, branch master, commit 5af893701677a4a54a28ad617e350bb98cf4d3b8 (2026-02-20), the last to change 2.3/dpv/modules/purposes.ttl
+
+cd992aab0f2a0a5a963a5336e299fc4ff7e1b43396aee023b3ca1c8955357c5e  dpv-2.3/modules/status-owl.ttl
+    source    https://raw.githubusercontent.com/w3c/dpv/5af893701677a4a54a28ad617e350bb98cf4d3b8/2.3/dpv/modules/status-owl.ttl
+    upstream  w3c/dpv, branch master, commit 5af893701677a4a54a28ad617e350bb98cf4d3b8 (2026-02-20), the last to change 2.3/dpv/modules/status-owl.ttl
+
+855c2e805a1cffbcd748d17e8b94f0d1aee1eb8a91100bf4995a47f6be20b4e5  dpv-2.3/modules/status.ttl
+    source    https://raw.githubusercontent.com/w3c/dpv/5af893701677a4a54a28ad617e350bb98cf4d3b8/2.3/dpv/modules/status.ttl
+    upstream  w3c/dpv, branch master, commit 5af893701677a4a54a28ad617e350bb98cf4d3b8 (2026-02-20), the last to change 2.3/dpv/modules/status.ttl
+
+987c4f5ae73e24a9328ffc1b5b8af1bdd4b739bf86e1a8106793b3ec5ce5dad8  dpv-2.3/modules/technical_measures.ttl
+    source    https://raw.githubusercontent.com/w3c/dpv/5af893701677a4a54a28ad617e350bb98cf4d3b8/2.3/dpv/modules/technical_measures.ttl
+    upstream  w3c/dpv, branch master, commit 5af893701677a4a54a28ad617e350bb98cf4d3b8 (2026-02-20), the last to change 2.3/dpv/modules/technical_measures.ttl
+
+0541f2a0fed030cd5e850ede2bc09ae24a903d1f8379ca1a4f7c63b501af934c  dpv-odrl/dpv-odrl.ttl
+    source    https://raw.githubusercontent.com/w3c-cg/dpv/61cdb927f7e26a01983657e4d6219a3ff3d11873/mappings/odrl/dpv-odrl.ttl
+    upstream  w3c-cg/dpv, branch dev, commit 61cdb927f7e26a01983657e4d6219a3ff3d11873 (2026-03-23), the last to change mappings/odrl/dpv-odrl.ttl; vendored from the branch at 8a5054540351fb0dfe492ca54eaffb3d107a0d76 (2026-08-06)
+
+767de4d1fd45cc71d0e7fb903f25660719273cf657ecc681d200fa459920f312  eu-file-type-20260715/filetypes-skos-ap-act.rdf
+    source    http://publications.europa.eu/resource/distribution/file-type/20260715-0/rdf/skos_ap_act/filetypes-skos-ap-act.rdf
+    upstream  EU Vocabularies, File type authority table, version 20260715-0, retrieved 2026-08-18
+
+7860085f8d0775d0beb628b93d7ff2138453d59aa110cb7d6af3cfa78fb0de8d  eu-file-type-20260715/filetypes-skos.rdf
+    source    http://publications.europa.eu/resource/distribution/file-type/20260715-0/rdf/skos_core/filetypes-skos.rdf
+    upstream  EU Vocabularies, File type authority table, version 20260715-0, retrieved 2026-08-18
