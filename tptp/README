@@ -1,0 +1,178 @@
+KGC: ODRL policy pairs over published vocabularies
+==================================================
+
+A TPTP export of the odrl-grounded-benchmark,
+https://github.com/Daham-Mustaf/odrl-grounded-benchmark, tag v1.1.1. The
+names are provisional: KGC is a proposed domain code and the problems are
+numbered in sequence. The original name of each problem is in its % Names
+field and in manifest.csv.
+
+What the problems are
+---------------------
+
+The 122 problems come from 61 pairs of ODRL policies (Open Digital Rights
+Language). Each pair constrains one property of a use, such as its
+purpose, its place, its language or its file type, with values from a
+published vocabulary: the Data Privacy Vocabulary, its Locations
+extension, GeoNames, the EU file type table or the IANA Language Subtag
+Registry. The question is whether some use can meet both policies.
+
+A problem holds the vocabulary's published statements, read as a partial
+order (Axioms/KGC000+0.ax and one file per vocabulary); the declarations
+the parties make, that two values are distinct or that nothing lies below
+both, written in the problem; and one condition: that some use meets the
+two policies, or that no use does. Equality is built in and no axioms of
+equality are added. An inequation is written only where a declaration
+states it: two names are not assumed to name two things. Every problem is
+function-free FOF without a conjecture, so its status is Satisfiable or
+Unsatisfiable.
+
+How a verdict follows
+---------------------
+
+Each pair of policies has two problems: one states that some use meets the
+two policies, the other that no use does.
+
+    first Unsatisfiable      Incompatible
+    second Unsatisfiable     Compatible
+    both Satisfiable         Unknown
+
+Both Unsatisfiable would mean the statements contradict each other; it
+does not occur. A Satisfiable problem also shows that the statements are
+consistent, so there is no separate consistency problem. The % Comments of
+each problem name its partner and the pair's verdict.
+
+Versions
+--------
+
+Version 1 (+1), 122 problems: 77 Satisfiable, 45 Unsatisfiable. These are
+the queries of the repository. Where a constraint fixes the value of the
+use, the condition tries only the concepts that value allows; elsewhere it
+lists every concept of the vocabulary. The declaration instances are those
+among the concepts the condition names and the concepts that lie between
+two of them, which gives the same status as all of them (the repository's
+tree_expand.py says why).
+
+Version 2 (+2), 92 problems: 61 Satisfiable, 31 Unsatisfiable. The
+condition lists every concept of the vocabulary in every part, as the
+paper's definition states, with the declaration instances among all
+concepts of the vocabulary. The two versions have the same status. A
+disjunction or conjunction of more than 64 members is written in balanced
+groups of at most 64; it is the same formula, nested about log n deep, so
+that a recursive parser does not run out of stack on the ten thousand
+disjuncts of the largest.
+
+Version 2 is not written for 30 problems: 10 under the ISO rule, whose
+declarations have 12,382,776 pairs over the vocabulary, and 20 whose
+condition and declarations come out the same in both versions, so that
+version 2 would repeat version 1.
+
+    KGC025+2   KGC317-1   the same formulas as version 1
+    KGC026+2   KGC317-2   the same formulas as version 1
+    KGC035+2   KGC322-1   the same formulas as version 1
+    KGC036+2   KGC322-2   the same formulas as version 1
+    KGC043+2   KGC334-1   declarations of 12,382,776 pairs (the ISO rule)
+    KGC044+2   KGC334-2   declarations of 12,382,776 pairs (the ISO rule)
+    KGC045+2   KGC335-1   declarations of 12,382,776 pairs (the ISO rule)
+    KGC046+2   KGC335-2   declarations of 12,382,776 pairs (the ISO rule)
+    KGC047+2   KGC336-1   declarations of 12,382,776 pairs (the ISO rule)
+    KGC048+2   KGC336-2   declarations of 12,382,776 pairs (the ISO rule)
+    KGC049+2   KGC337-1   declarations of 12,382,776 pairs (the ISO rule)
+    KGC050+2   KGC337-2   declarations of 12,382,776 pairs (the ISO rule)
+    KGC053+2   KGC341-1   the same formulas as version 1
+    KGC054+2   KGC341-2   the same formulas as version 1
+    KGC065+2   KGC362-1   the same formulas as version 1
+    KGC066+2   KGC362-2   the same formulas as version 1
+    KGC067+2   KGC363-1   the same formulas as version 1
+    KGC068+2   KGC363-2   the same formulas as version 1
+    KGC071+2   KGC365-1   the same formulas as version 1
+    KGC072+2   KGC365-2   the same formulas as version 1
+    KGC087+2   KGC377-1   the same formulas as version 1
+    KGC088+2   KGC377-2   the same formulas as version 1
+    KGC089+2   KGC378-1   the same formulas as version 1
+    KGC090+2   KGC378-2   the same formulas as version 1
+    KGC103+2   KGC392-1   declarations of 12,382,776 pairs (the ISO rule)
+    KGC104+2   KGC392-2   declarations of 12,382,776 pairs (the ISO rule)
+    KGC115+2   KGC398-1   the same formulas as version 1
+    KGC116+2   KGC398-2   the same formulas as version 1
+    KGC121+2   KGC404-1   the same formulas as version 1
+    KGC122+2   KGC404-2   the same formulas as version 1
+
+Provers
+-------
+
+Vampire 5.0.1, the release binary (commit 1b13eaf), one problem at a time:
+version 1 with --mode casc at 60 s; version 2 with --mode casc at 300 s
+and, for a Satisfiable problem casc did not solve, --mode casc_sat at
+300 s. The repository also decides every pair with Z3 4.8.12 on an SMT-LIB
+encoding of the same statements; that encoding is not part of this export.
+
+Version 1: 122 of 122 solved with the stated status. Version 2: 92 solved
+with --mode casc; 0 not solved within the limit.
+
+The slowest version 2 problems:
+
+    KGC099+2   KGC388-1   Satisfiable     casc         42.0 s
+    KGC098+2   KGC383-2   Unsatisfiable   casc          6.0 s
+    KGC093+2   KGC380-1   Satisfiable     casc          1.7 s
+    KGC101+2   KGC391-1   Satisfiable     casc          1.6 s
+    KGC097+2   KGC383-1   Satisfiable     casc          1.6 s
+    KGC095+2   KGC382-1   Satisfiable     casc          1.6 s
+    KGC041+2   KGC333-1   Satisfiable     casc          1.6 s
+    KGC039+2   KGC331-1   Satisfiable     casc          1.6 s
+    KGC094+2   KGC380-2   Unsatisfiable   casc          1.0 s
+    KGC042+2   KGC333-2   Satisfiable     casc          0.5 s
+
+Every file parses with tptp4X -x -w, includes expanded, with no warning.
+tptp4X was built from the TPTP World sources (github.com/TPTPWorld/TPTP4X
+at ce83fd4, JJParser at 94a781a).
+
+Layout
+------
+
+    Problems/KGC/KGCnnn+1.p    version 1
+    Problems/KGC/KGCnnn+2.p    version 2
+    Axioms/KGC000+0.ax         the order axioms
+    Axioms/KGC000+1.ax ...     one file per vocabulary
+    manifest.csv               one row per problem: problem, version,
+                               original name, case, check, status,
+                               case verdict, axiom files, Vampire
+                               result, mode, time
+
+Includes are written include('Axioms/KGC000+N.ax'), relative to this
+folder.
+
+Licences
+--------
+
+KGC000+0.ax, A partial order: CC BY 4.0, this project.
+KGC000+1.ax, BCP 47, fifteen primary language subtags: IANA states that
+    its protocol registries may be freely used (CC0 1.0 for rights IANA or
+    IETF hold); https://www.iana.org/help/licensing-terms
+KGC000+2.ax, DPV 2.3, consent status: W3C Document License 2023. The DPV
+    Community Group's permission to redistribute this derived slice is not
+    yet recorded.
+KGC000+3.ax, DPV 2.3, purposes: W3C Document License 2023. The DPV
+    Community Group's permission to redistribute this derived slice is not
+    yet recorded.
+KGC000+4.ax, DPV 2.3, technical and organisational measures: W3C Document
+    License 2023. The DPV Community Group's permission to redistribute
+    this derived slice is not yet recorded.
+KGC000+5.ax, GeoNames, a Europe slice: CC BY 4.0, credit GeoNames,
+    https://www.geonames.org
+KGC000+6.ax, DPV 2.3 Locations, geographic reading: W3C Document License
+    2023. The DPV Community Group's permission to redistribute this
+    derived slice is not yet recorded.
+KGC000+7.ax, DPV 2.3 Locations, jurisdictional reading: W3C Document
+    License 2023. The DPV Community Group's permission to redistribute
+    this derived slice is not yet recorded.
+The EU file type table (EU Vocabularies, Publications Office of the
+    European Union, version 20260715-0) gives the names of the file types
+    and no statement, so it has no axiom file: CC BY 4.0. The repository
+    records that the reuse terms of the snapshot are still to be
+    confirmed.
+The problems, the conditions and the declarations: CC BY 4.0, this
+    project.
+
+The DPV-derived files are not to be redistributed until the DPV Community
+Group's permission is recorded in the repository's README.

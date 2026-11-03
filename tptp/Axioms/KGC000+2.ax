@@ -1,0 +1,59 @@
+%------------------------------------------------------------------------------
+% File     : KGC000+2 : placeholder, for TPTP use only
+% Domain   : Semantic Web (ODRL policies), proposed
+% Axioms   : DPV 2.3, consent status
+% Version  : Especial.
+% English  : The 12 statements of the consent status module of the Data
+%            Privacy Vocabulary 2.3 that place one of its 13 consent statuses
+%            below another.
+
+% Refs     : [Mus26] Mustafa (2026), odrl-grounded-benchmark,
+%            https://github.com/Daham-Mustaf/odrl-grounded-benchmark, tag
+%            v1.1.1
+% Source   : [Mus26]
+% Names    : DPV-consent.ax [Mus26]
+
+% Status   : Satisfiable
+% Syntax   : left to TPTP
+
+% Comments : Licence of the source: W3C Document License 2023. The DPV
+%            Community Group's permission to redistribute this derived slice
+%            is not yet recorded.
+%------------------------------------------------------------------------------
+
+fof(res_dpv_consent_expired_below_dpv_consent_status_invalid_for_processing, axiom,
+    kge_leq(dpv_consent_expired, dpv_consent_status_invalid_for_processing)).
+
+fof(res_dpv_consent_given_below_dpv_consent_status_valid_for_processing, axiom,
+    kge_leq(dpv_consent_given, dpv_consent_status_valid_for_processing)).
+
+fof(res_dpv_consent_invalidated_below_dpv_consent_status_invalid_for_processing, axiom,
+    kge_leq(dpv_consent_invalidated, dpv_consent_status_invalid_for_processing)).
+
+fof(res_dpv_consent_refused_below_dpv_consent_status_invalid_for_processing, axiom,
+    kge_leq(dpv_consent_refused, dpv_consent_status_invalid_for_processing)).
+
+fof(res_dpv_consent_request_deferred_below_dpv_consent_status_invalid_for_processing, axiom,
+    kge_leq(dpv_consent_request_deferred, dpv_consent_status_invalid_for_processing)).
+
+fof(res_dpv_consent_requested_below_dpv_consent_status_invalid_for_processing, axiom,
+    kge_leq(dpv_consent_requested, dpv_consent_status_invalid_for_processing)).
+
+fof(res_dpv_consent_revoked_below_dpv_consent_status_invalid_for_processing, axiom,
+    kge_leq(dpv_consent_revoked, dpv_consent_status_invalid_for_processing)).
+
+fof(res_dpv_consent_status_invalid_for_processing_below_dpv_consent_status, axiom,
+    kge_leq(dpv_consent_status_invalid_for_processing, dpv_consent_status)).
+
+fof(res_dpv_consent_status_valid_for_processing_below_dpv_consent_status, axiom,
+    kge_leq(dpv_consent_status_valid_for_processing, dpv_consent_status)).
+
+fof(res_dpv_consent_unknown_below_dpv_consent_status_invalid_for_processing, axiom,
+    kge_leq(dpv_consent_unknown, dpv_consent_status_invalid_for_processing)).
+
+fof(res_dpv_consent_withdrawn_below_dpv_consent_status_invalid_for_processing, axiom,
+    kge_leq(dpv_consent_withdrawn, dpv_consent_status_invalid_for_processing)).
+
+fof(res_dpv_renewed_consent_given_below_dpv_consent_status_valid_for_processing, axiom,
+    kge_leq(dpv_renewed_consent_given, dpv_consent_status_valid_for_processing)).
+%------------------------------------------------------------------------------

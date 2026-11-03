@@ -1,0 +1,52 @@
+%------------------------------------------------------------------------------
+% File     : KGC058+2 : placeholder, for TPTP use only
+% Domain   : Semantic Web (ODRL policies), proposed
+% Problem  : Use only while the consent on record may justify processing against use only records whose consent was withdrawn: no use meets both
+% Version  : Especial.
+%            Theorem formulation : The condition is written over the whole
+%            vocabulary, as the paper's definition states; version 1 names
+%            only the concepts a fixed value allows. The two versions have the
+%            same status.
+% English  : As KGC342, with the valid and invalid branches declared disjoint.
+%            This problem states that no use meets the two policies.
+
+% Refs     : [Mus26] Mustafa (2026), odrl-grounded-benchmark,
+%            https://github.com/Daham-Mustaf/odrl-grounded-benchmark, tag
+%            v1.1.1
+% Source   : [Mus26]
+% Names    : KGC343-2 [Mus26]
+
+% Status   : Satisfiable
+% Rating   : left to TPTP
+% Syntax   : left to TPTP
+% SPC      : left to TPTP
+
+% Comments : KGC343 is Incompatible. Its two problems state that some use
+%            meets the two policies (KGC057) and that no use does (KGC058). A
+%            pair of policies is Incompatible when the first is Unsatisfiable,
+%            Compatible when the second is Unsatisfiable, and Unknown when
+%            both are Satisfiable; a Satisfiable problem also shows the
+%            statements consistent. Here the first is Unsatisfiable and the
+%            second Satisfiable.
+%------------------------------------------------------------------------------
+include('Axioms/KGC000+0.ax').
+include('Axioms/KGC000+2.ax').
+
+fof(bg_disj_dpv_consent_status_valid_for_processing_disjoint_dpv_consent_status_invalid_for_processing, axiom,
+    ! [X] : ~ ( kge_leq(X, dpv_consent_status_valid_for_processing) & kge_leq(X, dpv_consent_status_invalid_for_processing) )).
+
+fof(w_kgc343, axiom,
+    ~ ( ( ( kge_leq(dpv_consent_status_valid_for_processing, dpv_consent_status_valid_for_processing) & dpv_consent_status_valid_for_processing = dpv_consent_withdrawn )
+    | kge_leq(dpv_consent_withdrawn, dpv_consent_status_valid_for_processing)
+    | ( kge_leq(dpv_consent_expired, dpv_consent_status_valid_for_processing) & dpv_consent_expired = dpv_consent_withdrawn )
+    | ( kge_leq(dpv_consent_given, dpv_consent_status_valid_for_processing) & dpv_consent_given = dpv_consent_withdrawn )
+    | ( kge_leq(dpv_consent_invalidated, dpv_consent_status_valid_for_processing) & dpv_consent_invalidated = dpv_consent_withdrawn )
+    | ( kge_leq(dpv_consent_refused, dpv_consent_status_valid_for_processing) & dpv_consent_refused = dpv_consent_withdrawn )
+    | ( kge_leq(dpv_consent_request_deferred, dpv_consent_status_valid_for_processing) & dpv_consent_request_deferred = dpv_consent_withdrawn )
+    | ( kge_leq(dpv_consent_requested, dpv_consent_status_valid_for_processing) & dpv_consent_requested = dpv_consent_withdrawn )
+    | ( kge_leq(dpv_consent_revoked, dpv_consent_status_valid_for_processing) & dpv_consent_revoked = dpv_consent_withdrawn )
+    | ( kge_leq(dpv_consent_status, dpv_consent_status_valid_for_processing) & dpv_consent_status = dpv_consent_withdrawn )
+    | ( kge_leq(dpv_consent_status_invalid_for_processing, dpv_consent_status_valid_for_processing) & dpv_consent_status_invalid_for_processing = dpv_consent_withdrawn )
+    | ( kge_leq(dpv_consent_unknown, dpv_consent_status_valid_for_processing) & dpv_consent_unknown = dpv_consent_withdrawn )
+    | ( kge_leq(dpv_renewed_consent_given, dpv_consent_status_valid_for_processing) & dpv_renewed_consent_given = dpv_consent_withdrawn ) ) )).
+%------------------------------------------------------------------------------

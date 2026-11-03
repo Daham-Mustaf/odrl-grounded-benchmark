@@ -1,0 +1,80 @@
+%------------------------------------------------------------------------------
+% File     : KGC000+5 : placeholder, for TPTP use only
+% Domain   : Semantic Web (ODRL policies), proposed
+% Axioms   : GeoNames, a Europe slice
+% Version  : Especial.
+% English  : Fifteen places of GeoNames, from Europe down to three cities,
+%            each stated a concept, and the 14 statements that place one
+%            within another.
+
+% Refs     : [Mus26] Mustafa (2026), odrl-grounded-benchmark,
+%            https://github.com/Daham-Mustaf/odrl-grounded-benchmark, tag
+%            v1.1.1
+% Source   : [Mus26]
+% Names    : GN000-0.ax [Mus26]
+
+% Status   : Satisfiable
+% Syntax   : left to TPTP
+
+% Comments : Licence of the source: CC BY 4.0, credit GeoNames,
+%            https://www.geonames.org
+%------------------------------------------------------------------------------
+
+fof(gn_auvergne_rhone_alpes_concept, axiom, kge_concept(gn_auvergne_rhone_alpes)).
+
+fof(gn_baden_wuerttemberg_concept, axiom, kge_concept(gn_baden_wuerttemberg)).
+
+fof(gn_bayern_concept, axiom, kge_concept(gn_bayern)).
+
+fof(gn_berlin_concept, axiom, kge_concept(gn_berlin)).
+
+fof(gn_europe_concept, axiom, kge_concept(gn_europe)).
+
+fof(gn_france_concept, axiom, kge_concept(gn_france)).
+
+fof(gn_germany_concept, axiom, kge_concept(gn_germany)).
+
+fof(gn_grand_est_concept, axiom, kge_concept(gn_grand_est)).
+
+fof(gn_ile_de_france_concept, axiom, kge_concept(gn_ile_de_france)).
+
+fof(gn_munich_concept, axiom, kge_concept(gn_munich)).
+
+fof(gn_nouvelle_aquitaine_concept, axiom, kge_concept(gn_nouvelle_aquitaine)).
+
+fof(gn_occitanie_concept, axiom, kge_concept(gn_occitanie)).
+
+fof(gn_paris_concept, axiom, kge_concept(gn_paris)).
+
+fof(gn_provence_alpes_cote_d_azur_concept, axiom, kge_concept(gn_provence_alpes_cote_d_azur)).
+
+fof(gn_strasbourg_concept, axiom, kge_concept(gn_strasbourg)).
+
+fof(gn_auvergne_rhone_alpes_leq_france, axiom, kge_leq(gn_auvergne_rhone_alpes, gn_france)).
+
+fof(gn_baden_wuerttemberg_leq_germany, axiom, kge_leq(gn_baden_wuerttemberg, gn_germany)).
+
+fof(gn_bayern_leq_germany, axiom, kge_leq(gn_bayern, gn_germany)).
+
+fof(gn_berlin_leq_germany, axiom, kge_leq(gn_berlin, gn_germany)).
+
+fof(gn_france_leq_europe, axiom, kge_leq(gn_france, gn_europe)).
+
+fof(gn_germany_leq_europe, axiom, kge_leq(gn_germany, gn_europe)).
+
+fof(gn_grand_est_leq_france, axiom, kge_leq(gn_grand_est, gn_france)).
+
+fof(gn_ile_de_france_leq_france, axiom, kge_leq(gn_ile_de_france, gn_france)).
+
+fof(gn_munich_leq_bayern, axiom, kge_leq(gn_munich, gn_bayern)).
+
+fof(gn_nouvelle_aquitaine_leq_france, axiom, kge_leq(gn_nouvelle_aquitaine, gn_france)).
+
+fof(gn_occitanie_leq_france, axiom, kge_leq(gn_occitanie, gn_france)).
+
+fof(gn_paris_leq_ile_de_france, axiom, kge_leq(gn_paris, gn_ile_de_france)).
+
+fof(gn_provence_alpes_cote_d_azur_leq_france, axiom, kge_leq(gn_provence_alpes_cote_d_azur, gn_france)).
+
+fof(gn_strasbourg_leq_grand_est, axiom, kge_leq(gn_strasbourg, gn_grand_est)).
+%------------------------------------------------------------------------------

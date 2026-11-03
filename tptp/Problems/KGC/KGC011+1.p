@@ -1,0 +1,38 @@
+%------------------------------------------------------------------------------
+% File     : KGC011+1 : placeholder, for TPTP use only
+% Domain   : Semantic Web (ODRL policies), proposed
+% Problem  : Use within Germany against use in France only: some use meets both
+% Version  : Especial.
+% English  : A library permits use within Germany. A researcher's policy
+%            commits to use in France. France and Germany are declared
+%            distinct. This problem states that some use meets the two
+%            policies.
+
+% Refs     : [Mus26] Mustafa (2026), odrl-grounded-benchmark,
+%            https://github.com/Daham-Mustaf/odrl-grounded-benchmark, tag
+%            v1.1.1
+% Source   : [Mus26]
+% Names    : KGC308-1 [Mus26]
+
+% Status   : Satisfiable
+% Rating   : left to TPTP
+% Syntax   : left to TPTP
+% SPC      : left to TPTP
+
+% Comments : KGC308 is Unknown. Its two problems state that some use meets the
+%            two policies (KGC011) and that no use does (KGC012). A pair of
+%            policies is Incompatible when the first is Unsatisfiable,
+%            Compatible when the second is Unsatisfiable, and Unknown when
+%            both are Satisfiable; a Satisfiable problem also shows the
+%            statements consistent. Here the first is Satisfiable and the
+%            second Satisfiable.
+%------------------------------------------------------------------------------
+include('Axioms/KGC000+0.ax').
+include('Axioms/KGC000+5.ax').
+
+fof(bg_dist_gn_germany_gn_france, axiom,
+    gn_germany != gn_france).
+
+fof(w_kgc308, axiom,
+    kge_leq(gn_france, gn_germany)).
+%------------------------------------------------------------------------------

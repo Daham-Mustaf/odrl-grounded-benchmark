@@ -1,0 +1,31 @@
+%------------------------------------------------------------------------------
+% File     : KGC000+0 : placeholder, for TPTP use only
+% Domain   : Semantic Web (ODRL policies), proposed
+% Axioms   : A partial order
+% Version  : Especial.
+% English  : The order the vocabularies' statements are read in: reflexive,
+%            antisymmetric and transitive. Equality is built in.
+
+% Refs     : [Mus26] Mustafa (2026), odrl-grounded-benchmark,
+%            https://github.com/Daham-Mustaf/odrl-grounded-benchmark, tag
+%            v1.1.1
+% Source   : [Mus26]
+% Names    : KGE000-0.ax [Mus26]
+
+% Status   : Satisfiable
+% Syntax   : left to TPTP
+
+% Comments : Licence of the source: CC BY 4.0, this project.
+%------------------------------------------------------------------------------
+
+fof(ax_leq_reflexive, axiom,
+    ![X]: kge_leq(X, X)).
+
+fof(ax_leq_antisymmetric, axiom,
+    ![X, Y]:
+      ((kge_leq(X, Y) & kge_leq(Y, X)) => X = Y)).
+
+fof(ax_leq_transitive, axiom,
+    ![X, Y, Z]:
+      ((kge_leq(X, Y) & kge_leq(Y, Z)) => kge_leq(X, Z))).
+%------------------------------------------------------------------------------
