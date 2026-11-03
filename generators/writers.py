@@ -57,9 +57,11 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
-from header import Header, SMTHeader
+from header import Header, SMTHeader, spc_of
 from operator_notes import sentences as usage_note_sentences
 from targets import with_targets
+
+_AXIOMS = Path(__file__).resolve().parent.parent / "problems" / "axioms"
 
 
 def _twins(p) -> list:
@@ -166,6 +168,16 @@ def write_fof(p: dict, q: int, out_dir: Path) -> Path:
     formula = f"~ ( {witness} )" if negate else witness
     name = f"w_{p['id'].lower()}"
 
+    # The SPC is read from the formulas, with the included files, as TPTP
+    # defines it.  An include is looked for beside the problems written, then
+    # in the repository's own axioms.
+    included = []
+    for ax in p["includes"]:
+        found = next((d / ax for d in (out_dir / "axioms", _AXIOMS)
+                      if (d / ax).exists()), None)
+        if found:
+            included.append(found.read_text(encoding="utf-8"))
+    text = "\n".join(included + [p["fof_decls"], formula])
     header = Header(
         file     = f"{p['id']}-{q}.p",
         domain   = "kb",
@@ -173,6 +185,7 @@ def write_fof(p: dict, q: int, out_dir: Path) -> Path:
         english  = p.get("summary", p.get("description", p["name"])),
         status   = p[f"expected_q{q}"],
         comments = f"Query {q} of 2.  Verdict is derived from both queries.",
+        spc      = spc_of(p[f"expected_q{q}"], text),
     ).render()
 
     content = (

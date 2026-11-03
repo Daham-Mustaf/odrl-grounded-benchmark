@@ -11,7 +11,7 @@
 % Names    : KGC377-2.p
 %
 % Status   : Satisfiable
-% SPC      : FOF_SAT_RFN
+% SPC      : FOF_SAT_EPR_SEQ
 %
 % Comments : Query 2 of 2.  Verdict is derived from both queries.
 %--------------------------------------------------------------------------

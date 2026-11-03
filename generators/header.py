@@ -50,6 +50,31 @@ SPC = {
     "sat":   "FOF_SAT_RFN",
 }
 
+# The predicates of the signature; any other symbol applied to arguments is a
+# function symbol.
+PREDICATES = {"kge_leq", "kge_concept"}
+
+
+def spc_of(status: str, text: str) -> str:
+    """The Specialist Problem Class TPTP's definitions give a FOF problem
+    with no conjecture, from its formulas with the includes read in:
+
+        status    SAT or UNS
+        order     EPR when no function symbol and no existential quantifier
+                  occurs, so the clause form is function-free; RFO otherwise
+        equality  NEQ without an equality atom, PEQ when equality is the
+                  only predicate, SEQ when other predicates occur as well
+    """
+    body = "\n".join(l for l in text.splitlines()
+                     if not l.lstrip().startswith("%"))
+    applied = set(re.findall(r"(?<![\w$])([a-z]\w*)\(", body)) - {"fof", "include"}
+    order = "RFO" if (applied - PREDICATES) or re.search(r"\?\s*\[", body) \
+        else "EPR"
+    eq = re.search(r"!=|(?<![<=!])=(?![>=])", body)
+    equality = "NEQ" if not eq else ("SEQ" if applied & PREDICATES else "PEQ")
+    kind = "UNS" if status.lower().startswith("unsat") else "SAT"
+    return f"FOF_{kind}_{order}_{equality}"
+
 _SEP     = "%" + "-" * 74 + "\n"
 _SMT_SEP = "; " + "-" * 73 + "\n"
 
@@ -99,9 +124,7 @@ class Header:
     comments: str
     version:  str = "1.0"
     refs:     list = field(default_factory=lambda: ["thispaper"])
-
-    def _spc(self) -> str:
-        return SPC["unsat"] if "unsat" in self.status.lower() else SPC["sat"]
+    spc:      str = ""       # spc_of(); no SPC line when empty
 
     def render(self) -> str:
         return (
@@ -118,7 +141,7 @@ class Header:
             + f"% Names    : {self.file}\n"
             + "%\n"
             + f"% Status   : {self.status}\n"
-            + f"% SPC      : {self._spc()}\n"
+            + (f"% SPC      : {self.spc}\n" if self.spc else "")
             + "%\n"
             + _wrap("Comments", self.comments) + "\n"
             + _SEP

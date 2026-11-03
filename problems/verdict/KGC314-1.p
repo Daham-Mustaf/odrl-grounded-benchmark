@@ -11,7 +11,7 @@
 % Names    : KGC314-1.p
 %
 % Status   : Unsatisfiable
-% SPC      : FOF_UNS_RFN
+% SPC      : FOF_UNS_EPR_SEQ
 %
 % Comments : Query 1 of 2.  Verdict is derived from both queries.
 %--------------------------------------------------------------------------

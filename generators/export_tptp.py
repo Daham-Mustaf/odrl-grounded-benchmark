@@ -40,7 +40,12 @@ tptp/README.
 
 --runs reads the Vampire results generators/run_tptp.py writes, for the
 manifest and for the comment a version 2 problem gets when no mode solved
-it.
+it.  The export stops, and writes nothing, unless Vampire has confirmed the
+status of every version 1 problem, or if it found the opposite status for
+a version 2 problem.  A version 2 problem no mode solved keeps version 1's
+status, and its % Comments says that the status holds by construction.
+--draft writes the files without those checks, for a first run of
+run_tptp.py over a changed export; a draft is not for release.
 """
 
 import argparse
@@ -492,10 +497,15 @@ def solved(runs: list, status: str):
     return next(((m, r, s) for m, r, s in runs if r == status), None)
 
 
+OPPOSITE = {"Satisfiable": "Unsatisfiable", "Unsatisfiable": "Satisfiable"}
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[3])
     ap.add_argument("--out", default=ROOT / "tptp", type=Path)
     ap.add_argument("--runs", default=ROOT / "results" / "tptp-runs.csv", type=Path)
+    ap.add_argument("--draft", action="store_true",
+                    help="write without requiring Vampire's results")
     args = ap.parse_args()
 
     queries = sorted((ROOT / "problems/verdict").glob("KGC*-[12].p"),
@@ -505,14 +515,7 @@ def main() -> int:
     runs = read_runs(args.runs)
 
     pdir, adir = args.out / "Problems" / "KGC", args.out / "Axioms"
-    for d in (pdir, adir):
-        d.mkdir(parents=True, exist_ok=True)
-        for old in d.iterdir():
-            old.unlink()
-    for i in range(len(AXIOMS)):
-        (adir / f"KGC000+{i}.ax").write_text(axiom_text(i), encoding="utf-8")
-
-    rows, left_out = [], []
+    rows, left_out, texts, unconfirmed = [], [], {}, []
     cases = {}
     for qpath in queries:
         cid, q = qpath.stem[:6], int(qpath.stem[-1])
@@ -548,15 +551,24 @@ def main() -> int:
                     continue
             r = runs.get(f"{name}.p", [])
             hit = solved(r, v1["status"])
+            seen = ", ".join(f"{m} {res}" for m, res, _ in r) or "no run"
+            if version == 1 and hit is None:
+                unconfirmed.append(f"{name} ({original}): the header says "
+                                   f"{v1['status']}, Vampire: {seen}")
+            if any(res == OPPOSITE[v1["status"]] for _, res, _ in r):
+                unconfirmed.append(f"{name} ({original}): the header says "
+                                   f"{v1['status']}, Vampire found the "
+                                   f"opposite: {seen}")
             extra = ""
-            if version == 2 and r and hit is None:
+            if version == 2 and hit is None:
                 extra = (" Vampire 5.0.1 did not solve this version within "
                          "300 s in casc or casc_sat mode; its status equals "
-                         "version 1's by construction.")
-            text = problem_text(name, version, original, case, q,
-                                v1["status"], includes, formulas, partner,
-                                extra)
-            (pdir / f"{name}.p").write_text(text, encoding="utf-8")
+                         "version 1's by construction." if r else
+                         " No prover run is recorded for this version; its "
+                         "status equals version 1's by construction.")
+            texts[pdir / f"{name}.p"] = problem_text(
+                name, version, original, case, q, v1["status"], includes,
+                formulas, partner, extra)
             last = hit or (r[-1] if r else ("", "", ""))
             rows.append({
                 "problem": name, "version": version, "original name": original,
@@ -566,6 +578,21 @@ def main() -> int:
                 "Vampire result": last[1], "mode": last[0], "time": last[2],
             })
 
+    if unconfirmed and not args.draft:
+        print(f"not written: {len(unconfirmed)} problems without the "
+              f"status Vampire confirms", file=sys.stderr)
+        for u in unconfirmed:
+            print(f"  {u}", file=sys.stderr)
+        return 1
+
+    for d in (pdir, adir):
+        d.mkdir(parents=True, exist_ok=True)
+        for old in d.iterdir():
+            old.unlink()
+    for i in range(len(AXIOMS)):
+        (adir / f"KGC000+{i}.ax").write_text(axiom_text(i), encoding="utf-8")
+    for path, text in texts.items():
+        path.write_text(text, encoding="utf-8")
     with (args.out / "manifest.csv").open("w", encoding="utf-8", newline="") as f:
         w = csv.DictWriter(f, fieldnames=list(rows[0]), lineterminator="\n")
         w.writeheader()
@@ -575,7 +602,9 @@ def main() -> int:
     v1n = sum(1 for r in rows if r["version"] == 1)
     v2n = sum(1 for r in rows if r["version"] == 2)
     print(f"wrote {args.out}: {v1n} version 1, {v2n} version 2, "
-          f"{len(AXIOMS)} axiom files; {len(left_out)} version 2 left out")
+          f"{len(AXIOMS)} axiom files; {len(left_out)} version 2 left out"
+          + ("; a draft, statuses not confirmed" if args.draft else
+             "; every version 1 status confirmed by Vampire"))
     return 0
 
 
