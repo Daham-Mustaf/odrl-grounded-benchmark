@@ -14,27 +14,27 @@
     vann:preferredNamespacePrefix "vrep" ;
     vann:preferredNamespaceUri "https://w3id.org/odrl-kb/verdict-report#" ;
     dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
-    dcterms:description "Reports the result of comparing two ODRL policies before any use: whether their constraints on one left operand can be satisfied together. The comparison involves no request and no state of the world, so this vocabulary does not extend a compliance report model, which records the evaluation of a policy against a request."@en .
+    dcterms:description "Reports the result of comparing two ODRL policies before any use: whether their constraints on one left operand can be satisfied together. The comparison involves no request and no actual use, so this vocabulary does not extend a compliance report model, which records the evaluation of a policy against a request."@en .
 
 # ----- reports -----
 
 vrep:Report a rdfs:Class ;
     rdfs:isDefinedBy <https://w3id.org/odrl-kb/verdict-report> ;
     rdfs:label "Report"@en ;
-    skos:definition "A report on the constraints of ODRL policies, relative to a binding. Either a verdict on two policies or an input check on one constraint."@en .
+    skos:definition "A report on the constraints of ODRL policies, relative to a binding. A verdict on two policies, an input check on one constraint, or a consistency check of the statements in force."@en .
 
 vrep:OperandVerdictReport a rdfs:Class ;
     rdfs:subClassOf vrep:Report ;
     rdfs:isDefinedBy <https://w3id.org/odrl-kb/verdict-report> ;
     rdfs:label "Operand Verdict Report"@en ;
-    skos:definition "The verdict for the constraints two policies place on one left operand, relative to a binding and its declarations: Compatible when every structure they admit has a use satisfying both constraints, Incompatible when none has, and Unknown otherwise."@en ;
-    rdfs:comment "Only well-sorted constraints whose values all ground receive a verdict. Any other constraint is reported by an input check report."@en .
+    skos:definition "The verdict for the constraints two policies place on one left operand, relative to a binding and the declarations in force: Compatible when, whatever the vocabulary leaves open, some use meets both policies; Incompatible when, whatever the vocabulary leaves open, no use meets both policies; and Unknown when it depends on something the vocabulary leaves open."@en ;
+    rdfs:comment "Only well-sorted constraints whose values all name a concept receive a verdict. Any other constraint is reported by an input check report."@en .
 
 vrep:InputCheckReport a rdfs:Class ;
     rdfs:subClassOf vrep:Report ;
     rdfs:isDefinedBy <https://w3id.org/odrl-kb/verdict-report> ;
     rdfs:label "Input Check Report"@en ;
-    skos:definition "Whether one constraint can be read under its binding at all. Decided before any satisfiability question is asked."@en ;
+    skos:definition "Whether one constraint can be read under its binding at all. Decided before any prover is called."@en ;
     rdfs:comment "A constraint that fails an input check is rejected. It has no verdict, rather than a negative or an Unknown one."@en .
 
 vrep:WellSortednessReport a rdfs:Class ;
@@ -51,29 +51,36 @@ vrep:GroundingReport a rdfs:Class ;
     skos:definition "Whether every right-operand value of one well-sorted constraint names a concept of the bound resource under the binding's grounding rule."@en ;
     rdfs:comment "Decided by applying the grounding rule to each value. A value that names no concept is repaired by correcting the policy or the binding, not by a declaration of the parties."@en .
 
+vrep:ConsistencyReport a rdfs:Class ;
+    rdfs:subClassOf vrep:Report ;
+    rdfs:isDefinedBy <https://w3id.org/odrl-kb/verdict-report> ;
+    rdfs:label "Consistency Report"@en ;
+    skos:definition "Whether the statements of the resource and the declarations in force have a model. Checked after the input checks and before the verdict. When they have none, no verdict is given."@en .
+
 # ----- the three verdicts -----
 
 vrep:CompatibilityState a rdfs:Class ;
     rdfs:isDefinedBy <https://w3id.org/odrl-kb/verdict-report> ;
     rdfs:label "Compatibility State"@en ;
     skos:definition "The verdict of an operand verdict report. Exactly one of vrep:Compatible, vrep:Incompatible and vrep:Unknown."@en ;
-    owl:oneOf ( vrep:Compatible vrep:Incompatible vrep:Unknown ) .
+    owl:equivalentClass [ a owl:Class ;
+        owl:oneOf ( vrep:Compatible vrep:Incompatible vrep:Unknown ) ] .
 
 vrep:Compatible a vrep:CompatibilityState ;
     rdfs:isDefinedBy <https://w3id.org/odrl-kb/verdict-report> ;
     rdfs:label "Compatible"@en ;
-    skos:definition "Every structure the resource and the declarations admit has a use satisfying both constraints. Certified by a refutation of the negated witness condition."@en .
+    skos:definition "Whatever the vocabulary leaves open, some use meets both policies. Certified by a proof that no reading of the resource and the declarations leaves the two policies without a common use."@en .
 
 vrep:Incompatible a vrep:CompatibilityState ;
     rdfs:isDefinedBy <https://w3id.org/odrl-kb/verdict-report> ;
     rdfs:label "Incompatible"@en ;
-    skos:definition "No structure the resource and the declarations admit has a use satisfying both constraints. Certified by a refutation of the witness condition."@en .
+    skos:definition "Whatever the vocabulary leaves open, no use meets both policies. Certified by a proof that no reading admits a common use."@en .
 
 vrep:Unknown a vrep:CompatibilityState ;
     rdfs:isDefinedBy <https://w3id.org/odrl-kb/verdict-report> ;
     rdfs:label "Unknown"@en ;
-    skos:definition "Some structures the resource and the declarations admit have a use satisfying both constraints, and some do not. Both satisfiability queries are satisfiable."@en ;
-    rdfs:comment "A further statement in the declarations can make the verdict definite."@en .
+    skos:definition "It depends on something the vocabulary leaves open. The comment names it."@en ;
+    rdfs:comment "A further declaration, or a further statement of the resource, can make the verdict definite."@en .
 
 vrep:Compatible owl:differentFrom vrep:Incompatible, vrep:Unknown .
 vrep:Incompatible owl:differentFrom vrep:Unknown .
@@ -98,25 +105,26 @@ vrep:comparedPolicy a rdf:Property, owl:FunctionalProperty ;
 vrep:referenceConstraint a rdf:Property ;
     rdfs:isDefinedBy <https://w3id.org/odrl-kb/verdict-report> ;
     rdfs:label "reference constraint"@en ;
-    skos:definition "A constraint of the reference policy on the operand the report is about. Where a rule carries several constraints, each is given; they hold together."@en ;
+    skos:definition "A constraint of the policy on the operand the report is about: an atomic constraint, or a logical constraint (and, or, xone) as written, so its grouping is kept. Several constraints on one rule hold together, as in ODRL."@en ;
     rdfs:domain vrep:OperandVerdictReport .
 
 vrep:comparedConstraint a rdf:Property ;
     rdfs:isDefinedBy <https://w3id.org/odrl-kb/verdict-report> ;
     rdfs:label "compared constraint"@en ;
-    skos:definition "A constraint of the compared policy on the operand the report is about."@en ;
+    skos:definition "A constraint of the policy on the operand the report is about: an atomic constraint, or a logical constraint (and, or, xone) as written, so its grouping is kept. Several constraints on one rule hold together, as in ODRL."@en ;
     rdfs:domain vrep:OperandVerdictReport .
 
 vrep:binding a rdf:Property, owl:FunctionalProperty ;
     rdfs:isDefinedBy <https://w3id.org/odrl-kb/verdict-report> ;
     rdfs:label "binding"@en ;
     skos:definition "The binding that fixed the reading: which source supplies the concepts, at which sort, read how."@en ;
+    rdfs:domain vrep:Report ;
     rdfs:range bind:OperandBinding .
 
 vrep:declarations a rdf:Property, owl:FunctionalProperty ;
     rdfs:isDefinedBy <https://w3id.org/odrl-kb/verdict-report> ;
     rdfs:label "declarations"@en ;
-    skos:definition "What is declared beyond the resource. Every report names one set, the empty declarations included, so a reader sees what the verdict rests on."@en ;
+    skos:definition "What is declared beyond the resource. Every verdict report names one set, the empty declarations included."@en ;
     rdfs:domain vrep:OperandVerdictReport ;
     rdfs:range bind:Declarations .
 
@@ -137,8 +145,8 @@ vrep:profileNote a rdf:Property ;
 vrep:certificate a rdf:Property ;
     rdfs:isDefinedBy <https://w3id.org/odrl-kb/verdict-report> ;
     rdfs:label "certificate"@en ;
-    skos:definition "The evidence for a definite verdict, checkable without trusting the procedure: a refutation naming the resource, declared and axiom premises it uses."@en ;
-    rdfs:comment "Referenced, not reified. An Unknown verdict has no refutation to point at."@en ;
+    skos:definition "The proof behind a definite verdict, with the statements it uses: from the resource, from the declarations, or from the order axioms."@en ;
+    rdfs:comment "Referenced, not reified. An Unknown verdict has no proof to point at."@en ;
     rdfs:domain vrep:OperandVerdictReport .
 
 vrep:readAgainst a rdf:Property, owl:SymmetricProperty ;
@@ -147,6 +155,13 @@ vrep:readAgainst a rdf:Property, owl:SymmetricProperty ;
     skos:definition "Another case this one should be read with, because the two differ in one thing: the binding, the declarations, or one value."@en ;
     rdfs:domain vrep:Report ;
     rdfs:range vrep:Report .
+
+vrep:consistent a rdf:Property, owl:FunctionalProperty ;
+    rdfs:isDefinedBy <https://w3id.org/odrl-kb/verdict-report> ;
+    rdfs:label "consistent"@en ;
+    skos:definition "True when the statements of the resource and the declarations in force have a model."@en ;
+    rdfs:domain vrep:ConsistencyReport ;
+    rdfs:range xsd:boolean .
 
 # ----- properties of an input check report -----
 
