@@ -66,7 +66,7 @@ SETS = {
 # Sets whose members are the whole resource, less what the set names as left out.
 WHOLE = {"consent-declared", "dpv-purposes-declared", "tom-declared",
          "geonames-europe-declared", "filetype-declared"}
-RULES = {"PairwiseDistinctness", "PairwiseDisjointness", "PublishedDefinition"}
+RULES = {"PairwiseDistinctness", "PairwiseDisjointness"}
 
 fails = []
 

@@ -29,7 +29,7 @@
 <https://w3id.org/odrl-kb/dpv-consent/definitional> a bind:Declarations ;
     dcterms:title "The valid and invalid branches are disjoint"@en ;
     bind:appliesTo <https://w3id.org/odrl-kb/dpv-consent> ;
-    bind:generatedBy bind:PublishedDefinition ;
+    bind:generatedBy bind:PairwiseDisjointness ;
     bind:origin bind:proseDefinition ;
     bind:pairCount 1 ;
     bind:warrant [
