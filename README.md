@@ -11,7 +11,7 @@ them, and whether the implementation produces the verdicts the
 definitions prescribe.
 
 The terms used below are defined in [GLOSSARY.md](GLOSSARY.md), each
-with the name it replaced or still carries inside the code.
+with the name it replaced or still carries inside the code. 
 
 ---
 
