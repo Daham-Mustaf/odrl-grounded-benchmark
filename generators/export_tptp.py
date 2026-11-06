@@ -62,6 +62,7 @@ from rdflib import Graph, Namespace, URIRef
 from rdflib.namespace import DCTERMS
 
 import declarations
+import header
 import vocabulary
 from compile import FOF, render, tree_term
 from tree_expand import _map_item, constants_of_tree
@@ -70,10 +71,13 @@ ROOT = Path(__file__).resolve().parent.parent
 VREP = Namespace("https://w3id.org/odrl-kb/verdict-report#")
 DRK = Namespace("https://w3id.org/odrl-kb/drk/")
 
-REPO = "https://github.com/Daham-Mustaf/odrl-grounded-benchmark"
 TAG = "v1.1.1"
-REF = (f"[Mus26] Mustafa (2026), odrl-grounded-benchmark, {REPO}, "
-       f"tag {TAG}")
+# ODRL_ANON=1 renders the repository and the reference as anonymous, as it
+# does in every other generated header.
+REPO = header.identity("source")
+CITE = "[Anon26]" if header.ANONYMOUS else "[Mus26]"
+REF = (header.identity("ref") if header.ANONYMOUS else
+       f"{CITE} Mustafa (2026), odrl-grounded-benchmark, {REPO}, tag {TAG}")
 DOMAIN = "Semantic Web (ODRL policies), proposed"
 MAX_PAIRS = 25_000
 
@@ -299,8 +303,8 @@ def problem_text(name, version, original, case, q, status, includes,
         ("English", f"{case['story']} This problem states that {check}."),
         None,
         ("Refs", REF),
-        ("Source", "[Mus26]"),
-        ("Names", f"{original} [Mus26]"),
+        ("Source", CITE),
+        ("Names", f"{original} {CITE}"),
         None,
         ("Status", status),
         ("Rating", "left to TPTP"),
@@ -325,8 +329,8 @@ def axiom_text(i: int) -> str:
         ("English", english),
         None,
         ("Refs", REF),
-        ("Source", "[Mus26]"),
-        ("Names", f"{repo} [Mus26]"),
+        ("Source", CITE),
+        ("Names", f"{repo} {CITE}"),
         None,
         ("Status", "Satisfiable"),
         ("Syntax", "left to TPTP"),

@@ -6,3 +6,4 @@ __pycache__
 _chek
 cert-report.json
 /tmp
+*.patch
