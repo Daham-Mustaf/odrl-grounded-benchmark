@@ -93,6 +93,7 @@ probes/           statements each binding must and must not entail
 design/           modules written against the definitions and not yet
                   wired into the pipeline
 GLOSSARY.md       one definition per term, with its former or internal names
+UPSTREAM-ISSUES.md  the issues filed upstream, and what the benchmark does about each
 suite-numbers.tex the figures and the tables the paper includes,
                   written by generators/table_data.py --suite-numbers
 ```
@@ -449,6 +450,8 @@ under the Netherlands and the Netherlands in the EU; under the selected
 binding, transitivity gives Bonaire in the EU. That is not a statement
 about EU territorial law. KGC380, with KGC383 as the control where the
 same composition holds.
+
+Questions for the publishers are in [UPSTREAM-ISSUES.md](UPSTREAM-ISSUES.md).
 
 ---
 

@@ -4,10 +4,11 @@
 #     bash make-anon.sh [DIR]      # default ../odrl-grounded-benchmark-anon
 #
 # DIR must not exist and must lie outside this git repository.  The copy has
-# no git history.  The generated headers and the TPTP export are rewritten
-# there under ODRL_ANON=1, then the whole copy is searched: exit 1 if any
-# file matches daham, mustaf or mhamad, ignoring case.  Nothing in this
-# repository is changed.
+# no git history and no UPSTREAM-ISSUES.md, nor any line that points to it.
+# The generated headers and the TPTP export are rewritten there under
+# ODRL_ANON=1, then the whole copy is searched: exit 1 if any file matches
+# daham, mustaf or mhamad, ignoring case, or still names the issues.  Nothing
+# in this repository is changed.
 
 set -u
 ROOT="$(cd "$(dirname "$0")" && git rev-parse --show-toplevel)" || exit 1
@@ -58,10 +59,25 @@ if n != 1:
     raise SystemExit("no CITE in generators/export_tptp.py")
 p.write_text(t, encoding="utf-8")
 PY
+# The mirror is made without the list of upstream issues.
+rm -f UPSTREAM-ISSUES.md
+python3 - <<'PY' || die "could not take the pointers to the issues out"
+from pathlib import Path
+for f in Path(".").rglob("*"):
+    if f.is_file() and f.name != "make-anon.sh" and ".venv" not in f.parts:
+        data = f.read_bytes()
+        if b"UPSTREAM-ISSUES" in data:
+            lines = data.splitlines(keepends=True)
+            f.write_bytes(b"".join(l for l in lines if b"UPSTREAM-ISSUES" not in l))
+PY
+
 rm -rf .venv
 rm -f make-anon.sh
 
 if grep -rIilE 'daham|mustaf|mhamad' . ; then
   die "the files above still name an author; $OUT is not anonymous"
 fi
-echo "wrote $OUT: no match for daham, mustaf or mhamad"
+if grep -rIlE 'UPSTREAM-ISSUES|w3c-cg/dpv/issues' . ; then
+  die "the files above still point to the upstream issues"
+fi
+echo "wrote $OUT: no match for daham, mustaf or mhamad, and no upstream issues"
