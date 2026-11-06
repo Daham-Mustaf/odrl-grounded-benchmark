@@ -31,7 +31,10 @@ What is counted, per row:
 
     concepts     subjects the resource file types as its concept class
     order        kge_leq statements in the resource's .ax file
-    cases        verdict problems whose binding is this one
+    test cases   case files whose binding is this one
+    C, I, U      those with that verdict
+    rejected     those rejected as ill sorted or ungrounded; the accepted
+                 controls are in test cases and in no other column
     reads        the relation the profile's prose says the sort takes
 
 The last is the only field not measured. It is read from the profile
@@ -45,6 +48,17 @@ import re
 import sys
 from collections import Counter
 from pathlib import Path
+
+from rdflib import Graph, Namespace, RDF
+from rdflib.collection import Collection
+
+sys.path.insert(0, str(Path(__file__).parent))
+
+from signature import SIGNATURE, NOM, TAX, MER
+
+ODRL = Namespace("http://www.w3.org/ns/odrl/2/")
+VREP = Namespace("https://w3id.org/odrl-kb/verdict-report#")
+BIND = Namespace("https://w3id.org/odrl-kb/binding#")
 
 # One entry per binding. The resource tag is the builder's; the binding
 # IRI is what the case files cite.
@@ -173,11 +187,86 @@ def suite_totals(cases_dir: Path, verdict_dir: Path) -> dict:
     }
 
 
+def local(x) -> str:
+    return str(x).rsplit("/", 1)[-1].rsplit("#", 1)[-1]
+
+
+def constraint_term(g, node):
+    """A constraint as a value that compares: the operator and its values, or
+    the connective and its members in order."""
+    op = next(g.objects(node, ODRL.operator), None)
+    if op is not None:
+        right = next(g.objects(node, ODRL.rightOperand))
+        values = (list(Collection(g, right))
+                  if (right, RDF.first, None) in g else [right])
+        return (local(op), tuple(str(v) for v in values))
+    for conn in ("or", "xone", "and", "andSequence"):
+        head = next(g.objects(node, ODRL[conn]), None)
+        if head is not None:
+            return (conn, tuple(constraint_term(g, m)
+                                for m in Collection(g, head)))
+    raise ValueError(f"{node} is neither a constraint nor a logical constraint")
+
+
+def read_cases(cases_dir: Path) -> list:
+    """Every test case: what it asks and its outcome.
+
+    The outcome is C, I, U, rejected, or control (a constraint checked and
+    accepted, for which no verdict is asked).
+    """
+    out = []
+    for f in sorted(cases_dir.glob("KGC*.ttl")):
+        g = Graph().parse(f, format="turtle")
+        report = next(s for s in g.subjects(VREP.binding, None))
+        state = next(g.objects(report, VREP.compatibilityState), None)
+        if state is not None:
+            outcome = {"Compatible": "C", "Incompatible": "I",
+                       "Unknown": "U"}[local(state)]
+        elif (report, VREP.wellSorted, None) in g:
+            well = next(g.objects(report, VREP.wellSorted)).toPython()
+            outcome = "control" if well else "rejected"
+        elif next(g.objects(report, VREP.grounded)).toPython() is False:
+            outcome = "rejected"
+        else:
+            raise ValueError(f"{f.name}: no outcome in its report")
+        declarations = next(g.objects(report, VREP.declarations), None)
+        pair = [next(g.objects(report, p), None)
+                for p in (VREP.referenceConstraint, VREP.comparedConstraint)]
+        out.append({
+            "id": f.stem,
+            "outcome": outcome,
+            "binding": local(next(g.objects(report, VREP.binding))),
+            "declarations": str(declarations) if declarations else "",
+            "operators": {local(o) for o in g.objects(None, ODRL.operator)},
+            "connectives": {c for c in ("or", "xone", "and", "andSequence")
+                            if any(True for _ in g.subject_objects(ODRL[c]))},
+            "constraints": tuple(constraint_term(g, c) for c in pair
+                                 if c is not None),
+        })
+    return out
+
+
+def left_operand(profile: Path, binding: str) -> str:
+    """The binding's left operand, as the case files write it."""
+    g = Graph().parse(profile, format="turtle")
+    for b, o in g.subject_objects(BIND.leftOperand):
+        if local(b) == binding:
+            return ("odrl:" if str(o).startswith(str(ODRL))
+                    else "dpv-odrl:") + local(o)
+    return ""
+
+
 def rows(root: Path):
     cases = cases_by_binding(root / "cases")
+    tests = read_cases(root / "cases")
     out = []
     for label, tag, sort, binding in BINDINGS:
+        outcomes = Counter(c["outcome"] for c in tests
+                           if c["binding"] == binding)
+        profile = root / "problems" / "resources" / f"profile-{tag}.ttl"
         out.append({
+            "operand":  left_operand(profile, binding),
+            "outcomes": outcomes,
             "label":    label,
             "sort":     sort,
             "concepts": count_concepts(root / "problems" / "resources" / f"{tag}.ttl"),
@@ -314,19 +403,28 @@ def suite_numbers_tex(rs, totals, timings) -> str:
     lines += [f"\\newcommand{{\\{name}}}{{{value}}}" for name, value in macros]
     lines += [f"\\newcommand{{\\{name}}}{{{tex_escape(value)}}}"
               for name, value in time_macros(timings)]
+    outcome_total = Counter()
+    for r in rs:
+        outcome_total.update(r["outcomes"])
     lines += [
         "\\newcommand{\\suiteBindingsTable}{%",
-        "\\begin{tabular}{llrrr}",
+        "\\begin{tabular}{lllrrrrrrr}",
         "\\hline",
-        "resource and binding & sort & concepts & order & cases \\\\",
+        "left operand & resource and binding & sort & concepts & order"
+        " & test cases & C & I & U & rejected \\\\",
         "\\hline",
     ]
     for r in rs:
-        lines.append(f"{tex_escape(r['label'])} & {r['sort']} & {r['concepts']}"
-                     f" & {r['order']} & {r['cases']} \\\\")
+        o = r["outcomes"]
+        lines.append(f"{tex_escape(r['operand'])} & {tex_escape(r['label'])}"
+                     f" & {r['sort']} & {r['concepts']} & {r['order']}"
+                     f" & {r['cases']} & {o['C']} & {o['I']} & {o['U']}"
+                     f" & {o['rejected']} \\\\")
     lines += [
         "\\hline",
-        f"total & & & & {sum(r['cases'] for r in rs)} \\\\",
+        f"total & & & & & {sum(r['cases'] for r in rs)}"
+        f" & {outcome_total['C']} & {outcome_total['I']}"
+        f" & {outcome_total['U']} & {outcome_total['rejected']} \\\\",
         "\\hline",
         "\\end{tabular}%",
         "}",
@@ -386,7 +484,7 @@ def main() -> int:
         return 0
 
     w = max(len(r["label"]) for r in rs)
-    print(f"{'resource and binding':{w}}  sort  concepts  order  cases")
+    print(f"{'resource and binding':{w}}  sort  concepts  order  test cases")
     for r in rs:
         print(f"{r['label']:{w}}  {r['sort']:4}  {r['concepts']:8}  "
               f"{r['order']:5}  {r['cases']:5}")
