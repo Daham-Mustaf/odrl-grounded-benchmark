@@ -144,6 +144,11 @@ TIMEOUT="$PROVER_LIMIT" bash run_verdict.sh 2>/dev/null | tail -3
 hdr "6b. encodings: TPTP and SMT-LIB give the same status"
 uv run generators/check_encodings.py --limit "$PROVER_LIMIT" 2>&1 | tail -4
 
+# --- 6c. the closed world ----------------------------------------------
+hdr "6c. the closed world: what a checker reproduces that reads the resource as complete"
+uv run generators/closed_world.py --limit "$PROVER_LIMIT" \
+  || { echo "FAILED: the closed world disagrees with a verdict, or a check of its structure failed" >&2; FAILED=1; }
+
 # --- 7. provers agree --------------------------------------------------
 hdr "7. two provers, and what they cite"
 uv run generators/run_certify.py --timeout "$PROVER_LIMIT" \
@@ -177,10 +182,6 @@ if [ "${TIMINGS:-0}" = 1 ]; then
   uv run generators/time_queries.py --repeat 3 --limit "$PROVER_LIMIT" \
     || { echo "FAILED: the timing pass did not finish, or a query got no status" >&2; FAILED=1; }
 fi
-
-hdr "8c. the closed world: what a checker reproduces that reads the resource as complete"
-uv run generators/closed_world.py --limit "$PROVER_LIMIT" \
-  || { echo "FAILED: a test case got no kind in the closed-world run" >&2; FAILED=1; }
 
 hdr "9. figures for the paper"
 uv run generators/table_data.py --suite-numbers 2>&1 | tail -6

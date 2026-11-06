@@ -631,8 +631,16 @@ def closed_world_problems(closed, tests) -> list:
     if have != want:
         out.append(f"{CLOSED_WORLD} does not cover the test cases: "
                    + ", ".join(sorted(have ^ want)[:4]))
+    moved = Counter(r["closed_world"] for r in closed.values()
+                    if r["expected"] == "U")
+    if set(moved) - {"C", "I"}:
+        out.append(f"{CLOSED_WORLD}: an Unknown test case has no closed-world "
+                   f"verdict")
     for c in tests:
         row = closed.get(c["id"])
+        if row and c["outcome"] != "U" and row["reproduced"] != "yes":
+            out.append(f"{CLOSED_WORLD}: {c['id']} is {c['outcome']}, and the "
+                       f"closed world gives {row['closed_world']}")
         if row and row["expected"] != c["outcome"]:
             out.append(f"{CLOSED_WORLD}: {c['id']} expected {row['expected']}, "
                        f"its case file says {c['outcome']}")
@@ -826,6 +834,12 @@ def suite_numbers_tex(rs, totals, timings, tests, closed, certificates,
         ("suiteEtoEProblems",    outputs["e2e"]["problems"]),
         ("suiteEtoEDisagree",    outputs["e2e"]["disagreements"]),
         ("suiteReadAgainst",     len(read_against_links(tests))),
+    ]
+    moved = Counter(r["closed_world"] for r in closed.values()
+                    if r["expected"] == "U")
+    macros += [
+        ("suiteCWToCompatible",   moved["C"]),
+        ("suiteCWToIncompatible", moved["I"]),
     ]
     lines.append(f"% suiteNoteConflicts counts constraints in test cases with a"
                  f" verdict. Rejected test cases hold"
