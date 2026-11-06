@@ -126,6 +126,9 @@ Start with KGC310, KGC313 and KGC314: one published statement, then the
 same operand where the vocabulary settles nothing, then the same pair
 once the parties declare the concepts distinct.
 
+The paper's running example is KGC310 (purpose), KGC302 (spatial), KGC371
+(language), and KGC370 (language with the declaration).
+
 ---
 
 ## Release v1.1

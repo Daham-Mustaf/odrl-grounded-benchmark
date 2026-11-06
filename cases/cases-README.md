@@ -32,6 +32,9 @@ Start with KGC310, KGC313 and KGC314: one published statement, then the
 same operand where the vocabulary decides nothing, then the same pair
 once the concepts are declared distinct.
 
+The paper's running example is KGC310 (purpose), KGC302 (spatial), KGC371
+(language), and KGC370 (language with the declaration).
+
 `catalogue.html` lists every case with its two policies in plain words, how
 the vocabulary is read and the declarations in force with their origin, and
 then the lesson, the verdict and the reason. `catalogue-blind.html` is the same page
