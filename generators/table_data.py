@@ -8,6 +8,7 @@ Every figure the evaluation table needs, measured rather than recalled.
     uv run generators/table_data.py --tex > tab.tex # LaTeX rows
     uv run generators/table_data.py --macros        # \newcommand lines
     uv run generators/table_data.py --suite-numbers # writes suite-numbers.tex
+    uv run generators/table_data.py --challenges    # the rows, and any case in none
 
 Each row is one binding, not one resource: a file read under two
 profiles produces two rows, which is the table's point. Counts come from
@@ -532,6 +533,29 @@ def challenge_cw_table(rows, closed) -> list:
     return lines
 
 
+def under_no_challenge(rows, tests) -> list:
+    inside = {c["id"] for _, _, members in rows for c in members}
+    return [c for c in tests if c["id"] not in inside]
+
+
+def plain_term(term) -> str:
+    head, rest = term
+    if head in ("or", "xone", "and", "andSequence"):
+        return f"{head}(" + ", ".join(plain_term(m) for m in rest) + ")"
+    return f"{head} " + " ".join(local(v) for v in rest)
+
+
+def print_challenges(rows, tests) -> None:
+    for name, varies, members in rows:
+        print(f"{name} ({varies}): {len(members)}: "
+              + " ".join(c["id"] for c in members))
+    outside = under_no_challenge(rows, tests)
+    print(f"\nunder no challenge: {len(outside)}")
+    for c in outside:
+        print(f"  {c['id']}  {c['outcome']}  "
+              + " against ".join(plain_term(t) for t in c["constraints"]))
+
+
 def closed_world_problems(closed, tests) -> list:
     if closed is None:
         return [f"{CLOSED_WORLD} not found: run generators/closed_world.py"]
@@ -611,6 +635,9 @@ def suite_numbers_tex(rs, totals, timings, tests, closed, certificates) -> str:
     ]
     lines += coverage_table(tests)
     rows = challenges(tests, closed, certificates)
+    outside = under_no_challenge(rows, tests)
+    lines.insert(5, "% Under no challenge: "
+                 + (", ".join(c["id"] for c in outside) or "none") + ".")
     lines += challenge_table(rows)
     lines += challenge_cw_table(rows, closed)
     return "\n".join(lines) + "\n"
@@ -626,7 +653,20 @@ def main() -> int:
                     metavar="FILE",
                     help="write the macros and the bindings table "
                          "(default suite-numbers.tex, under --root)")
+    ap.add_argument("--challenges", action="store_true",
+                    help="each challenge's test cases, and those under none")
     args = ap.parse_args()
+
+    if args.challenges:
+        tests = read_cases(args.root / "cases")
+        closed = read_closed_world(args.root / CLOSED_WORLD)
+        problems = closed_world_problems(closed, tests)
+        if problems:
+            print("\n".join(problems), file=sys.stderr)
+            return 1
+        print_challenges(challenges(tests, closed, args.root / "certificates"),
+                         tests)
+        return 0
 
     rs = rows(args.root)
     totals = suite_totals(args.root / "cases",

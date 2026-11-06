@@ -93,7 +93,7 @@ probes/           statements each binding must and must not entail
 design/           modules written against the definitions and not yet
                   wired into the pipeline
 GLOSSARY.md       one definition per term, with its former or internal names
-suite-numbers.tex the figures and the bindings table the paper includes,
+suite-numbers.tex the figures and the tables the paper includes,
                   written by generators/table_data.py --suite-numbers
 ```
 
