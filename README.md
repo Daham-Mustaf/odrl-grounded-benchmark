@@ -250,8 +250,9 @@ bash run_verdict.sh
 uv run generators/run_certify.py
 uv run generators/check_certificates.py
 
-# the timing pass: each query alone, one at a time -> results/timings.csv
-uv run generators/time_queries.py
+# the timing pass: three runs of every check, each query alone, one at a time
+# -> results/timings-run1.csv, -run2.csv, -run3.csv
+uv run generators/time_queries.py --repeat 3
 
 # the figures, the times and the bindings table for the paper
 uv run generators/table_data.py --suite-numbers
@@ -260,7 +261,7 @@ uv run generators/table_data.py --suite-numbers
 Needs `vampire` and `z3` on the path, and `uv` for the Python. The
 suite was run with the Vampire 5.0.1 release binary (commit 1b13eafde)
 and Z3 4.8.12; `full-run.sh` prints the versions it finds, and
-`results/timings.csv` records them with the machine the times come from.
+`results/timings-runN.csv` records them with the machine the times come from.
 
 Every resource is rebuilt from a vendored vocabulary except two slices.
 The GeoNames slice, `problems/resources/geonames.ttl`, is hand-trimmed

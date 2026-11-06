@@ -2,7 +2,7 @@
 # Rebuild everything from the vendored vocabularies and check it.
 #
 #     bash full-run.sh 2>&1 | tee /tmp/run.log
-#     TIMINGS=1 bash full-run.sh     # and rewrite results/timings.csv
+#     TIMINGS=1 bash full-run.sh     # and rewrite the timing runs in results/
 #
 # Stops at the first builder or generator that fails, since everything
 # after it would be checking stale files.
@@ -162,13 +162,14 @@ fi
 rm -f "$cert_out"
 
 # --- 8b. timing pass, when asked -------------------------------------
-# TIMINGS=1 rewrites results/timings.csv: each query alone, one at a time,
-# at PROVER_LIMIT.  Without it stage 9 reads the committed file, and refuses
-# it when it does not time the current queries.
+# TIMINGS=1 rewrites the runs in results/: three independent runs of every
+# check, each query alone, one at a time, at PROVER_LIMIT, with nothing else
+# running.  Without it stage 9 reads the committed runs, and refuses them when
+# they do not time the current queries.
 if [ "${TIMINGS:-0}" = 1 ]; then
-  hdr "8b. timing pass: each query alone"
-  uv run generators/time_queries.py --limit "$PROVER_LIMIT" \
-    || { echo "FAILED: a query got no status in the timing pass" >&2; FAILED=1; }
+  hdr "8b. timing pass: three runs of every check, each query alone"
+  uv run generators/time_queries.py --repeat 3 --limit "$PROVER_LIMIT" \
+    || { echo "FAILED: the timing pass did not finish, or a query got no status" >&2; FAILED=1; }
 fi
 
 hdr "8c. the closed world: what a checker reproduces that reads the resource as complete"
