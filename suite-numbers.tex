@@ -38,3 +38,19 @@ total & & & & & 72 & 28 & 17 & 16 & 8 \\
 \hline
 \end{tabular}%
 }
+\newcommand{\suiteCoverageTable}{%
+\begin{tabular}{lccc}
+\hline
+operator & nom & tax & mer \\
+\hline
+eq & 4/6/4 & 9/7/9 & 10/4/3 \\
+neq & 2/0/1 & 1/0/0 & 1/0/0 \\
+isAnyOf & 2/0/0 & 1/2/1 & 0/1/0 \\
+isAllOf & 1/1/0 & 3/1/1 & 0/1/0 \\
+isNoneOf & 0/1/0 & 2/1/0 & 1/0/0 \\
+isA & rejected & 7/2/6 & rejected \\
+isPartOf & rejected & rejected & 6/1/1 \\
+hasPart & rejected & rejected & 1/0/0 \\
+\hline
+\end{tabular}%
+}

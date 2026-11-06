@@ -375,8 +375,39 @@ def tex_escape(s: str) -> str:
     return s
 
 
-def suite_numbers_tex(rs, totals, timings) -> str:
-    """suite-numbers.tex: the macros and the bindings table."""
+def sort_of_binding() -> dict:
+    return {binding: sort for _, _, sort, binding in BINDINGS}
+
+
+def coverage_table(tests) -> list:
+    """Operators by sorts.  An allowed cell holds the C/I/U counts of the test
+    cases that use the operator at that sort; a cell the signature does not
+    allow says rejected."""
+    sorts = (NOM, TAX, MER)
+    sort_of = sort_of_binding()
+    lines = [
+        "\\newcommand{\\suiteCoverageTable}{%",
+        "\\begin{tabular}{lccc}",
+        "\\hline",
+        "operator & " + " & ".join(sorts) + " \\\\",
+        "\\hline",
+    ]
+    for op, (admits, _) in SIGNATURE.items():
+        cells = []
+        for sort in sorts:
+            if sort not in admits:
+                cells.append("rejected")
+                continue
+            n = Counter(c["outcome"] for c in tests
+                        if sort_of[c["binding"]] == sort and op in c["operators"])
+            cells.append(f"{n['C']}/{n['I']}/{n['U']}")
+        lines.append(f"{op} & " + " & ".join(cells) + " \\\\")
+    lines += ["\\hline", "\\end{tabular}%", "}"]
+    return lines
+
+
+def suite_numbers_tex(rs, totals, timings, tests) -> str:
+    """suite-numbers.tex: the macros and the tables."""
     definite = totals["compatible"] + totals["incompatible"]
     macros = [
         ("suiteCases",        totals["files"]),
@@ -429,6 +460,7 @@ def suite_numbers_tex(rs, totals, timings) -> str:
         "\\end{tabular}%",
         "}",
     ]
+    lines += coverage_table(tests)
     return "\n".join(lines) + "\n"
 
 
@@ -458,7 +490,9 @@ def main() -> int:
                 print(f"  {pr}", file=sys.stderr)
             return 1
         out = args.root / args.suite_numbers
-        out.write_text(suite_numbers_tex(rs, totals, timings), encoding="utf-8")
+        out.write_text(suite_numbers_tex(
+            rs, totals, timings, read_cases(args.root / "cases")),
+            encoding="utf-8")
         print(f"wrote {out}: {totals['files']} cases, {len(rs)} bindings")
         return 0
 
