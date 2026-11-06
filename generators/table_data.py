@@ -418,7 +418,124 @@ def declaration_pairs(tests) -> list:
                   if len({c["declarations"] for c in same}) > 1)
 
 
-def suite_numbers_tex(rs, totals, timings, tests) -> str:
+CLOSED_WORLD = Path("results") / "closed-world.csv"
+
+# The paper's running example comes first when a row holds one of its cases.
+RUNNING_EXAMPLE = ("KGC310", "KGC302", "KGC371", "KGC370")
+CONSTRAINT_FORMS = {"or", "xone", "isAnyOf", "isAllOf", "isNoneOf"}
+BINDING_CHOICE = {"b-spatial-dpvloc-juris", "b-language-bcp47-primary"}
+SILENT = "nothing, the resource decides or is silent"
+
+
+def read_closed_world(path: Path):
+    """Each test case's row of results/closed-world.csv, or None."""
+    if not path.exists():
+        return None
+    with path.open(encoding="utf-8", newline="") as f:
+        return {r["case"]: r for r in csv.DictReader(f)}
+
+
+def cited(certificates: Path, cid: str) -> list:
+    """(source, statement) for each premise the case's proof cites."""
+    path = certificates / f"{cid}-observed.ttl"
+    if not path.exists():
+        return []
+    return re.findall(r'vrep:premiseSource vrep:(\w+) ;\s*'
+                      r'vrep:formulaName "([^"]+)"',
+                      path.read_text(encoding="utf-8"))
+
+
+def cites_order(premises) -> bool:
+    """An order statement of the resource.  Identity is written as two order
+    statements named _same_, and is not counted."""
+    return any(src == "fromResource" and "_same_" not in name
+               for src, name in premises)
+
+
+def cites_distinctness(premises) -> bool:
+    return any(name.startswith("bg_dist_") for _, name in premises)
+
+
+def challenges(tests, closed, certificates: Path) -> list:
+    """One row per challenge: its name, what varies, and its test cases.
+
+    A test case may fall under several."""
+    definite = ("C", "I")
+
+    def kind(c):
+        return closed[c["id"]]["kind"]
+
+    def proof(c):
+        return cited(certificates, c["id"])
+
+    rules = [
+        ("C1 order in the resource", SILENT,
+         lambda c: c["outcome"] in definite and cites_order(proof(c))),
+        ("C2 unstated distinctness", SILENT,
+         lambda c: (c["outcome"] == "U" and kind(c) in ("distinctness", "identity"))
+         or (c["outcome"] in definite and cites_distinctness(proof(c)))),
+        ("C3 unstated order", SILENT,
+         lambda c: c["outcome"] == "U" and kind(c) == "order"),
+        ("C4 declarations", "declarations",
+         lambda c: bool(c["declarations"])
+         and not c["declarations"].endswith("/empty")),
+        ("C5 choice of binding", "binding",
+         lambda c: c["binding"] in BINDING_CHOICE),
+        ("C6 ill-formed constraints", "the constraint",
+         lambda c: c["outcome"] in ("rejected", "control")),
+        ("C7 combined constraints", "the constraint",
+         lambda c: bool((c["operators"] | c["connectives"]) & CONSTRAINT_FORMS)),
+    ]
+    return [(name, varies, [c for c in tests if rule(c)])
+            for name, varies, rule in rules]
+
+
+def example_of(members) -> str:
+    ids = [c["id"] for c in members]
+    for cid in RUNNING_EXAMPLE:
+        if cid in ids:
+            return cid
+    return ids[0] if ids else "none"
+
+
+def challenge_table(rows) -> list:
+    lines = [
+        "\\newcommand{\\suiteChallengeTable}{%",
+        "\\begin{tabular}{llrrrrrl}",
+        "\\hline",
+        "challenge & what varies & test cases & C & I & U & rejected"
+        " & example \\\\",
+        "\\hline",
+    ]
+    for name, varies, members in rows:
+        n = Counter(c["outcome"] for c in members)
+        lines.append(f"{name} & {varies} & {len(members)} & {n['C']} & {n['I']}"
+                     f" & {n['U']} & {n['rejected']} & {example_of(members)}"
+                     " \\\\")
+    lines += ["\\hline", "\\end{tabular}%", "}"]
+    return lines
+
+
+def closed_world_problems(closed, tests) -> list:
+    if closed is None:
+        return [f"{CLOSED_WORLD} not found: run generators/closed_world.py"]
+    out = []
+    have, want = set(closed), {c["id"] for c in tests}
+    if have != want:
+        out.append(f"{CLOSED_WORLD} does not cover the test cases: "
+                   + ", ".join(sorted(have ^ want)[:4]))
+    for c in tests:
+        row = closed.get(c["id"])
+        if row and row["expected"] != c["outcome"]:
+            out.append(f"{CLOSED_WORLD}: {c['id']} expected {row['expected']}, "
+                       f"its case file says {c['outcome']}")
+        if row and c["outcome"] == "U" and row["kind"] not in (
+                "distinctness", "identity", "order"):
+            out.append(f"{CLOSED_WORLD}: {c['id']} has no kind")
+    return out
+
+
+def suite_numbers_tex(rs, totals, timings, tests, closed, certificates) -> str:
     """suite-numbers.tex: the macros and the tables."""
     definite = totals["compatible"] + totals["incompatible"]
     macros = [
@@ -477,6 +594,8 @@ def suite_numbers_tex(rs, totals, timings, tests) -> str:
         "}",
     ]
     lines += coverage_table(tests)
+    rows = challenges(tests, closed, certificates)
+    lines += challenge_table(rows)
     return "\n".join(lines) + "\n"
 
 
@@ -498,8 +617,11 @@ def main() -> int:
 
     if args.suite_numbers:
         timings = read_timings(args.root / TIMINGS)
+        tests = read_cases(args.root / "cases")
+        closed = read_closed_world(args.root / CLOSED_WORLD)
         problems = suite_problems(rs, totals) + timing_problems(
-            timings, args.root / "problems" / "verdict")
+            timings, args.root / "problems" / "verdict") + \
+            closed_world_problems(closed, tests)
         if problems:
             print("not written, the figures do not add up:", file=sys.stderr)
             for pr in problems:
@@ -507,7 +629,7 @@ def main() -> int:
             return 1
         out = args.root / args.suite_numbers
         out.write_text(suite_numbers_tex(
-            rs, totals, timings, read_cases(args.root / "cases")),
+            rs, totals, timings, tests, closed, args.root / "certificates"),
             encoding="utf-8")
         print(f"wrote {out}: {totals['files']} cases, {len(rs)} bindings")
         return 0

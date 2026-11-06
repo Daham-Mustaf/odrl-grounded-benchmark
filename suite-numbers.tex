@@ -56,3 +56,18 @@ hasPart & rejected & rejected & 1/0/0 \\
 \hline
 \end{tabular}%
 }
+\newcommand{\suiteChallengeTable}{%
+\begin{tabular}{llrrrrrl}
+\hline
+challenge & what varies & test cases & C & I & U & rejected & example \\
+\hline
+C1 order in the resource & nothing, the resource decides or is silent & 15 & 13 & 2 & 0 & 0 & KGC310 \\
+C2 unstated distinctness & nothing, the resource decides or is silent & 31 & 8 & 13 & 10 & 0 & KGC371 \\
+C3 unstated order & nothing, the resource decides or is silent & 6 & 0 & 0 & 6 & 0 & KGC301 \\
+C4 declarations & declarations & 25 & 8 & 15 & 2 & 0 & KGC370 \\
+C5 choice of binding & binding & 4 & 3 & 1 & 0 & 0 & KGC331 \\
+C6 ill-formed constraints & the constraint & 11 & 0 & 0 & 0 & 8 & KGC100 \\
+C7 combined constraints & the constraint & 28 & 14 & 8 & 6 & 0 & KGC303 \\
+\hline
+\end{tabular}%
+}
