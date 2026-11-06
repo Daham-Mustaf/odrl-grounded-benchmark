@@ -15,17 +15,19 @@ profiles produces two rows, which is the table's point. Counts come from
 the generated artefacts, so a figure that moves when a builder changes
 moves here too.
 
---suite-numbers writes suite-numbers.tex: ten macros of counts, six from the
-timing pass and the bindings table, for the paper to include. It refuses to
+--suite-numbers writes suite-numbers.tex: the macros of counts, those of the
+timing pass and the tables, for the paper to include. It refuses to
 write when the numbers do not add up: the rows must sum to the case files,
 every case must fall in exactly one of definite, Unknown, rejected and
 accepted, and every binding a case cites must have a row. A file that is
 written is therefore one whose figures agree.
 
-The six time macros come from results/timings.csv, which
-generators/time_queries.py writes: the seconds of all runs together, the
-slowest query, the limit, the machine, and the two prover versions. The file
-must time every current query under its prover and nothing else, or
+The time macros come from the runs generators/time_queries.py writes,
+results/timings-runN.csv.  A check is one query under one prover.  The macros
+are the number of runs, the median of the run totals, the median and the 95th
+percentile (nearest rank) over the checks of each check's median, the slowest
+check by its median, the limit, the machine, and the two prover versions.
+Every run must time every current query under its prover and nothing else, or
 suite-numbers.tex is not written.
 
 What is counted, per row:
@@ -45,7 +47,9 @@ taken from is a claim the header makes in prose.
 """
 import argparse
 import csv
+import math
 import re
+import statistics
 import sys
 from collections import Counter
 from pathlib import Path
@@ -303,14 +307,12 @@ def suite_problems(rs, totals) -> list:
     return out
 
 
-TIMINGS = Path("results") / "timings.csv"
+RESULTS = Path("results")
 PROVER = {"vampire": "Vampire", "z3": "Z3"}
 
 
-def read_timings(path: Path):
-    """(header, rows) of the timing pass, or None when there is no file."""
-    if not path.exists():
-        return None
+def read_timing_file(path: Path):
+    """(header, rows) of one run."""
     header, body = {}, []
     for line in path.read_text(encoding="utf-8").splitlines():
         if line.startswith("#"):
@@ -322,34 +324,72 @@ def read_timings(path: Path):
     return header, list(csv.DictReader(body))
 
 
+def timing_paths(results: Path) -> list:
+    """The runs time_queries.py writes.  The one results/timings.csv of an
+    earlier release stands until the first three-run pass; \\suiteRuns then
+    says 1."""
+    runs = sorted(results.glob("timings-run*.csv"))
+    if runs:
+        return runs
+    legacy = results / "timings.csv"
+    return [legacy] if legacy.exists() else []
+
+
+def read_timings(results: Path):
+    """Each run, as (path, header, rows)."""
+    return [(p, *read_timing_file(p)) for p in timing_paths(results)]
+
+
 def timing_problems(timings, verdict_dir: Path) -> list:
-    """Why the timing file does not fit the suite, or an empty list."""
-    if timings is None:
-        return [f"{TIMINGS} not found: run generators/time_queries.py"]
-    header, rows = timings
-    out = [f"{TIMINGS} has no {k} line in its header"
-           for k in ("vampire", "z3", "cpu", "ram", "date", "limit")
-           if k not in header]
+    """Why the runs do not fit the suite, or an empty list."""
+    if not timings:
+        return ["no timing runs in results/: run generators/time_queries.py"]
+    out = []
     want = {(q.stem, "vampire") for q in verdict_dir.glob("*-[12].p")} \
         | {(q.stem, "z3") for q in verdict_dir.glob("*-[12].smt2")}
-    have = [(r["query"], r["prover"]) for r in rows]
-    if len(have) != len(set(have)):
-        out.append(f"{TIMINGS} times a query twice")
-    for what, runs in (("has no time for", want - set(have)),
-                       ("times what is not a query of the suite:", set(have) - want)):
-        if runs:
-            shown = ", ".join(f"{q} under {PROVER.get(p, p)}" for q, p in sorted(runs)[:4])
-            more = f" and {len(runs) - 4} more" if len(runs) > 4 else ""
-            out.append(f"{TIMINGS} {what} {shown}{more}: "
-                       f"run generators/time_queries.py")
+    for path, header, rows in timings:
+        out += [f"{path.name} has no {k} line in its header"
+                for k in ("vampire", "z3", "cpu", "ram", "date", "limit")
+                if k not in header]
+        have = [(r["query"], r["prover"]) for r in rows]
+        if len(have) != len(set(have)):
+            out.append(f"{path.name} times a query twice")
+        for what, runs in (("has no time for", want - set(have)),
+                           ("times what is not a query of the suite:",
+                            set(have) - want)):
+            if runs:
+                shown = ", ".join(f"{q} under {PROVER.get(p, p)}"
+                                  for q, p in sorted(runs)[:4])
+                more = f" and {len(runs) - 4} more" if len(runs) > 4 else ""
+                out.append(f"{path.name} {what} {shown}{more}: "
+                           f"run generators/time_queries.py")
+    for key in ("vampire", "z3", "cpu", "limit"):
+        if len({header.get(key) for _, header, _ in timings}) > 1:
+            out.append(f"the timing runs differ in {key}")
     return out
 
 
+def median(values) -> float:
+    return statistics.median(values)
+
+
+def percentile(values, q: int) -> float:
+    """Nearest rank: the smallest value with q percent of them at or below."""
+    ordered = sorted(values)
+    return ordered[math.ceil(q / 100 * len(ordered)) - 1]
+
+
 def time_macros(timings) -> list:
-    """The six macros of the timing pass."""
-    header, rows = timings
-    total = sum(float(r["seconds"]) for r in rows)
-    slow = max(rows, key=lambda r: float(r["seconds"]))
+    """The macros of the timing pass, from its runs."""
+    header = timings[0][1]
+    totals = [sum(float(r["seconds"]) for r in rows) for _, _, rows in timings]
+    per_check = {}
+    for _, _, rows in timings:
+        for r in rows:
+            per_check.setdefault((r["query"], r["prover"]), []).append(
+                float(r["seconds"]))
+    medians = {check: median(s) for check, s in per_check.items()}
+    query, prover = max(medians, key=medians.get)
     # "Intel(R) Core(TM) Ultra 7 165U, 14 logical cores" -> "Intel Core Ultra 7 165U"
     cpu = header["cpu"].split(", ")[0]
     cpu = re.sub(r"\((R|TM)\)|\bCPU\b|\bProcessor\b|@.*", "", cpu)
@@ -360,9 +400,12 @@ def time_macros(timings) -> list:
         return m.group(1) if m else line
 
     return [
-        ("suiteTime",     f"{total:.1f}"),
-        ("suiteSlowest",  f"{slow['query']} ({PROVER[slow['prover']]}, "
-                          f"{float(slow['seconds']):.1f} s)"),
+        ("suiteRuns",     str(len(timings))),
+        ("suiteTime",     f"{median(totals):.1f}"),
+        ("suiteTimeMedian", f"{median(medians.values()):.2f}"),
+        ("suiteTimePninetyfive", f"{percentile(medians.values(), 95):.2f}"),
+        ("suiteSlowest",  f"{query} ({PROVER[prover]}, "
+                          f"{medians[(query, prover)]:.1f} s)"),
         ("suiteLimit",    header["limit"]),
         ("suiteHardware", f"{cpu}, {header['ram']} RAM"),
         ("suiteVampire",  version(header["vampire"], r"Vampire (\S+)")),
@@ -597,8 +640,11 @@ def suite_numbers_tex(rs, totals, timings, tests, closed, certificates) -> str:
         f" + {totals['unknown']} Unknown + {totals['rejected']} rejected"
         f" + {totals['accepted']} accepted controls.",
         "% Rejected is ill sorted plus ungrounded.",
-        f"% Times: {TIMINGS}, {timings[0]['date']}, each query alone,"
-        f" one at a time, at most {timings[0]['limit']} s.",
+        "% Times: " + ", ".join(
+            f"{path.as_posix().split('/')[-1]} of {head['date']}"
+            for path, head, _ in timings) +
+        f"; each query alone, one at a time, at most"
+        f" {timings[0][1]['limit']} s.",
     ]
     pairs = declaration_pairs(tests)
     macros.append(("suiteReadAgainstDecl", len(pairs)))
@@ -653,6 +699,8 @@ def main() -> int:
                     metavar="FILE",
                     help="write the macros and the bindings table "
                          "(default suite-numbers.tex, under --root)")
+    ap.add_argument("--timings", type=Path, default=None,
+                    help="the directory of the timing runs (default results)")
     ap.add_argument("--challenges", action="store_true",
                     help="each challenge's test cases, and those under none")
     args = ap.parse_args()
@@ -673,7 +721,7 @@ def main() -> int:
                           args.root / "problems" / "verdict")
 
     if args.suite_numbers:
-        timings = read_timings(args.root / TIMINGS)
+        timings = read_timings(args.timings or args.root / RESULTS)
         tests = read_cases(args.root / "cases")
         closed = read_closed_world(args.root / CLOSED_WORLD)
         problems = suite_problems(rs, totals) + timing_problems(
