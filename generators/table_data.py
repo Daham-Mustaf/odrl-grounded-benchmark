@@ -311,6 +311,11 @@ RESULTS = Path("results")
 PROVER = {"vampire": "Vampire", "z3": "Z3"}
 
 
+# What each of a case's two queries asks.
+CHECK_IN_WORDS = {"1": "a use that meets the policies",
+                  "2": "no use that meets the policies"}
+
+
 def read_timing_file(path: Path):
     """(header, rows) of one run."""
     header, body = {}, []
@@ -404,8 +409,9 @@ def time_macros(timings) -> list:
         ("suiteTime",     f"{median(totals):.1f}"),
         ("suiteTimeMedian", f"{median(medians.values()):.2f}"),
         ("suiteTimePninetyfive", f"{percentile(medians.values(), 95):.2f}"),
-        ("suiteSlowest",  f"{query} ({PROVER[prover]}, "
+        ("suiteSlowest",  f"{query.rsplit('-', 1)[0]} ({PROVER[prover]}, "
                           f"{medians[(query, prover)]:.1f} s)"),
+        ("suiteSlowestCheck", CHECK_IN_WORDS[query.rsplit("-", 1)[1]]),
         ("suiteLimit",    header["limit"]),
         ("suiteHardware", f"{cpu}, {header['ram']} RAM"),
         ("suiteVampire",  version(header["vampire"], r"Vampire (\S+)")),
