@@ -171,6 +171,10 @@ if [ "${TIMINGS:-0}" = 1 ]; then
     || { echo "FAILED: a query got no status in the timing pass" >&2; FAILED=1; }
 fi
 
+hdr "8c. the closed world: what a checker reproduces that reads the resource as complete"
+uv run generators/closed_world.py --limit "$PROVER_LIMIT" \
+  || { echo "FAILED: a test case got no kind in the closed-world run" >&2; FAILED=1; }
+
 hdr "9. figures for the paper"
 uv run generators/table_data.py --suite-numbers 2>&1 | tail -6
 [ "${PIPESTATUS[0]}" -eq 0 ] || { echo "FAILED: suite-numbers.tex was not written" >&2; FAILED=1; }
