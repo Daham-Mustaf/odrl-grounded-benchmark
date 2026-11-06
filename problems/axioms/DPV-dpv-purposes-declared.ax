@@ -13,8 +13,8 @@
 % problem naming two of the purposes below carries the inequation
 % between them as a bg_dist_ statement.
 %
-% Purposes: 121
-% Pairs   : 7260
+% Purposes: 122
+% Pairs   : 7381
 %
 % AcademicResearch, AccountManagement, Advertising, AgeVerification, CombatClimateChange, CommercialPurpose, CommercialResearch, CommunicationForCustomerCare
 % CommunicationManagement, CounterMoneyLaundering, Counterterrorism, CustomerCare, CustomerClaimsManagement, CustomerManagement, CustomerOrderManagement, CustomerRelationshipManagement
@@ -28,7 +28,7 @@
 % ProvideEventRecommendations, ProvideOfficialStatistics, ProvidePersonalisedRecommendations, ProvideProductRecommendations, PublicBenefit, PublicPolicyMaking, PublicRelations, Purpose
 % RecordManagement, RecruitmentAdvertising, RecruitmentApplicantBackgroundCheck, RecruitmentApplicantCriminalBackgroundCheck, RecruitmentApplicantInformationAuthentication, RecruitmentApplicantSelection, RecruitmentApplicationAnalysis, RecruitmentApplicationManagement
 % RecruitmentApplicationScreening, RecruitmentInterviewAnalysis, RecruitmentInterviewAssessment, RecruitmentInterviewManagement, RecruitmentInterviewScheduling, RecruitmentManagement, RecruitmentTargetedAdvertising, RepairImpairments
-% RequestedServiceProvision, ResearchAndDevelopment, ScientificResearch, SearchFunctionalities, SellDataToThirdParties, SellInsightsFromData, SellProducts, SellProductsToDataSubject
-% ServiceAccessDetermination, ServiceManagement, ServiceMonitoring, ServiceOptimisation, ServicePersonalisation, ServiceProvision, ServiceRegistration, ServiceUsageAnalytics
-% SocialMediaMarketing, TargetedAdvertising, TechnicalServiceProvision, UserInterfacePersonalisation, VendorManagement, VendorPayment, VendorRecordsManagement, VendorSelectionAssessment
-% Verification
+% RequestedServiceProvision, ResearchAndDevelopment, RightsFulfilment, ScientificResearch, SearchFunctionalities, SellDataToThirdParties, SellInsightsFromData, SellProducts
+% SellProductsToDataSubject, ServiceAccessDetermination, ServiceManagement, ServiceMonitoring, ServiceOptimisation, ServicePersonalisation, ServiceProvision, ServiceRegistration
+% ServiceUsageAnalytics, SocialMediaMarketing, TargetedAdvertising, TechnicalServiceProvision, UserInterfacePersonalisation, VendorManagement, VendorPayment, VendorRecordsManagement
+% VendorSelectionAssessment, Verification

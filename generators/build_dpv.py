@@ -61,6 +61,12 @@ except ImportError:
     raise
 
 DPV = Namespace("https://w3id.org/dpv#")
+CLASSES = DPV["purposes-classes"]
+
+# Concepts of the module's scheme that are not in the resource, and why.
+LEFT_OUT = {
+    "Sector": "the domain of a purpose, not a purpose",
+}
 
 
 def parse(path: Path):
@@ -92,6 +98,18 @@ def parse(path: Path):
     defined = {str(sub)[len(DPV):] for sub in g.subjects()
                if str(sub).startswith(str(DPV))}
 
+    # The concepts of the resource are the classes of the module's scheme, and
+    # not the ends of the order statements: RightsFulfilment has no statement
+    # left once its one edge is dropped, and it is still a purpose.  Whatever
+    # else the scheme holds is left out by name, with the reason.
+    scheme = {str(s)[len(DPV):] for s in g.subjects(SKOS.inScheme, CLASSES)
+              if str(s).startswith(str(DPV))}
+    missing = sorted(set(LEFT_OUT) - scheme)
+    if missing:
+        raise ValueError(f"LEFT_OUT names what the scheme does not hold: "
+                         f"{', '.join(missing)}")
+    concepts = scheme - set(LEFT_OUT)
+
     edges, labels, external = [], {}, []
     for child, parent in g.subject_objects(SKOS.broader):
         if not (str(child).startswith(str(DPV))
@@ -107,7 +125,7 @@ def parse(path: Path):
         if str(subj).startswith(str(DPV)):
             labels[str(subj)[len(DPV):]] = str(lab)
 
-    return sorted(set(edges)), labels, sorted(set(external))
+    return sorted(set(edges)), labels, sorted(set(external)), concepts
 
 
 def ancestors(edges, seeds):
@@ -213,6 +231,9 @@ def resource_ttl(edges, labels, concepts, meta) -> str:
         "# different left operand with its own binding.  That edge is not",
         "# read here, so RightsFulfilment is a root of this resource and",
         "# not of DPV.  Any excluded edge is listed by the generator.",
+        "#",
+        "# Left out of the module's scheme:",
+        *[f"#   dpv:{c}: {why}." for c, why in sorted(LEFT_OUT.items())],
         "#",
         "# The hierarchy is a directed acyclic graph and not a tree:",
         "# several concepts have two parents.  A concept below two others",
@@ -459,12 +480,11 @@ def main() -> int:
     ap.add_argument("--out", default="problems", type=Path)
     args = ap.parse_args()
 
-    edges, labels, external = parse(args.purposes)
+    edges, labels, external, all_concepts = parse(args.purposes)
     if not edges:
         print("no skos:broader edges found; check the file", file=sys.stderr)
         return 1
 
-    all_concepts = {c for c, _ in edges} | {p for _, p in edges}
     concepts = ancestors(edges, args.seeds) if args.seeds else all_concepts
     if args.seeds:
         missing = [s for s in args.seeds if s not in all_concepts]
@@ -518,6 +538,8 @@ def main() -> int:
         print(f"excluded: {c} below {p} "
               f"({p} is defined in another module and belongs to another "
               f"operand)")
+    for c, why in sorted(LEFT_OUT.items()):
+        print(f"left out: {c} ({why})")
     print(f"{multi} concepts have more than one parent")
 
     # The pairs a disjointness declaration would contradict.  Reported

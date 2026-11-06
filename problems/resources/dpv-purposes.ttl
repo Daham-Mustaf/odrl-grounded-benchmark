@@ -13,6 +13,9 @@
 # read here, so RightsFulfilment is a root of this resource and
 # not of DPV.  Any excluded edge is listed by the generator.
 #
+# Left out of the module's scheme:
+#   dpv:Sector: the domain of a purpose, not a purpose.
+#
 # The hierarchy is a directed acyclic graph and not a tree:
 # several concepts have two parents.  A concept below two others
 # is below each of them, and reaches a common ancestor by either
@@ -41,7 +44,7 @@
     dcterms:issued "2026-08-19"^^<http://www.w3.org/2001/XMLSchema#date> ;
     dcterms:license <https://www.w3.org/copyright/document-license-2023/> .
 
-# Concepts                    : 121
+# Concepts                    : 122
 # Order statements, published : 131
 # Order predicate             : skos:broader
 
@@ -533,6 +536,10 @@ odrlkb:research_and_development a odrlkb:Purpose ;
     rdfs:label "Research and Development"@en ;
     dcterms:identifier dpv:ResearchAndDevelopment ;
     skos:broader odrlkb:purpose .
+
+odrlkb:rights_fulfilment a odrlkb:Purpose ;
+    rdfs:label "Rights Fulfilment"@en ;
+    dcterms:identifier dpv:RightsFulfilment .
 
 odrlkb:scientific_research a odrlkb:Purpose ;
     rdfs:label "Scientific Research"@en ;

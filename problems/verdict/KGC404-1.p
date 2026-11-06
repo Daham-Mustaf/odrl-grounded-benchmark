@@ -121,6 +121,7 @@ fof(w_kgc404, axiom,
 | ( kge_leq(dpv_recruitment_targeted_advertising, dpv_research_and_development) & kge_leq(dpv_recruitment_targeted_advertising, dpv_non_commercial_purpose) )
 | ( kge_leq(dpv_repair_impairments, dpv_research_and_development) & kge_leq(dpv_repair_impairments, dpv_non_commercial_purpose) )
 | ( kge_leq(dpv_requested_service_provision, dpv_research_and_development) & kge_leq(dpv_requested_service_provision, dpv_non_commercial_purpose) )
+| ( kge_leq(dpv_rights_fulfilment, dpv_research_and_development) & kge_leq(dpv_rights_fulfilment, dpv_non_commercial_purpose) )
 | ( kge_leq(dpv_scientific_research, dpv_research_and_development) & kge_leq(dpv_scientific_research, dpv_non_commercial_purpose) )
 | ( kge_leq(dpv_search_functionalities, dpv_research_and_development) & kge_leq(dpv_search_functionalities, dpv_non_commercial_purpose) )
 | ( kge_leq(dpv_sell_data_to_third_parties, dpv_research_and_development) & kge_leq(dpv_sell_data_to_third_parties, dpv_non_commercial_purpose) )

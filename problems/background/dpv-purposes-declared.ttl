@@ -16,8 +16,8 @@
 # that a refutation cites the instance it used rather than a term
 # standing for all of them.
 #
-# Purposes: 121
-# Pairs   : 7260
+# Purposes: 122
+# Pairs   : 7381
 #
 # Source: https://w3id.org/dpv/2.3
 
@@ -33,7 +33,7 @@
     bind:origin bind:proseDefinition ;
     rdfs:comment "The origin rests on DPV's separate definition of each purpose."@en ;
     bind:scopeCondition "Distinctness between the listed purposes, and not disjointness: DPV publishes concepts below two parents, and a disjointness over such a pair would contradict it."@en ;
-    bind:pairCount 7260 ;
+    bind:pairCount 7381 ;
     bind:states [
         a owl:AllDifferent ;
         owl:members (
@@ -135,6 +135,7 @@
             <https://w3id.org/dpv#RepairImpairments>
             <https://w3id.org/dpv#RequestedServiceProvision>
             <https://w3id.org/dpv#ResearchAndDevelopment>
+            <https://w3id.org/dpv#RightsFulfilment>
             <https://w3id.org/dpv#ScientificResearch>
             <https://w3id.org/dpv#SearchFunctionalities>
             <https://w3id.org/dpv#SellDataToThirdParties>
