@@ -516,6 +516,22 @@ def challenge_table(rows) -> list:
     return lines
 
 
+def challenge_cw_table(rows, closed) -> list:
+    """The same rows, and how many expected outcomes the closed world keeps."""
+    lines = [
+        "\\newcommand{\\suiteChallengeCWTable}{%",
+        "\\begin{tabular}{lrr}",
+        "\\hline",
+        "challenge & test cases & reproduced \\\\",
+        "\\hline",
+    ]
+    for name, _, members in rows:
+        same = sum(1 for c in members if closed[c["id"]]["reproduced"] == "yes")
+        lines.append(f"{name} & {len(members)} & {same} \\\\")
+    lines += ["\\hline", "\\end{tabular}%", "}"]
+    return lines
+
+
 def closed_world_problems(closed, tests) -> list:
     if closed is None:
         return [f"{CLOSED_WORLD} not found: run generators/closed_world.py"]
@@ -596,6 +612,7 @@ def suite_numbers_tex(rs, totals, timings, tests, closed, certificates) -> str:
     lines += coverage_table(tests)
     rows = challenges(tests, closed, certificates)
     lines += challenge_table(rows)
+    lines += challenge_cw_table(rows, closed)
     return "\n".join(lines) + "\n"
 
 
