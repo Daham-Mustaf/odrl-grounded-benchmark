@@ -406,6 +406,18 @@ def coverage_table(tests) -> list:
     return lines
 
 
+def declaration_pairs(tests) -> list:
+    """Policy pairs that differ in the declarations only: one binding and the
+    same constraints in the same places, asked under more than one set of
+    declarations.  One entry per policy pair, with its test cases."""
+    groups = {}
+    for c in tests:
+        if c["constraints"]:
+            groups.setdefault((c["binding"], c["constraints"]), []).append(c)
+    return sorted([c["id"] for c in same] for same in groups.values()
+                  if len({c["declarations"] for c in same}) > 1)
+
+
 def suite_numbers_tex(rs, totals, timings, tests) -> str:
     """suite-numbers.tex: the macros and the tables."""
     definite = totals["compatible"] + totals["incompatible"]
@@ -431,6 +443,10 @@ def suite_numbers_tex(rs, totals, timings, tests) -> str:
         f"% Times: {TIMINGS}, {timings[0]['date']}, each query alone,"
         f" one at a time, at most {timings[0]['limit']} s.",
     ]
+    pairs = declaration_pairs(tests)
+    macros.append(("suiteReadAgainstDecl", len(pairs)))
+    lines.append("% Differ in the declarations only: "
+                 + ", ".join("/".join(ids) for ids in pairs) + ".")
     lines += [f"\\newcommand{{\\{name}}}{{{value}}}" for name, value in macros]
     lines += [f"\\newcommand{{\\{name}}}{{{tex_escape(value)}}}"
               for name, value in time_macros(timings)]
