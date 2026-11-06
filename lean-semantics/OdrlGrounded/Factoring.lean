@@ -20,7 +20,7 @@ operand interprets its own copy, so the concept sets are disjoint. A joint
 valuation gives each operand its own valuation. Only the operands in `ls`,
 those that occur in one of the two constraint sets, take part.
 
-The ungrounded clause is not restated. It makes the whole verdict `Unknown`
+The ungrounded clause is not restated. It leaves the whole verdict undefined
 before any factoring, as in the definition of the verdict. This file covers
 the other case, where every value is grounded.
 -/

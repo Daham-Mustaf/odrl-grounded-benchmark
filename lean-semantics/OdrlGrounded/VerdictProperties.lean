@@ -101,11 +101,11 @@ section
 variable {V C : Type} {T T' : List (Assertion C)}
 
 /-- Monotonicity for the verdict with the ungrounded clause. The grounding
-does not depend on the theory, so an ungrounded pair stays `Unknown`. -/
+does not depend on the theory, so an ungrounded pair stays without a verdict. -/
 theorem groundedVerdict_compatible_mono (γ : Grounding V C)
     (hsub : ∀ a ∈ T, a ∈ T') (t t' : ConstraintSet V)
-    (h : groundedVerdict γ T t t' = Verdict.compatible) :
-    groundedVerdict γ T' t t' = Verdict.compatible := by
+    (h : groundedVerdict γ T t t' = some Verdict.compatible) :
+    groundedVerdict γ T' t t' = some Verdict.compatible := by
   cases hg : ConstraintSet.ground γ t with
   | none =>
     rw [groundedVerdict_of_left_none γ T t t' hg] at h
@@ -118,12 +118,12 @@ theorem groundedVerdict_compatible_mono (γ : Grounding V C)
     | some g' =>
       rw [groundedVerdict_of_some γ T t t' g g' hg hg'] at h
       rw [groundedVerdict_of_some γ T' t t' g g' hg hg']
-      exact verdict_compatible_mono hsub h
+      exact congrArg some (verdict_compatible_mono hsub (Option.some.inj h))
 
 theorem groundedVerdict_incompatible_mono (γ : Grounding V C)
     (hsub : ∀ a ∈ T, a ∈ T') (hT' : Consistent T') (t t' : ConstraintSet V)
-    (h : groundedVerdict γ T t t' = Verdict.incompatible) :
-    groundedVerdict γ T' t t' = Verdict.incompatible := by
+    (h : groundedVerdict γ T t t' = some Verdict.incompatible) :
+    groundedVerdict γ T' t t' = some Verdict.incompatible := by
   cases hg : ConstraintSet.ground γ t with
   | none =>
     rw [groundedVerdict_of_left_none γ T t t' hg] at h
@@ -136,7 +136,7 @@ theorem groundedVerdict_incompatible_mono (γ : Grounding V C)
     | some g' =>
       rw [groundedVerdict_of_some γ T t t' g g' hg hg'] at h
       rw [groundedVerdict_of_some γ T' t t' g g' hg hg']
-      exact verdict_incompatible_mono hsub hT' h
+      exact congrArg some (verdict_incompatible_mono hsub hT' (Option.some.inj h))
 
 end
 

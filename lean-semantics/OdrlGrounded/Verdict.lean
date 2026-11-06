@@ -6,7 +6,7 @@ set_option autoImplicit false
 # Verdicts
 
 Paper: Definition (Verdict), restricted to one operand. The ungrounded clause
-(`γ` undefined gives `Unknown`) is a layer above this one, and the theorems
+(`γ` undefined gives no verdict) is a layer above this one, and the theorems
 (exclusivity, monotonicity, soundness) are in VerdictProperties.lean.
 -/
 

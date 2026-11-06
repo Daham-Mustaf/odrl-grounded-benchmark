@@ -7,16 +7,16 @@ Core Lean only, no Mathlib. Build from this folder:
 
 | File | Paper |
 |---|---|
-| OdrlGrounded/Model.lean | Resource and background theory, Structure, Models |
+| OdrlGrounded/Model.lean | Resource and declarations, Structure, Models |
 | OdrlGrounded/Syntax.lean | Signature and well-sortedness, constraint sets |
 | OdrlGrounded/Semantics.lean | Denotation, Valuation and satisfaction |
 | OdrlGrounded/Verdict.lean | Verdict (one operand) |
 | OdrlGrounded/Grounding.lean | Grounding, candidate set, ungrounded clause |
-| OdrlGrounded/VerdictProperties.lean | Exclusivity, monotonicity, soundness |
-| OdrlGrounded/Witness.lean | Witness lemma for a conjunction of atoms |
+| OdrlGrounded/VerdictProperties.lean | Exclusivity, adding statements, soundness |
+| OdrlGrounded/Witness.lean | Lemma "Formula and valuations", for a conjunction of atoms |
 | OdrlGrounded/Disjuncts.lean | Reduction of a constraint set to disjuncts, with or, xone and negation |
-| OdrlGrounded/Decision.lean | Computing verdicts: the two entailment queries |
-| OdrlGrounded/Factoring.lean | Operand independence, operand-wise factoring |
+| OdrlGrounded/Decision.lean | Proposition "Three checks": the two entailment queries |
+| OdrlGrounded/Factoring.lean | Proposition "Verdict by left operand" |
 | OdrlGrounded/Examples/Language.lean | Running example, language row |
 | OdrlGrounded/Examples/Grounding.lean | Language row with values, ungrounded alternative |
 | OdrlGrounded/Examples/Purpose.lean | Running example, purpose row: `Compatible`, with a model of the published assertion |
@@ -36,18 +36,17 @@ Axiom check:
 | Paper | Lean | File |
 |---|---|---|
 | Signature and well-sortedness | `Atom.wellSorted`, `Item.wellSorted`, `ConstraintSet.xoneOk_of_wellSorted` | Syntax.lean |
-| Resource, background theory, models | `Assertion`, `Model`, `Mod`, `Consistent` | Model.lean |
+| Resource, declarations, models | `Assertion`, `Model`, `Mod`, `Consistent` | Model.lean |
 | Structure with unnamed elements | `Structure`, `structVerdict` | Collapse.lean |
 | Grounding, ungrounded clause | `Grounding`, `Grounding.range`, `groundedVerdict`, `groundedVerdict_of_left_none`, `groundedVerdict_of_right_none` | Grounding.lean |
 | Denotation, valuation and satisfaction | `Atom.denot`, `Model.satAtom`, `Model.satItem`, `Model.satSet`, `Model.admits` | Semantics.lean |
 | Verdict | `Compatible`, `Incompatible`, `verdict`, `verdict_eq_compatible_iff`, `verdict_eq_incompatible_iff`, `verdict_eq_unknown_iff` | Verdict.lean, VerdictProperties.lean |
 | Exclusivity | `not_compatible_and_incompatible` | VerdictProperties.lean |
-| Monotonicity | `verdict_compatible_mono`, `verdict_incompatible_mono` | VerdictProperties.lean |
-| Soundness | `sound_compatible`, `sound_incompatible` | VerdictProperties.lean |
-| Witness lemma | `Model.witness`, `witness_iff`, `admits_atoms_iff` | Witness.lean |
-| Reduction of a constraint set | `setDisj`, `admits_iff_exists_witness` | Disjuncts.lean |
-| Verdict from the witness condition | `Model.pairWitness`, `verdict_compatible_iff_witness`, `verdict_incompatible_iff_witness` | Decision.lean |
-| Operand-wise factoring | `mverdict`, `minVerdict`, `factoring` | Factoring.lean |
+| Proposition "Adding statements" | `verdict_compatible_mono`, `verdict_incompatible_mono` | VerdictProperties.lean |
+| Theorem "Soundness" | `sound_compatible`, `sound_incompatible` | VerdictProperties.lean |
+| Lemma "Formula and valuations" | `witness_iff`, `admits_atoms_iff`, `admits_iff_exists_witness` | Witness.lean, Disjuncts.lean |
+| Proposition "Three checks" | `verdict_compatible_iff_witness`, `verdict_incompatible_iff_witness` | Decision.lean |
+| Proposition "Verdict by left operand" | `factoring` | Factoring.lean |
 | Structures against preorders | `verdict_eq_structVerdict` | Collapse.lean |
 | Running example | `language_unknown`, `language_declared_verdict`, `purpose_verdict`, `spatial_verdict` | Examples/ |
 | All three verdicts, inconsistent theory | `three_verdicts_occur`, `contradictory_verdict` | Examples/Verdicts.lean |
@@ -56,11 +55,16 @@ Hypotheses. `Consistent T` is needed for exclusivity, for the Incompatible
 direction of the decision form, and for the Incompatible case of monotonicity
 (on the larger theory). Without consistency both verdicts hold vacuously and
 `verdict` reports Compatible (`contradictory_verdict`). `xoneOk`, no `isAllOf`
-among the alternatives of an `xone`, is needed by the witness decision. The
+among the alternatives of an `xone`, is needed by `admits_iff_exists_witness`,
+`verdict_compatible_iff_witness` and `verdict_incompatible_iff_witness`. The
 benchmark compiler does not need it: it rewrites a negated `isAllOf` to a
 disjunction of `neq`; no case puts an `isAllOf` under an `xone` since KGC307
 was retired. The rewrite is checked by `crosscheck/` (T1, second line) and by
 `tests/test_witness.py`, not in Lean yet.
+
+The ungrounded clause. `groundedVerdict` returns `Option Verdict`, and `none`
+when a value is ungrounded: the paper leaves the verdict undefined there, and
+the benchmark rejects the test case.
 
 Axioms. Every main theorem depends only on `propext`, `Classical.choice` and
 `Quot.sound`, or fewer. `Classical.choice` enters through `verdict`, which is a

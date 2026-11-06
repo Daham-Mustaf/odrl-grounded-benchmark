@@ -34,12 +34,11 @@ theorem langRequestBad_ungrounded :
   decide
 
 /-- One ungrounded alternative leaves the whole request without a denotation,
-so the verdict is `Unknown`. The grounded offer `eq de` against the request
-`eq fr` alone is `Incompatible` under the same declaration
+so there is no verdict. The grounded offer `eq de` against the request `eq fr`
+alone is `Incompatible` under the same declaration
 (`language_declared_verdict`). -/
-theorem ungrounded_alternative_unknown :
-    groundedVerdict langGrounding decl langOffer langRequestBad =
-      Verdict.unknown :=
+theorem ungrounded_alternative_none :
+    groundedVerdict langGrounding decl langOffer langRequestBad = none :=
   groundedVerdict_of_right_none langGrounding decl langOffer langRequestBad
     langRequestBad_ungrounded
 

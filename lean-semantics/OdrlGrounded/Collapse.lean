@@ -526,13 +526,13 @@ theorem verdict_eq_structVerdict (T : List (Assertion C)) (N : C → Prop)
 
 end
 
-/-- The grounded verdict over structures: `Unknown` when a value is
-ungrounded, otherwise the verdict over structures. -/
+/-- The grounded verdict over structures: `none` when a value is ungrounded,
+otherwise the verdict over structures. -/
 noncomputable def groundedStructVerdict {V C : Type} (γ : Grounding V C)
-    (T : List (Assertion C)) (t t' : ConstraintSet V) : Verdict :=
+    (T : List (Assertion C)) (t t' : ConstraintSet V) : Option Verdict :=
   match ConstraintSet.ground γ t, ConstraintSet.ground γ t' with
-  | some g, some g' => structVerdict T (Grounding.range γ) g g'
-  | _, _ => Verdict.unknown
+  | some g, some g' => some (structVerdict T (Grounding.range γ) g g')
+  | _, _ => none
 
 theorem groundedVerdict_eq_struct {V C : Type} (γ : Grounding V C)
     (T : List (Assertion C)) (t t' : ConstraintSet V) :
@@ -543,6 +543,6 @@ theorem groundedVerdict_eq_struct {V C : Type} (γ : Grounding V C)
   | some g =>
     cases hr : ConstraintSet.ground γ t' with
     | none => rfl
-    | some g' => exact verdict_eq_structVerdict T (Grounding.range γ) g g'
+    | some g' => exact congrArg some (verdict_eq_structVerdict T (Grounding.range γ) g g')
 
 end OdrlGrounded
