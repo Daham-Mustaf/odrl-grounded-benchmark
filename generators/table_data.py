@@ -348,20 +348,10 @@ def read_timing_file(path: Path):
     return header, list(csv.DictReader(body))
 
 
-def timing_paths(results: Path) -> list:
-    """The runs time_queries.py writes.  The one results/timings.csv of an
-    earlier release stands until the first three-run pass; \\suiteRuns then
-    says 1."""
-    runs = sorted(results.glob("timings-run*.csv"))
-    if runs:
-        return runs
-    legacy = results / "timings.csv"
-    return [legacy] if legacy.exists() else []
-
-
 def read_timings(results: Path):
-    """Each run, as (path, header, rows)."""
-    return [(p, *read_timing_file(p)) for p in timing_paths(results)]
+    """Each run time_queries.py wrote, as (path, header, rows)."""
+    return [(p, *read_timing_file(p))
+            for p in sorted(results.glob("timings-run*.csv"))]
 
 
 def timing_problems(timings, verdict_dir: Path) -> list:

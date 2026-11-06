@@ -137,7 +137,7 @@ KGC301 is a variant of the purpose row.
 
 ## Release v1.1
 
-The numbers are those of `suite-numbers.tex`:
+The numbers are those of `suite-numbers.tex` at the tag `v1.1`:
 
 ```
 cases                72

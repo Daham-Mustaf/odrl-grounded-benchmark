@@ -20,7 +20,7 @@ prover,
 
 under a header of comment lines naming both prover versions, the CPU, the
 memory, the operating system, the date, the limit and the run.  A new pass
-replaces the old one, results/timings.csv included.  table_data.py
+replaces the old one.  table_data.py
 --suite-numbers reads the runs for the time macros, and refuses a run that
 does not cover the current queries.
 
@@ -195,9 +195,8 @@ def main() -> int:
               file=sys.stderr)
         return 1
 
-    for old in [args.results / "timings.csv",
-                *args.results.glob("timings-run*.csv")]:
-        old.unlink(missing_ok=True)
+    for old in args.results.glob("timings-run*.csv"):
+        old.unlink()
 
     missing = []
     for number in range(1, args.repeat + 1):
