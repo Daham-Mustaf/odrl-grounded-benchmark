@@ -5,7 +5,9 @@
 % Times: timings.csv of 2026-10-30T15:21:53+01:00; each query alone, one at a time, at most 60 s.
 % Under no challenge: none.
 % suiteNoteConflicts counts constraints in test cases with a verdict. Rejected test cases hold 3 more: KGC101, KGC105, KGC381.
-% Differ in the declarations only: KGC303/KGC304, KGC308/KGC309, KGC313/KGC314, KGC316/KGC403, KGC320/KGC321, KGC333/KGC334, KGC342/KGC343/KGC348, KGC363/KGC364, KGC370/KGC371, KGC374/KGC375, KGC393/KGC394.
+% suiteReadAgainstDecl: same policies, same binding, and the declarations of the second contain those of the first: KGC303/KGC304, KGC313/KGC314, KGC316/KGC403, KGC320/KGC321, KGC333/KGC334, KGC342/KGC343, KGC342/KGC348, KGC363/KGC364, KGC371/KGC370, KGC375/KGC374, KGC393/KGC394.
+% suiteReadAgainstMoved: Unknown under the first, a verdict under the second: KGC303/KGC304, KGC313/KGC314, KGC316/KGC403, KGC320/KGC321, KGC333/KGC334, KGC342/KGC343, KGC363/KGC364, KGC371/KGC370, KGC375/KGC374, KGC393/KGC394.
+% Same policies and binding, neither set of declarations contains the other, disjointness against distinctness: KGC308/KGC309, KGC343/KGC348.
 \newcommand{\suiteCases}{71}
 \newcommand{\suiteQueries}{120}
 \newcommand{\suiteDefinite}{44}
@@ -31,6 +33,8 @@
 \newcommand{\suiteCWToCompatible}{4}
 \newcommand{\suiteCWToIncompatible}{12}
 \newcommand{\suiteReadAgainstDecl}{11}
+\newcommand{\suiteReadAgainstMoved}{10}
+\newcommand{\suiteReadAgainstReversed}{0}
 \newcommand{\suiteRuns}{1}
 \newcommand{\suiteTime}{43.8}
 \newcommand{\suiteTimeMedian}{0.02}
@@ -115,7 +119,6 @@ C2 unstated distinctness & 30 & 20 \\
 C3 unstated order & 6 & 0 \\
 C4 declarations & 24 & 22 \\
 C5 choice of binding & 4 & 4 \\
-C6 ill-formed constraints & 11 & 11 \\
 C7 combined constraints & 28 & 22 \\
 \hline
 \end{tabular}%

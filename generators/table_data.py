@@ -66,6 +66,7 @@ from rdflib.collection import Collection
 
 sys.path.insert(0, str(Path(__file__).parent))
 
+import declarations
 from operator_notes import beyond
 from signature import SIGNATURE, NOM, TAX, MER
 
@@ -474,16 +475,71 @@ def coverage_table(tests) -> list:
     return lines
 
 
-def declaration_pairs(tests) -> list:
-    """Policy pairs that differ in the declarations only: one binding and the
-    same constraints in the same places, asked under more than one set of
-    declarations.  One entry per policy pair, with its test cases."""
+def read_declarations(background: Path) -> dict:
+    """Each set of declarations by IRI: what it states, as (members, disjoint).
+    Every pair of members is declared distinct; a disjoint pair is unordered."""
+    out = {}
+    for path in sorted(background.glob("*.ttl")):
+        d = declarations.load(path)
+        out[d.iri] = (set(d.members), {frozenset(p) for p in d.disjoint})
+    return out
+
+
+def contains(larger, smaller) -> bool:
+    """Whether every statement of one set is a statement of the other.
+
+    A set states the distinctness of every pair of its members, so it holds
+    another's pairs when it holds that set's members.  A disjointness and a
+    distinctness are different statements, and neither is the other's."""
+    (big_m, big_d), (small_m, small_d) = larger, smaller
+    return (len(small_m) < 2 or small_m <= big_m) and small_d <= big_d
+
+
+def declaration_pairs(tests, sets) -> tuple:
+    """(contained, neither, same): the test cases with the same policies and the
+    same binding, compared two at a time by their declarations.
+
+        contained   (smaller, larger): the declarations of one contain the
+                    declarations of the other
+        neither     (a, b): neither contains the other
+        same        (a, b): the same declarations, so the same inputs twice
+    """
     groups = {}
     for c in tests:
         if c["constraints"]:
-            groups.setdefault((c["binding"], c["constraints"]), []).append(c)
-    return sorted([c["id"] for c in same] for same in groups.values()
-                  if len({c["declarations"] for c in same}) > 1)
+            key = (c["binding"], tuple(sorted(c["constraints"], key=repr)))
+            groups.setdefault(key, []).append(c)
+    contained, neither, same = [], [], []
+    for group in groups.values():
+        for i, a in enumerate(group):
+            for b in group[i + 1:]:
+                da, db = sets[a["declarations"]], sets[b["declarations"]]
+                if da == db:
+                    same.append((a, b))
+                elif contains(db, da):
+                    contained.append((a, b))
+                elif contains(da, db):
+                    contained.append((b, a))
+                else:
+                    neither.append((a, b))
+    by_id = lambda pair: (pair[0]["id"], pair[1]["id"])
+    return (sorted(contained, key=by_id), sorted(neither, key=by_id),
+            sorted(same, key=by_id))
+
+
+def moved_and_reversed(contained) -> tuple:
+    """(moved, reversed) over the pairs.  More declarations may take an Unknown
+    to a verdict, which is moved.  A verdict under the smaller set that does not
+    stand under the larger one is reversed, and adding statements cannot do it."""
+    moved = [(a, b) for a, b in contained
+             if a["outcome"] == "U" and b["outcome"] != "U"]
+    back = [(a, b) for a, b in contained
+            if a["outcome"] != "U" and b["outcome"] != a["outcome"]]
+    return moved, back
+
+
+def pair_names(pairs) -> str:
+    return ", ".join(f"{a['id']}/{b['id']}" for a, b in pairs) or "none"
 
 
 CLOSED_WORLD = Path("results") / "closed-world.csv"
@@ -594,6 +650,10 @@ def challenge_cw_table(rows, closed) -> list:
         "\\hline",
     ]
     for name, _, members in rows:
+        # The closed-world checker keeps the input checks, so it reproduces C6
+        # by construction.
+        if name.startswith("C6"):
+            continue
         same = sum(1 for c in members if closed[c["id"]]["reproduced"] == "yes")
         lines.append(f"{name} & {len(members)} & {same} \\\\")
     lines += ["\\hline", "\\end{tabular}%", "}"]
@@ -790,7 +850,7 @@ def output_problems(outputs, tests, certificates: Path) -> list:
 
 
 def suite_numbers_tex(rs, totals, timings, tests, closed, certificates,
-                      outputs) -> str:
+                      outputs, sets) -> str:
     """suite-numbers.tex: the macros and the tables."""
     definite = totals["compatible"] + totals["incompatible"]
     macros = [
@@ -845,10 +905,21 @@ def suite_numbers_tex(rs, totals, timings, tests, closed, certificates,
                  f" verdict. Rejected test cases hold"
                  f" {len(rejected_conflicts)} more: "
                  + ", ".join(rejected_conflicts) + ".")
-    pairs = declaration_pairs(tests)
-    macros.append(("suiteReadAgainstDecl", len(pairs)))
-    lines.append("% Differ in the declarations only: "
-                 + ", ".join("/".join(ids) for ids in pairs) + ".")
+    contained, neither, _ = declaration_pairs(tests, sets)
+    moved, back = moved_and_reversed(contained)
+    macros += [
+        ("suiteReadAgainstDecl",     len(contained)),
+        ("suiteReadAgainstMoved",    len(moved)),
+        ("suiteReadAgainstReversed", len(back)),
+    ]
+    lines.append("% suiteReadAgainstDecl: same policies, same binding, and the "
+                 "declarations of the second contain those of the first: "
+                 + pair_names(contained) + ".")
+    lines.append("% suiteReadAgainstMoved: Unknown under the first, a verdict "
+                 "under the second: " + pair_names(moved) + ".")
+    lines.append("% Same policies and binding, neither set of declarations "
+                 "contains the other, disjointness against distinctness: "
+                 + pair_names(neither) + ".")
     lines += [f"\\newcommand{{\\{name}}}{{{value}}}" for name, value in macros]
     lines += [f"\\newcommand{{\\{name}}}{{{tex_escape(value)}}}"
               for name, value in time_macros(timings)]
@@ -929,6 +1000,14 @@ def main() -> int:
             closed_world_problems(closed, tests)
         outputs = read_outputs(args.root)
         problems += output_problems(outputs, tests, args.root / "certificates")
+        sets = read_declarations(args.root / "problems" / "background")
+        contained, _, same = declaration_pairs(tests, sets)
+        for a, b in same:
+            problems.append(f"{a['id']} and {b['id']} have the same policies, "
+                            f"binding and declarations")
+        for a, b in moved_and_reversed(contained)[1]:
+            problems.append(f"{a['id']} is {a['outcome']}, and {b['id']}, with "
+                            f"more declarations, is {b['outcome']}: reversed")
         if problems:
             print("not written, the figures do not add up:", file=sys.stderr)
             for pr in problems:
@@ -937,7 +1016,7 @@ def main() -> int:
         out = args.root / args.suite_numbers
         out.write_text(suite_numbers_tex(
             rs, totals, timings, tests, closed, args.root / "certificates",
-            outputs),
+            outputs, sets),
             encoding="utf-8")
         print(f"wrote {out}: {totals['files']} cases, {len(rs)} bindings")
         return 0
