@@ -1,39 +1,43 @@
 %------------------------------------------------------------------------------
 % File     : KGC069+2 : placeholder, for TPTP use only
 % Domain   : Semantic Web (ODRL policies), proposed
-% Problem  : Use with both encryption and access control in place against use with encryption as the only measure: some use meets both
+% Problem  : Use with at least one of encryption and access control in place against use with encryption at rest as the only measure: some use meets both
 % Version  : Especial.
 %            Theorem formulation : The condition is written over the whole
 %            vocabulary, as the paper's definition states; version 1 names
-%            only the concepts a fixed value allows. The two versions have the
+%            only the concepts a fixed value allows. The versions have the
 %            same status.
-% English  : As KGC363, with encryption and access control declared distinct.
-%            This problem states that some use meets the two policies.
+% English  : A controller requires at least one of encryption and access
+%            control. A processor's policy commits to encryption at rest as
+%            the only measure. This problem states that some use meets the two
+%            policies.
 
 % Refs     : [Mus26] Mustafa (2026), odrl-grounded-benchmark,
-%            https://github.com/Daham-Mustaf/odrl-grounded-benchmark, tag
-%            v1.1.1
+%            https://github.com/Daham-Mustaf/odrl-grounded-benchmark, tag v1.2
 % Source   : [Mus26]
-% Names    : KGC364-1 [Mus26]
+% Names    : KGC366-1 [Mus26]
 
 % Status   : Unsatisfiable
 % Rating   : left to TPTP
 % Syntax   : left to TPTP
 % SPC      : left to TPTP
 
-% Comments : KGC364 is Incompatible. Its two problems state that some use
-%            meets the two policies (KGC069) and that no use does (KGC070). A
+% Comments : KGC366 is Incompatible. Its two problems state that some use
+%            meets the two policies (KGC069) and that no use does (KGC070);
+%            here the first is Unsatisfiable and the second Satisfiable. A
 %            pair of policies is Incompatible when the first is Unsatisfiable,
 %            Compatible when the second is Unsatisfiable, and Unknown when
 %            both are Satisfiable; a Satisfiable problem also shows the
-%            statements consistent. Here the first is Unsatisfiable and the
-%            second Satisfiable.
+%            statements consistent.
 %------------------------------------------------------------------------------
 include('Axioms/KGC000+0.ax').
 include('Axioms/KGC000+4.ax').
 
 fof(bg_dist_tm_encryption_tm_access_control_method, axiom,
     tm_encryption != tm_access_control_method).
+
+fof(bg_dist_tm_encryption_tm_encryption_at_rest, axiom,
+    tm_encryption != tm_encryption_at_rest).
 
 fof(bg_dist_tm_encryption_tm_activity_monitoring, axiom,
     tm_encryption != tm_activity_monitoring).
@@ -103,9 +107,6 @@ fof(bg_dist_tm_encryption_tm_document_randomised_pseudonymisation, axiom,
 
 fof(bg_dist_tm_encryption_tm_document_security, axiom,
     tm_encryption != tm_document_security).
-
-fof(bg_dist_tm_encryption_tm_encryption_at_rest, axiom,
-    tm_encryption != tm_encryption_at_rest).
 
 fof(bg_dist_tm_encryption_tm_encryption_in_transfer, axiom,
     tm_encryption != tm_encryption_in_transfer).
@@ -251,6 +252,9 @@ fof(bg_dist_tm_encryption_tm_wireless_security_protocols, axiom,
 fof(bg_dist_tm_encryption_tm_zero_knowledge_authentication, axiom,
     tm_encryption != tm_zero_knowledge_authentication).
 
+fof(bg_dist_tm_access_control_method_tm_encryption_at_rest, axiom,
+    tm_access_control_method != tm_encryption_at_rest).
+
 fof(bg_dist_tm_access_control_method_tm_activity_monitoring, axiom,
     tm_access_control_method != tm_activity_monitoring).
 
@@ -319,9 +323,6 @@ fof(bg_dist_tm_access_control_method_tm_document_randomised_pseudonymisation, ax
 
 fof(bg_dist_tm_access_control_method_tm_document_security, axiom,
     tm_access_control_method != tm_document_security).
-
-fof(bg_dist_tm_access_control_method_tm_encryption_at_rest, axiom,
-    tm_access_control_method != tm_encryption_at_rest).
 
 fof(bg_dist_tm_access_control_method_tm_encryption_in_transfer, axiom,
     tm_access_control_method != tm_encryption_in_transfer).
@@ -467,6 +468,219 @@ fof(bg_dist_tm_access_control_method_tm_wireless_security_protocols, axiom,
 fof(bg_dist_tm_access_control_method_tm_zero_knowledge_authentication, axiom,
     tm_access_control_method != tm_zero_knowledge_authentication).
 
+fof(bg_dist_tm_encryption_at_rest_tm_activity_monitoring, axiom,
+    tm_encryption_at_rest != tm_activity_monitoring).
+
+fof(bg_dist_tm_encryption_at_rest_tm_anonymisation, axiom,
+    tm_encryption_at_rest != tm_anonymisation).
+
+fof(bg_dist_tm_encryption_at_rest_tm_asymmetric_cryptography, axiom,
+    tm_encryption_at_rest != tm_asymmetric_cryptography).
+
+fof(bg_dist_tm_encryption_at_rest_tm_asymmetric_encryption, axiom,
+    tm_encryption_at_rest != tm_asymmetric_encryption).
+
+fof(bg_dist_tm_encryption_at_rest_tm_authentication_a_b_c, axiom,
+    tm_encryption_at_rest != tm_authentication_a_b_c).
+
+fof(bg_dist_tm_encryption_at_rest_tm_authentication_p_a_b_c, axiom,
+    tm_encryption_at_rest != tm_authentication_p_a_b_c).
+
+fof(bg_dist_tm_encryption_at_rest_tm_authentication_protocols, axiom,
+    tm_encryption_at_rest != tm_authentication_protocols).
+
+fof(bg_dist_tm_encryption_at_rest_tm_authorisation_protocols, axiom,
+    tm_encryption_at_rest != tm_authorisation_protocols).
+
+fof(bg_dist_tm_encryption_at_rest_tm_biometric_authentication, axiom,
+    tm_encryption_at_rest != tm_biometric_authentication).
+
+fof(bg_dist_tm_encryption_at_rest_tm_cryptographic_authentication, axiom,
+    tm_encryption_at_rest != tm_cryptographic_authentication).
+
+fof(bg_dist_tm_encryption_at_rest_tm_cryptographic_key_management, axiom,
+    tm_encryption_at_rest != tm_cryptographic_key_management).
+
+fof(bg_dist_tm_encryption_at_rest_tm_cryptographic_methods, axiom,
+    tm_encryption_at_rest != tm_cryptographic_methods).
+
+fof(bg_dist_tm_encryption_at_rest_tm_data_backup_protocols, axiom,
+    tm_encryption_at_rest != tm_data_backup_protocols).
+
+fof(bg_dist_tm_encryption_at_rest_tm_data_redaction, axiom,
+    tm_encryption_at_rest != tm_data_redaction).
+
+fof(bg_dist_tm_encryption_at_rest_tm_data_sanitisation_technique, axiom,
+    tm_encryption_at_rest != tm_data_sanitisation_technique).
+
+fof(bg_dist_tm_encryption_at_rest_tm_deidentification, axiom,
+    tm_encryption_at_rest != tm_deidentification).
+
+fof(bg_dist_tm_encryption_at_rest_tm_deterministic_pseudonymisation, axiom,
+    tm_encryption_at_rest != tm_deterministic_pseudonymisation).
+
+fof(bg_dist_tm_encryption_at_rest_tm_differential_privacy, axiom,
+    tm_encryption_at_rest != tm_differential_privacy).
+
+fof(bg_dist_tm_encryption_at_rest_tm_digital_rights_management, axiom,
+    tm_encryption_at_rest != tm_digital_rights_management).
+
+fof(bg_dist_tm_encryption_at_rest_tm_digital_signatures, axiom,
+    tm_encryption_at_rest != tm_digital_signatures).
+
+fof(bg_dist_tm_encryption_at_rest_tm_distributed_system_security, axiom,
+    tm_encryption_at_rest != tm_distributed_system_security).
+
+fof(bg_dist_tm_encryption_at_rest_tm_document_randomised_pseudonymisation, axiom,
+    tm_encryption_at_rest != tm_document_randomised_pseudonymisation).
+
+fof(bg_dist_tm_encryption_at_rest_tm_document_security, axiom,
+    tm_encryption_at_rest != tm_document_security).
+
+fof(bg_dist_tm_encryption_at_rest_tm_encryption_in_transfer, axiom,
+    tm_encryption_at_rest != tm_encryption_in_transfer).
+
+fof(bg_dist_tm_encryption_at_rest_tm_encryption_in_use, axiom,
+    tm_encryption_at_rest != tm_encryption_in_use).
+
+fof(bg_dist_tm_encryption_at_rest_tm_end_to_end_encryption, axiom,
+    tm_encryption_at_rest != tm_end_to_end_encryption).
+
+fof(bg_dist_tm_encryption_at_rest_tm_fail_safe_protocols, axiom,
+    tm_encryption_at_rest != tm_fail_safe_protocols).
+
+fof(bg_dist_tm_encryption_at_rest_tm_file_system_security, axiom,
+    tm_encryption_at_rest != tm_file_system_security).
+
+fof(bg_dist_tm_encryption_at_rest_tm_fully_randomised_pseudonymisation, axiom,
+    tm_encryption_at_rest != tm_fully_randomised_pseudonymisation).
+
+fof(bg_dist_tm_encryption_at_rest_tm_hardware_security_protocols, axiom,
+    tm_encryption_at_rest != tm_hardware_security_protocols).
+
+fof(bg_dist_tm_encryption_at_rest_tm_hash_functions, axiom,
+    tm_encryption_at_rest != tm_hash_functions).
+
+fof(bg_dist_tm_encryption_at_rest_tm_hash_message_authentication_code, axiom,
+    tm_encryption_at_rest != tm_hash_message_authentication_code).
+
+fof(bg_dist_tm_encryption_at_rest_tm_homomorphic_encryption, axiom,
+    tm_encryption_at_rest != tm_homomorphic_encryption).
+
+fof(bg_dist_tm_encryption_at_rest_tm_information_flow_control, axiom,
+    tm_encryption_at_rest != tm_information_flow_control).
+
+fof(bg_dist_tm_encryption_at_rest_tm_intrusion_detection_system, axiom,
+    tm_encryption_at_rest != tm_intrusion_detection_system).
+
+fof(bg_dist_tm_encryption_at_rest_tm_legal_measure, axiom,
+    tm_encryption_at_rest != tm_legal_measure).
+
+fof(bg_dist_tm_encryption_at_rest_tm_message_authentication_codes, axiom,
+    tm_encryption_at_rest != tm_message_authentication_codes).
+
+fof(bg_dist_tm_encryption_at_rest_tm_mobile_platform_security, axiom,
+    tm_encryption_at_rest != tm_mobile_platform_security).
+
+fof(bg_dist_tm_encryption_at_rest_tm_monotonic_counter_pseudonymisation, axiom,
+    tm_encryption_at_rest != tm_monotonic_counter_pseudonymisation).
+
+fof(bg_dist_tm_encryption_at_rest_tm_multi_factor_authentication, axiom,
+    tm_encryption_at_rest != tm_multi_factor_authentication).
+
+fof(bg_dist_tm_encryption_at_rest_tm_network_proxy_routing, axiom,
+    tm_encryption_at_rest != tm_network_proxy_routing).
+
+fof(bg_dist_tm_encryption_at_rest_tm_network_security_protocols, axiom,
+    tm_encryption_at_rest != tm_network_security_protocols).
+
+fof(bg_dist_tm_encryption_at_rest_tm_operating_system_security, axiom,
+    tm_encryption_at_rest != tm_operating_system_security).
+
+fof(bg_dist_tm_encryption_at_rest_tm_organisational_measure, axiom,
+    tm_encryption_at_rest != tm_organisational_measure).
+
+fof(bg_dist_tm_encryption_at_rest_tm_password_authentication, axiom,
+    tm_encryption_at_rest != tm_password_authentication).
+
+fof(bg_dist_tm_encryption_at_rest_tm_penetration_testing_methods, axiom,
+    tm_encryption_at_rest != tm_penetration_testing_methods).
+
+fof(bg_dist_tm_encryption_at_rest_tm_physical_measure, axiom,
+    tm_encryption_at_rest != tm_physical_measure).
+
+fof(bg_dist_tm_encryption_at_rest_tm_post_quantum_cryptography, axiom,
+    tm_encryption_at_rest != tm_post_quantum_cryptography).
+
+fof(bg_dist_tm_encryption_at_rest_tm_privacy_preserving_protocol, axiom,
+    tm_encryption_at_rest != tm_privacy_preserving_protocol).
+
+fof(bg_dist_tm_encryption_at_rest_tm_private_information_retrieval, axiom,
+    tm_encryption_at_rest != tm_private_information_retrieval).
+
+fof(bg_dist_tm_encryption_at_rest_tm_pseudonymisation, axiom,
+    tm_encryption_at_rest != tm_pseudonymisation).
+
+fof(bg_dist_tm_encryption_at_rest_tm_quantum_cryptography, axiom,
+    tm_encryption_at_rest != tm_quantum_cryptography).
+
+fof(bg_dist_tm_encryption_at_rest_tm_r_n_g_pseudonymisation, axiom,
+    tm_encryption_at_rest != tm_r_n_g_pseudonymisation).
+
+fof(bg_dist_tm_encryption_at_rest_tm_secret_sharing_schemes, axiom,
+    tm_encryption_at_rest != tm_secret_sharing_schemes).
+
+fof(bg_dist_tm_encryption_at_rest_tm_secure_multi_party_computation, axiom,
+    tm_encryption_at_rest != tm_secure_multi_party_computation).
+
+fof(bg_dist_tm_encryption_at_rest_tm_security_method, axiom,
+    tm_encryption_at_rest != tm_security_method).
+
+fof(bg_dist_tm_encryption_at_rest_tm_single_sign_on, axiom,
+    tm_encryption_at_rest != tm_single_sign_on).
+
+fof(bg_dist_tm_encryption_at_rest_tm_symmetric_cryptography, axiom,
+    tm_encryption_at_rest != tm_symmetric_cryptography).
+
+fof(bg_dist_tm_encryption_at_rest_tm_symmetric_encryption, axiom,
+    tm_encryption_at_rest != tm_symmetric_encryption).
+
+fof(bg_dist_tm_encryption_at_rest_tm_technical_measure, axiom,
+    tm_encryption_at_rest != tm_technical_measure).
+
+fof(bg_dist_tm_encryption_at_rest_tm_technical_organisational_measure, axiom,
+    tm_encryption_at_rest != tm_technical_organisational_measure).
+
+fof(bg_dist_tm_encryption_at_rest_tm_trusted_computing, axiom,
+    tm_encryption_at_rest != tm_trusted_computing).
+
+fof(bg_dist_tm_encryption_at_rest_tm_trusted_execution_environment, axiom,
+    tm_encryption_at_rest != tm_trusted_execution_environment).
+
+fof(bg_dist_tm_encryption_at_rest_tm_usage_control, axiom,
+    tm_encryption_at_rest != tm_usage_control).
+
+fof(bg_dist_tm_encryption_at_rest_tm_use_synthetic_data, axiom,
+    tm_encryption_at_rest != tm_use_synthetic_data).
+
+fof(bg_dist_tm_encryption_at_rest_tm_virtualisation_security, axiom,
+    tm_encryption_at_rest != tm_virtualisation_security).
+
+fof(bg_dist_tm_encryption_at_rest_tm_vulnerability_testing_methods, axiom,
+    tm_encryption_at_rest != tm_vulnerability_testing_methods).
+
+fof(bg_dist_tm_encryption_at_rest_tm_web_browser_security, axiom,
+    tm_encryption_at_rest != tm_web_browser_security).
+
+fof(bg_dist_tm_encryption_at_rest_tm_web_security_protocols, axiom,
+    tm_encryption_at_rest != tm_web_security_protocols).
+
+fof(bg_dist_tm_encryption_at_rest_tm_wireless_security_protocols, axiom,
+    tm_encryption_at_rest != tm_wireless_security_protocols).
+
+fof(bg_dist_tm_encryption_at_rest_tm_zero_knowledge_authentication, axiom,
+    tm_encryption_at_rest != tm_zero_knowledge_authentication).
+
 fof(bg_dist_tm_activity_monitoring_tm_anonymisation, axiom,
     tm_activity_monitoring != tm_anonymisation).
 
@@ -532,9 +746,6 @@ fof(bg_dist_tm_activity_monitoring_tm_document_randomised_pseudonymisation, axio
 
 fof(bg_dist_tm_activity_monitoring_tm_document_security, axiom,
     tm_activity_monitoring != tm_document_security).
-
-fof(bg_dist_tm_activity_monitoring_tm_encryption_at_rest, axiom,
-    tm_activity_monitoring != tm_encryption_at_rest).
 
 fof(bg_dist_tm_activity_monitoring_tm_encryption_in_transfer, axiom,
     tm_activity_monitoring != tm_encryption_in_transfer).
@@ -743,9 +954,6 @@ fof(bg_dist_tm_anonymisation_tm_document_randomised_pseudonymisation, axiom,
 fof(bg_dist_tm_anonymisation_tm_document_security, axiom,
     tm_anonymisation != tm_document_security).
 
-fof(bg_dist_tm_anonymisation_tm_encryption_at_rest, axiom,
-    tm_anonymisation != tm_encryption_at_rest).
-
 fof(bg_dist_tm_anonymisation_tm_encryption_in_transfer, axiom,
     tm_anonymisation != tm_encryption_in_transfer).
 
@@ -950,9 +1158,6 @@ fof(bg_dist_tm_asymmetric_cryptography_tm_document_randomised_pseudonymisation, 
 fof(bg_dist_tm_asymmetric_cryptography_tm_document_security, axiom,
     tm_asymmetric_cryptography != tm_document_security).
 
-fof(bg_dist_tm_asymmetric_cryptography_tm_encryption_at_rest, axiom,
-    tm_asymmetric_cryptography != tm_encryption_at_rest).
-
 fof(bg_dist_tm_asymmetric_cryptography_tm_encryption_in_transfer, axiom,
     tm_asymmetric_cryptography != tm_encryption_in_transfer).
 
@@ -1154,9 +1359,6 @@ fof(bg_dist_tm_asymmetric_encryption_tm_document_randomised_pseudonymisation, ax
 fof(bg_dist_tm_asymmetric_encryption_tm_document_security, axiom,
     tm_asymmetric_encryption != tm_document_security).
 
-fof(bg_dist_tm_asymmetric_encryption_tm_encryption_at_rest, axiom,
-    tm_asymmetric_encryption != tm_encryption_at_rest).
-
 fof(bg_dist_tm_asymmetric_encryption_tm_encryption_in_transfer, axiom,
     tm_asymmetric_encryption != tm_encryption_in_transfer).
 
@@ -1355,9 +1557,6 @@ fof(bg_dist_tm_authentication_a_b_c_tm_document_randomised_pseudonymisation, axi
 fof(bg_dist_tm_authentication_a_b_c_tm_document_security, axiom,
     tm_authentication_a_b_c != tm_document_security).
 
-fof(bg_dist_tm_authentication_a_b_c_tm_encryption_at_rest, axiom,
-    tm_authentication_a_b_c != tm_encryption_at_rest).
-
 fof(bg_dist_tm_authentication_a_b_c_tm_encryption_in_transfer, axiom,
     tm_authentication_a_b_c != tm_encryption_in_transfer).
 
@@ -1553,9 +1752,6 @@ fof(bg_dist_tm_authentication_p_a_b_c_tm_document_randomised_pseudonymisation, a
 fof(bg_dist_tm_authentication_p_a_b_c_tm_document_security, axiom,
     tm_authentication_p_a_b_c != tm_document_security).
 
-fof(bg_dist_tm_authentication_p_a_b_c_tm_encryption_at_rest, axiom,
-    tm_authentication_p_a_b_c != tm_encryption_at_rest).
-
 fof(bg_dist_tm_authentication_p_a_b_c_tm_encryption_in_transfer, axiom,
     tm_authentication_p_a_b_c != tm_encryption_in_transfer).
 
@@ -1748,9 +1944,6 @@ fof(bg_dist_tm_authentication_protocols_tm_document_randomised_pseudonymisation,
 fof(bg_dist_tm_authentication_protocols_tm_document_security, axiom,
     tm_authentication_protocols != tm_document_security).
 
-fof(bg_dist_tm_authentication_protocols_tm_encryption_at_rest, axiom,
-    tm_authentication_protocols != tm_encryption_at_rest).
-
 fof(bg_dist_tm_authentication_protocols_tm_encryption_in_transfer, axiom,
     tm_authentication_protocols != tm_encryption_in_transfer).
 
@@ -1940,9 +2133,6 @@ fof(bg_dist_tm_authorisation_protocols_tm_document_randomised_pseudonymisation, 
 fof(bg_dist_tm_authorisation_protocols_tm_document_security, axiom,
     tm_authorisation_protocols != tm_document_security).
 
-fof(bg_dist_tm_authorisation_protocols_tm_encryption_at_rest, axiom,
-    tm_authorisation_protocols != tm_encryption_at_rest).
-
 fof(bg_dist_tm_authorisation_protocols_tm_encryption_in_transfer, axiom,
     tm_authorisation_protocols != tm_encryption_in_transfer).
 
@@ -2129,9 +2319,6 @@ fof(bg_dist_tm_biometric_authentication_tm_document_randomised_pseudonymisation,
 fof(bg_dist_tm_biometric_authentication_tm_document_security, axiom,
     tm_biometric_authentication != tm_document_security).
 
-fof(bg_dist_tm_biometric_authentication_tm_encryption_at_rest, axiom,
-    tm_biometric_authentication != tm_encryption_at_rest).
-
 fof(bg_dist_tm_biometric_authentication_tm_encryption_in_transfer, axiom,
     tm_biometric_authentication != tm_encryption_in_transfer).
 
@@ -2315,9 +2502,6 @@ fof(bg_dist_tm_cryptographic_authentication_tm_document_randomised_pseudonymisat
 fof(bg_dist_tm_cryptographic_authentication_tm_document_security, axiom,
     tm_cryptographic_authentication != tm_document_security).
 
-fof(bg_dist_tm_cryptographic_authentication_tm_encryption_at_rest, axiom,
-    tm_cryptographic_authentication != tm_encryption_at_rest).
-
 fof(bg_dist_tm_cryptographic_authentication_tm_encryption_in_transfer, axiom,
     tm_cryptographic_authentication != tm_encryption_in_transfer).
 
@@ -2498,9 +2682,6 @@ fof(bg_dist_tm_cryptographic_key_management_tm_document_randomised_pseudonymisat
 fof(bg_dist_tm_cryptographic_key_management_tm_document_security, axiom,
     tm_cryptographic_key_management != tm_document_security).
 
-fof(bg_dist_tm_cryptographic_key_management_tm_encryption_at_rest, axiom,
-    tm_cryptographic_key_management != tm_encryption_at_rest).
-
 fof(bg_dist_tm_cryptographic_key_management_tm_encryption_in_transfer, axiom,
     tm_cryptographic_key_management != tm_encryption_in_transfer).
 
@@ -2678,9 +2859,6 @@ fof(bg_dist_tm_cryptographic_methods_tm_document_randomised_pseudonymisation, ax
 fof(bg_dist_tm_cryptographic_methods_tm_document_security, axiom,
     tm_cryptographic_methods != tm_document_security).
 
-fof(bg_dist_tm_cryptographic_methods_tm_encryption_at_rest, axiom,
-    tm_cryptographic_methods != tm_encryption_at_rest).
-
 fof(bg_dist_tm_cryptographic_methods_tm_encryption_in_transfer, axiom,
     tm_cryptographic_methods != tm_encryption_in_transfer).
 
@@ -2855,9 +3033,6 @@ fof(bg_dist_tm_data_backup_protocols_tm_document_randomised_pseudonymisation, ax
 fof(bg_dist_tm_data_backup_protocols_tm_document_security, axiom,
     tm_data_backup_protocols != tm_document_security).
 
-fof(bg_dist_tm_data_backup_protocols_tm_encryption_at_rest, axiom,
-    tm_data_backup_protocols != tm_encryption_at_rest).
-
 fof(bg_dist_tm_data_backup_protocols_tm_encryption_in_transfer, axiom,
     tm_data_backup_protocols != tm_encryption_in_transfer).
 
@@ -3029,9 +3204,6 @@ fof(bg_dist_tm_data_redaction_tm_document_randomised_pseudonymisation, axiom,
 fof(bg_dist_tm_data_redaction_tm_document_security, axiom,
     tm_data_redaction != tm_document_security).
 
-fof(bg_dist_tm_data_redaction_tm_encryption_at_rest, axiom,
-    tm_data_redaction != tm_encryption_at_rest).
-
 fof(bg_dist_tm_data_redaction_tm_encryption_in_transfer, axiom,
     tm_data_redaction != tm_encryption_in_transfer).
 
@@ -3200,9 +3372,6 @@ fof(bg_dist_tm_data_sanitisation_technique_tm_document_randomised_pseudonymisati
 fof(bg_dist_tm_data_sanitisation_technique_tm_document_security, axiom,
     tm_data_sanitisation_technique != tm_document_security).
 
-fof(bg_dist_tm_data_sanitisation_technique_tm_encryption_at_rest, axiom,
-    tm_data_sanitisation_technique != tm_encryption_at_rest).
-
 fof(bg_dist_tm_data_sanitisation_technique_tm_encryption_in_transfer, axiom,
     tm_data_sanitisation_technique != tm_encryption_in_transfer).
 
@@ -3368,9 +3537,6 @@ fof(bg_dist_tm_deidentification_tm_document_randomised_pseudonymisation, axiom,
 fof(bg_dist_tm_deidentification_tm_document_security, axiom,
     tm_deidentification != tm_document_security).
 
-fof(bg_dist_tm_deidentification_tm_encryption_at_rest, axiom,
-    tm_deidentification != tm_encryption_at_rest).
-
 fof(bg_dist_tm_deidentification_tm_encryption_in_transfer, axiom,
     tm_deidentification != tm_encryption_in_transfer).
 
@@ -3533,9 +3699,6 @@ fof(bg_dist_tm_deterministic_pseudonymisation_tm_document_randomised_pseudonymis
 fof(bg_dist_tm_deterministic_pseudonymisation_tm_document_security, axiom,
     tm_deterministic_pseudonymisation != tm_document_security).
 
-fof(bg_dist_tm_deterministic_pseudonymisation_tm_encryption_at_rest, axiom,
-    tm_deterministic_pseudonymisation != tm_encryption_at_rest).
-
 fof(bg_dist_tm_deterministic_pseudonymisation_tm_encryption_in_transfer, axiom,
     tm_deterministic_pseudonymisation != tm_encryption_in_transfer).
 
@@ -3695,9 +3858,6 @@ fof(bg_dist_tm_differential_privacy_tm_document_randomised_pseudonymisation, axi
 fof(bg_dist_tm_differential_privacy_tm_document_security, axiom,
     tm_differential_privacy != tm_document_security).
 
-fof(bg_dist_tm_differential_privacy_tm_encryption_at_rest, axiom,
-    tm_differential_privacy != tm_encryption_at_rest).
-
 fof(bg_dist_tm_differential_privacy_tm_encryption_in_transfer, axiom,
     tm_differential_privacy != tm_encryption_in_transfer).
 
@@ -3854,9 +4014,6 @@ fof(bg_dist_tm_digital_rights_management_tm_document_randomised_pseudonymisation
 fof(bg_dist_tm_digital_rights_management_tm_document_security, axiom,
     tm_digital_rights_management != tm_document_security).
 
-fof(bg_dist_tm_digital_rights_management_tm_encryption_at_rest, axiom,
-    tm_digital_rights_management != tm_encryption_at_rest).
-
 fof(bg_dist_tm_digital_rights_management_tm_encryption_in_transfer, axiom,
     tm_digital_rights_management != tm_encryption_in_transfer).
 
@@ -4010,9 +4167,6 @@ fof(bg_dist_tm_digital_signatures_tm_document_randomised_pseudonymisation, axiom
 fof(bg_dist_tm_digital_signatures_tm_document_security, axiom,
     tm_digital_signatures != tm_document_security).
 
-fof(bg_dist_tm_digital_signatures_tm_encryption_at_rest, axiom,
-    tm_digital_signatures != tm_encryption_at_rest).
-
 fof(bg_dist_tm_digital_signatures_tm_encryption_in_transfer, axiom,
     tm_digital_signatures != tm_encryption_in_transfer).
 
@@ -4163,9 +4317,6 @@ fof(bg_dist_tm_distributed_system_security_tm_document_randomised_pseudonymisati
 fof(bg_dist_tm_distributed_system_security_tm_document_security, axiom,
     tm_distributed_system_security != tm_document_security).
 
-fof(bg_dist_tm_distributed_system_security_tm_encryption_at_rest, axiom,
-    tm_distributed_system_security != tm_encryption_at_rest).
-
 fof(bg_dist_tm_distributed_system_security_tm_encryption_in_transfer, axiom,
     tm_distributed_system_security != tm_encryption_in_transfer).
 
@@ -4313,9 +4464,6 @@ fof(bg_dist_tm_distributed_system_security_tm_zero_knowledge_authentication, axi
 fof(bg_dist_tm_document_randomised_pseudonymisation_tm_document_security, axiom,
     tm_document_randomised_pseudonymisation != tm_document_security).
 
-fof(bg_dist_tm_document_randomised_pseudonymisation_tm_encryption_at_rest, axiom,
-    tm_document_randomised_pseudonymisation != tm_encryption_at_rest).
-
 fof(bg_dist_tm_document_randomised_pseudonymisation_tm_encryption_in_transfer, axiom,
     tm_document_randomised_pseudonymisation != tm_encryption_in_transfer).
 
@@ -4460,9 +4608,6 @@ fof(bg_dist_tm_document_randomised_pseudonymisation_tm_wireless_security_protoco
 fof(bg_dist_tm_document_randomised_pseudonymisation_tm_zero_knowledge_authentication, axiom,
     tm_document_randomised_pseudonymisation != tm_zero_knowledge_authentication).
 
-fof(bg_dist_tm_document_security_tm_encryption_at_rest, axiom,
-    tm_document_security != tm_encryption_at_rest).
-
 fof(bg_dist_tm_document_security_tm_encryption_in_transfer, axiom,
     tm_document_security != tm_encryption_in_transfer).
 
@@ -4606,150 +4751,6 @@ fof(bg_dist_tm_document_security_tm_wireless_security_protocols, axiom,
 
 fof(bg_dist_tm_document_security_tm_zero_knowledge_authentication, axiom,
     tm_document_security != tm_zero_knowledge_authentication).
-
-fof(bg_dist_tm_encryption_at_rest_tm_encryption_in_transfer, axiom,
-    tm_encryption_at_rest != tm_encryption_in_transfer).
-
-fof(bg_dist_tm_encryption_at_rest_tm_encryption_in_use, axiom,
-    tm_encryption_at_rest != tm_encryption_in_use).
-
-fof(bg_dist_tm_encryption_at_rest_tm_end_to_end_encryption, axiom,
-    tm_encryption_at_rest != tm_end_to_end_encryption).
-
-fof(bg_dist_tm_encryption_at_rest_tm_fail_safe_protocols, axiom,
-    tm_encryption_at_rest != tm_fail_safe_protocols).
-
-fof(bg_dist_tm_encryption_at_rest_tm_file_system_security, axiom,
-    tm_encryption_at_rest != tm_file_system_security).
-
-fof(bg_dist_tm_encryption_at_rest_tm_fully_randomised_pseudonymisation, axiom,
-    tm_encryption_at_rest != tm_fully_randomised_pseudonymisation).
-
-fof(bg_dist_tm_encryption_at_rest_tm_hardware_security_protocols, axiom,
-    tm_encryption_at_rest != tm_hardware_security_protocols).
-
-fof(bg_dist_tm_encryption_at_rest_tm_hash_functions, axiom,
-    tm_encryption_at_rest != tm_hash_functions).
-
-fof(bg_dist_tm_encryption_at_rest_tm_hash_message_authentication_code, axiom,
-    tm_encryption_at_rest != tm_hash_message_authentication_code).
-
-fof(bg_dist_tm_encryption_at_rest_tm_homomorphic_encryption, axiom,
-    tm_encryption_at_rest != tm_homomorphic_encryption).
-
-fof(bg_dist_tm_encryption_at_rest_tm_information_flow_control, axiom,
-    tm_encryption_at_rest != tm_information_flow_control).
-
-fof(bg_dist_tm_encryption_at_rest_tm_intrusion_detection_system, axiom,
-    tm_encryption_at_rest != tm_intrusion_detection_system).
-
-fof(bg_dist_tm_encryption_at_rest_tm_legal_measure, axiom,
-    tm_encryption_at_rest != tm_legal_measure).
-
-fof(bg_dist_tm_encryption_at_rest_tm_message_authentication_codes, axiom,
-    tm_encryption_at_rest != tm_message_authentication_codes).
-
-fof(bg_dist_tm_encryption_at_rest_tm_mobile_platform_security, axiom,
-    tm_encryption_at_rest != tm_mobile_platform_security).
-
-fof(bg_dist_tm_encryption_at_rest_tm_monotonic_counter_pseudonymisation, axiom,
-    tm_encryption_at_rest != tm_monotonic_counter_pseudonymisation).
-
-fof(bg_dist_tm_encryption_at_rest_tm_multi_factor_authentication, axiom,
-    tm_encryption_at_rest != tm_multi_factor_authentication).
-
-fof(bg_dist_tm_encryption_at_rest_tm_network_proxy_routing, axiom,
-    tm_encryption_at_rest != tm_network_proxy_routing).
-
-fof(bg_dist_tm_encryption_at_rest_tm_network_security_protocols, axiom,
-    tm_encryption_at_rest != tm_network_security_protocols).
-
-fof(bg_dist_tm_encryption_at_rest_tm_operating_system_security, axiom,
-    tm_encryption_at_rest != tm_operating_system_security).
-
-fof(bg_dist_tm_encryption_at_rest_tm_organisational_measure, axiom,
-    tm_encryption_at_rest != tm_organisational_measure).
-
-fof(bg_dist_tm_encryption_at_rest_tm_password_authentication, axiom,
-    tm_encryption_at_rest != tm_password_authentication).
-
-fof(bg_dist_tm_encryption_at_rest_tm_penetration_testing_methods, axiom,
-    tm_encryption_at_rest != tm_penetration_testing_methods).
-
-fof(bg_dist_tm_encryption_at_rest_tm_physical_measure, axiom,
-    tm_encryption_at_rest != tm_physical_measure).
-
-fof(bg_dist_tm_encryption_at_rest_tm_post_quantum_cryptography, axiom,
-    tm_encryption_at_rest != tm_post_quantum_cryptography).
-
-fof(bg_dist_tm_encryption_at_rest_tm_privacy_preserving_protocol, axiom,
-    tm_encryption_at_rest != tm_privacy_preserving_protocol).
-
-fof(bg_dist_tm_encryption_at_rest_tm_private_information_retrieval, axiom,
-    tm_encryption_at_rest != tm_private_information_retrieval).
-
-fof(bg_dist_tm_encryption_at_rest_tm_pseudonymisation, axiom,
-    tm_encryption_at_rest != tm_pseudonymisation).
-
-fof(bg_dist_tm_encryption_at_rest_tm_quantum_cryptography, axiom,
-    tm_encryption_at_rest != tm_quantum_cryptography).
-
-fof(bg_dist_tm_encryption_at_rest_tm_r_n_g_pseudonymisation, axiom,
-    tm_encryption_at_rest != tm_r_n_g_pseudonymisation).
-
-fof(bg_dist_tm_encryption_at_rest_tm_secret_sharing_schemes, axiom,
-    tm_encryption_at_rest != tm_secret_sharing_schemes).
-
-fof(bg_dist_tm_encryption_at_rest_tm_secure_multi_party_computation, axiom,
-    tm_encryption_at_rest != tm_secure_multi_party_computation).
-
-fof(bg_dist_tm_encryption_at_rest_tm_security_method, axiom,
-    tm_encryption_at_rest != tm_security_method).
-
-fof(bg_dist_tm_encryption_at_rest_tm_single_sign_on, axiom,
-    tm_encryption_at_rest != tm_single_sign_on).
-
-fof(bg_dist_tm_encryption_at_rest_tm_symmetric_cryptography, axiom,
-    tm_encryption_at_rest != tm_symmetric_cryptography).
-
-fof(bg_dist_tm_encryption_at_rest_tm_symmetric_encryption, axiom,
-    tm_encryption_at_rest != tm_symmetric_encryption).
-
-fof(bg_dist_tm_encryption_at_rest_tm_technical_measure, axiom,
-    tm_encryption_at_rest != tm_technical_measure).
-
-fof(bg_dist_tm_encryption_at_rest_tm_technical_organisational_measure, axiom,
-    tm_encryption_at_rest != tm_technical_organisational_measure).
-
-fof(bg_dist_tm_encryption_at_rest_tm_trusted_computing, axiom,
-    tm_encryption_at_rest != tm_trusted_computing).
-
-fof(bg_dist_tm_encryption_at_rest_tm_trusted_execution_environment, axiom,
-    tm_encryption_at_rest != tm_trusted_execution_environment).
-
-fof(bg_dist_tm_encryption_at_rest_tm_usage_control, axiom,
-    tm_encryption_at_rest != tm_usage_control).
-
-fof(bg_dist_tm_encryption_at_rest_tm_use_synthetic_data, axiom,
-    tm_encryption_at_rest != tm_use_synthetic_data).
-
-fof(bg_dist_tm_encryption_at_rest_tm_virtualisation_security, axiom,
-    tm_encryption_at_rest != tm_virtualisation_security).
-
-fof(bg_dist_tm_encryption_at_rest_tm_vulnerability_testing_methods, axiom,
-    tm_encryption_at_rest != tm_vulnerability_testing_methods).
-
-fof(bg_dist_tm_encryption_at_rest_tm_web_browser_security, axiom,
-    tm_encryption_at_rest != tm_web_browser_security).
-
-fof(bg_dist_tm_encryption_at_rest_tm_web_security_protocols, axiom,
-    tm_encryption_at_rest != tm_web_security_protocols).
-
-fof(bg_dist_tm_encryption_at_rest_tm_wireless_security_protocols, axiom,
-    tm_encryption_at_rest != tm_wireless_security_protocols).
-
-fof(bg_dist_tm_encryption_at_rest_tm_zero_knowledge_authentication, axiom,
-    tm_encryption_at_rest != tm_zero_knowledge_authentication).
 
 fof(bg_dist_tm_encryption_in_transfer_tm_encryption_in_use, axiom,
     tm_encryption_in_transfer != tm_encryption_in_use).
@@ -8135,6 +8136,151 @@ fof(bg_dist_tm_web_security_protocols_tm_zero_knowledge_authentication, axiom,
 fof(bg_dist_tm_wireless_security_protocols_tm_zero_knowledge_authentication, axiom,
     tm_wireless_security_protocols != tm_zero_knowledge_authentication).
 
-fof(w_kgc364, axiom,
-    tm_access_control_method = tm_encryption).
+fof(w_kgc366, axiom,
+    ( ( tm_encryption = tm_encryption_at_rest
+    | tm_access_control_method = tm_encryption_at_rest
+    | tm_encryption_at_rest = tm_encryption
+    | tm_encryption_at_rest = tm_access_control_method
+    | ( tm_activity_monitoring = tm_encryption_at_rest & ( tm_activity_monitoring = tm_encryption
+    | tm_activity_monitoring = tm_access_control_method ) )
+    | ( tm_anonymisation = tm_encryption_at_rest & ( tm_anonymisation = tm_encryption
+    | tm_anonymisation = tm_access_control_method ) )
+    | ( tm_asymmetric_cryptography = tm_encryption_at_rest & ( tm_asymmetric_cryptography = tm_encryption
+    | tm_asymmetric_cryptography = tm_access_control_method ) )
+    | ( tm_asymmetric_encryption = tm_encryption_at_rest & ( tm_asymmetric_encryption = tm_encryption
+    | tm_asymmetric_encryption = tm_access_control_method ) )
+    | ( tm_authentication_a_b_c = tm_encryption_at_rest & ( tm_authentication_a_b_c = tm_encryption
+    | tm_authentication_a_b_c = tm_access_control_method ) )
+    | ( tm_authentication_p_a_b_c = tm_encryption_at_rest & ( tm_authentication_p_a_b_c = tm_encryption
+    | tm_authentication_p_a_b_c = tm_access_control_method ) )
+    | ( tm_authentication_protocols = tm_encryption_at_rest & ( tm_authentication_protocols = tm_encryption
+    | tm_authentication_protocols = tm_access_control_method ) )
+    | ( tm_authorisation_protocols = tm_encryption_at_rest & ( tm_authorisation_protocols = tm_encryption
+    | tm_authorisation_protocols = tm_access_control_method ) )
+    | ( tm_biometric_authentication = tm_encryption_at_rest & ( tm_biometric_authentication = tm_encryption
+    | tm_biometric_authentication = tm_access_control_method ) )
+    | ( tm_cryptographic_authentication = tm_encryption_at_rest & ( tm_cryptographic_authentication = tm_encryption
+    | tm_cryptographic_authentication = tm_access_control_method ) )
+    | ( tm_cryptographic_key_management = tm_encryption_at_rest & ( tm_cryptographic_key_management = tm_encryption
+    | tm_cryptographic_key_management = tm_access_control_method ) )
+    | ( tm_cryptographic_methods = tm_encryption_at_rest & ( tm_cryptographic_methods = tm_encryption
+    | tm_cryptographic_methods = tm_access_control_method ) )
+    | ( tm_data_backup_protocols = tm_encryption_at_rest & ( tm_data_backup_protocols = tm_encryption
+    | tm_data_backup_protocols = tm_access_control_method ) )
+    | ( tm_data_redaction = tm_encryption_at_rest & ( tm_data_redaction = tm_encryption
+    | tm_data_redaction = tm_access_control_method ) )
+    | ( tm_data_sanitisation_technique = tm_encryption_at_rest & ( tm_data_sanitisation_technique = tm_encryption
+    | tm_data_sanitisation_technique = tm_access_control_method ) )
+    | ( tm_deidentification = tm_encryption_at_rest & ( tm_deidentification = tm_encryption
+    | tm_deidentification = tm_access_control_method ) )
+    | ( tm_deterministic_pseudonymisation = tm_encryption_at_rest & ( tm_deterministic_pseudonymisation = tm_encryption
+    | tm_deterministic_pseudonymisation = tm_access_control_method ) )
+    | ( tm_differential_privacy = tm_encryption_at_rest & ( tm_differential_privacy = tm_encryption
+    | tm_differential_privacy = tm_access_control_method ) )
+    | ( tm_digital_rights_management = tm_encryption_at_rest & ( tm_digital_rights_management = tm_encryption
+    | tm_digital_rights_management = tm_access_control_method ) )
+    | ( tm_digital_signatures = tm_encryption_at_rest & ( tm_digital_signatures = tm_encryption
+    | tm_digital_signatures = tm_access_control_method ) )
+    | ( tm_distributed_system_security = tm_encryption_at_rest & ( tm_distributed_system_security = tm_encryption
+    | tm_distributed_system_security = tm_access_control_method ) )
+    | ( tm_document_randomised_pseudonymisation = tm_encryption_at_rest & ( tm_document_randomised_pseudonymisation = tm_encryption
+    | tm_document_randomised_pseudonymisation = tm_access_control_method ) )
+    | ( tm_document_security = tm_encryption_at_rest & ( tm_document_security = tm_encryption
+    | tm_document_security = tm_access_control_method ) )
+    | ( tm_encryption_in_transfer = tm_encryption_at_rest & ( tm_encryption_in_transfer = tm_encryption
+    | tm_encryption_in_transfer = tm_access_control_method ) )
+    | ( tm_encryption_in_use = tm_encryption_at_rest & ( tm_encryption_in_use = tm_encryption
+    | tm_encryption_in_use = tm_access_control_method ) )
+    | ( tm_end_to_end_encryption = tm_encryption_at_rest & ( tm_end_to_end_encryption = tm_encryption
+    | tm_end_to_end_encryption = tm_access_control_method ) )
+    | ( tm_fail_safe_protocols = tm_encryption_at_rest & ( tm_fail_safe_protocols = tm_encryption
+    | tm_fail_safe_protocols = tm_access_control_method ) )
+    | ( tm_file_system_security = tm_encryption_at_rest & ( tm_file_system_security = tm_encryption
+    | tm_file_system_security = tm_access_control_method ) )
+    | ( tm_fully_randomised_pseudonymisation = tm_encryption_at_rest & ( tm_fully_randomised_pseudonymisation = tm_encryption
+    | tm_fully_randomised_pseudonymisation = tm_access_control_method ) )
+    | ( tm_hardware_security_protocols = tm_encryption_at_rest & ( tm_hardware_security_protocols = tm_encryption
+    | tm_hardware_security_protocols = tm_access_control_method ) )
+    | ( tm_hash_functions = tm_encryption_at_rest & ( tm_hash_functions = tm_encryption
+    | tm_hash_functions = tm_access_control_method ) )
+    | ( tm_hash_message_authentication_code = tm_encryption_at_rest & ( tm_hash_message_authentication_code = tm_encryption
+    | tm_hash_message_authentication_code = tm_access_control_method ) )
+    | ( tm_homomorphic_encryption = tm_encryption_at_rest & ( tm_homomorphic_encryption = tm_encryption
+    | tm_homomorphic_encryption = tm_access_control_method ) )
+    | ( tm_information_flow_control = tm_encryption_at_rest & ( tm_information_flow_control = tm_encryption
+    | tm_information_flow_control = tm_access_control_method ) )
+    | ( tm_intrusion_detection_system = tm_encryption_at_rest & ( tm_intrusion_detection_system = tm_encryption
+    | tm_intrusion_detection_system = tm_access_control_method ) )
+    | ( tm_legal_measure = tm_encryption_at_rest & ( tm_legal_measure = tm_encryption
+    | tm_legal_measure = tm_access_control_method ) )
+    | ( tm_message_authentication_codes = tm_encryption_at_rest & ( tm_message_authentication_codes = tm_encryption
+    | tm_message_authentication_codes = tm_access_control_method ) )
+    | ( tm_mobile_platform_security = tm_encryption_at_rest & ( tm_mobile_platform_security = tm_encryption
+    | tm_mobile_platform_security = tm_access_control_method ) )
+    | ( tm_monotonic_counter_pseudonymisation = tm_encryption_at_rest & ( tm_monotonic_counter_pseudonymisation = tm_encryption
+    | tm_monotonic_counter_pseudonymisation = tm_access_control_method ) )
+    | ( tm_multi_factor_authentication = tm_encryption_at_rest & ( tm_multi_factor_authentication = tm_encryption
+    | tm_multi_factor_authentication = tm_access_control_method ) )
+    | ( tm_network_proxy_routing = tm_encryption_at_rest & ( tm_network_proxy_routing = tm_encryption
+    | tm_network_proxy_routing = tm_access_control_method ) )
+    | ( tm_network_security_protocols = tm_encryption_at_rest & ( tm_network_security_protocols = tm_encryption
+    | tm_network_security_protocols = tm_access_control_method ) )
+    | ( tm_operating_system_security = tm_encryption_at_rest & ( tm_operating_system_security = tm_encryption
+    | tm_operating_system_security = tm_access_control_method ) )
+    | ( tm_organisational_measure = tm_encryption_at_rest & ( tm_organisational_measure = tm_encryption
+    | tm_organisational_measure = tm_access_control_method ) )
+    | ( tm_password_authentication = tm_encryption_at_rest & ( tm_password_authentication = tm_encryption
+    | tm_password_authentication = tm_access_control_method ) )
+    | ( tm_penetration_testing_methods = tm_encryption_at_rest & ( tm_penetration_testing_methods = tm_encryption
+    | tm_penetration_testing_methods = tm_access_control_method ) )
+    | ( tm_physical_measure = tm_encryption_at_rest & ( tm_physical_measure = tm_encryption
+    | tm_physical_measure = tm_access_control_method ) )
+    | ( tm_post_quantum_cryptography = tm_encryption_at_rest & ( tm_post_quantum_cryptography = tm_encryption
+    | tm_post_quantum_cryptography = tm_access_control_method ) )
+    | ( tm_privacy_preserving_protocol = tm_encryption_at_rest & ( tm_privacy_preserving_protocol = tm_encryption
+    | tm_privacy_preserving_protocol = tm_access_control_method ) )
+    | ( tm_private_information_retrieval = tm_encryption_at_rest & ( tm_private_information_retrieval = tm_encryption
+    | tm_private_information_retrieval = tm_access_control_method ) )
+    | ( tm_pseudonymisation = tm_encryption_at_rest & ( tm_pseudonymisation = tm_encryption
+    | tm_pseudonymisation = tm_access_control_method ) )
+    | ( tm_quantum_cryptography = tm_encryption_at_rest & ( tm_quantum_cryptography = tm_encryption
+    | tm_quantum_cryptography = tm_access_control_method ) )
+    | ( tm_r_n_g_pseudonymisation = tm_encryption_at_rest & ( tm_r_n_g_pseudonymisation = tm_encryption
+    | tm_r_n_g_pseudonymisation = tm_access_control_method ) )
+    | ( tm_secret_sharing_schemes = tm_encryption_at_rest & ( tm_secret_sharing_schemes = tm_encryption
+    | tm_secret_sharing_schemes = tm_access_control_method ) )
+    | ( tm_secure_multi_party_computation = tm_encryption_at_rest & ( tm_secure_multi_party_computation = tm_encryption
+    | tm_secure_multi_party_computation = tm_access_control_method ) )
+    | ( tm_security_method = tm_encryption_at_rest & ( tm_security_method = tm_encryption
+    | tm_security_method = tm_access_control_method ) )
+    | ( tm_single_sign_on = tm_encryption_at_rest & ( tm_single_sign_on = tm_encryption
+    | tm_single_sign_on = tm_access_control_method ) )
+    | ( tm_symmetric_cryptography = tm_encryption_at_rest & ( tm_symmetric_cryptography = tm_encryption
+    | tm_symmetric_cryptography = tm_access_control_method ) )
+    | ( tm_symmetric_encryption = tm_encryption_at_rest & ( tm_symmetric_encryption = tm_encryption
+    | tm_symmetric_encryption = tm_access_control_method ) )
+    | ( tm_technical_measure = tm_encryption_at_rest & ( tm_technical_measure = tm_encryption
+    | tm_technical_measure = tm_access_control_method ) ) )
+    | ( ( tm_technical_organisational_measure = tm_encryption_at_rest & ( tm_technical_organisational_measure = tm_encryption
+    | tm_technical_organisational_measure = tm_access_control_method ) )
+    | ( tm_trusted_computing = tm_encryption_at_rest & ( tm_trusted_computing = tm_encryption
+    | tm_trusted_computing = tm_access_control_method ) )
+    | ( tm_trusted_execution_environment = tm_encryption_at_rest & ( tm_trusted_execution_environment = tm_encryption
+    | tm_trusted_execution_environment = tm_access_control_method ) )
+    | ( tm_usage_control = tm_encryption_at_rest & ( tm_usage_control = tm_encryption
+    | tm_usage_control = tm_access_control_method ) )
+    | ( tm_use_synthetic_data = tm_encryption_at_rest & ( tm_use_synthetic_data = tm_encryption
+    | tm_use_synthetic_data = tm_access_control_method ) )
+    | ( tm_virtualisation_security = tm_encryption_at_rest & ( tm_virtualisation_security = tm_encryption
+    | tm_virtualisation_security = tm_access_control_method ) )
+    | ( tm_vulnerability_testing_methods = tm_encryption_at_rest & ( tm_vulnerability_testing_methods = tm_encryption
+    | tm_vulnerability_testing_methods = tm_access_control_method ) )
+    | ( tm_web_browser_security = tm_encryption_at_rest & ( tm_web_browser_security = tm_encryption
+    | tm_web_browser_security = tm_access_control_method ) )
+    | ( tm_web_security_protocols = tm_encryption_at_rest & ( tm_web_security_protocols = tm_encryption
+    | tm_web_security_protocols = tm_access_control_method ) )
+    | ( tm_wireless_security_protocols = tm_encryption_at_rest & ( tm_wireless_security_protocols = tm_encryption
+    | tm_wireless_security_protocols = tm_access_control_method ) )
+    | ( tm_zero_knowledge_authentication = tm_encryption_at_rest & ( tm_zero_knowledge_authentication = tm_encryption
+    | tm_zero_knowledge_authentication = tm_access_control_method ) ) ) )).
 %------------------------------------------------------------------------------

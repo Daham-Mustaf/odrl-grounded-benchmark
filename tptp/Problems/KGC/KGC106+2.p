@@ -1,278 +1,281 @@
 %------------------------------------------------------------------------------
 % File     : KGC106+2 : placeholder, for TPTP use only
 % Domain   : Semantic Web (ODRL policies), proposed
-% Problem  : Use for at least one of public benefit and non-commercial research against use for improving transport mobility only: no use meets both
+% Problem  : Use for public benefit or non-commercial research, or any narrower purpose against use for commercial research only: some use meets both
 % Version  : Especial.
 %            Theorem formulation : The condition is written over the whole
 %            vocabulary, as the paper's definition states; version 1 names
-%            only the concepts a fixed value allows. The two versions have the
+%            only the concepts a fixed value allows. The versions have the
 %            same status.
-% English  : A city's traffic data platform permits use for at least one of
-%            public benefit and non-commercial research. A city transport
-%            authority commits to improving transport mobility. This problem
-%            states that no use meets the two policies.
+% English  : A city's traffic data platform permits use for public benefit or
+%            non-commercial research, or any narrower purpose. A company
+%            commits to use for commercial research. This problem states that
+%            some use meets the two policies.
 
 % Refs     : [Mus26] Mustafa (2026), odrl-grounded-benchmark,
-%            https://github.com/Daham-Mustaf/odrl-grounded-benchmark, tag
-%            v1.1.1
+%            https://github.com/Daham-Mustaf/odrl-grounded-benchmark, tag v1.2
 % Source   : [Mus26]
-% Names    : KGC393-2 [Mus26]
+% Names    : KGC399-1 [Mus26]
 
 % Status   : Satisfiable
 % Rating   : left to TPTP
 % Syntax   : left to TPTP
 % SPC      : left to TPTP
 
-% Comments : KGC393 is Unknown. Its two problems state that some use meets the
-%            two policies (KGC105) and that no use does (KGC106). A pair of
+% Comments : KGC399 is Unknown. Its two problems state that some use meets the
+%            two policies (KGC106) and that no use does (KGC107); here the
+%            first is Satisfiable and the second Satisfiable. A pair of
 %            policies is Incompatible when the first is Unsatisfiable,
 %            Compatible when the second is Unsatisfiable, and Unknown when
 %            both are Satisfiable; a Satisfiable problem also shows the
-%            statements consistent. Here the first is Satisfiable and the
-%            second Satisfiable.
+%            statements consistent.
 %------------------------------------------------------------------------------
 include('Axioms/KGC000+0.ax').
 include('Axioms/KGC000+3.ax').
 
-fof(w_kgc393, axiom,
-    ~ ( ( ( dpv_public_benefit = dpv_improve_transport_mobility
-    | dpv_non_commercial_research = dpv_improve_transport_mobility
-    | dpv_improve_transport_mobility = dpv_public_benefit
-    | dpv_improve_transport_mobility = dpv_non_commercial_research
-    | ( dpv_academic_research = dpv_improve_transport_mobility & ( dpv_academic_research = dpv_public_benefit
-    | dpv_academic_research = dpv_non_commercial_research ) )
-    | ( dpv_account_management = dpv_improve_transport_mobility & ( dpv_account_management = dpv_public_benefit
-    | dpv_account_management = dpv_non_commercial_research ) )
-    | ( dpv_advertising = dpv_improve_transport_mobility & ( dpv_advertising = dpv_public_benefit
-    | dpv_advertising = dpv_non_commercial_research ) )
-    | ( dpv_age_verification = dpv_improve_transport_mobility & ( dpv_age_verification = dpv_public_benefit
-    | dpv_age_verification = dpv_non_commercial_research ) )
-    | ( dpv_combat_climate_change = dpv_improve_transport_mobility & ( dpv_combat_climate_change = dpv_public_benefit
-    | dpv_combat_climate_change = dpv_non_commercial_research ) )
-    | ( dpv_commercial_purpose = dpv_improve_transport_mobility & ( dpv_commercial_purpose = dpv_public_benefit
-    | dpv_commercial_purpose = dpv_non_commercial_research ) )
-    | ( dpv_commercial_research = dpv_improve_transport_mobility & ( dpv_commercial_research = dpv_public_benefit
-    | dpv_commercial_research = dpv_non_commercial_research ) )
-    | ( dpv_communication_for_customer_care = dpv_improve_transport_mobility & ( dpv_communication_for_customer_care = dpv_public_benefit
-    | dpv_communication_for_customer_care = dpv_non_commercial_research ) )
-    | ( dpv_communication_management = dpv_improve_transport_mobility & ( dpv_communication_management = dpv_public_benefit
-    | dpv_communication_management = dpv_non_commercial_research ) )
-    | ( dpv_counter_money_laundering = dpv_improve_transport_mobility & ( dpv_counter_money_laundering = dpv_public_benefit
-    | dpv_counter_money_laundering = dpv_non_commercial_research ) )
-    | ( dpv_counterterrorism = dpv_improve_transport_mobility & ( dpv_counterterrorism = dpv_public_benefit
-    | dpv_counterterrorism = dpv_non_commercial_research ) )
-    | ( dpv_customer_care = dpv_improve_transport_mobility & ( dpv_customer_care = dpv_public_benefit
-    | dpv_customer_care = dpv_non_commercial_research ) )
-    | ( dpv_customer_claims_management = dpv_improve_transport_mobility & ( dpv_customer_claims_management = dpv_public_benefit
-    | dpv_customer_claims_management = dpv_non_commercial_research ) )
-    | ( dpv_customer_management = dpv_improve_transport_mobility & ( dpv_customer_management = dpv_public_benefit
-    | dpv_customer_management = dpv_non_commercial_research ) )
-    | ( dpv_customer_order_management = dpv_improve_transport_mobility & ( dpv_customer_order_management = dpv_public_benefit
-    | dpv_customer_order_management = dpv_non_commercial_research ) )
-    | ( dpv_customer_relationship_management = dpv_improve_transport_mobility & ( dpv_customer_relationship_management = dpv_public_benefit
-    | dpv_customer_relationship_management = dpv_non_commercial_research ) )
-    | ( dpv_customer_solvency_monitoring = dpv_improve_transport_mobility & ( dpv_customer_solvency_monitoring = dpv_public_benefit
-    | dpv_customer_solvency_monitoring = dpv_non_commercial_research ) )
-    | ( dpv_data_altruism = dpv_improve_transport_mobility & ( dpv_data_altruism = dpv_public_benefit
-    | dpv_data_altruism = dpv_non_commercial_research ) )
-    | ( dpv_delivery_of_goods = dpv_improve_transport_mobility & ( dpv_delivery_of_goods = dpv_public_benefit
-    | dpv_delivery_of_goods = dpv_non_commercial_research ) )
-    | ( dpv_direct_marketing = dpv_improve_transport_mobility & ( dpv_direct_marketing = dpv_public_benefit
-    | dpv_direct_marketing = dpv_non_commercial_research ) )
-    | ( dpv_dispute_management = dpv_improve_transport_mobility & ( dpv_dispute_management = dpv_public_benefit
-    | dpv_dispute_management = dpv_non_commercial_research ) )
-    | ( dpv_enforce_access_control = dpv_improve_transport_mobility & ( dpv_enforce_access_control = dpv_public_benefit
-    | dpv_enforce_access_control = dpv_non_commercial_research ) )
-    | ( dpv_enforce_security = dpv_improve_transport_mobility & ( dpv_enforce_security = dpv_public_benefit
-    | dpv_enforce_security = dpv_non_commercial_research ) )
-    | ( dpv_establish_contractual_agreement = dpv_improve_transport_mobility & ( dpv_establish_contractual_agreement = dpv_public_benefit
-    | dpv_establish_contractual_agreement = dpv_non_commercial_research ) )
-    | ( dpv_fraud_prevention_and_detection = dpv_improve_transport_mobility & ( dpv_fraud_prevention_and_detection = dpv_public_benefit
-    | dpv_fraud_prevention_and_detection = dpv_non_commercial_research ) )
-    | ( dpv_fulfilment_of_contractual_obligation = dpv_improve_transport_mobility & ( dpv_fulfilment_of_contractual_obligation = dpv_public_benefit
-    | dpv_fulfilment_of_contractual_obligation = dpv_non_commercial_research ) )
-    | ( dpv_fulfilment_of_obligation = dpv_improve_transport_mobility & ( dpv_fulfilment_of_obligation = dpv_public_benefit
-    | dpv_fulfilment_of_obligation = dpv_non_commercial_research ) )
-    | ( dpv_human_resource_management = dpv_improve_transport_mobility & ( dpv_human_resource_management = dpv_public_benefit
-    | dpv_human_resource_management = dpv_non_commercial_research ) )
-    | ( dpv_identity_authentication = dpv_improve_transport_mobility & ( dpv_identity_authentication = dpv_public_benefit
-    | dpv_identity_authentication = dpv_non_commercial_research ) )
-    | ( dpv_identity_verification = dpv_improve_transport_mobility & ( dpv_identity_verification = dpv_public_benefit
-    | dpv_identity_verification = dpv_non_commercial_research ) )
-    | ( dpv_improve_existing_products_and_services = dpv_improve_transport_mobility & ( dpv_improve_existing_products_and_services = dpv_public_benefit
-    | dpv_improve_existing_products_and_services = dpv_non_commercial_research ) )
-    | ( dpv_improve_healthcare = dpv_improve_transport_mobility & ( dpv_improve_healthcare = dpv_public_benefit
-    | dpv_improve_healthcare = dpv_non_commercial_research ) )
-    | ( dpv_improve_internal_crm_processes = dpv_improve_transport_mobility & ( dpv_improve_internal_crm_processes = dpv_public_benefit
-    | dpv_improve_internal_crm_processes = dpv_non_commercial_research ) )
-    | ( dpv_improve_public_services = dpv_improve_transport_mobility & ( dpv_improve_public_services = dpv_public_benefit
-    | dpv_improve_public_services = dpv_non_commercial_research ) )
-    | ( dpv_increase_service_robustness = dpv_improve_transport_mobility & ( dpv_increase_service_robustness = dpv_public_benefit
-    | dpv_increase_service_robustness = dpv_non_commercial_research ) )
-    | ( dpv_internal_resource_optimisation = dpv_improve_transport_mobility & ( dpv_internal_resource_optimisation = dpv_public_benefit
-    | dpv_internal_resource_optimisation = dpv_non_commercial_research ) )
-    | ( dpv_legal_compliance = dpv_improve_transport_mobility & ( dpv_legal_compliance = dpv_public_benefit
-    | dpv_legal_compliance = dpv_non_commercial_research ) )
-    | ( dpv_maintain_fraud_database = dpv_improve_transport_mobility & ( dpv_maintain_fraud_database = dpv_public_benefit
-    | dpv_maintain_fraud_database = dpv_non_commercial_research ) )
-    | ( dpv_marketing = dpv_improve_transport_mobility & ( dpv_marketing = dpv_public_benefit
-    | dpv_marketing = dpv_non_commercial_research ) )
-    | ( dpv_member_partner_management = dpv_improve_transport_mobility & ( dpv_member_partner_management = dpv_public_benefit
-    | dpv_member_partner_management = dpv_non_commercial_research ) )
-    | ( dpv_misuse_prevention_and_detection = dpv_improve_transport_mobility & ( dpv_misuse_prevention_and_detection = dpv_public_benefit
-    | dpv_misuse_prevention_and_detection = dpv_non_commercial_research ) )
-    | ( dpv_non_commercial_purpose = dpv_improve_transport_mobility & ( dpv_non_commercial_purpose = dpv_public_benefit
-    | dpv_non_commercial_purpose = dpv_non_commercial_research ) )
-    | ( dpv_optimisation_for_consumer = dpv_improve_transport_mobility & ( dpv_optimisation_for_consumer = dpv_public_benefit
-    | dpv_optimisation_for_consumer = dpv_non_commercial_research ) )
-    | ( dpv_optimisation_for_controller = dpv_improve_transport_mobility & ( dpv_optimisation_for_controller = dpv_public_benefit
-    | dpv_optimisation_for_controller = dpv_non_commercial_research ) )
-    | ( dpv_optimise_user_interface = dpv_improve_transport_mobility & ( dpv_optimise_user_interface = dpv_public_benefit
-    | dpv_optimise_user_interface = dpv_non_commercial_research ) )
-    | ( dpv_organisation_compliance_management = dpv_improve_transport_mobility & ( dpv_organisation_compliance_management = dpv_public_benefit
-    | dpv_organisation_compliance_management = dpv_non_commercial_research ) )
-    | ( dpv_organisation_governance = dpv_improve_transport_mobility & ( dpv_organisation_governance = dpv_public_benefit
-    | dpv_organisation_governance = dpv_non_commercial_research ) )
-    | ( dpv_organisation_risk_management = dpv_improve_transport_mobility & ( dpv_organisation_risk_management = dpv_public_benefit
-    | dpv_organisation_risk_management = dpv_non_commercial_research ) )
-    | ( dpv_payment_management = dpv_improve_transport_mobility & ( dpv_payment_management = dpv_public_benefit
-    | dpv_payment_management = dpv_non_commercial_research ) )
-    | ( dpv_personalisation = dpv_improve_transport_mobility & ( dpv_personalisation = dpv_public_benefit
-    | dpv_personalisation = dpv_non_commercial_research ) )
-    | ( dpv_personalised_advertising = dpv_improve_transport_mobility & ( dpv_personalised_advertising = dpv_public_benefit
-    | dpv_personalised_advertising = dpv_non_commercial_research ) )
-    | ( dpv_personalised_benefits = dpv_improve_transport_mobility & ( dpv_personalised_benefits = dpv_public_benefit
-    | dpv_personalised_benefits = dpv_non_commercial_research ) )
-    | ( dpv_personnel_behaviour_monitoring = dpv_improve_transport_mobility & ( dpv_personnel_behaviour_monitoring = dpv_public_benefit
-    | dpv_personnel_behaviour_monitoring = dpv_non_commercial_research ) )
-    | ( dpv_personnel_hiring = dpv_improve_transport_mobility & ( dpv_personnel_hiring = dpv_public_benefit
-    | dpv_personnel_hiring = dpv_non_commercial_research ) )
-    | ( dpv_personnel_management = dpv_improve_transport_mobility & ( dpv_personnel_management = dpv_public_benefit
-    | dpv_personnel_management = dpv_non_commercial_research ) )
-    | ( dpv_personnel_monitoring = dpv_improve_transport_mobility & ( dpv_personnel_monitoring = dpv_public_benefit
-    | dpv_personnel_monitoring = dpv_non_commercial_research ) )
-    | ( dpv_personnel_offboarding = dpv_improve_transport_mobility & ( dpv_personnel_offboarding = dpv_public_benefit
-    | dpv_personnel_offboarding = dpv_non_commercial_research ) )
-    | ( dpv_personnel_onboarding = dpv_improve_transport_mobility & ( dpv_personnel_onboarding = dpv_public_benefit
-    | dpv_personnel_onboarding = dpv_non_commercial_research ) )
-    | ( dpv_personnel_payment = dpv_improve_transport_mobility & ( dpv_personnel_payment = dpv_public_benefit
-    | dpv_personnel_payment = dpv_non_commercial_research ) )
-    | ( dpv_personnel_performance_evaluation = dpv_improve_transport_mobility & ( dpv_personnel_performance_evaluation = dpv_public_benefit
-    | dpv_personnel_performance_evaluation = dpv_non_commercial_research ) ) )
-    | ( ( dpv_personnel_performance_management = dpv_improve_transport_mobility & ( dpv_personnel_performance_management = dpv_public_benefit
-    | dpv_personnel_performance_management = dpv_non_commercial_research ) )
-    | ( dpv_personnel_performance_monitoring = dpv_improve_transport_mobility & ( dpv_personnel_performance_monitoring = dpv_public_benefit
-    | dpv_personnel_performance_monitoring = dpv_non_commercial_research ) )
-    | ( dpv_personnel_performance_prediction = dpv_improve_transport_mobility & ( dpv_personnel_performance_prediction = dpv_public_benefit
-    | dpv_personnel_performance_prediction = dpv_non_commercial_research ) )
-    | ( dpv_personnel_promotion_management = dpv_improve_transport_mobility & ( dpv_personnel_promotion_management = dpv_public_benefit
-    | dpv_personnel_promotion_management = dpv_non_commercial_research ) )
-    | ( dpv_personnel_termination_management = dpv_improve_transport_mobility & ( dpv_personnel_termination_management = dpv_public_benefit
-    | dpv_personnel_termination_management = dpv_non_commercial_research ) )
-    | ( dpv_personnel_workload_management = dpv_improve_transport_mobility & ( dpv_personnel_workload_management = dpv_public_benefit
-    | dpv_personnel_workload_management = dpv_non_commercial_research ) )
-    | ( dpv_political_campaign = dpv_improve_transport_mobility & ( dpv_political_campaign = dpv_public_benefit
-    | dpv_political_campaign = dpv_non_commercial_research ) )
-    | ( dpv_protection_of_ipr = dpv_improve_transport_mobility & ( dpv_protection_of_ipr = dpv_public_benefit
-    | dpv_protection_of_ipr = dpv_non_commercial_research ) )
-    | ( dpv_protection_of_national_security = dpv_improve_transport_mobility & ( dpv_protection_of_national_security = dpv_public_benefit
-    | dpv_protection_of_national_security = dpv_non_commercial_research ) )
-    | ( dpv_protection_of_public_security = dpv_improve_transport_mobility & ( dpv_protection_of_public_security = dpv_public_benefit
-    | dpv_protection_of_public_security = dpv_non_commercial_research ) )
-    | ( dpv_provide_event_recommendations = dpv_improve_transport_mobility & ( dpv_provide_event_recommendations = dpv_public_benefit
-    | dpv_provide_event_recommendations = dpv_non_commercial_research ) )
-    | ( dpv_provide_official_statistics = dpv_improve_transport_mobility & ( dpv_provide_official_statistics = dpv_public_benefit
-    | dpv_provide_official_statistics = dpv_non_commercial_research ) )
-    | ( dpv_provide_personalised_recommendations = dpv_improve_transport_mobility & ( dpv_provide_personalised_recommendations = dpv_public_benefit
-    | dpv_provide_personalised_recommendations = dpv_non_commercial_research ) )
-    | ( dpv_provide_product_recommendations = dpv_improve_transport_mobility & ( dpv_provide_product_recommendations = dpv_public_benefit
-    | dpv_provide_product_recommendations = dpv_non_commercial_research ) )
-    | ( dpv_public_policy_making = dpv_improve_transport_mobility & ( dpv_public_policy_making = dpv_public_benefit
-    | dpv_public_policy_making = dpv_non_commercial_research ) )
-    | ( dpv_public_relations = dpv_improve_transport_mobility & ( dpv_public_relations = dpv_public_benefit
-    | dpv_public_relations = dpv_non_commercial_research ) )
-    | ( dpv_purpose = dpv_improve_transport_mobility & ( dpv_purpose = dpv_public_benefit
-    | dpv_purpose = dpv_non_commercial_research ) )
-    | ( dpv_record_management = dpv_improve_transport_mobility & ( dpv_record_management = dpv_public_benefit
-    | dpv_record_management = dpv_non_commercial_research ) )
-    | ( dpv_recruitment_advertising = dpv_improve_transport_mobility & ( dpv_recruitment_advertising = dpv_public_benefit
-    | dpv_recruitment_advertising = dpv_non_commercial_research ) )
-    | ( dpv_recruitment_applicant_background_check = dpv_improve_transport_mobility & ( dpv_recruitment_applicant_background_check = dpv_public_benefit
-    | dpv_recruitment_applicant_background_check = dpv_non_commercial_research ) )
-    | ( dpv_recruitment_applicant_criminal_background_check = dpv_improve_transport_mobility & ( dpv_recruitment_applicant_criminal_background_check = dpv_public_benefit
-    | dpv_recruitment_applicant_criminal_background_check = dpv_non_commercial_research ) )
-    | ( dpv_recruitment_applicant_information_authentication = dpv_improve_transport_mobility & ( dpv_recruitment_applicant_information_authentication = dpv_public_benefit
-    | dpv_recruitment_applicant_information_authentication = dpv_non_commercial_research ) )
-    | ( dpv_recruitment_applicant_selection = dpv_improve_transport_mobility & ( dpv_recruitment_applicant_selection = dpv_public_benefit
-    | dpv_recruitment_applicant_selection = dpv_non_commercial_research ) )
-    | ( dpv_recruitment_application_analysis = dpv_improve_transport_mobility & ( dpv_recruitment_application_analysis = dpv_public_benefit
-    | dpv_recruitment_application_analysis = dpv_non_commercial_research ) )
-    | ( dpv_recruitment_application_management = dpv_improve_transport_mobility & ( dpv_recruitment_application_management = dpv_public_benefit
-    | dpv_recruitment_application_management = dpv_non_commercial_research ) )
-    | ( dpv_recruitment_application_screening = dpv_improve_transport_mobility & ( dpv_recruitment_application_screening = dpv_public_benefit
-    | dpv_recruitment_application_screening = dpv_non_commercial_research ) )
-    | ( dpv_recruitment_interview_analysis = dpv_improve_transport_mobility & ( dpv_recruitment_interview_analysis = dpv_public_benefit
-    | dpv_recruitment_interview_analysis = dpv_non_commercial_research ) )
-    | ( dpv_recruitment_interview_assessment = dpv_improve_transport_mobility & ( dpv_recruitment_interview_assessment = dpv_public_benefit
-    | dpv_recruitment_interview_assessment = dpv_non_commercial_research ) )
-    | ( dpv_recruitment_interview_management = dpv_improve_transport_mobility & ( dpv_recruitment_interview_management = dpv_public_benefit
-    | dpv_recruitment_interview_management = dpv_non_commercial_research ) )
-    | ( dpv_recruitment_interview_scheduling = dpv_improve_transport_mobility & ( dpv_recruitment_interview_scheduling = dpv_public_benefit
-    | dpv_recruitment_interview_scheduling = dpv_non_commercial_research ) )
-    | ( dpv_recruitment_management = dpv_improve_transport_mobility & ( dpv_recruitment_management = dpv_public_benefit
-    | dpv_recruitment_management = dpv_non_commercial_research ) )
-    | ( dpv_recruitment_targeted_advertising = dpv_improve_transport_mobility & ( dpv_recruitment_targeted_advertising = dpv_public_benefit
-    | dpv_recruitment_targeted_advertising = dpv_non_commercial_research ) )
-    | ( dpv_repair_impairments = dpv_improve_transport_mobility & ( dpv_repair_impairments = dpv_public_benefit
-    | dpv_repair_impairments = dpv_non_commercial_research ) )
-    | ( dpv_requested_service_provision = dpv_improve_transport_mobility & ( dpv_requested_service_provision = dpv_public_benefit
-    | dpv_requested_service_provision = dpv_non_commercial_research ) )
-    | ( dpv_research_and_development = dpv_improve_transport_mobility & ( dpv_research_and_development = dpv_public_benefit
-    | dpv_research_and_development = dpv_non_commercial_research ) )
-    | ( dpv_scientific_research = dpv_improve_transport_mobility & ( dpv_scientific_research = dpv_public_benefit
-    | dpv_scientific_research = dpv_non_commercial_research ) )
-    | ( dpv_search_functionalities = dpv_improve_transport_mobility & ( dpv_search_functionalities = dpv_public_benefit
-    | dpv_search_functionalities = dpv_non_commercial_research ) )
-    | ( dpv_sell_data_to_third_parties = dpv_improve_transport_mobility & ( dpv_sell_data_to_third_parties = dpv_public_benefit
-    | dpv_sell_data_to_third_parties = dpv_non_commercial_research ) )
-    | ( dpv_sell_insights_from_data = dpv_improve_transport_mobility & ( dpv_sell_insights_from_data = dpv_public_benefit
-    | dpv_sell_insights_from_data = dpv_non_commercial_research ) )
-    | ( dpv_sell_products = dpv_improve_transport_mobility & ( dpv_sell_products = dpv_public_benefit
-    | dpv_sell_products = dpv_non_commercial_research ) )
-    | ( dpv_sell_products_to_data_subject = dpv_improve_transport_mobility & ( dpv_sell_products_to_data_subject = dpv_public_benefit
-    | dpv_sell_products_to_data_subject = dpv_non_commercial_research ) )
-    | ( dpv_service_access_determination = dpv_improve_transport_mobility & ( dpv_service_access_determination = dpv_public_benefit
-    | dpv_service_access_determination = dpv_non_commercial_research ) )
-    | ( dpv_service_management = dpv_improve_transport_mobility & ( dpv_service_management = dpv_public_benefit
-    | dpv_service_management = dpv_non_commercial_research ) )
-    | ( dpv_service_monitoring = dpv_improve_transport_mobility & ( dpv_service_monitoring = dpv_public_benefit
-    | dpv_service_monitoring = dpv_non_commercial_research ) )
-    | ( dpv_service_optimisation = dpv_improve_transport_mobility & ( dpv_service_optimisation = dpv_public_benefit
-    | dpv_service_optimisation = dpv_non_commercial_research ) )
-    | ( dpv_service_personalisation = dpv_improve_transport_mobility & ( dpv_service_personalisation = dpv_public_benefit
-    | dpv_service_personalisation = dpv_non_commercial_research ) )
-    | ( dpv_service_provision = dpv_improve_transport_mobility & ( dpv_service_provision = dpv_public_benefit
-    | dpv_service_provision = dpv_non_commercial_research ) )
-    | ( dpv_service_registration = dpv_improve_transport_mobility & ( dpv_service_registration = dpv_public_benefit
-    | dpv_service_registration = dpv_non_commercial_research ) )
-    | ( dpv_service_usage_analytics = dpv_improve_transport_mobility & ( dpv_service_usage_analytics = dpv_public_benefit
-    | dpv_service_usage_analytics = dpv_non_commercial_research ) )
-    | ( dpv_social_media_marketing = dpv_improve_transport_mobility & ( dpv_social_media_marketing = dpv_public_benefit
-    | dpv_social_media_marketing = dpv_non_commercial_research ) )
-    | ( dpv_targeted_advertising = dpv_improve_transport_mobility & ( dpv_targeted_advertising = dpv_public_benefit
-    | dpv_targeted_advertising = dpv_non_commercial_research ) )
-    | ( dpv_technical_service_provision = dpv_improve_transport_mobility & ( dpv_technical_service_provision = dpv_public_benefit
-    | dpv_technical_service_provision = dpv_non_commercial_research ) )
-    | ( dpv_user_interface_personalisation = dpv_improve_transport_mobility & ( dpv_user_interface_personalisation = dpv_public_benefit
-    | dpv_user_interface_personalisation = dpv_non_commercial_research ) )
-    | ( dpv_vendor_management = dpv_improve_transport_mobility & ( dpv_vendor_management = dpv_public_benefit
-    | dpv_vendor_management = dpv_non_commercial_research ) )
-    | ( dpv_vendor_payment = dpv_improve_transport_mobility & ( dpv_vendor_payment = dpv_public_benefit
-    | dpv_vendor_payment = dpv_non_commercial_research ) )
-    | ( dpv_vendor_records_management = dpv_improve_transport_mobility & ( dpv_vendor_records_management = dpv_public_benefit
-    | dpv_vendor_records_management = dpv_non_commercial_research ) )
-    | ( dpv_vendor_selection_assessment = dpv_improve_transport_mobility & ( dpv_vendor_selection_assessment = dpv_public_benefit
-    | dpv_vendor_selection_assessment = dpv_non_commercial_research ) )
-    | ( dpv_verification = dpv_improve_transport_mobility & ( dpv_verification = dpv_public_benefit
-    | dpv_verification = dpv_non_commercial_research ) ) ) ) )).
+fof(w_kgc399, axiom,
+    ( ( ( kge_leq(dpv_public_benefit, dpv_public_benefit) & dpv_public_benefit = dpv_commercial_research )
+    | ( kge_leq(dpv_non_commercial_research, dpv_public_benefit) & dpv_non_commercial_research = dpv_commercial_research )
+    | kge_leq(dpv_commercial_research, dpv_public_benefit)
+    | ( kge_leq(dpv_academic_research, dpv_public_benefit) & dpv_academic_research = dpv_commercial_research )
+    | ( kge_leq(dpv_account_management, dpv_public_benefit) & dpv_account_management = dpv_commercial_research )
+    | ( kge_leq(dpv_advertising, dpv_public_benefit) & dpv_advertising = dpv_commercial_research )
+    | ( kge_leq(dpv_age_verification, dpv_public_benefit) & dpv_age_verification = dpv_commercial_research )
+    | ( kge_leq(dpv_combat_climate_change, dpv_public_benefit) & dpv_combat_climate_change = dpv_commercial_research )
+    | ( kge_leq(dpv_commercial_purpose, dpv_public_benefit) & dpv_commercial_purpose = dpv_commercial_research )
+    | ( kge_leq(dpv_communication_for_customer_care, dpv_public_benefit) & dpv_communication_for_customer_care = dpv_commercial_research )
+    | ( kge_leq(dpv_communication_management, dpv_public_benefit) & dpv_communication_management = dpv_commercial_research )
+    | ( kge_leq(dpv_counter_money_laundering, dpv_public_benefit) & dpv_counter_money_laundering = dpv_commercial_research )
+    | ( kge_leq(dpv_counterterrorism, dpv_public_benefit) & dpv_counterterrorism = dpv_commercial_research )
+    | ( kge_leq(dpv_customer_care, dpv_public_benefit) & dpv_customer_care = dpv_commercial_research )
+    | ( kge_leq(dpv_customer_claims_management, dpv_public_benefit) & dpv_customer_claims_management = dpv_commercial_research )
+    | ( kge_leq(dpv_customer_management, dpv_public_benefit) & dpv_customer_management = dpv_commercial_research )
+    | ( kge_leq(dpv_customer_order_management, dpv_public_benefit) & dpv_customer_order_management = dpv_commercial_research )
+    | ( kge_leq(dpv_customer_relationship_management, dpv_public_benefit) & dpv_customer_relationship_management = dpv_commercial_research )
+    | ( kge_leq(dpv_customer_solvency_monitoring, dpv_public_benefit) & dpv_customer_solvency_monitoring = dpv_commercial_research )
+    | ( kge_leq(dpv_data_altruism, dpv_public_benefit) & dpv_data_altruism = dpv_commercial_research )
+    | ( kge_leq(dpv_delivery_of_goods, dpv_public_benefit) & dpv_delivery_of_goods = dpv_commercial_research )
+    | ( kge_leq(dpv_direct_marketing, dpv_public_benefit) & dpv_direct_marketing = dpv_commercial_research )
+    | ( kge_leq(dpv_dispute_management, dpv_public_benefit) & dpv_dispute_management = dpv_commercial_research )
+    | ( kge_leq(dpv_enforce_access_control, dpv_public_benefit) & dpv_enforce_access_control = dpv_commercial_research )
+    | ( kge_leq(dpv_enforce_security, dpv_public_benefit) & dpv_enforce_security = dpv_commercial_research )
+    | ( kge_leq(dpv_establish_contractual_agreement, dpv_public_benefit) & dpv_establish_contractual_agreement = dpv_commercial_research )
+    | ( kge_leq(dpv_fraud_prevention_and_detection, dpv_public_benefit) & dpv_fraud_prevention_and_detection = dpv_commercial_research )
+    | ( kge_leq(dpv_fulfilment_of_contractual_obligation, dpv_public_benefit) & dpv_fulfilment_of_contractual_obligation = dpv_commercial_research )
+    | ( kge_leq(dpv_fulfilment_of_obligation, dpv_public_benefit) & dpv_fulfilment_of_obligation = dpv_commercial_research )
+    | ( kge_leq(dpv_human_resource_management, dpv_public_benefit) & dpv_human_resource_management = dpv_commercial_research )
+    | ( kge_leq(dpv_identity_authentication, dpv_public_benefit) & dpv_identity_authentication = dpv_commercial_research )
+    | ( kge_leq(dpv_identity_verification, dpv_public_benefit) & dpv_identity_verification = dpv_commercial_research )
+    | ( kge_leq(dpv_improve_existing_products_and_services, dpv_public_benefit) & dpv_improve_existing_products_and_services = dpv_commercial_research )
+    | ( kge_leq(dpv_improve_healthcare, dpv_public_benefit) & dpv_improve_healthcare = dpv_commercial_research )
+    | ( kge_leq(dpv_improve_internal_crm_processes, dpv_public_benefit) & dpv_improve_internal_crm_processes = dpv_commercial_research )
+    | ( kge_leq(dpv_improve_public_services, dpv_public_benefit) & dpv_improve_public_services = dpv_commercial_research )
+    | ( kge_leq(dpv_improve_transport_mobility, dpv_public_benefit) & dpv_improve_transport_mobility = dpv_commercial_research )
+    | ( kge_leq(dpv_increase_service_robustness, dpv_public_benefit) & dpv_increase_service_robustness = dpv_commercial_research )
+    | ( kge_leq(dpv_internal_resource_optimisation, dpv_public_benefit) & dpv_internal_resource_optimisation = dpv_commercial_research )
+    | ( kge_leq(dpv_legal_compliance, dpv_public_benefit) & dpv_legal_compliance = dpv_commercial_research )
+    | ( kge_leq(dpv_maintain_fraud_database, dpv_public_benefit) & dpv_maintain_fraud_database = dpv_commercial_research )
+    | ( kge_leq(dpv_marketing, dpv_public_benefit) & dpv_marketing = dpv_commercial_research )
+    | ( kge_leq(dpv_member_partner_management, dpv_public_benefit) & dpv_member_partner_management = dpv_commercial_research )
+    | ( kge_leq(dpv_misuse_prevention_and_detection, dpv_public_benefit) & dpv_misuse_prevention_and_detection = dpv_commercial_research )
+    | ( kge_leq(dpv_non_commercial_purpose, dpv_public_benefit) & dpv_non_commercial_purpose = dpv_commercial_research )
+    | ( kge_leq(dpv_optimisation_for_consumer, dpv_public_benefit) & dpv_optimisation_for_consumer = dpv_commercial_research )
+    | ( kge_leq(dpv_optimisation_for_controller, dpv_public_benefit) & dpv_optimisation_for_controller = dpv_commercial_research )
+    | ( kge_leq(dpv_optimise_user_interface, dpv_public_benefit) & dpv_optimise_user_interface = dpv_commercial_research )
+    | ( kge_leq(dpv_organisation_compliance_management, dpv_public_benefit) & dpv_organisation_compliance_management = dpv_commercial_research )
+    | ( kge_leq(dpv_organisation_governance, dpv_public_benefit) & dpv_organisation_governance = dpv_commercial_research )
+    | ( kge_leq(dpv_organisation_risk_management, dpv_public_benefit) & dpv_organisation_risk_management = dpv_commercial_research )
+    | ( kge_leq(dpv_payment_management, dpv_public_benefit) & dpv_payment_management = dpv_commercial_research )
+    | ( kge_leq(dpv_personalisation, dpv_public_benefit) & dpv_personalisation = dpv_commercial_research )
+    | ( kge_leq(dpv_personalised_advertising, dpv_public_benefit) & dpv_personalised_advertising = dpv_commercial_research )
+    | ( kge_leq(dpv_personalised_benefits, dpv_public_benefit) & dpv_personalised_benefits = dpv_commercial_research )
+    | ( kge_leq(dpv_personnel_behaviour_monitoring, dpv_public_benefit) & dpv_personnel_behaviour_monitoring = dpv_commercial_research )
+    | ( kge_leq(dpv_personnel_hiring, dpv_public_benefit) & dpv_personnel_hiring = dpv_commercial_research )
+    | ( kge_leq(dpv_personnel_management, dpv_public_benefit) & dpv_personnel_management = dpv_commercial_research )
+    | ( kge_leq(dpv_personnel_monitoring, dpv_public_benefit) & dpv_personnel_monitoring = dpv_commercial_research )
+    | ( kge_leq(dpv_personnel_offboarding, dpv_public_benefit) & dpv_personnel_offboarding = dpv_commercial_research )
+    | ( kge_leq(dpv_personnel_onboarding, dpv_public_benefit) & dpv_personnel_onboarding = dpv_commercial_research )
+    | ( kge_leq(dpv_personnel_payment, dpv_public_benefit) & dpv_personnel_payment = dpv_commercial_research )
+    | ( kge_leq(dpv_personnel_performance_evaluation, dpv_public_benefit) & dpv_personnel_performance_evaluation = dpv_commercial_research )
+    | ( kge_leq(dpv_personnel_performance_management, dpv_public_benefit) & dpv_personnel_performance_management = dpv_commercial_research ) )
+    | ( ( kge_leq(dpv_personnel_performance_monitoring, dpv_public_benefit) & dpv_personnel_performance_monitoring = dpv_commercial_research )
+    | ( kge_leq(dpv_personnel_performance_prediction, dpv_public_benefit) & dpv_personnel_performance_prediction = dpv_commercial_research )
+    | ( kge_leq(dpv_personnel_promotion_management, dpv_public_benefit) & dpv_personnel_promotion_management = dpv_commercial_research )
+    | ( kge_leq(dpv_personnel_termination_management, dpv_public_benefit) & dpv_personnel_termination_management = dpv_commercial_research )
+    | ( kge_leq(dpv_personnel_workload_management, dpv_public_benefit) & dpv_personnel_workload_management = dpv_commercial_research )
+    | ( kge_leq(dpv_political_campaign, dpv_public_benefit) & dpv_political_campaign = dpv_commercial_research )
+    | ( kge_leq(dpv_protection_of_ipr, dpv_public_benefit) & dpv_protection_of_ipr = dpv_commercial_research )
+    | ( kge_leq(dpv_protection_of_national_security, dpv_public_benefit) & dpv_protection_of_national_security = dpv_commercial_research )
+    | ( kge_leq(dpv_protection_of_public_security, dpv_public_benefit) & dpv_protection_of_public_security = dpv_commercial_research )
+    | ( kge_leq(dpv_provide_event_recommendations, dpv_public_benefit) & dpv_provide_event_recommendations = dpv_commercial_research )
+    | ( kge_leq(dpv_provide_official_statistics, dpv_public_benefit) & dpv_provide_official_statistics = dpv_commercial_research )
+    | ( kge_leq(dpv_provide_personalised_recommendations, dpv_public_benefit) & dpv_provide_personalised_recommendations = dpv_commercial_research )
+    | ( kge_leq(dpv_provide_product_recommendations, dpv_public_benefit) & dpv_provide_product_recommendations = dpv_commercial_research )
+    | ( kge_leq(dpv_public_policy_making, dpv_public_benefit) & dpv_public_policy_making = dpv_commercial_research )
+    | ( kge_leq(dpv_public_relations, dpv_public_benefit) & dpv_public_relations = dpv_commercial_research )
+    | ( kge_leq(dpv_purpose, dpv_public_benefit) & dpv_purpose = dpv_commercial_research )
+    | ( kge_leq(dpv_record_management, dpv_public_benefit) & dpv_record_management = dpv_commercial_research )
+    | ( kge_leq(dpv_recruitment_advertising, dpv_public_benefit) & dpv_recruitment_advertising = dpv_commercial_research )
+    | ( kge_leq(dpv_recruitment_applicant_background_check, dpv_public_benefit) & dpv_recruitment_applicant_background_check = dpv_commercial_research )
+    | ( kge_leq(dpv_recruitment_applicant_criminal_background_check, dpv_public_benefit) & dpv_recruitment_applicant_criminal_background_check = dpv_commercial_research )
+    | ( kge_leq(dpv_recruitment_applicant_information_authentication, dpv_public_benefit) & dpv_recruitment_applicant_information_authentication = dpv_commercial_research )
+    | ( kge_leq(dpv_recruitment_applicant_selection, dpv_public_benefit) & dpv_recruitment_applicant_selection = dpv_commercial_research )
+    | ( kge_leq(dpv_recruitment_application_analysis, dpv_public_benefit) & dpv_recruitment_application_analysis = dpv_commercial_research )
+    | ( kge_leq(dpv_recruitment_application_management, dpv_public_benefit) & dpv_recruitment_application_management = dpv_commercial_research )
+    | ( kge_leq(dpv_recruitment_application_screening, dpv_public_benefit) & dpv_recruitment_application_screening = dpv_commercial_research )
+    | ( kge_leq(dpv_recruitment_interview_analysis, dpv_public_benefit) & dpv_recruitment_interview_analysis = dpv_commercial_research )
+    | ( kge_leq(dpv_recruitment_interview_assessment, dpv_public_benefit) & dpv_recruitment_interview_assessment = dpv_commercial_research )
+    | ( kge_leq(dpv_recruitment_interview_management, dpv_public_benefit) & dpv_recruitment_interview_management = dpv_commercial_research )
+    | ( kge_leq(dpv_recruitment_interview_scheduling, dpv_public_benefit) & dpv_recruitment_interview_scheduling = dpv_commercial_research )
+    | ( kge_leq(dpv_recruitment_management, dpv_public_benefit) & dpv_recruitment_management = dpv_commercial_research )
+    | ( kge_leq(dpv_recruitment_targeted_advertising, dpv_public_benefit) & dpv_recruitment_targeted_advertising = dpv_commercial_research )
+    | ( kge_leq(dpv_repair_impairments, dpv_public_benefit) & dpv_repair_impairments = dpv_commercial_research )
+    | ( kge_leq(dpv_requested_service_provision, dpv_public_benefit) & dpv_requested_service_provision = dpv_commercial_research )
+    | ( kge_leq(dpv_research_and_development, dpv_public_benefit) & dpv_research_and_development = dpv_commercial_research )
+    | ( kge_leq(dpv_rights_fulfilment, dpv_public_benefit) & dpv_rights_fulfilment = dpv_commercial_research )
+    | ( kge_leq(dpv_scientific_research, dpv_public_benefit) & dpv_scientific_research = dpv_commercial_research )
+    | ( kge_leq(dpv_search_functionalities, dpv_public_benefit) & dpv_search_functionalities = dpv_commercial_research )
+    | ( kge_leq(dpv_sell_data_to_third_parties, dpv_public_benefit) & dpv_sell_data_to_third_parties = dpv_commercial_research )
+    | ( kge_leq(dpv_sell_insights_from_data, dpv_public_benefit) & dpv_sell_insights_from_data = dpv_commercial_research )
+    | ( kge_leq(dpv_sell_products, dpv_public_benefit) & dpv_sell_products = dpv_commercial_research )
+    | ( kge_leq(dpv_sell_products_to_data_subject, dpv_public_benefit) & dpv_sell_products_to_data_subject = dpv_commercial_research )
+    | ( kge_leq(dpv_service_access_determination, dpv_public_benefit) & dpv_service_access_determination = dpv_commercial_research )
+    | ( kge_leq(dpv_service_management, dpv_public_benefit) & dpv_service_management = dpv_commercial_research )
+    | ( kge_leq(dpv_service_monitoring, dpv_public_benefit) & dpv_service_monitoring = dpv_commercial_research )
+    | ( kge_leq(dpv_service_optimisation, dpv_public_benefit) & dpv_service_optimisation = dpv_commercial_research )
+    | ( kge_leq(dpv_service_personalisation, dpv_public_benefit) & dpv_service_personalisation = dpv_commercial_research )
+    | ( kge_leq(dpv_service_provision, dpv_public_benefit) & dpv_service_provision = dpv_commercial_research )
+    | ( kge_leq(dpv_service_registration, dpv_public_benefit) & dpv_service_registration = dpv_commercial_research )
+    | ( kge_leq(dpv_service_usage_analytics, dpv_public_benefit) & dpv_service_usage_analytics = dpv_commercial_research )
+    | ( kge_leq(dpv_social_media_marketing, dpv_public_benefit) & dpv_social_media_marketing = dpv_commercial_research )
+    | ( kge_leq(dpv_targeted_advertising, dpv_public_benefit) & dpv_targeted_advertising = dpv_commercial_research )
+    | ( kge_leq(dpv_technical_service_provision, dpv_public_benefit) & dpv_technical_service_provision = dpv_commercial_research )
+    | ( kge_leq(dpv_user_interface_personalisation, dpv_public_benefit) & dpv_user_interface_personalisation = dpv_commercial_research )
+    | ( kge_leq(dpv_vendor_management, dpv_public_benefit) & dpv_vendor_management = dpv_commercial_research )
+    | ( kge_leq(dpv_vendor_payment, dpv_public_benefit) & dpv_vendor_payment = dpv_commercial_research )
+    | ( kge_leq(dpv_vendor_records_management, dpv_public_benefit) & dpv_vendor_records_management = dpv_commercial_research )
+    | ( kge_leq(dpv_vendor_selection_assessment, dpv_public_benefit) & dpv_vendor_selection_assessment = dpv_commercial_research )
+    | ( kge_leq(dpv_verification, dpv_public_benefit) & dpv_verification = dpv_commercial_research )
+    | ( kge_leq(dpv_public_benefit, dpv_non_commercial_research) & dpv_public_benefit = dpv_commercial_research )
+    | ( kge_leq(dpv_non_commercial_research, dpv_non_commercial_research) & dpv_non_commercial_research = dpv_commercial_research )
+    | kge_leq(dpv_commercial_research, dpv_non_commercial_research)
+    | ( kge_leq(dpv_academic_research, dpv_non_commercial_research) & dpv_academic_research = dpv_commercial_research )
+    | ( kge_leq(dpv_account_management, dpv_non_commercial_research) & dpv_account_management = dpv_commercial_research )
+    | ( kge_leq(dpv_advertising, dpv_non_commercial_research) & dpv_advertising = dpv_commercial_research ) )
+    | ( ( kge_leq(dpv_age_verification, dpv_non_commercial_research) & dpv_age_verification = dpv_commercial_research )
+    | ( kge_leq(dpv_combat_climate_change, dpv_non_commercial_research) & dpv_combat_climate_change = dpv_commercial_research )
+    | ( kge_leq(dpv_commercial_purpose, dpv_non_commercial_research) & dpv_commercial_purpose = dpv_commercial_research )
+    | ( kge_leq(dpv_communication_for_customer_care, dpv_non_commercial_research) & dpv_communication_for_customer_care = dpv_commercial_research )
+    | ( kge_leq(dpv_communication_management, dpv_non_commercial_research) & dpv_communication_management = dpv_commercial_research )
+    | ( kge_leq(dpv_counter_money_laundering, dpv_non_commercial_research) & dpv_counter_money_laundering = dpv_commercial_research )
+    | ( kge_leq(dpv_counterterrorism, dpv_non_commercial_research) & dpv_counterterrorism = dpv_commercial_research )
+    | ( kge_leq(dpv_customer_care, dpv_non_commercial_research) & dpv_customer_care = dpv_commercial_research )
+    | ( kge_leq(dpv_customer_claims_management, dpv_non_commercial_research) & dpv_customer_claims_management = dpv_commercial_research )
+    | ( kge_leq(dpv_customer_management, dpv_non_commercial_research) & dpv_customer_management = dpv_commercial_research )
+    | ( kge_leq(dpv_customer_order_management, dpv_non_commercial_research) & dpv_customer_order_management = dpv_commercial_research )
+    | ( kge_leq(dpv_customer_relationship_management, dpv_non_commercial_research) & dpv_customer_relationship_management = dpv_commercial_research )
+    | ( kge_leq(dpv_customer_solvency_monitoring, dpv_non_commercial_research) & dpv_customer_solvency_monitoring = dpv_commercial_research )
+    | ( kge_leq(dpv_data_altruism, dpv_non_commercial_research) & dpv_data_altruism = dpv_commercial_research )
+    | ( kge_leq(dpv_delivery_of_goods, dpv_non_commercial_research) & dpv_delivery_of_goods = dpv_commercial_research )
+    | ( kge_leq(dpv_direct_marketing, dpv_non_commercial_research) & dpv_direct_marketing = dpv_commercial_research )
+    | ( kge_leq(dpv_dispute_management, dpv_non_commercial_research) & dpv_dispute_management = dpv_commercial_research )
+    | ( kge_leq(dpv_enforce_access_control, dpv_non_commercial_research) & dpv_enforce_access_control = dpv_commercial_research )
+    | ( kge_leq(dpv_enforce_security, dpv_non_commercial_research) & dpv_enforce_security = dpv_commercial_research )
+    | ( kge_leq(dpv_establish_contractual_agreement, dpv_non_commercial_research) & dpv_establish_contractual_agreement = dpv_commercial_research )
+    | ( kge_leq(dpv_fraud_prevention_and_detection, dpv_non_commercial_research) & dpv_fraud_prevention_and_detection = dpv_commercial_research )
+    | ( kge_leq(dpv_fulfilment_of_contractual_obligation, dpv_non_commercial_research) & dpv_fulfilment_of_contractual_obligation = dpv_commercial_research )
+    | ( kge_leq(dpv_fulfilment_of_obligation, dpv_non_commercial_research) & dpv_fulfilment_of_obligation = dpv_commercial_research )
+    | ( kge_leq(dpv_human_resource_management, dpv_non_commercial_research) & dpv_human_resource_management = dpv_commercial_research )
+    | ( kge_leq(dpv_identity_authentication, dpv_non_commercial_research) & dpv_identity_authentication = dpv_commercial_research )
+    | ( kge_leq(dpv_identity_verification, dpv_non_commercial_research) & dpv_identity_verification = dpv_commercial_research )
+    | ( kge_leq(dpv_improve_existing_products_and_services, dpv_non_commercial_research) & dpv_improve_existing_products_and_services = dpv_commercial_research )
+    | ( kge_leq(dpv_improve_healthcare, dpv_non_commercial_research) & dpv_improve_healthcare = dpv_commercial_research )
+    | ( kge_leq(dpv_improve_internal_crm_processes, dpv_non_commercial_research) & dpv_improve_internal_crm_processes = dpv_commercial_research )
+    | ( kge_leq(dpv_improve_public_services, dpv_non_commercial_research) & dpv_improve_public_services = dpv_commercial_research )
+    | ( kge_leq(dpv_improve_transport_mobility, dpv_non_commercial_research) & dpv_improve_transport_mobility = dpv_commercial_research )
+    | ( kge_leq(dpv_increase_service_robustness, dpv_non_commercial_research) & dpv_increase_service_robustness = dpv_commercial_research )
+    | ( kge_leq(dpv_internal_resource_optimisation, dpv_non_commercial_research) & dpv_internal_resource_optimisation = dpv_commercial_research )
+    | ( kge_leq(dpv_legal_compliance, dpv_non_commercial_research) & dpv_legal_compliance = dpv_commercial_research )
+    | ( kge_leq(dpv_maintain_fraud_database, dpv_non_commercial_research) & dpv_maintain_fraud_database = dpv_commercial_research )
+    | ( kge_leq(dpv_marketing, dpv_non_commercial_research) & dpv_marketing = dpv_commercial_research )
+    | ( kge_leq(dpv_member_partner_management, dpv_non_commercial_research) & dpv_member_partner_management = dpv_commercial_research )
+    | ( kge_leq(dpv_misuse_prevention_and_detection, dpv_non_commercial_research) & dpv_misuse_prevention_and_detection = dpv_commercial_research )
+    | ( kge_leq(dpv_non_commercial_purpose, dpv_non_commercial_research) & dpv_non_commercial_purpose = dpv_commercial_research )
+    | ( kge_leq(dpv_optimisation_for_consumer, dpv_non_commercial_research) & dpv_optimisation_for_consumer = dpv_commercial_research )
+    | ( kge_leq(dpv_optimisation_for_controller, dpv_non_commercial_research) & dpv_optimisation_for_controller = dpv_commercial_research )
+    | ( kge_leq(dpv_optimise_user_interface, dpv_non_commercial_research) & dpv_optimise_user_interface = dpv_commercial_research )
+    | ( kge_leq(dpv_organisation_compliance_management, dpv_non_commercial_research) & dpv_organisation_compliance_management = dpv_commercial_research )
+    | ( kge_leq(dpv_organisation_governance, dpv_non_commercial_research) & dpv_organisation_governance = dpv_commercial_research )
+    | ( kge_leq(dpv_organisation_risk_management, dpv_non_commercial_research) & dpv_organisation_risk_management = dpv_commercial_research )
+    | ( kge_leq(dpv_payment_management, dpv_non_commercial_research) & dpv_payment_management = dpv_commercial_research )
+    | ( kge_leq(dpv_personalisation, dpv_non_commercial_research) & dpv_personalisation = dpv_commercial_research )
+    | ( kge_leq(dpv_personalised_advertising, dpv_non_commercial_research) & dpv_personalised_advertising = dpv_commercial_research )
+    | ( kge_leq(dpv_personalised_benefits, dpv_non_commercial_research) & dpv_personalised_benefits = dpv_commercial_research )
+    | ( kge_leq(dpv_personnel_behaviour_monitoring, dpv_non_commercial_research) & dpv_personnel_behaviour_monitoring = dpv_commercial_research )
+    | ( kge_leq(dpv_personnel_hiring, dpv_non_commercial_research) & dpv_personnel_hiring = dpv_commercial_research )
+    | ( kge_leq(dpv_personnel_management, dpv_non_commercial_research) & dpv_personnel_management = dpv_commercial_research )
+    | ( kge_leq(dpv_personnel_monitoring, dpv_non_commercial_research) & dpv_personnel_monitoring = dpv_commercial_research )
+    | ( kge_leq(dpv_personnel_offboarding, dpv_non_commercial_research) & dpv_personnel_offboarding = dpv_commercial_research )
+    | ( kge_leq(dpv_personnel_onboarding, dpv_non_commercial_research) & dpv_personnel_onboarding = dpv_commercial_research )
+    | ( kge_leq(dpv_personnel_payment, dpv_non_commercial_research) & dpv_personnel_payment = dpv_commercial_research )
+    | ( kge_leq(dpv_personnel_performance_evaluation, dpv_non_commercial_research) & dpv_personnel_performance_evaluation = dpv_commercial_research )
+    | ( kge_leq(dpv_personnel_performance_management, dpv_non_commercial_research) & dpv_personnel_performance_management = dpv_commercial_research )
+    | ( kge_leq(dpv_personnel_performance_monitoring, dpv_non_commercial_research) & dpv_personnel_performance_monitoring = dpv_commercial_research )
+    | ( kge_leq(dpv_personnel_performance_prediction, dpv_non_commercial_research) & dpv_personnel_performance_prediction = dpv_commercial_research )
+    | ( kge_leq(dpv_personnel_promotion_management, dpv_non_commercial_research) & dpv_personnel_promotion_management = dpv_commercial_research )
+    | ( kge_leq(dpv_personnel_termination_management, dpv_non_commercial_research) & dpv_personnel_termination_management = dpv_commercial_research )
+    | ( kge_leq(dpv_personnel_workload_management, dpv_non_commercial_research) & dpv_personnel_workload_management = dpv_commercial_research )
+    | ( kge_leq(dpv_political_campaign, dpv_non_commercial_research) & dpv_political_campaign = dpv_commercial_research ) )
+    | ( ( kge_leq(dpv_protection_of_ipr, dpv_non_commercial_research) & dpv_protection_of_ipr = dpv_commercial_research )
+    | ( kge_leq(dpv_protection_of_national_security, dpv_non_commercial_research) & dpv_protection_of_national_security = dpv_commercial_research )
+    | ( kge_leq(dpv_protection_of_public_security, dpv_non_commercial_research) & dpv_protection_of_public_security = dpv_commercial_research )
+    | ( kge_leq(dpv_provide_event_recommendations, dpv_non_commercial_research) & dpv_provide_event_recommendations = dpv_commercial_research )
+    | ( kge_leq(dpv_provide_official_statistics, dpv_non_commercial_research) & dpv_provide_official_statistics = dpv_commercial_research )
+    | ( kge_leq(dpv_provide_personalised_recommendations, dpv_non_commercial_research) & dpv_provide_personalised_recommendations = dpv_commercial_research )
+    | ( kge_leq(dpv_provide_product_recommendations, dpv_non_commercial_research) & dpv_provide_product_recommendations = dpv_commercial_research )
+    | ( kge_leq(dpv_public_policy_making, dpv_non_commercial_research) & dpv_public_policy_making = dpv_commercial_research )
+    | ( kge_leq(dpv_public_relations, dpv_non_commercial_research) & dpv_public_relations = dpv_commercial_research )
+    | ( kge_leq(dpv_purpose, dpv_non_commercial_research) & dpv_purpose = dpv_commercial_research )
+    | ( kge_leq(dpv_record_management, dpv_non_commercial_research) & dpv_record_management = dpv_commercial_research )
+    | ( kge_leq(dpv_recruitment_advertising, dpv_non_commercial_research) & dpv_recruitment_advertising = dpv_commercial_research )
+    | ( kge_leq(dpv_recruitment_applicant_background_check, dpv_non_commercial_research) & dpv_recruitment_applicant_background_check = dpv_commercial_research )
+    | ( kge_leq(dpv_recruitment_applicant_criminal_background_check, dpv_non_commercial_research) & dpv_recruitment_applicant_criminal_background_check = dpv_commercial_research )
+    | ( kge_leq(dpv_recruitment_applicant_information_authentication, dpv_non_commercial_research) & dpv_recruitment_applicant_information_authentication = dpv_commercial_research )
+    | ( kge_leq(dpv_recruitment_applicant_selection, dpv_non_commercial_research) & dpv_recruitment_applicant_selection = dpv_commercial_research )
+    | ( kge_leq(dpv_recruitment_application_analysis, dpv_non_commercial_research) & dpv_recruitment_application_analysis = dpv_commercial_research )
+    | ( kge_leq(dpv_recruitment_application_management, dpv_non_commercial_research) & dpv_recruitment_application_management = dpv_commercial_research )
+    | ( kge_leq(dpv_recruitment_application_screening, dpv_non_commercial_research) & dpv_recruitment_application_screening = dpv_commercial_research )
+    | ( kge_leq(dpv_recruitment_interview_analysis, dpv_non_commercial_research) & dpv_recruitment_interview_analysis = dpv_commercial_research )
+    | ( kge_leq(dpv_recruitment_interview_assessment, dpv_non_commercial_research) & dpv_recruitment_interview_assessment = dpv_commercial_research )
+    | ( kge_leq(dpv_recruitment_interview_management, dpv_non_commercial_research) & dpv_recruitment_interview_management = dpv_commercial_research )
+    | ( kge_leq(dpv_recruitment_interview_scheduling, dpv_non_commercial_research) & dpv_recruitment_interview_scheduling = dpv_commercial_research )
+    | ( kge_leq(dpv_recruitment_management, dpv_non_commercial_research) & dpv_recruitment_management = dpv_commercial_research )
+    | ( kge_leq(dpv_recruitment_targeted_advertising, dpv_non_commercial_research) & dpv_recruitment_targeted_advertising = dpv_commercial_research )
+    | ( kge_leq(dpv_repair_impairments, dpv_non_commercial_research) & dpv_repair_impairments = dpv_commercial_research )
+    | ( kge_leq(dpv_requested_service_provision, dpv_non_commercial_research) & dpv_requested_service_provision = dpv_commercial_research )
+    | ( kge_leq(dpv_research_and_development, dpv_non_commercial_research) & dpv_research_and_development = dpv_commercial_research )
+    | ( kge_leq(dpv_rights_fulfilment, dpv_non_commercial_research) & dpv_rights_fulfilment = dpv_commercial_research )
+    | ( kge_leq(dpv_scientific_research, dpv_non_commercial_research) & dpv_scientific_research = dpv_commercial_research )
+    | ( kge_leq(dpv_search_functionalities, dpv_non_commercial_research) & dpv_search_functionalities = dpv_commercial_research )
+    | ( kge_leq(dpv_sell_data_to_third_parties, dpv_non_commercial_research) & dpv_sell_data_to_third_parties = dpv_commercial_research )
+    | ( kge_leq(dpv_sell_insights_from_data, dpv_non_commercial_research) & dpv_sell_insights_from_data = dpv_commercial_research )
+    | ( kge_leq(dpv_sell_products, dpv_non_commercial_research) & dpv_sell_products = dpv_commercial_research )
+    | ( kge_leq(dpv_sell_products_to_data_subject, dpv_non_commercial_research) & dpv_sell_products_to_data_subject = dpv_commercial_research )
+    | ( kge_leq(dpv_service_access_determination, dpv_non_commercial_research) & dpv_service_access_determination = dpv_commercial_research )
+    | ( kge_leq(dpv_service_management, dpv_non_commercial_research) & dpv_service_management = dpv_commercial_research )
+    | ( kge_leq(dpv_service_monitoring, dpv_non_commercial_research) & dpv_service_monitoring = dpv_commercial_research )
+    | ( kge_leq(dpv_service_optimisation, dpv_non_commercial_research) & dpv_service_optimisation = dpv_commercial_research )
+    | ( kge_leq(dpv_service_personalisation, dpv_non_commercial_research) & dpv_service_personalisation = dpv_commercial_research )
+    | ( kge_leq(dpv_service_provision, dpv_non_commercial_research) & dpv_service_provision = dpv_commercial_research )
+    | ( kge_leq(dpv_service_registration, dpv_non_commercial_research) & dpv_service_registration = dpv_commercial_research )
+    | ( kge_leq(dpv_service_usage_analytics, dpv_non_commercial_research) & dpv_service_usage_analytics = dpv_commercial_research )
+    | ( kge_leq(dpv_social_media_marketing, dpv_non_commercial_research) & dpv_social_media_marketing = dpv_commercial_research )
+    | ( kge_leq(dpv_targeted_advertising, dpv_non_commercial_research) & dpv_targeted_advertising = dpv_commercial_research )
+    | ( kge_leq(dpv_technical_service_provision, dpv_non_commercial_research) & dpv_technical_service_provision = dpv_commercial_research )
+    | ( kge_leq(dpv_user_interface_personalisation, dpv_non_commercial_research) & dpv_user_interface_personalisation = dpv_commercial_research )
+    | ( kge_leq(dpv_vendor_management, dpv_non_commercial_research) & dpv_vendor_management = dpv_commercial_research )
+    | ( kge_leq(dpv_vendor_payment, dpv_non_commercial_research) & dpv_vendor_payment = dpv_commercial_research )
+    | ( kge_leq(dpv_vendor_records_management, dpv_non_commercial_research) & dpv_vendor_records_management = dpv_commercial_research )
+    | ( kge_leq(dpv_vendor_selection_assessment, dpv_non_commercial_research) & dpv_vendor_selection_assessment = dpv_commercial_research )
+    | ( kge_leq(dpv_verification, dpv_non_commercial_research) & dpv_verification = dpv_commercial_research ) ) )).
 %------------------------------------------------------------------------------

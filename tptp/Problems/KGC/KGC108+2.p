@@ -1,1108 +1,759 @@
 %------------------------------------------------------------------------------
 % File     : KGC108+2 : placeholder, for TPTP use only
 % Domain   : Semantic Web (ODRL policies), proposed
-% Problem  : Use for at least one of public benefit and non-commercial research against use for improving transport mobility only: no use meets both
+% Problem  : Use for scientific research or any narrower purpose against use for research and development only: some use meets both
 % Version  : Especial.
 %            Theorem formulation : The condition is written over the whole
 %            vocabulary, as the paper's definition states; version 1 names
-%            only the concepts a fixed value allows. The two versions have the
+%            only the concepts a fixed value allows. The versions have the
 %            same status.
-% English  : As KGC393, with improving transport mobility declared distinct
-%            from both purposes the first policy names. This problem states
-%            that no use meets the two policies.
+% English  : As KGC316, with scientific research and research and development
+%            declared distinct. This problem states that some use meets the
+%            two policies.
 
 % Refs     : [Mus26] Mustafa (2026), odrl-grounded-benchmark,
-%            https://github.com/Daham-Mustaf/odrl-grounded-benchmark, tag
-%            v1.1.1
+%            https://github.com/Daham-Mustaf/odrl-grounded-benchmark, tag v1.2
 % Source   : [Mus26]
-% Names    : KGC394-2 [Mus26]
+% Names    : KGC403-1 [Mus26]
 
-% Status   : Satisfiable
+% Status   : Unsatisfiable
 % Rating   : left to TPTP
 % Syntax   : left to TPTP
 % SPC      : left to TPTP
 
-% Comments : KGC394 is Incompatible. Its two problems state that some use
-%            meets the two policies (KGC107) and that no use does (KGC108). A
+% Comments : KGC403 is Incompatible. Its two problems state that some use
+%            meets the two policies (KGC108) and that no use does (KGC109);
+%            here the first is Unsatisfiable and the second Satisfiable. A
 %            pair of policies is Incompatible when the first is Unsatisfiable,
 %            Compatible when the second is Unsatisfiable, and Unknown when
 %            both are Satisfiable; a Satisfiable problem also shows the
-%            statements consistent. Here the first is Unsatisfiable and the
-%            second Satisfiable.
+%            statements consistent.
 %------------------------------------------------------------------------------
 include('Axioms/KGC000+0.ax').
 include('Axioms/KGC000+3.ax').
 
-fof(bg_dist_dpv_public_benefit_dpv_non_commercial_research, axiom,
-    dpv_public_benefit != dpv_non_commercial_research).
+fof(bg_dist_dpv_scientific_research_dpv_research_and_development, axiom,
+    dpv_scientific_research != dpv_research_and_development).
 
-fof(bg_dist_dpv_public_benefit_dpv_improve_transport_mobility, axiom,
-    dpv_public_benefit != dpv_improve_transport_mobility).
+fof(bg_dist_dpv_scientific_research_dpv_academic_research, axiom,
+    dpv_scientific_research != dpv_academic_research).
 
-fof(bg_dist_dpv_public_benefit_dpv_academic_research, axiom,
-    dpv_public_benefit != dpv_academic_research).
+fof(bg_dist_dpv_scientific_research_dpv_account_management, axiom,
+    dpv_scientific_research != dpv_account_management).
 
-fof(bg_dist_dpv_public_benefit_dpv_account_management, axiom,
-    dpv_public_benefit != dpv_account_management).
+fof(bg_dist_dpv_scientific_research_dpv_advertising, axiom,
+    dpv_scientific_research != dpv_advertising).
 
-fof(bg_dist_dpv_public_benefit_dpv_advertising, axiom,
-    dpv_public_benefit != dpv_advertising).
+fof(bg_dist_dpv_scientific_research_dpv_age_verification, axiom,
+    dpv_scientific_research != dpv_age_verification).
 
-fof(bg_dist_dpv_public_benefit_dpv_age_verification, axiom,
-    dpv_public_benefit != dpv_age_verification).
+fof(bg_dist_dpv_scientific_research_dpv_combat_climate_change, axiom,
+    dpv_scientific_research != dpv_combat_climate_change).
 
-fof(bg_dist_dpv_public_benefit_dpv_combat_climate_change, axiom,
-    dpv_public_benefit != dpv_combat_climate_change).
+fof(bg_dist_dpv_scientific_research_dpv_commercial_purpose, axiom,
+    dpv_scientific_research != dpv_commercial_purpose).
 
-fof(bg_dist_dpv_public_benefit_dpv_commercial_purpose, axiom,
-    dpv_public_benefit != dpv_commercial_purpose).
+fof(bg_dist_dpv_scientific_research_dpv_commercial_research, axiom,
+    dpv_scientific_research != dpv_commercial_research).
 
-fof(bg_dist_dpv_public_benefit_dpv_commercial_research, axiom,
-    dpv_public_benefit != dpv_commercial_research).
+fof(bg_dist_dpv_scientific_research_dpv_communication_for_customer_care, axiom,
+    dpv_scientific_research != dpv_communication_for_customer_care).
 
-fof(bg_dist_dpv_public_benefit_dpv_communication_for_customer_care, axiom,
-    dpv_public_benefit != dpv_communication_for_customer_care).
+fof(bg_dist_dpv_scientific_research_dpv_communication_management, axiom,
+    dpv_scientific_research != dpv_communication_management).
 
-fof(bg_dist_dpv_public_benefit_dpv_communication_management, axiom,
-    dpv_public_benefit != dpv_communication_management).
+fof(bg_dist_dpv_scientific_research_dpv_counter_money_laundering, axiom,
+    dpv_scientific_research != dpv_counter_money_laundering).
 
-fof(bg_dist_dpv_public_benefit_dpv_counter_money_laundering, axiom,
-    dpv_public_benefit != dpv_counter_money_laundering).
+fof(bg_dist_dpv_scientific_research_dpv_counterterrorism, axiom,
+    dpv_scientific_research != dpv_counterterrorism).
 
-fof(bg_dist_dpv_public_benefit_dpv_counterterrorism, axiom,
-    dpv_public_benefit != dpv_counterterrorism).
+fof(bg_dist_dpv_scientific_research_dpv_customer_care, axiom,
+    dpv_scientific_research != dpv_customer_care).
 
-fof(bg_dist_dpv_public_benefit_dpv_customer_care, axiom,
-    dpv_public_benefit != dpv_customer_care).
+fof(bg_dist_dpv_scientific_research_dpv_customer_claims_management, axiom,
+    dpv_scientific_research != dpv_customer_claims_management).
 
-fof(bg_dist_dpv_public_benefit_dpv_customer_claims_management, axiom,
-    dpv_public_benefit != dpv_customer_claims_management).
+fof(bg_dist_dpv_scientific_research_dpv_customer_management, axiom,
+    dpv_scientific_research != dpv_customer_management).
 
-fof(bg_dist_dpv_public_benefit_dpv_customer_management, axiom,
-    dpv_public_benefit != dpv_customer_management).
+fof(bg_dist_dpv_scientific_research_dpv_customer_order_management, axiom,
+    dpv_scientific_research != dpv_customer_order_management).
 
-fof(bg_dist_dpv_public_benefit_dpv_customer_order_management, axiom,
-    dpv_public_benefit != dpv_customer_order_management).
+fof(bg_dist_dpv_scientific_research_dpv_customer_relationship_management, axiom,
+    dpv_scientific_research != dpv_customer_relationship_management).
 
-fof(bg_dist_dpv_public_benefit_dpv_customer_relationship_management, axiom,
-    dpv_public_benefit != dpv_customer_relationship_management).
+fof(bg_dist_dpv_scientific_research_dpv_customer_solvency_monitoring, axiom,
+    dpv_scientific_research != dpv_customer_solvency_monitoring).
 
-fof(bg_dist_dpv_public_benefit_dpv_customer_solvency_monitoring, axiom,
-    dpv_public_benefit != dpv_customer_solvency_monitoring).
+fof(bg_dist_dpv_scientific_research_dpv_data_altruism, axiom,
+    dpv_scientific_research != dpv_data_altruism).
 
-fof(bg_dist_dpv_public_benefit_dpv_data_altruism, axiom,
-    dpv_public_benefit != dpv_data_altruism).
+fof(bg_dist_dpv_scientific_research_dpv_delivery_of_goods, axiom,
+    dpv_scientific_research != dpv_delivery_of_goods).
 
-fof(bg_dist_dpv_public_benefit_dpv_delivery_of_goods, axiom,
-    dpv_public_benefit != dpv_delivery_of_goods).
+fof(bg_dist_dpv_scientific_research_dpv_direct_marketing, axiom,
+    dpv_scientific_research != dpv_direct_marketing).
 
-fof(bg_dist_dpv_public_benefit_dpv_direct_marketing, axiom,
-    dpv_public_benefit != dpv_direct_marketing).
+fof(bg_dist_dpv_scientific_research_dpv_dispute_management, axiom,
+    dpv_scientific_research != dpv_dispute_management).
 
-fof(bg_dist_dpv_public_benefit_dpv_dispute_management, axiom,
-    dpv_public_benefit != dpv_dispute_management).
+fof(bg_dist_dpv_scientific_research_dpv_enforce_access_control, axiom,
+    dpv_scientific_research != dpv_enforce_access_control).
 
-fof(bg_dist_dpv_public_benefit_dpv_enforce_access_control, axiom,
-    dpv_public_benefit != dpv_enforce_access_control).
+fof(bg_dist_dpv_scientific_research_dpv_enforce_security, axiom,
+    dpv_scientific_research != dpv_enforce_security).
 
-fof(bg_dist_dpv_public_benefit_dpv_enforce_security, axiom,
-    dpv_public_benefit != dpv_enforce_security).
+fof(bg_dist_dpv_scientific_research_dpv_establish_contractual_agreement, axiom,
+    dpv_scientific_research != dpv_establish_contractual_agreement).
 
-fof(bg_dist_dpv_public_benefit_dpv_establish_contractual_agreement, axiom,
-    dpv_public_benefit != dpv_establish_contractual_agreement).
+fof(bg_dist_dpv_scientific_research_dpv_fraud_prevention_and_detection, axiom,
+    dpv_scientific_research != dpv_fraud_prevention_and_detection).
 
-fof(bg_dist_dpv_public_benefit_dpv_fraud_prevention_and_detection, axiom,
-    dpv_public_benefit != dpv_fraud_prevention_and_detection).
+fof(bg_dist_dpv_scientific_research_dpv_fulfilment_of_contractual_obligation, axiom,
+    dpv_scientific_research != dpv_fulfilment_of_contractual_obligation).
 
-fof(bg_dist_dpv_public_benefit_dpv_fulfilment_of_contractual_obligation, axiom,
-    dpv_public_benefit != dpv_fulfilment_of_contractual_obligation).
+fof(bg_dist_dpv_scientific_research_dpv_fulfilment_of_obligation, axiom,
+    dpv_scientific_research != dpv_fulfilment_of_obligation).
 
-fof(bg_dist_dpv_public_benefit_dpv_fulfilment_of_obligation, axiom,
-    dpv_public_benefit != dpv_fulfilment_of_obligation).
+fof(bg_dist_dpv_scientific_research_dpv_human_resource_management, axiom,
+    dpv_scientific_research != dpv_human_resource_management).
 
-fof(bg_dist_dpv_public_benefit_dpv_human_resource_management, axiom,
-    dpv_public_benefit != dpv_human_resource_management).
+fof(bg_dist_dpv_scientific_research_dpv_identity_authentication, axiom,
+    dpv_scientific_research != dpv_identity_authentication).
 
-fof(bg_dist_dpv_public_benefit_dpv_identity_authentication, axiom,
-    dpv_public_benefit != dpv_identity_authentication).
+fof(bg_dist_dpv_scientific_research_dpv_identity_verification, axiom,
+    dpv_scientific_research != dpv_identity_verification).
 
-fof(bg_dist_dpv_public_benefit_dpv_identity_verification, axiom,
-    dpv_public_benefit != dpv_identity_verification).
+fof(bg_dist_dpv_scientific_research_dpv_improve_existing_products_and_services, axiom,
+    dpv_scientific_research != dpv_improve_existing_products_and_services).
 
-fof(bg_dist_dpv_public_benefit_dpv_improve_existing_products_and_services, axiom,
-    dpv_public_benefit != dpv_improve_existing_products_and_services).
+fof(bg_dist_dpv_scientific_research_dpv_improve_healthcare, axiom,
+    dpv_scientific_research != dpv_improve_healthcare).
 
-fof(bg_dist_dpv_public_benefit_dpv_improve_healthcare, axiom,
-    dpv_public_benefit != dpv_improve_healthcare).
+fof(bg_dist_dpv_scientific_research_dpv_improve_internal_crm_processes, axiom,
+    dpv_scientific_research != dpv_improve_internal_crm_processes).
 
-fof(bg_dist_dpv_public_benefit_dpv_improve_internal_crm_processes, axiom,
-    dpv_public_benefit != dpv_improve_internal_crm_processes).
+fof(bg_dist_dpv_scientific_research_dpv_improve_public_services, axiom,
+    dpv_scientific_research != dpv_improve_public_services).
 
-fof(bg_dist_dpv_public_benefit_dpv_improve_public_services, axiom,
-    dpv_public_benefit != dpv_improve_public_services).
+fof(bg_dist_dpv_scientific_research_dpv_improve_transport_mobility, axiom,
+    dpv_scientific_research != dpv_improve_transport_mobility).
 
-fof(bg_dist_dpv_public_benefit_dpv_increase_service_robustness, axiom,
-    dpv_public_benefit != dpv_increase_service_robustness).
+fof(bg_dist_dpv_scientific_research_dpv_increase_service_robustness, axiom,
+    dpv_scientific_research != dpv_increase_service_robustness).
 
-fof(bg_dist_dpv_public_benefit_dpv_internal_resource_optimisation, axiom,
-    dpv_public_benefit != dpv_internal_resource_optimisation).
+fof(bg_dist_dpv_scientific_research_dpv_internal_resource_optimisation, axiom,
+    dpv_scientific_research != dpv_internal_resource_optimisation).
 
-fof(bg_dist_dpv_public_benefit_dpv_legal_compliance, axiom,
-    dpv_public_benefit != dpv_legal_compliance).
+fof(bg_dist_dpv_scientific_research_dpv_legal_compliance, axiom,
+    dpv_scientific_research != dpv_legal_compliance).
 
-fof(bg_dist_dpv_public_benefit_dpv_maintain_fraud_database, axiom,
-    dpv_public_benefit != dpv_maintain_fraud_database).
+fof(bg_dist_dpv_scientific_research_dpv_maintain_fraud_database, axiom,
+    dpv_scientific_research != dpv_maintain_fraud_database).
 
-fof(bg_dist_dpv_public_benefit_dpv_marketing, axiom,
-    dpv_public_benefit != dpv_marketing).
+fof(bg_dist_dpv_scientific_research_dpv_marketing, axiom,
+    dpv_scientific_research != dpv_marketing).
 
-fof(bg_dist_dpv_public_benefit_dpv_member_partner_management, axiom,
-    dpv_public_benefit != dpv_member_partner_management).
+fof(bg_dist_dpv_scientific_research_dpv_member_partner_management, axiom,
+    dpv_scientific_research != dpv_member_partner_management).
 
-fof(bg_dist_dpv_public_benefit_dpv_misuse_prevention_and_detection, axiom,
-    dpv_public_benefit != dpv_misuse_prevention_and_detection).
+fof(bg_dist_dpv_scientific_research_dpv_misuse_prevention_and_detection, axiom,
+    dpv_scientific_research != dpv_misuse_prevention_and_detection).
 
-fof(bg_dist_dpv_public_benefit_dpv_non_commercial_purpose, axiom,
-    dpv_public_benefit != dpv_non_commercial_purpose).
+fof(bg_dist_dpv_scientific_research_dpv_non_commercial_purpose, axiom,
+    dpv_scientific_research != dpv_non_commercial_purpose).
 
-fof(bg_dist_dpv_public_benefit_dpv_optimisation_for_consumer, axiom,
-    dpv_public_benefit != dpv_optimisation_for_consumer).
+fof(bg_dist_dpv_scientific_research_dpv_non_commercial_research, axiom,
+    dpv_scientific_research != dpv_non_commercial_research).
 
-fof(bg_dist_dpv_public_benefit_dpv_optimisation_for_controller, axiom,
-    dpv_public_benefit != dpv_optimisation_for_controller).
+fof(bg_dist_dpv_scientific_research_dpv_optimisation_for_consumer, axiom,
+    dpv_scientific_research != dpv_optimisation_for_consumer).
 
-fof(bg_dist_dpv_public_benefit_dpv_optimise_user_interface, axiom,
-    dpv_public_benefit != dpv_optimise_user_interface).
+fof(bg_dist_dpv_scientific_research_dpv_optimisation_for_controller, axiom,
+    dpv_scientific_research != dpv_optimisation_for_controller).
 
-fof(bg_dist_dpv_public_benefit_dpv_organisation_compliance_management, axiom,
-    dpv_public_benefit != dpv_organisation_compliance_management).
+fof(bg_dist_dpv_scientific_research_dpv_optimise_user_interface, axiom,
+    dpv_scientific_research != dpv_optimise_user_interface).
 
-fof(bg_dist_dpv_public_benefit_dpv_organisation_governance, axiom,
-    dpv_public_benefit != dpv_organisation_governance).
+fof(bg_dist_dpv_scientific_research_dpv_organisation_compliance_management, axiom,
+    dpv_scientific_research != dpv_organisation_compliance_management).
 
-fof(bg_dist_dpv_public_benefit_dpv_organisation_risk_management, axiom,
-    dpv_public_benefit != dpv_organisation_risk_management).
+fof(bg_dist_dpv_scientific_research_dpv_organisation_governance, axiom,
+    dpv_scientific_research != dpv_organisation_governance).
 
-fof(bg_dist_dpv_public_benefit_dpv_payment_management, axiom,
-    dpv_public_benefit != dpv_payment_management).
+fof(bg_dist_dpv_scientific_research_dpv_organisation_risk_management, axiom,
+    dpv_scientific_research != dpv_organisation_risk_management).
 
-fof(bg_dist_dpv_public_benefit_dpv_personalisation, axiom,
-    dpv_public_benefit != dpv_personalisation).
+fof(bg_dist_dpv_scientific_research_dpv_payment_management, axiom,
+    dpv_scientific_research != dpv_payment_management).
 
-fof(bg_dist_dpv_public_benefit_dpv_personalised_advertising, axiom,
-    dpv_public_benefit != dpv_personalised_advertising).
+fof(bg_dist_dpv_scientific_research_dpv_personalisation, axiom,
+    dpv_scientific_research != dpv_personalisation).
 
-fof(bg_dist_dpv_public_benefit_dpv_personalised_benefits, axiom,
-    dpv_public_benefit != dpv_personalised_benefits).
+fof(bg_dist_dpv_scientific_research_dpv_personalised_advertising, axiom,
+    dpv_scientific_research != dpv_personalised_advertising).
 
-fof(bg_dist_dpv_public_benefit_dpv_personnel_behaviour_monitoring, axiom,
-    dpv_public_benefit != dpv_personnel_behaviour_monitoring).
+fof(bg_dist_dpv_scientific_research_dpv_personalised_benefits, axiom,
+    dpv_scientific_research != dpv_personalised_benefits).
 
-fof(bg_dist_dpv_public_benefit_dpv_personnel_hiring, axiom,
-    dpv_public_benefit != dpv_personnel_hiring).
+fof(bg_dist_dpv_scientific_research_dpv_personnel_behaviour_monitoring, axiom,
+    dpv_scientific_research != dpv_personnel_behaviour_monitoring).
 
-fof(bg_dist_dpv_public_benefit_dpv_personnel_management, axiom,
-    dpv_public_benefit != dpv_personnel_management).
+fof(bg_dist_dpv_scientific_research_dpv_personnel_hiring, axiom,
+    dpv_scientific_research != dpv_personnel_hiring).
 
-fof(bg_dist_dpv_public_benefit_dpv_personnel_monitoring, axiom,
-    dpv_public_benefit != dpv_personnel_monitoring).
+fof(bg_dist_dpv_scientific_research_dpv_personnel_management, axiom,
+    dpv_scientific_research != dpv_personnel_management).
 
-fof(bg_dist_dpv_public_benefit_dpv_personnel_offboarding, axiom,
-    dpv_public_benefit != dpv_personnel_offboarding).
+fof(bg_dist_dpv_scientific_research_dpv_personnel_monitoring, axiom,
+    dpv_scientific_research != dpv_personnel_monitoring).
 
-fof(bg_dist_dpv_public_benefit_dpv_personnel_onboarding, axiom,
-    dpv_public_benefit != dpv_personnel_onboarding).
+fof(bg_dist_dpv_scientific_research_dpv_personnel_offboarding, axiom,
+    dpv_scientific_research != dpv_personnel_offboarding).
 
-fof(bg_dist_dpv_public_benefit_dpv_personnel_payment, axiom,
-    dpv_public_benefit != dpv_personnel_payment).
+fof(bg_dist_dpv_scientific_research_dpv_personnel_onboarding, axiom,
+    dpv_scientific_research != dpv_personnel_onboarding).
 
-fof(bg_dist_dpv_public_benefit_dpv_personnel_performance_evaluation, axiom,
-    dpv_public_benefit != dpv_personnel_performance_evaluation).
+fof(bg_dist_dpv_scientific_research_dpv_personnel_payment, axiom,
+    dpv_scientific_research != dpv_personnel_payment).
 
-fof(bg_dist_dpv_public_benefit_dpv_personnel_performance_management, axiom,
-    dpv_public_benefit != dpv_personnel_performance_management).
+fof(bg_dist_dpv_scientific_research_dpv_personnel_performance_evaluation, axiom,
+    dpv_scientific_research != dpv_personnel_performance_evaluation).
 
-fof(bg_dist_dpv_public_benefit_dpv_personnel_performance_monitoring, axiom,
-    dpv_public_benefit != dpv_personnel_performance_monitoring).
+fof(bg_dist_dpv_scientific_research_dpv_personnel_performance_management, axiom,
+    dpv_scientific_research != dpv_personnel_performance_management).
 
-fof(bg_dist_dpv_public_benefit_dpv_personnel_performance_prediction, axiom,
-    dpv_public_benefit != dpv_personnel_performance_prediction).
+fof(bg_dist_dpv_scientific_research_dpv_personnel_performance_monitoring, axiom,
+    dpv_scientific_research != dpv_personnel_performance_monitoring).
 
-fof(bg_dist_dpv_public_benefit_dpv_personnel_promotion_management, axiom,
-    dpv_public_benefit != dpv_personnel_promotion_management).
+fof(bg_dist_dpv_scientific_research_dpv_personnel_performance_prediction, axiom,
+    dpv_scientific_research != dpv_personnel_performance_prediction).
 
-fof(bg_dist_dpv_public_benefit_dpv_personnel_termination_management, axiom,
-    dpv_public_benefit != dpv_personnel_termination_management).
+fof(bg_dist_dpv_scientific_research_dpv_personnel_promotion_management, axiom,
+    dpv_scientific_research != dpv_personnel_promotion_management).
 
-fof(bg_dist_dpv_public_benefit_dpv_personnel_workload_management, axiom,
-    dpv_public_benefit != dpv_personnel_workload_management).
+fof(bg_dist_dpv_scientific_research_dpv_personnel_termination_management, axiom,
+    dpv_scientific_research != dpv_personnel_termination_management).
 
-fof(bg_dist_dpv_public_benefit_dpv_political_campaign, axiom,
-    dpv_public_benefit != dpv_political_campaign).
+fof(bg_dist_dpv_scientific_research_dpv_personnel_workload_management, axiom,
+    dpv_scientific_research != dpv_personnel_workload_management).
 
-fof(bg_dist_dpv_public_benefit_dpv_protection_of_ipr, axiom,
-    dpv_public_benefit != dpv_protection_of_ipr).
+fof(bg_dist_dpv_scientific_research_dpv_political_campaign, axiom,
+    dpv_scientific_research != dpv_political_campaign).
 
-fof(bg_dist_dpv_public_benefit_dpv_protection_of_national_security, axiom,
-    dpv_public_benefit != dpv_protection_of_national_security).
+fof(bg_dist_dpv_scientific_research_dpv_protection_of_ipr, axiom,
+    dpv_scientific_research != dpv_protection_of_ipr).
 
-fof(bg_dist_dpv_public_benefit_dpv_protection_of_public_security, axiom,
-    dpv_public_benefit != dpv_protection_of_public_security).
+fof(bg_dist_dpv_scientific_research_dpv_protection_of_national_security, axiom,
+    dpv_scientific_research != dpv_protection_of_national_security).
 
-fof(bg_dist_dpv_public_benefit_dpv_provide_event_recommendations, axiom,
-    dpv_public_benefit != dpv_provide_event_recommendations).
+fof(bg_dist_dpv_scientific_research_dpv_protection_of_public_security, axiom,
+    dpv_scientific_research != dpv_protection_of_public_security).
 
-fof(bg_dist_dpv_public_benefit_dpv_provide_official_statistics, axiom,
-    dpv_public_benefit != dpv_provide_official_statistics).
+fof(bg_dist_dpv_scientific_research_dpv_provide_event_recommendations, axiom,
+    dpv_scientific_research != dpv_provide_event_recommendations).
 
-fof(bg_dist_dpv_public_benefit_dpv_provide_personalised_recommendations, axiom,
-    dpv_public_benefit != dpv_provide_personalised_recommendations).
+fof(bg_dist_dpv_scientific_research_dpv_provide_official_statistics, axiom,
+    dpv_scientific_research != dpv_provide_official_statistics).
 
-fof(bg_dist_dpv_public_benefit_dpv_provide_product_recommendations, axiom,
-    dpv_public_benefit != dpv_provide_product_recommendations).
+fof(bg_dist_dpv_scientific_research_dpv_provide_personalised_recommendations, axiom,
+    dpv_scientific_research != dpv_provide_personalised_recommendations).
 
-fof(bg_dist_dpv_public_benefit_dpv_public_policy_making, axiom,
-    dpv_public_benefit != dpv_public_policy_making).
+fof(bg_dist_dpv_scientific_research_dpv_provide_product_recommendations, axiom,
+    dpv_scientific_research != dpv_provide_product_recommendations).
 
-fof(bg_dist_dpv_public_benefit_dpv_public_relations, axiom,
-    dpv_public_benefit != dpv_public_relations).
+fof(bg_dist_dpv_scientific_research_dpv_public_benefit, axiom,
+    dpv_scientific_research != dpv_public_benefit).
 
-fof(bg_dist_dpv_public_benefit_dpv_purpose, axiom,
-    dpv_public_benefit != dpv_purpose).
+fof(bg_dist_dpv_scientific_research_dpv_public_policy_making, axiom,
+    dpv_scientific_research != dpv_public_policy_making).
 
-fof(bg_dist_dpv_public_benefit_dpv_record_management, axiom,
-    dpv_public_benefit != dpv_record_management).
+fof(bg_dist_dpv_scientific_research_dpv_public_relations, axiom,
+    dpv_scientific_research != dpv_public_relations).
 
-fof(bg_dist_dpv_public_benefit_dpv_recruitment_advertising, axiom,
-    dpv_public_benefit != dpv_recruitment_advertising).
+fof(bg_dist_dpv_scientific_research_dpv_purpose, axiom,
+    dpv_scientific_research != dpv_purpose).
 
-fof(bg_dist_dpv_public_benefit_dpv_recruitment_applicant_background_check, axiom,
-    dpv_public_benefit != dpv_recruitment_applicant_background_check).
+fof(bg_dist_dpv_scientific_research_dpv_record_management, axiom,
+    dpv_scientific_research != dpv_record_management).
 
-fof(bg_dist_dpv_public_benefit_dpv_recruitment_applicant_criminal_background_check, axiom,
-    dpv_public_benefit != dpv_recruitment_applicant_criminal_background_check).
+fof(bg_dist_dpv_scientific_research_dpv_recruitment_advertising, axiom,
+    dpv_scientific_research != dpv_recruitment_advertising).
 
-fof(bg_dist_dpv_public_benefit_dpv_recruitment_applicant_information_authentication, axiom,
-    dpv_public_benefit != dpv_recruitment_applicant_information_authentication).
+fof(bg_dist_dpv_scientific_research_dpv_recruitment_applicant_background_check, axiom,
+    dpv_scientific_research != dpv_recruitment_applicant_background_check).
 
-fof(bg_dist_dpv_public_benefit_dpv_recruitment_applicant_selection, axiom,
-    dpv_public_benefit != dpv_recruitment_applicant_selection).
+fof(bg_dist_dpv_scientific_research_dpv_recruitment_applicant_criminal_background_check, axiom,
+    dpv_scientific_research != dpv_recruitment_applicant_criminal_background_check).
 
-fof(bg_dist_dpv_public_benefit_dpv_recruitment_application_analysis, axiom,
-    dpv_public_benefit != dpv_recruitment_application_analysis).
+fof(bg_dist_dpv_scientific_research_dpv_recruitment_applicant_information_authentication, axiom,
+    dpv_scientific_research != dpv_recruitment_applicant_information_authentication).
 
-fof(bg_dist_dpv_public_benefit_dpv_recruitment_application_management, axiom,
-    dpv_public_benefit != dpv_recruitment_application_management).
+fof(bg_dist_dpv_scientific_research_dpv_recruitment_applicant_selection, axiom,
+    dpv_scientific_research != dpv_recruitment_applicant_selection).
 
-fof(bg_dist_dpv_public_benefit_dpv_recruitment_application_screening, axiom,
-    dpv_public_benefit != dpv_recruitment_application_screening).
+fof(bg_dist_dpv_scientific_research_dpv_recruitment_application_analysis, axiom,
+    dpv_scientific_research != dpv_recruitment_application_analysis).
 
-fof(bg_dist_dpv_public_benefit_dpv_recruitment_interview_analysis, axiom,
-    dpv_public_benefit != dpv_recruitment_interview_analysis).
+fof(bg_dist_dpv_scientific_research_dpv_recruitment_application_management, axiom,
+    dpv_scientific_research != dpv_recruitment_application_management).
 
-fof(bg_dist_dpv_public_benefit_dpv_recruitment_interview_assessment, axiom,
-    dpv_public_benefit != dpv_recruitment_interview_assessment).
+fof(bg_dist_dpv_scientific_research_dpv_recruitment_application_screening, axiom,
+    dpv_scientific_research != dpv_recruitment_application_screening).
 
-fof(bg_dist_dpv_public_benefit_dpv_recruitment_interview_management, axiom,
-    dpv_public_benefit != dpv_recruitment_interview_management).
+fof(bg_dist_dpv_scientific_research_dpv_recruitment_interview_analysis, axiom,
+    dpv_scientific_research != dpv_recruitment_interview_analysis).
 
-fof(bg_dist_dpv_public_benefit_dpv_recruitment_interview_scheduling, axiom,
-    dpv_public_benefit != dpv_recruitment_interview_scheduling).
+fof(bg_dist_dpv_scientific_research_dpv_recruitment_interview_assessment, axiom,
+    dpv_scientific_research != dpv_recruitment_interview_assessment).
 
-fof(bg_dist_dpv_public_benefit_dpv_recruitment_management, axiom,
-    dpv_public_benefit != dpv_recruitment_management).
+fof(bg_dist_dpv_scientific_research_dpv_recruitment_interview_management, axiom,
+    dpv_scientific_research != dpv_recruitment_interview_management).
 
-fof(bg_dist_dpv_public_benefit_dpv_recruitment_targeted_advertising, axiom,
-    dpv_public_benefit != dpv_recruitment_targeted_advertising).
+fof(bg_dist_dpv_scientific_research_dpv_recruitment_interview_scheduling, axiom,
+    dpv_scientific_research != dpv_recruitment_interview_scheduling).
 
-fof(bg_dist_dpv_public_benefit_dpv_repair_impairments, axiom,
-    dpv_public_benefit != dpv_repair_impairments).
+fof(bg_dist_dpv_scientific_research_dpv_recruitment_management, axiom,
+    dpv_scientific_research != dpv_recruitment_management).
 
-fof(bg_dist_dpv_public_benefit_dpv_requested_service_provision, axiom,
-    dpv_public_benefit != dpv_requested_service_provision).
+fof(bg_dist_dpv_scientific_research_dpv_recruitment_targeted_advertising, axiom,
+    dpv_scientific_research != dpv_recruitment_targeted_advertising).
 
-fof(bg_dist_dpv_public_benefit_dpv_research_and_development, axiom,
-    dpv_public_benefit != dpv_research_and_development).
+fof(bg_dist_dpv_scientific_research_dpv_repair_impairments, axiom,
+    dpv_scientific_research != dpv_repair_impairments).
 
-fof(bg_dist_dpv_public_benefit_dpv_scientific_research, axiom,
-    dpv_public_benefit != dpv_scientific_research).
+fof(bg_dist_dpv_scientific_research_dpv_requested_service_provision, axiom,
+    dpv_scientific_research != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_public_benefit_dpv_search_functionalities, axiom,
-    dpv_public_benefit != dpv_search_functionalities).
+fof(bg_dist_dpv_scientific_research_dpv_rights_fulfilment, axiom,
+    dpv_scientific_research != dpv_rights_fulfilment).
 
-fof(bg_dist_dpv_public_benefit_dpv_sell_data_to_third_parties, axiom,
-    dpv_public_benefit != dpv_sell_data_to_third_parties).
+fof(bg_dist_dpv_scientific_research_dpv_search_functionalities, axiom,
+    dpv_scientific_research != dpv_search_functionalities).
 
-fof(bg_dist_dpv_public_benefit_dpv_sell_insights_from_data, axiom,
-    dpv_public_benefit != dpv_sell_insights_from_data).
+fof(bg_dist_dpv_scientific_research_dpv_sell_data_to_third_parties, axiom,
+    dpv_scientific_research != dpv_sell_data_to_third_parties).
 
-fof(bg_dist_dpv_public_benefit_dpv_sell_products, axiom,
-    dpv_public_benefit != dpv_sell_products).
+fof(bg_dist_dpv_scientific_research_dpv_sell_insights_from_data, axiom,
+    dpv_scientific_research != dpv_sell_insights_from_data).
 
-fof(bg_dist_dpv_public_benefit_dpv_sell_products_to_data_subject, axiom,
-    dpv_public_benefit != dpv_sell_products_to_data_subject).
+fof(bg_dist_dpv_scientific_research_dpv_sell_products, axiom,
+    dpv_scientific_research != dpv_sell_products).
 
-fof(bg_dist_dpv_public_benefit_dpv_service_access_determination, axiom,
-    dpv_public_benefit != dpv_service_access_determination).
+fof(bg_dist_dpv_scientific_research_dpv_sell_products_to_data_subject, axiom,
+    dpv_scientific_research != dpv_sell_products_to_data_subject).
 
-fof(bg_dist_dpv_public_benefit_dpv_service_management, axiom,
-    dpv_public_benefit != dpv_service_management).
+fof(bg_dist_dpv_scientific_research_dpv_service_access_determination, axiom,
+    dpv_scientific_research != dpv_service_access_determination).
 
-fof(bg_dist_dpv_public_benefit_dpv_service_monitoring, axiom,
-    dpv_public_benefit != dpv_service_monitoring).
+fof(bg_dist_dpv_scientific_research_dpv_service_management, axiom,
+    dpv_scientific_research != dpv_service_management).
 
-fof(bg_dist_dpv_public_benefit_dpv_service_optimisation, axiom,
-    dpv_public_benefit != dpv_service_optimisation).
+fof(bg_dist_dpv_scientific_research_dpv_service_monitoring, axiom,
+    dpv_scientific_research != dpv_service_monitoring).
 
-fof(bg_dist_dpv_public_benefit_dpv_service_personalisation, axiom,
-    dpv_public_benefit != dpv_service_personalisation).
+fof(bg_dist_dpv_scientific_research_dpv_service_optimisation, axiom,
+    dpv_scientific_research != dpv_service_optimisation).
 
-fof(bg_dist_dpv_public_benefit_dpv_service_provision, axiom,
-    dpv_public_benefit != dpv_service_provision).
+fof(bg_dist_dpv_scientific_research_dpv_service_personalisation, axiom,
+    dpv_scientific_research != dpv_service_personalisation).
 
-fof(bg_dist_dpv_public_benefit_dpv_service_registration, axiom,
-    dpv_public_benefit != dpv_service_registration).
+fof(bg_dist_dpv_scientific_research_dpv_service_provision, axiom,
+    dpv_scientific_research != dpv_service_provision).
 
-fof(bg_dist_dpv_public_benefit_dpv_service_usage_analytics, axiom,
-    dpv_public_benefit != dpv_service_usage_analytics).
+fof(bg_dist_dpv_scientific_research_dpv_service_registration, axiom,
+    dpv_scientific_research != dpv_service_registration).
 
-fof(bg_dist_dpv_public_benefit_dpv_social_media_marketing, axiom,
-    dpv_public_benefit != dpv_social_media_marketing).
+fof(bg_dist_dpv_scientific_research_dpv_service_usage_analytics, axiom,
+    dpv_scientific_research != dpv_service_usage_analytics).
 
-fof(bg_dist_dpv_public_benefit_dpv_targeted_advertising, axiom,
-    dpv_public_benefit != dpv_targeted_advertising).
+fof(bg_dist_dpv_scientific_research_dpv_social_media_marketing, axiom,
+    dpv_scientific_research != dpv_social_media_marketing).
 
-fof(bg_dist_dpv_public_benefit_dpv_technical_service_provision, axiom,
-    dpv_public_benefit != dpv_technical_service_provision).
+fof(bg_dist_dpv_scientific_research_dpv_targeted_advertising, axiom,
+    dpv_scientific_research != dpv_targeted_advertising).
 
-fof(bg_dist_dpv_public_benefit_dpv_user_interface_personalisation, axiom,
-    dpv_public_benefit != dpv_user_interface_personalisation).
+fof(bg_dist_dpv_scientific_research_dpv_technical_service_provision, axiom,
+    dpv_scientific_research != dpv_technical_service_provision).
 
-fof(bg_dist_dpv_public_benefit_dpv_vendor_management, axiom,
-    dpv_public_benefit != dpv_vendor_management).
+fof(bg_dist_dpv_scientific_research_dpv_user_interface_personalisation, axiom,
+    dpv_scientific_research != dpv_user_interface_personalisation).
 
-fof(bg_dist_dpv_public_benefit_dpv_vendor_payment, axiom,
-    dpv_public_benefit != dpv_vendor_payment).
+fof(bg_dist_dpv_scientific_research_dpv_vendor_management, axiom,
+    dpv_scientific_research != dpv_vendor_management).
 
-fof(bg_dist_dpv_public_benefit_dpv_vendor_records_management, axiom,
-    dpv_public_benefit != dpv_vendor_records_management).
+fof(bg_dist_dpv_scientific_research_dpv_vendor_payment, axiom,
+    dpv_scientific_research != dpv_vendor_payment).
 
-fof(bg_dist_dpv_public_benefit_dpv_vendor_selection_assessment, axiom,
-    dpv_public_benefit != dpv_vendor_selection_assessment).
+fof(bg_dist_dpv_scientific_research_dpv_vendor_records_management, axiom,
+    dpv_scientific_research != dpv_vendor_records_management).
 
-fof(bg_dist_dpv_public_benefit_dpv_verification, axiom,
-    dpv_public_benefit != dpv_verification).
+fof(bg_dist_dpv_scientific_research_dpv_vendor_selection_assessment, axiom,
+    dpv_scientific_research != dpv_vendor_selection_assessment).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_improve_transport_mobility, axiom,
-    dpv_non_commercial_research != dpv_improve_transport_mobility).
+fof(bg_dist_dpv_scientific_research_dpv_verification, axiom,
+    dpv_scientific_research != dpv_verification).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_academic_research, axiom,
-    dpv_non_commercial_research != dpv_academic_research).
+fof(bg_dist_dpv_research_and_development_dpv_academic_research, axiom,
+    dpv_research_and_development != dpv_academic_research).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_account_management, axiom,
-    dpv_non_commercial_research != dpv_account_management).
+fof(bg_dist_dpv_research_and_development_dpv_account_management, axiom,
+    dpv_research_and_development != dpv_account_management).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_advertising, axiom,
-    dpv_non_commercial_research != dpv_advertising).
+fof(bg_dist_dpv_research_and_development_dpv_advertising, axiom,
+    dpv_research_and_development != dpv_advertising).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_age_verification, axiom,
-    dpv_non_commercial_research != dpv_age_verification).
+fof(bg_dist_dpv_research_and_development_dpv_age_verification, axiom,
+    dpv_research_and_development != dpv_age_verification).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_combat_climate_change, axiom,
-    dpv_non_commercial_research != dpv_combat_climate_change).
+fof(bg_dist_dpv_research_and_development_dpv_combat_climate_change, axiom,
+    dpv_research_and_development != dpv_combat_climate_change).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_commercial_purpose, axiom,
-    dpv_non_commercial_research != dpv_commercial_purpose).
+fof(bg_dist_dpv_research_and_development_dpv_commercial_purpose, axiom,
+    dpv_research_and_development != dpv_commercial_purpose).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_commercial_research, axiom,
-    dpv_non_commercial_research != dpv_commercial_research).
+fof(bg_dist_dpv_research_and_development_dpv_commercial_research, axiom,
+    dpv_research_and_development != dpv_commercial_research).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_communication_for_customer_care, axiom,
-    dpv_non_commercial_research != dpv_communication_for_customer_care).
+fof(bg_dist_dpv_research_and_development_dpv_communication_for_customer_care, axiom,
+    dpv_research_and_development != dpv_communication_for_customer_care).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_communication_management, axiom,
-    dpv_non_commercial_research != dpv_communication_management).
+fof(bg_dist_dpv_research_and_development_dpv_communication_management, axiom,
+    dpv_research_and_development != dpv_communication_management).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_counter_money_laundering, axiom,
-    dpv_non_commercial_research != dpv_counter_money_laundering).
+fof(bg_dist_dpv_research_and_development_dpv_counter_money_laundering, axiom,
+    dpv_research_and_development != dpv_counter_money_laundering).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_counterterrorism, axiom,
-    dpv_non_commercial_research != dpv_counterterrorism).
+fof(bg_dist_dpv_research_and_development_dpv_counterterrorism, axiom,
+    dpv_research_and_development != dpv_counterterrorism).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_customer_care, axiom,
-    dpv_non_commercial_research != dpv_customer_care).
+fof(bg_dist_dpv_research_and_development_dpv_customer_care, axiom,
+    dpv_research_and_development != dpv_customer_care).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_customer_claims_management, axiom,
-    dpv_non_commercial_research != dpv_customer_claims_management).
+fof(bg_dist_dpv_research_and_development_dpv_customer_claims_management, axiom,
+    dpv_research_and_development != dpv_customer_claims_management).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_customer_management, axiom,
-    dpv_non_commercial_research != dpv_customer_management).
+fof(bg_dist_dpv_research_and_development_dpv_customer_management, axiom,
+    dpv_research_and_development != dpv_customer_management).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_customer_order_management, axiom,
-    dpv_non_commercial_research != dpv_customer_order_management).
+fof(bg_dist_dpv_research_and_development_dpv_customer_order_management, axiom,
+    dpv_research_and_development != dpv_customer_order_management).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_customer_relationship_management, axiom,
-    dpv_non_commercial_research != dpv_customer_relationship_management).
+fof(bg_dist_dpv_research_and_development_dpv_customer_relationship_management, axiom,
+    dpv_research_and_development != dpv_customer_relationship_management).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_customer_solvency_monitoring, axiom,
-    dpv_non_commercial_research != dpv_customer_solvency_monitoring).
+fof(bg_dist_dpv_research_and_development_dpv_customer_solvency_monitoring, axiom,
+    dpv_research_and_development != dpv_customer_solvency_monitoring).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_data_altruism, axiom,
-    dpv_non_commercial_research != dpv_data_altruism).
+fof(bg_dist_dpv_research_and_development_dpv_data_altruism, axiom,
+    dpv_research_and_development != dpv_data_altruism).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_delivery_of_goods, axiom,
-    dpv_non_commercial_research != dpv_delivery_of_goods).
+fof(bg_dist_dpv_research_and_development_dpv_delivery_of_goods, axiom,
+    dpv_research_and_development != dpv_delivery_of_goods).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_direct_marketing, axiom,
-    dpv_non_commercial_research != dpv_direct_marketing).
+fof(bg_dist_dpv_research_and_development_dpv_direct_marketing, axiom,
+    dpv_research_and_development != dpv_direct_marketing).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_dispute_management, axiom,
-    dpv_non_commercial_research != dpv_dispute_management).
+fof(bg_dist_dpv_research_and_development_dpv_dispute_management, axiom,
+    dpv_research_and_development != dpv_dispute_management).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_enforce_access_control, axiom,
-    dpv_non_commercial_research != dpv_enforce_access_control).
+fof(bg_dist_dpv_research_and_development_dpv_enforce_access_control, axiom,
+    dpv_research_and_development != dpv_enforce_access_control).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_enforce_security, axiom,
-    dpv_non_commercial_research != dpv_enforce_security).
+fof(bg_dist_dpv_research_and_development_dpv_enforce_security, axiom,
+    dpv_research_and_development != dpv_enforce_security).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_establish_contractual_agreement, axiom,
-    dpv_non_commercial_research != dpv_establish_contractual_agreement).
+fof(bg_dist_dpv_research_and_development_dpv_establish_contractual_agreement, axiom,
+    dpv_research_and_development != dpv_establish_contractual_agreement).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_fraud_prevention_and_detection, axiom,
-    dpv_non_commercial_research != dpv_fraud_prevention_and_detection).
+fof(bg_dist_dpv_research_and_development_dpv_fraud_prevention_and_detection, axiom,
+    dpv_research_and_development != dpv_fraud_prevention_and_detection).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_fulfilment_of_contractual_obligation, axiom,
-    dpv_non_commercial_research != dpv_fulfilment_of_contractual_obligation).
+fof(bg_dist_dpv_research_and_development_dpv_fulfilment_of_contractual_obligation, axiom,
+    dpv_research_and_development != dpv_fulfilment_of_contractual_obligation).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_fulfilment_of_obligation, axiom,
-    dpv_non_commercial_research != dpv_fulfilment_of_obligation).
+fof(bg_dist_dpv_research_and_development_dpv_fulfilment_of_obligation, axiom,
+    dpv_research_and_development != dpv_fulfilment_of_obligation).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_human_resource_management, axiom,
-    dpv_non_commercial_research != dpv_human_resource_management).
+fof(bg_dist_dpv_research_and_development_dpv_human_resource_management, axiom,
+    dpv_research_and_development != dpv_human_resource_management).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_identity_authentication, axiom,
-    dpv_non_commercial_research != dpv_identity_authentication).
+fof(bg_dist_dpv_research_and_development_dpv_identity_authentication, axiom,
+    dpv_research_and_development != dpv_identity_authentication).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_identity_verification, axiom,
-    dpv_non_commercial_research != dpv_identity_verification).
+fof(bg_dist_dpv_research_and_development_dpv_identity_verification, axiom,
+    dpv_research_and_development != dpv_identity_verification).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_improve_existing_products_and_services, axiom,
-    dpv_non_commercial_research != dpv_improve_existing_products_and_services).
+fof(bg_dist_dpv_research_and_development_dpv_improve_existing_products_and_services, axiom,
+    dpv_research_and_development != dpv_improve_existing_products_and_services).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_improve_healthcare, axiom,
-    dpv_non_commercial_research != dpv_improve_healthcare).
+fof(bg_dist_dpv_research_and_development_dpv_improve_healthcare, axiom,
+    dpv_research_and_development != dpv_improve_healthcare).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_improve_internal_crm_processes, axiom,
-    dpv_non_commercial_research != dpv_improve_internal_crm_processes).
+fof(bg_dist_dpv_research_and_development_dpv_improve_internal_crm_processes, axiom,
+    dpv_research_and_development != dpv_improve_internal_crm_processes).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_improve_public_services, axiom,
-    dpv_non_commercial_research != dpv_improve_public_services).
+fof(bg_dist_dpv_research_and_development_dpv_improve_public_services, axiom,
+    dpv_research_and_development != dpv_improve_public_services).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_increase_service_robustness, axiom,
-    dpv_non_commercial_research != dpv_increase_service_robustness).
+fof(bg_dist_dpv_research_and_development_dpv_improve_transport_mobility, axiom,
+    dpv_research_and_development != dpv_improve_transport_mobility).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_internal_resource_optimisation, axiom,
-    dpv_non_commercial_research != dpv_internal_resource_optimisation).
+fof(bg_dist_dpv_research_and_development_dpv_increase_service_robustness, axiom,
+    dpv_research_and_development != dpv_increase_service_robustness).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_legal_compliance, axiom,
-    dpv_non_commercial_research != dpv_legal_compliance).
+fof(bg_dist_dpv_research_and_development_dpv_internal_resource_optimisation, axiom,
+    dpv_research_and_development != dpv_internal_resource_optimisation).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_maintain_fraud_database, axiom,
-    dpv_non_commercial_research != dpv_maintain_fraud_database).
+fof(bg_dist_dpv_research_and_development_dpv_legal_compliance, axiom,
+    dpv_research_and_development != dpv_legal_compliance).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_marketing, axiom,
-    dpv_non_commercial_research != dpv_marketing).
+fof(bg_dist_dpv_research_and_development_dpv_maintain_fraud_database, axiom,
+    dpv_research_and_development != dpv_maintain_fraud_database).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_member_partner_management, axiom,
-    dpv_non_commercial_research != dpv_member_partner_management).
+fof(bg_dist_dpv_research_and_development_dpv_marketing, axiom,
+    dpv_research_and_development != dpv_marketing).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_misuse_prevention_and_detection, axiom,
-    dpv_non_commercial_research != dpv_misuse_prevention_and_detection).
+fof(bg_dist_dpv_research_and_development_dpv_member_partner_management, axiom,
+    dpv_research_and_development != dpv_member_partner_management).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_non_commercial_purpose, axiom,
-    dpv_non_commercial_research != dpv_non_commercial_purpose).
+fof(bg_dist_dpv_research_and_development_dpv_misuse_prevention_and_detection, axiom,
+    dpv_research_and_development != dpv_misuse_prevention_and_detection).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_optimisation_for_consumer, axiom,
-    dpv_non_commercial_research != dpv_optimisation_for_consumer).
+fof(bg_dist_dpv_research_and_development_dpv_non_commercial_purpose, axiom,
+    dpv_research_and_development != dpv_non_commercial_purpose).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_optimisation_for_controller, axiom,
-    dpv_non_commercial_research != dpv_optimisation_for_controller).
+fof(bg_dist_dpv_research_and_development_dpv_non_commercial_research, axiom,
+    dpv_research_and_development != dpv_non_commercial_research).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_optimise_user_interface, axiom,
-    dpv_non_commercial_research != dpv_optimise_user_interface).
+fof(bg_dist_dpv_research_and_development_dpv_optimisation_for_consumer, axiom,
+    dpv_research_and_development != dpv_optimisation_for_consumer).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_organisation_compliance_management, axiom,
-    dpv_non_commercial_research != dpv_organisation_compliance_management).
+fof(bg_dist_dpv_research_and_development_dpv_optimisation_for_controller, axiom,
+    dpv_research_and_development != dpv_optimisation_for_controller).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_organisation_governance, axiom,
-    dpv_non_commercial_research != dpv_organisation_governance).
+fof(bg_dist_dpv_research_and_development_dpv_optimise_user_interface, axiom,
+    dpv_research_and_development != dpv_optimise_user_interface).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_organisation_risk_management, axiom,
-    dpv_non_commercial_research != dpv_organisation_risk_management).
+fof(bg_dist_dpv_research_and_development_dpv_organisation_compliance_management, axiom,
+    dpv_research_and_development != dpv_organisation_compliance_management).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_payment_management, axiom,
-    dpv_non_commercial_research != dpv_payment_management).
+fof(bg_dist_dpv_research_and_development_dpv_organisation_governance, axiom,
+    dpv_research_and_development != dpv_organisation_governance).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_personalisation, axiom,
-    dpv_non_commercial_research != dpv_personalisation).
+fof(bg_dist_dpv_research_and_development_dpv_organisation_risk_management, axiom,
+    dpv_research_and_development != dpv_organisation_risk_management).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_personalised_advertising, axiom,
-    dpv_non_commercial_research != dpv_personalised_advertising).
+fof(bg_dist_dpv_research_and_development_dpv_payment_management, axiom,
+    dpv_research_and_development != dpv_payment_management).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_personalised_benefits, axiom,
-    dpv_non_commercial_research != dpv_personalised_benefits).
+fof(bg_dist_dpv_research_and_development_dpv_personalisation, axiom,
+    dpv_research_and_development != dpv_personalisation).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_personnel_behaviour_monitoring, axiom,
-    dpv_non_commercial_research != dpv_personnel_behaviour_monitoring).
+fof(bg_dist_dpv_research_and_development_dpv_personalised_advertising, axiom,
+    dpv_research_and_development != dpv_personalised_advertising).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_personnel_hiring, axiom,
-    dpv_non_commercial_research != dpv_personnel_hiring).
+fof(bg_dist_dpv_research_and_development_dpv_personalised_benefits, axiom,
+    dpv_research_and_development != dpv_personalised_benefits).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_personnel_management, axiom,
-    dpv_non_commercial_research != dpv_personnel_management).
+fof(bg_dist_dpv_research_and_development_dpv_personnel_behaviour_monitoring, axiom,
+    dpv_research_and_development != dpv_personnel_behaviour_monitoring).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_personnel_monitoring, axiom,
-    dpv_non_commercial_research != dpv_personnel_monitoring).
+fof(bg_dist_dpv_research_and_development_dpv_personnel_hiring, axiom,
+    dpv_research_and_development != dpv_personnel_hiring).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_personnel_offboarding, axiom,
-    dpv_non_commercial_research != dpv_personnel_offboarding).
+fof(bg_dist_dpv_research_and_development_dpv_personnel_management, axiom,
+    dpv_research_and_development != dpv_personnel_management).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_personnel_onboarding, axiom,
-    dpv_non_commercial_research != dpv_personnel_onboarding).
+fof(bg_dist_dpv_research_and_development_dpv_personnel_monitoring, axiom,
+    dpv_research_and_development != dpv_personnel_monitoring).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_personnel_payment, axiom,
-    dpv_non_commercial_research != dpv_personnel_payment).
+fof(bg_dist_dpv_research_and_development_dpv_personnel_offboarding, axiom,
+    dpv_research_and_development != dpv_personnel_offboarding).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_personnel_performance_evaluation, axiom,
-    dpv_non_commercial_research != dpv_personnel_performance_evaluation).
+fof(bg_dist_dpv_research_and_development_dpv_personnel_onboarding, axiom,
+    dpv_research_and_development != dpv_personnel_onboarding).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_personnel_performance_management, axiom,
-    dpv_non_commercial_research != dpv_personnel_performance_management).
+fof(bg_dist_dpv_research_and_development_dpv_personnel_payment, axiom,
+    dpv_research_and_development != dpv_personnel_payment).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_personnel_performance_monitoring, axiom,
-    dpv_non_commercial_research != dpv_personnel_performance_monitoring).
+fof(bg_dist_dpv_research_and_development_dpv_personnel_performance_evaluation, axiom,
+    dpv_research_and_development != dpv_personnel_performance_evaluation).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_personnel_performance_prediction, axiom,
-    dpv_non_commercial_research != dpv_personnel_performance_prediction).
+fof(bg_dist_dpv_research_and_development_dpv_personnel_performance_management, axiom,
+    dpv_research_and_development != dpv_personnel_performance_management).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_personnel_promotion_management, axiom,
-    dpv_non_commercial_research != dpv_personnel_promotion_management).
+fof(bg_dist_dpv_research_and_development_dpv_personnel_performance_monitoring, axiom,
+    dpv_research_and_development != dpv_personnel_performance_monitoring).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_personnel_termination_management, axiom,
-    dpv_non_commercial_research != dpv_personnel_termination_management).
+fof(bg_dist_dpv_research_and_development_dpv_personnel_performance_prediction, axiom,
+    dpv_research_and_development != dpv_personnel_performance_prediction).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_personnel_workload_management, axiom,
-    dpv_non_commercial_research != dpv_personnel_workload_management).
+fof(bg_dist_dpv_research_and_development_dpv_personnel_promotion_management, axiom,
+    dpv_research_and_development != dpv_personnel_promotion_management).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_political_campaign, axiom,
-    dpv_non_commercial_research != dpv_political_campaign).
+fof(bg_dist_dpv_research_and_development_dpv_personnel_termination_management, axiom,
+    dpv_research_and_development != dpv_personnel_termination_management).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_protection_of_ipr, axiom,
-    dpv_non_commercial_research != dpv_protection_of_ipr).
+fof(bg_dist_dpv_research_and_development_dpv_personnel_workload_management, axiom,
+    dpv_research_and_development != dpv_personnel_workload_management).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_protection_of_national_security, axiom,
-    dpv_non_commercial_research != dpv_protection_of_national_security).
+fof(bg_dist_dpv_research_and_development_dpv_political_campaign, axiom,
+    dpv_research_and_development != dpv_political_campaign).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_protection_of_public_security, axiom,
-    dpv_non_commercial_research != dpv_protection_of_public_security).
+fof(bg_dist_dpv_research_and_development_dpv_protection_of_ipr, axiom,
+    dpv_research_and_development != dpv_protection_of_ipr).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_provide_event_recommendations, axiom,
-    dpv_non_commercial_research != dpv_provide_event_recommendations).
+fof(bg_dist_dpv_research_and_development_dpv_protection_of_national_security, axiom,
+    dpv_research_and_development != dpv_protection_of_national_security).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_provide_official_statistics, axiom,
-    dpv_non_commercial_research != dpv_provide_official_statistics).
+fof(bg_dist_dpv_research_and_development_dpv_protection_of_public_security, axiom,
+    dpv_research_and_development != dpv_protection_of_public_security).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_provide_personalised_recommendations, axiom,
-    dpv_non_commercial_research != dpv_provide_personalised_recommendations).
+fof(bg_dist_dpv_research_and_development_dpv_provide_event_recommendations, axiom,
+    dpv_research_and_development != dpv_provide_event_recommendations).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_provide_product_recommendations, axiom,
-    dpv_non_commercial_research != dpv_provide_product_recommendations).
+fof(bg_dist_dpv_research_and_development_dpv_provide_official_statistics, axiom,
+    dpv_research_and_development != dpv_provide_official_statistics).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_public_policy_making, axiom,
-    dpv_non_commercial_research != dpv_public_policy_making).
+fof(bg_dist_dpv_research_and_development_dpv_provide_personalised_recommendations, axiom,
+    dpv_research_and_development != dpv_provide_personalised_recommendations).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_public_relations, axiom,
-    dpv_non_commercial_research != dpv_public_relations).
+fof(bg_dist_dpv_research_and_development_dpv_provide_product_recommendations, axiom,
+    dpv_research_and_development != dpv_provide_product_recommendations).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_purpose, axiom,
-    dpv_non_commercial_research != dpv_purpose).
+fof(bg_dist_dpv_research_and_development_dpv_public_benefit, axiom,
+    dpv_research_and_development != dpv_public_benefit).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_record_management, axiom,
-    dpv_non_commercial_research != dpv_record_management).
+fof(bg_dist_dpv_research_and_development_dpv_public_policy_making, axiom,
+    dpv_research_and_development != dpv_public_policy_making).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_recruitment_advertising, axiom,
-    dpv_non_commercial_research != dpv_recruitment_advertising).
+fof(bg_dist_dpv_research_and_development_dpv_public_relations, axiom,
+    dpv_research_and_development != dpv_public_relations).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_recruitment_applicant_background_check, axiom,
-    dpv_non_commercial_research != dpv_recruitment_applicant_background_check).
+fof(bg_dist_dpv_research_and_development_dpv_purpose, axiom,
+    dpv_research_and_development != dpv_purpose).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_recruitment_applicant_criminal_background_check, axiom,
-    dpv_non_commercial_research != dpv_recruitment_applicant_criminal_background_check).
+fof(bg_dist_dpv_research_and_development_dpv_record_management, axiom,
+    dpv_research_and_development != dpv_record_management).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_recruitment_applicant_information_authentication, axiom,
-    dpv_non_commercial_research != dpv_recruitment_applicant_information_authentication).
+fof(bg_dist_dpv_research_and_development_dpv_recruitment_advertising, axiom,
+    dpv_research_and_development != dpv_recruitment_advertising).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_recruitment_applicant_selection, axiom,
-    dpv_non_commercial_research != dpv_recruitment_applicant_selection).
+fof(bg_dist_dpv_research_and_development_dpv_recruitment_applicant_background_check, axiom,
+    dpv_research_and_development != dpv_recruitment_applicant_background_check).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_recruitment_application_analysis, axiom,
-    dpv_non_commercial_research != dpv_recruitment_application_analysis).
+fof(bg_dist_dpv_research_and_development_dpv_recruitment_applicant_criminal_background_check, axiom,
+    dpv_research_and_development != dpv_recruitment_applicant_criminal_background_check).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_recruitment_application_management, axiom,
-    dpv_non_commercial_research != dpv_recruitment_application_management).
+fof(bg_dist_dpv_research_and_development_dpv_recruitment_applicant_information_authentication, axiom,
+    dpv_research_and_development != dpv_recruitment_applicant_information_authentication).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_recruitment_application_screening, axiom,
-    dpv_non_commercial_research != dpv_recruitment_application_screening).
+fof(bg_dist_dpv_research_and_development_dpv_recruitment_applicant_selection, axiom,
+    dpv_research_and_development != dpv_recruitment_applicant_selection).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_recruitment_interview_analysis, axiom,
-    dpv_non_commercial_research != dpv_recruitment_interview_analysis).
+fof(bg_dist_dpv_research_and_development_dpv_recruitment_application_analysis, axiom,
+    dpv_research_and_development != dpv_recruitment_application_analysis).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_recruitment_interview_assessment, axiom,
-    dpv_non_commercial_research != dpv_recruitment_interview_assessment).
+fof(bg_dist_dpv_research_and_development_dpv_recruitment_application_management, axiom,
+    dpv_research_and_development != dpv_recruitment_application_management).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_recruitment_interview_management, axiom,
-    dpv_non_commercial_research != dpv_recruitment_interview_management).
+fof(bg_dist_dpv_research_and_development_dpv_recruitment_application_screening, axiom,
+    dpv_research_and_development != dpv_recruitment_application_screening).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_recruitment_interview_scheduling, axiom,
-    dpv_non_commercial_research != dpv_recruitment_interview_scheduling).
+fof(bg_dist_dpv_research_and_development_dpv_recruitment_interview_analysis, axiom,
+    dpv_research_and_development != dpv_recruitment_interview_analysis).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_recruitment_management, axiom,
-    dpv_non_commercial_research != dpv_recruitment_management).
+fof(bg_dist_dpv_research_and_development_dpv_recruitment_interview_assessment, axiom,
+    dpv_research_and_development != dpv_recruitment_interview_assessment).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_recruitment_targeted_advertising, axiom,
-    dpv_non_commercial_research != dpv_recruitment_targeted_advertising).
+fof(bg_dist_dpv_research_and_development_dpv_recruitment_interview_management, axiom,
+    dpv_research_and_development != dpv_recruitment_interview_management).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_repair_impairments, axiom,
-    dpv_non_commercial_research != dpv_repair_impairments).
+fof(bg_dist_dpv_research_and_development_dpv_recruitment_interview_scheduling, axiom,
+    dpv_research_and_development != dpv_recruitment_interview_scheduling).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_requested_service_provision, axiom,
-    dpv_non_commercial_research != dpv_requested_service_provision).
+fof(bg_dist_dpv_research_and_development_dpv_recruitment_management, axiom,
+    dpv_research_and_development != dpv_recruitment_management).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_research_and_development, axiom,
-    dpv_non_commercial_research != dpv_research_and_development).
+fof(bg_dist_dpv_research_and_development_dpv_recruitment_targeted_advertising, axiom,
+    dpv_research_and_development != dpv_recruitment_targeted_advertising).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_scientific_research, axiom,
-    dpv_non_commercial_research != dpv_scientific_research).
+fof(bg_dist_dpv_research_and_development_dpv_repair_impairments, axiom,
+    dpv_research_and_development != dpv_repair_impairments).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_search_functionalities, axiom,
-    dpv_non_commercial_research != dpv_search_functionalities).
+fof(bg_dist_dpv_research_and_development_dpv_requested_service_provision, axiom,
+    dpv_research_and_development != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_sell_data_to_third_parties, axiom,
-    dpv_non_commercial_research != dpv_sell_data_to_third_parties).
+fof(bg_dist_dpv_research_and_development_dpv_rights_fulfilment, axiom,
+    dpv_research_and_development != dpv_rights_fulfilment).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_sell_insights_from_data, axiom,
-    dpv_non_commercial_research != dpv_sell_insights_from_data).
+fof(bg_dist_dpv_research_and_development_dpv_search_functionalities, axiom,
+    dpv_research_and_development != dpv_search_functionalities).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_sell_products, axiom,
-    dpv_non_commercial_research != dpv_sell_products).
+fof(bg_dist_dpv_research_and_development_dpv_sell_data_to_third_parties, axiom,
+    dpv_research_and_development != dpv_sell_data_to_third_parties).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_sell_products_to_data_subject, axiom,
-    dpv_non_commercial_research != dpv_sell_products_to_data_subject).
+fof(bg_dist_dpv_research_and_development_dpv_sell_insights_from_data, axiom,
+    dpv_research_and_development != dpv_sell_insights_from_data).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_service_access_determination, axiom,
-    dpv_non_commercial_research != dpv_service_access_determination).
+fof(bg_dist_dpv_research_and_development_dpv_sell_products, axiom,
+    dpv_research_and_development != dpv_sell_products).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_service_management, axiom,
-    dpv_non_commercial_research != dpv_service_management).
+fof(bg_dist_dpv_research_and_development_dpv_sell_products_to_data_subject, axiom,
+    dpv_research_and_development != dpv_sell_products_to_data_subject).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_service_monitoring, axiom,
-    dpv_non_commercial_research != dpv_service_monitoring).
+fof(bg_dist_dpv_research_and_development_dpv_service_access_determination, axiom,
+    dpv_research_and_development != dpv_service_access_determination).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_service_optimisation, axiom,
-    dpv_non_commercial_research != dpv_service_optimisation).
+fof(bg_dist_dpv_research_and_development_dpv_service_management, axiom,
+    dpv_research_and_development != dpv_service_management).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_service_personalisation, axiom,
-    dpv_non_commercial_research != dpv_service_personalisation).
+fof(bg_dist_dpv_research_and_development_dpv_service_monitoring, axiom,
+    dpv_research_and_development != dpv_service_monitoring).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_service_provision, axiom,
-    dpv_non_commercial_research != dpv_service_provision).
+fof(bg_dist_dpv_research_and_development_dpv_service_optimisation, axiom,
+    dpv_research_and_development != dpv_service_optimisation).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_service_registration, axiom,
-    dpv_non_commercial_research != dpv_service_registration).
+fof(bg_dist_dpv_research_and_development_dpv_service_personalisation, axiom,
+    dpv_research_and_development != dpv_service_personalisation).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_service_usage_analytics, axiom,
-    dpv_non_commercial_research != dpv_service_usage_analytics).
+fof(bg_dist_dpv_research_and_development_dpv_service_provision, axiom,
+    dpv_research_and_development != dpv_service_provision).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_social_media_marketing, axiom,
-    dpv_non_commercial_research != dpv_social_media_marketing).
+fof(bg_dist_dpv_research_and_development_dpv_service_registration, axiom,
+    dpv_research_and_development != dpv_service_registration).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_targeted_advertising, axiom,
-    dpv_non_commercial_research != dpv_targeted_advertising).
+fof(bg_dist_dpv_research_and_development_dpv_service_usage_analytics, axiom,
+    dpv_research_and_development != dpv_service_usage_analytics).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_technical_service_provision, axiom,
-    dpv_non_commercial_research != dpv_technical_service_provision).
+fof(bg_dist_dpv_research_and_development_dpv_social_media_marketing, axiom,
+    dpv_research_and_development != dpv_social_media_marketing).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_user_interface_personalisation, axiom,
-    dpv_non_commercial_research != dpv_user_interface_personalisation).
+fof(bg_dist_dpv_research_and_development_dpv_targeted_advertising, axiom,
+    dpv_research_and_development != dpv_targeted_advertising).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_vendor_management, axiom,
-    dpv_non_commercial_research != dpv_vendor_management).
+fof(bg_dist_dpv_research_and_development_dpv_technical_service_provision, axiom,
+    dpv_research_and_development != dpv_technical_service_provision).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_vendor_payment, axiom,
-    dpv_non_commercial_research != dpv_vendor_payment).
+fof(bg_dist_dpv_research_and_development_dpv_user_interface_personalisation, axiom,
+    dpv_research_and_development != dpv_user_interface_personalisation).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_vendor_records_management, axiom,
-    dpv_non_commercial_research != dpv_vendor_records_management).
+fof(bg_dist_dpv_research_and_development_dpv_vendor_management, axiom,
+    dpv_research_and_development != dpv_vendor_management).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_vendor_selection_assessment, axiom,
-    dpv_non_commercial_research != dpv_vendor_selection_assessment).
+fof(bg_dist_dpv_research_and_development_dpv_vendor_payment, axiom,
+    dpv_research_and_development != dpv_vendor_payment).
 
-fof(bg_dist_dpv_non_commercial_research_dpv_verification, axiom,
-    dpv_non_commercial_research != dpv_verification).
+fof(bg_dist_dpv_research_and_development_dpv_vendor_records_management, axiom,
+    dpv_research_and_development != dpv_vendor_records_management).
 
-fof(bg_dist_dpv_improve_transport_mobility_dpv_academic_research, axiom,
-    dpv_improve_transport_mobility != dpv_academic_research).
+fof(bg_dist_dpv_research_and_development_dpv_vendor_selection_assessment, axiom,
+    dpv_research_and_development != dpv_vendor_selection_assessment).
 
-fof(bg_dist_dpv_improve_transport_mobility_dpv_account_management, axiom,
-    dpv_improve_transport_mobility != dpv_account_management).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_advertising, axiom,
-    dpv_improve_transport_mobility != dpv_advertising).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_age_verification, axiom,
-    dpv_improve_transport_mobility != dpv_age_verification).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_combat_climate_change, axiom,
-    dpv_improve_transport_mobility != dpv_combat_climate_change).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_commercial_purpose, axiom,
-    dpv_improve_transport_mobility != dpv_commercial_purpose).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_commercial_research, axiom,
-    dpv_improve_transport_mobility != dpv_commercial_research).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_communication_for_customer_care, axiom,
-    dpv_improve_transport_mobility != dpv_communication_for_customer_care).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_communication_management, axiom,
-    dpv_improve_transport_mobility != dpv_communication_management).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_counter_money_laundering, axiom,
-    dpv_improve_transport_mobility != dpv_counter_money_laundering).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_counterterrorism, axiom,
-    dpv_improve_transport_mobility != dpv_counterterrorism).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_customer_care, axiom,
-    dpv_improve_transport_mobility != dpv_customer_care).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_customer_claims_management, axiom,
-    dpv_improve_transport_mobility != dpv_customer_claims_management).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_customer_management, axiom,
-    dpv_improve_transport_mobility != dpv_customer_management).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_customer_order_management, axiom,
-    dpv_improve_transport_mobility != dpv_customer_order_management).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_customer_relationship_management, axiom,
-    dpv_improve_transport_mobility != dpv_customer_relationship_management).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_customer_solvency_monitoring, axiom,
-    dpv_improve_transport_mobility != dpv_customer_solvency_monitoring).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_data_altruism, axiom,
-    dpv_improve_transport_mobility != dpv_data_altruism).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_delivery_of_goods, axiom,
-    dpv_improve_transport_mobility != dpv_delivery_of_goods).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_direct_marketing, axiom,
-    dpv_improve_transport_mobility != dpv_direct_marketing).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_dispute_management, axiom,
-    dpv_improve_transport_mobility != dpv_dispute_management).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_enforce_access_control, axiom,
-    dpv_improve_transport_mobility != dpv_enforce_access_control).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_enforce_security, axiom,
-    dpv_improve_transport_mobility != dpv_enforce_security).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_establish_contractual_agreement, axiom,
-    dpv_improve_transport_mobility != dpv_establish_contractual_agreement).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_fraud_prevention_and_detection, axiom,
-    dpv_improve_transport_mobility != dpv_fraud_prevention_and_detection).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_fulfilment_of_contractual_obligation, axiom,
-    dpv_improve_transport_mobility != dpv_fulfilment_of_contractual_obligation).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_fulfilment_of_obligation, axiom,
-    dpv_improve_transport_mobility != dpv_fulfilment_of_obligation).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_human_resource_management, axiom,
-    dpv_improve_transport_mobility != dpv_human_resource_management).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_identity_authentication, axiom,
-    dpv_improve_transport_mobility != dpv_identity_authentication).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_identity_verification, axiom,
-    dpv_improve_transport_mobility != dpv_identity_verification).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_improve_existing_products_and_services, axiom,
-    dpv_improve_transport_mobility != dpv_improve_existing_products_and_services).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_improve_healthcare, axiom,
-    dpv_improve_transport_mobility != dpv_improve_healthcare).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_improve_internal_crm_processes, axiom,
-    dpv_improve_transport_mobility != dpv_improve_internal_crm_processes).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_improve_public_services, axiom,
-    dpv_improve_transport_mobility != dpv_improve_public_services).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_increase_service_robustness, axiom,
-    dpv_improve_transport_mobility != dpv_increase_service_robustness).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_internal_resource_optimisation, axiom,
-    dpv_improve_transport_mobility != dpv_internal_resource_optimisation).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_legal_compliance, axiom,
-    dpv_improve_transport_mobility != dpv_legal_compliance).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_maintain_fraud_database, axiom,
-    dpv_improve_transport_mobility != dpv_maintain_fraud_database).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_marketing, axiom,
-    dpv_improve_transport_mobility != dpv_marketing).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_member_partner_management, axiom,
-    dpv_improve_transport_mobility != dpv_member_partner_management).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_misuse_prevention_and_detection, axiom,
-    dpv_improve_transport_mobility != dpv_misuse_prevention_and_detection).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_non_commercial_purpose, axiom,
-    dpv_improve_transport_mobility != dpv_non_commercial_purpose).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_optimisation_for_consumer, axiom,
-    dpv_improve_transport_mobility != dpv_optimisation_for_consumer).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_optimisation_for_controller, axiom,
-    dpv_improve_transport_mobility != dpv_optimisation_for_controller).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_optimise_user_interface, axiom,
-    dpv_improve_transport_mobility != dpv_optimise_user_interface).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_organisation_compliance_management, axiom,
-    dpv_improve_transport_mobility != dpv_organisation_compliance_management).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_organisation_governance, axiom,
-    dpv_improve_transport_mobility != dpv_organisation_governance).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_organisation_risk_management, axiom,
-    dpv_improve_transport_mobility != dpv_organisation_risk_management).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_payment_management, axiom,
-    dpv_improve_transport_mobility != dpv_payment_management).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_personalisation, axiom,
-    dpv_improve_transport_mobility != dpv_personalisation).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_personalised_advertising, axiom,
-    dpv_improve_transport_mobility != dpv_personalised_advertising).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_personalised_benefits, axiom,
-    dpv_improve_transport_mobility != dpv_personalised_benefits).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_personnel_behaviour_monitoring, axiom,
-    dpv_improve_transport_mobility != dpv_personnel_behaviour_monitoring).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_personnel_hiring, axiom,
-    dpv_improve_transport_mobility != dpv_personnel_hiring).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_personnel_management, axiom,
-    dpv_improve_transport_mobility != dpv_personnel_management).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_personnel_monitoring, axiom,
-    dpv_improve_transport_mobility != dpv_personnel_monitoring).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_personnel_offboarding, axiom,
-    dpv_improve_transport_mobility != dpv_personnel_offboarding).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_personnel_onboarding, axiom,
-    dpv_improve_transport_mobility != dpv_personnel_onboarding).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_personnel_payment, axiom,
-    dpv_improve_transport_mobility != dpv_personnel_payment).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_personnel_performance_evaluation, axiom,
-    dpv_improve_transport_mobility != dpv_personnel_performance_evaluation).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_personnel_performance_management, axiom,
-    dpv_improve_transport_mobility != dpv_personnel_performance_management).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_personnel_performance_monitoring, axiom,
-    dpv_improve_transport_mobility != dpv_personnel_performance_monitoring).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_personnel_performance_prediction, axiom,
-    dpv_improve_transport_mobility != dpv_personnel_performance_prediction).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_personnel_promotion_management, axiom,
-    dpv_improve_transport_mobility != dpv_personnel_promotion_management).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_personnel_termination_management, axiom,
-    dpv_improve_transport_mobility != dpv_personnel_termination_management).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_personnel_workload_management, axiom,
-    dpv_improve_transport_mobility != dpv_personnel_workload_management).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_political_campaign, axiom,
-    dpv_improve_transport_mobility != dpv_political_campaign).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_protection_of_ipr, axiom,
-    dpv_improve_transport_mobility != dpv_protection_of_ipr).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_protection_of_national_security, axiom,
-    dpv_improve_transport_mobility != dpv_protection_of_national_security).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_protection_of_public_security, axiom,
-    dpv_improve_transport_mobility != dpv_protection_of_public_security).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_provide_event_recommendations, axiom,
-    dpv_improve_transport_mobility != dpv_provide_event_recommendations).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_provide_official_statistics, axiom,
-    dpv_improve_transport_mobility != dpv_provide_official_statistics).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_provide_personalised_recommendations, axiom,
-    dpv_improve_transport_mobility != dpv_provide_personalised_recommendations).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_provide_product_recommendations, axiom,
-    dpv_improve_transport_mobility != dpv_provide_product_recommendations).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_public_policy_making, axiom,
-    dpv_improve_transport_mobility != dpv_public_policy_making).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_public_relations, axiom,
-    dpv_improve_transport_mobility != dpv_public_relations).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_purpose, axiom,
-    dpv_improve_transport_mobility != dpv_purpose).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_record_management, axiom,
-    dpv_improve_transport_mobility != dpv_record_management).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_recruitment_advertising, axiom,
-    dpv_improve_transport_mobility != dpv_recruitment_advertising).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_recruitment_applicant_background_check, axiom,
-    dpv_improve_transport_mobility != dpv_recruitment_applicant_background_check).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_recruitment_applicant_criminal_background_check, axiom,
-    dpv_improve_transport_mobility != dpv_recruitment_applicant_criminal_background_check).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_recruitment_applicant_information_authentication, axiom,
-    dpv_improve_transport_mobility != dpv_recruitment_applicant_information_authentication).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_recruitment_applicant_selection, axiom,
-    dpv_improve_transport_mobility != dpv_recruitment_applicant_selection).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_recruitment_application_analysis, axiom,
-    dpv_improve_transport_mobility != dpv_recruitment_application_analysis).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_recruitment_application_management, axiom,
-    dpv_improve_transport_mobility != dpv_recruitment_application_management).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_recruitment_application_screening, axiom,
-    dpv_improve_transport_mobility != dpv_recruitment_application_screening).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_recruitment_interview_analysis, axiom,
-    dpv_improve_transport_mobility != dpv_recruitment_interview_analysis).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_recruitment_interview_assessment, axiom,
-    dpv_improve_transport_mobility != dpv_recruitment_interview_assessment).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_recruitment_interview_management, axiom,
-    dpv_improve_transport_mobility != dpv_recruitment_interview_management).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_recruitment_interview_scheduling, axiom,
-    dpv_improve_transport_mobility != dpv_recruitment_interview_scheduling).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_recruitment_management, axiom,
-    dpv_improve_transport_mobility != dpv_recruitment_management).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_recruitment_targeted_advertising, axiom,
-    dpv_improve_transport_mobility != dpv_recruitment_targeted_advertising).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_repair_impairments, axiom,
-    dpv_improve_transport_mobility != dpv_repair_impairments).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_requested_service_provision, axiom,
-    dpv_improve_transport_mobility != dpv_requested_service_provision).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_research_and_development, axiom,
-    dpv_improve_transport_mobility != dpv_research_and_development).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_scientific_research, axiom,
-    dpv_improve_transport_mobility != dpv_scientific_research).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_search_functionalities, axiom,
-    dpv_improve_transport_mobility != dpv_search_functionalities).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_sell_data_to_third_parties, axiom,
-    dpv_improve_transport_mobility != dpv_sell_data_to_third_parties).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_sell_insights_from_data, axiom,
-    dpv_improve_transport_mobility != dpv_sell_insights_from_data).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_sell_products, axiom,
-    dpv_improve_transport_mobility != dpv_sell_products).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_sell_products_to_data_subject, axiom,
-    dpv_improve_transport_mobility != dpv_sell_products_to_data_subject).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_service_access_determination, axiom,
-    dpv_improve_transport_mobility != dpv_service_access_determination).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_service_management, axiom,
-    dpv_improve_transport_mobility != dpv_service_management).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_service_monitoring, axiom,
-    dpv_improve_transport_mobility != dpv_service_monitoring).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_service_optimisation, axiom,
-    dpv_improve_transport_mobility != dpv_service_optimisation).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_service_personalisation, axiom,
-    dpv_improve_transport_mobility != dpv_service_personalisation).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_service_provision, axiom,
-    dpv_improve_transport_mobility != dpv_service_provision).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_service_registration, axiom,
-    dpv_improve_transport_mobility != dpv_service_registration).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_service_usage_analytics, axiom,
-    dpv_improve_transport_mobility != dpv_service_usage_analytics).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_social_media_marketing, axiom,
-    dpv_improve_transport_mobility != dpv_social_media_marketing).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_targeted_advertising, axiom,
-    dpv_improve_transport_mobility != dpv_targeted_advertising).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_technical_service_provision, axiom,
-    dpv_improve_transport_mobility != dpv_technical_service_provision).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_user_interface_personalisation, axiom,
-    dpv_improve_transport_mobility != dpv_user_interface_personalisation).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_vendor_management, axiom,
-    dpv_improve_transport_mobility != dpv_vendor_management).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_vendor_payment, axiom,
-    dpv_improve_transport_mobility != dpv_vendor_payment).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_vendor_records_management, axiom,
-    dpv_improve_transport_mobility != dpv_vendor_records_management).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_vendor_selection_assessment, axiom,
-    dpv_improve_transport_mobility != dpv_vendor_selection_assessment).
-
-fof(bg_dist_dpv_improve_transport_mobility_dpv_verification, axiom,
-    dpv_improve_transport_mobility != dpv_verification).
+fof(bg_dist_dpv_research_and_development_dpv_verification, axiom,
+    dpv_research_and_development != dpv_verification).
 
 fof(bg_dist_dpv_academic_research_dpv_account_management, axiom,
     dpv_academic_research != dpv_account_management).
@@ -1203,6 +854,9 @@ fof(bg_dist_dpv_academic_research_dpv_improve_internal_crm_processes, axiom,
 fof(bg_dist_dpv_academic_research_dpv_improve_public_services, axiom,
     dpv_academic_research != dpv_improve_public_services).
 
+fof(bg_dist_dpv_academic_research_dpv_improve_transport_mobility, axiom,
+    dpv_academic_research != dpv_improve_transport_mobility).
+
 fof(bg_dist_dpv_academic_research_dpv_increase_service_robustness, axiom,
     dpv_academic_research != dpv_increase_service_robustness).
 
@@ -1226,6 +880,9 @@ fof(bg_dist_dpv_academic_research_dpv_misuse_prevention_and_detection, axiom,
 
 fof(bg_dist_dpv_academic_research_dpv_non_commercial_purpose, axiom,
     dpv_academic_research != dpv_non_commercial_purpose).
+
+fof(bg_dist_dpv_academic_research_dpv_non_commercial_research, axiom,
+    dpv_academic_research != dpv_non_commercial_research).
 
 fof(bg_dist_dpv_academic_research_dpv_optimisation_for_consumer, axiom,
     dpv_academic_research != dpv_optimisation_for_consumer).
@@ -1323,6 +980,9 @@ fof(bg_dist_dpv_academic_research_dpv_provide_personalised_recommendations, axio
 fof(bg_dist_dpv_academic_research_dpv_provide_product_recommendations, axiom,
     dpv_academic_research != dpv_provide_product_recommendations).
 
+fof(bg_dist_dpv_academic_research_dpv_public_benefit, axiom,
+    dpv_academic_research != dpv_public_benefit).
+
 fof(bg_dist_dpv_academic_research_dpv_public_policy_making, axiom,
     dpv_academic_research != dpv_public_policy_making).
 
@@ -1383,11 +1043,8 @@ fof(bg_dist_dpv_academic_research_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_academic_research_dpv_requested_service_provision, axiom,
     dpv_academic_research != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_academic_research_dpv_research_and_development, axiom,
-    dpv_academic_research != dpv_research_and_development).
-
-fof(bg_dist_dpv_academic_research_dpv_scientific_research, axiom,
-    dpv_academic_research != dpv_scientific_research).
+fof(bg_dist_dpv_academic_research_dpv_rights_fulfilment, axiom,
+    dpv_academic_research != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_academic_research_dpv_search_functionalities, axiom,
     dpv_academic_research != dpv_search_functionalities).
@@ -1551,6 +1208,9 @@ fof(bg_dist_dpv_account_management_dpv_improve_internal_crm_processes, axiom,
 fof(bg_dist_dpv_account_management_dpv_improve_public_services, axiom,
     dpv_account_management != dpv_improve_public_services).
 
+fof(bg_dist_dpv_account_management_dpv_improve_transport_mobility, axiom,
+    dpv_account_management != dpv_improve_transport_mobility).
+
 fof(bg_dist_dpv_account_management_dpv_increase_service_robustness, axiom,
     dpv_account_management != dpv_increase_service_robustness).
 
@@ -1574,6 +1234,9 @@ fof(bg_dist_dpv_account_management_dpv_misuse_prevention_and_detection, axiom,
 
 fof(bg_dist_dpv_account_management_dpv_non_commercial_purpose, axiom,
     dpv_account_management != dpv_non_commercial_purpose).
+
+fof(bg_dist_dpv_account_management_dpv_non_commercial_research, axiom,
+    dpv_account_management != dpv_non_commercial_research).
 
 fof(bg_dist_dpv_account_management_dpv_optimisation_for_consumer, axiom,
     dpv_account_management != dpv_optimisation_for_consumer).
@@ -1671,6 +1334,9 @@ fof(bg_dist_dpv_account_management_dpv_provide_personalised_recommendations, axi
 fof(bg_dist_dpv_account_management_dpv_provide_product_recommendations, axiom,
     dpv_account_management != dpv_provide_product_recommendations).
 
+fof(bg_dist_dpv_account_management_dpv_public_benefit, axiom,
+    dpv_account_management != dpv_public_benefit).
+
 fof(bg_dist_dpv_account_management_dpv_public_policy_making, axiom,
     dpv_account_management != dpv_public_policy_making).
 
@@ -1731,11 +1397,8 @@ fof(bg_dist_dpv_account_management_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_account_management_dpv_requested_service_provision, axiom,
     dpv_account_management != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_account_management_dpv_research_and_development, axiom,
-    dpv_account_management != dpv_research_and_development).
-
-fof(bg_dist_dpv_account_management_dpv_scientific_research, axiom,
-    dpv_account_management != dpv_scientific_research).
+fof(bg_dist_dpv_account_management_dpv_rights_fulfilment, axiom,
+    dpv_account_management != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_account_management_dpv_search_functionalities, axiom,
     dpv_account_management != dpv_search_functionalities).
@@ -1896,6 +1559,9 @@ fof(bg_dist_dpv_advertising_dpv_improve_internal_crm_processes, axiom,
 fof(bg_dist_dpv_advertising_dpv_improve_public_services, axiom,
     dpv_advertising != dpv_improve_public_services).
 
+fof(bg_dist_dpv_advertising_dpv_improve_transport_mobility, axiom,
+    dpv_advertising != dpv_improve_transport_mobility).
+
 fof(bg_dist_dpv_advertising_dpv_increase_service_robustness, axiom,
     dpv_advertising != dpv_increase_service_robustness).
 
@@ -1919,6 +1585,9 @@ fof(bg_dist_dpv_advertising_dpv_misuse_prevention_and_detection, axiom,
 
 fof(bg_dist_dpv_advertising_dpv_non_commercial_purpose, axiom,
     dpv_advertising != dpv_non_commercial_purpose).
+
+fof(bg_dist_dpv_advertising_dpv_non_commercial_research, axiom,
+    dpv_advertising != dpv_non_commercial_research).
 
 fof(bg_dist_dpv_advertising_dpv_optimisation_for_consumer, axiom,
     dpv_advertising != dpv_optimisation_for_consumer).
@@ -2016,6 +1685,9 @@ fof(bg_dist_dpv_advertising_dpv_provide_personalised_recommendations, axiom,
 fof(bg_dist_dpv_advertising_dpv_provide_product_recommendations, axiom,
     dpv_advertising != dpv_provide_product_recommendations).
 
+fof(bg_dist_dpv_advertising_dpv_public_benefit, axiom,
+    dpv_advertising != dpv_public_benefit).
+
 fof(bg_dist_dpv_advertising_dpv_public_policy_making, axiom,
     dpv_advertising != dpv_public_policy_making).
 
@@ -2076,11 +1748,8 @@ fof(bg_dist_dpv_advertising_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_advertising_dpv_requested_service_provision, axiom,
     dpv_advertising != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_advertising_dpv_research_and_development, axiom,
-    dpv_advertising != dpv_research_and_development).
-
-fof(bg_dist_dpv_advertising_dpv_scientific_research, axiom,
-    dpv_advertising != dpv_scientific_research).
+fof(bg_dist_dpv_advertising_dpv_rights_fulfilment, axiom,
+    dpv_advertising != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_advertising_dpv_search_functionalities, axiom,
     dpv_advertising != dpv_search_functionalities).
@@ -2238,6 +1907,9 @@ fof(bg_dist_dpv_age_verification_dpv_improve_internal_crm_processes, axiom,
 fof(bg_dist_dpv_age_verification_dpv_improve_public_services, axiom,
     dpv_age_verification != dpv_improve_public_services).
 
+fof(bg_dist_dpv_age_verification_dpv_improve_transport_mobility, axiom,
+    dpv_age_verification != dpv_improve_transport_mobility).
+
 fof(bg_dist_dpv_age_verification_dpv_increase_service_robustness, axiom,
     dpv_age_verification != dpv_increase_service_robustness).
 
@@ -2261,6 +1933,9 @@ fof(bg_dist_dpv_age_verification_dpv_misuse_prevention_and_detection, axiom,
 
 fof(bg_dist_dpv_age_verification_dpv_non_commercial_purpose, axiom,
     dpv_age_verification != dpv_non_commercial_purpose).
+
+fof(bg_dist_dpv_age_verification_dpv_non_commercial_research, axiom,
+    dpv_age_verification != dpv_non_commercial_research).
 
 fof(bg_dist_dpv_age_verification_dpv_optimisation_for_consumer, axiom,
     dpv_age_verification != dpv_optimisation_for_consumer).
@@ -2358,6 +2033,9 @@ fof(bg_dist_dpv_age_verification_dpv_provide_personalised_recommendations, axiom
 fof(bg_dist_dpv_age_verification_dpv_provide_product_recommendations, axiom,
     dpv_age_verification != dpv_provide_product_recommendations).
 
+fof(bg_dist_dpv_age_verification_dpv_public_benefit, axiom,
+    dpv_age_verification != dpv_public_benefit).
+
 fof(bg_dist_dpv_age_verification_dpv_public_policy_making, axiom,
     dpv_age_verification != dpv_public_policy_making).
 
@@ -2418,11 +2096,8 @@ fof(bg_dist_dpv_age_verification_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_age_verification_dpv_requested_service_provision, axiom,
     dpv_age_verification != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_age_verification_dpv_research_and_development, axiom,
-    dpv_age_verification != dpv_research_and_development).
-
-fof(bg_dist_dpv_age_verification_dpv_scientific_research, axiom,
-    dpv_age_verification != dpv_scientific_research).
+fof(bg_dist_dpv_age_verification_dpv_rights_fulfilment, axiom,
+    dpv_age_verification != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_age_verification_dpv_search_functionalities, axiom,
     dpv_age_verification != dpv_search_functionalities).
@@ -2577,6 +2252,9 @@ fof(bg_dist_dpv_combat_climate_change_dpv_improve_internal_crm_processes, axiom,
 fof(bg_dist_dpv_combat_climate_change_dpv_improve_public_services, axiom,
     dpv_combat_climate_change != dpv_improve_public_services).
 
+fof(bg_dist_dpv_combat_climate_change_dpv_improve_transport_mobility, axiom,
+    dpv_combat_climate_change != dpv_improve_transport_mobility).
+
 fof(bg_dist_dpv_combat_climate_change_dpv_increase_service_robustness, axiom,
     dpv_combat_climate_change != dpv_increase_service_robustness).
 
@@ -2600,6 +2278,9 @@ fof(bg_dist_dpv_combat_climate_change_dpv_misuse_prevention_and_detection, axiom
 
 fof(bg_dist_dpv_combat_climate_change_dpv_non_commercial_purpose, axiom,
     dpv_combat_climate_change != dpv_non_commercial_purpose).
+
+fof(bg_dist_dpv_combat_climate_change_dpv_non_commercial_research, axiom,
+    dpv_combat_climate_change != dpv_non_commercial_research).
 
 fof(bg_dist_dpv_combat_climate_change_dpv_optimisation_for_consumer, axiom,
     dpv_combat_climate_change != dpv_optimisation_for_consumer).
@@ -2697,6 +2378,9 @@ fof(bg_dist_dpv_combat_climate_change_dpv_provide_personalised_recommendations, 
 fof(bg_dist_dpv_combat_climate_change_dpv_provide_product_recommendations, axiom,
     dpv_combat_climate_change != dpv_provide_product_recommendations).
 
+fof(bg_dist_dpv_combat_climate_change_dpv_public_benefit, axiom,
+    dpv_combat_climate_change != dpv_public_benefit).
+
 fof(bg_dist_dpv_combat_climate_change_dpv_public_policy_making, axiom,
     dpv_combat_climate_change != dpv_public_policy_making).
 
@@ -2757,11 +2441,8 @@ fof(bg_dist_dpv_combat_climate_change_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_combat_climate_change_dpv_requested_service_provision, axiom,
     dpv_combat_climate_change != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_combat_climate_change_dpv_research_and_development, axiom,
-    dpv_combat_climate_change != dpv_research_and_development).
-
-fof(bg_dist_dpv_combat_climate_change_dpv_scientific_research, axiom,
-    dpv_combat_climate_change != dpv_scientific_research).
+fof(bg_dist_dpv_combat_climate_change_dpv_rights_fulfilment, axiom,
+    dpv_combat_climate_change != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_combat_climate_change_dpv_search_functionalities, axiom,
     dpv_combat_climate_change != dpv_search_functionalities).
@@ -2913,6 +2594,9 @@ fof(bg_dist_dpv_commercial_purpose_dpv_improve_internal_crm_processes, axiom,
 fof(bg_dist_dpv_commercial_purpose_dpv_improve_public_services, axiom,
     dpv_commercial_purpose != dpv_improve_public_services).
 
+fof(bg_dist_dpv_commercial_purpose_dpv_improve_transport_mobility, axiom,
+    dpv_commercial_purpose != dpv_improve_transport_mobility).
+
 fof(bg_dist_dpv_commercial_purpose_dpv_increase_service_robustness, axiom,
     dpv_commercial_purpose != dpv_increase_service_robustness).
 
@@ -2936,6 +2620,9 @@ fof(bg_dist_dpv_commercial_purpose_dpv_misuse_prevention_and_detection, axiom,
 
 fof(bg_dist_dpv_commercial_purpose_dpv_non_commercial_purpose, axiom,
     dpv_commercial_purpose != dpv_non_commercial_purpose).
+
+fof(bg_dist_dpv_commercial_purpose_dpv_non_commercial_research, axiom,
+    dpv_commercial_purpose != dpv_non_commercial_research).
 
 fof(bg_dist_dpv_commercial_purpose_dpv_optimisation_for_consumer, axiom,
     dpv_commercial_purpose != dpv_optimisation_for_consumer).
@@ -3033,6 +2720,9 @@ fof(bg_dist_dpv_commercial_purpose_dpv_provide_personalised_recommendations, axi
 fof(bg_dist_dpv_commercial_purpose_dpv_provide_product_recommendations, axiom,
     dpv_commercial_purpose != dpv_provide_product_recommendations).
 
+fof(bg_dist_dpv_commercial_purpose_dpv_public_benefit, axiom,
+    dpv_commercial_purpose != dpv_public_benefit).
+
 fof(bg_dist_dpv_commercial_purpose_dpv_public_policy_making, axiom,
     dpv_commercial_purpose != dpv_public_policy_making).
 
@@ -3093,11 +2783,8 @@ fof(bg_dist_dpv_commercial_purpose_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_commercial_purpose_dpv_requested_service_provision, axiom,
     dpv_commercial_purpose != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_commercial_purpose_dpv_research_and_development, axiom,
-    dpv_commercial_purpose != dpv_research_and_development).
-
-fof(bg_dist_dpv_commercial_purpose_dpv_scientific_research, axiom,
-    dpv_commercial_purpose != dpv_scientific_research).
+fof(bg_dist_dpv_commercial_purpose_dpv_rights_fulfilment, axiom,
+    dpv_commercial_purpose != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_commercial_purpose_dpv_search_functionalities, axiom,
     dpv_commercial_purpose != dpv_search_functionalities).
@@ -3246,6 +2933,9 @@ fof(bg_dist_dpv_commercial_research_dpv_improve_internal_crm_processes, axiom,
 fof(bg_dist_dpv_commercial_research_dpv_improve_public_services, axiom,
     dpv_commercial_research != dpv_improve_public_services).
 
+fof(bg_dist_dpv_commercial_research_dpv_improve_transport_mobility, axiom,
+    dpv_commercial_research != dpv_improve_transport_mobility).
+
 fof(bg_dist_dpv_commercial_research_dpv_increase_service_robustness, axiom,
     dpv_commercial_research != dpv_increase_service_robustness).
 
@@ -3269,6 +2959,9 @@ fof(bg_dist_dpv_commercial_research_dpv_misuse_prevention_and_detection, axiom,
 
 fof(bg_dist_dpv_commercial_research_dpv_non_commercial_purpose, axiom,
     dpv_commercial_research != dpv_non_commercial_purpose).
+
+fof(bg_dist_dpv_commercial_research_dpv_non_commercial_research, axiom,
+    dpv_commercial_research != dpv_non_commercial_research).
 
 fof(bg_dist_dpv_commercial_research_dpv_optimisation_for_consumer, axiom,
     dpv_commercial_research != dpv_optimisation_for_consumer).
@@ -3366,6 +3059,9 @@ fof(bg_dist_dpv_commercial_research_dpv_provide_personalised_recommendations, ax
 fof(bg_dist_dpv_commercial_research_dpv_provide_product_recommendations, axiom,
     dpv_commercial_research != dpv_provide_product_recommendations).
 
+fof(bg_dist_dpv_commercial_research_dpv_public_benefit, axiom,
+    dpv_commercial_research != dpv_public_benefit).
+
 fof(bg_dist_dpv_commercial_research_dpv_public_policy_making, axiom,
     dpv_commercial_research != dpv_public_policy_making).
 
@@ -3426,11 +3122,8 @@ fof(bg_dist_dpv_commercial_research_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_commercial_research_dpv_requested_service_provision, axiom,
     dpv_commercial_research != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_commercial_research_dpv_research_and_development, axiom,
-    dpv_commercial_research != dpv_research_and_development).
-
-fof(bg_dist_dpv_commercial_research_dpv_scientific_research, axiom,
-    dpv_commercial_research != dpv_scientific_research).
+fof(bg_dist_dpv_commercial_research_dpv_rights_fulfilment, axiom,
+    dpv_commercial_research != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_commercial_research_dpv_search_functionalities, axiom,
     dpv_commercial_research != dpv_search_functionalities).
@@ -3576,6 +3269,9 @@ fof(bg_dist_dpv_communication_for_customer_care_dpv_improve_internal_crm_process
 fof(bg_dist_dpv_communication_for_customer_care_dpv_improve_public_services, axiom,
     dpv_communication_for_customer_care != dpv_improve_public_services).
 
+fof(bg_dist_dpv_communication_for_customer_care_dpv_improve_transport_mobility, axiom,
+    dpv_communication_for_customer_care != dpv_improve_transport_mobility).
+
 fof(bg_dist_dpv_communication_for_customer_care_dpv_increase_service_robustness, axiom,
     dpv_communication_for_customer_care != dpv_increase_service_robustness).
 
@@ -3599,6 +3295,9 @@ fof(bg_dist_dpv_communication_for_customer_care_dpv_misuse_prevention_and_detect
 
 fof(bg_dist_dpv_communication_for_customer_care_dpv_non_commercial_purpose, axiom,
     dpv_communication_for_customer_care != dpv_non_commercial_purpose).
+
+fof(bg_dist_dpv_communication_for_customer_care_dpv_non_commercial_research, axiom,
+    dpv_communication_for_customer_care != dpv_non_commercial_research).
 
 fof(bg_dist_dpv_communication_for_customer_care_dpv_optimisation_for_consumer, axiom,
     dpv_communication_for_customer_care != dpv_optimisation_for_consumer).
@@ -3696,6 +3395,9 @@ fof(bg_dist_dpv_communication_for_customer_care_dpv_provide_personalised_recomme
 fof(bg_dist_dpv_communication_for_customer_care_dpv_provide_product_recommendations, axiom,
     dpv_communication_for_customer_care != dpv_provide_product_recommendations).
 
+fof(bg_dist_dpv_communication_for_customer_care_dpv_public_benefit, axiom,
+    dpv_communication_for_customer_care != dpv_public_benefit).
+
 fof(bg_dist_dpv_communication_for_customer_care_dpv_public_policy_making, axiom,
     dpv_communication_for_customer_care != dpv_public_policy_making).
 
@@ -3756,11 +3458,8 @@ fof(bg_dist_dpv_communication_for_customer_care_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_communication_for_customer_care_dpv_requested_service_provision, axiom,
     dpv_communication_for_customer_care != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_communication_for_customer_care_dpv_research_and_development, axiom,
-    dpv_communication_for_customer_care != dpv_research_and_development).
-
-fof(bg_dist_dpv_communication_for_customer_care_dpv_scientific_research, axiom,
-    dpv_communication_for_customer_care != dpv_scientific_research).
+fof(bg_dist_dpv_communication_for_customer_care_dpv_rights_fulfilment, axiom,
+    dpv_communication_for_customer_care != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_communication_for_customer_care_dpv_search_functionalities, axiom,
     dpv_communication_for_customer_care != dpv_search_functionalities).
@@ -3903,6 +3602,9 @@ fof(bg_dist_dpv_communication_management_dpv_improve_internal_crm_processes, axi
 fof(bg_dist_dpv_communication_management_dpv_improve_public_services, axiom,
     dpv_communication_management != dpv_improve_public_services).
 
+fof(bg_dist_dpv_communication_management_dpv_improve_transport_mobility, axiom,
+    dpv_communication_management != dpv_improve_transport_mobility).
+
 fof(bg_dist_dpv_communication_management_dpv_increase_service_robustness, axiom,
     dpv_communication_management != dpv_increase_service_robustness).
 
@@ -3926,6 +3628,9 @@ fof(bg_dist_dpv_communication_management_dpv_misuse_prevention_and_detection, ax
 
 fof(bg_dist_dpv_communication_management_dpv_non_commercial_purpose, axiom,
     dpv_communication_management != dpv_non_commercial_purpose).
+
+fof(bg_dist_dpv_communication_management_dpv_non_commercial_research, axiom,
+    dpv_communication_management != dpv_non_commercial_research).
 
 fof(bg_dist_dpv_communication_management_dpv_optimisation_for_consumer, axiom,
     dpv_communication_management != dpv_optimisation_for_consumer).
@@ -4023,6 +3728,9 @@ fof(bg_dist_dpv_communication_management_dpv_provide_personalised_recommendation
 fof(bg_dist_dpv_communication_management_dpv_provide_product_recommendations, axiom,
     dpv_communication_management != dpv_provide_product_recommendations).
 
+fof(bg_dist_dpv_communication_management_dpv_public_benefit, axiom,
+    dpv_communication_management != dpv_public_benefit).
+
 fof(bg_dist_dpv_communication_management_dpv_public_policy_making, axiom,
     dpv_communication_management != dpv_public_policy_making).
 
@@ -4083,11 +3791,8 @@ fof(bg_dist_dpv_communication_management_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_communication_management_dpv_requested_service_provision, axiom,
     dpv_communication_management != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_communication_management_dpv_research_and_development, axiom,
-    dpv_communication_management != dpv_research_and_development).
-
-fof(bg_dist_dpv_communication_management_dpv_scientific_research, axiom,
-    dpv_communication_management != dpv_scientific_research).
+fof(bg_dist_dpv_communication_management_dpv_rights_fulfilment, axiom,
+    dpv_communication_management != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_communication_management_dpv_search_functionalities, axiom,
     dpv_communication_management != dpv_search_functionalities).
@@ -4227,6 +3932,9 @@ fof(bg_dist_dpv_counter_money_laundering_dpv_improve_internal_crm_processes, axi
 fof(bg_dist_dpv_counter_money_laundering_dpv_improve_public_services, axiom,
     dpv_counter_money_laundering != dpv_improve_public_services).
 
+fof(bg_dist_dpv_counter_money_laundering_dpv_improve_transport_mobility, axiom,
+    dpv_counter_money_laundering != dpv_improve_transport_mobility).
+
 fof(bg_dist_dpv_counter_money_laundering_dpv_increase_service_robustness, axiom,
     dpv_counter_money_laundering != dpv_increase_service_robustness).
 
@@ -4250,6 +3958,9 @@ fof(bg_dist_dpv_counter_money_laundering_dpv_misuse_prevention_and_detection, ax
 
 fof(bg_dist_dpv_counter_money_laundering_dpv_non_commercial_purpose, axiom,
     dpv_counter_money_laundering != dpv_non_commercial_purpose).
+
+fof(bg_dist_dpv_counter_money_laundering_dpv_non_commercial_research, axiom,
+    dpv_counter_money_laundering != dpv_non_commercial_research).
 
 fof(bg_dist_dpv_counter_money_laundering_dpv_optimisation_for_consumer, axiom,
     dpv_counter_money_laundering != dpv_optimisation_for_consumer).
@@ -4347,6 +4058,9 @@ fof(bg_dist_dpv_counter_money_laundering_dpv_provide_personalised_recommendation
 fof(bg_dist_dpv_counter_money_laundering_dpv_provide_product_recommendations, axiom,
     dpv_counter_money_laundering != dpv_provide_product_recommendations).
 
+fof(bg_dist_dpv_counter_money_laundering_dpv_public_benefit, axiom,
+    dpv_counter_money_laundering != dpv_public_benefit).
+
 fof(bg_dist_dpv_counter_money_laundering_dpv_public_policy_making, axiom,
     dpv_counter_money_laundering != dpv_public_policy_making).
 
@@ -4407,11 +4121,8 @@ fof(bg_dist_dpv_counter_money_laundering_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_counter_money_laundering_dpv_requested_service_provision, axiom,
     dpv_counter_money_laundering != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_counter_money_laundering_dpv_research_and_development, axiom,
-    dpv_counter_money_laundering != dpv_research_and_development).
-
-fof(bg_dist_dpv_counter_money_laundering_dpv_scientific_research, axiom,
-    dpv_counter_money_laundering != dpv_scientific_research).
+fof(bg_dist_dpv_counter_money_laundering_dpv_rights_fulfilment, axiom,
+    dpv_counter_money_laundering != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_counter_money_laundering_dpv_search_functionalities, axiom,
     dpv_counter_money_laundering != dpv_search_functionalities).
@@ -4548,6 +4259,9 @@ fof(bg_dist_dpv_counterterrorism_dpv_improve_internal_crm_processes, axiom,
 fof(bg_dist_dpv_counterterrorism_dpv_improve_public_services, axiom,
     dpv_counterterrorism != dpv_improve_public_services).
 
+fof(bg_dist_dpv_counterterrorism_dpv_improve_transport_mobility, axiom,
+    dpv_counterterrorism != dpv_improve_transport_mobility).
+
 fof(bg_dist_dpv_counterterrorism_dpv_increase_service_robustness, axiom,
     dpv_counterterrorism != dpv_increase_service_robustness).
 
@@ -4571,6 +4285,9 @@ fof(bg_dist_dpv_counterterrorism_dpv_misuse_prevention_and_detection, axiom,
 
 fof(bg_dist_dpv_counterterrorism_dpv_non_commercial_purpose, axiom,
     dpv_counterterrorism != dpv_non_commercial_purpose).
+
+fof(bg_dist_dpv_counterterrorism_dpv_non_commercial_research, axiom,
+    dpv_counterterrorism != dpv_non_commercial_research).
 
 fof(bg_dist_dpv_counterterrorism_dpv_optimisation_for_consumer, axiom,
     dpv_counterterrorism != dpv_optimisation_for_consumer).
@@ -4668,6 +4385,9 @@ fof(bg_dist_dpv_counterterrorism_dpv_provide_personalised_recommendations, axiom
 fof(bg_dist_dpv_counterterrorism_dpv_provide_product_recommendations, axiom,
     dpv_counterterrorism != dpv_provide_product_recommendations).
 
+fof(bg_dist_dpv_counterterrorism_dpv_public_benefit, axiom,
+    dpv_counterterrorism != dpv_public_benefit).
+
 fof(bg_dist_dpv_counterterrorism_dpv_public_policy_making, axiom,
     dpv_counterterrorism != dpv_public_policy_making).
 
@@ -4728,11 +4448,8 @@ fof(bg_dist_dpv_counterterrorism_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_counterterrorism_dpv_requested_service_provision, axiom,
     dpv_counterterrorism != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_counterterrorism_dpv_research_and_development, axiom,
-    dpv_counterterrorism != dpv_research_and_development).
-
-fof(bg_dist_dpv_counterterrorism_dpv_scientific_research, axiom,
-    dpv_counterterrorism != dpv_scientific_research).
+fof(bg_dist_dpv_counterterrorism_dpv_rights_fulfilment, axiom,
+    dpv_counterterrorism != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_counterterrorism_dpv_search_functionalities, axiom,
     dpv_counterterrorism != dpv_search_functionalities).
@@ -4866,6 +4583,9 @@ fof(bg_dist_dpv_customer_care_dpv_improve_internal_crm_processes, axiom,
 fof(bg_dist_dpv_customer_care_dpv_improve_public_services, axiom,
     dpv_customer_care != dpv_improve_public_services).
 
+fof(bg_dist_dpv_customer_care_dpv_improve_transport_mobility, axiom,
+    dpv_customer_care != dpv_improve_transport_mobility).
+
 fof(bg_dist_dpv_customer_care_dpv_increase_service_robustness, axiom,
     dpv_customer_care != dpv_increase_service_robustness).
 
@@ -4889,6 +4609,9 @@ fof(bg_dist_dpv_customer_care_dpv_misuse_prevention_and_detection, axiom,
 
 fof(bg_dist_dpv_customer_care_dpv_non_commercial_purpose, axiom,
     dpv_customer_care != dpv_non_commercial_purpose).
+
+fof(bg_dist_dpv_customer_care_dpv_non_commercial_research, axiom,
+    dpv_customer_care != dpv_non_commercial_research).
 
 fof(bg_dist_dpv_customer_care_dpv_optimisation_for_consumer, axiom,
     dpv_customer_care != dpv_optimisation_for_consumer).
@@ -4986,6 +4709,9 @@ fof(bg_dist_dpv_customer_care_dpv_provide_personalised_recommendations, axiom,
 fof(bg_dist_dpv_customer_care_dpv_provide_product_recommendations, axiom,
     dpv_customer_care != dpv_provide_product_recommendations).
 
+fof(bg_dist_dpv_customer_care_dpv_public_benefit, axiom,
+    dpv_customer_care != dpv_public_benefit).
+
 fof(bg_dist_dpv_customer_care_dpv_public_policy_making, axiom,
     dpv_customer_care != dpv_public_policy_making).
 
@@ -5046,11 +4772,8 @@ fof(bg_dist_dpv_customer_care_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_customer_care_dpv_requested_service_provision, axiom,
     dpv_customer_care != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_customer_care_dpv_research_and_development, axiom,
-    dpv_customer_care != dpv_research_and_development).
-
-fof(bg_dist_dpv_customer_care_dpv_scientific_research, axiom,
-    dpv_customer_care != dpv_scientific_research).
+fof(bg_dist_dpv_customer_care_dpv_rights_fulfilment, axiom,
+    dpv_customer_care != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_customer_care_dpv_search_functionalities, axiom,
     dpv_customer_care != dpv_search_functionalities).
@@ -5181,6 +4904,9 @@ fof(bg_dist_dpv_customer_claims_management_dpv_improve_internal_crm_processes, a
 fof(bg_dist_dpv_customer_claims_management_dpv_improve_public_services, axiom,
     dpv_customer_claims_management != dpv_improve_public_services).
 
+fof(bg_dist_dpv_customer_claims_management_dpv_improve_transport_mobility, axiom,
+    dpv_customer_claims_management != dpv_improve_transport_mobility).
+
 fof(bg_dist_dpv_customer_claims_management_dpv_increase_service_robustness, axiom,
     dpv_customer_claims_management != dpv_increase_service_robustness).
 
@@ -5204,6 +4930,9 @@ fof(bg_dist_dpv_customer_claims_management_dpv_misuse_prevention_and_detection, 
 
 fof(bg_dist_dpv_customer_claims_management_dpv_non_commercial_purpose, axiom,
     dpv_customer_claims_management != dpv_non_commercial_purpose).
+
+fof(bg_dist_dpv_customer_claims_management_dpv_non_commercial_research, axiom,
+    dpv_customer_claims_management != dpv_non_commercial_research).
 
 fof(bg_dist_dpv_customer_claims_management_dpv_optimisation_for_consumer, axiom,
     dpv_customer_claims_management != dpv_optimisation_for_consumer).
@@ -5301,6 +5030,9 @@ fof(bg_dist_dpv_customer_claims_management_dpv_provide_personalised_recommendati
 fof(bg_dist_dpv_customer_claims_management_dpv_provide_product_recommendations, axiom,
     dpv_customer_claims_management != dpv_provide_product_recommendations).
 
+fof(bg_dist_dpv_customer_claims_management_dpv_public_benefit, axiom,
+    dpv_customer_claims_management != dpv_public_benefit).
+
 fof(bg_dist_dpv_customer_claims_management_dpv_public_policy_making, axiom,
     dpv_customer_claims_management != dpv_public_policy_making).
 
@@ -5361,11 +5093,8 @@ fof(bg_dist_dpv_customer_claims_management_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_customer_claims_management_dpv_requested_service_provision, axiom,
     dpv_customer_claims_management != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_customer_claims_management_dpv_research_and_development, axiom,
-    dpv_customer_claims_management != dpv_research_and_development).
-
-fof(bg_dist_dpv_customer_claims_management_dpv_scientific_research, axiom,
-    dpv_customer_claims_management != dpv_scientific_research).
+fof(bg_dist_dpv_customer_claims_management_dpv_rights_fulfilment, axiom,
+    dpv_customer_claims_management != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_customer_claims_management_dpv_search_functionalities, axiom,
     dpv_customer_claims_management != dpv_search_functionalities).
@@ -5493,6 +5222,9 @@ fof(bg_dist_dpv_customer_management_dpv_improve_internal_crm_processes, axiom,
 fof(bg_dist_dpv_customer_management_dpv_improve_public_services, axiom,
     dpv_customer_management != dpv_improve_public_services).
 
+fof(bg_dist_dpv_customer_management_dpv_improve_transport_mobility, axiom,
+    dpv_customer_management != dpv_improve_transport_mobility).
+
 fof(bg_dist_dpv_customer_management_dpv_increase_service_robustness, axiom,
     dpv_customer_management != dpv_increase_service_robustness).
 
@@ -5516,6 +5248,9 @@ fof(bg_dist_dpv_customer_management_dpv_misuse_prevention_and_detection, axiom,
 
 fof(bg_dist_dpv_customer_management_dpv_non_commercial_purpose, axiom,
     dpv_customer_management != dpv_non_commercial_purpose).
+
+fof(bg_dist_dpv_customer_management_dpv_non_commercial_research, axiom,
+    dpv_customer_management != dpv_non_commercial_research).
 
 fof(bg_dist_dpv_customer_management_dpv_optimisation_for_consumer, axiom,
     dpv_customer_management != dpv_optimisation_for_consumer).
@@ -5613,6 +5348,9 @@ fof(bg_dist_dpv_customer_management_dpv_provide_personalised_recommendations, ax
 fof(bg_dist_dpv_customer_management_dpv_provide_product_recommendations, axiom,
     dpv_customer_management != dpv_provide_product_recommendations).
 
+fof(bg_dist_dpv_customer_management_dpv_public_benefit, axiom,
+    dpv_customer_management != dpv_public_benefit).
+
 fof(bg_dist_dpv_customer_management_dpv_public_policy_making, axiom,
     dpv_customer_management != dpv_public_policy_making).
 
@@ -5673,11 +5411,8 @@ fof(bg_dist_dpv_customer_management_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_customer_management_dpv_requested_service_provision, axiom,
     dpv_customer_management != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_customer_management_dpv_research_and_development, axiom,
-    dpv_customer_management != dpv_research_and_development).
-
-fof(bg_dist_dpv_customer_management_dpv_scientific_research, axiom,
-    dpv_customer_management != dpv_scientific_research).
+fof(bg_dist_dpv_customer_management_dpv_rights_fulfilment, axiom,
+    dpv_customer_management != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_customer_management_dpv_search_functionalities, axiom,
     dpv_customer_management != dpv_search_functionalities).
@@ -5802,6 +5537,9 @@ fof(bg_dist_dpv_customer_order_management_dpv_improve_internal_crm_processes, ax
 fof(bg_dist_dpv_customer_order_management_dpv_improve_public_services, axiom,
     dpv_customer_order_management != dpv_improve_public_services).
 
+fof(bg_dist_dpv_customer_order_management_dpv_improve_transport_mobility, axiom,
+    dpv_customer_order_management != dpv_improve_transport_mobility).
+
 fof(bg_dist_dpv_customer_order_management_dpv_increase_service_robustness, axiom,
     dpv_customer_order_management != dpv_increase_service_robustness).
 
@@ -5825,6 +5563,9 @@ fof(bg_dist_dpv_customer_order_management_dpv_misuse_prevention_and_detection, a
 
 fof(bg_dist_dpv_customer_order_management_dpv_non_commercial_purpose, axiom,
     dpv_customer_order_management != dpv_non_commercial_purpose).
+
+fof(bg_dist_dpv_customer_order_management_dpv_non_commercial_research, axiom,
+    dpv_customer_order_management != dpv_non_commercial_research).
 
 fof(bg_dist_dpv_customer_order_management_dpv_optimisation_for_consumer, axiom,
     dpv_customer_order_management != dpv_optimisation_for_consumer).
@@ -5922,6 +5663,9 @@ fof(bg_dist_dpv_customer_order_management_dpv_provide_personalised_recommendatio
 fof(bg_dist_dpv_customer_order_management_dpv_provide_product_recommendations, axiom,
     dpv_customer_order_management != dpv_provide_product_recommendations).
 
+fof(bg_dist_dpv_customer_order_management_dpv_public_benefit, axiom,
+    dpv_customer_order_management != dpv_public_benefit).
+
 fof(bg_dist_dpv_customer_order_management_dpv_public_policy_making, axiom,
     dpv_customer_order_management != dpv_public_policy_making).
 
@@ -5982,11 +5726,8 @@ fof(bg_dist_dpv_customer_order_management_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_customer_order_management_dpv_requested_service_provision, axiom,
     dpv_customer_order_management != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_customer_order_management_dpv_research_and_development, axiom,
-    dpv_customer_order_management != dpv_research_and_development).
-
-fof(bg_dist_dpv_customer_order_management_dpv_scientific_research, axiom,
-    dpv_customer_order_management != dpv_scientific_research).
+fof(bg_dist_dpv_customer_order_management_dpv_rights_fulfilment, axiom,
+    dpv_customer_order_management != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_customer_order_management_dpv_search_functionalities, axiom,
     dpv_customer_order_management != dpv_search_functionalities).
@@ -6108,6 +5849,9 @@ fof(bg_dist_dpv_customer_relationship_management_dpv_improve_internal_crm_proces
 fof(bg_dist_dpv_customer_relationship_management_dpv_improve_public_services, axiom,
     dpv_customer_relationship_management != dpv_improve_public_services).
 
+fof(bg_dist_dpv_customer_relationship_management_dpv_improve_transport_mobility, axiom,
+    dpv_customer_relationship_management != dpv_improve_transport_mobility).
+
 fof(bg_dist_dpv_customer_relationship_management_dpv_increase_service_robustness, axiom,
     dpv_customer_relationship_management != dpv_increase_service_robustness).
 
@@ -6131,6 +5875,9 @@ fof(bg_dist_dpv_customer_relationship_management_dpv_misuse_prevention_and_detec
 
 fof(bg_dist_dpv_customer_relationship_management_dpv_non_commercial_purpose, axiom,
     dpv_customer_relationship_management != dpv_non_commercial_purpose).
+
+fof(bg_dist_dpv_customer_relationship_management_dpv_non_commercial_research, axiom,
+    dpv_customer_relationship_management != dpv_non_commercial_research).
 
 fof(bg_dist_dpv_customer_relationship_management_dpv_optimisation_for_consumer, axiom,
     dpv_customer_relationship_management != dpv_optimisation_for_consumer).
@@ -6228,6 +5975,9 @@ fof(bg_dist_dpv_customer_relationship_management_dpv_provide_personalised_recomm
 fof(bg_dist_dpv_customer_relationship_management_dpv_provide_product_recommendations, axiom,
     dpv_customer_relationship_management != dpv_provide_product_recommendations).
 
+fof(bg_dist_dpv_customer_relationship_management_dpv_public_benefit, axiom,
+    dpv_customer_relationship_management != dpv_public_benefit).
+
 fof(bg_dist_dpv_customer_relationship_management_dpv_public_policy_making, axiom,
     dpv_customer_relationship_management != dpv_public_policy_making).
 
@@ -6288,11 +6038,8 @@ fof(bg_dist_dpv_customer_relationship_management_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_customer_relationship_management_dpv_requested_service_provision, axiom,
     dpv_customer_relationship_management != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_customer_relationship_management_dpv_research_and_development, axiom,
-    dpv_customer_relationship_management != dpv_research_and_development).
-
-fof(bg_dist_dpv_customer_relationship_management_dpv_scientific_research, axiom,
-    dpv_customer_relationship_management != dpv_scientific_research).
+fof(bg_dist_dpv_customer_relationship_management_dpv_rights_fulfilment, axiom,
+    dpv_customer_relationship_management != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_customer_relationship_management_dpv_search_functionalities, axiom,
     dpv_customer_relationship_management != dpv_search_functionalities).
@@ -6411,6 +6158,9 @@ fof(bg_dist_dpv_customer_solvency_monitoring_dpv_improve_internal_crm_processes,
 fof(bg_dist_dpv_customer_solvency_monitoring_dpv_improve_public_services, axiom,
     dpv_customer_solvency_monitoring != dpv_improve_public_services).
 
+fof(bg_dist_dpv_customer_solvency_monitoring_dpv_improve_transport_mobility, axiom,
+    dpv_customer_solvency_monitoring != dpv_improve_transport_mobility).
+
 fof(bg_dist_dpv_customer_solvency_monitoring_dpv_increase_service_robustness, axiom,
     dpv_customer_solvency_monitoring != dpv_increase_service_robustness).
 
@@ -6434,6 +6184,9 @@ fof(bg_dist_dpv_customer_solvency_monitoring_dpv_misuse_prevention_and_detection
 
 fof(bg_dist_dpv_customer_solvency_monitoring_dpv_non_commercial_purpose, axiom,
     dpv_customer_solvency_monitoring != dpv_non_commercial_purpose).
+
+fof(bg_dist_dpv_customer_solvency_monitoring_dpv_non_commercial_research, axiom,
+    dpv_customer_solvency_monitoring != dpv_non_commercial_research).
 
 fof(bg_dist_dpv_customer_solvency_monitoring_dpv_optimisation_for_consumer, axiom,
     dpv_customer_solvency_monitoring != dpv_optimisation_for_consumer).
@@ -6531,6 +6284,9 @@ fof(bg_dist_dpv_customer_solvency_monitoring_dpv_provide_personalised_recommenda
 fof(bg_dist_dpv_customer_solvency_monitoring_dpv_provide_product_recommendations, axiom,
     dpv_customer_solvency_monitoring != dpv_provide_product_recommendations).
 
+fof(bg_dist_dpv_customer_solvency_monitoring_dpv_public_benefit, axiom,
+    dpv_customer_solvency_monitoring != dpv_public_benefit).
+
 fof(bg_dist_dpv_customer_solvency_monitoring_dpv_public_policy_making, axiom,
     dpv_customer_solvency_monitoring != dpv_public_policy_making).
 
@@ -6591,11 +6347,8 @@ fof(bg_dist_dpv_customer_solvency_monitoring_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_customer_solvency_monitoring_dpv_requested_service_provision, axiom,
     dpv_customer_solvency_monitoring != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_customer_solvency_monitoring_dpv_research_and_development, axiom,
-    dpv_customer_solvency_monitoring != dpv_research_and_development).
-
-fof(bg_dist_dpv_customer_solvency_monitoring_dpv_scientific_research, axiom,
-    dpv_customer_solvency_monitoring != dpv_scientific_research).
+fof(bg_dist_dpv_customer_solvency_monitoring_dpv_rights_fulfilment, axiom,
+    dpv_customer_solvency_monitoring != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_customer_solvency_monitoring_dpv_search_functionalities, axiom,
     dpv_customer_solvency_monitoring != dpv_search_functionalities).
@@ -6711,6 +6464,9 @@ fof(bg_dist_dpv_data_altruism_dpv_improve_internal_crm_processes, axiom,
 fof(bg_dist_dpv_data_altruism_dpv_improve_public_services, axiom,
     dpv_data_altruism != dpv_improve_public_services).
 
+fof(bg_dist_dpv_data_altruism_dpv_improve_transport_mobility, axiom,
+    dpv_data_altruism != dpv_improve_transport_mobility).
+
 fof(bg_dist_dpv_data_altruism_dpv_increase_service_robustness, axiom,
     dpv_data_altruism != dpv_increase_service_robustness).
 
@@ -6734,6 +6490,9 @@ fof(bg_dist_dpv_data_altruism_dpv_misuse_prevention_and_detection, axiom,
 
 fof(bg_dist_dpv_data_altruism_dpv_non_commercial_purpose, axiom,
     dpv_data_altruism != dpv_non_commercial_purpose).
+
+fof(bg_dist_dpv_data_altruism_dpv_non_commercial_research, axiom,
+    dpv_data_altruism != dpv_non_commercial_research).
 
 fof(bg_dist_dpv_data_altruism_dpv_optimisation_for_consumer, axiom,
     dpv_data_altruism != dpv_optimisation_for_consumer).
@@ -6831,6 +6590,9 @@ fof(bg_dist_dpv_data_altruism_dpv_provide_personalised_recommendations, axiom,
 fof(bg_dist_dpv_data_altruism_dpv_provide_product_recommendations, axiom,
     dpv_data_altruism != dpv_provide_product_recommendations).
 
+fof(bg_dist_dpv_data_altruism_dpv_public_benefit, axiom,
+    dpv_data_altruism != dpv_public_benefit).
+
 fof(bg_dist_dpv_data_altruism_dpv_public_policy_making, axiom,
     dpv_data_altruism != dpv_public_policy_making).
 
@@ -6891,11 +6653,8 @@ fof(bg_dist_dpv_data_altruism_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_data_altruism_dpv_requested_service_provision, axiom,
     dpv_data_altruism != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_data_altruism_dpv_research_and_development, axiom,
-    dpv_data_altruism != dpv_research_and_development).
-
-fof(bg_dist_dpv_data_altruism_dpv_scientific_research, axiom,
-    dpv_data_altruism != dpv_scientific_research).
+fof(bg_dist_dpv_data_altruism_dpv_rights_fulfilment, axiom,
+    dpv_data_altruism != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_data_altruism_dpv_search_functionalities, axiom,
     dpv_data_altruism != dpv_search_functionalities).
@@ -7008,6 +6767,9 @@ fof(bg_dist_dpv_delivery_of_goods_dpv_improve_internal_crm_processes, axiom,
 fof(bg_dist_dpv_delivery_of_goods_dpv_improve_public_services, axiom,
     dpv_delivery_of_goods != dpv_improve_public_services).
 
+fof(bg_dist_dpv_delivery_of_goods_dpv_improve_transport_mobility, axiom,
+    dpv_delivery_of_goods != dpv_improve_transport_mobility).
+
 fof(bg_dist_dpv_delivery_of_goods_dpv_increase_service_robustness, axiom,
     dpv_delivery_of_goods != dpv_increase_service_robustness).
 
@@ -7031,6 +6793,9 @@ fof(bg_dist_dpv_delivery_of_goods_dpv_misuse_prevention_and_detection, axiom,
 
 fof(bg_dist_dpv_delivery_of_goods_dpv_non_commercial_purpose, axiom,
     dpv_delivery_of_goods != dpv_non_commercial_purpose).
+
+fof(bg_dist_dpv_delivery_of_goods_dpv_non_commercial_research, axiom,
+    dpv_delivery_of_goods != dpv_non_commercial_research).
 
 fof(bg_dist_dpv_delivery_of_goods_dpv_optimisation_for_consumer, axiom,
     dpv_delivery_of_goods != dpv_optimisation_for_consumer).
@@ -7128,6 +6893,9 @@ fof(bg_dist_dpv_delivery_of_goods_dpv_provide_personalised_recommendations, axio
 fof(bg_dist_dpv_delivery_of_goods_dpv_provide_product_recommendations, axiom,
     dpv_delivery_of_goods != dpv_provide_product_recommendations).
 
+fof(bg_dist_dpv_delivery_of_goods_dpv_public_benefit, axiom,
+    dpv_delivery_of_goods != dpv_public_benefit).
+
 fof(bg_dist_dpv_delivery_of_goods_dpv_public_policy_making, axiom,
     dpv_delivery_of_goods != dpv_public_policy_making).
 
@@ -7188,11 +6956,8 @@ fof(bg_dist_dpv_delivery_of_goods_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_delivery_of_goods_dpv_requested_service_provision, axiom,
     dpv_delivery_of_goods != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_delivery_of_goods_dpv_research_and_development, axiom,
-    dpv_delivery_of_goods != dpv_research_and_development).
-
-fof(bg_dist_dpv_delivery_of_goods_dpv_scientific_research, axiom,
-    dpv_delivery_of_goods != dpv_scientific_research).
+fof(bg_dist_dpv_delivery_of_goods_dpv_rights_fulfilment, axiom,
+    dpv_delivery_of_goods != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_delivery_of_goods_dpv_search_functionalities, axiom,
     dpv_delivery_of_goods != dpv_search_functionalities).
@@ -7302,6 +7067,9 @@ fof(bg_dist_dpv_direct_marketing_dpv_improve_internal_crm_processes, axiom,
 fof(bg_dist_dpv_direct_marketing_dpv_improve_public_services, axiom,
     dpv_direct_marketing != dpv_improve_public_services).
 
+fof(bg_dist_dpv_direct_marketing_dpv_improve_transport_mobility, axiom,
+    dpv_direct_marketing != dpv_improve_transport_mobility).
+
 fof(bg_dist_dpv_direct_marketing_dpv_increase_service_robustness, axiom,
     dpv_direct_marketing != dpv_increase_service_robustness).
 
@@ -7325,6 +7093,9 @@ fof(bg_dist_dpv_direct_marketing_dpv_misuse_prevention_and_detection, axiom,
 
 fof(bg_dist_dpv_direct_marketing_dpv_non_commercial_purpose, axiom,
     dpv_direct_marketing != dpv_non_commercial_purpose).
+
+fof(bg_dist_dpv_direct_marketing_dpv_non_commercial_research, axiom,
+    dpv_direct_marketing != dpv_non_commercial_research).
 
 fof(bg_dist_dpv_direct_marketing_dpv_optimisation_for_consumer, axiom,
     dpv_direct_marketing != dpv_optimisation_for_consumer).
@@ -7422,6 +7193,9 @@ fof(bg_dist_dpv_direct_marketing_dpv_provide_personalised_recommendations, axiom
 fof(bg_dist_dpv_direct_marketing_dpv_provide_product_recommendations, axiom,
     dpv_direct_marketing != dpv_provide_product_recommendations).
 
+fof(bg_dist_dpv_direct_marketing_dpv_public_benefit, axiom,
+    dpv_direct_marketing != dpv_public_benefit).
+
 fof(bg_dist_dpv_direct_marketing_dpv_public_policy_making, axiom,
     dpv_direct_marketing != dpv_public_policy_making).
 
@@ -7482,11 +7256,8 @@ fof(bg_dist_dpv_direct_marketing_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_direct_marketing_dpv_requested_service_provision, axiom,
     dpv_direct_marketing != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_direct_marketing_dpv_research_and_development, axiom,
-    dpv_direct_marketing != dpv_research_and_development).
-
-fof(bg_dist_dpv_direct_marketing_dpv_scientific_research, axiom,
-    dpv_direct_marketing != dpv_scientific_research).
+fof(bg_dist_dpv_direct_marketing_dpv_rights_fulfilment, axiom,
+    dpv_direct_marketing != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_direct_marketing_dpv_search_functionalities, axiom,
     dpv_direct_marketing != dpv_search_functionalities).
@@ -7593,6 +7364,9 @@ fof(bg_dist_dpv_dispute_management_dpv_improve_internal_crm_processes, axiom,
 fof(bg_dist_dpv_dispute_management_dpv_improve_public_services, axiom,
     dpv_dispute_management != dpv_improve_public_services).
 
+fof(bg_dist_dpv_dispute_management_dpv_improve_transport_mobility, axiom,
+    dpv_dispute_management != dpv_improve_transport_mobility).
+
 fof(bg_dist_dpv_dispute_management_dpv_increase_service_robustness, axiom,
     dpv_dispute_management != dpv_increase_service_robustness).
 
@@ -7616,6 +7390,9 @@ fof(bg_dist_dpv_dispute_management_dpv_misuse_prevention_and_detection, axiom,
 
 fof(bg_dist_dpv_dispute_management_dpv_non_commercial_purpose, axiom,
     dpv_dispute_management != dpv_non_commercial_purpose).
+
+fof(bg_dist_dpv_dispute_management_dpv_non_commercial_research, axiom,
+    dpv_dispute_management != dpv_non_commercial_research).
 
 fof(bg_dist_dpv_dispute_management_dpv_optimisation_for_consumer, axiom,
     dpv_dispute_management != dpv_optimisation_for_consumer).
@@ -7713,6 +7490,9 @@ fof(bg_dist_dpv_dispute_management_dpv_provide_personalised_recommendations, axi
 fof(bg_dist_dpv_dispute_management_dpv_provide_product_recommendations, axiom,
     dpv_dispute_management != dpv_provide_product_recommendations).
 
+fof(bg_dist_dpv_dispute_management_dpv_public_benefit, axiom,
+    dpv_dispute_management != dpv_public_benefit).
+
 fof(bg_dist_dpv_dispute_management_dpv_public_policy_making, axiom,
     dpv_dispute_management != dpv_public_policy_making).
 
@@ -7773,11 +7553,8 @@ fof(bg_dist_dpv_dispute_management_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_dispute_management_dpv_requested_service_provision, axiom,
     dpv_dispute_management != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_dispute_management_dpv_research_and_development, axiom,
-    dpv_dispute_management != dpv_research_and_development).
-
-fof(bg_dist_dpv_dispute_management_dpv_scientific_research, axiom,
-    dpv_dispute_management != dpv_scientific_research).
+fof(bg_dist_dpv_dispute_management_dpv_rights_fulfilment, axiom,
+    dpv_dispute_management != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_dispute_management_dpv_search_functionalities, axiom,
     dpv_dispute_management != dpv_search_functionalities).
@@ -7881,6 +7658,9 @@ fof(bg_dist_dpv_enforce_access_control_dpv_improve_internal_crm_processes, axiom
 fof(bg_dist_dpv_enforce_access_control_dpv_improve_public_services, axiom,
     dpv_enforce_access_control != dpv_improve_public_services).
 
+fof(bg_dist_dpv_enforce_access_control_dpv_improve_transport_mobility, axiom,
+    dpv_enforce_access_control != dpv_improve_transport_mobility).
+
 fof(bg_dist_dpv_enforce_access_control_dpv_increase_service_robustness, axiom,
     dpv_enforce_access_control != dpv_increase_service_robustness).
 
@@ -7904,6 +7684,9 @@ fof(bg_dist_dpv_enforce_access_control_dpv_misuse_prevention_and_detection, axio
 
 fof(bg_dist_dpv_enforce_access_control_dpv_non_commercial_purpose, axiom,
     dpv_enforce_access_control != dpv_non_commercial_purpose).
+
+fof(bg_dist_dpv_enforce_access_control_dpv_non_commercial_research, axiom,
+    dpv_enforce_access_control != dpv_non_commercial_research).
 
 fof(bg_dist_dpv_enforce_access_control_dpv_optimisation_for_consumer, axiom,
     dpv_enforce_access_control != dpv_optimisation_for_consumer).
@@ -8001,6 +7784,9 @@ fof(bg_dist_dpv_enforce_access_control_dpv_provide_personalised_recommendations,
 fof(bg_dist_dpv_enforce_access_control_dpv_provide_product_recommendations, axiom,
     dpv_enforce_access_control != dpv_provide_product_recommendations).
 
+fof(bg_dist_dpv_enforce_access_control_dpv_public_benefit, axiom,
+    dpv_enforce_access_control != dpv_public_benefit).
+
 fof(bg_dist_dpv_enforce_access_control_dpv_public_policy_making, axiom,
     dpv_enforce_access_control != dpv_public_policy_making).
 
@@ -8061,11 +7847,8 @@ fof(bg_dist_dpv_enforce_access_control_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_enforce_access_control_dpv_requested_service_provision, axiom,
     dpv_enforce_access_control != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_enforce_access_control_dpv_research_and_development, axiom,
-    dpv_enforce_access_control != dpv_research_and_development).
-
-fof(bg_dist_dpv_enforce_access_control_dpv_scientific_research, axiom,
-    dpv_enforce_access_control != dpv_scientific_research).
+fof(bg_dist_dpv_enforce_access_control_dpv_rights_fulfilment, axiom,
+    dpv_enforce_access_control != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_enforce_access_control_dpv_search_functionalities, axiom,
     dpv_enforce_access_control != dpv_search_functionalities).
@@ -8166,6 +7949,9 @@ fof(bg_dist_dpv_enforce_security_dpv_improve_internal_crm_processes, axiom,
 fof(bg_dist_dpv_enforce_security_dpv_improve_public_services, axiom,
     dpv_enforce_security != dpv_improve_public_services).
 
+fof(bg_dist_dpv_enforce_security_dpv_improve_transport_mobility, axiom,
+    dpv_enforce_security != dpv_improve_transport_mobility).
+
 fof(bg_dist_dpv_enforce_security_dpv_increase_service_robustness, axiom,
     dpv_enforce_security != dpv_increase_service_robustness).
 
@@ -8189,6 +7975,9 @@ fof(bg_dist_dpv_enforce_security_dpv_misuse_prevention_and_detection, axiom,
 
 fof(bg_dist_dpv_enforce_security_dpv_non_commercial_purpose, axiom,
     dpv_enforce_security != dpv_non_commercial_purpose).
+
+fof(bg_dist_dpv_enforce_security_dpv_non_commercial_research, axiom,
+    dpv_enforce_security != dpv_non_commercial_research).
 
 fof(bg_dist_dpv_enforce_security_dpv_optimisation_for_consumer, axiom,
     dpv_enforce_security != dpv_optimisation_for_consumer).
@@ -8286,6 +8075,9 @@ fof(bg_dist_dpv_enforce_security_dpv_provide_personalised_recommendations, axiom
 fof(bg_dist_dpv_enforce_security_dpv_provide_product_recommendations, axiom,
     dpv_enforce_security != dpv_provide_product_recommendations).
 
+fof(bg_dist_dpv_enforce_security_dpv_public_benefit, axiom,
+    dpv_enforce_security != dpv_public_benefit).
+
 fof(bg_dist_dpv_enforce_security_dpv_public_policy_making, axiom,
     dpv_enforce_security != dpv_public_policy_making).
 
@@ -8346,11 +8138,8 @@ fof(bg_dist_dpv_enforce_security_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_enforce_security_dpv_requested_service_provision, axiom,
     dpv_enforce_security != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_enforce_security_dpv_research_and_development, axiom,
-    dpv_enforce_security != dpv_research_and_development).
-
-fof(bg_dist_dpv_enforce_security_dpv_scientific_research, axiom,
-    dpv_enforce_security != dpv_scientific_research).
+fof(bg_dist_dpv_enforce_security_dpv_rights_fulfilment, axiom,
+    dpv_enforce_security != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_enforce_security_dpv_search_functionalities, axiom,
     dpv_enforce_security != dpv_search_functionalities).
@@ -8448,6 +8237,9 @@ fof(bg_dist_dpv_establish_contractual_agreement_dpv_improve_internal_crm_process
 fof(bg_dist_dpv_establish_contractual_agreement_dpv_improve_public_services, axiom,
     dpv_establish_contractual_agreement != dpv_improve_public_services).
 
+fof(bg_dist_dpv_establish_contractual_agreement_dpv_improve_transport_mobility, axiom,
+    dpv_establish_contractual_agreement != dpv_improve_transport_mobility).
+
 fof(bg_dist_dpv_establish_contractual_agreement_dpv_increase_service_robustness, axiom,
     dpv_establish_contractual_agreement != dpv_increase_service_robustness).
 
@@ -8471,6 +8263,9 @@ fof(bg_dist_dpv_establish_contractual_agreement_dpv_misuse_prevention_and_detect
 
 fof(bg_dist_dpv_establish_contractual_agreement_dpv_non_commercial_purpose, axiom,
     dpv_establish_contractual_agreement != dpv_non_commercial_purpose).
+
+fof(bg_dist_dpv_establish_contractual_agreement_dpv_non_commercial_research, axiom,
+    dpv_establish_contractual_agreement != dpv_non_commercial_research).
 
 fof(bg_dist_dpv_establish_contractual_agreement_dpv_optimisation_for_consumer, axiom,
     dpv_establish_contractual_agreement != dpv_optimisation_for_consumer).
@@ -8568,6 +8363,9 @@ fof(bg_dist_dpv_establish_contractual_agreement_dpv_provide_personalised_recomme
 fof(bg_dist_dpv_establish_contractual_agreement_dpv_provide_product_recommendations, axiom,
     dpv_establish_contractual_agreement != dpv_provide_product_recommendations).
 
+fof(bg_dist_dpv_establish_contractual_agreement_dpv_public_benefit, axiom,
+    dpv_establish_contractual_agreement != dpv_public_benefit).
+
 fof(bg_dist_dpv_establish_contractual_agreement_dpv_public_policy_making, axiom,
     dpv_establish_contractual_agreement != dpv_public_policy_making).
 
@@ -8628,11 +8426,8 @@ fof(bg_dist_dpv_establish_contractual_agreement_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_establish_contractual_agreement_dpv_requested_service_provision, axiom,
     dpv_establish_contractual_agreement != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_establish_contractual_agreement_dpv_research_and_development, axiom,
-    dpv_establish_contractual_agreement != dpv_research_and_development).
-
-fof(bg_dist_dpv_establish_contractual_agreement_dpv_scientific_research, axiom,
-    dpv_establish_contractual_agreement != dpv_scientific_research).
+fof(bg_dist_dpv_establish_contractual_agreement_dpv_rights_fulfilment, axiom,
+    dpv_establish_contractual_agreement != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_establish_contractual_agreement_dpv_search_functionalities, axiom,
     dpv_establish_contractual_agreement != dpv_search_functionalities).
@@ -8727,6 +8522,9 @@ fof(bg_dist_dpv_fraud_prevention_and_detection_dpv_improve_internal_crm_processe
 fof(bg_dist_dpv_fraud_prevention_and_detection_dpv_improve_public_services, axiom,
     dpv_fraud_prevention_and_detection != dpv_improve_public_services).
 
+fof(bg_dist_dpv_fraud_prevention_and_detection_dpv_improve_transport_mobility, axiom,
+    dpv_fraud_prevention_and_detection != dpv_improve_transport_mobility).
+
 fof(bg_dist_dpv_fraud_prevention_and_detection_dpv_increase_service_robustness, axiom,
     dpv_fraud_prevention_and_detection != dpv_increase_service_robustness).
 
@@ -8750,6 +8548,9 @@ fof(bg_dist_dpv_fraud_prevention_and_detection_dpv_misuse_prevention_and_detecti
 
 fof(bg_dist_dpv_fraud_prevention_and_detection_dpv_non_commercial_purpose, axiom,
     dpv_fraud_prevention_and_detection != dpv_non_commercial_purpose).
+
+fof(bg_dist_dpv_fraud_prevention_and_detection_dpv_non_commercial_research, axiom,
+    dpv_fraud_prevention_and_detection != dpv_non_commercial_research).
 
 fof(bg_dist_dpv_fraud_prevention_and_detection_dpv_optimisation_for_consumer, axiom,
     dpv_fraud_prevention_and_detection != dpv_optimisation_for_consumer).
@@ -8847,6 +8648,9 @@ fof(bg_dist_dpv_fraud_prevention_and_detection_dpv_provide_personalised_recommen
 fof(bg_dist_dpv_fraud_prevention_and_detection_dpv_provide_product_recommendations, axiom,
     dpv_fraud_prevention_and_detection != dpv_provide_product_recommendations).
 
+fof(bg_dist_dpv_fraud_prevention_and_detection_dpv_public_benefit, axiom,
+    dpv_fraud_prevention_and_detection != dpv_public_benefit).
+
 fof(bg_dist_dpv_fraud_prevention_and_detection_dpv_public_policy_making, axiom,
     dpv_fraud_prevention_and_detection != dpv_public_policy_making).
 
@@ -8907,11 +8711,8 @@ fof(bg_dist_dpv_fraud_prevention_and_detection_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_fraud_prevention_and_detection_dpv_requested_service_provision, axiom,
     dpv_fraud_prevention_and_detection != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_fraud_prevention_and_detection_dpv_research_and_development, axiom,
-    dpv_fraud_prevention_and_detection != dpv_research_and_development).
-
-fof(bg_dist_dpv_fraud_prevention_and_detection_dpv_scientific_research, axiom,
-    dpv_fraud_prevention_and_detection != dpv_scientific_research).
+fof(bg_dist_dpv_fraud_prevention_and_detection_dpv_rights_fulfilment, axiom,
+    dpv_fraud_prevention_and_detection != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_fraud_prevention_and_detection_dpv_search_functionalities, axiom,
     dpv_fraud_prevention_and_detection != dpv_search_functionalities).
@@ -9003,6 +8804,9 @@ fof(bg_dist_dpv_fulfilment_of_contractual_obligation_dpv_improve_internal_crm_pr
 fof(bg_dist_dpv_fulfilment_of_contractual_obligation_dpv_improve_public_services, axiom,
     dpv_fulfilment_of_contractual_obligation != dpv_improve_public_services).
 
+fof(bg_dist_dpv_fulfilment_of_contractual_obligation_dpv_improve_transport_mobility, axiom,
+    dpv_fulfilment_of_contractual_obligation != dpv_improve_transport_mobility).
+
 fof(bg_dist_dpv_fulfilment_of_contractual_obligation_dpv_increase_service_robustness, axiom,
     dpv_fulfilment_of_contractual_obligation != dpv_increase_service_robustness).
 
@@ -9026,6 +8830,9 @@ fof(bg_dist_dpv_fulfilment_of_contractual_obligation_dpv_misuse_prevention_and_d
 
 fof(bg_dist_dpv_fulfilment_of_contractual_obligation_dpv_non_commercial_purpose, axiom,
     dpv_fulfilment_of_contractual_obligation != dpv_non_commercial_purpose).
+
+fof(bg_dist_dpv_fulfilment_of_contractual_obligation_dpv_non_commercial_research, axiom,
+    dpv_fulfilment_of_contractual_obligation != dpv_non_commercial_research).
 
 fof(bg_dist_dpv_fulfilment_of_contractual_obligation_dpv_optimisation_for_consumer, axiom,
     dpv_fulfilment_of_contractual_obligation != dpv_optimisation_for_consumer).
@@ -9123,6 +8930,9 @@ fof(bg_dist_dpv_fulfilment_of_contractual_obligation_dpv_provide_personalised_re
 fof(bg_dist_dpv_fulfilment_of_contractual_obligation_dpv_provide_product_recommendations, axiom,
     dpv_fulfilment_of_contractual_obligation != dpv_provide_product_recommendations).
 
+fof(bg_dist_dpv_fulfilment_of_contractual_obligation_dpv_public_benefit, axiom,
+    dpv_fulfilment_of_contractual_obligation != dpv_public_benefit).
+
 fof(bg_dist_dpv_fulfilment_of_contractual_obligation_dpv_public_policy_making, axiom,
     dpv_fulfilment_of_contractual_obligation != dpv_public_policy_making).
 
@@ -9183,11 +8993,8 @@ fof(bg_dist_dpv_fulfilment_of_contractual_obligation_dpv_repair_impairments, axi
 fof(bg_dist_dpv_fulfilment_of_contractual_obligation_dpv_requested_service_provision, axiom,
     dpv_fulfilment_of_contractual_obligation != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_fulfilment_of_contractual_obligation_dpv_research_and_development, axiom,
-    dpv_fulfilment_of_contractual_obligation != dpv_research_and_development).
-
-fof(bg_dist_dpv_fulfilment_of_contractual_obligation_dpv_scientific_research, axiom,
-    dpv_fulfilment_of_contractual_obligation != dpv_scientific_research).
+fof(bg_dist_dpv_fulfilment_of_contractual_obligation_dpv_rights_fulfilment, axiom,
+    dpv_fulfilment_of_contractual_obligation != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_fulfilment_of_contractual_obligation_dpv_search_functionalities, axiom,
     dpv_fulfilment_of_contractual_obligation != dpv_search_functionalities).
@@ -9276,6 +9083,9 @@ fof(bg_dist_dpv_fulfilment_of_obligation_dpv_improve_internal_crm_processes, axi
 fof(bg_dist_dpv_fulfilment_of_obligation_dpv_improve_public_services, axiom,
     dpv_fulfilment_of_obligation != dpv_improve_public_services).
 
+fof(bg_dist_dpv_fulfilment_of_obligation_dpv_improve_transport_mobility, axiom,
+    dpv_fulfilment_of_obligation != dpv_improve_transport_mobility).
+
 fof(bg_dist_dpv_fulfilment_of_obligation_dpv_increase_service_robustness, axiom,
     dpv_fulfilment_of_obligation != dpv_increase_service_robustness).
 
@@ -9299,6 +9109,9 @@ fof(bg_dist_dpv_fulfilment_of_obligation_dpv_misuse_prevention_and_detection, ax
 
 fof(bg_dist_dpv_fulfilment_of_obligation_dpv_non_commercial_purpose, axiom,
     dpv_fulfilment_of_obligation != dpv_non_commercial_purpose).
+
+fof(bg_dist_dpv_fulfilment_of_obligation_dpv_non_commercial_research, axiom,
+    dpv_fulfilment_of_obligation != dpv_non_commercial_research).
 
 fof(bg_dist_dpv_fulfilment_of_obligation_dpv_optimisation_for_consumer, axiom,
     dpv_fulfilment_of_obligation != dpv_optimisation_for_consumer).
@@ -9396,6 +9209,9 @@ fof(bg_dist_dpv_fulfilment_of_obligation_dpv_provide_personalised_recommendation
 fof(bg_dist_dpv_fulfilment_of_obligation_dpv_provide_product_recommendations, axiom,
     dpv_fulfilment_of_obligation != dpv_provide_product_recommendations).
 
+fof(bg_dist_dpv_fulfilment_of_obligation_dpv_public_benefit, axiom,
+    dpv_fulfilment_of_obligation != dpv_public_benefit).
+
 fof(bg_dist_dpv_fulfilment_of_obligation_dpv_public_policy_making, axiom,
     dpv_fulfilment_of_obligation != dpv_public_policy_making).
 
@@ -9456,11 +9272,8 @@ fof(bg_dist_dpv_fulfilment_of_obligation_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_fulfilment_of_obligation_dpv_requested_service_provision, axiom,
     dpv_fulfilment_of_obligation != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_fulfilment_of_obligation_dpv_research_and_development, axiom,
-    dpv_fulfilment_of_obligation != dpv_research_and_development).
-
-fof(bg_dist_dpv_fulfilment_of_obligation_dpv_scientific_research, axiom,
-    dpv_fulfilment_of_obligation != dpv_scientific_research).
+fof(bg_dist_dpv_fulfilment_of_obligation_dpv_rights_fulfilment, axiom,
+    dpv_fulfilment_of_obligation != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_fulfilment_of_obligation_dpv_search_functionalities, axiom,
     dpv_fulfilment_of_obligation != dpv_search_functionalities).
@@ -9546,6 +9359,9 @@ fof(bg_dist_dpv_human_resource_management_dpv_improve_internal_crm_processes, ax
 fof(bg_dist_dpv_human_resource_management_dpv_improve_public_services, axiom,
     dpv_human_resource_management != dpv_improve_public_services).
 
+fof(bg_dist_dpv_human_resource_management_dpv_improve_transport_mobility, axiom,
+    dpv_human_resource_management != dpv_improve_transport_mobility).
+
 fof(bg_dist_dpv_human_resource_management_dpv_increase_service_robustness, axiom,
     dpv_human_resource_management != dpv_increase_service_robustness).
 
@@ -9569,6 +9385,9 @@ fof(bg_dist_dpv_human_resource_management_dpv_misuse_prevention_and_detection, a
 
 fof(bg_dist_dpv_human_resource_management_dpv_non_commercial_purpose, axiom,
     dpv_human_resource_management != dpv_non_commercial_purpose).
+
+fof(bg_dist_dpv_human_resource_management_dpv_non_commercial_research, axiom,
+    dpv_human_resource_management != dpv_non_commercial_research).
 
 fof(bg_dist_dpv_human_resource_management_dpv_optimisation_for_consumer, axiom,
     dpv_human_resource_management != dpv_optimisation_for_consumer).
@@ -9666,6 +9485,9 @@ fof(bg_dist_dpv_human_resource_management_dpv_provide_personalised_recommendatio
 fof(bg_dist_dpv_human_resource_management_dpv_provide_product_recommendations, axiom,
     dpv_human_resource_management != dpv_provide_product_recommendations).
 
+fof(bg_dist_dpv_human_resource_management_dpv_public_benefit, axiom,
+    dpv_human_resource_management != dpv_public_benefit).
+
 fof(bg_dist_dpv_human_resource_management_dpv_public_policy_making, axiom,
     dpv_human_resource_management != dpv_public_policy_making).
 
@@ -9726,11 +9548,8 @@ fof(bg_dist_dpv_human_resource_management_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_human_resource_management_dpv_requested_service_provision, axiom,
     dpv_human_resource_management != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_human_resource_management_dpv_research_and_development, axiom,
-    dpv_human_resource_management != dpv_research_and_development).
-
-fof(bg_dist_dpv_human_resource_management_dpv_scientific_research, axiom,
-    dpv_human_resource_management != dpv_scientific_research).
+fof(bg_dist_dpv_human_resource_management_dpv_rights_fulfilment, axiom,
+    dpv_human_resource_management != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_human_resource_management_dpv_search_functionalities, axiom,
     dpv_human_resource_management != dpv_search_functionalities).
@@ -9813,6 +9632,9 @@ fof(bg_dist_dpv_identity_authentication_dpv_improve_internal_crm_processes, axio
 fof(bg_dist_dpv_identity_authentication_dpv_improve_public_services, axiom,
     dpv_identity_authentication != dpv_improve_public_services).
 
+fof(bg_dist_dpv_identity_authentication_dpv_improve_transport_mobility, axiom,
+    dpv_identity_authentication != dpv_improve_transport_mobility).
+
 fof(bg_dist_dpv_identity_authentication_dpv_increase_service_robustness, axiom,
     dpv_identity_authentication != dpv_increase_service_robustness).
 
@@ -9836,6 +9658,9 @@ fof(bg_dist_dpv_identity_authentication_dpv_misuse_prevention_and_detection, axi
 
 fof(bg_dist_dpv_identity_authentication_dpv_non_commercial_purpose, axiom,
     dpv_identity_authentication != dpv_non_commercial_purpose).
+
+fof(bg_dist_dpv_identity_authentication_dpv_non_commercial_research, axiom,
+    dpv_identity_authentication != dpv_non_commercial_research).
 
 fof(bg_dist_dpv_identity_authentication_dpv_optimisation_for_consumer, axiom,
     dpv_identity_authentication != dpv_optimisation_for_consumer).
@@ -9933,6 +9758,9 @@ fof(bg_dist_dpv_identity_authentication_dpv_provide_personalised_recommendations
 fof(bg_dist_dpv_identity_authentication_dpv_provide_product_recommendations, axiom,
     dpv_identity_authentication != dpv_provide_product_recommendations).
 
+fof(bg_dist_dpv_identity_authentication_dpv_public_benefit, axiom,
+    dpv_identity_authentication != dpv_public_benefit).
+
 fof(bg_dist_dpv_identity_authentication_dpv_public_policy_making, axiom,
     dpv_identity_authentication != dpv_public_policy_making).
 
@@ -9993,11 +9821,8 @@ fof(bg_dist_dpv_identity_authentication_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_identity_authentication_dpv_requested_service_provision, axiom,
     dpv_identity_authentication != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_identity_authentication_dpv_research_and_development, axiom,
-    dpv_identity_authentication != dpv_research_and_development).
-
-fof(bg_dist_dpv_identity_authentication_dpv_scientific_research, axiom,
-    dpv_identity_authentication != dpv_scientific_research).
+fof(bg_dist_dpv_identity_authentication_dpv_rights_fulfilment, axiom,
+    dpv_identity_authentication != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_identity_authentication_dpv_search_functionalities, axiom,
     dpv_identity_authentication != dpv_search_functionalities).
@@ -10077,6 +9902,9 @@ fof(bg_dist_dpv_identity_verification_dpv_improve_internal_crm_processes, axiom,
 fof(bg_dist_dpv_identity_verification_dpv_improve_public_services, axiom,
     dpv_identity_verification != dpv_improve_public_services).
 
+fof(bg_dist_dpv_identity_verification_dpv_improve_transport_mobility, axiom,
+    dpv_identity_verification != dpv_improve_transport_mobility).
+
 fof(bg_dist_dpv_identity_verification_dpv_increase_service_robustness, axiom,
     dpv_identity_verification != dpv_increase_service_robustness).
 
@@ -10100,6 +9928,9 @@ fof(bg_dist_dpv_identity_verification_dpv_misuse_prevention_and_detection, axiom
 
 fof(bg_dist_dpv_identity_verification_dpv_non_commercial_purpose, axiom,
     dpv_identity_verification != dpv_non_commercial_purpose).
+
+fof(bg_dist_dpv_identity_verification_dpv_non_commercial_research, axiom,
+    dpv_identity_verification != dpv_non_commercial_research).
 
 fof(bg_dist_dpv_identity_verification_dpv_optimisation_for_consumer, axiom,
     dpv_identity_verification != dpv_optimisation_for_consumer).
@@ -10197,6 +10028,9 @@ fof(bg_dist_dpv_identity_verification_dpv_provide_personalised_recommendations, 
 fof(bg_dist_dpv_identity_verification_dpv_provide_product_recommendations, axiom,
     dpv_identity_verification != dpv_provide_product_recommendations).
 
+fof(bg_dist_dpv_identity_verification_dpv_public_benefit, axiom,
+    dpv_identity_verification != dpv_public_benefit).
+
 fof(bg_dist_dpv_identity_verification_dpv_public_policy_making, axiom,
     dpv_identity_verification != dpv_public_policy_making).
 
@@ -10257,11 +10091,8 @@ fof(bg_dist_dpv_identity_verification_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_identity_verification_dpv_requested_service_provision, axiom,
     dpv_identity_verification != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_identity_verification_dpv_research_and_development, axiom,
-    dpv_identity_verification != dpv_research_and_development).
-
-fof(bg_dist_dpv_identity_verification_dpv_scientific_research, axiom,
-    dpv_identity_verification != dpv_scientific_research).
+fof(bg_dist_dpv_identity_verification_dpv_rights_fulfilment, axiom,
+    dpv_identity_verification != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_identity_verification_dpv_search_functionalities, axiom,
     dpv_identity_verification != dpv_search_functionalities).
@@ -10338,6 +10169,9 @@ fof(bg_dist_dpv_improve_existing_products_and_services_dpv_improve_internal_crm_
 fof(bg_dist_dpv_improve_existing_products_and_services_dpv_improve_public_services, axiom,
     dpv_improve_existing_products_and_services != dpv_improve_public_services).
 
+fof(bg_dist_dpv_improve_existing_products_and_services_dpv_improve_transport_mobility, axiom,
+    dpv_improve_existing_products_and_services != dpv_improve_transport_mobility).
+
 fof(bg_dist_dpv_improve_existing_products_and_services_dpv_increase_service_robustness, axiom,
     dpv_improve_existing_products_and_services != dpv_increase_service_robustness).
 
@@ -10361,6 +10195,9 @@ fof(bg_dist_dpv_improve_existing_products_and_services_dpv_misuse_prevention_and
 
 fof(bg_dist_dpv_improve_existing_products_and_services_dpv_non_commercial_purpose, axiom,
     dpv_improve_existing_products_and_services != dpv_non_commercial_purpose).
+
+fof(bg_dist_dpv_improve_existing_products_and_services_dpv_non_commercial_research, axiom,
+    dpv_improve_existing_products_and_services != dpv_non_commercial_research).
 
 fof(bg_dist_dpv_improve_existing_products_and_services_dpv_optimisation_for_consumer, axiom,
     dpv_improve_existing_products_and_services != dpv_optimisation_for_consumer).
@@ -10458,6 +10295,9 @@ fof(bg_dist_dpv_improve_existing_products_and_services_dpv_provide_personalised_
 fof(bg_dist_dpv_improve_existing_products_and_services_dpv_provide_product_recommendations, axiom,
     dpv_improve_existing_products_and_services != dpv_provide_product_recommendations).
 
+fof(bg_dist_dpv_improve_existing_products_and_services_dpv_public_benefit, axiom,
+    dpv_improve_existing_products_and_services != dpv_public_benefit).
+
 fof(bg_dist_dpv_improve_existing_products_and_services_dpv_public_policy_making, axiom,
     dpv_improve_existing_products_and_services != dpv_public_policy_making).
 
@@ -10518,11 +10358,8 @@ fof(bg_dist_dpv_improve_existing_products_and_services_dpv_repair_impairments, a
 fof(bg_dist_dpv_improve_existing_products_and_services_dpv_requested_service_provision, axiom,
     dpv_improve_existing_products_and_services != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_improve_existing_products_and_services_dpv_research_and_development, axiom,
-    dpv_improve_existing_products_and_services != dpv_research_and_development).
-
-fof(bg_dist_dpv_improve_existing_products_and_services_dpv_scientific_research, axiom,
-    dpv_improve_existing_products_and_services != dpv_scientific_research).
+fof(bg_dist_dpv_improve_existing_products_and_services_dpv_rights_fulfilment, axiom,
+    dpv_improve_existing_products_and_services != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_improve_existing_products_and_services_dpv_search_functionalities, axiom,
     dpv_improve_existing_products_and_services != dpv_search_functionalities).
@@ -10596,6 +10433,9 @@ fof(bg_dist_dpv_improve_healthcare_dpv_improve_internal_crm_processes, axiom,
 fof(bg_dist_dpv_improve_healthcare_dpv_improve_public_services, axiom,
     dpv_improve_healthcare != dpv_improve_public_services).
 
+fof(bg_dist_dpv_improve_healthcare_dpv_improve_transport_mobility, axiom,
+    dpv_improve_healthcare != dpv_improve_transport_mobility).
+
 fof(bg_dist_dpv_improve_healthcare_dpv_increase_service_robustness, axiom,
     dpv_improve_healthcare != dpv_increase_service_robustness).
 
@@ -10619,6 +10459,9 @@ fof(bg_dist_dpv_improve_healthcare_dpv_misuse_prevention_and_detection, axiom,
 
 fof(bg_dist_dpv_improve_healthcare_dpv_non_commercial_purpose, axiom,
     dpv_improve_healthcare != dpv_non_commercial_purpose).
+
+fof(bg_dist_dpv_improve_healthcare_dpv_non_commercial_research, axiom,
+    dpv_improve_healthcare != dpv_non_commercial_research).
 
 fof(bg_dist_dpv_improve_healthcare_dpv_optimisation_for_consumer, axiom,
     dpv_improve_healthcare != dpv_optimisation_for_consumer).
@@ -10716,6 +10559,9 @@ fof(bg_dist_dpv_improve_healthcare_dpv_provide_personalised_recommendations, axi
 fof(bg_dist_dpv_improve_healthcare_dpv_provide_product_recommendations, axiom,
     dpv_improve_healthcare != dpv_provide_product_recommendations).
 
+fof(bg_dist_dpv_improve_healthcare_dpv_public_benefit, axiom,
+    dpv_improve_healthcare != dpv_public_benefit).
+
 fof(bg_dist_dpv_improve_healthcare_dpv_public_policy_making, axiom,
     dpv_improve_healthcare != dpv_public_policy_making).
 
@@ -10776,11 +10622,8 @@ fof(bg_dist_dpv_improve_healthcare_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_improve_healthcare_dpv_requested_service_provision, axiom,
     dpv_improve_healthcare != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_improve_healthcare_dpv_research_and_development, axiom,
-    dpv_improve_healthcare != dpv_research_and_development).
-
-fof(bg_dist_dpv_improve_healthcare_dpv_scientific_research, axiom,
-    dpv_improve_healthcare != dpv_scientific_research).
+fof(bg_dist_dpv_improve_healthcare_dpv_rights_fulfilment, axiom,
+    dpv_improve_healthcare != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_improve_healthcare_dpv_search_functionalities, axiom,
     dpv_improve_healthcare != dpv_search_functionalities).
@@ -10851,6 +10694,9 @@ fof(bg_dist_dpv_improve_healthcare_dpv_verification, axiom,
 fof(bg_dist_dpv_improve_internal_crm_processes_dpv_improve_public_services, axiom,
     dpv_improve_internal_crm_processes != dpv_improve_public_services).
 
+fof(bg_dist_dpv_improve_internal_crm_processes_dpv_improve_transport_mobility, axiom,
+    dpv_improve_internal_crm_processes != dpv_improve_transport_mobility).
+
 fof(bg_dist_dpv_improve_internal_crm_processes_dpv_increase_service_robustness, axiom,
     dpv_improve_internal_crm_processes != dpv_increase_service_robustness).
 
@@ -10874,6 +10720,9 @@ fof(bg_dist_dpv_improve_internal_crm_processes_dpv_misuse_prevention_and_detecti
 
 fof(bg_dist_dpv_improve_internal_crm_processes_dpv_non_commercial_purpose, axiom,
     dpv_improve_internal_crm_processes != dpv_non_commercial_purpose).
+
+fof(bg_dist_dpv_improve_internal_crm_processes_dpv_non_commercial_research, axiom,
+    dpv_improve_internal_crm_processes != dpv_non_commercial_research).
 
 fof(bg_dist_dpv_improve_internal_crm_processes_dpv_optimisation_for_consumer, axiom,
     dpv_improve_internal_crm_processes != dpv_optimisation_for_consumer).
@@ -10971,6 +10820,9 @@ fof(bg_dist_dpv_improve_internal_crm_processes_dpv_provide_personalised_recommen
 fof(bg_dist_dpv_improve_internal_crm_processes_dpv_provide_product_recommendations, axiom,
     dpv_improve_internal_crm_processes != dpv_provide_product_recommendations).
 
+fof(bg_dist_dpv_improve_internal_crm_processes_dpv_public_benefit, axiom,
+    dpv_improve_internal_crm_processes != dpv_public_benefit).
+
 fof(bg_dist_dpv_improve_internal_crm_processes_dpv_public_policy_making, axiom,
     dpv_improve_internal_crm_processes != dpv_public_policy_making).
 
@@ -11031,11 +10883,8 @@ fof(bg_dist_dpv_improve_internal_crm_processes_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_improve_internal_crm_processes_dpv_requested_service_provision, axiom,
     dpv_improve_internal_crm_processes != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_improve_internal_crm_processes_dpv_research_and_development, axiom,
-    dpv_improve_internal_crm_processes != dpv_research_and_development).
-
-fof(bg_dist_dpv_improve_internal_crm_processes_dpv_scientific_research, axiom,
-    dpv_improve_internal_crm_processes != dpv_scientific_research).
+fof(bg_dist_dpv_improve_internal_crm_processes_dpv_rights_fulfilment, axiom,
+    dpv_improve_internal_crm_processes != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_improve_internal_crm_processes_dpv_search_functionalities, axiom,
     dpv_improve_internal_crm_processes != dpv_search_functionalities).
@@ -11103,6 +10952,9 @@ fof(bg_dist_dpv_improve_internal_crm_processes_dpv_vendor_selection_assessment, 
 fof(bg_dist_dpv_improve_internal_crm_processes_dpv_verification, axiom,
     dpv_improve_internal_crm_processes != dpv_verification).
 
+fof(bg_dist_dpv_improve_public_services_dpv_improve_transport_mobility, axiom,
+    dpv_improve_public_services != dpv_improve_transport_mobility).
+
 fof(bg_dist_dpv_improve_public_services_dpv_increase_service_robustness, axiom,
     dpv_improve_public_services != dpv_increase_service_robustness).
 
@@ -11126,6 +10978,9 @@ fof(bg_dist_dpv_improve_public_services_dpv_misuse_prevention_and_detection, axi
 
 fof(bg_dist_dpv_improve_public_services_dpv_non_commercial_purpose, axiom,
     dpv_improve_public_services != dpv_non_commercial_purpose).
+
+fof(bg_dist_dpv_improve_public_services_dpv_non_commercial_research, axiom,
+    dpv_improve_public_services != dpv_non_commercial_research).
 
 fof(bg_dist_dpv_improve_public_services_dpv_optimisation_for_consumer, axiom,
     dpv_improve_public_services != dpv_optimisation_for_consumer).
@@ -11223,6 +11078,9 @@ fof(bg_dist_dpv_improve_public_services_dpv_provide_personalised_recommendations
 fof(bg_dist_dpv_improve_public_services_dpv_provide_product_recommendations, axiom,
     dpv_improve_public_services != dpv_provide_product_recommendations).
 
+fof(bg_dist_dpv_improve_public_services_dpv_public_benefit, axiom,
+    dpv_improve_public_services != dpv_public_benefit).
+
 fof(bg_dist_dpv_improve_public_services_dpv_public_policy_making, axiom,
     dpv_improve_public_services != dpv_public_policy_making).
 
@@ -11283,11 +11141,8 @@ fof(bg_dist_dpv_improve_public_services_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_improve_public_services_dpv_requested_service_provision, axiom,
     dpv_improve_public_services != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_improve_public_services_dpv_research_and_development, axiom,
-    dpv_improve_public_services != dpv_research_and_development).
-
-fof(bg_dist_dpv_improve_public_services_dpv_scientific_research, axiom,
-    dpv_improve_public_services != dpv_scientific_research).
+fof(bg_dist_dpv_improve_public_services_dpv_rights_fulfilment, axiom,
+    dpv_improve_public_services != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_improve_public_services_dpv_search_functionalities, axiom,
     dpv_improve_public_services != dpv_search_functionalities).
@@ -11355,6 +11210,261 @@ fof(bg_dist_dpv_improve_public_services_dpv_vendor_selection_assessment, axiom,
 fof(bg_dist_dpv_improve_public_services_dpv_verification, axiom,
     dpv_improve_public_services != dpv_verification).
 
+fof(bg_dist_dpv_improve_transport_mobility_dpv_increase_service_robustness, axiom,
+    dpv_improve_transport_mobility != dpv_increase_service_robustness).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_internal_resource_optimisation, axiom,
+    dpv_improve_transport_mobility != dpv_internal_resource_optimisation).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_legal_compliance, axiom,
+    dpv_improve_transport_mobility != dpv_legal_compliance).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_maintain_fraud_database, axiom,
+    dpv_improve_transport_mobility != dpv_maintain_fraud_database).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_marketing, axiom,
+    dpv_improve_transport_mobility != dpv_marketing).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_member_partner_management, axiom,
+    dpv_improve_transport_mobility != dpv_member_partner_management).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_misuse_prevention_and_detection, axiom,
+    dpv_improve_transport_mobility != dpv_misuse_prevention_and_detection).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_non_commercial_purpose, axiom,
+    dpv_improve_transport_mobility != dpv_non_commercial_purpose).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_non_commercial_research, axiom,
+    dpv_improve_transport_mobility != dpv_non_commercial_research).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_optimisation_for_consumer, axiom,
+    dpv_improve_transport_mobility != dpv_optimisation_for_consumer).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_optimisation_for_controller, axiom,
+    dpv_improve_transport_mobility != dpv_optimisation_for_controller).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_optimise_user_interface, axiom,
+    dpv_improve_transport_mobility != dpv_optimise_user_interface).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_organisation_compliance_management, axiom,
+    dpv_improve_transport_mobility != dpv_organisation_compliance_management).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_organisation_governance, axiom,
+    dpv_improve_transport_mobility != dpv_organisation_governance).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_organisation_risk_management, axiom,
+    dpv_improve_transport_mobility != dpv_organisation_risk_management).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_payment_management, axiom,
+    dpv_improve_transport_mobility != dpv_payment_management).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_personalisation, axiom,
+    dpv_improve_transport_mobility != dpv_personalisation).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_personalised_advertising, axiom,
+    dpv_improve_transport_mobility != dpv_personalised_advertising).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_personalised_benefits, axiom,
+    dpv_improve_transport_mobility != dpv_personalised_benefits).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_personnel_behaviour_monitoring, axiom,
+    dpv_improve_transport_mobility != dpv_personnel_behaviour_monitoring).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_personnel_hiring, axiom,
+    dpv_improve_transport_mobility != dpv_personnel_hiring).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_personnel_management, axiom,
+    dpv_improve_transport_mobility != dpv_personnel_management).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_personnel_monitoring, axiom,
+    dpv_improve_transport_mobility != dpv_personnel_monitoring).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_personnel_offboarding, axiom,
+    dpv_improve_transport_mobility != dpv_personnel_offboarding).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_personnel_onboarding, axiom,
+    dpv_improve_transport_mobility != dpv_personnel_onboarding).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_personnel_payment, axiom,
+    dpv_improve_transport_mobility != dpv_personnel_payment).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_personnel_performance_evaluation, axiom,
+    dpv_improve_transport_mobility != dpv_personnel_performance_evaluation).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_personnel_performance_management, axiom,
+    dpv_improve_transport_mobility != dpv_personnel_performance_management).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_personnel_performance_monitoring, axiom,
+    dpv_improve_transport_mobility != dpv_personnel_performance_monitoring).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_personnel_performance_prediction, axiom,
+    dpv_improve_transport_mobility != dpv_personnel_performance_prediction).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_personnel_promotion_management, axiom,
+    dpv_improve_transport_mobility != dpv_personnel_promotion_management).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_personnel_termination_management, axiom,
+    dpv_improve_transport_mobility != dpv_personnel_termination_management).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_personnel_workload_management, axiom,
+    dpv_improve_transport_mobility != dpv_personnel_workload_management).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_political_campaign, axiom,
+    dpv_improve_transport_mobility != dpv_political_campaign).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_protection_of_ipr, axiom,
+    dpv_improve_transport_mobility != dpv_protection_of_ipr).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_protection_of_national_security, axiom,
+    dpv_improve_transport_mobility != dpv_protection_of_national_security).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_protection_of_public_security, axiom,
+    dpv_improve_transport_mobility != dpv_protection_of_public_security).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_provide_event_recommendations, axiom,
+    dpv_improve_transport_mobility != dpv_provide_event_recommendations).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_provide_official_statistics, axiom,
+    dpv_improve_transport_mobility != dpv_provide_official_statistics).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_provide_personalised_recommendations, axiom,
+    dpv_improve_transport_mobility != dpv_provide_personalised_recommendations).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_provide_product_recommendations, axiom,
+    dpv_improve_transport_mobility != dpv_provide_product_recommendations).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_public_benefit, axiom,
+    dpv_improve_transport_mobility != dpv_public_benefit).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_public_policy_making, axiom,
+    dpv_improve_transport_mobility != dpv_public_policy_making).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_public_relations, axiom,
+    dpv_improve_transport_mobility != dpv_public_relations).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_purpose, axiom,
+    dpv_improve_transport_mobility != dpv_purpose).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_record_management, axiom,
+    dpv_improve_transport_mobility != dpv_record_management).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_recruitment_advertising, axiom,
+    dpv_improve_transport_mobility != dpv_recruitment_advertising).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_recruitment_applicant_background_check, axiom,
+    dpv_improve_transport_mobility != dpv_recruitment_applicant_background_check).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_recruitment_applicant_criminal_background_check, axiom,
+    dpv_improve_transport_mobility != dpv_recruitment_applicant_criminal_background_check).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_recruitment_applicant_information_authentication, axiom,
+    dpv_improve_transport_mobility != dpv_recruitment_applicant_information_authentication).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_recruitment_applicant_selection, axiom,
+    dpv_improve_transport_mobility != dpv_recruitment_applicant_selection).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_recruitment_application_analysis, axiom,
+    dpv_improve_transport_mobility != dpv_recruitment_application_analysis).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_recruitment_application_management, axiom,
+    dpv_improve_transport_mobility != dpv_recruitment_application_management).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_recruitment_application_screening, axiom,
+    dpv_improve_transport_mobility != dpv_recruitment_application_screening).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_recruitment_interview_analysis, axiom,
+    dpv_improve_transport_mobility != dpv_recruitment_interview_analysis).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_recruitment_interview_assessment, axiom,
+    dpv_improve_transport_mobility != dpv_recruitment_interview_assessment).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_recruitment_interview_management, axiom,
+    dpv_improve_transport_mobility != dpv_recruitment_interview_management).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_recruitment_interview_scheduling, axiom,
+    dpv_improve_transport_mobility != dpv_recruitment_interview_scheduling).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_recruitment_management, axiom,
+    dpv_improve_transport_mobility != dpv_recruitment_management).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_recruitment_targeted_advertising, axiom,
+    dpv_improve_transport_mobility != dpv_recruitment_targeted_advertising).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_repair_impairments, axiom,
+    dpv_improve_transport_mobility != dpv_repair_impairments).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_requested_service_provision, axiom,
+    dpv_improve_transport_mobility != dpv_requested_service_provision).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_rights_fulfilment, axiom,
+    dpv_improve_transport_mobility != dpv_rights_fulfilment).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_search_functionalities, axiom,
+    dpv_improve_transport_mobility != dpv_search_functionalities).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_sell_data_to_third_parties, axiom,
+    dpv_improve_transport_mobility != dpv_sell_data_to_third_parties).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_sell_insights_from_data, axiom,
+    dpv_improve_transport_mobility != dpv_sell_insights_from_data).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_sell_products, axiom,
+    dpv_improve_transport_mobility != dpv_sell_products).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_sell_products_to_data_subject, axiom,
+    dpv_improve_transport_mobility != dpv_sell_products_to_data_subject).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_service_access_determination, axiom,
+    dpv_improve_transport_mobility != dpv_service_access_determination).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_service_management, axiom,
+    dpv_improve_transport_mobility != dpv_service_management).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_service_monitoring, axiom,
+    dpv_improve_transport_mobility != dpv_service_monitoring).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_service_optimisation, axiom,
+    dpv_improve_transport_mobility != dpv_service_optimisation).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_service_personalisation, axiom,
+    dpv_improve_transport_mobility != dpv_service_personalisation).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_service_provision, axiom,
+    dpv_improve_transport_mobility != dpv_service_provision).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_service_registration, axiom,
+    dpv_improve_transport_mobility != dpv_service_registration).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_service_usage_analytics, axiom,
+    dpv_improve_transport_mobility != dpv_service_usage_analytics).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_social_media_marketing, axiom,
+    dpv_improve_transport_mobility != dpv_social_media_marketing).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_targeted_advertising, axiom,
+    dpv_improve_transport_mobility != dpv_targeted_advertising).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_technical_service_provision, axiom,
+    dpv_improve_transport_mobility != dpv_technical_service_provision).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_user_interface_personalisation, axiom,
+    dpv_improve_transport_mobility != dpv_user_interface_personalisation).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_vendor_management, axiom,
+    dpv_improve_transport_mobility != dpv_vendor_management).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_vendor_payment, axiom,
+    dpv_improve_transport_mobility != dpv_vendor_payment).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_vendor_records_management, axiom,
+    dpv_improve_transport_mobility != dpv_vendor_records_management).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_vendor_selection_assessment, axiom,
+    dpv_improve_transport_mobility != dpv_vendor_selection_assessment).
+
+fof(bg_dist_dpv_improve_transport_mobility_dpv_verification, axiom,
+    dpv_improve_transport_mobility != dpv_verification).
+
 fof(bg_dist_dpv_increase_service_robustness_dpv_internal_resource_optimisation, axiom,
     dpv_increase_service_robustness != dpv_internal_resource_optimisation).
 
@@ -11375,6 +11485,9 @@ fof(bg_dist_dpv_increase_service_robustness_dpv_misuse_prevention_and_detection,
 
 fof(bg_dist_dpv_increase_service_robustness_dpv_non_commercial_purpose, axiom,
     dpv_increase_service_robustness != dpv_non_commercial_purpose).
+
+fof(bg_dist_dpv_increase_service_robustness_dpv_non_commercial_research, axiom,
+    dpv_increase_service_robustness != dpv_non_commercial_research).
 
 fof(bg_dist_dpv_increase_service_robustness_dpv_optimisation_for_consumer, axiom,
     dpv_increase_service_robustness != dpv_optimisation_for_consumer).
@@ -11472,6 +11585,9 @@ fof(bg_dist_dpv_increase_service_robustness_dpv_provide_personalised_recommendat
 fof(bg_dist_dpv_increase_service_robustness_dpv_provide_product_recommendations, axiom,
     dpv_increase_service_robustness != dpv_provide_product_recommendations).
 
+fof(bg_dist_dpv_increase_service_robustness_dpv_public_benefit, axiom,
+    dpv_increase_service_robustness != dpv_public_benefit).
+
 fof(bg_dist_dpv_increase_service_robustness_dpv_public_policy_making, axiom,
     dpv_increase_service_robustness != dpv_public_policy_making).
 
@@ -11532,11 +11648,8 @@ fof(bg_dist_dpv_increase_service_robustness_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_increase_service_robustness_dpv_requested_service_provision, axiom,
     dpv_increase_service_robustness != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_increase_service_robustness_dpv_research_and_development, axiom,
-    dpv_increase_service_robustness != dpv_research_and_development).
-
-fof(bg_dist_dpv_increase_service_robustness_dpv_scientific_research, axiom,
-    dpv_increase_service_robustness != dpv_scientific_research).
+fof(bg_dist_dpv_increase_service_robustness_dpv_rights_fulfilment, axiom,
+    dpv_increase_service_robustness != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_increase_service_robustness_dpv_search_functionalities, axiom,
     dpv_increase_service_robustness != dpv_search_functionalities).
@@ -11621,6 +11734,9 @@ fof(bg_dist_dpv_internal_resource_optimisation_dpv_misuse_prevention_and_detecti
 
 fof(bg_dist_dpv_internal_resource_optimisation_dpv_non_commercial_purpose, axiom,
     dpv_internal_resource_optimisation != dpv_non_commercial_purpose).
+
+fof(bg_dist_dpv_internal_resource_optimisation_dpv_non_commercial_research, axiom,
+    dpv_internal_resource_optimisation != dpv_non_commercial_research).
 
 fof(bg_dist_dpv_internal_resource_optimisation_dpv_optimisation_for_consumer, axiom,
     dpv_internal_resource_optimisation != dpv_optimisation_for_consumer).
@@ -11718,6 +11834,9 @@ fof(bg_dist_dpv_internal_resource_optimisation_dpv_provide_personalised_recommen
 fof(bg_dist_dpv_internal_resource_optimisation_dpv_provide_product_recommendations, axiom,
     dpv_internal_resource_optimisation != dpv_provide_product_recommendations).
 
+fof(bg_dist_dpv_internal_resource_optimisation_dpv_public_benefit, axiom,
+    dpv_internal_resource_optimisation != dpv_public_benefit).
+
 fof(bg_dist_dpv_internal_resource_optimisation_dpv_public_policy_making, axiom,
     dpv_internal_resource_optimisation != dpv_public_policy_making).
 
@@ -11778,11 +11897,8 @@ fof(bg_dist_dpv_internal_resource_optimisation_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_internal_resource_optimisation_dpv_requested_service_provision, axiom,
     dpv_internal_resource_optimisation != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_internal_resource_optimisation_dpv_research_and_development, axiom,
-    dpv_internal_resource_optimisation != dpv_research_and_development).
-
-fof(bg_dist_dpv_internal_resource_optimisation_dpv_scientific_research, axiom,
-    dpv_internal_resource_optimisation != dpv_scientific_research).
+fof(bg_dist_dpv_internal_resource_optimisation_dpv_rights_fulfilment, axiom,
+    dpv_internal_resource_optimisation != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_internal_resource_optimisation_dpv_search_functionalities, axiom,
     dpv_internal_resource_optimisation != dpv_search_functionalities).
@@ -11864,6 +11980,9 @@ fof(bg_dist_dpv_legal_compliance_dpv_misuse_prevention_and_detection, axiom,
 
 fof(bg_dist_dpv_legal_compliance_dpv_non_commercial_purpose, axiom,
     dpv_legal_compliance != dpv_non_commercial_purpose).
+
+fof(bg_dist_dpv_legal_compliance_dpv_non_commercial_research, axiom,
+    dpv_legal_compliance != dpv_non_commercial_research).
 
 fof(bg_dist_dpv_legal_compliance_dpv_optimisation_for_consumer, axiom,
     dpv_legal_compliance != dpv_optimisation_for_consumer).
@@ -11961,6 +12080,9 @@ fof(bg_dist_dpv_legal_compliance_dpv_provide_personalised_recommendations, axiom
 fof(bg_dist_dpv_legal_compliance_dpv_provide_product_recommendations, axiom,
     dpv_legal_compliance != dpv_provide_product_recommendations).
 
+fof(bg_dist_dpv_legal_compliance_dpv_public_benefit, axiom,
+    dpv_legal_compliance != dpv_public_benefit).
+
 fof(bg_dist_dpv_legal_compliance_dpv_public_policy_making, axiom,
     dpv_legal_compliance != dpv_public_policy_making).
 
@@ -12021,11 +12143,8 @@ fof(bg_dist_dpv_legal_compliance_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_legal_compliance_dpv_requested_service_provision, axiom,
     dpv_legal_compliance != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_legal_compliance_dpv_research_and_development, axiom,
-    dpv_legal_compliance != dpv_research_and_development).
-
-fof(bg_dist_dpv_legal_compliance_dpv_scientific_research, axiom,
-    dpv_legal_compliance != dpv_scientific_research).
+fof(bg_dist_dpv_legal_compliance_dpv_rights_fulfilment, axiom,
+    dpv_legal_compliance != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_legal_compliance_dpv_search_functionalities, axiom,
     dpv_legal_compliance != dpv_search_functionalities).
@@ -12104,6 +12223,9 @@ fof(bg_dist_dpv_maintain_fraud_database_dpv_misuse_prevention_and_detection, axi
 
 fof(bg_dist_dpv_maintain_fraud_database_dpv_non_commercial_purpose, axiom,
     dpv_maintain_fraud_database != dpv_non_commercial_purpose).
+
+fof(bg_dist_dpv_maintain_fraud_database_dpv_non_commercial_research, axiom,
+    dpv_maintain_fraud_database != dpv_non_commercial_research).
 
 fof(bg_dist_dpv_maintain_fraud_database_dpv_optimisation_for_consumer, axiom,
     dpv_maintain_fraud_database != dpv_optimisation_for_consumer).
@@ -12201,6 +12323,9 @@ fof(bg_dist_dpv_maintain_fraud_database_dpv_provide_personalised_recommendations
 fof(bg_dist_dpv_maintain_fraud_database_dpv_provide_product_recommendations, axiom,
     dpv_maintain_fraud_database != dpv_provide_product_recommendations).
 
+fof(bg_dist_dpv_maintain_fraud_database_dpv_public_benefit, axiom,
+    dpv_maintain_fraud_database != dpv_public_benefit).
+
 fof(bg_dist_dpv_maintain_fraud_database_dpv_public_policy_making, axiom,
     dpv_maintain_fraud_database != dpv_public_policy_making).
 
@@ -12261,11 +12386,8 @@ fof(bg_dist_dpv_maintain_fraud_database_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_maintain_fraud_database_dpv_requested_service_provision, axiom,
     dpv_maintain_fraud_database != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_maintain_fraud_database_dpv_research_and_development, axiom,
-    dpv_maintain_fraud_database != dpv_research_and_development).
-
-fof(bg_dist_dpv_maintain_fraud_database_dpv_scientific_research, axiom,
-    dpv_maintain_fraud_database != dpv_scientific_research).
+fof(bg_dist_dpv_maintain_fraud_database_dpv_rights_fulfilment, axiom,
+    dpv_maintain_fraud_database != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_maintain_fraud_database_dpv_search_functionalities, axiom,
     dpv_maintain_fraud_database != dpv_search_functionalities).
@@ -12341,6 +12463,9 @@ fof(bg_dist_dpv_marketing_dpv_misuse_prevention_and_detection, axiom,
 
 fof(bg_dist_dpv_marketing_dpv_non_commercial_purpose, axiom,
     dpv_marketing != dpv_non_commercial_purpose).
+
+fof(bg_dist_dpv_marketing_dpv_non_commercial_research, axiom,
+    dpv_marketing != dpv_non_commercial_research).
 
 fof(bg_dist_dpv_marketing_dpv_optimisation_for_consumer, axiom,
     dpv_marketing != dpv_optimisation_for_consumer).
@@ -12438,6 +12563,9 @@ fof(bg_dist_dpv_marketing_dpv_provide_personalised_recommendations, axiom,
 fof(bg_dist_dpv_marketing_dpv_provide_product_recommendations, axiom,
     dpv_marketing != dpv_provide_product_recommendations).
 
+fof(bg_dist_dpv_marketing_dpv_public_benefit, axiom,
+    dpv_marketing != dpv_public_benefit).
+
 fof(bg_dist_dpv_marketing_dpv_public_policy_making, axiom,
     dpv_marketing != dpv_public_policy_making).
 
@@ -12498,11 +12626,8 @@ fof(bg_dist_dpv_marketing_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_marketing_dpv_requested_service_provision, axiom,
     dpv_marketing != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_marketing_dpv_research_and_development, axiom,
-    dpv_marketing != dpv_research_and_development).
-
-fof(bg_dist_dpv_marketing_dpv_scientific_research, axiom,
-    dpv_marketing != dpv_scientific_research).
+fof(bg_dist_dpv_marketing_dpv_rights_fulfilment, axiom,
+    dpv_marketing != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_marketing_dpv_search_functionalities, axiom,
     dpv_marketing != dpv_search_functionalities).
@@ -12575,6 +12700,9 @@ fof(bg_dist_dpv_member_partner_management_dpv_misuse_prevention_and_detection, a
 
 fof(bg_dist_dpv_member_partner_management_dpv_non_commercial_purpose, axiom,
     dpv_member_partner_management != dpv_non_commercial_purpose).
+
+fof(bg_dist_dpv_member_partner_management_dpv_non_commercial_research, axiom,
+    dpv_member_partner_management != dpv_non_commercial_research).
 
 fof(bg_dist_dpv_member_partner_management_dpv_optimisation_for_consumer, axiom,
     dpv_member_partner_management != dpv_optimisation_for_consumer).
@@ -12672,6 +12800,9 @@ fof(bg_dist_dpv_member_partner_management_dpv_provide_personalised_recommendatio
 fof(bg_dist_dpv_member_partner_management_dpv_provide_product_recommendations, axiom,
     dpv_member_partner_management != dpv_provide_product_recommendations).
 
+fof(bg_dist_dpv_member_partner_management_dpv_public_benefit, axiom,
+    dpv_member_partner_management != dpv_public_benefit).
+
 fof(bg_dist_dpv_member_partner_management_dpv_public_policy_making, axiom,
     dpv_member_partner_management != dpv_public_policy_making).
 
@@ -12732,11 +12863,8 @@ fof(bg_dist_dpv_member_partner_management_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_member_partner_management_dpv_requested_service_provision, axiom,
     dpv_member_partner_management != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_member_partner_management_dpv_research_and_development, axiom,
-    dpv_member_partner_management != dpv_research_and_development).
-
-fof(bg_dist_dpv_member_partner_management_dpv_scientific_research, axiom,
-    dpv_member_partner_management != dpv_scientific_research).
+fof(bg_dist_dpv_member_partner_management_dpv_rights_fulfilment, axiom,
+    dpv_member_partner_management != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_member_partner_management_dpv_search_functionalities, axiom,
     dpv_member_partner_management != dpv_search_functionalities).
@@ -12806,6 +12934,9 @@ fof(bg_dist_dpv_member_partner_management_dpv_verification, axiom,
 
 fof(bg_dist_dpv_misuse_prevention_and_detection_dpv_non_commercial_purpose, axiom,
     dpv_misuse_prevention_and_detection != dpv_non_commercial_purpose).
+
+fof(bg_dist_dpv_misuse_prevention_and_detection_dpv_non_commercial_research, axiom,
+    dpv_misuse_prevention_and_detection != dpv_non_commercial_research).
 
 fof(bg_dist_dpv_misuse_prevention_and_detection_dpv_optimisation_for_consumer, axiom,
     dpv_misuse_prevention_and_detection != dpv_optimisation_for_consumer).
@@ -12903,6 +13034,9 @@ fof(bg_dist_dpv_misuse_prevention_and_detection_dpv_provide_personalised_recomme
 fof(bg_dist_dpv_misuse_prevention_and_detection_dpv_provide_product_recommendations, axiom,
     dpv_misuse_prevention_and_detection != dpv_provide_product_recommendations).
 
+fof(bg_dist_dpv_misuse_prevention_and_detection_dpv_public_benefit, axiom,
+    dpv_misuse_prevention_and_detection != dpv_public_benefit).
+
 fof(bg_dist_dpv_misuse_prevention_and_detection_dpv_public_policy_making, axiom,
     dpv_misuse_prevention_and_detection != dpv_public_policy_making).
 
@@ -12963,11 +13097,8 @@ fof(bg_dist_dpv_misuse_prevention_and_detection_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_misuse_prevention_and_detection_dpv_requested_service_provision, axiom,
     dpv_misuse_prevention_and_detection != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_misuse_prevention_and_detection_dpv_research_and_development, axiom,
-    dpv_misuse_prevention_and_detection != dpv_research_and_development).
-
-fof(bg_dist_dpv_misuse_prevention_and_detection_dpv_scientific_research, axiom,
-    dpv_misuse_prevention_and_detection != dpv_scientific_research).
+fof(bg_dist_dpv_misuse_prevention_and_detection_dpv_rights_fulfilment, axiom,
+    dpv_misuse_prevention_and_detection != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_misuse_prevention_and_detection_dpv_search_functionalities, axiom,
     dpv_misuse_prevention_and_detection != dpv_search_functionalities).
@@ -13034,6 +13165,9 @@ fof(bg_dist_dpv_misuse_prevention_and_detection_dpv_vendor_selection_assessment,
 
 fof(bg_dist_dpv_misuse_prevention_and_detection_dpv_verification, axiom,
     dpv_misuse_prevention_and_detection != dpv_verification).
+
+fof(bg_dist_dpv_non_commercial_purpose_dpv_non_commercial_research, axiom,
+    dpv_non_commercial_purpose != dpv_non_commercial_research).
 
 fof(bg_dist_dpv_non_commercial_purpose_dpv_optimisation_for_consumer, axiom,
     dpv_non_commercial_purpose != dpv_optimisation_for_consumer).
@@ -13131,6 +13265,9 @@ fof(bg_dist_dpv_non_commercial_purpose_dpv_provide_personalised_recommendations,
 fof(bg_dist_dpv_non_commercial_purpose_dpv_provide_product_recommendations, axiom,
     dpv_non_commercial_purpose != dpv_provide_product_recommendations).
 
+fof(bg_dist_dpv_non_commercial_purpose_dpv_public_benefit, axiom,
+    dpv_non_commercial_purpose != dpv_public_benefit).
+
 fof(bg_dist_dpv_non_commercial_purpose_dpv_public_policy_making, axiom,
     dpv_non_commercial_purpose != dpv_public_policy_making).
 
@@ -13191,11 +13328,8 @@ fof(bg_dist_dpv_non_commercial_purpose_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_non_commercial_purpose_dpv_requested_service_provision, axiom,
     dpv_non_commercial_purpose != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_non_commercial_purpose_dpv_research_and_development, axiom,
-    dpv_non_commercial_purpose != dpv_research_and_development).
-
-fof(bg_dist_dpv_non_commercial_purpose_dpv_scientific_research, axiom,
-    dpv_non_commercial_purpose != dpv_scientific_research).
+fof(bg_dist_dpv_non_commercial_purpose_dpv_rights_fulfilment, axiom,
+    dpv_non_commercial_purpose != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_non_commercial_purpose_dpv_search_functionalities, axiom,
     dpv_non_commercial_purpose != dpv_search_functionalities).
@@ -13262,6 +13396,234 @@ fof(bg_dist_dpv_non_commercial_purpose_dpv_vendor_selection_assessment, axiom,
 
 fof(bg_dist_dpv_non_commercial_purpose_dpv_verification, axiom,
     dpv_non_commercial_purpose != dpv_verification).
+
+fof(bg_dist_dpv_non_commercial_research_dpv_optimisation_for_consumer, axiom,
+    dpv_non_commercial_research != dpv_optimisation_for_consumer).
+
+fof(bg_dist_dpv_non_commercial_research_dpv_optimisation_for_controller, axiom,
+    dpv_non_commercial_research != dpv_optimisation_for_controller).
+
+fof(bg_dist_dpv_non_commercial_research_dpv_optimise_user_interface, axiom,
+    dpv_non_commercial_research != dpv_optimise_user_interface).
+
+fof(bg_dist_dpv_non_commercial_research_dpv_organisation_compliance_management, axiom,
+    dpv_non_commercial_research != dpv_organisation_compliance_management).
+
+fof(bg_dist_dpv_non_commercial_research_dpv_organisation_governance, axiom,
+    dpv_non_commercial_research != dpv_organisation_governance).
+
+fof(bg_dist_dpv_non_commercial_research_dpv_organisation_risk_management, axiom,
+    dpv_non_commercial_research != dpv_organisation_risk_management).
+
+fof(bg_dist_dpv_non_commercial_research_dpv_payment_management, axiom,
+    dpv_non_commercial_research != dpv_payment_management).
+
+fof(bg_dist_dpv_non_commercial_research_dpv_personalisation, axiom,
+    dpv_non_commercial_research != dpv_personalisation).
+
+fof(bg_dist_dpv_non_commercial_research_dpv_personalised_advertising, axiom,
+    dpv_non_commercial_research != dpv_personalised_advertising).
+
+fof(bg_dist_dpv_non_commercial_research_dpv_personalised_benefits, axiom,
+    dpv_non_commercial_research != dpv_personalised_benefits).
+
+fof(bg_dist_dpv_non_commercial_research_dpv_personnel_behaviour_monitoring, axiom,
+    dpv_non_commercial_research != dpv_personnel_behaviour_monitoring).
+
+fof(bg_dist_dpv_non_commercial_research_dpv_personnel_hiring, axiom,
+    dpv_non_commercial_research != dpv_personnel_hiring).
+
+fof(bg_dist_dpv_non_commercial_research_dpv_personnel_management, axiom,
+    dpv_non_commercial_research != dpv_personnel_management).
+
+fof(bg_dist_dpv_non_commercial_research_dpv_personnel_monitoring, axiom,
+    dpv_non_commercial_research != dpv_personnel_monitoring).
+
+fof(bg_dist_dpv_non_commercial_research_dpv_personnel_offboarding, axiom,
+    dpv_non_commercial_research != dpv_personnel_offboarding).
+
+fof(bg_dist_dpv_non_commercial_research_dpv_personnel_onboarding, axiom,
+    dpv_non_commercial_research != dpv_personnel_onboarding).
+
+fof(bg_dist_dpv_non_commercial_research_dpv_personnel_payment, axiom,
+    dpv_non_commercial_research != dpv_personnel_payment).
+
+fof(bg_dist_dpv_non_commercial_research_dpv_personnel_performance_evaluation, axiom,
+    dpv_non_commercial_research != dpv_personnel_performance_evaluation).
+
+fof(bg_dist_dpv_non_commercial_research_dpv_personnel_performance_management, axiom,
+    dpv_non_commercial_research != dpv_personnel_performance_management).
+
+fof(bg_dist_dpv_non_commercial_research_dpv_personnel_performance_monitoring, axiom,
+    dpv_non_commercial_research != dpv_personnel_performance_monitoring).
+
+fof(bg_dist_dpv_non_commercial_research_dpv_personnel_performance_prediction, axiom,
+    dpv_non_commercial_research != dpv_personnel_performance_prediction).
+
+fof(bg_dist_dpv_non_commercial_research_dpv_personnel_promotion_management, axiom,
+    dpv_non_commercial_research != dpv_personnel_promotion_management).
+
+fof(bg_dist_dpv_non_commercial_research_dpv_personnel_termination_management, axiom,
+    dpv_non_commercial_research != dpv_personnel_termination_management).
+
+fof(bg_dist_dpv_non_commercial_research_dpv_personnel_workload_management, axiom,
+    dpv_non_commercial_research != dpv_personnel_workload_management).
+
+fof(bg_dist_dpv_non_commercial_research_dpv_political_campaign, axiom,
+    dpv_non_commercial_research != dpv_political_campaign).
+
+fof(bg_dist_dpv_non_commercial_research_dpv_protection_of_ipr, axiom,
+    dpv_non_commercial_research != dpv_protection_of_ipr).
+
+fof(bg_dist_dpv_non_commercial_research_dpv_protection_of_national_security, axiom,
+    dpv_non_commercial_research != dpv_protection_of_national_security).
+
+fof(bg_dist_dpv_non_commercial_research_dpv_protection_of_public_security, axiom,
+    dpv_non_commercial_research != dpv_protection_of_public_security).
+
+fof(bg_dist_dpv_non_commercial_research_dpv_provide_event_recommendations, axiom,
+    dpv_non_commercial_research != dpv_provide_event_recommendations).
+
+fof(bg_dist_dpv_non_commercial_research_dpv_provide_official_statistics, axiom,
+    dpv_non_commercial_research != dpv_provide_official_statistics).
+
+fof(bg_dist_dpv_non_commercial_research_dpv_provide_personalised_recommendations, axiom,
+    dpv_non_commercial_research != dpv_provide_personalised_recommendations).
+
+fof(bg_dist_dpv_non_commercial_research_dpv_provide_product_recommendations, axiom,
+    dpv_non_commercial_research != dpv_provide_product_recommendations).
+
+fof(bg_dist_dpv_non_commercial_research_dpv_public_benefit, axiom,
+    dpv_non_commercial_research != dpv_public_benefit).
+
+fof(bg_dist_dpv_non_commercial_research_dpv_public_policy_making, axiom,
+    dpv_non_commercial_research != dpv_public_policy_making).
+
+fof(bg_dist_dpv_non_commercial_research_dpv_public_relations, axiom,
+    dpv_non_commercial_research != dpv_public_relations).
+
+fof(bg_dist_dpv_non_commercial_research_dpv_purpose, axiom,
+    dpv_non_commercial_research != dpv_purpose).
+
+fof(bg_dist_dpv_non_commercial_research_dpv_record_management, axiom,
+    dpv_non_commercial_research != dpv_record_management).
+
+fof(bg_dist_dpv_non_commercial_research_dpv_recruitment_advertising, axiom,
+    dpv_non_commercial_research != dpv_recruitment_advertising).
+
+fof(bg_dist_dpv_non_commercial_research_dpv_recruitment_applicant_background_check, axiom,
+    dpv_non_commercial_research != dpv_recruitment_applicant_background_check).
+
+fof(bg_dist_dpv_non_commercial_research_dpv_recruitment_applicant_criminal_background_check, axiom,
+    dpv_non_commercial_research != dpv_recruitment_applicant_criminal_background_check).
+
+fof(bg_dist_dpv_non_commercial_research_dpv_recruitment_applicant_information_authentication, axiom,
+    dpv_non_commercial_research != dpv_recruitment_applicant_information_authentication).
+
+fof(bg_dist_dpv_non_commercial_research_dpv_recruitment_applicant_selection, axiom,
+    dpv_non_commercial_research != dpv_recruitment_applicant_selection).
+
+fof(bg_dist_dpv_non_commercial_research_dpv_recruitment_application_analysis, axiom,
+    dpv_non_commercial_research != dpv_recruitment_application_analysis).
+
+fof(bg_dist_dpv_non_commercial_research_dpv_recruitment_application_management, axiom,
+    dpv_non_commercial_research != dpv_recruitment_application_management).
+
+fof(bg_dist_dpv_non_commercial_research_dpv_recruitment_application_screening, axiom,
+    dpv_non_commercial_research != dpv_recruitment_application_screening).
+
+fof(bg_dist_dpv_non_commercial_research_dpv_recruitment_interview_analysis, axiom,
+    dpv_non_commercial_research != dpv_recruitment_interview_analysis).
+
+fof(bg_dist_dpv_non_commercial_research_dpv_recruitment_interview_assessment, axiom,
+    dpv_non_commercial_research != dpv_recruitment_interview_assessment).
+
+fof(bg_dist_dpv_non_commercial_research_dpv_recruitment_interview_management, axiom,
+    dpv_non_commercial_research != dpv_recruitment_interview_management).
+
+fof(bg_dist_dpv_non_commercial_research_dpv_recruitment_interview_scheduling, axiom,
+    dpv_non_commercial_research != dpv_recruitment_interview_scheduling).
+
+fof(bg_dist_dpv_non_commercial_research_dpv_recruitment_management, axiom,
+    dpv_non_commercial_research != dpv_recruitment_management).
+
+fof(bg_dist_dpv_non_commercial_research_dpv_recruitment_targeted_advertising, axiom,
+    dpv_non_commercial_research != dpv_recruitment_targeted_advertising).
+
+fof(bg_dist_dpv_non_commercial_research_dpv_repair_impairments, axiom,
+    dpv_non_commercial_research != dpv_repair_impairments).
+
+fof(bg_dist_dpv_non_commercial_research_dpv_requested_service_provision, axiom,
+    dpv_non_commercial_research != dpv_requested_service_provision).
+
+fof(bg_dist_dpv_non_commercial_research_dpv_rights_fulfilment, axiom,
+    dpv_non_commercial_research != dpv_rights_fulfilment).
+
+fof(bg_dist_dpv_non_commercial_research_dpv_search_functionalities, axiom,
+    dpv_non_commercial_research != dpv_search_functionalities).
+
+fof(bg_dist_dpv_non_commercial_research_dpv_sell_data_to_third_parties, axiom,
+    dpv_non_commercial_research != dpv_sell_data_to_third_parties).
+
+fof(bg_dist_dpv_non_commercial_research_dpv_sell_insights_from_data, axiom,
+    dpv_non_commercial_research != dpv_sell_insights_from_data).
+
+fof(bg_dist_dpv_non_commercial_research_dpv_sell_products, axiom,
+    dpv_non_commercial_research != dpv_sell_products).
+
+fof(bg_dist_dpv_non_commercial_research_dpv_sell_products_to_data_subject, axiom,
+    dpv_non_commercial_research != dpv_sell_products_to_data_subject).
+
+fof(bg_dist_dpv_non_commercial_research_dpv_service_access_determination, axiom,
+    dpv_non_commercial_research != dpv_service_access_determination).
+
+fof(bg_dist_dpv_non_commercial_research_dpv_service_management, axiom,
+    dpv_non_commercial_research != dpv_service_management).
+
+fof(bg_dist_dpv_non_commercial_research_dpv_service_monitoring, axiom,
+    dpv_non_commercial_research != dpv_service_monitoring).
+
+fof(bg_dist_dpv_non_commercial_research_dpv_service_optimisation, axiom,
+    dpv_non_commercial_research != dpv_service_optimisation).
+
+fof(bg_dist_dpv_non_commercial_research_dpv_service_personalisation, axiom,
+    dpv_non_commercial_research != dpv_service_personalisation).
+
+fof(bg_dist_dpv_non_commercial_research_dpv_service_provision, axiom,
+    dpv_non_commercial_research != dpv_service_provision).
+
+fof(bg_dist_dpv_non_commercial_research_dpv_service_registration, axiom,
+    dpv_non_commercial_research != dpv_service_registration).
+
+fof(bg_dist_dpv_non_commercial_research_dpv_service_usage_analytics, axiom,
+    dpv_non_commercial_research != dpv_service_usage_analytics).
+
+fof(bg_dist_dpv_non_commercial_research_dpv_social_media_marketing, axiom,
+    dpv_non_commercial_research != dpv_social_media_marketing).
+
+fof(bg_dist_dpv_non_commercial_research_dpv_targeted_advertising, axiom,
+    dpv_non_commercial_research != dpv_targeted_advertising).
+
+fof(bg_dist_dpv_non_commercial_research_dpv_technical_service_provision, axiom,
+    dpv_non_commercial_research != dpv_technical_service_provision).
+
+fof(bg_dist_dpv_non_commercial_research_dpv_user_interface_personalisation, axiom,
+    dpv_non_commercial_research != dpv_user_interface_personalisation).
+
+fof(bg_dist_dpv_non_commercial_research_dpv_vendor_management, axiom,
+    dpv_non_commercial_research != dpv_vendor_management).
+
+fof(bg_dist_dpv_non_commercial_research_dpv_vendor_payment, axiom,
+    dpv_non_commercial_research != dpv_vendor_payment).
+
+fof(bg_dist_dpv_non_commercial_research_dpv_vendor_records_management, axiom,
+    dpv_non_commercial_research != dpv_vendor_records_management).
+
+fof(bg_dist_dpv_non_commercial_research_dpv_vendor_selection_assessment, axiom,
+    dpv_non_commercial_research != dpv_vendor_selection_assessment).
+
+fof(bg_dist_dpv_non_commercial_research_dpv_verification, axiom,
+    dpv_non_commercial_research != dpv_verification).
 
 fof(bg_dist_dpv_optimisation_for_consumer_dpv_optimisation_for_controller, axiom,
     dpv_optimisation_for_consumer != dpv_optimisation_for_controller).
@@ -13356,6 +13718,9 @@ fof(bg_dist_dpv_optimisation_for_consumer_dpv_provide_personalised_recommendatio
 fof(bg_dist_dpv_optimisation_for_consumer_dpv_provide_product_recommendations, axiom,
     dpv_optimisation_for_consumer != dpv_provide_product_recommendations).
 
+fof(bg_dist_dpv_optimisation_for_consumer_dpv_public_benefit, axiom,
+    dpv_optimisation_for_consumer != dpv_public_benefit).
+
 fof(bg_dist_dpv_optimisation_for_consumer_dpv_public_policy_making, axiom,
     dpv_optimisation_for_consumer != dpv_public_policy_making).
 
@@ -13416,11 +13781,8 @@ fof(bg_dist_dpv_optimisation_for_consumer_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_optimisation_for_consumer_dpv_requested_service_provision, axiom,
     dpv_optimisation_for_consumer != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_optimisation_for_consumer_dpv_research_and_development, axiom,
-    dpv_optimisation_for_consumer != dpv_research_and_development).
-
-fof(bg_dist_dpv_optimisation_for_consumer_dpv_scientific_research, axiom,
-    dpv_optimisation_for_consumer != dpv_scientific_research).
+fof(bg_dist_dpv_optimisation_for_consumer_dpv_rights_fulfilment, axiom,
+    dpv_optimisation_for_consumer != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_optimisation_for_consumer_dpv_search_functionalities, axiom,
     dpv_optimisation_for_consumer != dpv_search_functionalities).
@@ -13578,6 +13940,9 @@ fof(bg_dist_dpv_optimisation_for_controller_dpv_provide_personalised_recommendat
 fof(bg_dist_dpv_optimisation_for_controller_dpv_provide_product_recommendations, axiom,
     dpv_optimisation_for_controller != dpv_provide_product_recommendations).
 
+fof(bg_dist_dpv_optimisation_for_controller_dpv_public_benefit, axiom,
+    dpv_optimisation_for_controller != dpv_public_benefit).
+
 fof(bg_dist_dpv_optimisation_for_controller_dpv_public_policy_making, axiom,
     dpv_optimisation_for_controller != dpv_public_policy_making).
 
@@ -13638,11 +14003,8 @@ fof(bg_dist_dpv_optimisation_for_controller_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_optimisation_for_controller_dpv_requested_service_provision, axiom,
     dpv_optimisation_for_controller != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_optimisation_for_controller_dpv_research_and_development, axiom,
-    dpv_optimisation_for_controller != dpv_research_and_development).
-
-fof(bg_dist_dpv_optimisation_for_controller_dpv_scientific_research, axiom,
-    dpv_optimisation_for_controller != dpv_scientific_research).
+fof(bg_dist_dpv_optimisation_for_controller_dpv_rights_fulfilment, axiom,
+    dpv_optimisation_for_controller != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_optimisation_for_controller_dpv_search_functionalities, axiom,
     dpv_optimisation_for_controller != dpv_search_functionalities).
@@ -13797,6 +14159,9 @@ fof(bg_dist_dpv_optimise_user_interface_dpv_provide_personalised_recommendations
 fof(bg_dist_dpv_optimise_user_interface_dpv_provide_product_recommendations, axiom,
     dpv_optimise_user_interface != dpv_provide_product_recommendations).
 
+fof(bg_dist_dpv_optimise_user_interface_dpv_public_benefit, axiom,
+    dpv_optimise_user_interface != dpv_public_benefit).
+
 fof(bg_dist_dpv_optimise_user_interface_dpv_public_policy_making, axiom,
     dpv_optimise_user_interface != dpv_public_policy_making).
 
@@ -13857,11 +14222,8 @@ fof(bg_dist_dpv_optimise_user_interface_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_optimise_user_interface_dpv_requested_service_provision, axiom,
     dpv_optimise_user_interface != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_optimise_user_interface_dpv_research_and_development, axiom,
-    dpv_optimise_user_interface != dpv_research_and_development).
-
-fof(bg_dist_dpv_optimise_user_interface_dpv_scientific_research, axiom,
-    dpv_optimise_user_interface != dpv_scientific_research).
+fof(bg_dist_dpv_optimise_user_interface_dpv_rights_fulfilment, axiom,
+    dpv_optimise_user_interface != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_optimise_user_interface_dpv_search_functionalities, axiom,
     dpv_optimise_user_interface != dpv_search_functionalities).
@@ -14013,6 +14375,9 @@ fof(bg_dist_dpv_organisation_compliance_management_dpv_provide_personalised_reco
 fof(bg_dist_dpv_organisation_compliance_management_dpv_provide_product_recommendations, axiom,
     dpv_organisation_compliance_management != dpv_provide_product_recommendations).
 
+fof(bg_dist_dpv_organisation_compliance_management_dpv_public_benefit, axiom,
+    dpv_organisation_compliance_management != dpv_public_benefit).
+
 fof(bg_dist_dpv_organisation_compliance_management_dpv_public_policy_making, axiom,
     dpv_organisation_compliance_management != dpv_public_policy_making).
 
@@ -14073,11 +14438,8 @@ fof(bg_dist_dpv_organisation_compliance_management_dpv_repair_impairments, axiom
 fof(bg_dist_dpv_organisation_compliance_management_dpv_requested_service_provision, axiom,
     dpv_organisation_compliance_management != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_organisation_compliance_management_dpv_research_and_development, axiom,
-    dpv_organisation_compliance_management != dpv_research_and_development).
-
-fof(bg_dist_dpv_organisation_compliance_management_dpv_scientific_research, axiom,
-    dpv_organisation_compliance_management != dpv_scientific_research).
+fof(bg_dist_dpv_organisation_compliance_management_dpv_rights_fulfilment, axiom,
+    dpv_organisation_compliance_management != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_organisation_compliance_management_dpv_search_functionalities, axiom,
     dpv_organisation_compliance_management != dpv_search_functionalities).
@@ -14226,6 +14588,9 @@ fof(bg_dist_dpv_organisation_governance_dpv_provide_personalised_recommendations
 fof(bg_dist_dpv_organisation_governance_dpv_provide_product_recommendations, axiom,
     dpv_organisation_governance != dpv_provide_product_recommendations).
 
+fof(bg_dist_dpv_organisation_governance_dpv_public_benefit, axiom,
+    dpv_organisation_governance != dpv_public_benefit).
+
 fof(bg_dist_dpv_organisation_governance_dpv_public_policy_making, axiom,
     dpv_organisation_governance != dpv_public_policy_making).
 
@@ -14286,11 +14651,8 @@ fof(bg_dist_dpv_organisation_governance_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_organisation_governance_dpv_requested_service_provision, axiom,
     dpv_organisation_governance != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_organisation_governance_dpv_research_and_development, axiom,
-    dpv_organisation_governance != dpv_research_and_development).
-
-fof(bg_dist_dpv_organisation_governance_dpv_scientific_research, axiom,
-    dpv_organisation_governance != dpv_scientific_research).
+fof(bg_dist_dpv_organisation_governance_dpv_rights_fulfilment, axiom,
+    dpv_organisation_governance != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_organisation_governance_dpv_search_functionalities, axiom,
     dpv_organisation_governance != dpv_search_functionalities).
@@ -14436,6 +14798,9 @@ fof(bg_dist_dpv_organisation_risk_management_dpv_provide_personalised_recommenda
 fof(bg_dist_dpv_organisation_risk_management_dpv_provide_product_recommendations, axiom,
     dpv_organisation_risk_management != dpv_provide_product_recommendations).
 
+fof(bg_dist_dpv_organisation_risk_management_dpv_public_benefit, axiom,
+    dpv_organisation_risk_management != dpv_public_benefit).
+
 fof(bg_dist_dpv_organisation_risk_management_dpv_public_policy_making, axiom,
     dpv_organisation_risk_management != dpv_public_policy_making).
 
@@ -14496,11 +14861,8 @@ fof(bg_dist_dpv_organisation_risk_management_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_organisation_risk_management_dpv_requested_service_provision, axiom,
     dpv_organisation_risk_management != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_organisation_risk_management_dpv_research_and_development, axiom,
-    dpv_organisation_risk_management != dpv_research_and_development).
-
-fof(bg_dist_dpv_organisation_risk_management_dpv_scientific_research, axiom,
-    dpv_organisation_risk_management != dpv_scientific_research).
+fof(bg_dist_dpv_organisation_risk_management_dpv_rights_fulfilment, axiom,
+    dpv_organisation_risk_management != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_organisation_risk_management_dpv_search_functionalities, axiom,
     dpv_organisation_risk_management != dpv_search_functionalities).
@@ -14643,6 +15005,9 @@ fof(bg_dist_dpv_payment_management_dpv_provide_personalised_recommendations, axi
 fof(bg_dist_dpv_payment_management_dpv_provide_product_recommendations, axiom,
     dpv_payment_management != dpv_provide_product_recommendations).
 
+fof(bg_dist_dpv_payment_management_dpv_public_benefit, axiom,
+    dpv_payment_management != dpv_public_benefit).
+
 fof(bg_dist_dpv_payment_management_dpv_public_policy_making, axiom,
     dpv_payment_management != dpv_public_policy_making).
 
@@ -14703,11 +15068,8 @@ fof(bg_dist_dpv_payment_management_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_payment_management_dpv_requested_service_provision, axiom,
     dpv_payment_management != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_payment_management_dpv_research_and_development, axiom,
-    dpv_payment_management != dpv_research_and_development).
-
-fof(bg_dist_dpv_payment_management_dpv_scientific_research, axiom,
-    dpv_payment_management != dpv_scientific_research).
+fof(bg_dist_dpv_payment_management_dpv_rights_fulfilment, axiom,
+    dpv_payment_management != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_payment_management_dpv_search_functionalities, axiom,
     dpv_payment_management != dpv_search_functionalities).
@@ -14847,6 +15209,9 @@ fof(bg_dist_dpv_personalisation_dpv_provide_personalised_recommendations, axiom,
 fof(bg_dist_dpv_personalisation_dpv_provide_product_recommendations, axiom,
     dpv_personalisation != dpv_provide_product_recommendations).
 
+fof(bg_dist_dpv_personalisation_dpv_public_benefit, axiom,
+    dpv_personalisation != dpv_public_benefit).
+
 fof(bg_dist_dpv_personalisation_dpv_public_policy_making, axiom,
     dpv_personalisation != dpv_public_policy_making).
 
@@ -14907,11 +15272,8 @@ fof(bg_dist_dpv_personalisation_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_personalisation_dpv_requested_service_provision, axiom,
     dpv_personalisation != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_personalisation_dpv_research_and_development, axiom,
-    dpv_personalisation != dpv_research_and_development).
-
-fof(bg_dist_dpv_personalisation_dpv_scientific_research, axiom,
-    dpv_personalisation != dpv_scientific_research).
+fof(bg_dist_dpv_personalisation_dpv_rights_fulfilment, axiom,
+    dpv_personalisation != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_personalisation_dpv_search_functionalities, axiom,
     dpv_personalisation != dpv_search_functionalities).
@@ -15048,6 +15410,9 @@ fof(bg_dist_dpv_personalised_advertising_dpv_provide_personalised_recommendation
 fof(bg_dist_dpv_personalised_advertising_dpv_provide_product_recommendations, axiom,
     dpv_personalised_advertising != dpv_provide_product_recommendations).
 
+fof(bg_dist_dpv_personalised_advertising_dpv_public_benefit, axiom,
+    dpv_personalised_advertising != dpv_public_benefit).
+
 fof(bg_dist_dpv_personalised_advertising_dpv_public_policy_making, axiom,
     dpv_personalised_advertising != dpv_public_policy_making).
 
@@ -15108,11 +15473,8 @@ fof(bg_dist_dpv_personalised_advertising_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_personalised_advertising_dpv_requested_service_provision, axiom,
     dpv_personalised_advertising != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_personalised_advertising_dpv_research_and_development, axiom,
-    dpv_personalised_advertising != dpv_research_and_development).
-
-fof(bg_dist_dpv_personalised_advertising_dpv_scientific_research, axiom,
-    dpv_personalised_advertising != dpv_scientific_research).
+fof(bg_dist_dpv_personalised_advertising_dpv_rights_fulfilment, axiom,
+    dpv_personalised_advertising != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_personalised_advertising_dpv_search_functionalities, axiom,
     dpv_personalised_advertising != dpv_search_functionalities).
@@ -15246,6 +15608,9 @@ fof(bg_dist_dpv_personalised_benefits_dpv_provide_personalised_recommendations, 
 fof(bg_dist_dpv_personalised_benefits_dpv_provide_product_recommendations, axiom,
     dpv_personalised_benefits != dpv_provide_product_recommendations).
 
+fof(bg_dist_dpv_personalised_benefits_dpv_public_benefit, axiom,
+    dpv_personalised_benefits != dpv_public_benefit).
+
 fof(bg_dist_dpv_personalised_benefits_dpv_public_policy_making, axiom,
     dpv_personalised_benefits != dpv_public_policy_making).
 
@@ -15306,11 +15671,8 @@ fof(bg_dist_dpv_personalised_benefits_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_personalised_benefits_dpv_requested_service_provision, axiom,
     dpv_personalised_benefits != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_personalised_benefits_dpv_research_and_development, axiom,
-    dpv_personalised_benefits != dpv_research_and_development).
-
-fof(bg_dist_dpv_personalised_benefits_dpv_scientific_research, axiom,
-    dpv_personalised_benefits != dpv_scientific_research).
+fof(bg_dist_dpv_personalised_benefits_dpv_rights_fulfilment, axiom,
+    dpv_personalised_benefits != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_personalised_benefits_dpv_search_functionalities, axiom,
     dpv_personalised_benefits != dpv_search_functionalities).
@@ -15441,6 +15803,9 @@ fof(bg_dist_dpv_personnel_behaviour_monitoring_dpv_provide_personalised_recommen
 fof(bg_dist_dpv_personnel_behaviour_monitoring_dpv_provide_product_recommendations, axiom,
     dpv_personnel_behaviour_monitoring != dpv_provide_product_recommendations).
 
+fof(bg_dist_dpv_personnel_behaviour_monitoring_dpv_public_benefit, axiom,
+    dpv_personnel_behaviour_monitoring != dpv_public_benefit).
+
 fof(bg_dist_dpv_personnel_behaviour_monitoring_dpv_public_policy_making, axiom,
     dpv_personnel_behaviour_monitoring != dpv_public_policy_making).
 
@@ -15501,11 +15866,8 @@ fof(bg_dist_dpv_personnel_behaviour_monitoring_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_personnel_behaviour_monitoring_dpv_requested_service_provision, axiom,
     dpv_personnel_behaviour_monitoring != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_personnel_behaviour_monitoring_dpv_research_and_development, axiom,
-    dpv_personnel_behaviour_monitoring != dpv_research_and_development).
-
-fof(bg_dist_dpv_personnel_behaviour_monitoring_dpv_scientific_research, axiom,
-    dpv_personnel_behaviour_monitoring != dpv_scientific_research).
+fof(bg_dist_dpv_personnel_behaviour_monitoring_dpv_rights_fulfilment, axiom,
+    dpv_personnel_behaviour_monitoring != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_personnel_behaviour_monitoring_dpv_search_functionalities, axiom,
     dpv_personnel_behaviour_monitoring != dpv_search_functionalities).
@@ -15633,6 +15995,9 @@ fof(bg_dist_dpv_personnel_hiring_dpv_provide_personalised_recommendations, axiom
 fof(bg_dist_dpv_personnel_hiring_dpv_provide_product_recommendations, axiom,
     dpv_personnel_hiring != dpv_provide_product_recommendations).
 
+fof(bg_dist_dpv_personnel_hiring_dpv_public_benefit, axiom,
+    dpv_personnel_hiring != dpv_public_benefit).
+
 fof(bg_dist_dpv_personnel_hiring_dpv_public_policy_making, axiom,
     dpv_personnel_hiring != dpv_public_policy_making).
 
@@ -15693,11 +16058,8 @@ fof(bg_dist_dpv_personnel_hiring_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_personnel_hiring_dpv_requested_service_provision, axiom,
     dpv_personnel_hiring != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_personnel_hiring_dpv_research_and_development, axiom,
-    dpv_personnel_hiring != dpv_research_and_development).
-
-fof(bg_dist_dpv_personnel_hiring_dpv_scientific_research, axiom,
-    dpv_personnel_hiring != dpv_scientific_research).
+fof(bg_dist_dpv_personnel_hiring_dpv_rights_fulfilment, axiom,
+    dpv_personnel_hiring != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_personnel_hiring_dpv_search_functionalities, axiom,
     dpv_personnel_hiring != dpv_search_functionalities).
@@ -15822,6 +16184,9 @@ fof(bg_dist_dpv_personnel_management_dpv_provide_personalised_recommendations, a
 fof(bg_dist_dpv_personnel_management_dpv_provide_product_recommendations, axiom,
     dpv_personnel_management != dpv_provide_product_recommendations).
 
+fof(bg_dist_dpv_personnel_management_dpv_public_benefit, axiom,
+    dpv_personnel_management != dpv_public_benefit).
+
 fof(bg_dist_dpv_personnel_management_dpv_public_policy_making, axiom,
     dpv_personnel_management != dpv_public_policy_making).
 
@@ -15882,11 +16247,8 @@ fof(bg_dist_dpv_personnel_management_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_personnel_management_dpv_requested_service_provision, axiom,
     dpv_personnel_management != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_personnel_management_dpv_research_and_development, axiom,
-    dpv_personnel_management != dpv_research_and_development).
-
-fof(bg_dist_dpv_personnel_management_dpv_scientific_research, axiom,
-    dpv_personnel_management != dpv_scientific_research).
+fof(bg_dist_dpv_personnel_management_dpv_rights_fulfilment, axiom,
+    dpv_personnel_management != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_personnel_management_dpv_search_functionalities, axiom,
     dpv_personnel_management != dpv_search_functionalities).
@@ -16008,6 +16370,9 @@ fof(bg_dist_dpv_personnel_monitoring_dpv_provide_personalised_recommendations, a
 fof(bg_dist_dpv_personnel_monitoring_dpv_provide_product_recommendations, axiom,
     dpv_personnel_monitoring != dpv_provide_product_recommendations).
 
+fof(bg_dist_dpv_personnel_monitoring_dpv_public_benefit, axiom,
+    dpv_personnel_monitoring != dpv_public_benefit).
+
 fof(bg_dist_dpv_personnel_monitoring_dpv_public_policy_making, axiom,
     dpv_personnel_monitoring != dpv_public_policy_making).
 
@@ -16068,11 +16433,8 @@ fof(bg_dist_dpv_personnel_monitoring_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_personnel_monitoring_dpv_requested_service_provision, axiom,
     dpv_personnel_monitoring != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_personnel_monitoring_dpv_research_and_development, axiom,
-    dpv_personnel_monitoring != dpv_research_and_development).
-
-fof(bg_dist_dpv_personnel_monitoring_dpv_scientific_research, axiom,
-    dpv_personnel_monitoring != dpv_scientific_research).
+fof(bg_dist_dpv_personnel_monitoring_dpv_rights_fulfilment, axiom,
+    dpv_personnel_monitoring != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_personnel_monitoring_dpv_search_functionalities, axiom,
     dpv_personnel_monitoring != dpv_search_functionalities).
@@ -16191,6 +16553,9 @@ fof(bg_dist_dpv_personnel_offboarding_dpv_provide_personalised_recommendations, 
 fof(bg_dist_dpv_personnel_offboarding_dpv_provide_product_recommendations, axiom,
     dpv_personnel_offboarding != dpv_provide_product_recommendations).
 
+fof(bg_dist_dpv_personnel_offboarding_dpv_public_benefit, axiom,
+    dpv_personnel_offboarding != dpv_public_benefit).
+
 fof(bg_dist_dpv_personnel_offboarding_dpv_public_policy_making, axiom,
     dpv_personnel_offboarding != dpv_public_policy_making).
 
@@ -16251,11 +16616,8 @@ fof(bg_dist_dpv_personnel_offboarding_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_personnel_offboarding_dpv_requested_service_provision, axiom,
     dpv_personnel_offboarding != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_personnel_offboarding_dpv_research_and_development, axiom,
-    dpv_personnel_offboarding != dpv_research_and_development).
-
-fof(bg_dist_dpv_personnel_offboarding_dpv_scientific_research, axiom,
-    dpv_personnel_offboarding != dpv_scientific_research).
+fof(bg_dist_dpv_personnel_offboarding_dpv_rights_fulfilment, axiom,
+    dpv_personnel_offboarding != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_personnel_offboarding_dpv_search_functionalities, axiom,
     dpv_personnel_offboarding != dpv_search_functionalities).
@@ -16371,6 +16733,9 @@ fof(bg_dist_dpv_personnel_onboarding_dpv_provide_personalised_recommendations, a
 fof(bg_dist_dpv_personnel_onboarding_dpv_provide_product_recommendations, axiom,
     dpv_personnel_onboarding != dpv_provide_product_recommendations).
 
+fof(bg_dist_dpv_personnel_onboarding_dpv_public_benefit, axiom,
+    dpv_personnel_onboarding != dpv_public_benefit).
+
 fof(bg_dist_dpv_personnel_onboarding_dpv_public_policy_making, axiom,
     dpv_personnel_onboarding != dpv_public_policy_making).
 
@@ -16431,11 +16796,8 @@ fof(bg_dist_dpv_personnel_onboarding_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_personnel_onboarding_dpv_requested_service_provision, axiom,
     dpv_personnel_onboarding != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_personnel_onboarding_dpv_research_and_development, axiom,
-    dpv_personnel_onboarding != dpv_research_and_development).
-
-fof(bg_dist_dpv_personnel_onboarding_dpv_scientific_research, axiom,
-    dpv_personnel_onboarding != dpv_scientific_research).
+fof(bg_dist_dpv_personnel_onboarding_dpv_rights_fulfilment, axiom,
+    dpv_personnel_onboarding != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_personnel_onboarding_dpv_search_functionalities, axiom,
     dpv_personnel_onboarding != dpv_search_functionalities).
@@ -16548,6 +16910,9 @@ fof(bg_dist_dpv_personnel_payment_dpv_provide_personalised_recommendations, axio
 fof(bg_dist_dpv_personnel_payment_dpv_provide_product_recommendations, axiom,
     dpv_personnel_payment != dpv_provide_product_recommendations).
 
+fof(bg_dist_dpv_personnel_payment_dpv_public_benefit, axiom,
+    dpv_personnel_payment != dpv_public_benefit).
+
 fof(bg_dist_dpv_personnel_payment_dpv_public_policy_making, axiom,
     dpv_personnel_payment != dpv_public_policy_making).
 
@@ -16608,11 +16973,8 @@ fof(bg_dist_dpv_personnel_payment_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_personnel_payment_dpv_requested_service_provision, axiom,
     dpv_personnel_payment != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_personnel_payment_dpv_research_and_development, axiom,
-    dpv_personnel_payment != dpv_research_and_development).
-
-fof(bg_dist_dpv_personnel_payment_dpv_scientific_research, axiom,
-    dpv_personnel_payment != dpv_scientific_research).
+fof(bg_dist_dpv_personnel_payment_dpv_rights_fulfilment, axiom,
+    dpv_personnel_payment != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_personnel_payment_dpv_search_functionalities, axiom,
     dpv_personnel_payment != dpv_search_functionalities).
@@ -16722,6 +17084,9 @@ fof(bg_dist_dpv_personnel_performance_evaluation_dpv_provide_personalised_recomm
 fof(bg_dist_dpv_personnel_performance_evaluation_dpv_provide_product_recommendations, axiom,
     dpv_personnel_performance_evaluation != dpv_provide_product_recommendations).
 
+fof(bg_dist_dpv_personnel_performance_evaluation_dpv_public_benefit, axiom,
+    dpv_personnel_performance_evaluation != dpv_public_benefit).
+
 fof(bg_dist_dpv_personnel_performance_evaluation_dpv_public_policy_making, axiom,
     dpv_personnel_performance_evaluation != dpv_public_policy_making).
 
@@ -16782,11 +17147,8 @@ fof(bg_dist_dpv_personnel_performance_evaluation_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_personnel_performance_evaluation_dpv_requested_service_provision, axiom,
     dpv_personnel_performance_evaluation != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_personnel_performance_evaluation_dpv_research_and_development, axiom,
-    dpv_personnel_performance_evaluation != dpv_research_and_development).
-
-fof(bg_dist_dpv_personnel_performance_evaluation_dpv_scientific_research, axiom,
-    dpv_personnel_performance_evaluation != dpv_scientific_research).
+fof(bg_dist_dpv_personnel_performance_evaluation_dpv_rights_fulfilment, axiom,
+    dpv_personnel_performance_evaluation != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_personnel_performance_evaluation_dpv_search_functionalities, axiom,
     dpv_personnel_performance_evaluation != dpv_search_functionalities).
@@ -16893,6 +17255,9 @@ fof(bg_dist_dpv_personnel_performance_management_dpv_provide_personalised_recomm
 fof(bg_dist_dpv_personnel_performance_management_dpv_provide_product_recommendations, axiom,
     dpv_personnel_performance_management != dpv_provide_product_recommendations).
 
+fof(bg_dist_dpv_personnel_performance_management_dpv_public_benefit, axiom,
+    dpv_personnel_performance_management != dpv_public_benefit).
+
 fof(bg_dist_dpv_personnel_performance_management_dpv_public_policy_making, axiom,
     dpv_personnel_performance_management != dpv_public_policy_making).
 
@@ -16953,11 +17318,8 @@ fof(bg_dist_dpv_personnel_performance_management_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_personnel_performance_management_dpv_requested_service_provision, axiom,
     dpv_personnel_performance_management != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_personnel_performance_management_dpv_research_and_development, axiom,
-    dpv_personnel_performance_management != dpv_research_and_development).
-
-fof(bg_dist_dpv_personnel_performance_management_dpv_scientific_research, axiom,
-    dpv_personnel_performance_management != dpv_scientific_research).
+fof(bg_dist_dpv_personnel_performance_management_dpv_rights_fulfilment, axiom,
+    dpv_personnel_performance_management != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_personnel_performance_management_dpv_search_functionalities, axiom,
     dpv_personnel_performance_management != dpv_search_functionalities).
@@ -17061,6 +17423,9 @@ fof(bg_dist_dpv_personnel_performance_monitoring_dpv_provide_personalised_recomm
 fof(bg_dist_dpv_personnel_performance_monitoring_dpv_provide_product_recommendations, axiom,
     dpv_personnel_performance_monitoring != dpv_provide_product_recommendations).
 
+fof(bg_dist_dpv_personnel_performance_monitoring_dpv_public_benefit, axiom,
+    dpv_personnel_performance_monitoring != dpv_public_benefit).
+
 fof(bg_dist_dpv_personnel_performance_monitoring_dpv_public_policy_making, axiom,
     dpv_personnel_performance_monitoring != dpv_public_policy_making).
 
@@ -17121,11 +17486,8 @@ fof(bg_dist_dpv_personnel_performance_monitoring_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_personnel_performance_monitoring_dpv_requested_service_provision, axiom,
     dpv_personnel_performance_monitoring != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_personnel_performance_monitoring_dpv_research_and_development, axiom,
-    dpv_personnel_performance_monitoring != dpv_research_and_development).
-
-fof(bg_dist_dpv_personnel_performance_monitoring_dpv_scientific_research, axiom,
-    dpv_personnel_performance_monitoring != dpv_scientific_research).
+fof(bg_dist_dpv_personnel_performance_monitoring_dpv_rights_fulfilment, axiom,
+    dpv_personnel_performance_monitoring != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_personnel_performance_monitoring_dpv_search_functionalities, axiom,
     dpv_personnel_performance_monitoring != dpv_search_functionalities).
@@ -17226,6 +17588,9 @@ fof(bg_dist_dpv_personnel_performance_prediction_dpv_provide_personalised_recomm
 fof(bg_dist_dpv_personnel_performance_prediction_dpv_provide_product_recommendations, axiom,
     dpv_personnel_performance_prediction != dpv_provide_product_recommendations).
 
+fof(bg_dist_dpv_personnel_performance_prediction_dpv_public_benefit, axiom,
+    dpv_personnel_performance_prediction != dpv_public_benefit).
+
 fof(bg_dist_dpv_personnel_performance_prediction_dpv_public_policy_making, axiom,
     dpv_personnel_performance_prediction != dpv_public_policy_making).
 
@@ -17286,11 +17651,8 @@ fof(bg_dist_dpv_personnel_performance_prediction_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_personnel_performance_prediction_dpv_requested_service_provision, axiom,
     dpv_personnel_performance_prediction != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_personnel_performance_prediction_dpv_research_and_development, axiom,
-    dpv_personnel_performance_prediction != dpv_research_and_development).
-
-fof(bg_dist_dpv_personnel_performance_prediction_dpv_scientific_research, axiom,
-    dpv_personnel_performance_prediction != dpv_scientific_research).
+fof(bg_dist_dpv_personnel_performance_prediction_dpv_rights_fulfilment, axiom,
+    dpv_personnel_performance_prediction != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_personnel_performance_prediction_dpv_search_functionalities, axiom,
     dpv_personnel_performance_prediction != dpv_search_functionalities).
@@ -17388,6 +17750,9 @@ fof(bg_dist_dpv_personnel_promotion_management_dpv_provide_personalised_recommen
 fof(bg_dist_dpv_personnel_promotion_management_dpv_provide_product_recommendations, axiom,
     dpv_personnel_promotion_management != dpv_provide_product_recommendations).
 
+fof(bg_dist_dpv_personnel_promotion_management_dpv_public_benefit, axiom,
+    dpv_personnel_promotion_management != dpv_public_benefit).
+
 fof(bg_dist_dpv_personnel_promotion_management_dpv_public_policy_making, axiom,
     dpv_personnel_promotion_management != dpv_public_policy_making).
 
@@ -17448,11 +17813,8 @@ fof(bg_dist_dpv_personnel_promotion_management_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_personnel_promotion_management_dpv_requested_service_provision, axiom,
     dpv_personnel_promotion_management != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_personnel_promotion_management_dpv_research_and_development, axiom,
-    dpv_personnel_promotion_management != dpv_research_and_development).
-
-fof(bg_dist_dpv_personnel_promotion_management_dpv_scientific_research, axiom,
-    dpv_personnel_promotion_management != dpv_scientific_research).
+fof(bg_dist_dpv_personnel_promotion_management_dpv_rights_fulfilment, axiom,
+    dpv_personnel_promotion_management != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_personnel_promotion_management_dpv_search_functionalities, axiom,
     dpv_personnel_promotion_management != dpv_search_functionalities).
@@ -17547,6 +17909,9 @@ fof(bg_dist_dpv_personnel_termination_management_dpv_provide_personalised_recomm
 fof(bg_dist_dpv_personnel_termination_management_dpv_provide_product_recommendations, axiom,
     dpv_personnel_termination_management != dpv_provide_product_recommendations).
 
+fof(bg_dist_dpv_personnel_termination_management_dpv_public_benefit, axiom,
+    dpv_personnel_termination_management != dpv_public_benefit).
+
 fof(bg_dist_dpv_personnel_termination_management_dpv_public_policy_making, axiom,
     dpv_personnel_termination_management != dpv_public_policy_making).
 
@@ -17607,11 +17972,8 @@ fof(bg_dist_dpv_personnel_termination_management_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_personnel_termination_management_dpv_requested_service_provision, axiom,
     dpv_personnel_termination_management != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_personnel_termination_management_dpv_research_and_development, axiom,
-    dpv_personnel_termination_management != dpv_research_and_development).
-
-fof(bg_dist_dpv_personnel_termination_management_dpv_scientific_research, axiom,
-    dpv_personnel_termination_management != dpv_scientific_research).
+fof(bg_dist_dpv_personnel_termination_management_dpv_rights_fulfilment, axiom,
+    dpv_personnel_termination_management != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_personnel_termination_management_dpv_search_functionalities, axiom,
     dpv_personnel_termination_management != dpv_search_functionalities).
@@ -17703,6 +18065,9 @@ fof(bg_dist_dpv_personnel_workload_management_dpv_provide_personalised_recommend
 fof(bg_dist_dpv_personnel_workload_management_dpv_provide_product_recommendations, axiom,
     dpv_personnel_workload_management != dpv_provide_product_recommendations).
 
+fof(bg_dist_dpv_personnel_workload_management_dpv_public_benefit, axiom,
+    dpv_personnel_workload_management != dpv_public_benefit).
+
 fof(bg_dist_dpv_personnel_workload_management_dpv_public_policy_making, axiom,
     dpv_personnel_workload_management != dpv_public_policy_making).
 
@@ -17763,11 +18128,8 @@ fof(bg_dist_dpv_personnel_workload_management_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_personnel_workload_management_dpv_requested_service_provision, axiom,
     dpv_personnel_workload_management != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_personnel_workload_management_dpv_research_and_development, axiom,
-    dpv_personnel_workload_management != dpv_research_and_development).
-
-fof(bg_dist_dpv_personnel_workload_management_dpv_scientific_research, axiom,
-    dpv_personnel_workload_management != dpv_scientific_research).
+fof(bg_dist_dpv_personnel_workload_management_dpv_rights_fulfilment, axiom,
+    dpv_personnel_workload_management != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_personnel_workload_management_dpv_search_functionalities, axiom,
     dpv_personnel_workload_management != dpv_search_functionalities).
@@ -17856,6 +18218,9 @@ fof(bg_dist_dpv_political_campaign_dpv_provide_personalised_recommendations, axi
 fof(bg_dist_dpv_political_campaign_dpv_provide_product_recommendations, axiom,
     dpv_political_campaign != dpv_provide_product_recommendations).
 
+fof(bg_dist_dpv_political_campaign_dpv_public_benefit, axiom,
+    dpv_political_campaign != dpv_public_benefit).
+
 fof(bg_dist_dpv_political_campaign_dpv_public_policy_making, axiom,
     dpv_political_campaign != dpv_public_policy_making).
 
@@ -17916,11 +18281,8 @@ fof(bg_dist_dpv_political_campaign_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_political_campaign_dpv_requested_service_provision, axiom,
     dpv_political_campaign != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_political_campaign_dpv_research_and_development, axiom,
-    dpv_political_campaign != dpv_research_and_development).
-
-fof(bg_dist_dpv_political_campaign_dpv_scientific_research, axiom,
-    dpv_political_campaign != dpv_scientific_research).
+fof(bg_dist_dpv_political_campaign_dpv_rights_fulfilment, axiom,
+    dpv_political_campaign != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_political_campaign_dpv_search_functionalities, axiom,
     dpv_political_campaign != dpv_search_functionalities).
@@ -18006,6 +18368,9 @@ fof(bg_dist_dpv_protection_of_ipr_dpv_provide_personalised_recommendations, axio
 fof(bg_dist_dpv_protection_of_ipr_dpv_provide_product_recommendations, axiom,
     dpv_protection_of_ipr != dpv_provide_product_recommendations).
 
+fof(bg_dist_dpv_protection_of_ipr_dpv_public_benefit, axiom,
+    dpv_protection_of_ipr != dpv_public_benefit).
+
 fof(bg_dist_dpv_protection_of_ipr_dpv_public_policy_making, axiom,
     dpv_protection_of_ipr != dpv_public_policy_making).
 
@@ -18066,11 +18431,8 @@ fof(bg_dist_dpv_protection_of_ipr_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_protection_of_ipr_dpv_requested_service_provision, axiom,
     dpv_protection_of_ipr != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_protection_of_ipr_dpv_research_and_development, axiom,
-    dpv_protection_of_ipr != dpv_research_and_development).
-
-fof(bg_dist_dpv_protection_of_ipr_dpv_scientific_research, axiom,
-    dpv_protection_of_ipr != dpv_scientific_research).
+fof(bg_dist_dpv_protection_of_ipr_dpv_rights_fulfilment, axiom,
+    dpv_protection_of_ipr != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_protection_of_ipr_dpv_search_functionalities, axiom,
     dpv_protection_of_ipr != dpv_search_functionalities).
@@ -18153,6 +18515,9 @@ fof(bg_dist_dpv_protection_of_national_security_dpv_provide_personalised_recomme
 fof(bg_dist_dpv_protection_of_national_security_dpv_provide_product_recommendations, axiom,
     dpv_protection_of_national_security != dpv_provide_product_recommendations).
 
+fof(bg_dist_dpv_protection_of_national_security_dpv_public_benefit, axiom,
+    dpv_protection_of_national_security != dpv_public_benefit).
+
 fof(bg_dist_dpv_protection_of_national_security_dpv_public_policy_making, axiom,
     dpv_protection_of_national_security != dpv_public_policy_making).
 
@@ -18213,11 +18578,8 @@ fof(bg_dist_dpv_protection_of_national_security_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_protection_of_national_security_dpv_requested_service_provision, axiom,
     dpv_protection_of_national_security != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_protection_of_national_security_dpv_research_and_development, axiom,
-    dpv_protection_of_national_security != dpv_research_and_development).
-
-fof(bg_dist_dpv_protection_of_national_security_dpv_scientific_research, axiom,
-    dpv_protection_of_national_security != dpv_scientific_research).
+fof(bg_dist_dpv_protection_of_national_security_dpv_rights_fulfilment, axiom,
+    dpv_protection_of_national_security != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_protection_of_national_security_dpv_search_functionalities, axiom,
     dpv_protection_of_national_security != dpv_search_functionalities).
@@ -18297,6 +18659,9 @@ fof(bg_dist_dpv_protection_of_public_security_dpv_provide_personalised_recommend
 fof(bg_dist_dpv_protection_of_public_security_dpv_provide_product_recommendations, axiom,
     dpv_protection_of_public_security != dpv_provide_product_recommendations).
 
+fof(bg_dist_dpv_protection_of_public_security_dpv_public_benefit, axiom,
+    dpv_protection_of_public_security != dpv_public_benefit).
+
 fof(bg_dist_dpv_protection_of_public_security_dpv_public_policy_making, axiom,
     dpv_protection_of_public_security != dpv_public_policy_making).
 
@@ -18357,11 +18722,8 @@ fof(bg_dist_dpv_protection_of_public_security_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_protection_of_public_security_dpv_requested_service_provision, axiom,
     dpv_protection_of_public_security != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_protection_of_public_security_dpv_research_and_development, axiom,
-    dpv_protection_of_public_security != dpv_research_and_development).
-
-fof(bg_dist_dpv_protection_of_public_security_dpv_scientific_research, axiom,
-    dpv_protection_of_public_security != dpv_scientific_research).
+fof(bg_dist_dpv_protection_of_public_security_dpv_rights_fulfilment, axiom,
+    dpv_protection_of_public_security != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_protection_of_public_security_dpv_search_functionalities, axiom,
     dpv_protection_of_public_security != dpv_search_functionalities).
@@ -18438,6 +18800,9 @@ fof(bg_dist_dpv_provide_event_recommendations_dpv_provide_personalised_recommend
 fof(bg_dist_dpv_provide_event_recommendations_dpv_provide_product_recommendations, axiom,
     dpv_provide_event_recommendations != dpv_provide_product_recommendations).
 
+fof(bg_dist_dpv_provide_event_recommendations_dpv_public_benefit, axiom,
+    dpv_provide_event_recommendations != dpv_public_benefit).
+
 fof(bg_dist_dpv_provide_event_recommendations_dpv_public_policy_making, axiom,
     dpv_provide_event_recommendations != dpv_public_policy_making).
 
@@ -18498,11 +18863,8 @@ fof(bg_dist_dpv_provide_event_recommendations_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_provide_event_recommendations_dpv_requested_service_provision, axiom,
     dpv_provide_event_recommendations != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_provide_event_recommendations_dpv_research_and_development, axiom,
-    dpv_provide_event_recommendations != dpv_research_and_development).
-
-fof(bg_dist_dpv_provide_event_recommendations_dpv_scientific_research, axiom,
-    dpv_provide_event_recommendations != dpv_scientific_research).
+fof(bg_dist_dpv_provide_event_recommendations_dpv_rights_fulfilment, axiom,
+    dpv_provide_event_recommendations != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_provide_event_recommendations_dpv_search_functionalities, axiom,
     dpv_provide_event_recommendations != dpv_search_functionalities).
@@ -18576,6 +18938,9 @@ fof(bg_dist_dpv_provide_official_statistics_dpv_provide_personalised_recommendat
 fof(bg_dist_dpv_provide_official_statistics_dpv_provide_product_recommendations, axiom,
     dpv_provide_official_statistics != dpv_provide_product_recommendations).
 
+fof(bg_dist_dpv_provide_official_statistics_dpv_public_benefit, axiom,
+    dpv_provide_official_statistics != dpv_public_benefit).
+
 fof(bg_dist_dpv_provide_official_statistics_dpv_public_policy_making, axiom,
     dpv_provide_official_statistics != dpv_public_policy_making).
 
@@ -18636,11 +19001,8 @@ fof(bg_dist_dpv_provide_official_statistics_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_provide_official_statistics_dpv_requested_service_provision, axiom,
     dpv_provide_official_statistics != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_provide_official_statistics_dpv_research_and_development, axiom,
-    dpv_provide_official_statistics != dpv_research_and_development).
-
-fof(bg_dist_dpv_provide_official_statistics_dpv_scientific_research, axiom,
-    dpv_provide_official_statistics != dpv_scientific_research).
+fof(bg_dist_dpv_provide_official_statistics_dpv_rights_fulfilment, axiom,
+    dpv_provide_official_statistics != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_provide_official_statistics_dpv_search_functionalities, axiom,
     dpv_provide_official_statistics != dpv_search_functionalities).
@@ -18711,6 +19073,9 @@ fof(bg_dist_dpv_provide_official_statistics_dpv_verification, axiom,
 fof(bg_dist_dpv_provide_personalised_recommendations_dpv_provide_product_recommendations, axiom,
     dpv_provide_personalised_recommendations != dpv_provide_product_recommendations).
 
+fof(bg_dist_dpv_provide_personalised_recommendations_dpv_public_benefit, axiom,
+    dpv_provide_personalised_recommendations != dpv_public_benefit).
+
 fof(bg_dist_dpv_provide_personalised_recommendations_dpv_public_policy_making, axiom,
     dpv_provide_personalised_recommendations != dpv_public_policy_making).
 
@@ -18771,11 +19136,8 @@ fof(bg_dist_dpv_provide_personalised_recommendations_dpv_repair_impairments, axi
 fof(bg_dist_dpv_provide_personalised_recommendations_dpv_requested_service_provision, axiom,
     dpv_provide_personalised_recommendations != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_provide_personalised_recommendations_dpv_research_and_development, axiom,
-    dpv_provide_personalised_recommendations != dpv_research_and_development).
-
-fof(bg_dist_dpv_provide_personalised_recommendations_dpv_scientific_research, axiom,
-    dpv_provide_personalised_recommendations != dpv_scientific_research).
+fof(bg_dist_dpv_provide_personalised_recommendations_dpv_rights_fulfilment, axiom,
+    dpv_provide_personalised_recommendations != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_provide_personalised_recommendations_dpv_search_functionalities, axiom,
     dpv_provide_personalised_recommendations != dpv_search_functionalities).
@@ -18843,6 +19205,9 @@ fof(bg_dist_dpv_provide_personalised_recommendations_dpv_vendor_selection_assess
 fof(bg_dist_dpv_provide_personalised_recommendations_dpv_verification, axiom,
     dpv_provide_personalised_recommendations != dpv_verification).
 
+fof(bg_dist_dpv_provide_product_recommendations_dpv_public_benefit, axiom,
+    dpv_provide_product_recommendations != dpv_public_benefit).
+
 fof(bg_dist_dpv_provide_product_recommendations_dpv_public_policy_making, axiom,
     dpv_provide_product_recommendations != dpv_public_policy_making).
 
@@ -18903,11 +19268,8 @@ fof(bg_dist_dpv_provide_product_recommendations_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_provide_product_recommendations_dpv_requested_service_provision, axiom,
     dpv_provide_product_recommendations != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_provide_product_recommendations_dpv_research_and_development, axiom,
-    dpv_provide_product_recommendations != dpv_research_and_development).
-
-fof(bg_dist_dpv_provide_product_recommendations_dpv_scientific_research, axiom,
-    dpv_provide_product_recommendations != dpv_scientific_research).
+fof(bg_dist_dpv_provide_product_recommendations_dpv_rights_fulfilment, axiom,
+    dpv_provide_product_recommendations != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_provide_product_recommendations_dpv_search_functionalities, axiom,
     dpv_provide_product_recommendations != dpv_search_functionalities).
@@ -18975,6 +19337,135 @@ fof(bg_dist_dpv_provide_product_recommendations_dpv_vendor_selection_assessment,
 fof(bg_dist_dpv_provide_product_recommendations_dpv_verification, axiom,
     dpv_provide_product_recommendations != dpv_verification).
 
+fof(bg_dist_dpv_public_benefit_dpv_public_policy_making, axiom,
+    dpv_public_benefit != dpv_public_policy_making).
+
+fof(bg_dist_dpv_public_benefit_dpv_public_relations, axiom,
+    dpv_public_benefit != dpv_public_relations).
+
+fof(bg_dist_dpv_public_benefit_dpv_purpose, axiom,
+    dpv_public_benefit != dpv_purpose).
+
+fof(bg_dist_dpv_public_benefit_dpv_record_management, axiom,
+    dpv_public_benefit != dpv_record_management).
+
+fof(bg_dist_dpv_public_benefit_dpv_recruitment_advertising, axiom,
+    dpv_public_benefit != dpv_recruitment_advertising).
+
+fof(bg_dist_dpv_public_benefit_dpv_recruitment_applicant_background_check, axiom,
+    dpv_public_benefit != dpv_recruitment_applicant_background_check).
+
+fof(bg_dist_dpv_public_benefit_dpv_recruitment_applicant_criminal_background_check, axiom,
+    dpv_public_benefit != dpv_recruitment_applicant_criminal_background_check).
+
+fof(bg_dist_dpv_public_benefit_dpv_recruitment_applicant_information_authentication, axiom,
+    dpv_public_benefit != dpv_recruitment_applicant_information_authentication).
+
+fof(bg_dist_dpv_public_benefit_dpv_recruitment_applicant_selection, axiom,
+    dpv_public_benefit != dpv_recruitment_applicant_selection).
+
+fof(bg_dist_dpv_public_benefit_dpv_recruitment_application_analysis, axiom,
+    dpv_public_benefit != dpv_recruitment_application_analysis).
+
+fof(bg_dist_dpv_public_benefit_dpv_recruitment_application_management, axiom,
+    dpv_public_benefit != dpv_recruitment_application_management).
+
+fof(bg_dist_dpv_public_benefit_dpv_recruitment_application_screening, axiom,
+    dpv_public_benefit != dpv_recruitment_application_screening).
+
+fof(bg_dist_dpv_public_benefit_dpv_recruitment_interview_analysis, axiom,
+    dpv_public_benefit != dpv_recruitment_interview_analysis).
+
+fof(bg_dist_dpv_public_benefit_dpv_recruitment_interview_assessment, axiom,
+    dpv_public_benefit != dpv_recruitment_interview_assessment).
+
+fof(bg_dist_dpv_public_benefit_dpv_recruitment_interview_management, axiom,
+    dpv_public_benefit != dpv_recruitment_interview_management).
+
+fof(bg_dist_dpv_public_benefit_dpv_recruitment_interview_scheduling, axiom,
+    dpv_public_benefit != dpv_recruitment_interview_scheduling).
+
+fof(bg_dist_dpv_public_benefit_dpv_recruitment_management, axiom,
+    dpv_public_benefit != dpv_recruitment_management).
+
+fof(bg_dist_dpv_public_benefit_dpv_recruitment_targeted_advertising, axiom,
+    dpv_public_benefit != dpv_recruitment_targeted_advertising).
+
+fof(bg_dist_dpv_public_benefit_dpv_repair_impairments, axiom,
+    dpv_public_benefit != dpv_repair_impairments).
+
+fof(bg_dist_dpv_public_benefit_dpv_requested_service_provision, axiom,
+    dpv_public_benefit != dpv_requested_service_provision).
+
+fof(bg_dist_dpv_public_benefit_dpv_rights_fulfilment, axiom,
+    dpv_public_benefit != dpv_rights_fulfilment).
+
+fof(bg_dist_dpv_public_benefit_dpv_search_functionalities, axiom,
+    dpv_public_benefit != dpv_search_functionalities).
+
+fof(bg_dist_dpv_public_benefit_dpv_sell_data_to_third_parties, axiom,
+    dpv_public_benefit != dpv_sell_data_to_third_parties).
+
+fof(bg_dist_dpv_public_benefit_dpv_sell_insights_from_data, axiom,
+    dpv_public_benefit != dpv_sell_insights_from_data).
+
+fof(bg_dist_dpv_public_benefit_dpv_sell_products, axiom,
+    dpv_public_benefit != dpv_sell_products).
+
+fof(bg_dist_dpv_public_benefit_dpv_sell_products_to_data_subject, axiom,
+    dpv_public_benefit != dpv_sell_products_to_data_subject).
+
+fof(bg_dist_dpv_public_benefit_dpv_service_access_determination, axiom,
+    dpv_public_benefit != dpv_service_access_determination).
+
+fof(bg_dist_dpv_public_benefit_dpv_service_management, axiom,
+    dpv_public_benefit != dpv_service_management).
+
+fof(bg_dist_dpv_public_benefit_dpv_service_monitoring, axiom,
+    dpv_public_benefit != dpv_service_monitoring).
+
+fof(bg_dist_dpv_public_benefit_dpv_service_optimisation, axiom,
+    dpv_public_benefit != dpv_service_optimisation).
+
+fof(bg_dist_dpv_public_benefit_dpv_service_personalisation, axiom,
+    dpv_public_benefit != dpv_service_personalisation).
+
+fof(bg_dist_dpv_public_benefit_dpv_service_provision, axiom,
+    dpv_public_benefit != dpv_service_provision).
+
+fof(bg_dist_dpv_public_benefit_dpv_service_registration, axiom,
+    dpv_public_benefit != dpv_service_registration).
+
+fof(bg_dist_dpv_public_benefit_dpv_service_usage_analytics, axiom,
+    dpv_public_benefit != dpv_service_usage_analytics).
+
+fof(bg_dist_dpv_public_benefit_dpv_social_media_marketing, axiom,
+    dpv_public_benefit != dpv_social_media_marketing).
+
+fof(bg_dist_dpv_public_benefit_dpv_targeted_advertising, axiom,
+    dpv_public_benefit != dpv_targeted_advertising).
+
+fof(bg_dist_dpv_public_benefit_dpv_technical_service_provision, axiom,
+    dpv_public_benefit != dpv_technical_service_provision).
+
+fof(bg_dist_dpv_public_benefit_dpv_user_interface_personalisation, axiom,
+    dpv_public_benefit != dpv_user_interface_personalisation).
+
+fof(bg_dist_dpv_public_benefit_dpv_vendor_management, axiom,
+    dpv_public_benefit != dpv_vendor_management).
+
+fof(bg_dist_dpv_public_benefit_dpv_vendor_payment, axiom,
+    dpv_public_benefit != dpv_vendor_payment).
+
+fof(bg_dist_dpv_public_benefit_dpv_vendor_records_management, axiom,
+    dpv_public_benefit != dpv_vendor_records_management).
+
+fof(bg_dist_dpv_public_benefit_dpv_vendor_selection_assessment, axiom,
+    dpv_public_benefit != dpv_vendor_selection_assessment).
+
+fof(bg_dist_dpv_public_benefit_dpv_verification, axiom,
+    dpv_public_benefit != dpv_verification).
+
 fof(bg_dist_dpv_public_policy_making_dpv_public_relations, axiom,
     dpv_public_policy_making != dpv_public_relations).
 
@@ -19032,11 +19523,8 @@ fof(bg_dist_dpv_public_policy_making_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_public_policy_making_dpv_requested_service_provision, axiom,
     dpv_public_policy_making != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_public_policy_making_dpv_research_and_development, axiom,
-    dpv_public_policy_making != dpv_research_and_development).
-
-fof(bg_dist_dpv_public_policy_making_dpv_scientific_research, axiom,
-    dpv_public_policy_making != dpv_scientific_research).
+fof(bg_dist_dpv_public_policy_making_dpv_rights_fulfilment, axiom,
+    dpv_public_policy_making != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_public_policy_making_dpv_search_functionalities, axiom,
     dpv_public_policy_making != dpv_search_functionalities).
@@ -19158,11 +19646,8 @@ fof(bg_dist_dpv_public_relations_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_public_relations_dpv_requested_service_provision, axiom,
     dpv_public_relations != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_public_relations_dpv_research_and_development, axiom,
-    dpv_public_relations != dpv_research_and_development).
-
-fof(bg_dist_dpv_public_relations_dpv_scientific_research, axiom,
-    dpv_public_relations != dpv_scientific_research).
+fof(bg_dist_dpv_public_relations_dpv_rights_fulfilment, axiom,
+    dpv_public_relations != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_public_relations_dpv_search_functionalities, axiom,
     dpv_public_relations != dpv_search_functionalities).
@@ -19281,11 +19766,8 @@ fof(bg_dist_dpv_purpose_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_purpose_dpv_requested_service_provision, axiom,
     dpv_purpose != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_purpose_dpv_research_and_development, axiom,
-    dpv_purpose != dpv_research_and_development).
-
-fof(bg_dist_dpv_purpose_dpv_scientific_research, axiom,
-    dpv_purpose != dpv_scientific_research).
+fof(bg_dist_dpv_purpose_dpv_rights_fulfilment, axiom,
+    dpv_purpose != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_purpose_dpv_search_functionalities, axiom,
     dpv_purpose != dpv_search_functionalities).
@@ -19401,11 +19883,8 @@ fof(bg_dist_dpv_record_management_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_record_management_dpv_requested_service_provision, axiom,
     dpv_record_management != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_record_management_dpv_research_and_development, axiom,
-    dpv_record_management != dpv_research_and_development).
-
-fof(bg_dist_dpv_record_management_dpv_scientific_research, axiom,
-    dpv_record_management != dpv_scientific_research).
+fof(bg_dist_dpv_record_management_dpv_rights_fulfilment, axiom,
+    dpv_record_management != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_record_management_dpv_search_functionalities, axiom,
     dpv_record_management != dpv_search_functionalities).
@@ -19518,11 +19997,8 @@ fof(bg_dist_dpv_recruitment_advertising_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_recruitment_advertising_dpv_requested_service_provision, axiom,
     dpv_recruitment_advertising != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_recruitment_advertising_dpv_research_and_development, axiom,
-    dpv_recruitment_advertising != dpv_research_and_development).
-
-fof(bg_dist_dpv_recruitment_advertising_dpv_scientific_research, axiom,
-    dpv_recruitment_advertising != dpv_scientific_research).
+fof(bg_dist_dpv_recruitment_advertising_dpv_rights_fulfilment, axiom,
+    dpv_recruitment_advertising != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_recruitment_advertising_dpv_search_functionalities, axiom,
     dpv_recruitment_advertising != dpv_search_functionalities).
@@ -19632,11 +20108,8 @@ fof(bg_dist_dpv_recruitment_applicant_background_check_dpv_repair_impairments, a
 fof(bg_dist_dpv_recruitment_applicant_background_check_dpv_requested_service_provision, axiom,
     dpv_recruitment_applicant_background_check != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_recruitment_applicant_background_check_dpv_research_and_development, axiom,
-    dpv_recruitment_applicant_background_check != dpv_research_and_development).
-
-fof(bg_dist_dpv_recruitment_applicant_background_check_dpv_scientific_research, axiom,
-    dpv_recruitment_applicant_background_check != dpv_scientific_research).
+fof(bg_dist_dpv_recruitment_applicant_background_check_dpv_rights_fulfilment, axiom,
+    dpv_recruitment_applicant_background_check != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_recruitment_applicant_background_check_dpv_search_functionalities, axiom,
     dpv_recruitment_applicant_background_check != dpv_search_functionalities).
@@ -19743,11 +20216,8 @@ fof(bg_dist_dpv_recruitment_applicant_criminal_background_check_dpv_repair_impai
 fof(bg_dist_dpv_recruitment_applicant_criminal_background_check_dpv_requested_service_provision, axiom,
     dpv_recruitment_applicant_criminal_background_check != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_recruitment_applicant_criminal_background_check_dpv_research_and_development, axiom,
-    dpv_recruitment_applicant_criminal_background_check != dpv_research_and_development).
-
-fof(bg_dist_dpv_recruitment_applicant_criminal_background_check_dpv_scientific_research, axiom,
-    dpv_recruitment_applicant_criminal_background_check != dpv_scientific_research).
+fof(bg_dist_dpv_recruitment_applicant_criminal_background_check_dpv_rights_fulfilment, axiom,
+    dpv_recruitment_applicant_criminal_background_check != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_recruitment_applicant_criminal_background_check_dpv_search_functionalities, axiom,
     dpv_recruitment_applicant_criminal_background_check != dpv_search_functionalities).
@@ -19851,11 +20321,8 @@ fof(bg_dist_dpv_recruitment_applicant_information_authentication_dpv_repair_impa
 fof(bg_dist_dpv_recruitment_applicant_information_authentication_dpv_requested_service_provision, axiom,
     dpv_recruitment_applicant_information_authentication != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_recruitment_applicant_information_authentication_dpv_research_and_development, axiom,
-    dpv_recruitment_applicant_information_authentication != dpv_research_and_development).
-
-fof(bg_dist_dpv_recruitment_applicant_information_authentication_dpv_scientific_research, axiom,
-    dpv_recruitment_applicant_information_authentication != dpv_scientific_research).
+fof(bg_dist_dpv_recruitment_applicant_information_authentication_dpv_rights_fulfilment, axiom,
+    dpv_recruitment_applicant_information_authentication != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_recruitment_applicant_information_authentication_dpv_search_functionalities, axiom,
     dpv_recruitment_applicant_information_authentication != dpv_search_functionalities).
@@ -19956,11 +20423,8 @@ fof(bg_dist_dpv_recruitment_applicant_selection_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_recruitment_applicant_selection_dpv_requested_service_provision, axiom,
     dpv_recruitment_applicant_selection != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_recruitment_applicant_selection_dpv_research_and_development, axiom,
-    dpv_recruitment_applicant_selection != dpv_research_and_development).
-
-fof(bg_dist_dpv_recruitment_applicant_selection_dpv_scientific_research, axiom,
-    dpv_recruitment_applicant_selection != dpv_scientific_research).
+fof(bg_dist_dpv_recruitment_applicant_selection_dpv_rights_fulfilment, axiom,
+    dpv_recruitment_applicant_selection != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_recruitment_applicant_selection_dpv_search_functionalities, axiom,
     dpv_recruitment_applicant_selection != dpv_search_functionalities).
@@ -20058,11 +20522,8 @@ fof(bg_dist_dpv_recruitment_application_analysis_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_recruitment_application_analysis_dpv_requested_service_provision, axiom,
     dpv_recruitment_application_analysis != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_recruitment_application_analysis_dpv_research_and_development, axiom,
-    dpv_recruitment_application_analysis != dpv_research_and_development).
-
-fof(bg_dist_dpv_recruitment_application_analysis_dpv_scientific_research, axiom,
-    dpv_recruitment_application_analysis != dpv_scientific_research).
+fof(bg_dist_dpv_recruitment_application_analysis_dpv_rights_fulfilment, axiom,
+    dpv_recruitment_application_analysis != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_recruitment_application_analysis_dpv_search_functionalities, axiom,
     dpv_recruitment_application_analysis != dpv_search_functionalities).
@@ -20157,11 +20618,8 @@ fof(bg_dist_dpv_recruitment_application_management_dpv_repair_impairments, axiom
 fof(bg_dist_dpv_recruitment_application_management_dpv_requested_service_provision, axiom,
     dpv_recruitment_application_management != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_recruitment_application_management_dpv_research_and_development, axiom,
-    dpv_recruitment_application_management != dpv_research_and_development).
-
-fof(bg_dist_dpv_recruitment_application_management_dpv_scientific_research, axiom,
-    dpv_recruitment_application_management != dpv_scientific_research).
+fof(bg_dist_dpv_recruitment_application_management_dpv_rights_fulfilment, axiom,
+    dpv_recruitment_application_management != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_recruitment_application_management_dpv_search_functionalities, axiom,
     dpv_recruitment_application_management != dpv_search_functionalities).
@@ -20253,11 +20711,8 @@ fof(bg_dist_dpv_recruitment_application_screening_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_recruitment_application_screening_dpv_requested_service_provision, axiom,
     dpv_recruitment_application_screening != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_recruitment_application_screening_dpv_research_and_development, axiom,
-    dpv_recruitment_application_screening != dpv_research_and_development).
-
-fof(bg_dist_dpv_recruitment_application_screening_dpv_scientific_research, axiom,
-    dpv_recruitment_application_screening != dpv_scientific_research).
+fof(bg_dist_dpv_recruitment_application_screening_dpv_rights_fulfilment, axiom,
+    dpv_recruitment_application_screening != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_recruitment_application_screening_dpv_search_functionalities, axiom,
     dpv_recruitment_application_screening != dpv_search_functionalities).
@@ -20346,11 +20801,8 @@ fof(bg_dist_dpv_recruitment_interview_analysis_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_recruitment_interview_analysis_dpv_requested_service_provision, axiom,
     dpv_recruitment_interview_analysis != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_recruitment_interview_analysis_dpv_research_and_development, axiom,
-    dpv_recruitment_interview_analysis != dpv_research_and_development).
-
-fof(bg_dist_dpv_recruitment_interview_analysis_dpv_scientific_research, axiom,
-    dpv_recruitment_interview_analysis != dpv_scientific_research).
+fof(bg_dist_dpv_recruitment_interview_analysis_dpv_rights_fulfilment, axiom,
+    dpv_recruitment_interview_analysis != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_recruitment_interview_analysis_dpv_search_functionalities, axiom,
     dpv_recruitment_interview_analysis != dpv_search_functionalities).
@@ -20436,11 +20888,8 @@ fof(bg_dist_dpv_recruitment_interview_assessment_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_recruitment_interview_assessment_dpv_requested_service_provision, axiom,
     dpv_recruitment_interview_assessment != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_recruitment_interview_assessment_dpv_research_and_development, axiom,
-    dpv_recruitment_interview_assessment != dpv_research_and_development).
-
-fof(bg_dist_dpv_recruitment_interview_assessment_dpv_scientific_research, axiom,
-    dpv_recruitment_interview_assessment != dpv_scientific_research).
+fof(bg_dist_dpv_recruitment_interview_assessment_dpv_rights_fulfilment, axiom,
+    dpv_recruitment_interview_assessment != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_recruitment_interview_assessment_dpv_search_functionalities, axiom,
     dpv_recruitment_interview_assessment != dpv_search_functionalities).
@@ -20523,11 +20972,8 @@ fof(bg_dist_dpv_recruitment_interview_management_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_recruitment_interview_management_dpv_requested_service_provision, axiom,
     dpv_recruitment_interview_management != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_recruitment_interview_management_dpv_research_and_development, axiom,
-    dpv_recruitment_interview_management != dpv_research_and_development).
-
-fof(bg_dist_dpv_recruitment_interview_management_dpv_scientific_research, axiom,
-    dpv_recruitment_interview_management != dpv_scientific_research).
+fof(bg_dist_dpv_recruitment_interview_management_dpv_rights_fulfilment, axiom,
+    dpv_recruitment_interview_management != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_recruitment_interview_management_dpv_search_functionalities, axiom,
     dpv_recruitment_interview_management != dpv_search_functionalities).
@@ -20607,11 +21053,8 @@ fof(bg_dist_dpv_recruitment_interview_scheduling_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_recruitment_interview_scheduling_dpv_requested_service_provision, axiom,
     dpv_recruitment_interview_scheduling != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_recruitment_interview_scheduling_dpv_research_and_development, axiom,
-    dpv_recruitment_interview_scheduling != dpv_research_and_development).
-
-fof(bg_dist_dpv_recruitment_interview_scheduling_dpv_scientific_research, axiom,
-    dpv_recruitment_interview_scheduling != dpv_scientific_research).
+fof(bg_dist_dpv_recruitment_interview_scheduling_dpv_rights_fulfilment, axiom,
+    dpv_recruitment_interview_scheduling != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_recruitment_interview_scheduling_dpv_search_functionalities, axiom,
     dpv_recruitment_interview_scheduling != dpv_search_functionalities).
@@ -20688,11 +21131,8 @@ fof(bg_dist_dpv_recruitment_management_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_recruitment_management_dpv_requested_service_provision, axiom,
     dpv_recruitment_management != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_recruitment_management_dpv_research_and_development, axiom,
-    dpv_recruitment_management != dpv_research_and_development).
-
-fof(bg_dist_dpv_recruitment_management_dpv_scientific_research, axiom,
-    dpv_recruitment_management != dpv_scientific_research).
+fof(bg_dist_dpv_recruitment_management_dpv_rights_fulfilment, axiom,
+    dpv_recruitment_management != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_recruitment_management_dpv_search_functionalities, axiom,
     dpv_recruitment_management != dpv_search_functionalities).
@@ -20766,11 +21206,8 @@ fof(bg_dist_dpv_recruitment_targeted_advertising_dpv_repair_impairments, axiom,
 fof(bg_dist_dpv_recruitment_targeted_advertising_dpv_requested_service_provision, axiom,
     dpv_recruitment_targeted_advertising != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_recruitment_targeted_advertising_dpv_research_and_development, axiom,
-    dpv_recruitment_targeted_advertising != dpv_research_and_development).
-
-fof(bg_dist_dpv_recruitment_targeted_advertising_dpv_scientific_research, axiom,
-    dpv_recruitment_targeted_advertising != dpv_scientific_research).
+fof(bg_dist_dpv_recruitment_targeted_advertising_dpv_rights_fulfilment, axiom,
+    dpv_recruitment_targeted_advertising != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_recruitment_targeted_advertising_dpv_search_functionalities, axiom,
     dpv_recruitment_targeted_advertising != dpv_search_functionalities).
@@ -20841,11 +21278,8 @@ fof(bg_dist_dpv_recruitment_targeted_advertising_dpv_verification, axiom,
 fof(bg_dist_dpv_repair_impairments_dpv_requested_service_provision, axiom,
     dpv_repair_impairments != dpv_requested_service_provision).
 
-fof(bg_dist_dpv_repair_impairments_dpv_research_and_development, axiom,
-    dpv_repair_impairments != dpv_research_and_development).
-
-fof(bg_dist_dpv_repair_impairments_dpv_scientific_research, axiom,
-    dpv_repair_impairments != dpv_scientific_research).
+fof(bg_dist_dpv_repair_impairments_dpv_rights_fulfilment, axiom,
+    dpv_repair_impairments != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_repair_impairments_dpv_search_functionalities, axiom,
     dpv_repair_impairments != dpv_search_functionalities).
@@ -20913,11 +21347,8 @@ fof(bg_dist_dpv_repair_impairments_dpv_vendor_selection_assessment, axiom,
 fof(bg_dist_dpv_repair_impairments_dpv_verification, axiom,
     dpv_repair_impairments != dpv_verification).
 
-fof(bg_dist_dpv_requested_service_provision_dpv_research_and_development, axiom,
-    dpv_requested_service_provision != dpv_research_and_development).
-
-fof(bg_dist_dpv_requested_service_provision_dpv_scientific_research, axiom,
-    dpv_requested_service_provision != dpv_scientific_research).
+fof(bg_dist_dpv_requested_service_provision_dpv_rights_fulfilment, axiom,
+    dpv_requested_service_provision != dpv_rights_fulfilment).
 
 fof(bg_dist_dpv_requested_service_provision_dpv_search_functionalities, axiom,
     dpv_requested_service_provision != dpv_search_functionalities).
@@ -20985,140 +21416,71 @@ fof(bg_dist_dpv_requested_service_provision_dpv_vendor_selection_assessment, axi
 fof(bg_dist_dpv_requested_service_provision_dpv_verification, axiom,
     dpv_requested_service_provision != dpv_verification).
 
-fof(bg_dist_dpv_research_and_development_dpv_scientific_research, axiom,
-    dpv_research_and_development != dpv_scientific_research).
+fof(bg_dist_dpv_rights_fulfilment_dpv_search_functionalities, axiom,
+    dpv_rights_fulfilment != dpv_search_functionalities).
 
-fof(bg_dist_dpv_research_and_development_dpv_search_functionalities, axiom,
-    dpv_research_and_development != dpv_search_functionalities).
+fof(bg_dist_dpv_rights_fulfilment_dpv_sell_data_to_third_parties, axiom,
+    dpv_rights_fulfilment != dpv_sell_data_to_third_parties).
 
-fof(bg_dist_dpv_research_and_development_dpv_sell_data_to_third_parties, axiom,
-    dpv_research_and_development != dpv_sell_data_to_third_parties).
+fof(bg_dist_dpv_rights_fulfilment_dpv_sell_insights_from_data, axiom,
+    dpv_rights_fulfilment != dpv_sell_insights_from_data).
 
-fof(bg_dist_dpv_research_and_development_dpv_sell_insights_from_data, axiom,
-    dpv_research_and_development != dpv_sell_insights_from_data).
+fof(bg_dist_dpv_rights_fulfilment_dpv_sell_products, axiom,
+    dpv_rights_fulfilment != dpv_sell_products).
 
-fof(bg_dist_dpv_research_and_development_dpv_sell_products, axiom,
-    dpv_research_and_development != dpv_sell_products).
+fof(bg_dist_dpv_rights_fulfilment_dpv_sell_products_to_data_subject, axiom,
+    dpv_rights_fulfilment != dpv_sell_products_to_data_subject).
 
-fof(bg_dist_dpv_research_and_development_dpv_sell_products_to_data_subject, axiom,
-    dpv_research_and_development != dpv_sell_products_to_data_subject).
+fof(bg_dist_dpv_rights_fulfilment_dpv_service_access_determination, axiom,
+    dpv_rights_fulfilment != dpv_service_access_determination).
 
-fof(bg_dist_dpv_research_and_development_dpv_service_access_determination, axiom,
-    dpv_research_and_development != dpv_service_access_determination).
+fof(bg_dist_dpv_rights_fulfilment_dpv_service_management, axiom,
+    dpv_rights_fulfilment != dpv_service_management).
 
-fof(bg_dist_dpv_research_and_development_dpv_service_management, axiom,
-    dpv_research_and_development != dpv_service_management).
+fof(bg_dist_dpv_rights_fulfilment_dpv_service_monitoring, axiom,
+    dpv_rights_fulfilment != dpv_service_monitoring).
 
-fof(bg_dist_dpv_research_and_development_dpv_service_monitoring, axiom,
-    dpv_research_and_development != dpv_service_monitoring).
+fof(bg_dist_dpv_rights_fulfilment_dpv_service_optimisation, axiom,
+    dpv_rights_fulfilment != dpv_service_optimisation).
 
-fof(bg_dist_dpv_research_and_development_dpv_service_optimisation, axiom,
-    dpv_research_and_development != dpv_service_optimisation).
+fof(bg_dist_dpv_rights_fulfilment_dpv_service_personalisation, axiom,
+    dpv_rights_fulfilment != dpv_service_personalisation).
 
-fof(bg_dist_dpv_research_and_development_dpv_service_personalisation, axiom,
-    dpv_research_and_development != dpv_service_personalisation).
+fof(bg_dist_dpv_rights_fulfilment_dpv_service_provision, axiom,
+    dpv_rights_fulfilment != dpv_service_provision).
 
-fof(bg_dist_dpv_research_and_development_dpv_service_provision, axiom,
-    dpv_research_and_development != dpv_service_provision).
+fof(bg_dist_dpv_rights_fulfilment_dpv_service_registration, axiom,
+    dpv_rights_fulfilment != dpv_service_registration).
 
-fof(bg_dist_dpv_research_and_development_dpv_service_registration, axiom,
-    dpv_research_and_development != dpv_service_registration).
+fof(bg_dist_dpv_rights_fulfilment_dpv_service_usage_analytics, axiom,
+    dpv_rights_fulfilment != dpv_service_usage_analytics).
 
-fof(bg_dist_dpv_research_and_development_dpv_service_usage_analytics, axiom,
-    dpv_research_and_development != dpv_service_usage_analytics).
+fof(bg_dist_dpv_rights_fulfilment_dpv_social_media_marketing, axiom,
+    dpv_rights_fulfilment != dpv_social_media_marketing).
 
-fof(bg_dist_dpv_research_and_development_dpv_social_media_marketing, axiom,
-    dpv_research_and_development != dpv_social_media_marketing).
+fof(bg_dist_dpv_rights_fulfilment_dpv_targeted_advertising, axiom,
+    dpv_rights_fulfilment != dpv_targeted_advertising).
 
-fof(bg_dist_dpv_research_and_development_dpv_targeted_advertising, axiom,
-    dpv_research_and_development != dpv_targeted_advertising).
+fof(bg_dist_dpv_rights_fulfilment_dpv_technical_service_provision, axiom,
+    dpv_rights_fulfilment != dpv_technical_service_provision).
 
-fof(bg_dist_dpv_research_and_development_dpv_technical_service_provision, axiom,
-    dpv_research_and_development != dpv_technical_service_provision).
+fof(bg_dist_dpv_rights_fulfilment_dpv_user_interface_personalisation, axiom,
+    dpv_rights_fulfilment != dpv_user_interface_personalisation).
 
-fof(bg_dist_dpv_research_and_development_dpv_user_interface_personalisation, axiom,
-    dpv_research_and_development != dpv_user_interface_personalisation).
+fof(bg_dist_dpv_rights_fulfilment_dpv_vendor_management, axiom,
+    dpv_rights_fulfilment != dpv_vendor_management).
 
-fof(bg_dist_dpv_research_and_development_dpv_vendor_management, axiom,
-    dpv_research_and_development != dpv_vendor_management).
+fof(bg_dist_dpv_rights_fulfilment_dpv_vendor_payment, axiom,
+    dpv_rights_fulfilment != dpv_vendor_payment).
 
-fof(bg_dist_dpv_research_and_development_dpv_vendor_payment, axiom,
-    dpv_research_and_development != dpv_vendor_payment).
+fof(bg_dist_dpv_rights_fulfilment_dpv_vendor_records_management, axiom,
+    dpv_rights_fulfilment != dpv_vendor_records_management).
 
-fof(bg_dist_dpv_research_and_development_dpv_vendor_records_management, axiom,
-    dpv_research_and_development != dpv_vendor_records_management).
+fof(bg_dist_dpv_rights_fulfilment_dpv_vendor_selection_assessment, axiom,
+    dpv_rights_fulfilment != dpv_vendor_selection_assessment).
 
-fof(bg_dist_dpv_research_and_development_dpv_vendor_selection_assessment, axiom,
-    dpv_research_and_development != dpv_vendor_selection_assessment).
-
-fof(bg_dist_dpv_research_and_development_dpv_verification, axiom,
-    dpv_research_and_development != dpv_verification).
-
-fof(bg_dist_dpv_scientific_research_dpv_search_functionalities, axiom,
-    dpv_scientific_research != dpv_search_functionalities).
-
-fof(bg_dist_dpv_scientific_research_dpv_sell_data_to_third_parties, axiom,
-    dpv_scientific_research != dpv_sell_data_to_third_parties).
-
-fof(bg_dist_dpv_scientific_research_dpv_sell_insights_from_data, axiom,
-    dpv_scientific_research != dpv_sell_insights_from_data).
-
-fof(bg_dist_dpv_scientific_research_dpv_sell_products, axiom,
-    dpv_scientific_research != dpv_sell_products).
-
-fof(bg_dist_dpv_scientific_research_dpv_sell_products_to_data_subject, axiom,
-    dpv_scientific_research != dpv_sell_products_to_data_subject).
-
-fof(bg_dist_dpv_scientific_research_dpv_service_access_determination, axiom,
-    dpv_scientific_research != dpv_service_access_determination).
-
-fof(bg_dist_dpv_scientific_research_dpv_service_management, axiom,
-    dpv_scientific_research != dpv_service_management).
-
-fof(bg_dist_dpv_scientific_research_dpv_service_monitoring, axiom,
-    dpv_scientific_research != dpv_service_monitoring).
-
-fof(bg_dist_dpv_scientific_research_dpv_service_optimisation, axiom,
-    dpv_scientific_research != dpv_service_optimisation).
-
-fof(bg_dist_dpv_scientific_research_dpv_service_personalisation, axiom,
-    dpv_scientific_research != dpv_service_personalisation).
-
-fof(bg_dist_dpv_scientific_research_dpv_service_provision, axiom,
-    dpv_scientific_research != dpv_service_provision).
-
-fof(bg_dist_dpv_scientific_research_dpv_service_registration, axiom,
-    dpv_scientific_research != dpv_service_registration).
-
-fof(bg_dist_dpv_scientific_research_dpv_service_usage_analytics, axiom,
-    dpv_scientific_research != dpv_service_usage_analytics).
-
-fof(bg_dist_dpv_scientific_research_dpv_social_media_marketing, axiom,
-    dpv_scientific_research != dpv_social_media_marketing).
-
-fof(bg_dist_dpv_scientific_research_dpv_targeted_advertising, axiom,
-    dpv_scientific_research != dpv_targeted_advertising).
-
-fof(bg_dist_dpv_scientific_research_dpv_technical_service_provision, axiom,
-    dpv_scientific_research != dpv_technical_service_provision).
-
-fof(bg_dist_dpv_scientific_research_dpv_user_interface_personalisation, axiom,
-    dpv_scientific_research != dpv_user_interface_personalisation).
-
-fof(bg_dist_dpv_scientific_research_dpv_vendor_management, axiom,
-    dpv_scientific_research != dpv_vendor_management).
-
-fof(bg_dist_dpv_scientific_research_dpv_vendor_payment, axiom,
-    dpv_scientific_research != dpv_vendor_payment).
-
-fof(bg_dist_dpv_scientific_research_dpv_vendor_records_management, axiom,
-    dpv_scientific_research != dpv_vendor_records_management).
-
-fof(bg_dist_dpv_scientific_research_dpv_vendor_selection_assessment, axiom,
-    dpv_scientific_research != dpv_vendor_selection_assessment).
-
-fof(bg_dist_dpv_scientific_research_dpv_verification, axiom,
-    dpv_scientific_research != dpv_verification).
+fof(bg_dist_dpv_rights_fulfilment_dpv_verification, axiom,
+    dpv_rights_fulfilment != dpv_verification).
 
 fof(bg_dist_dpv_search_functionalities_dpv_sell_data_to_third_parties, axiom,
     dpv_search_functionalities != dpv_sell_data_to_third_parties).
@@ -21813,245 +22175,127 @@ fof(bg_dist_dpv_vendor_records_management_dpv_verification, axiom,
 fof(bg_dist_dpv_vendor_selection_assessment_dpv_verification, axiom,
     dpv_vendor_selection_assessment != dpv_verification).
 
-fof(w_kgc394, axiom,
-    ~ ( ( ( dpv_public_benefit = dpv_improve_transport_mobility
-    | dpv_non_commercial_research = dpv_improve_transport_mobility
-    | dpv_improve_transport_mobility = dpv_public_benefit
-    | dpv_improve_transport_mobility = dpv_non_commercial_research
-    | ( dpv_academic_research = dpv_improve_transport_mobility & ( dpv_academic_research = dpv_public_benefit
-    | dpv_academic_research = dpv_non_commercial_research ) )
-    | ( dpv_account_management = dpv_improve_transport_mobility & ( dpv_account_management = dpv_public_benefit
-    | dpv_account_management = dpv_non_commercial_research ) )
-    | ( dpv_advertising = dpv_improve_transport_mobility & ( dpv_advertising = dpv_public_benefit
-    | dpv_advertising = dpv_non_commercial_research ) )
-    | ( dpv_age_verification = dpv_improve_transport_mobility & ( dpv_age_verification = dpv_public_benefit
-    | dpv_age_verification = dpv_non_commercial_research ) )
-    | ( dpv_combat_climate_change = dpv_improve_transport_mobility & ( dpv_combat_climate_change = dpv_public_benefit
-    | dpv_combat_climate_change = dpv_non_commercial_research ) )
-    | ( dpv_commercial_purpose = dpv_improve_transport_mobility & ( dpv_commercial_purpose = dpv_public_benefit
-    | dpv_commercial_purpose = dpv_non_commercial_research ) )
-    | ( dpv_commercial_research = dpv_improve_transport_mobility & ( dpv_commercial_research = dpv_public_benefit
-    | dpv_commercial_research = dpv_non_commercial_research ) )
-    | ( dpv_communication_for_customer_care = dpv_improve_transport_mobility & ( dpv_communication_for_customer_care = dpv_public_benefit
-    | dpv_communication_for_customer_care = dpv_non_commercial_research ) )
-    | ( dpv_communication_management = dpv_improve_transport_mobility & ( dpv_communication_management = dpv_public_benefit
-    | dpv_communication_management = dpv_non_commercial_research ) )
-    | ( dpv_counter_money_laundering = dpv_improve_transport_mobility & ( dpv_counter_money_laundering = dpv_public_benefit
-    | dpv_counter_money_laundering = dpv_non_commercial_research ) )
-    | ( dpv_counterterrorism = dpv_improve_transport_mobility & ( dpv_counterterrorism = dpv_public_benefit
-    | dpv_counterterrorism = dpv_non_commercial_research ) )
-    | ( dpv_customer_care = dpv_improve_transport_mobility & ( dpv_customer_care = dpv_public_benefit
-    | dpv_customer_care = dpv_non_commercial_research ) )
-    | ( dpv_customer_claims_management = dpv_improve_transport_mobility & ( dpv_customer_claims_management = dpv_public_benefit
-    | dpv_customer_claims_management = dpv_non_commercial_research ) )
-    | ( dpv_customer_management = dpv_improve_transport_mobility & ( dpv_customer_management = dpv_public_benefit
-    | dpv_customer_management = dpv_non_commercial_research ) )
-    | ( dpv_customer_order_management = dpv_improve_transport_mobility & ( dpv_customer_order_management = dpv_public_benefit
-    | dpv_customer_order_management = dpv_non_commercial_research ) )
-    | ( dpv_customer_relationship_management = dpv_improve_transport_mobility & ( dpv_customer_relationship_management = dpv_public_benefit
-    | dpv_customer_relationship_management = dpv_non_commercial_research ) )
-    | ( dpv_customer_solvency_monitoring = dpv_improve_transport_mobility & ( dpv_customer_solvency_monitoring = dpv_public_benefit
-    | dpv_customer_solvency_monitoring = dpv_non_commercial_research ) )
-    | ( dpv_data_altruism = dpv_improve_transport_mobility & ( dpv_data_altruism = dpv_public_benefit
-    | dpv_data_altruism = dpv_non_commercial_research ) )
-    | ( dpv_delivery_of_goods = dpv_improve_transport_mobility & ( dpv_delivery_of_goods = dpv_public_benefit
-    | dpv_delivery_of_goods = dpv_non_commercial_research ) )
-    | ( dpv_direct_marketing = dpv_improve_transport_mobility & ( dpv_direct_marketing = dpv_public_benefit
-    | dpv_direct_marketing = dpv_non_commercial_research ) )
-    | ( dpv_dispute_management = dpv_improve_transport_mobility & ( dpv_dispute_management = dpv_public_benefit
-    | dpv_dispute_management = dpv_non_commercial_research ) )
-    | ( dpv_enforce_access_control = dpv_improve_transport_mobility & ( dpv_enforce_access_control = dpv_public_benefit
-    | dpv_enforce_access_control = dpv_non_commercial_research ) )
-    | ( dpv_enforce_security = dpv_improve_transport_mobility & ( dpv_enforce_security = dpv_public_benefit
-    | dpv_enforce_security = dpv_non_commercial_research ) )
-    | ( dpv_establish_contractual_agreement = dpv_improve_transport_mobility & ( dpv_establish_contractual_agreement = dpv_public_benefit
-    | dpv_establish_contractual_agreement = dpv_non_commercial_research ) )
-    | ( dpv_fraud_prevention_and_detection = dpv_improve_transport_mobility & ( dpv_fraud_prevention_and_detection = dpv_public_benefit
-    | dpv_fraud_prevention_and_detection = dpv_non_commercial_research ) )
-    | ( dpv_fulfilment_of_contractual_obligation = dpv_improve_transport_mobility & ( dpv_fulfilment_of_contractual_obligation = dpv_public_benefit
-    | dpv_fulfilment_of_contractual_obligation = dpv_non_commercial_research ) )
-    | ( dpv_fulfilment_of_obligation = dpv_improve_transport_mobility & ( dpv_fulfilment_of_obligation = dpv_public_benefit
-    | dpv_fulfilment_of_obligation = dpv_non_commercial_research ) )
-    | ( dpv_human_resource_management = dpv_improve_transport_mobility & ( dpv_human_resource_management = dpv_public_benefit
-    | dpv_human_resource_management = dpv_non_commercial_research ) )
-    | ( dpv_identity_authentication = dpv_improve_transport_mobility & ( dpv_identity_authentication = dpv_public_benefit
-    | dpv_identity_authentication = dpv_non_commercial_research ) )
-    | ( dpv_identity_verification = dpv_improve_transport_mobility & ( dpv_identity_verification = dpv_public_benefit
-    | dpv_identity_verification = dpv_non_commercial_research ) )
-    | ( dpv_improve_existing_products_and_services = dpv_improve_transport_mobility & ( dpv_improve_existing_products_and_services = dpv_public_benefit
-    | dpv_improve_existing_products_and_services = dpv_non_commercial_research ) )
-    | ( dpv_improve_healthcare = dpv_improve_transport_mobility & ( dpv_improve_healthcare = dpv_public_benefit
-    | dpv_improve_healthcare = dpv_non_commercial_research ) )
-    | ( dpv_improve_internal_crm_processes = dpv_improve_transport_mobility & ( dpv_improve_internal_crm_processes = dpv_public_benefit
-    | dpv_improve_internal_crm_processes = dpv_non_commercial_research ) )
-    | ( dpv_improve_public_services = dpv_improve_transport_mobility & ( dpv_improve_public_services = dpv_public_benefit
-    | dpv_improve_public_services = dpv_non_commercial_research ) )
-    | ( dpv_increase_service_robustness = dpv_improve_transport_mobility & ( dpv_increase_service_robustness = dpv_public_benefit
-    | dpv_increase_service_robustness = dpv_non_commercial_research ) )
-    | ( dpv_internal_resource_optimisation = dpv_improve_transport_mobility & ( dpv_internal_resource_optimisation = dpv_public_benefit
-    | dpv_internal_resource_optimisation = dpv_non_commercial_research ) )
-    | ( dpv_legal_compliance = dpv_improve_transport_mobility & ( dpv_legal_compliance = dpv_public_benefit
-    | dpv_legal_compliance = dpv_non_commercial_research ) )
-    | ( dpv_maintain_fraud_database = dpv_improve_transport_mobility & ( dpv_maintain_fraud_database = dpv_public_benefit
-    | dpv_maintain_fraud_database = dpv_non_commercial_research ) )
-    | ( dpv_marketing = dpv_improve_transport_mobility & ( dpv_marketing = dpv_public_benefit
-    | dpv_marketing = dpv_non_commercial_research ) )
-    | ( dpv_member_partner_management = dpv_improve_transport_mobility & ( dpv_member_partner_management = dpv_public_benefit
-    | dpv_member_partner_management = dpv_non_commercial_research ) )
-    | ( dpv_misuse_prevention_and_detection = dpv_improve_transport_mobility & ( dpv_misuse_prevention_and_detection = dpv_public_benefit
-    | dpv_misuse_prevention_and_detection = dpv_non_commercial_research ) )
-    | ( dpv_non_commercial_purpose = dpv_improve_transport_mobility & ( dpv_non_commercial_purpose = dpv_public_benefit
-    | dpv_non_commercial_purpose = dpv_non_commercial_research ) )
-    | ( dpv_optimisation_for_consumer = dpv_improve_transport_mobility & ( dpv_optimisation_for_consumer = dpv_public_benefit
-    | dpv_optimisation_for_consumer = dpv_non_commercial_research ) )
-    | ( dpv_optimisation_for_controller = dpv_improve_transport_mobility & ( dpv_optimisation_for_controller = dpv_public_benefit
-    | dpv_optimisation_for_controller = dpv_non_commercial_research ) )
-    | ( dpv_optimise_user_interface = dpv_improve_transport_mobility & ( dpv_optimise_user_interface = dpv_public_benefit
-    | dpv_optimise_user_interface = dpv_non_commercial_research ) )
-    | ( dpv_organisation_compliance_management = dpv_improve_transport_mobility & ( dpv_organisation_compliance_management = dpv_public_benefit
-    | dpv_organisation_compliance_management = dpv_non_commercial_research ) )
-    | ( dpv_organisation_governance = dpv_improve_transport_mobility & ( dpv_organisation_governance = dpv_public_benefit
-    | dpv_organisation_governance = dpv_non_commercial_research ) )
-    | ( dpv_organisation_risk_management = dpv_improve_transport_mobility & ( dpv_organisation_risk_management = dpv_public_benefit
-    | dpv_organisation_risk_management = dpv_non_commercial_research ) )
-    | ( dpv_payment_management = dpv_improve_transport_mobility & ( dpv_payment_management = dpv_public_benefit
-    | dpv_payment_management = dpv_non_commercial_research ) )
-    | ( dpv_personalisation = dpv_improve_transport_mobility & ( dpv_personalisation = dpv_public_benefit
-    | dpv_personalisation = dpv_non_commercial_research ) )
-    | ( dpv_personalised_advertising = dpv_improve_transport_mobility & ( dpv_personalised_advertising = dpv_public_benefit
-    | dpv_personalised_advertising = dpv_non_commercial_research ) )
-    | ( dpv_personalised_benefits = dpv_improve_transport_mobility & ( dpv_personalised_benefits = dpv_public_benefit
-    | dpv_personalised_benefits = dpv_non_commercial_research ) )
-    | ( dpv_personnel_behaviour_monitoring = dpv_improve_transport_mobility & ( dpv_personnel_behaviour_monitoring = dpv_public_benefit
-    | dpv_personnel_behaviour_monitoring = dpv_non_commercial_research ) )
-    | ( dpv_personnel_hiring = dpv_improve_transport_mobility & ( dpv_personnel_hiring = dpv_public_benefit
-    | dpv_personnel_hiring = dpv_non_commercial_research ) )
-    | ( dpv_personnel_management = dpv_improve_transport_mobility & ( dpv_personnel_management = dpv_public_benefit
-    | dpv_personnel_management = dpv_non_commercial_research ) )
-    | ( dpv_personnel_monitoring = dpv_improve_transport_mobility & ( dpv_personnel_monitoring = dpv_public_benefit
-    | dpv_personnel_monitoring = dpv_non_commercial_research ) )
-    | ( dpv_personnel_offboarding = dpv_improve_transport_mobility & ( dpv_personnel_offboarding = dpv_public_benefit
-    | dpv_personnel_offboarding = dpv_non_commercial_research ) )
-    | ( dpv_personnel_onboarding = dpv_improve_transport_mobility & ( dpv_personnel_onboarding = dpv_public_benefit
-    | dpv_personnel_onboarding = dpv_non_commercial_research ) )
-    | ( dpv_personnel_payment = dpv_improve_transport_mobility & ( dpv_personnel_payment = dpv_public_benefit
-    | dpv_personnel_payment = dpv_non_commercial_research ) )
-    | ( dpv_personnel_performance_evaluation = dpv_improve_transport_mobility & ( dpv_personnel_performance_evaluation = dpv_public_benefit
-    | dpv_personnel_performance_evaluation = dpv_non_commercial_research ) ) )
-    | ( ( dpv_personnel_performance_management = dpv_improve_transport_mobility & ( dpv_personnel_performance_management = dpv_public_benefit
-    | dpv_personnel_performance_management = dpv_non_commercial_research ) )
-    | ( dpv_personnel_performance_monitoring = dpv_improve_transport_mobility & ( dpv_personnel_performance_monitoring = dpv_public_benefit
-    | dpv_personnel_performance_monitoring = dpv_non_commercial_research ) )
-    | ( dpv_personnel_performance_prediction = dpv_improve_transport_mobility & ( dpv_personnel_performance_prediction = dpv_public_benefit
-    | dpv_personnel_performance_prediction = dpv_non_commercial_research ) )
-    | ( dpv_personnel_promotion_management = dpv_improve_transport_mobility & ( dpv_personnel_promotion_management = dpv_public_benefit
-    | dpv_personnel_promotion_management = dpv_non_commercial_research ) )
-    | ( dpv_personnel_termination_management = dpv_improve_transport_mobility & ( dpv_personnel_termination_management = dpv_public_benefit
-    | dpv_personnel_termination_management = dpv_non_commercial_research ) )
-    | ( dpv_personnel_workload_management = dpv_improve_transport_mobility & ( dpv_personnel_workload_management = dpv_public_benefit
-    | dpv_personnel_workload_management = dpv_non_commercial_research ) )
-    | ( dpv_political_campaign = dpv_improve_transport_mobility & ( dpv_political_campaign = dpv_public_benefit
-    | dpv_political_campaign = dpv_non_commercial_research ) )
-    | ( dpv_protection_of_ipr = dpv_improve_transport_mobility & ( dpv_protection_of_ipr = dpv_public_benefit
-    | dpv_protection_of_ipr = dpv_non_commercial_research ) )
-    | ( dpv_protection_of_national_security = dpv_improve_transport_mobility & ( dpv_protection_of_national_security = dpv_public_benefit
-    | dpv_protection_of_national_security = dpv_non_commercial_research ) )
-    | ( dpv_protection_of_public_security = dpv_improve_transport_mobility & ( dpv_protection_of_public_security = dpv_public_benefit
-    | dpv_protection_of_public_security = dpv_non_commercial_research ) )
-    | ( dpv_provide_event_recommendations = dpv_improve_transport_mobility & ( dpv_provide_event_recommendations = dpv_public_benefit
-    | dpv_provide_event_recommendations = dpv_non_commercial_research ) )
-    | ( dpv_provide_official_statistics = dpv_improve_transport_mobility & ( dpv_provide_official_statistics = dpv_public_benefit
-    | dpv_provide_official_statistics = dpv_non_commercial_research ) )
-    | ( dpv_provide_personalised_recommendations = dpv_improve_transport_mobility & ( dpv_provide_personalised_recommendations = dpv_public_benefit
-    | dpv_provide_personalised_recommendations = dpv_non_commercial_research ) )
-    | ( dpv_provide_product_recommendations = dpv_improve_transport_mobility & ( dpv_provide_product_recommendations = dpv_public_benefit
-    | dpv_provide_product_recommendations = dpv_non_commercial_research ) )
-    | ( dpv_public_policy_making = dpv_improve_transport_mobility & ( dpv_public_policy_making = dpv_public_benefit
-    | dpv_public_policy_making = dpv_non_commercial_research ) )
-    | ( dpv_public_relations = dpv_improve_transport_mobility & ( dpv_public_relations = dpv_public_benefit
-    | dpv_public_relations = dpv_non_commercial_research ) )
-    | ( dpv_purpose = dpv_improve_transport_mobility & ( dpv_purpose = dpv_public_benefit
-    | dpv_purpose = dpv_non_commercial_research ) )
-    | ( dpv_record_management = dpv_improve_transport_mobility & ( dpv_record_management = dpv_public_benefit
-    | dpv_record_management = dpv_non_commercial_research ) )
-    | ( dpv_recruitment_advertising = dpv_improve_transport_mobility & ( dpv_recruitment_advertising = dpv_public_benefit
-    | dpv_recruitment_advertising = dpv_non_commercial_research ) )
-    | ( dpv_recruitment_applicant_background_check = dpv_improve_transport_mobility & ( dpv_recruitment_applicant_background_check = dpv_public_benefit
-    | dpv_recruitment_applicant_background_check = dpv_non_commercial_research ) )
-    | ( dpv_recruitment_applicant_criminal_background_check = dpv_improve_transport_mobility & ( dpv_recruitment_applicant_criminal_background_check = dpv_public_benefit
-    | dpv_recruitment_applicant_criminal_background_check = dpv_non_commercial_research ) )
-    | ( dpv_recruitment_applicant_information_authentication = dpv_improve_transport_mobility & ( dpv_recruitment_applicant_information_authentication = dpv_public_benefit
-    | dpv_recruitment_applicant_information_authentication = dpv_non_commercial_research ) )
-    | ( dpv_recruitment_applicant_selection = dpv_improve_transport_mobility & ( dpv_recruitment_applicant_selection = dpv_public_benefit
-    | dpv_recruitment_applicant_selection = dpv_non_commercial_research ) )
-    | ( dpv_recruitment_application_analysis = dpv_improve_transport_mobility & ( dpv_recruitment_application_analysis = dpv_public_benefit
-    | dpv_recruitment_application_analysis = dpv_non_commercial_research ) )
-    | ( dpv_recruitment_application_management = dpv_improve_transport_mobility & ( dpv_recruitment_application_management = dpv_public_benefit
-    | dpv_recruitment_application_management = dpv_non_commercial_research ) )
-    | ( dpv_recruitment_application_screening = dpv_improve_transport_mobility & ( dpv_recruitment_application_screening = dpv_public_benefit
-    | dpv_recruitment_application_screening = dpv_non_commercial_research ) )
-    | ( dpv_recruitment_interview_analysis = dpv_improve_transport_mobility & ( dpv_recruitment_interview_analysis = dpv_public_benefit
-    | dpv_recruitment_interview_analysis = dpv_non_commercial_research ) )
-    | ( dpv_recruitment_interview_assessment = dpv_improve_transport_mobility & ( dpv_recruitment_interview_assessment = dpv_public_benefit
-    | dpv_recruitment_interview_assessment = dpv_non_commercial_research ) )
-    | ( dpv_recruitment_interview_management = dpv_improve_transport_mobility & ( dpv_recruitment_interview_management = dpv_public_benefit
-    | dpv_recruitment_interview_management = dpv_non_commercial_research ) )
-    | ( dpv_recruitment_interview_scheduling = dpv_improve_transport_mobility & ( dpv_recruitment_interview_scheduling = dpv_public_benefit
-    | dpv_recruitment_interview_scheduling = dpv_non_commercial_research ) )
-    | ( dpv_recruitment_management = dpv_improve_transport_mobility & ( dpv_recruitment_management = dpv_public_benefit
-    | dpv_recruitment_management = dpv_non_commercial_research ) )
-    | ( dpv_recruitment_targeted_advertising = dpv_improve_transport_mobility & ( dpv_recruitment_targeted_advertising = dpv_public_benefit
-    | dpv_recruitment_targeted_advertising = dpv_non_commercial_research ) )
-    | ( dpv_repair_impairments = dpv_improve_transport_mobility & ( dpv_repair_impairments = dpv_public_benefit
-    | dpv_repair_impairments = dpv_non_commercial_research ) )
-    | ( dpv_requested_service_provision = dpv_improve_transport_mobility & ( dpv_requested_service_provision = dpv_public_benefit
-    | dpv_requested_service_provision = dpv_non_commercial_research ) )
-    | ( dpv_research_and_development = dpv_improve_transport_mobility & ( dpv_research_and_development = dpv_public_benefit
-    | dpv_research_and_development = dpv_non_commercial_research ) )
-    | ( dpv_scientific_research = dpv_improve_transport_mobility & ( dpv_scientific_research = dpv_public_benefit
-    | dpv_scientific_research = dpv_non_commercial_research ) )
-    | ( dpv_search_functionalities = dpv_improve_transport_mobility & ( dpv_search_functionalities = dpv_public_benefit
-    | dpv_search_functionalities = dpv_non_commercial_research ) )
-    | ( dpv_sell_data_to_third_parties = dpv_improve_transport_mobility & ( dpv_sell_data_to_third_parties = dpv_public_benefit
-    | dpv_sell_data_to_third_parties = dpv_non_commercial_research ) )
-    | ( dpv_sell_insights_from_data = dpv_improve_transport_mobility & ( dpv_sell_insights_from_data = dpv_public_benefit
-    | dpv_sell_insights_from_data = dpv_non_commercial_research ) )
-    | ( dpv_sell_products = dpv_improve_transport_mobility & ( dpv_sell_products = dpv_public_benefit
-    | dpv_sell_products = dpv_non_commercial_research ) )
-    | ( dpv_sell_products_to_data_subject = dpv_improve_transport_mobility & ( dpv_sell_products_to_data_subject = dpv_public_benefit
-    | dpv_sell_products_to_data_subject = dpv_non_commercial_research ) )
-    | ( dpv_service_access_determination = dpv_improve_transport_mobility & ( dpv_service_access_determination = dpv_public_benefit
-    | dpv_service_access_determination = dpv_non_commercial_research ) )
-    | ( dpv_service_management = dpv_improve_transport_mobility & ( dpv_service_management = dpv_public_benefit
-    | dpv_service_management = dpv_non_commercial_research ) )
-    | ( dpv_service_monitoring = dpv_improve_transport_mobility & ( dpv_service_monitoring = dpv_public_benefit
-    | dpv_service_monitoring = dpv_non_commercial_research ) )
-    | ( dpv_service_optimisation = dpv_improve_transport_mobility & ( dpv_service_optimisation = dpv_public_benefit
-    | dpv_service_optimisation = dpv_non_commercial_research ) )
-    | ( dpv_service_personalisation = dpv_improve_transport_mobility & ( dpv_service_personalisation = dpv_public_benefit
-    | dpv_service_personalisation = dpv_non_commercial_research ) )
-    | ( dpv_service_provision = dpv_improve_transport_mobility & ( dpv_service_provision = dpv_public_benefit
-    | dpv_service_provision = dpv_non_commercial_research ) )
-    | ( dpv_service_registration = dpv_improve_transport_mobility & ( dpv_service_registration = dpv_public_benefit
-    | dpv_service_registration = dpv_non_commercial_research ) )
-    | ( dpv_service_usage_analytics = dpv_improve_transport_mobility & ( dpv_service_usage_analytics = dpv_public_benefit
-    | dpv_service_usage_analytics = dpv_non_commercial_research ) )
-    | ( dpv_social_media_marketing = dpv_improve_transport_mobility & ( dpv_social_media_marketing = dpv_public_benefit
-    | dpv_social_media_marketing = dpv_non_commercial_research ) )
-    | ( dpv_targeted_advertising = dpv_improve_transport_mobility & ( dpv_targeted_advertising = dpv_public_benefit
-    | dpv_targeted_advertising = dpv_non_commercial_research ) )
-    | ( dpv_technical_service_provision = dpv_improve_transport_mobility & ( dpv_technical_service_provision = dpv_public_benefit
-    | dpv_technical_service_provision = dpv_non_commercial_research ) )
-    | ( dpv_user_interface_personalisation = dpv_improve_transport_mobility & ( dpv_user_interface_personalisation = dpv_public_benefit
-    | dpv_user_interface_personalisation = dpv_non_commercial_research ) )
-    | ( dpv_vendor_management = dpv_improve_transport_mobility & ( dpv_vendor_management = dpv_public_benefit
-    | dpv_vendor_management = dpv_non_commercial_research ) )
-    | ( dpv_vendor_payment = dpv_improve_transport_mobility & ( dpv_vendor_payment = dpv_public_benefit
-    | dpv_vendor_payment = dpv_non_commercial_research ) )
-    | ( dpv_vendor_records_management = dpv_improve_transport_mobility & ( dpv_vendor_records_management = dpv_public_benefit
-    | dpv_vendor_records_management = dpv_non_commercial_research ) )
-    | ( dpv_vendor_selection_assessment = dpv_improve_transport_mobility & ( dpv_vendor_selection_assessment = dpv_public_benefit
-    | dpv_vendor_selection_assessment = dpv_non_commercial_research ) )
-    | ( dpv_verification = dpv_improve_transport_mobility & ( dpv_verification = dpv_public_benefit
-    | dpv_verification = dpv_non_commercial_research ) ) ) ) )).
+fof(w_kgc403, axiom,
+    ( ( ( kge_leq(dpv_scientific_research, dpv_scientific_research) & dpv_scientific_research = dpv_research_and_development )
+    | kge_leq(dpv_research_and_development, dpv_scientific_research)
+    | ( kge_leq(dpv_academic_research, dpv_scientific_research) & dpv_academic_research = dpv_research_and_development )
+    | ( kge_leq(dpv_account_management, dpv_scientific_research) & dpv_account_management = dpv_research_and_development )
+    | ( kge_leq(dpv_advertising, dpv_scientific_research) & dpv_advertising = dpv_research_and_development )
+    | ( kge_leq(dpv_age_verification, dpv_scientific_research) & dpv_age_verification = dpv_research_and_development )
+    | ( kge_leq(dpv_combat_climate_change, dpv_scientific_research) & dpv_combat_climate_change = dpv_research_and_development )
+    | ( kge_leq(dpv_commercial_purpose, dpv_scientific_research) & dpv_commercial_purpose = dpv_research_and_development )
+    | ( kge_leq(dpv_commercial_research, dpv_scientific_research) & dpv_commercial_research = dpv_research_and_development )
+    | ( kge_leq(dpv_communication_for_customer_care, dpv_scientific_research) & dpv_communication_for_customer_care = dpv_research_and_development )
+    | ( kge_leq(dpv_communication_management, dpv_scientific_research) & dpv_communication_management = dpv_research_and_development )
+    | ( kge_leq(dpv_counter_money_laundering, dpv_scientific_research) & dpv_counter_money_laundering = dpv_research_and_development )
+    | ( kge_leq(dpv_counterterrorism, dpv_scientific_research) & dpv_counterterrorism = dpv_research_and_development )
+    | ( kge_leq(dpv_customer_care, dpv_scientific_research) & dpv_customer_care = dpv_research_and_development )
+    | ( kge_leq(dpv_customer_claims_management, dpv_scientific_research) & dpv_customer_claims_management = dpv_research_and_development )
+    | ( kge_leq(dpv_customer_management, dpv_scientific_research) & dpv_customer_management = dpv_research_and_development )
+    | ( kge_leq(dpv_customer_order_management, dpv_scientific_research) & dpv_customer_order_management = dpv_research_and_development )
+    | ( kge_leq(dpv_customer_relationship_management, dpv_scientific_research) & dpv_customer_relationship_management = dpv_research_and_development )
+    | ( kge_leq(dpv_customer_solvency_monitoring, dpv_scientific_research) & dpv_customer_solvency_monitoring = dpv_research_and_development )
+    | ( kge_leq(dpv_data_altruism, dpv_scientific_research) & dpv_data_altruism = dpv_research_and_development )
+    | ( kge_leq(dpv_delivery_of_goods, dpv_scientific_research) & dpv_delivery_of_goods = dpv_research_and_development )
+    | ( kge_leq(dpv_direct_marketing, dpv_scientific_research) & dpv_direct_marketing = dpv_research_and_development )
+    | ( kge_leq(dpv_dispute_management, dpv_scientific_research) & dpv_dispute_management = dpv_research_and_development )
+    | ( kge_leq(dpv_enforce_access_control, dpv_scientific_research) & dpv_enforce_access_control = dpv_research_and_development )
+    | ( kge_leq(dpv_enforce_security, dpv_scientific_research) & dpv_enforce_security = dpv_research_and_development )
+    | ( kge_leq(dpv_establish_contractual_agreement, dpv_scientific_research) & dpv_establish_contractual_agreement = dpv_research_and_development )
+    | ( kge_leq(dpv_fraud_prevention_and_detection, dpv_scientific_research) & dpv_fraud_prevention_and_detection = dpv_research_and_development )
+    | ( kge_leq(dpv_fulfilment_of_contractual_obligation, dpv_scientific_research) & dpv_fulfilment_of_contractual_obligation = dpv_research_and_development )
+    | ( kge_leq(dpv_fulfilment_of_obligation, dpv_scientific_research) & dpv_fulfilment_of_obligation = dpv_research_and_development )
+    | ( kge_leq(dpv_human_resource_management, dpv_scientific_research) & dpv_human_resource_management = dpv_research_and_development )
+    | ( kge_leq(dpv_identity_authentication, dpv_scientific_research) & dpv_identity_authentication = dpv_research_and_development )
+    | ( kge_leq(dpv_identity_verification, dpv_scientific_research) & dpv_identity_verification = dpv_research_and_development )
+    | ( kge_leq(dpv_improve_existing_products_and_services, dpv_scientific_research) & dpv_improve_existing_products_and_services = dpv_research_and_development )
+    | ( kge_leq(dpv_improve_healthcare, dpv_scientific_research) & dpv_improve_healthcare = dpv_research_and_development )
+    | ( kge_leq(dpv_improve_internal_crm_processes, dpv_scientific_research) & dpv_improve_internal_crm_processes = dpv_research_and_development )
+    | ( kge_leq(dpv_improve_public_services, dpv_scientific_research) & dpv_improve_public_services = dpv_research_and_development )
+    | ( kge_leq(dpv_improve_transport_mobility, dpv_scientific_research) & dpv_improve_transport_mobility = dpv_research_and_development )
+    | ( kge_leq(dpv_increase_service_robustness, dpv_scientific_research) & dpv_increase_service_robustness = dpv_research_and_development )
+    | ( kge_leq(dpv_internal_resource_optimisation, dpv_scientific_research) & dpv_internal_resource_optimisation = dpv_research_and_development )
+    | ( kge_leq(dpv_legal_compliance, dpv_scientific_research) & dpv_legal_compliance = dpv_research_and_development )
+    | ( kge_leq(dpv_maintain_fraud_database, dpv_scientific_research) & dpv_maintain_fraud_database = dpv_research_and_development )
+    | ( kge_leq(dpv_marketing, dpv_scientific_research) & dpv_marketing = dpv_research_and_development )
+    | ( kge_leq(dpv_member_partner_management, dpv_scientific_research) & dpv_member_partner_management = dpv_research_and_development )
+    | ( kge_leq(dpv_misuse_prevention_and_detection, dpv_scientific_research) & dpv_misuse_prevention_and_detection = dpv_research_and_development )
+    | ( kge_leq(dpv_non_commercial_purpose, dpv_scientific_research) & dpv_non_commercial_purpose = dpv_research_and_development )
+    | ( kge_leq(dpv_non_commercial_research, dpv_scientific_research) & dpv_non_commercial_research = dpv_research_and_development )
+    | ( kge_leq(dpv_optimisation_for_consumer, dpv_scientific_research) & dpv_optimisation_for_consumer = dpv_research_and_development )
+    | ( kge_leq(dpv_optimisation_for_controller, dpv_scientific_research) & dpv_optimisation_for_controller = dpv_research_and_development )
+    | ( kge_leq(dpv_optimise_user_interface, dpv_scientific_research) & dpv_optimise_user_interface = dpv_research_and_development )
+    | ( kge_leq(dpv_organisation_compliance_management, dpv_scientific_research) & dpv_organisation_compliance_management = dpv_research_and_development )
+    | ( kge_leq(dpv_organisation_governance, dpv_scientific_research) & dpv_organisation_governance = dpv_research_and_development )
+    | ( kge_leq(dpv_organisation_risk_management, dpv_scientific_research) & dpv_organisation_risk_management = dpv_research_and_development )
+    | ( kge_leq(dpv_payment_management, dpv_scientific_research) & dpv_payment_management = dpv_research_and_development )
+    | ( kge_leq(dpv_personalisation, dpv_scientific_research) & dpv_personalisation = dpv_research_and_development )
+    | ( kge_leq(dpv_personalised_advertising, dpv_scientific_research) & dpv_personalised_advertising = dpv_research_and_development )
+    | ( kge_leq(dpv_personalised_benefits, dpv_scientific_research) & dpv_personalised_benefits = dpv_research_and_development )
+    | ( kge_leq(dpv_personnel_behaviour_monitoring, dpv_scientific_research) & dpv_personnel_behaviour_monitoring = dpv_research_and_development )
+    | ( kge_leq(dpv_personnel_hiring, dpv_scientific_research) & dpv_personnel_hiring = dpv_research_and_development )
+    | ( kge_leq(dpv_personnel_management, dpv_scientific_research) & dpv_personnel_management = dpv_research_and_development )
+    | ( kge_leq(dpv_personnel_monitoring, dpv_scientific_research) & dpv_personnel_monitoring = dpv_research_and_development )
+    | ( kge_leq(dpv_personnel_offboarding, dpv_scientific_research) & dpv_personnel_offboarding = dpv_research_and_development )
+    | ( kge_leq(dpv_personnel_onboarding, dpv_scientific_research) & dpv_personnel_onboarding = dpv_research_and_development )
+    | ( kge_leq(dpv_personnel_payment, dpv_scientific_research) & dpv_personnel_payment = dpv_research_and_development )
+    | ( kge_leq(dpv_personnel_performance_evaluation, dpv_scientific_research) & dpv_personnel_performance_evaluation = dpv_research_and_development ) )
+    | ( ( kge_leq(dpv_personnel_performance_management, dpv_scientific_research) & dpv_personnel_performance_management = dpv_research_and_development )
+    | ( kge_leq(dpv_personnel_performance_monitoring, dpv_scientific_research) & dpv_personnel_performance_monitoring = dpv_research_and_development )
+    | ( kge_leq(dpv_personnel_performance_prediction, dpv_scientific_research) & dpv_personnel_performance_prediction = dpv_research_and_development )
+    | ( kge_leq(dpv_personnel_promotion_management, dpv_scientific_research) & dpv_personnel_promotion_management = dpv_research_and_development )
+    | ( kge_leq(dpv_personnel_termination_management, dpv_scientific_research) & dpv_personnel_termination_management = dpv_research_and_development )
+    | ( kge_leq(dpv_personnel_workload_management, dpv_scientific_research) & dpv_personnel_workload_management = dpv_research_and_development )
+    | ( kge_leq(dpv_political_campaign, dpv_scientific_research) & dpv_political_campaign = dpv_research_and_development )
+    | ( kge_leq(dpv_protection_of_ipr, dpv_scientific_research) & dpv_protection_of_ipr = dpv_research_and_development )
+    | ( kge_leq(dpv_protection_of_national_security, dpv_scientific_research) & dpv_protection_of_national_security = dpv_research_and_development )
+    | ( kge_leq(dpv_protection_of_public_security, dpv_scientific_research) & dpv_protection_of_public_security = dpv_research_and_development )
+    | ( kge_leq(dpv_provide_event_recommendations, dpv_scientific_research) & dpv_provide_event_recommendations = dpv_research_and_development )
+    | ( kge_leq(dpv_provide_official_statistics, dpv_scientific_research) & dpv_provide_official_statistics = dpv_research_and_development )
+    | ( kge_leq(dpv_provide_personalised_recommendations, dpv_scientific_research) & dpv_provide_personalised_recommendations = dpv_research_and_development )
+    | ( kge_leq(dpv_provide_product_recommendations, dpv_scientific_research) & dpv_provide_product_recommendations = dpv_research_and_development )
+    | ( kge_leq(dpv_public_benefit, dpv_scientific_research) & dpv_public_benefit = dpv_research_and_development )
+    | ( kge_leq(dpv_public_policy_making, dpv_scientific_research) & dpv_public_policy_making = dpv_research_and_development )
+    | ( kge_leq(dpv_public_relations, dpv_scientific_research) & dpv_public_relations = dpv_research_and_development )
+    | ( kge_leq(dpv_purpose, dpv_scientific_research) & dpv_purpose = dpv_research_and_development )
+    | ( kge_leq(dpv_record_management, dpv_scientific_research) & dpv_record_management = dpv_research_and_development )
+    | ( kge_leq(dpv_recruitment_advertising, dpv_scientific_research) & dpv_recruitment_advertising = dpv_research_and_development )
+    | ( kge_leq(dpv_recruitment_applicant_background_check, dpv_scientific_research) & dpv_recruitment_applicant_background_check = dpv_research_and_development )
+    | ( kge_leq(dpv_recruitment_applicant_criminal_background_check, dpv_scientific_research) & dpv_recruitment_applicant_criminal_background_check = dpv_research_and_development )
+    | ( kge_leq(dpv_recruitment_applicant_information_authentication, dpv_scientific_research) & dpv_recruitment_applicant_information_authentication = dpv_research_and_development )
+    | ( kge_leq(dpv_recruitment_applicant_selection, dpv_scientific_research) & dpv_recruitment_applicant_selection = dpv_research_and_development )
+    | ( kge_leq(dpv_recruitment_application_analysis, dpv_scientific_research) & dpv_recruitment_application_analysis = dpv_research_and_development )
+    | ( kge_leq(dpv_recruitment_application_management, dpv_scientific_research) & dpv_recruitment_application_management = dpv_research_and_development )
+    | ( kge_leq(dpv_recruitment_application_screening, dpv_scientific_research) & dpv_recruitment_application_screening = dpv_research_and_development )
+    | ( kge_leq(dpv_recruitment_interview_analysis, dpv_scientific_research) & dpv_recruitment_interview_analysis = dpv_research_and_development )
+    | ( kge_leq(dpv_recruitment_interview_assessment, dpv_scientific_research) & dpv_recruitment_interview_assessment = dpv_research_and_development )
+    | ( kge_leq(dpv_recruitment_interview_management, dpv_scientific_research) & dpv_recruitment_interview_management = dpv_research_and_development )
+    | ( kge_leq(dpv_recruitment_interview_scheduling, dpv_scientific_research) & dpv_recruitment_interview_scheduling = dpv_research_and_development )
+    | ( kge_leq(dpv_recruitment_management, dpv_scientific_research) & dpv_recruitment_management = dpv_research_and_development )
+    | ( kge_leq(dpv_recruitment_targeted_advertising, dpv_scientific_research) & dpv_recruitment_targeted_advertising = dpv_research_and_development )
+    | ( kge_leq(dpv_repair_impairments, dpv_scientific_research) & dpv_repair_impairments = dpv_research_and_development )
+    | ( kge_leq(dpv_requested_service_provision, dpv_scientific_research) & dpv_requested_service_provision = dpv_research_and_development )
+    | ( kge_leq(dpv_rights_fulfilment, dpv_scientific_research) & dpv_rights_fulfilment = dpv_research_and_development )
+    | ( kge_leq(dpv_search_functionalities, dpv_scientific_research) & dpv_search_functionalities = dpv_research_and_development )
+    | ( kge_leq(dpv_sell_data_to_third_parties, dpv_scientific_research) & dpv_sell_data_to_third_parties = dpv_research_and_development )
+    | ( kge_leq(dpv_sell_insights_from_data, dpv_scientific_research) & dpv_sell_insights_from_data = dpv_research_and_development )
+    | ( kge_leq(dpv_sell_products, dpv_scientific_research) & dpv_sell_products = dpv_research_and_development )
+    | ( kge_leq(dpv_sell_products_to_data_subject, dpv_scientific_research) & dpv_sell_products_to_data_subject = dpv_research_and_development )
+    | ( kge_leq(dpv_service_access_determination, dpv_scientific_research) & dpv_service_access_determination = dpv_research_and_development )
+    | ( kge_leq(dpv_service_management, dpv_scientific_research) & dpv_service_management = dpv_research_and_development )
+    | ( kge_leq(dpv_service_monitoring, dpv_scientific_research) & dpv_service_monitoring = dpv_research_and_development )
+    | ( kge_leq(dpv_service_optimisation, dpv_scientific_research) & dpv_service_optimisation = dpv_research_and_development )
+    | ( kge_leq(dpv_service_personalisation, dpv_scientific_research) & dpv_service_personalisation = dpv_research_and_development )
+    | ( kge_leq(dpv_service_provision, dpv_scientific_research) & dpv_service_provision = dpv_research_and_development )
+    | ( kge_leq(dpv_service_registration, dpv_scientific_research) & dpv_service_registration = dpv_research_and_development )
+    | ( kge_leq(dpv_service_usage_analytics, dpv_scientific_research) & dpv_service_usage_analytics = dpv_research_and_development )
+    | ( kge_leq(dpv_social_media_marketing, dpv_scientific_research) & dpv_social_media_marketing = dpv_research_and_development )
+    | ( kge_leq(dpv_targeted_advertising, dpv_scientific_research) & dpv_targeted_advertising = dpv_research_and_development )
+    | ( kge_leq(dpv_technical_service_provision, dpv_scientific_research) & dpv_technical_service_provision = dpv_research_and_development )
+    | ( kge_leq(dpv_user_interface_personalisation, dpv_scientific_research) & dpv_user_interface_personalisation = dpv_research_and_development )
+    | ( kge_leq(dpv_vendor_management, dpv_scientific_research) & dpv_vendor_management = dpv_research_and_development )
+    | ( kge_leq(dpv_vendor_payment, dpv_scientific_research) & dpv_vendor_payment = dpv_research_and_development )
+    | ( kge_leq(dpv_vendor_records_management, dpv_scientific_research) & dpv_vendor_records_management = dpv_research_and_development )
+    | ( kge_leq(dpv_vendor_selection_assessment, dpv_scientific_research) & dpv_vendor_selection_assessment = dpv_research_and_development )
+    | ( kge_leq(dpv_verification, dpv_scientific_research) & dpv_verification = dpv_research_and_development ) ) )).
 %------------------------------------------------------------------------------

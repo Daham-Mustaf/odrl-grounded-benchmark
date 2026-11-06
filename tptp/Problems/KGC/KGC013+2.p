@@ -1,109 +1,159 @@
 %------------------------------------------------------------------------------
 % File     : KGC013+2 : placeholder, for TPTP use only
 % Domain   : Semantic Web (ODRL policies), proposed
-% Problem  : Use within Germany against use in France only: some use meets both
+% Problem  : Use for research and development or any narrower purpose against use for scientific research only: some use meets both
 % Version  : Especial.
 %            Theorem formulation : The condition is written over the whole
 %            vocabulary, as the paper's definition states; version 1 names
-%            only the concepts a fixed value allows. The two versions have the
+%            only the concepts a fixed value allows. The versions have the
 %            same status.
-% English  : As KGC308, with the features that share a parent declared
-%            disjoint: nothing lies within both. This problem states that some
-%            use meets the two policies.
+% English  : A city's traffic data platform permits use for research and
+%            development or any narrower purpose. A university commits to use
+%            for scientific research. This problem states that some use meets
+%            the two policies.
 
 % Refs     : [Mus26] Mustafa (2026), odrl-grounded-benchmark,
-%            https://github.com/Daham-Mustaf/odrl-grounded-benchmark, tag
-%            v1.1.1
+%            https://github.com/Daham-Mustaf/odrl-grounded-benchmark, tag v1.2
 % Source   : [Mus26]
-% Names    : KGC309-1 [Mus26]
+% Names    : KGC310-1 [Mus26]
 
-% Status   : Unsatisfiable
+% Status   : Satisfiable
 % Rating   : left to TPTP
 % Syntax   : left to TPTP
 % SPC      : left to TPTP
 
-% Comments : KGC309 is Incompatible. Its two problems state that some use
-%            meets the two policies (KGC013) and that no use does (KGC014). A
-%            pair of policies is Incompatible when the first is Unsatisfiable,
+% Comments : KGC310 is Compatible. Its two problems state that some use meets
+%            the two policies (KGC013) and that no use does (KGC014); here the
+%            first is Satisfiable and the second Unsatisfiable. A pair of
+%            policies is Incompatible when the first is Unsatisfiable,
 %            Compatible when the second is Unsatisfiable, and Unknown when
 %            both are Satisfiable; a Satisfiable problem also shows the
-%            statements consistent. Here the first is Unsatisfiable and the
-%            second Satisfiable.
+%            statements consistent.
 %------------------------------------------------------------------------------
 include('Axioms/KGC000+0.ax').
-include('Axioms/KGC000+5.ax').
+include('Axioms/KGC000+3.ax').
 
-fof(bg_disj_gn_grand_est_disjoint_gn_nouvelle_aquitaine, axiom,
-    ! [X] : ~ ( kge_leq(X, gn_grand_est) & kge_leq(X, gn_nouvelle_aquitaine) )).
-
-fof(bg_disj_gn_grand_est_disjoint_gn_occitanie, axiom,
-    ! [X] : ~ ( kge_leq(X, gn_grand_est) & kge_leq(X, gn_occitanie) )).
-
-fof(bg_disj_gn_grand_est_disjoint_gn_auvergne_rhone_alpes, axiom,
-    ! [X] : ~ ( kge_leq(X, gn_grand_est) & kge_leq(X, gn_auvergne_rhone_alpes) )).
-
-fof(bg_disj_gn_grand_est_disjoint_gn_provence_alpes_cote_d_azur, axiom,
-    ! [X] : ~ ( kge_leq(X, gn_grand_est) & kge_leq(X, gn_provence_alpes_cote_d_azur) )).
-
-fof(bg_disj_gn_occitanie_disjoint_gn_nouvelle_aquitaine, axiom,
-    ! [X] : ~ ( kge_leq(X, gn_occitanie) & kge_leq(X, gn_nouvelle_aquitaine) )).
-
-fof(bg_disj_gn_occitanie_disjoint_gn_auvergne_rhone_alpes, axiom,
-    ! [X] : ~ ( kge_leq(X, gn_occitanie) & kge_leq(X, gn_auvergne_rhone_alpes) )).
-
-fof(bg_disj_gn_auvergne_rhone_alpes_disjoint_gn_nouvelle_aquitaine, axiom,
-    ! [X] : ~ ( kge_leq(X, gn_auvergne_rhone_alpes) & kge_leq(X, gn_nouvelle_aquitaine) )).
-
-fof(bg_disj_gn_berlin_disjoint_gn_baden_wuerttemberg, axiom,
-    ! [X] : ~ ( kge_leq(X, gn_berlin) & kge_leq(X, gn_baden_wuerttemberg) )).
-
-fof(bg_disj_gn_bayern_disjoint_gn_berlin, axiom,
-    ! [X] : ~ ( kge_leq(X, gn_bayern) & kge_leq(X, gn_berlin) )).
-
-fof(bg_disj_gn_bayern_disjoint_gn_baden_wuerttemberg, axiom,
-    ! [X] : ~ ( kge_leq(X, gn_bayern) & kge_leq(X, gn_baden_wuerttemberg) )).
-
-fof(bg_disj_gn_provence_alpes_cote_d_azur_disjoint_gn_nouvelle_aquitaine, axiom,
-    ! [X] : ~ ( kge_leq(X, gn_provence_alpes_cote_d_azur) & kge_leq(X, gn_nouvelle_aquitaine) )).
-
-fof(bg_disj_gn_provence_alpes_cote_d_azur_disjoint_gn_occitanie, axiom,
-    ! [X] : ~ ( kge_leq(X, gn_provence_alpes_cote_d_azur) & kge_leq(X, gn_occitanie) )).
-
-fof(bg_disj_gn_provence_alpes_cote_d_azur_disjoint_gn_auvergne_rhone_alpes, axiom,
-    ! [X] : ~ ( kge_leq(X, gn_provence_alpes_cote_d_azur) & kge_leq(X, gn_auvergne_rhone_alpes) )).
-
-fof(bg_disj_gn_ile_de_france_disjoint_gn_nouvelle_aquitaine, axiom,
-    ! [X] : ~ ( kge_leq(X, gn_ile_de_france) & kge_leq(X, gn_nouvelle_aquitaine) )).
-
-fof(bg_disj_gn_ile_de_france_disjoint_gn_grand_est, axiom,
-    ! [X] : ~ ( kge_leq(X, gn_ile_de_france) & kge_leq(X, gn_grand_est) )).
-
-fof(bg_disj_gn_ile_de_france_disjoint_gn_occitanie, axiom,
-    ! [X] : ~ ( kge_leq(X, gn_ile_de_france) & kge_leq(X, gn_occitanie) )).
-
-fof(bg_disj_gn_ile_de_france_disjoint_gn_auvergne_rhone_alpes, axiom,
-    ! [X] : ~ ( kge_leq(X, gn_ile_de_france) & kge_leq(X, gn_auvergne_rhone_alpes) )).
-
-fof(bg_disj_gn_ile_de_france_disjoint_gn_provence_alpes_cote_d_azur, axiom,
-    ! [X] : ~ ( kge_leq(X, gn_ile_de_france) & kge_leq(X, gn_provence_alpes_cote_d_azur) )).
-
-fof(bg_disj_gn_france_disjoint_gn_germany, axiom,
-    ! [X] : ~ ( kge_leq(X, gn_france) & kge_leq(X, gn_germany) )).
-
-fof(w_kgc309, axiom,
-    ( ( kge_leq(gn_germany, gn_germany) & gn_germany = gn_france )
-    | kge_leq(gn_france, gn_germany)
-    | ( kge_leq(gn_auvergne_rhone_alpes, gn_germany) & gn_auvergne_rhone_alpes = gn_france )
-    | ( kge_leq(gn_baden_wuerttemberg, gn_germany) & gn_baden_wuerttemberg = gn_france )
-    | ( kge_leq(gn_bayern, gn_germany) & gn_bayern = gn_france )
-    | ( kge_leq(gn_berlin, gn_germany) & gn_berlin = gn_france )
-    | ( kge_leq(gn_europe, gn_germany) & gn_europe = gn_france )
-    | ( kge_leq(gn_grand_est, gn_germany) & gn_grand_est = gn_france )
-    | ( kge_leq(gn_ile_de_france, gn_germany) & gn_ile_de_france = gn_france )
-    | ( kge_leq(gn_munich, gn_germany) & gn_munich = gn_france )
-    | ( kge_leq(gn_nouvelle_aquitaine, gn_germany) & gn_nouvelle_aquitaine = gn_france )
-    | ( kge_leq(gn_occitanie, gn_germany) & gn_occitanie = gn_france )
-    | ( kge_leq(gn_paris, gn_germany) & gn_paris = gn_france )
-    | ( kge_leq(gn_provence_alpes_cote_d_azur, gn_germany) & gn_provence_alpes_cote_d_azur = gn_france )
-    | ( kge_leq(gn_strasbourg, gn_germany) & gn_strasbourg = gn_france ) )).
+fof(w_kgc310, axiom,
+    ( ( ( kge_leq(dpv_research_and_development, dpv_research_and_development) & dpv_research_and_development = dpv_scientific_research )
+    | kge_leq(dpv_scientific_research, dpv_research_and_development)
+    | ( kge_leq(dpv_academic_research, dpv_research_and_development) & dpv_academic_research = dpv_scientific_research )
+    | ( kge_leq(dpv_account_management, dpv_research_and_development) & dpv_account_management = dpv_scientific_research )
+    | ( kge_leq(dpv_advertising, dpv_research_and_development) & dpv_advertising = dpv_scientific_research )
+    | ( kge_leq(dpv_age_verification, dpv_research_and_development) & dpv_age_verification = dpv_scientific_research )
+    | ( kge_leq(dpv_combat_climate_change, dpv_research_and_development) & dpv_combat_climate_change = dpv_scientific_research )
+    | ( kge_leq(dpv_commercial_purpose, dpv_research_and_development) & dpv_commercial_purpose = dpv_scientific_research )
+    | ( kge_leq(dpv_commercial_research, dpv_research_and_development) & dpv_commercial_research = dpv_scientific_research )
+    | ( kge_leq(dpv_communication_for_customer_care, dpv_research_and_development) & dpv_communication_for_customer_care = dpv_scientific_research )
+    | ( kge_leq(dpv_communication_management, dpv_research_and_development) & dpv_communication_management = dpv_scientific_research )
+    | ( kge_leq(dpv_counter_money_laundering, dpv_research_and_development) & dpv_counter_money_laundering = dpv_scientific_research )
+    | ( kge_leq(dpv_counterterrorism, dpv_research_and_development) & dpv_counterterrorism = dpv_scientific_research )
+    | ( kge_leq(dpv_customer_care, dpv_research_and_development) & dpv_customer_care = dpv_scientific_research )
+    | ( kge_leq(dpv_customer_claims_management, dpv_research_and_development) & dpv_customer_claims_management = dpv_scientific_research )
+    | ( kge_leq(dpv_customer_management, dpv_research_and_development) & dpv_customer_management = dpv_scientific_research )
+    | ( kge_leq(dpv_customer_order_management, dpv_research_and_development) & dpv_customer_order_management = dpv_scientific_research )
+    | ( kge_leq(dpv_customer_relationship_management, dpv_research_and_development) & dpv_customer_relationship_management = dpv_scientific_research )
+    | ( kge_leq(dpv_customer_solvency_monitoring, dpv_research_and_development) & dpv_customer_solvency_monitoring = dpv_scientific_research )
+    | ( kge_leq(dpv_data_altruism, dpv_research_and_development) & dpv_data_altruism = dpv_scientific_research )
+    | ( kge_leq(dpv_delivery_of_goods, dpv_research_and_development) & dpv_delivery_of_goods = dpv_scientific_research )
+    | ( kge_leq(dpv_direct_marketing, dpv_research_and_development) & dpv_direct_marketing = dpv_scientific_research )
+    | ( kge_leq(dpv_dispute_management, dpv_research_and_development) & dpv_dispute_management = dpv_scientific_research )
+    | ( kge_leq(dpv_enforce_access_control, dpv_research_and_development) & dpv_enforce_access_control = dpv_scientific_research )
+    | ( kge_leq(dpv_enforce_security, dpv_research_and_development) & dpv_enforce_security = dpv_scientific_research )
+    | ( kge_leq(dpv_establish_contractual_agreement, dpv_research_and_development) & dpv_establish_contractual_agreement = dpv_scientific_research )
+    | ( kge_leq(dpv_fraud_prevention_and_detection, dpv_research_and_development) & dpv_fraud_prevention_and_detection = dpv_scientific_research )
+    | ( kge_leq(dpv_fulfilment_of_contractual_obligation, dpv_research_and_development) & dpv_fulfilment_of_contractual_obligation = dpv_scientific_research )
+    | ( kge_leq(dpv_fulfilment_of_obligation, dpv_research_and_development) & dpv_fulfilment_of_obligation = dpv_scientific_research )
+    | ( kge_leq(dpv_human_resource_management, dpv_research_and_development) & dpv_human_resource_management = dpv_scientific_research )
+    | ( kge_leq(dpv_identity_authentication, dpv_research_and_development) & dpv_identity_authentication = dpv_scientific_research )
+    | ( kge_leq(dpv_identity_verification, dpv_research_and_development) & dpv_identity_verification = dpv_scientific_research )
+    | ( kge_leq(dpv_improve_existing_products_and_services, dpv_research_and_development) & dpv_improve_existing_products_and_services = dpv_scientific_research )
+    | ( kge_leq(dpv_improve_healthcare, dpv_research_and_development) & dpv_improve_healthcare = dpv_scientific_research )
+    | ( kge_leq(dpv_improve_internal_crm_processes, dpv_research_and_development) & dpv_improve_internal_crm_processes = dpv_scientific_research )
+    | ( kge_leq(dpv_improve_public_services, dpv_research_and_development) & dpv_improve_public_services = dpv_scientific_research )
+    | ( kge_leq(dpv_improve_transport_mobility, dpv_research_and_development) & dpv_improve_transport_mobility = dpv_scientific_research )
+    | ( kge_leq(dpv_increase_service_robustness, dpv_research_and_development) & dpv_increase_service_robustness = dpv_scientific_research )
+    | ( kge_leq(dpv_internal_resource_optimisation, dpv_research_and_development) & dpv_internal_resource_optimisation = dpv_scientific_research )
+    | ( kge_leq(dpv_legal_compliance, dpv_research_and_development) & dpv_legal_compliance = dpv_scientific_research )
+    | ( kge_leq(dpv_maintain_fraud_database, dpv_research_and_development) & dpv_maintain_fraud_database = dpv_scientific_research )
+    | ( kge_leq(dpv_marketing, dpv_research_and_development) & dpv_marketing = dpv_scientific_research )
+    | ( kge_leq(dpv_member_partner_management, dpv_research_and_development) & dpv_member_partner_management = dpv_scientific_research )
+    | ( kge_leq(dpv_misuse_prevention_and_detection, dpv_research_and_development) & dpv_misuse_prevention_and_detection = dpv_scientific_research )
+    | ( kge_leq(dpv_non_commercial_purpose, dpv_research_and_development) & dpv_non_commercial_purpose = dpv_scientific_research )
+    | ( kge_leq(dpv_non_commercial_research, dpv_research_and_development) & dpv_non_commercial_research = dpv_scientific_research )
+    | ( kge_leq(dpv_optimisation_for_consumer, dpv_research_and_development) & dpv_optimisation_for_consumer = dpv_scientific_research )
+    | ( kge_leq(dpv_optimisation_for_controller, dpv_research_and_development) & dpv_optimisation_for_controller = dpv_scientific_research )
+    | ( kge_leq(dpv_optimise_user_interface, dpv_research_and_development) & dpv_optimise_user_interface = dpv_scientific_research )
+    | ( kge_leq(dpv_organisation_compliance_management, dpv_research_and_development) & dpv_organisation_compliance_management = dpv_scientific_research )
+    | ( kge_leq(dpv_organisation_governance, dpv_research_and_development) & dpv_organisation_governance = dpv_scientific_research )
+    | ( kge_leq(dpv_organisation_risk_management, dpv_research_and_development) & dpv_organisation_risk_management = dpv_scientific_research )
+    | ( kge_leq(dpv_payment_management, dpv_research_and_development) & dpv_payment_management = dpv_scientific_research )
+    | ( kge_leq(dpv_personalisation, dpv_research_and_development) & dpv_personalisation = dpv_scientific_research )
+    | ( kge_leq(dpv_personalised_advertising, dpv_research_and_development) & dpv_personalised_advertising = dpv_scientific_research )
+    | ( kge_leq(dpv_personalised_benefits, dpv_research_and_development) & dpv_personalised_benefits = dpv_scientific_research )
+    | ( kge_leq(dpv_personnel_behaviour_monitoring, dpv_research_and_development) & dpv_personnel_behaviour_monitoring = dpv_scientific_research )
+    | ( kge_leq(dpv_personnel_hiring, dpv_research_and_development) & dpv_personnel_hiring = dpv_scientific_research )
+    | ( kge_leq(dpv_personnel_management, dpv_research_and_development) & dpv_personnel_management = dpv_scientific_research )
+    | ( kge_leq(dpv_personnel_monitoring, dpv_research_and_development) & dpv_personnel_monitoring = dpv_scientific_research )
+    | ( kge_leq(dpv_personnel_offboarding, dpv_research_and_development) & dpv_personnel_offboarding = dpv_scientific_research )
+    | ( kge_leq(dpv_personnel_onboarding, dpv_research_and_development) & dpv_personnel_onboarding = dpv_scientific_research )
+    | ( kge_leq(dpv_personnel_payment, dpv_research_and_development) & dpv_personnel_payment = dpv_scientific_research )
+    | ( kge_leq(dpv_personnel_performance_evaluation, dpv_research_and_development) & dpv_personnel_performance_evaluation = dpv_scientific_research ) )
+    | ( ( kge_leq(dpv_personnel_performance_management, dpv_research_and_development) & dpv_personnel_performance_management = dpv_scientific_research )
+    | ( kge_leq(dpv_personnel_performance_monitoring, dpv_research_and_development) & dpv_personnel_performance_monitoring = dpv_scientific_research )
+    | ( kge_leq(dpv_personnel_performance_prediction, dpv_research_and_development) & dpv_personnel_performance_prediction = dpv_scientific_research )
+    | ( kge_leq(dpv_personnel_promotion_management, dpv_research_and_development) & dpv_personnel_promotion_management = dpv_scientific_research )
+    | ( kge_leq(dpv_personnel_termination_management, dpv_research_and_development) & dpv_personnel_termination_management = dpv_scientific_research )
+    | ( kge_leq(dpv_personnel_workload_management, dpv_research_and_development) & dpv_personnel_workload_management = dpv_scientific_research )
+    | ( kge_leq(dpv_political_campaign, dpv_research_and_development) & dpv_political_campaign = dpv_scientific_research )
+    | ( kge_leq(dpv_protection_of_ipr, dpv_research_and_development) & dpv_protection_of_ipr = dpv_scientific_research )
+    | ( kge_leq(dpv_protection_of_national_security, dpv_research_and_development) & dpv_protection_of_national_security = dpv_scientific_research )
+    | ( kge_leq(dpv_protection_of_public_security, dpv_research_and_development) & dpv_protection_of_public_security = dpv_scientific_research )
+    | ( kge_leq(dpv_provide_event_recommendations, dpv_research_and_development) & dpv_provide_event_recommendations = dpv_scientific_research )
+    | ( kge_leq(dpv_provide_official_statistics, dpv_research_and_development) & dpv_provide_official_statistics = dpv_scientific_research )
+    | ( kge_leq(dpv_provide_personalised_recommendations, dpv_research_and_development) & dpv_provide_personalised_recommendations = dpv_scientific_research )
+    | ( kge_leq(dpv_provide_product_recommendations, dpv_research_and_development) & dpv_provide_product_recommendations = dpv_scientific_research )
+    | ( kge_leq(dpv_public_benefit, dpv_research_and_development) & dpv_public_benefit = dpv_scientific_research )
+    | ( kge_leq(dpv_public_policy_making, dpv_research_and_development) & dpv_public_policy_making = dpv_scientific_research )
+    | ( kge_leq(dpv_public_relations, dpv_research_and_development) & dpv_public_relations = dpv_scientific_research )
+    | ( kge_leq(dpv_purpose, dpv_research_and_development) & dpv_purpose = dpv_scientific_research )
+    | ( kge_leq(dpv_record_management, dpv_research_and_development) & dpv_record_management = dpv_scientific_research )
+    | ( kge_leq(dpv_recruitment_advertising, dpv_research_and_development) & dpv_recruitment_advertising = dpv_scientific_research )
+    | ( kge_leq(dpv_recruitment_applicant_background_check, dpv_research_and_development) & dpv_recruitment_applicant_background_check = dpv_scientific_research )
+    | ( kge_leq(dpv_recruitment_applicant_criminal_background_check, dpv_research_and_development) & dpv_recruitment_applicant_criminal_background_check = dpv_scientific_research )
+    | ( kge_leq(dpv_recruitment_applicant_information_authentication, dpv_research_and_development) & dpv_recruitment_applicant_information_authentication = dpv_scientific_research )
+    | ( kge_leq(dpv_recruitment_applicant_selection, dpv_research_and_development) & dpv_recruitment_applicant_selection = dpv_scientific_research )
+    | ( kge_leq(dpv_recruitment_application_analysis, dpv_research_and_development) & dpv_recruitment_application_analysis = dpv_scientific_research )
+    | ( kge_leq(dpv_recruitment_application_management, dpv_research_and_development) & dpv_recruitment_application_management = dpv_scientific_research )
+    | ( kge_leq(dpv_recruitment_application_screening, dpv_research_and_development) & dpv_recruitment_application_screening = dpv_scientific_research )
+    | ( kge_leq(dpv_recruitment_interview_analysis, dpv_research_and_development) & dpv_recruitment_interview_analysis = dpv_scientific_research )
+    | ( kge_leq(dpv_recruitment_interview_assessment, dpv_research_and_development) & dpv_recruitment_interview_assessment = dpv_scientific_research )
+    | ( kge_leq(dpv_recruitment_interview_management, dpv_research_and_development) & dpv_recruitment_interview_management = dpv_scientific_research )
+    | ( kge_leq(dpv_recruitment_interview_scheduling, dpv_research_and_development) & dpv_recruitment_interview_scheduling = dpv_scientific_research )
+    | ( kge_leq(dpv_recruitment_management, dpv_research_and_development) & dpv_recruitment_management = dpv_scientific_research )
+    | ( kge_leq(dpv_recruitment_targeted_advertising, dpv_research_and_development) & dpv_recruitment_targeted_advertising = dpv_scientific_research )
+    | ( kge_leq(dpv_repair_impairments, dpv_research_and_development) & dpv_repair_impairments = dpv_scientific_research )
+    | ( kge_leq(dpv_requested_service_provision, dpv_research_and_development) & dpv_requested_service_provision = dpv_scientific_research )
+    | ( kge_leq(dpv_rights_fulfilment, dpv_research_and_development) & dpv_rights_fulfilment = dpv_scientific_research )
+    | ( kge_leq(dpv_search_functionalities, dpv_research_and_development) & dpv_search_functionalities = dpv_scientific_research )
+    | ( kge_leq(dpv_sell_data_to_third_parties, dpv_research_and_development) & dpv_sell_data_to_third_parties = dpv_scientific_research )
+    | ( kge_leq(dpv_sell_insights_from_data, dpv_research_and_development) & dpv_sell_insights_from_data = dpv_scientific_research )
+    | ( kge_leq(dpv_sell_products, dpv_research_and_development) & dpv_sell_products = dpv_scientific_research )
+    | ( kge_leq(dpv_sell_products_to_data_subject, dpv_research_and_development) & dpv_sell_products_to_data_subject = dpv_scientific_research )
+    | ( kge_leq(dpv_service_access_determination, dpv_research_and_development) & dpv_service_access_determination = dpv_scientific_research )
+    | ( kge_leq(dpv_service_management, dpv_research_and_development) & dpv_service_management = dpv_scientific_research )
+    | ( kge_leq(dpv_service_monitoring, dpv_research_and_development) & dpv_service_monitoring = dpv_scientific_research )
+    | ( kge_leq(dpv_service_optimisation, dpv_research_and_development) & dpv_service_optimisation = dpv_scientific_research )
+    | ( kge_leq(dpv_service_personalisation, dpv_research_and_development) & dpv_service_personalisation = dpv_scientific_research )
+    | ( kge_leq(dpv_service_provision, dpv_research_and_development) & dpv_service_provision = dpv_scientific_research )
+    | ( kge_leq(dpv_service_registration, dpv_research_and_development) & dpv_service_registration = dpv_scientific_research )
+    | ( kge_leq(dpv_service_usage_analytics, dpv_research_and_development) & dpv_service_usage_analytics = dpv_scientific_research )
+    | ( kge_leq(dpv_social_media_marketing, dpv_research_and_development) & dpv_social_media_marketing = dpv_scientific_research )
+    | ( kge_leq(dpv_targeted_advertising, dpv_research_and_development) & dpv_targeted_advertising = dpv_scientific_research )
+    | ( kge_leq(dpv_technical_service_provision, dpv_research_and_development) & dpv_technical_service_provision = dpv_scientific_research )
+    | ( kge_leq(dpv_user_interface_personalisation, dpv_research_and_development) & dpv_user_interface_personalisation = dpv_scientific_research )
+    | ( kge_leq(dpv_vendor_management, dpv_research_and_development) & dpv_vendor_management = dpv_scientific_research )
+    | ( kge_leq(dpv_vendor_payment, dpv_research_and_development) & dpv_vendor_payment = dpv_scientific_research )
+    | ( kge_leq(dpv_vendor_records_management, dpv_research_and_development) & dpv_vendor_records_management = dpv_scientific_research )
+    | ( kge_leq(dpv_vendor_selection_assessment, dpv_research_and_development) & dpv_vendor_selection_assessment = dpv_scientific_research )
+    | ( kge_leq(dpv_verification, dpv_research_and_development) & dpv_verification = dpv_scientific_research ) ) )).
 %------------------------------------------------------------------------------

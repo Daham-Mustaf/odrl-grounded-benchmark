@@ -7,6 +7,7 @@ Checks and runs the TPTP export that export_tptp.py writes.
     uv run generators/run_tptp.py check [--tptp4x PATH]
     uv run generators/run_tptp.py run --version 1 --limit 60
     uv run generators/run_tptp.py run --version 2 --limit 300 --sat-retry
+    uv run generators/run_tptp.py axioms --limit 300
 
 check   parses every problem and axiom file with tptp4X, includes expanded
         (-x) and warnings on (-w), and fails on an error, a warning, or a
@@ -17,6 +18,8 @@ run     runs Vampire on the problems of one version, one at a time, with
         run is appended to results/tptp-runs.csv (problem, mode, limit,
         result, seconds) as it ends, so a run that stops resumes where it
         stopped.
+axioms  runs Vampire on each file of tptp/Axioms alone, with --mode casc, and
+        fails unless each is Satisfiable.  The runs go in the same file.
 
 tptp4X is built from the TPTP World sources (github.com/TPTPWorld/TPTP4X
 and JJParser); TPTP is set to the export folder, so that the includes,
@@ -125,6 +128,37 @@ def run(version: int, limit: int, sat_retry: bool) -> int:
     return 1 if wrong else 0
 
 
+def axioms(limit: int) -> int:
+    files = sorted((EXPORT / "Axioms").glob("*.ax"))
+    done = {}
+    if RUNS.exists():
+        with RUNS.open(encoding="utf-8") as f:
+            for r in csv.DictReader(f):
+                if r["limit"] == str(limit):
+                    done[r["problem"]] = r["result"]
+    new = not RUNS.exists()
+    wrong = []
+    with RUNS.open("a", encoding="utf-8", newline="") as out:
+        w = csv.DictWriter(out, fieldnames=FIELDS, lineterminator="\n")
+        if new:
+            w.writeheader()
+        for f in files:
+            result = done.get(f.name)
+            if result is None:
+                result, seconds = vampire(f, "casc", limit)
+                w.writerow({"problem": f.name, "mode": "casc", "limit": limit,
+                            "result": result, "seconds": f"{seconds:.2f}"})
+                out.flush()
+                print(f"  {f.name:12} casc      {result:15} {seconds:7.2f} s",
+                      flush=True)
+            if result != "Satisfiable":
+                wrong.append((f.name, result))
+    for name, result in wrong:
+        print(f"    WRONG {name}: {result}, and it must be Satisfiable alone")
+    print(f"axiom files: {len(files)}, {len(files) - len(wrong)} Satisfiable alone")
+    return 1 if wrong else 0
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[3])
     sub = ap.add_subparsers(dest="cmd", required=True)
@@ -134,9 +168,13 @@ def main() -> int:
     r.add_argument("--version", type=int, required=True)
     r.add_argument("--limit", type=int, required=True)
     r.add_argument("--sat-retry", action="store_true")
+    x = sub.add_parser("axioms")
+    x.add_argument("--limit", type=int, required=True)
     args = ap.parse_args()
     if args.cmd == "check":
         return check(args.tptp4x)
+    if args.cmd == "axioms":
+        return axioms(args.limit)
     return run(args.version, args.limit, args.sat_retry)
 
 

@@ -1,44 +1,34 @@
 %------------------------------------------------------------------------------
 % File     : KGC062+1 : placeholder, for TPTP use only
 % Domain   : Semantic Web (ODRL policies), proposed
-% Problem  : Use under any consent status except withdrawn and revoked against use only records whose consent has expired: no use meets both
+% Problem  : Use with both encryption and access control in place against applies technical measures only, no organisational ones: no use meets both
 % Version  : Especial.
-% English  : A controller permits use under any consent status except
-%            withdrawn and revoked. A processor commits to use only records
-%            whose consent has expired, in a consent-renewal campaign. This
-%            problem states that no use meets the two policies.
+% English  : A controller permits use where encryption and access control are
+%            both in place. A processor states that it applies technical
+%            measures only, no organisational ones. This problem states that
+%            no use meets the two policies.
 
 % Refs     : [Mus26] Mustafa (2026), odrl-grounded-benchmark,
-%            https://github.com/Daham-Mustaf/odrl-grounded-benchmark, tag
-%            v1.1.1
+%            https://github.com/Daham-Mustaf/odrl-grounded-benchmark, tag v1.2
 % Source   : [Mus26]
-% Names    : KGC349-2 [Mus26]
+% Names    : KGC360-2 [Mus26]
 
 % Status   : Unsatisfiable
 % Rating   : left to TPTP
 % Syntax   : left to TPTP
 % SPC      : left to TPTP
 
-% Comments : KGC349 is Compatible. Its two problems state that some use meets
-%            the two policies (KGC061) and that no use does (KGC062). A pair
-%            of policies is Incompatible when the first is Unsatisfiable,
+% Comments : KGC360 is Compatible. Its two problems state that some use meets
+%            the two policies (KGC061) and that no use does (KGC062); here the
+%            first is Satisfiable and the second Unsatisfiable. A pair of
+%            policies is Incompatible when the first is Unsatisfiable,
 %            Compatible when the second is Unsatisfiable, and Unknown when
 %            both are Satisfiable; a Satisfiable problem also shows the
-%            statements consistent. Here the first is Satisfiable and the
-%            second Unsatisfiable.
+%            statements consistent.
 %------------------------------------------------------------------------------
 include('Axioms/KGC000+0.ax').
-include('Axioms/KGC000+2.ax').
+include('Axioms/KGC000+4.ax').
 
-fof(bg_dist_dpv_consent_withdrawn_dpv_consent_revoked, axiom,
-    dpv_consent_withdrawn != dpv_consent_revoked).
-
-fof(bg_dist_dpv_consent_withdrawn_dpv_consent_expired, axiom,
-    dpv_consent_withdrawn != dpv_consent_expired).
-
-fof(bg_dist_dpv_consent_revoked_dpv_consent_expired, axiom,
-    dpv_consent_revoked != dpv_consent_expired).
-
-fof(w_kgc349, axiom,
-    ~ ( ( dpv_consent_expired != dpv_consent_withdrawn & dpv_consent_expired != dpv_consent_revoked ) )).
+fof(w_kgc360, axiom,
+    ~ ( ( kge_leq(tm_encryption, tm_technical_measure) & kge_leq(tm_access_control_method, tm_technical_measure) ) )).
 %------------------------------------------------------------------------------

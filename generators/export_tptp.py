@@ -13,15 +13,22 @@ Writes
     tptp/Problems/KGC/KGCnnn+2.p   version 2: the same problem with the
                                    condition written over the whole
                                    vocabulary, where it is written
+    tptp/Problems/KGC/KGCnnn+3.p   a further full form, where the checks of one
+                                   problem differ over the whole vocabulary
     tptp/Axioms/KGC000+0.ax        the order axioms
     tptp/Axioms/KGC000+N.ax        one file per vocabulary
     tptp/manifest.csv              one row per file
 
 The repository's own files keep their names; nothing under problems/ or
 cases/ changes.  The names follow the TPTP manual: one abstract problem per
-query, numbered KGC001 to KGC122 in the order of the original names, which
-go in % Names and in the manifest.  KGC is a provisional domain code; the
-maintainer assigns the real domain and numbers.
+query, numbered from KGC001 in the order of the original names, which go in
+% Names and in the manifest.  KGC is a provisional domain code; the maintainer
+assigns the real domain and numbers.  SPC is left to TPTP.
+
+A problem is exported once.  Two queries whose formulas and include lines are
+equal after renaming the case id are one problem, and % Names lists every
+original check.  Where the checks of such a group differ over the whole
+vocabulary, each distinct full form is written as its own version, +2 and +3.
 
 Version 1 is the query as the repository writes it: the same formulas, the
 includes renamed, the includes of files that carry no formula left out (the
@@ -39,13 +46,15 @@ same formulas as version 1.  Both are listed, with the reason, in
 tptp/README.
 
 --runs reads the Vampire results generators/run_tptp.py writes, for the
-manifest and for the comment a version 2 problem gets when no mode solved
-it.  The export stops, and writes nothing, unless Vampire has confirmed the
-status of every version 1 problem, or if it found the opposite status for
-a version 2 problem.  A version 2 problem no mode solved keeps version 1's
-status, and its % Comments says that the status holds by construction.
---draft writes the files without those checks, for a first run of
-run_tptp.py over a changed export; a draft is not for release.
+manifest and for the comment a full form gets when no mode solved it.  The
+export stops, and writes nothing, unless Vampire has confirmed the status of
+every version 1 problem and found every axiom file Satisfiable alone, or if it
+found the opposite status for a full form.  A full form no mode solved keeps
+version 1's status, and its % Comments says that the status holds by
+construction.  --draft writes the files without those checks, for a first run
+of run_tptp.py over a changed export; a draft is not for release.
+
+--zip writes the export as one zip file, for sending it outside git.
 """
 
 import argparse
@@ -54,6 +63,8 @@ import importlib
 import re
 import sys
 import textwrap
+import zipfile
+from collections import Counter
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
@@ -71,7 +82,7 @@ ROOT = Path(__file__).resolve().parent.parent
 VREP = Namespace("https://w3id.org/odrl-kb/verdict-report#")
 DRK = Namespace("https://w3id.org/odrl-kb/drk/")
 
-TAG = "v1.1.1"
+TAG = "v1.2"
 # ODRL_ANON=1 renders the repository and the reference as anonymous, as it
 # does in every other generated header.
 REPO = header.identity("source")
@@ -112,7 +123,7 @@ AXIOMS = [
      "another.", DPV_LICENCE),
     ("DPV-dpv-purposes.ax", "DPV 2.3, purposes",
      "The 131 statements of the purposes module of the Data Privacy "
-     "Vocabulary 2.3 that place one of its 121 purposes below another.",
+     "Vocabulary 2.3 that place one of its 122 purposes below another.",
      DPV_LICENCE),
     ("DPV-tom.ax", "DPV 2.3, technical and organisational measures",
      "The 75 statements of the Data Privacy Vocabulary 2.3 that place one "
@@ -265,46 +276,65 @@ def version2(p: dict, q: int):
     return out[0], out[1], pairs
 
 
-def normal(formulas: list) -> list:
-    return sorted(" ".join(f.split()) for f in formulas)
+def normal(formulas: list, cid: str = "") -> list:
+    """The formulas in a form that compares: white space and order do not
+    count, and neither does the case id in the name of the condition."""
+    renamed = [f.replace(f"w_{cid.lower()}(", "w_(").replace(f"w_{cid.lower()},", "w_,")
+               for f in formulas]
+    return sorted(" ".join(f.split()) for f in renamed)
 
 
 # --- writing -----------------------------------------------------------------
 
-def problem_text(name, version, original, case, q, status, includes,
-                 formulas, partner, comment_extra="") -> str:
-    check = CHECK[q]
-    first, second = (name[:6], partner) if q == 1 else (partner, name[:6])
-    s1, s2 = (status, case["other_status"]) if q == 1 else \
-        (case["other_status"], status)
+def problem_text(name, version, members, status, includes, formulas,
+                 comment_extra="") -> str:
+    """One problem file.  members: the checks it is, each a dict of original,
+    cid, q, case and partner; the first gives the title."""
+    first_member = members[0]
+    case, q = first_member["case"], first_member["q"]
     t = [x for x in case["titles"] if x]
     titles = " against ".join([t[0]] + [x[:1].lower() + x[1:] for x in t[1:]])
     version_field = [("Version", "Especial.")]
-    if version == 2:
+    if version >= 2:
         version_field += textwrap.wrap(
             "Theorem formulation : The condition is written over the whole "
             "vocabulary, as the paper's definition states; version 1 names "
-            "only the concepts a fixed value allows. The two versions have "
+            "only the concepts a fixed value allows. The versions have "
             "the same status.", 78, initial_indent="%            ",
             subsequent_indent="%            ")
-    comments = (
-        f"{original[:6]} is {case['verdict']}. Its two problems state that "
-        f"some use meets the two policies ({first}) and that no use does "
-        f"({second}). A pair of policies is Incompatible when the first is "
-        f"Unsatisfiable, Compatible when the second is Unsatisfiable, and "
-        f"Unknown when both are Satisfiable; a Satisfiable problem also shows "
-        f"the statements consistent. Here the first is {s1} and the second "
-        f"{s2}." + comment_extra)
+    english = f"{case['story']} This problem states that {CHECK[q]}."
+    for m in members[1:]:
+        english += (f" It is also a check of {m['cid']}: {m['case']['story']} "
+                    f"There it states that {CHECK[m['q']]}.")
+    comments = ""
+    if len(members) > 1:
+        comments += (f"This problem is {len(members)} checks whose formulas and "
+                     f"include lines are the same after renaming the case. ")
+    for m in members:
+        s1, s2 = ((status, m["case"]["other_status"]) if m["q"] == 1 else
+                  (m["case"]["other_status"], status))
+        first, second = ((name[:6], m["partner"]) if m["q"] == 1 else
+                         (m["partner"], name[:6]))
+        comments += (f"{m['cid']} is {m['case']['verdict']}. Its two problems "
+                     f"state that some use meets the two policies ({first}) and "
+                     f"that no use does ({second}); here the first is {s1} and "
+                     f"the second {s2}. ")
+    comments += ("A pair of policies is Incompatible when the first is "
+                 "Unsatisfiable, Compatible when the second is Unsatisfiable, "
+                 "and Unknown when both are Satisfiable; a Satisfiable problem "
+                 "also shows the statements consistent." + comment_extra)
+    names = [("Names", f"{first_member['original']} {CITE}")]
+    names += [f"%          : {m['original']} {CITE}" for m in members[1:]]
     head = header([
         ("File", f"{name} : placeholder, for TPTP use only"),
         ("Domain", DOMAIN),
         ("Problem", f"{titles}: {SHORT[q]}", False),
         *version_field,
-        ("English", f"{case['story']} This problem states that {check}."),
+        ("English", english),
         None,
         ("Refs", REF),
         ("Source", CITE),
-        ("Names", f"{original} {CITE}"),
+        *names,
         None,
         ("Status", status),
         ("Rating", "left to TPTP"),
@@ -340,20 +370,17 @@ def axiom_text(i: int) -> str:
     return head + "\n" + "\n\n".join(formulas) + "\n" + "%" + "-" * 78 + "\n"
 
 
-def readme(rows: list, left_out: list) -> str:
+def readme(rows: list, left_out: list, axiom_runs: dict) -> str:
     """tptp/README, from the rows of the manifest."""
     from collections import Counter
     v1 = [r for r in rows if r["version"] == 1]
-    v2 = [r for r in rows if r["version"] == 2]
-    by_status = Counter(r["status"] for r in v1)
-    v2_status = Counter(r["status"] for r in v2)
-    v1_ok = sum(1 for r in v1 if r["Vampire result"] == r["status"])
-    v2_mode = Counter(r["mode"] for r in v2 if r["Vampire result"] == r["status"])
-    v2_open = [r for r in v2 if r["Vampire result"] != r["status"]]
-    slow = sorted((r for r in v2 if r["time"]), key=lambda r: -float(r["time"]))[:10]
+    versions = sorted({r["version"] for r in rows})
+    merged = [r for r in v1 if " " in r["original name"]]
     why = Counter(w for _, _, w in left_out)
-    cases = len({r["case"] for r in v1})
+    cases = len({c for r in v1 for c in r["case"].split()})
+    checks = sum(len(r["original name"].split()) for r in v1)
     count = lambda c: ", ".join(f"{n} {k}" for k, n in sorted(c.items()))
+    of = lambda v: [r for r in rows if r["version"] == v]
 
     out = []
 
@@ -375,7 +402,8 @@ def readme(rows: list, left_out: list) -> str:
     para(f"A TPTP export of the odrl-grounded-benchmark, {REPO}, tag {TAG}. "
          "The names are provisional: KGC is a proposed domain code and the "
          "problems are numbered in sequence. The original name of each "
-         "problem is in its % Names field and in manifest.csv.")
+         "problem is in its % Names field and in manifest.csv. SPC, Rating "
+         "and Syntax are left to TPTP.")
     title("What the problems are")
     para(f"The {len(v1)} problems come from {cases} pairs of ODRL policies "
          "(Open Digital Rights Language). Each pair constrains one property "
@@ -395,7 +423,7 @@ def readme(rows: list, left_out: list) -> str:
          "function-free FOF without a conjecture, so its status is "
          "Satisfiable or Unsatisfiable.")
     title("How a verdict follows")
-    para("Each pair of policies has two problems: one states that some use "
+    para("Each pair of policies has two checks: one states that some use "
          "meets the two policies, the other that no use does.")
     table(["first Unsatisfiable      Incompatible",
            "second Unsatisfiable     Compatible",
@@ -405,8 +433,15 @@ def readme(rows: list, left_out: list) -> str:
          "the statements are consistent, so there is no separate consistency "
          "problem. The % Comments of each problem name its partner and the "
          "pair's verdict.")
+    title("Merged checks")
+    para(f"The {cases} pairs have {checks} checks, and {len(v1)} problems. A "
+         f"problem is exported once: two checks whose formulas and include "
+         f"lines are the same after renaming the case are one problem, and "
+         f"% Names lists both. {len(merged)} problems are such groups:")
+    table([f"{r['problem']:10} {r['original name']}" for r in merged])
     title("Versions")
-    para(f"Version 1 (+1), {len(v1)} problems: {count(by_status)}. These are "
+    para(f"Version 1 (+1), {len(v1)} problems: "
+         f"{count(Counter(r['status'] for r in v1))}. These are "
          "the queries of the repository. Where a constraint fixes the value "
          "of the use, the condition tries only the concepts that value "
          "allows; elsewhere it lists every concept of the vocabulary. The "
@@ -414,55 +449,84 @@ def readme(rows: list, left_out: list) -> str:
          "names and the concepts that lie between two of them, which gives "
          "the same status as all of them (the repository's tree_expand.py "
          "says why).")
-    para(f"Version 2 (+2), {len(v2)} problems: {count(v2_status)}. The "
+    para(f"Version 2 (+2), {len(of(2))} problems: "
+         f"{count(Counter(r['status'] for r in of(2)))}. The "
          "condition lists every concept of the vocabulary in every part, as "
          "the paper's definition states, with the declaration instances "
-         "among all concepts of the vocabulary. The two versions have the "
+         "among all concepts of the vocabulary. The versions have the "
          "same status. A disjunction or conjunction of more than 64 members "
          "is written in balanced groups of at most 64; it is the same "
          "formula, nested about log n deep, so that a recursive parser does "
          "not run out of stack on the ten thousand disjuncts of the largest.")
+    if of(3):
+        para(f"Version 3 (+3), {len(of(3))} problems: "
+             f"{count(Counter(r['status'] for r in of(3)))}. The checks of a "
+             "merged problem can differ over the whole vocabulary. Each "
+             "distinct full form is then its own version, and % Names says "
+             "which check it is:")
+        table([f"{r['problem']:10} {r['original name']}" for r in rows
+               if r["version"] >= 2 and r["problem"][:6] in
+               {x["problem"][:6] for x in of(3)}])
     iso = sum(n for w, n in why.items() if "ISO" in w)
     same = sum(n for w, n in why.items() if "same formulas" in w)
     pairs = next((w.split()[2] for w in why if "ISO" in w), "")
-    para(f"Version 2 is not written for {len(left_out)} problems: {iso} "
+    para(f"A full form is not written for {len(left_out)} checks: {iso} "
          f"under the ISO rule, whose declarations have {pairs} pairs over "
          f"the vocabulary, and {same} whose condition and declarations "
-         f"come out the same in both versions, so that version 2 would "
+         f"come out the same over the whole vocabulary, so that it would "
          f"repeat version 1.")
     table([f"{name:10} {original:10} {w}" for name, original, w in left_out])
     title("Provers")
-    para("Vampire 5.0.1, the release binary (commit 1b13eaf), one problem at "
-         "a time: version 1 with --mode casc at 60 s; version 2 with --mode "
-         "casc at 300 s and, for a Satisfiable problem casc did not solve, "
-         "--mode casc_sat at 300 s. The repository also decides every pair "
-         "with Z3 4.8.12 on an SMT-LIB encoding of the same statements; that "
-         "encoding is not part of this export.")
-    para(f"Version 1: {v1_ok} of {len(v1)} solved with the stated status. "
-         f"Version 2: " + (", ".join(f"{n} solved with --mode {m}"
-                                     for m, n in sorted(v2_mode.items()))
-                           or "no runs recorded")
-         + f"; {len(v2_open)} not solved within the limit"
-         + ("." if not v2_open else
+    para("Vampire 5.0.1, built from source at commit 1b13eaf, one problem at a "
+         "time: every problem with --mode casc at 300 s and, for a Satisfiable "
+         "full form casc did not solve, --mode casc_sat at 300 s. The "
+         "repository also decides every pair with Z3 4.8.12 on an SMT-LIB "
+         "encoding of the same statements; that encoding is not part of this "
+         "export.")
+    table([f"{'version':8} {'problems':>8} {'Satisfiable':>12} "
+           f"{'Unsatisfiable':>14} {'solved':>7} {'slowest':>10}"] + [
+        f"{v:<8} {len(of(v)):>8} "
+        f"{sum(r['status'] == 'Satisfiable' for r in of(v)):>12} "
+        f"{sum(r['status'] == 'Unsatisfiable' for r in of(v)):>14} "
+        f"{sum(r['Vampire result'] == r['status'] for r in of(v)):>7} "
+        + (f"{max(float(r['time']) for r in of(v) if r['time']):>8.2f} s"
+           if any(r["time"] for r in of(v)) else f"{'no runs':>10}")
+        for v in versions])
+    open_forms = [r for r in rows if r["version"] >= 2
+                  and r["Vampire result"] != r["status"]]
+    modes = Counter(r["mode"] for r in rows if r["version"] >= 2
+                    and r["Vampire result"] == r["status"])
+    para("The full forms: " + (", ".join(f"{n} solved with --mode {m}"
+                                         for m, n in sorted(modes.items()))
+                               or "no runs recorded")
+         + f"; {len(open_forms)} not solved within the limit"
+         + ("." if not open_forms else
             ", whose status equals version 1's by construction: "
-            + ", ".join(r["problem"] for r in v2_open) + "."))
+            + ", ".join(r["problem"] for r in open_forms) + "."))
+    slow = sorted((r for r in rows if r["version"] >= 2 and r["time"]),
+                  key=lambda r: -float(r["time"]))[:10]
     if slow:
-        para("The slowest version 2 problems:")
-        table([f"{r['problem']:10} {r['original name']:10} "
+        para("The slowest full forms:")
+        table([f"{r['problem']:10} {r['original name'].split()[0]:10} "
                f"{r['Vampire result']:15} {r['mode']:9} {float(r['time']):7.1f} s"
                for r in slow])
+    sat = sum(1 for res in axiom_runs.values() if res == "Satisfiable")
+    para(f"Each of the {len(AXIOMS)} axiom files alone: {sat} Satisfiable, "
+         "with --mode casc.")
     para("Every file parses with tptp4X -x -w, includes expanded, with no "
          "warning. tptp4X was built from the TPTP World sources "
          "(github.com/TPTPWorld/TPTP4X at ce83fd4, JJParser at 94a781a).")
     title("Layout")
     table(["Problems/KGC/KGCnnn+1.p    version 1",
            "Problems/KGC/KGCnnn+2.p    version 2",
+           "Problems/KGC/KGCnnn+3.p    version 3, where it is written",
            "Axioms/KGC000+0.ax         the order axioms",
            "Axioms/KGC000+1.ax ...     one file per vocabulary",
            "manifest.csv               one row per problem: problem, version,",
            "                           original name, case, check, status,",
            "                           case verdict, axiom files, Vampire",
-           "                           result, mode, time"])
+           "                           result, mode, time; a merged problem",
+           "                           has its checks in one field, by spaces"])
     para("Includes are written include('Axioms/KGC000+N.ax'), relative to "
          "this folder.")
     title("Licences")
@@ -504,86 +568,146 @@ def solved(runs: list, status: str):
 OPPOSITE = {"Satisfiable": "Unsatisfiable", "Unsatisfiable": "Satisfiable"}
 
 
+def member_of(qpath: Path, numbers: dict, cases: dict) -> dict:
+    """One check, as a problem file names it."""
+    original, cid, q = qpath.stem, qpath.stem[:6], int(qpath.stem[-1])
+    partner = f"{cid}-{3 - q}"
+    other = read_query(qpath.with_name(f"{partner}.p"))
+    return {"original": original, "cid": cid, "q": q,
+            "case": dict(cases[cid], other_status=other["status"]),
+            "partner": numbers[partner]}
+
+
+def includes_of(query: dict, original: str) -> list:
+    unknown = [a for a in query["includes"]
+               if has_formulas(a) and a not in AXIOM_NAME]
+    if unknown:
+        raise SystemExit(f"{original} includes {unknown}, which has "
+                         f"formulas and no export name")
+    return [AXIOM_NAME[a] for a in query["includes"] if a in AXIOM_NAME]
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[3])
     ap.add_argument("--out", default=ROOT / "tptp", type=Path)
     ap.add_argument("--runs", default=ROOT / "results" / "tptp-runs.csv", type=Path)
     ap.add_argument("--draft", action="store_true",
                     help="write without requiring Vampire's results")
+    ap.add_argument("--zip", type=Path, help="also write the export as this zip")
     args = ap.parse_args()
 
     queries = sorted((ROOT / "problems/verdict").glob("KGC*-[12].p"),
                      key=lambda p: (p.stem[:6], p.stem[-1]))
-    numbers = {q.stem: f"KGC{i:03d}" for i, q in enumerate(queries, 1)}
     problems = problems_by_id()
     runs = read_runs(args.runs)
+    cases = {q.stem[:6]: read_case(q.stem[:6]) for q in queries}
+    read = {q.stem: read_query(q) for q in queries}
 
+    # One abstract problem per group of queries whose formulas and include
+    # lines are equal after renaming the case id, numbered by the first.
+    groups = {}
+    for q in queries:
+        cid = q.stem[:6]
+        key = (tuple(includes_of(read[q.stem], q.stem)),
+               tuple(normal(read[q.stem]["formulas"], cid)))
+        groups.setdefault(key, []).append(q)
+    numbers = {}
+    for i, group in enumerate(groups.values(), 1):
+        for q in group:
+            numbers[q.stem] = f"KGC{i:03d}"
+
+    # What is written: every problem once, whichever group it comes from.
+    specs, written, left_out, unconfirmed = [], {}, [], []
+    for (includes, v1_key), group in groups.items():
+        abstract = numbers[group[0].stem]
+        rep = read[group[0].stem]
+        members = [member_of(q, numbers, cases) for q in group]
+        status = rep["status"]
+        for q in group:
+            if read[q.stem]["status"] != status:
+                raise SystemExit(f"{group[0].stem} and {q.stem} are one problem "
+                                 f"with two statuses")
+        spec = {"name": f"{abstract}+1", "version": 1, "includes": includes,
+                "formulas": rep["formulas"], "members": members,
+                "status": status}
+        specs.append(spec)
+        written[(includes, v1_key)] = spec
+
+    for (includes, v1_key), group in groups.items():
+        abstract = numbers[group[0].stem]
+        status = read[group[0].stem]["status"]
+        version = 1
+        for q in group:
+            original, cid, n = q.stem, q.stem[:6], int(q.stem[-1])
+            member = member_of(q, numbers, cases)
+            formulas, plain, pairs = version2(problems[cid], n)
+            if formulas is None:
+                left_out.append((abstract, original, f"declarations of "
+                                 f"{pairs:,} pairs (the ISO rule)"))
+                continue
+            key = (includes, tuple(normal(plain, cid)))
+            if key[1] == v1_key:
+                left_out.append((abstract, original, "the same formulas "
+                                 "as version 1"))
+                continue
+            if key in written:
+                written[key]["members"].append(member)
+                continue
+            version += 1
+            spec = {"name": f"{abstract}+{version}", "version": version,
+                    "includes": includes, "formulas": formulas,
+                    "members": [member], "status": status}
+            specs.append(spec)
+            written[key] = spec
+
+    # The runs, and the files.
     pdir, adir = args.out / "Problems" / "KGC", args.out / "Axioms"
-    rows, left_out, texts, unconfirmed = [], [], {}, []
-    cases = {}
-    for qpath in queries:
-        cid, q = qpath.stem[:6], int(qpath.stem[-1])
-        cases.setdefault(cid, read_case(cid))
-    for qpath in queries:
-        original, cid, q = qpath.stem, qpath.stem[:6], int(qpath.stem[-1])
-        partner_stem = f"{cid}-{3 - q}"
-        abstract, partner = numbers[original], numbers[partner_stem]
-        v1 = read_query(qpath)
-        other = read_query(qpath.with_name(f"{partner_stem}.p"))
-        case = dict(cases[cid], other_status=other["status"])
-        unknown = [a for a in v1["includes"]
-                   if has_formulas(a) and a not in AXIOM_NAME]
-        if unknown:
-            raise SystemExit(f"{original} includes {unknown}, which has "
-                             f"formulas and no export name")
-        includes = [AXIOM_NAME[a] for a in v1["includes"] if a in AXIOM_NAME]
-        dropped = [a for a in v1["includes"] if a not in AXIOM_NAME]
+    rows, texts = [], {}
+    for spec in sorted(specs, key=lambda s: s["name"]):
+        name, version, status = spec["name"], spec["version"], spec["status"]
+        r = runs.get(f"{name}.p", [])
+        hit = solved(r, status)
+        seen = ", ".join(f"{m} {res}" for m, res, _ in r) or "no run"
+        label = " ".join(m["original"] for m in spec["members"])
+        if version == 1 and hit is None:
+            unconfirmed.append(f"{name} ({label}): the header says {status}, "
+                               f"Vampire: {seen}")
+        if any(res == OPPOSITE[status] for _, res, _ in r):
+            unconfirmed.append(f"{name} ({label}): the header says {status}, "
+                               f"Vampire found the opposite: {seen}")
+        extra = ""
+        if version >= 2 and hit is None:
+            extra = (" Vampire 5.0.1 did not solve this version within "
+                     "300 s in casc or casc_sat mode; its status equals "
+                     "version 1's by construction." if r else
+                     " No prover run is recorded for this version; its "
+                     "status equals version 1's by construction.")
+        texts[pdir / f"{name}.p"] = problem_text(
+            name, version, spec["members"], status, spec["includes"],
+            spec["formulas"], extra)
+        last = hit or (r[-1] if r else ("", "", ""))
+        checks = list(dict.fromkeys(CHECK[m["q"]] for m in spec["members"]))
+        rows.append({
+            "problem": name, "version": version, "original name": label,
+            "case": " ".join(m["cid"] for m in spec["members"]),
+            "check": " / ".join(checks), "status": status,
+            "case verdict": " ".join(m["case"]["verdict"]
+                                     for m in spec["members"]),
+            "axiom files": " ".join(spec["includes"]),
+            "Vampire result": last[1], "mode": last[0], "time": last[2],
+        })
 
-        for version in (1, 2):
-            name = f"{abstract}+{version}"
-            if version == 1:
-                formulas = v1["formulas"]
-            else:
-                formulas, plain, pairs = version2(problems[cid], q)
-                if formulas is None:
-                    left_out.append((name, original, f"declarations of "
-                                     f"{pairs:,} pairs (the ISO rule)"))
-                    continue
-                if normal(plain) == normal(v1["formulas"]):
-                    left_out.append((name, original, "the same formulas "
-                                     "as version 1"))
-                    continue
-            r = runs.get(f"{name}.p", [])
-            hit = solved(r, v1["status"])
-            seen = ", ".join(f"{m} {res}" for m, res, _ in r) or "no run"
-            if version == 1 and hit is None:
-                unconfirmed.append(f"{name} ({original}): the header says "
-                                   f"{v1['status']}, Vampire: {seen}")
-            if any(res == OPPOSITE[v1["status"]] for _, res, _ in r):
-                unconfirmed.append(f"{name} ({original}): the header says "
-                                   f"{v1['status']}, Vampire found the "
-                                   f"opposite: {seen}")
-            extra = ""
-            if version == 2 and hit is None:
-                extra = (" Vampire 5.0.1 did not solve this version within "
-                         "300 s in casc or casc_sat mode; its status equals "
-                         "version 1's by construction." if r else
-                         " No prover run is recorded for this version; its "
-                         "status equals version 1's by construction.")
-            texts[pdir / f"{name}.p"] = problem_text(
-                name, version, original, case, q, v1["status"], includes,
-                formulas, partner, extra)
-            last = hit or (r[-1] if r else ("", "", ""))
-            rows.append({
-                "problem": name, "version": version, "original name": original,
-                "case": cid, "check": CHECK[q], "status": v1["status"],
-                "case verdict": case["verdict"],
-                "axiom files": " ".join(includes),
-                "Vampire result": last[1], "mode": last[0], "time": last[2],
-            })
+    axiom_runs = {}
+    for i in range(len(AXIOMS)):
+        name = f"KGC000+{i}.ax"
+        r = runs.get(name, [])
+        axiom_runs[name] = r[-1][1] if r else "no run"
+        if axiom_runs[name] != "Satisfiable":
+            unconfirmed.append(f"{name}: not Satisfiable alone, Vampire: "
+                               f"{axiom_runs[name]}")
 
     if unconfirmed and not args.draft:
-        print(f"not written: {len(unconfirmed)} problems without the "
+        print(f"not written: {len(unconfirmed)} files without the "
               f"status Vampire confirms", file=sys.stderr)
         for u in unconfirmed:
             print(f"  {u}", file=sys.stderr)
@@ -601,12 +725,21 @@ def main() -> int:
         w = csv.DictWriter(f, fieldnames=list(rows[0]), lineterminator="\n")
         w.writeheader()
         w.writerows(rows)
-    (args.out / "README").write_text(readme(rows, left_out),
+    (args.out / "README").write_text(readme(rows, left_out, axiom_runs),
                                      encoding="utf-8")
-    v1n = sum(1 for r in rows if r["version"] == 1)
-    v2n = sum(1 for r in rows if r["version"] == 2)
-    print(f"wrote {args.out}: {v1n} version 1, {v2n} version 2, "
-          f"{len(AXIOMS)} axiom files; {len(left_out)} version 2 left out"
+    if args.zip:
+        files = [args.out / "README", args.out / "manifest.csv",
+                 *sorted(adir.iterdir()), *sorted(pdir.iterdir())]
+        with zipfile.ZipFile(args.zip, "w", zipfile.ZIP_DEFLATED) as z:
+            for path in files:
+                z.write(path, str(Path("KGC") / path.relative_to(args.out)))
+    counts = Counter(r["version"] for r in rows)
+    merged = sum(1 for r in rows if r["version"] == 1
+                 and " " in r["original name"])
+    print(f"wrote {args.out}: "
+          + ", ".join(f"{n} version {v}" for v, n in sorted(counts.items()))
+          + f", {len(AXIOMS)} axiom files; {merged} merged groups; "
+          f"{len(left_out)} checks without a full form"
           + ("; a draft, statuses not confirmed" if args.draft else
              "; every version 1 status confirmed by Vampire"))
     return 0

@@ -1,41 +1,40 @@
 %------------------------------------------------------------------------------
 % File     : KGC075+2 : placeholder, for TPTP use only
 % Domain   : Semantic Web (ODRL policies), proposed
-% Problem  : Distribute in German only against distribute in French only: some use meets both
+% Problem  : Distribute in German only against distribute in American English only: some use meets both
 % Version  : Especial.
 %            Theorem formulation : The condition is written over the whole
 %            vocabulary, as the paper's definition states; version 1 names
-%            only the concepts a fixed value allows. The two versions have the
+%            only the concepts a fixed value allows. The versions have the
 %            same status.
 % English  : A publisher distributes in German. A licensee's policy commits to
-%            French. The registry rule that different primary subtags name
-%            different languages is adopted. This problem states that some use
-%            meets the two policies.
+%            American English (en-US), under the rule that reduces a tag to
+%            its primary subtag. This problem states that some use meets the
+%            two policies.
 
 % Refs     : [Mus26] Mustafa (2026), odrl-grounded-benchmark,
-%            https://github.com/Daham-Mustaf/odrl-grounded-benchmark, tag
-%            v1.1.1
+%            https://github.com/Daham-Mustaf/odrl-grounded-benchmark, tag v1.2
 % Source   : [Mus26]
-% Names    : KGC370-1 [Mus26]
+% Names    : KGC373-1 [Mus26]
 
 % Status   : Unsatisfiable
 % Rating   : left to TPTP
 % Syntax   : left to TPTP
 % SPC      : left to TPTP
 
-% Comments : KGC370 is Incompatible. Its two problems state that some use
-%            meets the two policies (KGC075) and that no use does (KGC076). A
+% Comments : KGC373 is Incompatible. Its two problems state that some use
+%            meets the two policies (KGC075) and that no use does (KGC076);
+%            here the first is Unsatisfiable and the second Satisfiable. A
 %            pair of policies is Incompatible when the first is Unsatisfiable,
 %            Compatible when the second is Unsatisfiable, and Unknown when
 %            both are Satisfiable; a Satisfiable problem also shows the
-%            statements consistent. Here the first is Unsatisfiable and the
-%            second Satisfiable.
+%            statements consistent.
 %------------------------------------------------------------------------------
 include('Axioms/KGC000+0.ax').
 include('Axioms/KGC000+1.ax').
 
-fof(bg_dist_bcp47_de_fr, axiom,
-    bcp_de != bcp_fr).
+fof(bg_dist_bcp47_de_en, axiom,
+    bcp_de != bcp_en).
 
 fof(bg_dist_bcp47_de_bg, axiom,
     bcp_de != bcp_bg).
@@ -49,14 +48,14 @@ fof(bg_dist_bcp47_de_da, axiom,
 fof(bg_dist_bcp47_de_el, axiom,
     bcp_de != bcp_el).
 
-fof(bg_dist_bcp47_de_en, axiom,
-    bcp_de != bcp_en).
-
 fof(bg_dist_bcp47_de_es, axiom,
     bcp_de != bcp_es).
 
 fof(bg_dist_bcp47_de_fi, axiom,
     bcp_de != bcp_fi).
+
+fof(bg_dist_bcp47_de_fr, axiom,
+    bcp_de != bcp_fr).
 
 fof(bg_dist_bcp47_de_hu, axiom,
     bcp_de != bcp_hu).
@@ -76,44 +75,44 @@ fof(bg_dist_bcp47_de_pt, axiom,
 fof(bg_dist_bcp47_de_sv, axiom,
     bcp_de != bcp_sv).
 
-fof(bg_dist_bcp47_fr_bg, axiom,
-    bcp_fr != bcp_bg).
+fof(bg_dist_bcp47_en_bg, axiom,
+    bcp_en != bcp_bg).
 
-fof(bg_dist_bcp47_fr_cs, axiom,
-    bcp_fr != bcp_cs).
+fof(bg_dist_bcp47_en_cs, axiom,
+    bcp_en != bcp_cs).
 
-fof(bg_dist_bcp47_fr_da, axiom,
-    bcp_fr != bcp_da).
+fof(bg_dist_bcp47_en_da, axiom,
+    bcp_en != bcp_da).
 
-fof(bg_dist_bcp47_fr_el, axiom,
-    bcp_fr != bcp_el).
+fof(bg_dist_bcp47_en_el, axiom,
+    bcp_en != bcp_el).
 
-fof(bg_dist_bcp47_fr_en, axiom,
-    bcp_fr != bcp_en).
+fof(bg_dist_bcp47_en_es, axiom,
+    bcp_en != bcp_es).
 
-fof(bg_dist_bcp47_fr_es, axiom,
-    bcp_fr != bcp_es).
+fof(bg_dist_bcp47_en_fi, axiom,
+    bcp_en != bcp_fi).
 
-fof(bg_dist_bcp47_fr_fi, axiom,
-    bcp_fr != bcp_fi).
+fof(bg_dist_bcp47_en_fr, axiom,
+    bcp_en != bcp_fr).
 
-fof(bg_dist_bcp47_fr_hu, axiom,
-    bcp_fr != bcp_hu).
+fof(bg_dist_bcp47_en_hu, axiom,
+    bcp_en != bcp_hu).
 
-fof(bg_dist_bcp47_fr_it, axiom,
-    bcp_fr != bcp_it).
+fof(bg_dist_bcp47_en_it, axiom,
+    bcp_en != bcp_it).
 
-fof(bg_dist_bcp47_fr_nl, axiom,
-    bcp_fr != bcp_nl).
+fof(bg_dist_bcp47_en_nl, axiom,
+    bcp_en != bcp_nl).
 
-fof(bg_dist_bcp47_fr_pl, axiom,
-    bcp_fr != bcp_pl).
+fof(bg_dist_bcp47_en_pl, axiom,
+    bcp_en != bcp_pl).
 
-fof(bg_dist_bcp47_fr_pt, axiom,
-    bcp_fr != bcp_pt).
+fof(bg_dist_bcp47_en_pt, axiom,
+    bcp_en != bcp_pt).
 
-fof(bg_dist_bcp47_fr_sv, axiom,
-    bcp_fr != bcp_sv).
+fof(bg_dist_bcp47_en_sv, axiom,
+    bcp_en != bcp_sv).
 
 fof(bg_dist_bcp47_bg_cs, axiom,
     bcp_bg != bcp_cs).
@@ -124,14 +123,14 @@ fof(bg_dist_bcp47_bg_da, axiom,
 fof(bg_dist_bcp47_bg_el, axiom,
     bcp_bg != bcp_el).
 
-fof(bg_dist_bcp47_bg_en, axiom,
-    bcp_bg != bcp_en).
-
 fof(bg_dist_bcp47_bg_es, axiom,
     bcp_bg != bcp_es).
 
 fof(bg_dist_bcp47_bg_fi, axiom,
     bcp_bg != bcp_fi).
+
+fof(bg_dist_bcp47_bg_fr, axiom,
+    bcp_bg != bcp_fr).
 
 fof(bg_dist_bcp47_bg_hu, axiom,
     bcp_bg != bcp_hu).
@@ -157,14 +156,14 @@ fof(bg_dist_bcp47_cs_da, axiom,
 fof(bg_dist_bcp47_cs_el, axiom,
     bcp_cs != bcp_el).
 
-fof(bg_dist_bcp47_cs_en, axiom,
-    bcp_cs != bcp_en).
-
 fof(bg_dist_bcp47_cs_es, axiom,
     bcp_cs != bcp_es).
 
 fof(bg_dist_bcp47_cs_fi, axiom,
     bcp_cs != bcp_fi).
+
+fof(bg_dist_bcp47_cs_fr, axiom,
+    bcp_cs != bcp_fr).
 
 fof(bg_dist_bcp47_cs_hu, axiom,
     bcp_cs != bcp_hu).
@@ -187,14 +186,14 @@ fof(bg_dist_bcp47_cs_sv, axiom,
 fof(bg_dist_bcp47_da_el, axiom,
     bcp_da != bcp_el).
 
-fof(bg_dist_bcp47_da_en, axiom,
-    bcp_da != bcp_en).
-
 fof(bg_dist_bcp47_da_es, axiom,
     bcp_da != bcp_es).
 
 fof(bg_dist_bcp47_da_fi, axiom,
     bcp_da != bcp_fi).
+
+fof(bg_dist_bcp47_da_fr, axiom,
+    bcp_da != bcp_fr).
 
 fof(bg_dist_bcp47_da_hu, axiom,
     bcp_da != bcp_hu).
@@ -214,14 +213,14 @@ fof(bg_dist_bcp47_da_pt, axiom,
 fof(bg_dist_bcp47_da_sv, axiom,
     bcp_da != bcp_sv).
 
-fof(bg_dist_bcp47_el_en, axiom,
-    bcp_el != bcp_en).
-
 fof(bg_dist_bcp47_el_es, axiom,
     bcp_el != bcp_es).
 
 fof(bg_dist_bcp47_el_fi, axiom,
     bcp_el != bcp_fi).
+
+fof(bg_dist_bcp47_el_fr, axiom,
+    bcp_el != bcp_fr).
 
 fof(bg_dist_bcp47_el_hu, axiom,
     bcp_el != bcp_hu).
@@ -241,32 +240,11 @@ fof(bg_dist_bcp47_el_pt, axiom,
 fof(bg_dist_bcp47_el_sv, axiom,
     bcp_el != bcp_sv).
 
-fof(bg_dist_bcp47_en_es, axiom,
-    bcp_en != bcp_es).
-
-fof(bg_dist_bcp47_en_fi, axiom,
-    bcp_en != bcp_fi).
-
-fof(bg_dist_bcp47_en_hu, axiom,
-    bcp_en != bcp_hu).
-
-fof(bg_dist_bcp47_en_it, axiom,
-    bcp_en != bcp_it).
-
-fof(bg_dist_bcp47_en_nl, axiom,
-    bcp_en != bcp_nl).
-
-fof(bg_dist_bcp47_en_pl, axiom,
-    bcp_en != bcp_pl).
-
-fof(bg_dist_bcp47_en_pt, axiom,
-    bcp_en != bcp_pt).
-
-fof(bg_dist_bcp47_en_sv, axiom,
-    bcp_en != bcp_sv).
-
 fof(bg_dist_bcp47_es_fi, axiom,
     bcp_es != bcp_fi).
+
+fof(bg_dist_bcp47_es_fr, axiom,
+    bcp_es != bcp_fr).
 
 fof(bg_dist_bcp47_es_hu, axiom,
     bcp_es != bcp_hu).
@@ -286,6 +264,9 @@ fof(bg_dist_bcp47_es_pt, axiom,
 fof(bg_dist_bcp47_es_sv, axiom,
     bcp_es != bcp_sv).
 
+fof(bg_dist_bcp47_fi_fr, axiom,
+    bcp_fi != bcp_fr).
+
 fof(bg_dist_bcp47_fi_hu, axiom,
     bcp_fi != bcp_hu).
 
@@ -303,6 +284,24 @@ fof(bg_dist_bcp47_fi_pt, axiom,
 
 fof(bg_dist_bcp47_fi_sv, axiom,
     bcp_fi != bcp_sv).
+
+fof(bg_dist_bcp47_fr_hu, axiom,
+    bcp_fr != bcp_hu).
+
+fof(bg_dist_bcp47_fr_it, axiom,
+    bcp_fr != bcp_it).
+
+fof(bg_dist_bcp47_fr_nl, axiom,
+    bcp_fr != bcp_nl).
+
+fof(bg_dist_bcp47_fr_pl, axiom,
+    bcp_fr != bcp_pl).
+
+fof(bg_dist_bcp47_fr_pt, axiom,
+    bcp_fr != bcp_pt).
+
+fof(bg_dist_bcp47_fr_sv, axiom,
+    bcp_fr != bcp_sv).
 
 fof(bg_dist_bcp47_hu_it, axiom,
     bcp_hu != bcp_it).
@@ -349,20 +348,20 @@ fof(bg_dist_bcp47_pl_sv, axiom,
 fof(bg_dist_bcp47_pt_sv, axiom,
     bcp_pt != bcp_sv).
 
-fof(w_kgc370, axiom,
-    ( bcp_de = bcp_fr
-    | bcp_fr = bcp_de
-    | ( bcp_bg = bcp_de & bcp_bg = bcp_fr )
-    | ( bcp_cs = bcp_de & bcp_cs = bcp_fr )
-    | ( bcp_da = bcp_de & bcp_da = bcp_fr )
-    | ( bcp_el = bcp_de & bcp_el = bcp_fr )
-    | ( bcp_en = bcp_de & bcp_en = bcp_fr )
-    | ( bcp_es = bcp_de & bcp_es = bcp_fr )
-    | ( bcp_fi = bcp_de & bcp_fi = bcp_fr )
-    | ( bcp_hu = bcp_de & bcp_hu = bcp_fr )
-    | ( bcp_it = bcp_de & bcp_it = bcp_fr )
-    | ( bcp_nl = bcp_de & bcp_nl = bcp_fr )
-    | ( bcp_pl = bcp_de & bcp_pl = bcp_fr )
-    | ( bcp_pt = bcp_de & bcp_pt = bcp_fr )
-    | ( bcp_sv = bcp_de & bcp_sv = bcp_fr ) )).
+fof(w_kgc373, axiom,
+    ( bcp_de = bcp_en
+    | bcp_en = bcp_de
+    | ( bcp_bg = bcp_de & bcp_bg = bcp_en )
+    | ( bcp_cs = bcp_de & bcp_cs = bcp_en )
+    | ( bcp_da = bcp_de & bcp_da = bcp_en )
+    | ( bcp_el = bcp_de & bcp_el = bcp_en )
+    | ( bcp_es = bcp_de & bcp_es = bcp_en )
+    | ( bcp_fi = bcp_de & bcp_fi = bcp_en )
+    | ( bcp_fr = bcp_de & bcp_fr = bcp_en )
+    | ( bcp_hu = bcp_de & bcp_hu = bcp_en )
+    | ( bcp_it = bcp_de & bcp_it = bcp_en )
+    | ( bcp_nl = bcp_de & bcp_nl = bcp_en )
+    | ( bcp_pl = bcp_de & bcp_pl = bcp_en )
+    | ( bcp_pt = bcp_de & bcp_pt = bcp_en )
+    | ( bcp_sv = bcp_de & bcp_sv = bcp_en ) )).
 %------------------------------------------------------------------------------

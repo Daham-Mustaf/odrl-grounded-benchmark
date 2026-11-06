@@ -7,8 +7,7 @@
 %            antisymmetric and transitive. Equality is built in.
 
 % Refs     : [Mus26] Mustafa (2026), odrl-grounded-benchmark,
-%            https://github.com/Daham-Mustaf/odrl-grounded-benchmark, tag
-%            v1.1.1
+%            https://github.com/Daham-Mustaf/odrl-grounded-benchmark, tag v1.2
 % Source   : [Mus26]
 % Names    : KGE000-0.ax [Mus26]
 

@@ -4,11 +4,10 @@
 % Axioms   : DPV 2.3, purposes
 % Version  : Especial.
 % English  : The 131 statements of the purposes module of the Data Privacy
-%            Vocabulary 2.3 that place one of its 121 purposes below another.
+%            Vocabulary 2.3 that place one of its 122 purposes below another.
 
 % Refs     : [Mus26] Mustafa (2026), odrl-grounded-benchmark,
-%            https://github.com/Daham-Mustaf/odrl-grounded-benchmark, tag
-%            v1.1.1
+%            https://github.com/Daham-Mustaf/odrl-grounded-benchmark, tag v1.2
 % Source   : [Mus26]
 % Names    : DPV-dpv-purposes.ax [Mus26]
 

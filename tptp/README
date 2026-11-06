@@ -2,15 +2,15 @@ KGC: ODRL policy pairs over published vocabularies
 ==================================================
 
 A TPTP export of the odrl-grounded-benchmark,
-https://github.com/Daham-Mustaf/odrl-grounded-benchmark, tag v1.1.1. The
+https://github.com/Daham-Mustaf/odrl-grounded-benchmark, tag v1.2. The
 names are provisional: KGC is a proposed domain code and the problems are
 numbered in sequence. The original name of each problem is in its % Names
-field and in manifest.csv.
+field and in manifest.csv. SPC, Rating and Syntax are left to TPTP.
 
 What the problems are
 ---------------------
 
-The 122 problems come from 61 pairs of ODRL policies (Open Digital Rights
+The 111 problems come from 60 pairs of ODRL policies (Open Digital Rights
 Language). Each pair constrains one property of a use, such as its
 purpose, its place, its language or its file type, with values from a
 published vocabulary: the Data Privacy Vocabulary, its Locations
@@ -30,7 +30,7 @@ Unsatisfiable.
 How a verdict follows
 ---------------------
 
-Each pair of policies has two problems: one states that some use meets the
+Each pair of policies has two checks: one states that some use meets the
 two policies, the other that no use does.
 
     first Unsatisfiable      Incompatible
@@ -42,10 +42,27 @@ does not occur. A Satisfiable problem also shows that the statements are
 consistent, so there is no separate consistency problem. The % Comments of
 each problem name its partner and the pair's verdict.
 
+Merged checks
+-------------
+
+The 60 pairs have 120 checks, and 111 problems. A problem is exported
+once: two checks whose formulas and include lines are the same after
+renaming the case are one problem, and % Names lists both. 8 problems are
+such groups:
+
+    KGC063+1   KGC362-1 KGC365-1
+    KGC064+1   KGC362-2 KGC365-2
+    KGC079+1   KGC375-1 KGC379-1
+    KGC080+1   KGC375-2 KGC379-2
+    KGC083+1   KGC377-1 KGC378-2 KGC398-2
+    KGC085+1   KGC378-1 KGC398-1
+    KGC088+1   KGC382-1 KGC391-1
+    KGC089+1   KGC382-2 KGC391-2
+
 Versions
 --------
 
-Version 1 (+1), 122 problems: 77 Satisfiable, 45 Unsatisfiable. These are
+Version 1 (+1), 111 problems: 71 Satisfiable, 40 Unsatisfiable. These are
 the queries of the repository. Where a constraint fixes the value of the
 use, the condition tries only the concepts that value allows; elsewhere it
 lists every concept of the vocabulary. The declaration instances are those
@@ -53,75 +70,90 @@ among the concepts the condition names and the concepts that lie between
 two of them, which gives the same status as all of them (the repository's
 tree_expand.py says why).
 
-Version 2 (+2), 92 problems: 61 Satisfiable, 31 Unsatisfiable. The
+Version 2 (+2), 86 problems: 57 Satisfiable, 29 Unsatisfiable. The
 condition lists every concept of the vocabulary in every part, as the
 paper's definition states, with the declaration instances among all
-concepts of the vocabulary. The two versions have the same status. A
+concepts of the vocabulary. The versions have the same status. A
 disjunction or conjunction of more than 64 members is written in balanced
 groups of at most 64; it is the same formula, nested about log n deep, so
 that a recursive parser does not run out of stack on the ten thousand
 disjuncts of the largest.
 
-Version 2 is not written for 30 problems: 10 under the ISO rule, whose
-declarations have 12,382,776 pairs over the vocabulary, and 20 whose
-condition and declarations come out the same in both versions, so that
-version 2 would repeat version 1.
+Version 3 (+3), 2 problems: 1 Satisfiable, 1 Unsatisfiable. The checks of
+a merged problem can differ over the whole vocabulary. Each distinct full
+form is then its own version, and % Names says which check it is:
 
-    KGC025+2   KGC317-1   the same formulas as version 1
-    KGC026+2   KGC317-2   the same formulas as version 1
-    KGC035+2   KGC322-1   the same formulas as version 1
-    KGC036+2   KGC322-2   the same formulas as version 1
-    KGC043+2   KGC334-1   declarations of 12,382,776 pairs (the ISO rule)
-    KGC044+2   KGC334-2   declarations of 12,382,776 pairs (the ISO rule)
-    KGC045+2   KGC335-1   declarations of 12,382,776 pairs (the ISO rule)
-    KGC046+2   KGC335-2   declarations of 12,382,776 pairs (the ISO rule)
-    KGC047+2   KGC336-1   declarations of 12,382,776 pairs (the ISO rule)
-    KGC048+2   KGC336-2   declarations of 12,382,776 pairs (the ISO rule)
-    KGC049+2   KGC337-1   declarations of 12,382,776 pairs (the ISO rule)
-    KGC050+2   KGC337-2   declarations of 12,382,776 pairs (the ISO rule)
-    KGC053+2   KGC341-1   the same formulas as version 1
-    KGC054+2   KGC341-2   the same formulas as version 1
-    KGC065+2   KGC362-1   the same formulas as version 1
-    KGC066+2   KGC362-2   the same formulas as version 1
-    KGC067+2   KGC363-1   the same formulas as version 1
-    KGC068+2   KGC363-2   the same formulas as version 1
-    KGC071+2   KGC365-1   the same formulas as version 1
-    KGC072+2   KGC365-2   the same formulas as version 1
-    KGC087+2   KGC377-1   the same formulas as version 1
-    KGC088+2   KGC377-2   the same formulas as version 1
-    KGC089+2   KGC378-1   the same formulas as version 1
-    KGC090+2   KGC378-2   the same formulas as version 1
-    KGC103+2   KGC392-1   declarations of 12,382,776 pairs (the ISO rule)
-    KGC104+2   KGC392-2   declarations of 12,382,776 pairs (the ISO rule)
-    KGC115+2   KGC398-1   the same formulas as version 1
-    KGC116+2   KGC398-2   the same formulas as version 1
-    KGC121+2   KGC404-1   the same formulas as version 1
-    KGC122+2   KGC404-2   the same formulas as version 1
+    KGC088+2   KGC382-1
+    KGC088+3   KGC391-1
+    KGC089+2   KGC382-2
+    KGC089+3   KGC391-2
+
+A full form is not written for 30 checks: 10 under the ISO rule, whose
+declarations have 12,382,776 pairs over the vocabulary, and 20 whose
+condition and declarations come out the same over the whole vocabulary, so
+that it would repeat version 1.
+
+    KGC023     KGC317-1   the same formulas as version 1
+    KGC024     KGC317-2   the same formulas as version 1
+    KGC033     KGC322-1   the same formulas as version 1
+    KGC034     KGC322-2   the same formulas as version 1
+    KGC041     KGC334-1   declarations of 12,382,776 pairs (the ISO rule)
+    KGC042     KGC334-2   declarations of 12,382,776 pairs (the ISO rule)
+    KGC043     KGC335-1   declarations of 12,382,776 pairs (the ISO rule)
+    KGC044     KGC335-2   declarations of 12,382,776 pairs (the ISO rule)
+    KGC045     KGC336-1   declarations of 12,382,776 pairs (the ISO rule)
+    KGC046     KGC336-2   declarations of 12,382,776 pairs (the ISO rule)
+    KGC047     KGC337-1   declarations of 12,382,776 pairs (the ISO rule)
+    KGC048     KGC337-2   declarations of 12,382,776 pairs (the ISO rule)
+    KGC051     KGC341-1   the same formulas as version 1
+    KGC052     KGC341-2   the same formulas as version 1
+    KGC063     KGC362-1   the same formulas as version 1
+    KGC063     KGC365-1   the same formulas as version 1
+    KGC064     KGC362-2   the same formulas as version 1
+    KGC064     KGC365-2   the same formulas as version 1
+    KGC065     KGC363-1   the same formulas as version 1
+    KGC066     KGC363-2   the same formulas as version 1
+    KGC083     KGC377-1   the same formulas as version 1
+    KGC083     KGC378-2   the same formulas as version 1
+    KGC083     KGC398-2   the same formulas as version 1
+    KGC084     KGC377-2   the same formulas as version 1
+    KGC085     KGC378-1   the same formulas as version 1
+    KGC085     KGC398-1   the same formulas as version 1
+    KGC094     KGC392-1   declarations of 12,382,776 pairs (the ISO rule)
+    KGC095     KGC392-2   declarations of 12,382,776 pairs (the ISO rule)
+    KGC110     KGC404-1   the same formulas as version 1
+    KGC111     KGC404-2   the same formulas as version 1
 
 Provers
 -------
 
-Vampire 5.0.1, the release binary (commit 1b13eaf), one problem at a time:
-version 1 with --mode casc at 60 s; version 2 with --mode casc at 300 s
-and, for a Satisfiable problem casc did not solve, --mode casc_sat at
-300 s. The repository also decides every pair with Z3 4.8.12 on an SMT-LIB
-encoding of the same statements; that encoding is not part of this export.
+Vampire 5.0.1, built from source at commit 1b13eaf, one problem at a time:
+every problem with --mode casc at 300 s and, for a Satisfiable full form
+casc did not solve, --mode casc_sat at 300 s. The repository also decides
+every pair with Z3 4.8.12 on an SMT-LIB encoding of the same statements;
+that encoding is not part of this export.
 
-Version 1: 122 of 122 solved with the stated status. Version 2: 92 solved
-with --mode casc; 0 not solved within the limit.
+    version  problems  Satisfiable  Unsatisfiable  solved    slowest
+    1             111           71             40     111     1.04 s
+    2              86           57             29      86    22.12 s
+    3               2            1              1       2     1.47 s
 
-The slowest version 2 problems:
+The full forms: 88 solved with --mode casc; 0 not solved within the limit.
 
-    KGC099+2   KGC388-1   Satisfiable     casc         42.0 s
-    KGC098+2   KGC383-2   Unsatisfiable   casc          6.0 s
-    KGC093+2   KGC380-1   Satisfiable     casc          1.7 s
-    KGC101+2   KGC391-1   Satisfiable     casc          1.6 s
-    KGC097+2   KGC383-1   Satisfiable     casc          1.6 s
-    KGC095+2   KGC382-1   Satisfiable     casc          1.6 s
-    KGC041+2   KGC333-1   Satisfiable     casc          1.6 s
-    KGC039+2   KGC331-1   Satisfiable     casc          1.6 s
-    KGC094+2   KGC380-2   Unsatisfiable   casc          1.0 s
-    KGC042+2   KGC333-2   Satisfiable     casc          0.5 s
+The slowest full forms:
+
+    KGC092+2   KGC388-1   Satisfiable     casc         22.1 s
+    KGC091+2   KGC383-2   Unsatisfiable   casc          5.3 s
+    KGC086+2   KGC380-1   Satisfiable     casc          1.5 s
+    KGC090+2   KGC383-1   Satisfiable     casc          1.5 s
+    KGC088+3   KGC391-1   Satisfiable     casc          1.5 s
+    KGC037+2   KGC331-1   Satisfiable     casc          1.5 s
+    KGC039+2   KGC333-1   Satisfiable     casc          1.5 s
+    KGC088+2   KGC382-1   Satisfiable     casc          1.5 s
+    KGC087+2   KGC380-2   Unsatisfiable   casc          0.8 s
+    KGC040+2   KGC333-2   Satisfiable     casc          0.5 s
+
+Each of the 8 axiom files alone: 8 Satisfiable, with --mode casc.
 
 Every file parses with tptp4X -x -w, includes expanded, with no warning.
 tptp4X was built from the TPTP World sources (github.com/TPTPWorld/TPTP4X
@@ -132,12 +164,14 @@ Layout
 
     Problems/KGC/KGCnnn+1.p    version 1
     Problems/KGC/KGCnnn+2.p    version 2
+    Problems/KGC/KGCnnn+3.p    version 3, where it is written
     Axioms/KGC000+0.ax         the order axioms
     Axioms/KGC000+1.ax ...     one file per vocabulary
     manifest.csv               one row per problem: problem, version,
                                original name, case, check, status,
                                case verdict, axiom files, Vampire
-                               result, mode, time
+                               result, mode, time; a merged problem
+                               has its checks in one field, by spaces
 
 Includes are written include('Axioms/KGC000+N.ax'), relative to this
 folder.

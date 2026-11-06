@@ -3,32 +3,33 @@
 % Domain   : Semantic Web (ODRL policies), proposed
 % Problem  : Use in exactly one of France and Germany against use in France only: some use meets both
 % Version  : Especial.
-% English  : A library permits use in exactly one of France and Germany. A
-%            researcher's policy commits to use in France. This problem states
-%            that some use meets the two policies.
+% English  : As KGC303, with France and Germany declared distinct. This
+%            problem states that some use meets the two policies.
 
 % Refs     : [Mus26] Mustafa (2026), odrl-grounded-benchmark,
-%            https://github.com/Daham-Mustaf/odrl-grounded-benchmark, tag
-%            v1.1.1
+%            https://github.com/Daham-Mustaf/odrl-grounded-benchmark, tag v1.2
 % Source   : [Mus26]
-% Names    : KGC303-1 [Mus26]
+% Names    : KGC304-1 [Mus26]
 
 % Status   : Satisfiable
 % Rating   : left to TPTP
 % Syntax   : left to TPTP
 % SPC      : left to TPTP
 
-% Comments : KGC303 is Unknown. Its two problems state that some use meets the
-%            two policies (KGC007) and that no use does (KGC008). A pair of
+% Comments : KGC304 is Compatible. Its two problems state that some use meets
+%            the two policies (KGC007) and that no use does (KGC008); here the
+%            first is Satisfiable and the second Unsatisfiable. A pair of
 %            policies is Incompatible when the first is Unsatisfiable,
 %            Compatible when the second is Unsatisfiable, and Unknown when
 %            both are Satisfiable; a Satisfiable problem also shows the
-%            statements consistent. Here the first is Satisfiable and the
-%            second Satisfiable.
+%            statements consistent.
 %------------------------------------------------------------------------------
 include('Axioms/KGC000+0.ax').
 include('Axioms/KGC000+5.ax').
 
-fof(w_kgc303, axiom,
+fof(bg_dist_gn_france_gn_germany, axiom,
+    gn_france != gn_germany).
+
+fof(w_kgc304, axiom,
     gn_france != gn_germany).
 %------------------------------------------------------------------------------

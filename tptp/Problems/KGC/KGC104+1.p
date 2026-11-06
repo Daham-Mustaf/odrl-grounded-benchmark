@@ -1,37 +1,36 @@
 %------------------------------------------------------------------------------
 % File     : KGC104+1 : placeholder, for TPTP use only
 % Domain   : Semantic Web (ODRL policies), proposed
-% Problem  : Use in any area except Germany against use in Bavaria only: no use meets both
+% Problem  : Use for any purpose except marketing against use for advertising only: some use meets both
 % Version  : Especial.
-% English  : A library permits use anywhere except Germany. A researcher's
-%            policy commits to use in Bavaria, a state of Germany. This
-%            problem states that no use meets the two policies.
+% English  : A city's traffic data platform permits use for any purpose except
+%            marketing. A company commits to advertising. This problem states
+%            that some use meets the two policies.
 
 % Refs     : [Mus26] Mustafa (2026), odrl-grounded-benchmark,
-%            https://github.com/Daham-Mustaf/odrl-grounded-benchmark, tag
-%            v1.1.1
+%            https://github.com/Daham-Mustaf/odrl-grounded-benchmark, tag v1.2
 % Source   : [Mus26]
-% Names    : KGC392-2 [Mus26]
+% Names    : KGC397-1 [Mus26]
 
-% Status   : Unsatisfiable
+% Status   : Satisfiable
 % Rating   : left to TPTP
 % Syntax   : left to TPTP
 % SPC      : left to TPTP
 
-% Comments : KGC392 is Compatible. Its two problems state that some use meets
-%            the two policies (KGC103) and that no use does (KGC104). A pair
-%            of policies is Incompatible when the first is Unsatisfiable,
+% Comments : KGC397 is Compatible. Its two problems state that some use meets
+%            the two policies (KGC104) and that no use does (KGC105); here the
+%            first is Satisfiable and the second Unsatisfiable. A pair of
+%            policies is Incompatible when the first is Unsatisfiable,
 %            Compatible when the second is Unsatisfiable, and Unknown when
 %            both are Satisfiable; a Satisfiable problem also shows the
-%            statements consistent. Here the first is Satisfiable and the
-%            second Unsatisfiable.
+%            statements consistent.
 %------------------------------------------------------------------------------
 include('Axioms/KGC000+0.ax').
-include('Axioms/KGC000+6.ax').
+include('Axioms/KGC000+3.ax').
 
-fof(bg_dist_loc_de_loc_de_by, axiom,
-    loc_de != loc_de_by).
+fof(bg_dist_dpv_marketing_dpv_advertising, axiom,
+    dpv_marketing != dpv_advertising).
 
-fof(w_kgc392, axiom,
-    ~ ( loc_de_by != loc_de )).
+fof(w_kgc397, axiom,
+    dpv_advertising != dpv_marketing).
 %------------------------------------------------------------------------------
