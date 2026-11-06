@@ -662,11 +662,13 @@ BINDING_LABEL = {
 }
 
 IDENTITY_NOTE = (
-    "# DPV writes identity with skos:sameAs, which is not a SKOS term (see\n"
-    "# https://github.com/w3c-cg/dpv/issues/485).  skos:sameAs and owl:sameAs\n"
-    "# are both read as identity.  DPV links BQ and SJ to several islands, BQ\n"
-    "# to NL-BQ1, NL-BQ2 and NL-BQ3 and SJ to NO-21 and NO-22, so this binding\n"
-    "# identifies those islands with one another.  No case relies on it.")
+    "# This binding reads skos:sameAs as identity.  DPV 2.3 uses this property,\n"
+    "# which SKOS does not define, for 30 pairs; owl:sameAs would be read the\n"
+    "# same way.  The BQ and SJ pairs merge different places: BQ with NL-BQ1,\n"
+    "# NL-BQ2 and NL-BQ3, and SJ with NO-21 and NO-22, so the islands of each\n"
+    "# group are one concept here.\n"
+    "# Issues filed with DPV: UPSTREAM-ISSUES.md.\n"
+    "# No test case relies on these merges.")
 
 
 def profile_ttl(mode) -> str:

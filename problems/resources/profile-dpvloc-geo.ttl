@@ -12,11 +12,13 @@
 # profile: the union edges are membership, and this reading does
 # not take them as containment.
 #
-# DPV writes identity with skos:sameAs, which is not a SKOS term (see
-# https://github.com/w3c-cg/dpv/issues/485).  skos:sameAs and owl:sameAs
-# are both read as identity.  DPV links BQ and SJ to several islands, BQ
-# to NL-BQ1, NL-BQ2 and NL-BQ3 and SJ to NO-21 and NO-22, so this binding
-# identifies those islands with one another.  No case relies on it.
+# This binding reads skos:sameAs as identity.  DPV 2.3 uses this property,
+# which SKOS does not define, for 30 pairs; owl:sameAs would be read the
+# same way.  The BQ and SJ pairs merge different places: BQ with NL-BQ1,
+# NL-BQ2 and NL-BQ3, and SJ with NO-21 and NO-22, so the islands of each
+# group are one concept here.
+# Issues filed with DPV: UPSTREAM-ISSUES.md.
+# No test case relies on these merges.
 
 @prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> .
 @prefix bind: <https://w3id.org/odrl-kb/binding#> .
