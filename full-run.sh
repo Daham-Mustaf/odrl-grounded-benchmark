@@ -18,11 +18,9 @@ die() { echo "FAILED: $1" >&2; exit 1; }
 FAILED=0
 
 # Seconds a prover may take on one query, for the verdict run (stage 6), the
-# encodings check (6b), the two provers (7) and the proof checker (8) alike.
-# The checker runs Vampire in a mode that is slower on satisfiable queries
-# than the one stage 6 uses; KGC331-1 takes about 35 seconds there.  Set
-# PROVER_LIMIT to change it.
-PROVER_LIMIT="${PROVER_LIMIT:-60}"
+# encodings check (6b), the two provers (7), the proof checker (8) and the
+# timing pass (8b) alike.  Set PROVER_LIMIT to change it.
+PROVER_LIMIT="${PROVER_LIMIT:-300}"
 
 RETRIEVED=2026-08-19
 

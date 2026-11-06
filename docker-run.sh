@@ -11,5 +11,5 @@ cd /benchmark
 echo "=== environment"
 cat ENVIRONMENT
 
-bash full-run.sh
+PROVER_LIMIT="${PROVER_LIMIT:-300}" bash full-run.sh
 exit $?

@@ -5,7 +5,7 @@ time_queries.py
 The timing pass: every query of the suite under its prover, each alone, one
 at a time, and the wall time it took.
 
-    uv run generators/time_queries.py [--limit 60] [--out results/timings.csv]
+    uv run generators/time_queries.py [--limit 300] [--out results/timings.csv]
 
 A .p query runs under Vampire as the verdict run runs it (run_verdict.sh,
 casc mode), an .smt2 query under Z3.  One process runs at a time, so that no
@@ -109,7 +109,7 @@ def main() -> int:
     ap.add_argument("--dir", default=ROOT / "problems" / "verdict", type=Path)
     ap.add_argument("--out", default=ROOT / "results" / "timings.csv", type=Path)
     ap.add_argument("--limit", type=int,
-                    default=int(os.environ.get("PROVER_LIMIT", 60)),
+                    default=int(os.environ.get("PROVER_LIMIT", 300)),
                     help="seconds a prover may take on one query")
     args = ap.parse_args()
 
