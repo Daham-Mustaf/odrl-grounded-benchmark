@@ -208,6 +208,8 @@ Two tags keep earlier states of the repository:
 Vocabularies first, then problems, then the harnesses.
 
 ```bash
+export VAMPIRE=/path/to/vampire Z3=/path/to/z3
+
 # the framework axioms every query includes
 uv run generators/gen_primitives.py
 
@@ -262,9 +264,10 @@ uv run generators/time_queries.py --repeat 3
 uv run generators/table_data.py --suite-numbers
 ```
 
-Needs `vampire` and `z3` on the path, and `uv` for the Python. The
-suite was run with the Vampire 5.0.1 release binary (commit 1b13eafde)
-and Z3 4.8.12; `full-run.sh` prints the versions it finds, and
+Needs the variables `VAMPIRE` and `Z3` set to the two provers' binaries, which
+are never found through PATH, and `uv` for the Python. The suite was run with
+Vampire 5.0.1 (commit 1b13eafde) and Z3 4.8.12; `full-run.sh` prints the
+versions it finds, and
 `results/timings-runN.csv` records them with the machine the times come from.
 
 Every resource is rebuilt from a vendored vocabulary except two slices.

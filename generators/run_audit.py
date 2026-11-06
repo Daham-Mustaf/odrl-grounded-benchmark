@@ -15,6 +15,8 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime
 from pathlib import Path
 
+import provers
+
 DEFAULT_PROBLEM_GLOB = "Conflict/KGC*.p"
 DEFAULT_TIMEOUT      = 30
 
@@ -24,12 +26,12 @@ DEFAULT_TIMEOUT      = 30
 # ---------------------------------------------------------------------------
 
 def vampire_casc_cmd(prob, timeout):
-    return ["vampire", "--mode", "casc",
+    return [provers.vampire(), "--mode", "casc",
             "--time_limit", str(timeout),
             "--include", ".", str(prob)]
 
 def vampire_strategy_cmd(strategy, prob, timeout):
-    return ["vampire", "--saturation_algorithm", strategy,
+    return [provers.vampire(), "--saturation_algorithm", strategy,
             "--time_limit", str(timeout),
             "--include", ".", str(prob)]
 
@@ -38,13 +40,13 @@ def eprover_cmd(prob, timeout):
             f"--cpu-limit={timeout}", "-s", str(prob)]
 
 def z3_cmd(smt, timeout):
-    return ["z3", f"-T:{timeout}", str(smt)]
+    return [provers.z3(), f"-T:{timeout}", str(smt)]
 
 def cvc5_cmd(smt, timeout):
     return ["cvc5", f"--tlimit={timeout * 1000}", str(smt)]
 
 def vampire_fmb_cmd(prob, timeout):
-    return ["vampire", "--saturation_algorithm", "fmb",
+    return [provers.vampire(), "--saturation_algorithm", "fmb",
             "--fmb_start_size", "5",
             "--time_limit", str(timeout),
             "--include", ".", str(prob)]

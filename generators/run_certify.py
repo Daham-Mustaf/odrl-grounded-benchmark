@@ -22,6 +22,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
+import provers
 from certificate import (premises_from_vampire, premises_from_z3, classify,
                          to_turtle, withdrawable, model_literals,
                          compare_models, compare, NoAxiomNames, NoProof)
@@ -30,9 +31,8 @@ from certificate import (premises_from_vampire, premises_from_z3, classify,
 # propagate --output_axiom_names to its child strategies, and without names
 # no premise can be attributed.  --include makes the run independent of the
 # working directory, so anyone can reproduce it from anywhere.
-VAMPIRE = ["vampire", "--mode", "vampire", "--proof", "tptp",
+VAMPIRE = ["--mode", "vampire", "--proof", "tptp",
            "--output_axiom_names", "on"]
-Z3 = ["z3"]
 
 # Problems where the two provers cite different kinds of statements for a
 # reason that is understood, with the reason.  The difference is still
@@ -48,7 +48,7 @@ def run_vampire(path: Path, timeout: int, root: Path) -> tuple[str, str]:
     """Returns (normalised status, raw output)."""
     try:
         r = subprocess.run(
-            VAMPIRE + ["--include", str(root), "--time_limit", str(timeout),
+            [provers.vampire()] + VAMPIRE + ["--include", str(root), "--time_limit", str(timeout),
                        str(path)],
             capture_output=True, text=True, timeout=timeout + 10)
     except (subprocess.TimeoutExpired, FileNotFoundError) as e:
@@ -74,7 +74,7 @@ def run_z3(path: Path, timeout: int) -> tuple[str, str]:
     are always emitted and the reader takes what arrived.
     """
     try:
-        r = subprocess.run(Z3 + [f"-T:{timeout}", str(path)],
+        r = subprocess.run([provers.z3(), f"-T:{timeout}", str(path)],
                            capture_output=True, text=True,
                            timeout=timeout + 10)
     except (subprocess.TimeoutExpired, FileNotFoundError) as e:

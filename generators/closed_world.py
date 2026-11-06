@@ -65,6 +65,7 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(Path(__file__).parent))
 
 import declarations
+import provers
 import table_data
 import vocabulary
 from compile import constants_in, tree_term
@@ -225,7 +226,7 @@ def status(query: Path, extra: list, limit: int) -> str:
         f.write(text)
     try:
         out = subprocess.run(
-            ["vampire", "--include", str(ROOT / "problems"), "--mode", "casc",
+            [provers.vampire(), "--include", str(ROOT / "problems"), "--mode", "casc",
              "--time_limit", str(limit), f.name],
             capture_output=True, text=True, timeout=limit + 30).stdout
     except subprocess.TimeoutExpired:

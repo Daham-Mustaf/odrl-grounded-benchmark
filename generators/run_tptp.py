@@ -33,6 +33,10 @@ import time
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(Path(__file__).parent))
+
+import provers
+
 EXPORT = ROOT / "tptp"
 RUNS = ROOT / "results" / "tptp-runs.csv"
 FIELDS = ["problem", "mode", "limit", "result", "seconds"]
@@ -74,7 +78,7 @@ def vampire(path: Path, mode: str, limit: int) -> tuple:
     start = time.monotonic()
     try:
         out = subprocess.run(
-            ["vampire", "--include", str(EXPORT), "--mode", mode,
+            [provers.vampire(), "--include", str(EXPORT), "--mode", mode,
              "--time_limit", str(limit), str(path)],
             capture_output=True, text=True, timeout=limit + 60).stdout
     except subprocess.TimeoutExpired:
@@ -125,7 +129,7 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[3])
     sub = ap.add_subparsers(dest="cmd", required=True)
     c = sub.add_parser("check")
-    c.add_argument("--tptp4x", default="tptp4X")
+    c.add_argument("--tptp4x", default=os.environ.get("TPTP4X", "tptp4X"))
     r = sub.add_parser("run")
     r.add_argument("--version", type=int, required=True)
     r.add_argument("--limit", type=int, required=True)

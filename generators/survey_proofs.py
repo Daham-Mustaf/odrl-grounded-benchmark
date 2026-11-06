@@ -55,6 +55,8 @@ import sys
 from collections import Counter, defaultdict
 from pathlib import Path
 
+import provers
+
 # Rules a checker over ground clauses can verify without an order, a
 # unification algorithm, or a clausifier.  Everything else needs machinery,
 # and the point of the split is to say how much.  rectify, ennf and nnf
@@ -174,7 +176,8 @@ def run_one(path: Path, limit: int, binary: str, show: bool, include: Path):
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[3])
     ap.add_argument("--dir", default="problems/verdict", type=Path)
-    ap.add_argument("--binary", default="vampire")
+    ap.add_argument("--binary", default=None,
+                    help="the Vampire binary (default: the variable VAMPIRE)")
     ap.add_argument("--limit", type=int, default=30)
     ap.add_argument("--include", default="problems", type=Path,
                     help="root for include() directives; run_verdict.sh "
@@ -183,6 +186,8 @@ def main() -> int:
     ap.add_argument("--show", action="store_true",
                     help="print the proof text as well")
     args = ap.parse_args()
+    if args.binary is None:
+        args.binary = provers.vampire()
 
     files = sorted(args.dir.glob("*.p"))
     if args.problem:
@@ -202,7 +207,7 @@ def main() -> int:
             status, rules, steps = run_one(f, args.limit, args.binary,
                                            args.show, args.include)
         except FileNotFoundError:
-            print(f"{args.binary} is not on PATH", file=sys.stderr)
+            print(f"{args.binary} was not found", file=sys.stderr)
             return 1
         except subprocess.TimeoutExpired:
             status, rules, steps = "timeout", Counter(), 0

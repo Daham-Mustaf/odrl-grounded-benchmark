@@ -69,6 +69,7 @@ sys.path.insert(0, str(ROOT / "tests"))
 
 import test_witness as TW                      # noqa: E402
 import declarations                            # noqa: E402
+import provers                                 # noqa: E402
 from compile import Constraint, Or, Xone       # noqa: E402
 from signature import SIGNATURE, NOM, TAX, MER  # noqa: E402
 from tree_expand import expand_tree            # noqa: E402
@@ -315,7 +316,7 @@ def build(pr, work: Path) -> dict:
 
 def status_z3(path):
     try:
-        out = subprocess.run(["z3", f"-T:{LIMIT}", str(path)], capture_output=True,
+        out = subprocess.run([provers.z3(), f"-T:{LIMIT}", str(path)], capture_output=True,
                              text=True, timeout=LIMIT + 30).stdout
     except subprocess.TimeoutExpired:
         return "timeout"
@@ -324,7 +325,7 @@ def status_z3(path):
 
 def status_vampire(path, work):
     try:
-        out = subprocess.run(["vampire", "--include", str(work / "problems"),
+        out = subprocess.run([provers.vampire(), "--include", str(work / "problems"),
                               "--mode", "casc", "--time_limit", str(LIMIT), str(path)],
                              capture_output=True, text=True, timeout=LIMIT + 30).stdout
     except subprocess.TimeoutExpired:

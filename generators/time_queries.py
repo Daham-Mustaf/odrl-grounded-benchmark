@@ -41,6 +41,9 @@ import time
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(Path(__file__).parent))
+
+import provers
 
 SZS = {"Satisfiable": "sat", "CounterSatisfiable": "sat",
        "Unsatisfiable": "unsat", "Theorem": "unsat",
@@ -55,7 +58,19 @@ def first_line(cmd) -> str:
     return out.splitlines()[0].strip() if out.strip() else "unknown"
 
 
+def sysctl(name: str) -> str:
+    """A value of the machine, on macOS, or the empty string."""
+    try:
+        return subprocess.run(["sysctl", "-n", name], capture_output=True,
+                              text=True).stdout.strip()
+    except OSError:
+        return ""
+
+
 def cpu() -> str:
+    chip = sysctl("machdep.cpu.brand_string")
+    if chip:
+        return chip
     try:
         for line in Path("/proc/cpuinfo").read_text().splitlines():
             if line.startswith("model name"):
@@ -66,6 +81,9 @@ def cpu() -> str:
 
 
 def ram() -> str:
+    size = sysctl("hw.memsize")
+    if size:
+        return f"{int(size) / 2 ** 30:.1f} GiB"
     try:
         for line in Path("/proc/meminfo").read_text().splitlines():
             if line.startswith("MemTotal:"):
@@ -77,6 +95,8 @@ def ram() -> str:
 
 
 def os_name() -> str:
+    if platform.system() == "Darwin":
+        return f"macOS {platform.mac_ver()[0]}"
     name = platform.system()
     try:
         for line in Path("/etc/os-release").read_text().splitlines():
@@ -90,10 +110,10 @@ def os_name() -> str:
 def run(path: Path, limit: int) -> tuple:
     """(status, seconds) of one query."""
     if path.suffix == ".p":
-        cmd = ["vampire", "--include", str(ROOT / "problems"), "--mode", "casc",
+        cmd = [provers.vampire(), "--include", str(ROOT / "problems"), "--mode", "casc",
                "--time_limit", str(limit), str(path)]
     else:
-        cmd = ["z3", f"-T:{limit}", str(path)]
+        cmd = [provers.z3(), f"-T:{limit}", str(path)]
     start = time.monotonic()
     try:
         out = subprocess.run(cmd, capture_output=True, text=True,
@@ -120,8 +140,8 @@ def one_run(number: int, repeat: int, queries, limit: int, out: Path) -> list:
     """Time every check once and write the file; the checks with no status."""
     header = [
         f"{out.name}, written by generators/time_queries.py. Do not edit.",
-        f"vampire: {first_line(['vampire', '--version'])}",
-        f"z3: {first_line(['z3', '--version'])}",
+        f"vampire: {first_line([provers.vampire(), '--version'])}",
+        f"z3: {first_line([provers.z3(), '--version'])}",
         f"cpu: {cpu()}, {os.cpu_count()} logical cores",
         f"ram: {ram()}",
         f"os: {os_name()}",

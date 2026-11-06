@@ -20,6 +20,7 @@ import tempfile
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
+import provers
 
 from policy import (read_policy, read_profile, read_resource, bind, ground,
                     by_operand, ProfileError, GroundingError)
@@ -27,7 +28,7 @@ from compile import Constraint as CC, compile_operand
 from signature import is_well_sorted
 from certificate import premises_from_vampire, classify, NoAxiomNames, WITHDRAWABLE
 
-VAMPIRE = ["vampire", "--mode", "casc", "--proof", "on",
+VAMPIRE = ["--mode", "casc", "--proof", "on",
            "--output_axiom_names", "on", "--time_limit", "30"]
 
 ORDER_AXIOMS = """\
@@ -58,7 +59,7 @@ def run(text):
         f.write(text)
         path = f.name
     try:
-        r = subprocess.run(VAMPIRE + [path], capture_output=True, text=True,
+        r = subprocess.run([provers.vampire()] + VAMPIRE + [path], capture_output=True, text=True,
                            timeout=60)
     except (FileNotFoundError, subprocess.TimeoutExpired) as e:
         return "unavailable", str(e)

@@ -50,6 +50,8 @@ import sys
 from collections import Counter, defaultdict
 from pathlib import Path
 
+import provers
+
 # ---------------------------------------------------------------------
 # budgets and rule knowledge
 # ---------------------------------------------------------------------
@@ -668,7 +670,8 @@ def obtain_proof(path: Path, args):
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[3])
     ap.add_argument("--dir", default="problems/verdict", type=Path)
-    ap.add_argument("--binary", default="vampire")
+    ap.add_argument("--binary", default=None,
+                    help="the Vampire binary (default: the variable VAMPIRE)")
     ap.add_argument("--limit", type=int, default=30)
     ap.add_argument("--include", default="problems", type=Path,
                     help="root for include() directives; run_verdict.sh "
@@ -685,6 +688,8 @@ def main() -> int:
                     help="print every step result, not only failures")
     ap.add_argument("--json", type=Path, help="write the report here")
     args = ap.parse_args()
+    if args.binary is None and args.proofs is None:
+        args.binary = provers.vampire()
 
     files = sorted(args.dir.glob("*.p"))
     if args.problem:

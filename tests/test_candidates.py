@@ -39,6 +39,7 @@ from compile import Constraint
 from tree_expand import expand_tree
 from writers import write_fof, write_smt2
 
+import provers
 import problem_data_bcp47
 import problem_data_dpv
 
@@ -88,7 +89,7 @@ TESTS = [kgc404_non_commercial, neq_german_neq_french, neq_marketing_neq_researc
 
 
 def vampire(path):
-    r = subprocess.run(["vampire", "--include", str(ROOT / "problems"),
+    r = subprocess.run([provers.vampire(), "--include", str(ROOT / "problems"),
                         "--mode", "casc", "--time_limit", str(LIMIT), str(path)],
                        capture_output=True, text=True, timeout=LIMIT + 60)
     m = re.search(r"SZS status (\w+)", r.stdout)
@@ -98,7 +99,7 @@ def vampire(path):
 
 
 def z3(path):
-    r = subprocess.run(["z3", f"-T:{LIMIT}", str(path)], capture_output=True,
+    r = subprocess.run([provers.z3(), f"-T:{LIMIT}", str(path)], capture_output=True,
                        text=True, timeout=LIMIT + 60)
     return r.stdout.split("\n", 1)[0].strip() or "no-output"
 

@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # Rebuild everything from the vendored vocabularies and check it.
 #
+#     export VAMPIRE=/path/to/vampire Z3=/path/to/z3
 #     bash full-run.sh 2>&1 | tee /tmp/run.log
 #     TIMINGS=1 bash full-run.sh     # and rewrite the timing runs in results/
 #
@@ -12,6 +13,12 @@ cd "$(dirname "$0")"
 
 hdr() { echo; echo "=== $1"; }
 die() { echo "FAILED: $1" >&2; exit 1; }
+
+# The provers are named by the environment, and never found through PATH.
+for p in VAMPIRE Z3; do
+  [ -x "${!p:-}" ] || die "set $p to the path of the binary; PATH is not searched"
+done
+export VAMPIRE Z3
 
 # A check that fails sets this and the run goes on, so one run reports every
 # failure; the exit status at the end says whether there was one.
@@ -26,8 +33,8 @@ RETRIEVED=2026-08-19
 
 # The provers, as they ran.  Their versions and modes are not changed here.
 hdr "0. provers"
-echo "  $(vampire --version 2>&1 | head -1)"
-echo "  $(z3 --version 2>&1 | head -1)"
+echo "  $("$VAMPIRE" --version 2>&1 | head -1)"
+echo "  $("$Z3" --version 2>&1 | head -1)"
 
 # Every builder reads a vendored file; each must be byte for byte the file
 # its source publishes, as vocabularies/MANIFEST records it.

@@ -50,6 +50,8 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
 
+import provers
+
 from rdflib import Graph, Namespace, RDF
 from rdflib.namespace import DCTERMS
 
@@ -99,7 +101,7 @@ def alone(p: dict, side: str) -> dict:
 
 def z3_status(path: Path, seconds: int) -> str:
     try:
-        out = subprocess.run(["z3", f"-T:{seconds}", str(path)],
+        out = subprocess.run([provers.z3(), f"-T:{seconds}", str(path)],
                              capture_output=True, text=True,
                              timeout=seconds + 10).stdout
     except subprocess.TimeoutExpired:

@@ -61,6 +61,8 @@ import sys
 from functools import lru_cache
 from pathlib import Path
 
+import provers
+
 # Problems whose two sides are known to differ.  Each entry is a defect to
 # fix, not an accepted difference.  There are none.
 KNOWN_GAPS: dict = {}
@@ -69,8 +71,7 @@ KNOWN_GAPS: dict = {}
 # schedule mode answers the large Location queries in a fraction of the time.
 # The seconds per query are given with --limit; full-run.sh passes the
 # PROVER_LIMIT that stages 6 to 8 use.
-VAMPIRE = ["vampire", "--mode", "casc", "--time_limit"]
-Z3 = ["z3"]
+VAMPIRE = ["--mode", "casc", "--time_limit"]
 
 _SZS = re.compile(r"SZS status (\w+)")
 
@@ -79,7 +80,7 @@ _SZS = re.compile(r"SZS status (\w+)")
 
 def run_fof(path: Path, include: Path, limit: int) -> str:
     try:
-        out = subprocess.run(VAMPIRE + [str(limit), "--include", str(include),
+        out = subprocess.run([provers.vampire()] + VAMPIRE + [str(limit), "--include", str(include),
                                         str(path)],
                              capture_output=True, text=True,
                              timeout=limit + 30).stdout
@@ -95,7 +96,7 @@ def run_fof(path: Path, include: Path, limit: int) -> str:
 
 def run_smt(path: Path, limit: int) -> str:
     try:
-        out = subprocess.run(Z3 + [f"-T:{limit}", str(path)], capture_output=True,
+        out = subprocess.run([provers.z3(), f"-T:{limit}", str(path)], capture_output=True,
                              text=True, timeout=limit + 30).stdout
     except subprocess.TimeoutExpired:
         return "timeout"

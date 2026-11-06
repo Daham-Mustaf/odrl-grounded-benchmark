@@ -373,7 +373,7 @@ def timing_problems(timings, verdict_dir: Path) -> list:
         | {(q.stem, "z3") for q in verdict_dir.glob("*-[12].smt2")}
     for path, header, rows in timings:
         out += [f"{path.name} has no {k} line in its header"
-                for k in ("vampire", "z3", "cpu", "ram", "date", "limit")
+                for k in ("vampire", "z3", "cpu", "ram", "os", "date", "limit")
                 if k not in header]
         have = [(r["query"], r["prover"]) for r in rows]
         if len(have) != len(set(have)):
@@ -433,6 +433,7 @@ def time_macros(timings) -> list:
         ("suiteSlowestCheck", CHECK_IN_WORDS[query.rsplit("-", 1)[1]]),
         ("suiteLimit",    header["limit"]),
         ("suiteHardware", f"{cpu}, {header['ram']} RAM"),
+        ("suiteOS",       header.get("os", "").split(", ")[0]),
         ("suiteVampire",  version(header["vampire"], r"Vampire (\S+)")),
         ("suiteZthree",   version(header["z3"], r"version (\S+)")),
     ]

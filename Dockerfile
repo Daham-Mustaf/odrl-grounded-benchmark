@@ -54,10 +54,13 @@ RUN uv sync --frozen --no-install-project
 
 COPY . .
 
+# The provers are named by the environment, and never found through PATH.
+ENV VAMPIRE=/usr/local/bin/vampire Z3=/usr/bin/z3
+
 # Record what the image holds, so a reader of the output knows what
 # produced it.
-RUN echo "vampire: $(vampire --version 2>&1 | head -1)" > /benchmark/ENVIRONMENT \
-    && echo "z3:      $(z3 --version)" >> /benchmark/ENVIRONMENT \
+RUN echo "vampire: $("$VAMPIRE" --version 2>&1 | head -1)" > /benchmark/ENVIRONMENT \
+    && echo "z3:      $("$Z3" --version)" >> /benchmark/ENVIRONMENT \
     && echo "python:  $(python --version)" >> /benchmark/ENVIRONMENT
 
 CMD ["bash", "docker-run.sh"]
