@@ -33,7 +33,7 @@ def local(x):
 
 FAMILY = {}
 FAMILIES = {
-    "motivating example":      [300, 301, 302],
+    "motivating example":      [301, 302],
     "file type":               [320, 321, 322, 323],
     "GeoNames spatial":        list(range(303, 307)) + [308, 309],
     "DPV purposes":            list(range(310, 320)) + list(range(393, 398)) + [399, 403, 404],

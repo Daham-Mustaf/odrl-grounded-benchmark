@@ -39,8 +39,8 @@ from compile import Constraint
 from tree_expand import expand_tree
 from writers import write_fof, write_smt2
 
+import problem_data_bcp47
 import problem_data_dpv
-import problem_data_motivating
 
 LIMIT = 120
 
@@ -64,12 +64,12 @@ def kgc404_non_commercial():
 
 
 def neq_german_neq_french():
-    p = dict(entry(problem_data_motivating, "KGC300"))
+    p = dict(entry(problem_data_bcp47, "KGC370"))
     p.update(
-        id="TEST300", subdir="test",
+        id="TEST370", subdir="test",
         name="language, neq bcp:de against neq bcp:fr",
-        tree=[c("neq", problem_data_motivating.DE),
-              c("neq", problem_data_motivating.FR, side="request")])
+        tree=[c("neq", problem_data_bcp47.DE),
+              c("neq", problem_data_bcp47.FR, side="request")])
     return p, "bcp_en"
 
 

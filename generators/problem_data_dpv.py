@@ -659,7 +659,7 @@ kgc:KGC315-p2-c1 a odrl:Constraint ;
             "purpose the second requires, so no use can meet both, and the "
             "verdict is Incompatible. No order statement and no declaration "
             "takes part, so nobody can reopen the verdict by withdrawing a "
-            "statement, unlike KGC300 and KGC314."),
+            "statement, unlike KGC370 and KGC314."),
         "maintainer_note": (
             "The witness asks for a concept both distinct from and "
             "identical to marketing, which no structure provides. The "

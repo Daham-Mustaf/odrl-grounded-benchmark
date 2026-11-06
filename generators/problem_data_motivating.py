@@ -1,29 +1,29 @@
 """
 problem_data_motivating.py
 ==========================
-The three constraint pairs of the motivating example, one per sort, one per
-verdict.  Reproducing this table mechanically is the first milestone.
+The constraint pairs of the motivating example, one per sort, one per verdict.
+Reproducing this table mechanically is the first milestone.
 
-    KGC300  language  nom  eq bcp:de        x eq bcp:fr      -> Incompatible
     KGC301  purpose   tax  isA dpv:NCP      x eq dpv:SR      -> Unknown
     KGC302  spatial   mer  isPartOf gn:EU   x eq gn:FR       -> Compatible
+
+KGC300 is retired.  It had the same inputs as KGC370: language, eq de against
+eq fr, binding b-language-bcp47, declarations bcp47/distinct, and its TPTP
+problems were identical to KGC370's apart from the name.  The language row of
+the example is KGC371 and KGC370.  KGC300 is recoverable from the tag v1.1.1.
 
 Each problem is decided by two queries over the same witness condition.
 
 The witness condition
 ---------------------
 For the constraints K on one operand, W(K) is computed over the concepts the
-grounding names.  All three pairs here use subset-mode operators only, with
+grounding names.  Both pairs here use subset-mode operators only, with
 no isAllOf and no isAnyOf, so F is empty and there are no A_k.  W reduces to
 D != empty, which over the named concepts c is the finite disjunction
 
     OR_c ( c is in every subset-mode denotation of K )
 
 and is therefore quantifier-free.  Worked per problem:
-
-  KGC300  D = [[eq de]] and [[eq fr]] = {de} and {fr}
-          W = (de = de & de = fr) | (fr = de & fr = fr)
-            = (de = fr)                                  after simplification
 
   KGC301  D = [[isA ncp]] and [[eq sr]] = {x | x leq ncp} and {sr}
           W = (ncp leq ncp & ncp = sr) | (sr leq ncp & sr = sr)
@@ -39,7 +39,6 @@ prescribes and what a generator produces mechanically.
 
 from compile import Constraint
 
-DE, FR = "bcp_de", "bcp_fr"
 NCP, SR = "dpv_non_commercial_purpose", "dpv_scientific_research"
 EUROPE, FRANCE = "gn_europe", "gn_france"
 
@@ -49,102 +48,6 @@ def C(op, *vals, side="offer"):
 
 
 PROBLEMS = [
-
-    # -----------------------------------------------------------------
-    # KGC300  language, nominal.  B declares the two subtags distinct,
-    # so no structure identifies them and no witness exists.
-    # -----------------------------------------------------------------
-    {
-        "id":                "KGC300",
-        "binding":           "https://w3id.org/odrl-kb/profile/b-language-bcp47",
-        "subdir":            "verdict",
-        "name":              "language, eq bcp:de against eq bcp:fr",
-        "left_operand":      "language",
-        "sort":              "nom",
-        "resource":          "https://w3id.org/odrl-kb/bcp47",
-        "background_theory": "https://w3id.org/odrl-kb/bcp47/distinct",
-        "includes":          ["KGE000-0.ax", "BCP47000-0.ax", "BCP47001-0.ax"],
-        "fof_decls": """\
-% Declarations: the distinctness rule, BCP47001-0.ax.  The
-% pair de, fr is one of its 105 instances.
-""",
-        "tree": [C("eq", DE), C("eq", FR, side="request")],
-        "description": (
-            "A German library permits use in German only, and a French "
-            "library commits to use in French only. The two policies can "
-            "hold together only if German and French are one language. The "
-            "declared registry rule, that different primary language "
-            "subtags name different languages, makes them two, so no use "
-            "satisfies both. The language of a use is the language of what "
-            "the user publishes from the manuscripts, such as "
-            "transcriptions or translations."),
-        "maintainer_note": (
-            "The refutation cites the one distinctness instance. The "
-            "witness fails in every structure."),
-
-        # D != empty over the named concepts {de, fr}
-
-        "expected_q1": "Unsatisfiable",   # no model admits a witness
-        "expected_q2": "Satisfiable",
-
-        "smt2_logic": "UF",
-
-        "summary": (
-            "A German library permits use of its manuscripts in German only. "
-            "A French library's policy commits to use in French only."),
-        "certificate": {
-            "kind": "Refutation",
-            "comment": (
-                "Both policies can hold together only if German and French "
-                "are one language. The declared rule that different primary "
-                "language subtags name different languages, warranted by "
-                "RFC 5646 sections 3 and 3.1.5, makes them two, so no use "
-                "meets both policies."),
-            "premises": [
-                ("fromDeclarations",
-                 "bcp:de and bcp:fr are distinct (distinctness rule)"),
-            ],
-        },
-        "ttl": """\
-@prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
-@prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix bcp47:   <https://w3id.org/odrl-kb/bcp47#> .
-@prefix drk:     <https://w3id.org/odrl-kb/drk/> .
-@prefix kgc:     <https://w3id.org/odrl-kb/problem/> .
-@prefix vrep:    <https://w3id.org/odrl-kb/verdict-report#> .
-
-drk:policy-300-1 a odrl:Set ;
-    odrl:uid drk:policy-300-1 ;
-    dcterms:title "Use in German only"@en ;
-    odrl:assigner drk:german-library ;
-    odrl:permission kgc:KGC300-p1-r1 .
-
-kgc:KGC300-p1-r1 a odrl:Permission ;
-    odrl:action odrl:use ;
-    odrl:target drk:manuscripts ;
-    odrl:constraint kgc:KGC300-p1-c1 .
-
-kgc:KGC300-p1-c1 a odrl:Constraint ;
-    odrl:leftOperand odrl:language ;
-    odrl:operator odrl:eq ;
-    odrl:rightOperand bcp47:de .
-
-drk:policy-300-2 a odrl:Set ;
-    odrl:uid drk:policy-300-2 ;
-    dcterms:title "Use in French only"@en ;
-    odrl:assignee drk:french-library ;
-    odrl:permission kgc:KGC300-p2-r1 .
-
-kgc:KGC300-p2-r1 a odrl:Permission ;
-    odrl:action odrl:use ;
-    odrl:target drk:manuscripts ;
-    odrl:constraint kgc:KGC300-p2-c1 .
-
-kgc:KGC300-p2-c1 a odrl:Constraint ;
-    odrl:leftOperand odrl:language ;
-    odrl:operator odrl:eq ;
-    odrl:rightOperand bcp47:fr .""",
-    },
 
     # -----------------------------------------------------------------
     # KGC301  purpose, taxonomic.  DPV neither places SR under NCP nor

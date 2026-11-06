@@ -5,7 +5,7 @@ that fixed the answer, and the report the semantics produces for them.
 
 ```
 KGC100-112   well-sortedness, rejected at drafting time
-KGC300-302   the motivating example, one per sort
+KGC301-302   the motivating example: purpose and spatial
 KGC303-304   spatial: exactly one of two alternatives, over GeoNames
 KGC308-309   spatial: one country within another, over GeoNames
 KGC310-319   purpose, over DPV purposes
@@ -34,6 +34,7 @@ once the concepts are declared distinct.
 
 The paper's running example is KGC310 (purpose), KGC302 (spatial), KGC371
 (language), and KGC370 (language with the declaration).
+KGC301 is a variant of the purpose row.
 
 `catalogue.html` lists every case with its two policies in plain words, how
 the vocabulary is read and the declarations in force with their origin, and
@@ -83,9 +84,10 @@ holds the grid: each of the 24 cells of operator by kind of value has a
 verdict case where that kind of value admits the operator and a rejection
 where it does not, and `or` and `xone` each appear for every kind of value.
 
-Retired (IDs never reused, recoverable from tags pre-retire, pre-purpose, pre-review and pre-final)
+Retired (IDs never reused, recoverable from tags pre-retire, pre-purpose, pre-review and pre-final, and KGC300 from v1.1.1)
 
 ```
+KGC300   language: eq German against eq French, the same inputs as KGC370
 KGC305   spatial: xone(isPartOf France, isPartOf Germany) against eq France, countries distinct
 KGC306   the same, France and Germany declared disjoint
 KGC307   spatial: xone(eq France, isAllOf (France Germany)) against eq France

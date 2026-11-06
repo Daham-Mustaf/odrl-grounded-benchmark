@@ -1,7 +1,7 @@
 """
 gen_motivating.py
 =================
-Generates the three motivating-example problems, each as two satisfiability
+Generates the motivating-example problems, each as two satisfiability
 queries, plus policies and expected reports.
 
 Output, per problem:

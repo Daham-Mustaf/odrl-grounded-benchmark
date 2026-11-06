@@ -104,7 +104,7 @@ suite-numbers.tex the figures and the tables the paper includes,
 ```
 KGC100-112   well-sortedness: nine constraints, six rejected at
              drafting time by the signature alone
-KGC300-302   the motivating example, one per sort
+KGC301-302   the motivating example: purpose and spatial
 KGC303-304   spatial: exactly one of two alternatives, over GeoNames
 KGC308-309   spatial: one country within another, over GeoNames
 KGC310-319   purpose, over DPV purposes, in a mobility data space
@@ -128,6 +128,7 @@ once the parties declare the concepts distinct.
 
 The paper's running example is KGC310 (purpose), KGC302 (spatial), KGC371
 (language), and KGC370 (language with the declaration).
+KGC301 is a variant of the purpose row.
 
 ---
 

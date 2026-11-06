@@ -8,7 +8,6 @@ KGC105,rejected,rejected,yes,
 KGC110,control,control,yes,
 KGC111,control,control,yes,
 KGC112,control,control,yes,
-KGC300,I,I,yes,
 KGC301,U,I,no,order
 KGC302,C,C,yes,
 KGC303,U,C,no,distinctness

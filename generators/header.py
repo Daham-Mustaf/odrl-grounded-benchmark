@@ -217,7 +217,7 @@ if __name__ == "__main__":
     body = "fof(a1, axiom, ![X]: p(X)).\nfof(a2, axiom, ![X]: q(X)).\n"
     assert "2 axioms:" in ax_comment(body, "2 order", "note")
 
-    h = Header(file="KGC300-1.p", domain="kb",
+    h = Header(file="KGC302-1.p", domain="kb",
                title="Motivating example, spatial operand, first query",
                english="Query R + B + W for the spatial operand.",
                status="Satisfiable",
@@ -225,7 +225,7 @@ if __name__ == "__main__":
     print(h)
     assert all(l.startswith("%") for l in h.splitlines() if l)
 
-    s = SMTHeader(file="KGC300-1.smt2", domain="kb",
+    s = SMTHeader(file="KGC302-1.smt2", domain="kb",
                   title="Motivating example, spatial operand, first query",
                   status="sat",
                   comments="Two-query procedure, query 1 of 2.").render()
