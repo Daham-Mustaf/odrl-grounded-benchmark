@@ -127,6 +127,10 @@ fi
 hdr "4f. regression tests: the witness ranges over the whole vocabulary"
 uv run tests/test_candidates.py || { echo "FAILED: a regression test did not pass" >&2; FAILED=1; }
 
+hdr "4g. end to end: the pipeline against the definitions, on random problems"
+uv run tests/test_end_to_end.py --json results/end-to-end.json 2>&1 | tail -8
+[ "${PIPESTATUS[0]}" -eq 0 ] || { echo "FAILED: the pipeline and the definitions disagree" >&2; FAILED=1; }
+
 hdr "5. bindings: do the probes hold"
 uv run generators/validate_bindings.py --probes probes \
   --axioms problems/axioms 2>&1 | tail -5
@@ -142,12 +146,14 @@ uv run generators/check_encodings.py --limit "$PROVER_LIMIT" 2>&1 | tail -4
 
 # --- 7. provers agree --------------------------------------------------
 hdr "7. two provers, and what they cite"
-uv run generators/run_certify.py --timeout "$PROVER_LIMIT" 2>&1 | grep -E \
+uv run generators/run_certify.py --timeout "$PROVER_LIMIT" \
+  --json results/two-provers.json 2>&1 | grep -E \
   "STATUS DISAGREEMENT|STATUS INCONCLUSIVE|PROVERS DIFFER|provenance agreement" | tail -10
 
 hdr "8. proof checking"
 cert_out=$(mktemp)
-uv run generators/check_certificates.py --limit "$PROVER_LIMIT" > "$cert_out" 2>&1
+uv run generators/check_certificates.py --limit "$PROVER_LIMIT" \
+  --json results/proof-check.json > "$cert_out" 2>&1
 grep -E "^(suite summary|  (FULLY_CHECKED|PARTIALLY_CHECKED|REJECTED|other) )" "$cert_out"
 echo
 grep -E -A40 "^(unsupported mechanisms|premise classes)" "$cert_out"

@@ -1,0 +1,14 @@
+{
+  "problems": 2004,
+  "random": 2000,
+  "fixed": 4,
+  "seed": 20261030,
+  "vampire_problems": 204,
+  "skipped_no_structure": 404,
+  "from_definitions": {
+    "Compatible": 482,
+    "Incompatible": 699,
+    "Unknown": 823
+  },
+  "disagreements": 0
+}

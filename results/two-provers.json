@@ -1,0 +1,13 @@
+{
+  "problems": 60,
+  "refutations": 44,
+  "provenance_agree": 43,
+  "provenance_differ": [
+    "KGC309"
+  ],
+  "explained": [
+    "KGC309"
+  ],
+  "status_inconclusive": [],
+  "status_disagreement": []
+}

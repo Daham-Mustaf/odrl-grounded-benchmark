@@ -1,0 +1,829 @@
+{
+  "problems": {
+    "KGC301-1": {
+      "result": "SATISFIABLE"
+    },
+    "KGC301-2": {
+      "result": "SATISFIABLE"
+    },
+    "KGC302-1": {
+      "result": "SATISFIABLE"
+    },
+    "KGC302-2": {
+      "result": "FULLY_CHECKED",
+      "steps": 5,
+      "unverified": 0,
+      "premise_classes": {
+        "resource": 1,
+        "witness condition": 1
+      },
+      "failures": []
+    },
+    "KGC303-1": {
+      "result": "SATISFIABLE"
+    },
+    "KGC303-2": {
+      "result": "SATISFIABLE"
+    },
+    "KGC304-1": {
+      "result": "SATISFIABLE"
+    },
+    "KGC304-2": {
+      "result": "FULLY_CHECKED",
+      "steps": 6,
+      "unverified": 0,
+      "premise_classes": {
+        "declared distinctness": 1,
+        "witness condition": 1
+      },
+      "failures": []
+    },
+    "KGC308-1": {
+      "result": "SATISFIABLE"
+    },
+    "KGC308-2": {
+      "result": "SATISFIABLE"
+    },
+    "KGC309-1": {
+      "result": "FULLY_CHECKED",
+      "steps": 9,
+      "unverified": 0,
+      "premise_classes": {
+        "axiom": 1,
+        "declared disjointness": 1,
+        "witness condition": 1
+      },
+      "failures": []
+    },
+    "KGC309-2": {
+      "result": "SATISFIABLE"
+    },
+    "KGC310-1": {
+      "result": "SATISFIABLE"
+    },
+    "KGC310-2": {
+      "result": "FULLY_CHECKED",
+      "steps": 5,
+      "unverified": 0,
+      "premise_classes": {
+        "resource": 1,
+        "witness condition": 1
+      },
+      "failures": []
+    },
+    "KGC313-1": {
+      "result": "SATISFIABLE"
+    },
+    "KGC313-2": {
+      "result": "SATISFIABLE"
+    },
+    "KGC314-1": {
+      "result": "FULLY_CHECKED",
+      "steps": 6,
+      "unverified": 0,
+      "premise_classes": {
+        "declared distinctness": 1,
+        "witness condition": 1
+      },
+      "failures": []
+    },
+    "KGC314-2": {
+      "result": "SATISFIABLE"
+    },
+    "KGC315-1": {
+      "result": "SATISFIABLE"
+    },
+    "KGC315-2": {
+      "result": "FULLY_CHECKED",
+      "steps": 21,
+      "unverified": 0,
+      "premise_classes": {
+        "axiom": 1,
+        "resource": 4,
+        "witness condition": 1
+      },
+      "failures": []
+    },
+    "KGC316-1": {
+      "result": "SATISFIABLE"
+    },
+    "KGC316-2": {
+      "result": "SATISFIABLE"
+    },
+    "KGC317-1": {
+      "result": "FULLY_CHECKED",
+      "steps": 3,
+      "unverified": 0,
+      "premise_classes": {
+        "witness condition": 1
+      },
+      "failures": []
+    },
+    "KGC317-2": {
+      "result": "SATISFIABLE"
+    },
+    "KGC318-1": {
+      "result": "SATISFIABLE"
+    },
+    "KGC318-2": {
+      "result": "FULLY_CHECKED",
+      "steps": 6,
+      "unverified": 0,
+      "premise_classes": {
+        "declared distinctness": 1,
+        "witness condition": 1
+      },
+      "failures": []
+    },
+    "KGC319-1": {
+      "result": "SATISFIABLE"
+    },
+    "KGC319-2": {
+      "result": "SATISFIABLE"
+    },
+    "KGC320-1": {
+      "result": "SATISFIABLE"
+    },
+    "KGC320-2": {
+      "result": "SATISFIABLE"
+    },
+    "KGC321-1": {
+      "result": "FULLY_CHECKED",
+      "steps": 6,
+      "unverified": 0,
+      "premise_classes": {
+        "declared distinctness": 1,
+        "witness condition": 1
+      },
+      "failures": []
+    },
+    "KGC321-2": {
+      "result": "SATISFIABLE"
+    },
+    "KGC322-1": {
+      "result": "SATISFIABLE"
+    },
+    "KGC322-2": {
+      "result": "FULLY_CHECKED",
+      "steps": 3,
+      "unverified": 0,
+      "premise_classes": {
+        "witness condition": 1
+      },
+      "failures": []
+    },
+    "KGC323-1": {
+      "result": "SATISFIABLE"
+    },
+    "KGC323-2": {
+      "result": "FULLY_CHECKED",
+      "steps": 6,
+      "unverified": 0,
+      "premise_classes": {
+        "declared distinctness": 1,
+        "witness condition": 1
+      },
+      "failures": []
+    },
+    "KGC331-1": {
+      "result": "SATISFIABLE"
+    },
+    "KGC331-2": {
+      "result": "FULLY_CHECKED",
+      "steps": 5,
+      "unverified": 0,
+      "premise_classes": {
+        "resource": 1,
+        "witness condition": 1
+      },
+      "failures": []
+    },
+    "KGC333-1": {
+      "result": "SATISFIABLE"
+    },
+    "KGC333-2": {
+      "result": "SATISFIABLE"
+    },
+    "KGC334-1": {
+      "result": "FULLY_CHECKED",
+      "steps": 6,
+      "unverified": 0,
+      "premise_classes": {
+        "declared distinctness": 1,
+        "witness condition": 1
+      },
+      "failures": []
+    },
+    "KGC334-2": {
+      "result": "SATISFIABLE"
+    },
+    "KGC335-1": {
+      "result": "SATISFIABLE"
+    },
+    "KGC335-2": {
+      "result": "FULLY_CHECKED",
+      "steps": 6,
+      "unverified": 0,
+      "premise_classes": {
+        "declared distinctness": 1,
+        "witness condition": 1
+      },
+      "failures": []
+    },
+    "KGC336-1": {
+      "result": "PARTIALLY_CHECKED",
+      "steps": 16,
+      "unverified": 2,
+      "premise_classes": {
+        "declared distinctness": 2,
+        "witness condition": 1
+      },
+      "failures": [
+        {
+          "step": "f9712",
+          "kind": "introduced",
+          "rule": "introduced",
+          "status": "UNSUPPORTED",
+          "detail": "symbol or clause introduced, not entailed"
+        },
+        {
+          "step": "f9716",
+          "kind": "introduced",
+          "rule": "introduced",
+          "status": "UNSUPPORTED",
+          "detail": "symbol or clause introduced, not entailed"
+        }
+      ]
+    },
+    "KGC336-2": {
+      "result": "SATISFIABLE"
+    },
+    "KGC337-1": {
+      "result": "FULLY_CHECKED",
+      "steps": 6,
+      "unverified": 0,
+      "premise_classes": {
+        "declared distinctness": 1,
+        "witness condition": 1
+      },
+      "failures": []
+    },
+    "KGC337-2": {
+      "result": "SATISFIABLE"
+    },
+    "KGC340-1": {
+      "result": "SATISFIABLE"
+    },
+    "KGC340-2": {
+      "result": "FULLY_CHECKED",
+      "steps": 5,
+      "unverified": 0,
+      "premise_classes": {
+        "resource": 1,
+        "witness condition": 1
+      },
+      "failures": []
+    },
+    "KGC341-1": {
+      "result": "SATISFIABLE"
+    },
+    "KGC341-2": {
+      "result": "FULLY_CHECKED",
+      "steps": 3,
+      "unverified": 0,
+      "premise_classes": {
+        "witness condition": 1
+      },
+      "failures": []
+    },
+    "KGC342-1": {
+      "result": "SATISFIABLE"
+    },
+    "KGC342-2": {
+      "result": "SATISFIABLE"
+    },
+    "KGC343-1": {
+      "result": "FULLY_CHECKED",
+      "steps": 9,
+      "unverified": 0,
+      "premise_classes": {
+        "resource": 1,
+        "declared disjointness": 1,
+        "witness condition": 1
+      },
+      "failures": []
+    },
+    "KGC343-2": {
+      "result": "SATISFIABLE"
+    },
+    "KGC348-1": {
+      "result": "SATISFIABLE"
+    },
+    "KGC348-2": {
+      "result": "SATISFIABLE"
+    },
+    "KGC349-1": {
+      "result": "SATISFIABLE"
+    },
+    "KGC349-2": {
+      "result": "PARTIALLY_CHECKED",
+      "steps": 17,
+      "unverified": 2,
+      "premise_classes": {
+        "declared distinctness": 2,
+        "witness condition": 1
+      },
+      "failures": [
+        {
+          "step": "f45",
+          "kind": "introduced",
+          "rule": "introduced",
+          "status": "UNSUPPORTED",
+          "detail": "symbol or clause introduced, not entailed"
+        },
+        {
+          "step": "f49",
+          "kind": "introduced",
+          "rule": "introduced",
+          "status": "UNSUPPORTED",
+          "detail": "symbol or clause introduced, not entailed"
+        }
+      ]
+    },
+    "KGC360-1": {
+      "result": "SATISFIABLE"
+    },
+    "KGC360-2": {
+      "result": "PARTIALLY_CHECKED",
+      "steps": 17,
+      "unverified": 2,
+      "premise_classes": {
+        "resource": 2,
+        "witness condition": 1
+      },
+      "failures": [
+        {
+          "step": "f165",
+          "kind": "introduced",
+          "rule": "introduced",
+          "status": "UNSUPPORTED",
+          "detail": "symbol or clause introduced, not entailed"
+        },
+        {
+          "step": "f169",
+          "kind": "introduced",
+          "rule": "introduced",
+          "status": "UNSUPPORTED",
+          "detail": "symbol or clause introduced, not entailed"
+        }
+      ]
+    },
+    "KGC362-1": {
+      "result": "SATISFIABLE"
+    },
+    "KGC362-2": {
+      "result": "FULLY_CHECKED",
+      "steps": 3,
+      "unverified": 0,
+      "premise_classes": {
+        "witness condition": 1
+      },
+      "failures": []
+    },
+    "KGC363-1": {
+      "result": "SATISFIABLE"
+    },
+    "KGC363-2": {
+      "result": "SATISFIABLE"
+    },
+    "KGC364-1": {
+      "result": "FULLY_CHECKED",
+      "steps": 6,
+      "unverified": 0,
+      "premise_classes": {
+        "declared distinctness": 1,
+        "witness condition": 1
+      },
+      "failures": []
+    },
+    "KGC364-2": {
+      "result": "SATISFIABLE"
+    },
+    "KGC365-1": {
+      "result": "SATISFIABLE"
+    },
+    "KGC365-2": {
+      "result": "FULLY_CHECKED",
+      "steps": 3,
+      "unverified": 0,
+      "premise_classes": {
+        "witness condition": 1
+      },
+      "failures": []
+    },
+    "KGC366-1": {
+      "result": "PARTIALLY_CHECKED",
+      "steps": 16,
+      "unverified": 2,
+      "premise_classes": {
+        "declared distinctness": 2,
+        "witness condition": 1
+      },
+      "failures": [
+        {
+          "step": "f170",
+          "kind": "introduced",
+          "rule": "introduced",
+          "status": "UNSUPPORTED",
+          "detail": "symbol or clause introduced, not entailed"
+        },
+        {
+          "step": "f174",
+          "kind": "introduced",
+          "rule": "introduced",
+          "status": "UNSUPPORTED",
+          "detail": "symbol or clause introduced, not entailed"
+        }
+      ]
+    },
+    "KGC366-2": {
+      "result": "SATISFIABLE"
+    },
+    "KGC370-1": {
+      "result": "FULLY_CHECKED",
+      "steps": 6,
+      "unverified": 0,
+      "premise_classes": {
+        "declared distinctness": 1,
+        "witness condition": 1
+      },
+      "failures": []
+    },
+    "KGC370-2": {
+      "result": "SATISFIABLE"
+    },
+    "KGC371-1": {
+      "result": "SATISFIABLE"
+    },
+    "KGC371-2": {
+      "result": "SATISFIABLE"
+    },
+    "KGC373-1": {
+      "result": "FULLY_CHECKED",
+      "steps": 6,
+      "unverified": 0,
+      "premise_classes": {
+        "declared distinctness": 1,
+        "witness condition": 1
+      },
+      "failures": []
+    },
+    "KGC373-2": {
+      "result": "SATISFIABLE"
+    },
+    "KGC374-1": {
+      "result": "SATISFIABLE"
+    },
+    "KGC374-2": {
+      "result": "FULLY_CHECKED",
+      "steps": 6,
+      "unverified": 0,
+      "premise_classes": {
+        "declared distinctness": 1,
+        "witness condition": 1
+      },
+      "failures": []
+    },
+    "KGC375-1": {
+      "result": "SATISFIABLE"
+    },
+    "KGC375-2": {
+      "result": "SATISFIABLE"
+    },
+    "KGC376-1": {
+      "result": "FULLY_CHECKED",
+      "steps": 6,
+      "unverified": 0,
+      "premise_classes": {
+        "declared distinctness": 1,
+        "witness condition": 1
+      },
+      "failures": []
+    },
+    "KGC376-2": {
+      "result": "SATISFIABLE"
+    },
+    "KGC377-1": {
+      "result": "FULLY_CHECKED",
+      "steps": 3,
+      "unverified": 0,
+      "premise_classes": {
+        "witness condition": 1
+      },
+      "failures": []
+    },
+    "KGC377-2": {
+      "result": "SATISFIABLE"
+    },
+    "KGC378-1": {
+      "result": "SATISFIABLE"
+    },
+    "KGC378-2": {
+      "result": "FULLY_CHECKED",
+      "steps": 3,
+      "unverified": 0,
+      "premise_classes": {
+        "witness condition": 1
+      },
+      "failures": []
+    },
+    "KGC379-1": {
+      "result": "SATISFIABLE"
+    },
+    "KGC379-2": {
+      "result": "SATISFIABLE"
+    },
+    "KGC380-1": {
+      "result": "SATISFIABLE"
+    },
+    "KGC380-2": {
+      "result": "FULLY_CHECKED",
+      "steps": 13,
+      "unverified": 0,
+      "premise_classes": {
+        "axiom": 1,
+        "resource": 2,
+        "witness condition": 1
+      },
+      "failures": []
+    },
+    "KGC382-1": {
+      "result": "SATISFIABLE"
+    },
+    "KGC382-2": {
+      "result": "FULLY_CHECKED",
+      "steps": 5,
+      "unverified": 0,
+      "premise_classes": {
+        "resource": 1,
+        "witness condition": 1
+      },
+      "failures": []
+    },
+    "KGC383-1": {
+      "result": "SATISFIABLE"
+    },
+    "KGC383-2": {
+      "result": "FULLY_CHECKED",
+      "steps": 13,
+      "unverified": 0,
+      "premise_classes": {
+        "axiom": 1,
+        "resource": 2,
+        "witness condition": 1
+      },
+      "failures": []
+    },
+    "KGC388-1": {
+      "result": "SATISFIABLE"
+    },
+    "KGC388-2": {
+      "result": "FULLY_CHECKED",
+      "steps": 6,
+      "unverified": 0,
+      "premise_classes": {
+        "axiom": 1,
+        "witness condition": 1
+      },
+      "failures": []
+    },
+    "KGC391-1": {
+      "result": "SATISFIABLE"
+    },
+    "KGC391-2": {
+      "result": "FULLY_CHECKED",
+      "steps": 5,
+      "unverified": 0,
+      "premise_classes": {
+        "resource": 1,
+        "witness condition": 1
+      },
+      "failures": []
+    },
+    "KGC392-1": {
+      "result": "SATISFIABLE"
+    },
+    "KGC392-2": {
+      "result": "FULLY_CHECKED",
+      "steps": 6,
+      "unverified": 0,
+      "premise_classes": {
+        "declared distinctness": 1,
+        "witness condition": 1
+      },
+      "failures": []
+    },
+    "KGC393-1": {
+      "result": "SATISFIABLE"
+    },
+    "KGC393-2": {
+      "result": "SATISFIABLE"
+    },
+    "KGC394-1": {
+      "result": "PARTIALLY_CHECKED",
+      "steps": 16,
+      "unverified": 2,
+      "premise_classes": {
+        "declared distinctness": 2,
+        "witness condition": 1
+      },
+      "failures": [
+        {
+          "step": "f282",
+          "kind": "introduced",
+          "rule": "introduced",
+          "status": "UNSUPPORTED",
+          "detail": "symbol or clause introduced, not entailed"
+        },
+        {
+          "step": "f286",
+          "kind": "introduced",
+          "rule": "introduced",
+          "status": "UNSUPPORTED",
+          "detail": "symbol or clause introduced, not entailed"
+        }
+      ]
+    },
+    "KGC394-2": {
+      "result": "SATISFIABLE"
+    },
+    "KGC395-1": {
+      "result": "SATISFIABLE"
+    },
+    "KGC395-2": {
+      "result": "FULLY_CHECKED",
+      "steps": 6,
+      "unverified": 0,
+      "premise_classes": {
+        "resource": 1,
+        "witness condition": 1
+      },
+      "failures": []
+    },
+    "KGC396-1": {
+      "result": "SATISFIABLE"
+    },
+    "KGC396-2": {
+      "result": "PARTIALLY_CHECKED",
+      "steps": 17,
+      "unverified": 2,
+      "premise_classes": {
+        "resource": 2,
+        "witness condition": 1
+      },
+      "failures": [
+        {
+          "step": "f277",
+          "kind": "introduced",
+          "rule": "introduced",
+          "status": "UNSUPPORTED",
+          "detail": "symbol or clause introduced, not entailed"
+        },
+        {
+          "step": "f281",
+          "kind": "introduced",
+          "rule": "introduced",
+          "status": "UNSUPPORTED",
+          "detail": "symbol or clause introduced, not entailed"
+        }
+      ]
+    },
+    "KGC397-1": {
+      "result": "SATISFIABLE"
+    },
+    "KGC397-2": {
+      "result": "FULLY_CHECKED",
+      "steps": 6,
+      "unverified": 0,
+      "premise_classes": {
+        "declared distinctness": 1,
+        "witness condition": 1
+      },
+      "failures": []
+    },
+    "KGC398-1": {
+      "result": "SATISFIABLE"
+    },
+    "KGC398-2": {
+      "result": "FULLY_CHECKED",
+      "steps": 3,
+      "unverified": 0,
+      "premise_classes": {
+        "witness condition": 1
+      },
+      "failures": []
+    },
+    "KGC399-1": {
+      "result": "SATISFIABLE"
+    },
+    "KGC399-2": {
+      "result": "SATISFIABLE"
+    },
+    "KGC403-1": {
+      "result": "FULLY_CHECKED",
+      "steps": 13,
+      "unverified": 0,
+      "premise_classes": {
+        "axiom": 1,
+        "resource": 1,
+        "declared distinctness": 1,
+        "witness condition": 1
+      },
+      "failures": []
+    },
+    "KGC403-2": {
+      "result": "SATISFIABLE"
+    },
+    "KGC404-1": {
+      "result": "SATISFIABLE"
+    },
+    "KGC404-2": {
+      "result": "PARTIALLY_CHECKED",
+      "steps": 17,
+      "unverified": 5,
+      "premise_classes": {
+        "resource": 2,
+        "witness condition": 1
+      },
+      "failures": [
+        {
+          "step": "f135",
+          "kind": "premise",
+          "rule": "w_kgc404",
+          "status": "UNSUPPORTED",
+          "detail": "122 constants exceeds budget"
+        },
+        {
+          "step": "f140",
+          "kind": "inference",
+          "rule": "ennf transformation",
+          "status": "UNSUPPORTED",
+          "detail": "122 constants exceeds budget"
+        },
+        {
+          "step": "f352",
+          "kind": "inference",
+          "rule": "cnf transformation",
+          "status": "UNSUPPORTED",
+          "detail": "122 constants exceeds budget"
+        },
+        {
+          "step": "f1091",
+          "kind": "introduced",
+          "rule": "introduced",
+          "status": "UNSUPPORTED",
+          "detail": "symbol or clause introduced, not entailed"
+        },
+        {
+          "step": "f1095",
+          "kind": "introduced",
+          "rule": "introduced",
+          "status": "UNSUPPORTED",
+          "detail": "symbol or clause introduced, not entailed"
+        }
+      ]
+    }
+  },
+  "summary": {
+    "SATISFIABLE": 76,
+    "FULLY_CHECKED": 37,
+    "PARTIALLY_CHECKED": 7
+  },
+  "unsupported": {
+    "introduced introduced": [
+      "KGC336-1",
+      "KGC349-2",
+      "KGC360-2",
+      "KGC366-1",
+      "KGC394-1",
+      "KGC396-2",
+      "KGC404-2"
+    ],
+    "premise equivalence 122 constants exceeds budget": [
+      "KGC404-2"
+    ],
+    "ennf transformation": [
+      "KGC404-2"
+    ],
+    "cnf transformation": [
+      "KGC404-2"
+    ]
+  },
+  "premise_classes": {
+    "resource": 23,
+    "witness condition": 44,
+    "declared distinctness": 24,
+    "axiom": 6,
+    "declared disjointness": 2
+  }
+}

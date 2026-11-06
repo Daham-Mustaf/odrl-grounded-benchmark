@@ -30,6 +30,12 @@ check by its median, the limit, the machine, and the two prover versions.
 Every run must time every current query under its prover and nothing else, or
 suite-numbers.tex is not written.
 
+The proof checker, the two-provers stage and the end-to-end test each leave a
+JSON file in results/: proof-check.json, two-provers.json, end-to-end.json.
+The macros for the certificates, the agreement of the provers and the
+end-to-end test are read from them, and suite-numbers.tex is not written when
+one is missing or does not fit the case files and certificates.
+
 What is counted, per row:
 
     concepts     subjects the resource file types as its concept class
@@ -47,6 +53,7 @@ taken from is a claim the header makes in prose.
 """
 import argparse
 import csv
+import json
 import math
 import re
 import statistics
@@ -54,11 +61,12 @@ import sys
 from collections import Counter
 from pathlib import Path
 
-from rdflib import Graph, Namespace, RDF
+from rdflib import Graph, Literal, Namespace, RDF
 from rdflib.collection import Collection
 
 sys.path.insert(0, str(Path(__file__).parent))
 
+from operator_notes import beyond
 from signature import SIGNATURE, NOM, TAX, MER
 
 ODRL = Namespace("http://www.w3.org/ns/odrl/2/")
@@ -237,9 +245,19 @@ def read_cases(cases_dir: Path) -> list:
         declarations = next(g.objects(report, VREP.declarations), None)
         pair = [next(g.objects(report, p), None)
                 for p in (VREP.referenceConstraint, VREP.comparedConstraint)]
+        conflicts = []
+        for c in g.subjects(RDF.type, ODRL.Constraint):
+            op = local(next(g.objects(c, ODRL.operator)))
+            for lo in g.objects(c, ODRL.leftOperand):
+                if beyond(lo, op):
+                    conflicts.append((local(lo), op))
         out.append({
             "id": f.stem,
             "outcome": outcome,
+            "ill_sorted": (report, VREP.wellSorted, Literal(False)) in g,
+            "read_against": {local(o).removesuffix("-report")
+                             for o in g.objects(report, VREP.readAgainst)},
+            "note_conflicts": conflicts,
             "binding": local(next(g.objects(report, VREP.binding))),
             "declarations": str(declarations) if declarations else "",
             "operators": {local(o) for o in g.objects(None, ODRL.operator)},
@@ -624,7 +642,147 @@ def closed_world_problems(closed, tests) -> list:
     return out
 
 
-def suite_numbers_tex(rs, totals, timings, tests, closed, certificates) -> str:
+PROOF_CHECK = RESULTS / "proof-check.json"
+TWO_PROVERS = RESULTS / "two-provers.json"
+END_TO_END = RESULTS / "end-to-end.json"
+
+
+def read_outputs(root: Path) -> dict:
+    """The JSON files the proof checker, the two-provers stage and the
+    end-to-end test write.  A file that is not there is None."""
+    out = {}
+    for key, rel in (("proof", PROOF_CHECK), ("provers", TWO_PROVERS),
+                     ("e2e", END_TO_END)):
+        path = root / rel
+        out[key] = (json.loads(path.read_text(encoding="utf-8"))
+                    if path.exists() else None)
+    return out
+
+
+def coverage_cells(tests) -> tuple:
+    """(admitted, excluded): the cells of the grid the case files fill.  An
+    admitted cell has a test case with a verdict, an excluded one a test case
+    rejected as ill sorted for that operator at that sort."""
+    sort_of = sort_of_binding()
+    admitted = excluded = 0
+    for op, (admits, _) in SIGNATURE.items():
+        for sort in (NOM, TAX, MER):
+            at = [c for c in tests
+                  if sort_of[c["binding"]] == sort and op in c["operators"]]
+            if sort in admits:
+                admitted += any(c["outcome"] in ("C", "I", "U") for c in at)
+            else:
+                excluded += any(c["ill_sorted"] for c in at)
+    return admitted, excluded
+
+
+def read_against_links(tests) -> set:
+    """Every read-against link, once, whichever case states it."""
+    return {frozenset((c["id"], other)) for c in tests
+            for other in c["read_against"]}
+
+
+def note_conflicts(tests) -> tuple:
+    """(constraints in test cases with a verdict, rejected test cases): the
+    constraints whose operator the DPV-ODRL notes do not list."""
+    verdict = sum(len(c["note_conflicts"]) for c in tests
+                  if c["outcome"] in ("C", "I", "U"))
+    rejected = [c["id"] for c in tests
+                if c["outcome"] == "rejected" and c["note_conflicts"]]
+    return verdict, rejected
+
+
+CITES = (("constraints and order axioms only", False, False),
+         ("statements of the resource", True, False),
+         ("declarations", False, True),
+         ("statements of the resource and declarations", True, True))
+
+
+def cites_counts(tests, certificates: Path) -> list:
+    """(label, Compatible, Incompatible) for what each Vampire proof cites."""
+    n = Counter()
+    for c in tests:
+        if c["outcome"] in ("C", "I"):
+            sources = {src for src, _ in cited(certificates, c["id"])}
+            n[("fromResource" in sources, "fromDeclarations" in sources,
+               c["outcome"])] += 1
+    return [(label, n[(res, decl, "C")], n[(res, decl, "I")])
+            for label, res, decl in CITES]
+
+
+def cites_table(rows) -> list:
+    lines = [
+        "\\newcommand{\\suiteCitesTable}{%",
+        "\\begin{tabular}{lrrr}",
+        "\\hline",
+        "the proof cites & Compatible & Incompatible & total \\\\",
+        "\\hline",
+    ]
+    for label, comp, inc in rows:
+        lines.append(f"{label} & {comp} & {inc} & {comp + inc} \\\\")
+    lines += ["\\hline",
+              f"total & {sum(r[1] for r in rows)} & {sum(r[2] for r in rows)}"
+              f" & {sum(r[1] + r[2] for r in rows)} \\\\",
+              "\\hline", "\\end{tabular}%", "}"]
+    return lines
+
+
+def certificate_ids(certificates: Path) -> set:
+    return {p.name.removesuffix("-observed.ttl")
+            for p in certificates.glob("*-observed.ttl")}
+
+
+def output_problems(outputs, tests, certificates: Path) -> list:
+    """Why the run outputs do not fit the case files, or an empty list."""
+    out = [f"{rel} not found: run full-run.sh"
+           for key, rel in (("proof", PROOF_CHECK), ("provers", TWO_PROVERS),
+                            ("e2e", END_TO_END)) if outputs[key] is None]
+    definite = {c["id"] for c in tests if c["outcome"] in ("C", "I")}
+    have = certificate_ids(certificates)
+    for cid in sorted(definite - have):
+        out.append(f"{cid} has a definite verdict and no observed certificate")
+    for cid in sorted(have - definite):
+        out.append(f"{cid} has an observed certificate and no definite verdict")
+    if outputs["proof"] is not None:
+        s = outputs["proof"]["summary"]
+        checked = (s.get("FULLY_CHECKED", 0) + s.get("PARTIALLY_CHECKED", 0)
+                   + s.get("REJECTED", 0))
+        if checked != len(definite):
+            out.append(f"{PROOF_CHECK} checked {checked} proofs, and "
+                       f"{len(definite)} verdicts are definite")
+        if set(s) - {"FULLY_CHECKED", "PARTIALLY_CHECKED", "REJECTED",
+                     "SATISFIABLE"}:
+            out.append(f"{PROOF_CHECK}: a query got no status: {s}")
+    if outputs["provers"] is not None:
+        v = outputs["provers"]
+        if v["refutations"] != len(definite):
+            out.append(f"{TWO_PROVERS} has {v['refutations']} refutations, and "
+                       f"{len(definite)} verdicts are definite")
+        if v["provenance_agree"] + len(v["provenance_differ"]) != v["refutations"]:
+            out.append(f"{TWO_PROVERS}: agree and differ do not sum to the "
+                       f"refutations")
+        if v["status_disagreement"]:
+            out.append(f"{TWO_PROVERS}: the provers disagree on "
+                       + ", ".join(v["status_disagreement"]))
+    if outputs["e2e"] is not None and outputs["e2e"]["disagreements"]:
+        out.append(f"{END_TO_END}: the pipeline and the definitions disagree "
+                   f"on {outputs['e2e']['disagreements']} problems")
+    admitted, excluded = coverage_cells(tests)
+    if admitted + excluded != len(SIGNATURE) * 3:
+        out.append(f"the case files fill {admitted} admitted and {excluded} "
+                   f"excluded cells of {len(SIGNATURE) * 3}")
+    links = read_against_links(tests)
+    stated = sum(len(c["read_against"]) for c in tests)
+    if stated != 2 * len(links):
+        out.append(f"{stated} read-against statements for {len(links)} links: "
+                   f"a link is not stated from both sides")
+    if sum(a + b for _, a, b in cites_counts(tests, certificates)) != len(definite):
+        out.append("the proofs cited do not sum to the definite verdicts")
+    return out
+
+
+def suite_numbers_tex(rs, totals, timings, tests, closed, certificates,
+                      outputs) -> str:
     """suite-numbers.tex: the macros and the tables."""
     definite = totals["compatible"] + totals["incompatible"]
     macros = [
@@ -652,6 +810,27 @@ def suite_numbers_tex(rs, totals, timings, tests, closed, certificates) -> str:
         f"; each query alone, one at a time, at most"
         f" {timings[0][1]['limit']} s.",
     ]
+    admitted, excluded = coverage_cells(tests)
+    conflicts, rejected_conflicts = note_conflicts(tests)
+    checked = outputs["proof"]["summary"]
+    macros += [
+        ("suiteControls",        totals["accepted"]),
+        ("suiteCellsAdmitted",   admitted),
+        ("suiteCellsExcluded",   excluded),
+        ("suiteNoteConflicts",   conflicts),
+        ("suiteCertificates",    len(certificate_ids(certificates))),
+        ("suiteFullyChecked",    checked.get("FULLY_CHECKED", 0)),
+        ("suitePartlyChecked",   checked.get("PARTIALLY_CHECKED", 0)),
+        ("suiteProofRejected",   checked.get("REJECTED", 0)),
+        ("suiteProvenanceAgree", outputs["provers"]["provenance_agree"]),
+        ("suiteEtoEProblems",    outputs["e2e"]["problems"]),
+        ("suiteEtoEDisagree",    outputs["e2e"]["disagreements"]),
+        ("suiteReadAgainst",     len(read_against_links(tests))),
+    ]
+    lines.append(f"% suiteNoteConflicts counts constraints in test cases with a"
+                 f" verdict. Rejected test cases hold"
+                 f" {len(rejected_conflicts)} more: "
+                 + ", ".join(rejected_conflicts) + ".")
     pairs = declaration_pairs(tests)
     macros.append(("suiteReadAgainstDecl", len(pairs)))
     lines.append("% Differ in the declarations only: "
@@ -686,6 +865,7 @@ def suite_numbers_tex(rs, totals, timings, tests, closed, certificates) -> str:
         "}",
     ]
     lines += coverage_table(tests)
+    lines += cites_table(cites_counts(tests, certificates))
     rows = challenges(tests, closed, certificates)
     outside = under_no_challenge(rows, tests)
     lines.insert(5, "% Under no challenge: "
@@ -733,6 +913,8 @@ def main() -> int:
         problems = suite_problems(rs, totals) + timing_problems(
             timings, args.root / "problems" / "verdict") + \
             closed_world_problems(closed, tests)
+        outputs = read_outputs(args.root)
+        problems += output_problems(outputs, tests, args.root / "certificates")
         if problems:
             print("not written, the figures do not add up:", file=sys.stderr)
             for pr in problems:
@@ -740,7 +922,8 @@ def main() -> int:
             return 1
         out = args.root / args.suite_numbers
         out.write_text(suite_numbers_tex(
-            rs, totals, timings, tests, closed, args.root / "certificates"),
+            rs, totals, timings, tests, closed, args.root / "certificates",
+            outputs),
             encoding="utf-8")
         print(f"wrote {out}: {totals['files']} cases, {len(rs)} bindings")
         return 0

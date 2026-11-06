@@ -8,8 +8,14 @@ certificate beside the expected one.
     uv run generators/run_certify.py
     uv run generators/run_certify.py --problem KGC310
     uv run generators/run_certify.py --prover vampire     # one only
+    uv run generators/run_certify.py --json results/two-provers.json
+
+--json writes the counts the figures for the paper read: the refutations, how
+many of them the two provers agree on by provenance, and any status they differ
+on.
 """
 import argparse
+import json
 import re
 import subprocess
 import sys
@@ -133,6 +139,7 @@ def main() -> int:
     ap.add_argument("--prover", choices=("both", "vampire", "z3"),
                     default="both")
     ap.add_argument("--timeout", type=int, default=30)
+    ap.add_argument("--json", type=Path, help="write the counts here")
     args = ap.parse_args()
 
     pdir, odir = Path(args.problems_dir), Path(args.out_dir)
@@ -148,7 +155,7 @@ def main() -> int:
     use_v = args.prover in ("both", "vampire")
     use_z = args.prover in ("both", "z3")
     agree = disagree = matched = mismatched = 0
-    explained = []
+    explained, inconclusive, clashes, differ = [], [], [], []
 
     for q1path in problems:
         pid = q1path.name[:-4]
@@ -176,6 +183,7 @@ def main() -> int:
                 label = "STATUS DISAGREEMENT" if clash else "STATUS INCONCLUSIVE"
                 print(f"{pid}  {label}  "
                       f"vampire=({s1},{s2}) z3=({z1},{z2})")
+                (clashes if clash else inconclusive).append(pid)
                 if not clash:
                     s1 = s1 if s1 in definite else z1
                     s2 = s2 if s2 in definite else z2
@@ -267,6 +275,7 @@ def main() -> int:
                 print(f"    both provers: {shape}")
             else:
                 disagree += 1
+                differ.append(pid)
                 print(f"    PROVERS DIFFER  {pid}  vampire={a}  z3={b}")
                 if pid in EXPLAINED:
                     explained.append(pid)
@@ -279,6 +288,17 @@ def main() -> int:
     if use_v:
         print(f"certificate agreement: {matched} match, "
               f"{mismatched} differ from the problem's declaration")
+    if args.json:
+        args.json.parent.mkdir(parents=True, exist_ok=True)
+        args.json.write_text(json.dumps({
+            "problems": len(problems),
+            "refutations": agree + disagree,
+            "provenance_agree": agree,
+            "provenance_differ": differ,
+            "explained": explained,
+            "status_inconclusive": inconclusive,
+            "status_disagreement": clashes,
+        }, indent=2) + "\n", encoding="utf-8")
     return 0
 
 

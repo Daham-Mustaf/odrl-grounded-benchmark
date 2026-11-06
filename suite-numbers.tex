@@ -4,6 +4,7 @@
 % Rejected is ill sorted plus ungrounded.
 % Times: timings.csv of 2026-10-30T15:21:53+01:00; each query alone, one at a time, at most 60 s.
 % Under no challenge: none.
+% suiteNoteConflicts counts constraints in test cases with a verdict. Rejected test cases hold 3 more: KGC101, KGC105, KGC381.
 % Differ in the declarations only: KGC303/KGC304, KGC308/KGC309, KGC313/KGC314, KGC316/KGC403, KGC320/KGC321, KGC333/KGC334, KGC342/KGC343/KGC348, KGC363/KGC364, KGC370/KGC371, KGC374/KGC375, KGC393/KGC394.
 \newcommand{\suiteCases}{71}
 \newcommand{\suiteQueries}{120}
@@ -15,6 +16,18 @@
 \newcommand{\suiteIllSorted}{6}
 \newcommand{\suiteUngrounded}{2}
 \newcommand{\suiteBindings}{9}
+\newcommand{\suiteControls}{3}
+\newcommand{\suiteCellsAdmitted}{18}
+\newcommand{\suiteCellsExcluded}{6}
+\newcommand{\suiteNoteConflicts}{14}
+\newcommand{\suiteCertificates}{44}
+\newcommand{\suiteFullyChecked}{37}
+\newcommand{\suitePartlyChecked}{7}
+\newcommand{\suiteProofRejected}{0}
+\newcommand{\suiteProvenanceAgree}{43}
+\newcommand{\suiteEtoEProblems}{2004}
+\newcommand{\suiteEtoEDisagree}{0}
+\newcommand{\suiteReadAgainst}{22}
 \newcommand{\suiteReadAgainstDecl}{11}
 \newcommand{\suiteRuns}{1}
 \newcommand{\suiteTime}{43.8}
@@ -58,6 +71,20 @@ isNoneOf & 0/1/0 & 2/1/0 & 1/0/0 \\
 isA & rejected & 7/2/6 & rejected \\
 isPartOf & rejected & rejected & 6/1/1 \\
 hasPart & rejected & rejected & 1/0/0 \\
+\hline
+\end{tabular}%
+}
+\newcommand{\suiteCitesTable}{%
+\begin{tabular}{lrrr}
+\hline
+the proof cites & Compatible & Incompatible & total \\
+\hline
+constraints and order axioms only & 7 & 2 & 9 \\
+statements of the resource & 13 & 0 & 13 \\
+declarations & 8 & 12 & 20 \\
+statements of the resource and declarations & 0 & 2 & 2 \\
+\hline
+total & 28 & 16 & 44 \\
 \hline
 \end{tabular}%
 }

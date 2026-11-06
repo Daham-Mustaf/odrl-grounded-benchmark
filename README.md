@@ -88,6 +88,8 @@ problems/
 cases/            one file per problem: the two policies and the
                   expected report
 certificates/     what the provers produced, and what they cited
+results/          what the runs wrote: the times, the proof checker's report,
+                  the two provers' counts, the end-to-end test, the closed world
 vocab/            the schemas for the terms this project mints
 probes/           statements each binding must and must not entail
 design/           modules written against the definitions and not yet

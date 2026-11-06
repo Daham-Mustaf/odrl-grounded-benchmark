@@ -7,6 +7,7 @@ random problems small enough to decide by enumeration.
     uv run tests/test_end_to_end.py                     # 2000 random + 4 fixed
     uv run tests/test_end_to_end.py --count 500 --vampire 50
     uv run tests/test_end_to_end.py --keep /tmp/e2e     # keep the queries
+    uv run tests/test_end_to_end.py --json results/end-to-end.json
 
 What a problem is
 -----------------
@@ -51,6 +52,7 @@ the shim below does what the case data did then.
 
 import argparse
 import itertools
+import json
 import os
 import random
 import re
@@ -354,7 +356,11 @@ def main() -> int:
     ap.add_argument("--seed", type=int, default=SEED)
     ap.add_argument("--jobs", type=int, default=8)
     ap.add_argument("--keep", type=Path, help="write the queries here and keep them")
+    ap.add_argument("--json", type=Path,
+                    help="write the counts the figures for the paper read here")
     args = ap.parse_args()
+    if args.json:
+        args.json = args.json.resolve()
 
     rng = random.Random(args.seed)
 
@@ -450,6 +456,18 @@ def main() -> int:
             print(f"        a structure with no use: {r['without'].describe()}")
         print(f"        queries: {r['paths'][('fof', 1)].parent}/{pr['pid']}-*")
     print(f"\n{len(bad)} disagreement(s)")
+    if args.json:
+        args.json.parent.mkdir(parents=True, exist_ok=True)
+        args.json.write_text(json.dumps({
+            "problems": len(rows),
+            "random": args.count,
+            "fixed": len(rows) - args.count,
+            "seed": args.seed,
+            "vampire_problems": len(sample),
+            "skipped_no_structure": skipped,
+            "from_definitions": dict(sorted(tally.items())),
+            "disagreements": len(bad),
+        }, indent=2) + "\n", encoding="utf-8")
     if not args.keep:
         shutil.rmtree(work, ignore_errors=True)
     return 1 if bad else 0

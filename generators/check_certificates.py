@@ -765,7 +765,7 @@ def main() -> int:
             "unsupported": {r: sorted(ids)
                             for r, ids in suite_unsupported.items()},
             "premise_classes": dict(suite_premises),
-        }, indent=2))
+        }, indent=2) + "\n")
         print(f"\nreport written to {args.json}")
     return 0
 
