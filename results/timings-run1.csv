@@ -4,31 +4,31 @@
 # cpu: Apple M4 Pro, 14 logical cores
 # ram: 24.0 GiB
 # os: macOS 27.2
-# date: 2026-11-06T21:05:16+03:00
+# date: 2026-11-07T09:59:12+03:00
 # limit: 300
-# run: 1 of 1
+# run: 1 of 3
 # runs: each query alone, one at a time
 query,prover,status,seconds
 KGC301-1,vampire,sat,0.13
-KGC301-1,z3,sat,0.01
+KGC301-1,z3,sat,0.03
 KGC301-2,vampire,sat,0.13
 KGC301-2,z3,sat,0.01
 KGC302-1,vampire,sat,0.11
-KGC302-1,z3,sat,0.03
+KGC302-1,z3,sat,0.02
 KGC302-2,vampire,unsat,0.01
 KGC302-2,z3,unsat,0.01
 KGC303-1,vampire,sat,0.11
-KGC303-1,z3,sat,0.03
+KGC303-1,z3,sat,0.02
 KGC303-2,vampire,sat,0.11
 KGC303-2,z3,sat,0.03
 KGC304-1,vampire,sat,0.11
-KGC304-1,z3,sat,0.03
+KGC304-1,z3,sat,0.02
 KGC304-2,vampire,unsat,0.01
 KGC304-2,z3,unsat,0.01
 KGC308-1,vampire,sat,0.11
-KGC308-1,z3,sat,0.04
+KGC308-1,z3,sat,0.03
 KGC308-2,vampire,sat,0.11
-KGC308-2,z3,sat,0.03
+KGC308-2,z3,sat,0.02
 KGC309-1,vampire,unsat,0.01
 KGC309-1,z3,unsat,0.01
 KGC309-2,vampire,sat,0.11
@@ -47,7 +47,7 @@ KGC314-2,vampire,sat,0.13
 KGC314-2,z3,sat,0.01
 KGC315-1,vampire,sat,0.13
 KGC315-1,z3,sat,0.01
-KGC315-2,vampire,unsat,0.02
+KGC315-2,vampire,unsat,0.01
 KGC315-2,z3,unsat,0.01
 KGC316-1,vampire,sat,0.13
 KGC316-1,z3,sat,0.01
@@ -55,13 +55,13 @@ KGC316-2,vampire,sat,0.13
 KGC316-2,z3,sat,0.01
 KGC317-1,vampire,unsat,0.01
 KGC317-1,z3,unsat,0.01
-KGC317-2,vampire,sat,0.13
+KGC317-2,vampire,sat,0.12
 KGC317-2,z3,sat,0.01
-KGC318-1,vampire,sat,0.13
+KGC318-1,vampire,sat,0.12
 KGC318-1,z3,sat,0.01
 KGC318-2,vampire,unsat,0.01
 KGC318-2,z3,unsat,0.01
-KGC319-1,vampire,sat,0.13
+KGC319-1,vampire,sat,0.12
 KGC319-1,z3,sat,0.01
 KGC319-2,vampire,sat,0.13
 KGC319-2,z3,sat,0.01
@@ -81,11 +81,11 @@ KGC323-1,vampire,sat,0.01
 KGC323-1,z3,sat,0.01
 KGC323-2,vampire,unsat,0.01
 KGC323-2,z3,unsat,0.01
-KGC331-1,vampire,sat,0.44
+KGC331-1,vampire,sat,0.45
 KGC331-1,z3,sat,0.01
 KGC331-2,vampire,unsat,0.02
 KGC331-2,z3,unsat,0.01
-KGC333-1,vampire,sat,0.45
+KGC333-1,vampire,sat,0.44
 KGC333-1,z3,sat,0.01
 KGC333-2,vampire,sat,0.45
 KGC333-2,z3,sat,0.01
@@ -197,15 +197,15 @@ KGC382-1,vampire,sat,0.44
 KGC382-1,z3,sat,0.01
 KGC382-2,vampire,unsat,0.02
 KGC382-2,z3,unsat,0.01
-KGC383-1,vampire,sat,0.45
+KGC383-1,vampire,sat,0.44
 KGC383-1,z3,sat,0.01
-KGC383-2,vampire,unsat,1.03
+KGC383-2,vampire,unsat,1.02
 KGC383-2,z3,unsat,0.01
 KGC388-1,vampire,sat,0.44
 KGC388-1,z3,sat,0.01
 KGC388-2,vampire,unsat,0.02
 KGC388-2,z3,unsat,0.01
-KGC391-1,vampire,sat,0.45
+KGC391-1,vampire,sat,0.44
 KGC391-1,z3,sat,0.01
 KGC391-2,vampire,unsat,0.02
 KGC391-2,z3,unsat,0.01
@@ -215,7 +215,7 @@ KGC392-2,vampire,unsat,0.02
 KGC392-2,z3,unsat,0.01
 KGC393-1,vampire,sat,0.13
 KGC393-1,z3,sat,0.01
-KGC393-2,vampire,sat,0.13
+KGC393-2,vampire,sat,0.12
 KGC393-2,z3,sat,0.01
 KGC394-1,vampire,unsat,0.01
 KGC394-1,z3,unsat,0.01
@@ -225,7 +225,7 @@ KGC395-1,vampire,sat,0.13
 KGC395-1,z3,sat,0.01
 KGC395-2,vampire,unsat,0.01
 KGC395-2,z3,unsat,0.01
-KGC396-1,vampire,sat,0.13
+KGC396-1,vampire,sat,0.12
 KGC396-1,z3,sat,0.01
 KGC396-2,vampire,unsat,0.01
 KGC396-2,z3,unsat,0.01
@@ -237,7 +237,7 @@ KGC398-1,vampire,sat,0.01
 KGC398-1,z3,sat,0.01
 KGC398-2,vampire,unsat,0.01
 KGC398-2,z3,unsat,0.01
-KGC399-1,vampire,sat,0.13
+KGC399-1,vampire,sat,0.12
 KGC399-1,z3,sat,0.01
 KGC399-2,vampire,sat,0.13
 KGC399-2,z3,sat,0.01
@@ -246,6 +246,6 @@ KGC403-1,z3,unsat,0.01
 KGC403-2,vampire,sat,0.13
 KGC403-2,z3,sat,0.01
 KGC404-1,vampire,sat,0.13
-KGC404-1,z3,sat,12.09
+KGC404-1,z3,sat,11.96
 KGC404-2,vampire,unsat,0.01
 KGC404-2,z3,unsat,0.01
