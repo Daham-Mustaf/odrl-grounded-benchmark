@@ -290,9 +290,11 @@ Dockerfile that pins both provers: the Vampire 5.0.1 release binary,
 checked against its hash, and Debian bookworm's Z3 4.8.12.
 
 ```bash
-docker build -t odrl-benchmark .
-docker run --rm odrl-benchmark
+docker build --platform linux/amd64 -t odrl-benchmark .
+docker run --rm --platform linux/amd64 odrl-benchmark
 ```
+
+The platform is named because the pinned Vampire is an x86-64 binary.
 
 This prints the prover versions the image holds, recorded in
 `/benchmark/ENVIRONMENT`, and runs `full-run.sh`, so the container
@@ -306,10 +308,9 @@ line tools and CMake.
 
 Vampire 5.0.1, from source at commit 1b13eaf, built without the Z3 link: the
 `z3` submodule stays out, and a static link does not work on macOS, so
-`BUILD_SHARED_LIBS` keeps its default. 43 of the 44 proofs are identical to the
+`BUILD_SHARED_LIBS` keeps its default. 44 of the 44 proofs are identical to the
 release binary's apart from the lines that give the version, the time and the
-memory. The release binary's proof of the other, KGC404-2, predates the
-disjunct RightsFulfilment added to its formula.
+memory.
 
 ```bash
 git clone https://github.com/vprover/vampire.git
