@@ -298,6 +298,69 @@ This prints the prover versions the image holds, recorded in
 `/benchmark/ENVIRONMENT`, and runs `full-run.sh`, so the container
 checks exactly what a local run checks and exits with its status.
 
+### Building the pinned provers on macOS
+
+The binaries the Dockerfile pins are for Linux. On a Mac the two provers and
+tptp4X are built from source, outside the repository, with the Xcode command
+line tools and CMake.
+
+Vampire 5.0.1, from source at commit 1b13eaf, built without the Z3 link: the
+`z3` submodule stays out, and a static link does not work on macOS, so
+`BUILD_SHARED_LIBS` keeps its default. 43 of the 44 proofs are identical to the
+release binary's apart from the lines that give the version, the time and the
+memory. The release binary's proof of the other, KGC404-2, predates the
+disjunct RightsFulfilment added to its formula.
+
+```bash
+git clone https://github.com/vprover/vampire.git
+cd vampire
+git checkout 1b13eaf
+git submodule update --init --depth 1 cadical viras
+cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DCMAKE_POLICY_VERSION_MINIMUM=3.5
+cmake --build build -j "$(sysctl -n hw.ncpu)"
+```
+
+The binary is `build/vampire`.
+
+Z3 4.8.12, from the tag `z3-4.8.12` with `tools/z3-4.8.12-clang21.patch`. Apple
+clang 21 rejects four places in templates that are never instantiated, so the
+patch changes no code that runs. No z3-solver 4.8.12 wheel exists for arm64.
+
+```bash
+git clone --depth 1 --branch z3-4.8.12 https://github.com/Z3Prover/z3.git z3-4.8.12
+cd z3-4.8.12
+git apply /path/to/odrl-grounded-benchmark/tools/z3-4.8.12-clang21.patch
+cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DZ3_BUILD_LIBZ3_SHARED=OFF -DZ3_ENABLE_EXAMPLE_TARGETS=OFF -DZ3_BUILD_TEST_EXECUTABLES=OFF -DCMAKE_POLICY_VERSION_MINIMUM=3.5
+cmake --build build -j "$(sysctl -n hw.ncpu)" --target shell
+```
+
+The binary is `build/z3`.
+
+tptp4X, from TPTP4X at ce83fd4 and JJParser at 94a781a.
+
+```bash
+git clone https://github.com/TPTPWorld/JJParser.git
+git -C JJParser checkout 94a781a
+git clone https://github.com/TPTPWorld/TPTP4X.git
+git -C TPTP4X checkout ce83fd4
+cd TPTP4X
+make JJPARSER=../JJParser CC=clang CFLAGS="-w -I../JJParser -DTPTP_HOME=\\\"$HOME/tptp\\\"" LFLAGS="-lcurl -lm"
+```
+
+The binary is `tptp4X`.
+
+Three environment variables name them. `full-run.sh`, the timing stage and the
+TPTP runner read `VAMPIRE` and `Z3` and never search PATH, so a newer prover on
+the PATH cannot stand in; Vampire 5.1.0, for one, rejects
+`--output_axiom_names`, which stage 7 needs. `generators/run_tptp.py check`
+reads `TPTP4X`.
+
+```bash
+export VAMPIRE=/path/to/vampire/build/vampire
+export Z3=/path/to/z3-4.8.12/build/z3
+export TPTP4X=/path/to/TPTP4X/tptp4X
+```
+
 ---
 
 ## Verdict reports
