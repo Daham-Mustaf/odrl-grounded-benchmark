@@ -6,10 +6,10 @@ set_option autoImplicit false
 # Properties of the verdict
 
 Paper: Definition (Models) and the consistency assumption, Proposition
-(Monotonicity under extension), Theorem (Soundness).
+(Adding statements), Theorem (Soundness).
 
-`Compatible` and `Incompatible` both hold when the theory has no model, so
-the verdicts are exclusive only for a consistent theory, which the paper
+`Compatible` and `Incompatible` both hold when the statements have no model, so
+the verdicts are exclusive only for consistent statements, which the paper
 assumes throughout. Monotonicity and soundness need no further assumption
 beyond that.
 -/
@@ -18,10 +18,10 @@ namespace OdrlGrounded
 
 section
 
-variable {C : Type} {T T' : List (Assertion C)} {N : C → Prop}
+variable {C : Type} {T T' : List (Statement C)} {N : C → Prop}
   {t t' : ConstraintSet C}
 
-/-- For a consistent theory the two definite cases exclude each other. -/
+/-- For consistent statements the two definite cases exclude each other. -/
 theorem not_compatible_and_incompatible (hT : Consistent T) :
     ¬ (Compatible T N t t' ∧ Incompatible T N t t') := by
   rintro ⟨hc, hi⟩
@@ -52,7 +52,7 @@ theorem verdict_eq_unknown_iff :
   · simp [h]
   · by_cases h' : Incompatible T N t t' <;> simp [h, h']
 
-/-- Adding assertions shrinks the class of models. -/
+/-- Adding statements shrinks the class of models. -/
 theorem compatible_mono (hsub : ∀ a ∈ T, a ∈ T') :
     Compatible T N t t' → Compatible T' N t t' := by
   intro h M hM
@@ -63,14 +63,14 @@ theorem incompatible_mono (hsub : ∀ a ∈ T, a ∈ T') :
   intro h M hM
   exact h M (fun a ha => hM a (hsub a ha))
 
-/-- Proposition (Monotonicity under extension), Compatible case. -/
+/-- Proposition (Adding statements), Compatible case. -/
 theorem verdict_compatible_mono (hsub : ∀ a ∈ T, a ∈ T')
     (h : verdict T N t t' = Verdict.compatible) :
     verdict T' N t t' = Verdict.compatible :=
   verdict_eq_compatible_iff.mpr
     (compatible_mono hsub (verdict_eq_compatible_iff.mp h))
 
-/-- Proposition (Monotonicity under extension), Incompatible case. -/
+/-- Proposition (Adding statements), Incompatible case. -/
 theorem verdict_incompatible_mono (hsub : ∀ a ∈ T, a ∈ T')
     (hT' : Consistent T')
     (h : verdict T N t t' = Verdict.incompatible) :
@@ -82,13 +82,13 @@ theorem verdict_incompatible_mono (hsub : ∀ a ∈ T, a ∈ T')
     (incompatible_mono hsub ((verdict_eq_incompatible_iff hT).mp h))
 
 /-- Theorem (Soundness), Compatible case. `I` is the intended structure,
-a model of the theory. -/
-theorem sound_compatible (I : Model C) (hI : Mod T I)
+a model of the statements. -/
+theorem sound_compatible (I : ConceptOrder C) (hI : Mod T I)
     (h : verdict T N t t' = Verdict.compatible) : I.admits N (t ++ t') :=
   (verdict_eq_compatible_iff.mp h) I hI
 
 /-- Theorem (Soundness), Incompatible case. -/
-theorem sound_incompatible (I : Model C) (hI : Mod T I)
+theorem sound_incompatible (I : ConceptOrder C) (hI : Mod T I)
     (h : verdict T N t t' = Verdict.incompatible) :
     ¬ I.admits N (t ++ t') := by
   have hT : Consistent T := ⟨I, hI⟩
@@ -98,10 +98,10 @@ end
 
 section
 
-variable {V C : Type} {T T' : List (Assertion C)}
+variable {V C : Type} {T T' : List (Statement C)}
 
 /-- Monotonicity for the verdict with the ungrounded clause. The grounding
-does not depend on the theory, so an ungrounded pair stays without a verdict. -/
+does not depend on the statements, so an ungrounded pair stays rejected. -/
 theorem groundedVerdict_compatible_mono (γ : Grounding V C)
     (hsub : ∀ a ∈ T, a ∈ T') (t t' : ConstraintSet V)
     (h : groundedVerdict γ T t t' = some Verdict.compatible) :

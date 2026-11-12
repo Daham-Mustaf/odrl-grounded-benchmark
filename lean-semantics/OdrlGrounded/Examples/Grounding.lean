@@ -6,35 +6,36 @@ set_option autoImplicit false
 /-!
 # Running example, language row, with values
 
-The policy names languages by value. The BCP 47 binding grounds `german` to
-`de` and `french` to `fr`. The value `klingon` names no concept of the binding.
+The policy names languages by value: the values `de` and `fr`, as in Figure 1.
+The BCP 47 binding grounds each to the concept of the same name. The value
+`klingon` names no concept of the binding.
 -/
 
 namespace OdrlGrounded.Example
 
 inductive LangVal where
-  | german
-  | french
+  | de
+  | fr
   | klingon
   deriving DecidableEq, Repr
 
 def langGrounding : LangVal → Option L
-  | .german => some de
-  | .french => some fr
+  | .de => some de
+  | .fr => some fr
   | .klingon => none
 
-def langOffer : ConstraintSet LangVal := [.atom (.eq .german)]
+def langOffer : ConstraintSet LangVal := [.atom (.eq .de)]
 
-/-- The request `french or klingon`. -/
+/-- The request `fr or klingon`. -/
 def langRequestBad : ConstraintSet LangVal :=
-  [.or [.eq .french, .eq .klingon]]
+  [.or [.eq .fr, .eq .klingon]]
 
 theorem langRequestBad_ungrounded :
     ConstraintSet.ground langGrounding langRequestBad = none := by
   decide
 
 /-- One ungrounded alternative leaves the whole request without a denotation,
-so there is no verdict. The grounded offer `eq de` against the request `eq fr`
+so the input is rejected. The grounded offer `eq de` against the request `eq fr`
 alone is `Incompatible` under the same declaration
 (`language_declared_verdict`). -/
 theorem ungrounded_alternative_none :

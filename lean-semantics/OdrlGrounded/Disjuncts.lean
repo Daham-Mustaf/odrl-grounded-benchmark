@@ -5,7 +5,8 @@ set_option autoImplicit false
 /-!
 # Constraint sets as disjuncts
 
-Paper: Lemma (Reduction of a constraint set), then the witness lemma.
+Paper: Section (Computing Compatibility Verdicts), paragraph (Cases), then
+Lemma (Formula and valuations).
 
 A constraint set is a conjunction of members. A member is an atom, an `or`, or
 an `xone`. Distributing the conjunction over the alternatives gives a list of
@@ -25,7 +26,7 @@ namespace OdrlGrounded
 
 /-! ## Negated literals -/
 
-theorem not_within_iff {C : Type} (M : Model C) (ρ : List C) (S : C → Prop) :
+theorem not_within_iff {C : Type} (M : ConceptOrder C) (ρ : List C) (S : C → Prop) :
     ¬ (∀ y, M.elems ρ y → S y) ↔ ∃ y, M.elems ρ y ∧ ¬ S y := by
   constructor
   · intro h
@@ -35,7 +36,7 @@ theorem not_within_iff {C : Type} (M : Model C) (ρ : List C) (S : C → Prop) :
   · rintro ⟨y, hy, hn⟩ h
     exact hn (h y hy)
 
-theorem not_meets_iff {C : Type} (M : Model C) (ρ : List C) (T : C → Prop) :
+theorem not_meets_iff {C : Type} (M : ConceptOrder C) (ρ : List C) (T : C → Prop) :
     ¬ (∃ y, M.elems ρ y ∧ T y) ↔ ∀ y, M.elems ρ y → ¬ T y := by
   constructor
   · intro h y hy hT
@@ -50,12 +51,12 @@ variable {C : Type}
 /-- The literal for the negation of an atomic constraint. For `isAllOf` there
 is none, and the value here is never used, because well-sortedness excludes
 `isAllOf` under `xone`. -/
-def negLit (M : Model C) : Atom C → Lit C
+def negLit (M : ConceptOrder C) : Atom C → Lit C
   | .isAnyOf gs => .within (fun y => ¬ (Atom.isAnyOf gs).denot M y)
   | .isAllOf _ => .meets (fun _ => False)
   | a => .meets (fun y => ¬ a.denot M y)
 
-theorem negLit_closed (M : Model C) (a : Atom C) :
+theorem negLit_closed (M : ConceptOrder C) (a : Atom C) :
     (Atom.negLit M a).closed M := by
   cases a with
   | eq _ => exact True.intro
@@ -72,7 +73,7 @@ theorem negLit_closed (M : Model C) (a : Atom C) :
 end Atom
 
 /-- A negated atomic constraint holds exactly when its negated literal does. -/
-theorem satAtom_neg_iff {C : Type} (M : Model C) (ρ : List C) (a : Atom C)
+theorem satAtom_neg_iff {C : Type} (M : ConceptOrder C) (ρ : List C) (a : Atom C)
     (h : a.isAllOfAtom = false) :
     ¬ M.satAtom ρ a ↔ M.satLit ρ (Atom.negLit M a) := by
   cases a with
@@ -86,7 +87,7 @@ theorem satAtom_neg_iff {C : Type} (M : Model C) (ρ : List C) (a : Atom C)
   | hasPart g => exact not_within_iff M ρ ((Atom.hasPart g).denot M)
 
 /-- A negated `isAnyOf` is read as `isNoneOf`. -/
-theorem negLit_isAnyOf_iff {C : Type} (M : Model C) (ρ : List C) (gs : List C) :
+theorem negLit_isAnyOf_iff {C : Type} (M : ConceptOrder C) (ρ : List C) (gs : List C) :
     M.satLit ρ (Atom.negLit M (Atom.isAnyOf gs)) ↔
       M.satLit ρ (Atom.lit M (Atom.isNoneOf gs)) := by
   constructor
@@ -170,26 +171,26 @@ theorem exactlyOne_iff_index {α : Type} (P : α → Prop) :
 
 /-- Disjuncts of an `xone`: for each position, that alternative holds and the
 others fail. -/
-def xoneDisj {C : Type} (M : Model C) : List (Atom C) → List (List (Lit C))
+def xoneDisj {C : Type} (M : ConceptOrder C) : List (Atom C) → List (List (Lit C))
   | [] => []
   | a :: rest =>
       (Atom.lit M a :: rest.map (Atom.negLit M)) ::
         (xoneDisj M rest).map (fun l => Atom.negLit M a :: l)
 
 /-- Disjuncts of one member of a constraint set. -/
-def Item.disj {C : Type} (M : Model C) : Item C → List (List (Lit C))
+def Item.disj {C : Type} (M : ConceptOrder C) : Item C → List (List (Lit C))
   | .atom a => [[Atom.lit M a]]
   | .or alts => alts.map (fun a => [Atom.lit M a])
   | .xone alts => xoneDisj M alts
 
 /-- Disjuncts of a constraint set: the conjunction is distributed over the
 alternatives of its members. -/
-def setDisj {C : Type} (M : Model C) : List (Item C) → List (List (Lit C))
+def setDisj {C : Type} (M : ConceptOrder C) : List (Item C) → List (List (Lit C))
   | [] => [[]]
   | it :: rest =>
       (Item.disj M it).flatMap fun K => (setDisj M rest).map fun K' => K ++ K'
 
-theorem xone_disj_iff {C : Type} (M : Model C) (ρ : List C) :
+theorem xone_disj_iff {C : Type} (M : ConceptOrder C) (ρ : List C) :
     ∀ alts : List (Atom C), (∀ a ∈ alts, a.isAllOfAtom = false) →
       (ExactlyOne (M.satAtom ρ) alts ↔
         ∃ K ∈ xoneDisj M alts, ∀ l ∈ K, M.satLit ρ l) := by
@@ -236,7 +237,7 @@ theorem xone_disj_iff {C : Type} (M : Model C) (ρ : List C) :
         exact ih'.mpr ⟨K', hK', fun l hl =>
           hsK l (List.mem_cons.mpr (Or.inr hl))⟩
 
-theorem satItem_iff_disj {C : Type} (M : Model C) (ρ : List C)
+theorem satItem_iff_disj {C : Type} (M : ConceptOrder C) (ρ : List C)
     (it : Item C) (h : it.xoneOk) :
     M.satItem ρ it ↔ ∃ K ∈ Item.disj M it, ∀ l ∈ K, M.satLit ρ l := by
   cases it with
@@ -273,7 +274,7 @@ theorem satItem_iff_disj {C : Type} (M : Model C) (ρ : List C)
     exact (exactlyOne_iff_index (M.satAtom ρ) alts).symm.trans
       (xone_disj_iff M ρ alts hno)
 
-theorem satSet_iff_disj {C : Type} (M : Model C) (ρ : List C) :
+theorem satSet_iff_disj {C : Type} (M : ConceptOrder C) (ρ : List C) :
     ∀ t : List (Item C), (∀ it ∈ t, it.xoneOk) →
       (M.satSet ρ t ↔ ∃ K ∈ setDisj M t, ∀ l ∈ K, M.satLit ρ l) := by
   intro t
@@ -318,7 +319,7 @@ theorem satSet_iff_disj {C : Type} (M : Model C) (ρ : List C) :
 
 /-! ## Closure of the literals -/
 
-theorem xoneDisj_closed {C : Type} (M : Model C) :
+theorem xoneDisj_closed {C : Type} (M : ConceptOrder C) :
     ∀ alts : List (Atom C), ∀ K ∈ xoneDisj M alts, ∀ l ∈ K, l.closed M := by
   intro alts
   induction alts with
@@ -341,7 +342,7 @@ theorem xoneDisj_closed {C : Type} (M : Model C) :
         exact Atom.negLit_closed M a
       · exact ih K' hK' l h'
 
-theorem Item.disj_closed {C : Type} (M : Model C) (it : Item C) :
+theorem Item.disj_closed {C : Type} (M : ConceptOrder C) (it : Item C) :
     ∀ K ∈ Item.disj M it, ∀ l ∈ K, l.closed M := by
   cases it with
   | atom a =>
@@ -360,7 +361,7 @@ theorem Item.disj_closed {C : Type} (M : Model C) (it : Item C) :
     exact Atom.lit_closed M a
   | xone alts => exact xoneDisj_closed M alts
 
-theorem setDisj_closed {C : Type} (M : Model C) :
+theorem setDisj_closed {C : Type} (M : ConceptOrder C) :
     ∀ t : List (Item C), ∀ K ∈ setDisj M t, ∀ l ∈ K, l.closed M := by
   intro t
   induction t with
@@ -380,20 +381,20 @@ theorem setDisj_closed {C : Type} (M : Model C) :
 
 /-! ## The reduction -/
 
-/-- A model admits a valuation for a constraint set exactly when some disjunct
+/-- A concept order admits a valuation for a constraint set exactly when some disjunct
 satisfies W. The set needs no `isAllOf` under `xone`, which well-sortedness
 gives (`ConstraintSet.xoneOk_of_wellSorted`). -/
-theorem admits_iff_exists_witness {C : Type} (M : Model C) (N : C → Prop)
+theorem admits_iff_exists_witness {C : Type} (M : ConceptOrder C) (N : C → Prop)
     (t : ConstraintSet C) (ht : t.xoneOk) :
     M.admits N t ↔ ∃ K ∈ setDisj M t, M.witness N K := by
   constructor
   · rintro ⟨ρ, hne, hN, hsat⟩
     obtain ⟨K, hK, hsK⟩ := (satSet_iff_disj M ρ t ht).mp hsat
-    exact ⟨K, hK, (Model.witness_iff M N K (setDisj_closed M t K hK)).mp
+    exact ⟨K, hK, (ConceptOrder.witness_iff M N K (setDisj_closed M t K hK)).mp
       ⟨ρ, hne, hN, hsK⟩⟩
   · rintro ⟨K, hK, hw⟩
     obtain ⟨ρ, hne, hN, hsK⟩ :=
-      (Model.witness_iff M N K (setDisj_closed M t K hK)).mpr hw
+      (ConceptOrder.witness_iff M N K (setDisj_closed M t K hK)).mpr hw
     exact ⟨ρ, hne, hN, (satSet_iff_disj M ρ t ht).mpr ⟨K, hK, hsK⟩⟩
 
 end OdrlGrounded

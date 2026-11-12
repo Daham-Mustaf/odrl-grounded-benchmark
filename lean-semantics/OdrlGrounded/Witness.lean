@@ -5,15 +5,15 @@ set_option autoImplicit false
 /-!
 # Witness lemma, for a conjunction of atomic constraints
 
-Paper: Lemma (Witness), the condition W(K) with the candidate set `N`.
+Paper: Lemma (Formula and valuations), the condition W(K) with the candidate set `N`.
 
 Each atomic constraint is a literal on the set of elements that a valuation
 denotes. `within S`: every denoted element lies in `S` (every subset-mode
 operator). `covers F`: every `g` in `F` is denoted (`isAllOf`). `meets T`:
 some denoted element lies in `T` (`isAnyOf`).
 
-`Model.cand` is the largest set of elements a valuation could denote: the
-elements of values in `N` that satisfy every `within` literal. `Model.witness`
+`ConceptOrder.cand` is the largest set of elements a valuation could denote: the
+elements of values in `N` that satisfy every `within` literal. `ConceptOrder.witness`
 is W(K): the largest set is nonempty, contains every `covers` set, and meets
 every `meets` set.
 
@@ -35,7 +35,7 @@ namespace Lit
 variable {C : Type}
 
 /-- A `within` predicate respects identity of elements. -/
-def closed (M : Model C) : Lit C → Prop
+def closed (M : ConceptOrder C) : Lit C → Prop
   | .within S => ∀ x y, M.eqv x y → S x → S y
   | .covers _ => True
   | .meets _ => True
@@ -122,27 +122,27 @@ theorem seeds_exist {C : Type} (D : C → Prop) :
         · exact Lit.seeded_mono (fun z hz => List.mem_cons.mpr (Or.inr hz))
             l' (hs l' h)
 
-namespace Model
+namespace ConceptOrder
 
 variable {C : Type}
 
 /-- Satisfaction of a literal by a valuation. -/
-def satLit (M : Model C) (ρ : List C) : Lit C → Prop
+def satLit (M : ConceptOrder C) (ρ : List C) : Lit C → Prop
   | .within S => ∀ y, M.elems ρ y → S y
   | .covers F => ∀ g ∈ F, M.elems ρ g
   | .meets T => ∃ y, M.elems ρ y ∧ T y
 
 /-- The largest set of elements a valuation could denote under `K`. -/
-def cand (M : Model C) (N : C → Prop) (K : List (Lit C)) (y : C) : Prop :=
+def cand (M : ConceptOrder C) (N : C → Prop) (K : List (Lit C)) (y : C) : Prop :=
   (∃ x, N x ∧ M.eqv x y) ∧ ∀ l ∈ K, l.allows y
 
 /-- W(K): the largest set is nonempty and meets every demand. -/
-def witness (M : Model C) (N : C → Prop) (K : List (Lit C)) : Prop :=
+def witness (M : ConceptOrder C) (N : C → Prop) (K : List (Lit C)) : Prop :=
   (∃ y, M.cand N K y) ∧ ∀ l ∈ K, l.needs (M.cand N K)
 
 /-- Every seed has a representative value in `N`, and the representatives
 denote exactly the seeds. -/
-theorem reps_exist (M : Model C) (N : C → Prop) :
+theorem reps_exist (M : ConceptOrder C) (N : C → Prop) :
     ∀ ys : List C, (∀ y ∈ ys, ∃ x, N x ∧ M.eqv x y) →
       ∃ xs : List C, (∀ x ∈ xs, N x) ∧ (∀ y ∈ ys, ∃ x ∈ xs, M.eqv x y) ∧
         (∀ x ∈ xs, ∃ y ∈ ys, M.eqv x y) := by
@@ -177,7 +177,7 @@ theorem reps_exist (M : Model C) (N : C → Prop) :
 
 /-- Witness lemma. A valuation with values in `N` that satisfies every
 literal exists exactly when W(K) holds. -/
-theorem witness_iff (M : Model C) (N : C → Prop) (K : List (Lit C))
+theorem witness_iff (M : ConceptOrder C) (N : C → Prop) (K : List (Lit C))
     (hc : ∀ l ∈ K, l.closed M) :
     (∃ ρ : List C, ρ ≠ [] ∧ (∀ x ∈ ρ, N x) ∧ ∀ l ∈ K, M.satLit ρ l) ↔
       M.witness N K := by
@@ -243,7 +243,7 @@ theorem witness_iff (M : Model C) (N : C → Prop) (K : List (Lit C))
         obtain ⟨x, hx, hxy⟩ := h1 y hy'
         exact ⟨y, ⟨x, hx, hxy⟩, hT⟩
 
-end Model
+end ConceptOrder
 
 /-! ## From atomic constraints to literals -/
 
@@ -252,13 +252,13 @@ namespace Atom
 variable {C : Type}
 
 /-- The literal an atomic constraint stands for, by its mode. -/
-def lit (M : Model C) : Atom C → Lit C
+def lit (M : ConceptOrder C) : Atom C → Lit C
   | .isAnyOf gs => .meets ((Atom.isAnyOf gs).denot M)
   | .isAllOf gs => .covers gs
   | a => .within (a.denot M)
 
 /-- Every denotation is closed under identity of elements. -/
-theorem denot_closed (M : Model C) (a : Atom C) :
+theorem denot_closed (M : ConceptOrder C) (a : Atom C) :
     ∀ x y, M.eqv x y → a.denot M x → a.denot M y := by
   intro x y hxy
   cases a with
@@ -289,7 +289,7 @@ theorem denot_closed (M : Model C) (a : Atom C) :
     intro h
     exact M.trans h hxy.1
 
-theorem lit_closed (M : Model C) (a : Atom C) : (Atom.lit M a).closed M := by
+theorem lit_closed (M : ConceptOrder C) (a : Atom C) : (Atom.lit M a).closed M := by
   cases a with
   | eq g => exact Atom.denot_closed M (Atom.eq g)
   | neq g => exact Atom.denot_closed M (Atom.neq g)
@@ -304,7 +304,7 @@ end Atom
 
 /-- An atomic constraint holds exactly when its literal does. For `isAllOf`
 this uses that the denoted elements are closed under identity. -/
-theorem satAtom_iff_satLit {C : Type} (M : Model C) (ρ : List C)
+theorem satAtom_iff_satLit {C : Type} (M : ConceptOrder C) (ρ : List C)
     (a : Atom C) : M.satAtom ρ a ↔ M.satLit ρ (Atom.lit M a) := by
   cases a with
   | eq _ => exact Iff.rfl
@@ -324,7 +324,7 @@ theorem satAtom_iff_satLit {C : Type} (M : Model C) (ρ : List C)
   | hasPart _ => exact Iff.rfl
 
 /-- Witness lemma for a conjunction of atomic constraints. -/
-theorem admits_atoms_iff {C : Type} (M : Model C) (N : C → Prop)
+theorem admits_atoms_iff {C : Type} (M : ConceptOrder C) (N : C → Prop)
     (atoms : List (Atom C)) :
     M.admits N (atoms.map Item.atom) ↔
       M.witness N (atoms.map (Atom.lit M)) := by
@@ -332,7 +332,7 @@ theorem admits_atoms_iff {C : Type} (M : Model C) (N : C → Prop)
     intro l hl
     obtain ⟨a, _, rfl⟩ := List.mem_map.mp hl
     exact Atom.lit_closed M a
-  refine Iff.trans ?_ (Model.witness_iff M N _ hc)
+  refine Iff.trans ?_ (ConceptOrder.witness_iff M N _ hc)
   constructor
   · rintro ⟨ρ, hne, hN, hsat⟩
     refine ⟨ρ, hne, hN, ?_⟩

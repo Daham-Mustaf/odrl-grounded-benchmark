@@ -9,12 +9,12 @@ Paper: Definition (Structure), Definition (Models).
 
 The paper's structure is a partial order on an arbitrary carrier `P`, with an
 interpretation `h : C → P`. The carrier may hold elements that no concept
-names. Everything else in this development uses preorders on `C` (`Model`),
+names. Everything else in this development uses preorders on `C` (`ConceptOrder`),
 where mutual order means identity and disjointness quantifies over `C` only.
 This file shows that the two give the same consistency and the same verdicts.
 
 The structure side is written literally as in the paper, not by pushing atoms
-forward along `h` and reusing `Model.satSet`. Denotations are sets of elements
+forward along `h` and reusing `ConceptOrder.satSet`. Denotations are sets of elements
 of `P`, complements are taken in `P`, and the elements a valuation denotes are
 `h x` for its values `x`. The theorems below then compare that reading with the
 eqv-form on `C` that the earlier files use.
@@ -23,11 +23,11 @@ What is proved.
 
 * `Structure.induced`: a structure gives a preorder on `C` by
   `a ≤ b` iff `h a ≤ h b`. Its mutual order is `h a = h b`, by antisymmetry.
-* `Structure.sat_induced`: if a structure satisfies an assertion, so does its
+* `Structure.sat_induced`: if a structure satisfies a statement, so does its
   induced preorder.
-* `Model.lift`: a preorder gives a structure whose elements are the down-sets
-  of concepts. Every element is named. `Model.lift_induced` says the lift
-  induces the preorder it came from, and `Model.sat_lift` says it satisfies
+* `ConceptOrder.lift`: a preorder gives a structure whose elements are the down-sets
+  of concepts. Every element is named. `ConceptOrder.lift_induced` says the lift
+  induces the preorder it came from, and `ConceptOrder.sat_lift` says it satisfies
   whatever the preorder does.
 * `Structure.admits_iff`: a structure admits a valuation for a constraint set
   iff its induced preorder does.
@@ -36,7 +36,7 @@ What is proved.
   `groundedVerdict_eq_struct`.
 
 What is not claimed. A structure and its induced preorder need not satisfy the
-same assertions. A structure with an unnamed element below both `h a` and
+same statements. A structure with an unnamed element below both `h a` and
 `h b` fails `a ⊥ b`, while its induced preorder looks only at named concepts
 and can satisfy it. So `sat_induced` is an implication, and only the lift
 preserves satisfaction exactly. The two sets of models differ, but each model on
@@ -61,19 +61,19 @@ namespace Structure
 
 variable {C : Type}
 
-/-- Satisfaction of an assertion, as in Definition (Structure). Disjointness
+/-- Satisfaction of a statement, as in Definition (Structure). Disjointness
 quantifies over the whole carrier, unnamed elements included. -/
-def sat (S : Structure C) : Assertion C → Prop
-  | .below a b => S.le (S.h a) (S.h b)
-  | .same a b => S.h a = S.h b
+def sat (S : Structure C) : Statement C → Prop
+  | .order a b => S.le (S.h a) (S.h b)
+  | .identity a b => S.h a = S.h b
   | .distinct a b => S.h a ≠ S.h b
   | .disjoint a b => ∀ u : S.P, ¬ (S.le u (S.h a) ∧ S.le u (S.h b))
 
-/-- `S.Models T`: the structure satisfies every assertion of `T = R ∪ B`. -/
-def Models (S : Structure C) (T : List (Assertion C)) : Prop :=
+/-- `S.Models T`: the structure satisfies every statement of `T = R ∪ B`. -/
+def Models (S : Structure C) (T : List (Statement C)) : Prop :=
   ∀ a ∈ T, S.sat a
 
-/-- Table (denotation) in a structure: the elements a constraint accepts.
+/-- Definition (Denotation) in a structure: the elements a constraint accepts.
 Complements are taken in the whole carrier. -/
 def sem (S : Structure C) : Atom C → S.P → Prop
   | .eq g, u => u = S.h g
@@ -89,7 +89,7 @@ def sem (S : Structure C) : Atom C → S.P → Prop
 def vals (S : Structure C) (ρ : List C) (u : S.P) : Prop :=
   ∃ x ∈ ρ, S.h x = u
 
-/-- Definition (Valuation and satisfaction), one atomic constraint. -/
+/-- Definition (Satisfaction of constraints), one atomic constraint. -/
 def satAtom (S : Structure C) (ρ : List C) (a : Atom C) : Prop :=
   match a.mode with
   | .meets => ∃ u, S.vals ρ u ∧ S.sem a u
@@ -97,7 +97,7 @@ def satAtom (S : Structure C) (ρ : List C) (a : Atom C) : Prop :=
   | .subset => ∀ u, S.vals ρ u → S.sem a u
 
 /-- One member of a constraint set. `xone` is by position, as in
-`Model.satItem`. -/
+`ConceptOrder.satItem`. -/
 def satItem (S : Structure C) (ρ : List C) : Item C → Prop
   | .atom a => S.satAtom ρ a
   | .or alts => ∃ a ∈ alts, S.satAtom ρ a
@@ -122,21 +122,21 @@ variable {C : Type}
 
 /-- Definition (Models), over structures: the pair is consistent when some
 structure satisfies it. -/
-def StructConsistent (T : List (Assertion C)) : Prop :=
+def StructConsistent (T : List (Statement C)) : Prop :=
   ∃ S : Structure C, S.Models T
 
 /-- Every structure that satisfies `T` admits a common valuation. -/
-def StructCompatible (T : List (Assertion C)) (N : C → Prop)
+def StructCompatible (T : List (Statement C)) (N : C → Prop)
     (t t' : ConstraintSet C) : Prop :=
   ∀ S : Structure C, S.Models T → S.admits N (t ++ t')
 
 /-- No structure that satisfies `T` admits a common valuation. -/
-def StructIncompatible (T : List (Assertion C)) (N : C → Prop)
+def StructIncompatible (T : List (Statement C)) (N : C → Prop)
     (t t' : ConstraintSet C) : Prop :=
   ∀ S : Structure C, S.Models T → ¬ S.admits N (t ++ t')
 
 open Classical in
-noncomputable def structVerdict (T : List (Assertion C)) (N : C → Prop)
+noncomputable def structVerdict (T : List (Statement C)) (N : C → Prop)
     (t t' : ConstraintSet C) : Verdict :=
   if StructCompatible T N t t' then Verdict.compatible
   else if StructIncompatible T N t t' then Verdict.incompatible
@@ -146,35 +146,35 @@ end
 
 /-! ## From a structure to a preorder -/
 
-namespace Model
+namespace ConceptOrder
 
 variable {C : Type}
 
 /-- `satAtom` in `subset` mode. -/
-theorem satAtom_of_subset (M : Model C) (ρ : List C) (a : Atom C)
+theorem satAtom_of_subset (M : ConceptOrder C) (ρ : List C) (a : Atom C)
     (h : a.mode = Mode.subset) :
     M.satAtom ρ a ↔ ∀ y, M.elems ρ y → a.denot M y := by
   first
-    | (simp only [Model.satAtom, h]; done)
-    | (unfold Model.satAtom; rw [h]; try exact Iff.rfl)
+    | (simp only [ConceptOrder.satAtom, h]; done)
+    | (unfold ConceptOrder.satAtom; rw [h]; try exact Iff.rfl)
 
 /-- `satAtom` in `meets` mode. -/
-theorem satAtom_of_meets (M : Model C) (ρ : List C) (a : Atom C)
+theorem satAtom_of_meets (M : ConceptOrder C) (ρ : List C) (a : Atom C)
     (h : a.mode = Mode.meets) :
     M.satAtom ρ a ↔ ∃ y, M.elems ρ y ∧ a.denot M y := by
   first
-    | (simp only [Model.satAtom, h]; done)
-    | (unfold Model.satAtom; rw [h]; try exact Iff.rfl)
+    | (simp only [ConceptOrder.satAtom, h]; done)
+    | (unfold ConceptOrder.satAtom; rw [h]; try exact Iff.rfl)
 
 /-- `satAtom` in `superset` mode. -/
-theorem satAtom_of_superset (M : Model C) (ρ : List C) (a : Atom C)
+theorem satAtom_of_superset (M : ConceptOrder C) (ρ : List C) (a : Atom C)
     (h : a.mode = Mode.superset) :
     M.satAtom ρ a ↔ ∀ y, a.denot M y → M.elems ρ y := by
   first
-    | (simp only [Model.satAtom, h]; done)
-    | (unfold Model.satAtom; rw [h]; try exact Iff.rfl)
+    | (simp only [ConceptOrder.satAtom, h]; done)
+    | (unfold ConceptOrder.satAtom; rw [h]; try exact Iff.rfl)
 
-end Model
+end ConceptOrder
 
 namespace Structure
 
@@ -202,7 +202,7 @@ theorem satAtom_of_superset (S : Structure C) (ρ : List C) (a : Atom C)
     | (unfold Structure.satAtom; rw [h]; try exact Iff.rfl)
 
 /-- The preorder a structure induces on the concepts. -/
-def induced (S : Structure C) : Model C where
+def induced (S : Structure C) : ConceptOrder C where
   le := fun a b => S.le (S.h a) (S.h b)
   refl := fun a => S.refl (S.h a)
   trans := fun h1 h2 => S.trans h1 h2
@@ -234,8 +234,8 @@ theorem elems_iff (S : Structure C) (ρ : List C) (y : C) :
   · rintro ⟨x, hx, hxy⟩
     exact ⟨x, hx, (S.induced_eqv x y).mpr hxy⟩
 
-/-- The eqv-form of Table (denotation) on `C` agrees with the structure's table
-on the element a concept denotes. -/
+/-- The eqv-form of Definition (Denotation) on `C` agrees with the structure's
+denotation on the element a concept denotes. -/
 theorem sem_iff (S : Structure C) (a : Atom C) (y : C) :
     a.denot S.induced y ↔ S.sem a (S.h y) := by
   cases a with
@@ -373,17 +373,17 @@ theorem admits_iff (S : Structure C) (N : C → Prop) (t : ConstraintSet C) :
 
 /-- What a structure satisfies, its induced preorder satisfies. Disjointness
 goes one way only: the structure quantifies over unnamed elements as well. -/
-theorem sat_induced (S : Structure C) {a : Assertion C} (h : S.sat a) :
+theorem sat_induced (S : Structure C) {a : Statement C} (h : S.sat a) :
     S.induced.sat a := by
   cases a with
-  | below _ _ => exact h
-  | same x y => exact (S.induced_eqv x y).mpr h
+  | order _ _ => exact h
+  | identity x y => exact (S.induced_eqv x y).mpr h
   | distinct x y => exact fun e => h ((S.induced_eqv x y).mp e)
   | disjoint _ _ =>
     intro z hz
     exact h (S.h z) hz
 
-theorem models_induced (S : Structure C) {T : List (Assertion C)}
+theorem models_induced (S : Structure C) {T : List (Statement C)}
     (h : S.Models T) : Mod T S.induced :=
   fun a ha => S.sat_induced (h a ha)
 
@@ -391,19 +391,19 @@ end Structure
 
 /-! ## From a preorder to a structure -/
 
-namespace Model
+namespace ConceptOrder
 
 variable {C : Type}
 
 /-- The down-set of a concept. -/
-def down (M : Model C) (c : C) : C → Prop := fun x => M.le x c
+def down (M : ConceptOrder C) (c : C) : C → Prop := fun x => M.le x c
 
 /-- The carrier of the lift: the down-sets of concepts. Every element is named. -/
-abbrev Carrier (M : Model C) : Type := { s : C → Prop // ∃ c, s = M.down c }
+abbrev Carrier (M : ConceptOrder C) : Type := { s : C → Prop // ∃ c, s = M.down c }
 
 /-- The structure of a preorder: down-sets ordered by inclusion, with each
 concept interpreted as its own down-set. -/
-def lift (M : Model C) : Structure C where
+def lift (M : ConceptOrder C) : Structure C where
   P := M.Carrier
   le := fun s t => ∀ x, s.1 x → t.1 x
   refl := fun _ _ hx => hx
@@ -411,7 +411,7 @@ def lift (M : Model C) : Structure C where
   antisymm := fun h1 h2 => Subtype.ext (funext fun x => propext ⟨h1 x, h2 x⟩)
   h := fun c => ⟨M.down c, c, rfl⟩
 
-theorem lift_le (M : Model C) (a b : C) :
+theorem lift_le (M : ConceptOrder C) (a b : C) :
     M.lift.induced.le a b ↔ M.le a b := by
   constructor
   · intro h
@@ -421,7 +421,7 @@ theorem lift_le (M : Model C) (a b : C) :
     exact (M.trans hx' h : M.le x b)
 
 /-- Two preorders with the same order are equal. -/
-theorem ext_le {M M' : Model C} (h : ∀ a b, M.le a b ↔ M'.le a b) : M = M' := by
+theorem ext_le {M M' : ConceptOrder C} (h : ∀ a b, M.le a b ↔ M'.le a b) : M = M' := by
   cases M with
   | mk le refl trans =>
     cases M' with
@@ -431,10 +431,10 @@ theorem ext_le {M M' : Model C} (h : ∀ a b, M.le a b ↔ M'.le a b) : M = M' :
       rfl
 
 /-- The lift induces the preorder it came from. -/
-theorem lift_induced (M : Model C) : M.lift.induced = M :=
+theorem lift_induced (M : ConceptOrder C) : M.lift.induced = M :=
   ext_le (fun a b => M.lift_le a b)
 
-theorem lift_h_eq (M : Model C) (x y : C) :
+theorem lift_h_eq (M : ConceptOrder C) (x y : C) :
     M.lift.h x = M.lift.h y ↔ M.eqv x y := by
   refine (M.lift.induced_eqv x y).symm.trans ?_
   constructor
@@ -445,11 +445,11 @@ theorem lift_h_eq (M : Model C) (x y : C) :
 
 /-- The lift satisfies whatever the preorder does, disjointness included,
 because every element of the lift is named. -/
-theorem sat_lift (M : Model C) {a : Assertion C} (h : M.sat a) :
+theorem sat_lift (M : ConceptOrder C) {a : Statement C} (h : M.sat a) :
     M.lift.sat a := by
   cases a with
-  | below x y => exact (M.lift_le x y).mpr h
-  | same x y => exact (M.lift_h_eq x y).mpr h
+  | order x y => exact (M.lift_le x y).mpr h
+  | identity x y => exact (M.lift_h_eq x y).mpr h
   | distinct x y => exact fun e => h ((M.lift_h_eq x y).mp e)
   | disjoint x y =>
     rintro ⟨s, c, rfl⟩ ⟨h1, h2⟩
@@ -457,11 +457,11 @@ theorem sat_lift (M : Model C) {a : Assertion C} (h : M.sat a) :
     have h2' : M.le c y := h2 c (M.refl c)
     exact h c ⟨h1', h2'⟩
 
-theorem models_lift (M : Model C) {T : List (Assertion C)} (h : Mod T M) :
+theorem models_lift (M : ConceptOrder C) {T : List (Statement C)} (h : Mod T M) :
     M.lift.Models T :=
   fun a ha => M.sat_lift (h a ha)
 
-end Model
+end ConceptOrder
 
 /-! ## Collapse -/
 
@@ -469,8 +469,9 @@ section
 
 variable {C : Type}
 
-/-- A theory has a structure model iff it has a preorder model. -/
-theorem consistent_iff_structConsistent (T : List (Assertion C)) :
+/-- The statements `T` have a model among the structures iff they have one
+among the concept orders. -/
+theorem consistent_iff_structConsistent (T : List (Statement C)) :
     Consistent T ↔ StructConsistent T := by
   constructor
   · rintro ⟨M, hM⟩
@@ -478,7 +479,7 @@ theorem consistent_iff_structConsistent (T : List (Assertion C)) :
   · rintro ⟨S, hS⟩
     exact ⟨S.induced, S.models_induced hS⟩
 
-theorem compatible_iff_structCompatible (T : List (Assertion C)) (N : C → Prop)
+theorem compatible_iff_structCompatible (T : List (Statement C)) (N : C → Prop)
     (t t' : ConstraintSet C) :
     Compatible T N t t' ↔ StructCompatible T N t t' := by
   constructor
@@ -492,7 +493,7 @@ theorem compatible_iff_structCompatible (T : List (Assertion C)) (N : C → Prop
     rw [M.lift_induced] at h2
     exact h2
 
-theorem incompatible_iff_structIncompatible (T : List (Assertion C)) (N : C → Prop)
+theorem incompatible_iff_structIncompatible (T : List (Statement C)) (N : C → Prop)
     (t t' : ConstraintSet C) :
     Incompatible T N t t' ↔ StructIncompatible T N t t' := by
   constructor
@@ -506,7 +507,7 @@ theorem incompatible_iff_structIncompatible (T : List (Assertion C)) (N : C → 
 
 /-- The verdict over preorders is the verdict over structures. Neither side
 assumes that `(R, B)` is consistent. -/
-theorem verdict_eq_structVerdict (T : List (Assertion C)) (N : C → Prop)
+theorem verdict_eq_structVerdict (T : List (Statement C)) (N : C → Prop)
     (t t' : ConstraintSet C) :
     verdict T N t t' = structVerdict T N t t' := by
   unfold verdict structVerdict
@@ -529,13 +530,13 @@ end
 /-- The grounded verdict over structures: `none` when a value is ungrounded,
 otherwise the verdict over structures. -/
 noncomputable def groundedStructVerdict {V C : Type} (γ : Grounding V C)
-    (T : List (Assertion C)) (t t' : ConstraintSet V) : Option Verdict :=
+    (T : List (Statement C)) (t t' : ConstraintSet V) : Option Verdict :=
   match ConstraintSet.ground γ t, ConstraintSet.ground γ t' with
   | some g, some g' => some (structVerdict T (Grounding.range γ) g g')
   | _, _ => none
 
 theorem groundedVerdict_eq_struct {V C : Type} (γ : Grounding V C)
-    (T : List (Assertion C)) (t t' : ConstraintSet V) :
+    (T : List (Statement C)) (t t' : ConstraintSet V) :
     groundedVerdict γ T t t' = groundedStructVerdict γ T t t' := by
   unfold groundedVerdict groundedStructVerdict
   cases hl : ConstraintSet.ground γ t with

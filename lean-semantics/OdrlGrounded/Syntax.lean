@@ -5,7 +5,7 @@ set_option autoImplicit false
 /-!
 # Grounded constraints and constraint sets
 
-Paper: Definition (Signature and well-sortedness), Table (signature).
+Paper: Definition (Well-sortedness), including the operators each sort allows.
 
 Atoms are already grounded: their arguments are concepts, so the grounding
 `γ` has been applied. Ungrounded values are handled at the verdict level, not
@@ -36,7 +36,8 @@ inductive Atom (C : Type) where
   | hasPart (g : C)
   deriving DecidableEq, Repr
 
-/-- Table (signature). `isA` only at `tax`, `isPartOf` and `hasPart` only at
+/-- The operators each sort allows, as in Definition (Well-sortedness). `isA`
+only at `tax`, `isPartOf` and `hasPart` only at
 `mer`, every other operator at every sort. A set operator needs a nonempty set
 of values. -/
 def Atom.wellSorted {C : Type} (σ : Srt) : Atom C → Prop
@@ -63,7 +64,7 @@ inductive Item (C : Type) where
 /-- The constraints of one rule on one operand, conjoined. -/
 abbrev ConstraintSet (C : Type) := List (Item C)
 
-/-- Definition (Signature and well-sortedness). Every constraint is well
+/-- Definition (Well-sortedness). Every constraint is well
 sorted, a Logical Constraint has at least one alternative, and no `xone`
 alternative is an `isAllOf`. -/
 def Item.wellSorted {C : Type} (σ : Srt) : Item C → Prop

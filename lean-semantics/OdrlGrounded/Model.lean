@@ -1,27 +1,33 @@
 set_option autoImplicit false
 
 /-!
-# Models and assertions
+# Concept orders and statements
 
-Paper: Definition (Resource and background theory), Definition (Structure),
-Definition (Models).
+Paper: Definition (Binding), Definition (Structure), Definition (Models).
 
-A model over the concept type `C` is a preorder on `C`. Mutual order means
-identity (`eqv`). The paper's structures (a partial order on an arbitrary
+A concept order over the concept type `C` is a preorder on `C`. Mutual order
+means identity (`eqv`). The paper's structures (a partial order on an arbitrary
 carrier plus an interpretation `h`) are related to this form in the collapse
 step, not here.
+
+`T` stands for the statements R of a binding together with the declarations B.
+
+Not represented here: the sort of a binding; the restriction of a nominal
+binding, whose R and B contain no order statement and no disjointness
+statement; and the restriction of the declarations B to distinctness and
+disjointness statements.
 -/
 
 namespace OdrlGrounded
 
-structure Model (C : Type) where
+structure ConceptOrder (C : Type) where
   le : C → C → Prop
   refl : ∀ a, le a a
   trans : ∀ {a b c}, le a b → le b c → le a c
 
-namespace Model
+namespace ConceptOrder
 
-variable {C : Type} (M : Model C)
+variable {C : Type} (M : ConceptOrder C)
 
 /-- Two concepts denote the same element. -/
 def eqv (a b : C) : Prop := M.le a b ∧ M.le b a
@@ -33,36 +39,50 @@ theorem eqv_symm {a b : C} (h : M.eqv a b) : M.eqv b a := ⟨h.2, h.1⟩
 theorem eqv_trans {a b c : C} (h₁ : M.eqv a b) (h₂ : M.eqv b c) : M.eqv a c :=
   ⟨M.trans h₁.1 h₂.1, M.trans h₂.2 h₁.2⟩
 
-end Model
+end ConceptOrder
 
-/-- Assertions of a resource `R` or a background theory `B`. -/
-inductive Assertion (C : Type) where
-  | below (a b : C)
-  | same (a b : C)
+/-- A statement, as in Definition (Binding): an order, identity, distinctness
+or disjointness statement, in the statements R of a binding or in the
+declarations B. -/
+inductive Statement (C : Type) where
+  | order (a b : C)
+  | identity (a b : C)
   | distinct (a b : C)
   | disjoint (a b : C)
 
-namespace Model
+namespace ConceptOrder
 
 variable {C : Type}
 
-/-- Satisfaction of an assertion. Disjointness quantifies over the concepts
-`C` only. The collapse step shows this loses nothing against the paper's
-carrier with unnamed elements. -/
-def sat (M : Model C) : Assertion C → Prop
-  | .below a b => M.le a b
-  | .same a b => M.eqv a b
+/-- Satisfaction of a statement. Disjointness quantifies over the concepts `C`
+only. For a single structure this is weaker than the paper's reading, which
+quantifies over the whole carrier. For consistency and for verdicts nothing is
+lost: see `consistent_iff_structConsistent` and `verdict_eq_structVerdict` in
+Collapse.lean. -/
+def sat (M : ConceptOrder C) : Statement C → Prop
+  | .order a b => M.le a b
+  | .identity a b => M.eqv a b
   | .distinct a b => ¬ M.eqv a b
   | .disjoint a b => ∀ z, ¬ (M.le z a ∧ M.le z b)
 
-end Model
+/-- Disjointness excludes order. -/
+theorem not_le_of_disjoint (M : ConceptOrder C) {a b : C}
+    (h : M.sat (.disjoint a b)) : ¬ M.le a b :=
+  fun hab => h a ⟨M.refl a, hab⟩
 
-/-- `Mod T M`: `M` is a model of the finite theory `T = R ∪ B`. -/
-def Mod {C : Type} (T : List (Assertion C)) (M : Model C) : Prop :=
+/-- Disjointness excludes identity. -/
+theorem not_eqv_of_disjoint (M : ConceptOrder C) {a b : C}
+    (h : M.sat (.disjoint a b)) : ¬ M.eqv a b :=
+  fun e => M.not_le_of_disjoint h e.1
+
+end ConceptOrder
+
+/-- `Mod T M`: `M` is a model of the statements `T`. -/
+def Mod {C : Type} (T : List (Statement C)) (M : ConceptOrder C) : Prop :=
   ∀ a ∈ T, M.sat a
 
 /-- `(R, B)` is consistent when it has a model. -/
-def Consistent {C : Type} (T : List (Assertion C)) : Prop :=
-  ∃ M : Model C, Mod T M
+def Consistent {C : Type} (T : List (Statement C)) : Prop :=
+  ∃ M : ConceptOrder C, Mod T M
 
 end OdrlGrounded

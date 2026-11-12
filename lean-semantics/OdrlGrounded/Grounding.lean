@@ -11,8 +11,8 @@ Paper: Definition (Grounding), and the ungrounded clause of Definition
 A policy names concepts by values of type `V`. A grounding is a partial
 function from values to concepts. A value outside its domain names no concept
 of the binding. A constraint set that contains such a value has no denotation,
-so there is no verdict, whatever the theory says: the paper leaves it undefined,
-and the benchmark rejects the test case.
+so the input is rejected, whatever the statements say, as in the paper; the
+benchmark rejects the test case.
 
 The candidate set `N` is the range of the grounding, because `γ` is onto the
 binding's concept set `C_β`.
@@ -51,23 +51,23 @@ def ConstraintSet.ground {V C : Type} (γ : Grounding V C)
   List.mapM (Item.ground γ) t
 
 /-- Definition (Verdict) with the ungrounded clause. If either side has an
-ungrounded value there is no verdict, `none`. Otherwise it is the verdict of the
+ungrounded value the input is rejected: `none`. Otherwise it is the verdict of the
 grounded sets, with the range of `γ` as candidate set. -/
 noncomputable def groundedVerdict {V C : Type} (γ : Grounding V C)
-    (T : List (Assertion C)) (t t' : ConstraintSet V) : Option Verdict :=
+    (T : List (Statement C)) (t t' : ConstraintSet V) : Option Verdict :=
   match ConstraintSet.ground γ t, ConstraintSet.ground γ t' with
   | some g, some g' => some (verdict T (Grounding.range γ) g g')
   | _, _ => none
 
 theorem groundedVerdict_of_left_none {V C : Type} (γ : Grounding V C)
-    (T : List (Assertion C)) (t t' : ConstraintSet V)
+    (T : List (Statement C)) (t t' : ConstraintSet V)
     (h : ConstraintSet.ground γ t = none) :
     groundedVerdict γ T t t' = none := by
   unfold groundedVerdict
   simp [h]
 
 theorem groundedVerdict_of_right_none {V C : Type} (γ : Grounding V C)
-    (T : List (Assertion C)) (t t' : ConstraintSet V)
+    (T : List (Statement C)) (t t' : ConstraintSet V)
     (h : ConstraintSet.ground γ t' = none) :
     groundedVerdict γ T t t' = none := by
   unfold groundedVerdict
@@ -76,7 +76,7 @@ theorem groundedVerdict_of_right_none {V C : Type} (γ : Grounding V C)
   | some g => simp [h]
 
 theorem groundedVerdict_of_some {V C : Type} (γ : Grounding V C)
-    (T : List (Assertion C)) (t t' : ConstraintSet V)
+    (T : List (Statement C)) (t t' : ConstraintSet V)
     (g g' : ConstraintSet C)
     (h : ConstraintSet.ground γ t = some g)
     (h' : ConstraintSet.ground γ t' = some g') :

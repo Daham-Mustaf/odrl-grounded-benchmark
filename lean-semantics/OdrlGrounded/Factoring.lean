@@ -5,24 +5,26 @@ set_option autoImplicit false
 /-!
 # Operand-wise factoring
 
-Paper: Assumption (Operand independence), Corollary (Operand-wise factoring).
+Paper: Definition (Verdict for several left operands), Proposition (Verdict by
+left operand).
 
-Operands are indexed by `ι`. Each operand `ℓ` has its own theory `T ℓ`,
+Operands are indexed by `ι`. Each operand `ℓ` has its own statements `T ℓ`,
 candidate set `N ℓ`, and constraint sets `t ℓ` and `t' ℓ`. Each Logical
 Constraint stays on one operand, so a constraint set on several operands is
 one constraint set per operand.
 
-Assumption (Operand independence) says that a structure for the union is an
-independent choice of one structure per operand. This is built into the types
-here: a model of all the theories is a family `M : ι → Model C` with `M ℓ` a
-model of `T ℓ`. The concept type `C` is shared only for convenience, and each
+Definition (Verdict for several left operands) takes a family of models, one
+model of the statements of each operand. The family `M : ι → ConceptOrder C`,
+with `M ℓ` a model of `T ℓ` for every `ℓ` in `ls`, mirrors that definition; it
+no longer implements an assumption. The concept type `C` is shared only for
+convenience, and each
 operand interprets its own copy, so the concept sets are disjoint. A joint
 valuation gives each operand its own valuation. Only the operands in `ls`,
 those that occur in one of the two constraint sets, take part.
 
-The ungrounded clause is not restated. It leaves the whole verdict undefined
-before any factoring, as in the definition of the verdict. This file covers
-the other case, where every value is grounded.
+The ungrounded clause is not restated: an ungrounded value means the input is
+rejected before any factoring, as in the paper. This file covers the other
+case, where every value is grounded.
 -/
 
 namespace OdrlGrounded
@@ -87,33 +89,33 @@ theorem Verdict.ext_of_iff (x y : Verdict)
 /-! ## Families of models -/
 
 /-- Any concept set with every concept identified. -/
-def Model.indiscrete {C : Type} : Model C where
+def ConceptOrder.indiscrete {C : Type} : ConceptOrder C where
   le := fun _ _ => True
   refl := fun _ => True.intro
   trans := fun _ _ => True.intro
 
-/-- A model of a consistent theory, chosen. -/
-noncomputable def Consistent.model {C : Type} {T : List (Assertion C)}
-    (h : Consistent T) : Model C :=
-  Classical.choose (show ∃ M : Model C, Mod T M from h)
+/-- A model of consistent statements, chosen. -/
+noncomputable def Consistent.model {C : Type} {T : List (Statement C)}
+    (h : Consistent T) : ConceptOrder C :=
+  Classical.choose (show ∃ M : ConceptOrder C, Mod T M from h)
 
-theorem Consistent.model_spec {C : Type} {T : List (Assertion C)}
+theorem Consistent.model_spec {C : Type} {T : List (Statement C)}
     (h : Consistent T) : Mod T h.model :=
-  Classical.choose_spec (show ∃ M : Model C, Mod T M from h)
+  Classical.choose_spec (show ∃ M : ConceptOrder C, Mod T M from h)
 
 section
 
 variable {ι C : Type}
 
 /-- A joint valuation gives each operand in `ls` its own valuation. -/
-def MAdmits (ls : List ι) (M : ι → Model C) (N : ι → C → Prop)
+def MAdmits (ls : List ι) (M : ι → ConceptOrder C) (N : ι → C → Prop)
     (t t' : ι → ConstraintSet C) : Prop :=
   ∃ ρ : (ℓ : ι) → ℓ ∈ ls → List C, ∀ (ℓ : ι) (hℓ : ℓ ∈ ls),
     ρ ℓ hℓ ≠ [] ∧ (∀ x ∈ ρ ℓ hℓ, N ℓ x) ∧
       (M ℓ).satSet (ρ ℓ hℓ) (t ℓ ++ t' ℓ)
 
 /-- A joint valuation exists exactly when each operand has one. -/
-theorem madmits_iff (ls : List ι) (M : ι → Model C) (N : ι → C → Prop)
+theorem madmits_iff (ls : List ι) (M : ι → ConceptOrder C) (N : ι → C → Prop)
     (t t' : ι → ConstraintSet C) :
     MAdmits ls M N t t' ↔ ∀ ℓ ∈ ls, (M ℓ).admits (N ℓ) (t ℓ ++ t' ℓ) := by
   constructor
@@ -126,38 +128,38 @@ theorem madmits_iff (ls : List ι) (M : ι → Model C) (N : ι → C → Prop)
     exact ⟨fun ℓ hℓ => Classical.choose (hex ℓ hℓ),
       fun ℓ hℓ => Classical.choose_spec (hex ℓ hℓ)⟩
 
-/-- Every family of models of the theories admits a joint valuation. -/
-def MCompatible (ls : List ι) (T : ι → List (Assertion C))
+/-- Every family of models of the statements admits a joint valuation. -/
+def MCompatible (ls : List ι) (T : ι → List (Statement C))
     (N : ι → C → Prop) (t t' : ι → ConstraintSet C) : Prop :=
-  ∀ M : ι → Model C, (∀ ℓ ∈ ls, Mod (T ℓ) (M ℓ)) → MAdmits ls M N t t'
+  ∀ M : ι → ConceptOrder C, (∀ ℓ ∈ ls, Mod (T ℓ) (M ℓ)) → MAdmits ls M N t t'
 
-/-- No family of models of the theories admits a joint valuation. -/
-def MIncompatible (ls : List ι) (T : ι → List (Assertion C))
+/-- No family of models of the statements admits a joint valuation. -/
+def MIncompatible (ls : List ι) (T : ι → List (Statement C))
     (N : ι → C → Prop) (t t' : ι → ConstraintSet C) : Prop :=
-  ∀ M : ι → Model C, (∀ ℓ ∈ ls, Mod (T ℓ) (M ℓ)) → ¬ MAdmits ls M N t t'
+  ∀ M : ι → ConceptOrder C, (∀ ℓ ∈ ls, Mod (T ℓ) (M ℓ)) → ¬ MAdmits ls M N t t'
 
 open Classical in
-noncomputable def mverdict (ls : List ι) (T : ι → List (Assertion C))
+noncomputable def mverdict (ls : List ι) (T : ι → List (Statement C))
     (N : ι → C → Prop) (t t' : ι → ConstraintSet C) : Verdict :=
   if MCompatible ls T N t t' then Verdict.compatible
   else if MIncompatible ls T N t t' then Verdict.incompatible
   else Verdict.unknown
 
 open Classical in
-/-- A family of models of the theories with a prescribed model at `ℓ0`. -/
-noncomputable def modelFamily (ls : List ι) (T : ι → List (Assertion C))
-    (hcons : ∀ ℓ ∈ ls, Consistent (T ℓ)) (ℓ0 : ι) (M0 : Model C) :
-    ι → Model C :=
+/-- A family of models of the statements with a prescribed model at `ℓ0`. -/
+noncomputable def modelFamily (ls : List ι) (T : ι → List (Statement C))
+    (hcons : ∀ ℓ ∈ ls, Consistent (T ℓ)) (ℓ0 : ι) (M0 : ConceptOrder C) :
+    ι → ConceptOrder C :=
   fun ℓ => if ℓ = ℓ0 then M0 else
     if hℓ : ℓ ∈ ls then (hcons ℓ hℓ).model else M0
 
-theorem modelFamily_self (ls : List ι) (T : ι → List (Assertion C))
-    (hcons : ∀ ℓ ∈ ls, Consistent (T ℓ)) (ℓ0 : ι) (M0 : Model C) :
+theorem modelFamily_self (ls : List ι) (T : ι → List (Statement C))
+    (hcons : ∀ ℓ ∈ ls, Consistent (T ℓ)) (ℓ0 : ι) (M0 : ConceptOrder C) :
     modelFamily ls T hcons ℓ0 M0 ℓ0 = M0 := by
   simp [modelFamily]
 
-theorem modelFamily_mod (ls : List ι) (T : ι → List (Assertion C))
-    (hcons : ∀ ℓ ∈ ls, Consistent (T ℓ)) (ℓ0 : ι) (M0 : Model C)
+theorem modelFamily_mod (ls : List ι) (T : ι → List (Statement C))
+    (hcons : ∀ ℓ ∈ ls, Consistent (T ℓ)) (ℓ0 : ι) (M0 : ConceptOrder C)
     (hM0 : Mod (T ℓ0) M0) :
     ∀ ℓ ∈ ls, Mod (T ℓ) (modelFamily ls T hcons ℓ0 M0 ℓ) := by
   intro ℓ hℓ
@@ -169,15 +171,15 @@ theorem modelFamily_mod (ls : List ι) (T : ι → List (Assertion C))
 
 open Classical in
 /-- A family of models built from one model per operand in `ls`. -/
-noncomputable def pickFamily (ls : List ι) (f : (ℓ : ι) → ℓ ∈ ls → Model C) :
-    ι → Model C :=
-  fun ℓ => if h : ℓ ∈ ls then f ℓ h else Model.indiscrete
+noncomputable def pickFamily (ls : List ι) (f : (ℓ : ι) → ℓ ∈ ls → ConceptOrder C) :
+    ι → ConceptOrder C :=
+  fun ℓ => if h : ℓ ∈ ls then f ℓ h else ConceptOrder.indiscrete
 
-theorem pickFamily_eq (ls : List ι) (f : (ℓ : ι) → ℓ ∈ ls → Model C)
+theorem pickFamily_eq (ls : List ι) (f : (ℓ : ι) → ℓ ∈ ls → ConceptOrder C)
     (ℓ : ι) (hℓ : ℓ ∈ ls) : pickFamily ls f ℓ = f ℓ hℓ := by
   simp [pickFamily, hℓ]
 
-variable {ls : List ι} {T : ι → List (Assertion C)} {N : ι → C → Prop}
+variable {ls : List ι} {T : ι → List (Statement C)} {N : ι → C → Prop}
   {t t' : ι → ConstraintSet C}
 
 /-- Compatible for the union exactly when Compatible for every operand. -/
@@ -203,13 +205,13 @@ theorem mincompatible_iff :
   constructor
   · intro h
     refine Classical.byContradiction fun hne => ?_
-    have hex : ∀ (ℓ : ι) (hℓ : ℓ ∈ ls), ∃ M : Model C, Mod (T ℓ) M ∧
+    have hex : ∀ (ℓ : ι) (hℓ : ℓ ∈ ls), ∃ M : ConceptOrder C, Mod (T ℓ) M ∧
         M.admits (N ℓ) (t ℓ ++ t' ℓ) := by
       intro ℓ hℓ
       refine Classical.byContradiction fun hno => hne ⟨ℓ, hℓ, ?_⟩
       intro M hM hadm
       exact hno ⟨M, hM, hadm⟩
-    obtain ⟨f, hf⟩ : ∃ f : (ℓ : ι) → ℓ ∈ ls → Model C,
+    obtain ⟨f, hf⟩ : ∃ f : (ℓ : ι) → ℓ ∈ ls → ConceptOrder C,
         ∀ (ℓ : ι) (hℓ : ℓ ∈ ls), Mod (T ℓ) (f ℓ hℓ) ∧
           (f ℓ hℓ).admits (N ℓ) (t ℓ ++ t' ℓ) :=
       ⟨fun ℓ hℓ => Classical.choose (hex ℓ hℓ),
@@ -244,9 +246,9 @@ theorem mverdict_eq_incompatible_iff (hcons : ∀ ℓ ∈ ls, Consistent (T ℓ)
     simp [h, hn]
   · by_cases h' : MIncompatible ls T N t t' <;> simp [h, h']
 
-/-- Corollary (Operand-wise factoring), for grounded constraint sets. The
+/-- Proposition (Verdict by left operand), for grounded constraint sets. The
 verdict of the union is the minimum of the per-operand verdicts, each taken
-under that operand's own theory. -/
+under that operand's own statements. -/
 theorem factoring (hcons : ∀ ℓ ∈ ls, Consistent (T ℓ)) :
     mverdict ls T N t t' =
       minVerdict (ls.map fun ℓ => verdict (T ℓ) (N ℓ) (t ℓ) (t' ℓ)) := by

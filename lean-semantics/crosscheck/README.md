@@ -22,7 +22,7 @@ Run from this folder:
 | Witness lemma with the candidate set `N` | T1 in reductions_audit.py | Witness.lean, `admits_atoms_iff` |
 | `or`, `xone`, negation reduce to disjuncts | T1 | Disjuncts.lean, `admits_iff_exists_witness` |
 | `xone` counts by position | T2 | Disjuncts.lean, `exactlyOne_iff_index` |
-| `N = C` is wrong when `N` is smaller | "N-vs-C" line | `Model.cand`, first clause |
+| `N = C` is wrong when `N` is smaller | "N-vs-C" line | `ConceptOrder.cand`, first clause |
 | Negated `isAllOf` lifts to a disjunction of `neq`, so `isAllOf` may stand under `xone` (used by `generators/compile.py`) | T1, second line | not in Lean yet |
 | Structures with unnamed elements lose nothing against preorders | T3 | Collapse.lean, `verdict_eq_structVerdict` |
 | Verdict of two operands is the minimum | T4 | Factoring.lean, `factoring` |

@@ -40,3 +40,8 @@ The file does not import the root module, so the root can import it.
 #print axioms OdrlGrounded.Example.Spatial.spatial_verdict
 #print axioms OdrlGrounded.Example.three_verdicts_occur
 #print axioms OdrlGrounded.Example.contradictory_verdict
+#print axioms OdrlGrounded.ConceptOrder.not_le_of_disjoint
+#print axioms OdrlGrounded.ConceptOrder.not_eqv_of_disjoint
+#print axioms OdrlGrounded.checkedVerdict_eq_none_iff
+#print axioms OdrlGrounded.checkedVerdict_of_consistent
+#print axioms OdrlGrounded.Example.contradictory_checkedVerdict
