@@ -21,7 +21,7 @@ abbrev P := Fin 2
 abbrev sr : P := 0
 abbrev rd : P := 1
 
-/-- Candidate set: the binding's whole concept set. -/
+/-- The concept set: the binding's whole set of concepts. -/
 def N : P → Prop := fun _ => True
 
 def offer : ConstraintSet P := [.atom (.isA rd)]
@@ -70,7 +70,8 @@ theorem purpose_verdict :
     verdict published N offer request = Verdict.compatible :=
   verdict_eq_compatible_iff.mpr purpose_compatible
 
-/-- The witness in the chain model, the model that the check finds. -/
+/-- The chain model has a valuation that satisfies both constraint sets. It is
+the model that the check finds. -/
 theorem purpose_witness :
     ∃ M, Mod published M ∧ M.admits N (offer ++ request) :=
   ⟨chain, chain_models, purpose_compatible chain chain_models⟩

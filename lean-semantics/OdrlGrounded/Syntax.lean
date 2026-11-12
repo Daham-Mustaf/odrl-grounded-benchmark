@@ -77,9 +77,9 @@ def Item.wellSorted {C : Type} (σ : Srt) : Item C → Prop
 def ConstraintSet.wellSorted {C : Type} (σ : Srt) (t : ConstraintSet C) : Prop :=
   ∀ it ∈ t, it.wellSorted σ
 
-/-- The one part of well-sortedness that the reduction to disjuncts uses: no
-`xone` alternative is an `isAllOf`. A negated `isAllOf` is a disjunction, not a
-literal. -/
+/-- The one part of well-sortedness that the reduction to cases uses: no
+`xone` alternative is an `isAllOf`. A negated `isAllOf` is a disjunction, not
+one condition. -/
 def Item.xoneOk {C : Type} : Item C → Prop
   | .xone alts => ∀ a ∈ alts, a.isAllOfAtom = false
   | _ => True

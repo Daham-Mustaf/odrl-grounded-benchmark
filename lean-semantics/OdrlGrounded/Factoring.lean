@@ -9,7 +9,7 @@ Paper: Definition (Verdict for several left operands), Proposition (Verdict by
 left operand).
 
 Operands are indexed by `ι`. Each operand `ℓ` has its own statements `T ℓ`,
-candidate set `N ℓ`, and constraint sets `t ℓ` and `t' ℓ`. Each Logical
+concept set `N ℓ`, and constraint sets `t ℓ` and `t' ℓ`. Each Logical
 Constraint stays on one operand, so a constraint set on several operands is
 one constraint set per operand.
 

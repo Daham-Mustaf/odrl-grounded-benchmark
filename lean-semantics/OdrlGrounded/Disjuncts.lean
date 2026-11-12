@@ -3,28 +3,28 @@ import OdrlGrounded.Witness
 set_option autoImplicit false
 
 /-!
-# Constraint sets as disjuncts
+# Constraint sets as cases
 
 Paper: Section (Computing Compatibility Verdicts), paragraph (Cases), then
 Lemma (Formula and valuations).
 
 A constraint set is a conjunction of members. A member is an atom, an `or`, or
 an `xone`. Distributing the conjunction over the alternatives gives a list of
-disjuncts, each a list of literals, and `M` admits a valuation exactly when
-some disjunct satisfies W.
+cases, each a list of conditions, and `M` admits a valuation exactly when
+`M` satisfies W(K) for some case K.
 
-`or` contributes one disjunct per alternative. `xone` contributes one disjunct
-per position: that alternative holds and every other one fails. A failing
-alternative is a negated literal. A negated subset-mode atom is a `meets`
-literal. A negated `isAnyOf` is a `within` literal, which is `isNoneOf`
-(`negLit_isAnyOf_iff`). A negated `isAllOf` is not a literal but a
+`or` contributes one case per alternative. `xone` contributes one case per
+position: that alternative holds and every other one fails. A failing
+alternative is a negated constraint ¬c. A negated subset-mode atom is a `meets`
+condition. A negated `isAnyOf` is a `within` condition, which is `isNoneOf`
+(`negLit_isAnyOf_iff`). A negated `isAllOf` is not one condition but a
 disjunction, which is why `xone` alternatives may not be `isAllOf`, as
 required by well-sortedness.
 -/
 
 namespace OdrlGrounded
 
-/-! ## Negated literals -/
+/-! ## Negated constraints -/
 
 theorem not_within_iff {C : Type} (M : ConceptOrder C) (ρ : List C) (S : C → Prop) :
     ¬ (∀ y, M.elems ρ y → S y) ↔ ∃ y, M.elems ρ y ∧ ¬ S y := by
@@ -48,7 +48,8 @@ namespace Atom
 
 variable {C : Type}
 
-/-- The literal for the negation of an atomic constraint. For `isAllOf` there
+/-- The condition for the negated constraint ¬c of an atomic constraint c. For
+`isAllOf` there
 is none, and the value here is never used, because well-sortedness excludes
 `isAllOf` under `xone`. -/
 def negLit (M : ConceptOrder C) : Atom C → Lit C
@@ -72,7 +73,7 @@ theorem negLit_closed (M : ConceptOrder C) (a : Atom C) :
 
 end Atom
 
-/-- A negated atomic constraint holds exactly when its negated literal does. -/
+/-- A negated atomic constraint ¬c holds exactly when its condition does. -/
 theorem satAtom_neg_iff {C : Type} (M : ConceptOrder C) (ρ : List C) (a : Atom C)
     (h : a.isAllOfAtom = false) :
     ¬ M.satAtom ρ a ↔ M.satLit ρ (Atom.negLit M a) := by
@@ -167,9 +168,9 @@ theorem exactlyOne_iff_index {α : Type} (P : α → Prop) :
               (by omega)
             simpa using h1
 
-/-! ## Disjuncts -/
+/-! ## Cases -/
 
-/-- Disjuncts of an `xone`: for each position, that alternative holds and the
+/-- Cases of an `xone`: for each position, that alternative holds and the
 others fail. -/
 def xoneDisj {C : Type} (M : ConceptOrder C) : List (Atom C) → List (List (Lit C))
   | [] => []
@@ -177,13 +178,13 @@ def xoneDisj {C : Type} (M : ConceptOrder C) : List (Atom C) → List (List (Lit
       (Atom.lit M a :: rest.map (Atom.negLit M)) ::
         (xoneDisj M rest).map (fun l => Atom.negLit M a :: l)
 
-/-- Disjuncts of one member of a constraint set. -/
+/-- Cases of one member of a constraint set. -/
 def Item.disj {C : Type} (M : ConceptOrder C) : Item C → List (List (Lit C))
   | .atom a => [[Atom.lit M a]]
   | .or alts => alts.map (fun a => [Atom.lit M a])
   | .xone alts => xoneDisj M alts
 
-/-- Disjuncts of a constraint set: the conjunction is distributed over the
+/-- Cases of a constraint set: the conjunction is distributed over the
 alternatives of its members. -/
 def setDisj {C : Type} (M : ConceptOrder C) : List (Item C) → List (List (Lit C))
   | [] => [[]]
@@ -317,7 +318,7 @@ theorem satSet_iff_disj {C : Type} (M : ConceptOrder C) (ρ : List C) :
         exact hitsat
       · exact hrestsat x h
 
-/-! ## Closure of the literals -/
+/-! ## Closure of the conditions -/
 
 theorem xoneDisj_closed {C : Type} (M : ConceptOrder C) :
     ∀ alts : List (Atom C), ∀ K ∈ xoneDisj M alts, ∀ l ∈ K, l.closed M := by
@@ -381,8 +382,8 @@ theorem setDisj_closed {C : Type} (M : ConceptOrder C) :
 
 /-! ## The reduction -/
 
-/-- A concept order admits a valuation for a constraint set exactly when some disjunct
-satisfies W. The set needs no `isAllOf` under `xone`, which well-sortedness
+/-- A concept order admits a valuation for a constraint set exactly when it
+satisfies W(K) for some case K. The set needs no `isAllOf` under `xone`, which well-sortedness
 gives (`ConstraintSet.xoneOk_of_wellSorted`). -/
 theorem admits_iff_exists_witness {C : Type} (M : ConceptOrder C) (N : C → Prop)
     (t : ConstraintSet C) (ht : t.xoneOk) :

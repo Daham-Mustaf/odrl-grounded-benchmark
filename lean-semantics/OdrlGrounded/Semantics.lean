@@ -7,7 +7,7 @@ set_option autoImplicit false
 
 Paper: Definition (Denotation), Definition (Satisfaction of constraints).
 
-A valuation is a nonempty list of concepts, all in the candidate set `N`
+A valuation is a nonempty list of concepts, all in the concept set `N`
 (`N = C_β`, the binding's whole concept set). Lists stand for finite sets.
 Satisfaction uses the elements the values denote, as in the paper.
 -/
@@ -78,7 +78,7 @@ def satSet (M : ConceptOrder C) (ρ : List C) (t : ConstraintSet C) : Prop :=
   ∀ it ∈ t, M.satItem ρ it
 
 /-- `M` admits a valuation that satisfies the constraint set. The valuation is nonempty
-and its values lie in the candidate set `N`. -/
+and its values lie in the concept set `N`. -/
 def admits (M : ConceptOrder C) (N : C → Prop) (t : ConstraintSet C) : Prop :=
   ∃ ρ : List C, ρ ≠ [] ∧ (∀ x ∈ ρ, N x) ∧ M.satSet ρ t
 

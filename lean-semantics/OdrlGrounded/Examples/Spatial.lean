@@ -20,7 +20,7 @@ abbrev G := Fin 2
 abbrev france : G := 0
 abbrev europe : G := 1
 
-/-- Candidate set: the binding's whole concept set. -/
+/-- The concept set: the binding's whole set of concepts. -/
 def N : G → Prop := fun _ => True
 
 def offer : ConstraintSet G := [.atom (.isPartOf europe)]
@@ -70,7 +70,7 @@ theorem spatial_verdict :
     verdict published N offer request = Verdict.compatible :=
   verdict_eq_compatible_iff.mpr spatial_compatible
 
-/-- The witness in the chain model. -/
+/-- The chain model has a valuation that satisfies both constraint sets. -/
 theorem spatial_witness :
     ∃ M, Mod published M ∧ M.admits N (offer ++ request) :=
   ⟨chain, chain_models, spatial_compatible chain chain_models⟩

@@ -109,7 +109,7 @@ def satItem (S : Structure C) (ρ : List C) : Item C → Prop
 def satSet (S : Structure C) (ρ : List C) (t : ConstraintSet C) : Prop :=
   ∀ it ∈ t, S.satItem ρ it
 
-/-- The structure admits a nonempty valuation, with values in the candidate set
+/-- The structure admits a nonempty valuation, with values in the concept set
 `N`, that satisfies the constraint set. -/
 def admits (S : Structure C) (N : C → Prop) (t : ConstraintSet C) : Prop :=
   ∃ ρ : List C, ρ ≠ [] ∧ (∀ x ∈ ρ, N x) ∧ S.satSet ρ t

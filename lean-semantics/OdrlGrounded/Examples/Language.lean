@@ -16,7 +16,7 @@ abbrev L := Fin 2
 abbrev de : L := 0
 abbrev fr : L := 1
 
-/-- Candidate set: the binding's whole concept set. -/
+/-- The concept set: the binding's whole set of concepts. -/
 def N : L → Prop := fun _ => True
 
 def offer : ConstraintSet L := [.atom (.eq de)]

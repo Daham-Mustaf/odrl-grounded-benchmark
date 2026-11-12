@@ -3,18 +3,20 @@ import OdrlGrounded.Semantics
 set_option autoImplicit false
 
 /-!
-# Witness lemma, for a conjunction of atomic constraints
+# Formula and valuations, for a conjunction of atomic constraints
 
-Paper: Lemma (Formula and valuations), the condition W(K) with the candidate set `N`.
+Paper: Lemma (Formula and valuations), the joint-satisfaction formula W(K) with
+the concept set `N`.
 
-Each atomic constraint is a literal on the set of elements that a valuation
-denotes. `within S`: every denoted element lies in `S` (every subset-mode
+Each constraint of a case, negated or not, is a condition on the set of
+elements that a valuation denotes, as in the proof of Lemma (Formula and
+valuations). `within S`: every denoted element lies in `S` (every subset-mode
 operator). `covers F`: every `g` in `F` is denoted (`isAllOf`). `meets T`:
 some denoted element lies in `T` (`isAnyOf`).
 
 `ConceptOrder.cand` is the largest set of elements a valuation could denote: the
-elements of values in `N` that satisfy every `within` literal. `ConceptOrder.witness`
-is W(K): the largest set is nonempty, contains every `covers` set, and meets
+elements of values in `N` that satisfy every `within` condition.
+`ConceptOrder.witness` is the joint-satisfaction formula W(K): the largest set is nonempty, contains every `covers` set, and meets
 every `meets` set.
 
 `witness_iff` says that a valuation exists exactly when W(K) holds. The
@@ -24,7 +26,8 @@ Disjunction, `xone` and negation come in the next step.
 
 namespace OdrlGrounded
 
-/-- A literal on the set of elements a valuation denotes. -/
+/-- A condition that a constraint of a case, negated or not, puts on the set of
+elements a valuation denotes. -/
 inductive Lit (C : Type) where
   | within (S : C → Prop)
   | covers (F : List C)
@@ -40,19 +43,19 @@ def closed (M : ConceptOrder C) : Lit C → Prop
   | .covers _ => True
   | .meets _ => True
 
-/-- What a literal allows an element of the largest set to be. -/
+/-- What a condition allows an element of the largest set to be. -/
 def allows : Lit C → C → Prop
   | .within S, y => S y
   | .covers _, _ => True
   | .meets _, _ => True
 
-/-- What a literal demands of the largest set `D`. -/
+/-- What a condition demands of the largest set `D`. -/
 def needs (D : C → Prop) : Lit C → Prop
   | .within _ => True
   | .covers F => ∀ g ∈ F, D g
   | .meets T => ∃ y, D y ∧ T y
 
-/-- The literal is met by a finite list of seed elements. -/
+/-- The condition is met by a finite list of seed elements. -/
 def seeded (ys : List C) : Lit C → Prop
   | .within _ => True
   | .covers F => ∀ g ∈ F, g ∈ ys
@@ -126,7 +129,7 @@ namespace ConceptOrder
 
 variable {C : Type}
 
-/-- Satisfaction of a literal by a valuation. -/
+/-- Satisfaction of a condition by a valuation. -/
 def satLit (M : ConceptOrder C) (ρ : List C) : Lit C → Prop
   | .within S => ∀ y, M.elems ρ y → S y
   | .covers F => ∀ g ∈ F, M.elems ρ g
@@ -175,8 +178,8 @@ theorem reps_exist (M : ConceptOrder C) (N : C → Prop) :
       · obtain ⟨w, hw, hwz⟩ := h2 z h'
         exact ⟨w, by simp [hw], hwz⟩
 
-/-- Witness lemma. A valuation with values in `N` that satisfies every
-literal exists exactly when W(K) holds. -/
+/-- Lemma (Formula and valuations). A valuation with values in `N` that
+satisfies every condition exists exactly when W(K) holds. -/
 theorem witness_iff (M : ConceptOrder C) (N : C → Prop) (K : List (Lit C))
     (hc : ∀ l ∈ K, l.closed M) :
     (∃ ρ : List C, ρ ≠ [] ∧ (∀ x ∈ ρ, N x) ∧ ∀ l ∈ K, M.satLit ρ l) ↔
@@ -245,13 +248,13 @@ theorem witness_iff (M : ConceptOrder C) (N : C → Prop) (K : List (Lit C))
 
 end ConceptOrder
 
-/-! ## From atomic constraints to literals -/
+/-! ## From atomic constraints to conditions -/
 
 namespace Atom
 
 variable {C : Type}
 
-/-- The literal an atomic constraint stands for, by its mode. -/
+/-- The condition an atomic constraint stands for, by its mode. -/
 def lit (M : ConceptOrder C) : Atom C → Lit C
   | .isAnyOf gs => .meets ((Atom.isAnyOf gs).denot M)
   | .isAllOf gs => .covers gs
@@ -302,7 +305,7 @@ theorem lit_closed (M : ConceptOrder C) (a : Atom C) : (Atom.lit M a).closed M :
 
 end Atom
 
-/-- An atomic constraint holds exactly when its literal does. For `isAllOf`
+/-- An atomic constraint holds exactly when its condition does. For `isAllOf`
 this uses that the denoted elements are closed under identity. -/
 theorem satAtom_iff_satLit {C : Type} (M : ConceptOrder C) (ρ : List C)
     (a : Atom C) : M.satAtom ρ a ↔ M.satLit ρ (Atom.lit M a) := by
@@ -323,7 +326,7 @@ theorem satAtom_iff_satLit {C : Type} (M : ConceptOrder C) (ρ : List C)
   | isPartOf _ => exact Iff.rfl
   | hasPart _ => exact Iff.rfl
 
-/-- Witness lemma for a conjunction of atomic constraints. -/
+/-- Lemma (Formula and valuations) for a conjunction of atomic constraints. -/
 theorem admits_atoms_iff {C : Type} (M : ConceptOrder C) (N : C → Prop)
     (atoms : List (Atom C)) :
     M.admits N (atoms.map Item.atom) ↔

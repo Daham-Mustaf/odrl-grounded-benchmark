@@ -14,8 +14,8 @@ of the binding. A constraint set that contains such a value has no denotation,
 so the input is rejected, whatever the statements say, as in the paper; the
 benchmark rejects the test case.
 
-The candidate set `N` is the range of the grounding, because `γ` is onto the
-binding's concept set `C_β`.
+The concept set `N` is the range of the grounding: by Definition (Grounding),
+every concept of the binding's concept set `C_β` is named by at least one value.
 -/
 
 namespace OdrlGrounded
@@ -23,7 +23,7 @@ namespace OdrlGrounded
 /-- A grounding maps a value to a concept, or is undefined on it. -/
 abbrev Grounding (V C : Type) := V → Option C
 
-/-- Candidate set: the concepts that some value grounds to. -/
+/-- The concept set: the concepts that some value grounds to. -/
 def Grounding.range {V C : Type} (γ : Grounding V C) : C → Prop :=
   fun c => ∃ v, γ v = some c
 
@@ -52,7 +52,7 @@ def ConstraintSet.ground {V C : Type} (γ : Grounding V C)
 
 /-- Definition (Verdict) with the ungrounded clause. If either side has an
 ungrounded value the input is rejected: `none`. Otherwise it is the verdict of the
-grounded sets, with the range of `γ` as candidate set. -/
+grounded sets, with the range of `γ` as the concept set. -/
 noncomputable def groundedVerdict {V C : Type} (γ : Grounding V C)
     (T : List (Statement C)) (t t' : ConstraintSet V) : Option Verdict :=
   match ConstraintSet.ground γ t, ConstraintSet.ground γ t' with

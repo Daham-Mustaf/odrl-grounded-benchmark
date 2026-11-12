@@ -6,16 +6,15 @@ set_option autoImplicit false
 /-!
 # Computing verdicts
 
-Paper: Section (Computing Compatibility Verdicts), the reduction of the verdict to two
-satisfiability queries.
+Paper: Section (Computing Compatibility Verdicts), the reduction of the verdict to
+the checks of R ∪ B ∪ {¬W} and R ∪ B ∪ {W}.
 
-`ConceptOrder.pairWitness` says that W holds in `M` for the pair: some disjunct of
-the conjunction of the two constraint sets satisfies W. A pair is `Compatible`
-exactly when the statements `T` entail W, which is the first query (the
-statements with the negation of W are unsatisfiable). It is `Incompatible`
-exactly when the statements entail the negation of W, which is the second query
-(the statements with W are unsatisfiable). The results are semantic: "entail"
-is truth in every model of the statements.
+`ConceptOrder.pairWitness` says that the formula W holds in `M` for the pair:
+`M` satisfies W(K) for some case K of the two constraint sets. A pair is
+`Compatible` exactly when the statements `T` entail W, that is, when
+R ∪ B ∪ {¬W} has no model. It is `Incompatible` exactly when the statements
+entail ¬W, that is, when R ∪ B ∪ {W} has no model. The results are semantic:
+"entail" is truth in every model of the statements.
 -/
 
 namespace OdrlGrounded
