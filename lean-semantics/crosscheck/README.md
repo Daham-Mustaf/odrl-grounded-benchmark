@@ -7,8 +7,8 @@ agreement between the two is by review, not by construction.
 
 Lean proves a statement for all models, but only the statement we wrote. These
 scripts test that the statement is the intended one. They found three errors
-that Lean would have happily proved around: the candidate set `N` was replaced
-by `C`, `xone` was counted by content instead of by position, and a negated
+that Lean would have happily proved around: the concept set `N` was replaced
+by the whole concept type `C`, `xone` was counted by content instead of by position, and a negated
 `isAnyOf` was not read as `isNoneOf`.
 
 Run from this folder:

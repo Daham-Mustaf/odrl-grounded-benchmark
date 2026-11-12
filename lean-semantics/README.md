@@ -11,10 +11,10 @@ Core Lean only, no Mathlib. Build from this folder:
 | OdrlGrounded/Syntax.lean | Well-sortedness, constraint sets |
 | OdrlGrounded/Semantics.lean | Denotation, Satisfaction of constraints |
 | OdrlGrounded/Verdict.lean | Verdict (one operand) |
-| OdrlGrounded/Grounding.lean | Grounding, candidate set, ungrounded clause |
+| OdrlGrounded/Grounding.lean | Grounding, concept set, rejection of an ungrounded value |
 | OdrlGrounded/VerdictProperties.lean | Exclusivity, adding statements, soundness |
 | OdrlGrounded/Witness.lean | Lemma "Formula and valuations", for a conjunction of atoms |
-| OdrlGrounded/Disjuncts.lean | Reduction of a constraint set to disjuncts, with or, xone and negation |
+| OdrlGrounded/Disjuncts.lean | Reduction of a constraint set to cases, with or, xone and negation |
 | OdrlGrounded/Decision.lean | Proposition "Three checks": the two entailment queries |
 | OdrlGrounded/Factoring.lean | Proposition "Verdict by left operand" |
 | OdrlGrounded/Examples/Language.lean | Running example, language row |
@@ -40,6 +40,7 @@ Axiom check:
 | Disjointness excludes identity and order | `ConceptOrder.not_le_of_disjoint`, `ConceptOrder.not_eqv_of_disjoint` | Model.lean |
 | Structure with unnamed elements | `Structure`, `structVerdict` | Collapse.lean |
 | Grounding, ungrounded clause | `Grounding`, `Grounding.range`, `groundedVerdict`, `groundedVerdict_of_left_none`, `groundedVerdict_of_right_none` | Grounding.lean |
+| The concept set of the left operand, Definition 4 (Grounding); not the N of Definition 10 (Formula of a case) | `N` | Semantics.lean, Grounding.lean |
 | Denotation, satisfaction of constraints | `Atom.denot`, `ConceptOrder.satAtom`, `ConceptOrder.satItem`, `ConceptOrder.satSet`, `ConceptOrder.admits` | Semantics.lean |
 | Verdict | `Compatible`, `Incompatible`, `verdict`, `verdict_eq_compatible_iff`, `verdict_eq_incompatible_iff`, `verdict_eq_unknown_iff` | Verdict.lean, VerdictProperties.lean |
 | Verdict, only for consistent statements | `checkedVerdict`, `checkedVerdict_eq_none_iff`, `checkedVerdict_of_consistent` | Verdict.lean |
