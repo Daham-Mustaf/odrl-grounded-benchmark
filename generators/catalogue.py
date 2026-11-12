@@ -61,7 +61,8 @@ MEANING = {
     "Incompatible": "Whatever the vocabulary leaves open, no use meets both policies.",
     "Unknown": "It depends on something the vocabulary leaves open, and the reason names it.",
     "Rejected": "The policy uses an operator that does not apply to this kind of value, "
-                "or a value that names no entry of the vocabulary.",
+                "combines an all-of condition in a choice of exactly one, "
+                "or uses a value that names no entry of the vocabulary.",
     "Accepted": "A control. The condition fits this kind of value, and the policy goes "
                 "on to a verdict.",
 }
@@ -220,6 +221,13 @@ def policy(g, pol, names) -> dict:
                      for c in g.objects(r, ODRL.constraint)])
 
 
+def xone_with_allof(g, c) -> bool:
+    """Whether c is an xone that combines an isAllOf constraint, which
+    Definition Well-sortedness rejects."""
+    return any((m, ODRL.operator, ODRL.isAllOf) in g
+               for lst in g.objects(c, ODRL.xone) for m in Collection(g, lst))
+
+
 def case(path: Path, names, sets, origins, bindings) -> dict:
     g = Graph().parse(path, format="turtle")
     pols = sorted(g.subjects(RDF.type, ODRL.Set), key=str)
@@ -231,11 +239,18 @@ def case(path: Path, names, sets, origins, bindings) -> dict:
         verdict = (state, VERDICT[state][0], VERDICT[state][1])
     elif "WellSortednessReport" in types:
         ok = next(g.objects(rep, VREP.wellSorted)).toPython()
-        verdict = (("Accepted: the operator applies to this kind of value", "control",
-                    "A control: the operator applies, and the policy goes on to a verdict.")
-                   if ok else
-                   ("Rejected: the operator does not apply to this kind of value", "rejected",
-                    "The operator does not apply to this kind of value, so no verdict is computed."))
+        checked = next(g.objects(rep, VREP.constraint), None)
+        if ok:
+            verdict = ("Accepted: the operator applies to this kind of value", "control",
+                       "A control: the operator applies, and the policy goes on to a verdict.")
+        elif xone_with_allof(g, checked):
+            verdict = ("Rejected: a choice of exactly one combines an all-of condition",
+                       "rejected",
+                       "A choice of exactly one must not combine an all-of condition, "
+                       "so no verdict is computed.")
+        else:
+            verdict = ("Rejected: the operator does not apply to this kind of value", "rejected",
+                       "The operator does not apply to this kind of value, so no verdict is computed.")
     else:
         verdict = ("Rejected: names no entry of the vocabulary", "rejected",
                    "A value names no entry of the part of the vocabulary used here, "

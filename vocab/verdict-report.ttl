@@ -41,8 +41,8 @@ vrep:WellSortednessReport a rdfs:Class ;
     rdfs:subClassOf vrep:InputCheckReport ;
     rdfs:isDefinedBy <https://w3id.org/odrl-kb/verdict-report> ;
     rdfs:label "Well-Sortedness Report"@en ;
-    skos:definition "Whether one constraint can be evaluated at all under the sort its left operand is bound at: whether the operator is defined at that sort and the right operand has the arity the operator takes."@en ;
-    rdfs:comment "Decided by the signature alone. No resource is opened."@en .
+    skos:definition "Whether one constraint can be evaluated at all under the sort its left operand is bound at: whether the operator is defined at that sort and the right operand has the arity the operator takes. For a logical constraint, whether every constraint it combines is well sorted and, for an xone, whether none of them is an isAllOf constraint."@en ;
+    rdfs:comment "Decided by the signature and the connective alone. No resource is opened."@en .
 
 vrep:GroundingReport a rdfs:Class ;
     rdfs:subClassOf vrep:InputCheckReport ;
@@ -174,7 +174,7 @@ vrep:constraint a rdf:Property, owl:FunctionalProperty ;
 vrep:wellSorted a rdf:Property, owl:FunctionalProperty ;
     rdfs:isDefinedBy <https://w3id.org/odrl-kb/verdict-report> ;
     rdfs:label "well sorted"@en ;
-    skos:definition "True when the operator is defined at the binding's sort and the right operand has the arity the operator takes. When false, rdfs:comment gives the reason."@en ;
+    skos:definition "True when the operator is defined at the binding's sort and the right operand has the arity the operator takes; for a logical constraint, when every constraint it combines is well sorted and no xone combines an isAllOf constraint. When false, rdfs:comment gives the reason."@en ;
     rdfs:domain vrep:WellSortednessReport ;
     rdfs:range xsd:boolean .
 

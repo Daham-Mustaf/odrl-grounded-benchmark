@@ -107,6 +107,8 @@ suite-numbers.tex the figures and the tables the paper includes,
 ```
 KGC100-112   well-sortedness: nine constraints, six rejected at
              drafting time by the signature alone
+KGC123       well-sortedness: an xone that combines an isAllOf
+             constraint, rejected at drafting time
 KGC301-302   the motivating example: purpose and spatial
 KGC303-304   spatial: exactly one of two alternatives, over GeoNames
 KGC308-309   spatial: one country within another, over GeoNames
@@ -408,8 +410,10 @@ declarations or certificate:
 
 ```
 vrep:WellSortednessReport                   whether the operator and the
-  vrep:constraint, vrep:binding,            arity fit the binding's sort;
-  vrep:wellSorted                           false in KGC100 to KGC102
+  vrep:constraint, vrep:binding,            arity fit the binding's sort,
+  vrep:wellSorted                           and whether an xone combines
+                                            an isAllOf constraint; false
+                                            in KGC100 to KGC105 and KGC123
 vrep:GroundingReport                        whether every value names a
   vrep:constraint, vrep:binding,            concept of the bound resource;
   vrep:grounded, vrep:ungroundedValue       false in KGC372 and KGC381

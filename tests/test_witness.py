@@ -77,7 +77,8 @@ try:
     from compile import (Constraint, MODE, SUBSET, MEETS, SUPERSET,
                          witness_condition)
     try:
-        from compile import Lit, Or, Xone, disjuncts, witness_of_tree
+        from compile import (IllSorted, Lit, Or, Xone, disjuncts,
+                             witness_of_tree)
         HAVE_TREES = True
     except ImportError:
         HAVE_TREES = False
@@ -447,8 +448,17 @@ def tree_battery(names):
             [Xone((C("isAnyOf", a, b), C("eq", c)))]),
         ("plain conjunction",
             [C("isA", a), C("eq", b)]),
-        # isAllOf under xone: the negation of the isAllOf alternative is a
-        # disjunction of neq, distributed into the disjuncts.
+        ("or(isAllOf a b, eq c)",
+            [Or((C("isAllOf", a, b), C("eq", c)))]),
+    ]
+
+
+def ill_sorted_trees(names):
+    """Trees with an isAllOf under an xone.  Definition Well-sortedness
+    rejects them (an xone must not combine an isAllOf constraint), and so
+    must compile.py, before any witness is built."""
+    a, b, c = names[0], names[1], names[2]
+    return [
         ("xone(isAllOf a, eq b)",
             [Xone((C("isAllOf", a), C("eq", b)))]),
         ("xone(isAllOf a b, eq c)",
@@ -470,9 +480,20 @@ def tree_battery(names):
         ("xone(isAllOf a b, eq c), or(isA a, eq b)",
             [Xone((C("isAllOf", a, b), C("eq", c))),
              Or((C("isA", a), C("eq", b)))]),
-        ("or(isAllOf a b, eq c)",
-            [Or((C("isAllOf", a, b), C("eq", c)))]),
     ]
+
+
+def run_ill_sorted(battery, names):
+    """Each tree must raise IllSorted; one that compiles is a failure."""
+    failures = []
+    M = next(iter(structures(names)))
+    for label, items in battery:
+        try:
+            witness_of_tree(items, list(names), "tax", Eval(M))
+        except IllSorted:
+            continue
+        failures.append((label, None, None, None))
+    return len(battery), failures
 
 
 def run_trees(battery, names, verbose=False):
@@ -524,13 +545,23 @@ def main() -> int:
               f"{checked:6} checks   {status}")
         total_failures += failures
 
+        checked, failures = run_ill_sorted(ill_sorted_trees(names), names)
+        status = ("ok" if not failures else
+                  f"{len(failures)} COMPILED: "
+                  + ", ".join(label for label, *_ in failures))
+        print(f"{'isAllOf under xone':24} {checked:3} sets, IllSorted expected"
+              f"   {status}")
+        total_failures += failures
+
         # The rewrites the expansion depends on.  negate() returns a
         # disjunction of literals.  A negated isAnyOf must become one
         # positive isNoneOf, not a negative literal: a negative literal would
         # emit a meets requirement against the complement, which is
         # satisfiable whenever anything else is in D.  A negated isAllOf
         # must become one positive neq per listed value: the witness has no
-        # case for a negative superset-mode literal.
+        # case for a negative superset-mode literal.  No tree reaches that
+        # rewrite, since check_tree rejects an isAllOf under an xone; this
+        # call is the only one that does.
         from compile import negate
         a, b = names[0], names[1]
         got = negate(C("isAnyOf", a, b))

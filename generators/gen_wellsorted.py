@@ -4,10 +4,11 @@ gen_wellsorted.py
 
 Generates the drafting-time check problems and runs it.
 
-No queries are written.  Well-sortedness is decided by the signature alone,
-so a rejected constraint never reaches a prover.  Each problem produces one
-case file recording the constraint and the expected outcome, with the reason
-when it is rejected.
+No queries are written.  Well-sortedness is decided by the signature, and
+for a Logical Constraint by compile.check_tree as well, so a rejected
+constraint never reaches a prover.  Each problem produces one case file
+recording the constraint and the expected outcome, with the reason when it
+is rejected.
 
 Usage:
 
@@ -21,6 +22,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
 
+from compile import SET_OPERATORS, IllSorted, check_tree
 from problem_data_wellsorted import PROBLEMS
 from signature import is_well_sorted
 from targets import with_targets
@@ -50,25 +52,56 @@ _HEADER = """\
 # test, and an evaluator that answered yes or no would be inventing an answer.
 """
 
+# The same for an xone, whose operators all fit the kind of value.
+_XONE_HEADER = """\
+# A check made while a policy is drafted: whether a choice of exactly one
+# combines an isAllOf constraint.  The answer comes from the policy's
+# constraints alone, so no vocabulary was opened and no prover was run.
+#
+# A rejected policy is not false.  Exactly one asks every other constraint
+# to fail, and the failure of an isAllOf constraint is not one constraint:
+# any one of its values may be missing.
+"""
+
+
+def check(p: dict) -> tuple[bool, str]:
+    """Whether the problem's constraint is well sorted, and the reason when
+    it is not.  A Constraint is checked against the signature.  For a Logical
+    Constraint each constraint it combines is checked so, and then the tree
+    goes through compile.check_tree, as it would on its way to a query."""
+    if "tree" not in p:
+        return is_well_sorted(p["operator"], p["sort"], p["arity"])
+    for item in p["tree"]:
+        for c in getattr(item, "alts", (item,)):
+            arity = "n" if c.operator in SET_OPERATORS else len(c.values)
+            ok, why = is_well_sorted(c.operator, p["sort"], arity)
+            if not ok:
+                return ok, why
+    try:
+        check_tree(p["tree"])
+    except IllSorted as e:
+        return False, str(e)
+    return True, ""
+
 
 def case_ttl(p: dict, accepted: bool, reason: str) -> str:
-    """One case file: the constraint, and what the signature says about it."""
+    """One case file: the constraint, and what the check says about it."""
     pid = p["id"]
     lines = [
         GENERATED_HEADER,
-        _HEADER,
+        _XONE_HEADER if p["operator"] == "xone" else _HEADER,
         with_targets(p["ttl"]),
         "",
         "### Expected result " + "#" * 55,
         "",
         f"drk:{pid}-report a vrep:WellSortednessReport ;",
         f'    dcterms:identifier "{pid}" ;',
-        f"    vrep:constraint kgc:{pid}-p1-c1 ;",
+        f"    vrep:constraint {p['constraint']} ;",
         f"    vrep:binding <{p['binding']}> ;",
     ]
-    # What a reader sees is the problem's own wording; the signature only
-    # decides whether the operator applies, and main() checks that against
-    # the problem's expectation.
+    # What a reader sees is the problem's own wording; the check only
+    # decides whether the constraint is accepted, and main() checks that
+    # against the problem's expectation.
     summary = p["summary"]
     comment = p["reason"]
     lines.append(f'    dcterms:description """{summary}"""@en ;')
@@ -92,7 +125,7 @@ def main() -> int:
     failures = 0
     start = time.perf_counter()
     for p in PROBLEMS:
-        accepted, reason = is_well_sorted(p["operator"], p["sort"], p["arity"])
+        accepted, reason = check(p)
         mark = "ok" if accepted == p["accepted"] else "MISMATCH"
         if accepted != p["accepted"]:
             failures += 1

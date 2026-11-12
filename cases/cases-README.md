@@ -5,6 +5,7 @@ that fixed the answer, and the report the semantics produces for them.
 
 ```
 KGC100-112   well-sortedness, rejected at drafting time
+KGC123       well-sortedness: an xone that combines an isAllOf constraint
 KGC301-302   the motivating example: purpose and spatial
 KGC303-304   spatial: exactly one of two alternatives, over GeoNames
 KGC308-309   spatial: one country within another, over GeoNames

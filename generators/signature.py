@@ -2,12 +2,14 @@
 signature.py
 ============
 The signature: which operators each sort admits, and what shape of right
-operand each requires.  This is the table of the paper, and the whole of the
-drafting-time check.
+operand each requires.  This is the table of the paper, and the drafting-time
+check of a Constraint; compile.check_tree adds the one rule for a Logical
+Constraint, that an xone must not combine an isAllOf constraint.
 
 Nothing here reads a resource.  Well-sortedness depends on the operator, the
-arity and the operand's sort, and on nothing else, which is what makes the
-check possible before any vocabulary is opened.
+arity and the operand's sort, and for a Logical Constraint on its connective,
+and on nothing else, which is what makes the check possible before any
+vocabulary is opened.
 """
 
 NOM, TAX, MER = "nom", "tax", "mer"

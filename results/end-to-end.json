@@ -4,11 +4,11 @@
   "fixed": 4,
   "seed": 20261030,
   "vampire_problems": 204,
-  "skipped_no_structure": 404,
+  "skipped_no_structure": 384,
   "from_definitions": {
-    "Compatible": 482,
-    "Incompatible": 699,
-    "Unknown": 823
+    "Compatible": 456,
+    "Incompatible": 709,
+    "Unknown": 839
   },
   "disagreements": 0
 }

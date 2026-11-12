@@ -17,7 +17,8 @@ declarations at random (distinctness over some of the concepts, disjointness
 between some pairs at tax and mer, or none), written as RDF and read through
 declarations.py like every set in problems/background; a sort at random; and
 two policies drawn from every operator the signature admits at that sort,
-some of their constraints inside or and xone.  Four fixed problems are added,
+some of their constraints inside or and xone, an xone never with an isAllOf
+alternative (Definition Well-sortedness).  Four fixed problems are added,
 each one a named-only witness gets wrong:
 
   F1  isA a against isA b, where the two meet only in a third concept
@@ -104,13 +105,17 @@ def constraint(rng, op, names, side):
 
 def policy(rng, sort, names, side):
     ops = admitted(sort)
+    # Definition Well-sortedness: an xone must not combine an isAllOf
+    # constraint, so an xone draws its alternatives from the others.
+    xone_ops = [op for op in ops if op != "isAllOf"]
     items = []
     for _ in range(rng.choice((1, 2))):
         r = rng.random()
         if r < 0.6:
             items.append(constraint(rng, rng.choice(ops), names, side))
         else:
-            alts = tuple(constraint(rng, rng.choice(ops), names, side)
+            pool = ops if r < 0.8 else xone_ops
+            alts = tuple(constraint(rng, rng.choice(pool), names, side)
                          for _ in range(2))
             items.append(Or(alts) if r < 0.8 else Xone(alts))
     return items

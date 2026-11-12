@@ -41,7 +41,7 @@ FAMILIES = {
     "consent status":          list(range(340, 344)) + [348, 349],
     "technical measures":      range(360, 367),
     "language":                list(range(370, 380)) + [398],
-    "well-sortedness":         [100, 101, 102, 103, 104, 105, 110, 111, 112],
+    "well-sortedness":         [100, 101, 102, 103, 104, 105, 110, 111, 112, 123],
 }
 for fam, ids in FAMILIES.items():
     for i in ids:

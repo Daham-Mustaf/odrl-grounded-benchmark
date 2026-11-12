@@ -98,7 +98,8 @@ class IllSorted(ValueError):
 
 
 def check_tree(items):
-    """Rejects a Logical Constraint with no alternatives.
+    """Rejects a Logical Constraint with no alternatives, and an xone with an
+    isAllOf alternative.
 
     ODRL ranges the operands of one over Constraint instances and an empty
     list is malformed, but without the check the failure surfaces three
@@ -106,10 +107,17 @@ def check_tree(items):
     disjunct list is empty, and or_ is handed an empty sequence.  Naming the
     defect here is worth the line, and it makes the empty case unreachable
     in the syntax classes below.
+
+    Definition Well-sortedness adds that an xone must not combine an isAllOf
+    constraint.  A case of an xone negates every alternative but one, and a
+    case negates no isAllOf constraint.
     """
     for it in items:
         if isinstance(it, (Or, Xone)) and not it.alts:
             raise IllSorted("Logical Constraint with no alternatives")
+        if isinstance(it, Xone) and any(c.operator == "isAllOf"
+                                        for c in it.alts):
+            raise IllSorted("an xone must not combine an isAllOf constraint")
 
 
 def negate(c: Constraint) -> tuple:
@@ -121,6 +129,8 @@ def negate(c: Constraint) -> tuple:
     isAllOf is the one superset-mode operator.  A bound set fails it when
     some listed value is missing, so its negation is the disjunction of
     neq v over the listed values, each a positive subset-mode literal.
+    check_tree rejects an xone with an isAllOf alternative, as the paper
+    does, so no tree reaches this rewrite; only the unit tests call it.
 
     Every other negation is the failure of a subset condition and stays a
     negative literal; the witness gives it a meets requirement against the

@@ -1,14 +1,14 @@
 """
 problem_data_wellsorted.py
 ==========================
-The drafting-time check.  Nine problems: ill-sorted constraints, one per
-sort, the two parthood operators at nom and hasPart at tax, and one
-well-sorted control per sort.
+The drafting-time check.  Ten problems: ill-sorted constraints, one per
+sort, the two parthood operators at nom and hasPart at tax, an xone that
+combines an isAllOf constraint, and one well-sorted control per sort.
 
-These build no queries.  Well-sortedness is decided by the signature alone,
-before any resource is opened, so a rejected constraint never reaches a
-prover.  That is the claim, and the absence of query files is the evidence
-for it.
+These build no queries.  Well-sortedness is decided by the signature, and
+for an xone by its alternatives, before any resource is opened, so a
+rejected constraint never reaches a prover.  That is the claim, and the
+absence of query files is the evidence for it.
 
     KGC100  spatial  isA        gn:Europe    mer   rejected
     KGC101  purpose  isPartOf   dpv:NCP      tax   rejected
@@ -16,20 +16,27 @@ for it.
     KGC102  language isA        bcp:de       nom   rejected
     KGC103  language isPartOf   bcp:de       nom   rejected
     KGC104  language hasPart    bcp:de       nom   rejected
+    KGC123  language xone(eq bcp:de, isAllOf bcp:de bcp:fr)
+                                             nom   rejected
     KGC110  spatial  isPartOf   gn:Europe    mer   accepted
     KGC111  purpose  isA        dpv:NCP      tax   accepted
     KGC112  language eq         bcp:de       nom   accepted
 
-The six rejections are the same error in three settings: an operator put to
-a resource that supplies a different relation.  KGC100 is the case the paper
-uses throughout, a gazetteer asked about kinds.
+KGC100 to KGC105 are the same error in three settings: an operator put to a
+resource that supplies a different relation.  KGC100 is the case the paper
+uses throughout, a gazetteer asked about kinds.  KGC123 is the other error
+Definition Well-sortedness names: every operator fits the sort, but an xone
+must not combine an isAllOf constraint.
 """
+
+from compile import Constraint, Xone, right_operand
 
 VALUE = {
     "gn:Europe":  "<https://sws.geonames.org/6255148/>",
     "dpv:NCP":    "dpv:NonCommercialPurpose",
     "dpv:NCR":    "dpv:NonCommercialResearch",
     "bcp:de":     "bcp47:de",
+    "bcp:fr":     "bcp47:fr",
 }
 
 PREFIX = {
@@ -74,13 +81,16 @@ TITLE = {
     "KGC102": "Use in a kind of German only",
     "KGC103": "Use within German",
     "KGC104": "Use in a language that includes German",
+    "KGC123": "Use either in German only or in both German and French",
     "KGC110": "Use within Europe",
     "KGC111": "Use for non-commercial purposes or any narrower purpose",
     "KGC112": "Use in German only",
 }
 
 
-def _ttl(pid: str, operand: str, operator: str, value: str) -> str:
+def _ttl(pid: str, operand: str, constraint: str, body: str) -> str:
+    """The policy and its permission, which names `constraint`; `body` is the
+    Turtle of that constraint and of any constraints it combines."""
     _, prefix_line = PREFIX[operand]
     profile = ("\n    odrl:profile dpv-odrl: ;"
                if LEFT[operand].startswith("dpv-odrl:") else "")
@@ -106,12 +116,19 @@ drk:policy-{pid[3:]}-1 a odrl:Set ;
 kgc:{pid}-p1-r1 a odrl:Permission ;
     odrl:action odrl:use ;
     odrl:target drk:manuscripts ;
-    odrl:constraint kgc:{pid}-p1-c1 .
+    odrl:constraint {constraint} .
 
-kgc:{pid}-p1-c1 a odrl:Constraint ;
+{body}"""
+
+
+def _atom(node: str, operand: str, operator: str, values) -> str:
+    """One Constraint.  A set operator's values are written as a list."""
+    right = right_operand(operator, [VALUE[v] for v in values])
+    return f"""\
+{node} a odrl:Constraint ;
     odrl:leftOperand {LEFT[operand]} ;
     odrl:operator odrl:{operator} ;
-    odrl:rightOperand {VALUE[value]} ."""
+    odrl:rightOperand {right} ."""
 
 
 def _problem(pid, operand, operator, value, sort, accepted, description,
@@ -120,6 +137,7 @@ def _problem(pid, operand, operator, value, sort, accepted, description,
     whether the constraint is accepted; gen_wellsorted checks that against
     `accepted` and never uses its message as text."""
     resource, background = RESOURCE[operand]
+    node = f"kgc:{pid}-p1-c1"
     return {
         "id":                pid,
         "subdir":            "wellsorted",
@@ -135,7 +153,47 @@ def _problem(pid, operand, operator, value, sort, accepted, description,
         "description":       description,
         "summary":           summary,
         "reason":            reason,
-        "ttl":               _ttl(pid, operand, operator, value),
+        "ttl":               _ttl(pid, operand, node,
+                                  _atom(node, operand, operator, (value,))),
+        "constraint":        node,
+        "binding":           BINDING[operand],
+    }
+
+
+def _xone_problem(pid, operand, alts, sort, accepted, description, summary,
+                  reason):
+    """An xone over constraints, each alternative an (operator, values) pair.
+    The report names the Logical Constraint, which Definition
+    Well-sortedness checks as a whole.  gen_wellsorted checks each
+    alternative against the signature and the tree with compile.check_tree,
+    and compares the outcome with `accepted`."""
+    resource, background = RESOURCE[operand]
+    node = f"kgc:{pid}-p1-lc"
+    members = [f"kgc:{pid}-p1-c{i}" for i in range(1, len(alts) + 1)]
+    body = "\n\n".join(
+        [f"{node} a odrl:LogicalConstraint ;\n"
+         f"    odrl:xone ( {' '.join(members)} ) ."]
+        + [_atom(m, operand, op, values)
+           for m, (op, values) in zip(members, alts)])
+    return {
+        "id":                pid,
+        "subdir":            "wellsorted",
+        "name":              f"{operand}, xone("
+                             + ", ".join(f"{op} {' '.join(values)}"
+                                         for op, values in alts) + ")",
+        "left_operand":      operand,
+        "operator":          "xone",
+        "sort":              sort,
+        "resource":          resource,
+        "background_theory": background,
+        "accepted":          accepted,
+        "description":       description,
+        "summary":           summary,
+        "reason":            reason,
+        "tree":              [Xone(tuple(Constraint(op, tuple(values))
+                                         for op, values in alts))],
+        "ttl":               _ttl(pid, operand, node, body),
+        "constraint":        node,
         "binding":           BINDING[operand],
     }
 
@@ -212,6 +270,27 @@ PROBLEMS = [
              "A German library's policy uses hasPart with German, a language in "
              "the IANA registry.",
              "hasPart asks whether one value has another as a part.  This reading takes languages as names only: none of the fifteen languages used here belongs to a larger language in the IANA registry (RFC 5646), and the reading takes no order from the registry, so the operator does not apply to this kind of value."),
+
+    _xone_problem("KGC123", "language",
+                  [("eq", ("bcp:de",)), ("isAllOf", ("bcp:de", "bcp:fr"))],
+                  "nom", False,
+                  "A policy that gives a language relies on the IANA "
+                  "registry.  Exactly one of two constraints must hold: eq "
+                  "German, or isAllOf German and French.  Exactly one asks "
+                  "the other constraint to fail, and for isAllOf that is not "
+                  "one constraint: German may be missing, or French.  An "
+                  "xone must not combine an isAllOf constraint, so the "
+                  "policy is rejected before the registry is opened.  A "
+                  "drafter writes or instead: the two cannot both hold "
+                  "unless German and French are the same language.",
+                  "A German library's policy uses exactly one of eq with "
+                  "German and isAllOf with German and French, languages in "
+                  "the IANA registry.",
+                  "Exactly one of the two must hold, so the other must "
+                  "fail, and isAllOf with German and French fails in two "
+                  "ways: German is missing, or French is missing.  That is "
+                  "not one constraint, so an xone must not combine an "
+                  "isAllOf constraint."),
 
     _problem("KGC110", "spatial", "isPartOf", "gn:Europe", "mer", True,
              "Control.  isPartOf asks whether one value is part of another, "

@@ -191,7 +191,8 @@ def suite_totals(cases_dir: Path, verdict_dir: Path) -> dict:
         "epistemic": states.get("Unknown", 0),
         # Constraints rejected because a value does not ground.
         "ungrounded": ungrounded,
-        # Constraints rejected because the operator does not fit the sort.
+        # Constraints rejected as ill sorted: the operator does not fit the
+        # sort, or an xone combines an isAllOf constraint.
         "ill_sorted": ill_sorted,
         "rejected": ill_sorted + ungrounded,
         # Well-sorted controls: checked, accepted, no verdict asked for.

@@ -60,10 +60,12 @@ direction of the decision form, and for the Incompatible case of monotonicity
 `verdict` reports Compatible (`contradictory_verdict`). `xoneOk`, no `isAllOf`
 among the alternatives of an `xone`, is needed by `admits_iff_exists_witness`,
 `verdict_compatible_iff_witness` and `verdict_incompatible_iff_witness`. The
-benchmark compiler does not need it: it rewrites a negated `isAllOf` to a
-disjunction of `neq`; no case puts an `isAllOf` under an `xone` since KGC307
-was retired. The rewrite is checked by `crosscheck/` (T1, second line) and by
-`tests/test_witness.py`, not in Lean yet.
+paper rejects such input: by Definition 1 (Well-sortedness) an `xone` must
+not combine an `isAllOf` constraint. The benchmark compiler rejects it too
+(`check_tree` in `generators/compile.py`, and the rejected case KGC123). The
+compiler keeps its rewrite of a negated `isAllOf` to a disjunction of `neq`,
+but only the unit tests reach it (`tests/test_witness.py`); `crosscheck/`
+(T1, second line) checks the rewrite in its own code. It is not in Lean yet.
 
 The ungrounded clause. `groundedVerdict` returns `Option Verdict`, and `none`
 when a value is ungrounded: the input is rejected, as in the paper, and the

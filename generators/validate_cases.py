@@ -170,10 +170,14 @@ def check(path: Path, bindings, declarations, errs, warns, twins, notes):
                 if re.search(r"\b(offer|request)", str(v), re.I):
                     warns.append(f"{path.name}: {label} says offer or request")
 
+    # Definition Well-sortedness checks a Logical Constraint as a whole (an
+    # xone must not combine an isAllOf constraint), so the report may name one.
     for rep in g.subjects(RDF.type, VREP.WellSortednessReport):
         cs = list(g.objects(rep, VREP.constraint))
-        if len(cs) != 1 or (cs[0], RDF.type, ODRL.Constraint) not in g:
-            e("well-sortedness report: vrep:constraint is not a constraint in the file")
+        kinds = set(g.objects(cs[0], RDF.type)) if len(cs) == 1 else set()
+        if not kinds & {ODRL.Constraint, ODRL.LogicalConstraint}:
+            e("well-sortedness report: vrep:constraint is not a constraint "
+              "or a logical constraint in the file")
         if len(list(g.objects(rep, VREP.wellSorted))) != 1:
             e("well-sortedness report: no vrep:wellSorted")
         for b in g.objects(rep, VREP.binding):

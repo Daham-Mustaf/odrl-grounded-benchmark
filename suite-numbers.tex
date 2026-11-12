@@ -1,6 +1,6 @@
 % suite-numbers.tex
 % Written by generators/table_data.py --suite-numbers. Do not edit.
-% 71 cases = 44 definite + 16 Unknown + 8 rejected + 3 accepted controls.
+% 72 cases = 44 definite + 16 Unknown + 9 rejected + 3 accepted controls.
 % Rejected is ill sorted plus ungrounded.
 % Times: timings-run1.csv of 2026-11-07T09:59:12+03:00, timings-run2.csv of 2026-11-07T09:59:39+03:00, timings-run3.csv of 2026-11-07T10:00:05+03:00; each query alone, one at a time, at most 300 s.
 % Under no challenge: none.
@@ -8,14 +8,14 @@
 % suiteReadAgainstDecl: same policies, same binding, and the declarations of the second contain those of the first: KGC303/KGC304, KGC313/KGC314, KGC316/KGC403, KGC320/KGC321, KGC333/KGC334, KGC342/KGC343, KGC342/KGC348, KGC363/KGC364, KGC371/KGC370, KGC375/KGC374, KGC393/KGC394.
 % suiteReadAgainstMoved: Unknown under the first, a verdict under the second: KGC303/KGC304, KGC313/KGC314, KGC316/KGC403, KGC320/KGC321, KGC333/KGC334, KGC342/KGC343, KGC363/KGC364, KGC371/KGC370, KGC375/KGC374, KGC393/KGC394.
 % Same policies and binding, neither set of declarations contains the other, disjointness against distinctness: KGC308/KGC309, KGC343/KGC348.
-\newcommand{\suiteCases}{71}
+\newcommand{\suiteCases}{72}
 \newcommand{\suiteQueries}{120}
 \newcommand{\suiteDefinite}{44}
 \newcommand{\suiteCompatible}{28}
 \newcommand{\suiteIncompatible}{16}
 \newcommand{\suiteUnknown}{16}
-\newcommand{\suiteRejected}{8}
-\newcommand{\suiteIllSorted}{6}
+\newcommand{\suiteRejected}{9}
+\newcommand{\suiteIllSorted}{7}
 \newcommand{\suiteUngrounded}{2}
 \newcommand{\suiteBindings}{9}
 \newcommand{\suiteControls}{3}
@@ -58,10 +58,10 @@ dpv-odrl:Location & DPV Locations, geographic & mer & 5009 & 4846 & 10 & 5 & 3 &
 dpv-odrl:Location & DPV Locations, jurisdictional & mer & 5015 & 5023 & 3 & 3 & 0 & 0 & 0 \\
 odrl:spatial & GeoNames Europe slice & mer & 15 & 14 & 7 & 2 & 1 & 2 & 1 \\
 odrl:fileFormat & EU file type table & nom & 228 & 0 & 4 & 2 & 1 & 1 & 0 \\
-odrl:language & BCP 47 subtags, exact & nom & 15 & 0 & 14 & 3 & 3 & 3 & 4 \\
+odrl:language & BCP 47 subtags, exact & nom & 15 & 0 & 15 & 3 & 3 & 3 & 5 \\
 odrl:language & BCP 47 subtags, primary & nom & 15 & 0 & 1 & 0 & 1 & 0 & 0 \\
 \hline
-total & & & & & 71 & 28 & 16 & 16 & 8 \\
+total & & & & & 72 & 28 & 16 & 16 & 9 \\
 \hline
 \end{tabular}%
 }
@@ -105,8 +105,8 @@ C2 unstated distinctness & nothing, the resource decides or is silent & 30 & 8 &
 C3 unstated order & nothing, the resource decides or is silent & 6 & 0 & 0 & 6 & 0 & KGC301 \\
 C4 declarations & declarations & 24 & 8 & 14 & 2 & 0 & KGC370 \\
 C5 choice of binding & binding & 4 & 3 & 1 & 0 & 0 & KGC331 \\
-C6 ill-formed constraints & the constraint & 11 & 0 & 0 & 0 & 8 & KGC100 \\
-C7 combined constraints & the constraint & 28 & 14 & 8 & 6 & 0 & KGC303 \\
+C6 ill-formed constraints & the constraint & 12 & 0 & 0 & 0 & 9 & KGC100 \\
+C7 combined constraints & the constraint & 29 & 14 & 8 & 6 & 1 & KGC123 \\
 \hline
 \end{tabular}%
 }
@@ -120,7 +120,7 @@ C2 unstated distinctness & 30 & 20 \\
 C3 unstated order & 6 & 0 \\
 C4 declarations & 24 & 22 \\
 C5 choice of binding & 4 & 4 \\
-C7 combined constraints & 28 & 22 \\
+C7 combined constraints & 29 & 23 \\
 \hline
 \end{tabular}%
 }
