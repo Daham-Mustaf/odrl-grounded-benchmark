@@ -606,8 +606,13 @@ def challenges(tests, closed, certificates: Path) -> list:
             for name, varies, rule in rules]
 
 
-def example_of(members) -> str:
-    ids = [c["id"] for c in members]
+def example_of(name, members) -> str:
+    """The case a row of the challenge table shows: the running example when
+    the row holds one of its cases, else the first case with a verdict.  The
+    input checks (C6) give no verdict, so their row shows the first rejected
+    case."""
+    want = ("rejected",) if name.startswith("C6") else ("C", "I", "U")
+    ids = [c["id"] for c in members if c["outcome"] in want]
     for cid in RUNNING_EXAMPLE:
         if cid in ids:
             return cid
@@ -626,7 +631,7 @@ def challenge_table(rows) -> list:
     for name, varies, members in rows:
         n = Counter(c["outcome"] for c in members)
         lines.append(f"{name} & {varies} & {len(members)} & {n['C']} & {n['I']}"
-                     f" & {n['U']} & {n['rejected']} & {example_of(members)}"
+                     f" & {n['U']} & {n['rejected']} & {example_of(name, members)}"
                      " \\\\")
     lines += ["\\hline", "\\end{tabular}%", "}"]
     return lines
