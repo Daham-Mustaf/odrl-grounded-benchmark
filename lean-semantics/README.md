@@ -23,6 +23,7 @@ Core Lean only, no Mathlib. Build from this folder:
 | OdrlGrounded/Examples/Purpose.lean | Running example, purpose row: `Compatible`, with a model of the published statement |
 | OdrlGrounded/Examples/Spatial.lean | Running example, place row: `Compatible`, with a model of the published statement |
 | OdrlGrounded/Examples/Verdicts.lean | All three verdicts under consistent statements, inconsistent statements, well-sortedness |
+| OdrlGrounded/Examples/Checks.lean | Example of the paragraph "Checks": an `or` of `eq de` and `eq fr` against `neq it` is `Compatible` once de and fr are declared distinct, although each case alone is `Unknown` |
 | OdrlGrounded/Audit.lean | `#print axioms` for the main theorems and examples |
 
 Folder `crosscheck/` holds the brute-force Python checks of the same
@@ -36,45 +37,49 @@ Output on 2026-11-19 with Lean 4.34.1 (`leanprover/lean4:v4.34.1`, Lake
 5.0.0), after `lake clean` and `lake build`. No other axiom, no error and no
 `sorry`:
 
-    info: OdrlGrounded/Audit.lean:26:0: 'OdrlGrounded.not_compatible_and_incompatible' does not depend on any axioms
-    info: OdrlGrounded/Audit.lean:27:0: 'OdrlGrounded.verdict_compatible_mono' depends on axioms: [propext, Classical.choice, Quot.sound]
-    info: OdrlGrounded/Audit.lean:28:0: 'OdrlGrounded.verdict_incompatible_mono' depends on axioms: [propext, Classical.choice, Quot.sound]
-    info: OdrlGrounded/Audit.lean:29:0: 'OdrlGrounded.sound_compatible' depends on axioms: [propext, Classical.choice, Quot.sound]
-    info: OdrlGrounded/Audit.lean:30:0: 'OdrlGrounded.sound_incompatible' depends on axioms: [propext, Classical.choice, Quot.sound]
-    info: OdrlGrounded/Audit.lean:31:0: 'OdrlGrounded.admits_atoms_iff' depends on axioms: [propext, Quot.sound]
-    info: OdrlGrounded/Audit.lean:32:0: 'OdrlGrounded.admits_iff_exists_witness' depends on axioms: [propext, Classical.choice, Quot.sound]
-    info: OdrlGrounded/Audit.lean:33:0: 'OdrlGrounded.verdict_compatible_iff_witness' depends on axioms: [propext, Classical.choice, Quot.sound]
-    info: OdrlGrounded/Audit.lean:34:0: 'OdrlGrounded.verdict_incompatible_iff_witness' depends on axioms: [propext, Classical.choice, Quot.sound]
-    info: OdrlGrounded/Audit.lean:35:0: 'OdrlGrounded.factoring' depends on axioms: [propext, Classical.choice, Quot.sound]
-    info: OdrlGrounded/Audit.lean:36:0: 'OdrlGrounded.verdict_eq_structVerdict' depends on axioms: [propext, Classical.choice, Quot.sound]
-    info: OdrlGrounded/Audit.lean:37:0: 'OdrlGrounded.Example.language_unknown' depends on axioms: [propext, Classical.choice, Quot.sound]
-    info: OdrlGrounded/Audit.lean:38:0: 'OdrlGrounded.Example.language_declared_verdict' depends on axioms: [propext, Classical.choice, Quot.sound]
-    info: OdrlGrounded/Audit.lean:39:0: 'OdrlGrounded.Example.Purpose.purpose_verdict' depends on axioms: [propext, Classical.choice, Quot.sound]
-    info: OdrlGrounded/Audit.lean:40:0: 'OdrlGrounded.Example.Spatial.spatial_verdict' depends on axioms: [propext, Classical.choice, Quot.sound]
-    info: OdrlGrounded/Audit.lean:41:0: 'OdrlGrounded.Example.three_verdicts_occur' depends on axioms: [propext, Classical.choice, Quot.sound]
-    info: OdrlGrounded/Audit.lean:42:0: 'OdrlGrounded.Example.contradictory_verdict' depends on axioms: [propext, Classical.choice, Quot.sound]
-    info: OdrlGrounded/Audit.lean:43:0: 'OdrlGrounded.ConceptOrder.not_le_of_disjoint' does not depend on any axioms
-    info: OdrlGrounded/Audit.lean:44:0: 'OdrlGrounded.ConceptOrder.not_eqv_of_disjoint' does not depend on any axioms
-    info: OdrlGrounded/Audit.lean:45:0: 'OdrlGrounded.checkedVerdict_eq_none_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
-    info: OdrlGrounded/Audit.lean:46:0: 'OdrlGrounded.checkedVerdict_of_consistent' depends on axioms: [propext, Classical.choice, Quot.sound]
-    info: OdrlGrounded/Audit.lean:47:0: 'OdrlGrounded.Example.contradictory_checkedVerdict' depends on axioms: [propext, Classical.choice, Quot.sound]
-    info: OdrlGrounded/Audit.lean:48:0: 'OdrlGrounded.ConstraintSet.xoneOk_of_wellSorted' depends on axioms: [propext]
-    info: OdrlGrounded/Audit.lean:49:0: 'OdrlGrounded.groundedVerdict_of_left_none' depends on axioms: [propext, Classical.choice, Quot.sound]
-    info: OdrlGrounded/Audit.lean:50:0: 'OdrlGrounded.groundedVerdict_of_right_none' depends on axioms: [propext, Classical.choice, Quot.sound]
-    info: OdrlGrounded/Audit.lean:51:0: 'OdrlGrounded.consistent_iff_structConsistent' depends on axioms: [propext, Quot.sound]
-    info: OdrlGrounded/Audit.lean:52:0: 'OdrlGrounded.verdict_eq_compatible_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
-    info: OdrlGrounded/Audit.lean:53:0: 'OdrlGrounded.verdict_eq_incompatible_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
-    info: OdrlGrounded/Audit.lean:54:0: 'OdrlGrounded.verdict_eq_unknown_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
-    info: OdrlGrounded/Audit.lean:55:0: 'OdrlGrounded.groundedVerdict_eq_struct' depends on axioms: [propext, Classical.choice, Quot.sound]
-    info: OdrlGrounded/Audit.lean:56:0: 'OdrlGrounded.groundedVerdict_compatible_mono' depends on axioms: [propext, Classical.choice, Quot.sound]
-    info: OdrlGrounded/Audit.lean:57:0: 'OdrlGrounded.groundedVerdict_incompatible_mono' depends on axioms: [propext, Classical.choice, Quot.sound]
-    info: OdrlGrounded/Audit.lean:58:0: 'OdrlGrounded.satSet_iff_disj' depends on axioms: [propext, Classical.choice, Quot.sound]
-    info: OdrlGrounded/Audit.lean:59:0: 'OdrlGrounded.negLit_isAnyOf_iff' depends on axioms: [propext]
-    info: OdrlGrounded/Audit.lean:60:0: 'OdrlGrounded.exactlyOne_iff_index' depends on axioms: [propext, Quot.sound]
-    info: OdrlGrounded/Audit.lean:61:0: 'OdrlGrounded.ConceptOrder.witness_iff' depends on axioms: [propext]
-    info: OdrlGrounded/Audit.lean:62:0: 'OdrlGrounded.admits_iff_pairWitness' depends on axioms: [propext, Classical.choice, Quot.sound]
-    info: OdrlGrounded/Audit.lean:63:0: 'OdrlGrounded.Structure.sound_compatible' depends on axioms: [propext, Classical.choice, Quot.sound]
-    info: OdrlGrounded/Audit.lean:64:0: 'OdrlGrounded.Structure.sound_incompatible' depends on axioms: [propext, Classical.choice, Quot.sound]
+    info: OdrlGrounded/Audit.lean:27:0: 'OdrlGrounded.not_compatible_and_incompatible' does not depend on any axioms
+    info: OdrlGrounded/Audit.lean:28:0: 'OdrlGrounded.verdict_compatible_mono' depends on axioms: [propext, Classical.choice, Quot.sound]
+    info: OdrlGrounded/Audit.lean:29:0: 'OdrlGrounded.verdict_incompatible_mono' depends on axioms: [propext, Classical.choice, Quot.sound]
+    info: OdrlGrounded/Audit.lean:30:0: 'OdrlGrounded.sound_compatible' depends on axioms: [propext, Classical.choice, Quot.sound]
+    info: OdrlGrounded/Audit.lean:31:0: 'OdrlGrounded.sound_incompatible' depends on axioms: [propext, Classical.choice, Quot.sound]
+    info: OdrlGrounded/Audit.lean:32:0: 'OdrlGrounded.admits_atoms_iff' depends on axioms: [propext, Quot.sound]
+    info: OdrlGrounded/Audit.lean:33:0: 'OdrlGrounded.admits_iff_exists_witness' depends on axioms: [propext, Classical.choice, Quot.sound]
+    info: OdrlGrounded/Audit.lean:34:0: 'OdrlGrounded.verdict_compatible_iff_witness' depends on axioms: [propext, Classical.choice, Quot.sound]
+    info: OdrlGrounded/Audit.lean:35:0: 'OdrlGrounded.verdict_incompatible_iff_witness' depends on axioms: [propext, Classical.choice, Quot.sound]
+    info: OdrlGrounded/Audit.lean:36:0: 'OdrlGrounded.factoring' depends on axioms: [propext, Classical.choice, Quot.sound]
+    info: OdrlGrounded/Audit.lean:37:0: 'OdrlGrounded.verdict_eq_structVerdict' depends on axioms: [propext, Classical.choice, Quot.sound]
+    info: OdrlGrounded/Audit.lean:38:0: 'OdrlGrounded.Example.language_unknown' depends on axioms: [propext, Classical.choice, Quot.sound]
+    info: OdrlGrounded/Audit.lean:39:0: 'OdrlGrounded.Example.language_declared_verdict' depends on axioms: [propext, Classical.choice, Quot.sound]
+    info: OdrlGrounded/Audit.lean:40:0: 'OdrlGrounded.Example.Purpose.purpose_verdict' depends on axioms: [propext, Classical.choice, Quot.sound]
+    info: OdrlGrounded/Audit.lean:41:0: 'OdrlGrounded.Example.Spatial.spatial_verdict' depends on axioms: [propext, Classical.choice, Quot.sound]
+    info: OdrlGrounded/Audit.lean:42:0: 'OdrlGrounded.Example.three_verdicts_occur' depends on axioms: [propext, Classical.choice, Quot.sound]
+    info: OdrlGrounded/Audit.lean:43:0: 'OdrlGrounded.Example.contradictory_verdict' depends on axioms: [propext, Classical.choice, Quot.sound]
+    info: OdrlGrounded/Audit.lean:44:0: 'OdrlGrounded.ConceptOrder.not_le_of_disjoint' does not depend on any axioms
+    info: OdrlGrounded/Audit.lean:45:0: 'OdrlGrounded.ConceptOrder.not_eqv_of_disjoint' does not depend on any axioms
+    info: OdrlGrounded/Audit.lean:46:0: 'OdrlGrounded.checkedVerdict_eq_none_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+    info: OdrlGrounded/Audit.lean:47:0: 'OdrlGrounded.checkedVerdict_of_consistent' depends on axioms: [propext, Classical.choice, Quot.sound]
+    info: OdrlGrounded/Audit.lean:48:0: 'OdrlGrounded.Example.contradictory_checkedVerdict' depends on axioms: [propext, Classical.choice, Quot.sound]
+    info: OdrlGrounded/Audit.lean:49:0: 'OdrlGrounded.ConstraintSet.xoneOk_of_wellSorted' depends on axioms: [propext]
+    info: OdrlGrounded/Audit.lean:50:0: 'OdrlGrounded.groundedVerdict_of_left_none' depends on axioms: [propext, Classical.choice, Quot.sound]
+    info: OdrlGrounded/Audit.lean:51:0: 'OdrlGrounded.groundedVerdict_of_right_none' depends on axioms: [propext, Classical.choice, Quot.sound]
+    info: OdrlGrounded/Audit.lean:52:0: 'OdrlGrounded.consistent_iff_structConsistent' depends on axioms: [propext, Quot.sound]
+    info: OdrlGrounded/Audit.lean:53:0: 'OdrlGrounded.verdict_eq_compatible_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+    info: OdrlGrounded/Audit.lean:54:0: 'OdrlGrounded.verdict_eq_incompatible_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+    info: OdrlGrounded/Audit.lean:55:0: 'OdrlGrounded.verdict_eq_unknown_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+    info: OdrlGrounded/Audit.lean:56:0: 'OdrlGrounded.groundedVerdict_eq_struct' depends on axioms: [propext, Classical.choice, Quot.sound]
+    info: OdrlGrounded/Audit.lean:57:0: 'OdrlGrounded.groundedVerdict_compatible_mono' depends on axioms: [propext, Classical.choice, Quot.sound]
+    info: OdrlGrounded/Audit.lean:58:0: 'OdrlGrounded.groundedVerdict_incompatible_mono' depends on axioms: [propext, Classical.choice, Quot.sound]
+    info: OdrlGrounded/Audit.lean:59:0: 'OdrlGrounded.satSet_iff_disj' depends on axioms: [propext, Classical.choice, Quot.sound]
+    info: OdrlGrounded/Audit.lean:60:0: 'OdrlGrounded.negLit_isAnyOf_iff' depends on axioms: [propext]
+    info: OdrlGrounded/Audit.lean:61:0: 'OdrlGrounded.exactlyOne_iff_index' depends on axioms: [propext, Quot.sound]
+    info: OdrlGrounded/Audit.lean:62:0: 'OdrlGrounded.ConceptOrder.witness_iff' depends on axioms: [propext]
+    info: OdrlGrounded/Audit.lean:63:0: 'OdrlGrounded.admits_iff_pairWitness' depends on axioms: [propext, Classical.choice, Quot.sound]
+    info: OdrlGrounded/Audit.lean:64:0: 'OdrlGrounded.Structure.sound_compatible' depends on axioms: [propext, Classical.choice, Quot.sound]
+    info: OdrlGrounded/Audit.lean:65:0: 'OdrlGrounded.Structure.sound_incompatible' depends on axioms: [propext, Classical.choice, Quot.sound]
+    info: OdrlGrounded/Audit.lean:66:0: 'OdrlGrounded.Example.Checks.declared_verdict' depends on axioms: [propext, Classical.choice, Quot.sound]
+    info: OdrlGrounded/Audit.lean:67:0: 'OdrlGrounded.Example.Checks.undeclared_verdict' depends on axioms: [propext, Classical.choice, Quot.sound]
+    info: OdrlGrounded/Audit.lean:68:0: 'OdrlGrounded.Example.Checks.german_alone_verdict' depends on axioms: [propext, Classical.choice, Quot.sound]
+    info: OdrlGrounded/Audit.lean:69:0: 'OdrlGrounded.Example.Checks.french_alone_verdict' depends on axioms: [propext, Classical.choice, Quot.sound]
 
 ## Paper to Lean
 
@@ -100,6 +105,7 @@ Output on 2026-11-19 with Lean 4.34.1 (`leanprover/lean4:v4.34.1`, Lake
 | Definition "Formula of a case" | `ConceptOrder.witness`, the formula W(K) of a case K; `ConceptOrder.cand`; `ConceptOrder.pairWitness`, the formula W of the two constraint sets | Witness.lean, Decision.lean |
 | Lemma "Formula and valuations" | `ConceptOrder.witness_iff`, `admits_atoms_iff`, `admits_iff_exists_witness`, `admits_iff_pairWitness` | Witness.lean, Disjuncts.lean, Decision.lean |
 | Proposition "Three checks" | `checkedVerdict_eq_none_iff`, `verdict_compatible_iff_witness`, `verdict_incompatible_iff_witness` | Verdict.lean, Decision.lean |
+| Example of the paragraph "Checks" | `declared_verdict`, `undeclared_verdict`, `german_alone_verdict`, `french_alone_verdict` | Examples/Checks.lean |
 | Running example | `language_unknown`, `language_declared_verdict`, `purpose_verdict`, `spatial_verdict` | Examples/ |
 | All three verdicts, inconsistent statements | `three_verdicts_occur`, `contradictory_verdict`, `contradictory_checkedVerdict` | Examples/Verdicts.lean |
 

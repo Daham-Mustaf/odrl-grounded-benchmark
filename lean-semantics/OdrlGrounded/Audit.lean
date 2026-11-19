@@ -7,6 +7,7 @@ import OdrlGrounded.Examples.Language
 import OdrlGrounded.Examples.Purpose
 import OdrlGrounded.Examples.Spatial
 import OdrlGrounded.Examples.Verdicts
+import OdrlGrounded.Examples.Checks
 
 set_option autoImplicit false
 
@@ -62,3 +63,7 @@ The file does not import the root module, so the root can import it.
 #print axioms OdrlGrounded.admits_iff_pairWitness
 #print axioms OdrlGrounded.Structure.sound_compatible
 #print axioms OdrlGrounded.Structure.sound_incompatible
+#print axioms OdrlGrounded.Example.Checks.declared_verdict
+#print axioms OdrlGrounded.Example.Checks.undeclared_verdict
+#print axioms OdrlGrounded.Example.Checks.german_alone_verdict
+#print axioms OdrlGrounded.Example.Checks.french_alone_verdict

@@ -14,4 +14,5 @@ import OdrlGrounded.Collapse
 import OdrlGrounded.Examples.Purpose
 import OdrlGrounded.Examples.Spatial
 import OdrlGrounded.Examples.Verdicts
+import OdrlGrounded.Examples.Checks
 import OdrlGrounded.Audit
