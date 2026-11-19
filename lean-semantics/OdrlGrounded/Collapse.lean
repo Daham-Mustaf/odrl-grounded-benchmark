@@ -1,11 +1,13 @@
 import OdrlGrounded.Grounding
+import OdrlGrounded.VerdictProperties
 
 set_option autoImplicit false
 
 /-!
 # Collapse: structures against preorders
 
-Paper: Definition (Structure), Definition (Models).
+Paper: Definition (Structure), Definition (Models), and Theorem (Soundness)
+for a structure.
 
 The paper's structure is a partial order on an arbitrary carrier `P`, with an
 interpretation `h : C → P`. The carrier may hold elements that no concept
@@ -34,6 +36,8 @@ What is proved.
 * `consistent_iff_structConsistent`, `compatible_iff_structCompatible`,
   `incompatible_iff_structIncompatible`, `verdict_eq_structVerdict` and
   `groundedVerdict_eq_struct`.
+* `Structure.sound_compatible`, `Structure.sound_incompatible`: Theorem
+  (Soundness) for the intended structure itself, through its induced preorder.
 
 What is not claimed. A structure and its induced preorder need not satisfy the
 same statements. A structure with an unnamed element below both `h a` and
@@ -545,5 +549,29 @@ theorem groundedVerdict_eq_struct {V C : Type} (γ : Grounding V C)
     cases hr : ConstraintSet.ground γ t' with
     | none => rfl
     | some g' => exact congrArg some (verdict_eq_structVerdict T (Grounding.range γ) g g')
+
+/-! ## Soundness for a structure -/
+
+section
+
+variable {C : Type} {T : List (Statement C)} {N : C → Prop}
+  {t t' : ConstraintSet C}
+
+/-- Theorem (Soundness) for a structure, Compatible case. `I` is the intended
+structure of Assumption (Correctness), a model of the statements. The proof goes
+through the preorder `I` induces on the concepts: a model of the statements by
+`Structure.models_induced`, with the same valuations by `Structure.admits_iff`. -/
+theorem Structure.sound_compatible (I : Structure C) (hI : I.Models T)
+    (h : verdict T N t t' = Verdict.compatible) : I.admits N (t ++ t') :=
+  (I.admits_iff N (t ++ t')).mpr
+    (OdrlGrounded.sound_compatible I.induced (I.models_induced hI) h)
+
+/-- Theorem (Soundness) for a structure, Incompatible case. -/
+theorem Structure.sound_incompatible (I : Structure C) (hI : I.Models T)
+    (h : verdict T N t t' = Verdict.incompatible) : ¬ I.admits N (t ++ t') :=
+  fun ha => OdrlGrounded.sound_incompatible I.induced (I.models_induced hI) h
+    ((I.admits_iff N (t ++ t')).mp ha)
+
+end
 
 end OdrlGrounded

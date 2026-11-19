@@ -17,7 +17,7 @@ Core Lean only, no Mathlib. Build from this folder:
 | OdrlGrounded/Disjuncts.lean | Cases, with or, xone and negated constraints; Lemma "Formula and valuations" for a constraint set |
 | OdrlGrounded/Decision.lean | Proposition "Three checks": the checks of R ∪ B ∪ {¬W} and R ∪ B ∪ {W} |
 | OdrlGrounded/Factoring.lean | Verdict for several left operands, Proposition "Verdict by left operand" |
-| OdrlGrounded/Collapse.lean | Structure, against the preorders used elsewhere: the same consistency and the same verdicts |
+| OdrlGrounded/Collapse.lean | Structure, against the preorders used elsewhere: the same consistency and the same verdicts; Theorem "Soundness" for a structure |
 | OdrlGrounded/Examples/Language.lean | Running example, language row |
 | OdrlGrounded/Examples/Grounding.lean | Language row with values, ungrounded alternative |
 | OdrlGrounded/Examples/Purpose.lean | Running example, purpose row: `Compatible`, with a model of the published statement |
@@ -73,6 +73,8 @@ Output on 2026-11-19 with Lean 4.34.1 (`leanprover/lean4:v4.34.1`, Lake
     info: OdrlGrounded/Audit.lean:60:0: 'OdrlGrounded.exactlyOne_iff_index' depends on axioms: [propext, Quot.sound]
     info: OdrlGrounded/Audit.lean:61:0: 'OdrlGrounded.ConceptOrder.witness_iff' depends on axioms: [propext]
     info: OdrlGrounded/Audit.lean:62:0: 'OdrlGrounded.admits_iff_pairWitness' depends on axioms: [propext, Classical.choice, Quot.sound]
+    info: OdrlGrounded/Audit.lean:63:0: 'OdrlGrounded.Structure.sound_compatible' depends on axioms: [propext, Classical.choice, Quot.sound]
+    info: OdrlGrounded/Audit.lean:64:0: 'OdrlGrounded.Structure.sound_incompatible' depends on axioms: [propext, Classical.choice, Quot.sound]
 
 ## Paper to Lean
 
@@ -93,13 +95,17 @@ Output on 2026-11-19 with Lean 4.34.1 (`leanprover/lean4:v4.34.1`, Lake
 | Verdict for several left operands | `MCompatible`, `MIncompatible`, `mverdict` | Factoring.lean |
 | Proposition "Verdict by left operand" | `factoring` | Factoring.lean |
 | Proposition "Adding statements" | `verdict_compatible_mono`, `verdict_incompatible_mono`, `groundedVerdict_compatible_mono`, `groundedVerdict_incompatible_mono` | VerdictProperties.lean |
-| Theorem "Soundness" | `sound_compatible`, `sound_incompatible` | VerdictProperties.lean |
+| Theorem "Soundness" | `sound_compatible`, `sound_incompatible`; for a structure `I`, `Structure.sound_compatible`, `Structure.sound_incompatible` | VerdictProperties.lean, Collapse.lean |
 | Cases | `setDisj`, `Item.disj`, `xoneDisj`, `Atom.negLit`, `satSet_iff_disj`, `negLit_isAnyOf_iff`, `exactlyOne_iff_index` | Disjuncts.lean |
 | Definition "Formula of a case" | `ConceptOrder.witness`, the formula W(K) of a case K; `ConceptOrder.cand`; `ConceptOrder.pairWitness`, the formula W of the two constraint sets | Witness.lean, Decision.lean |
 | Lemma "Formula and valuations" | `ConceptOrder.witness_iff`, `admits_atoms_iff`, `admits_iff_exists_witness`, `admits_iff_pairWitness` | Witness.lean, Disjuncts.lean, Decision.lean |
 | Proposition "Three checks" | `checkedVerdict_eq_none_iff`, `verdict_compatible_iff_witness`, `verdict_incompatible_iff_witness` | Verdict.lean, Decision.lean |
 | Running example | `language_unknown`, `language_declared_verdict`, `purpose_verdict`, `spatial_verdict` | Examples/ |
 | All three verdicts, inconsistent statements | `three_verdicts_occur`, `contradictory_verdict`, `contradictory_checkedVerdict` | Examples/Verdicts.lean |
+
+Generality. The theorems hold for any finite list of statements, and therefore
+for every binding with declarations. Well-sortedness and grounding are checks on
+the input, and a theorem assumes only the part it needs (`xoneOk`).
 
 Hypotheses. `Consistent T` is needed for exclusivity, for the Incompatible
 check of Proposition "Three checks", and for the Incompatible case of monotonicity

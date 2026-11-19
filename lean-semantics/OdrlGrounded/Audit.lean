@@ -60,3 +60,5 @@ The file does not import the root module, so the root can import it.
 #print axioms OdrlGrounded.exactlyOne_iff_index
 #print axioms OdrlGrounded.ConceptOrder.witness_iff
 #print axioms OdrlGrounded.admits_iff_pairWitness
+#print axioms OdrlGrounded.Structure.sound_compatible
+#print axioms OdrlGrounded.Structure.sound_incompatible
