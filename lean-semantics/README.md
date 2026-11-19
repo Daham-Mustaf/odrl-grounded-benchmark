@@ -1,6 +1,6 @@
 # Lean mechanization of the grounded ODRL semantics
 
-Mechanizes "Denotational Semantics and Open-World Reasoning for Externally-Grounded ODRL Constraints".
+Mechanizes the semantics of the accompanying paper.
 Core Lean only, no Mathlib. Build from this folder:
 
     lake build
