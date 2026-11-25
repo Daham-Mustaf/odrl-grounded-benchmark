@@ -279,6 +279,7 @@ kgc:KGC310-p2-c1 a odrl:Constraint ;
 
         "smt2_logic": "UF",
 
+        "open": "distinctness",
         "certificate": {
             "kind": "Models",                   
                        "comment": (
@@ -570,6 +571,7 @@ kgc:KGC315-p2-c1 a odrl:Constraint ;
 
         "smt2_logic": "UF",
 
+        "open": "order",
         "certificate": {
             "kind": "Models",
             "comment": (
@@ -808,6 +810,7 @@ kgc:KGC317-p2-c1 a odrl:Constraint ;
             "purpose can meet both. If non-commercial research is not also "
             "a commercial purpose, the use is admitted. If it is, both "
             "tiers apply and the use is refused. The verdict is Unknown."),
+        "open": "order",
         "certificate": {"kind": "Models",
             "comment": (
                 "DPV places non-commercial research below non-commercial "
@@ -862,6 +865,7 @@ kgc:KGC317-p2-c1 a odrl:Constraint ;
             "improving transport mobility from either, so it may be the "
             "same purpose as one of them or a different one, and the "
             "verdict is Unknown. KGC395 is the draft the drafter meant."),
+        "open": "distinctness",
         "certificate": {"kind": "Models",
             "comment": (
                 "If improving transport mobility is the same purpose as "
@@ -1072,6 +1076,7 @@ kgc:KGC317-p2-c1 a odrl:Constraint ;
             "the use is admitted. The verdict is Unknown, where KGC395, "
             "with a second policy under the first alternative, is "
             "Compatible."),
+        "open": "order",
         "certificate": {"kind": "Models",
             "comment": (
                 "DPV places commercial research below commercial purpose "

@@ -77,7 +77,7 @@ try:
     from compile import (Constraint, MODE, SUBSET, MEETS, SUPERSET,
                          witness_condition)
     try:
-        from compile import (IllSorted, Lit, Or, Xone, disjuncts,
+        from compile import (And, IllSorted, Lit, Or, Xone, disjuncts,
                              witness_of_tree)
         HAVE_TREES = True
     except ImportError:
@@ -411,6 +411,9 @@ def tree_satisfies(items, S: set, M: Structure) -> bool:
         elif isinstance(it, Xone):
             if sum(1 for c in it.alts if satisfies(c, S, M)) != 1:
                 return False
+        elif isinstance(it, And):
+            if not all(satisfies(c, S, M) for c in it.alts):
+                return False
         else:
             raise TypeError(it)
     return True
@@ -450,6 +453,16 @@ def tree_battery(names):
             [C("isA", a), C("eq", b)]),
         ("or(isAllOf a b, eq c)",
             [Or((C("isAllOf", a, b), C("eq", c)))]),
+        # An and group: every constraint of it holds, so it is one case.
+        ("and(isA a, isA b)",
+            [And((C("isA", a), C("isA", b)))]),
+        ("and(isAllOf a b, neq c)",
+            [And((C("isAllOf", a, b), C("neq", c)))]),
+        ("and(isA a, eq b), xone(eq a, eq c)",
+            [And((C("isA", a), C("eq", b))), Xone((C("eq", a), C("eq", c)))]),
+        ("and(eq a, isAnyOf b c), or(eq b, isA c)",
+            [And((C("eq", a), C("isAnyOf", b, c))),
+             Or((C("eq", b), C("isA", c)))]),
     ]
 
 
@@ -541,7 +554,7 @@ def main() -> int:
     if HAVE_TREES:
         checked, failures = run_trees(tree_battery(names), names, args.verbose)
         status = "ok" if not failures else f"{len(failures)} DISAGREEMENTS"
-        print(f"{'trees (or, xone)':24} {len(tree_battery(names)):3} sets, "
+        print(f"{'trees (or, xone, and)':24} {len(tree_battery(names)):3} sets, "
               f"{checked:6} checks   {status}")
         total_failures += failures
 
@@ -580,7 +593,7 @@ def main() -> int:
         if not expect_ok:
             total_failures.append(("negate(isAllOf)", None, None, None))
     else:
-        print(f"{'trees (or, xone)':24} not in compile.py yet")
+        print(f"{'trees (or, xone, and)':24} not in compile.py yet")
 
     print()
     if not total_failures:

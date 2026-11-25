@@ -12,7 +12,7 @@ from pathlib import Path
 
 import declarations
 import vocabulary
-from compile import Constraint, Or, Xone, compile_operand
+from compile import And, Constraint, Or, Xone, compile_operand
 
 _ASSERTION = re.compile(
     r"fof\(\s*([a-z][a-z0-9_]*)\s*,\s*axiom,\s*"
@@ -126,7 +126,7 @@ def constants_of_tree(items) -> list:
     """The concepts the tree names, in the order it names them."""
     seen = []
     for item in items:
-        alts = item.alts if isinstance(item, (Or, Xone)) else (item,)
+        alts = item.alts if isinstance(item, (Or, Xone, And)) else (item,)
         for c in alts:
             if not isinstance(c, Constraint):
                 raise TypeError(
@@ -162,7 +162,7 @@ def _map_item(item, g: dict):
     if isinstance(item, Constraint):
         return _map_constraint(item, g)
     alts = tuple(_map_constraint(c, g) for c in item.alts)
-    return Or(alts) if isinstance(item, Or) else Xone(alts)
+    return type(item)(alts)
 
 
 # The formula fields a case used to carry by hand.  Every one of them is

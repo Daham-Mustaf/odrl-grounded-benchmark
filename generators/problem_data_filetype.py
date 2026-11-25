@@ -131,6 +131,7 @@ PROBLEMS = [
         "smt2_logic": "UF",
         "smt2_background": "",
 
+        "open": "identity",
         "certificate": {
             "kind": "Models",
 "comment": (

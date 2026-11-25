@@ -180,13 +180,13 @@ fi
 rm -f "$cert_out"
 
 # --- 8b. timing pass, when asked -------------------------------------
-# TIMINGS=1 rewrites the runs in results/: three independent runs of every
+# TIMINGS=1 rewrites the runs in results/: ten independent runs of every
 # check, each query alone, one at a time, at PROVER_LIMIT, with nothing else
 # running.  Without it stage 9 reads the committed runs, and refuses them when
 # they do not time the current queries.
 if [ "${TIMINGS:-0}" = 1 ]; then
-  hdr "8b. timing pass: three runs of every check, each query alone"
-  uv run generators/time_queries.py --repeat 3 --limit "$PROVER_LIMIT" \
+  hdr "8b. timing pass: ten runs of every check, each query alone"
+  uv run generators/time_queries.py --repeat 10 --limit "$PROVER_LIMIT" \
     || { echo "FAILED: the timing pass did not finish, or a query got no status" >&2; FAILED=1; }
 fi
 

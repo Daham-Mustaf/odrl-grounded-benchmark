@@ -344,6 +344,7 @@ PROBLEMS = [
         "expected_q2": "Satisfiable",
         "smt2_logic": "UF",
         "smt2_background": "",
+        "open": "distinctness",
         "certificate": {
             "kind": "Models",
 "comment": (

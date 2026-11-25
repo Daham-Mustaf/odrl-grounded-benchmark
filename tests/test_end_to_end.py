@@ -5,7 +5,7 @@ The verdict the pipeline gives against the verdict the definitions give, on
 random problems small enough to decide by enumeration.
 
     uv run tests/test_end_to_end.py                     # 2000 random + 4 fixed
-    uv run tests/test_end_to_end.py --count 500 --vampire 50
+    uv run tests/test_end_to_end.py --count 500
     uv run tests/test_end_to_end.py --keep /tmp/e2e     # keep the queries
     uv run tests/test_end_to_end.py --json results/end-to-end.json
 
@@ -17,9 +17,9 @@ declarations at random (distinctness over some of the concepts, disjointness
 between some pairs at tax and mer, or none), written as RDF and read through
 declarations.py like every set in problems/background; a sort at random; and
 two policies drawn from every operator the signature admits at that sort,
-some of their constraints inside or and xone, an xone never with an isAllOf
-alternative (Definition Well-sortedness).  Four fixed problems are added,
-each one a named-only witness gets wrong:
+some of their constraints inside or, xone and and groups, an xone never with
+an isAllOf alternative (Definition Well-sortedness).  Four fixed problems are
+added, each one a named-only witness gets wrong:
 
   F1  isA a against isA b, where the two meet only in a third concept
   F2  neq a against neq b, the three concepts declared distinct
@@ -39,8 +39,8 @@ problem with no structure at all is skipped.
 The verdict from the pipeline
 -----------------------------
 The problem goes through expand_tree, write_fof and write_smt2 as they are.
-Z3 decides both queries of every problem; Vampire those of a sample.  The
-verdict is read from the pair as run_verdict.sh reads it.
+Z3 and Vampire decide both queries of every problem.  The verdict is read from
+the pair as run_verdict.sh reads it.
 
 Every disagreement is printed in full: the problem, the verdict from the
 definitions with a structure that shows it, and what each prover said.
@@ -71,7 +71,7 @@ sys.path.insert(0, str(ROOT / "tests"))
 import test_witness as TW                      # noqa: E402
 import declarations                            # noqa: E402
 import provers                                 # noqa: E402
-from compile import Constraint, Or, Xone       # noqa: E402
+from compile import And, Constraint, Or, Xone  # noqa: E402
 from signature import SIGNATURE, NOM, TAX, MER  # noqa: E402
 from tree_expand import expand_tree            # noqa: E402
 from writers import write_fof, write_smt2      # noqa: E402
@@ -111,13 +111,15 @@ def policy(rng, sort, names, side):
     items = []
     for _ in range(rng.choice((1, 2))):
         r = rng.random()
-        if r < 0.6:
+        if r < 0.55:
             items.append(constraint(rng, rng.choice(ops), names, side))
-        else:
-            pool = ops if r < 0.8 else xone_ops
-            alts = tuple(constraint(rng, rng.choice(pool), names, side)
-                         for _ in range(2))
-            items.append(Or(alts) if r < 0.8 else Xone(alts))
+            continue
+        kind = (Or if r < 0.75 else Xone if r < 0.9 else And)
+        # An and group may hold any operator, isAllOf included.
+        pool = xone_ops if kind is Xone else ops
+        alts = tuple(constraint(rng, rng.choice(pool), names, side)
+                     for _ in range(2))
+        items.append(kind(alts))
     return items
 
 
@@ -166,7 +168,7 @@ def describe(pr) -> str:
     def item(it):
         if isinstance(it, Constraint):
             return f"{it.operator} {' '.join(it.values)}"
-        kind = "or" if isinstance(it, Or) else "xone"
+        kind = {Or: "or", Xone: "xone", And: "and"}[type(it)]
         return f"{kind}({', '.join(item(c) for c in it.alts)})"
     sides = {}
     for it in pr["tree"]:
@@ -357,8 +359,6 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[1])
     ap.add_argument("--count", type=int, default=2000,
                     help="random problems decided (those with no structure do not count)")
-    ap.add_argument("--vampire", type=int, default=200,
-                    help="problems whose queries Vampire also decides")
     ap.add_argument("--seed", type=int, default=SEED)
     ap.add_argument("--jobs", type=int, default=8)
     ap.add_argument("--keep", type=Path, help="write the queries here and keep them")
@@ -399,13 +399,8 @@ def main() -> int:
             rows.append(dict(pr=pr, expected=v, with_use=with_use,
                              without=without, paths=paths))
 
-        sample = {r["pr"]["pid"] for r in rows if r["pr"]["pid"].startswith("F")}
-        step = max(1, len(rows) // max(1, args.vampire))
-        sample |= {r["pr"]["pid"] for r in rows[::step]}
-
-        jobs = [(r, "z3", n) for r in rows for n in (1, 2)] + \
-               [(r, "vampire", n) for r in rows if r["pr"]["pid"] in sample
-                for n in (1, 2)]
+        jobs = [(r, prover, n) for prover in ("z3", "vampire")
+                for r in rows for n in (1, 2)]
 
         def run(job):
             r, prover, n = job
@@ -428,7 +423,8 @@ def main() -> int:
             for c in (it.alts if hasattr(it, "alts") else (it,)):
                 ops[r["pr"]["sort"]].add(c.operator)
             if not isinstance(it, Constraint):
-                conns[r["pr"]["sort"]].add("or" if isinstance(it, Or) else "xone")
+                conns[r["pr"]["sort"]].add({Or: "or", Xone: "xone",
+                                            And: "and"}[type(it)])
 
     bad = []
     for r in rows:
@@ -444,7 +440,7 @@ def main() -> int:
     print(f"end-to-end: {len(rows)} problems decided, {len(rows) - args.count} fixed and "
           f"{args.count} random ({skipped} drawn with no structure skipped), seed {args.seed}")
     print("  from the definitions: " + ", ".join(f"{k} {v}" for k, v in sorted(tally.items())))
-    print(f"  Z3 on {len(rows)} problems, Vampire on {len(sample)}")
+    print(f"  Z3 and Vampire on all {len(rows)} problems")
     for s in (NOM, TAX, MER):
         missing = sorted(set(admitted(s)) - ops[s])
         print(f"  {s}: operators {len(ops[s])} of {len(admitted(s))}"
@@ -469,7 +465,7 @@ def main() -> int:
             "random": args.count,
             "fixed": len(rows) - args.count,
             "seed": args.seed,
-            "vampire_problems": len(sample),
+            "vampire_problems": len(rows),
             "skipped_no_structure": skipped,
             "from_definitions": dict(sorted(tally.items())),
             "disagreements": len(bad),

@@ -258,9 +258,9 @@ bash run_verdict.sh
 uv run generators/run_certify.py
 uv run generators/check_certificates.py
 
-# the timing pass: three runs of every check, each query alone, one at a time
-# -> results/timings-run1.csv, -run2.csv, -run3.csv
-uv run generators/time_queries.py --repeat 3
+# the timing pass: ten runs of every check, each query alone, one at a time
+# -> results/timings-run1.csv to -run10.csv
+uv run generators/time_queries.py --repeat 10
 
 # the figures, the times and the bindings table for the paper
 uv run generators/table_data.py --suite-numbers

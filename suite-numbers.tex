@@ -2,7 +2,8 @@
 % Written by generators/table_data.py --suite-numbers. Do not edit.
 % 72 cases = 44 definite + 16 Unknown + 9 rejected + 3 accepted controls.
 % Rejected is ill sorted plus ungrounded.
-% Times: timings-run1.csv of 2026-11-07T09:59:12+03:00, timings-run2.csv of 2026-11-07T09:59:39+03:00, timings-run3.csv of 2026-11-07T10:00:05+03:00; each query alone, one at a time, at most 300 s.
+% Times: timings-run1.csv of 2026-11-25T13:08:54+03:00, timings-run2.csv of 2026-11-25T13:09:21+03:00, timings-run3.csv of 2026-11-25T13:09:47+03:00, timings-run4.csv of 2026-11-25T13:10:14+03:00, timings-run5.csv of 2026-11-25T13:10:41+03:00, timings-run6.csv of 2026-11-25T13:11:07+03:00, timings-run7.csv of 2026-11-25T13:11:34+03:00, timings-run8.csv of 2026-11-25T13:12:01+03:00, timings-run9.csv of 2026-11-25T13:12:28+03:00, timings-run10.csv of 2026-11-25T13:12:54+03:00; each query alone, one at a time, at most 300 s.
+% suiteTime is the mean of the run totals (the sum of the times of every check) over the runs, without the fastest and the slowest run.
 % Under no challenge: none.
 % suiteNoteConflicts counts constraints in test cases with a verdict. Rejected test cases hold 3 more: KGC101, KGC105, KGC381.
 % suiteReadAgainstDecl: same policies, same binding, and the declarations of the second contain those of the first: KGC303/KGC304, KGC313/KGC314, KGC316/KGC403, KGC320/KGC321, KGC333/KGC334, KGC342/KGC343, KGC342/KGC348, KGC363/KGC364, KGC371/KGC370, KGC375/KGC374, KGC393/KGC394.
@@ -30,40 +31,51 @@
 \newcommand{\suiteEtoEProblems}{2004}
 \newcommand{\suiteEtoEDisagree}{0}
 \newcommand{\suiteReadAgainst}{22}
+\newcommand{\suiteEtoERandom}{2000}
+\newcommand{\suiteEtoEFixed}{4}
+\newcommand{\suiteChallengeOrder}{15}
+\newcommand{\suiteChallengeDistinctness}{29}
+\newcommand{\suiteChallengeUnstatedOrder}{7}
+\newcommand{\suiteChallengeDeclarations}{24}
+\newcommand{\suiteChallengeBinding}{4}
+\newcommand{\suiteChallengeIllFormed}{12}
+\newcommand{\suiteChallengeCombined}{29}
 \newcommand{\suiteCWToCompatible}{4}
 \newcommand{\suiteCWToIncompatible}{12}
 \newcommand{\suiteReadAgainstDecl}{11}
 \newcommand{\suiteReadAgainstMoved}{10}
 \newcommand{\suiteReadAgainstReversed}{0}
-\newcommand{\suiteRuns}{3}
-\newcommand{\suiteTime}{26.8}
+\newcommand{\suiteRuns}{10}
+\newcommand{\suiteTime}{27.2}
 \newcommand{\suiteTimeMedian}{0.01}
-\newcommand{\suiteTimePninetyfive}{0.44}
-\newcommand{\suiteSlowest}{KGC404 (Z3, 12.0 s)}
+\newcommand{\suiteTimePninetyfive}{0.45}
+\newcommand{\suiteSlowest}{KGC404 (Z3, 12.3 s)}
 \newcommand{\suiteSlowestCheck}{a use that meets the policies}
 \newcommand{\suiteLimit}{300}
 \newcommand{\suiteHardware}{Apple M4 Pro, 24.0 GiB RAM}
-\newcommand{\suiteOS}{macOS 27.2}
+\newcommand{\suiteOS}{macOS 27.2.1}
 \newcommand{\suiteVampire}{5.0.1}
 \newcommand{\suiteZthree}{4.8.12}
+% suiteBindingsTable: a left operand without its odrl: or dpv-odrl: prefix (Measure is dpv-odrl:TechnicalOrganisationalMeasure); DPV Locations (geogr.) and (juris.) are geographic and jurisdictional.
 \newcommand{\suiteBindingsTable}{%
-\begin{tabular}{lllrrrrrrr}
-\hline
-left operand & resource and binding & sort & concepts & order & test cases & C & I & U & rejected \\
-\hline
-dpv-odrl:Purpose & DPV purposes & tax & 122 & 131 & 20 & 7 & 4 & 6 & 2 \\
-dpv-odrl:Status & DPV consent status & tax & 13 & 12 & 6 & 3 & 1 & 2 & 0 \\
-dpv-odrl:TechnicalOrganisationalMeasure & DPV measures & tax & 74 & 75 & 6 & 3 & 2 & 1 & 0 \\
-dpv-odrl:Location & DPV Locations, geographic & mer & 5009 & 4846 & 10 & 5 & 3 & 1 & 1 \\
-dpv-odrl:Location & DPV Locations, jurisdictional & mer & 5015 & 5023 & 3 & 3 & 0 & 0 & 0 \\
-odrl:spatial & GeoNames Europe slice & mer & 15 & 14 & 7 & 2 & 1 & 2 & 1 \\
-odrl:fileFormat & EU file type table & nom & 228 & 0 & 4 & 2 & 1 & 1 & 0 \\
-odrl:language & BCP 47 subtags, exact & nom & 15 & 0 & 15 & 3 & 3 & 3 & 5 \\
-odrl:language & BCP 47 subtags, primary & nom & 15 & 0 & 1 & 0 & 1 & 0 & 0 \\
-\hline
-total & & & & & 72 & 28 & 16 & 16 & 9 \\
-\hline
-\end{tabular}%
+{\setlength{\tabcolsep}{2.5pt}%
+\begin{tabular}{@{}lllrrrrrrrr@{}}
+\toprule
+\shortstack{left\\operand} & resource & sort & concepts & \shortstack{order\\statements} & \shortstack{test\\cases} & C & I & U & R & A \\
+\midrule
+Purpose & DPV purposes & tax & 122 & 131 & 20 & 7 & 4 & 6 & 2 & 1 \\
+Status & DPV consent status & tax & 13 & 12 & 6 & 3 & 1 & 2 & 0 & 0 \\
+Measure & DPV measures & tax & 74 & 75 & 6 & 3 & 2 & 1 & 0 & 0 \\
+Location & DPV Locations (geogr.) & mer & 5009 & 4846 & 10 & 5 & 3 & 1 & 1 & 0 \\
+Location & DPV Locations (juris.) & mer & 5015 & 5023 & 3 & 3 & 0 & 0 & 0 & 0 \\
+spatial & GeoNames subset & mer & 15 & 14 & 7 & 2 & 1 & 2 & 1 & 1 \\
+fileFormat & EU file type table & nom & 228 & 0 & 4 & 2 & 1 & 1 & 0 & 0 \\
+language & BCP 47 subtags, exact & nom & 15 & 0 & 15 & 3 & 3 & 3 & 5 & 1 \\
+language & BCP 47 subtags, primary & nom & 15 & 0 & 1 & 0 & 1 & 0 & 0 & 0 \\
+\midrule
+total & & & & & 72 & 28 & 16 & 16 & 9 & 3 \\
+\bottomrule
+\end{tabular}}%
 }
 \newcommand{\suiteCoverageTable}{%
 \begin{tabular}{lccc}
@@ -96,18 +108,18 @@ total & 28 & 16 & 44 \\
 \end{tabular}%
 }
 \newcommand{\suiteChallengeTable}{%
-\begin{tabular}{llrrrrrl}
-\hline
-challenge & what varies & test cases & C & I & U & rejected & example \\
-\hline
-C1 order in the resource & nothing, the resource decides or is silent & 15 & 13 & 2 & 0 & 0 & KGC310 \\
-C2 unstated distinctness & nothing, the resource decides or is silent & 30 & 8 & 12 & 10 & 0 & KGC371 \\
-C3 unstated order & nothing, the resource decides or is silent & 6 & 0 & 0 & 6 & 0 & KGC301 \\
-C4 declarations & declarations & 24 & 8 & 14 & 2 & 0 & KGC370 \\
-C5 choice of binding & binding & 4 & 3 & 1 & 0 & 0 & KGC331 \\
-C6 ill-formed constraints & the constraint & 12 & 0 & 0 & 0 & 9 & KGC100 \\
-C7 combined constraints & the constraint & 29 & 14 & 8 & 6 & 1 & KGC303 \\
-\hline
+\begin{tabular}{@{}lrrrrrrl@{}}
+\toprule
+challenge & test cases & C & I & U & R & A & example \\
+\midrule
+Order in the resource & 15 & 13 & 2 & 0 & 0 & 0 & KGC310 \\
+Unstated distinctness & 29 & 8 & 12 & 9 & 0 & 0 & KGC371 \\
+Unstated order & 7 & 0 & 0 & 7 & 0 & 0 & KGC301 \\
+Declarations & 24 & 8 & 14 & 2 & 0 & 0 & KGC370 \\
+Choice of binding & 4 & 3 & 1 & 0 & 0 & 0 & KGC331 \\
+Ill-formed constraints & 12 & 0 & 0 & 0 & 9 & 3 & KGC100 \\
+Combined constraints & 29 & 14 & 8 & 6 & 1 & 0 & KGC303 \\
+\bottomrule
 \end{tabular}%
 }
 \newcommand{\suiteChallengeCWTable}{%
@@ -115,12 +127,12 @@ C7 combined constraints & the constraint & 29 & 14 & 8 & 6 & 1 & KGC303 \\
 \hline
 challenge & test cases & reproduced \\
 \hline
-C1 order in the resource & 15 & 15 \\
-C2 unstated distinctness & 30 & 20 \\
-C3 unstated order & 6 & 0 \\
-C4 declarations & 24 & 22 \\
-C5 choice of binding & 4 & 4 \\
-C7 combined constraints & 29 & 23 \\
+Order in the resource & 15 & 15 \\
+Unstated distinctness & 29 & 20 \\
+Unstated order & 7 & 0 \\
+Declarations & 24 & 22 \\
+Choice of binding & 4 & 4 \\
+Combined constraints & 29 & 23 \\
 \hline
 \end{tabular}%
 }
