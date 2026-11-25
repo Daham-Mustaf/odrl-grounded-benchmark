@@ -10,6 +10,11 @@ For each operand both policies constrain, it computes the witness condition,
 writes the two queries, runs a prover, and reports the verdict with its
 certificate.
 
+Each file holds one policy, and the policy is read as a tree
+(policy.read_policy): a Logical Constraint is one item of it, and a list of
+right operands is the values of one constraint.  A policy that does not read
+as a tree is refused, and no verdict is computed.
+
 The benchmark is one caller of this.  Nothing here knows about a problem id.
 """
 
@@ -23,8 +28,8 @@ sys.path.insert(0, str(Path(__file__).parent))
 import provers
 
 from policy import (read_policy, read_profile, read_resource, bind, ground,
-                    by_operand, ProfileError, GroundingError)
-from compile import Constraint as CC, compile_operand
+                    by_operand, atoms, PolicyError, ProfileError, GroundingError)
+from compile import IllSorted, check_tree, compile_operand
 from signature import is_well_sorted
 from certificate import premises_from_vampire, classify, NoAxiomNames, WITHDRAWABLE
 
@@ -91,19 +96,25 @@ def main() -> int:
     backgrounds = dict(x.split("=", 1) for x in args.background)
 
     profile = read_profile(args.profile)
-    offer = read_policy(args.offer, "offer")
-    request = read_policy(args.request, "request")
+    trees = []
+    for side, path in (("offer", args.offer), ("request", args.request)):
+        try:
+            trees.append(read_policy(path, side))
+        except PolicyError as e:
+            print(f"error: {path}: {e}", file=sys.stderr)
+            return 2
+    groups = by_operand(*trees)
 
     try:
-        bindings = bind(offer + request, profile)
+        bindings = bind(groups, profile)
     except ProfileError as e:
         print(f"error: {e}", file=sys.stderr)
         return 2
 
-    groups = by_operand(offer, request)
     verdicts = {}
 
-    for operand, constraints in sorted(groups.items()):
+    for operand, items in sorted(groups.items()):
+        constraints = atoms(items)
         b = bindings[operand]
         print(f"\n{operand}  (sort {b.sort})")
 
@@ -115,6 +126,12 @@ def main() -> int:
                 print(f"  ill sorted: {c.operator}: {why}")
                 verdicts[operand] = "IllSorted"
                 break
+        else:
+            try:
+                check_tree(items)
+            except IllSorted as e:
+                print(f"  ill sorted: {e}")
+                verdicts[operand] = "IllSorted"
         if verdicts.get(operand) == "IllSorted":
             continue
 
@@ -134,8 +151,7 @@ def main() -> int:
 
         # 3. the witness condition
         concepts = sorted({v for c in constraints for v in c.values})
-        w = compile_operand([CC(c.operator, c.values, c.side)
-                             for c in constraints], concepts, b.sort)
+        w = compile_operand(items, concepts, b.sort)
 
         bg = []
         if operand in backgrounds:

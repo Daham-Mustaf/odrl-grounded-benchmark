@@ -47,6 +47,7 @@
         "KGC304",
         "KGC313",
         "KGC314",
+        "KGC316",
         "KGC318",
         "KGC320",
         "KGC321",
@@ -106,16 +107,13 @@
         "KGC403"
       ],
       "authored_only": [],
-      "derived_only": [
-        "KGC316"
-      ]
+      "derived_only": []
     },
     {
       "challenge": "Unstated order",
       "authored": [
         "KGC301",
         "KGC308",
-        "KGC316",
         "KGC319",
         "KGC342",
         "KGC348",
@@ -129,9 +127,7 @@
         "KGC348",
         "KGC399"
       ],
-      "authored_only": [
-        "KGC316"
-      ],
+      "authored_only": [],
       "derived_only": []
     },
     {
@@ -309,5 +305,5 @@
       "derived_only": []
     }
   ],
-  "differences": 2
+  "differences": 0
 }

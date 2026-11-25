@@ -571,7 +571,7 @@ kgc:KGC315-p2-c1 a odrl:Constraint ;
 
         "smt2_logic": "UF",
 
-        "open": "order",
+        "open": "identity",
         "certificate": {
             "kind": "Models",
             "comment": (

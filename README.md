@@ -135,6 +135,22 @@ The paper's running example is KGC310 (purpose), KGC302 (spatial), KGC371
 (language), and KGC370 (language with the declaration).
 KGC301 is a variant of the purpose row.
 
+`generators/table_data.py` assigns the test cases to the paper's seven
+challenges from the authored data, and a test case may fall under several.
+*Order in the resource*: the expected output is Compatible or Incompatible, and
+the authored premises hold an order statement of the resource. *Unstated
+distinctness*: the output is Compatible or Incompatible and the authored
+premises hold a declared distinctness, or it is Unknown and the `open` field is
+`distinctness` or `identity`. *Unstated order*: the output is Unknown and the
+`open` field is `order`. *Declarations*: the declarations are not empty.
+*Choice of binding*: the binding is the jurisdictional one of DPV Locations or
+the primary-subtag one of BCP 47. *Ill-formed constraints*: the output is a
+rejection or an accepted control. *Combined constraints*: the operators and
+connectives of the policies include `isAnyOf`, `isAllOf`, `isNoneOf`, `or` or
+`xone`. `results/challenges.json` compares this with the premises the proofs
+cite and with the closed-world run, and lists every difference; the last four
+rules read the same fields on both sides.
+
 ---
 
 ## Release v1.1
@@ -422,9 +438,11 @@ vrep:GroundingReport                        whether every value names a
 The case files are generated. `validate_cases.py` checks every file
 against this shape, and `validate_terms.py` fails any file using a
 `vrep:` term the schema does not define. `lint_cases.py` checks the wording
-and the parties of each family, `check_policies.py` that each policy alone
-admits a use and that both policies share action and target, and
-`check_coverage.py` that every cell of the operator-by-sort grid has a case.
+and the parties of each family, `check_trees.py` that the policies of each
+file, read as a tree, are the authored tree its queries are built from,
+`check_policies.py` that each policy alone admits a use and that both
+policies share action and target, and `check_coverage.py` that every cell
+of the operator-by-sort grid has a case.
 `generators/catalogue.py` writes `cases/catalogue.html`, one entry per case,
 and `cases/catalogue-blind.html` without the lesson, the verdict and the
 reason. What makes a case worth keeping is in `cases/cases-README.md`.

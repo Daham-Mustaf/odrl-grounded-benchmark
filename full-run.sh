@@ -120,10 +120,11 @@ echo "  none"
 hdr "4d. declarations: the RDF of each set, its axioms and the queries that carry it"
 uv run generators/check_declarations.py || die "a set of declarations disagrees with its axioms or queries"
 
-hdr "4e. cases: shape lint, what each policy asks, coverage of the grid"
+hdr "4e. cases: shape lint, policies against trees, what each policy asks, coverage of the grid"
 cases_ok=0
 lint_out=$(uv run generators/lint_cases.py 2>&1) || cases_ok=1
 echo "$lint_out" | sed -n '/^FAILURES:/,$p;/^lint clean/p'
+uv run generators/check_trees.py || cases_ok=1
 uv run generators/check_policies.py || cases_ok=1
 uv run generators/check_coverage.py || cases_ok=1
 if [ "$cases_ok" != 0 ]; then

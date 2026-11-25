@@ -26,6 +26,8 @@ Core Lean only, no Mathlib. Build from this folder:
 | OdrlGrounded/Examples/Checks.lean | Example of the paragraph "Checks": an `or` of `eq de` and `eq fr` against `neq it` is `Compatible` once de and fr are declared distinct, although each case alone is `Unknown` |
 | OdrlGrounded/Audit.lean | `#print axioms` for the main theorems and examples |
 
+The paper's binding is the tuple (sort, concept set, statements, grounding function); here the sort and the grounding function are separate arguments, and the theorems are stated for an arbitrary grounding function.
+
 Folder `crosscheck/` holds the brute-force Python checks of the same
 claims, with a table of which Lean theorem covers which check.
 
