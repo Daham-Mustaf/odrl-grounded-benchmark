@@ -1,42 +1,26 @@
 """
 policy.py
 =========
-Reads ODRL policies, a profile and a resource out of Turtle, and produces the
-objects the semantics works on.
+Reads ODRL policies out of Turtle, as the trees the compiler uses.
 
-A policy is read as the tree the compiler uses: one item per constraint of its
-permission, a compile.Constraint, or an And, an Or or a Xone for a Logical
-Constraint.  Each atomic constraint records the policy it belongs to, and a
-list of right operands is the values of one constraint, in order.  What has no
-such reading is refused, and never read as the conjunction of its parts:
-odrl:andSequence; a Logical Constraint within another, or over several left
-operands; several rules, a prohibition or an obligation; a constraint of a
-duty, or a refinement.
-
-The profile is required.  Without it there is no sort, and without a sort
-well-sortedness cannot be checked: defaulting to nom would silently accept
-some constraints and reject others with no basis.  A missing profile entry is
-an error, not a default.
-
-The declarations may be empty.  That is a legitimate state of the world,
-not a failure: with no distinctness or disjointness declared, nothing is
-Incompatible except where an operator meets its own complement, because a
-structure may identify any two concepts the resource has not separated.
+A tree has one item per constraint of the policy's permission, a
+compile.Constraint, or an And, an Or or a Xone for a Logical Constraint.  Each
+atomic constraint records the policy it belongs to, and a list of right
+operands is the values of one constraint, in order.  What has no such reading
+is refused, and never read as the conjunction of its parts: odrl:andSequence;
+a Logical Constraint within another, or over several left operands; several
+rules, a prohibition or an obligation; a constraint of a duty, or a refinement.
 """
-
-from dataclasses import dataclass, field
 
 try:
     from rdflib import BNode, Graph, Namespace, RDF
     from rdflib.collection import Collection
-    from rdflib.namespace import RDFS
 except ImportError:                                   # pragma: no cover
     Graph = None
 
 from compile import SET_OPERATORS, And, Constraint, Or, Xone
 
 ODRL = "http://www.w3.org/ns/odrl/2/"
-VREP = "https://w3id.org/odrl-kb/verdict-report#"
 
 RULES = ("permission", "prohibition", "obligation")
 
@@ -48,35 +32,6 @@ class PolicyError(Exception):
     """A policy that does not read as a tree."""
 
 
-class ProfileError(Exception):
-    """The profile does not cover an operand the policy constrains."""
-
-
-class GroundingError(Exception):
-    """A right-operand value names no concept of its resource."""
-
-
-@dataclass
-class Binding:
-    """What the profile declares for one operand."""
-    operand: str
-    sort: str
-    resource: str
-    background: str | None = None
-
-
-@dataclass
-class Resource:
-    """Concepts and the order the authority published."""
-    iri: str
-    concepts: set = field(default_factory=set)
-    order: set = field(default_factory=set)      # (below, above) pairs
-
-    def term(self, iri: str) -> str:
-        """The constant a concept IRI is encoded as."""
-        return _slug(iri)
-
-
 def _slug(iri: str) -> str:
     """A TPTP constant for an IRI.  Stable, lowercase, prefix preserved."""
     tail = iri.rstrip("/").rsplit("/", 1)[-1].rsplit("#", 1)[-1]
@@ -86,21 +41,6 @@ def _slug(iri: str) -> str:
 def _local(uri) -> str:
     s = str(uri)
     return s.rsplit("#", 1)[-1].rsplit("/", 1)[-1]
-
-
-def read_profile(path) -> dict[str, Binding]:
-    """Operand -> Binding.  One entry per operand in scope."""
-    g = Graph().parse(path, format="turtle")
-    out = {}
-    V = Namespace(VREP)
-    for b in g.subjects(RDF.type, V.OperandBinding):
-        operand = _local(g.value(b, V.leftOperand))
-        sort = _local(g.value(b, V.sort))
-        resource = str(g.value(b, V.resource))
-        background = g.value(b, V.declarations)
-        out[operand] = Binding(operand, sort, resource,
-                               str(background) if background else None)
-    return out
 
 
 def policies(g) -> list:
@@ -246,41 +186,6 @@ def atoms(items) -> list:
     """The atomic constraints of a tree, in order."""
     return [c for item in items
             for c in (item.alts if isinstance(item, (And, Or, Xone)) else (item,))]
-
-
-def read_resource(path, iri: str) -> Resource:
-    """Concepts and order statements.  Nothing else is read."""
-    g = Graph().parse(path, format="turtle")
-    r = Resource(iri)
-    SKOS = Namespace("http://www.w3.org/2004/02/skos/core#")
-    GN = Namespace("https://www.geonames.org/ontology#")
-    for s in set(g.subjects()):
-        if isinstance(s, type(next(iter(g.subjects())))) and "#" in str(s) or "/" in str(s):
-            r.concepts.add(_slug(str(s)))
-    for pred in (SKOS.broader, GN.parentFeature, RDFS.subClassOf):
-        for s, o in g.subject_objects(pred):
-            r.order.add((_slug(str(s)), _slug(str(o))))
-            r.concepts.update({_slug(str(s)), _slug(str(o))})
-    return r
-
-
-def bind(operands, profile: dict[str, Binding]):
-    """The binding of each left operand, refusing unprofiled operands."""
-    missing = set(operands) - set(profile)
-    if missing:
-        raise ProfileError(
-            "no sort declared for: " + ", ".join(sorted(missing)) +
-            ".  The profile must bind every operand in scope; there is no "
-            "default sort.")
-    return {operand: profile[operand] for operand in operands}
-
-
-def ground(constraints, resource: Resource):
-    """Every right-operand value must name a concept of the resource."""
-    bad = [v for c in constraints for v in c.values if v not in resource.concepts]
-    if bad:
-        raise GroundingError(", ".join(sorted(set(bad))))
-    return True
 
 
 def by_operand(*trees):
