@@ -10,8 +10,10 @@ happen to name: a third language satisfies "anywhere but German" and
 "anywhere but French" together, and a policy pair that only a concept neither
 policy names can satisfy has to be found Compatible.
 
-    concepts(resource)                      every concept of a resource, as the
-                                            constants the encodings use
+    iris(resource)                          every concept of a resource, as the
+                                            IRI a policy names it by
+    concepts(resource)                      the same, as the constants the
+                                            encodings use
     candidates(resource, named)             the named constants first, then the
                                             rest, sorted
     register(resource, constants)           a vocabulary built outside
@@ -54,21 +56,25 @@ FILE = {
 _cache: dict = {}
 
 
+def iris(resource: str) -> list:
+    """Every concept of the resource, as the IRI a policy names it by."""
+    if resource not in FILE:
+        raise ValueError(f"no concept set known for resource {resource}")
+    g = Graph().parse(RESOURCES / FILE[resource], format="turtle")
+    if resource == "https://w3id.org/odrl-kb/geonames-europe":
+        return list(g.subjects(RDF.type, GN.Feature))
+    if resource == "https://w3id.org/odrl-kb/bcp47":
+        return list(g.subjects(RDF.type, SKOS.Concept))
+    return [o for o in g.objects(None, DCTERMS.identifier)
+            if isinstance(o, URIRef)]
+
+
 def concepts(resource: str) -> list:
     """Every concept of the resource, as a constant, sorted."""
     if resource not in _cache:
-        if resource not in FILE:
-            raise ValueError(f"no concept set known for resource {resource}")
-        g = Graph().parse(RESOURCES / FILE[resource], format="turtle")
-        if resource == "https://w3id.org/odrl-kb/geonames-europe":
-            iris = list(g.subjects(RDF.type, GN.Feature))
-        elif resource == "https://w3id.org/odrl-kb/bcp47":
-            iris = list(g.subjects(RDF.type, SKOS.Concept))
-        else:
-            iris = [o for o in g.objects(None, DCTERMS.identifier)
-                    if isinstance(o, URIRef)]
+        named = iris(resource)
         constant = declarations.constant_for(resource)
-        _cache[resource] = sorted({constant(i) for i in iris})
+        _cache[resource] = sorted({constant(i) for i in named})
     return list(_cache[resource])
 
 

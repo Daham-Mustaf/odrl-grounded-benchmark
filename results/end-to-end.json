@@ -3,12 +3,12 @@
   "random": 2000,
   "fixed": 4,
   "seed": 20261030,
-  "vampire_problems": 204,
-  "skipped_no_structure": 384,
+  "vampire_problems": 2004,
+  "skipped_no_structure": 402,
   "from_definitions": {
-    "Compatible": 456,
-    "Incompatible": 709,
-    "Unknown": 839
+    "Compatible": 396,
+    "Incompatible": 798,
+    "Unknown": 810
   },
   "disagreements": 0
 }

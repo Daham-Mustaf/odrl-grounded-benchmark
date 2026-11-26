@@ -73,7 +73,7 @@ class Constraint:
 
 # Logical Constraints.  ODRL IM 2.5.2 ranges their operands over atomic
 # constraints, so alternatives do not nest: a tree is a conjunction of
-# items, each a Constraint, an Or or a Xone.  The offer tree and the
+# items, each a Constraint, an Or, a Xone or an And.  The offer tree and the
 # request tree of one operand are compiled as one concatenated conjunction.
 
 @dataclass(frozen=True)
@@ -83,6 +83,13 @@ class Or:
 
 @dataclass(frozen=True)
 class Xone:
+    alts: tuple            # of Constraint
+
+
+@dataclass(frozen=True)
+class And:
+    """Every constraint of the group.  A case holds every constraint of an
+    odrl:and, so a group is one alternative with all of them."""
     alts: tuple            # of Constraint
 
 
@@ -113,7 +120,7 @@ def check_tree(items):
     case negates no isAllOf constraint.
     """
     for it in items:
-        if isinstance(it, (Or, Xone)) and not it.alts:
+        if isinstance(it, (Or, Xone, And)) and not it.alts:
             raise IllSorted("Logical Constraint with no alternatives")
         if isinstance(it, Xone) and any(c.operator == "isAllOf"
                                         for c in it.alts):
@@ -154,6 +161,8 @@ def alternatives(item):
         return ((Lit(item),),)
     if isinstance(item, Or):
         return tuple((Lit(c),) for c in item.alts)
+    if isinstance(item, And):
+        return (tuple(Lit(c) for c in item.alts),)
     if isinstance(item, Xone):
         out = []
         for i, ci in enumerate(item.alts):

@@ -208,6 +208,7 @@ PROBLEMS = [
             "distinctness. If France and Germany are the same country, both "
             "alternatives hold and 'exactly one' fails; if they are "
             "different, it does not. The verdict is Unknown."),
+        "open": "distinctness",
         "certificate": {"kind": "Models",
             "comment": (
                 "GeoNames does not state that France and Germany are "
@@ -278,6 +279,7 @@ PROBLEMS = [
             "in France would meet both policies; if not, none would. The "
             "verdict is Unknown. KGC309 adds the declaration that decides "
             "it."),
+        "open": "order",
         "certificate": {"kind": "Models",
             "comment": (
                 "GeoNames places France and Germany within Europe, and the "

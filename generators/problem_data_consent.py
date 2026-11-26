@@ -307,6 +307,7 @@ PROBLEMS = [
       "valid branch, a use meets both policies; if it does not, none does. "
       "The verdict is therefore Unknown. KGC343 adds the disjointness as a "
       "declaration."),
+        "open": "order",
         "certificate": {"kind": "Models",
             "comment": (
                 "DPV places the withdrawn state below the invalid branch, "
@@ -389,6 +390,7 @@ PROBLEMS = [
             "it does not stop withdrawn consent from lying below that "
             "branch. Only the disjointness of KGC343 does. The verdict "
             "stays Unknown."),
+        "open": "order",
         "certificate": {"kind": "Models",
             "comment": (
                 "The states are declared distinct, since DPV defines each "

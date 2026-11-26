@@ -3,8 +3,9 @@
 time_queries.py
 ===============
 The timing pass: every check of the suite, that is every query under its
-prover, each alone, one at a time, and the wall time it took.  Three
-independent runs of every check, with nothing else running.
+prover, each alone, one at a time, and the wall time it took.  Independent
+runs of every check, --repeat of them (full-run.sh asks for ten), with nothing
+else running.
 
     uv run generators/time_queries.py [--repeat 3] [--limit 300] [--results results]
 

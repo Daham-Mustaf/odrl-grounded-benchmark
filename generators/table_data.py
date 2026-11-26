@@ -22,13 +22,21 @@ every case must fall in exactly one of definite, Unknown, rejected and
 accepted, and every binding a case cites must have a row. A file that is
 written is therefore one whose figures agree.
 
+The challenges and their counts come from the authored data, the problem_data
+modules: the open statement of an Unknown case, the authored expected premises
+of a definite one, and for the rest what the test case states.  The rules on
+proofs and on the closed world are kept as a check.  --suite-numbers also
+writes results/challenges.json, per challenge the authored and the derived
+members and what differs.
+
 The time macros come from the runs generators/time_queries.py writes,
 results/timings-runN.csv.  A check is one query under one prover.  The macros
-are the number of runs, the median of the run totals, the median and the 95th
-percentile (nearest rank) over the checks of each check's median, the slowest
-check by its median, the limit, the machine, and the two prover versions.
-Every run must time every current query under its prover and nothing else, or
-suite-numbers.tex is not written.
+are the number of runs, suiteTime (the mean of the run totals without the
+fastest and the slowest run), the median and the 95th percentile (nearest rank)
+over the checks of each check's median, the slowest check by its median, the
+limit, the machine, and the two prover versions.  Every run must time every
+current query under its prover and nothing else, or suite-numbers.tex is not
+written.
 
 The proof checker, the two-provers stage and the end-to-end test each leave a
 JSON file in results/: proof-check.json, two-provers.json, end-to-end.json.
@@ -42,8 +50,8 @@ What is counted, per row:
     order        kge_leq statements in the resource's .ax file
     test cases   case files whose binding is this one
     C, I, U      those with that verdict
-    rejected     those rejected as ill sorted or ungrounded; the accepted
-                 controls are in test cases and in no other column
+    R            those rejected as ill sorted or ungrounded
+    A            the accepted controls; C, I, U, R and A sum to the test cases
     reads        the relation the profile's prose says the sort takes
 
 The last is the only field not measured. It is read from the profile
@@ -53,6 +61,7 @@ taken from is a claim the header makes in prose.
 """
 import argparse
 import csv
+import importlib
 import json
 import math
 import re
@@ -82,11 +91,34 @@ BINDINGS = [
     ("DPV measures",                 "tom",            "tax", "b-tom"),
     ("DPV Locations, geographic",    "dpvloc-geo",     "mer", "b-spatial-dpvloc-geo"),
     ("DPV Locations, jurisdictional","dpvloc-juris",   "mer", "b-spatial-dpvloc-juris"),
-    ("GeoNames Europe slice",        "geonames",       "mer", "b-spatial-geonames"),
+    ("GeoNames subset",              "geonames",       "mer", "b-spatial-geonames"),
     ("EU file type table",           "filetype",       "nom", "b-fileformat"),
     ("BCP 47 subtags, exact",        "bcp47",          "nom", "b-language-bcp47"),
     ("BCP 47 subtags, primary",      "bcp47",          "nom", "b-language-bcp47-primary"),
 ]
+
+# The names the bindings table shows.  A left operand loses its prefix; the
+# two longest resource names and the longest operand are abbreviated, so that
+# the table fits the text width.  suite-numbers.tex says so in a comment.
+SHORT_OPERAND = {
+    "dpv-odrl:Purpose": "Purpose", "dpv-odrl:Status": "Status",
+    "dpv-odrl:TechnicalOrganisationalMeasure": "Measure",
+    "dpv-odrl:Location": "Location", "odrl:spatial": "spatial",
+    "odrl:fileFormat": "fileFormat", "odrl:language": "language",
+}
+SHORT_LABEL = {
+    "DPV Locations, geographic": "DPV Locations (geogr.)",
+    "DPV Locations, jurisdictional": "DPV Locations (juris.)",
+}
+
+
+def short_operand(name: str) -> str:
+    return SHORT_OPERAND[name]
+
+
+def short_label(label: str) -> str:
+    return SHORT_LABEL.get(label, label)
+
 
 # The axiom file each resource writes, since the naming is not uniform.
 AXIOMS = {
@@ -324,6 +356,10 @@ def suite_problems(rs, totals) -> list:
     for r in rs:
         if r["concepts"] < 0 or r["order"] < 0:
             out.append(f"{r['label']}: resource or axiom file not found")
+        o = r["outcomes"]
+        if sum(o.values()) != r["cases"]:
+            out.append(f"{r['label']}: C, I, U, R and A sum to "
+                       f"{sum(o.values())}, not its {r['cases']} test cases")
     return out
 
 
@@ -350,9 +386,10 @@ def read_timing_file(path: Path):
 
 
 def read_timings(results: Path):
-    """Each run time_queries.py wrote, as (path, header, rows)."""
+    """Each run time_queries.py wrote, as (path, header, rows), in run order."""
+    number = lambda p: int(re.search(r"run(\d+)", p.name).group(1))
     return [(p, *read_timing_file(p))
-            for p in sorted(results.glob("timings-run*.csv"))]
+            for p in sorted(results.glob("timings-run*.csv"), key=number)]
 
 
 def timing_problems(timings, verdict_dir: Path) -> list:
@@ -360,6 +397,9 @@ def timing_problems(timings, verdict_dir: Path) -> list:
     if not timings:
         return ["no timing runs in results/: run generators/time_queries.py"]
     out = []
+    if len(timings) < 3:
+        out.append(f"{len(timings)} timing run(s): suiteTime leaves out the "
+                   f"fastest and the slowest, so it needs at least three")
     want = {(q.stem, "vampire") for q in verdict_dir.glob("*-[12].p")} \
         | {(q.stem, "z3") for q in verdict_dir.glob("*-[12].smt2")}
     for path, header, rows in timings:
@@ -394,6 +434,12 @@ def percentile(values, q: int) -> float:
     return ordered[math.ceil(q / 100 * len(ordered)) - 1]
 
 
+def trimmed_mean(totals) -> float:
+    """The mean of the run totals without the fastest and the slowest run."""
+    ordered = sorted(totals)
+    return statistics.fmean(ordered[1:-1])
+
+
 def time_macros(timings) -> list:
     """The macros of the timing pass, from its runs."""
     header = timings[0][1]
@@ -416,7 +462,7 @@ def time_macros(timings) -> list:
 
     return [
         ("suiteRuns",     str(len(timings))),
-        ("suiteTime",     f"{median(totals):.1f}"),
+        ("suiteTime",     f"{trimmed_mean(totals):.1f}"),
         ("suiteTimeMedian", f"{median(medians.values()):.2f}"),
         ("suiteTimePninetyfive", f"{percentile(medians.values(), 95):.2f}"),
         ("suiteSlowest",  f"{query.rsplit('-', 1)[0]} ({PROVER[prover]}, "
@@ -535,12 +581,44 @@ def pair_names(pairs) -> str:
 
 
 CLOSED_WORLD = Path("results") / "closed-world.csv"
+CHALLENGES_JSON = Path("results") / "challenges.json"
 
 # The paper's running example comes first when a row holds one of its cases.
 RUNNING_EXAMPLE = ("KGC310", "KGC302", "KGC371", "KGC370")
 CONSTRAINT_FORMS = {"or", "xone", "isAnyOf", "isAllOf", "isNoneOf"}
 BINDING_CHOICE = {"b-spatial-dpvloc-juris", "b-language-bcp47-primary"}
-SILENT = "nothing, the resource decides or is silent"
+
+# The seven challenges, in the paper's order and with its names.
+CHALLENGES = (ORDER_IN_RESOURCE, UNSTATED_DISTINCTNESS, UNSTATED_ORDER,
+              DECLARATIONS, CHOICE_OF_BINDING, ILL_FORMED, COMBINED) = (
+    "Order in the resource", "Unstated distinctness", "Unstated order",
+    "Declarations", "Choice of binding", "Ill-formed constraints",
+    "Combined constraints")
+
+# One module of problem data per resource family, as catalogue.py reads them.
+PROBLEM_MODULES = ("motivating", "geonames", "dpv", "dpvloc", "filetype",
+                   "consent", "tom", "bcp47", "wellsorted")
+
+# The macro that carries each challenge's count, in the order of CHALLENGES.
+CHALLENGE_MACRO = {
+    ORDER_IN_RESOURCE: "suiteChallengeOrder",
+    UNSTATED_DISTINCTNESS: "suiteChallengeDistinctness",
+    UNSTATED_ORDER: "suiteChallengeUnstatedOrder",
+    DECLARATIONS: "suiteChallengeDeclarations",
+    CHOICE_OF_BINDING: "suiteChallengeBinding",
+    ILL_FORMED: "suiteChallengeIllFormed",
+    COMBINED: "suiteChallengeCombined",
+}
+
+# The authored expected premises are written in words.  A premise of the
+# resource is an order statement of it.  A premise of the declarations is a
+# distinctness statement or a disjointness statement.
+_ORDER_PREMISE = re.compile(
+    r"\b(below|lies within|is within|is a member of|order statements?)\b")
+_DISTINCT_PREMISE = re.compile(r"\bdistinct\b")
+_DISJOINT_PREMISE = re.compile(r"\bdisjoint\b|\bnothing lies within both\b")
+# What an Unknown test case leaves open, in its authored "open" field.
+OPEN = ("order", "distinctness", "identity")
 
 
 def read_closed_world(path: Path):
@@ -572,10 +650,104 @@ def cites_distinctness(premises) -> bool:
     return any(name.startswith("bg_dist_") for _, name in premises)
 
 
-def challenges(tests, closed, certificates: Path) -> list:
-    """One row per challenge: its name, what varies, and its test cases.
+# --- the authored classification ------------------------------------------
+
+def authored_problems() -> dict:
+    """Test case ID -> its problem data, as the generators read it."""
+    out = {}
+    for m in PROBLEM_MODULES:
+        for p in importlib.import_module("problem_data_" + m).PROBLEMS:
+            out[p["id"]] = p
+    return out
+
+
+def authored_premises(p) -> list:
+    """(source, text) of a definite test case's authored expected premises."""
+    return [(src, text) for src, text in p["certificate"].get("premises") or []]
+
+
+def authored_states_order(p) -> bool:
+    """Whether the authored expected premises hold an order statement of the
+    resource."""
+    return any(src == "fromResource" and _ORDER_PREMISE.search(text)
+               for src, text in authored_premises(p))
+
+
+def authored_states_distinctness(p) -> bool:
+    """Whether the authored expected premises hold a distinctness statement of
+    the declarations, as against a disjointness statement."""
+    return any(src == "fromDeclarations" and _DISTINCT_PREMISE.search(text)
+               for src, text in authored_premises(p))
+
+
+def authored_problems_in(tests, problems) -> list:
+    """Why the authored data cannot classify these test cases, or []."""
+    out = []
+    for c in tests:
+        p, outcome = problems.get(c["id"]), c["outcome"]
+        if p is None:
+            out.append(f"{c['id']}: no problem data")
+            continue
+        if outcome == "U":
+            if p.get("open") not in OPEN:
+                out.append(f"{c['id']}: Unknown, and its problem data have no "
+                           f"open statement ({p.get('open')!r})")
+        elif "open" in p:
+            out.append(f"{c['id']}: {outcome}, and its problem data have an "
+                       f"open statement")
+        if outcome in ("C", "I"):
+            for src, text in authored_premises(p):
+                if src == "fromResource" and not _ORDER_PREMISE.search(text):
+                    out.append(f"{c['id']}: premise of the resource not read as "
+                               f"an order statement: {text!r}")
+                if src == "fromDeclarations" and not (
+                        _DISTINCT_PREMISE.search(text)
+                        or _DISJOINT_PREMISE.search(text)):
+                    out.append(f"{c['id']}: premise of the declarations not read "
+                               f"as distinctness or disjointness: {text!r}")
+    return out
+
+
+def challenges(tests, problems) -> list:
+    """(name, its test cases), per challenge, from the authored data.
 
     A test case may fall under several."""
+    definite = ("C", "I")
+
+    def order(c):
+        return c["outcome"] in definite and authored_states_order(problems[c["id"]])
+
+    def unstated_distinctness(c):
+        p = problems[c["id"]]
+        return (c["outcome"] == "U" and p["open"] in ("distinctness", "identity")) \
+            or (c["outcome"] in definite and authored_states_distinctness(p))
+
+    def unstated_order(c):
+        return c["outcome"] == "U" and problems[c["id"]]["open"] == "order"
+
+    rules = (
+        (ORDER_IN_RESOURCE, order),
+        (UNSTATED_DISTINCTNESS, unstated_distinctness),
+        (UNSTATED_ORDER, unstated_order),
+        (DECLARATIONS, declares),
+        (CHOICE_OF_BINDING, lambda c: c["binding"] in BINDING_CHOICE),
+        (ILL_FORMED, lambda c: c["outcome"] in ("rejected", "control")),
+        (COMBINED, lambda c: bool((c["operators"] | c["connectives"])
+                                  & CONSTRAINT_FORMS)),
+    )
+    return [(name, [c for c in tests if rule(c)]) for name, rule in rules]
+
+
+def declares(c) -> bool:
+    return bool(c["declarations"]) and not c["declarations"].endswith("/empty")
+
+
+# --- the check: the same challenges from proofs and the closed world ------
+
+def derived_challenges(tests, closed, certificates: Path) -> list:
+    """(name, its test cases), per challenge, as the rules on proofs and on the
+    closed world classify them.  The last four rules read the test case, so
+    they are the same as in challenges()."""
     definite = ("C", "I")
 
     def kind(c):
@@ -584,34 +756,45 @@ def challenges(tests, closed, certificates: Path) -> list:
     def proof(c):
         return cited(certificates, c["id"])
 
-    rules = [
-        ("C1 order in the resource", SILENT,
+    rules = (
+        (ORDER_IN_RESOURCE,
          lambda c: c["outcome"] in definite and cites_order(proof(c))),
-        ("C2 unstated distinctness", SILENT,
+        (UNSTATED_DISTINCTNESS,
          lambda c: (c["outcome"] == "U" and kind(c) in ("distinctness", "identity"))
          or (c["outcome"] in definite and cites_distinctness(proof(c)))),
-        ("C3 unstated order", SILENT,
+        (UNSTATED_ORDER,
          lambda c: c["outcome"] == "U" and kind(c) == "order"),
-        ("C4 declarations", "declarations",
-         lambda c: bool(c["declarations"])
-         and not c["declarations"].endswith("/empty")),
-        ("C5 choice of binding", "binding",
-         lambda c: c["binding"] in BINDING_CHOICE),
-        ("C6 ill-formed constraints", "the constraint",
-         lambda c: c["outcome"] in ("rejected", "control")),
-        ("C7 combined constraints", "the constraint",
-         lambda c: bool((c["operators"] | c["connectives"]) & CONSTRAINT_FORMS)),
-    ]
-    return [(name, varies, [c for c in tests if rule(c)])
-            for name, varies, rule in rules]
+        (DECLARATIONS, declares),
+        (CHOICE_OF_BINDING, lambda c: c["binding"] in BINDING_CHOICE),
+        (ILL_FORMED, lambda c: c["outcome"] in ("rejected", "control")),
+        (COMBINED, lambda c: bool((c["operators"] | c["connectives"])
+                                  & CONSTRAINT_FORMS)),
+    )
+    return [(name, [c for c in tests if rule(c)]) for name, rule in rules]
+
+
+def challenge_check(authored, derived) -> list:
+    """Per challenge, the members of each classification and what differs."""
+    out = []
+    for (name, a), (name2, d) in zip(authored, derived):
+        assert name == name2
+        ids_a, ids_d = [c["id"] for c in a], [c["id"] for c in d]
+        out.append({
+            "challenge": name,
+            "authored": ids_a,
+            "derived": ids_d,
+            "authored_only": sorted(set(ids_a) - set(ids_d)),
+            "derived_only": sorted(set(ids_d) - set(ids_a)),
+        })
+    return out
 
 
 def example_of(name, members) -> str:
     """The case a row of the challenge table shows: the running example when
     the row holds one of its cases, else the first case with a verdict.  The
-    input checks (C6) give no verdict, so their row shows the first rejected
-    case."""
-    want = ("rejected",) if name.startswith("C6") else ("C", "I", "U")
+    input checks give no verdict, so the row of the ill-formed constraints
+    shows the first rejected case."""
+    want = ("rejected",) if name == ILL_FORMED else ("C", "I", "U")
     ids = [c["id"] for c in members if c["outcome"] in want]
     for cid in RUNNING_EXAMPLE:
         if cid in ids:
@@ -620,20 +803,20 @@ def example_of(name, members) -> str:
 
 
 def challenge_table(rows) -> list:
+    """Rows of challenges, in booktabs; columns sum to the test cases."""
     lines = [
         "\\newcommand{\\suiteChallengeTable}{%",
-        "\\begin{tabular}{llrrrrrl}",
-        "\\hline",
-        "challenge & what varies & test cases & C & I & U & rejected"
-        " & example \\\\",
-        "\\hline",
+        "\\begin{tabular}{@{}lrrrrrrl@{}}",
+        "\\toprule",
+        "challenge & test cases & C & I & U & R & A & example \\\\",
+        "\\midrule",
     ]
-    for name, varies, members in rows:
+    for name, members in rows:
         n = Counter(c["outcome"] for c in members)
-        lines.append(f"{name} & {varies} & {len(members)} & {n['C']} & {n['I']}"
-                     f" & {n['U']} & {n['rejected']} & {example_of(name, members)}"
-                     " \\\\")
-    lines += ["\\hline", "\\end{tabular}%", "}"]
+        lines.append(f"{name} & {len(members)} & {n['C']} & {n['I']}"
+                     f" & {n['U']} & {n['rejected']} & {n['control']}"
+                     f" & {example_of(name, members)} \\\\")
+    lines += ["\\bottomrule", "\\end{tabular}%", "}"]
     return lines
 
 
@@ -646,10 +829,10 @@ def challenge_cw_table(rows, closed) -> list:
         "challenge & test cases & reproduced \\\\",
         "\\hline",
     ]
-    for name, _, members in rows:
-        # The closed-world checker keeps the input checks, so it reproduces C6
-        # by construction.
-        if name.startswith("C6"):
+    for name, members in rows:
+        # The closed-world checker keeps the input checks, so it reproduces the
+        # ill-formed constraints by construction.
+        if name == ILL_FORMED:
             continue
         same = sum(1 for c in members if closed[c["id"]]["reproduced"] == "yes")
         lines.append(f"{name} & {len(members)} & {same} \\\\")
@@ -658,7 +841,7 @@ def challenge_cw_table(rows, closed) -> list:
 
 
 def under_no_challenge(rows, tests) -> list:
-    inside = {c["id"] for _, _, members in rows for c in members}
+    inside = {c["id"] for _, members in rows for c in members}
     return [c for c in tests if c["id"] not in inside]
 
 
@@ -670,14 +853,39 @@ def plain_term(term) -> str:
 
 
 def print_challenges(rows, tests) -> None:
-    for name, varies, members in rows:
-        print(f"{name} ({varies}): {len(members)}: "
+    for name, members in rows:
+        print(f"{name}: {len(members)}: "
               + " ".join(c["id"] for c in members))
     outside = under_no_challenge(rows, tests)
     print(f"\nunder no challenge: {len(outside)}")
     for c in outside:
         print(f"  {c['id']}  {c['outcome']}  "
               + " against ".join(plain_term(t) for t in c["constraints"]))
+
+
+def write_challenge_check(path: Path, check) -> None:
+    """results/challenges.json: the two classifications, side by side."""
+    path.write_text(json.dumps({
+        "about": "Written by generators/table_data.py. Per challenge: the test "
+                 "cases the authored data place in it (problem_data_*.py), the "
+                 "test cases the rules on proofs and on the closed world place "
+                 "in it, and the IDs only one of them has.",
+        "challenges": check,
+        "differences": sum(len(c["authored_only"]) + len(c["derived_only"])
+                           for c in check),
+    }, indent=2) + "\n", encoding="utf-8")
+
+
+def print_challenge_check(check) -> None:
+    """The differences, if any, for a reader of the run."""
+    for c in check:
+        if c["authored_only"] or c["derived_only"]:
+            print(f"challenge {c['challenge']}: authored {len(c['authored'])}, "
+                  f"derived {len(c['derived'])}; only authored: "
+                  f"{' '.join(c['authored_only']) or 'none'}; only derived: "
+                  f"{' '.join(c['derived_only']) or 'none'}")
+    if not any(c["authored_only"] or c["derived_only"] for c in check):
+        print("challenges: the authored and the derived classification agree")
 
 
 def closed_world_problems(closed, tests) -> list:
@@ -847,8 +1055,9 @@ def output_problems(outputs, tests, certificates: Path) -> list:
 
 
 def suite_numbers_tex(rs, totals, timings, tests, closed, certificates,
-                      outputs, sets) -> str:
-    """suite-numbers.tex: the macros and the tables."""
+                      outputs, sets, rows) -> str:
+    """suite-numbers.tex: the macros and the tables.  rows is the authored
+    classification, per challenge."""
     definite = totals["compatible"] + totals["incompatible"]
     macros = [
         ("suiteCases",        totals["files"]),
@@ -874,6 +1083,8 @@ def suite_numbers_tex(rs, totals, timings, tests, closed, certificates,
             for path, head, _ in timings) +
         f"; each query alone, one at a time, at most"
         f" {timings[0][1]['limit']} s.",
+        "% suiteTime is the mean of the run totals (the sum of the times of every"
+        " check) over the runs, without the fastest and the slowest run.",
     ]
     admitted, excluded = coverage_cells(tests)
     conflicts, rejected_conflicts = note_conflicts(tests)
@@ -891,7 +1102,10 @@ def suite_numbers_tex(rs, totals, timings, tests, closed, certificates,
         ("suiteEtoEProblems",    outputs["e2e"]["problems"]),
         ("suiteEtoEDisagree",    outputs["e2e"]["disagreements"]),
         ("suiteReadAgainst",     len(read_against_links(tests))),
+        ("suiteEtoERandom",      outputs["e2e"]["random"]),
+        ("suiteEtoEFixed",       outputs["e2e"]["fixed"]),
     ]
+    macros += [(CHALLENGE_MACRO[name], len(members)) for name, members in rows]
     moved = Counter(r["closed_world"] for r in closed.values()
                     if r["expected"] == "U")
     macros += [
@@ -923,34 +1137,41 @@ def suite_numbers_tex(rs, totals, timings, tests, closed, certificates,
     outcome_total = Counter()
     for r in rs:
         outcome_total.update(r["outcomes"])
+    lines.append("% suiteBindingsTable: a left operand without its odrl: or "
+                 "dpv-odrl: prefix (Measure is dpv-odrl:TechnicalOrganisational"
+                 "Measure); DPV Locations (geogr.) and (juris.) are geographic "
+                 "and jurisdictional.")
     lines += [
         "\\newcommand{\\suiteBindingsTable}{%",
-        "\\begin{tabular}{lllrrrrrrr}",
-        "\\hline",
-        "left operand & resource and binding & sort & concepts & order"
-        " & test cases & C & I & U & rejected \\\\",
-        "\\hline",
+        "{\\setlength{\\tabcolsep}{2.5pt}%",
+        "\\begin{tabular}{@{}lllrrrrrrrr@{}}",
+        "\\toprule",
+        "\\shortstack{left\\\\operand} & resource & sort & concepts"
+        " & \\shortstack{order\\\\statements} & \\shortstack{test\\\\cases}"
+        " & C & I & U & R & A \\\\",
+        "\\midrule",
     ]
     for r in rs:
         o = r["outcomes"]
-        lines.append(f"{tex_escape(r['operand'])} & {tex_escape(r['label'])}"
+        lines.append(f"{tex_escape(short_operand(r['operand']))}"
+                     f" & {tex_escape(short_label(r['label']))}"
                      f" & {r['sort']} & {r['concepts']} & {r['order']}"
                      f" & {r['cases']} & {o['C']} & {o['I']} & {o['U']}"
-                     f" & {o['rejected']} \\\\")
+                     f" & {o['rejected']} & {o['control']} \\\\")
     lines += [
-        "\\hline",
+        "\\midrule",
         f"total & & & & & {sum(r['cases'] for r in rs)}"
         f" & {outcome_total['C']} & {outcome_total['I']}"
-        f" & {outcome_total['U']} & {outcome_total['rejected']} \\\\",
-        "\\hline",
-        "\\end{tabular}%",
+        f" & {outcome_total['U']} & {outcome_total['rejected']}"
+        f" & {outcome_total['control']} \\\\",
+        "\\bottomrule",
+        "\\end{tabular}}%",
         "}",
     ]
     lines += coverage_table(tests)
     lines += cites_table(cites_counts(tests, certificates))
-    rows = challenges(tests, closed, certificates)
     outside = under_no_challenge(rows, tests)
-    lines.insert(5, "% Under no challenge: "
+    lines.insert(6, "% Under no challenge: "
                  + (", ".join(c["id"] for c in outside) or "none") + ".")
     lines += challenge_table(rows)
     lines += challenge_cw_table(rows, closed)
@@ -980,8 +1201,17 @@ def main() -> int:
         if problems:
             print("\n".join(problems), file=sys.stderr)
             return 1
-        print_challenges(challenges(tests, closed, args.root / "certificates"),
-                         tests)
+        authored = authored_problems()
+        problems = authored_problems_in(tests, authored)
+        if problems:
+            print("\n".join(problems), file=sys.stderr)
+            return 1
+        classified = challenges(tests, authored)
+        print_challenges(classified, tests)
+        print()
+        print_challenge_check(challenge_check(
+            classified, derived_challenges(tests, closed,
+                                           args.root / "certificates")))
         return 0
 
     rs = rows(args.root)
@@ -1005,15 +1235,22 @@ def main() -> int:
         for a, b in moved_and_reversed(contained)[1]:
             problems.append(f"{a['id']} is {a['outcome']}, and {b['id']}, with "
                             f"more declarations, is {b['outcome']}: reversed")
+        authored = authored_problems()
+        problems += authored_problems_in(tests, authored)
         if problems:
             print("not written, the figures do not add up:", file=sys.stderr)
             for pr in problems:
                 print(f"  {pr}", file=sys.stderr)
             return 1
+        classified = challenges(tests, authored)
+        check = challenge_check(classified, derived_challenges(
+            tests, closed, args.root / "certificates"))
+        write_challenge_check(args.root / CHALLENGES_JSON, check)
+        print_challenge_check(check)
         out = args.root / args.suite_numbers
         out.write_text(suite_numbers_tex(
             rs, totals, timings, tests, closed, args.root / "certificates",
-            outputs, sets),
+            outputs, sets, classified),
             encoding="utf-8")
         print(f"wrote {out}: {totals['files']} cases, {len(rs)} bindings")
         return 0

@@ -348,6 +348,7 @@ PROBLEMS = [
         "expected_q2": "Satisfiable",
         "summary": (
             "As KGC370, without the registry rule."),
+        "open": "distinctness",
         "certificate": {
             "kind": "Models",
             "comment": (
@@ -542,6 +543,7 @@ PROBLEMS = [
             "same withdrawal takes an Incompatible to Unknown there and a "
             "Compatible to Unknown here. What the declaration buys is a "
             "definite verdict, not a direction."),
+        "open": "distinctness",
         "certificate": {
             "kind": "Models",
             "comment": (
@@ -725,6 +727,7 @@ PROBLEMS = [
             "different. So the verdict is Unknown.\n\n"
             "The registry rule decides it: with the rule the verdict is "
             "Compatible."),
+        "open": "distinctness",
         "certificate": {
             "kind": "Models",
             "comment": (
